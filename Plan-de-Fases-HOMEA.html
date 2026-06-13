@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOMEA · Plan de Fases — Landing Oficial</title>
+<style>
+  :root{
+    --bg:#ffffff; --ink:#1a1a1a; --muted:#5f6368; --line:#e3e3e0;
+    --surface:#fafaf8; --accent:#9a7b4f; --accent-soft:#f3ede2;
+    --font:"Helvetica Neue",Arial,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#f0efec;font-family:var(--font);color:var(--ink);padding:40px 16px;-webkit-font-smoothing:antialiased}
+  .page{max-width:860px;margin:0 auto;background:var(--bg);border-radius:18px;padding:48px 52px;box-shadow:0 10px 40px rgba(0,0,0,.06)}
+  header h1{font-size:30px;font-weight:700;letter-spacing:-.5px}
+  header p{font-size:16px;color:var(--muted);margin-top:6px}
+  .legend{display:flex;gap:24px;margin-top:18px;font-size:13px;color:var(--muted)}
+  .legend span{display:flex;align-items:center;gap:8px}
+  .dot{width:11px;height:11px;border-radius:50%}
+  .dot.acc{background:var(--accent)} .dot.mut{background:var(--muted)}
+  hr{border:none;border-top:1.5px solid var(--line);margin:22px 0 8px}
+  .timeline{position:relative;margin-top:26px;padding-left:56px}
+  .timeline::before{content:"";position:absolute;left:17px;top:8px;bottom:8px;width:2.5px;background:var(--line)}
+  .phase{position:relative;margin-bottom:22px}
+  .num{position:absolute;left:-56px;top:18px;width:34px;height:34px;border-radius:50%;background:var(--muted);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;z-index:1}
+  .phase.key .num{background:var(--accent)}
+  .card{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:20px 24px}
+  .phase.key .card{border:2px solid var(--accent);background:#fff}
+  .card h2{font-size:19px;font-weight:700}
+  .card p{font-size:14.5px;color:var(--muted);margin-top:8px;line-height:1.5}
+  .deliver{margin-top:14px;font-size:13.5px;display:flex;gap:10px;align-items:baseline}
+  .deliver b{color:var(--muted);font-size:11.5px;letter-spacing:.8px;white-space:nowrap}
+  .phase.key .deliver b{color:var(--accent)}
+  .deliver span{color:var(--ink)}
+  .rule{margin-top:26px;border:1.5px dashed var(--line);border-radius:12px;padding:18px 22px;background:var(--accent-soft)}
+  .rule b{display:block;font-size:14px;margin-bottom:5px}
+  .rule p{font-size:13.5px;color:#6b5a3d}
+  footer{margin-top:28px;font-size:12px;color:#9a9a96;text-align:right}
+  @media print{body{background:#fff;padding:0}.page{box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>HOMEA · Landing Oficial</h1>
+    <p>Plan de fases — de OXATIS a Next.js sin perder SEO</p>
+    <div class="legend">
+      <span><i class="dot acc"></i> Fases críticas SEO</span>
+      <span><i class="dot mut"></i> Fases de construcción</span>
+    </div>
+  </header>
+  <hr>
+  <div class="timeline">
+
+    <div class="phase key">
+      <div class="num">0</div>
+      <div class="card">
+        <h2>Fase 0 — Descubrimiento y blindaje SEO</h2>
+        <p>Captura la línea base antes de tocar nada: auditoría del sitio OXATIS, export de Search Console (16 meses), inventario de URLs, mapa de redirecciones 301 y brief competitivo (HOMEA + ARTEXA).</p>
+        <div class="deliver"><b>ENTREGABLE</b><span>Playbook con línea base + mapa 301 borrador + brief competitivo</span></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="num">1</div>
+      <div class="card">
+        <h2>Fase 1 — Estrategia de conversión y arquitectura</h2>
+        <p>Design system orientado a conversión + arquitectura de información que mapea las páginas nuevas a las URLs que ya rankean. Define la lógica "producto solo-lead" vs. "producto compra directa".</p>
+        <div class="deliver"><b>ENTREGABLE</b><span>Mapa de secciones + arquitectura de URLs aprobada</span></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="num">2</div>
+      <div class="card">
+        <h2>Fase 2 — Layout y validación</h2>
+        <p>Wireframe de las secciones recomendadas para el segmento premium; refinar y eliminar lo que no aporte hasta cerrar el layout oficial.</p>
+        <div class="deliver"><b>ENTREGABLE</b><span>Layout oficial aprobado</span></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="num">3</div>
+      <div class="card">
+        <h2>Fase 3 — Construcción del front + SEO técnico</h2>
+        <p>Secciones con contenido real, metadatos, JSON-LD (Product, LocalBusiness, BreadcrumbList), sitemap, robots, canónicos, paridad de contenido y 301. Tracking GA4 + Meta Pixel/CAPI y formulario de leads (RHF + Zod) a KOMMO.</p>
+        <div class="deliver"><b>ENTREGABLE</b><span>Front funcional en staging (con noindex)</span></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="num">4</div>
+      <div class="card">
+        <h2>Fase 4 — Integración Shopify</h2>
+        <p>Conexión de Shopify como backend, Storefront API para carrito y checkout de productos de bajo ticket, e integración de la tienda inicial.</p>
+        <div class="deliver"><b>ENTREGABLE</b><span>Ecommerce de bajo ticket operativo</span></div>
+      </div>
+    </div>
+
+    <div class="phase key">
+      <div class="num">5</div>
+      <div class="card">
+        <h2>Fase 5 — Función general, QA y lanzamiento</h2>
+        <p>Responsive, accesibilidad (WCAG) y Core Web Vitals. Corte de migración: publicar 301, enviar sitemap a GSC, validar indexación y monitorear 2–6 semanas contra la línea base.</p>
+        <div class="deliver"><b>ENTREGABLE</b><span>Sitio en producción en www.homea.mx sin pérdida de SEO</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="rule">
+    <b>Regla de oro del proyecto</b>
+    <p>Toda decisión de URLs, contenido y publicación se valida contra el Playbook de Migración SEO. El riesgo #1 es perder posicionamiento orgánico — capturar la línea base ANTES de construir.</p>
+  </div>
+
+  <footer>Documento interno HOMEA · Landing Page Oficial</footer>
+</div>
+</body>
+</html>

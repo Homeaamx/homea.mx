@@ -1,0 +1,178 @@
+# ----------------------------------------
+# Reports snapshot
+# Account: 877-676-5866
+# Property: Homea
+# ----------------------------------------
+#  
+# Start date: 20250101
+# End date: 20260604
+Active users,New users,Average engagement time per active user,Sessions
+11142,12587,61.25040387722132,18038
+
+#  
+# Start date: 20250101
+# End date: 20260604
+Session source / medium,Sessions,Key events,Total revenue
+google / organic,6898,129,0
+(direct) / (none),4347,86,0
+google / cpc,2254,94,0
+facebook / paid_social,2098,0,0
+bing / organic,667,14,0
+mx.search.yahoo.com / referral,128,4,0
+homeakommo.kommo.com / referral,76,0,0
+kommo.cc / referral,62,0,0
+chatgpt.com / referral,43,0,0
+homea.oxatis.com / referral,43,0,0
+ntp.msn.com / referral,42,0,0
+vercel.com / referral,42,0,0
+yahoo / organic,42,0,0
+m.facebook.com / referral,33,0,0
+homea-hotsale.vercel.app / referral,30,4,0
+facebook.com / referral,29,0,0
+(data not available),22,0,0
+l.instagram.com / referral,22,0,0
+chatgpt.com / (not set),16,0,0
+gemini.google.com / referral,16,2,0
+duckduckgo / organic,12,0,0
+ig / social,12,0,0
+pinterest.com / referral,12,0,0
+yelp.com / referral,12,0,0
+l.facebook.com / referral,10,0,0
+app.clickup.com / referral,5,0,0
+ecosia.org / organic,5,0,0
+es.search.yahoo.com / referral,5,0,0
+learn-us-east-1-prod-fleet02-xythos.content.blackboardcdn.com / referral,5,0,0
+groupbuytools.com / referral,4,0,0
+rktemplates.com / referral,3,0,0
+ads.google.com / referral,2,0,0
+cn.bing.com / referral,2,0,0
+copilot.com / referral,2,0,0
+ensun.io / referral,2,0,0
+images.search.yahoo.com / referral,2,0,0
+instagram.com / referral,2,0,0
+localhost:5500 / referral,2,0,0
+tagassistant.google.com / referral,2,0,0
+adsmanager.facebook.com / referral,1,0,0
+claude.ai / referral,1,0,0
+co.search.yahoo.com / referral,1,0,0
+erp.suweizhisou.com / referral,1,0,0
+gadgetech.info / referral,1,0,0
+homea.mx / referral,1,0,0
+l.wl.co / referral,1,0,0
+pe.search.yahoo.com / referral,1,0,0
+perplexity.ai / referral,1,0,0
+search.avastbrowser.com / referral,1,0,0
+search.brave.com / referral,1,0,0
+startpage.com / referral,1,0,0
+
+#  
+# Start date: 20250101
+# End date: 20260604
+First user source / medium,Active users
+google / organic,4096
+(direct) / (none),3577
+google / cpc,1384
+facebook / paid_social,1247
+bing / organic,403
+mx.search.yahoo.com / referral,83
+yahoo / organic,35
+chatgpt.com / referral,34
+(data not available),24
+facebook.com / referral,23
+m.facebook.com / referral,20
+l.instagram.com / referral,15
+homea.oxatis.com / referral,13
+chatgpt.com / (not set),10
+gemini.google.com / referral,8
+l.facebook.com / referral,8
+duckduckgo / organic,7
+yelp.com / referral,7
+ecosia.org / organic,5
+es.search.yahoo.com / referral,5
+ig / social,3
+cn.bing.com / referral,2
+copilot.com / referral,2
+ensun.io / referral,2
+images.search.yahoo.com / referral,2
+pinterest.com / referral,2
+tagassistant.google.com / referral,2
+app.clickup.com / referral,1
+claude.ai / referral,1
+co.search.yahoo.com / referral,1
+erp.suweizhisou.com / referral,1
+gadgetech.info / referral,1
+groupbuytools.com / referral,1
+homea.mx / referral,1
+l.wl.co / referral,1
+learn-us-east-1-prod-fleet02-xythos.content.blackboardcdn.com / referral,1
+pe.search.yahoo.com / referral,1
+perplexity.ai / referral,1
+search.avastbrowser.com / referral,1
+search.brave.com / referral,1
+startpage.com / referral,1
+
+#  
+# Start date: 20250101
+# End date: 20260604
+Session source / medium,Sessions
+google / organic,6898
+(direct) / (none),4347
+google / cpc,2254
+facebook / paid_social,2098
+bing / organic,667
+mx.search.yahoo.com / referral,128
+homeakommo.kommo.com / referral,76
+kommo.cc / referral,62
+chatgpt.com / referral,43
+homea.oxatis.com / referral,43
+ntp.msn.com / referral,42
+vercel.com / referral,42
+yahoo / organic,42
+m.facebook.com / referral,33
+homea-hotsale.vercel.app / referral,30
+facebook.com / referral,29
+(data not available),22
+l.instagram.com / referral,22
+chatgpt.com / (not set),16
+gemini.google.com / referral,16
+duckduckgo / organic,12
+ig / social,12
+pinterest.com / referral,12
+yelp.com / referral,12
+l.facebook.com / referral,10
+app.clickup.com / referral,5
+ecosia.org / organic,5
+es.search.yahoo.com / referral,5
+learn-us-east-1-prod-fleet02-xythos.content.blackboardcdn.com / referral,5
+groupbuytools.com / referral,4
+rktemplates.com / referral,3
+ads.google.com / referral,2
+cn.bing.com / referral,2
+copilot.com / referral,2
+ensun.io / referral,2
+images.search.yahoo.com / referral,2
+instagram.com / referral,2
+localhost:5500 / referral,2
+tagassistant.google.com / referral,2
+adsmanager.facebook.com / referral,1
+claude.ai / referral,1
+co.search.yahoo.com / referral,1
+erp.suweizhisou.com / referral,1
+gadgetech.info / referral,1
+homea.mx / referral,1
+l.wl.co / referral,1
+pe.search.yahoo.com / referral,1
+perplexity.ai / referral,1
+search.avastbrowser.com / referral,1
+search.brave.com / referral,1
+startpage.com / referral,1
+
+#  
+# Start date: 20250101
+# End date: 20260604
+Session Google Ads campaign,Sessions
+2025_HOMEA_búsqueda-1,1580
+Performance Max-8-Hot Sale 2026,219
+Leads-Performance Max-2026 (General),211
+Performance Max-6- Smeg_Promo,133
+Google Maps- Max Performance,71

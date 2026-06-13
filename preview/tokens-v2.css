@@ -1,0 +1,337 @@
+/* ==========================================================================
+   Homea Premium — Colors & Type · v2
+   Premium appliance distribution & advisory · Mexico.
+   Surfaces: Bone / Greige / Espresso / Homea Black. Accent: champagne gold.
+   Type: Newsreader (display, editorial) + Montserrat (UI, labels, wordmark).
+   Doctrine: sharp corners, precision figures, restrained motion.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap");
+
+/* ---------- Fonts: Montserrat 100–900, roman + italics where supplied ---- */
+@font-face { font-family: "Montserrat"; font-weight: 100; font-style: normal; font-display: swap;
+  src: url("fonts/Montserrat-Thin.ttf") format("truetype"); }
+@font-face { font-family: "Montserrat"; font-weight: 200; font-style: normal; font-display: swap;
+  src: url("fonts/Montserrat-ExtraLight.ttf") format("truetype"); }
+@font-face { font-family: "Montserrat"; font-weight: 300; font-style: normal; font-display: swap;
+  src: url("fonts/Montserrat-Light.ttf") format("truetype"); }
+@font-face { font-family: "Montserrat"; font-weight: 300; font-style: italic; font-display: swap;
+  src: url("fonts/Montserrat-LightItalic.ttf") format("truetype"); }
+@font-face { font-family: "Montserrat"; font-weight: 400; font-style: normal; font-display: swap;
+  src: url("fonts/Montserrat-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Montserrat"; font-weight: 400; font-style: italic; font-display: swap;
+  src: url("fonts/Montserrat-Italic.ttf") format("truetype"); }
+@font-face { font-family: "Montserrat"; font-weight: 500; font-style: normal; font-display: swap;
+  src: url("fonts/Montserrat-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Montserrat"; font-weight: 500; font-style: italic; font-display: swap;
+  src: url("fonts/Montserrat-MediumItalic.ttf") format("truetype"); }
+@font-face { font-family: "Montserrat"; font-weight: 600; font-style: normal; font-display: swap;
+  src: url("fonts/Montserrat-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Montserrat"; font-weight: 600; font-style: italic; font-display: swap;
+  src: url("fonts/Montserrat-SemiBoldItalic.ttf") format("truetype"); }
+@font-face { font-family: "Montserrat"; font-weight: 700; font-style: normal; font-display: swap;
+  src: url("fonts/Montserrat-Bold.ttf") format("truetype"); }
+@font-face { font-family: "Montserrat"; font-weight: 700; font-style: italic; font-display: swap;
+  src: url("fonts/Montserrat-BoldItalic.ttf") format("truetype"); }
+@font-face { font-family: "Montserrat"; font-weight: 800; font-style: normal; font-display: swap;
+  src: url("fonts/Montserrat-ExtraBold.ttf") format("truetype"); }
+@font-face { font-family: "Montserrat"; font-weight: 900; font-style: normal; font-display: swap;
+  src: url("fonts/Montserrat-Black.ttf") format("truetype"); }
+
+/* ---------- Tokens ------------------------------------------------------- */
+:root {
+  /* -------- Brand · core surfaces -------- */
+  --homea-black:        #0A0A0A;   /* Homea Black — brand moments, footer, dramatic bands */
+  --homea-gold:         #BD9B5E;   /* Homea Gold — flat champagne. The ONLY gold for UI fills/rules */
+  --homea-bone:         #F7F3EC;   /* Bone — default editorial surface */
+  --homea-white:        #FFFFFF;
+
+  /* -------- v2 supporting tones — the "showroom" neutrals -------- */
+  --homea-greige:       #ECEAE3;   /* warm grey-beige — product/showroom surface (Sub-Zero register) */
+  --homea-greige-deep:  #E2DFD5;   /* greige hover / pressed wash */
+  --homea-espresso:     #1E1914;   /* warm near-black — photography-adjacent dark sections */
+
+  /* Bright metallic gold lives INSIDE the supplied logo artwork only.
+     Never as a UI fill, rule, or text colour. Kept for reference. */
+  --homea-gold-bright:  #E5C04B;
+  --homea-gold-light:   #EECF5A;
+  --homea-gold-deep:    #8E6F3A;   /* hover / strong fills */
+  --homea-gold-soft:    #E6D6B5;   /* wash / inactive */
+  --homea-gold-text:    #76603B;   /* AA-safe gold for small text on bone/white (≥4.5:1) */
+
+  /* -------- Warm-neutral 10-step scale -------- */
+  --homea-n050:  #FAF7F0;
+  --homea-n100:  #F1ECE0;
+  --homea-n200:  #E5DED0;          /* default hairline */
+  --homea-n300:  #C9BFA6;
+  --homea-n400:  #A89B7E;
+  --homea-n500:  #807761;
+  --homea-n600:  #5C5544;
+  --homea-n700:  #3D372B;
+  --homea-n800:  #1F1C17;
+  --homea-n900:  #0A0A0A;
+
+  /* -------- Semantic — warm, muted, brand-aligned (never cold, never gold) -- */
+  --homea-success:   #5E6F48;      /* olivo — bone text */
+  --homea-warning:   #C2761F;      /* ocre quemado — black text; distinct from champagne gold */
+  --homea-danger:    #9C3D26;      /* ladrillo — errors only, bone text */
+  --homea-info:      #5C5544;      /* tinta cálida (n600) — neutral notes, bone text */
+
+  /* -------- Compatibility aliases (deprecated, kept so old markup works) -- */
+  --homea-terracotta:       var(--homea-gold);
+  --homea-terracotta-deep:  var(--homea-gold-deep);
+  --homea-terracotta-soft:  var(--homea-gold-soft);
+  --homea-sand:             var(--homea-n100);
+  --homea-beige:            var(--homea-n200);
+  --homea-taupe:            var(--homea-n500);
+  --homea-taupe-soft:       var(--homea-n400);
+  --homea-carbon:           var(--homea-black);
+  --homea-ink:              var(--homea-n800);
+
+  /* -------- Surfaces — light (default) -------- */
+  --bg:             var(--homea-bone);
+  --bg-soft:        var(--homea-n100);
+  --bg-greige:      var(--homea-greige);  /* product display bands */
+  --surface:        var(--homea-white);
+  --surface-alt:    var(--homea-n050);
+  --fg:             var(--homea-black);
+  --fg-muted:       var(--homea-n500);
+  --fg-subtle:      var(--homea-n400);
+  --border:         var(--homea-n200);
+  --border-strong:  var(--homea-n300);
+  --accent:         var(--homea-gold);
+  --accent-deep:    var(--homea-gold-deep);
+  --accent-text:    var(--homea-gold-text);
+  --accent-fg:      var(--homea-black);
+  --focus-ring:     rgba(189, 155, 94, 0.45);
+
+  /* -------- Surfaces — dark -------- */
+  --dark-bg:         var(--homea-black);
+  --dark-bg-soft:    #141312;
+  --dark-surface:    var(--homea-espresso);
+  --dark-fg:         var(--homea-bone);
+  --dark-fg-muted:   #BFB59E;
+  --dark-border:     #2A2620;
+
+  /* -------- Type stacks -------- */
+  --font-display: "Newsreader", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --font-sans:    "Montserrat", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* -------- Letter spacing — a brand signature -------- */
+  --tracking-tight:  -0.015em;     /* @kind font */
+  --tracking-display:-0.01em;      /* @kind font */
+  --tracking-normal:  0em;         /* @kind font */
+  --tracking-wide:    0.08em;      /* @kind font */
+  --tracking-wider:   0.18em;      /* @kind font */
+  --tracking-label:   0.22em;      /* @kind font */
+  --tracking-wordmark:0.32em;      /* @kind font */
+
+  /* -------- Type scale -------- */
+  --fs-xs:   12px;
+  --fs-sm:   14px;
+  --fs-base: 16px;
+  --fs-md:   18px;
+  --fs-lg:   20px;
+  --fs-xl:   24px;
+  --fs-2xl:  32px;
+  --fs-3xl:  44px;
+  --fs-4xl:  60px;
+  --fs-5xl:  84px;
+
+  --lh-tight:  1.06;  /* @kind font */
+  --lh-snug:   1.18;  /* @kind font */
+  --lh-normal: 1.5;   /* @kind font */
+  --lh-loose:  1.7;   /* @kind font */
+
+  /* -------- Spacing — 4px base -------- */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px;
+
+  /* -------- Radii — Homea is sharp -------- */
+  --r-none: 0;      /* @kind radius */
+  --r-xs:   0;      /* @kind radius */
+  --r-sm:   0;      /* @kind radius */
+  --r-md:   0;      /* @kind radius */
+  --r-lg:   0;      /* @kind radius */
+  --r-pill: 9999px; /* @kind radius */
+
+  /* -------- Borders -------- */
+  --bw-hair: 1px;      /* @kind spacing */
+  --bw-rule: 2px;      /* @kind spacing */
+  --gold-rule-w: 48px; /* @kind spacing */
+
+  /* -------- Shadows — minimal, warm -------- */
+  --shadow-xs: 0 1px 2px rgba(10, 10, 10, .05);
+  --shadow-sm: 0 2px 6px rgba(10, 10, 10, .06), 0 1px 2px rgba(10, 10, 10, .04);
+  --shadow-md: 0 8px 24px rgba(10, 10, 10, .08), 0 2px 6px rgba(10, 10, 10, .04);
+  --shadow-lg: 0 24px 48px rgba(10, 10, 10, .14), 0 4px 10px rgba(10, 10, 10, .06);
+
+  /* The single branded shadow — gold floating over dark. Use sparingly. */
+  --shadow-gold: 0 10px 32px rgba(189, 155, 94, 0.28);
+
+  /* -------- Motion — "objects that feel right" -------- */
+  --ease-standard: cubic-bezier(.2, .7, .2, 1);  /* @kind other */
+  --ease-reveal:   cubic-bezier(.16, .84, .28, 1); /* @kind other */
+  --dur-fast:   140ms; /* @kind other */
+  --dur-med:    240ms; /* @kind other */
+  --dur-slow:   420ms; /* @kind other */
+  --dur-reveal: 700ms; /* @kind other */
+
+  /* -------- Layout -------- */
+  --container: 1240px; /* @kind spacing */
+  --gutter:    24px;   /* @kind spacing */
+  --nav-h:     80px;   /* @kind spacing */
+
+  /* -------- Branded gradients -------- */
+  --grad-gold-glow: radial-gradient(60% 60% at 80% 40%,
+                      rgba(189, 155, 94, 0.28), transparent 70%); /* @kind color */
+}
+
+/* ---------- Base --------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-family: var(--font-sans); color: var(--fg); background: var(--bg);
+       -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body { margin: 0; font-size: var(--fs-base); line-height: var(--lh-normal); }
+img  { display: block; max-width: 100%; }
+
+/* ---------- Display & headings — Newsreader carries the editorial voice -- */
+.h-display, .display-1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(48px, 7vw, var(--fs-5xl));
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-display);
+  color: var(--fg);
+  text-wrap: balance;
+}
+/* Inside display type: <b> = weight emphasis, <i>/<em> = the voice accent */
+.h-display b, .display-1 b { font-weight: 600; }
+.h-display i, .h-display em, .display-1 i, .display-1 em {
+  font-style: italic; font-weight: 400; }
+
+h1, .h1 { font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(36px, 4.5vw, var(--fs-4xl));
+  line-height: var(--lh-tight); letter-spacing: var(--tracking-display); margin: 0; }
+h1 b, .h1 b { font-weight: 600; }
+h1 i, h1 em, .h1 i, .h1 em { font-style: italic; }
+
+h2, .h2 { font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(28px, 3vw, var(--fs-3xl));
+  line-height: var(--lh-snug); letter-spacing: -0.005em; margin: 0; }
+h2 b, .h2 b { font-weight: 600; }
+h2 i, h2 em, .h2 i, .h2 em { font-style: italic; }
+
+/* H3 down: Montserrat — the rational, UI register */
+h3, .h3 { font-family: var(--font-sans); font-weight: 600;
+  font-size: var(--fs-xl); line-height: var(--lh-snug); margin: 0; }
+h4, .h4 { font-family: var(--font-sans); font-weight: 600;
+  font-size: var(--fs-lg); line-height: var(--lh-snug); margin: 0; }
+
+/* ---------- Eyebrow — AA-safe sizes & colours ---------------------------- */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--accent-text);          /* gold-text: 4.5:1+ on bone/white */
+}
+.eyebrow-bone   { color: var(--homea-bone); }
+.eyebrow-bright { color: var(--homea-gold-bright); }   /* on black/espresso only */
+.eyebrow-muted  { color: var(--fg-muted); }
+
+/* ---------- Body --------------------------------------------------------- */
+p, .p { font-family: var(--font-sans); font-weight: 400;
+  font-size: var(--fs-base); line-height: var(--lh-normal);
+  color: var(--fg); margin: 0 0 1em 0; text-wrap: pretty; }
+.lead    { font-size: var(--fs-lg); font-weight: 300; line-height: var(--lh-normal); color: var(--fg); }
+.lead-serif { font-family: var(--font-display); font-size: var(--fs-xl);
+  font-weight: 400; line-height: var(--lh-normal); }
+.small, small { font-size: var(--fs-sm); color: var(--fg-muted); }
+.caption { font-size: 13px; color: var(--fg-muted); letter-spacing: 0.02em; }
+
+/* ---------- Precision — figures, specs, the · system --------------------- */
+.figures, .price, .spec-value {
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+}
+.price { font-family: var(--font-sans); font-weight: 500; letter-spacing: 0.01em; }
+.price .currency { font-size: 0.62em; font-weight: 600;
+  letter-spacing: var(--tracking-wider); color: var(--fg-muted); margin-left: 0.35em; }
+
+.spec       { display: grid; grid-template-columns: max-content 1fr; column-gap: var(--s-5); row-gap: 0; }
+.spec-row   { display: contents; }
+.spec-label { font-family: var(--font-sans); font-weight: 600; font-size: 11px;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase;
+  color: var(--fg-muted); padding: 10px 0; border-bottom: 1px solid var(--border); }
+.spec-value { font-family: var(--font-sans); font-weight: 400; font-size: var(--fs-sm);
+  color: var(--fg); padding: 10px 0; border-bottom: 1px solid var(--border); }
+
+.dotlist { font-size: var(--fs-sm); color: var(--fg-muted); letter-spacing: 0.04em; }
+.dotlist .dot, .dot-sep { color: var(--homea-gold); padding: 0 0.45em; }
+
+/* ---------- Links -------------------------------------------------------- */
+a { color: var(--accent-text); text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color var(--dur-fast) var(--ease-standard),
+                border-color var(--dur-fast) var(--ease-standard); }
+a:hover { color: var(--homea-gold-deep); border-bottom-color: currentColor; }
+
+/* ---------- Utility ------------------------------------------------------ */
+.fg          { color: var(--fg); }
+.fg-muted    { color: var(--fg-muted); }
+.fg-subtle   { color: var(--fg-subtle); }
+.fg-gold     { color: var(--homea-gold); }
+.fg-gold-text { color: var(--accent-text); }
+.fg-gold-bright { color: var(--homea-gold-bright); }
+.fg-taupe    { color: var(--homea-n500); }
+.fg-bone     { color: var(--homea-bone); }
+/* Deprecated alias names, kept so older markup still works */
+.fg-terracotta { color: var(--homea-gold); }
+
+/* ---------- Dark helpers -------------------------------------------------- */
+.on-dark { background: var(--dark-bg); color: var(--dark-fg); }
+.on-dark p { color: var(--dark-fg-muted); }
+.on-dark a { color: var(--homea-gold-bright); }
+.on-espresso { background: var(--homea-espresso); color: var(--dark-fg); }
+.on-espresso p { color: var(--dark-fg-muted); }
+.on-espresso a { color: var(--homea-gold-bright); }
+.on-greige { background: var(--homea-greige); color: var(--fg); }
+
+/* ---------- Gold rule — the brand divider ------------------------------- */
+.rule-gold,
+.rule-terra {                /* alias kept for legacy */
+  display: block;
+  width: var(--gold-rule-w);
+  height: var(--bw-rule);
+  background: var(--homea-gold);
+  border: 0;
+}
+
+/* ---------- Motion — restrained reveals ---------------------------------- */
+/* Add .reveal to a block; JS adds .in when it enters the viewport.
+   Without JS (or with reduced motion) content simply shows. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { opacity: 0; transform: translateY(16px);
+    transition: opacity var(--dur-reveal) var(--ease-reveal),
+                transform var(--dur-reveal) var(--ease-reveal); }
+  .reveal.in { opacity: 1; transform: none; }
+  .reveal-img { overflow: hidden; }
+  .reveal-img > * { transform: scale(1.04);
+    transition: transform 1200ms var(--ease-reveal); }
+  .reveal-img.in > * { transform: scale(1); }
+}
+
+/* ---------- Wordmark caps — for HOMEA / HOMEA PREMIUM type lockups ------- */
+.wordmark {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wordmark);
+  text-transform: uppercase;
+}
+.wordmark .premium {
+  font-weight: 300;
+  letter-spacing: var(--tracking-label);
+  color: var(--homea-gold);
+}

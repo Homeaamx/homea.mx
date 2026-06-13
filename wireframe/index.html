@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOMEA — Wireframe (índice)</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+<div class="wf-bar">
+  <strong>Wireframe HOMEA</strong>
+  <a href="index.html" class="active">Índice</a>
+  <a href="home.html">Home</a>
+  <a href="coleccion-plp.html">Colección/PLP</a>
+  <a href="producto-pdp.html">Producto/PDP</a>
+  <a href="landing-b2b.html">Landing B2B</a>
+  <a href="marcas.html">Marcas</a>
+  <a href="quienes-somos-showroom.html">Quiénes Somos/Showroom</a>
+  <a href="contacto.html">Contacto</a>
+</div>
+<div class="wrap">
+  <h1 class="tpl-title">Wireframe — estructura, no diseño final</h1>
+  <p class="tpl-sub">Esqueleto de las 7 plantillas. Contenedores y placeholders rotulados (sin contenido real ni diseño). Tokens del Design System usados solo como referencia de espaciado/tipografía. Cada bloque mapea a una <b>section</b> de Shopify Online Store 2.0; los sub-bloques, a <b>blocks</b>.</p>
+
+  <div class="legend">
+    <span><b>Leyenda:</b></span>
+    <span><span class="pill f1">Fase 1</span> guía + lead (ahora)</span>
+    <span><span class="pill f2">Fase 2</span> ecommerce (activación controlada)</span>
+    <span>│ Borde <b style="color:#B8893E">dorado</b> = ruta <b>LEAD</b> (alto ticket)</span>
+    <span>┆ Borde <b>punteado</b> = ruta <b>COMPRA</b> (Fase 2)</span>
+    <span><span class="cta cta-lead">Cotizar</span> CTA primario · <span class="cta cta-buy">Comprar</span> secundario/F2</span>
+  </div>
+
+  <div class="note">Jerarquía de conversión: en cada plantilla, la ruta <b>LEAD</b> (Cotizar/WhatsApp/showroom → KOMMO) es la primaria de Fase 1; la ruta <b>COMPRA</b> (checkout Shopify) está diseñada pero se activa por categoría/gama en Fase 2. Las dos se distinguen visualmente.</div>
+
+  <section class="wf" data-route="lead">
+    <div class="wf-h"><span class="wf-num">01</span><h2>Home</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">Propuesta de autoridad + descubrimiento (mega-menú, por categoría/marca/espacio) + rutas a segmentos y showroom.</p>
+  </section>
+  <section class="wf" data-route="lead">
+    <div class="wf-h"><span class="wf-num">02</span><h2>Colección / PLP</h2><span class="pill f1">Fase 1</span><span class="pill f2">Fase 2</span></div>
+    <p class="wf-p">Grid filtrable con filtros técnicos profundos, precio de referencia + estatus y doble CTA.</p>
+  </section>
+  <section class="wf" data-route="lead">
+    <div class="wf-h"><span class="wf-num">03</span><h2>Producto / PDP</h2><span class="pill f1">Fase 1</span><span class="pill f2">Fase 2</span></div>
+    <p class="wf-p">Specs + ficha técnica PDF + FAQ + doble CTA (Cotizar primario / Comprar F2) + showroom.</p>
+  </section>
+  <section class="wf" data-route="lead">
+    <div class="wf-h"><span class="wf-num">04</span><h2>Landing de lead B2B</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">Arquitectos / desarrolladores / cocineros: beneficios, constructor de cotización, proyectos y form → KOMMO.</p>
+  </section>
+  <section class="wf" data-route="lead">
+    <div class="wf-h"><span class="wf-num">05</span><h2>Marcas</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">Índice de 96 marcas + filtro por gama, y página por marca.</p>
+  </section>
+  <section class="wf" data-route="lead">
+    <div class="wf-h"><span class="wf-num">06</span><h2>Quiénes Somos / Showroom</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">Autoridad, cifras, showroom Querétaro con cita y galería de proyectos.</p>
+  </section>
+  <section class="wf" data-route="lead">
+    <div class="wf-h"><span class="wf-num">07</span><h2>Contacto</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">Form → KOMMO, datos homologados, showroom con mapa, WhatsApp.</p>
+  </section>
+</div>
+</body>
+</html>

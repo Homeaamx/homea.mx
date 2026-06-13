@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOMEA — Wireframe · Colección / PLP</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+<div class="wf-bar">
+  <strong>Wireframe HOMEA</strong>
+  <a href="index.html">Índice</a>
+  <a href="home.html">Home</a>
+  <a href="coleccion-plp.html" class="active">Colección/PLP</a>
+  <a href="producto-pdp.html">Producto/PDP</a>
+  <a href="landing-b2b.html">Landing B2B</a>
+  <a href="marcas.html">Marcas</a>
+  <a href="quienes-somos-showroom.html">Quiénes Somos/Showroom</a>
+  <a href="contacto.html">Contacto</a>
+</div>
+<div class="wrap">
+  <h1 class="tpl-title">Colección / PLP (con filtros)</h1>
+  <p class="tpl-sub">El corazón de "eficiencia + expertise": filtros técnicos profundos + precio de referencia/estatus + doble CTA. Corrige el problema #1 (descubrir producto).</p>
+  <div class="note">Header global + mega-menú y footer aplican igual que en Home (no se repiten aquí).</div>
+
+  <section class="wf">
+    <div class="wf-h"><span class="wf-num">01</span><h2>Breadcrumb</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">Orientación + SEO.</p>
+    <div class="box sm">[ Inicio › Categoría › Subcategoría ]</div>
+    <div class="wf-map">Shopify: breadcrumb (theme)</div>
+  </section>
+
+  <section class="wf" data-route="lead">
+    <div class="wf-h"><span class="wf-num">02</span><h2>Encabezado de colección</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">Título + texto experto (intro SEO) + conteo ("138 artículos").</p>
+    <div class="box">[ H1 categoría + descripción experta + conteo ]</div>
+    <div class="wf-map">Shopify: section "collection banner" (description + product count)</div>
+  </section>
+
+  <section class="wf">
+    <div class="wf-h"><span class="wf-num">03</span><h2>Filtros técnicos + orden + chips</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">Filtros profundos (Artexa): marca, tipo, gama, ancho, capacidad, combustible, CFM, zonas, color, energy star, panel ready, precio. Orden: relevancia/precio/stock/más vendidos. Chips de filtro activo (Liverpool).</p>
+    <div class="row"><div class="box sm">[ Chips activos ✕ ]</div><div class="box sm">[ Ordenar por ▾ ]</div><div class="box sm">[ Grid / Lista ]</div></div>
+    <div class="wf-map">Shopify: Search &amp; Discovery (filtros por metafields/tags)</div>
+  </section>
+
+  <section class="wf" data-route="lead">
+    <div class="wf-h"><span class="wf-num">04</span><h2>Cuerpo: filtros (aside) + grid de producto</h2><span class="pill f1">Fase 1</span><span class="pill f2">Fase 2</span></div>
+    <p class="wf-p">Tarjeta: marca · título · precio de referencia + estatus (Bajo pedido/Disponible) · badge gama · wishlist/comparar · DOBLE CTA. Evita tarjetas sin precio/CTA (error El Tío Sam).</p>
+    <div class="row">
+      <div class="box xtall" style="flex:1 1 200px">[ ASIDE filtros
+        <br>▢ Marca ▢ Tipo ▢ Gama
+        <br>▢ Ancho ▢ Capacidad
+        <br>▢ Combustible ▢ CFM
+        <br>▢ Panel ready ▢ Precio ]</div>
+      <div style="flex:3 1 360px">
+        <div class="row cols-3">
+          <div class="box tall">[ Tarjeta: marca · título · precio ref · estatus · gama
+            <div class="ctas"><span class="cta cta-lead">Cotizar</span><span class="cta cta-buy">Comprar · F2</span></div> ]</div>
+          <div class="box tall">[ Tarjeta producto ]</div>
+          <div class="box tall">[ Tarjeta producto ]</div>
+          <div class="box tall">[ Tarjeta producto ]</div>
+          <div class="box tall">[ Tarjeta producto ]</div>
+          <div class="box tall">[ Tarjeta producto ]</div>
+        </div>
+      </div>
+    </div>
+    <div class="wf-map">Shopify: plantilla "collection" · grid de product cards (snippet) · doble CTA condicional por tag/precio</div>
+  </section>
+
+  <section class="wf">
+    <div class="wf-h"><span class="wf-num">05</span><h2>Paginación / cargar más</h2><span class="pill f1">Fase 1</span></div>
+    <div class="box sm">[ ‹ 1 2 3 › ]</div>
+    <div class="wf-map">Shopify: paginate</div>
+  </section>
+
+  <section class="wf">
+    <div class="wf-h"><span class="wf-num">06</span><h2>Guía de compra de la categoría</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">Bloque educativo (KITCH tips, ABT learn): expertise + SEO.</p>
+    <div class="box tall">[ Texto guía + enlaces a artículos ]</div>
+    <div class="wf-map">Shopify: section "rich text" / "blog posts" en plantilla de colección</div>
+  </section>
+
+  <section class="wf" data-route="lead">
+    <div class="wf-h"><span class="wf-num">07</span><h2>CTA asesoría</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">"¿No encuentras lo que buscas? Habla con un especialista."</p>
+    <div class="box">[ Texto + <div class="ctas"><span class="cta cta-lead">Hablar con un especialista</span></div> ]</div>
+    <div class="wf-map">Shopify: section "call to action"</div>
+  </section>
+</div>
+</body>
+</html>

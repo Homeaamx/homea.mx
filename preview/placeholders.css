@@ -1,0 +1,115 @@
+/* ==========================================================================
+   Homea — Editorial placeholder system
+   Replaces photography slots with intentional, labeled tiles while real
+   product/lifestyle imagery is sourced.
+   ========================================================================== */
+
+.ph {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: var(--homea-cocoa);
+  color: var(--homea-bone);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Subtle textile weave texture using crossed gradients */
+.ph::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(45deg, rgba(247,241,230,0.035) 0 1px, transparent 1px 8px),
+    repeating-linear-gradient(-45deg, rgba(31,27,21,0.25) 0 1px, transparent 1px 10px);
+  pointer-events: none;
+}
+
+/* Inner frame */
+.ph::after {
+  content: "";
+  position: absolute; inset: 14px;
+  border: 1px solid rgba(184,137,62,0.30);
+  pointer-events: none;
+}
+
+.ph-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 20px;
+  max-width: 80%;
+}
+
+.ph-eyebrow {
+  font-family: var(--homea-sans);
+  font-weight: 500;
+  font-size: 9px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--homea-gold);
+  margin-bottom: 14px;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.ph-eyebrow::before, .ph-eyebrow::after {
+  content: ""; width: 18px; height: 1px; background: var(--homea-gold); opacity: 0.6;
+}
+
+.ph-title {
+  font-family: var(--homea-sans);
+  font-weight: 200;
+  font-style: italic;
+  font-size: 22px;
+  letter-spacing: 0.02em;
+  color: var(--homea-ivory);
+  line-height: 1.2;
+  margin: 0 0 10px;
+}
+
+.ph-caption {
+  font-family: var(--homea-sans);
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--homea-mute-ink);
+}
+
+/* Tonal variants to give visual variety */
+.ph.ink    { background: var(--homea-ink); }
+.ph.cocoa  { background: var(--homea-cocoa); }
+.ph.clay   { background: var(--homea-clay); color: var(--homea-ink); }
+.ph.clay   .ph-title { color: var(--homea-ink); }
+.ph.clay   .ph-eyebrow { color: var(--homea-ink); opacity: 0.7; }
+.ph.clay   .ph-eyebrow::before, .ph.clay .ph-eyebrow::after { background: var(--homea-ink); opacity: 0.4; }
+.ph.clay   .ph-caption { color: var(--homea-cocoa); }
+.ph.linen  { background: var(--homea-linen); color: var(--homea-ink); }
+.ph.linen  .ph-title { color: var(--homea-ink); }
+.ph.linen  .ph-eyebrow { color: var(--homea-gold-deep); }
+.ph.linen  .ph-eyebrow::before, .ph.linen .ph-eyebrow::after { background: var(--homea-gold-deep); }
+.ph.linen  .ph-caption { color: var(--homea-mute); }
+.ph.bone   { background: var(--homea-bone); color: var(--homea-ink); }
+.ph.bone   .ph-title { color: var(--homea-ink); }
+.ph.bone   .ph-eyebrow { color: var(--homea-gold-deep); }
+.ph.bone   .ph-eyebrow::before, .ph.bone .ph-eyebrow::after { background: var(--homea-gold-deep); }
+.ph.bone   .ph-caption { color: var(--homea-mute); }
+.ph.stone  { background: var(--homea-stone); color: var(--homea-ink); }
+.ph.stone  .ph-title { color: var(--homea-ink); }
+.ph.stone  .ph-eyebrow { color: var(--homea-cocoa); }
+.ph.stone  .ph-eyebrow::before, .ph.stone .ph-eyebrow::after { background: var(--homea-cocoa); }
+.ph.stone  .ph-caption { color: var(--homea-cocoa); opacity: 0.7; }
+.ph.gold   { background: var(--homea-gold-deep); }
+.ph.gold   .ph-title { color: var(--homea-ivory); }
+
+/* Small H monogram as quiet watermark */
+.ph-mark {
+  position: absolute;
+  bottom: 18px; right: 22px;
+  font-family: var(--homea-sans);
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.32em;
+  opacity: 0.35;
+  z-index: 1;
+}

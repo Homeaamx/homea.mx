@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOMEA — Wireframe · Producto / PDP</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+<div class="wf-bar">
+  <strong>Wireframe HOMEA</strong>
+  <a href="index.html">Índice</a>
+  <a href="home.html">Home</a>
+  <a href="coleccion-plp.html">Colección/PLP</a>
+  <a href="producto-pdp.html" class="active">Producto/PDP</a>
+  <a href="landing-b2b.html">Landing B2B</a>
+  <a href="marcas.html">Marcas</a>
+  <a href="quienes-somos-showroom.html">Quiénes Somos/Showroom</a>
+  <a href="contacto.html">Contacto</a>
+</div>
+<div class="wrap">
+  <h1 class="tpl-title">Producto / PDP</h1>
+  <p class="tpl-sub">PDP experta tipo Artexa: galería + specs + ficha técnica PDF + FAQ + doble CTA (Cotizar primario / Comprar F2). Handle limpio regenerado del nombre real.</p>
+  <div class="note">Header global + mega-menú y footer aplican igual que en Home.</div>
+
+  <section class="wf">
+    <div class="wf-h"><span class="wf-num">01</span><h2>Breadcrumb</h2><span class="pill f1">Fase 1</span></div>
+    <div class="box sm">[ Inicio › Categoría › Producto ]</div>
+  </section>
+
+  <section class="wf" data-route="lead">
+    <div class="wf-h"><span class="wf-num">02</span><h2>Galería + Bloque de compra/lead</h2><span class="pill f1">Fase 1</span><span class="pill f2">Fase 2</span></div>
+    <p class="wf-p">Galería con varias imágenes reales (evita pocas/baja calidad). Bloque: marca · título · SKU · precio ref + IVA + estatus stock · gama · DOBLE CTA · wishlist/comparar.</p>
+    <div class="row">
+      <div class="box xtall" style="flex:2 1 320px">[ Galería: imagen principal + miniaturas + badges (gama/estatus/novedad) ]</div>
+      <div class="box xtall" style="flex:1 1 260px">[ Marca · Título · SKU
+        <br>Precio de referencia + IVA
+        <br>Estatus: Bajo pedido / Disponible · gama
+        <div class="ctas"><span class="cta cta-lead">Cotizar / WhatsApp</span></div>
+        <div class="ctas"><span class="cta cta-buy">Comprar · Fase 2</span></div>
+        <div class="ctas"><span class="cta cta-ghost">♡ Deseos</span><span class="cta cta-ghost">⇄ Comparar</span></div> ]</div>
+    </div>
+    <div class="wf-map">Shopify: plantilla "product" · buy buttons (Comprar visible por tag/precio en F2; si no, solo Cotizar)</div>
+  </section>
+
+  <section class="wf" data-route="lead">
+    <div class="wf-h"><span class="wf-num">03</span><h2>Calculadora de espacio "¿cabrá?"</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">AJ Madison: valida medidas del hueco vs. equipo.</p>
+    <div class="box">[ Inputs alto/ancho/fondo → resultado ]</div>
+    <div class="wf-map">Shopify: app / bloque custom (lee metafields de dimensiones)</div>
+  </section>
+
+  <section class="wf">
+    <div class="wf-h"><span class="wf-num">04</span><h2>Información del producto</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">Descripción en formato uniforme (evita copy-paste tipo KITCH).</p>
+    <div class="box tall">[ Descripción estructurada ]</div>
+  </section>
+
+  <section class="wf">
+    <div class="wf-h"><span class="wf-num">05</span><h2>Especificaciones técnicas</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">Tabla estructurada CON dimensiones (corrige falta de medidas de J&S).</p>
+    <div class="box tall">[ Tabla specs: dimensiones · capacidad · combustible · consumo · etc. ]</div>
+    <div class="wf-map">Shopify: metafields de producto renderizados en tabla</div>
+  </section>
+
+  <section class="wf">
+    <div class="wf-h"><span class="wf-num">06</span><h2>Descargables: ficha técnica PDF + manual</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">Señal de expertise fuerte (Artexa/Ferguson).</p>
+    <div class="row"><div class="box sm">[ ⬇ Ficha técnica PDF ]</div><div class="box sm">[ ⬇ Manual ]</div></div>
+    <div class="wf-map">Shopify: metafield file / files</div>
+  </section>
+
+  <section class="wf">
+    <div class="wf-h"><span class="wf-num">07</span><h2>FAQ por equipo</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">KITCH / J&S: dudas frecuentes del producto.</p>
+    <div class="box">[ Acordeón de preguntas ]</div>
+    <div class="wf-map">Shopify: section "collapsible content" (metaobject FAQ)</div>
+  </section>
+
+  <section class="wf" data-route="buy">
+    <div class="wf-h"><span class="wf-num">08</span><h2>Kits / accesorios recomendados</h2><span class="pill f1">Fase 1 (ref)</span><span class="pill f2">Fase 2 (compra)</span></div>
+    <p class="wf-p">Ferguson: recomienda kits/jaladeras/accesorios.</p>
+    <div class="row cols-3"><div class="box tall">[ Accesorio ]</div><div class="box tall">[ Kit ]</div><div class="box tall">[ Accesorio ]</div></div>
+  </section>
+
+  <section class="wf">
+    <div class="wf-h"><span class="wf-num">09</span><h2>Relacionados (misma marca / gama)</h2><span class="pill f1">Fase 1</span></div>
+    <div class="row cols-4"><div class="box tall">[ Producto ]</div><div class="box tall">[ Producto ]</div><div class="box tall">[ Producto ]</div><div class="box tall">[ Producto ]</div></div>
+    <div class="wf-map">Shopify: product recommendations</div>
+  </section>
+
+  <section class="wf" data-route="buy">
+    <div class="wf-h"><span class="wf-num">10</span><h2>Reseñas + conteo</h2><span class="pill f2">Fase 2</span></div>
+    <p class="wf-p">Palacio/Liverpool/ABT: prueba social transaccional.</p>
+    <div class="box">[ ★★★★☆ (77) + reseñas ]</div>
+    <div class="wf-map">Shopify: app de reseñas (Judge.me / Shopify Product Reviews)</div>
+  </section>
+
+  <section class="wf">
+    <div class="wf-h"><span class="wf-num">11</span><h2>Garantía e instalación (+ garantía extendida)</h2><span class="pill f1">Fase 1 (info)</span><span class="pill f2">Fase 2 (upsell)</span></div>
+    <div class="box">[ Texto garantía/instalación + selector garantía extendida (F2) ]</div>
+  </section>
+
+  <section class="wf" data-route="lead">
+    <div class="wf-h"><span class="wf-num">12</span><h2>Back-in-stock / "avísame"</h2><span class="pill f1">Fase 1</span></div>
+    <p class="wf-p">ABT: si 0 disponibles, capturar interés (corrige frustración de Artexa).</p>
+    <div class="box sm">[ Email → avísame cuando llegue ]</div>
+    <div class="wf-map">Shopify: app back-in-stock → KOMMO</div>
+  </section>
+
+  <section class="wf" data-route="lead">
+    <div class="wf-h"><span class="wf-num">13</span><h2>CTA showroom + WhatsApp</h2><span class="pill f1">Fase 1</span></div>
+    <div class="box">[ "Vívelo en el showroom" <div class="ctas"><span class="cta cta-lead">Agenda tu visita</span><span class="cta cta-ghost">WhatsApp</span></div> ]</div>
+  </section>
+</div>
+</body>
+</html>

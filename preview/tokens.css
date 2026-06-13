@@ -1,0 +1,150 @@
+/* ==========================================================================
+   Homea — Design Tokens
+   Premium home & living. Warm golds on deep ink, earthy neutrals.
+   Type: Montserrat only — light for editorial, high-tracked caps for labels.
+   ========================================================================== */
+
+/* -------- Font face — Montserrat family, local -------- */
+@font-face { font-family: "Montserrat"; font-weight: 100; font-style: normal;
+  src: url("fonts/Montserrat-Thin.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 100; font-style: italic;
+  src: url("fonts/Montserrat-ThinItalic.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 200; font-style: normal;
+  src: url("fonts/Montserrat-ExtraLight.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 200; font-style: italic;
+  src: url("fonts/Montserrat-ExtraLightItalic.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 300; font-style: normal;
+  src: url("fonts/Montserrat-Light.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 300; font-style: italic;
+  src: url("fonts/Montserrat-LightItalic.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 400; font-style: normal;
+  src: url("fonts/Montserrat-Regular.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 400; font-style: italic;
+  src: url("fonts/Montserrat-Italic.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 500; font-style: normal;
+  src: url("fonts/Montserrat-Medium.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 500; font-style: italic;
+  src: url("fonts/Montserrat-MediumItalic.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 600; font-style: normal;
+  src: url("fonts/Montserrat-SemiBold.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 600; font-style: italic;
+  src: url("fonts/Montserrat-SemiBoldItalic.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 700; font-style: normal;
+  src: url("fonts/Montserrat-Bold.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 700; font-style: italic;
+  src: url("fonts/Montserrat-BoldItalic.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 800; font-style: normal;
+  src: url("fonts/Montserrat-ExtraBold.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 800; font-style: italic;
+  src: url("fonts/Montserrat-ExtraBoldItalic.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 900; font-style: normal;
+  src: url("fonts/Montserrat-Black.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 900; font-style: italic;
+  src: url("fonts/Montserrat-BlackItalic.ttf") format("truetype"); font-display: swap; }
+
+:root {
+  /* -------- Color — Core brand -------- */
+  --homea-gold:        #B8893E;
+  --homea-gold-deep:   #8C6526;
+  --homea-gold-light:  #D4AD6A;
+  --homea-gold-pale:   #EBD9B4;
+
+  /* -------- Color — Earth neutrals -------- */
+  --homea-ivory:       #F4F2EE;
+  --homea-bone:        #E8E6E2;
+  --homea-linen:       #D8D6D2;
+  --homea-stone:       #9A9893;
+  --homea-clay:        #6E6B65;
+  --homea-cocoa:       #1A1612;   /* dark surface — nearly black, barely warm */
+
+  /* -------- Color — Ink & surface -------- */
+  --homea-ink:         #000000;   /* default surface — true black */
+  --homea-ink-soft:    #0D0B09;
+  --homea-mute-ink:    #7A7874;   /* secondary copy on dark */
+  --homea-mute:        #6A6864;   /* secondary copy on light */
+  --homea-hair:        #D0CEC9;
+  --homea-hair-dark:   #1C1B19;   /* hairline on ink */
+  --homea-white:       #FFFFFF;
+
+  /* -------- State (all warm-tinted — no greens or reds) -------- */
+  --homea-success:     #8C6526;   /* gold-deep */
+  --homea-warning:     #B8893E;
+  --homea-error:       #5E4A35;   /* cocoa */
+  --homea-info:        #A68664;   /* clay */
+
+  /* -------- Type — Montserrat only -------- */
+  --homea-sans:  "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --homea-mono:  "SF Mono", "Menlo", monospace;
+
+  /* Fluid type scale */
+  --fs-display-xl: clamp(64px, 8vw, 128px);
+  --fs-display-l:  clamp(48px, 6vw, 88px);
+  --fs-display-m:  clamp(36px, 4.5vw, 64px);
+  --fs-h1:         clamp(32px, 3.5vw, 48px);
+  --fs-h2:         clamp(26px, 2.6vw, 36px);
+  --fs-h3:         22px;
+  --fs-h4:         18px;
+  --fs-body-l:     17px;
+  --fs-body:       15px;
+  --fs-caption:    13px;
+  --fs-eyebrow:    11px;
+
+  --lh-display: 1.02;
+  --lh-heading: 1.15;
+  --lh-body: 1.65;
+  --lh-tight: 1.3;
+
+  /* Letter-spacing — a brand signature on all-caps labels */
+  --ls-eyebrow: 0.42em;
+  --ls-button:  0.28em;
+  --ls-caps:    0.16em;
+  --ls-display: -0.01em;
+
+  /* -------- Spacing (4pt base) -------- */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px; --sp-10: 128px;
+
+  /* -------- Radii — minimal -------- */
+  --r-0: 0; --r-1: 2px; --r-2: 4px; --r-3: 8px; --r-pill: 999px;
+
+  /* -------- Shadows — warm-tinted -------- */
+  --sh-1: 0 1px 2px rgba(95, 73, 44, 0.08);
+  --sh-2: 0 4px 12px rgba(95, 73, 44, 0.10), 0 1px 2px rgba(95, 73, 44, 0.06);
+  --sh-3: 0 12px 32px rgba(95, 73, 44, 0.14), 0 2px 6px rgba(95, 73, 44, 0.08);
+  --sh-4: 0 24px 60px rgba(0, 0, 0, 0.50);
+  --sh-gold: 0 0 0 1px rgba(184, 137, 62, 0.35);
+
+  /* -------- Motion -------- */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.6, 0, 0.4, 1);
+  --dur-fast: 180ms;
+  --dur-base: 280ms;
+  --dur-slow: 520ms;
+
+  /* -------- Layout -------- */
+  --container: 1320px;
+  --gutter: 24px;
+}
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: var(--homea-sans);
+  font-weight: 300;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--homea-ink-soft);
+  background: var(--homea-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { display: block; max-width: 100%; }
+
+/* Type primitives — Montserrat only, weight and tracking carry hierarchy */
+.display  { font-family: var(--homea-sans); font-weight: 200; letter-spacing: var(--ls-display); line-height: var(--lh-display); }
+.display-italic { font-weight: 200; font-style: italic; }
+.heading  { font-family: var(--homea-sans); font-weight: 400; line-height: var(--lh-heading); }
+.eyebrow  { font-family: var(--homea-sans); font-weight: 500; font-size: var(--fs-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--homea-gold); }
+.body     { font-family: var(--homea-sans); font-weight: 300; }
+.caption  { font-family: var(--homea-sans); font-weight: 400; font-size: var(--fs-caption); color: var(--homea-mute-ink); }

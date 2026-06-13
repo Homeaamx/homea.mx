@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOMEA — Tablero de referencia (Benchmark)</title>
+<style>
+  :root{ --bg:#0e0e0e; --card:#1a1a1a; --line:#2c2c2c; --gold:#c8a14a; --green:#4a9d6a; --red:#c0654a; --txt:#eee; --muted:#9a9a9a; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55}
+  header{padding:30px 24px;border-bottom:1px solid var(--line);background:#000}
+  header h1{margin:0 0 6px;font-size:22px}
+  header p{margin:0;color:var(--muted);font-size:14px;max-width:820px}
+  main{max-width:1080px;margin:0 auto;padding:24px}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin:8px 0 24px;font-size:13px;color:var(--muted)}
+  .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;margin-right:6px;font-weight:600}
+  .tag.model{background:#23201a;color:var(--gold);border:1px solid #3a3018}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:18px}
+  .card h2{margin:0 0 2px;font-size:18px}
+  .card .role{font-size:12px;color:var(--muted);margin:0 0 14px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:720px){.cols{grid-template-columns:1fr}}
+  .col h3{font-size:12px;text-transform:uppercase;letter-spacing:.5px;margin:0 0 8px}
+  .si h3{color:var(--green)} .no h3{color:var(--red)}
+  ul{margin:0;padding-left:18px;font-size:13.5px} li{margin-bottom:6px}
+  .links{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+  .links a{font-size:12.5px;color:#0e0e0e;background:var(--gold);text-decoration:none;padding:7px 12px;border-radius:8px;font-weight:600}
+  .links a.alt{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+  .note{max-width:1080px;margin:18px auto;padding:14px 18px;background:#1c1810;border:1px solid #3a3018;border-radius:10px;color:#d8c79a;font-size:13px}
+  footer{color:var(--muted);font-size:12px;text-align:center;padding:30px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header>
+  <h1>HOMEA — Tablero de referencia (Benchmark)</h1>
+  <p>Proveedor de referencia + competencia, para definir qué SÍ debe llevar la nueva web (guía + lead, con eficiencia y expertise) y qué evitar. Cada tarjeta enlaza a las pantallas reales revisadas. Análisis completo en <strong>BENCHMARK.md</strong>.</p>
+</header>
+
+<div class="note">
+  Las capturas de pantalla del navegador no pueden guardarse como archivos en esta sesión; por eso el tablero <strong>enlaza directo a cada pantalla en vivo</strong> y el análisis detallado vive en BENCHMARK.md. Modelo objetivo de HOMEA hoy = <strong>Artexa</strong> (guía + lead, sin checkout); base transaccional de fase 2 = <strong>Palacio / Liverpool</strong>.
+</div>
+
+<main>
+  <div class="legend">
+    <span><span class="tag model">PROVEEDOR REF.</span> modelo a seguir</span>
+    <span><span class="tag model">COMPETENCIA</span> mismo nicho</span>
+    <span><span class="tag model">ECOMMERCE REF.</span> vara fase 2</span>
+  </div>
+
+  <div class="card">
+    <h2>Artexa <span class="tag model">PROVEEDOR REF.</span></h2>
+    <p class="role">Portafolio de marcas premium · guía + spec + lead (sin checkout) · Experience &amp; Design Centers. Lo más cercano a lo que HOMEA quiere ofrecer.</p>
+    <div class="cols">
+      <div class="col si">
+        <h3>Adoptar</h3>
+        <ul>
+          <li>Propuesta de valor editorial / autoridad ("desde 1992", marcas que los proyectos especifican).</li>
+          <li>Navegación por <strong>espacios</strong> + por <strong>marca</strong>.</li>
+          <li>Precio de referencia + estatus "Bajo pedido" (sin forzar compra).</li>
+          <li><strong>Filtros técnicos profundos</strong> (ancho, capacidad, gas, CFM…).</li>
+          <li>PDP: URL limpia, specs, <strong>ficha técnica descargable</strong>, "Cotiza Ahora".</li>
+          <li>Lista de deseos · Artexa Pro (canal profesional) · showroom protagonista.</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h3>Evitar / vigilar</h3>
+        <ul>
+          <li>Heros con video pesado → riesgo de velocidad móvil (CWV).</li>
+          <li>Productos "0 disponibles" sin alternativa clara (ofrecer "avísame/cotiza").</li>
+        </ul>
+      </div>
+    </div>
+    <div class="links">
+      <a href="https://artexa.com/es/" target="_blank" rel="noopener">Home</a>
+      <a href="https://artexa.com/es/productos" target="_blank" rel="noopener" class="alt">Productos</a>
+      <a href="https://artexa.com/es/productos/cocinas-y-bar" target="_blank" rel="noopener" class="alt">PLP filtros</a>
+      <a href="https://artexa.com/es/horno-vapor-combi-benessi-30-pulgadas-acero-inoxidable-bksoss30mast-benessi" target="_blank" rel="noopener" class="alt">PDP ejemplar</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>El Tío Sam <span class="tag model">COMPETENCIA</span></h2>
+    <p class="role">Electrodomésticos en Guadalajara · WordPress + WooCommerce · guía + lead (sin checkout).</p>
+    <div class="cols">
+      <div class="col si">
+        <h3>Adoptar</h3>
+        <ul>
+          <li>Filtros funcionales aun con catálogo chico (subcategoría, marca, oferta, orden por precio).</li>
+          <li>Taxonomía granular de refrigeración (SEO de cola larga).</li>
+          <li>Lead form simple + WhatsApp + sucursales/horarios claros.</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h3>Evitar</h3>
+        <ul>
+          <li>Tarjetas <strong>sin precio</strong> con CTA "Leer más" (se siente incompleto).</li>
+          <li>Diseño de plantilla genérica sin jerarquía premium.</li>
+          <li>Hero de promo de temporada sin propuesta de valor de marca.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="links">
+      <a href="https://eltiosam.com.mx/" target="_blank" rel="noopener">Home</a>
+      <a href="https://eltiosam.com.mx/index.php/product-category/refrigeracion/" target="_blank" rel="noopener" class="alt">PLP Refrigeración</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>El Palacio de Hierro — Cocina / Línea Blanca <span class="tag model">ECOMMERCE REF.</span></h2>
+    <p class="role">Ecommerce premium real · vara para el checkout de HOMEA en fase 2.</p>
+    <div class="cols">
+      <div class="col si">
+        <h3>Adoptar (fase 2)</h3>
+        <ul>
+          <li>Mega-menú departamental claro (Hogar → Línea Blanca / Electrodomésticos).</li>
+          <li>PLP con facetas (precio, % descuento, marca) + conteo + paginación.</li>
+          <li>Tarjeta: marca, <strong>meses sin intereses</strong>, precio con descuento, wishlist.</li>
+          <li>PDP: galería, badge -%, reseñas, <strong>garantía extendida</strong>, escasez, envío gratis.</li>
+          <li>URLs y títulos SEO-limpios.</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h3>Evitar</h3>
+        <ul>
+          <li>Amplitud de gran almacén → diluye expertise de nicho.</li>
+          <li>Promoción cruzada y banners que distraen del producto.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="links">
+      <a href="https://www.elpalaciodehierro.com/hogar/linea-blanca/estufas-parrillas/" target="_blank" rel="noopener">PLP Estufas</a>
+      <a href="https://www.elpalaciodehierro.com/mabe-estufa-de-gas-lp-con-campana-44964266.html" target="_blank" rel="noopener" class="alt">PDP</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Liverpool <span class="tag model">ECOMMERCE REF.</span></h2>
+    <p class="role">Ecommerce + búsqueda potente · referencia de descubrimiento y comparación para fase 2.</p>
+    <div class="cols">
+      <div class="col si">
+        <h3>Adoptar (fase 2)</h3>
+        <ul>
+          <li><strong>Búsqueda como eje</strong> con facetas + chips de filtro rápido + grid/lista.</li>
+          <li>Reseñas con conteo y <strong>swatches de color</strong> en la tarjeta.</li>
+          <li>Financiamiento ("Mi crédito") y "Elige una tienda" (disponibilidad / pickup).</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h3>Evitar</h3>
+        <ul>
+          <li>Catálogo marketplace gigantesco → ruido que erosiona la especialización.</li>
+          <li>Estética de retail masivo, lejos del posicionamiento premium.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="links">
+      <a href="https://www.liverpool.com.mx/tienda?s=estufa+de+gas" target="_blank" rel="noopener">Resultados búsqueda</a>
+    </div>
+  </div>
+
+  <h2 style="font-size:16px;color:var(--gold);border-left:3px solid var(--gold);padding-left:10px;margin:34px 0 6px">Benchmark internacional (otros países)</h2>
+  <p class="role" style="color:var(--muted);font-size:13px;margin:0 0 16px">Líderes globales en venta premium de electrodomésticos (EE.UU.). Incluye notas del análisis previo de Carla. Detalle en BENCHMARK.md §6–§7.</p>
+
+  <div class="card">
+    <h2>Build with Ferguson <span class="tag model">EE.UU.</span></h2>
+    <p class="role">Verificado de primera mano. El mejor ejemplo de "comprar por contexto" + herramientas de proyecto.</p>
+    <div class="cols">
+      <div class="col si">
+        <h3>Adoptar</h3>
+        <ul>
+          <li><strong>Shop by Room</strong> (cocina, bar, lavandería, exterior) y <strong>Shop by Features/Lifestyle</strong> (lujo, smart, panel ready).</li>
+          <li><strong>Constructor de proyecto/cotización por áreas</strong> de la casa.</li>
+          <li>Fichas técnicas en PDF · recomendación de kits/jaladeras · filtros por tipo de equipo.</li>
+          <li><strong>PRO Pricing</strong> (B2B) · reseñas · <strong>reserva de cita en showroom</strong> · Learning Center.</li>
+        </ul>
+      </div>
+      <div class="col no"><h3>Evitar</h3><ul><li>Sitio de EE.UU. (logística/precios no trasladables tal cual).</li></ul></div>
+    </div>
+    <div class="links"><a href="https://www.fergusonhome.com/appliances/c109152" target="_blank" rel="noopener">Appliances</a></div>
+  </div>
+
+  <div class="card">
+    <h2>ABT <span class="tag model">EE.UU.</span></h2>
+    <p class="role">Verificado de primera mano. El mejor ejemplo de expertise visible + confianza + inspiración.</p>
+    <div class="cols">
+      <div class="col si">
+        <h3>Adoptar</h3>
+        <ul>
+          <li><strong>"Get Expert Help"</strong> con un especialista real + asistente IA ("Ask Bolt").</li>
+          <li><strong>Be Inspired</strong> (foto → equipo + precio) · <strong>Showroom &amp; Galleries</strong> (proyectos instalados).</li>
+          <li><strong>Price Match</strong> · financiamiento · <strong>recordatorio back-in-stock</strong> · compartir/imprimir ficha.</li>
+          <li>Reseñas masivas con conteo · Rebates por marca · Learn/Videos/Blog.</li>
+        </ul>
+      </div>
+      <div class="col no"><h3>Evitar</h3><ul><li>Vende mucho más que electrodomésticos → ruido que diluye el nicho.</li></ul></div>
+    </div>
+    <div class="links"><a href="https://www.abt.com/" target="_blank" rel="noopener">Home</a></div>
+  </div>
+
+  <div class="card">
+    <h2>AJ Madison · James &amp; Steven · KITCH <span class="tag model">NOTAS CARLA</span></h2>
+    <p class="role">Documentados con el análisis previo de Carla (AJ Madison y James &amp; Steven bloquean acceso automatizado; no se evade CAPTCHA).</p>
+    <div class="cols">
+      <div class="col si">
+        <h3>Adoptar</h3>
+        <ul>
+          <li><strong>AJ Madison:</strong> calculadora de espacio (¿cabrá?), reseñas, IA/chatbot, "IN STOCK", paquetes por marca.</li>
+          <li><strong>James &amp; Steven:</strong> Outlet/descuentos con vigencia, FAQ por producto, filtros (marca, tipo, ancho, ahorro de energía), "Más Vendidos", Blog, fotos reales de showroom.</li>
+          <li><strong>KITCH (MX):</strong> Tips antes de comprar, navegación por marca, FAQ por equipo, sección Showroom.</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h3>Evitar</h3>
+        <ul>
+          <li>Descripciones sin dimensiones (J&amp;S) o sin formato uniforme / copy-paste (KITCH).</li>
+          <li>Exceso de secciones/texto que pierde al usuario (AJ Madison).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="links">
+      <a href="https://www.ajmadison.com/" target="_blank" rel="noopener" class="alt">AJ Madison</a>
+      <a href="https://jamesandsteven.com/" target="_blank" rel="noopener" class="alt">James &amp; Steven</a>
+      <a href="https://kitch.mx/" target="_blank" rel="noopener" class="alt">KITCH</a>
+    </div>
+  </div>
+</main>
+
+<footer>Tablero de referencia · Benchmark para HOMEA Landing Page Oficial · Enlaces a sitios de terceros para fines de comparación interna.</footer>
+</body>
+</html>

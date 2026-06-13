@@ -1,0 +1,67 @@
+/* ==========================================================================
+   HOMEA — Wireframe (esqueleto). ESTRUCTURA, NO DISEÑO FINAL.
+   Tokens del Design System usados SOLO como referencia de espaciado/tipografía.
+   Grises = placeholders. Dorado = ruta LEAD (Fase 1). Punteado/mute = ruta COMPRA (Fase 2).
+   Cada .wf = una "section" de Shopify OS 2.0; cada .box = un "block".
+   ========================================================================== */
+:root{
+  --container:1320px;           /* DS --container */
+  --gutter:24px;                /* DS --gutter */
+  --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px;
+  --gold:#B8893E;               /* DS --homea-gold (ruta LEAD) */
+  --ink:#1A1612;
+  --paper:#F4F2EE;              /* DS --homea-ivory */
+  --line:#bdb9b1;
+  --mute:#8a857d;
+  --box:#e7e4de;
+  --sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.5}
+
+/* Aviso de wireframe + navegación entre plantillas */
+.wf-bar{position:sticky;top:0;z-index:99;background:var(--ink);color:#fff;padding:10px 20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:12px}
+.wf-bar strong{color:var(--gold);letter-spacing:.18em;text-transform:uppercase;font-weight:600;font-size:11px}
+.wf-bar a{color:#ddd;text-decoration:none;border:1px solid #3a352e;padding:4px 9px;border-radius:4px}
+.wf-bar a:hover,.wf-bar a.active{color:var(--ink);background:var(--gold);border-color:var(--gold)}
+
+.wrap{max-width:var(--container);margin:0 auto;padding:var(--sp-7) var(--gutter)}
+.tpl-title{font-weight:200;font-size:34px;margin:0 0 4px}
+.tpl-sub{color:var(--mute);font-size:14px;margin:0 0 var(--sp-6)}
+
+/* Leyenda */
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--mute);border:1px dashed var(--line);padding:12px 16px;border-radius:6px;margin-bottom:var(--sp-6)}
+.legend b{color:var(--ink)}
+
+/* SECTION (Shopify section) */
+.wf{border:1px solid var(--line);border-left:4px solid var(--mute);background:#fbfaf8;border-radius:6px;padding:var(--sp-5);margin:0 0 var(--sp-5)}
+.wf[data-route="lead"]{border-left-color:var(--gold)}
+.wf[data-route="buy"]{border-left-style:dashed;border-left-color:var(--mute);background:#f3f1ec}
+.wf-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.wf-num{font-size:11px;font-weight:600;letter-spacing:.16em;color:var(--mute);border:1px solid var(--line);border-radius:3px;padding:2px 7px}
+.wf-h h2{font-size:18px;font-weight:500;margin:0}
+.pill{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.pill.f1{background:rgba(184,137,62,.16);color:#7a5a22;border:1px solid rgba(184,137,62,.4)}
+.pill.f2{background:#e7e4de;color:#6a6660;border:1px dashed var(--mute)}
+.wf-p{color:var(--mute);font-size:13px;font-style:italic;margin:0 0 var(--sp-4)}
+.wf-map{margin-top:12px;font-size:11px;color:var(--mute);font-family:monospace;border-top:1px dotted var(--line);padding-top:8px}
+
+/* BLOCKS (placeholders) */
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.cols-2>*{flex:1 1 240px}.cols-3>*{flex:1 1 180px}.cols-4>*{flex:1 1 130px}
+.box{background:repeating-linear-gradient(45deg,var(--box) 0 10px,#efece6 10px 20px);border:1px dashed var(--line);border-radius:4px;min-height:54px;display:flex;align-items:center;justify-content:center;text-align:center;color:#6a6660;font-size:12px;padding:12px}
+.box.tall{min-height:160px}.box.xtall{min-height:240px}.box.sm{min-height:40px;font-size:11px}
+.fullbleed{background:#ddd9d1;border-style:solid}
+
+/* CTAs — jerarquía de conversión y separación lead vs compra */
+.ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.cta{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:10px 16px;border-radius:3px}
+.cta-lead{background:var(--gold);color:#fff}                 /* primario, Fase 1 */
+.cta-buy{background:transparent;color:#6a6660;border:1px dashed var(--mute)} /* secundario, Fase 2 */
+.cta-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+
+/* Mega-menú esquemático */
+.mega{display:flex;gap:24px;flex-wrap:wrap;border:1px dashed var(--line);padding:14px;border-radius:4px;background:#fff}
+.mega .col{flex:1 1 150px}.mega h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 8px}
+.mega .ln{height:8px;background:var(--box);border-radius:2px;margin:6px 0}
+.note{font-size:12px;color:var(--mute);background:#fff;border:1px dashed var(--line);border-radius:4px;padding:10px 12px;margin-bottom:var(--sp-5)}

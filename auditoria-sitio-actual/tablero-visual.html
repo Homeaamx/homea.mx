@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOMEA — Tablero visual del sitio actual (homea.mx)</title>
+<style>
+  :root{ --bg:#0e0e0e; --card:#1a1a1a; --line:#2c2c2c; --gold:#c8a14a; --txt:#eee; --muted:#9a9a9a; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+  header{padding:32px 24px;border-bottom:1px solid var(--line);background:#000}
+  header h1{margin:0 0 6px;font-size:22px;letter-spacing:.5px}
+  header p{margin:0;color:var(--muted);font-size:14px}
+  .note{max-width:1100px;margin:20px auto;padding:14px 18px;background:#1c1810;border:1px solid #3a3018;border-radius:10px;color:#d8c79a;font-size:13px}
+  main{max-width:1100px;margin:0 auto;padding:24px}
+  h2{font-size:16px;color:var(--gold);border-left:3px solid var(--gold);padding-left:10px;margin:36px 0 8px}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 14px}
+  .grid{display:grid;gap:14px}
+  .banners{grid-template-columns:1fr}
+  .badges{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .logos{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+  .surfaces{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+  figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  figure img{width:100%;height:100%;object-fit:cover;display:block;background:#fff}
+  .banners figure img{max-height:220px}
+  .badges figure img{padding:10px;background:#fff;max-height:150px;object-fit:contain}
+  .logos figure img{padding:14px;background:#fff;height:80px;object-fit:contain}
+  .surfaces figure img{max-height:150px}
+  figcaption{font-size:11px;color:var(--muted);padding:6px 8px;text-align:center}
+  footer{color:var(--muted);font-size:12px;text-align:center;padding:30px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header>
+  <h1>HOMEA — Tablero visual del sitio actual</h1>
+  <p>Referencia de los activos visuales de <strong>homea.mx</strong> (sitio OXATIS) para la migración a Shopify. Las imágenes se cargan en vivo desde el sitio.</p>
+</header>
+
+<div class="note">
+  <strong>Función del sitio:</strong> hoy es una <strong>guía de compra + generador de leads</strong> para clientes finales (B2C) y B2B (arquitectos, desarrolladores, cocineros); el ecommerce transaccional llega en una <strong>fase posterior con Shopify</strong>. El rediseño debe <strong>mantener la guía de usuario, priorizando eficiencia (encontrar/comparar rápido) y expertise (asesoría experta visible)</strong>. Por eso este tablero cataloga los activos que comunican gama, marca y confianza — no un escaparate de checkout.
+  <br><br>
+  Nota técnica: las imágenes se sirven directamente desde www.homea.mx. Si el sitio está caído o cambia un asset, el recuadro aparecerá vacío. El detalle sección por sección está en <strong>AUDITORIA-SITIO-ACTUAL.md</strong>.
+</div>
+
+<main>
+  <h2>1. Identidad</h2>
+  <p class="sub">Logo actual (versión dorada premium).</p>
+  <div class="grid badges">
+    <figure><img loading="lazy" src="https://www.homea.mx/Files/119914/Img/02/LOGO-HOMEA-DORADO-PREMIUM-RECTANGULAR.jpg" alt="Logo HOMEA"><figcaption>Logo HOMEA dorado</figcaption></figure>
+  </div>
+
+  <h2>2. Banners de gama / categoría (hero rotativo y bloques)</h2>
+  <p class="sub">Cada banner agrupa marcas por nivel de precio. Son el principal recurso visual del home.</p>
+  <div class="grid banners">
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/17/cocina-premium-thermador-subzero-wolf-monogram-mexico-queretaro-ciudaddemexi.png" alt=""><figcaption>Cocina PREMIUM — Thermador, Sub-Zero, Wolf, Monogram</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/14/cocina-residencial-cafeappliances-smeg-bertazzoni-kitchenaid-asko-mexico-que.png" alt=""><figcaption>Cocina RESIDENCIAL — Café, Smeg, Bertazzoni, KitchenAid, Asko</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/20/cocina-economica-mabe-teka-axcent-whirlpool-tecnolam-mexico-queretaro-ciudad.png" alt=""><figcaption>Cocina ECONÓMICA — Mabe, Teka, Axcent, Whirlpool</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/05/cocina-centrolavado-lavadora-secadora-bosch-whirlpool-maytag-lg-samsung-mexi.png" alt=""><figcaption>Cuidado de la ropa — Bosch, Whirlpool, Maytag, LG, Samsung</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/06/asador-grill-terraza-exterior-cocina-homea-wolf-viking-broilking-terrace-mex.png" alt=""><figcaption>Exterior — Asadores/Grills — Wolf, Viking, Broil King</figcaption></figure>
+  </div>
+
+  <h2>3. Botones / accesos destacados (badges circulares)</h2>
+  <p class="sub">Fila de accesos rápidos bajo el hero: ofertas, listas de precios, clientes/proyectos, garantías, marcas, quiénes somos.</p>
+  <div class="grid badges">
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/15/ofertasypromociones.png" alt=""><figcaption>Ofertas y promociones</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/08/listasprecios.png" alt=""><figcaption>Listas de precios</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/10/cllientesyproyectos-homea-cocina-refrigerador-diseno-arquitectura-constructo.png" alt=""><figcaption>Clientes y proyectos</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/06/icono-garantias-instalacion.png" alt=""><figcaption>Garantías e instalación</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/17/marcas.png" alt=""><figcaption>Nuestras marcas</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/25/quienes-somos-homea.png" alt=""><figcaption>Quiénes somos</figcaption></figure>
+  </div>
+
+  <h2>4. Superficies / Laminam (recubrimientos)</h2>
+  <p class="sub">Línea de piedra sinterizada (Laminam) — categoría B2B/arquitectura.</p>
+  <div class="grid surfaces">
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/06/bianco-statuario-naturali-laminam-slab-1-zoom.jpg" alt=""><figcaption>Bianco Statuario</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/14/laminam-piedra-tecnologica-granito-cuarzo-arquitectura-2.png" alt=""><figcaption>Arquitectura</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/08/laminam-piedra-tecnologica-granito-cuarzo-muebles-1.jpg" alt=""><figcaption>Muebles</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/23/laminam-piedra-tecnologica-granito-cuarzo-cocina-3.png" alt=""><figcaption>Cocina</figcaption></figure>
+  </div>
+
+  <h2>5. Marcas del catálogo (logos)</h2>
+  <p class="sub">Muestra de las ~96 marcas. La página "Listas de Precios" las ordena de mayor a menor precio por posicionamiento.</p>
+  <div class="grid logos">
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/16/la-cornue-logo.png" alt=""><figcaption>La Cornue</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/19/gaggenau-logo.jpg" alt=""><figcaption>Gaggenau</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/12/thermador-logo.jpg" alt=""><figcaption>Thermador</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/04/monogram-logo-fondo-negro-.jpg" alt=""><figcaption>Monogram</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/07/miele-logo-1.png" alt=""><figcaption>Miele</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/25/viking-1-logo.jpg" alt=""><figcaption>Viking</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/08/subzero-logo.png" alt=""><figcaption>Sub-Zero</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/08/wolf-logo-gde.jpg" alt=""><figcaption>Wolf</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/02/cove-logo.png" alt=""><figcaption>Cove</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/23/pitt-cooking-logo.png" alt=""><figcaption>Pitt Cooking</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/13/elica-logo.png" alt=""><figcaption>Elica</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/08/cafe-logo-con-lema.jpg" alt=""><figcaption>Café</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/03/kitchenaid-logo-homea.jpg" alt=""><figcaption>KitchenAid</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/11/thor-logo.jpg" alt=""><figcaption>Thor</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/06/smeg-logo.jpg" alt=""><figcaption>Smeg</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/20/bosch-logo.jpg" alt=""><figcaption>Bosch</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/24/asko-logo.png" alt=""><figcaption>Asko</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/21/bertazzoni-logo.jpg" alt=""><figcaption>Bertazzoni</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/19/electrolux-fondo-azul-logo.png" alt=""><figcaption>Electrolux</figcaption></figure>
+    <figure><img loading="lazy" src="https://www.homea.mx/files/119914/img/24/frigidaire-profesional.jpg" alt=""><figcaption>Frigidaire Pro</figcaption></figure>
+  </div>
+</main>
+
+<footer>Tablero generado para la auditoría del sitio actual · HOMEA Landing Page Oficial · Imágenes © homea.mx</footer>
+</body>
+</html>
