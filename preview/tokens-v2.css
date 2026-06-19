@@ -50,6 +50,7 @@
   --homea-greige:       #ECEAE3;   /* warm grey-beige — product/showroom surface (Sub-Zero register) */
   --homea-greige-deep:  #E2DFD5;   /* greige hover / pressed wash */
   --homea-espresso:     #1E1914;   /* warm near-black — photography-adjacent dark sections */
+  --homea-espresso-raised: #45403B; /* espresso +18% bone — fondo de superficie elevado, da aire al texto */
 
   /* Bright metallic gold lives INSIDE the supplied logo artwork only.
      Never as a UI fill, rule, or text colour. Kept for reference. */
@@ -294,7 +295,7 @@ a:hover { color: var(--homea-gold-deep); border-bottom-color: currentColor; }
 .on-dark { background: var(--dark-bg); color: var(--dark-fg); }
 .on-dark p { color: var(--dark-fg-muted); }
 .on-dark a { color: var(--homea-gold-bright); }
-.on-espresso { background: var(--homea-espresso); color: var(--dark-fg); }
+.on-espresso { background: var(--homea-espresso-raised); color: var(--dark-fg); }
 .on-espresso p { color: var(--dark-fg-muted); }
 .on-espresso a { color: var(--homea-gold-bright); }
 .on-greige { background: var(--homea-greige); color: var(--fg); }

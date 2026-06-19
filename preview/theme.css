@@ -17,13 +17,18 @@
 
 /* ---------- Utility bar — puntuación negra ------------------------------- */
 .ubar { background: var(--homea-black); }
-.ubar .container { display: flex; justify-content: space-between; align-items: center; height: 38px; }
+/* 3 zonas: teléfono de oficina (izq) · slot de temporada/tipo de cambio (centro) · cuenta (der) */
+.ubar .container { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 38px; gap: 16px; }
 .ubar a {
   font-size: 10px; font-weight: 600; letter-spacing: var(--tracking-wider);
   text-transform: uppercase; color: var(--dark-fg-muted); border-bottom: none;
 }
 .ubar a:hover { color: var(--homea-bone); }
-.ubar .u-right { display: flex; gap: 26px; }
+.ubar .u-phone { justify-self: start; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.ubar .u-phone svg { display: block; flex-shrink: 0; }
+.ubar .u-fx { justify-self: center; font-size: 10px; font-weight: 600; letter-spacing: var(--tracking-wider); color: var(--dark-fg-muted); white-space: nowrap; }
+.ubar .u-fx strong { color: var(--homea-bone); font-weight: 700; letter-spacing: 0.04em; }
+.ubar .u-right { justify-self: end; display: flex; gap: 26px; }
 .ubar .wa { color: var(--homea-gold-bright); }
 
 /* ---------- Nav — sticky, claro → oscuro al hacer scroll ------------------ */
@@ -55,7 +60,12 @@
   letter-spacing: var(--tracking-wider); text-transform: uppercase;
   color: var(--fg); border-bottom: none;
 }
+/* Igualar el espacio inferior de los links de la izquierda para que el texto
+   quede a la misma altura (no aplica al ícono de lupa). */
+.nav-right > a:not(.nav-search) { border-bottom: 2px solid transparent; padding-bottom: 4px; }
 .nav-right > a:hover { color: var(--accent-text); }
+.nav-search { display: inline-flex; align-items: center; padding: 4px; }
+.nav-search svg { display: block; width: 18px; height: 18px; }
 
 /* Scrolled: banda oscura con blur (único uso de blur del sistema) */
 .site-nav.scrolled {
@@ -69,10 +79,10 @@
 .site-nav.scrolled .nav-right > a { color: var(--homea-bone); }
 
 /* ---------- Mega menú ----------------------------------------------------- */
-.has-mega { position: relative; height: 100%; display: flex; align-items: center; }
+.has-mega { position: static; height: 100%; display: flex; align-items: center; }
 .mega-panel {
-  position: absolute; top: 100%; left: 50%; transform: translateX(-26%);
-  width: min(1080px, 92vw); background: var(--surface);
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  width: min(1260px, 95vw); background: var(--surface);
   border: 1px solid var(--border); border-top: 2px solid var(--homea-gold);
   box-shadow: var(--shadow-lg);
   padding: 40px 44px 44px;
@@ -84,7 +94,8 @@
 .has-mega:hover .mega-panel, .has-mega:focus-within .mega-panel {
   opacity: 1; visibility: visible; translate: 0 0; transition-delay: 0s;
 }
-.mega-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 36px; }
+.mega-grid { display: grid; grid-template-columns: 1.5fr repeat(5, 1fr); gap: 28px; }
+.mega-col-cat a { white-space: nowrap; }
 .mega-col h4 {
   font-size: 10px; font-weight: 600; letter-spacing: var(--tracking-wider);
   text-transform: uppercase; color: var(--fg-muted);
@@ -95,6 +106,95 @@
   padding: 6px 0; border-bottom: none;
 }
 .mega-col a:hover { color: var(--accent-text); }
+
+/* ---------- Mega-menú maestro-detalle (flyout) ---------------------------- */
+/* Colapsado al abrir: solo el riel de macro categorías. Se expande al pasar el cursor.
+   Borde izquierdo anclado en la posición centrada del panel expandido → crece hacia la derecha. */
+.mega-flyout { padding: 0; width: min(1232px, 94vw); overflow: hidden;
+  left: calc(50% - min(616px, 47vw)); transform: none; }
+/* Altura FIJA e idéntica en los dos estados (intro con la H y categoría activa),
+   acotada al viewport para que nunca se salga. Evita el "salto" de tamaño al hacer hover. */
+.mega-flyout-main { display: grid; grid-template-columns: 248px auto minmax(300px, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  height: min(588px, calc(100vh - 128px)); }
+/* Colocación explícita: la intro (H de marca) se superpone sobre detalle+imagen
+   y se ve al abrir; al pasar el cursor por una categoría se oculta (.cat-active). */
+.mega-flyout-main > .mega-rail    { grid-area: 1 / 1; }
+.mega-flyout-main > .mega-detail  { grid-area: 1 / 2; }
+.mega-flyout-main > .mega-feature { grid-area: 1 / 3; }
+.mega-flyout-main > .mega-intro   { grid-area: 1 / 2 / 2 / 4; z-index: 3; }
+.mega-panel.cat-active .mega-intro { display: none; }
+/* Intro de marca: H blanca a la DERECHA sobre un degradado claro más marcado */
+.mega-intro { position: relative; display: grid; place-items: center end; overflow: hidden;
+  padding-right: clamp(48px, 7vw, 130px);
+  background: linear-gradient(100deg,
+     var(--surface) 0%, var(--homea-greige) 50%, var(--homea-gold-soft) 100%); }
+.mega-intro-h { position: relative; z-index: 1; width: clamp(220px, 22vw, 320px); height: auto; aspect-ratio: 1; fill: #fff;
+  filter: drop-shadow(0 6px 28px rgba(30, 25, 20, 0.16)); }
+.mega-rail { display: flex; flex-direction: column; justify-content: space-between; padding: 22px 0;
+  background: var(--bg-greige); border-right: 1px solid var(--border); overflow-y: auto; }
+.mega-cat { appearance: none; background: none; border: 0; border-left: 2px solid transparent;
+  font-family: var(--font-sans); font-size: 16px; color: var(--fg); text-align: left;
+  padding: 11px 28px; cursor: pointer; line-height: 1.28;
+  transition: color var(--dur-fast,.18s) var(--ease-standard), border-color var(--dur-fast,.18s), background var(--dur-fast,.18s); }
+.mega-cat:hover, .mega-cat.is-active {
+  color: var(--accent-text); border-left-color: var(--homea-gold); background: var(--surface); }
+.mega-detail { padding: 24px 30px; display: flex; flex-direction: column;
+  min-height: 0; overflow-y: auto; }
+.mega-pane { display: none; }
+.mega-pane.is-active { display: flex; flex-direction: column; flex: 1; min-height: 0;
+  animation: megaFade .26s var(--ease-standard); }
+/* Masonry (column-count). El nº de columnas y el ANCHO los fija v2.js según cuántas
+   subcategorías tenga cada categoría, para que el detalle se encoja a lo que usa y
+   la foto crezca a llenar el resto (sin banda blanca vacía). */
+.mega-subcols { column-gap: 26px; column-count: 3; width: 622px; }
+.mega-subcol { break-inside: avoid; -webkit-column-break-inside: avoid; page-break-inside: avoid;
+  margin: 0 0 18px; }
+.mega-subcol:last-child { margin-bottom: 0; }
+/* Layout de columnas fijas (Cocina y Bar): 3 columnas explícitas en lugar del
+   masonry auto-balanceado. Cada columna lleva un grupo principal arriba y un
+   grupo secundario alineado al fondo (Lavavajillas / Trituradores / Dispensadores),
+   con las bases alineadas entre columnas. */
+.mega-subcols.is-fixed { display: flex; column-count: auto; gap: 26px; align-items: stretch; }
+.mega-subcols.is-fixed .mega-col { display: flex; flex-direction: column;
+  flex: 0 0 190px; width: 190px; }
+.mega-subcols.is-fixed .mega-col > .mega-subcol:last-child { margin-top: auto; margin-bottom: 0; }
+.mega-subcol h5 { font-family: var(--font-sans); font-size: 12.5px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--fg-muted);
+  margin: 0 0 8px; padding-bottom: 7px; border-bottom: 1px solid var(--border); }
+.mega-subcol a { display: block; font-size: 14.5px; color: var(--fg); padding: 6px 0; line-height: 1.28; }
+.mega-subcol a:hover { color: var(--accent-text); }
+.mega-all { display: inline-block; margin-top: auto; padding-top: 20px; font-family: var(--font-sans);
+  font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-text); }
+/* Tarjetas de subcategoría — tile con foto + texto (estilo grid de categorías) */
+.mega-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.mega-card { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; background: var(--bg-greige); }
+.mega-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  transition: transform .5s var(--ease-standard); }
+.mega-card:hover img { transform: scale(1.05); }
+.mega-card::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(10,10,10,0) 36%, rgba(10,10,10,.70)); }
+.mega-card-cap { position: absolute; left: 12px; right: 10px; bottom: 10px; z-index: 1; color: #fff; }
+.mega-card-cap strong { font-family: var(--font-display); font-weight: 500; font-size: 17px; line-height: 1.12;
+  display: block; text-shadow: 0 1px 8px rgba(0,0,0,.35); }
+.mega-feature { position: relative; display: block; overflow: hidden;
+  opacity: 0; transition: opacity var(--dur-med) var(--ease-standard); }
+.mega-feature.is-on { opacity: 1; }
+.mega-feature img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.mega-feature::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(10,10,10,0) 40%, rgba(10,10,10,.62)); }
+.mega-feature-cap { position: absolute; left: 32px; bottom: 30px; right: 22px; z-index: 1; color: #fff; }
+.mega-feature-cap span { display: block; font-family: var(--font-sans); font-size: 12px;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase; opacity: .85; margin-bottom: 8px; }
+.mega-feature-cap strong { font-family: var(--font-display); font-weight: 500; font-size: 34px; line-height: 1.04; }
+.mega-strip { display: flex; gap: 14px 44px; flex-wrap: wrap; align-items: center;
+  padding: 15px 38px; border-top: 1px solid var(--border); background: var(--surface); }
+.mega-strip-group { display: flex; align-items: center; gap: 18px; }
+.mega-strip-group > span { font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-muted); }
+.mega-strip a { font-size: 13px; color: var(--fg); }
+.mega-strip a:hover { color: var(--accent-text); }
+@keyframes megaFade { from { opacity: 0; translate: 0 6px; } to { opacity: 1; translate: 0 0; } }
 
 /* ---------- Botones — vivos, caps, intercambio de color ------------------- */
 .btn {
@@ -150,8 +250,9 @@
 .hero { background: var(--bg); }
 .hero-grid {
   display: grid; grid-template-columns: 1.05fr .95fr; gap: 72px; align-items: center;
-  padding-top: 56px; padding-bottom: 72px;
-  min-height: calc(100svh - var(--nav-h) - 38px); max-height: 860px;
+  padding-top: 28px; padding-bottom: 36px;
+  /* Cabe en la primera vista: alto = viewport menos nav (80px) y ubar (38px) */
+  height: calc(100svh - var(--nav-h) - 38px); min-height: 520px; max-height: 840px;
 }
 .hero-msg { display: flex; flex-direction: column; gap: 22px; align-items: flex-start; min-height: 320px; }
 .hero-msg h1 { max-width: 560px; font-size: clamp(40px, 5vw, 72px); }
@@ -176,23 +277,87 @@
 .hero-bars button {
   flex: 1; height: 2px; padding: 0; border: 0; cursor: pointer;
   background: var(--border-strong); position: relative; overflow: hidden;
+  -webkit-appearance: none; appearance: none; outline: none;
+  accent-color: var(--homea-gold); -webkit-tap-highlight-color: transparent;
 }
+.hero-bars button:focus-visible { box-shadow: 0 0 0 2px var(--homea-gold); }
 .hero-bars button.done::after { content: ""; position: absolute; inset: 0; background: var(--homea-gold); opacity: .35; }
 .hero-bars button .fill { display: none; }
 .hero-bars button.on .fill { display: block; position: absolute; inset: 0; background: var(--homea-gold); transform-origin: left; }
 @keyframes barFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-.hero-bars button.on .fill { animation: barFill 6000ms linear forwards; }
+.hero-bars button.on .fill { animation: barFill 10000ms linear forwards; }
 .hero.paused .hero-bars button.on .fill { animation-play-state: paused; }
+/* Flecha "siguiente" al final de la barra de progreso */
+.hero-next { -webkit-appearance: none; appearance: none; background: none; border: 0; cursor: pointer;
+  flex: none; display: grid; place-items: center; width: 30px; height: 30px; padding: 0; margin-left: 2px;
+  color: var(--fg); opacity: .75;
+  transition: opacity var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard); }
+.hero-next:hover { opacity: 1; transform: translateX(3px); }
+.hero-next:focus-visible { opacity: 1; outline: none; box-shadow: 0 0 0 2px var(--homea-gold); border-radius: 50%; }
+.hero-next svg { width: 20px; height: 20px; }
 
 /* Pila de imágenes con crossfade-settle */
 .hero-visual {
-  position: relative; aspect-ratio: 4 / 4.4; max-height: 640px; overflow: hidden;
+  position: relative; height: 100%; align-self: stretch; max-height: 100%; overflow: hidden;
   background: var(--bg-greige); box-shadow: var(--shadow-md);
 }
 .hero-visual .hi { position: absolute; inset: 0; opacity: 0; transition: opacity 700ms var(--ease-reveal); }
 .hero-visual .hi img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.045); transition: transform 1200ms var(--ease-reveal); }
 .hero-visual .hi.on { opacity: 1; }
 .hero-visual .hi.on img { transform: scale(1); }
+
+/* ---------- Hero cinemático full-bleed (Opción A) — solo home ---------- */
+.btn-bone { background: var(--homea-bone); color: var(--homea-black); border-color: var(--homea-bone); }
+.btn-bone:hover { background: var(--homea-gold); color: var(--homea-black); border-color: var(--homea-gold); }
+
+.hero-cine { position: relative; overflow: hidden; display: flex; align-items: center;
+  height: calc(100svh - var(--nav-h) - 38px); min-height: 560px; max-height: 900px; background: var(--homea-black); }
+.hero-cine .hero-visual { position: absolute; inset: -6% 0; height: auto; max-height: none; aspect-ratio: auto;
+  box-shadow: none; background: var(--homea-black); align-self: auto; will-change: transform; }
+.hero-cine .hi img { transform: scale(1.05); }
+.hero-cine .hi.on img { transform: scale(1.05); }
+.hero-cine .hero-veil { position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(10,10,10,.78) 0%, rgba(10,10,10,.55) 42%, rgba(10,10,10,.18) 100%); }
+.hero-cine .hero-inner { position: relative; width: 100%; }
+.hero-cine .hero-copy { display: flex; flex-direction: column; gap: 26px; align-items: flex-start; max-width: 620px; will-change: transform, opacity; }
+.hero-cine .hero-msg { min-height: 0; }
+.hero-cine .hero-prog .idx { color: var(--homea-bone); }
+.hero-cine .hero-prog .idx span { color: var(--dark-fg-muted); }
+.hero-cine .hero-bars button { background: rgba(247,243,236,.22); }
+.hero-cine .hero-bars button.on .fill { background: var(--homea-bone); }
+.hero-cine .hero-bars button.done::after { background: var(--homea-bone); opacity: .5; }
+.hero-cine .hero-next { color: var(--homea-bone); }
+.hero-cine .hero-cue { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 5px; color: var(--homea-gold);
+  font-family: var(--font-sans); font-weight: 600; font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+  animation: heroBob 1.9s ease-in-out infinite; }
+.hero-cine .hero-cue .ar { font-size: 13px; }
+@keyframes heroBob { 0%,100% { transform: translateX(-50%) translateY(0); opacity: .5; } 50% { transform: translateX(-50%) translateY(6px); opacity: 1; } }
+
+/* ---------- Stats con scroll (Opción B) — cada cifra con su imagen ---------- */
+.statscroll { position: relative; height: 260vh; background: var(--homea-black); }
+.statscroll .ss-pin { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; align-items: center; }
+.statscroll .ss-bg { position: absolute; inset: 0; background-size: cover; background-position: center;
+  opacity: 0; transform: scale(1.07); transition: opacity 1s var(--ease-reveal), transform 7s ease-out; }
+.statscroll .ss-bg.on { opacity: 1; transform: scale(1); }
+.statscroll .ss-veil { position: absolute; inset: 0; background: rgba(10,10,10,.56); }
+.statscroll .ss-inner { position: relative; width: 100%; }
+.statscroll .ss-inner .eyebrow-bright { margin-bottom: 30px; }
+.statscroll .ss-stack { position: relative; min-height: clamp(180px, 24vh, 240px); }
+.statscroll .ss-item { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; gap: 14px;
+  opacity: 0; transform: translateY(28px); transition: opacity .6s var(--ease-reveal), transform .6s var(--ease-reveal); }
+.statscroll .ss-item.on { opacity: 1; transform: none; }
+.statscroll .ss-n { font-family: var(--font-display); font-weight: 400; line-height: .88;
+  font-size: clamp(72px, 13vw, 184px); color: var(--homea-bone); font-variant-numeric: tabular-nums; }
+.statscroll .ss-l { font-family: var(--font-sans); font-weight: 600; font-size: 14px;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--homea-gold); }
+.statscroll .ss-dots { display: flex; gap: 10px; margin-top: 44px; }
+.statscroll .ss-dots i { width: 30px; height: 2px; background: rgba(247,243,236,.28); }
+.statscroll .ss-dots i.on { background: var(--homea-gold); }
+@media (max-width: 767px) {
+  .statscroll { height: 100svh; }
+  .statscroll .ss-pin { position: relative; }
+}
 
 /* ---------- Imágenes y slots ---------------------------------------------- */
 .photo { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -247,12 +412,345 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .cat:hover .imgw img { transform: scale(1.02); }
 .cat h3 { font-family: var(--font-display); font-weight: 400; font-size: 30px; color: var(--fg); }
 
+/* ---------- Guía de categorías (home): full-width, texto sobre la imagen ---------- */
+.catsec { padding-left: 32px; padding-right: 32px; position: relative; overflow: hidden; }
+.cat-orbs { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+  /* El resplandor de las orbes se desvanece cerca de los cantos superior/inferior
+     de cada sección: así NO hay corte duro en la costura entre secciones (que se
+     veía como una línea horizontal) y los fondos greige se funden sin separación. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 110px, #000 calc(100% - 110px), transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 110px, #000 calc(100% - 110px), transparent 100%); }
+.cat-orbs .orb { position: absolute; left: var(--x); top: var(--y); width: var(--s); height: var(--s);
+  margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2); border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, var(--c), transparent 72%);
+  opacity: var(--o); filter: blur(var(--b)); will-change: transform; }
+.catsec .sec-head, .catsec .cat-grid { position: relative; z-index: 1; }
+@media (prefers-reduced-motion: reduce) { .cat-orbs { display: none; } }
+.catsec .sec-head { margin-left: 8px; }
+.catsec .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; padding: 0; }
+.catsec .cat { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; }
+.catsec .cat-media { position: absolute; inset: 0; background: var(--homea-espresso) center / cover no-repeat;
+  transition: transform var(--dur-slow) var(--ease-reveal); }
+.catsec .cat:hover .cat-media { transform: scale(1.04); }
+.catsec .cat-media.ph::after { content: "Imagen"; position: absolute; top: 18px; left: 20px;
+  font-family: var(--font-sans); font-weight: 600; font-size: 10px; letter-spacing: .2em;
+  text-transform: uppercase; color: rgba(247, 243, 236, .42); }
+.catsec .cat::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(10,10,10,.82) 0%, rgba(10,10,10,.32) 40%, rgba(10,10,10,0) 68%); }
+.catsec .cat-cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+  padding: 30px; display: flex; flex-direction: column; gap: 9px; }
+.catsec .cat-cap h3 { font-family: var(--font-display); font-weight: 400; font-size: 34px; line-height: 1.04; color: var(--homea-bone); }
+.catsec .cat-brands { font-family: var(--font-sans); font-weight: 600; font-size: 12px; letter-spacing: .07em; color: #ECE3CF; }
+/* ---- Hover de tarjetas de categoría ----
+   Oscurece la imagen, enmarca con keyline oro y revela "Explorar más →" arriba a
+   la derecha. Coherente con el sistema: oro champagne, eyebrow Montserrat, esquinas
+   vivas, motion contenido. */
+.catsec .cat-media { transition: transform var(--dur-slow) var(--ease-reveal),
+  filter var(--dur-med) var(--ease-standard); }
+.catsec .cat:hover .cat-media, .catsec .cat:focus-visible .cat-media { filter: brightness(.6); }
+/* keyline oro al hover */
+.catsec .cat { outline: 1.5px solid transparent; outline-offset: -1.5px;
+  transition: outline-color var(--dur-med) var(--ease-standard); }
+.catsec .cat:hover, .catsec .cat:focus-visible { outline-color: var(--homea-gold); }
+/* "Explorar más →" arriba a la derecha */
+.catsec .cat::before { content: "Explorar más →"; position: absolute; top: 20px; right: 22px; z-index: 2;
+  font-family: var(--font-sans); font-weight: 600; font-size: 11px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--homea-bone); opacity: 0; transform: translateY(-8px);
+  transition: opacity var(--dur-med) var(--ease-standard), transform var(--dur-med) var(--ease-standard); }
+.catsec .cat:hover::before, .catsec .cat:focus-visible::before { opacity: 1; transform: translateY(0); }
+/* el título sube un poco para dar aire a la línea de marcas */
+.catsec .cat-cap { transition: transform var(--dur-med) var(--ease-standard); }
+.catsec .cat:hover .cat-cap, .catsec .cat:focus-visible .cat-cap { transform: translateY(-4px); }
+@media (prefers-reduced-motion: reduce) {
+  .catsec .cat-cap, .catsec .cat:hover .cat-cap { transform: none; }
+  .catsec .cat::before { transition: opacity var(--dur-med) var(--ease-standard); transform: none; }
+}
+
+@media (max-width: 1080px) { .catsec .cat-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .catsec { padding-left: 20px; padding-right: 20px; } .catsec .cat-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Presentación de marca: spotlight de negritas por scroll --------- */
+.brandintro { position: relative; background: var(--bg); overflow: hidden; }
+.bi-sticky { padding: clamp(36px, 7vh, 72px) 0; position: relative; z-index: 1; }
+
+/* Glifo decorativo: la "H" del logo. Arranca INVISIBLE; conforme bajas, una orbe
+   dorada CRECE (scale por --k) y la H aparece en blanco (--kh) → logo blanco sobre
+   fondo dorado. Pura decoración (aria-hidden, sin eventos). */
+/* La orbe se ancla al borde DERECHO del contenido (container max 1240px, padding
+   48px), no al viewport: así en pantallas anchas no se pega al borde ni se corta
+   — queda completamente visible y enmarcada de forma consistente en todo ancho. */
+.bi-glyph { position: absolute; top: 42%; right: max(48px, calc((100vw - 1240px) / 2 + 48px));
+  transform: translateY(-50%); width: clamp(280px, min(34vw, 60vh), 540px); aspect-ratio: 1;
+  z-index: 0; pointer-events: none; display: grid; place-items: center; }
+.bi-orb { position: absolute; left: 50%; top: 50%; width: 94%; height: 94%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%,
+     var(--homea-gold-light) 0%, var(--homea-gold) 54%, var(--homea-gold-deep) 100%);
+  filter: blur(5px);
+  transform: translate(-50%, -50%) scale(var(--k, 0));
+  /* --kx (1→0) lo baja el scroll al salir hacia la siguiente sección: la orbe se
+     "vacía" en el botón y desaparece por completo al dejar el logo. */
+  opacity: clamp(0, calc(var(--k, 0) * var(--kx, 1)), 1);
+  will-change: transform, opacity; }
+.bi-h { position: relative; width: 76%; height: 76%; fill: #fff; opacity: var(--kh, 0);
+  filter: drop-shadow(0 2px 16px color-mix(in srgb, var(--homea-gold-deep) 55%, transparent));
+  will-change: opacity; }
+@media (prefers-reduced-motion: reduce) {
+  .bi-orb { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  .bi-h { opacity: 1; }
+  .bi-body { opacity: 1; transform: none; } }
+@media (max-width: 767px) { .bi-glyph { display: none; } }
+
+/* Orbes doradas que descienden hacia la sección (continúan el scroll de arriba) */
+.bi-flow { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.bi-flow-orb { position: absolute; left: var(--x); top: var(--y);
+  width: var(--s); height: var(--s); border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%,
+     color-mix(in srgb, var(--homea-gold) 82%, white) 0%,
+     color-mix(in srgb, var(--homea-gold) 42%, transparent) 46%, transparent 72%);
+  filter: blur(36px); opacity: calc(var(--k, 0) * 0.55); will-change: transform, opacity; }
+
+/* brandintro en CLARO (greige), a juego con la sección de categorías. Texto espresso.
+   El cuerpo arranca tenue y aparece con el scroll (--kt). */
+.brandintro.on-greige { background: var(--bg-greige); color: var(--homea-espresso); }
+.brandintro.on-greige .bi-title,
+.brandintro.on-greige .bi-copy { color: var(--homea-espresso); }
+.brandintro.on-greige .eyebrow-bright { color: var(--accent-text); }
+.brandintro.on-greige .arrow-link.light { color: var(--accent-text); }
+.bi-body { opacity: calc(0.12 + var(--kt, 0) * 0.88);
+  transform: translateY(calc((1 - var(--kt, 0)) * 22px)); will-change: opacity, transform; }
+/* Placeholders en ORO sólido con texto ESPRESSO */
+.brandintro.on-greige .bi-copy .ph.on {
+  color: var(--homea-espresso); -webkit-text-stroke-color: var(--homea-espresso);
+  background-color: var(--homea-gold); }
+.bi-grid { display: flex; gap: clamp(28px, 4vw, 56px); align-items: stretch;
+  /* Reserva a la derecha para que el texto NUNCA se meta bajo la orbe dorada.
+     Coincide con el ancla de la orbe (≈ ancho de la orbe + holgura de 50px), así
+     el gap texto↔orbe es constante en todo ancho. En móvil se anula (<767px). */
+  padding-right: clamp(341px, calc(50px + 33vw), 574px); }
+.bi-rail { position: relative; flex: 0 0 2px; width: 2px; background: var(--border); align-self: stretch; }
+.bi-rail-fill { position: absolute; inset: 0; background: var(--homea-gold);
+  transform-origin: top; transform: scaleY(0); will-change: transform; }
+.bi-body { flex: 1 1 auto; max-width: 880px; }
+.bi-head { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; margin-bottom: clamp(22px, 3vh, 36px); }
+.bi-title { font-size: clamp(26px, 3vw, 42px); line-height: 1.06; max-width: 20ch; }
+.bi-title i { font-style: italic; }
+.bi-copy { font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(17px, 1.7vw, 22px); line-height: 1.5; color: var(--fg);
+  max-width: 70ch; margin: 0; text-wrap: pretty; }
+/* Frases clave: por defecto normales; al "encenderse" se ven en negrita + realce
+   dorado. Negrita simulada con text-stroke para NO reflujar el párrafo al scroll. */
+.bi-copy .ph { transition: color .35s ease, background-color .35s ease, -webkit-text-stroke-color .35s ease;
+  border-radius: 2px; padding: 0 .06em; margin: 0 -.06em;
+  -webkit-text-stroke: .6px transparent; }
+.bi-copy .ph.on { color: var(--fg);
+  -webkit-text-stroke: .6px var(--fg);
+  background-color: color-mix(in srgb, var(--homea-gold) 28%, transparent);
+  box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.bi-cta { margin-top: clamp(22px, 3vh, 36px); display: inline-flex; }
+
+@media (max-width: 767px) {
+  .bi-rail { display: none; }
+  .bi-grid { padding-right: 0; }   /* glifo oculto en móvil → el texto usa todo el ancho */
+  .bi-copy .ph.on { background-color: transparent; }
+}
+
+/* ---------- Transición fluida: brandintro → distribución oficial ------------
+   Las dos secciones espresso se leen como UN solo acto oscuro. Suavizamos los
+   dos cantos donde el oscuro toca superficie clara (greige arriba, bone abajo)
+   con un degradado corto, y unimos la costura entre ambas reduciendo el aire
+   y prolongando el riel dorado como hilo conductor. */
+.brandintro::before { content: none; }   /* sección ahora clara (greige): sin degradado superior */
+/* Aire inferior generoso: el greige + las orbes continúan más allá de "Conócenos"
+   y la orbe dorada del glifo cabe COMPLETA antes de tocar la sección oscura.
+   Escala con vw para acompañar el tamaño del glifo (clamp 300–540px). */
+.brandintro .bi-sticky { padding-bottom: clamp(120px, 15vw, 280px); }
+.brandmq.tight { position: relative; padding-top: clamp(56px, 7.5vh, 88px); }  /* espacio saludable y proporcional: la sección clara de arriba ya no es oscura, el contenido respira desde el borde */
+.brandmq::after {                /* canto inferior: espresso → bone */
+  content: ""; position: absolute; inset: auto 0 0 0; height: clamp(60px, 9vh, 110px);
+  background: linear-gradient(to top,
+     var(--bg) 0%,
+     color-mix(in srgb, var(--bg) 40%, transparent) 45%,
+     transparent 100%);
+  z-index: 0; pointer-events: none; }
+.brandmq > * { position: relative; z-index: 1; }   /* contenido por encima del fade */
+/* Hilo conductor: rule dorado centrado que enlaza el statement con la cinta */
+.brandmq .sec-head.reveal { display: flex; flex-direction: column; align-items: flex-start; }
+.brandmq .bridge-rule { display: none; }   /* línea izquierda eliminada (se quitó el riel de brandintro) */
+/* Encabezado en fila: statement a la izquierda, CTA dorado centrado a la derecha */
+.brandmq-head { display: flex; justify-content: space-between; align-items: center;
+  gap: clamp(28px, 4vw, 64px); margin-bottom: clamp(30px, 4.5vh, 52px); }
+.brandmq .brandmq-head .sec-head { margin-bottom: 0; }
+/* Píldora dorada estática (mismo look que .cta-float del hero, sin posicionar) */
+.cta-pill { display: inline-flex; align-items: center; gap: 10px; flex: none;
+  padding: 15px 28px; border-radius: 999px; text-decoration: none; white-space: nowrap;
+  font-family: var(--font-sans); font-size: 12.5px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase;
+  /* --fill (0→1) lo gobierna el scroll: la orbe dorada "se vacía" en el botón.
+     0 = contorno translúcido · 1 = relleno dorado sólido + texto oscuro (tono hover). */
+  --fill: 0;
+  color: color-mix(in srgb, #14110D calc(var(--fill) * 100%), var(--homea-gold));
+  background: color-mix(in srgb, var(--homea-gold) calc(var(--fill) * 100%), rgba(20, 17, 13, .42));
+  border: 1.5px solid var(--homea-gold);
+  transition: background var(--dur-fast) var(--ease-standard),
+              color var(--dur-fast) var(--ease-standard),
+              transform var(--dur-fast) var(--ease-standard); }
+/* Gana a `.on-espresso a` (que forzaría el dorado-bright en el texto) para que el
+   relleno por scroll controle realmente color y fondo. Va ANTES de :hover. */
+.brandmq .cta-pill {
+  color: color-mix(in srgb, #14110D calc(var(--fill) * 100%), var(--homea-gold));
+  background: color-mix(in srgb, var(--homea-gold) calc(var(--fill) * 100%), rgba(20, 17, 13, .42)); }
+.cta-pill .ico { width: 1.15em; height: 1.15em; flex: none; }
+.cta-pill:hover { background: var(--homea-gold); color: #14110D; transform: translateY(-2px); }
+.cta-pill:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(189,155,94,.45); }
+@media (max-width: 760px) {
+  .brandmq-head { flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------- Marquesina de marcas · "Distribución oficial" -------------------
+   Cinta infinita en dos filas opuestas; pausa al hover; respeta reduced-motion.
+   Cada marca es un CHIP: un mosaico con el logo de la marca (placeholder hasta
+   cargar la imagen real en assets/logos/<slug>.png). Mientras no haya logo, el
+   chip muestra el wordmark editorial del sistema v2 como respaldo. */
+.brandmq { overflow: hidden; }
+.brandmq .sec-head { margin-bottom: clamp(30px, 4.5vh, 52px); }
+.brandmq .sec-head .sub { color: var(--dark-fg-muted); }   /* sobre espresso */
+.mq { display: flex; flex-direction: column; gap: clamp(10px, 1.3vw, 20px);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.mq-row { display: flex; overflow: hidden;
+  cursor: grab; touch-action: pan-y;
+  -webkit-user-select: none; user-select: none; }
+.mq-row.dragging { cursor: grabbing; }
+.mq-track { display: flex; flex: 0 0 auto; align-items: center; will-change: transform; }
+.mq-row.left  .mq-track { animation: mqMove 52s linear infinite; }
+.mq-row.right .mq-track { animation: mqMove 64s linear infinite reverse; }
+.mq:hover .mq-track { animation-play-state: paused; }
+/* Cuando el JS toma el control del arrastre, desactiva la animación CSS */
+.mq.is-draggable .mq-track { animation: none !important; }
+/* Durante el arrastre, evita el zoom de hover y la selección de imágenes */
+.mq-row.dragging .mq-chip:hover { transform: none; }
+.mq-row.dragging .mq-chip { transition: none; }
+.mq-logo { -webkit-user-drag: none; user-drag: none; }
+.mq-seq { display: flex; flex: 0 0 auto; align-items: center; }
+
+/* Chip / mosaico de marca — FOTO de la marca al fondo + wordmark/logo blanco al
+   centro. Al hover la foto se oscurece y el wordmark/logo se intensifica. */
+.mq-chip { position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: 0 0 auto; height: clamp(132px, 13.5vw, 188px);
+  width: clamp(232px, 23vw, 340px); margin: 0 clamp(8px, 1vw, 16px);
+  padding: 0 clamp(28px, 3.2vw, 48px);
+  border: 1px solid color-mix(in srgb, var(--homea-gold) 24%, transparent);
+  background-color: var(--homea-espresso); background-size: cover; background-position: center;
+  text-decoration: none;
+  transition: border-color var(--dur-med) var(--ease-standard),
+              transform var(--dur-med) var(--ease-standard); }
+/* Velo oscuro sobre la foto para que el wordmark blanco se lea; al hover se ACLARA
+   (deja ver mejor la foto) y el logo se vuelve más transparente. */
+.mq-chip::before { content: ""; position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(180deg, rgba(20,17,13,.42) 0%, rgba(20,17,13,.62) 100%);
+  transition: background var(--dur-med) var(--ease-standard); }
+.mq-chip:hover { border-color: color-mix(in srgb, var(--homea-gold) 62%, transparent);
+  transform: scale(1.05); z-index: 2; }
+.mq-chip:hover::before { background: linear-gradient(180deg, rgba(20,17,13,.12) 0%, rgba(20,17,13,.26) 100%); }
+.mq-logo { position: relative; z-index: 1; max-height: 36%; max-width: 66%; width: auto; object-fit: contain;
+  display: block; opacity: .94; filter: drop-shadow(0 2px 12px rgba(0,0,0,.5));
+  transition: opacity var(--dur-med) var(--ease-standard); }
+.mq-chip:hover .mq-logo { opacity: .35; }
+.mq-name { position: relative; z-index: 1; display: none; font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(20px, 2.1vw, 31px); line-height: 1; color: var(--homea-bone);
+  text-shadow: 0 2px 16px rgba(0,0,0,.55); white-space: nowrap;
+  transition: opacity var(--dur-med) var(--ease-standard); }
+.mq-chip:hover .mq-name { opacity: .4; }
+/* Sin logo (wordmark como marca): se oculta la imagen y se muestra el nombre */
+.mq-chip.no-logo .mq-logo { display: none; }
+.mq-chip.no-logo .mq-name { display: inline-block; }
+/* Foto de fondo por marca (data-brand) */
+.mq-chip[data-brand="sub-zero"]   { background-image: url('assets/photos/brands/sub-zero.jpg'); }
+.mq-chip[data-brand="wolf"]       { background-image: url('assets/photos/brands/wolf.jpg'); }
+.mq-chip[data-brand="cove"]       { background-image: url('assets/photos/brands/cove.jpg'); }
+.mq-chip[data-brand="miele"]      { background-image: url('assets/photos/brands/miele.jpg'); }
+.mq-chip[data-brand="thermador"]  { background-image: url('assets/photos/brands/thermador.jpg'); }
+.mq-chip[data-brand="monogram"]   { background-image: url('assets/photos/brands/monogram.jpg'); }
+.mq-chip[data-brand="viking"]     { background-image: url('assets/photos/brands/viking.jpg'); }
+.mq-chip[data-brand="gaggenau"]   { background-image: url('assets/photos/brands/gaggenau.jpg'); }
+.mq-chip[data-brand="la-cornue"]  { background-image: url('assets/photos/brands/la-cornue.jpg'); }
+.mq-chip[data-brand="smeg"]       { background-image: url('assets/photos/brands/smeg.jpg'); }
+.mq-chip[data-brand="bertazzoni"] { background-image: url('assets/photos/brands/bertazzoni.jpg'); }
+.mq-chip[data-brand="kitchenaid"] { background-image: url('assets/photos/brands/kitchenaid.jpg'); }
+.mq-chip[data-brand="bosch"]      { background-image: url('assets/photos/brands/bosch.jpg'); }
+.mq-chip[data-brand="elica"]      { background-image: url('assets/photos/brands/elica.jpg'); }
+.mq-chip[data-brand="pitt-cooking"] { background-image: url('assets/photos/brands/pitt-cooking.jpg'); }
+.mq-chip[data-brand="hoshizaki"]  { background-image: url('assets/photos/brands/hoshizaki.jpg'); }
+.mq-chip[data-brand="alfresco"]   { background-image: url('assets/photos/brands/alfresco.jpg'); }
+.mq-chip[data-brand="lynx"]       { background-image: url('assets/photos/brands/lynx.jpg'); }
+.mq-chip[data-brand="kamado-joe"] { background-image: url('assets/photos/brands/kamado-joe.jpg'); }
+
+@keyframes mqMove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .mq-row .mq-track { animation: none; }
+  .mq { -webkit-mask-image: none; mask-image: none; }
+}
+
 /* ---------- Método / asesoría (espresso) ----------------------------------- */
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 72px; }
 .step { border-top: 1px solid var(--dark-border); padding-top: 24px; display: flex; flex-direction: column; gap: 14px; }
 .step .n { font-family: var(--font-display); font-size: 40px; color: var(--homea-gold); line-height: 1; }
 .step h3 { color: var(--dark-fg); font-size: 19px; }
 .step p { margin: 0; font-size: var(--fs-sm); line-height: var(--lh-loose); }
+
+/* ---------- Beneficios: "por qué elegirnos" (superficie CLARA) ------------
+   Orbes doradas de fondo cuya intensidad sube con el scroll (--k, 0→1, lo
+   setea el JS al entrar la sección). Tarjetas-placeholder que se revelan
+   escalonadas y se mueven al hover. Tonos claros para contrastar con la
+   sección oscura de arriba (Expertos). */
+.benefits { position: relative; overflow: hidden; }
+.bene-orbs { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.bene-orb { position: absolute; left: var(--x); top: var(--y); width: var(--s); height: var(--s);
+  margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2); border-radius: 50%;
+  background: radial-gradient(circle at 42% 38%, color-mix(in srgb, var(--homea-gold) 72%, transparent), transparent 70%);
+  filter: blur(60px);
+  opacity: calc(.04 + var(--k, 0) * .34);
+  transform: scale(calc(.68 + var(--k, 0) * .46));
+  transition: opacity .3s linear, transform .3s linear; will-change: opacity, transform; }
+.benefits .container { position: relative; z-index: 1; }
+.benefits .sec-head { margin-bottom: clamp(40px, 6vh, 76px); }
+
+.bene-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 2vw, 30px); }
+.bene-card { position: relative; overflow: hidden; padding: clamp(26px, 2.4vw, 38px);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--homea-espresso) 3%, transparent);
+  opacity: 0; transform: translateY(26px);
+  transition: opacity .7s var(--ease-standard), transform .55s var(--ease-standard),
+              border-color .35s var(--ease-standard), background .35s var(--ease-standard);
+  transition-delay: var(--d, 0s); }
+.bene-card.in { opacity: 1; transform: none; }
+.bene-glow { position: absolute; top: -70px; right: -70px; width: 230px; height: 230px; border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--homea-gold) 50%, transparent), transparent 70%);
+  filter: blur(42px); opacity: 0; pointer-events: none;
+  transition: opacity .4s var(--ease-standard); }
+.bene-ico { width: 46px; height: 46px; display: grid; place-items: center; margin-bottom: 22px;
+  color: var(--homea-gold); border: 1px solid var(--border);
+  transition: transform .4s var(--ease-standard), border-color .4s var(--ease-standard); }
+.bene-ico svg { width: 22px; height: 22px; }
+.bene-card h3 { position: relative; color: var(--fg); font-size: 19px; margin: 0 0 10px; }
+.bene-card p { position: relative; color: var(--fg-muted); font-size: var(--fs-sm);
+  line-height: var(--lh-loose); margin: 0; }
+.bene-card p i { font-style: italic; opacity: .85; }
+/* Movimiento al pasar el mouse */
+.bene-card.in:hover { transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--homea-gold) 60%, transparent);
+  background: color-mix(in srgb, var(--homea-gold) 7%, transparent); }
+.bene-card:hover { transition-delay: 0s; }
+.bene-card:hover .bene-glow { opacity: 1; }
+.bene-card:hover .bene-ico { transform: translateY(-2px) scale(1.07); border-color: var(--homea-gold); }
+@media (prefers-reduced-motion: reduce) {
+  .bene-card { opacity: 1; transform: none; transition: border-color .3s, background .3s; }
+  .bene-orb { transition: none; }
+}
+@media (max-width: 900px) { .bene-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .bene-grid { grid-template-columns: 1fr; } }
 
 .stats { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--dark-border);
   display: flex; gap: 64px; align-items: baseline; flex-wrap: wrap; }
@@ -416,12 +914,39 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 /* ---------- WhatsApp flotante ------------------------------------------------------- */
 .wa-float {
   position: fixed; right: 28px; bottom: 28px; z-index: 60;
-  width: 52px; height: 52px; display: grid; place-items: center;
-  background: var(--homea-espresso); color: var(--homea-gold-bright);
-  font-size: 20px; border-bottom: none; box-shadow: var(--shadow-md);
-  transition: transform var(--dur-fast) var(--ease-standard), background var(--dur-fast) var(--ease-standard);
+  width: 56px; height: 56px; display: grid; place-items: center;
+  background: #25D366; color: #fff; border-radius: 50%;
+  border-bottom: none; box-shadow: var(--shadow-md);
+  transition: background var(--dur-fast) var(--ease-standard);
+  animation: waBreathe 3.4s ease-in-out infinite;
 }
-.wa-float:hover { transform: translateY(-3px); background: var(--homea-black); color: var(--homea-gold-bright); }
+.wa-float svg { width: 34px; height: 34px; display: block; }
+.wa-float:hover { background: #1da851; color: #fff; transform: scale(1.08); animation-play-state: paused; }
+@keyframes waBreathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.085); } }
+@media (prefers-reduced-motion: reduce) { .wa-float { animation: none; } }
+
+/* CTA "Contáctanos" — oro champagne, translúcido (deja ver el fondo).
+   Vive DENTRO del hero (absolute): solo se ve en el hero y se va con el scroll.
+   Elevado para dejar margen sano sobre el flotante de WhatsApp. */
+.cta-float {
+  position: absolute; right: 28px; bottom: 124px; z-index: 5;
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 12px 20px; border-radius: 999px;
+  font-family: var(--font-sans); font-size: 12.5px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase;
+  color: var(--homea-gold);
+  background: rgba(20, 17, 13, .42);
+  border: 1.5px solid var(--homea-gold);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-md); white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease-standard),
+              color var(--dur-fast) var(--ease-standard),
+              transform var(--dur-fast) var(--ease-standard);
+}
+.cta-float .ico { width: 1.25em; height: 1.25em; flex: none; }
+.cta-float:hover { background: var(--homea-gold); color: #14110D; transform: translateY(-2px); }
+.cta-float:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(189,155,94,.45), var(--shadow-md); }
+@media (max-width: 600px) { .cta-float { padding: 11px 16px; right: 20px; bottom: 118px; font-size: 11.5px; } }
 
 /* ---------- Responsive ---------------------------------------------------------------- */
 @media (max-width: 1180px) {
@@ -432,8 +957,8 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 }
 @media (max-width: 1080px) {
   .nav-right { display: none; }
-  .hero-grid { grid-template-columns: 1fr; gap: 40px; min-height: 0; max-height: none; }
-  .hero-visual { aspect-ratio: 16 / 10; max-height: 440px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; height: auto; min-height: 0; max-height: none; }
+  .hero-visual { aspect-ratio: 16 / 10; height: auto; align-self: auto; max-height: 440px; }
   .split, .pdp, .plp { grid-template-columns: 1fr; gap: 40px; }
   .pdp .gallery, .filters { position: static; }
   .grid-3, .plp-grid, .steps { grid-template-columns: 1fr 1fr; }
@@ -447,6 +972,7 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
   .nav-links { display: none; }
   .grid-2, .grid-3, .grid-4, .plp-grid, .steps, .help-tiles, .brandtiles, .form-grid-2 { grid-template-columns: 1fr; }
   .site-footer .cols { grid-template-columns: 1fr; }
-  .ubar .container > a:first-child { display: none; }
+  .ubar .container { grid-template-columns: 1fr auto; }
+  .ubar .u-phone { display: none; }
   .stats { gap: 32px; }
 }

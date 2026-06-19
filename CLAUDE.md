@@ -56,6 +56,7 @@ Una landing page moderna con **dos objetivos simultáneos**:
 - **Infra/DNS:** GoDaddy (DNS) → **apuntar `www.homea.mx` a Vercel** (CNAME/A). Shopify queda como API + checkout.
 - **Analítica:** GA4 + Meta Pixel/CAPI, **inyectados desde el front-end** (tracking limpio, sin GTM heredado).
 - **SEO técnico (propio):** `sitemap.ts`, `robots.txt`, canónicos (Metadata API), JSON-LD, redirects 301 en `next.config.js`/`vercel.json`.
+- **Imágenes:** producto → **Shopify CDN** (vía `next/image` con loader); editoriales → **Vercel/`next/image`**. Optimización siempre (AVIF/WebP, `srcset`, lazy, hero `priority`) + **nombres de archivo SEO** (descriptivos, trends). Detalle: `docs/ESTRATEGIA-IMAGENES.md`.
 - **Dominio:** `www.homea.mx` (se conserva — activo de autoridad SEO).
 
 ## 5. Design System — v2 (junio 2026, handoff de claude.ai/design)
@@ -74,6 +75,7 @@ Migramos de OXATIS → Next.js conservando el dominio `homea.mx`. El riesgo #1 e
 - `docs/PLAN-DE-FASES.md` — las 6 fases y su estado.
 - `docs/PLAYBOOK-MIGRACION-SEO.md` — checklist accionable de migración (la columna vertebral SEO).
 - `docs/PLAN-REDIRECTS-MIGRACION.md` — plan de redirects 301 (estructura Google, reglas de mapeo, Tier 1–2).
+- `docs/ESTRATEGIA-IMAGENES.md` — dónde se almacenan las imágenes (producto→Shopify CDN, editoriales→Vercel/`next/image`), optimización de carga y **nomenclatura SEO de archivos** (descriptiva + trends de búsqueda).
 - `docs/FASE1-CONCEPTO-Y-SECCIONES.md` — concepto + arquitectura de secciones de la landing.
 - `docs/FASE1-ANALISIS-Y-SECCIONES.md` — análisis (auditoría+benchmark) + secciones por plantilla (7 plantillas).
 - `auditoria-sitio-actual/` y `benchmark-competencia/` — auditoría del sitio actual + benchmark de competencia/proveedor.

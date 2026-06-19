@@ -4,21 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HOMEA — Equipamiento premium para el hogar · Querétaro</title>
-<link rel="icon" type="image/png" href="assets/homea-premium-19.png">
+<link rel="icon" type="image/png" href="assets/favicon-circle.png">
 <link rel="stylesheet" href="tokens-v2.css">
-<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="theme.css?v=46">
 </head>
 <body>
 
 <!-- Utility bar -->
 <div class="ubar"><div class="container">
-  <a href="tel:8000000000">01 800 000 0000 · contacto@homea.mx</a>
+  <a class="u-phone" href="tel:+524422163552" aria-label="Teléfono de oficina">
+    <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.8 3.5h2.7l1.4 3.8-2 1.4a11.5 11.5 0 0 0 4.4 4.4l1.4-2 3.8 1.4v2.7a2 2 0 0 1-2.2 2A15.2 15.2 0 0 1 4.8 5.7a2 2 0 0 1 2-2.2Z"/></svg>
+    Tel. oficina · (442) 216 3552
+  </a>
+  <!-- Slot de temporada: por ahora muestra el tipo de cambio del día (FIX DOF/Banxico, en vivo vía JS). En temporadas, reemplazar por el mensaje de campaña. -->
+  <span class="u-fx" id="u-fx" data-fx-fallback="17.21">Tipo de cambio · 1 USD = <strong>17.21</strong> MXN</span>
   <div class="u-right">
-    <a href="marcas.html">Listas de precios</a>
-    <a href="#">Guías</a>
-    <a class="wa" href="#">WhatsApp ▸</a>
     <a href="#">Cuenta</a>
-    <a href="#">♡ Deseos</a>
   </div>
 </div></div>
 
@@ -29,25 +30,94 @@
   </a>
   <div class="nav-links">
     <div class="has-mega"><span>Productos</span>
-      <div class="mega-panel"><div class="mega-grid">
-        <div class="mega-col"><h4>Por categoría</h4>
-          <a href="coleccion.html">Cocina</a><a href="coleccion.html">Refrigeración</a>
-          <a href="coleccion.html">Lavado</a><a href="coleccion.html">Bar &amp; Vinos</a>
-          <a href="coleccion.html">Exterior</a><a href="coleccion.html">Climatización</a></div>
-        <div class="mega-col"><h4>Por marca</h4>
-          <a href="marcas.html">Sub-Zero</a><a href="marcas.html">Wolf</a>
-          <a href="marcas.html">Miele</a><a href="marcas.html">Thermador</a>
-          <a href="marcas.html">Monogram</a><a href="marcas.html">Ver las 96 →</a></div>
-        <div class="mega-col"><h4>Por espacio</h4>
-          <a href="coleccion.html">Cocina interior</a><a href="coleccion.html">Cocina exterior</a>
-          <a href="coleccion.html">Bar &amp; cava</a><a href="coleccion.html">Lavandería</a></div>
-        <div class="mega-col"><h4>Por característica</h4>
-          <a href="coleccion.html">Panelable</a><a href="coleccion.html">Built-in</a>
-          <a href="coleccion.html">Sobremedida</a><a href="coleccion.html">Outlet</a></div>
-        <div class="mega-col"><h4>Destacados</h4>
-          <a href="coleccion.html">Novedades</a><a href="coleccion.html">Más vendidos</a>
-          <a href="coleccion.html">Outlet &amp; Ofertas</a><a href="coleccion.html">Paquetes por marca</a></div>
-      </div></div>
+      <div class="mega-panel mega-flyout" data-mega>
+        <div class="mega-flyout-main">
+          <div class="mega-rail" role="tablist" aria-label="Categorías de producto">
+            <button class="mega-cat" data-pane="cocina" data-img="assets/photos/cat-cocina-bar.jpg" data-pos="30% 50%" data-label="Cocina y Bar">Cocina y Bar</button>
+            <button class="mega-cat" data-pane="exterior" data-img="assets/photos/cat-exterior-asador.jpg" data-label="Exterior">Exterior</button>
+            <button class="mega-cat" data-pane="electro" data-img="assets/photos/cat-electro-menores-kitchenaid-mixer.webp" data-label="Electrodomésticos menores">Electrodomésticos menores</button>
+            <button class="mega-cat" data-pane="lavanderia" data-img="assets/photos/cat-cuidado-ropa.jpg" data-label="Lavandería">Lavandería</button>
+            <button class="mega-cat" data-pane="banos" data-img="assets/photos/cat-banos.jpg" data-label="Baños">Baños</button>
+            <button class="mega-cat" data-pane="minisplits" data-img="assets/photos/minisplit.png" data-label="Minisplits">Minisplits</button>
+            <button class="mega-cat" data-pane="vapor" data-img="assets/photos/cat-vapor-sauna.jpg" data-label="Vapor y Sauna">Vapor y Sauna</button>
+            <button class="mega-cat" data-pane="wellness" data-img="assets/photos/cat-wellness.jpg" data-label="Wellness">Wellness</button>
+            <button class="mega-cat" data-pane="recubrimientos" data-img="assets/photos/cat-recubrimientos.jpg" data-label="Recubrimientos y Superficies">Recubrimientos y Superficies</button>
+            <button class="mega-cat" data-pane="chimeneas" data-img="assets/photos/cat-chimeneas.jpg" data-label="Chimeneas &amp; Calentadores">Chimeneas &amp; Calentadores</button>
+          </div>
+          <div class="mega-detail">
+            <div class="mega-pane" data-pane="cocina"><div class="mega-subcols is-fixed">
+              <div class="mega-col">
+                <div class="mega-subcol"><h5>Refrigeración</h5> <a href="coleccion.html">Refrigeradores</a><a href="coleccion.html">Congeladores</a><a href="coleccion.html">Refrigeradores con congelador</a><a href="coleccion.html">Centros de bebida</a><a href="coleccion.html">Frigobares</a><a href="coleccion.html">Máquinas de hielo</a><a href="coleccion.html">Cavas de vino</a><a href="coleccion.html">Cajones fríos</a><a href="coleccion.html">Accesorios de refrigeración</a></div>
+                <div class="mega-subcol"><h5>Lavavajillas</h5> <a href="coleccion.html">Lavavajillas</a></div>
+              </div>
+              <div class="mega-col">
+                <div class="mega-subcol"><h5>Cocción</h5> <a href="coleccion.html">Estufas</a><a href="coleccion.html">Parrillas</a><a href="coleccion.html">Hornos</a><a href="coleccion.html">Microondas</a><a href="coleccion.html">Campanas</a><a href="coleccion.html">Cajones</a><a href="coleccion.html">Cafeteras</a><a href="coleccion.html">Accesorios de cocción</a></div>
+                <div class="mega-subcol"><h5>Trituradores</h5> <a href="coleccion.html">Trituradores</a></div>
+              </div>
+              <div class="mega-col">
+                <div class="mega-subcol"><h5>Tarjas y Grifería</h5> <a href="coleccion.html">Tarjas</a><a href="coleccion.html">Grifería</a><a href="coleccion.html">Dispensadores de Agua</a><a href="coleccion.html">Accesorios de Tarjas &amp; Grifería</a></div>
+                <div class="mega-subcol"><h5>Dispensadores &amp; Filtros de agua</h5> <a href="coleccion.html">Dispensadores de agua</a><a href="coleccion.html">Filtros de agua</a></div>
+              </div>
+            </div><a class="mega-all" href="coleccion.html">Ver todo Cocina y Bar →</a></div>
+
+            <div class="mega-pane" data-pane="exterior"><div class="mega-subcols">
+              <div class="mega-subcol"><h5>Asadores &amp; Hornos</h5>
+                <a href="coleccion.html">Asadores empotrables</a><a href="coleccion.html">Asadores con carrito</a><a href="coleccion.html">Hornos de pizza</a><a href="coleccion.html">Accesorios Asadores &amp; Hornos</a></div>
+              <div class="mega-subcol"><h5>Alberca</h5>
+                <a href="coleccion.html">Mosaicos</a></div>
+            </div><a class="mega-all" href="coleccion.html">Ver todo Exterior →</a></div>
+
+            <div class="mega-pane" data-pane="electro"><div class="mega-subcols">
+              <div class="mega-subcol"><h5>Electrodomésticos menores</h5>
+                <a href="coleccion.html">Licuadoras</a><a href="coleccion.html">Batidoras</a><a href="coleccion.html">Tostadoras</a><a href="coleccion.html">Exprimidor de cítricos</a><a href="coleccion.html">Cafeteras</a><a href="coleccion.html">Accesorios de cocina pequeños</a></div>
+            </div><a class="mega-all" href="coleccion.html">Ver todo Electrodomésticos menores →</a></div>
+
+            <div class="mega-pane" data-pane="lavanderia"><div class="mega-subcols">
+              <div class="mega-subcol"><h5>Lavandería</h5>
+                <a href="coleccion.html">Lavadoras</a><a href="coleccion.html">Secadoras</a><a href="coleccion.html">Lavasecadoras (2 en 1)</a><a href="coleccion.html">Centros de Lavado</a></div>
+            </div><a class="mega-all" href="coleccion.html">Ver todo Lavandería →</a></div>
+
+            <div class="mega-pane" data-pane="banos"><div class="mega-subcols">
+              <div class="mega-subcol"><h5>Baños</h5>
+                <a href="coleccion.html">Tarjas</a><a href="coleccion.html">Monomandos</a><a href="coleccion.html">Regaderas</a><a href="coleccion.html">Tinas</a><a href="coleccion.html">Accesorios de Baños</a></div>
+            </div><a class="mega-all" href="coleccion.html">Ver todo Baños →</a></div>
+
+            <div class="mega-pane" data-pane="minisplits"><div class="mega-subcols">
+              <div class="mega-subcol"><h5>Minisplits</h5>
+                <a href="coleccion.html">Minisplit Frío</a><a href="coleccion.html">Minisplit Frío &amp; Calor</a></div>
+            </div><a class="mega-all" href="coleccion.html">Ver todo Minisplits →</a></div>
+
+            <div class="mega-pane" data-pane="vapor"><div class="mega-subcols">
+              <div class="mega-subcol"><h5>Vapor y Sauna</h5>
+                <a href="coleccion.html">Vapor</a><a href="coleccion.html">Sauna interior</a><a href="coleccion.html">Sauna exterior</a></div>
+            </div><a class="mega-all" href="coleccion.html">Ver todo Vapor y Sauna →</a></div>
+
+            <div class="mega-pane" data-pane="wellness"><div class="mega-subcols">
+              <div class="mega-subcol"><h5>Wellness</h5>
+                <a href="coleccion.html">Tinas de Inmersión</a><a href="coleccion.html">Carril de Nado</a><a href="coleccion.html">Sillón para masajes</a><a href="coleccion.html">Jacuzzi</a></div>
+            </div><a class="mega-all" href="coleccion.html">Ver todo Wellness →</a></div>
+
+            <div class="mega-pane" data-pane="recubrimientos"><div class="mega-subcols">
+              <div class="mega-subcol"><h5>Recubrimientos y Superficies</h5>
+                <a href="coleccion.html">Pisos</a><a href="coleccion.html">Muros</a><a href="coleccion.html">Piedras Sinterizadas</a></div>
+            </div><a class="mega-all" href="coleccion.html">Ver todo Recubrimientos y Superficies →</a></div>
+
+            <div class="mega-pane" data-pane="chimeneas"><div class="mega-subcols">
+              <div class="mega-subcol"><h5>Chimeneas &amp; Calentadores</h5>
+                <a href="coleccion.html">Chimeneas</a><a href="coleccion.html">Calentadores</a></div>
+            </div><a class="mega-all" href="coleccion.html">Ver todo Chimeneas &amp; Calentadores →</a></div>
+          </div>
+          <a class="mega-feature" data-mega-feature href="coleccion.html">
+            <img src="assets/photos/cat-cocina-bar.jpg" alt="" data-mega-img>
+            <span class="mega-feature-cap"><span>Categoría</span><strong data-mega-label>Cocina y Bar</strong></span>
+          </a>
+          <div class="mega-intro" data-mega-intro aria-hidden="true">
+            <svg class="mega-intro-h" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M23,19 H35.5 V84 H23 Z M65,19 H77.5 V84 H65 Z M65,44.8 L42,47.4 L42,53.8 L65,56.4 Z M70.5,50.6 A4.5,4.5 0 1,0 61.5,50.6 A4.5,4.5 0 1,0 70.5,50.6 Z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
     <a href="marcas.html">Marcas</a>
     <a href="b2b.html">Proyectos</a>
@@ -57,30 +127,38 @@
   <div class="nav-right">
     <a href="#">Herramientas</a>
     <a href="nosotros.html">Showroom</a>
-    <a href="coleccion.html">Buscar ⌕</a>
+    <a class="nav-search" href="coleccion.html" aria-label="Buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg></a>
   </div>
-  <a class="btn btn-ghost" href="contacto.html">Cotizar</a>
+  <a class="btn btn-ghost" href="#">Wishlist</a>
 </div></nav>
 
 <!-- Hero rotativo: 5 mensajes sincronizados con imagen -->
-<section class="hero" data-rotate>
+<section class="hero hero-cine" data-rotate>
   <script type="application/json" id="hero-data">[
-    {"eyebrow":"Cocina · Curaduría","title":"La cocina que <i>mereces</i>.","sub":"Equipo de lujo para paladares exigentes, elegido pieza por pieza."},
-    {"eyebrow":"Asesoría · Personal","title":"Equipos que se adaptan a <i>ti</i>.","sub":"Funcionalidad y diseño a tu alcance. Escuchamos primero."},
-    {"eyebrow":"Proyectos · Mayoreo","title":"Una compra inteligente, <i>accesible</i>.","sub":"Expertos en proyectos de mayoreo, de plano a puesta en marcha."},
-    {"eyebrow":"Innovación · Desde 2004","title":"Innovamos tu <i>hogar</i>.","sub":"Tecnología y eficiencia que trabajan contigo, sin anunciarse."},
-    {"eyebrow":"Exterior · Asadores","title":"Tu patio, tu <i>cocina</i>.","sub":"Asadores de alto rendimiento con asesoría experta."}
+    {"eyebrow":"Refrigeración · Cocción","title":"Las marcas que <em>pediste</em>.","sub":"SubZero, Wolf, Gaggenau, Miele, Viking y más.<br>Equipo de lujo, listo para entregar.","btnP":"Explorar categorías","btnPUrl":"coleccion.html","btnS":"Marcas","btnSUrl":"marcas.html"},
+    {"eyebrow":"Asesoría · Experta","title":"Encontramos lo que <em>estás buscando</em>.","sub":"Te asesoramos para encontrar los mejores equipos para tu cocina.","btnP":"Agendar asesoría","btnPUrl":"contacto.html","btnS":"Ver catálogo","btnSUrl":"coleccion.html"},
+    {"eyebrow":"Mayoreo · Proyectos","title":"Equipa todo, <em>paga menos</em>.","sub":"Surtimos proyectos completos de electrodomésticos.<br>Precio especial, marcas de calidad.","btnP":"Cotizar proyecto","btnPUrl":"b2b.html","btnS":"Herramientas","btnSUrl":"coleccion.html"},
+    {"eyebrow":"Marcas · Desde 2004","title":"22 años <em>innovando hogares</em>.","sub":"Expertos en electrodomésticos. Más de dos décadas vendiendo lo mejor para tu hogar.","btnP":"Explorar marcas","btnPUrl":"marcas.html","btnS":"Nosotros","btnSUrl":"nosotros.html"},
+    {"eyebrow":"Ofertas · Exclusivas","title":"Precios inigualables, <em>solo para ti</em>.","sub":"Electrodomésticos de calidad al mejor precio. Mejoramos cualquier oferta.","btnP":"Ofertas","btnPUrl":"coleccion.html","btnS":"Contáctanos","btnSUrl":"contacto.html"}
   ]</script>
-  <div class="container hero-grid">
-    <div style="display:flex;flex-direction:column;gap:28px;align-items:flex-start">
+  <div class="hero-visual hero-bg" data-px="55">
+    <div class="hi on"><img src="assets/photos/hero-subzero-wolf-cocina.jpg" alt="Cocina equipada con refrigeración Sub-Zero y cocción Wolf" style="transform:scaleX(-1);object-position:center 70%"></div>
+    <div class="hi"><img src="assets/photos/hero-proyecto-residencial.jpg" alt="Proyecto residencial con electrodomésticos integrados"></div>
+    <div class="hi"><img src="assets/photos/hero-thermador-cocina.jpg" alt="Cocina equipada con refrigeración y cocción Thermador"></div>
+    <div class="hi"><img src="assets/photos/hero-gaggenau-vario-400.jpg" alt="Isla de cocción Gaggenau Vario serie 400" style="object-position:center 82%"></div>
+    <div class="hi"><img src="assets/photos/hero-miele-cocina.jpg" alt="Cocina equipada con electrodomésticos Miele" style="object-position:center 65%;transform:none"></div>
+  </div>
+  <div class="hero-veil"></div>
+  <div class="container hero-inner">
+    <div class="hero-copy" data-px="-26">
       <div class="hero-msg run">
-        <div class="eyebrow rise">Cocina · Curaduría</div>
-        <h1 class="h-display rise">La cocina que <i>mereces</i>.</h1>
-        <p class="sub rise">Equipo de lujo para paladares exigentes, elegido pieza por pieza.</p>
+        <div class="eyebrow eyebrow-bright rise">Refrigeración · Cocción</div>
+        <h1 class="h-display rise" style="color:var(--homea-bone)">Las marcas que <em>pediste</em>.</h1>
+        <p class="sub rise" style="color:#dcd6c9">SubZero, Wolf, Gaggenau, Miele, Viking y más.<br>Equipo de lujo, listo para entregar.</p>
       </div>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="coleccion.html">Ver equipamiento</a>
-        <a class="btn btn-ghost" href="contacto.html">Agendar asesoría</a>
+        <a class="btn btn-bone" href="coleccion.html">Explorar categorías</a>
+        <a class="btn btn-ghost-light" href="marcas.html">Marcas</a>
       </div>
       <div class="hero-prog">
         <span class="idx figures">01 <span>/ 05</span></span>
@@ -91,153 +169,280 @@
           <button aria-label="Mensaje 4"></button>
           <button aria-label="Mensaje 5"></button>
         </div>
+        <button class="hero-next" aria-label="Siguiente mensaje">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="19" y2="12"></line><polyline points="13 6 19 12 13 18"></polyline></svg>
+        </button>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="hi on"><img src="assets/photos/hero-cocina.jpg" alt="Cocina equipada Sub-Zero y Wolf"></div>
-      <div class="hi"><img src="assets/photos/hero-equipos.jpg" alt="Estufa Wolf en cocina cálida"></div>
-      <div class="hi"><img src="assets/photos/hero-proyecto.jpg" alt="Proyecto residencial equipado"></div>
-      <div class="hi"><img src="assets/photos/hero-lavado.jpg" alt="Columna Miele en interior moderno"></div>
-      <div class="hi"><img src="assets/photos/hero-exterior.jpg" alt="Cocina exterior con asador"></div>
+  </div>
+  <div class="hero-cue" aria-hidden="true"><span>Scroll</span><span class="ar">↓</span></div>
+  <a class="cta-float" href="https://api.whatsapp.com/send/?phone=524461446318" target="_blank" rel="noopener" aria-label="Contáctanos por WhatsApp" data-track="whatsapp_click" data-label="wa_hero_cta">
+    <svg class="ico" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+    <span>Contáctanos</span>
+  </a>
+</section>
+
+<!-- Guía de electrodomésticos: categorías grandes (imágenes pendientes) -->
+<section class="sec on-greige catsec">
+  <div class="cat-orbs" aria-hidden="true">
+    <!-- Gutter vertical izquierdo (~33%) -->
+    <span class="orb" style="--x:33%;--y:4%;--s:300px;--c:#F0E2B4;--o:.70;--b:26px" data-speed="0.12"></span>
+    <span class="orb" style="--x:33%;--y:40%;--s:440px;--c:#EAD8A0;--o:.62;--b:34px" data-speed="0.07"></span>
+    <span class="orb" style="--x:33%;--y:78%;--s:340px;--c:#E6D09A;--o:.66;--b:28px" data-speed="0.15"></span>
+    <!-- Gutter vertical derecho (~66%) -->
+    <span class="orb" style="--x:66%;--y:8%;--s:280px;--c:#EFE0AE;--o:.68;--b:24px" data-speed="0.10"></span>
+    <span class="orb" style="--x:66%;--y:46%;--s:420px;--c:#E6D09A;--o:.60;--b:32px" data-speed="0.06"></span>
+    <span class="orb" style="--x:66%;--y:82%;--s:320px;--c:#F0E2B4;--o:.66;--b:26px" data-speed="0.16"></span>
+    <!-- Bordes laterales -->
+    <span class="orb" style="--x:-3%;--y:30%;--s:360px;--c:#DEC78C;--o:.50;--b:30px" data-speed="0.07"></span>
+    <span class="orb" style="--x:-2%;--y:88%;--s:300px;--c:#E6D09A;--o:.52;--b:26px" data-speed="0.09"></span>
+    <span class="orb" style="--x:102%;--y:55%;--s:340px;--c:#EAD8A0;--o:.52;--b:30px" data-speed="0.08"></span>
+    <span class="orb" style="--x:101%;--y:14%;--s:260px;--c:#D9C18A;--o:.48;--b:24px" data-speed="0.11"></span>
+    <!-- Acentos pequeños y nítidos en cruces -->
+    <span class="orb" style="--x:33%;--y:33%;--s:90px;--c:#C9A86A;--o:.62;--b:6px" data-speed="0.24"></span>
+    <span class="orb" style="--x:66%;--y:66%;--s:80px;--c:#BD9B5E;--o:.60;--b:5px" data-speed="0.26"></span>
+    <span class="orb" style="--x:46%;--y:5%;--s:70px;--c:#E6D09A;--o:.66;--b:5px" data-speed="0.22"></span>
+    <span class="orb" style="--x:50%;--y:95%;--s:96px;--c:#EAD8A0;--o:.58;--b:8px" data-speed="0.20"></span>
+  </div>
+  <div class="sec-head">
+    <div class="eyebrow">Guía electrodomésticos</div>
+    <span class="rule-gold"></span>
+    <h2>Todos tus espacios <em>en Homea</em>.</h2>
+  </div>
+  <div class="cat-grid reveal">
+    <a class="cat" href="coleccion.html">
+      <div class="cat-media" style="background-image:url('assets/photos/cat-cocina-bar.jpg');background-position:center 80%"></div>
+      <div class="cat-cap"><h3>Cocina y Bar</h3><span class="cat-brands">Gaggenau · Café · KitchenAid · GE Profile · y más</span></div>
+    </a>
+    <a class="cat" href="coleccion.html">
+      <div class="cat-media" style="background-image:url('assets/photos/cat-exterior-asador.jpg')"></div>
+      <div class="cat-cap"><h3>Exterior</h3><span class="cat-brands">Viking · Wolf · Alfresco · Artisan · y más</span></div>
+    </a>
+    <a class="cat" href="coleccion.html">
+      <div class="cat-media" style="background-image:url('assets/photos/cat-banos.jpg');background-position:center 80%"></div>
+      <div class="cat-cap"><h3>Baños</h3><span class="cat-brands">Axor · Hansgrohe · Delta · Catalano · y más</span></div>
+    </a>
+    <a class="cat" href="coleccion.html">
+      <div class="cat-media" style="background-image:url('assets/photos/cat-vapor-sauna.jpg')"></div>
+      <div class="cat-cap"><h3>Vapor y Sauna</h3><span class="cat-brands">Mr. Steam · Jacuzzi · Clearlight</span></div>
+    </a>
+    <a class="cat" href="coleccion.html">
+      <div class="cat-media" style="background-image:url('assets/photos/cat-recubrimientos-laminam-noir-desir.jpg');background-position:center 70%"></div>
+      <div class="cat-cap"><h3>Recubrimientos &amp; Superficies</h3><span class="cat-brands">Laminam</span></div>
+    </a>
+    <a class="cat" href="coleccion.html">
+      <div class="cat-media" style="background-image:url('assets/photos/cat-electro-menores-kitchenaid-mixer.webp');background-position:center 55%"></div>
+      <div class="cat-cap"><h3>Electrodomésticos menores</h3><span class="cat-brands">KitchenAid · Smeg · y más</span></div>
+    </a>
+    <a class="cat" href="coleccion.html">
+      <div class="cat-media" style="background-image:url('assets/photos/cat-cuidado-ropa-bosch-lavadora-secadora.jpg');background-position:center"></div>
+      <div class="cat-cap"><h3>Cuidado de ropa</h3><span class="cat-brands">Whirlpool · Bosch</span></div>
+    </a>
+    <a class="cat" href="coleccion.html">
+      <div class="cat-media" style="background-image:url('assets/photos/cat-wellness.jpg')"></div>
+      <div class="cat-cap"><h3>Wellness</h3><span class="cat-brands">Jacuzzi · Tina de inmersión · Sillón para masaje · y más</span></div>
+    </a>
+    <a class="cat" href="coleccion.html">
+      <div class="cat-media" style="background-image:url('assets/photos/cat-chimeneas.jpg')"></div>
+      <div class="cat-cap"><h3>Chimeneas</h3><span class="cat-brands">Hergom</span></div>
+    </a>
+    <a class="cat" href="coleccion.html">
+      <div class="cat-media" style="background-image:url('assets/photos/minisplit.png')"></div>
+      <div class="cat-cap"><h3>Minisplits</h3><span class="cat-brands">1.0 · 1.5 · 2.0 toneladas</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- Presentación de marca: bloque estático con glifo decorativo (H + orbe dorada) -->
+<section class="brandintro on-greige" id="brandintro" aria-label="Quiénes somos">
+  <!-- Mismo campo de orbes que la sección anterior (gutters 33%/66%): el fondo
+       se lee como continuación de .catsec y el parallax fluye hasta "Conócenos". -->
+  <div class="cat-orbs" aria-hidden="true">
+    <!-- Gutter vertical izquierdo (~33%) -->
+    <span class="orb" style="--x:33%;--y:2%;--s:360px;--c:#EAD8A0;--o:.60;--b:32px" data-speed="0.10"></span>
+    <span class="orb" style="--x:33%;--y:62%;--s:320px;--c:#F0E2B4;--o:.64;--b:28px" data-speed="0.15"></span>
+    <!-- Gutter vertical derecho (~66%) -->
+    <span class="orb" style="--x:66%;--y:18%;--s:420px;--c:#E6D09A;--o:.56;--b:34px" data-speed="0.07"></span>
+    <span class="orb" style="--x:66%;--y:84%;--s:300px;--c:#EFE0AE;--o:.60;--b:26px" data-speed="0.13"></span>
+    <!-- Bordes laterales -->
+    <span class="orb" style="--x:-3%;--y:44%;--s:340px;--c:#DEC78C;--o:.48;--b:30px" data-speed="0.08"></span>
+    <span class="orb" style="--x:-2%;--y:96%;--s:280px;--c:#E6D09A;--o:.50;--b:26px" data-speed="0.11"></span>
+    <span class="orb" style="--x:102%;--y:24%;--s:300px;--c:#EAD8A0;--o:.50;--b:28px" data-speed="0.09"></span>
+    <!-- Acentos pequeños y nítidos en cruces -->
+    <span class="orb" style="--x:33%;--y:33%;--s:86px;--c:#C9A86A;--o:.60;--b:6px" data-speed="0.24"></span>
+    <span class="orb" style="--x:33%;--y:90%;--s:78px;--c:#E6D09A;--o:.62;--b:6px" data-speed="0.22"></span>
+    <span class="orb" style="--x:66%;--y:54%;--s:80px;--c:#BD9B5E;--o:.58;--b:5px" data-speed="0.26"></span>
+  </div>
+  <div class="bi-glyph" aria-hidden="true">
+    <span class="bi-orb"></span>
+    <svg class="bi-h" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M23,19 H35.5 V84 H23 Z M65,19 H77.5 V84 H65 Z M65,44.8 L42,47.4 L42,53.8 L65,56.4 Z M70.5,50.6 A4.5,4.5 0 1,0 61.5,50.6 A4.5,4.5 0 1,0 70.5,50.6 Z"/>
+    </svg>
+  </div>
+  <div class="bi-sticky">
+    <div class="container">
+      <div class="bi-grid">
+        <div class="bi-body">
+          <div class="bi-head">
+            <div class="eyebrow eyebrow-bright">Expertos · Desde 2004</div>
+            <span class="rule-gold"></span>
+            <h2 class="bi-title">Todo el equipamiento de tu hogar, <i>en un solo lugar</i>.</h2>
+          </div>
+          <p class="bi-copy">Más de 22 años distribuyendo las <span class="ph">mejores marcas del mundo</span> —de lo accesible a lo premium— para equipar <span class="ph">cocina, baño y exterior</span>. Atendemos desde cliente final hasta arquitectos, desarrolladores y hoteles, con <span class="ph">garantía directa de fábrica</span> y entregas en toda la república.</p>
+          <a class="arrow-link bi-cta light" href="nosotros.html">Conócenos <span class="ln"></span><span class="ar">→</span></a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Categorías: tríptico showroom sobre greige -->
-<section class="sec on-greige"><div class="container">
-  <div class="sec-head">
-    <div class="eyebrow">Líneas · Curaduría multimarca</div>
-    <span class="rule-gold"></span>
-    <h2>Tres territorios, <b>un criterio</b>.</h2>
+<!-- Distribución oficial: marquesina de marcas (continúa la brandintro) -->
+<section class="sec tight on-espresso brandmq" id="distribucion-oficial">
+  <div class="container">
+    <div class="brandmq-head reveal">
+      <div class="sec-head">
+        <div class="eyebrow eyebrow-bright">Distribución oficial</div>
+        <h2>Distribuidores oficiales de <i>tus marcas favoritas</i>.</h2>
+        <p class="sub">Garantía de fábrica, refacciones y servicio técnico oficial en México.</p>
+      </div>
+      <a class="cta-pill" href="marcas.html">
+        <span>Conoce todas nuestras marcas</span>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="19" y2="12"></line><polyline points="13 6 19 12 13 18"></polyline></svg>
+      </a>
+    </div>
   </div>
-  <div class="grid-3 reveal" style="margin-top:64px">
-    <a class="cat" href="coleccion.html">
-      <div class="imgw"><img src="assets/photos/cat-cocina.jpg" alt="Cocina Sub-Zero / Wolf"></div>
-      <h3>Cocina</h3>
-      <span class="dotlist">Wolf <span class="dot">·</span> Thermador <span class="dot">·</span> La Cornue</span>
-      <span class="arrow-link">Ver línea <span class="ln"></span><span class="ar">→</span></span>
-    </a>
-    <a class="cat" href="coleccion.html">
-      <div class="imgw"><img src="assets/photos/cat-refrigeracion.jpg" alt="Refrigeración panelable Sub-Zero"></div>
-      <h3>Refrigeración</h3>
-      <span class="dotlist">Sub-Zero <span class="dot">·</span> Monogram <span class="dot">·</span> Miele</span>
-      <span class="arrow-link">Ver línea <span class="ln"></span><span class="ar">→</span></span>
-    </a>
-    <a class="cat" href="coleccion.html">
-      <div class="imgw"><img src="assets/photos/cat-exterior.jpg" alt="Asador Wolf en cocina exterior"></div>
-      <h3>Exterior</h3>
-      <span class="dotlist">Alfresco <span class="dot">·</span> Lynx <span class="dot">·</span> Kamado Joe</span>
-      <span class="arrow-link">Ver línea <span class="ln"></span><span class="ar">→</span></span>
-    </a>
+  <div class="mq" aria-label="Marcas que distribuimos">
+    <div class="mq-row left">
+      <div class="mq-track">
+        <div class="mq-seq">
+          <a class="mq-chip" href="marcas.html" aria-label="Sub-Zero" data-brand="sub-zero"><img class="mq-logo" src="assets/logos/sub-zero.png" alt="Sub-Zero" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Sub-Zero</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Wolf" data-brand="wolf"><img class="mq-logo" src="assets/logos/wolf.png" alt="Wolf" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Wolf</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Cove" data-brand="cove"><img class="mq-logo" src="assets/logos/cove.png" alt="Cove" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Cove</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Miele" data-brand="miele"><img class="mq-logo" src="assets/logos/miele.png" alt="Miele" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Miele</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Thermador" data-brand="thermador"><img class="mq-logo" src="assets/logos/thermador.png" alt="Thermador" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Thermador</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Monogram" data-brand="monogram"><img class="mq-logo" src="assets/logos/monogram.png" alt="Monogram" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Monogram</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Viking" data-brand="viking"><img class="mq-logo" src="assets/logos/viking.png" alt="Viking" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Viking</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Gaggenau" data-brand="gaggenau"><img class="mq-logo" src="assets/logos/gaggenau.png" alt="Gaggenau" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Gaggenau</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="La Cornue" data-brand="la-cornue"><img class="mq-logo" src="assets/logos/la-cornue.png" alt="La Cornue" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">La Cornue</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Smeg" data-brand="smeg"><img class="mq-logo" src="assets/logos/smeg.png" alt="Smeg" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Smeg</span></a>
+        </div>
+        <div class="mq-seq" aria-hidden="true">
+          <a class="mq-chip" href="marcas.html" aria-label="Sub-Zero" data-brand="sub-zero"><img class="mq-logo" src="assets/logos/sub-zero.png" alt="Sub-Zero" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Sub-Zero</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Wolf" data-brand="wolf"><img class="mq-logo" src="assets/logos/wolf.png" alt="Wolf" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Wolf</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Cove" data-brand="cove"><img class="mq-logo" src="assets/logos/cove.png" alt="Cove" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Cove</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Miele" data-brand="miele"><img class="mq-logo" src="assets/logos/miele.png" alt="Miele" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Miele</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Thermador" data-brand="thermador"><img class="mq-logo" src="assets/logos/thermador.png" alt="Thermador" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Thermador</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Monogram" data-brand="monogram"><img class="mq-logo" src="assets/logos/monogram.png" alt="Monogram" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Monogram</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Viking" data-brand="viking"><img class="mq-logo" src="assets/logos/viking.png" alt="Viking" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Viking</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Gaggenau" data-brand="gaggenau"><img class="mq-logo" src="assets/logos/gaggenau.png" alt="Gaggenau" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Gaggenau</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="La Cornue" data-brand="la-cornue"><img class="mq-logo" src="assets/logos/la-cornue.png" alt="La Cornue" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">La Cornue</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Smeg" data-brand="smeg"><img class="mq-logo" src="assets/logos/smeg.png" alt="Smeg" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Smeg</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="mq-row right">
+      <div class="mq-track">
+        <div class="mq-seq">
+          <a class="mq-chip" href="marcas.html" aria-label="Bertazzoni" data-brand="bertazzoni"><img class="mq-logo" src="assets/logos/bertazzoni.png" alt="Bertazzoni" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Bertazzoni</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="KitchenAid" data-brand="kitchenaid"><img class="mq-logo" src="assets/logos/kitchenaid.png" alt="KitchenAid" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">KitchenAid</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Bosch" data-brand="bosch"><img class="mq-logo" src="assets/logos/bosch.png" alt="Bosch" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Bosch</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Elica" data-brand="elica"><img class="mq-logo" src="assets/logos/elica.png" alt="Elica" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Elica</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Pitt Cooking" data-brand="pitt-cooking"><img class="mq-logo" src="assets/logos/pitt-cooking.png" alt="Pitt Cooking" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Pitt Cooking</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Hoshizaki" data-brand="hoshizaki"><img class="mq-logo" src="assets/logos/hoshizaki.png" alt="Hoshizaki" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Hoshizaki</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Alfresco" data-brand="alfresco"><img class="mq-logo" src="assets/logos/alfresco.png" alt="Alfresco" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Alfresco</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Lynx" data-brand="lynx"><img class="mq-logo" src="assets/logos/lynx.png" alt="Lynx" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Lynx</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Kamado Joe" data-brand="kamado-joe"><img class="mq-logo" src="assets/logos/kamado-joe.png" alt="Kamado Joe" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Kamado Joe</span></a>
+        </div>
+        <div class="mq-seq" aria-hidden="true">
+          <a class="mq-chip" href="marcas.html" aria-label="Bertazzoni" data-brand="bertazzoni"><img class="mq-logo" src="assets/logos/bertazzoni.png" alt="Bertazzoni" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Bertazzoni</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="KitchenAid" data-brand="kitchenaid"><img class="mq-logo" src="assets/logos/kitchenaid.png" alt="KitchenAid" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">KitchenAid</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Bosch" data-brand="bosch"><img class="mq-logo" src="assets/logos/bosch.png" alt="Bosch" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Bosch</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Elica" data-brand="elica"><img class="mq-logo" src="assets/logos/elica.png" alt="Elica" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Elica</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Pitt Cooking" data-brand="pitt-cooking"><img class="mq-logo" src="assets/logos/pitt-cooking.png" alt="Pitt Cooking" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Pitt Cooking</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Hoshizaki" data-brand="hoshizaki"><img class="mq-logo" src="assets/logos/hoshizaki.png" alt="Hoshizaki" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Hoshizaki</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Alfresco" data-brand="alfresco"><img class="mq-logo" src="assets/logos/alfresco.png" alt="Alfresco" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Alfresco</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Lynx" data-brand="lynx"><img class="mq-logo" src="assets/logos/lynx.png" alt="Lynx" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Lynx</span></a>
+          <a class="mq-chip" href="marcas.html" aria-label="Kamado Joe" data-brand="kamado-joe"><img class="mq-logo" src="assets/logos/kamado-joe.png" alt="Kamado Joe" onerror="this.closest('.mq-chip').classList.add('no-logo')" onload="this.closest('.mq-chip').classList.remove('no-logo')"><span class="mq-name">Kamado Joe</span></a>
+        </div>
+      </div>
+    </div>
   </div>
-</div></section>
+</section>
 
-<!-- Equipamiento curado: precisión es respeto -->
-<section class="sec"><div class="container">
-  <div class="sec-head-row">
-    <div class="sec-head">
-      <div class="eyebrow">Equipamiento · Curado</div>
+<!-- Beneficios: por qué elegirnos (orbes que se acentúan al scroll) -->
+<section class="sec benefits" id="beneficios" aria-label="Por qué elegirnos">
+  <div class="bene-orbs" aria-hidden="true">
+    <span class="bene-orb" style="--x:14%;--y:24%;--s:300px"></span>
+    <span class="bene-orb" style="--x:84%;--y:42%;--s:400px"></span>
+    <span class="bene-orb" style="--x:48%;--y:92%;--s:260px"></span>
+  </div>
+  <div class="container">
+    <div class="sec-head center">
+      <div class="eyebrow">Por qué nosotros</div>
       <span class="rule-gold"></span>
-      <h2>Elegido con criterio, <b>pieza por pieza</b>.</h2>
-      <p class="sub">No vendemos catálogos completos. Cada pieza está aquí porque la especificaríamos en nuestra propia casa.</p>
+      <h2>Beneficios de <i>equiparte con HOMEA</i>.</h2>
     </div>
-    <a class="arrow-link" href="coleccion.html">Ver todo <span class="ln"></span><span class="ar">→</span></a>
+    <div class="bene-grid">
+      <article class="bene-card reveal" style="--d:0s">
+        <span class="bene-glow" aria-hidden="true"></span>
+        <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="2.6" y="13" width="3.6" height="6" rx="1.2"/><rect x="17.8" y="13" width="3.6" height="6" rx="1.2"/><path d="M20 19a3 3 0 0 1-3 3h-2.2"/></svg></div>
+        <h3>Asesoría experta</h3>
+        <p>Más de 22 años de oficio. Te acompañamos del proyecto a la puesta en marcha.</p>
+      </article>
+      <article class="bene-card reveal" style="--d:.06s">
+        <span class="bene-glow" aria-hidden="true"></span>
+        <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.2 1.6 2.7-.3 1 2.6 2.3 1.4-.8 2.6.8 2.6-2.3 1.4-1 2.6-2.7-.3L12 21l-2.2-1.6-2.7.3-1-2.6-2.3-1.4.8-2.6-.8-2.6 2.3-1.4 1-2.6 2.7.3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Marcas oficiales</h3>
+        <p>Distribuidor autorizado de Sub-Zero, Wolf, Miele, Gaggenau y +90 marcas.</p>
+      </article>
+      <article class="bene-card reveal" style="--d:.12s">
+        <span class="bene-glow" aria-hidden="true"></span>
+        <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 2.5v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10v-5z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Garantía de fábrica</h3>
+        <p>Respaldo directo del fabricante y servicio postventa real.</p>
+      </article>
+      <article class="bene-card reveal" style="--d:.18s">
+        <span class="bene-glow" aria-hidden="true"></span>
+        <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.2-4h13.6L20 9"/><path d="M4 9a2.3 2.3 0 0 0 4 0 2.3 2.3 0 0 0 4 0 2.3 2.3 0 0 0 4 0 2.3 2.3 0 0 0 4 0"/><path d="M5 9.4V20h14V9.4"/><path d="M9.5 20v-4.5h5V20"/></svg></div>
+        <h3>Showroom en Querétaro</h3>
+        <p>Vive los equipos funcionando antes de decidir.</p>
+      </article>
+      <article class="bene-card reveal" style="--d:.24s">
+        <span class="bene-glow" aria-hidden="true"></span>
+        <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5h11v9.5H3z"/><path d="M14 9.5h3.8L21 12.6V16h-7z"/><circle cx="7" cy="18" r="1.7"/><circle cx="17.4" cy="18" r="1.7"/></svg></div>
+        <h3>Envíos a todo México</h3>
+        <p>Logística especializada para equipo de alto valor. <i>*Aplican restricciones.</i></p>
+      </article>
+      <article class="bene-card reveal" style="--d:.3s">
+        <span class="bene-glow" aria-hidden="true"></span>
+        <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 14.5h4"/></svg></div>
+        <h3>Meses sin intereses</h3>
+        <p>Financiamiento a MSI con tarjetas participantes.</p>
+      </article>
+    </div>
   </div>
-  <div class="grid-3 reveal" style="margin-top:64px">
-    <a class="pcard" href="producto.html">
-      <div class="imgw"><img src="assets/photos/prod-subzero.jpg" alt="Refrigerador Sub-Zero Classic 36"></div>
-      <div class="body">
-        <span class="brand">Sub-Zero</span>
-        <h3>Refrigerador Built-In Panelable 36" · Serie Classic</h3>
-        <span class="dotlist">36" <span class="dot">·</span> panelable <span class="dot">·</span> doble compresor</span>
-        <div class="row"><span class="price-tag figures">$189,999<span class="currency">MXN</span></span>
-          <span class="arrow-link">Ver pieza <span class="ln"></span><span class="ar">→</span></span></div>
-      </div>
-    </a>
-    <a class="pcard" href="producto.html">
-      <div class="imgw"><img src="assets/photos/prod-wolf.jpg" alt="Estufa Wolf serie profesional"></div>
-      <div class="body">
-        <span class="brand">Wolf</span>
-        <h3>Estufa de Piso a Gas 36" · 6 Quemadores</h3>
-        <span class="dotlist">36" <span class="dot">·</span> 6 quemadores <span class="dot">·</span> convección dual</span>
-        <div class="row"><span class="price-tag figures">$229,999<span class="currency">MXN</span></span>
-          <span class="arrow-link">Ver pieza <span class="ln"></span><span class="ar">→</span></span></div>
-      </div>
-    </a>
-    <a class="pcard" href="producto.html">
-      <div class="imgw"><img src="assets/photos/proyecto-1.jpg" alt="Lavavajillas Miele integrado tras panel de encino"></div>
-      <div class="body">
-        <span class="brand">Miele</span>
-        <h3>Lavavajillas Panelable G 7000 · Integrado Total</h3>
-        <span class="dotlist">24" <span class="dot">·</span> AutoDos <span class="dot">·</span> desaparece tras el panel</span>
-        <div class="row"><span class="price-tag figures">$64,999<span class="currency">MXN</span></span>
-          <span class="arrow-link">Ver pieza <span class="ln"></span><span class="ar">→</span></span></div>
-      </div>
-    </a>
-    <a class="pcard" href="producto.html">
-      <div class="imgw"><img src="assets/photos/miele-cafetera.jpg" alt="Cafetera empotrable Miele"></div>
-      <div class="body">
-        <span class="brand">Miele</span>
-        <h3>Cafetera Empotrable CVA · Built-in</h3>
-        <span class="dotlist">24" <span class="dot">·</span> plomada <span class="dot">·</span> perfiles automáticos</span>
-        <div class="row"><span class="price-tag figures">$98,500<span class="currency">MXN</span></span>
-          <span class="arrow-link">Ver pieza <span class="ln"></span><span class="ar">→</span></span></div>
-      </div>
-    </a>
-    <a class="pcard" href="producto.html">
-      <div class="imgw"><img src="assets/photos/prod-monogram.jpg" alt="Columna de vinos Monogram"></div>
-      <div class="body">
-        <span class="brand">Monogram</span>
-        <h3>Columna de Vinos Panelable · 2 Zonas</h3>
-        <span class="dotlist">24" <span class="dot">·</span> 2 zonas <span class="dot">·</span> protección UV</span>
-        <div class="row"><span class="price-tag figures">$145,000<span class="currency">MXN</span></span>
-          <span class="arrow-link">Ver pieza <span class="ln"></span><span class="ar">→</span></span></div>
-      </div>
-    </a>
-    <a class="pcard" href="producto.html">
-      <div class="imgw"><img src="assets/photos/prod-hoshizaki.jpg" alt="Máquina de hielo"></div>
-      <div class="body">
-        <span class="brand">Hoshizaki</span>
-        <h3>Máquina de Hielo IM-50 · Bar en Casa</h3>
-        <span class="dotlist">56 kg/día <span class="dot">·</span> cubo cuadrado <span class="dot">·</span> filtración doble</span>
-        <div class="row"><span class="price-tag figures">$74,500<span class="currency">MXN</span></span>
-          <span class="arrow-link">Ver pieza <span class="ln"></span><span class="ar">→</span></span></div>
-      </div>
-    </a>
-  </div>
-</div></section>
+</section>
 
-<!-- Método: asesoría sobre espresso -->
-<section class="sec on-espresso"><div class="container">
-  <div class="sec-head">
-    <div class="eyebrow eyebrow-bright">Asesoría · Sin prisa</div>
-    <span class="rule-gold"></span>
-    <h2 style="color:var(--dark-fg)">Escuchamos primero. <i>Especificamos</i> después.</h2>
-  </div>
-  <div class="steps reveal">
-    <div class="step">
-      <span class="n figures">01</span>
-      <h3>Escucha</h3>
-      <p>45 minutos contigo, en showroom o en obra. Antes de mostrar un solo equipo, entendemos cómo cocinas, lavas y vives.</p>
-    </div>
-    <div class="step">
-      <span class="n figures">02</span>
-      <h3>Especificación</h3>
-      <p>Planos, cargas eléctricas y medidas revisadas al milímetro. Una propuesta por escrito, con alternativas y por qué.</p>
-    </div>
-    <div class="step">
-      <span class="n figures">03</span>
-      <h3>Acompañamiento</h3>
-      <p>Entrega coordinada con tu obra, instalación certificada y puesta en marcha. Seguimos aquí después de la factura.</p>
+<!-- Stats con scroll (Opción B): cada cifra con su imagen de fondo -->
+<section class="statscroll" id="statscroll" aria-label="HOMEA en números">
+  <div class="ss-pin">
+    <div class="ss-bg on" style="background-image:url('assets/photos/historia.jpg')"></div>
+    <div class="ss-bg" style="background-image:url('assets/photos/showroom.jpg')"></div>
+    <div class="ss-bg" style="background-image:url('assets/photos/prod-subzero.jpg')"></div>
+    <div class="ss-bg" style="background-image:url('assets/photos/cat-cocina.jpg')"></div>
+    <div class="ss-veil"></div>
+    <div class="container ss-inner">
+      <div class="eyebrow eyebrow-bright">Oficio · en números</div>
+      <div class="ss-stack">
+        <div class="ss-item on"><span class="ss-n figures">22</span><span class="ss-l">años de oficio</span></div>
+        <div class="ss-item"><span class="ss-n figures">2 h</span><span class="ss-l">respuesta promedio</span></div>
+        <div class="ss-item"><span class="ss-n figures">96</span><span class="ss-l">marcas premium</span></div>
+        <div class="ss-item"><span class="ss-n figures">25,000</span><span class="ss-l">piezas en catálogo</span></div>
+      </div>
+      <div class="ss-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
     </div>
   </div>
-  <div class="stats reveal">
-    <div class="stat"><span class="n figures">22</span><span class="l">años de oficio</span></div>
-    <div class="stat"><span class="n figures">2 h</span><span class="l">respuesta promedio</span></div>
-    <div class="stat"><span class="n figures">96</span><span class="l">marcas premium</span></div>
-    <div class="stat"><span class="n figures">25,000</span><span class="l">piezas en catálogo</span></div>
-  </div>
-</div></section>
+</section>
 
 <!-- Segmentos: hogar / proyecto -->
 <section class="sec"><div class="container">
@@ -343,7 +548,7 @@
   </div>
 </div></footer>
 
-<a class="wa-float" href="#" aria-label="WhatsApp">✆</a>
-<script src="v2.js"></script>
+<a class="wa-float" href="https://api.whatsapp.com/send/?phone=524461446318" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-track="whatsapp_click" data-label="wa_float"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg></a>
+<script src="v2.js?v=18"></script>
 </body>
 </html>
