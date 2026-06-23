@@ -12,16 +12,20 @@
   }
 
   /* ---------- Reveals: una vez, al entrar al viewport ---------- */
-  var revealEls = document.querySelectorAll(".reveal, .reveal-img");
-  if ("IntersectionObserver" in window && revealEls.length) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.15 });
-    revealEls.forEach(function (el) { io.observe(el); });
+  if ("IntersectionObserver" in window) {
+    var reveal = function (el, obs) { el.classList.add("in"); obs.unobserve(el); };
+    /* General: aparece un poco antes de entrar para no dejar huecos en blanco. */
+    var ioEarly = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { reveal(e.target, ioEarly); } });
+    }, { threshold: 0, rootMargin: "0px 0px 20% 0px" });
+    document.querySelectorAll(".reveal:not(.cat-grid), .reveal-img").forEach(function (el) { ioEarly.observe(el); });
+    /* Categorías: animan justo al entrar en pantalla para que el reveal se vea al hacer scroll. */
+    var ioInView = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { reveal(e.target, ioInView); } });
+    }, { threshold: 0 });
+    document.querySelectorAll(".cat-grid.reveal").forEach(function (el) { ioInView.observe(el); });
   } else {
-    revealEls.forEach(function (el) { el.classList.add("in"); });
+    document.querySelectorAll(".reveal, .reveal-img").forEach(function (el) { el.classList.add("in"); });
   }
 
   /* ---------- Hero rotativo: 5 mensajes sincronizados ---------- */
@@ -41,6 +45,13 @@
     var btnP = ctaLinks[0] || null;
     var btnS = ctaLinks[1] || null;
     var idx = 0, timer = null;
+
+    /* Asigna href y, si el destino es externo (http/https), lo abre en nueva pestaña. */
+    function setCtaLink(el, url) {
+      el.setAttribute("href", url);
+      if (/^https?:\/\//i.test(url)) { el.setAttribute("target", "_blank"); el.setAttribute("rel", "noopener"); }
+      else { el.removeAttribute("target"); el.removeAttribute("rel"); }
+    }
 
     /* Alinea el CTA flotante "Contáctanos" a la MISMA altura que los botones del
        hero. Como el copy está centrado verticalmente y el H1 cambia de líneas por
@@ -67,9 +78,10 @@
       subEl.innerHTML = m.sub;
       msgBox.classList.add("run");
 
-      /* Botones por slide (texto + link) — mismos estilos, solo cambia contenido */
-      if (btnP && m.btnP) { btnP.textContent = m.btnP; if (m.btnPUrl) { btnP.setAttribute("href", m.btnPUrl); } }
-      if (btnS && m.btnS) { btnS.textContent = m.btnS; if (m.btnSUrl) { btnS.setAttribute("href", m.btnSUrl); } }
+      /* Botones por slide (texto + link) — mismos estilos, solo cambia contenido.
+         Los enlaces externos (http/https, p. ej. WhatsApp) se abren en nueva pestaña. */
+      if (btnP && m.btnP) { btnP.textContent = m.btnP; if (m.btnPUrl) { setCtaLink(btnP, m.btnPUrl); } }
+      if (btnS && m.btnS) { btnS.textContent = m.btnS; if (m.btnSUrl) { setCtaLink(btnS, m.btnSUrl); } }
 
       idxEl.innerHTML = "0" + (idx + 1) + " <span>/ 0" + N + "</span>";
       bars.forEach(function (b, j) {
@@ -115,14 +127,63 @@
     }
   }
 
-  /* ---------- Tabs (marcas): visual only ---------- */
+  /* ---------- Tabs de marcas: filtran por gama (cols C/D del Excel) ---------- */
   var tabs = document.querySelectorAll(".gama-tabs .t");
+  var brandTiles = document.querySelectorAll(".brandtiles a[data-gama]");
+  var brandGrid = document.querySelector(".brandtiles");
+  var gamaNote = document.querySelector(".gama-note");
+  var azRail = document.querySelector(".az-rail");
+  /* Orden por costo = orden inicial del DOM (posicionamiento del sitio).
+     Orden alfabético se calcula a partir de los nombres. */
+  var costOrder = Array.prototype.slice.call(brandTiles);
+  var alphaOrder = costOrder.slice().sort(function (a, b) {
+    return a.textContent.trim().localeCompare(b.textContent.trim(), "es");
+  });
+  function applyGama(filter) {
+    brandTiles.forEach(function (a) {
+      var show = filter === "all" ||
+        (" " + a.getAttribute("data-gama") + " ").indexOf(" " + filter + " ") >= 0;
+      a.classList.toggle("hide", !show);
+    });
+    /* TODAS → alfabético; cada gama → orden por costo (mayor a menor) */
+    if (brandGrid) {
+      (filter === "all" ? alphaOrder : costOrder).forEach(function (a) {
+        brandGrid.appendChild(a);
+      });
+    }
+    /* La nota de orden ("mayor costo a menor") solo aparece al filtrar por una gama */
+    if (gamaNote) { gamaNote.classList.toggle("hide", filter === "all"); }
+    /* El riel A→Z solo aparece en TODAS (orden alfabético) */
+    if (azRail) { azRail.classList.toggle("hide", filter !== "all"); updateAzArrow(); }
+  }
+  /* La flecha del riel A→Z sigue el scroll del usuario hasta llegar a la Z */
+  var azTrack = azRail && azRail.querySelector(".az-track");
+  var azArrow = azRail && azRail.querySelector(".az-arrow");
+  function updateAzArrow() {
+    if (!azArrow || !azTrack || !azRail || azRail.classList.contains("hide")) return;
+    var tr = azTrack.getBoundingClientRect();
+    var ref = window.innerHeight * 0.5;                 // línea de referencia del viewport
+    var y = Math.max(0, Math.min(tr.height, ref - tr.top));
+    azArrow.style.top = y + "px";
+  }
+  if (azArrow) {
+    var azTicking = false;
+    var onAzScroll = function () {
+      if (!azTicking) { azTicking = true; requestAnimationFrame(function () { updateAzArrow(); azTicking = false; }); }
+    };
+    window.addEventListener("scroll", onAzScroll, { passive: true });
+    window.addEventListener("resize", onAzScroll);
+    updateAzArrow();
+  }
   tabs.forEach(function (t) {
     t.addEventListener("click", function () {
       tabs.forEach(function (x) { x.classList.remove("on"); });
       t.classList.add("on");
+      if (brandTiles.length) { applyGama(t.getAttribute("data-filter") || "all"); }
     });
   });
+  var activeTab = document.querySelector(".gama-tabs .t.on");
+  if (brandTiles.length && activeTab) { applyGama(activeTab.getAttribute("data-filter") || "all"); }
 
   /* ---------- Tipo de cambio del día (slot de temporada del ubar) ----------
      Valor oficial = FIX que publica el DOF (dof.gob.mx/indicadores.php), que es
@@ -408,6 +469,13 @@
       var seq = row.querySelector(".mq-seq");
       if (!track || !seq) return;
 
+      /* Bloquea el arrastre nativo de <img>/<a>: si no, el navegador secuestra el
+         gesto al iniciar sobre una imagen y muestra el "fantasma" con su nombre. */
+      Array.prototype.forEach.call(row.querySelectorAll("img, a"), function (el) {
+        el.setAttribute("draggable", "false");
+      });
+      row.addEventListener("dragstart", function (e) { e.preventDefault(); });
+
       var isRight = row.classList.contains("right");
       var dir = isRight ? 1 : -1;          /* sentido del auto-scroll */
       var dur = isRight ? 64 : 52;         /* segundos por un seq (equiv. CSS) */
@@ -478,4 +546,64 @@
       }, true);
     });
   }
+})();
+
+/* ---- Reseñas Google — rotador ---------------------------------------- */
+(function () {
+  var grev = document.querySelector("[data-greviews]");
+  if (!grev) return;
+  var cards = Array.prototype.slice.call(grev.querySelectorAll(".grev-card"));
+  if (!cards.length) return;
+  var gi = 0, timer = null, DUR = 10000;
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Genera un dot por reseña (escala solo con el nº de tarjetas)
+  var dotsWrap = grev.querySelector(".grev-dots"), dots = [];
+  if (dotsWrap) {
+    cards.forEach(function (c, j) {
+      var b = document.createElement("button");
+      b.setAttribute("aria-label", "Reseña " + (j + 1));
+      b.addEventListener("click", function () { render(j); start(); });
+      dotsWrap.appendChild(b);
+      dots.push(b);
+    });
+  }
+  function render(i) {
+    gi = (i + cards.length) % cards.length;
+    cards.forEach(function (c, j) { c.classList.toggle("on", j === gi); });
+    dots.forEach(function (d, j) { d.classList.toggle("on", j === gi); });
+  }
+  function start() { stop(); timer = setInterval(function () { render(gi + 1); }, DUR); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  /* Sigue rotando aunque el cursor esté sobre la sección (sin pausa al hover). */
+  render(0); start();
+})();
+
+(function () {
+  "use strict";
+  /* ---------- Menú móvil (hamburguesa) ---------- */
+  var nav = document.querySelector(".site-nav");
+  var toggle = nav && nav.querySelector(".nav-toggle");
+  if (!nav || !toggle) return;
+
+  function close() { nav.classList.remove("nav-open"); toggle.setAttribute("aria-expanded", "false"); }
+  toggle.addEventListener("click", function () {
+    var open = nav.classList.toggle("nav-open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+
+  /* Cerrar el menú al elegir un enlace */
+  nav.querySelectorAll(".nav-links a, .nav-right a, .btn-ghost").forEach(function (a) {
+    a.addEventListener("click", close);
+  });
+
+  /* En móvil el mega-menú está oculto: "Productos" lleva al catálogo */
+  var prod = nav.querySelector(".has-mega > span");
+  if (prod) {
+    prod.addEventListener("click", function () {
+      if (window.matchMedia("(max-width: 1080px)").matches) { window.location.href = "coleccion.html"; }
+    });
+  }
+
+  /* Cerrar con Escape */
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
 })();

@@ -129,11 +129,12 @@
   --tracking-wordmark:0.32em;      /* @kind font */
 
   /* -------- Type scale -------- */
-  --fs-xs:   12px;
-  --fs-sm:   14px;
-  --fs-base: 16px;
-  --fs-md:   18px;
-  --fs-lg:   20px;
+  /* Body-copy sizes +5% (paragraphs y texto de divs). Display (xl+) sin cambios. */
+  --fs-xs:   12.6px;
+  --fs-sm:   14.7px;
+  --fs-base: 16.8px;
+  --fs-md:   18.9px;
+  --fs-lg:   21px;
   --fs-xl:   24px;
   --fs-2xl:  32px;
   --fs-3xl:  44px;
@@ -218,7 +219,7 @@ h1 b, .h1 b { font-weight: 600; }
 h1 i, h1 em, .h1 i, .h1 em { font-style: italic; }
 
 h2, .h2 { font-family: var(--font-display); font-weight: 400;
-  font-size: clamp(28px, 3vw, var(--fs-3xl));
+  font-size: calc(clamp(28px, 3vw, var(--fs-3xl)) * 1.05);
   line-height: var(--lh-snug); letter-spacing: -0.005em; margin: 0; }
 h2 b, .h2 b { font-weight: 600; }
 h2 i, h2 em, .h2 i, .h2 em { font-style: italic; }

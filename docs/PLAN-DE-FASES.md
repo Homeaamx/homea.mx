@@ -36,6 +36,8 @@ Estado: 🔵 pendiente · 🟡 en curso · ✅ hecho
 - [x] **Preview offline autocontenido** (`preview/offline/`) para revisión sin servidor.
 - [ ] Ajustes finales de diseño según feedback de Carla (en curso).
 
+> 🔁 **Recordatorio de respaldo (Carla):** aunque el sitio **aún NO está publicado**, **subir `test` → `main` de vez en cuando** (`git push origin test:main`) para mantener `main` como copia segura del avance. Hacerlo después de cada bloque de cambios del preview.
+
 **Entregable:** ✅ preview navegable aprobado = base visual para construir el front-end. ← **AQUÍ ESTAMOS**
 
 ---

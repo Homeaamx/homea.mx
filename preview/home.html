@@ -6,7 +6,7 @@
 <title>HOMEA — Equipamiento premium para el hogar · Querétaro</title>
 <link rel="icon" type="image/png" href="assets/favicon-circle.png">
 <link rel="stylesheet" href="tokens-v2.css">
-<link rel="stylesheet" href="theme.css?v=46">
+<link rel="stylesheet" href="theme.css?v=60">
 </head>
 <body>
 
@@ -28,8 +28,9 @@
   <a class="brand" href="home.html" aria-label="Inicio">
     <img src="assets/wordmark-black.png" alt="HOMEA Premium">
   </a>
+  <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
   <div class="nav-links">
-    <div class="has-mega"><span>Productos</span>
+    <div class="has-mega"><a href="coleccion.html">Productos</a>
       <div class="mega-panel mega-flyout" data-mega>
         <div class="mega-flyout-main">
           <div class="mega-rail" role="tablist" aria-label="Categorías de producto">
@@ -119,14 +120,22 @@
         </div>
       </div>
     </div>
-    <a href="marcas.html">Marcas</a>
+    <div class="has-mega has-mega--brands"><a href="marcas.html">Marcas</a>
+      <div class="mega-panel mega-brands">
+        <div class="mega-brands-head">
+          <span class="eyebrow">Marcas oficiales · A–Z</span>
+          <a class="mega-all" href="marcas.html">Ver todas las marcas →</a>
+        </div>
+        <div class="mega-brands-cols" role="list"><a href="coleccion.html">ACROS</a><a href="coleccion.html">ALFA FORNI</a><a href="coleccion.html">ALFRESCO</a><a href="coleccion.html">AMERICAN STANDARD</a><a href="coleccion.html">ARTISAN</a><a href="coleccion.html">ASKO</a><a href="coleccion.html">AXCENT</a><a href="coleccion.html">AXOR</a><a href="coleccion.html">BENESSI</a><a href="coleccion.html">BERTAZZONI</a><a href="coleccion.html">BLANCO</a><a href="coleccion.html">BLAZE</a><a href="coleccion.html">BOSCH</a><a href="coleccion.html">BRIZO</a><a href="coleccion.html">BROIL KING</a><a href="coleccion.html">CAFE</a><a href="coleccion.html">COVE</a><a href="coleccion.html">COYOTE</a><a href="coleccion.html">DAWN</a><a href="coleccion.html">DELTA</a><a href="coleccion.html">DEXA</a><a href="coleccion.html">ECLIPSE</a><a href="coleccion.html">ELECTROLUX</a><a href="coleccion.html">ELICA</a><a href="coleccion.html">ELKAY</a><a href="coleccion.html">FALMEC</a><a href="coleccion.html">FRANKE</a><a href="coleccion.html">FRIGIDAIRE</a><a href="coleccion.html">FULGOR MILANO</a><a href="coleccion.html">GAGGENAU</a><a href="coleccion.html">THE GALLEY</a><a href="coleccion.html">GE PROFILE</a><a href="coleccion.html">GESSI</a><a href="coleccion.html">HAIER</a><a href="coleccion.html">HANSGROHE</a><a href="coleccion.html">HOSHIZAKI</a><a href="coleccion.html">I-DRAIN</a><a href="coleccion.html">INSINKERATOR</a><a href="coleccion.html">INVISACOOK</a><a href="coleccion.html">IO MABE</a><a href="coleccion.html">KALT</a><a href="coleccion.html">KAMADO JOE</a><a href="coleccion.html">KELE MASTER SINKS</a><a href="coleccion.html">KEUCO</a><a href="coleccion.html">KITCHENAID</a><a href="coleccion.html">LYNX</a><a href="coleccion.html">MABE</a><a href="coleccion.html">MASTERBUILT</a><a href="coleccion.html">MAYTAG</a><a href="coleccion.html">MIELE</a><a href="coleccion.html">MOEN</a><a href="coleccion.html">MONOGRAM</a><a href="coleccion.html">MONT ALPI</a><a href="coleccion.html">MR STEAM</a><a href="coleccion.html">NOBILI</a><a href="coleccion.html">PEERLESS</a><a href="coleccion.html">PITT COOKING</a><a href="coleccion.html">POLETTI SINKS</a><a href="coleccion.html">SAPPHIRE</a><a href="coleccion.html">SCHOCK</a><a href="coleccion.html">SCOTSMAN</a><a href="coleccion.html">SEDONA BY LYNX</a><a href="coleccion.html">SMEG</a><a href="coleccion.html">SUBZERO</a><a href="coleccion.html">SUMMIT</a><a href="coleccion.html">SUPRA</a><a href="coleccion.html">TECNOLAM</a><a href="coleccion.html">TEKA</a><a href="coleccion.html">THERMADOR</a><a href="coleccion.html">THOR</a><a href="coleccion.html">TRADEWIND</a><a href="coleccion.html">U-LINE</a><a href="coleccion.html">VIKING</a><a href="coleccion.html">WHIRLPOOL</a><a href="coleccion.html">WOLF</a><a href="coleccion.html">WPPO</a></div>
+      </div>
+    </div>
     <a href="b2b.html">Proyectos</a>
     <a href="coleccion.html">Ofertas</a>
-    <a href="#">Guías</a>
+    <a href="guias.html">Guías</a>
+    <a class="nav-sec" href="herramientas.html">Herramientas</a>
+    <a class="nav-sec" href="nosotros.html">Showroom</a>
   </div>
   <div class="nav-right">
-    <a href="#">Herramientas</a>
-    <a href="nosotros.html">Showroom</a>
     <a class="nav-search" href="coleccion.html" aria-label="Buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg></a>
   </div>
   <a class="btn btn-ghost" href="#">Wishlist</a>
@@ -135,11 +144,11 @@
 <!-- Hero rotativo: 5 mensajes sincronizados con imagen -->
 <section class="hero hero-cine" data-rotate>
   <script type="application/json" id="hero-data">[
-    {"eyebrow":"Refrigeración · Cocción","title":"Las marcas que <em>pediste</em>.","sub":"SubZero, Wolf, Gaggenau, Miele, Viking y más.<br>Equipo de lujo, listo para entregar.","btnP":"Explorar categorías","btnPUrl":"coleccion.html","btnS":"Marcas","btnSUrl":"marcas.html"},
-    {"eyebrow":"Asesoría · Experta","title":"Encontramos lo que <em>estás buscando</em>.","sub":"Te asesoramos para encontrar los mejores equipos para tu cocina.","btnP":"Agendar asesoría","btnPUrl":"contacto.html","btnS":"Ver catálogo","btnSUrl":"coleccion.html"},
-    {"eyebrow":"Mayoreo · Proyectos","title":"Equipa todo, <em>paga menos</em>.","sub":"Surtimos proyectos completos de electrodomésticos.<br>Precio especial, marcas de calidad.","btnP":"Cotizar proyecto","btnPUrl":"b2b.html","btnS":"Herramientas","btnSUrl":"coleccion.html"},
+    {"eyebrow":"Refrigeración · Cocción","title":"Las marcas que <em>pediste</em>.","sub":"SubZero, Wolf, Gaggenau, Miele, Viking y más.<br>Equipo de lujo, listo para entregar.","btnP":"Explorar categorías","btnPUrl":"#categorias","btnS":"Marcas","btnSUrl":"marcas.html"},
+    {"eyebrow":"Asesoría · Experta","title":"Encontramos lo que <em>estás buscando</em>.","sub":"Te asesoramos para encontrar los mejores equipos para tu cocina.","btnP":"Agendar asesoría","btnPUrl":"contacto.html","btnS":"Ver catálogo","btnSUrl":"guias.html"},
+    {"eyebrow":"Mayoreo · Proyectos","title":"Equipa todo, <em>paga menos</em>.","sub":"Surtimos proyectos completos de electrodomésticos.<br>Precio especial, marcas de calidad.","btnP":"Cotizar proyecto","btnPUrl":"https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21","btnS":"Herramientas","btnSUrl":"herramientas.html"},
     {"eyebrow":"Marcas · Desde 2004","title":"22 años <em>innovando hogares</em>.","sub":"Expertos en electrodomésticos. Más de dos décadas vendiendo lo mejor para tu hogar.","btnP":"Explorar marcas","btnPUrl":"marcas.html","btnS":"Nosotros","btnSUrl":"nosotros.html"},
-    {"eyebrow":"Ofertas · Exclusivas","title":"Precios inigualables, <em>solo para ti</em>.","sub":"Electrodomésticos de calidad al mejor precio. Mejoramos cualquier oferta.","btnP":"Ofertas","btnPUrl":"coleccion.html","btnS":"Contáctanos","btnSUrl":"contacto.html"}
+    {"eyebrow":"Ofertas · Exclusivas","title":"Precios inigualables, <em>solo para ti</em>.","sub":"Electrodomésticos de calidad al mejor precio. Mejoramos cualquier oferta.","btnP":"Ofertas","btnPUrl":"coleccion.html","btnS":"Contáctanos","btnSUrl":"https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21"}
   ]</script>
   <div class="hero-visual hero-bg" data-px="55">
     <div class="hi on"><img src="assets/photos/hero-subzero-wolf-cocina.jpg" alt="Cocina equipada con refrigeración Sub-Zero y cocción Wolf" style="transform:scaleX(-1);object-position:center 70%"></div>
@@ -157,7 +166,7 @@
         <p class="sub rise" style="color:#dcd6c9">SubZero, Wolf, Gaggenau, Miele, Viking y más.<br>Equipo de lujo, listo para entregar.</p>
       </div>
       <div class="hero-ctas">
-        <a class="btn btn-bone" href="coleccion.html">Explorar categorías</a>
+        <a class="btn btn-bone" href="#categorias">Explorar categorías</a>
         <a class="btn btn-ghost-light" href="marcas.html">Marcas</a>
       </div>
       <div class="hero-prog">
@@ -176,7 +185,7 @@
     </div>
   </div>
   <div class="hero-cue" aria-hidden="true"><span>Scroll</span><span class="ar">↓</span></div>
-  <a class="cta-float" href="https://api.whatsapp.com/send/?phone=524461446318" target="_blank" rel="noopener" aria-label="Contáctanos por WhatsApp" data-track="whatsapp_click" data-label="wa_hero_cta">
+  <a class="cta-float" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" aria-label="Contáctanos por WhatsApp" data-track="whatsapp_click" data-label="wa_hero_cta">
     <svg class="ico" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
     <span>Contáctanos</span>
   </a>
@@ -204,7 +213,7 @@
     <span class="orb" style="--x:46%;--y:5%;--s:70px;--c:#E6D09A;--o:.66;--b:5px" data-speed="0.22"></span>
     <span class="orb" style="--x:50%;--y:95%;--s:96px;--c:#EAD8A0;--o:.58;--b:8px" data-speed="0.20"></span>
   </div>
-  <div class="sec-head">
+  <div class="sec-head" id="categorias">
     <div class="eyebrow">Guía electrodomésticos</div>
     <span class="rule-gold"></span>
     <h2>Todos tus espacios <em>en Homea</em>.</h2>
@@ -250,6 +259,16 @@
       <div class="cat-media" style="background-image:url('assets/photos/minisplit.png')"></div>
       <div class="cat-cap"><h3>Minisplits</h3><span class="cat-brands">1.0 · 1.5 · 2.0 toneladas</span></div>
     </a>
+    <div class="cat-guide">
+      <div class="cg-col">
+        <div class="cg-body">
+          <span class="rule-gold"></span>
+          <p>¿No sabes por dónde empezar? No te preocupes, <em>nosotros te guiamos</em>.</p>
+        </div>
+        <a class="btn btn-primary" href="guias.html">Guía de compra</a>
+      </div>
+      <span class="cg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2"></circle><circle cx="18" cy="5" r="2"></circle><path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5"></path></svg></span>
+    </div>
   </div>
 </section>
 
@@ -302,7 +321,7 @@
     <div class="brandmq-head reveal">
       <div class="sec-head">
         <div class="eyebrow eyebrow-bright">Distribución oficial</div>
-        <h2>Distribuidores oficiales de <i>tus marcas favoritas</i>.</h2>
+        <h2>Distribuidores oficiales de<br><i>tus marcas favoritas</i>.</h2>
         <p class="sub">Garantía de fábrica, refacciones y servicio técnico oficial en México.</p>
       </div>
       <a class="cta-pill" href="marcas.html">
@@ -380,142 +399,153 @@
     <div class="sec-head center">
       <div class="eyebrow">Por qué nosotros</div>
       <span class="rule-gold"></span>
-      <h2>Beneficios de <i>equiparte con HOMEA</i>.</h2>
+      <h2>Beneficios de <i>equiparte con</i> <img class="brand-ink" src="assets/black_logo_homea.png" alt="HOMEA"></h2>
     </div>
     <div class="bene-grid">
       <article class="bene-card reveal" style="--d:0s">
         <span class="bene-glow" aria-hidden="true"></span>
         <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="2.6" y="13" width="3.6" height="6" rx="1.2"/><rect x="17.8" y="13" width="3.6" height="6" rx="1.2"/><path d="M20 19a3 3 0 0 1-3 3h-2.2"/></svg></div>
         <h3>Asesoría experta</h3>
-        <p>Más de 22 años de oficio. Te acompañamos del proyecto a la puesta en marcha.</p>
+        <p>Ejecutivos especializados en ofrecerte el mejor servicio personalizado en cada paso de tu compra.</p>
       </article>
       <article class="bene-card reveal" style="--d:.06s">
         <span class="bene-glow" aria-hidden="true"></span>
-        <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.2 1.6 2.7-.3 1 2.6 2.3 1.4-.8 2.6.8 2.6-2.3 1.4-1 2.6-2.7-.3L12 21l-2.2-1.6-2.7.3-1-2.6-2.3-1.4.8-2.6-.8-2.6 2.3-1.4 1-2.6 2.7.3z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h3>Marcas oficiales</h3>
-        <p>Distribuidor autorizado de Sub-Zero, Wolf, Miele, Gaggenau y +90 marcas.</p>
+        <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.6 12.5 11 5.1a2 2 0 0 1 1.4-.6H19a1.5 1.5 0 0 1 1.5 1.5v6.6a2 2 0 0 1-.6 1.4l-7.4 7.4a1.6 1.6 0 0 1-2.3 0l-6.6-6.6a1.6 1.6 0 0 1 0-2.3z"/><circle cx="16" cy="8" r="1.2"/></svg></div>
+        <h3>Precios inigualables</h3>
+        <p>Descuentos únicos para todo tipo de proyectos. Mejoramos cualquier precio.</p>
       </article>
       <article class="bene-card reveal" style="--d:.12s">
         <span class="bene-glow" aria-hidden="true"></span>
-        <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 2.5v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10v-5z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h3>Garantía de fábrica</h3>
-        <p>Respaldo directo del fabricante y servicio postventa real.</p>
+        <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.2 1.6 2.7-.3 1 2.6 2.3 1.4-.8 2.6.8 2.6-2.3 1.4-1 2.6-2.7-.3L12 21l-2.2-1.6-2.7.3-1-2.6-2.3-1.4.8-2.6-.8-2.6 2.3-1.4 1-2.6 2.7.3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Marcas internacionales</h3>
+        <p>Reconocidas por su calidad y funcionalidad.</p>
       </article>
       <article class="bene-card reveal" style="--d:.18s">
         <span class="bene-glow" aria-hidden="true"></span>
-        <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.2-4h13.6L20 9"/><path d="M4 9a2.3 2.3 0 0 0 4 0 2.3 2.3 0 0 0 4 0 2.3 2.3 0 0 0 4 0 2.3 2.3 0 0 0 4 0"/><path d="M5 9.4V20h14V9.4"/><path d="M9.5 20v-4.5h5V20"/></svg></div>
-        <h3>Showroom en Querétaro</h3>
-        <p>Vive los equipos funcionando antes de decidir.</p>
+        <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 2.5v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10v-5z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Garantía de fábrica</h3>
+        <p>Respaldo directo del fabricante y servicio postventa garantizado.</p>
       </article>
       <article class="bene-card reveal" style="--d:.24s">
         <span class="bene-glow" aria-hidden="true"></span>
         <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5h11v9.5H3z"/><path d="M14 9.5h3.8L21 12.6V16h-7z"/><circle cx="7" cy="18" r="1.7"/><circle cx="17.4" cy="18" r="1.7"/></svg></div>
         <h3>Envíos a todo México</h3>
-        <p>Logística especializada para equipo de alto valor. <i>*Aplican restricciones.</i></p>
+        <p>Entregas a domicilio en todo el país. <i>*Aplican restricciones.</i></p>
       </article>
       <article class="bene-card reveal" style="--d:.3s">
         <span class="bene-glow" aria-hidden="true"></span>
-        <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 14.5h4"/></svg></div>
-        <h3>Meses sin intereses</h3>
-        <p>Financiamiento a MSI con tarjetas participantes.</p>
+        <div class="bene-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.2-4h13.6L20 9"/><path d="M4 9a2.3 2.3 0 0 0 4 0 2.3 2.3 0 0 0 4 0 2.3 2.3 0 0 0 4 0 2.3 2.3 0 0 0 4 0"/><path d="M5 9.4V20h14V9.4"/><path d="M9.5 20v-4.5h5V20"/></svg></div>
+        <h3>Showroom en Querétaro</h3>
+        <p>Visítanos y recibe asesoría presencial.</p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- Stats con scroll (Opción B): cada cifra con su imagen de fondo -->
-<section class="statscroll" id="statscroll" aria-label="HOMEA en números">
-  <div class="ss-pin">
-    <div class="ss-bg on" style="background-image:url('assets/photos/historia.jpg')"></div>
-    <div class="ss-bg" style="background-image:url('assets/photos/showroom.jpg')"></div>
-    <div class="ss-bg" style="background-image:url('assets/photos/prod-subzero.jpg')"></div>
-    <div class="ss-bg" style="background-image:url('assets/photos/cat-cocina.jpg')"></div>
-    <div class="ss-veil"></div>
-    <div class="container ss-inner">
-      <div class="eyebrow eyebrow-bright">Oficio · en números</div>
-      <div class="ss-stack">
-        <div class="ss-item on"><span class="ss-n figures">22</span><span class="ss-l">años de oficio</span></div>
-        <div class="ss-item"><span class="ss-n figures">2 h</span><span class="ss-l">respuesta promedio</span></div>
-        <div class="ss-item"><span class="ss-n figures">96</span><span class="ss-l">marcas premium</span></div>
-        <div class="ss-item"><span class="ss-n figures">25,000</span><span class="ss-l">piezas en catálogo</span></div>
-      </div>
-      <div class="ss-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
-    </div>
-  </div>
-</section>
-
-<!-- Segmentos: hogar / proyecto -->
-<section class="sec"><div class="container">
-  <div class="grid-2" style="gap:48px">
-    <div class="reveal" style="border:1px solid var(--border);background:var(--surface);padding:48px 44px;display:flex;flex-direction:column;gap:18px;align-items:flex-start">
-      <div class="eyebrow">Para tu hogar</div>
-      <h2 style="font-size:30px">Una pieza o la cocina <i>completa</i>.</h2>
-      <p style="margin:0;color:var(--fg-muted);font-size:var(--fs-sm)">Compra directa de línea residencial o cotización asesorada de alta gama. Tú eliges el ritmo.</p>
-      <span class="dotlist">Cotización en 2 h <span class="dot">·</span> entrega coordinada <span class="dot">·</span> instalación certificada</span>
-      <a class="arrow-link" href="coleccion.html">Explorar el catálogo <span class="ln"></span><span class="ar">→</span></a>
-    </div>
-    <div class="reveal" style="border:1px solid var(--border);background:var(--surface);padding:48px 44px;display:flex;flex-direction:column;gap:18px;align-items:flex-start">
-      <div class="eyebrow">Para tu proyecto</div>
-      <h2 style="font-size:30px">Arquitectos, desarrolladores, <i>cocinas integrales</i>.</h2>
-      <p style="margin:0;color:var(--fg-muted);font-size:var(--fs-sm)">Listas por volumen, apoyo en especificación y tiempos alineados a obra. Un solo interlocutor.</p>
-      <span class="dotlist">Precios mayoreo <span class="dot">·</span> specs y planos <span class="dot">·</span> facturación</span>
-      <a class="arrow-link" href="b2b.html">Conocer Proyectos <span class="ln"></span><span class="ar">→</span></a>
-    </div>
-  </div>
-</div></section>
-
 <!-- Showroom -->
-<section class="sec on-greige"><div class="container">
+<section class="sec on-greige loc-full"><div class="container">
   <div class="split">
     <div class="imgw reveal-img"><img src="assets/photos/showroom.jpg" alt="Showroom HOMEA"></div>
-    <div class="text reveal">
+    <div class="text reveal on-dark">
+      <a class="loc-map" href="https://maps.app.goo.gl/LS9rqfHgK3qjFV926" target="_blank" rel="noopener" aria-label="Ver ubicación en Google Maps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></a>
       <div class="eyebrow">Showroom · Querétaro</div>
       <span class="rule-gold"></span>
       <h2>Vívelo antes de <i>decidirlo</i>.</h2>
       <ul class="meta-list">
-        <li><b>Dirección</b> Querétaro, Qro. · México</li>
-        <li><b>Horario</b> Lun–Sáb · 10:00–19:00</li>
+        <li><b>Dirección</b> Ahuehuetes 7, Álamos 1a Secc. Querétaro, Qro. 76160, México</li>
+        <li><b>Horario</b> Lun–Vie · 9:00–19:00<br>Sáb · 10:00–14:00</li>
         <li><b>Cita</b> Asesoría personalizada con especialista</li>
       </ul>
-      <a class="btn btn-primary" href="contacto.html">Agendar visita</a>
+      <a class="btn btn-bone" href="contacto.html">Agendar visita</a>
     </div>
   </div>
 </div></section>
 
-<!-- Testimonio -->
-<section class="sec"><div class="container">
-  <div class="testimonial reveal">
-    <span class="rule-gold"></span>
-    <blockquote>«Nos escucharon dos horas antes de enseñarnos un solo horno.
-    La cocina quedó como la <i>imaginamos</i>, no como nos la quisieron vender.»</blockquote>
-    <div class="who figures">A. Sordo <span class="dot">·</span> Querétaro</div>
-  </div>
-</div></section>
-
-<!-- Marcas -->
-<section class="sec tight" style="border-top:1px solid var(--border)"><div class="container">
-  <div class="sec-head-row">
-    <div class="sec-head">
-      <div class="eyebrow">96 marcas · 4 gamas</div>
-      <span class="dotlist" style="font-size:15px;letter-spacing:.08em">
-        Sub-Zero <span class="dot">·</span> Wolf <span class="dot">·</span> Cove <span class="dot">·</span> Miele
-        <span class="dot">·</span> Thermador <span class="dot">·</span> Monogram <span class="dot">·</span> Viking
-        <span class="dot">·</span> Gaggenau <span class="dot">·</span> La Cornue <span class="dot">·</span> Smeg
-        <span class="dot">·</span> Bertazzoni <span class="dot">·</span> KitchenAid
-      </span>
+<!-- Reseñas Google -->
+<section class="sec greview-sec" data-greviews><div class="container">
+  <div class="grev-head reveal">
+    <div class="eyebrow">Reseñas verificadas · Google</div>
+    <div class="grev-id">
+      <div class="gnum">4.7</div>
+      <div class="gcol">
+        <div class="gstars" aria-label="4.7 de 5 estrellas">★★★★★</div>
+        <div class="gline">
+          <span class="gmark" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          </span>
+          132 reseñas en Google
+        </div>
+      </div>
     </div>
-    <a class="arrow-link" href="marcas.html">Ver las 96 <span class="ln"></span><span class="ar">→</span></a>
+    <a class="arrow-link" href="https://maps.app.goo.gl/Q9Vqyskx3wXkG1z69" target="_blank" rel="noopener">Ver en Google Maps <span class="ln"></span><span class="ar">→</span></a>
+  </div>
+
+  <div class="grev-stage reveal">
+    <figure class="grev-card on">
+      <div class="cstars" aria-hidden="true">★★★★★</div>
+      <blockquote>«Excelente atención al cliente, muy amables y profesionales. Entendieron perfectamente nuestras necesidades y se <i>adaptaron</i> a ellas. 100% recomendables.»</blockquote>
+      <figcaption class="cwho"><span class="cav"><img src="assets/reviews/mike9240.webp" alt="mike9240" loading="lazy" onerror="this.remove()"><b>M</b></span><span><span class="cn">mike9240</span><span class="cm">Local Guide <span class="dot">·</span> hace 3 meses</span></span></figcaption>
+    </figure>
+    <figure class="grev-card">
+      <div class="cstars" aria-hidden="true">★★★★★</div>
+      <blockquote>«We've worked with Carla at Homea many times and have always been <i>satisfied</i>. Knowledgeable about the products and a huge help as we worked through the installation and servicing of our new kitchen appliances. Cheers!»</blockquote>
+      <figcaption class="cwho"><span class="cav"><img src="assets/reviews/dennis-powell.webp" alt="Dennis Powell" loading="lazy" onerror="this.remove()"><b>D</b></span><span><span class="cn">Dennis Powell</span><span class="cm">Google <span class="dot">·</span> hace 10 meses</span></span></figcaption>
+    </figure>
+    <figure class="grev-card">
+      <div class="cstars" aria-hidden="true">★★★★★</div>
+      <blockquote>«Siempre encuentro el mobiliario adecuado para nuestros proyectos; nos interesa mucho la <i>calidad</i> para nuestros clientes y, hasta ahora, han quedado satisfechos. Con Homea hemos hecho un buen equipo de trabajo, siempre atentos y dispuestos a apoyarnos. Gracias.»</blockquote>
+      <figcaption class="cwho"><span class="cav"><img src="assets/reviews/arturo-munoz-perez.webp" alt="Arturo Muñoz Pérez" loading="lazy" onerror="this.remove()"><b>A</b></span><span><span class="cn">Arturo Muñoz Pérez</span><span class="cm">Google <span class="dot">·</span> hace 10 meses</span></span></figcaption>
+    </figure>
+    <figure class="grev-card">
+      <div class="cstars" aria-hidden="true">★★★★★</div>
+      <blockquote>«Es un lugar increíble, excelentes precios con trato sumamente amable; siempre encuentras lo que <i>buscas</i>. Sugiero especialmente al Sr. Rafael Magdaleno por su enorme capacidad para complacer al cliente.»</blockquote>
+      <figcaption class="cwho"><span class="cav"><img src="assets/reviews/florencio-garcia-rodriguez.webp" alt="Florencio García Rodríguez" loading="lazy" onerror="this.remove()"><b>F</b></span><span><span class="cn">Florencio García Rodríguez</span><span class="cm">Local Guide <span class="dot">·</span> hace 10 meses</span></span></figcaption>
+    </figure>
+    <figure class="grev-card">
+      <div class="cstars" aria-hidden="true">★★★★★</div>
+      <blockquote>«He comprado con frecuencia: la calidad y los tiempos de entrega son bastante <i>buenos</i>. Definitivamente volvería a comprar. ¡Felicidades!»</blockquote>
+      <figcaption class="cwho"><span class="cav"><img src="assets/reviews/jorge-pedrero.webp" alt="Jorge Pedrero" loading="lazy" onerror="this.remove()"><b>J</b></span><span><span class="cn">Jorge Pedrero</span><span class="cm">Google <span class="dot">·</span> hace 10 meses</span></span></figcaption>
+    </figure>
+    <figure class="grev-card">
+      <div class="cstars" aria-hidden="true">★★★★★</div>
+      <blockquote>«Definitivamente una empresa que está a otro nivel, uno <i>muy alto</i>. Equipos de última generación y siempre a la vanguardia. En Querétaro son distribuidores exclusivos de varias marcas de muy alto perfil.»</blockquote>
+      <figcaption class="cwho"><span class="cav"><img src="assets/reviews/f-javier-e-garcia.webp" alt="F. Javier E. García" loading="lazy" onerror="this.remove()"><b>F</b></span><span><span class="cn">F. Javier E. García</span><span class="cm">Local Guide <span class="dot">·</span> hace 10 meses</span></span></figcaption>
+    </figure>
+    <figure class="grev-card">
+      <div class="cstars" aria-hidden="true">★★★★★</div>
+      <blockquote>«I'm a foreigner living in Mexico, looking for a high-end oven/range (Viking, Wolf or similar) for my new house. The staff at Homea in Querétaro — especially Carla — was extremely helpful with ordering, delivery and installation. I highly recommend Homea. I received <i>great service</i>.»</blockquote>
+      <figcaption class="cwho"><span class="cav"><img src="assets/reviews/careen-shannon.webp" alt="Careen Shannon" loading="lazy" onerror="this.remove()"><b>C</b></span><span><span class="cn">Careen Shannon</span><span class="cm">Google <span class="dot">·</span> hace 11 meses</span></span></figcaption>
+    </figure>
+    <figure class="grev-card">
+      <div class="cstars" aria-hidden="true">★★★★★</div>
+      <blockquote>«Excelente servicio y buenos precios. Tengo <i>20 años</i> comprando los equipos para mis proyectos en Homea sin ningún problema.»</blockquote>
+      <figcaption class="cwho"><span class="cav"><img src="assets/reviews/aniceto-orantes.webp" alt="Arq. Aniceto Orantes" loading="lazy" onerror="this.remove()"><b>A</b></span><span><span class="cn">Arq. Aniceto Orantes</span><span class="cm">Local Guide <span class="dot">·</span> hace 10 meses</span></span></figcaption>
+    </figure>
+    <figure class="grev-card">
+      <div class="cstars" aria-hidden="true">★★★★★</div>
+      <blockquote>«Felicidades. Gran empresa socialmente responsable, con muy buena <i>calidad y precio</i>. El dueño, gente de bien. Más empresas como esta.»</blockquote>
+      <figcaption class="cwho"><span class="cav"><img src="assets/reviews/mauricio-kuri.webp" alt="Mauricio Kuri" loading="lazy" onerror="this.remove()"><b>M</b></span><span><span class="cn">Mauricio Kuri</span><span class="cm">Google <span class="dot">·</span> hace 10 meses</span></span></figcaption>
+    </figure>
+    <figure class="grev-card">
+      <div class="cstars" aria-hidden="true">★★★★★</div>
+      <blockquote>«Excelentes precios y muy buen servicio. Solicité algo no existente y me llegó dos semanas <i>antes</i> de lo esperado. Tiene líneas de prestigio internacional.»</blockquote>
+      <figcaption class="cwho"><span class="cav"><img src="assets/reviews/jose-martin-del-campo.webp" alt="José Martín del Campo" loading="lazy" onerror="this.remove()"><b>J</b></span><span><span class="cn">José Martín del Campo</span><span class="cm">Google <span class="dot">·</span> hace 10 meses</span></span></figcaption>
+    </figure>
+  </div>
+
+  <div class="grev-foot reveal">
+    <div class="grev-dots" role="tablist" aria-label="Reseñas"></div>
   </div>
 </div></section>
 
 <!-- CTA banda negra -->
 <section class="sec on-dark cta-band">
-  <div class="glow"></div><div class="iso"></div>
+  <div class="glow"></div>
   <div class="container"><div class="inner reveal">
     <div class="eyebrow eyebrow-bright">Empecemos por escucharte</div>
-    <h2>Cuéntanos tu proyecto. <i>Sin prisa</i>.</h2>
-    <a class="btn btn-gold" href="contacto.html">Agendar asesoría</a>
-    <p>Respuesta promedio en 2 horas · Atención personal, sin call centers.</p>
+    <h2>Cuéntanos tu proyecto.<br><i>Sin prisa</i>.</h2>
+    <a class="btn btn-gold" href="contacto.html">Solicitar asesoría</a>
+    <p>Recibe atención personal y encuentra lo que estás buscando.</p>
   </div></div>
 </section>
 
@@ -525,30 +555,44 @@
     <div class="brandcol">
       <img class="mark" src="assets/homea-premium-19.png" alt="HOMEA">
       <span class="rule-gold"></span>
-      <p>Distribuidor de electrodomésticos y equipamiento premium de alta gama. Asesoría cercana, especificación precisa. Showroom en Querétaro, México.</p>
-      <span class="dotlist">Sub-Zero <span class="dot">·</span> Wolf <span class="dot">·</span> Miele <span class="dot">·</span> Thermador <span class="dot">·</span> Monogram <span class="dot">·</span> Viking</span>
+      <p>Distribuidor autorizado de electrodomésticos para todo tipo de proyectos. Marcas oficiales, asesoría especializada y servicio post-venta. Showroom en Querétaro, México. Entregas en todo México.</p>
+      <div class="f-gap" aria-hidden="true"></div>
+      <div class="f-contact">
+        <a href="tel:+524422163552">Tel. Oficina (442) 216 3552</a>
+        <a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_footer">WhatsApp +52 446 144 6318</a>
+        <a href="mailto:carteaga@homea.mx">carteaga@homea.mx</a>
+      </div>
+      <div class="f-social" aria-label="Síguenos en redes sociales">
+        <a href="https://www.instagram.com/homea_mx/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.facebook.com/homea.mx/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 9V7.2c0-.8.2-1.2 1.3-1.2H17V3h-2.6C11.5 3 11 4.7 11 6.9V9H9v3h2v9h3v-9h2.3l.4-3H14z"/></svg></a>
+        <a href="https://www.tiktok.com/@homea_mx" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3c.3 2 1.6 3.5 3.5 3.8v2.5c-1.3 0-2.5-.4-3.5-1.1v5.7a5.4 5.4 0 1 1-5.4-5.4c.3 0 .6 0 .9.1v2.7a2.7 2.7 0 1 0 1.9 2.6V3h2.6z"/></svg></a>
+        <a href="https://www.youtube.com/channel/UC5SHtEFZdDk5UuGfkfIWl1w" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 8.2a2.6 2.6 0 0 0-1.8-1.8C18.6 6 12 6 12 6s-6.6 0-8.2.4A2.6 2.6 0 0 0 2 8.2 27 27 0 0 0 1.7 12 27 27 0 0 0 2 15.8a2.6 2.6 0 0 0 1.8 1.8C5.4 18 12 18 12 18s6.6 0 8.2-.4a2.6 2.6 0 0 0 1.8-1.8c.3-1.2.3-3.8.3-3.8s0-2.6-.3-3.8zM10 15V9l5 3-5 3z"/></svg></a>
+      </div>
     </div>
-    <div class="lnk"><div class="f-eyebrow">Catálogo</div>
-      <a href="coleccion.html">Cocina</a><a href="coleccion.html">Refrigeración</a>
-      <a href="coleccion.html">Bar &amp; Vinos</a><a href="coleccion.html">Exterior</a>
-      <a href="marcas.html">Marcas</a><a href="coleccion.html">Outlet &amp; Ofertas</a></div>
+    <div class="lnk"><div class="f-eyebrow">Recursos</div>
+      <a href="coleccion.html">Productos</a>
+      <a href="marcas.html">Marcas</a>
+      <a href="marcas.html">Listas de precio</a>
+      <a class="soon" href="ofertas.html" aria-disabled="true" tabindex="-1">Ofertas</a>
+      <a href="guias.html">Guías</a>
+      <a href="herramientas.html">Herramientas</a></div>
     <div class="lnk"><div class="f-eyebrow">HOMEA</div>
       <a href="nosotros.html">Quiénes somos</a><a href="nosotros.html">Showroom</a>
-      <a href="b2b.html">Proyectos</a><a href="#">Blog &amp; Guías</a>
+      <a href="b2b.html">Proyectos</a><a href="#">Blog &amp; Newsletter</a>
       <a href="contacto.html">Contacto</a></div>
-    <div class="lnk"><div class="f-eyebrow">Comprar con confianza</div>
-      <a href="#">Formas de pago</a><a href="#">Financiamiento · MSI (Fase 2)</a>
-      <a href="#">Garantías e instalación</a><a href="#">Gastos de envío</a>
-      <a href="#">Devoluciones</a><a href="marcas.html">Listas de precios</a></div>
+    <div class="lnk"><div class="f-eyebrow">Atención al cliente</div>
+      <a href="garantias-instalacion.html">Garantías e instalación</a><a href="#">Fichas técnicas</a>
+      <a href="#">Gastos de envío</a><a href="#">Formas de pago</a>
+      <a href="garantias-instalacion.html">Contacto Post-Venta</a></div>
   </div>
   <div class="foot-bottom">
     <span class="since figures">Desde · 2004</span>
     <em>Equipamiento que está a la altura de tu hogar.</em>
-    <span>© 2026 HOMEA · Querétaro · Privacidad · Términos</span>
+    <span>© 2026 HOMEA · Querétaro · <a href="#">Privacidad</a> · <a href="#">Términos</a></span>
   </div>
 </div></footer>
 
-<a class="wa-float" href="https://api.whatsapp.com/send/?phone=524461446318" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-track="whatsapp_click" data-label="wa_float"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg></a>
-<script src="v2.js?v=18"></script>
+<a class="wa-float" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-track="whatsapp_click" data-label="wa_float"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg></a>
+<script src="v2.js?v=23"></script>
 </body>
 </html>
