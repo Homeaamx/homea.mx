@@ -1,0 +1,670 @@
+{
+  "_comment": "Taxonomía de la sección GUÍAS de HOMEA. Jerarquía de 3 niveles: Macrocategoría → Subcategoría 1 (categorías para guías) → Subcategoría 2 (tipo de producto / leaf de filtro). Regla: las GUÍAS viven en el nivel cuyos hijos son los leaves de producto. En macros de 3 niveles las guías viven en Subcategoría 1; en macros de 2 niveles (sin Subcategoría 2) las guías viven en la Macrocategoría y las Subcategorías 1 son los leaves de filtro. Modelo: AJ Madison /learn/ adaptado. Pensado para alimentar el build de Next.js.",
+  "version": "2.0",
+  "fecha": "2026-06-23",
+  "meta": {
+    "rutaHub": "/guias/",
+    "patronRutaMacro": "/guias/{macrocategoria}/",
+    "patronRutaCategoriaGuias3Niveles": "/guias/{macrocategoria}/{subcategoria1}/",
+    "patronRutaGuia3Niveles": "/guias/{macrocategoria}/{subcategoria1}/{tipo}/{slug}/",
+    "patronRutaGuia2Niveles": "/guias/{macrocategoria}/{tipo}/{slug}/",
+    "patronFiltroProducto": "/productos/{leaf}/?{faceta}={valor}",
+    "reglaNivelGuias": "Las guías se anclan en el nivel cuyos hijos directos son leaves de producto: Subcategoría 1 cuando la rama llega a Subcategoría 2; la Macrocategoría cuando la rama se detiene en Subcategoría 1.",
+    "facetas": ["tipo", "marca", "caracteristica", "gama", "instalacion", "combustible", "ancho"],
+    "gamas": ["premium", "residencial", "media"],
+    "ctaPrimario": "cotizar",
+    "ctaSecundario": "ver-productos",
+    "notaSEO": "Rutas limpias propias en Next.js. Cada guía: canónico + JSON-LD Article + BreadcrumbList. Cada índice de categoría: ItemList de guías. Opción: el segmento {macrocategoria} puede omitirse en la URL del artículo si se prefieren rutas más cortas (la macro seguiría siendo agrupación en el hub)."
+  },
+  "tiposDeGuia": [
+    { "slug": "guia-de-compra", "nombre": "Guía de compra", "funcion": "Cómo elegir, pros/contras, qué buscar, medidas" },
+    { "slug": "top-picks", "nombre": "Mejores / Top Picks", "funcion": "Rankings por tipo, marca o uso ('Los mejores X de 2026')" },
+    { "slug": "como-elegir", "nombre": "Cómo elegir / How-to", "funcion": "Medidas, instalación, configuración, reemplazo" },
+    { "slug": "resena", "nombre": "Reseña", "funcion": "Reseña de modelo, serie o colección" },
+    { "slug": "tendencias", "nombre": "Tendencias", "funcion": "Diseño, tecnología y novedades de mercado" },
+    { "slug": "comparativa", "nombre": "Comparativa", "funcion": "A vs. B (tipo, marca o tecnología)" },
+    { "slug": "mantenimiento", "nombre": "Mantenimiento", "funcion": "Cuidado, vida útil y solución de problemas" }
+  ],
+  "macrocategorias": [
+    {
+      "slug": "cocina-y-bar",
+      "nombre": "Cocina y Bar",
+      "ruta": "/guias/cocina-y-bar/",
+      "nivelGuias": "subcategoria1",
+      "guias": [],
+      "subcategorias1": [
+        {
+          "slug": "refrigeracion",
+          "nombre": "Refrigeración",
+          "esLeaf": false,
+          "rutaGuias": "/guias/cocina-y-bar/refrigeracion/",
+          "subcategorias2": [
+            { "nombre": "Refrigeradores", "slug": "refrigeradores", "filtro": "/productos/refrigeradores/" },
+            { "nombre": "Congeladores", "slug": "congeladores", "filtro": "/productos/congeladores/" },
+            { "nombre": "Refrigeradores de piso", "slug": "refrigeradores-de-piso", "filtro": "/productos/refrigeradores-de-piso/" },
+            { "nombre": "Centros de bebida", "slug": "centros-de-bebida", "filtro": "/productos/centros-de-bebida/" },
+            { "nombre": "Frigobares", "slug": "frigobares", "filtro": "/productos/frigobares/" },
+            { "nombre": "Máquinas de hielo", "slug": "maquinas-de-hielo", "filtro": "/productos/maquinas-de-hielo/" },
+            { "nombre": "Cavas de vino", "slug": "cavas-de-vino", "filtro": "/productos/cavas-de-vino/" },
+            { "nombre": "Cajones fríos", "slug": "cajones-frios", "filtro": "/productos/cajones-frios/" },
+            { "nombre": "Accesorios de refrigeración", "slug": "accesorios-refrigeracion", "filtro": "/productos/accesorios-refrigeracion/" }
+          ],
+          "guias": [
+            {
+              "titulo": "Guía de Refrigeración de Lujo",
+              "tipo": "guia-de-compra",
+              "ruta": "/guias/cocina-y-bar/refrigeracion/guia-de-compra/refrigeracion-de-lujo/",
+              "resumen": "Las diferencias finas entre refrigeradores integrados, built-in y de columna, y cómo elegir el sistema para tu cocina.",
+              "secciones": [
+                { "titulo": "Refrigerador integrado / panelable", "filtro": "/productos/refrigeradores/?caracteristica=panelable" },
+                { "titulo": "Refrigerador built-in (empotrable)", "filtro": "/productos/refrigeradores/?instalacion=built-in" },
+                { "titulo": "Refrigerador de columna", "filtro": "/productos/refrigeradores/?tipo=columna" },
+                { "titulo": "Marcas premium", "filtro": "/productos/refrigeradores/?gama=premium" }
+              ]
+            },
+            {
+              "titulo": "Guía de compra de refrigerador 2026",
+              "tipo": "guia-de-compra",
+              "ruta": "/guias/cocina-y-bar/refrigeracion/guia-de-compra/guia-de-compra-refrigerador/",
+              "resumen": "Tipos, capacidades, profundidad y características clave para elegir bien.",
+              "secciones": [
+                { "titulo": "French door", "filtro": "/productos/refrigeradores/?tipo=french-door" },
+                { "titulo": "Side-by-side", "filtro": "/productos/refrigeradores/?tipo=side-by-side" },
+                { "titulo": "Refrigeradores de piso", "filtro": "/productos/refrigeradores-de-piso/" },
+                { "titulo": "Counter-depth (profundidad de mueble)", "filtro": "/productos/refrigeradores/?caracteristica=counter-depth" }
+              ]
+            },
+            {
+              "titulo": "Los mejores refrigeradores panelables de 2026",
+              "tipo": "top-picks",
+              "ruta": "/guias/cocina-y-bar/refrigeracion/top-picks/mejores-refrigeradores-panelables/",
+              "resumen": "Selección de built-in y columnas panelables que desaparecen en el gabinete.",
+              "secciones": [
+                { "titulo": "Sub-Zero", "filtro": "/productos/refrigeradores/?marca=sub-zero&caracteristica=panelable" },
+                { "titulo": "Thermador", "filtro": "/productos/refrigeradores/?marca=thermador&caracteristica=panelable" },
+                { "titulo": "Viking", "filtro": "/productos/refrigeradores/?marca=viking&caracteristica=panelable" }
+              ]
+            },
+            {
+              "titulo": "Cómo medir el espacio para tu refrigerador",
+              "tipo": "como-elegir",
+              "ruta": "/guias/cocina-y-bar/refrigeracion/como-elegir/medidas-refrigerador/",
+              "resumen": "Medidas críticas, holguras y reemplazo de un built-in.",
+              "secciones": [
+                { "titulo": "Ver refrigeradores por ancho", "filtro": "/productos/refrigeradores/?ancho=76cm" }
+              ]
+            },
+            {
+              "titulo": "Características clave de una cava de vino",
+              "tipo": "guia-de-compra",
+              "ruta": "/guias/cocina-y-bar/refrigeracion/guia-de-compra/cava-de-vino/",
+              "resumen": "Zonas de temperatura, capacidad de botellas y enfriamiento dual.",
+              "secciones": [
+                { "titulo": "Cavas de doble zona", "filtro": "/productos/cavas-de-vino/?caracteristica=doble-zona" },
+                { "titulo": "Centros de bebida", "filtro": "/productos/centros-de-bebida/" }
+              ]
+            }
+          ]
+        },
+        {
+          "slug": "coccion",
+          "nombre": "Cocción",
+          "esLeaf": false,
+          "rutaGuias": "/guias/cocina-y-bar/coccion/",
+          "subcategorias2": [
+            { "nombre": "Estufas", "slug": "estufas", "filtro": "/productos/estufas/" },
+            { "nombre": "Parrillas", "slug": "parrillas", "filtro": "/productos/parrillas/" },
+            { "nombre": "Hornos", "slug": "hornos", "filtro": "/productos/hornos/" },
+            { "nombre": "Microondas", "slug": "microondas", "filtro": "/productos/microondas/" },
+            { "nombre": "Campanas", "slug": "campanas", "filtro": "/productos/campanas/" },
+            { "nombre": "Cajones", "slug": "cajones", "filtro": "/productos/cajones/" },
+            { "nombre": "Cafeteras", "slug": "cafeteras-empotrables", "filtro": "/productos/cafeteras-empotrables/" },
+            { "nombre": "Accesorios de cocción", "slug": "accesorios-coccion", "filtro": "/productos/accesorios-coccion/" }
+          ],
+          "guias": [
+            {
+              "titulo": "Guía de compra de cocción: estufa, parrilla u horno",
+              "tipo": "guia-de-compra",
+              "ruta": "/guias/cocina-y-bar/coccion/guia-de-compra/guia-de-compra-coccion/",
+              "resumen": "Cómo decidir entre rango, parrilla + horno empotrado y combustible.",
+              "secciones": [
+                { "titulo": "Rangos (estufas con horno)", "filtro": "/productos/estufas/?tipo=rango" },
+                { "titulo": "Parrillas empotrables", "filtro": "/productos/parrillas/?instalacion=empotrable" },
+                { "titulo": "Hornos empotrables", "filtro": "/productos/hornos/?instalacion=empotrable" }
+              ]
+            },
+            {
+              "titulo": "Inducción vs. gas vs. eléctrica",
+              "tipo": "comparativa",
+              "ruta": "/guias/cocina-y-bar/coccion/comparativa/induccion-vs-gas-vs-electrica/",
+              "resumen": "Rendimiento, control y mantenimiento de cada tecnología.",
+              "secciones": [
+                { "titulo": "Parrillas de inducción", "filtro": "/productos/parrillas/?combustible=induccion" },
+                { "titulo": "Parrillas de gas", "filtro": "/productos/parrillas/?combustible=gas" },
+                { "titulo": "Parrillas eléctricas", "filtro": "/productos/parrillas/?combustible=electrica" }
+              ]
+            },
+            {
+              "titulo": "Los mejores rangos profesionales (estilo restaurante)",
+              "tipo": "top-picks",
+              "ruta": "/guias/cocina-y-bar/coccion/top-picks/mejores-rangos-profesionales/",
+              "resumen": "Rangos de gama alta para cocinas de autor.",
+              "secciones": [
+                { "titulo": "Wolf", "filtro": "/productos/estufas/?marca=wolf&tipo=rango" },
+                { "titulo": "La Cornue", "filtro": "/productos/estufas/?marca=la-cornue" },
+                { "titulo": "Viking", "filtro": "/productos/estufas/?marca=viking&tipo=rango" }
+              ]
+            },
+            {
+              "titulo": "Cómo elegir tu campana de extracción",
+              "tipo": "como-elegir",
+              "ruta": "/guias/cocina-y-bar/coccion/como-elegir/elegir-campana/",
+              "resumen": "CFM, ancho y tipo de instalación según tu cocción.",
+              "secciones": [
+                { "titulo": "Campanas de isla", "filtro": "/productos/campanas/?instalacion=isla" },
+                { "titulo": "Campanas de pared", "filtro": "/productos/campanas/?instalacion=pared" },
+                { "titulo": "Campanas integradas / grupo filtrante", "filtro": "/productos/campanas/?instalacion=integrada" }
+              ]
+            },
+            {
+              "titulo": "Hornos de vapor y combi: qué son y para qué sirven",
+              "tipo": "tendencias",
+              "ruta": "/guias/cocina-y-bar/coccion/tendencias/hornos-de-vapor-combi/",
+              "resumen": "La cocción al vapor llega a la cocina residencial premium.",
+              "secciones": [
+                { "titulo": "Hornos de vapor", "filtro": "/productos/hornos/?caracteristica=vapor" },
+                { "titulo": "Cajones de vacío (sous-vide)", "filtro": "/productos/cajones/?tipo=vacio" }
+              ]
+            }
+          ]
+        },
+        {
+          "slug": "lavavajillas",
+          "nombre": "Lavavajillas",
+          "esLeaf": false,
+          "rutaGuias": "/guias/cocina-y-bar/lavavajillas/",
+          "subcategorias2": [
+            { "nombre": "Lavavajillas", "slug": "lavavajillas", "filtro": "/productos/lavavajillas/" }
+          ],
+          "guias": [
+            {
+              "titulo": "Guía de compra de lavavajillas",
+              "tipo": "guia-de-compra",
+              "ruta": "/guias/cocina-y-bar/lavavajillas/guia-de-compra/guia-de-compra-lavavajillas/",
+              "resumen": "Nivel de ruido (dBA), tercer cesto, secado y opciones panelables.",
+              "secciones": [
+                { "titulo": "Lavavajillas panelables", "filtro": "/productos/lavavajillas/?caracteristica=panelable" },
+                { "titulo": "Ultra silenciosos (≤44 dBA)", "filtro": "/productos/lavavajillas/?caracteristica=silencioso" },
+                { "titulo": "Marcas premium", "filtro": "/productos/lavavajillas/?gama=premium" }
+              ]
+            },
+            {
+              "titulo": "Los mejores lavavajillas silenciosos de 2026",
+              "tipo": "top-picks",
+              "ruta": "/guias/cocina-y-bar/lavavajillas/top-picks/mejores-lavavajillas-silenciosos/",
+              "resumen": "Modelos por debajo de 42 dBA con mejor secado.",
+              "secciones": [
+                { "titulo": "Miele", "filtro": "/productos/lavavajillas/?marca=miele" },
+                { "titulo": "Bosch", "filtro": "/productos/lavavajillas/?marca=bosch" },
+                { "titulo": "Thermador", "filtro": "/productos/lavavajillas/?marca=thermador" }
+              ]
+            },
+            {
+              "titulo": "Cómo cuidar y mantener tu lavavajillas",
+              "tipo": "mantenimiento",
+              "ruta": "/guias/cocina-y-bar/lavavajillas/mantenimiento/cuidado-lavavajillas/",
+              "resumen": "Limpieza de filtros, sal regeneradora y abrillantador.",
+              "secciones": [
+                { "titulo": "Accesorios y consumibles", "filtro": "/productos/accesorios-coccion/?tipo=lavavajillas" }
+              ]
+            }
+          ]
+        },
+        {
+          "slug": "tarjas-y-griferia",
+          "nombre": "Tarjas y Grifería",
+          "esLeaf": false,
+          "rutaGuias": "/guias/cocina-y-bar/tarjas-y-griferia/",
+          "subcategorias2": [
+            { "nombre": "Tarjas", "slug": "tarjas", "filtro": "/productos/tarjas/" },
+            { "nombre": "Grifería", "slug": "griferia", "filtro": "/productos/griferia/" },
+            { "nombre": "Dispensadores de Agua", "slug": "dispensadores-de-agua-tarja", "filtro": "/productos/dispensadores-de-agua-tarja/" },
+            { "nombre": "Accesorios de Tarjas & Grifería", "slug": "accesorios-tarjas-griferia", "filtro": "/productos/accesorios-tarjas-griferia/" }
+          ],
+          "guias": [
+            {
+              "titulo": "Guía de compra de tarjas de cocina",
+              "tipo": "guia-de-compra",
+              "ruta": "/guias/cocina-y-bar/tarjas-y-griferia/guia-de-compra/guia-de-compra-tarjas/",
+              "resumen": "Material, montaje (bajo cubierta vs. sobre cubierta), tazones y medidas.",
+              "secciones": [
+                { "titulo": "Tarjas bajo cubierta (undermount)", "filtro": "/productos/tarjas/?instalacion=undermount" },
+                { "titulo": "Tarjas de acero inoxidable", "filtro": "/productos/tarjas/?material=acero-inoxidable" },
+                { "titulo": "Tarjas tipo workstation", "filtro": "/productos/tarjas/?tipo=workstation" }
+              ]
+            },
+            {
+              "titulo": "Cómo elegir tu grifería (monomando, extraíble, touch)",
+              "tipo": "como-elegir",
+              "ruta": "/guias/cocina-y-bar/tarjas-y-griferia/como-elegir/elegir-griferia/",
+              "resumen": "Tipos de pico, acabados y tecnologías sin contacto.",
+              "secciones": [
+                { "titulo": "Grifería extraíble (pull-down)", "filtro": "/productos/griferia/?tipo=pull-down" },
+                { "titulo": "Grifería touchless", "filtro": "/productos/griferia/?caracteristica=touchless" },
+                { "titulo": "Acabado oro / champagne", "filtro": "/productos/griferia/?acabado=oro" }
+              ]
+            }
+          ]
+        },
+        {
+          "slug": "trituradores",
+          "nombre": "Trituradores",
+          "esLeaf": false,
+          "rutaGuias": "/guias/cocina-y-bar/trituradores/",
+          "subcategorias2": [
+            { "nombre": "Trituradores", "slug": "trituradores", "filtro": "/productos/trituradores/" }
+          ],
+          "guias": [
+            {
+              "titulo": "Guía de compra de triturador de alimentos",
+              "tipo": "guia-de-compra",
+              "ruta": "/guias/cocina-y-bar/trituradores/guia-de-compra/guia-de-compra-trituradores/",
+              "resumen": "HP, alimentación continua vs. por lotes y nivel de ruido.",
+              "secciones": [
+                { "titulo": "Alimentación continua", "filtro": "/productos/trituradores/?tipo=continuo" },
+                { "titulo": "Alta potencia (1 HP+)", "filtro": "/productos/trituradores/?caracteristica=alta-potencia" }
+              ]
+            },
+            {
+              "titulo": "¿Vale la pena un triturador? Pros y contras",
+              "tipo": "comparativa",
+              "ruta": "/guias/cocina-y-bar/trituradores/comparativa/vale-la-pena-triturador/",
+              "resumen": "Cuándo conviene y compatibilidad con tu instalación.",
+              "secciones": [
+                { "titulo": "Ver todos los trituradores", "filtro": "/productos/trituradores/" }
+              ]
+            }
+          ]
+        },
+        {
+          "slug": "dispensadores-y-filtros-de-agua",
+          "nombre": "Dispensadores & Filtros de agua",
+          "esLeaf": false,
+          "rutaGuias": "/guias/cocina-y-bar/dispensadores-y-filtros-de-agua/",
+          "subcategorias2": [
+            { "nombre": "Dispensadores de agua", "slug": "dispensadores-de-agua", "filtro": "/productos/dispensadores-de-agua/" },
+            { "nombre": "Filtros de agua", "slug": "filtros-de-agua", "filtro": "/productos/filtros-de-agua/" }
+          ],
+          "guias": [
+            {
+              "titulo": "Guía de filtración de agua para tu cocina",
+              "tipo": "guia-de-compra",
+              "ruta": "/guias/cocina-y-bar/dispensadores-y-filtros-de-agua/guia-de-compra/guia-filtracion-agua/",
+              "resumen": "Ósmosis inversa, carbón y sistemas bajo tarja.",
+              "secciones": [
+                { "titulo": "Sistemas de ósmosis inversa", "filtro": "/productos/filtros-de-agua/?tipo=osmosis-inversa" },
+                { "titulo": "Dispensadores de agua caliente/fría", "filtro": "/productos/dispensadores-de-agua/?caracteristica=caliente-fria" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "exterior",
+      "nombre": "Exterior",
+      "ruta": "/guias/exterior/",
+      "nivelGuias": "subcategoria1",
+      "guias": [],
+      "subcategorias1": [
+        {
+          "slug": "asadores-y-hornos",
+          "nombre": "Asadores & Hornos",
+          "esLeaf": false,
+          "rutaGuias": "/guias/exterior/asadores-y-hornos/",
+          "subcategorias2": [
+            { "nombre": "Asadores empotrables", "slug": "asadores-empotrables", "filtro": "/productos/asadores-empotrables/" },
+            { "nombre": "Asadores con carrito", "slug": "asadores-con-carrito", "filtro": "/productos/asadores-con-carrito/" },
+            { "nombre": "Hornos de pizza", "slug": "hornos-de-pizza", "filtro": "/productos/hornos-de-pizza/" },
+            { "nombre": "Accesorios Asadores & Hornos", "slug": "accesorios-asadores", "filtro": "/productos/accesorios-asadores/" }
+          ],
+          "guias": [
+            {
+              "titulo": "Guía de compra de asadores para exterior",
+              "tipo": "guia-de-compra",
+              "ruta": "/guias/exterior/asadores-y-hornos/guia-de-compra/guia-de-compra-asadores/",
+              "resumen": "Combustible, BTU, quemadores y empotrable vs. carrito.",
+              "secciones": [
+                { "titulo": "Asadores empotrables (built-in)", "filtro": "/productos/asadores-empotrables/" },
+                { "titulo": "Asadores con carrito", "filtro": "/productos/asadores-con-carrito/" },
+                { "titulo": "Asadores de gas", "filtro": "/productos/asadores-empotrables/?combustible=gas" }
+              ]
+            },
+            {
+              "titulo": "Cómo diseñar tu cocina exterior",
+              "tipo": "como-elegir",
+              "ruta": "/guias/exterior/asadores-y-hornos/como-elegir/disenar-cocina-exterior/",
+              "resumen": "Módulos, materiales para intemperie y flujo de trabajo.",
+              "secciones": [
+                { "titulo": "Hornos de pizza", "filtro": "/productos/hornos-de-pizza/" },
+                { "titulo": "Refrigeración de exterior", "filtro": "/productos/frigobares/?caracteristica=exterior" }
+              ]
+            },
+            {
+              "titulo": "Los mejores asadores premium de 2026",
+              "tipo": "top-picks",
+              "ruta": "/guias/exterior/asadores-y-hornos/top-picks/mejores-asadores-premium/",
+              "resumen": "Asadores de acero inoxidable de alto rendimiento.",
+              "secciones": [
+                { "titulo": "Gama premium", "filtro": "/productos/asadores-empotrables/?gama=premium" }
+              ]
+            }
+          ]
+        },
+        {
+          "slug": "alberca",
+          "nombre": "Alberca",
+          "esLeaf": false,
+          "rutaGuias": "/guias/exterior/alberca/",
+          "subcategorias2": [
+            { "nombre": "Mosaicos", "slug": "mosaicos", "filtro": "/productos/mosaicos/" }
+          ],
+          "guias": [
+            {
+              "titulo": "Guía de mosaicos para alberca",
+              "tipo": "guia-de-compra",
+              "ruta": "/guias/exterior/alberca/guia-de-compra/guia-mosaicos-alberca/",
+              "resumen": "Materiales, formatos y acabados para revestir tu alberca.",
+              "secciones": [
+                { "titulo": "Mosaico de vidrio", "filtro": "/productos/mosaicos/?material=vidrio" },
+                { "titulo": "Ver todos los mosaicos", "filtro": "/productos/mosaicos/" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "electrodomesticos-menores",
+      "nombre": "Electrodomésticos Menores",
+      "ruta": "/guias/electrodomesticos-menores/",
+      "nivelGuias": "macrocategoria",
+      "subcategorias1": [
+        { "nombre": "Licuadoras", "slug": "licuadoras", "esLeaf": true, "filtro": "/productos/licuadoras/" },
+        { "nombre": "Batidoras", "slug": "batidoras", "esLeaf": true, "filtro": "/productos/batidoras/" },
+        { "nombre": "Tostadoras", "slug": "tostadoras", "esLeaf": true, "filtro": "/productos/tostadoras/" },
+        { "nombre": "Exprimidor de cítricos", "slug": "exprimidores", "esLeaf": true, "filtro": "/productos/exprimidores/" },
+        { "nombre": "Cafeteras", "slug": "cafeteras", "esLeaf": true, "filtro": "/productos/cafeteras/" },
+        { "nombre": "Accesorios de cocina pequeños", "slug": "accesorios-cocina-pequenos", "esLeaf": true, "filtro": "/productos/accesorios-cocina-pequenos/" }
+      ],
+      "guias": [
+        {
+          "titulo": "Guía de electrodomésticos de barra premium",
+          "tipo": "guia-de-compra",
+          "ruta": "/guias/electrodomesticos-menores/guia-de-compra/electrodomesticos-de-barra/",
+          "resumen": "Las piezas de diseño que se quedan a la vista en tu cubierta.",
+          "secciones": [
+            { "titulo": "Batidoras de pedestal", "filtro": "/productos/batidoras/?tipo=pedestal" },
+            { "titulo": "Licuadoras de alto rendimiento", "filtro": "/productos/licuadoras/?caracteristica=alto-rendimiento" },
+            { "titulo": "Marcas de diseño (KitchenAid, Smeg)", "filtro": "/productos/batidoras/?marca=smeg" }
+          ]
+        },
+        {
+          "titulo": "Cómo elegir tu cafetera (espresso, goteo, cápsulas)",
+          "tipo": "como-elegir",
+          "ruta": "/guias/electrodomesticos-menores/como-elegir/elegir-cafetera/",
+          "resumen": "Métodos de extracción y nivel de automatización.",
+          "secciones": [
+            { "titulo": "Cafeteras espresso", "filtro": "/productos/cafeteras/?tipo=espresso" },
+            { "titulo": "Cafeteras superautomáticas", "filtro": "/productos/cafeteras/?tipo=superautomatica" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "lavanderia",
+      "nombre": "Lavandería",
+      "ruta": "/guias/lavanderia/",
+      "nivelGuias": "macrocategoria",
+      "subcategorias1": [
+        { "nombre": "Lavadoras", "slug": "lavadoras", "esLeaf": true, "filtro": "/productos/lavadoras/" },
+        { "nombre": "Secadoras", "slug": "secadoras", "esLeaf": true, "filtro": "/productos/secadoras/" },
+        { "nombre": "Lavasecadoras (2 en 1)", "slug": "lavasecadoras", "esLeaf": true, "filtro": "/productos/lavasecadoras/" },
+        { "nombre": "Centros de Lavado", "slug": "centros-de-lavado", "esLeaf": true, "filtro": "/productos/centros-de-lavado/" }
+      ],
+      "guias": [
+        {
+          "titulo": "Guía de compra de lavadora y secadora",
+          "tipo": "guia-de-compra",
+          "ruta": "/guias/lavanderia/guia-de-compra/guia-de-compra-lavanderia/",
+          "resumen": "Carga frontal vs. superior, capacidad, gas vs. eléctrica y apilable.",
+          "secciones": [
+            { "titulo": "Lavadoras de carga frontal", "filtro": "/productos/lavadoras/?tipo=carga-frontal" },
+            { "titulo": "Secadoras de gas", "filtro": "/productos/secadoras/?combustible=gas" },
+            { "titulo": "Sets apilables", "filtro": "/productos/lavadoras/?caracteristica=apilable" }
+          ]
+        },
+        {
+          "titulo": "Lavasecadora 2 en 1: ¿es para ti?",
+          "tipo": "comparativa",
+          "ruta": "/guias/lavanderia/comparativa/lavasecadora-2-en-1/",
+          "resumen": "Ventajas en espacios chicos y límites de capacidad.",
+          "secciones": [
+            { "titulo": "Lavasecadoras", "filtro": "/productos/lavasecadoras/" },
+            { "titulo": "Centros de lavado", "filtro": "/productos/centros-de-lavado/" }
+          ]
+        },
+        {
+          "titulo": "Cómo elegir tu cuarto de lavado",
+          "tipo": "como-elegir",
+          "ruta": "/guias/lavanderia/como-elegir/cuarto-de-lavado/",
+          "resumen": "Medidas, ventilación y conexiones para tu instalación.",
+          "secciones": [
+            { "titulo": "Lavandería premium", "filtro": "/productos/lavadoras/?gama=premium" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "banos",
+      "nombre": "Baños",
+      "ruta": "/guias/banos/",
+      "nivelGuias": "macrocategoria",
+      "subcategorias1": [
+        { "nombre": "Tarjas", "slug": "lavabos", "esLeaf": true, "filtro": "/productos/lavabos/" },
+        { "nombre": "Monomandos", "slug": "monomandos", "esLeaf": true, "filtro": "/productos/monomandos/" },
+        { "nombre": "Regaderas", "slug": "regaderas", "esLeaf": true, "filtro": "/productos/regaderas/" },
+        { "nombre": "Tinas", "slug": "tinas", "esLeaf": true, "filtro": "/productos/tinas/" },
+        { "nombre": "Accesorios de Baños", "slug": "accesorios-banos", "esLeaf": true, "filtro": "/productos/accesorios-banos/" }
+      ],
+      "guias": [
+        {
+          "titulo": "Guía para diseñar un baño premium",
+          "tipo": "guia-de-compra",
+          "ruta": "/guias/banos/guia-de-compra/disenar-bano-premium/",
+          "resumen": "Coordinar lavabo, grifería, regadera y tina con un mismo lenguaje.",
+          "secciones": [
+            { "titulo": "Regaderas tipo lluvia", "filtro": "/productos/regaderas/?tipo=lluvia" },
+            { "titulo": "Tinas exentas (freestanding)", "filtro": "/productos/tinas/?tipo=exenta" },
+            { "titulo": "Monomandos de lavabo", "filtro": "/productos/monomandos/" }
+          ]
+        },
+        {
+          "titulo": "Cómo elegir tu regadera (sistema, presión, acabados)",
+          "tipo": "como-elegir",
+          "ruta": "/guias/banos/como-elegir/elegir-regadera/",
+          "resumen": "Empotrada vs. exterior, mezcladoras termostáticas y jets.",
+          "secciones": [
+            { "titulo": "Sistemas de regadera empotrados", "filtro": "/productos/regaderas/?instalacion=empotrada" },
+            { "titulo": "Acabado oro / champagne", "filtro": "/productos/regaderas/?acabado=oro" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "minisplits",
+      "nombre": "Minisplits",
+      "ruta": "/guias/minisplits/",
+      "nivelGuias": "macrocategoria",
+      "subcategorias1": [
+        { "nombre": "Minisplit Frío", "slug": "minisplit-frio", "esLeaf": true, "filtro": "/productos/minisplits/?tipo=frio" },
+        { "nombre": "Minisplit Frío & Calor", "slug": "minisplit-frio-calor", "esLeaf": true, "filtro": "/productos/minisplits/?tipo=frio-calor" }
+      ],
+      "guias": [
+        {
+          "titulo": "Guía de compra de minisplits",
+          "tipo": "guia-de-compra",
+          "ruta": "/guias/minisplits/guia-de-compra/guia-de-compra-minisplits/",
+          "resumen": "Capacidad (BTU/toneladas) según m², inverter y SEER.",
+          "secciones": [
+            { "titulo": "Minisplit solo frío", "filtro": "/productos/minisplits/?tipo=frio" },
+            { "titulo": "Minisplit frío & calor", "filtro": "/productos/minisplits/?tipo=frio-calor" },
+            { "titulo": "Tecnología inverter", "filtro": "/productos/minisplits/?caracteristica=inverter" }
+          ]
+        },
+        {
+          "titulo": "¿Cuántos BTU necesito? Calculadora rápida",
+          "tipo": "como-elegir",
+          "ruta": "/guias/minisplits/como-elegir/cuantos-btu-necesito/",
+          "resumen": "Tabla de capacidad recomendada por superficie y carga térmica.",
+          "secciones": [
+            { "titulo": "12,000 BTU (1 ton)", "filtro": "/productos/minisplits/?capacidad=12000btu" },
+            { "titulo": "18,000 BTU (1.5 ton)", "filtro": "/productos/minisplits/?capacidad=18000btu" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "vapor-y-sauna",
+      "nombre": "Vapor y Sauna",
+      "ruta": "/guias/vapor-y-sauna/",
+      "nivelGuias": "macrocategoria",
+      "subcategorias1": [
+        { "nombre": "Vapor", "slug": "vapor", "esLeaf": true, "filtro": "/productos/vapor/" },
+        { "nombre": "Sauna interior", "slug": "sauna-interior", "esLeaf": true, "filtro": "/productos/sauna-interior/" },
+        { "nombre": "Sauna exterior", "slug": "sauna-exterior", "esLeaf": true, "filtro": "/productos/sauna-exterior/" }
+      ],
+      "guias": [
+        {
+          "titulo": "Guía de vapor y sauna en casa",
+          "tipo": "guia-de-compra",
+          "ruta": "/guias/vapor-y-sauna/guia-de-compra/guia-vapor-y-sauna/",
+          "resumen": "Diferencias entre baño de vapor, sauna seca e infrarroja.",
+          "secciones": [
+            { "titulo": "Generadores de vapor", "filtro": "/productos/vapor/" },
+            { "titulo": "Sauna interior", "filtro": "/productos/sauna-interior/" },
+            { "titulo": "Sauna exterior", "filtro": "/productos/sauna-exterior/" }
+          ]
+        },
+        {
+          "titulo": "Cómo planear tu cuarto de vapor",
+          "tipo": "como-elegir",
+          "ruta": "/guias/vapor-y-sauna/como-elegir/planear-cuarto-de-vapor/",
+          "resumen": "Volumen del recinto, impermeabilización y potencia del generador.",
+          "secciones": [
+            { "titulo": "Ver generadores por capacidad", "filtro": "/productos/vapor/?caracteristica=residencial" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "wellness",
+      "nombre": "Wellness",
+      "ruta": "/guias/wellness/",
+      "nivelGuias": "macrocategoria",
+      "subcategorias1": [
+        { "nombre": "Tinas de Inmersión", "slug": "tinas-de-inmersion", "esLeaf": true, "filtro": "/productos/tinas-de-inmersion/" },
+        { "nombre": "Carril de Nado", "slug": "carril-de-nado", "esLeaf": true, "filtro": "/productos/carril-de-nado/" },
+        { "nombre": "Sillón para masajes", "slug": "sillon-para-masajes", "esLeaf": true, "filtro": "/productos/sillon-para-masajes/" },
+        { "nombre": "Jacuzzi", "slug": "jacuzzi", "esLeaf": true, "filtro": "/productos/jacuzzi/" }
+      ],
+      "guias": [
+        {
+          "titulo": "Guía de wellness en casa",
+          "tipo": "guia-de-compra",
+          "ruta": "/guias/wellness/guia-de-compra/guia-wellness-en-casa/",
+          "resumen": "Hidroterapia, crioterapia y recuperación: qué elegir.",
+          "secciones": [
+            { "titulo": "Tinas de inmersión / cold plunge", "filtro": "/productos/tinas-de-inmersion/" },
+            { "titulo": "Jacuzzi", "filtro": "/productos/jacuzzi/" },
+            { "titulo": "Sillones de masaje", "filtro": "/productos/sillon-para-masajes/" }
+          ]
+        },
+        {
+          "titulo": "Carril de nado vs. alberca tradicional",
+          "tipo": "comparativa",
+          "ruta": "/guias/wellness/comparativa/carril-de-nado-vs-alberca/",
+          "resumen": "Espacio, mantenimiento y uso deportivo.",
+          "secciones": [
+            { "titulo": "Carriles de nado", "filtro": "/productos/carril-de-nado/" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "recubrimientos-y-superficies",
+      "nombre": "Recubrimientos y Superficies",
+      "ruta": "/guias/recubrimientos-y-superficies/",
+      "nivelGuias": "macrocategoria",
+      "subcategorias1": [
+        { "nombre": "Pisos", "slug": "pisos", "esLeaf": true, "filtro": "/productos/pisos/" },
+        { "nombre": "Muros", "slug": "muros", "esLeaf": true, "filtro": "/productos/muros/" },
+        { "nombre": "Piedras Sinterizadas", "slug": "piedras-sinterizadas", "esLeaf": true, "filtro": "/productos/piedras-sinterizadas/" }
+      ],
+      "guias": [
+        {
+          "titulo": "Guía de piedra sinterizada (Laminam y similares)",
+          "tipo": "guia-de-compra",
+          "ruta": "/guias/recubrimientos-y-superficies/guia-de-compra/guia-piedra-sinterizada/",
+          "resumen": "Formatos XXL, espesores y usos en cubierta, muro y piso.",
+          "secciones": [
+            { "titulo": "Piedras sinterizadas", "filtro": "/productos/piedras-sinterizadas/" },
+            { "titulo": "Pisos de gran formato", "filtro": "/productos/pisos/?formato=gran-formato" }
+          ]
+        },
+        {
+          "titulo": "Cómo elegir recubrimiento por espacio",
+          "tipo": "como-elegir",
+          "ruta": "/guias/recubrimientos-y-superficies/como-elegir/recubrimiento-por-espacio/",
+          "resumen": "Piso vs. muro, interior vs. exterior, antiderrapante.",
+          "secciones": [
+            { "titulo": "Muros", "filtro": "/productos/muros/" },
+            { "titulo": "Pisos de exterior", "filtro": "/productos/pisos/?uso=exterior" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "chimeneas-y-calentadores",
+      "nombre": "Chimeneas & Calentadores",
+      "ruta": "/guias/chimeneas-y-calentadores/",
+      "nivelGuias": "macrocategoria",
+      "subcategorias1": [
+        { "nombre": "Chimeneas", "slug": "chimeneas", "esLeaf": true, "filtro": "/productos/chimeneas/" },
+        { "nombre": "Calentadores", "slug": "calentadores", "esLeaf": true, "filtro": "/productos/calentadores/" }
+      ],
+      "guias": [
+        {
+          "titulo": "Guía de compra de chimeneas",
+          "tipo": "guia-de-compra",
+          "ruta": "/guias/chimeneas-y-calentadores/guia-de-compra/guia-de-compra-chimeneas/",
+          "resumen": "Eléctrica, de gas (etanol/gas natural) o de leña; empotrada vs. exenta.",
+          "secciones": [
+            { "titulo": "Chimeneas eléctricas", "filtro": "/productos/chimeneas/?combustible=electrica" },
+            { "titulo": "Chimeneas de gas", "filtro": "/productos/chimeneas/?combustible=gas" },
+            { "titulo": "Chimeneas empotrables", "filtro": "/productos/chimeneas/?instalacion=empotrable" }
+          ]
+        },
+        {
+          "titulo": "Cómo elegir tu calentador de patio",
+          "tipo": "como-elegir",
+          "ruta": "/guias/chimeneas-y-calentadores/como-elegir/elegir-calentador-patio/",
+          "resumen": "Cobertura térmica, combustible y montaje para exterior.",
+          "secciones": [
+            { "titulo": "Calentadores de exterior", "filtro": "/productos/calentadores/?uso=exterior" }
+          ]
+        }
+      ]
+    }
+  ]
+}

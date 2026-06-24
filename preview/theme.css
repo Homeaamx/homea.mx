@@ -121,7 +121,7 @@ html { scroll-behavior: smooth; }
   transition: color var(--dur-fast) var(--ease-standard),
               background-color var(--dur-fast) var(--ease-standard);
 }
-.mega-brands-cols a:hover { background: var(--homea-gold); color: var(--homea-black); font-weight: 600; }
+.mega-brands-cols a:hover { background: #e4c480; color: var(--homea-black); font-weight: 700; border-bottom-color: transparent; }
 
 .mega-grid { display: grid; grid-template-columns: 1.5fr repeat(5, 1fr); gap: 28px; }
 .mega-col-cat a { white-space: nowrap; }
@@ -135,7 +135,7 @@ html { scroll-behavior: smooth; }
   padding: 6px 10px; margin: 0 -10px; border-bottom: none;
   transition: color var(--dur-fast) var(--ease-standard), background-color var(--dur-fast) var(--ease-standard);
 }
-.mega-col a:hover { background: var(--homea-gold); color: var(--homea-black); font-weight: 600; }
+.mega-col a:hover { background: #e4c480; color: var(--homea-black); font-weight: 600; border-bottom-color: transparent; }
 
 /* ---------- Mega-menú maestro-detalle (flyout) ---------------------------- */
 /* Colapsado al abrir: solo el riel de macro categorías. Se expande al pasar el cursor.
@@ -168,8 +168,7 @@ html { scroll-behavior: smooth; }
   padding: 11px 28px; cursor: pointer; line-height: 1.28;
   transition: color var(--dur-fast,.18s) var(--ease-standard), border-color var(--dur-fast,.18s), background var(--dur-fast,.18s); }
 .mega-cat:hover, .mega-cat.is-active {
-  color: var(--homea-black); font-weight: 600;
-  border-left-color: var(--homea-gold); background: var(--homea-gold); }
+  color: var(--accent-text); border-left-color: var(--homea-gold); background: var(--surface); }
 .mega-detail { padding: 24px 30px; display: flex; flex-direction: column;
   min-height: 0; overflow-y: auto; }
 .mega-pane { display: none; }
@@ -200,7 +199,7 @@ html { scroll-behavior: smooth; }
   margin: 0 0 8px; padding-bottom: 7px; border-bottom: 1px solid var(--border); }
 .mega-subcol a { display: block; font-size: 14.5px; color: var(--fg); padding: 6px 10px; margin: 0 -10px; line-height: 1.28;
   transition: color var(--dur-fast) var(--ease-standard), background-color var(--dur-fast) var(--ease-standard); }
-.mega-subcol a:hover { background: var(--homea-gold); color: var(--homea-black); font-weight: 600; }
+.mega-subcol a:hover { background: #e4c480; color: var(--homea-black); font-weight: 600; border-bottom-color: transparent; }
 .mega-all { display: inline-block; margin-top: auto; padding-top: 20px; font-family: var(--font-sans);
   font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-text); }
 /* Tarjetas de subcategoría — tile con foto + texto (estilo grid de categorías) */
@@ -730,14 +729,14 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .mq-chip[data-brand="cove"]       { background-image: url('assets/photos/brands/cove.jpg'); }
 .mq-chip[data-brand="miele"]      { background-image: url('assets/photos/brands/miele.jpg'); }
 .mq-chip[data-brand="thermador"]  { background-image: url('assets/photos/brands/thermador.jpg'); }
-.mq-chip[data-brand="monogram"]   { background-image: url('assets/photos/brands/monogram.jpg'); }
+.mq-chip[data-brand="monogram"]   { background-image: url('assets/photos/brands/monogram.webp'); }
 .mq-chip[data-brand="viking"]     { background-image: url('assets/photos/brands/viking.jpg'); }
 .mq-chip[data-brand="gaggenau"]   { background-image: url('assets/photos/brands/gaggenau.jpg'); }
 .mq-chip[data-brand="la-cornue"]  { background-image: url('assets/photos/brands/la-cornue.jpg'); }
 .mq-chip[data-brand="smeg"]       { background-image: url('assets/photos/brands/smeg.jpg'); }
 .mq-chip[data-brand="bertazzoni"] { background-image: url('assets/photos/brands/bertazzoni.jpg'); }
 .mq-chip[data-brand="kitchenaid"] { background-image: url('assets/photos/brands/kitchenaid.jpg'); }
-.mq-chip[data-brand="bosch"]      { background-image: url('assets/photos/brands/bosch.jpg'); }
+.mq-chip[data-brand="bosch"]      { background-image: url('assets/photos/brands/bosch.webp'); }
 .mq-chip[data-brand="elica"]      { background-image: url('assets/photos/brands/elica.jpg'); }
 .mq-chip[data-brand="pitt-cooking"] { background-image: url('assets/photos/brands/pitt-cooking.jpg'); }
 .mq-chip[data-brand="hoshizaki"]  { background-image: url('assets/photos/brands/hoshizaki.jpg'); }
@@ -1021,20 +1020,63 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 }
 .az-rail .az-arrow {
   position: absolute; left: 50%; top: 0; transform: translate(-50%, -50%);
-  font-size: 18px; line-height: 1; color: var(--homea-gold);
+  width: 12px; height: 12px; border-radius: 50%; background: var(--homea-gold-deep);
+  box-shadow: 0 0 0 4px var(--homea-bone);
   transition: top .18s linear; will-change: top;
 }
 @media (max-width: 900px) { .az-rail { display: none; } }
 
+/* Mosaico de marcas — mismo diseño que la sección "Distribución oficial" del home
+   (.mq-chip): FOTO de marca al fondo + logo blanco al centro. Diferencias pedidas:
+   la imagen arranca MÁS oscura y al hover se revela por COMPLETO, mientras el logo
+   queda un poco transparente. Las marcas sin foto quedan en fondo oscuro + wordmark. */
 .brandtiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
-  background: var(--border); border: 1px solid var(--border); }
-.brandtiles a {
-  background: var(--surface); aspect-ratio: 3 / 1.6; display: grid; place-items: center;
-  text-align: center; border-bottom: none;
-  transition: background var(--dur-med) var(--ease-standard);
-}
-.brandtiles a:hover { background: var(--homea-black); }
-.brandtiles a.hide { display: none; }
+  background: var(--homea-espresso); border: 1px solid var(--homea-espresso); }
+.brandtile {
+  position: relative; overflow: hidden;
+  aspect-ratio: 3 / 1.6; display: flex; align-items: center; justify-content: center;
+  padding: 0 clamp(18px, 2.4vw, 40px); text-align: center; border-bottom: none;
+  background-color: var(--homea-espresso); background-size: cover; background-position: center;
+  outline: 1px solid transparent; outline-offset: -1px;
+  transition: outline-color var(--dur-med) var(--ease-standard); }
+/* Velo oscuro sobre la foto (más oscuro que el home para que arranque sobrio);
+   al hover se va a 0 → la imagen se ve por completo. */
+.brandtile::before { content: ""; position: absolute; inset: 0; z-index: 0;
+  background: rgba(18,15,11,.74);
+  transition: background var(--dur-med) var(--ease-standard); }
+.brandtile:hover { outline-color: color-mix(in srgb, var(--homea-gold) 62%, transparent); z-index: 2; }
+.brandtile:hover::before { background: rgba(18,15,11,0); }
+/* Logo blanco centrado; al hover queda un poco transparente (no desaparece). */
+.brandtile .bt-logo { position: relative; z-index: 1; max-height: 60%; max-width: 74%;
+  width: auto; object-fit: contain; display: block; opacity: .96;
+  /* Normaliza cualquier logo (de cualquier color) a BLANCO uniforme sobre el tile
+     oscuro: brightness(0) lo vuelve negro conservando alfa, invert(1) lo pasa a blanco.
+     Solo funciona con logos transparentes (los de fondo sólido se ven como caja). */
+  filter: brightness(0) invert(1) drop-shadow(0 2px 10px rgba(0,0,0,.45));
+  transition: opacity var(--dur-med) var(--ease-standard); }
+.brandtile:hover .bt-logo { opacity: .62; }
+/* Marcas con mucho margen interno en el arte original (PNG recortado al wordmark):
+   se reduce el padding del tile y se amplía el tope para que el logo se lea grande. */
+.brandtile[data-brand="benessi"],
+.brandtile[data-brand="cafe"],
+.brandtile[data-brand="franke"],
+.brandtile[data-brand="fulgor-milano"],
+.brandtile[data-brand="gessi"] { padding-left: 14px; padding-right: 14px; }
+.brandtile[data-brand="cafe"] .bt-logo,
+.brandtile[data-brand="franke"] .bt-logo,
+.brandtile[data-brand="fulgor-milano"] .bt-logo { max-height: 82%; max-width: 94%; }
+/* Invisacook: logo apilado (ícono + wordmark + tagline); se amplía el tope para
+   que el wordmark lea a la par del resto del grid. */
+.brandtile[data-brand="invisacook"] .bt-logo { max-height: 66%; }
+/* Bertazzoni: su emblema tiene detalle fino (cresta) que se pierde al forzarlo a
+   blanco. Se muestra en color original —como en el marquee del home— sin el
+   filtro brightness(0)/invert(1). */
+.brandtile[data-brand="bertazzoni"] .bt-logo { filter: drop-shadow(0 2px 10px rgba(0,0,0,.45)); }
+/* Benessi y Gessi: logos cuadrados/compactos; se mantienen a escala del resto
+   del grid (similar a dexa) para que no dominen su tile. */
+.brandtile[data-brand="benessi"] .bt-logo,
+.brandtile[data-brand="gessi"] .bt-logo { max-height: 55%; max-width: 66%; }
+.brandtile.hide { display: none; }
 .gama-note.hide { display: none; }
 
 /* Hero de marcas: texto sobre la imagen (oscurecida para legibilidad) */
@@ -1060,9 +1102,117 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .marcas-hero .eyebrow { color: var(--homea-gold-bright); }
 .marcas-hero h1 { color: var(--homea-bone); max-width: 620px; }
 .marcas-hero .sub { color: color-mix(in srgb, var(--homea-bone) 82%, transparent); }
-.brandtiles .bn { font-size: 14px; font-weight: 600; letter-spacing: var(--tracking-wider);
-  text-transform: uppercase; color: var(--fg-muted); transition: color var(--dur-med) var(--ease-standard); }
-.brandtiles a:hover .bn { color: var(--homea-gold-bright); }
+/* Aparición lenta del hero (mismo heroRise escalonado que home.html) */
+@media (prefers-reduced-motion: no-preference) {
+  .marcas-hero.run .crumbs,
+  .marcas-hero.run .eyebrow,
+  .marcas-hero.run h1,
+  .marcas-hero.run .sub { opacity: 0; animation: heroRise 640ms var(--ease-reveal) forwards; }
+  .marcas-hero.run .eyebrow { animation-delay: 90ms; }
+  .marcas-hero.run h1 { animation-delay: 180ms; }
+  .marcas-hero.run .sub { animation-delay: 270ms; }
+}
+/* Wordmark: solo visible cuando la marca no tiene logo (fallback). Texto claro
+   sobre el fondo oscuro; al hover se atenúa un poco igual que el logo. */
+.brandtile .bn { position: relative; z-index: 1; display: none;
+  font-size: clamp(13px, 1.2vw, 16px); font-weight: 600; letter-spacing: var(--tracking-wider);
+  text-transform: uppercase; color: var(--homea-bone); text-shadow: 0 2px 14px rgba(0,0,0,.55);
+  transition: opacity var(--dur-med) var(--ease-standard); }
+.brandtile .bt-logo { display: block; }
+.brandtile.no-logo .bt-logo { display: none; }
+.brandtile.no-logo .bn { display: inline-block; }
+.brandtile:hover .bn { opacity: .7; }
+/* Foto de fondo por marca (data-brand). Las marcas sin entrada quedan en fondo
+   oscuro espresso + wordmark. */
+.brandtile[data-brand="gaggenau"]{background-image:url('assets/photos/brands/gaggenau.jpg');}
+.brandtile[data-brand="thermador"]{background-image:url('assets/photos/brands/thermador.jpg');}
+.brandtile[data-brand="monogram"]{background-image:url('assets/photos/brands/monogram.webp');}
+.brandtile[data-brand="miele"]{background-image:url('assets/photos/brands/miele.jpg');}
+.brandtile[data-brand="viking"]{background-image:url('assets/photos/brands/viking.jpg');}
+.brandtile[data-brand="wolf"]{background-image:url('assets/photos/brands/wolf.jpg');}
+.brandtile[data-brand="sub-zero"]{background-image:url('assets/photos/brands/sub-zero.jpg');}
+.brandtile[data-brand="cove"]{background-image:url('assets/photos/brands/cove.jpg');}
+.brandtile[data-brand="pitt-cooking"]{background-image:url('assets/photos/brands/pitt-cooking.jpg');}
+.brandtile[data-brand="bosch"]{background-image:url('assets/photos/brands/bosch.webp');}
+.brandtile[data-brand="elica"]{background-image:url('assets/photos/brands/elica.jpg');}
+.brandtile[data-brand="kitchenaid"]{background-image:url('assets/photos/brands/kitchenaid.jpg');}
+.brandtile[data-brand="hoshizaki"]{background-image:url('assets/photos/brands/hoshizaki.jpg');}
+.brandtile[data-brand="smeg"]{background-image:url('assets/photos/brands/smeg.jpg');}
+.brandtile[data-brand="bertazzoni"]{background-image:url('assets/photos/brands/bertazzoni.jpg');}
+.brandtile[data-brand="lynx"]{background-image:url('assets/photos/brands/lynx.jpg');}
+.brandtile[data-brand="alfresco"]{background-image:url('assets/photos/brands/alfresco.jpg');}
+.brandtile[data-brand="kamado-joe"]{background-image:url('assets/photos/brands/kamado-joe.jpg');}
+.brandtile[data-brand="axor"]{background-image:url('assets/photos/brands/axor.jpg');}
+.brandtile[data-brand="blaze"]{background-image:url('assets/photos/brands/blaze.jpg');}
+.brandtile[data-brand="broil-king"]{background-image:url('assets/photos/brands/broil-king.jpg');}
+.brandtile[data-brand="cafe"]{background-image:url('assets/photos/brands/cafe.webp');}
+.brandtile[data-brand="coyote"]{background-image:url('assets/photos/brands/coyote.jpg');}
+.brandtile[data-brand="falmec"]{background-image:url('assets/photos/brands/falmec.jpg');}
+.brandtile[data-brand="frigidaire"]{background-image:url('assets/photos/brands/frigidaire.jpg');}
+.brandtile[data-brand="electrolux"]{background-image:url('assets/photos/brands/electrolux.jpg');}
+.brandtile[data-brand="ge-profile"]{background-image:url('assets/photos/brands/ge-profile.jpg');}
+.brandtile[data-brand="insinkerator"]{background-image:url('assets/photos/brands/insinkerator.jpg');}
+.brandtile[data-brand="invisacook"]{background-image:url('assets/photos/brands/invisacook.jpg');}
+.brandtile[data-brand="io-mabe"]{background-image:url('assets/photos/brands/io-mabe.jpg');}
+.brandtile[data-brand="mabe"]{background-image:url('assets/photos/brands/mabe.jpg');}
+.brandtile[data-brand="tecnolam"]{background-image:url('assets/photos/brands/tecnolam.jpg');}
+.brandtile[data-brand="thor"]{background-image:url('assets/photos/brands/thor.jpg');}
+.brandtile[data-brand="whirlpool"]{background-image:url('assets/photos/brands/whirlpool.jpg');}
+.brandtile[data-brand="acros"]{background-image:url('assets/photos/brands/acros.jpg');}
+.brandtile[data-brand="alfa-forni"]{background-image:url('assets/photos/brands/alfa-forni.webp');}
+.brandtile[data-brand="american-standard"]{background-image:url('assets/photos/brands/american-standard.webp');}
+.brandtile[data-brand="asko"]{background-image:url('assets/photos/brands/asko.jpg');}
+.brandtile[data-brand="axcent"]{background-image:url('assets/photos/brands/axcent.webp');}
+.brandtile[data-brand="benessi"]{background-image:url('assets/photos/brands/benessi.webp');}
+.brandtile[data-brand="artisan"]{background-image:url('assets/photos/brands/artisan.webp');}
+.brandtile[data-brand="dawn"]{background-image:url('assets/photos/brands/dawn.jpg');}
+.brandtile[data-brand="dexa"]{background-image:url('assets/photos/brands/dexa.webp');}
+.brandtile[data-brand="delta"]{background-image:url('assets/photos/brands/delta.jpg');}
+.brandtile[data-brand="blanco"]{background-image:url('assets/photos/brands/blanco.jpg');}
+.brandtile[data-brand="brizo"]{background-image:url('assets/photos/brands/brizo.jpg');}
+.brandtile[data-brand="eclipse"]{background-image:url('assets/photos/brands/eclipse.webp');}
+.brandtile[data-brand="elkay"]{background-image:url('assets/photos/brands/elkay.jpg');}
+.brandtile[data-brand="franke"]{background-image:url('assets/photos/brands/franke.avif');}
+.brandtile[data-brand="fulgor-milano"]{background-image:url('assets/photos/brands/fulgor-milano.jpg');}
+.brandtile[data-brand="haier"]{background-image:url('assets/photos/brands/haier.avif');}
+.brandtile[data-brand="hansgrohe"]{background-image:url('assets/photos/brands/hansgrohe.jpg');}
+.brandtile[data-brand="i-drain"]{background-image:url('assets/photos/brands/i-drain.jpg');}
+.brandtile[data-brand="kalt"]{background-image:url('assets/photos/brands/kalt.jpg');}
+.brandtile[data-brand="gessi"]{background-image:url('assets/photos/brands/gessi.webp');}
+.brandtile[data-brand="kele-master-sinks"]{background-image:url('assets/photos/brands/kele-master-sinks.webp');}
+.brandtile[data-brand="mr-steam"]{background-image:url('assets/photos/brands/mr-steam.webp');}
+.brandtile[data-brand="nobili"]{background-image:url('assets/photos/brands/nobili.jpg');}
+.brandtile[data-brand="peerless"]{background-image:url('assets/photos/brands/peerless.jpg');}
+.brandtile[data-brand="poletti-sinks"]{background-image:url('assets/photos/brands/poletti-sinks.jpg');}
+.brandtile[data-brand="sapphire"]{background-image:url('assets/photos/brands/sapphire.webp');}
+.brandtile[data-brand="schock"]{background-image:url('assets/photos/brands/schock.jpg');}
+.brandtile[data-brand="scotsman"]{background-image:url('assets/photos/brands/scotsman.jpg');}
+.brandtile[data-brand="summit"]{background-image:url('assets/photos/brands/summit.jpg');}
+.brandtile[data-brand="teka"]{background-image:url('assets/photos/brands/teka.webp');}
+.brandtile[data-brand="the-galley"]{background-image:url('assets/photos/brands/the-galley.jpg');}
+.brandtile[data-brand="tradewind"]{background-image:url('assets/photos/brands/tradewind.webp');}
+.brandtile[data-brand="u-line"]{background-image:url('assets/photos/brands/u-line.avif');}
+.brandtile[data-brand="wppo"]{background-image:url('assets/photos/brands/wppo.webp');}
+.brandtile[data-brand="sedona-by-lynx"]{background-image:url('assets/photos/brands/sedona-by-lynx.webp');}
+/* Fotos verticales: se sube el encuadre (baja la imagen dentro del tile) para
+   ver mejor el asador y que no se corte el grifo de Blanco. */
+.brandtile[data-brand="alfresco"]{ background-position: center 35%; }
+.brandtile[data-brand="artisan"]{ background-position: center 35%; }
+.brandtile[data-brand="blanco"]{ background-position: center 38%; }
+/* Elevar el encuadre (subir la imagen) para que el electrodoméstico se vea
+   completo dentro del tile, sin cortar la base (patas/ruedas/horno). */
+.brandtile[data-brand="cafe"]{ background-position: center 67%; }
+.brandtile[data-brand="cove"]{ background-position: center 68%; }
+.brandtile[data-brand="masterbuilt"]{ background-position: center 74%; }
+.brandtile[data-brand="monogram"]{ background-position: center 58%; }
+.brandtile[data-brand="teka"]{ background-position: center 74%; }
+.brandtile[data-brand="pitt-cooking"]{ background-position: center 72%; }
+.brandtile[data-brand="supra"]{background-image:url('assets/photos/brands/supra.jpg');}
+.brandtile[data-brand="keuco"]{background-image:url('assets/photos/brands/keuco.webp');}
+.brandtile[data-brand="masterbuilt"]{background-image:url('assets/photos/brands/masterbuilt.jpg');}
+.brandtile[data-brand="maytag"]{background-image:url('assets/photos/brands/maytag.jpg');}
+.brandtile[data-brand="moen"]{background-image:url('assets/photos/brands/moen.webp');}
+.brandtile[data-brand="mont-alpi"]{background-image:url('assets/photos/brands/mont-alpi.webp');}
 
 /* ---------- Tiles de ayuda / FAQ --------------------------------------------------- */
 .help-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
