@@ -7,6 +7,13 @@
       "runtimeArgs": ["-I", "-c", "import http.server,socketserver,os\nclass H(http.server.SimpleHTTPRequestHandler):\n    def __init__(self,*a,**k): super().__init__(*a,directory='/tmp/homea-preview-live',**k)\n    def end_headers(self):\n        self.send_header('Cache-Control','no-store, no-cache, must-revalidate, max-age=0')\n        self.send_header('Pragma','no-cache')\n        self.send_header('Expires','0')\n        super().end_headers()\nport=int(os.environ.get('PORT','8123'))\nsocketserver.TCPServer.allow_reuse_address=True\nsocketserver.TCPServer(('127.0.0.1',port),H).serve_forever()"],
       "port": 8123,
       "autoPort": true
+    },
+    {
+      "name": "homea-front",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "autoPort": true
     }
   ]
 }

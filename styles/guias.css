@@ -1,0 +1,211 @@
+/* ==========================================================================
+   GUÍAS — estilos de componentes de la sección.
+   Solo tokens v2 (tokens-v2.css). Sin colores/tipos/espaciados fuera del sistema.
+   ========================================================================== */
+
+/* ---------- Nav: estado activo de Guías --------------------------------- */
+.nav-links > a.is-active { border-bottom-color: var(--homea-gold); color: var(--accent-text); }
+.site-nav.scrolled .nav-links > a.is-active { color: var(--homea-gold-bright); }
+
+/* ---------- Mega menú · Productos (data-driven desde la taxonomía) ------- */
+.mega-panel.mega-guide { width: min(1200px, 95vw); padding: 24px 40px 30px; }
+.mega-guide-head {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 24px;
+  margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+.mega-guide-head .eyebrow { margin: 0; }
+.mega-guide-note {
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-subtle);
+}
+.mega-guide-cols {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px 28px;
+}
+.mega-guide-col { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.mega-guide-cat {
+  font-family: var(--font-sans); font-size: 12.5px; font-weight: 700;
+  letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  color: var(--fg); border-bottom: none; margin-bottom: 6px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.mega-guide-cat:hover { color: var(--accent-text); }
+.mega-guide-leaf {
+  display: block; font-size: 13.5px; color: var(--fg-muted); padding: 5px 10px; margin: 0 -10px;
+  line-height: 1.25; border-bottom: none; cursor: pointer;
+}
+.mega-guide-leaf:hover { background: #e4c480; color: var(--homea-black); border-bottom-color: transparent; }
+
+/* ---------- Hub: hero con fondo fotográfico (texto centrado) ------------ */
+.guias-hero {
+  position: relative;
+  display: flex; flex-direction: column;
+  min-height: 560px;
+  background: var(--homea-espresso) center / cover no-repeat;
+  background-image: url("/assets/photos/hero-guias-thermador.jpg");
+  color: var(--homea-bone);
+  overflow: hidden;
+}
+/* Velo para legibilidad del texto sobre la foto (espresso, sin teñir de color). */
+.guias-hero::before {
+  content: ""; position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.30) 0%, rgba(10, 10, 10, 0.48) 55%, rgba(10, 10, 10, 0.72) 100%);
+}
+.guias-hero-inner {
+  position: relative; z-index: 1; flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 20px; padding: 88px 0 64px;
+}
+.guias-hero-inner .rule-gold { margin: 0; }
+.guias-hero-inner h1 { color: var(--homea-bone); max-width: 18ch; }
+.guias-hero-inner .sub { margin: 6px 0 0; max-width: 56ch; color: rgba(247, 243, 236, 0.86); }
+.guias-hero-crumbs { position: relative; z-index: 1; padding-bottom: 28px; }
+.guias-hero-crumbs .crumbs { font-size: 12px; color: rgba(247, 243, 236, 0.72); }
+.guias-hero-crumbs .crumbs a { color: rgba(247, 243, 236, 0.72); border-bottom: none; }
+.guias-hero-crumbs .crumbs a:hover { color: var(--homea-gold-bright); }
+.guias-hero-crumbs .crumbs .sep { color: var(--homea-gold); padding: 0 0.6em; }
+.guias-hero-crumbs .crumbs [aria-current="page"] { color: var(--homea-bone); }
+
+/* ---------- Hub: hero "Guía" (réplica del bloque del home) -------------- */
+.guide-hero { padding-top: 56px; padding-bottom: 56px; }
+.guide-hero-grid {
+  display: flex; align-items: stretch; gap: clamp(20px, 3vw, 48px);
+}
+.guide-hero-body { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
+.guide-hero-lead {
+  font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 2.5vw, 38px);
+  line-height: var(--lh-snug); color: var(--fg); margin: 0; max-width: 18ch;
+}
+.guide-hero-lead em { font-style: italic; }
+.guide-hero-icon { flex: 0 0 auto; display: flex; align-items: center; color: var(--homea-gold); }
+.guide-hero-icon svg { width: clamp(112px, 12vw, 172px); height: auto; display: block; }
+
+/* ---------- Grid + tarjeta de guía -------------------------------------- */
+.guide-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+}
+.guide-card {
+  display: flex; flex-direction: column; gap: 12px;
+  background: var(--surface); border: 1px solid var(--border); border-top: 2px solid transparent;
+  padding: 26px 26px 24px; color: inherit; border-bottom: 1px solid var(--border);
+  transition: transform var(--dur-med) var(--ease-standard),
+              border-color var(--dur-med) var(--ease-standard),
+              box-shadow var(--dur-med) var(--ease-standard);
+}
+.guide-card:hover {
+  transform: translateY(-4px); border-top-color: var(--homea-gold);
+  box-shadow: var(--shadow-md); border-bottom-color: var(--border);
+}
+.guide-card-tag {
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--accent-text);
+}
+.guide-card-title {
+  font-family: var(--font-display); font-weight: 400; font-size: 23px; line-height: var(--lh-snug);
+  color: var(--fg); margin: 0;
+}
+.guide-card-sum { font-size: var(--fs-sm); color: var(--fg-muted); margin: 0; flex: 1; }
+.guide-card-more {
+  font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+  letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--accent-text);
+  margin-top: 4px;
+}
+
+/* ---------- Filtro por tipo de guía (chips) ----------------------------- */
+.guide-filter { display: flex; flex-direction: column; gap: 32px; }
+.guide-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip {
+  appearance: none; cursor: pointer; font-family: var(--font-sans); font-weight: 600;
+  font-size: 12px; letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  color: var(--fg); background: transparent; border: 1px solid var(--border-strong);
+  padding: 9px 16px; transition: all var(--dur-fast) var(--ease-standard);
+}
+.chip:hover { border-color: var(--homea-gold); color: var(--accent-text); }
+.chip.is-active { background: var(--homea-black); color: var(--homea-bone); border-color: var(--homea-black); }
+.chip-n {
+  font-variant-numeric: tabular-nums; font-weight: 700; margin-left: 6px;
+  color: var(--fg-subtle);
+}
+.chip.is-active .chip-n { color: var(--homea-gold-soft); }
+
+/* ---------- Índice de categoría: layout sidebar + main ------------------ */
+.category-layout { display: grid; grid-template-columns: 220px 1fr; gap: 48px; align-items: start; }
+.category-main { min-width: 0; }
+.cat-rail { display: flex; flex-direction: column; gap: 2px; position: sticky; top: calc(var(--nav-h) + 24px); }
+.cat-rail-head { margin-bottom: 12px; }
+.cat-rail-item {
+  display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 500; color: var(--fg-muted);
+  padding: 9px 12px; margin: 0 -12px; border-bottom: none; border-left: 2px solid transparent;
+}
+.cat-rail-item:hover { color: var(--fg); background: var(--bg-soft); }
+.cat-rail-item.is-active { color: var(--fg); border-left-color: var(--homea-gold); font-weight: 600; }
+.cat-rail-n { font-variant-numeric: tabular-nums; font-size: 12px; color: var(--fg-subtle); }
+
+/* ---------- Índice de macro (3 niveles): tarjetas de categoría ---------- */
+.category-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.category-card {
+  display: flex; flex-direction: column; gap: 12px; padding: 28px 26px;
+  background: var(--surface); border: 1px solid var(--border); border-top: 2px solid transparent;
+  color: inherit; transition: transform var(--dur-med) var(--ease-standard),
+              border-color var(--dur-med) var(--ease-standard), box-shadow var(--dur-med) var(--ease-standard);
+}
+.category-card:hover { transform: translateY(-4px); border-top-color: var(--homea-gold); box-shadow: var(--shadow-md); }
+.category-card-top { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
+.category-card-top h3 { font-family: var(--font-display); font-weight: 400; font-size: 26px; color: var(--fg); }
+.category-card-n {
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600; white-space: nowrap;
+  letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--accent-text);
+}
+.category-card-leaves { font-size: var(--fs-sm); color: var(--fg-muted); margin: 0; flex: 1; }
+.category-card-more {
+  font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+  letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--accent-text);
+}
+
+/* ---------- Artículo de guía -------------------------------------------- */
+.guide-article-wrap { display: grid; grid-template-columns: 1fr 340px; gap: 56px; align-items: start; }
+.guide-article-body { min-width: 0; max-width: 680px; }
+.guide-article-body .lead { margin: 0 0 24px; }
+.guide-article-note { color: var(--fg-muted); margin: 0 0 40px; }
+.guide-section { padding: 24px 0; border-top: 1px solid var(--border); }
+.guide-section:first-of-type { border-top: 2px solid var(--homea-gold); }
+.guide-section-title {
+  font-family: var(--font-display); font-weight: 400; font-size: 24px; line-height: var(--lh-snug);
+  color: var(--fg); margin: 0 0 16px;
+}
+.guide-cta-card {
+  position: sticky; top: calc(var(--nav-h) + 24px);
+  display: flex; flex-direction: column; gap: 16px; align-items: flex-start;
+  background: var(--homea-greige); border: 1px solid var(--border); padding: 30px 28px;
+}
+.guide-cta-card .eyebrow { margin: 0; }
+.guide-cta-copy { font-size: var(--fs-sm); color: var(--fg-muted); margin: 0; }
+.guide-cta-actions { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 4px; }
+
+/* ---------- CtaProducto · microcopy "Próximamente" ---------------------- */
+.cta-soon-wrap { display: inline-flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.cta-soon-wrap a[aria-disabled="true"] { border-bottom: none; }
+.cta-soon {
+  font-family: var(--font-sans); font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
+  color: var(--fg-subtle); display: none;
+}
+.cta-soon.is-open { display: inline-block; }
+.cta-soon a { font-size: 12px; }
+
+/* ---------- Responsive --------------------------------------------------- */
+@media (max-width: 1080px) {
+  .guide-grid, .category-cards { grid-template-columns: 1fr 1fr; }
+  .mega-guide-cols { grid-template-columns: repeat(3, 1fr); }
+  .guide-article-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .guide-cta-card { position: static; }
+}
+@media (max-width: 860px) {
+  .category-layout { grid-template-columns: 1fr; gap: 28px; }
+  .cat-rail { position: static; flex-direction: row; flex-wrap: wrap; }
+  .cat-rail-item { margin: 0; border-left: none; border-bottom: 2px solid transparent; }
+  .cat-rail-item.is-active { border-left: none; border-bottom-color: var(--homea-gold); }
+}
+@media (max-width: 640px) {
+  .guide-grid, .category-cards { grid-template-columns: 1fr; }
+  .guide-hero-icon { display: none; }
+}

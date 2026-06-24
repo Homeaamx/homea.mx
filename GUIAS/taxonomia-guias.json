@@ -184,7 +184,8 @@
           "esLeaf": false,
           "rutaGuias": "/guias/cocina-y-bar/lavavajillas/",
           "subcategorias2": [
-            { "nombre": "Lavavajillas", "slug": "lavavajillas", "filtro": "/productos/lavavajillas/" }
+            { "nombre": "Lavavajillas empotrable", "slug": "lavavajillas-empotrable", "filtro": "/productos/lavavajillas-empotrable/" },
+            { "nombre": "Lavavajillas de piso", "slug": "lavavajillas-de-piso", "filtro": "/productos/lavavajillas-de-piso/" }
           ],
           "guias": [
             {
@@ -471,7 +472,7 @@
       "ruta": "/guias/banos/",
       "nivelGuias": "macrocategoria",
       "subcategorias1": [
-        { "nombre": "Tarjas", "slug": "lavabos", "esLeaf": true, "filtro": "/productos/lavabos/" },
+        { "nombre": "Lavabos", "slug": "lavabos", "esLeaf": true, "filtro": "/productos/lavabos/" },
         { "nombre": "Monomandos", "slug": "monomandos", "esLeaf": true, "filtro": "/productos/monomandos/" },
         { "nombre": "Regaderas", "slug": "regaderas", "esLeaf": true, "filtro": "/productos/regaderas/" },
         { "nombre": "Tinas", "slug": "tinas", "esLeaf": true, "filtro": "/productos/tinas/" },
