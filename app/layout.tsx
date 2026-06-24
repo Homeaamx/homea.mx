@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "@/styles/tokens-v2.css";
 import "@/styles/theme.css";
 import "@/styles/guias.css";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
-import SiteHeader from "@/components/SiteHeader";
-import SiteFooter from "@/components/SiteFooter";
+import { getChrome } from "@/lib/preview";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import NavActive from "@/components/NavActive";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -19,13 +20,19 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // Nav + footer compartidos: markup exacto del preview v2 (reutilizado en todo el sitio).
+  const { nav, footer } = getChrome();
+
   return (
     <html lang="es">
       <body>
-        <SiteHeader />
+        <div dangerouslySetInnerHTML={{ __html: nav }} />
         <main>{children}</main>
-        <SiteFooter />
+        <div dangerouslySetInnerHTML={{ __html: footer }} />
         <WhatsAppFloat />
+        <NavActive />
+        {/* Interacciones del preview (nav scroll, mega flyout, reveals, hero, marquee). */}
+        <Script src="/v2.js" strategy="afterInteractive" />
       </body>
     </html>
   );

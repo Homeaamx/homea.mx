@@ -3,9 +3,13 @@
    Solo tokens v2 (tokens-v2.css). Sin colores/tipos/espaciados fuera del sistema.
    ========================================================================== */
 
-/* ---------- Nav: estado activo de Guías --------------------------------- */
-.nav-links > a.is-active { border-bottom-color: var(--homea-gold); color: var(--accent-text); }
-.site-nav.scrolled .nav-links > a.is-active { color: var(--homea-gold-bright); }
+/* ---------- Nav: estado activo de la ruta actual ------------------------ */
+.nav-links > a.is-active,
+.nav-links .has-mega > a.is-active { border-bottom-color: var(--homea-gold); color: var(--accent-text); }
+.nav-right > a.is-active { color: var(--accent-text); border-bottom-color: var(--homea-gold); }
+.site-nav.scrolled .nav-links > a.is-active,
+.site-nav.scrolled .nav-links .has-mega > a.is-active,
+.site-nav.scrolled .nav-right > a.is-active { color: var(--homea-gold-bright); }
 
 /* ---------- Mega menú · Productos (data-driven desde la taxonomía) ------- */
 .mega-panel.mega-guide { width: min(1200px, 95vw); padding: 24px 40px 30px; }
