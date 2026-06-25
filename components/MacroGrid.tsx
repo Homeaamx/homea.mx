@@ -18,15 +18,20 @@ const FOTO_MACRO: Record<string, { src: string; pos?: string }> = {
   "chimeneas-y-calentadores": { src: "cat-chimeneas.jpg" },
 };
 
-/** Resumen corto de hijos para la cápsula (Sub1 en 3 niveles; leaves en 2 niveles). */
+/** Resumen corto de hijos para la cápsula (Sub1 en 3 niveles; leaves en 2 niveles).
+ *  Los espacios internos de cada nombre se vuelven duros ( ) para que un
+ *  nombre de varias palabras (p. ej. "Tarjas y Grifería") salte de línea como
+ *  una sola unidad y no deje palabras sueltas; el corte solo ocurre en " · ". */
 function resumenHijos(macro: Macrocategoria): string {
-  const nombres = (macro.subcategorias1 ?? []).map((s) => s.nombre);
+  const nombres = (macro.subcategorias1 ?? []).map((s) =>
+    s.nombre.replace(/ /g, " ")
+  );
   return nombres.slice(0, 4).join(" · ");
 }
 
 export default function MacroGrid({ macros }: { macros: Macrocategoria[] }) {
   return (
-    <div className="cat-grid macro-grid">
+    <div className="cat-grid macro-grid reveal">
       {macros.map((macro) => {
         const foto = FOTO_MACRO[macro.slug];
         const bg = foto

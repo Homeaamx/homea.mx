@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import MacroGrid from "@/components/MacroGrid";
 import GuideCard, { type GuideCardData } from "@/components/GuideCard";
+import GuiaSearch from "@/components/GuiaSearch";
 import Breadcrumb from "@/components/Breadcrumb";
 import JsonLd from "@/components/JsonLd";
-import { getMacros, guiasDestacadas, nombreTipo, HUB_PATH } from "@/lib/guias";
+import { getMacros, guiasDestacadas, todasLasGuias, nombreTipo, HUB_PATH } from "@/lib/guias";
 import { absUrl } from "@/lib/site";
 
 // ISR — el contenido cambia poco; revalidar 1 vez al día.
@@ -19,6 +20,16 @@ export const metadata: Metadata = {
 export default function GuiasHubPage() {
   const macros = getMacros();
   const destacadas: GuideCardData[] = guiasDestacadas(6).map(({ macro, sub1, guia }) => ({
+    titulo: guia.titulo,
+    resumen: guia.resumen,
+    tipo: guia.tipo,
+    tipoNombre: nombreTipo(guia.tipo),
+    href: guia.ruta,
+    etiqueta: `${sub1?.nombre ?? macro.nombre} · ${nombreTipo(guia.tipo)}`,
+  }));
+
+  // Índice de búsqueda: todas las guías (solo guías, no productos).
+  const todas: GuideCardData[] = todasLasGuias().map(({ macro, sub1, guia }) => ({
     titulo: guia.titulo,
     resumen: guia.resumen,
     tipo: guia.tipo,
@@ -43,24 +54,28 @@ export default function GuiasHubPage() {
     <>
       <header className="guias-hero">
         <div className="guias-hero-inner container">
-          <div className="eyebrow eyebrow-bright">Centro de guías</div>
-          <span className="rule-gold" />
-          <h1>
-            Te guiamos para <i>elegir bien</i>.
+          <div className="eyebrow eyebrow-bright reveal">Centro de guías</div>
+          <span className="rule-gold reveal" style={{ transitionDelay: "80ms" }} />
+          <h1 className="reveal" style={{ transitionDelay: "160ms" }}>
+            Te guiamos para <br />
+            <i>elegir bien</i>.
           </h1>
-          <p className="sub">
-            Guías de compra por categoría, comparativas y consejos de especialista — para que
-            equipes tu hogar con confianza.
+          <p className="sub reveal" style={{ transitionDelay: "240ms" }}>
+            Guías por categoría, comparativas y consejos de especialista, para equipar tu hogar
+            con confianza.
           </p>
-        </div>
-        <div className="guias-hero-crumbs container">
-          <Breadcrumb crumbs={[{ nombre: "Inicio", href: "/" }, { nombre: "Guías" }]} />
+          <div className="reveal" style={{ transitionDelay: "320ms" }}>
+            <GuiaSearch guias={todas} />
+          </div>
         </div>
       </header>
 
       <section className="sec catsec">
         <div className="container">
-          <div className="sec-head">
+          <div className="guias-crumbs reveal">
+            <Breadcrumb crumbs={[{ nombre: "Inicio", href: "/" }, { nombre: "Guías" }]} />
+          </div>
+          <div className="sec-head reveal" style={{ transitionDelay: "60ms" }}>
             <div className="eyebrow">Explora por categoría</div>
             <span className="rule-gold" />
             <h2>
@@ -73,14 +88,14 @@ export default function GuiasHubPage() {
 
       <section className="sec tight" id="destacadas">
         <div className="container">
-          <div className="sec-head">
+          <div className="sec-head reveal">
             <div className="eyebrow">Más leídas</div>
             <span className="rule-gold" />
             <h2>
               Guías <i>destacadas</i>.
             </h2>
           </div>
-          <div className="guide-grid" style={{ marginTop: 40 }}>
+          <div className="guide-grid reveal" style={{ marginTop: 40 }}>
             {destacadas.map((c) => (
               <GuideCard key={c.href} card={c} />
             ))}

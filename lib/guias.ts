@@ -7,6 +7,7 @@ import type {
   Guia,
   Macrocategoria,
   Subcategoria1,
+  Subcategoria2,
   TaxonomiaGuias,
   TipoDeGuia,
 } from "@/types/guias";
@@ -38,6 +39,7 @@ export function nombreTipo(slug: string): string {
 export type RouteNode =
   | { kind: "macro"; macro: Macrocategoria }
   | { kind: "categoria"; macro: Macrocategoria; sub1: Subcategoria1 }
+  | { kind: "filtros"; macro: Macrocategoria; sub1: Subcategoria1; sub2: Subcategoria2 }
   | { kind: "guia"; macro: Macrocategoria; sub1?: Subcategoria1; guia: Guia };
 
 /** "/guias/cocina-y-bar/refrigeracion/" -> ["cocina-y-bar","refrigeracion"] */
@@ -68,6 +70,13 @@ for (const macro of taxonomia.macrocategorias) {
 
     // Índice de categoría de guías (ramas de 3 niveles).
     if (sub1.rutaGuias) register({ kind: "categoria", macro, sub1 }, sub1.rutaGuias);
+
+    // Página de filtros de una Subcategoría 2 (cuando tiene varios filtros).
+    for (const sub2 of sub1.subcategorias2 ?? []) {
+      if (sub2.rutaFiltros && (sub2.filtros?.length ?? 0) > 1) {
+        register({ kind: "filtros", macro, sub1, sub2 }, sub2.rutaFiltros);
+      }
+    }
 
     for (const guia of sub1.guias ?? []) {
       register({ kind: "guia", macro, sub1, guia }, guia.ruta);
@@ -128,6 +137,15 @@ export function leafFiltros(macro: Macrocategoria): { nombre: string; filtro: st
   );
 }
 
+/** Todas las guías del sitio (planas, con su macro/sub1) — para búsqueda en el hub. */
+export function todasLasGuias(): { macro: Macrocategoria; sub1?: Subcategoria1; guia: Guia }[] {
+  const all: { macro: Macrocategoria; sub1?: Subcategoria1; guia: Guia }[] = [];
+  for (const node of routeIndex.values()) {
+    if (node.kind === "guia") all.push({ macro: node.macro, sub1: node.sub1, guia: node.guia });
+  }
+  return all;
+}
+
 /** Guías destacadas / más leídas para el hub. Prioriza guías de compra y top-picks. */
 export function guiasDestacadas(limit = 6): { macro: Macrocategoria; sub1?: Subcategoria1; guia: Guia }[] {
   const all: { macro: Macrocategoria; sub1?: Subcategoria1; guia: Guia }[] = [];
@@ -176,6 +194,12 @@ export function buildBreadcrumb(node: RouteNode): Crumb[] {
 
   if (node.kind === "categoria") {
     crumbs.push({ nombre: node.sub1.nombre });
+    return crumbs;
+  }
+
+  if (node.kind === "filtros") {
+    crumbs.push({ nombre: node.sub1.nombre, href: node.sub1.rutaGuias });
+    crumbs.push({ nombre: node.sub2.nombre });
     return crumbs;
   }
 

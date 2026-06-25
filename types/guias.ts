@@ -25,11 +25,26 @@ export interface Guia {
 /**
  * Subcategoría 2 = tipo de producto / leaf de filtro (en ramas de 3 niveles).
  */
+/** Un filtro que subdivide una Subcategoría 2 (p.ej. "French Door" dentro de Refrigeradores). */
+export interface FiltroProducto {
+  nombre: string;
+  /** Ruta de filtro PLP aplicada (aún no existe; ver lib/flags.ts). */
+  filtro: string;
+}
+
+/**
+ * Si la Subcategoría 2 tiene `filtros` (varios), al hacer clic se abre su página de
+ * filtros (`rutaFiltros`); si no, se va directo al filtro PLP de Shopify (`filtro`).
+ */
 export interface Subcategoria2 {
   nombre: string;
   slug: string;
-  /** Ruta de filtro PLP del leaf. */
+  /** Ruta de filtro PLP del leaf (destino directo cuando NO hay varios filtros). */
   filtro: string;
+  /** Página de filtros de este tipo de producto (cuando `filtros` tiene varios). */
+  rutaFiltros?: string;
+  /** Filtros que subdividen este tipo de producto. */
+  filtros?: FiltroProducto[];
 }
 
 /**

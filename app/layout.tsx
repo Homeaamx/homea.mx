@@ -7,6 +7,7 @@ import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { getChrome } from "@/lib/preview";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import NavActive from "@/components/NavActive";
+import PreviewRouter from "@/components/PreviewRouter";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div dangerouslySetInnerHTML={{ __html: footer }} />
         <WhatsAppFloat />
         <NavActive />
+        <PreviewRouter />
         {/* Interacciones del preview (nav scroll, mega flyout, reveals, hero, marquee). */}
         <Script src="/v2.js" strategy="afterInteractive" />
       </body>

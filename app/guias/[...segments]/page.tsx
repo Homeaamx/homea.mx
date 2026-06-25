@@ -13,10 +13,12 @@ import {
   type RouteNode,
 } from "@/lib/guias";
 import { absUrl } from "@/lib/site";
-import type { Guia, Macrocategoria, Subcategoria1 } from "@/types/guias";
+import type { Guia, Macrocategoria, Subcategoria1, Subcategoria2 } from "@/types/guias";
 
 import PageHero from "@/components/PageHero";
 import CategoryList from "@/components/CategoryList";
+import FilterList from "@/components/FilterList";
+import GuiaSearch from "@/components/GuiaSearch";
 import GuideTypeFilter from "@/components/GuideTypeFilter";
 import GuideArticle from "@/components/GuideArticle";
 import JsonLd from "@/components/JsonLd";
@@ -58,6 +60,13 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
       alternates: { canonical: node.sub1.rutaGuias },
     };
   }
+  if (node.kind === "filtros") {
+    return {
+      title: `${node.sub2.nombre} — ${node.sub1.nombre}`,
+      description: `Filtra ${node.sub2.nombre} de ${node.sub1.nombre} por tipo y características. Catálogo premium HOMEA.`,
+      alternates: { canonical: node.sub2.rutaFiltros },
+    };
+  }
   // guía
   return {
     title: node.guia.titulo,
@@ -65,6 +74,30 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
     alternates: { canonical: node.guia.ruta },
   };
 }
+
+// Foto de fondo del encabezado por macrocategoría (ruta en /public).
+const HERO_FOTO_MACRO: Record<string, { src: string; pos?: string; flip?: boolean }> = {
+  "cocina-y-bar": { src: "/assets/photos/hero-cocina-bar-smeg.jpg", pos: "center 60%" },
+  exterior: { src: "/assets/photos/hero-exterior-subzero-wolf-cocina.jpg", pos: "center 55%" },
+  "electrodomesticos-menores": { src: "/assets/photos/hero-electrodomesticos-menores-smeg.jpg", pos: "center 50%", flip: true },
+  lavanderia: { src: "/assets/photos/hero-lavanderia-bosch.jpg", pos: "center 50%" },
+  banos: { src: "/assets/photos/hero-banos-hansgrohe.jpg", pos: "center 35%" },
+  minisplits: { src: "/assets/photos/hero-minisplits.jpg", pos: "center 12%" },
+  "vapor-y-sauna": { src: "/assets/photos/hero-vapor-sauna-artexa.webp", pos: "center 50%" },
+  wellness: { src: "/assets/photos/hero-wellness-artexa-sauna.jpg", pos: "center 80%" },
+  "recubrimientos-y-superficies": { src: "/assets/photos/hero-recubrimientos-laminam.jpg", pos: "center 50%" },
+  "chimeneas-y-calentadores": { src: "/assets/photos/hero-chimeneas-hergom.jpg", pos: "center 50%", flip: true },
+};
+
+// Foto de fondo del encabezado por Subcategoría 1 (ruta en /public), keyed por slug.
+const HERO_FOTO_SUB1: Record<string, { src: string; pos?: string; flip?: boolean }> = {
+  refrigeracion: { src: "/assets/photos/hero-sub1-refrigeracion-subzero.jpg", pos: "center 50%" },
+  coccion: { src: "/assets/photos/hero-sub1-coccion-gaggenau.jpg", pos: "center 75%" },
+  lavavajillas: { src: "/assets/photos/hero-sub1-lavavajillas-bosch.webp", pos: "center 50%" },
+  "tarjas-y-griferia": { src: "/assets/photos/hero-sub1-tarjas-griferia-blanco.jpg", pos: "center 50%" },
+  trituradores: { src: "/assets/photos/hero-sub1-trituradores-insinkerator.jpg", pos: "center 100%" },
+  "dispensadores-y-filtros-de-agua": { src: "/assets/photos/hero-sub1-dispensadores-delta.jpg", pos: "center 50%" },
+};
 
 // --------------------------------------------------------------------------
 // Helpers de presentación.
@@ -101,6 +134,7 @@ function itemListLd(name: string, items: { name: string; url: string }[]) {
 
 function MacroIndex({ macro, node }: { macro: Macrocategoria; node: RouteNode }) {
   const crumbs = buildBreadcrumb(node);
+  const heroFoto = HERO_FOTO_MACRO[macro.slug];
 
   // Rama de 2 niveles: la macro ES la categoría de guías → índice con filtro por tipo.
   if (macro.nivelGuias === "macrocategoria") {
@@ -110,9 +144,12 @@ function MacroIndex({ macro, node }: { macro: Macrocategoria; node: RouteNode })
       <>
         <PageHero
           crumbs={crumbs}
-          eyebrow="Guías"
+          rule
           title={macro.nombre}
           sub={`Guías de compra y cómo elegir en ${macro.nombre}.`}
+          bgImage={heroFoto?.src}
+          bgPosition={heroFoto?.pos}
+          bgFlip={heroFoto?.flip}
         />
         <section className="sec">
           <div className="container category-layout">
@@ -138,9 +175,12 @@ function MacroIndex({ macro, node }: { macro: Macrocategoria; node: RouteNode })
     <>
       <PageHero
         crumbs={crumbs}
-        eyebrow="Macrocategoría"
+        rule
         title={macro.nombre}
         sub={`Elige una categoría para ver sus guías.`}
+        bgImage={heroFoto?.src}
+        bgPosition={heroFoto?.pos}
+        bgFlip={heroFoto?.flip}
       />
       <section className="sec">
         <div className="container">
@@ -168,6 +208,7 @@ function CategoryIndex({
 }) {
   const crumbs = buildBreadcrumb(node);
   const cards = guiasToCards(sub1.guias ?? [], sub1.nombre);
+  const heroFoto = HERO_FOTO_SUB1[sub1.slug];
 
   return (
     <>
@@ -176,7 +217,21 @@ function CategoryIndex({
         eyebrow={macro.nombre}
         title={sub1.nombre}
         sub={`Guías de ${sub1.nombre}: qué buscar, comparativas y selección experta.`}
-      />
+        bgImage={heroFoto?.src}
+        bgPosition={heroFoto?.pos}
+        bgFlip={heroFoto?.flip}
+      >
+        {/* Buscador ACOTADO a esta subcategoría: temas (Subcategoría 2) + sus guías. */}
+        <div style={{ marginTop: 26 }}>
+          <GuiaSearch
+            guias={cards}
+            topics={sub1.subcategorias2 ?? []}
+            placeholder={`Busca en ${sub1.nombre}`}
+            ariaLabel={`Buscar en ${sub1.nombre}`}
+            scopeLabel={sub1.nombre}
+          />
+        </div>
+      </PageHero>
       <section className="sec">
         <div className="container category-layout">
           <CategoryList variant="leaves" leaves={sub1.subcategorias2 ?? []} railHead="Categorías" />
@@ -189,6 +244,43 @@ function CategoryIndex({
         data={itemListLd(
           `Guías de ${sub1.nombre}`,
           (sub1.guias ?? []).map((g) => ({ name: g.titulo, url: absUrl(g.ruta) }))
+        )}
+      />
+    </>
+  );
+}
+
+function FilterIndex({
+  macro,
+  sub1,
+  sub2,
+  node,
+}: {
+  macro: Macrocategoria;
+  sub1: Subcategoria1;
+  sub2: Subcategoria2;
+  node: RouteNode;
+}) {
+  const crumbs = buildBreadcrumb(node);
+  const filtros = sub2.filtros ?? [];
+
+  return (
+    <>
+      <PageHero
+        crumbs={crumbs}
+        eyebrow={sub1.nombre}
+        title={sub2.nombre}
+        sub={`Elige un filtro para ver los ${sub2.nombre.toLowerCase()} de ${sub1.nombre} que buscas.`}
+      />
+      <section className="sec">
+        <div className="container">
+          <FilterList filtros={filtros} />
+        </div>
+      </section>
+      <JsonLd
+        data={itemListLd(
+          `Filtros de ${sub2.nombre} · ${sub1.nombre}`,
+          filtros.map((f) => ({ name: f.nombre, url: absUrl(f.filtro) }))
         )}
       />
     </>
@@ -223,6 +315,8 @@ export default function GuiasCatchAll({ params }: { params: Params }) {
       return <MacroIndex macro={node.macro} node={node} />;
     case "categoria":
       return <CategoryIndex macro={node.macro} sub1={node.sub1} node={node} />;
+    case "filtros":
+      return <FilterIndex macro={node.macro} sub1={node.sub1} sub2={node.sub2} node={node} />;
     case "guia":
       return <ArticleView node={node} />;
   }

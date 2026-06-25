@@ -43,16 +43,16 @@
 .guias-hero {
   position: relative;
   display: flex; flex-direction: column;
-  min-height: 560px;
+  min-height: calc(100vh - var(--nav-h));
   background: var(--homea-espresso) center / cover no-repeat;
   background-image: url("/assets/photos/hero-guias-thermador.jpg");
   color: var(--homea-bone);
-  overflow: hidden;
+  /* Sin overflow:hidden — el panel de búsqueda debe poder desbordar el hero. */
 }
 /* Velo para legibilidad del texto sobre la foto (espresso, sin teñir de color). */
 .guias-hero::before {
   content: ""; position: absolute; inset: 0; z-index: 0;
-  background: linear-gradient(180deg, rgba(10, 10, 10, 0.30) 0%, rgba(10, 10, 10, 0.48) 55%, rgba(10, 10, 10, 0.72) 100%);
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.52) 0%, rgba(10, 10, 10, 0.62) 55%, rgba(10, 10, 10, 0.80) 100%);
 }
 .guias-hero-inner {
   position: relative; z-index: 1; flex: 1;
@@ -61,13 +61,72 @@
 }
 .guias-hero-inner .rule-gold { margin: 0; }
 .guias-hero-inner h1 { color: var(--homea-bone); max-width: 18ch; }
-.guias-hero-inner .sub { margin: 6px 0 0; max-width: 56ch; color: rgba(247, 243, 236, 0.86); }
-.guias-hero-crumbs { position: relative; z-index: 1; padding-bottom: 28px; }
-.guias-hero-crumbs .crumbs { font-size: 12px; color: rgba(247, 243, 236, 0.72); }
-.guias-hero-crumbs .crumbs a { color: rgba(247, 243, 236, 0.72); border-bottom: none; }
-.guias-hero-crumbs .crumbs a:hover { color: var(--homea-gold-bright); }
-.guias-hero-crumbs .crumbs .sep { color: var(--homea-gold); padding: 0 0.6em; }
-.guias-hero-crumbs .crumbs [aria-current="page"] { color: var(--homea-bone); }
+.guias-hero-inner .sub { margin: 6px auto 0; max-width: 42ch; color: rgba(247, 243, 236, 0.86); }
+
+/* ---------- Hub: buscador dentro del hero (solo guías) ------------------ */
+/* Ancho alineado con la línea "Te guiamos para" del h1 (≈6.98em del display,
+   que escala como la tipografía clamp(36px,4.5vw,76px) → clamp(251px,31.4vw,530px)). */
+.guia-search { position: relative; width: min(clamp(251px, 31.4vw, 530px), 92vw); margin: 26px auto 0; }
+/* En el encabezado de subcategoría (PageHero) el texto va a la izquierda: el
+   buscador se alinea con él (sin centrar). El hub /guias (.guias-hero) sigue centrado. */
+.page-hero .guia-search { margin-left: 0; margin-right: 0; margin-top: 0; }
+.guia-search-bar {
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(247, 243, 236, 0.96);
+  border: 1px solid rgba(247, 243, 236, 0.55);
+  padding: 16px 20px; box-shadow: var(--shadow-md);
+}
+.guia-search-bar svg { width: 20px; height: 20px; color: var(--fg-muted); flex: 0 0 auto; }
+.guia-search-input {
+  flex: 1; min-width: 0; appearance: none; border: none; background: transparent; outline: none;
+  font-family: var(--font-sans); font-size: 15px; color: var(--fg);
+}
+.guia-search-input::placeholder { color: var(--fg-subtle); }
+.guia-search-input::-webkit-search-cancel-button { -webkit-appearance: none; }
+.guia-search-panel {
+  position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 4;
+  background: var(--surface); border: 1px solid var(--border);
+  box-shadow: var(--shadow-md); max-height: min(64vh, 540px); overflow-y: auto; text-align: left;
+}
+.guia-search-results { list-style: none; margin: 0; padding: 0; }
+.guia-search-result {
+  display: flex; flex-direction: column; gap: 3px; padding: 13px 18px;
+  border-bottom: 1px solid var(--border); color: var(--fg);
+}
+.guia-search-results li:last-child .guia-search-result { border-bottom: none; }
+.guia-search-result:hover { background: var(--bg-soft); }
+.guia-search-result-tag {
+  font-family: var(--font-sans); font-size: 10.5px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--accent-text);
+}
+.guia-search-result-title { font-family: var(--font-display); font-size: 17px; line-height: var(--lh-snug); color: var(--fg); }
+.guia-search-empty { margin: 0; padding: 16px 18px; font-size: var(--fs-sm); color: var(--fg-muted); }
+
+/* ---------- Filtros de Subcategoría 2 (primera vista de filtros) ---------- */
+.filter-grid {
+  display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px;
+}
+.filter-chip {
+  display: inline-flex; align-items: center; padding: 13px 22px;
+  border: 1px solid var(--line); background: var(--bg-soft);
+  font-family: var(--font-sans); font-size: 14px; font-weight: 500;
+  letter-spacing: 0.01em; color: var(--fg); white-space: nowrap;
+  transition: border-color var(--dur-med) var(--ease-standard),
+              background var(--dur-med) var(--ease-standard),
+              color var(--dur-med) var(--ease-standard);
+}
+.filter-chip:hover {
+  border-color: var(--homea-gold);
+  background: var(--homea-espresso); color: var(--homea-bone);
+}
+
+/* Migas de pan sobre fondo claro, encima de "Explora por categoría". */
+.guias-crumbs { margin-bottom: 28px; }
+.guias-crumbs .crumbs { font-size: 12px; color: var(--fg-muted); }
+.guias-crumbs .crumbs a { color: var(--fg-muted); border-bottom: none; }
+.guias-crumbs .crumbs a:hover { color: var(--accent-text); }
+.guias-crumbs .crumbs .sep { color: var(--homea-gold); padding: 0 0.6em; }
+.guias-crumbs .crumbs [aria-current="page"] { color: var(--fg); }
 
 /* ---------- Hub: hero "Guía" (réplica del bloque del home) -------------- */
 .guide-hero { padding-top: 56px; padding-bottom: 56px; }

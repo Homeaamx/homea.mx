@@ -139,22 +139,71 @@
   var alphaOrder = costOrder.slice().sort(function (a, b) {
     return a.textContent.trim().localeCompare(b.textContent.trim(), "es");
   });
-  function applyGama(filter) {
-    brandTiles.forEach(function (a) {
-      var show = filter === "all" ||
-        (" " + a.getAttribute("data-gama") + " ").indexOf(" " + filter + " ") >= 0;
-      a.classList.toggle("hide", !show);
-    });
-    /* TODAS → alfabético; cada gama → orden por costo (mayor a menor) */
+  var GAMA_MOTION = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var GAMA_TINT = {
+    premium: "color-mix(in srgb, var(--homea-gold) 82%, var(--homea-espresso))",
+    residencial: "var(--homea-gold)",
+    media: "color-mix(in srgb, var(--homea-gold) 56%, var(--homea-bone))",
+    economica: "color-mix(in srgb, var(--homea-gold) 30%, var(--homea-bone))"
+  };
+  var gamaToken = 0;   /* invalida timeouts de un filtro anterior si se cambia rápido */
+
+  function gamaShows(a, filter) {
+    return filter === "all" ||
+      (" " + a.getAttribute("data-gama") + " ").indexOf(" " + filter + " ") >= 0;
+  }
+  /* Reordena (TODAS → alfabético; gama → costo) y fija estado de visibilidad/tinte. */
+  function gamaCommit(filter) {
     if (brandGrid) {
-      (filter === "all" ? alphaOrder : costOrder).forEach(function (a) {
-        brandGrid.appendChild(a);
-      });
+      (filter === "all" ? alphaOrder : costOrder).forEach(function (a) { brandGrid.appendChild(a); });
     }
-    /* La nota de orden ("mayor costo a menor") solo aparece al filtrar por una gama */
-    if (gamaNote) { gamaNote.classList.toggle("hide", filter === "all"); }
+    brandTiles.forEach(function (a) {
+      var show = gamaShows(a, filter);
+      a.classList.remove("tout");
+      a.classList.toggle("hide", !show);
+      a.classList.toggle("gacc", show && filter !== "all");
+    });
+  }
+  /* Entrada escalonada: arranca cada coincidencia en estado "tin" (sin transición),
+     restaura la transición y la quita con un retraso por índice → suben en cascada. */
+  function gamaReveal(filter) {
+    var vis = (filter === "all" ? alphaOrder : costOrder).filter(function (a) { return gamaShows(a, filter); });
+    vis.forEach(function (a) { a.style.transition = "none"; a.classList.add("tin"); });
+    if (brandGrid) { void brandGrid.offsetWidth; }
+    vis.forEach(function (a) { a.style.transition = ""; });
+    if (brandGrid) { void brandGrid.offsetWidth; }
+    var my = gamaToken;
+    vis.forEach(function (a, i) {
+      setTimeout(function () { if (my === gamaToken) { a.classList.remove("tin"); } }, i * 32 + 10);
+    });
+  }
+  function applyGama(filter, animate) {
+    if (brandGrid) { brandGrid.setAttribute("data-gama-active", filter); }
+    /* La nota de orden ("mayor costo a menor") solo aparece al filtrar por una gama
+       y adopta el tono de la gama activa. */
+    if (gamaNote) {
+      gamaNote.classList.toggle("hide", filter === "all");
+      /* El texto de la nota queda en el oro AA-safe (legible en bone);
+         solo la flecha (decorativa) adopta el tono de la gama. */
+      var ga = gamaNote.querySelector(".arrow");
+      if (ga) { ga.style.color = filter === "all" ? "" : (GAMA_TINT[filter] || ""); }
+    }
     /* El riel A→Z solo aparece en TODAS (orden alfabético) */
     if (azRail) { azRail.classList.toggle("hide", filter !== "all"); updateAzArrow(); }
+
+    if (!GAMA_MOTION || !animate) { gamaCommit(filter); return; }
+
+    gamaToken++;
+    var my = gamaToken;
+    /* Salida: desvanece las marcas visibles que ya no coinciden, luego reordena y revela. */
+    brandTiles.forEach(function (a) {
+      if (!a.classList.contains("hide") && !gamaShows(a, filter)) { a.classList.add("tout"); }
+    });
+    setTimeout(function () {
+      if (my !== gamaToken) { return; }
+      gamaCommit(filter);
+      gamaReveal(filter);
+    }, 150);
   }
   /* La flecha del riel A→Z sigue el scroll del usuario hasta llegar a la Z */
   var azTrack = azRail && azRail.querySelector(".az-track");
@@ -179,11 +228,11 @@
     t.addEventListener("click", function () {
       tabs.forEach(function (x) { x.classList.remove("on"); });
       t.classList.add("on");
-      if (brandTiles.length) { applyGama(t.getAttribute("data-filter") || "all"); }
+      if (brandTiles.length) { applyGama(t.getAttribute("data-filter") || "all", true); }
     });
   });
   var activeTab = document.querySelector(".gama-tabs .t.on");
-  if (brandTiles.length && activeTab) { applyGama(activeTab.getAttribute("data-filter") || "all"); }
+  if (brandTiles.length && activeTab) { applyGama(activeTab.getAttribute("data-filter") || "all", false); }
 
   /* ---------- Tipo de cambio del día (slot de temporada del ubar) ----------
      Valor oficial = FIX que publica el DOF (dof.gob.mx/indicadores.php), que es

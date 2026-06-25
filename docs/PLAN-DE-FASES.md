@@ -145,6 +145,19 @@ Estado: 🔵 pendiente · 🟡 en curso · ✅ hecho
 
 ---
 
+## 🔵 Fase 6 — Contenido editorial: blogs en Guías (cadencia quincenal) ⭐ NUEVO
+*Trabajo continuo: alimentar la sección **Guías** con artículos/blogs publicados de forma **quincenal** (cada 2 semanas). Refuerza la función de "guía de compra" del sitio y construye autoridad SEO orgánica sostenida.*
+
+- [ ] **Cadencia:** publicar **un blog/guía nuevo cada 2 semanas** (quincenal) en la sección Guías (`/guias`).
+- [ ] **Calendario editorial:** definir temas por quincena alineados a las macrocategorías (Cocina y Bar, Exterior, Baños, etc.) y a búsquedas reales (GSC / keywords).
+- [ ] **SEO por artículo:** title/description, canónico, JSON-LD (Article/FAQ), enlazado interno a productos y otras guías, imágenes con nombres SEO.
+- [ ] **Flujo de publicación:** redacción → revisión → publicación en Guías → indexación (sitemap) → difusión (redes/WhatsApp/email).
+- [ ] **Medición:** seguir tráfico orgánico y conversiones (lead/WhatsApp) por guía para priorizar próximos temas.
+
+**Entregable:** flujo editorial vivo con **publicación quincenal** en Guías; biblioteca de contenido que crece y suma SEO orgánico mes a mes.
+
+---
+
 ## Mapeo de los 9 pasos originales de Carla
 
 | Paso original | Fase |

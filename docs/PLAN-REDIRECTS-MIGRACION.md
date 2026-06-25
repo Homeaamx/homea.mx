@@ -130,3 +130,33 @@
 - **Ahora (Fase 0):** este plan + reglas + Tier 1–2 borrador. ✅
 - **Fase 4:** generar el CSV 1:1 completo (ya con handles de Shopify).
 - **Fase 5 (corte):** importar redirects + apuntar DNS + verificar.
+
+---
+
+## 9. Red de seguridad: rutas legacy `.html` → ruta limpia (Next/Vercel) ✅
+
+El front-end Next usa **URLs limpias** (`/guias/`, `/marcas`, …); los `.html` del
+preview/legacy no existen como ruta y darían **404**. Para blindarlos hay un redirect
+**308 (≈301)** en `next.config.js → redirects()` que mapea cada `*.html` a su ruta limpia,
+espejo del `LINK_MAP` de `lib/preview.ts`:
+
+| Legacy | Destino |
+|---|---|
+| `/home.html` | `/` |
+| `/marcas.html` | `/marcas` |
+| `/coleccion.html`, `/ofertas.html` | `/productos` |
+| `/producto.html` | `/producto` |
+| `/b2b.html` | `/proyectos` |
+| `/nosotros.html` | `/nosotros` |
+| `/contacto.html` | `/contacto` |
+| `/herramientas.html` | `/herramientas` |
+| `/garantias-instalacion.html` | `/garantias-instalacion` |
+| `/guias.html` | `/guias/` |
+
+**Por qué:** marcadores viejos, enlaces indexados y CTAs cuyo destino se sirve desde JSON
+inline (`#hero-data`) sin reescritura — p. ej. el botón **"Agendar asesoría"** (→ `contacto.html`)
+y **"Ver catálogo"** (→ `guias.html`) de la home aterrizaban en 404.
+
+**Pendiente (raíz, opcional):** limpiar los `btnPUrl`/`btnSUrl` del `#hero-data` en
+`preview/home.html` a rutas limpias (o reescribirlos en `lib/preview.ts`) para que la
+navegación interna no dependa del salto 308. Mientras tanto la red de seguridad lo cubre.

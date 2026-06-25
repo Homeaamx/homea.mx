@@ -197,7 +197,7 @@ html { scroll-behavior: smooth; }
 .mega-subcol h5 { font-family: var(--font-sans); font-size: 12.5px; font-weight: 700;
   letter-spacing: .14em; text-transform: uppercase; color: var(--fg-muted);
   margin: 0 0 8px; padding-bottom: 7px; border-bottom: 1px solid var(--border); }
-.mega-subcol a { display: block; font-size: 14.5px; color: var(--fg); padding: 6px 10px; margin: 0 -10px; line-height: 1.28;
+.mega-subcol a { display: block; font-size: 15.5px; color: var(--fg); padding: 6px 10px; margin: 0 -10px; line-height: 1.28;
   transition: color var(--dur-fast) var(--ease-standard), background-color var(--dur-fast) var(--ease-standard); }
 .mega-subcol a:hover { background: #e4c480; color: var(--homea-black); font-weight: 600; border-bottom-color: transparent; }
 .mega-all { display: inline-block; margin-top: auto; padding-top: 20px; font-family: var(--font-sans);
@@ -726,13 +726,13 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 /* Foto de fondo por marca (data-brand) */
 .mq-chip[data-brand="sub-zero"]   { background-image: url('/assets/photos/brands/sub-zero.jpg'); }
 .mq-chip[data-brand="wolf"]       { background-image: url('/assets/photos/brands/wolf.jpg'); }
-.mq-chip[data-brand="cove"]       { background-image: url('/assets/photos/brands/cove.jpg'); }
+.mq-chip[data-brand="cove"]       { background-image: url('/assets/photos/brands/cove.jpg'); background-position: center 65%; }
 .mq-chip[data-brand="miele"]      { background-image: url('/assets/photos/brands/miele.jpg'); }
 .mq-chip[data-brand="thermador"]  { background-image: url('/assets/photos/brands/thermador.jpg'); }
-.mq-chip[data-brand="monogram"]   { background-image: url('/assets/photos/brands/monogram.webp'); }
+.mq-chip[data-brand="monogram"]   { background-image: url('/assets/photos/brands/monogram.webp'); background-position: center 85%; }
 .mq-chip[data-brand="viking"]     { background-image: url('/assets/photos/brands/viking.jpg'); }
 .mq-chip[data-brand="gaggenau"]   { background-image: url('/assets/photos/brands/gaggenau.jpg'); }
-.mq-chip[data-brand="la-cornue"]  { background-image: url('/assets/photos/brands/la-cornue.jpg'); }
+.mq-chip[data-brand="la-cornue"]  { background-image: url('/assets/photos/brands/la-cornue.jpg'); background-position: center 100%; }
 .mq-chip[data-brand="smeg"]       { background-image: url('/assets/photos/brands/smeg.jpg'); }
 .mq-chip[data-brand="bertazzoni"] { background-image: url('/assets/photos/brands/bertazzoni.jpg'); }
 .mq-chip[data-brand="kitchenaid"] { background-image: url('/assets/photos/brands/kitchenaid.jpg'); }
@@ -932,6 +932,31 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .page-hero h1 { font-size: clamp(38px, 4.5vw, 60px); max-width: 720px; }
 .page-hero .sub { margin: 18px 0 0; max-width: 560px; font-size: var(--fs-md); font-weight: 300; color: var(--fg-muted); }
 
+/* Variante con foto de fondo: texto encima sobre velo espresso para legibilidad. */
+.page-hero--photo {
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 120px 0 96px;
+  overflow: hidden;
+}
+.page-hero--photo .container { position: relative; z-index: 1; }
+.page-hero__veil {
+  position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(90deg, rgba(10,10,10,.82) 0%, rgba(10,10,10,.62) 45%, rgba(10,10,10,.28) 100%);
+}
+/* Espejo horizontal SOLO de la foto: se voltea el header (su background se
+   refleja) y se contra-voltea su contenido directo (velo + texto) para que la
+   lectura quede normal. */
+.page-hero--flip { transform: scaleX(-1); }
+.page-hero--flip > * { transform: scaleX(-1); }
+.page-hero--photo .crumbs,
+.page-hero--photo .crumbs a { color: rgba(247,243,236,.78); }
+.page-hero--photo .crumbs a:hover { color: var(--homea-bone); }
+.page-hero--photo .eyebrow { color: var(--homea-gold); }
+.page-hero--photo h1 { color: var(--homea-bone); }
+.page-hero--photo .sub { color: rgba(247,243,236,.82); }
+
 /* ---------- PLP: filtros + grid ---------------------------------------------- */
 .plp { display: grid; grid-template-columns: 240px 1fr; gap: 56px; align-items: start; }
 .filters { display: flex; flex-direction: column; gap: 36px; position: sticky; top: calc(var(--nav-h) + 32px); }
@@ -1030,8 +1055,8 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
    (.mq-chip): FOTO de marca al fondo + logo blanco al centro. Diferencias pedidas:
    la imagen arranca MÁS oscura y al hover se revela por COMPLETO, mientras el logo
    queda un poco transparente. Las marcas sin foto quedan en fondo oscuro + wordmark. */
-.brandtiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
-  background: var(--homea-espresso); border: 1px solid var(--homea-espresso); }
+.brandtiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px;
+  background: var(--homea-bone); border: 3px solid var(--homea-bone); }
 .brandtile {
   position: relative; overflow: hidden;
   aspect-ratio: 3 / 1.6; display: flex; align-items: center; justify-content: center;
@@ -1128,6 +1153,7 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile:hover .bn { opacity: .15; }
 /* Foto de fondo por marca (data-brand). Las marcas sin entrada quedan en fondo
    oscuro espresso + wordmark. */
+.brandtile[data-brand="la-cornue"]{background-image:url('/assets/photos/brands/la-cornue.jpg');background-position:center 95%;}
 .brandtile[data-brand="gaggenau"]{background-image:url('/assets/photos/brands/gaggenau.jpg');}
 .brandtile[data-brand="thermador"]{background-image:url('/assets/photos/brands/thermador.jpg');}
 .brandtile[data-brand="monogram"]{background-image:url('/assets/photos/brands/monogram.webp');}
@@ -1208,7 +1234,7 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile[data-brand="cafe"]{ background-position: center 67%; }
 .brandtile[data-brand="cove"]{ background-position: center 68%; }
 .brandtile[data-brand="masterbuilt"]{ background-position: center 74%; }
-.brandtile[data-brand="monogram"]{ background-position: center 58%; }
+.brandtile[data-brand="monogram"]{ background-position: center 75%; }
 .brandtile[data-brand="teka"]{ background-position: center 74%; }
 .brandtile[data-brand="pitt-cooking"]{ background-position: center 72%; }
 .brandtile[data-brand="supra"]{background-image:url('/assets/photos/brands/supra.jpg');}

@@ -13,8 +13,14 @@ interface Props {
   variant?: "cards" | "rail" | "leaves";
   currentSlug?: string;
   /** Leaves de producto (con nombre + filtro) para variant "leaves".
-      Acepta Subcategoría 2 (3 niveles) o leaves de Subcategoría 1 (2 niveles). */
-  leaves?: { nombre: string; filtro: string }[];
+      Acepta Subcategoría 2 (3 niveles) o leaves de Subcategoría 1 (2 niveles).
+      Si el leaf trae `rutaFiltros` y varios `filtros`, enlaza a su página de filtros. */
+  leaves?: {
+    nombre: string;
+    filtro: string;
+    rutaFiltros?: string;
+    filtros?: unknown[];
+  }[];
   /** Encabezado del rail (default "Categorías"). */
   railHead?: string;
 }
@@ -30,16 +36,28 @@ export default function CategoryList({
     return (
       <nav className="cat-rail" aria-label={railHead}>
         <span className="cat-rail-head eyebrow">{railHead}</span>
-        {leaves.map((l) => (
-          <CtaProducto
-            key={l.filtro}
-            filtro={l.filtro}
-            className="cat-rail-item cat-rail-leaf"
-            fallback="whatsapp"
-          >
-            {l.nombre}
-          </CtaProducto>
-        ))}
+        {leaves.map((l) => {
+          // Con varios filtros → página de filtros; si no → filtro PLP directo.
+          const tieneFiltros = Boolean(l.rutaFiltros) && (l.filtros?.length ?? 0) > 1;
+          return tieneFiltros ? (
+            <Link
+              key={l.rutaFiltros}
+              href={l.rutaFiltros as string}
+              className="cat-rail-item cat-rail-leaf"
+            >
+              {l.nombre}
+            </Link>
+          ) : (
+            <CtaProducto
+              key={l.filtro}
+              filtro={l.filtro}
+              className="cat-rail-item cat-rail-leaf"
+              fallback="whatsapp"
+            >
+              {l.nombre}
+            </CtaProducto>
+          );
+        })}
       </nav>
     );
   }
