@@ -525,6 +525,74 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 @media (max-width: 1080px) { .catsec .cat-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 640px) { .catsec { padding-left: 20px; padding-right: 20px; } .catsec .cat-grid { grid-template-columns: 1fr; } }
 
+/* ====== Guías — mosaico editorial de macrocategorías (bento) ======
+   Solo afecta a .macro-grid (la rejilla de /guias). La sección de categorías del
+   home (.catsec .cat-grid SIN .macro-grid) queda intacta. El TAMAÑO del tile
+   codifica jerarquía: Cocina y Bar y Baños = features grandes (2×2); el zig-zag
+   de los dos features grandes (arriba-izq. y centro-der.) guía el ojo en diagonal. */
+.catsec .macro-grid {
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: clamp(116px, 12.5vw, 166px);
+  gap: 8px;
+  grid-template-areas:
+    "coc coc ext ext"
+    "coc coc ele lav"
+    "wel wel ban ban"
+    "vap min ban ban"
+    "rec rec chi chi";
+}
+/* La altura la define el grid, no el aspect-ratio del home. */
+.catsec .macro-grid .cat { aspect-ratio: auto; height: auto; }
+/* El delay del stagger (var --d, inline por tile) aplica SOLO a la revelación
+   (opacity/transform); el hover (outline-color) queda instantáneo. */
+.catsec .macro-grid .cat {
+  transition: outline-color var(--dur-med) var(--ease-standard),
+              opacity var(--dur-slow) var(--ease-reveal) var(--d, 0ms),
+              transform var(--dur-slow) var(--ease-reveal) var(--d, 0ms);
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* El contenedor ya no hace fade en bloque: animan los tiles, escalonados. */
+  .catsec .macro-grid.reveal { opacity: 1; transform: none; }
+  .catsec .macro-grid .cat { opacity: 0; transform: translateY(20px); }
+  .catsec .macro-grid.in .cat { opacity: 1; transform: none; }
+}
+/* Tipografía por tamaño de tile */
+.catsec .macro-grid .cat--big .cat-cap h3  { font-size: clamp(28px, 2.7vw, 40px); }
+.catsec .macro-grid .cat--wide .cat-cap h3 { font-size: clamp(21px, 2vw, 28px); }
+.catsec .macro-grid .cat--sm .cat-cap h3   { font-size: clamp(16px, 1.5vw, 20px); }
+.catsec .macro-grid .cat--sm .cat-cap { padding: 18px; gap: 6px; }
+.catsec .macro-grid .cat--sm .cat-brands { font-size: 10.5px; letter-spacing: .05em; }
+/* Índice curado (· 01 … · 10) en oro champagne, cifras tabulares. */
+.catsec .macro-grid .cat-num {
+  font-family: var(--font-sans); font-weight: 600; font-size: 11px; letter-spacing: .18em;
+  color: var(--homea-gold); font-variant-numeric: tabular-nums; }
+.catsec .macro-grid .cat--sm .cat-num { font-size: 10px; }
+
+/* Tablet: el mosaico se reorganiza a 2 columnas (sin !important — solo cambia
+   grid-template-areas y los tiles siguen a su área por nombre). */
+@media (max-width: 1080px) {
+  .catsec .macro-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: clamp(150px, 26vw, 200px);
+    grid-template-areas:
+      "coc coc"
+      "ext ele"
+      "lav wel"
+      "ban ban"
+      "vap min"
+      "rec chi";
+  }
+}
+/* Móvil: una columna, los features mantienen algo más de altura. */
+@media (max-width: 600px) {
+  .catsec .macro-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: minmax(150px, auto);
+    grid-template-areas: "coc" "ext" "ele" "lav" "wel" "ban" "vap" "min" "rec" "chi";
+  }
+  .catsec .macro-grid .cat--big { min-height: 220px; }
+}
+
 /* ---------- Presentación de marca: spotlight de negritas por scroll --------- */
 .brandintro { position: relative; background: var(--bg); overflow: hidden; }
 .bi-sticky { padding: clamp(36px, 7vh, 72px) 0; position: relative; z-index: 1; }
