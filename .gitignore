@@ -32,3 +32,9 @@ yarn-error.log*
 .idea/
 .vscode/
 *.swp
+
+# credenciales Shopify (nunca subir)
+catalogo-shopify/.env.shopify
+
+# archivos temporales de Excel
+~\$*.xlsx

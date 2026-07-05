@@ -25,11 +25,32 @@ export interface Guia {
 /**
  * Subcategoría 2 = tipo de producto / leaf de filtro (en ramas de 3 niveles).
  */
+/** Grupo de una ficha: "tipo" (cómo se instala) vs "estilo" (formato/configuración). */
+export type GrupoFicha = "tipo" | "estilo";
+
+/**
+ * Ficha de tipo de producto — alimenta el patrón "Planos de cocina" (FilterShowcase):
+ * tarjeta con diagrama técnico de línea + descripción concreta + specs al hover.
+ * Patrón y checklist para nuevas categorías: docs/PATRON-FICHAS-TIPO.md
+ */
+export interface FichaFiltro {
+  /** Fila donde vive la tarjeta ("Por instalación" / "Por configuración"). */
+  grupo: GrupoFicha;
+  /** Key del diagrama SVG en components/FiltroDiagrama.tsx (fallback: "generic"). */
+  diagrama: string;
+  /** UNA oración concreta y útil: qué es + para quién (siempre visible). */
+  descripcion: string;
+  /** Línea de precisión revelada al hover: "Anchos 36–48″ · El más buscado". */
+  specs: string;
+}
+
 /** Un filtro que subdivide una Subcategoría 2 (p.ej. "French Door" dentro de Refrigeradores). */
 export interface FiltroProducto {
   nombre: string;
   /** Ruta de filtro PLP aplicada (aún no existe; ver lib/flags.ts). */
   filtro: string;
+  /** Ficha de tipo (opcional). Con fichas → FilterShowcase; sin fichas → chips (FilterList). */
+  ficha?: FichaFiltro;
 }
 
 /**

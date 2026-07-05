@@ -120,6 +120,110 @@
   background: var(--homea-espresso); color: var(--homea-bone);
 }
 
+/* ---------- Fichas de tipo "Planos de cocina" (FilterShowcase) ------------
+   Tarjeta con diagrama técnico cuyas puertas se abren al hover.
+   Patrón y checklist para nuevas categorías: docs/PATRON-FICHAS-TIPO.md */
+.tfk { display: flex; flex-direction: column; gap: 44px; }
+.tfk-group-label { margin: 0 0 16px; }
+.tfk-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px;
+}
+.tfk-card {
+  display: flex; flex-direction: column;
+  background: var(--surface); border: 1px solid var(--border);
+  color: inherit; border-bottom: 1px solid var(--border);
+  transition: transform var(--dur-med) var(--ease-standard),
+              border-color var(--dur-med) var(--ease-standard),
+              box-shadow var(--dur-med) var(--ease-standard);
+}
+.tfk-card:hover {
+  transform: translateY(-4px); border-color: var(--homea-gold); box-shadow: var(--shadow-md);
+}
+.tfk-diagram {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--homea-greige); border-bottom: 1px solid var(--border);
+  padding: 14px 0 10px;
+}
+.tfk-diagram svg { height: 138px; width: auto; display: block; }
+.tfk-body { display: flex; flex-direction: column; flex: 1; padding: 16px 18px 20px; }
+.tfk-name {
+  font-family: var(--font-display); font-weight: 400; font-size: 21px;
+  line-height: var(--lh-snug); color: var(--fg); margin-bottom: 6px;
+}
+.tfk-desc { font-size: 13.5px; line-height: 1.55; color: var(--fg-muted); flex: 1; }
+.tfk-meta {
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--accent-text);
+  font-variant-numeric: tabular-nums;
+  max-height: 0; opacity: 0; overflow: hidden; margin-top: 0;
+  transition: max-height var(--dur-slow) var(--ease-standard),
+              opacity var(--dur-slow) var(--ease-standard),
+              margin var(--dur-slow) var(--ease-standard);
+}
+.tfk-card:hover .tfk-meta { max-height: 40px; opacity: 1; margin-top: 10px; }
+.tfk-cta {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: 14px;
+  font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+  letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--fg);
+  transition: color var(--dur-med) var(--ease-standard);
+}
+.tfk-arrow {
+  position: relative; display: inline-block; width: 28px; height: 1px;
+  background: var(--fg); transition: width var(--dur-slow) var(--ease-reveal),
+              background var(--dur-med) var(--ease-standard);
+}
+.tfk-arrow::after {
+  content: ""; position: absolute; right: 0; top: -3px; width: 6px; height: 6px;
+  border-top: 1px solid currentColor; border-right: 1px solid currentColor;
+  transform: rotate(45deg); color: var(--fg);
+  transition: color var(--dur-med) var(--ease-standard);
+}
+.tfk-card:hover .tfk-cta { color: var(--accent-text); }
+.tfk-card:hover .tfk-arrow { width: 44px; background: var(--accent-text); }
+.tfk-card:hover .tfk-arrow::after { color: var(--accent-text); }
+
+/* — Diagrama: anatomía y animación de puertas — */
+.tfk-diagram .fb { fill: var(--homea-bone); stroke: var(--homea-espresso); stroke-width: 1.5; }
+.tfk-diagram .dr rect, .tfk-diagram .dw rect { fill: var(--homea-bone); stroke: var(--homea-espresso); stroke-width: 1.5; }
+.tfk-diagram .dr line, .tfk-diagram .dw line { stroke: var(--homea-espresso); stroke-width: 1.5; stroke-linecap: round; }
+.tfk-diagram .dr, .tfk-diagram .dw {
+  transform-box: fill-box;
+  transition: transform 550ms var(--ease-reveal);
+}
+.tfk-diagram .hl { transform-origin: left center; }
+.tfk-diagram .hr { transform-origin: right center; }
+.tfk-card:hover .hl, .tfk-card:hover .hr { transform: scaleX(0.13); }
+.tfk-card:hover .dw { transform: translateY(7px); }
+.tfk-diagram .in { opacity: 0; transition: opacity var(--dur-slow) var(--ease-standard) 80ms; }
+.tfk-card:hover .in { opacity: 1; }
+.tfk-diagram .in .zone { fill: var(--homea-gold); opacity: 0.25; }
+.tfk-diagram .in line { stroke: var(--accent-text); stroke-width: 1.2; opacity: 0.7; }
+.tfk-diagram .fl { stroke: var(--homea-espresso); stroke-width: 1; opacity: 0.3; }
+.tfk-diagram .cab { stroke: var(--homea-espresso); stroke-width: 1; opacity: 0.35; stroke-dasharray: 3 3; fill: none; }
+.tfk-diagram .glass { fill: none; stroke: var(--homea-espresso); stroke-width: 1; opacity: 0.55; }
+.tfk-diagram .glass-shelf { stroke-width: 1 !important; opacity: 0.45; }
+.tfk-diagram .ln { fill: none; stroke: var(--homea-espresso); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+/* Tapa que se levanta al hover (arcones, asadores, campana retráctil). */
+.tfk-diagram .lid { transform-box: fill-box; transition: transform 550ms var(--ease-reveal); }
+.tfk-card:hover .lid { transform: translateY(-8px); }
+/* Revelados oro adicionales: trazos (agua/vapor/flamas) y aros (quemadores/hielo). */
+.tfk-diagram .in path { stroke: var(--accent-text); fill: none; stroke-width: 1.2; opacity: 0.7; }
+.tfk-diagram .in .ring { fill: none; stroke: var(--accent-text); stroke-width: 1.5; opacity: 0.8; }
+.tfk-diagram .in circle.zone, .tfk-diagram .in rect.zone { stroke: none; }
+
+/* Táctil (sin hover): specs siempre visibles; el diagrama descansa cerrado. */
+@media (hover: none) {
+  .tfk-meta { max-height: 40px; opacity: 1; margin-top: 10px; }
+}
+/* Movimiento reducido: sin animación de puertas ni lift; specs visibles. */
+@media (prefers-reduced-motion: reduce) {
+  .tfk-card, .tfk-diagram .dr, .tfk-diagram .dw, .tfk-diagram .lid, .tfk-diagram .in,
+  .tfk-meta, .tfk-arrow { transition: none; }
+  .tfk-card:hover { transform: none; }
+  .tfk-card:hover .hl, .tfk-card:hover .hr, .tfk-card:hover .dw,
+  .tfk-card:hover .lid { transform: none; }
+}
+
 /* Migas de pan sobre fondo claro, encima de "Explora por categoría". */
 .guias-crumbs { margin-bottom: 28px; }
 .guias-crumbs .crumbs { font-size: 12px; color: var(--fg-muted); }

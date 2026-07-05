@@ -76,6 +76,7 @@ Migramos de OXATIS → Next.js conservando el dominio `homea.mx`. El riesgo #1 e
 - `docs/PLAYBOOK-MIGRACION-SEO.md` — checklist accionable de migración (la columna vertebral SEO).
 - `docs/PLAN-REDIRECTS-MIGRACION.md` — plan de redirects 301 (estructura Google, reglas de mapeo, Tier 1–2).
 - `docs/ESTRATEGIA-IMAGENES.md` — dónde se almacenan las imágenes (producto→Shopify CDN, editoriales→Vercel/`next/image`), optimización de carga y **nomenclatura SEO de archivos** (descriptiva + trends de búsqueda).
+- `docs/PATRON-FICHAS-TIPO.md` — patrón "Planos de cocina": fichas de tipo de producto en Guías (diagrama de línea + hover puertas abiertas). Referencia: Refrigeradores. **Usar este patrón al definir los tipos de cada categoría nueva.**
 - `docs/FASE1-CONCEPTO-Y-SECCIONES.md` — concepto + arquitectura de secciones de la landing.
 - `docs/FASE1-ANALISIS-Y-SECCIONES.md` — análisis (auditoría+benchmark) + secciones por plantilla (7 plantillas).
 - `auditoria-sitio-actual/` y `benchmark-competencia/` — auditoría del sitio actual + benchmark de competencia/proveedor.

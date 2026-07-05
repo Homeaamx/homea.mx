@@ -18,6 +18,7 @@ import type { Guia, Macrocategoria, Subcategoria1, Subcategoria2 } from "@/types
 import PageHero from "@/components/PageHero";
 import CategoryList from "@/components/CategoryList";
 import FilterList from "@/components/FilterList";
+import FilterShowcase from "@/components/FilterShowcase";
 import GuiaSearch from "@/components/GuiaSearch";
 import GuideTypeFilter from "@/components/GuideTypeFilter";
 import GuideArticle from "@/components/GuideArticle";
@@ -263,6 +264,9 @@ function FilterIndex({
 }) {
   const crumbs = buildBreadcrumb(node);
   const filtros = sub2.filtros ?? [];
+  // Con fichas → patrón "Planos de cocina" (docs/PATRON-FICHAS-TIPO.md);
+  // sin fichas (categoría aún sin definir) → chips clásicos.
+  const conFichas = filtros.some((f) => f.ficha);
 
   return (
     <>
@@ -270,11 +274,19 @@ function FilterIndex({
         crumbs={crumbs}
         eyebrow={sub1.nombre}
         title={sub2.nombre}
-        sub={`Elige un filtro para ver los ${sub2.nombre.toLowerCase()} de ${sub1.nombre} que buscas.`}
+        sub={
+          conFichas
+            ? `Cada tipo de ${sub2.nombre.toLowerCase()} resuelve una cocina distinta. Compara y elige el tuyo.`
+            : `Elige un filtro para ver los ${sub2.nombre.toLowerCase()} de ${sub1.nombre} que buscas.`
+        }
       />
       <section className="sec">
         <div className="container">
-          <FilterList filtros={filtros} />
+          {conFichas ? (
+            <FilterShowcase filtros={filtros} contexto={sub2.nombre} />
+          ) : (
+            <FilterList filtros={filtros} />
+          )}
         </div>
       </section>
       <JsonLd
