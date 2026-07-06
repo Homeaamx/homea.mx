@@ -488,9 +488,18 @@
         mega.classList.add("cat-active");                 /* oculta la intro de marca y muestra detalle+foto */
       };
       cats.forEach(function (c) {
-        var go = function () { activate(c.dataset.pane, c.dataset.img, c.dataset.label, c.dataset.pos); };
+        var go = function () {
+          activate(c.dataset.pane, c.dataset.img, c.dataset.label, c.dataset.pos);
+          /* la foto grande enlaza a la macrocategoría activa */
+          if (featEl && c.dataset.href) { featEl.setAttribute("href", c.dataset.href); }
+        };
         c.addEventListener("mouseenter", go);
         c.addEventListener("focus", go);
+        /* clic en la macrocategoría → su página de catálogo */
+        if (c.dataset.href) {
+          c.style.cursor = "pointer";
+          c.addEventListener("click", function () { window.location.href = c.dataset.href; });
+        }
       });
       /* Al cerrar el menú, regresar al estado inicial: solo macro categorías, sin detalle ni foto */
       var reset = function () {
@@ -645,13 +654,9 @@
     a.addEventListener("click", close);
   });
 
-  /* En móvil el mega-menú está oculto: "Productos" lleva al catálogo */
-  var prod = nav.querySelector(".has-mega > span");
-  if (prod) {
-    prod.addEventListener("click", function () {
-      if (window.matchMedia("(max-width: 1080px)").matches) { window.location.href = "coleccion.html"; }
-    });
-  }
+  /* "Productos" NO navega: sólo abre el desplegable; la navegación ocurre al elegir
+     una macrocategoría del riel (data-href en .mega-cat). En móvil, el propio riel
+     lleva a cada macrocategoría. */
 
   /* Cerrar con Escape */
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
