@@ -59,6 +59,9 @@ html { scroll-behavior: smooth; }
   cursor: pointer; transition: color var(--dur-fast) var(--ease-standard);
 }
 .nav-links > a:hover, .nav-links .has-mega:hover > span, .nav-links .has-mega:hover > a { border-bottom-color: var(--homea-gold); }
+/* "Productos" abre el mega-menú al pasar el cursor; NO es un enlace → cursor normal
+   para que no invite al clic (la navegación ocurre al elegir una macrocategoría). */
+.nav-links .has-mega > span { cursor: default; }
 .nav-right { display: flex; gap: 26px; align-items: center; }
 .nav-right > a {
   font-family: var(--font-sans); font-weight: 600; font-size: 12px;

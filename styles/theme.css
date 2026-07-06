@@ -59,6 +59,9 @@ html { scroll-behavior: smooth; }
   cursor: pointer; transition: color var(--dur-fast) var(--ease-standard);
 }
 .nav-links > a:hover, .nav-links .has-mega:hover > span, .nav-links .has-mega:hover > a { border-bottom-color: var(--homea-gold); }
+/* "Productos" abre el mega-menú al pasar el cursor; NO es un enlace → cursor normal
+   para que no invite al clic (la navegación ocurre al elegir una macrocategoría). */
+.nav-links .has-mega > span { cursor: default; }
 .nav-right { display: flex; gap: 26px; align-items: center; }
 .nav-right > a {
   font-family: var(--font-sans); font-weight: 600; font-size: 12px;
@@ -97,7 +100,10 @@ html { scroll-behavior: smooth; }
               translate var(--dur-med) var(--ease-standard),
               visibility 0s linear var(--dur-med);
 }
-.has-mega:hover .mega-panel, .has-mega:focus-within .mega-panel {
+/* Apertura controlada por JS (.is-open): garantiza un solo panel abierto y cierre
+   limpio al salir el cursor. Sin :focus-within, para que el panel NO se quede
+   "pegado" tras hacer clic en el título (el foco persistía y lo mantenía abierto). */
+.has-mega.is-open .mega-panel {
   opacity: 1; visibility: visible; translate: 0 0; transition-delay: 0s;
 }
 
@@ -1087,14 +1093,46 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 }
 .gama-note .arrow { font-size: 16px; color: var(--homea-gold); transition: transform .25s ease; }
 .gama-note:hover .arrow { transform: translateX(6px); }
+/* ---------- Gama · filtros con rampa tonal por rango de marca ----------
+   Cada rango tiene un tono propio: PREMIUM el más oscuro (espresso) y aclarando
+   por pasos hasta ECONÓMICA (arena clara); TODAS usa el oro champagne como acento
+   maestro. En reposo el tono se insinúa como una barra inferior; al pasar el
+   cursor —o al seleccionar— el tono "sube" y rellena el botón. Así, al cambiar de
+   un rango a otro, se lee de inmediato el tono del nuevo rango. */
 .gama-tabs .t {
+  position: relative; overflow: hidden; isolation: isolate;
   font-size: 10px; font-weight: 600; letter-spacing: var(--tracking-label); text-transform: uppercase;
   padding: 12px 20px; border: 1px solid var(--border-strong); color: var(--fg);
-  cursor: pointer; background: transparent; transition: all var(--dur-fast) var(--ease-standard);
+  cursor: pointer; background: transparent;
+  box-shadow: inset 0 -3px 0 var(--tone, var(--border-strong));
+  transition: color var(--dur-med) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard),
+              box-shadow var(--dur-fast) var(--ease-standard),
+              transform var(--dur-fast) var(--ease-standard);
 }
-.gama-tabs .t:hover { border-color: var(--homea-gold); color: var(--homea-gold-text); transform: scale(1.06); }
-.gama-tabs .t.on { background: var(--homea-black); color: var(--homea-bone); border-color: var(--homea-black); }
-.gama-tabs .t.on:hover { color: var(--homea-gold-bright); border-color: var(--homea-gold); }
+/* Relleno tonal que asciende desde el borde inferior. */
+.gama-tabs .t::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: var(--tone, var(--homea-black));
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform var(--dur-med) var(--ease-standard);
+}
+/* Rampa de tonos: oscuro (Premium) → claro (Económica). Todas = oro champagne. */
+.gama-tabs .t[data-filter="all"]         { --tone: var(--homea-gold); --tone-fg: #1E1914; }
+.gama-tabs .t[data-filter="premium"]     { --tone: #1E1914; --tone-fg: #F5EFE4; }
+.gama-tabs .t[data-filter="residencial"] { --tone: #514536; --tone-fg: #F5EFE4; }
+.gama-tabs .t[data-filter="media"]       { --tone: #9A8B72; --tone-fg: #1E1914; }
+.gama-tabs .t[data-filter="economica"]   { --tone: #DCD3C2; --tone-fg: #1E1914; }
+
+.gama-tabs .t:hover, .gama-tabs .t.on {
+  color: var(--tone-fg, var(--homea-bone));
+  border-color: var(--tone, var(--homea-black));
+  box-shadow: inset 0 -3px 0 var(--tone, var(--border-strong));
+}
+.gama-tabs .t:hover { transform: translateY(-2px); }
+.gama-tabs .t:hover::before, .gama-tabs .t.on::before { transform: scaleY(1); }
+/* Sin recuadro de foco al hacer clic con ratón; se conserva para teclado. */
+.gama-tabs .t:focus:not(:focus-visible) { outline: none; }
 
 .brands-wrap { position: relative; }
 

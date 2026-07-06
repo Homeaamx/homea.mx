@@ -111,9 +111,17 @@
         mega.classList.add("cat-active");
       };
       cats.forEach(function (c) {
-        var go = function () { activate(c.dataset.pane, c.dataset.img, c.dataset.label, c.dataset.pos); };
+        var go = function () {
+          activate(c.dataset.pane, c.dataset.img, c.dataset.label, c.dataset.pos);
+          if (featEl && c.dataset.href) { featEl.setAttribute("href", c.dataset.href); }
+        };
         c.addEventListener("mouseenter", go);
         c.addEventListener("focus", go);
+        /* La navegación vive en la macrocategoría: clic en el riel → su página. */
+        if (c.dataset.href) {
+          c.style.cursor = "pointer";
+          c.addEventListener("click", function () { window.location.href = c.dataset.href; });
+        }
       });
       var reset = function () {
         cats.forEach(function (c) { c.classList.remove("is-active"); });
@@ -123,6 +131,48 @@
       };
       var wrap = mega.closest(".has-mega");
       if (wrap) { wrap.addEventListener("mouseleave", reset); }
+    }
+
+    /* ---- Apertura/cierre de los mega-menús: un solo panel a la vez ----
+       El panel se muestra por clase (.is-open) en vez de :hover. Delegación en la
+       barra: en CADA movimiento se recalcula sobre qué .has-mega está el cursor
+       (título o su panel) y se abre solo ese; el resto se cierra al instante. Así
+       nunca queda "pegado" el panel anterior al cambiar de título (p. ej. de
+       Marcas a Productos). Al salir de la barra se cierra tras una breve gracia. */
+    var siteNav = document.querySelector(".site-nav");
+    var megaWraps = document.querySelectorAll(".has-mega");
+    if (siteNav && megaWraps.length) {
+      var closeTimer = null;
+      var closeAllMega = function () {
+        if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+        megaWraps.forEach(function (w) { w.classList.remove("is-open"); });
+      };
+      var openMega = function (w) {
+        if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+        megaWraps.forEach(function (o) { o.classList.toggle("is-open", o === w); });
+      };
+      var closeSoon = function () {
+        if (closeTimer) { clearTimeout(closeTimer); }
+        closeTimer = setTimeout(closeAllMega, 140);
+      };
+      siteNav.addEventListener("mouseover", function (e) {
+        var w = e.target.closest(".has-mega");
+        if (w) { openMega(w); }
+        /* Sobre un elemento interactivo de la barra que NO es mega → cerrar.
+           El espacio vacío entre enlaces no dispara nada (evita parpadeo al cruzar). */
+        else if (e.target.closest("a, button, .btn, .nav-search")) { closeAllMega(); }
+      });
+      siteNav.addEventListener("mouseleave", closeSoon);
+      /* Al pulsar cualquier enlace de la barra (incluido el título con panel o un
+         item del panel) el mega se cierra al instante para dejar ver la página.
+         Con clic de ratón (e.detail > 0) se quita el foco del enlace para que no
+         quede el recuadro de foco ni un panel "pegado"; el foco de teclado (Enter,
+         e.detail === 0) se respeta para no romper la navegación accesible. */
+      siteNav.addEventListener("click", function (e) {
+        var a = e.target.closest("a");
+        if (a) { closeAllMega(); if (e.detail > 0) { a.blur(); } }
+      });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeAllMega(); } });
     }
 
     /* ---------- Menú móvil (hamburguesa) ---------- */
@@ -137,13 +187,8 @@
       mnav.querySelectorAll(".nav-links a, .nav-right a, .btn-ghost").forEach(function (a) {
         a.addEventListener("click", close);
       });
-      /* En móvil el mega-menú está oculto: "Productos" lleva al catálogo */
-      var prod = mnav.querySelector(".has-mega > span");
-      if (prod) {
-        prod.addEventListener("click", function () {
-          if (window.matchMedia("(max-width: 1080px)").matches) { window.location.href = "/productos"; }
-        });
-      }
+      /* "Productos" NO navega (no existe índice /productos): solo abre el desplegable.
+         La navegación ocurre al elegir una macrocategoría del riel. */
       document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
     }
   }
@@ -271,19 +316,32 @@
     var alphaOrder = costOrder.slice().sort(function (a, b) {
       return a.textContent.trim().localeCompare(b.textContent.trim(), "es");
     });
-    function applyGama(filter) {
+    var gamaReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function applyGama(filter, animate) {
       brandTiles.forEach(function (a) {
         var show = filter === "all" ||
           (" " + a.getAttribute("data-gama") + " ").indexOf(" " + filter + " ") >= 0;
         a.classList.toggle("hide", !show);
       });
+      var order = filter === "all" ? alphaOrder : costOrder;
       if (brandGrid) {
-        (filter === "all" ? alphaOrder : costOrder).forEach(function (a) {
-          brandGrid.appendChild(a);
-        });
+        order.forEach(function (a) { brandGrid.appendChild(a); });
       }
       if (gamaNote) { gamaNote.classList.toggle("hide", filter === "all"); }
       if (azRail) { azRail.classList.toggle("hide", filter !== "all"); updateAzArrow(); }
+      /* Al cambiar de gama, las marcas visibles entran con un fade escalonado.
+         WAAPI: se auto-limpia, se re-dispara limpio en cada cambio y respeta
+         "reduce motion". `fill:backwards` mantiene opacity 0 durante el retardo
+         del escalonado y no deja estado residual al terminar. */
+      if (animate && !gamaReduce.matches) {
+        var visible = order.filter(function (a) { return !a.classList.contains("hide"); });
+        visible.forEach(function (a, i) {
+          a.animate(
+            [{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "translateY(0)" }],
+            { duration: 420, delay: Math.min(i * 18, 360), easing: "cubic-bezier(.22,.61,.36,1)", fill: "backwards" }
+          );
+        });
+      }
     }
     var azTrack = azRail && azRail.querySelector(".az-track");
     var azArrow = azRail && azRail.querySelector(".az-arrow");
@@ -307,11 +365,11 @@
       t.addEventListener("click", function () {
         tabs.forEach(function (x) { x.classList.remove("on"); });
         t.classList.add("on");
-        if (brandTiles.length) { applyGama(t.getAttribute("data-filter") || "all"); }
+        if (brandTiles.length) { applyGama(t.getAttribute("data-filter") || "all", true); }
       });
     });
     var activeTab = document.querySelector(".gama-tabs .t.on");
-    if (brandTiles.length && activeTab) { applyGama(activeTab.getAttribute("data-filter") || "all"); }
+    if (brandTiles.length && activeTab) { applyGama(activeTab.getAttribute("data-filter") || "all", false); }
 
     /* ---------- Movimiento por scroll (hero + stats) ---------- */
     var rmotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

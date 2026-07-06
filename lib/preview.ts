@@ -5,16 +5,18 @@
 // - Quita el <script src="v2.js"> (se carga una sola vez, global) — el JSON inline
 //   (#hero-data) se conserva para que v2.js lo lea.
 
-import { readFileSync } from "fs";
+import { readdirSync, readFileSync } from "fs";
 import { join } from "path";
 
 const PREVIEW_DIR = join(process.cwd(), "preview");
+
+// Prefijo de las páginas de categoría del preview (categoria-<slug>.html).
+const CATEGORIA_PREFIX = "categoria-";
 
 // Mapeo de páginas del preview → rutas del sitio.
 const LINK_MAP: Record<string, string> = {
   "home.html": "/",
   "marcas.html": "/marcas",
-  "coleccion.html": "/productos",
   "producto.html": "/producto",
   "b2b.html": "/proyectos",
   "nosotros.html": "/nosotros",
@@ -22,7 +24,9 @@ const LINK_MAP: Record<string, string> = {
   "herramientas.html": "/herramientas",
   "garantias-instalacion.html": "/garantias-instalacion",
   "guias.html": "/guias/",
-  "ofertas.html": "/productos",
+  // No hay índice /productos ni página de ofertas todavía → caen a la home.
+  "coleccion.html": "/",
+  "ofertas.html": "/",
 };
 
 function readPreview(file: string): string {
@@ -35,7 +39,10 @@ function rewrite(html: string): string {
   html = html.replace(
     /href="([a-z0-9-]+)\.html(#[^"]*)?"/gi,
     (_m, file: string, frag = "") => {
-      const route = LINK_MAP[`${file}.html`] ?? "#";
+      // Páginas de categoría: categoria-<slug>.html → /productos/<slug>.
+      const route = file.startsWith(CATEGORIA_PREFIX)
+        ? `/productos/${file.slice(CATEGORIA_PREFIX.length)}`
+        : LINK_MAP[`${file}.html`] ?? "#";
       return `href="${route}${frag || ""}"`;
     }
   );
@@ -76,4 +83,16 @@ export function getMain(file: string): string {
 export function getTitle(file: string): string | undefined {
   const m = readPreview(file).match(/<title>([^<]*)<\/title>/i);
   return m?.[1]?.trim();
+}
+
+/** Slugs de las páginas de categoría del preview (categoria-<slug>.html → <slug>). */
+export function categoriaSlugs(): string[] {
+  return readdirSync(PREVIEW_DIR)
+    .filter((f) => f.startsWith(CATEGORIA_PREFIX) && f.endsWith(".html"))
+    .map((f) => f.slice(CATEGORIA_PREFIX.length, -".html".length));
+}
+
+/** Nombre de archivo del preview para una slug de categoría. */
+export function categoriaFile(slug: string): string {
+  return `${CATEGORIA_PREFIX}${slug}.html`;
 }
