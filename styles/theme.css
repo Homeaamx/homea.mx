@@ -1008,7 +1008,7 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
    esquinas vivas, sombra suave y flecha fina en SVG; en hover invierte a hueso y
    la flecha se desplaza. Se deshabilita al llegar al inicio/fin. */
 .subcat-band .container { padding-top: 34px; padding-bottom: 30px; }
-.subcat-carousel { display: flex; align-items: center; gap: clamp(16px, 1.8vw, 30px); }
+.subcat-carousel { display: flex; align-items: center; gap: clamp(32px, 4vw, 72px); }
 .subcat-carousel .subcat-strip { flex: 1 1 auto; min-width: 0; }
 .subcat-arrow {
   flex: 0 0 auto; width: 52px; height: 52px; display: grid; place-items: center;
@@ -1143,6 +1143,62 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 }
 .gama-note .arrow { font-size: 16px; color: var(--homea-gold); transition: transform .25s ease; }
 .gama-note:hover .arrow { transform: translateX(6px); }
+
+/* ---------- MODO MAGIA: reacomoda las marcas por macrocategoría ---------- */
+.gama-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; margin-bottom: 32px; }
+.gama-bar .gama-tabs { margin-bottom: 0; }
+.brands-wrap.hide { display: none; }
+
+.magic-btn {
+  display: inline-flex; align-items: center; gap: 9px; margin-left: auto; padding: 10px 18px; cursor: pointer;
+  background: #fff; color: var(--accent-text);
+  border: 1px solid var(--homea-gold);
+  font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase;
+  box-shadow: 0 6px 18px rgba(120, 96, 59, .16);
+  animation: magic-breathe 3.4s var(--ease-standard) infinite;
+  transition: background .3s var(--ease-standard), color .3s var(--ease-standard),
+              border-color .3s var(--ease-standard), box-shadow .35s var(--ease-standard),
+              transform .35s var(--ease-standard);
+}
+.magic-btn .magic-star { font-size: 14px; line-height: 1; color: var(--homea-gold);
+  transition: transform .5s var(--ease-standard), color .3s var(--ease-standard); }
+.magic-btn:hover {
+  animation: none;
+  background: #fff; border-color: var(--homea-gold);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 46px rgba(120, 96, 59, .30); }
+.magic-btn:active { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(120, 96, 59, .26); }
+.magic-btn:hover .magic-star { transform: rotate(90deg) scale(1.15); }
+.magic-btn.on { animation: none; scale: 1; background: var(--homea-espresso); color: var(--homea-bone); border-color: var(--homea-espresso); }
+.magic-btn.on .magic-star { color: var(--homea-gold); animation: magic-twinkle 2.4s ease-in-out infinite; }
+@keyframes magic-breathe {
+  0%, 100% { scale: 1;    box-shadow: 0 6px 18px rgba(120, 96, 59, .16); }
+  50%      { scale: 1.04; box-shadow: 0 12px 30px rgba(189, 155, 94, .34); }
+}
+@media (prefers-reduced-motion: reduce) { .magic-btn { animation: none; } }
+@keyframes magic-twinkle {
+  0%, 100% { opacity: 1; transform: rotate(180deg) scale(1); }
+  50%      { opacity: .55; transform: rotate(180deg) scale(1.28); }
+}
+
+.brands-grouped { display: block; position: relative; }
+.brands-grouped.hide { display: none; }
+/* Ráfaga de destellos oro al activar MODO MAGIA (se esparcen sobre las marcas). */
+.magic-sparkles { position: absolute; inset: 0; z-index: 6; pointer-events: none; overflow: visible; }
+.magic-sparkle { position: absolute; transform: translate(-50%, -50%); color: var(--homea-gold);
+  line-height: 1; will-change: transform, opacity;
+  text-shadow: 0 0 8px color-mix(in srgb, var(--homea-gold) 65%, transparent); }
+.brand-group { margin-top: 56px; }
+.brand-group:first-child { margin-top: 6px; }
+.brand-group-h { display: flex; align-items: baseline; gap: 14px; margin: 0 0 24px;
+  padding-bottom: 16px; border-bottom: 1px solid var(--border-strong); }
+.brand-group-h .bg-eyebrow { font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(26px, 3vw, 36px); letter-spacing: -0.01em; line-height: 1.05; color: var(--fg); }
+.brand-group-h .bg-count { font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--accent-text);
+  font-variant-numeric: tabular-nums; }
+.brands-grouped .brandtile { will-change: transform, opacity; }
 /* ---------- Gama · filtros con rampa tonal por rango de marca ----------
    Cada rango tiene un tono propio: PREMIUM el más oscuro (espresso) y aclarando
    por pasos hasta ECONÓMICA (arena clara); TODAS usa el oro champagne como acento
@@ -1206,6 +1262,27 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
   transition: top .18s linear; will-change: top;
 }
 @media (max-width: 900px) { .az-rail { display: none; } }
+
+/* Riel + → − (mayor a menor costo): reemplaza al A→Z al filtrar por una gama */
+.pm-rail {
+  position: absolute; top: 0; bottom: 0; left: -60px; width: 40px;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 2px 0;
+  font-family: var(--font-sans); font-weight: 600; font-size: 19px; line-height: 1;
+  color: var(--accent-text);
+}
+.pm-rail.hide { display: none; }
+.pm-rail .pm-track {
+  flex: 1 1 auto; position: relative; width: 1px; margin: 12px 0;
+  background: linear-gradient(var(--border-strong), color-mix(in srgb, var(--homea-gold) 55%, transparent));
+}
+.pm-rail .pm-arrow {
+  position: absolute; left: 50%; top: 0; transform: translate(-50%, -50%);
+  width: 12px; height: 12px; border-radius: 50%; background: var(--homea-gold-deep);
+  box-shadow: 0 0 0 4px var(--homea-bone);
+  transition: top .18s linear; will-change: top;
+}
+@media (max-width: 900px) { .pm-rail { display: none; } }
 
 /* Mosaico de marcas — mismo diseño que la sección "Distribución oficial" del home
    (.mq-chip): FOTO de marca al fondo + logo blanco al centro. Diferencias pedidas:

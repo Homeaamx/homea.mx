@@ -358,33 +358,56 @@
       }
     }
 
-    /* ---------- Tabs de marcas: filtran por gama ---------- */
+    /* ---------- Tabs de marcas: filtran por gama · MODO MAGIA: agrupa por macro ---------- */
     var tabs = document.querySelectorAll(".gama-tabs .t");
-    var brandTiles = document.querySelectorAll(".brandtiles a[data-gama]");
     var brandGrid = document.querySelector(".brandtiles");
+    var brandTiles = brandGrid ? brandGrid.querySelectorAll(":scope > a[data-gama]") : [];
+    var brandsWrap = document.querySelector(".brands-wrap");
+    var brandsGrouped = document.querySelector("#brandsGrouped");
+    var magicBtn = document.querySelector("#magicBtn");
     var gamaNote = document.querySelector(".gama-note");
     var azRail = document.querySelector(".az-rail");
-    var costOrder = Array.prototype.slice.call(brandTiles);
-    var alphaOrder = costOrder.slice().sort(function (a, b) {
+    var pmRail = document.querySelector(".pm-rail");
+    /* Macrocategorías (orden + etiqueta) — secciones de las listas de precios de homea.mx.
+       Una marca (data-sub) puede pertenecer a varias → se repite en cada macro al agrupar. */
+    var MACROS = [
+      { key: "cocina", label: "Equipos de Cocina" },
+      { key: "menores", label: "Electrodomésticos Menores" },
+      { key: "tarjas", label: "Tarjas & Monomandos" },
+      { key: "trituradores", label: "Trituradores" },
+      { key: "asadores", label: "Asadores, Grills & Hornos de Pizza" },
+      { key: "banos", label: "Baños & Regaderas" },
+      { key: "vapor", label: "Vapor & Wellness" }
+    ];
+    /* Orden por costo = orden inicial del sitio (posicionamiento mayor→menor). Se sella en
+       data-cost UNA vez por marca para que sobreviva a reordenamientos del DOM y a las
+       re-inicializaciones (navegación SPA / Fast Refresh): sin el sello, recapturar el orden
+       del DOM tras el sort A→Z de la vista TODAS dejaría el "orden por costo" en alfabético. */
+    var tilesArr = Array.prototype.slice.call(brandTiles);
+    tilesArr.forEach(function (a, i) {
+      if (!a.hasAttribute("data-cost")) { a.setAttribute("data-cost", i); }
+    });
+    var costOrder = tilesArr.slice().sort(function (a, b) {
+      return (+a.getAttribute("data-cost")) - (+b.getAttribute("data-cost"));
+    });
+    var alphaOrder = tilesArr.slice().sort(function (a, b) {
       return a.textContent.trim().localeCompare(b.textContent.trim(), "es");
     });
     var gamaReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    function applyGama(filter, animate) {
-      brandTiles.forEach(function (a) {
-        var show = filter === "all" ||
-          (" " + a.getAttribute("data-gama") + " ").indexOf(" " + filter + " ") >= 0;
-        a.classList.toggle("hide", !show);
-      });
+    var activeFilter = "all";
+    var magicOn = false;
+    function gamaShows(a, filter) {
+      return filter === "all" ||
+        (" " + a.getAttribute("data-gama") + " ").indexOf(" " + filter + " ") >= 0;
+    }
+    function inMacro(a, key) {
+      return (" " + (a.getAttribute("data-sub") || "") + " ").indexOf(" " + key + " ") >= 0;
+    }
+    /* Vista plana (gama): filtra por gama y ordena (TODAS→alfabético, gama→costo). */
+    function renderFlat(filter, animate) {
+      brandTiles.forEach(function (a) { a.classList.toggle("hide", !gamaShows(a, filter)); });
       var order = filter === "all" ? alphaOrder : costOrder;
-      if (brandGrid) {
-        order.forEach(function (a) { brandGrid.appendChild(a); });
-      }
-      if (gamaNote) { gamaNote.classList.toggle("hide", filter === "all"); }
-      if (azRail) { azRail.classList.toggle("hide", filter !== "all"); updateAzArrow(); }
-      /* Al cambiar de gama, las marcas visibles entran con un fade escalonado.
-         WAAPI: se auto-limpia, se re-dispara limpio en cada cambio y respeta
-         "reduce motion". `fill:backwards` mantiene opacity 0 durante el retardo
-         del escalonado y no deja estado residual al terminar. */
+      if (brandGrid) { order.forEach(function (a) { brandGrid.appendChild(a); }); }
       if (animate && !gamaReduce.matches) {
         var visible = order.filter(function (a) { return !a.classList.contains("hide"); });
         visible.forEach(function (a, i) {
@@ -395,23 +418,105 @@
         });
       }
     }
+    /* Vista MODO MAGIA: agrupa por macrocategoría; una marca se repite (clon) en cada macro
+       a la que pertenece. Respeta el filtro de gama activo. */
+    function renderGrouped(filter, animate) {
+      if (!brandsGrouped) return;
+      brandsGrouped.innerHTML = "";
+      var reveal = [];
+      MACROS.forEach(function (m) {
+        var members = costOrder.filter(function (a) { return inMacro(a, m.key) && gamaShows(a, filter); });
+        if (!members.length) return;
+        var sec = document.createElement("section");
+        sec.className = "brand-group";
+        var h = document.createElement("div");
+        h.className = "brand-group-h";
+        var eb = document.createElement("span"); eb.className = "bg-eyebrow"; eb.textContent = m.label;
+        var ct = document.createElement("span"); ct.className = "bg-count"; ct.textContent = members.length;
+        h.appendChild(eb); h.appendChild(ct);
+        var g = document.createElement("div");
+        g.className = "brandtiles brandtiles-grp";
+        members.forEach(function (a) {
+          var c = a.cloneNode(true);
+          c.classList.remove("hide", "tin", "tout", "gacc");
+          c.removeAttribute("style");
+          g.appendChild(c); reveal.push(c);
+        });
+        sec.appendChild(h); sec.appendChild(g);
+        brandsGrouped.appendChild(sec);
+      });
+      if (animate && !gamaReduce.matches) {
+        reveal.forEach(function (c, i) {
+          c.animate(
+            [{ opacity: 0, transform: "scale(.86) translateY(8px)" }, { opacity: 1, transform: "scale(1) translateY(0)" }],
+            { duration: 460, delay: Math.min(i * 12, 620), easing: "cubic-bezier(.22,.61,.36,1)", fill: "backwards" }
+          );
+        });
+      }
+    }
+    function applyGama(filter, animate) {
+      activeFilter = filter;
+      /* En MODO MAGIA el orden es por categoría → se ocultan rieles y nota de costo. */
+      if (gamaNote) { gamaNote.classList.toggle("hide", magicOn || filter === "all"); }
+      if (azRail) { azRail.classList.toggle("hide", magicOn || filter !== "all"); updateAzArrow(); }
+      if (pmRail) { pmRail.classList.toggle("hide", magicOn || filter === "all"); updatePmArrow(); }
+      if (brandsWrap) { brandsWrap.classList.toggle("hide", magicOn); }
+      if (brandsGrouped) { brandsGrouped.classList.toggle("hide", !magicOn); }
+      if (magicOn) { renderGrouped(filter, animate); } else { renderFlat(filter, animate); }
+    }
+    /* Ráfaga de destellos oro que se esparcen sobre las marcas al activar MODO MAGIA. */
+    function emitSparkles(host) {
+      if (!host || gamaReduce.matches || typeof host.animate === "undefined") return;
+      var layer = document.createElement("div");
+      layer.className = "magic-sparkles";
+      host.appendChild(layer);
+      var band = Math.min(host.offsetHeight || 700, 820);
+      for (var i = 0; i < 28; i++) {
+        var s = document.createElement("span");
+        s.className = "magic-sparkle";
+        s.textContent = "✦";
+        s.style.left = (Math.random() * 100) + "%";
+        s.style.top = (Math.random() * band) + "px";
+        s.style.fontSize = (7 + Math.random() * 15) + "px";
+        layer.appendChild(s);
+        var dx = (Math.random() - 0.5) * 46, dy = (Math.random() - 0.5) * 46, rot = (Math.random() - 0.5) * 160;
+        s.animate([
+          { opacity: 0, transform: "translate(-50%,-50%) scale(0) rotate(0deg)" },
+          { opacity: 1, transform: "translate(calc(-50% + " + (dx * 0.35) + "px), calc(-50% + " + (dy * 0.35) + "px)) scale(1) rotate(" + (rot * 0.5) + "deg)", offset: 0.4 },
+          { opacity: 0, transform: "translate(calc(-50% + " + dx + "px), calc(-50% + " + dy + "px)) scale(.15) rotate(" + rot + "deg)" }
+        ], { duration: 900 + Math.random() * 700, delay: i * 24, easing: "cubic-bezier(.22,.61,.36,1)", fill: "forwards" });
+      }
+      setTimeout(function () { if (layer.parentNode) { layer.parentNode.removeChild(layer); } }, 2400);
+    }
+    function setMagic(on) {
+      magicOn = on;
+      if (magicBtn) { magicBtn.classList.toggle("on", on); magicBtn.setAttribute("aria-pressed", on ? "true" : "false"); }
+      applyGama(activeFilter, true);
+      if (on) { emitSparkles(brandsGrouped); }
+    }
+    if (magicBtn) { magicBtn.addEventListener("click", function () { setMagic(!magicOn); }); }
     var azTrack = azRail && azRail.querySelector(".az-track");
     var azArrow = azRail && azRail.querySelector(".az-arrow");
-    function updateAzArrow() {
-      if (!azArrow || !azTrack || !azRail || azRail.classList.contains("hide")) return;
-      var tr = azTrack.getBoundingClientRect();
+    var pmTrack = pmRail && pmRail.querySelector(".pm-track");
+    var pmArrow = pmRail && pmRail.querySelector(".pm-arrow");
+    /* El punto del riel visible sigue el scroll hasta llegar al fondo. */
+    function railFollow(rail, track, arrow) {
+      if (!arrow || !track || !rail || rail.classList.contains("hide")) return;
+      var tr = track.getBoundingClientRect();
       var ref = window.innerHeight * 0.5;
       var y = Math.max(0, Math.min(tr.height, ref - tr.top));
-      azArrow.style.top = y + "px";
+      arrow.style.top = y + "px";
     }
-    if (azArrow) {
-      var azTicking = false;
-      var onAzScroll = function () {
-        if (!azTicking) { azTicking = true; requestAnimationFrame(function () { updateAzArrow(); azTicking = false; }); }
+    function updateAzArrow() { railFollow(azRail, azTrack, azArrow); }
+    function updatePmArrow() { railFollow(pmRail, pmTrack, pmArrow); }
+    if (azArrow || pmArrow) {
+      var railTicking = false;
+      var onRailScroll = function () {
+        if (!railTicking) { railTicking = true; requestAnimationFrame(function () { updateAzArrow(); updatePmArrow(); railTicking = false; }); }
       };
-      on(window, "scroll", onAzScroll, { passive: true });
-      on(window, "resize", onAzScroll);
-      updateAzArrow();
+      on(window, "scroll", onRailScroll, { passive: true });
+      on(window, "resize", onRailScroll);
+      updateAzArrow(); updatePmArrow();
     }
     tabs.forEach(function (t) {
       t.addEventListener("click", function () {
