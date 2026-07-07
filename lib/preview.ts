@@ -33,23 +33,49 @@ function readPreview(file: string): string {
   return readFileSync(join(PREVIEW_DIR, file), "utf8");
 }
 
-/** Reescribe enlaces internos (.html → ruta) y rutas de assets (→ /assets). */
+/** Un archivo .html del preview → su ruta en el sitio. */
+function mapTarget(file: string): string {
+  return file.startsWith(CATEGORIA_PREFIX)
+    ? `/productos/${file.slice(CATEGORIA_PREFIX.length)}`
+    : LINK_MAP[`${file}.html`] ?? "#";
+}
+
+/** Rutas relativas de assets → absolutas desde /public. */
+function rewriteAssets(s: string): string {
+  return s.replace(/([="'(\s])assets\//g, "$1/assets/");
+}
+
+// Todos los <script> (con atributos y cuerpo capturados). Global → resetear lastIndex.
+const RE_SCRIPT = /<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
+
+/** ¿El <script> es JS ejecutable? (sin type, o type js/module). Los application/json
+ *  (p. ej. #hero-data, JSON-LD) NO lo son y deben quedarse en el HTML. */
+function isExecutableJs(attrs: string): boolean {
+  const m = attrs.match(/\btype\s*=\s*["']([^"']*)["']/i);
+  if (!m) return true;
+  const t = m[1].trim().toLowerCase();
+  return (
+    t === "" ||
+    t === "text/javascript" ||
+    t === "application/javascript" ||
+    t === "module"
+  );
+}
+
+/** Reescribe enlaces internos (.html → ruta) y rutas de assets (→ /assets).
+ *  Quita los <script> de JS ejecutable (externos e inline): v2.js se carga global
+ *  y el JS inline de página se re-inyecta vía next/script (ver getScripts). Los
+ *  scripts de datos (application/json / ld+json) se conservan. */
 function rewrite(html: string): string {
   // Enlaces internos *.html → rutas limpias (conserva #fragmento).
   html = html.replace(
     /href="([a-z0-9-]+)\.html(#[^"]*)?"/gi,
-    (_m, file: string, frag = "") => {
-      // Páginas de categoría: categoria-<slug>.html → /productos/<slug>.
-      const route = file.startsWith(CATEGORIA_PREFIX)
-        ? `/productos/${file.slice(CATEGORIA_PREFIX.length)}`
-        : LINK_MAP[`${file}.html`] ?? "#";
-      return `href="${route}${frag || ""}"`;
-    }
+    (_m, file: string, frag = "") => `href="${mapTarget(file)}${frag || ""}"`
   );
-  // Rutas relativas de assets → absolutas desde /public.
-  html = html.replace(/([="'(\s])assets\//g, "$1/assets/");
-  // Quita scripts externos (v2.js se carga global en el layout).
-  html = html.replace(/<script\b[^>]*\bsrc=[^>]*><\/script>/gi, "");
+  html = rewriteAssets(html);
+  html = html.replace(RE_SCRIPT, (m, attrs: string) =>
+    isExecutableJs(attrs) ? "" : m
+  );
   return html;
 }
 
@@ -77,6 +103,36 @@ export function getMain(file: string): string {
   body = body.replace(RE_FOOTER, "");
   body = body.replace(RE_WAFLOAT, "");
   return rewrite(body);
+}
+
+/** CSS de página: contenido de los <style> del <head> (assets reescritos).
+ *  getMain sólo devuelve el <body>, así que este CSS hay que inyectarlo aparte. */
+export function getStyles(file: string): string {
+  const html = readPreview(file);
+  const parts: string[] = [];
+  const re = /<style\b[^>]*>([\s\S]*?)<\/style>/gi;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(html))) parts.push(m[1]);
+  return rewriteAssets(parts.join("\n"));
+}
+
+/** JS inline de página: cuerpos de los <script> ejecutables sin src, concatenados.
+ *  Se re-inyecta vía next/script porque dangerouslySetInnerHTML no ejecuta scripts.
+ *  Reescribe los enlaces *.html embebidos en el JS (p. ej. hrefs de spotlights). */
+export function getScripts(file: string): string {
+  const html = readPreview(file);
+  const parts: string[] = [];
+  RE_SCRIPT.lastIndex = 0;
+  let m: RegExpExecArray | null;
+  while ((m = RE_SCRIPT.exec(html))) {
+    const [, attrs, body] = m;
+    if (/\bsrc\s*=/i.test(attrs)) continue; // externos (v2.js) → global en el layout
+    if (!isExecutableJs(attrs)) continue; // datos (JSON/LD) → quedan en el HTML
+    parts.push(body);
+  }
+  const js = parts.join("\n;\n");
+  // Enlaces *.html embebidos en cadenas JS → rutas del sitio.
+  return js.replace(/\b([a-z0-9-]+)\.html/gi, (_m, f: string) => mapTarget(f));
 }
 
 /** Título del <title> de una página del preview (para metadata). */

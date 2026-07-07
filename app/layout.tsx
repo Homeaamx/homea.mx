@@ -7,6 +7,7 @@ import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { getChrome } from "@/lib/preview";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import NavActive from "@/components/NavActive";
+import HomeNavSticky from "@/components/HomeNavSticky";
 import PreviewRouter from "@/components/PreviewRouter";
 
 export const metadata: Metadata = {
@@ -27,14 +28,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <body>
-        <div dangerouslySetInnerHTML={{ __html: nav }} />
+        <div className="site-chrome" dangerouslySetInnerHTML={{ __html: nav }} />
         <main>{children}</main>
         <div dangerouslySetInnerHTML={{ __html: footer }} />
         <WhatsAppFloat />
         <NavActive />
+        <HomeNavSticky />
         <PreviewRouter />
         {/* Interacciones del preview (nav scroll, mega flyout, reveals, hero, marquee). */}
-        <Script src="/v2.js" strategy="afterInteractive" />
+        <Script src="/v2.js?v=30" strategy="afterInteractive" />
       </body>
     </html>
   );

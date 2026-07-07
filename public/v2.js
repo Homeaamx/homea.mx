@@ -218,6 +218,58 @@
       document.querySelectorAll(".reveal, .reveal-img").forEach(function (el) { el.classList.add("in"); });
     }
 
+    /* ---------- Slider de subcategorías: arrastrar para desplazar (mouse) ----------
+       Táctil ya usa el scroll nativo del strip; sólo activamos drag con mouse.
+       Si el gesto se movió, se suprime el clic para no navegar al soltar. */
+    var scStrip = document.getElementById("subcatStrip");
+    if (scStrip) {
+      /* Flechas ← → : desplazan el strip ~3 tarjetas con scroll directo (el suave
+         nativo behavior:"smooth" lo cancela el scroll-snap del strip). Se deshabilitan
+         al llegar al inicio/fin. */
+      var scArrows = Array.prototype.slice.call(document.querySelectorAll(".subcat-band [data-scroll]"));
+      function scSyncArrows() {
+        var max = scStrip.scrollWidth - scStrip.clientWidth;
+        var x = scStrip.scrollLeft;
+        scArrows.forEach(function (btn) {
+          var dir = parseInt(btn.getAttribute("data-scroll"), 10);
+          btn.disabled = max <= 1 ? true : (dir < 0 ? x <= 1 : x >= max - 1);
+        });
+      }
+      scArrows.forEach(function (btn) {
+        ctx.on(btn, "click", function () {
+          var max = scStrip.scrollWidth - scStrip.clientWidth;
+          var delta = 201 * 3 * parseInt(btn.getAttribute("data-scroll"), 10);
+          scStrip.scrollLeft = Math.max(0, Math.min(max, scStrip.scrollLeft + delta));
+          scSyncArrows();
+        });
+      });
+      ctx.on(scStrip, "scroll", scSyncArrows);
+      ctx.on(window, "resize", scSyncArrows);
+      scSyncArrows();
+      var scDown = false, scStartX = 0, scStartLeft = 0, scMoved = 0;
+      ctx.on(scStrip, "pointerdown", function (e) {
+        if (e.button !== 0 || e.pointerType !== "mouse") return;
+        scDown = true; scMoved = 0; scStartX = e.clientX; scStartLeft = scStrip.scrollLeft;
+        try { scStrip.setPointerCapture(e.pointerId); } catch (err) {}
+        scStrip.classList.add("dragging");
+      });
+      ctx.on(scStrip, "pointermove", function (e) {
+        if (!scDown) return;
+        var dx = e.clientX - scStartX;
+        if (Math.abs(dx) > scMoved) { scMoved = Math.abs(dx); }
+        scStrip.scrollLeft = scStartLeft - dx;
+      });
+      var scEnd = function () { if (scDown) { scDown = false; scStrip.classList.remove("dragging"); } };
+      ctx.on(scStrip, "pointerup", scEnd);
+      ctx.on(scStrip, "pointercancel", scEnd);
+      ctx.on(scStrip, "click", function (e) {
+        if (scMoved > 6) { e.preventDefault(); e.stopPropagation(); }
+      }, true);
+      // Evita el arrastre nativo del navegador (fantasma de imagen/enlace) que
+      // secuestra el gesto del mouse antes de que corra nuestro drag-to-scroll.
+      ctx.on(scStrip, "dragstart", function (e) { e.preventDefault(); });
+    }
+
     /* ---------- Hero rotativo: 5 mensajes sincronizados ---------- */
     var hero = document.querySelector(".hero[data-rotate]");
     if (hero) {

@@ -12,7 +12,10 @@
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 :where([id]) { scroll-margin-top: calc(var(--nav-h) + 24px); }
-.container { max-width: var(--container); margin: 0 auto; padding-left: 48px; padding-right: 48px; }
+/* Padding lateral fluido: escala con el viewport para márgenes proporcionales y
+   sanos en todo ancho (48px fijo se veía diminuto en pantallas grandes → producto
+   pegado al borde). Mín 48px, crece a 4vw, tope 96px. Móvil: 24px (media query). */
+.container { max-width: var(--container); margin: 0 auto; padding-left: clamp(48px, 4vw, 96px); padding-right: clamp(48px, 4vw, 96px); }
 .sec  { padding: 110px 0; }
 .sec.tight { padding: 72px 0; }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
@@ -86,6 +89,13 @@ html { scroll-behavior: smooth; }
 .site-nav.scrolled .nav-links .has-mega > span,
 .site-nav.scrolled .nav-links .has-mega > a,
 .site-nav.scrolled .nav-right > a { color: var(--homea-bone); }
+
+/* Home: el nav sticky se fija al bajar y sigue al usuario. El wrapper del chrome
+   (layout) deja de crear caja propia (display:contents) para que `position: sticky`
+   del nav quede respecto al scroll de <body>, no de un contenedor de sólo ~118px.
+   El cambio a negro es sutil vía la `transition` de fondo del .site-nav (sin
+   animación de entrada). Sólo en home. */
+html[data-home] .site-chrome { display: contents; }
 
 /* ---------- Mega menú ----------------------------------------------------- */
 .has-mega { position: static; height: 100%; display: flex; align-items: center; }
@@ -987,8 +997,48 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .site-footer .dotlist { color: var(--dark-fg-muted); }
 .site-footer .f-gap { height: 44px; }   /* espacio que ocupaban las marcas, conservado tras eliminarlas */
 /* Contacto directo + redes en la columna de marca (referencia benchmark) */
-.site-footer .f-contact { display: flex; flex-direction: column; gap: 9px; }
-.site-footer .f-contact a { font-size: var(--fs-sm); color: var(--dark-fg-muted); border-bottom: none; }
+/* Slider de subcategorías: arrastrable con el mouse (drag-to-scroll en v2.js).
+   Durante el arrastre se desactiva el snap para que el desplazamiento sea libre. */
+.subcat-strip { cursor: grab; }
+.subcat-strip img { -webkit-user-drag: none; user-select: none; }
+.subcat-strip.dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; user-select: none; }
+
+/* Slider de subcategorías: flechas como elementos flex que flanquean el strip con
+   un gap real (margen entre flecha y producto — no se enciman). Botón espresso de
+   esquinas vivas, sombra suave y flecha fina en SVG; en hover invierte a hueso y
+   la flecha se desplaza. Se deshabilita al llegar al inicio/fin. */
+.subcat-band .container { padding-top: 34px; padding-bottom: 30px; }
+.subcat-carousel { display: flex; align-items: center; gap: clamp(16px, 1.8vw, 30px); }
+.subcat-carousel .subcat-strip { flex: 1 1 auto; min-width: 0; }
+.subcat-arrow {
+  flex: 0 0 auto; width: 52px; height: 52px; display: grid; place-items: center;
+  background: var(--homea-espresso); color: var(--homea-bone); border: none; cursor: pointer;
+  box-shadow: 0 10px 30px rgba(30, 25, 20, .16);
+  transition: background .35s var(--ease-standard), color .35s var(--ease-standard),
+              box-shadow .35s var(--ease-standard), opacity .35s var(--ease-standard);
+}
+.subcat-arrow svg {
+  width: 22px; height: 22px; fill: none; stroke: currentColor;
+  stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+  transition: transform .35s var(--ease-standard);
+}
+.subcat-arrow:hover { background: var(--homea-bone); color: var(--homea-espresso); box-shadow: 0 14px 38px rgba(30, 25, 20, .24); }
+.subcat-arrow.prev:hover svg { transform: translateX(-3px); }
+.subcat-arrow.next:hover svg { transform: translateX(3px); }
+.subcat-arrow:disabled { opacity: .28; cursor: default; box-shadow: none; }
+.subcat-arrow:disabled:hover { background: var(--homea-espresso); color: var(--homea-bone); }
+@media (max-width: 640px) { .subcat-arrow { display: none; } }
+
+/* Fila de contacto + redes a todo lo ancho del footer: se distribuyen horizontal-
+   mente (teléfonos a la izquierda, redes a la derecha) en vez de apilarse en la
+   columna angosta de marca. Envuelve en pantallas chicas. */
+.site-footer .f-strip { display: flex; flex-flow: row wrap; align-items: center;
+  justify-content: space-between; gap: 18px 40px; margin-top: 56px; }
+/* Contactos en fila fluida (envuelven en pantallas chicas), separados por · */
+.site-footer .f-contact { display: flex; flex-flow: row wrap; align-items: baseline; gap: 10px 0; }
+.site-footer .f-contact a { font-size: var(--fs-sm); color: var(--dark-fg-muted); border-bottom: none; display: inline-flex; align-items: baseline; }
+.site-footer .f-contact a:not(:last-child)::after {
+  content: "·"; margin: 0 16px; color: color-mix(in srgb, var(--dark-fg-muted) 55%, transparent); }
 .site-footer .f-contact a:hover { color: var(--homea-gold-bright); }
 .site-footer .f-social { display: flex; gap: 12px; flex-wrap: wrap; }
 .site-footer .f-social a { width: 38px; height: 38px; display: grid; place-items: center;

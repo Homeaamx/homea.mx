@@ -82,5 +82,25 @@ export default function PreviewRouter() {
     window.__homeaInitPage?.();
   }, [pathname]);
 
+  // Auto-recuperación: si el contenido de <main> se re-monta (Fast Refresh en dev,
+  // o cualquier reemplazo del subárbol), los observers de reveal de v2.js quedan
+  // sobre nodos viejos y las secciones nunca aparecen al hacer scroll. Re-ligar.
+  // Sólo escucha el reemplazo de los hijos DIRECTOS de <main> (no interacciones
+  // internas), y bindPage es idempotente (aborta el contexto previo). Inerte en prod.
+  useEffect(() => {
+    const main = document.querySelector("main");
+    if (!main) return;
+    let raf = 0;
+    const obs = new MutationObserver(() => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => window.__homeaInitPage?.());
+    });
+    obs.observe(main, { childList: true });
+    return () => {
+      obs.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return null;
 }
