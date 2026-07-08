@@ -169,6 +169,15 @@
     media: "color-mix(in srgb, var(--homea-gold) 56%, var(--homea-bone))",
     economica: "color-mix(in srgb, var(--homea-gold) 30%, var(--homea-bone))"
   };
+  /* Descripción breve de cada rango [etiqueta, texto]. El panel .gama-desc toma el
+     tono del rango activo (ver theme.css) y v2.js le pone este texto. */
+  var GAMA_DESC = {
+    all: ["Rangos de marca", "Cuatro gamas, un lugar. Filtra por gama y por categoría, encuentra la que más se acomoda a tus necesidades."],
+    premium: ["Premium", "Marcas especializadas en satisfacer los paladares más exigentes, puestas a prueba con herramientas de última tecnología y una manufactura de excepción."],
+    residencial: ["Residencial", "Marcas enfocadas en funcionalidad y diseño a un precio accesible, para equipar el hogar sin renunciar al estilo."],
+    media: ["Media", "Marcas que ponen la tecnología a tu alcance: una compra inteligente que equilibra calidad y precio."],
+    economica: ["Económica", "Marcas al mejor precio, con el rendimiento necesario para el día a día."]
+  };
   var gamaToken = 0;   /* invalida timeouts de un filtro anterior si se cambia rápido */
   var activeFilter = "all";
   var magicOn = false;
@@ -240,12 +249,21 @@
   function applyGama(filter, animate) {
     activeFilter = filter;
     if (brandGrid) { brandGrid.setAttribute("data-gama-active", filter); }
-    /* La nota de orden ("mayor costo a menor") solo aparece al filtrar por una gama
-       (y nunca en MODO MAGIA, donde el orden es por categoría). */
+    /* La nota de orden ("mayor costo a menor") aparece al filtrar por una gama
+       (Premium/Residencial/Media/Económica), también en MODO MAGIA: cada grupo de
+       categoría se ordena por costo (ver renderGrouped). Solo se oculta en "Todas". */
     if (gamaNote) {
-      gamaNote.classList.toggle("hide", magicOn || filter === "all");
+      gamaNote.classList.toggle("hide", filter === "all");
       var ga = gamaNote.querySelector(".arrow");
       if (ga) { ga.style.color = filter === "all" ? "" : (GAMA_TINT[filter] || ""); }
+    }
+    /* Panel de descripción del rango: cambia de tono (data-gama) y de texto. */
+    var gamaDesc = document.querySelector(".gama-desc");
+    if (gamaDesc) {
+      var d = GAMA_DESC[filter] || GAMA_DESC.all;
+      gamaDesc.setAttribute("data-gama", filter);
+      var gdl = gamaDesc.querySelector(".gd-label"); if (gdl) { gdl.textContent = d[0]; }
+      var gdt = gamaDesc.querySelector(".gd-text"); if (gdt) { gdt.textContent = d[1]; }
     }
     /* Rieles A→Z / + → − : ocultos en MODO MAGIA. */
     if (azRail) { azRail.classList.toggle("hide", magicOn || filter !== "all"); updateAzArrow(); }
@@ -303,32 +321,39 @@
   /* Ráfaga de destellos oro que se esparcen sobre las marcas al activar MODO MAGIA. */
   function emitSparkles(host) {
     if (!host || !GAMA_MOTION || typeof host.animate === "undefined") return;
+    if (getComputedStyle(host).position === "static") { host.style.position = "relative"; }
     var layer = document.createElement("div");
     layer.className = "magic-sparkles";
     host.appendChild(layer);
-    var band = Math.min(host.offsetHeight || 700, 820);
-    for (var i = 0; i < 28; i++) {
+    var h = host.offsetHeight || 700;
+    /* Banda cubierta = zona visible al hacer clic (filtros + descripción + primeras
+       filas). Evita dispersar en la malla enorme (miles de px) donde no se verían. */
+    var band = Math.min(h, Math.max(1100, (window.innerHeight || 800) * 1.4));
+    /* Densidad proporcional a la banda: repartidas (no agrupadas), sutiles (baja
+       opacidad) y con retardo aleatorio para que titilen dispersas. */
+    var count = Math.max(24, Math.min(60, Math.round(band / 46)));
+    for (var i = 0; i < count; i++) {
       var s = document.createElement("span");
       s.className = "magic-sparkle";
       s.textContent = "✦";
       s.style.left = (Math.random() * 100) + "%";
       s.style.top = (Math.random() * band) + "px";
-      s.style.fontSize = (7 + Math.random() * 15) + "px";
+      s.style.fontSize = (6 + Math.random() * 11) + "px";
       layer.appendChild(s);
-      var dx = (Math.random() - 0.5) * 46, dy = (Math.random() - 0.5) * 46, rot = (Math.random() - 0.5) * 160;
+      var dx = (Math.random() - 0.5) * 40, dy = (Math.random() - 0.5) * 40, rot = (Math.random() - 0.5) * 140;
       s.animate([
         { opacity: 0, transform: "translate(-50%,-50%) scale(0) rotate(0deg)" },
-        { opacity: 1, transform: "translate(calc(-50% + " + (dx * 0.35) + "px), calc(-50% + " + (dy * 0.35) + "px)) scale(1) rotate(" + (rot * 0.5) + "deg)", offset: 0.4 },
+        { opacity: 0.68, transform: "translate(calc(-50% + " + (dx * 0.35) + "px), calc(-50% + " + (dy * 0.35) + "px)) scale(1) rotate(" + (rot * 0.5) + "deg)", offset: 0.4 },
         { opacity: 0, transform: "translate(calc(-50% + " + dx + "px), calc(-50% + " + dy + "px)) scale(.15) rotate(" + rot + "deg)" }
-      ], { duration: 900 + Math.random() * 700, delay: i * 24, easing: "cubic-bezier(.22,.61,.36,1)", fill: "forwards" });
+      ], { duration: 1000 + Math.random() * 800, delay: Math.random() * 800, easing: "cubic-bezier(.22,.61,.36,1)", fill: "forwards" });
     }
-    setTimeout(function () { if (layer.parentNode) { layer.parentNode.removeChild(layer); } }, 2400);
+    setTimeout(function () { if (layer.parentNode) { layer.parentNode.removeChild(layer); } }, 3000);
   }
   function setMagic(on) {
     magicOn = on;
     if (magicBtn) { magicBtn.classList.toggle("on", on); magicBtn.setAttribute("aria-pressed", on ? "true" : "false"); }
     applyGama(activeFilter, true);
-    if (on) { emitSparkles(brandsGrouped); }
+    if (on) { var sh = brandsGrouped || brandsWrap; emitSparkles((sh && sh.closest(".container")) || sh); }
   }
   if (magicBtn) { magicBtn.addEventListener("click", function () { setMagic(!magicOn); }); }
   var activeTab = document.querySelector(".gama-tabs .t.on");

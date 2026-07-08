@@ -139,68 +139,125 @@
   <a class="btn btn-ghost" href="#">Wishlist</a>
 </div></nav>
 
-<!-- Hero B2B -->
-<section class="hero"><div class="container hero-grid" style="min-height:0;padding-top:64px;padding-bottom:80px">
-  <div style="display:flex;flex-direction:column;gap:24px;align-items:flex-start">
-    <div class="eyebrow">Proyectos · B2B</div>
-    <span class="rule-gold"></span>
-    <h1 class="h-display" style="font-size:clamp(38px,4.6vw,64px)">Tu proyecto, especificado con <i>precisión</i>.</h1>
-    <p style="margin:0;max-width:460px;font-size:var(--fs-md);font-weight:300;color:var(--fg-muted)">
-      Arquitectos, interioristas, desarrolladores y cocinas integrales: listas por volumen, specs por partida y tiempos alineados a tu obra. Un solo interlocutor.</p>
-    <div class="hero-ctas">
-      <a class="btn btn-primary" href="contacto.html">Hablar de mi proyecto</a>
-      <a class="btn btn-ghost" href="marcas.html">Listas de precios</a>
+<!-- Hero B2B — editorial + índice de portafolio interactivo (distinto del home) -->
+<section class="proj-hero" id="projHero"><div class="container">
+  <div class="ph-grid">
+    <div class="ph-copy reveal">
+      <div class="eyebrow">Proyectos · B2B</div>
+      <span class="rule-gold"></span>
+      <h1 class="h-display">Tu proyecto, especificado con <i>precisión</i>.</h1>
+      <p class="ph-sub">Un solo interlocutor: specs por partida, listas por volumen y tiempos alineados a tu obra.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_hero_b2b">Hablar de mi proyecto</a>
+        <a class="btn btn-ghost" href="#proyectos-galeria">Ver proyectos</a>
+      </div>
+      <div class="ph-cred figures"><span>10,000+ proyectos</span><span class="dot">·</span><span>Desde 2004</span><span class="dot">·</span><span>Cobertura nacional</span></div>
+    </div>
+
+    <div class="ph-showcase reveal">
+      <div class="ph-stage">
+        <div class="ph-shot on"><img src="assets/projects/casa-artigas.jpg" alt="Casa Artigas — proyecto HOMEA" onerror="this.onerror=null;this.src='assets/photos/proyecto-1.jpg'"></div>
+        <div class="ph-shot"><img src="assets/projects/casa-kah.jpg" alt="Casa KAH — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-2.jpg'"></div>
+        <div class="ph-shot"><img src="assets/projects/casa-reims.jpg" alt="Casa Reims — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-3.jpg'"></div>
+        <div class="ph-shot"><img src="assets/projects/club-campestre.jpg" alt="Club Campestre — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/hero-proyecto-residencial.jpg'"></div>
+        <div class="ph-cap"><span class="ph-cap-loc">El Campanario, QRO</span><span class="ph-cap-name">Casa Artigas</span></div>
+      </div>
+      <div class="ph-thumbs" role="tablist" aria-label="Proyectos destacados">
+        <button type="button" class="ph-thumb on" role="tab" aria-selected="true" data-name="Casa Artigas" data-loc="El Campanario, QRO"><img src="assets/projects/casa-artigas.jpg" alt="Casa Artigas" onerror="this.onerror=null;this.src='assets/photos/proyecto-1.jpg'"></button>
+        <button type="button" class="ph-thumb" role="tab" aria-selected="false" data-name="Casa KAH" data-loc="El Campanario, QRO"><img src="assets/projects/casa-kah.jpg" alt="Casa KAH" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-2.jpg'"></button>
+        <button type="button" class="ph-thumb" role="tab" aria-selected="false" data-name="Casa Reims" data-loc="El Campanario, QRO"><img src="assets/projects/casa-reims.jpg" alt="Casa Reims" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-3.jpg'"></button>
+        <button type="button" class="ph-thumb" role="tab" aria-selected="false" data-name="Club Campestre" data-loc="Querétaro"><img src="assets/projects/club-campestre.jpg" alt="Club Campestre" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/hero-proyecto-residencial.jpg'"></button>
+      </div>
     </div>
   </div>
-  <div class="hero-visual" style="aspect-ratio:4/3.4;max-height:520px">
-    <div class="hi on"><img src="assets/photos/b2b-hero.jpg" alt="Interior de proyecto residencial equipado"></div>
-  </div>
 </div></section>
 
-<!-- Stats -->
-<section class="sec tight" style="padding-top:0"><div class="container">
-  <div class="stats on-light reveal" style="padding-top:28px">
-    <div class="stat"><span class="n figures">10,000+</span><span class="l">proyectos equipados</span></div>
-    <div class="stat"><span class="n figures">22</span><span class="l">años de oficio</span></div>
-    <div class="stat"><span class="n figures">96</span><span class="l">marcas premium</span></div>
-    <div class="stat"><span class="n figures">QRO</span><span class="l">showroom · cobertura nacional</span></div>
-  </div>
-</div></section>
+<script>
+/* Hero de proyectos: showcase interactivo (thumbnails → stage), auto-avance suave. */
+(function () {
+  var hero = document.getElementById("projHero");
+  if (!hero || hero.dataset.showcaseInit) return;
+  hero.dataset.showcaseInit = "1";
+  var shots = Array.prototype.slice.call(hero.querySelectorAll(".ph-shot"));
+  var thumbs = Array.prototype.slice.call(hero.querySelectorAll(".ph-thumb"));
+  var capName = hero.querySelector(".ph-cap-name");
+  var capLoc = hero.querySelector(".ph-cap-loc");
+  if (shots.length < 2) return;
+  var i = 0, timer = null, N = shots.length;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-<!-- Segmentos -->
+  function go(n) {
+    i = (n % N + N) % N;
+    shots.forEach(function (s, k) { s.classList.toggle("on", k === i); });
+    thumbs.forEach(function (t, k) {
+      var on = k === i;
+      t.classList.toggle("on", on);
+      t.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    if (capName) capName.textContent = thumbs[i].getAttribute("data-name") || "";
+    if (capLoc) capLoc.textContent = thumbs[i].getAttribute("data-loc") || "";
+  }
+  function start() { if (reduce) return; stop(); timer = setInterval(function () { go(i + 1); }, 4200); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+  thumbs.forEach(function (t, k) {
+    t.addEventListener("mouseenter", function () { go(k); });
+    t.addEventListener("focus", function () { go(k); });
+    t.addEventListener("click", function () { go(k); });
+  });
+  hero.addEventListener("mouseenter", stop);
+  hero.addEventListener("mouseleave", start);
+
+  go(0);
+  start();
+})();
+</script>
+
+<!-- Tipos de cliente (con íconos) -->
 <section class="sec on-greige"><div class="container">
   <div class="sec-head">
     <div class="eyebrow">A quién acompañamos</div>
     <span class="rule-gold"></span>
-    <h2>Tres perfiles, <b>un mismo rigor</b>.</h2>
+    <h2>Los tipos de cliente que <i>equipamos</i>.</h2>
   </div>
-  <div class="grid-3 reveal" style="margin-top:64px">
-    <div style="background:var(--surface);border:1px solid var(--border);padding:40px 36px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+  <div class="client-grid reveal">
+    <div class="client-card">
+      <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.6" r="1.7"/><path d="M12 6.3 6.4 20M12 6.3 17.6 20M9.6 14.2h4.8"/></svg></span>
       <div class="eyebrow">Arquitectos · Interioristas</div>
-      <h3 style="font-family:var(--font-display);font-weight:400;font-size:26px">Specs listos para <i>plano</i>.</h3>
+      <h3>Specs listos para <i>plano</i>.</h3>
       <span class="dotlist">Fichas técnicas <span class="dot">·</span> medidas y cargas <span class="dot">·</span> render assets</span>
-      <p style="margin:0;font-size:var(--fs-sm);color:var(--fg-muted)">Documentación por partida y un asesor que habla tu idioma: cortes, ventilaciones y tolerancias.</p>
+      <p>Documentación por partida y un asesor que habla tu idioma: cortes, ventilaciones y tolerancias.</p>
       <a class="arrow-link" href="contacto.html">Empezar <span class="ln"></span><span class="ar">→</span></a>
     </div>
-    <div style="background:var(--surface);border:1px solid var(--border);padding:40px 36px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+    <div class="client-card">
+      <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 21V6l6-3v18M18 21V10l-6-3M9 9h.5M9 12.5h.5M9 16h.5M14.5 12.5h.5M14.5 16h.5"/></svg></span>
       <div class="eyebrow">Desarrolladores</div>
-      <h3 style="font-family:var(--font-display);font-weight:400;font-size:26px">Volumen con <i>tiempos</i> de obra.</h3>
+      <h3>Volumen con <i>tiempos</i> de obra.</h3>
       <span class="dotlist">Precios mayoreo <span class="dot">·</span> entregas por etapa <span class="dot">·</span> facturación</span>
-      <p style="margin:0;font-size:var(--fs-sm);color:var(--fg-muted)">Paquetes por torre o prototipo, logística por etapas y contratos claros, de plano a puesta en marcha.</p>
+      <p>Paquetes por torre o prototipo, logística por etapas y contratos claros, de plano a puesta en marcha.</p>
       <a class="arrow-link" href="contacto.html">Empezar <span class="ln"></span><span class="ar">→</span></a>
     </div>
-    <div style="background:var(--surface);border:1px solid var(--border);padding:40px 36px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+    <div class="client-card">
+      <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 18.5h17M5.5 18.5v-1.5h13v1.5M12 6.5a6 6 0 0 0-6 6v1.5h12v-1.5a6 6 0 0 0-6-6ZM12 6.5V4.6M10.7 4.6h2.6"/></svg></span>
+      <div class="eyebrow">Hotelería · Hospitality</div>
+      <h3>Equipamiento que <i>rinde</i>.</h3>
+      <span class="dotlist">Cocina <span class="dot">·</span> lavandería <span class="dot">·</span> áreas comunes</span>
+      <p>Equipo de uso intensivo con refacciones a la mano y soporte post-venta para operación continua.</p>
+      <a class="arrow-link" href="contacto.html">Empezar <span class="ln"></span><span class="ar">→</span></a>
+    </div>
+    <div class="client-card">
+      <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3.5" width="16" height="17"/><path d="M12 3.5v17M8.6 7.4h.6M14.8 7.4h.6"/></svg></span>
       <div class="eyebrow">Cocinas integrales</div>
-      <h3 style="font-family:var(--font-display);font-weight:400;font-size:26px">El equipo que tu mueble <i>merece</i>.</h3>
+      <h3>El equipo que tu mueble <i>merece</i>.</h3>
       <span class="dotlist">Panelable <span class="dot">·</span> sobremedida <span class="dot">·</span> instalación certificada</span>
-      <p style="margin:0;font-size:var(--fs-sm);color:var(--fg-muted)">Built-in y panelables coordinados con tu producción: herrajes, frentes y tolerancias al milímetro.</p>
+      <p>Built-in y panelables coordinados con tu producción: herrajes, frentes y tolerancias al milímetro.</p>
       <a class="arrow-link" href="contacto.html">Empezar <span class="ln"></span><span class="ar">→</span></a>
     </div>
   </div>
 </div></section>
 
 <!-- Método espresso -->
-<section class="sec on-espresso"><div class="container">
+<section class="sec on-espresso" id="metodo"><div class="container">
   <div class="sec-head">
     <div class="eyebrow eyebrow-bright">Método · Sin prisa</div>
     <span class="rule-gold"></span>
@@ -225,33 +282,194 @@
   </div>
 </div></section>
 
-<!-- Proyectos instalados (fotos reales) -->
-<section class="sec"><div class="container">
-  <div class="sec-head-row">
-    <div class="sec-head">
-      <div class="eyebrow">Proyectos instalados</div>
-      <span class="rule-gold"></span>
-      <h2>Equipo HOMEA, <i>en obra</i>.</h2>
-    </div>
+<!-- Galería de proyectos — filtrable por tipo de cliente -->
+<section class="sec" id="proyectos-galeria"><div class="container">
+  <div class="sec-head">
+    <div class="eyebrow">Proyectos instalados</div>
+    <span class="rule-gold"></span>
+    <h2>Equipo HOMEA, <i>en obra</i>.</h2>
+    <p class="sub">Una muestra de residencias, desarrollos y hotelería que equipamos. Filtra por el perfil que te interesa.</p>
   </div>
-  <div class="grid-3 reveal" style="margin-top:64px">
-    <div class="cat">
-      <div class="imgw"><img src="assets/photos/proyecto-1.jpg" alt="Columnas panelables en encino, proyecto HOMEA"></div>
-      <h3 style="font-size:22px">Integración panelable</h3>
-      <span class="dotlist">Encino sobremedida <span class="dot">·</span> columnas built-in</span>
-    </div>
-    <div class="cat">
-      <div class="imgw"><img src="assets/photos/proyecto-2.jpg" alt="Proyecto residencial HOMEA"></div>
-      <h3 style="font-size:22px">Residencial QRO</h3>
-      <span class="dotlist">Cocina completa <span class="dot">·</span> 9 piezas</span>
-    </div>
-    <div class="cat">
-      <div class="imgw"><img src="assets/photos/proyecto-3.jpg" alt="Proyecto HOMEA instalado"></div>
-      <h3 style="font-size:22px">Desarrollo vertical</h3>
-      <span class="dotlist">Paquete por prototipo <span class="dot">·</span> 3 etapas</span>
-    </div>
+
+  <div class="proj-filter" role="tablist" aria-label="Filtrar proyectos por tipo de cliente">
+    <button class="pf on" data-filter="all" aria-pressed="true">Todos</button>
+    <button class="pf" data-filter="arquitectos" aria-pressed="false">Arquitectos</button>
+    <button class="pf" data-filter="desarrolladores" aria-pressed="false">Desarrolladores</button>
+    <button class="pf" data-filter="hoteleria" aria-pressed="false">Hotelería</button>
+    <button class="pf" data-filter="cocinas" aria-pressed="false">Cocinas integrales</button>
+    <button class="pf" data-filter="residencial" aria-pressed="false">Residencial</button>
   </div>
-</div></section>
+
+  <div class="proj-grid reveal">
+    <button type="button" class="proj-card" data-cat="arquitectos residencial" data-slug="casa-artigas" data-title="Casa Artigas" data-loc="El Campanario, QRO" data-fallback="assets/photos/proyecto-1.jpg">
+      <div class="pc-media"><img src="assets/projects/casa-artigas.jpg" alt="Casa Artigas — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-1.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
+      <div class="pc-body"><span class="pc-loc">El Campanario, QRO</span><h3>Casa Artigas</h3><p>Cocina residencial con refrigeración y cocción de alta gama.</p></div>
+    </button>
+    <button type="button" class="proj-card" data-cat="arquitectos residencial" data-slug="casa-kah" data-title="Casa KAH" data-loc="El Campanario, QRO" data-fallback="assets/photos/proyecto-2.jpg">
+      <div class="pc-media"><img src="assets/projects/casa-kah.jpg" alt="Casa KAH — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-2.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
+      <div class="pc-body"><span class="pc-loc">El Campanario, QRO</span><h3>Casa KAH</h3><p>Integración built-in coordinada con KAH Arquitectura.</p></div>
+    </button>
+    <button type="button" class="proj-card" data-cat="arquitectos residencial" data-slug="casa-reims" data-title="Casa Reims" data-loc="El Campanario, QRO" data-fallback="assets/photos/proyecto-3.jpg">
+      <div class="pc-media"><img src="assets/projects/casa-reims.jpg" alt="Casa Reims — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-3.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
+      <div class="pc-body"><span class="pc-loc">El Campanario, QRO</span><h3>Casa Reims</h3><p>Especificación por partida, del plano a la puesta en marcha.</p></div>
+    </button>
+    <button type="button" class="proj-card" data-cat="desarrolladores" data-slug="club-campestre" data-title="Club Campestre" data-loc="Querétaro" data-fallback="assets/photos/hero-proyecto-residencial.jpg">
+      <div class="pc-media"><img src="assets/projects/club-campestre.jpg" alt="Club Campestre — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/hero-proyecto-residencial.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
+      <div class="pc-body"><span class="pc-loc">Querétaro</span><h3>Club Campestre</h3><p>Paquete por prototipo para varias unidades residenciales.</p></div>
+    </button>
+    <button type="button" class="proj-card" data-cat="desarrolladores" data-slug="desarrollo-vertical" data-title="Desarrollo Vertical" data-loc="Querétaro" data-fallback="assets/photos/b2b-hero.jpg">
+      <div class="pc-media"><img src="assets/projects/desarrollo-vertical.jpg" alt="Desarrollo vertical — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/b2b-hero.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
+      <div class="pc-body"><span class="pc-loc">Querétaro</span><h3>Desarrollo Vertical</h3><p>Entregas por etapa para torre en construcción.</p></div>
+    </button>
+    <button type="button" class="proj-card" data-cat="hoteleria" data-slug="hotel-boutique" data-title="Hotel Boutique" data-loc="México" data-fallback="assets/photos/hero-proyecto.jpg">
+      <div class="pc-media"><img src="assets/projects/hotel-boutique.jpg" alt="Hotel Boutique — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/hero-proyecto.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
+      <div class="pc-body"><span class="pc-loc">México</span><h3>Hotel Boutique</h3><p>Cocina y áreas comunes de uso intensivo, con soporte post-venta.</p></div>
+    </button>
+    <button type="button" class="proj-card" data-cat="cocinas" data-slug="cocina-encino" data-title="Cocina Integral Encino" data-loc="Querétaro" data-fallback="assets/photos/proyecto-1.jpg">
+      <div class="pc-media"><img src="assets/projects/cocina-encino.jpg" alt="Cocina Integral Encino — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-1.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
+      <div class="pc-body"><span class="pc-loc">Querétaro</span><h3>Cocina Integral Encino</h3><p>Panelables sobremedida coordinados con la producción del mueble.</p></div>
+    </button>
+    <button type="button" class="proj-card" data-cat="residencial arquitectos" data-slug="residencia-lomas" data-title="Residencia" data-loc="Querétaro" data-fallback="assets/photos/proyecto-2.jpg">
+      <div class="pc-media"><img src="assets/projects/residencia-lomas.jpg" alt="Residencia — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-2.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
+      <div class="pc-body"><span class="pc-loc">Querétaro</span><h3>Residencia</h3><p>Cocina completa de 9 piezas, instalación certificada.</p></div>
+    </button>
+    <button type="button" class="proj-card" data-cat="residencial" data-slug="penthouse" data-title="Penthouse" data-loc="CDMX" data-fallback="assets/photos/proyecto-3.jpg">
+      <div class="pc-media"><img src="assets/projects/penthouse.jpg" alt="Penthouse — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-3.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
+      <div class="pc-body"><span class="pc-loc">CDMX</span><h3>Penthouse</h3><p>Equipo built-in y bar integrados a la arquitectura.</p></div>
+    </button>
+  </div>
+  <p class="proj-empty" hidden>No hay proyectos en este filtro todavía.</p>
+</div>
+
+<!-- Lightbox de galería de proyecto -->
+<div class="lightbox" id="projLightbox" hidden role="dialog" aria-modal="true" aria-label="Galería del proyecto">
+  <button type="button" class="lb-close" aria-label="Cerrar galería">&times;</button>
+  <button type="button" class="lb-nav lb-prev" aria-label="Imagen anterior">&#8249;</button>
+  <figure class="lb-stage">
+    <img class="lb-img" src="" alt="">
+    <figcaption class="lb-cap"><span class="lb-title"></span><span class="lb-count figures"></span></figcaption>
+  </figure>
+  <button type="button" class="lb-nav lb-next" aria-label="Imagen siguiente">&#8250;</button>
+</div>
+</section>
+
+<script>
+/* Galería de proyectos: filtro por tipo de cliente + lightbox multi-imagen. */
+(function () {
+  var wrap = document.getElementById("proyectos-galeria");
+  if (!wrap) return;
+  var cards = Array.prototype.slice.call(wrap.querySelectorAll(".proj-card"));
+
+  /* ---- Filtro por tipo de cliente ---- */
+  var chips = Array.prototype.slice.call(wrap.querySelectorAll(".proj-filter .pf"));
+  var empty = wrap.querySelector(".proj-empty");
+  chips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var f = chip.getAttribute("data-filter");
+      chips.forEach(function (c) {
+        var on = c === chip;
+        c.classList.toggle("on", on);
+        c.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      var shown = 0;
+      cards.forEach(function (card) {
+        var cats = " " + (card.getAttribute("data-cat") || "") + " ";
+        var show = f === "all" || cats.indexOf(" " + f + " ") >= 0;
+        card.classList.toggle("hide", !show);
+        if (show) shown++;
+      });
+      if (empty) empty.hidden = shown !== 0;
+    });
+  });
+
+  /* ---- Lightbox: abre las fotos del proyecto ----
+     Detecta automáticamente <slug>.jpg, <slug>-2.jpg … <slug>-12.jpg y muestra
+     solo las que existan. Si aún no hay ninguna, cae a la foto de respaldo. */
+  var lb = document.getElementById("projLightbox");
+  if (!lb) return;
+  var lbImg = lb.querySelector(".lb-img");
+  var lbTitle = lb.querySelector(".lb-title");
+  var lbCount = lb.querySelector(".lb-count");
+  var btnPrev = lb.querySelector(".lb-prev");
+  var btnNext = lb.querySelector(".lb-next");
+  var btnClose = lb.querySelector(".lb-close");
+  var shots = [], idx = 0, token = 0, curTitle = "";
+  var MAX = 12;
+
+  function render() {
+    if (!shots.length) return;
+    idx = (idx % shots.length + shots.length) % shots.length;
+    lbImg.src = shots[idx];
+    lbImg.alt = curTitle + " — imagen " + (idx + 1);
+    lbCount.textContent = shots.length > 1 ? (idx + 1) + " / " + shots.length : "";
+    var multi = shots.length > 1;
+    btnPrev.hidden = !multi;
+    btnNext.hidden = !multi;
+  }
+  function open() {
+    lb.hidden = false;
+    document.body.style.overflow = "hidden";
+    requestAnimationFrame(function () { lb.classList.add("on"); });
+    btnClose.focus();
+  }
+  function close() {
+    lb.classList.remove("on");
+    document.body.style.overflow = "";
+    token++;
+    setTimeout(function () { lb.hidden = true; }, 260);
+  }
+  function openProject(card) {
+    var slug = card.getAttribute("data-slug");
+    var title = card.getAttribute("data-title") || "";
+    var loc = card.getAttribute("data-loc") || "";
+    var fallback = card.getAttribute("data-fallback");
+    var coverImg = card.querySelector("img");
+    curTitle = title;
+    lbTitle.textContent = title + (loc ? " · " + loc : "");
+    /* Muestra la portada al instante mientras se detectan las demás. */
+    shots = [coverImg ? coverImg.src : fallback];
+    idx = 0;
+    render();
+    open();
+    /* Sondeo de imágenes reales del proyecto. */
+    var my = ++token;
+    var base = "/assets/projects/" + slug;
+    var found = {}, pending = MAX;
+    for (var n = 1; n <= MAX; n++) {
+      (function (n) {
+        var src = base + (n === 1 ? "" : "-" + n) + ".jpg";
+        var im = new Image();
+        im.onload = function () { found[n] = src; settle(); };
+        im.onerror = settle;
+        im.src = src;
+      })(n);
+    }
+    function settle() {
+      if (my !== token) return;      /* se cerró o se abrió otro proyecto */
+      if (--pending > 0) return;
+      var ordered = Object.keys(found).map(Number).sort(function (a, b) { return a - b; })
+        .map(function (k) { return found[k]; });
+      shots = ordered.length ? ordered : [fallback];
+      idx = 0;
+      render();
+    }
+  }
+
+  cards.forEach(function (card) {
+    card.addEventListener("click", function () { openProject(card); });
+  });
+  btnPrev.addEventListener("click", function () { idx--; render(); });
+  btnNext.addEventListener("click", function () { idx++; render(); });
+  btnClose.addEventListener("click", close);
+  lb.addEventListener("click", function (e) { if (e.target === lb) close(); });
+  document.addEventListener("keydown", function (e) {
+    if (lb.hidden) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "ArrowLeft") { idx--; render(); }
+    else if (e.key === "ArrowRight") { idx++; render(); }
+  });
+})();
+</script>
 
 <!-- CTA -->
 <section class="sec on-dark cta-band">
