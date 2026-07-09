@@ -146,24 +146,36 @@
 .pj-lb .lbn { right: 18px; }
 
 /* ===== A quién acompañamos — tarjetas con ícono (base en theme.css) =====
-   Hover: la tarjeta se tiñe de champagne y el texto pasa a blanco hueso. */
+   Jerarquía: ícono → eyebrow → título → tags → texto breve → CTA anclado al fondo. */
+#acompanamos .client-card { padding: 34px 30px 26px; gap: 0; }
+#acompanamos .client-card .client-ico { margin-bottom: 22px; }
+#acompanamos .client-card .eyebrow { margin-bottom: 12px; }
+#acompanamos .client-card h3 { margin-bottom: 16px; }
+#acompanamos .cc-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+#acompanamos .cc-tags span {
+  font-family: var(--font-ui, "Montserrat", sans-serif); font-size: 9.5px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--homea-gold-text);
+  border: 1px solid var(--homea-n300); padding: 7px 11px; white-space: nowrap;
+}
+#acompanamos .client-card p { font-size: 13.5px; line-height: 1.7; color: var(--homea-n500); margin-bottom: 26px; }
+#acompanamos .client-card .arrow-link { margin-top: auto; width: 100%; padding-top: 18px; border-top: 1px solid var(--homea-n200); }
+/* Hover: la tarjeta se tiñe de champagne y el texto pasa a blanco hueso. */
 #acompanamos .client-card {
   transition: background-color .35s var(--ease-standard), border-color var(--dur-med) var(--ease-standard),
     transform var(--dur-slow) var(--ease-reveal), box-shadow var(--dur-slow) var(--ease-reveal);
 }
 #acompanamos .client-card .eyebrow,
 #acompanamos .client-card h3,
-#acompanamos .client-card .dotlist,
-#acompanamos .client-card .dotlist .dot,
+#acompanamos .client-card .cc-tags span,
 #acompanamos .client-card p,
-#acompanamos .client-card .arrow-link { transition: color .35s var(--ease-standard); }
+#acompanamos .client-card .arrow-link { transition: color .35s var(--ease-standard), border-color .35s var(--ease-standard); }
 #acompanamos .client-card:hover { background: var(--homea-gold); border-color: var(--homea-gold); }
 #acompanamos .client-card:hover .eyebrow,
 #acompanamos .client-card:hover h3,
-#acompanamos .client-card:hover .dotlist,
 #acompanamos .client-card:hover p,
 #acompanamos .client-card:hover .arrow-link { color: var(--homea-bone); }
-#acompanamos .client-card:hover .dotlist .dot { color: rgba(247,243,236,.65); }
+#acompanamos .client-card:hover .cc-tags span { color: var(--homea-bone); border-color: rgba(247,243,236,.45); }
+#acompanamos .client-card:hover .arrow-link { border-top-color: rgba(247,243,236,.35); }
 #acompanamos .client-card:hover .client-ico { color: var(--homea-bone); border-color: rgba(247,243,236,.55); }
 
 /* ===== Clientes — muro de logos sobre espresso (sin enlaces) ===== */
@@ -334,12 +346,12 @@
     <div class="ph2-visual reveal" id="ph2Hero">
       <div class="ph2-media">
         <div class="ph2-stage">
-          <figure class="ph2-slide on" data-cap="Casa Campestre · Querétaro"><img src="assets/projects/hero-campestre.jpg" alt="Casa Campestre — cocina equipada por HOMEA con refrigeración profesional"></figure>
-          <figure class="ph2-slide" data-cap="Casa Artigas · El Campanario, QRO"><img src="assets/projects/hero-artigas.jpg" alt="Casa Artigas — cocina con estufa profesional Thermador" loading="lazy"></figure>
-          <figure class="ph2-slide" data-cap="Casa Zorrilla · El Campanario, QRO"><img src="assets/projects/hero-zorrilla.jpg" alt="Casa Zorrilla — isla con parrilla Thermador" loading="lazy"></figure>
-          <figure class="ph2-slide" data-cap="Casa Reims · El Campanario, QRO"><img src="assets/projects/hero-reims.jpg" alt="Casa Reims — cocina exterior con asador Wolf" loading="lazy"></figure>
-          <figure class="ph2-slide" data-cap="Punta Serra · Querétaro"><img src="assets/projects/hero-serra.jpg" alt="Punta Serra — isla con campana suspendida" loading="lazy"></figure>
-          <figure class="ph2-slide" data-cap="Residencia · Querétaro"><img src="assets/projects/hero-qro.jpg" alt="Residencia en Querétaro — estufa La Cornue CornuFé 90" loading="lazy"></figure>
+          <figure class="ph2-slide on" data-cap="Casa Campestre · Querétaro"><img src="assets/projects/hero-campestre.jpg" style="object-position:50% 38%" alt="Casa Campestre — cocina equipada por HOMEA con refrigeración profesional"></figure>
+          <figure class="ph2-slide" data-cap="Casa Artigas · El Campanario, QRO"><img src="assets/projects/hero-artigas.jpg" style="object-position:50% 72%" alt="Casa Artigas — cocina con estufa profesional Thermador" loading="lazy"></figure>
+          <figure class="ph2-slide" data-cap="Casa Zorrilla · El Campanario, QRO"><img src="assets/projects/hero-zorrilla.jpg" style="object-position:50% 55%" alt="Casa Zorrilla — isla con parrilla Thermador" loading="lazy"></figure>
+          <figure class="ph2-slide" data-cap="Casa Reims · El Campanario, QRO"><img src="assets/projects/hero-reims.jpg" style="object-position:50% 42%" alt="Casa Reims — cocina exterior con asador Wolf" loading="lazy"></figure>
+          <figure class="ph2-slide" data-cap="Punta Serra · Querétaro"><img src="assets/projects/hero-serra.jpg" style="object-position:50% 10%" alt="Punta Serra — isla con campana suspendida" loading="lazy"></figure>
+          <figure class="ph2-slide" data-cap="Residencia · Querétaro"><img src="assets/projects/hero-qro.jpg" style="object-position:50% 26%" alt="Residencia en Querétaro — estufa La Cornue CornuFé 90" loading="lazy"></figure>
         </div>
         <div class="ph2-glow" aria-hidden="true"></div>
         <img class="ph2-cut on" src="assets/projects/refri-viking.png" style="height:84%;right:0" alt="Refrigerador y congelador Viking Professional en columnas">
@@ -405,7 +417,7 @@
   <div class="sec-head">
     <span class="rule-gold"></span>
     <h2>Proyectos <i>destacados</i>.</h2>
-    <p class="sub">21 obras equipadas por HOMEA. Recorre las imágenes de cada proyecto con las flechas, o da clic para verlas en grande.</p>
+    <p class="sub">Más de 10,000 proyectos entregados a nivel nacional.</p>
   </div>
 
   <div class="pj-grid reveal">
@@ -788,10 +800,8 @@
 <!-- Clientes — muro de logos (de homea.mx, sin enlaces) -->
 <section class="sec on-espresso" id="clientes"><div class="container">
   <div class="sec-head">
-    <div class="eyebrow eyebrow-bright">Confianza construida</div>
     <span class="rule-gold"></span>
     <h2>Algunos de nuestros <i>clientes</i>.</h2>
-    <p class="sub">Despachos de arquitectura, desarrolladores y proyectos turísticos que han equipado con HOMEA.</p>
   </div>
 
   <div class="cl-group reveal">
@@ -873,7 +883,6 @@
 <!-- Tipos de cliente — columnas editoriales numeradas -->
 <section class="sec on-greige" id="acompanamos"><div class="container">
   <div class="sec-head">
-    <div class="eyebrow">A quién acompañamos</div>
     <span class="rule-gold"></span>
     <h2>Los tipos de cliente que <i>equipamos</i>.</h2>
   </div>
@@ -882,32 +891,32 @@
       <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M12 6.1v1.4"/><path d="M11.2 7.5 6 20"/><path d="M12.8 7.5 18 20"/><path d="M7.6 16.2a8.2 8.2 0 0 0 8.8 0"/></svg></span>
       <div class="eyebrow">Arquitectos · Interioristas</div>
       <h3>Specs listos para <i>plano</i>.</h3>
-      <span class="dotlist">Fichas técnicas <span class="dot">·</span> medidas y cargas <span class="dot">·</span> render assets</span>
-      <p>Documentación por partida y un asesor que habla tu idioma: cortes, ventilaciones y tolerancias.</p>
+      <div class="cc-tags"><span>Fichas técnicas</span><span>Medidas y cargas</span><span>Render assets</span></div>
+      <p>Recibimos a sus clientes y los atendemos personalmente, con asesoría y opinión experta en cada etapa de la venta. Precios preferenciales de largo plazo y servicio post-venta que respaldan cada partida del proyecto.</p>
       <a class="arrow-link" href="contacto.html">Empezar <span class="ln"></span><span class="ar">→</span></a>
     </div>
     <div class="client-card">
       <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V3h12v18"/><path d="M3.5 21h17"/><path d="M9.5 7h1.6M12.9 7h1.6M9.5 10.5h1.6M12.9 10.5h1.6M9.5 14h1.6M12.9 14h1.6"/><path d="M10.7 21v-3.2h2.6V21"/></svg></span>
       <div class="eyebrow">Desarrolladores</div>
       <h3>Volumen con <i>tiempos</i> de obra.</h3>
-      <span class="dotlist">Precios mayoreo <span class="dot">·</span> entregas por etapa <span class="dot">·</span> facturación</span>
-      <p>Paquetes por torre o prototipo, logística por etapas y contratos claros, de plano a puesta en marcha.</p>
+      <div class="cc-tags"><span>Precios mayoreo</span><span>Entregas por etapa</span><span>Facturación</span></div>
+      <p>Coordinamos las entregas directas en sitio y el apoyo logístico en cada fase de la obra, con acompañamiento post-venta durante toda la operación.</p>
       <a class="arrow-link" href="contacto.html">Empezar <span class="ln"></span><span class="ar">→</span></a>
     </div>
     <div class="client-card">
       <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 17a6.5 6.5 0 0 1 13 0"/><path d="M12 10.5V8.6"/><circle cx="12" cy="7.2" r="1.4"/><path d="M3.5 17h17"/><path d="M6 20h12"/></svg></span>
       <div class="eyebrow">Hotelería · Hospitality</div>
       <h3>Equipamiento que <i>rinde</i>.</h3>
-      <span class="dotlist">Cocina <span class="dot">·</span> lavandería <span class="dot">·</span> áreas comunes</span>
-      <p>Equipo de uso intensivo con refacciones a la mano y soporte post-venta para operación continua.</p>
+      <div class="cc-tags"><span>Cocina</span><span>Lavandería</span><span>Áreas comunes</span></div>
+      <p>Electrodomésticos residenciales de alta gama para su operación, con acompañamiento post-venta que los mantiene siempre en marcha.</p>
       <a class="arrow-link" href="contacto.html">Empezar <span class="ln"></span><span class="ar">→</span></a>
     </div>
     <div class="client-card">
       <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16"/><path d="M4 11h16"/><path d="M12 11v9"/><path d="M10 8h4"/><path d="M9.5 14.5v2M14.5 14.5v2"/></svg></span>
       <div class="eyebrow">Cocinas integrales</div>
       <h3>El equipo que tu mueble <i>merece</i>.</h3>
-      <span class="dotlist">Panelable <span class="dot">·</span> sobremedida <span class="dot">·</span> instalación certificada</span>
-      <p>Built-in y panelables coordinados con tu producción: herrajes, frentes y tolerancias al milímetro.</p>
+      <div class="cc-tags"><span>Panelable</span><span>Sobremedida</span><span>Instalación certificada</span></div>
+      <p>Asesoría experta en cada proyecto y atención directa a sus clientes, con precios preferenciales y acompañamiento post-venta de principio a fin.</p>
       <a class="arrow-link" href="contacto.html">Empezar <span class="ln"></span><span class="ar">→</span></a>
     </div>
   </div>

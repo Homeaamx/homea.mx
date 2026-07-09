@@ -260,8 +260,11 @@ html[data-home] .site-chrome { display: contents; }
 .btn:active { transform: scale(.98); }
 .btn-primary { background: var(--homea-black); color: var(--homea-bone); border-color: var(--homea-black); }
 .btn-primary:hover { background: var(--homea-gold); color: var(--homea-black); border-color: var(--homea-gold); }
-.btn-gold { background: var(--homea-gold); color: var(--homea-black); border-color: var(--homea-gold); }
-.btn-gold:hover { background: var(--homea-gold-deep); color: #fff; border-color: var(--homea-gold-deep); }
+/* Los selectores con .on-dark/.on-espresso ganan a `.on-dark a { color: gold-bright }` de tokens */
+.btn-gold,
+.on-dark .btn-gold, .on-espresso .btn-gold { background: var(--homea-gold); color: var(--homea-black); border-color: var(--homea-gold); }
+.btn-gold:hover,
+.on-dark .btn-gold:hover, .on-espresso .btn-gold:hover { background: var(--homea-gold-soft); color: var(--homea-black); border-color: var(--homea-gold-soft); }
 .btn-ghost { background: transparent; color: var(--homea-black); border-color: var(--homea-black); }
 .btn-ghost:hover { background: var(--homea-black); color: var(--homea-bone); }
 .btn-ghost-light { background: transparent; color: var(--homea-bone); border-color: var(--homea-bone); }

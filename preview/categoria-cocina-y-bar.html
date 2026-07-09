@@ -15,26 +15,31 @@
 /* Imagen COMPLETA siempre: ancho 100%, proporción bloqueada (los puntos no se descuadran) y alto
    automático. Nunca se recorta a los lados → campana y refrigerador siempre visibles. */
 .cathero { position: relative; width: 100%; margin: 0; background: var(--homea-espresso); }
-.hscene { position: relative; width: 100%; aspect-ratio: 2000 / 1126; background: var(--homea-espresso); overflow: hidden; }
+/* La escena cabe en el viewport (100svh menos barras). El marco interior conserva la
+   proporción de la foto (los spots/SVG se alinean por %): si falta alto, se recorta
+   arriba hasta 3vw (sin perder la campana) y el resto abajo (zona de piso). */
+.hscene { position: relative; width: 100%; height: min(56.3vw, calc(100svh - var(--hero-chrome, 110px))); background: var(--homea-espresso); overflow: hidden; }
+.hscene-frame { position: absolute; left: 0; width: 100%; aspect-ratio: 2000 / 1126; top: max(calc(100% - 56.3vw), -3.5vw); }
 
 /* Título integrado: centrado en la parte baja de la escena, sobre el piso (zona libre de equipos) */
 .cathero-scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(to top, rgba(10,9,7,.62) 0%, rgba(10,9,7,.34) 14%, transparent 34%);
   transition: opacity .5s var(--ease); }
-.cathero-cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; pointer-events: none;
-  text-align: center; padding: 0 24px clamp(22px, 3.2vw, 48px);
+.cathero-cap { position: absolute; left: 40%; right: 12%; bottom: 0; z-index: 4; pointer-events: none;
+  text-align: center; padding: 0 24px clamp(14px, min(3.2vw, 3vh), 48px);
   transition: opacity .45s var(--ease), transform .45s var(--ease); }
+@media (max-width: 900px) { .cathero-cap { left: 0; right: 0; } }
 .cathero-cap a { pointer-events: auto; }
 .cathero-crumbs { font-family: var(--font-sans); font-size: 11px; letter-spacing: var(--tracking-wider);
-  text-transform: uppercase; color: rgba(247,243,236,.68); margin-bottom: 14px; display: block; }
+  text-transform: uppercase; color: rgba(247,243,236,.68); margin-bottom: clamp(6px, 1.4vh, 14px); display: block; }
 .cathero-crumbs a { color: rgba(247,243,236,.68); border-bottom: none; transition: color var(--dur) var(--ease); }
 .cathero-crumbs a:hover { color: var(--homea-gold-light); }
 .cathero-crumbs .sep { color: var(--homea-gold); padding: 0 .55em; }
 .cathero-cap h1 { font-family: var(--font-serif); color: var(--homea-bone); font-weight: 400;
-  font-size: clamp(40px, 5.6vw, 86px); line-height: 1; letter-spacing: -0.01em; margin: 0;
+  font-size: clamp(36px, min(5.6vw, 8vh), 86px); line-height: 1; letter-spacing: -0.01em; margin: 0;
   text-shadow: 0 2px 34px rgba(0,0,0,.5); }
 .cathero-cap h1 i { font-style: italic; }
-.cathero-hint { display: inline-block; margin-top: 16px; font-family: var(--font-sans); font-weight: 500;
+.cathero-hint { display: inline-block; margin-top: clamp(8px, 1.6vh, 16px); font-family: var(--font-sans); font-weight: 500;
   font-size: 11.5px; letter-spacing: var(--tracking-wide); color: rgba(247,243,236,.72);
   text-shadow: 0 1px 10px rgba(0,0,0,.55); }
 .cathero-hint::before, .cathero-hint::after { content: ""; display: inline-block; width: 24px; height: 1px;
@@ -44,8 +49,8 @@
 /* Al explorar una pieza, el título se retira para dejar limpio el spotlight */
 .hscene.has-active .cathero-cap { opacity: 0; transform: translateY(10px); }
 .hscene.has-active .cathero-scrim { opacity: 0; }
-.hscene > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.hscene > svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hscene-frame > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.hscene-frame > svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .hscene .sg { opacity: 0; transition: opacity .45s var(--ease); }
 .hscene .sg.on { opacity: 1; }
 .hscene .sg .dim { fill: #14100C; fill-opacity: .68; }
@@ -316,6 +321,7 @@
 <!-- Hero de escena a todo lo ancho: título sobre la imagen + spotlight por electrodoméstico -->
 <header class="cathero">
   <div class="hscene" id="hscene">
+    <div class="hscene-frame">
     <img src="assets/photos/hero-cocina-bar-wolf-subzero.jpg" alt="Cocina equipada con campana, estufa, tarja, lavavajillas y refrigerador de alta gama">
     <svg viewBox="0 0 2000 1126" preserveAspectRatio="none" aria-hidden="true">
       <defs>
@@ -324,6 +330,7 @@
       <g id="hsceneGroups"></g>
     </svg>
     <div id="hsceneSpots"></div>
+    </div>
     <div class="cathero-scrim" aria-hidden="true"></div>
     <div class="cathero-cap">
       <nav class="cathero-crumbs" aria-label="Migas de pan"><a href="home.html">Inicio</a><span class="sep">·</span><a href="categoria-cocina-y-bar.html">Productos</a></nav>
@@ -646,11 +653,11 @@
     { i:0, label:"Campanas",           href:"categoria-cocina-y-bar.html?tipo=campanas",
       dot:[396,206],  hole:{c:[300,168], r:[330,195]},  anchor:[700,142],  side:"r" },
     { i:1, label:"Estufas",            href:"categoria-cocina-y-bar.html?tipo=estufas",
-      dot:[569,808],  hole:{c:[505,800], r:[345,275]},  anchor:[900,1010], side:"r" },
+      dot:[569,808],  hole:{c:[505,800], r:[345,275]},  anchor:[455,495],  side:"r" },
     { i:2, label:"Tarjas y Grifería",  href:"categoria-cocina-y-bar.html?tipo=tarjas-y-griferia",
       dot:[743,564],  hole:{c:[742,548], r:[155,145]},  anchor:[935,392],  side:"r" },
     { i:3, label:"Lavavajillas",       href:"categoria-cocina-y-bar.html?tipo=lavavajillas",
-      dot:[942,716],  hole:{c:[945,725], r:[145,195]},  anchor:[1150,935], side:"r" },
+      dot:[942,716],  hole:{c:[945,725], r:[145,195]},  anchor:[1240,475], side:"r" },
     { i:4, label:"Refrigeradores",     href:"categoria-cocina-y-bar.html?tipo=refrigeradores",
       dot:[1742,524], hole:{c:[1712,540], r:[255,360]}, anchor:[1380,255], side:"l" }
   ];
