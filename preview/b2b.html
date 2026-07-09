@@ -7,6 +7,195 @@
 <link rel="icon" type="image/png" href="assets/favicon-circle.png">
 <link rel="stylesheet" href="tokens-v2.css">
 <link rel="stylesheet" href="theme.css?v=60">
+<style>
+/* ===== Hero — banda negra full-width (foto + recorte de producto + copy) ===== */
+.ph2 {
+  background: var(--homea-black); color: var(--homea-bone);
+  min-height: calc(100svh - var(--nav-h) - 38px); max-height: 920px;
+  display: flex; align-items: center;
+  padding: clamp(16px, 2.5vh, 32px) 0 clamp(48px, 7vh, 96px); overflow: hidden;
+}
+.ph2 .container { width: 100%; }
+.ph2 .ph2-grid {
+  display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(250px, .72fr);
+  gap: clamp(24px, 3vw, 48px); align-items: center;
+}
+.ph2 .ph2-visual {
+  position: relative;
+  /* Sangra la imagen hacia el borde izquierdo del viewport (deja ~16px de aire). */
+  margin-left: calc(16px - max(48px, (100vw - var(--container)) / 2 + 48px));
+}
+.ph2 .ph2-media { position: relative; }
+.ph2 .ph2-stage {
+  position: relative; overflow: hidden;
+  width: calc(100% - clamp(64px, 7vw, 112px));
+  height: clamp(360px, 68svh, 720px); background: var(--homea-espresso);
+}
+.ph2 .ph2-slide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity .6s ease; }
+.ph2 .ph2-slide.on { opacity: 1; }
+.ph2 .ph2-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ph2 .ph2-arrows { display: flex; gap: 8px; margin-top: 14px; }
+.ph2 .ph2-arrow {
+  width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+  background: rgba(10,10,10,.5); color: var(--homea-bone); border: 1px solid rgba(247,243,236,.35);
+  cursor: pointer; font-size: 22px; line-height: 1;
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  transition: background .25s ease, color .25s ease, border-color .25s ease;
+}
+.ph2 .ph2-arrow:hover,
+.ph2 .ph2-arrow:focus-visible { background: var(--homea-gold); color: var(--homea-black); border-color: var(--homea-gold); }
+.ph2 .ph2-glow {
+  position: absolute; right: -5%; top: 2%; bottom: -8%; width: 46%;
+  background: radial-gradient(ellipse at center, rgba(189,155,94,.38) 0%, rgba(189,155,94,.14) 52%, transparent 74%);
+  filter: blur(36px); pointer-events: none;
+}
+.ph2 .ph2-cut {
+  position: absolute; right: clamp(24px, 3vw, 60px); bottom: -4%; width: auto;
+  filter: drop-shadow(-18px 28px 40px rgba(0,0,0,.6)) drop-shadow(0 0 26px rgba(236,234,227,.22));
+  opacity: 0; transition: opacity .6s ease; pointer-events: none;
+}
+.ph2 .ph2-cut.on { opacity: 1; }
+.ph2 .ph2-cap {
+  position: absolute; left: 0; top: 0; padding: 7px 14px;
+  background: rgba(10,10,10,.55); color: var(--homea-bone);
+  font-family: var(--font-ui, "Montserrat", sans-serif); font-size: 10px; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase;
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+}
+.ph2 .ph2-copy { display: flex; flex-direction: column; gap: 15px; align-items: flex-start; }
+.ph2 h1 { color: var(--homea-bone); font-size: clamp(28px, 3.4vw, 46px); line-height: 1.06; }
+.ph2 .ph2-sub { margin: 0; font-size: var(--fs-sm); font-weight: 300; line-height: var(--lh-normal); color: rgba(247,243,236,.72); max-width: 40ch; }
+.ph2 .hero-ctas { margin-top: 4px; }
+.ph2 .ph2-cta { display: inline-flex; align-items: center; gap: 10px; }
+.ph2 .ph2-cta-arrow { transition: transform .25s ease; }
+.ph2 .ph2-cta:hover .ph2-cta-arrow { transform: translateY(3px); }
+.ph2 .ph2-ghost { border-color: rgba(247,243,236,.4); color: var(--homea-bone); }
+.ph2 .ph2-ghost:hover { border-color: var(--homea-gold); color: var(--homea-gold); }
+.ph2 .ph2-cred { font-size: 11px; letter-spacing: .12em; color: rgba(247,243,236,.55); display: flex; gap: 10px; flex-wrap: wrap; }
+.ph2 .ph2-cred .dot { color: var(--homea-gold); }
+@media (max-width: 980px) {
+  .ph2 { min-height: 0; max-height: none; padding: 40px 0 48px; }
+  .ph2 .ph2-grid { grid-template-columns: 1fr; gap: 36px; }
+  .ph2 .ph2-copy { order: -1; }
+  .ph2 .ph2-visual { margin-left: 0; }
+  .ph2 .ph2-stage { width: calc(100% - 64px); height: clamp(320px, 52vh, 460px); }
+  .ph2 .ph2-cut { height: 82%; bottom: -4%; }
+  .ph2 .ph2-sub { max-width: none; }
+}
+
+/* ===== Proyectos destacados — grid de tarjetas con mini-carrusel ===== */
+#proyectos-destacados .pj-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(28px, 3vw, 40px) clamp(18px, 2vw, 28px); margin-top: 56px;
+}
+#proyectos-destacados .pj-media {
+  position: relative; overflow: hidden; background: var(--homea-greige-deep);
+  aspect-ratio: 4 / 3; cursor: zoom-in;
+}
+#proyectos-destacados .pj-media img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .6s ease;
+}
+#proyectos-destacados .pj-media:hover img { transform: scale(1.03); }
+#proyectos-destacados .pj-nav { position: absolute; right: 10px; bottom: 10px; display: flex; gap: 6px; }
+#proyectos-destacados .pj-arrow {
+  width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+  background: rgba(10,10,10,.5); color: var(--homea-bone); border: 1px solid rgba(247,243,236,.3);
+  cursor: pointer; font-size: 18px; line-height: 1;
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  transition: background .25s ease, color .25s ease, border-color .25s ease;
+}
+#proyectos-destacados .pj-arrow:hover,
+#proyectos-destacados .pj-arrow:focus-visible { background: var(--homea-gold); color: var(--homea-black); border-color: var(--homea-gold); }
+#proyectos-destacados .pj-cap { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-top: 13px; }
+#proyectos-destacados .pj-cap h3 { font-family: var(--font-display, "Newsreader", serif); font-weight: 400; font-size: 20px; line-height: 1.15; color: var(--fg); margin: 0; }
+#proyectos-destacados .pj-cap .loc {
+  display: block; margin-top: 3px; font-family: var(--font-ui, "Montserrat", sans-serif);
+  font-size: 10px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--homea-n500);
+}
+#proyectos-destacados .pj-count { font-size: 11px; letter-spacing: .12em; color: var(--homea-n400); font-variant-numeric: tabular-nums; white-space: nowrap; }
+#proyectos-destacados .pj-more { margin-top: 40px; text-align: right; }
+@media (max-width: 980px) { #proyectos-destacados .pj-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { #proyectos-destacados .pj-grid { grid-template-columns: 1fr; } }
+
+/* Lightbox de imagen grande */
+.pj-lb {
+  position: fixed; inset: 0; z-index: 200; background: rgba(10,10,10,.93);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .24s ease;
+}
+.pj-lb.on { opacity: 1; }
+.pj-lb[hidden] { display: none; }
+.pj-lb figure { margin: 0; max-width: min(92vw, 1400px); text-align: center; }
+.pj-lb img { max-width: 92vw; max-height: 82vh; object-fit: contain; display: block; margin: 0 auto; }
+.pj-lb figcaption {
+  margin-top: 14px; display: flex; justify-content: center; gap: 16px; color: var(--homea-bone);
+  font-family: var(--font-ui, "Montserrat", sans-serif); font-size: 11px; font-weight: 600;
+  letter-spacing: .18em; text-transform: uppercase;
+}
+.pj-lb .c { color: var(--homea-gold); }
+.pj-lb .lbx { position: absolute; top: 14px; right: 22px; background: none; border: 0; color: var(--homea-bone); font-size: 40px; line-height: 1; cursor: pointer; }
+.pj-lb .lba {
+  position: absolute; top: 50%; transform: translateY(-50%); width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center; font-size: 26px; line-height: 1;
+  background: rgba(10,10,10,.4); color: var(--homea-bone); border: 1px solid rgba(247,243,236,.35); cursor: pointer;
+  transition: background .25s ease, color .25s ease, border-color .25s ease;
+}
+.pj-lb .lba:hover { background: var(--homea-gold); color: var(--homea-black); border-color: var(--homea-gold); }
+.pj-lb .lbp { left: 18px; }
+.pj-lb .lbn { right: 18px; }
+
+/* ===== A quién acompañamos — tarjetas con ícono (base en theme.css) =====
+   Hover: la tarjeta se tiñe de champagne y el texto pasa a blanco hueso. */
+#acompanamos .client-card {
+  transition: background-color .35s var(--ease-standard), border-color var(--dur-med) var(--ease-standard),
+    transform var(--dur-slow) var(--ease-reveal), box-shadow var(--dur-slow) var(--ease-reveal);
+}
+#acompanamos .client-card .eyebrow,
+#acompanamos .client-card h3,
+#acompanamos .client-card .dotlist,
+#acompanamos .client-card .dotlist .dot,
+#acompanamos .client-card p,
+#acompanamos .client-card .arrow-link { transition: color .35s var(--ease-standard); }
+#acompanamos .client-card:hover { background: var(--homea-gold); border-color: var(--homea-gold); }
+#acompanamos .client-card:hover .eyebrow,
+#acompanamos .client-card:hover h3,
+#acompanamos .client-card:hover .dotlist,
+#acompanamos .client-card:hover p,
+#acompanamos .client-card:hover .arrow-link { color: var(--homea-bone); }
+#acompanamos .client-card:hover .dotlist .dot { color: rgba(247,243,236,.65); }
+#acompanamos .client-card:hover .client-ico { color: var(--homea-bone); border-color: rgba(247,243,236,.55); }
+
+/* ===== Clientes — muro de logos sobre espresso (sin enlaces) ===== */
+#clientes .sec-head h2 { color: var(--dark-fg); }
+#clientes .sec-head .sub { color: var(--dark-fg-muted); font-size: 19px; }
+#clientes .cl-group { margin-top: 48px; }
+#clientes .cl-group:first-of-type { margin-top: 8px; }
+#clientes .cl-label {
+  font-family: var(--font-ui, "Montserrat", sans-serif); font-size: 13px; font-weight: 600;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--homea-gold-bright);
+  margin-bottom: 18px;
+}
+#clientes .cl-wall { display: flex; flex-wrap: wrap; gap: 12px; }
+#clientes .cl-tile {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--homea-white); border: 1px solid var(--homea-n200);
+  height: 96px; padding: 14px 28px;
+}
+#clientes .cl-tile img {
+  max-height: 58px; max-width: 180px; width: auto; object-fit: contain; display: block;
+  filter: grayscale(1); opacity: .78; transition: filter .3s ease, opacity .3s ease;
+}
+#clientes .cl-tile:hover img { filter: none; opacity: 1; }
+#clientes .cl-name {
+  font-family: var(--font-ui, "Montserrat", sans-serif); font-size: 13px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--homea-n600); text-align: center;
+}
+@media (max-width: 760px) {
+  #clientes .cl-tile { height: 72px; padding: 10px 18px; }
+  #clientes .cl-tile img { max-height: 44px; max-width: 140px; }
+}
+</style>
 </head>
 <body>
 
@@ -139,82 +328,550 @@
   <a class="btn btn-ghost" href="#">Wishlist</a>
 </div></nav>
 
-<!-- Hero B2B — editorial + índice de portafolio interactivo (distinto del home) -->
-<section class="proj-hero" id="projHero"><div class="container">
-  <div class="ph-grid">
-    <div class="ph-copy reveal">
-      <div class="eyebrow">Proyectos · B2B</div>
-      <span class="rule-gold"></span>
-      <h1 class="h-display">Tu proyecto, especificado con <i>precisión</i>.</h1>
-      <p class="ph-sub">Un solo interlocutor: specs por partida, listas por volumen y tiempos alineados a tu obra.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_hero_b2b">Hablar de mi proyecto</a>
-        <a class="btn btn-ghost" href="#proyectos-galeria">Ver proyectos</a>
+<!-- Hero B2B — banda negra full-width: foto de obra + refri recortado + copy (estilo showroom) -->
+<section class="ph2" id="projHero"><div class="container">
+  <div class="ph2-grid">
+    <div class="ph2-visual reveal" id="ph2Hero">
+      <div class="ph2-media">
+        <div class="ph2-stage">
+          <figure class="ph2-slide on" data-cap="Casa Campestre · Querétaro"><img src="assets/projects/hero-campestre.jpg" alt="Casa Campestre — cocina equipada por HOMEA con refrigeración profesional"></figure>
+          <figure class="ph2-slide" data-cap="Casa Artigas · El Campanario, QRO"><img src="assets/projects/hero-artigas.jpg" alt="Casa Artigas — cocina con estufa profesional Thermador" loading="lazy"></figure>
+          <figure class="ph2-slide" data-cap="Casa Zorrilla · El Campanario, QRO"><img src="assets/projects/hero-zorrilla.jpg" alt="Casa Zorrilla — isla con parrilla Thermador" loading="lazy"></figure>
+          <figure class="ph2-slide" data-cap="Casa Reims · El Campanario, QRO"><img src="assets/projects/hero-reims.jpg" alt="Casa Reims — cocina exterior con asador Wolf" loading="lazy"></figure>
+          <figure class="ph2-slide" data-cap="Punta Serra · Querétaro"><img src="assets/projects/hero-serra.jpg" alt="Punta Serra — isla con campana suspendida" loading="lazy"></figure>
+          <figure class="ph2-slide" data-cap="Residencia · Querétaro"><img src="assets/projects/hero-qro.jpg" alt="Residencia en Querétaro — estufa La Cornue CornuFé 90" loading="lazy"></figure>
+        </div>
+        <div class="ph2-glow" aria-hidden="true"></div>
+        <img class="ph2-cut on" src="assets/projects/refri-viking.png" style="height:84%;right:0" alt="Refrigerador y congelador Viking Professional en columnas">
+        <img class="ph2-cut" src="assets/projects/cut-thermador-progrand.png" style="height:44%;bottom:-3%" alt="Estufa Thermador Pro Grand 60&quot; dual fuel" loading="lazy">
+        <img class="ph2-cut" src="assets/projects/cut-thermador-rangetop.png" style="height:34%;bottom:3%" alt="Parrilla Thermador Professional de 6 quemadores" loading="lazy">
+        <img class="ph2-cut" src="assets/projects/cut-wolf-og36.png" style="height:60%;bottom:-2%" alt="Asador Wolf OG36 empotrable de 36&quot;" loading="lazy">
+        <img class="ph2-cut" src="assets/projects/cut-elica-easyux.png" style="height:72%;bottom:auto;top:-2%" alt="Campana de isla Easy UX 52 en negro" loading="lazy">
+        <img class="ph2-cut" src="assets/projects/cut-cornufe90.png" style="height:42%;bottom:-3%" alt="Estufa La Cornue CornuFé 90 Provence Blue" loading="lazy">
+        <span class="ph2-cap">Casa Campestre · Querétaro</span>
       </div>
-      <div class="ph-cred figures"><span>10,000+ proyectos</span><span class="dot">·</span><span>Desde 2004</span><span class="dot">·</span><span>Cobertura nacional</span></div>
+      <div class="ph2-arrows">
+        <button type="button" class="ph2-arrow ph2-prev" aria-label="Proyecto anterior">&#8249;</button>
+        <button type="button" class="ph2-arrow ph2-next" aria-label="Proyecto siguiente">&#8250;</button>
+      </div>
     </div>
-
-    <div class="ph-showcase reveal">
-      <div class="ph-stage">
-        <div class="ph-shot on"><img src="assets/projects/casa-artigas.jpg" alt="Casa Artigas — proyecto HOMEA" onerror="this.onerror=null;this.src='assets/photos/proyecto-1.jpg'"></div>
-        <div class="ph-shot"><img src="assets/projects/casa-kah.jpg" alt="Casa KAH — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-2.jpg'"></div>
-        <div class="ph-shot"><img src="assets/projects/casa-reims.jpg" alt="Casa Reims — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-3.jpg'"></div>
-        <div class="ph-shot"><img src="assets/projects/club-campestre.jpg" alt="Club Campestre — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/hero-proyecto-residencial.jpg'"></div>
-        <div class="ph-cap"><span class="ph-cap-loc">El Campanario, QRO</span><span class="ph-cap-name">Casa Artigas</span></div>
-      </div>
-      <div class="ph-thumbs" role="tablist" aria-label="Proyectos destacados">
-        <button type="button" class="ph-thumb on" role="tab" aria-selected="true" data-name="Casa Artigas" data-loc="El Campanario, QRO"><img src="assets/projects/casa-artigas.jpg" alt="Casa Artigas" onerror="this.onerror=null;this.src='assets/photos/proyecto-1.jpg'"></button>
-        <button type="button" class="ph-thumb" role="tab" aria-selected="false" data-name="Casa KAH" data-loc="El Campanario, QRO"><img src="assets/projects/casa-kah.jpg" alt="Casa KAH" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-2.jpg'"></button>
-        <button type="button" class="ph-thumb" role="tab" aria-selected="false" data-name="Casa Reims" data-loc="El Campanario, QRO"><img src="assets/projects/casa-reims.jpg" alt="Casa Reims" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-3.jpg'"></button>
-        <button type="button" class="ph-thumb" role="tab" aria-selected="false" data-name="Club Campestre" data-loc="Querétaro"><img src="assets/projects/club-campestre.jpg" alt="Club Campestre" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/hero-proyecto-residencial.jpg'"></button>
+    <div class="ph2-copy reveal">
+      <div class="eyebrow eyebrow-bright">Conoce nuestros proyectos</div>
+      <span class="rule-gold"></span>
+      <h1 class="h-display">Todo tu proyecto, <i>en un solo lugar</i>.</h1>
+      <div class="hero-ctas">
+        <a class="btn btn-gold ph2-cta" href="#proyectos-destacados">Ver proyectos
+          <svg class="ph2-cta-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+        </a>
       </div>
     </div>
   </div>
 </div></section>
 
 <script>
-/* Hero de proyectos: showcase interactivo (thumbnails → stage), auto-avance suave. */
+/* Hero de proyectos: carrusel de imágenes (crossfade) con flechas + auto-avance suave. */
 (function () {
-  var hero = document.getElementById("projHero");
-  if (!hero || hero.dataset.showcaseInit) return;
-  hero.dataset.showcaseInit = "1";
-  var shots = Array.prototype.slice.call(hero.querySelectorAll(".ph-shot"));
-  var thumbs = Array.prototype.slice.call(hero.querySelectorAll(".ph-thumb"));
-  var capName = hero.querySelector(".ph-cap-name");
-  var capLoc = hero.querySelector(".ph-cap-loc");
-  if (shots.length < 2) return;
-  var i = 0, timer = null, N = shots.length;
+  var wrap = document.getElementById("ph2Hero");
+  if (!wrap || wrap.dataset.heroInit) return;
+  wrap.dataset.heroInit = "1";
+  var slides = Array.prototype.slice.call(wrap.querySelectorAll(".ph2-slide"));
+  if (slides.length < 2) return;
+  var cuts = Array.prototype.slice.call(wrap.querySelectorAll(".ph2-cut"));
+  var cap = wrap.querySelector(".ph2-cap");
+  var i = 0, N = slides.length, timer = null;
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function go(n) {
     i = (n % N + N) % N;
-    shots.forEach(function (s, k) { s.classList.toggle("on", k === i); });
-    thumbs.forEach(function (t, k) {
-      var on = k === i;
-      t.classList.toggle("on", on);
-      t.setAttribute("aria-selected", on ? "true" : "false");
-    });
-    if (capName) capName.textContent = thumbs[i].getAttribute("data-name") || "";
-    if (capLoc) capLoc.textContent = thumbs[i].getAttribute("data-loc") || "";
+    slides.forEach(function (s, k) { s.classList.toggle("on", k === i); });
+    cuts.forEach(function (c, k) { c.classList.toggle("on", k === i); });
+    if (cap) cap.textContent = slides[i].getAttribute("data-cap") || "";
   }
-  function start() { if (reduce) return; stop(); timer = setInterval(function () { go(i + 1); }, 4200); }
+  function start() { if (reduce) return; stop(); timer = setInterval(function () { go(i + 1); }, 5500); }
   function stop() { if (timer) { clearInterval(timer); timer = null; } }
 
-  thumbs.forEach(function (t, k) {
-    t.addEventListener("mouseenter", function () { go(k); });
-    t.addEventListener("focus", function () { go(k); });
-    t.addEventListener("click", function () { go(k); });
-  });
-  hero.addEventListener("mouseenter", stop);
-  hero.addEventListener("mouseleave", start);
+  wrap.querySelector(".ph2-prev").addEventListener("click", function () { go(i - 1); start(); });
+  wrap.querySelector(".ph2-next").addEventListener("click", function () { go(i + 1); start(); });
+  wrap.addEventListener("mouseenter", stop);
+  wrap.addEventListener("mouseleave", start);
 
   go(0);
   start();
 })();
 </script>
 
-<!-- Tipos de cliente (con íconos) -->
-<section class="sec on-greige"><div class="container">
+<!-- Proyectos destacados — grid de tarjetas con mini-carrusel + lightbox -->
+<section class="sec" id="proyectos-destacados"><div class="container">
+  <div class="sec-head">
+    <span class="rule-gold"></span>
+    <h2>Proyectos <i>destacados</i>.</h2>
+    <p class="sub">21 obras equipadas por HOMEA. Recorre las imágenes de cada proyecto con las flechas, o da clic para verlas en grande.</p>
+  </div>
+
+  <div class="pj-grid reveal">
+    <article class="pj-card" data-slug="artigas" data-n="5" data-name="Casa Artigas" data-loc="El Campanario, QRO">
+      <div class="pj-media">
+        <img src="assets/projects/g/artigas-1.jpg" alt="Casa Artigas — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>Casa Artigas</h3><span class="loc">El Campanario, QRO</span></div>
+        <span class="pj-count figures">1 / 5</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="kah" data-n="4" data-name="Casa KAH" data-loc="El Campanario, QRO">
+      <div class="pj-media">
+        <img src="assets/projects/g/kah-1.jpg" alt="Casa KAH — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>Casa KAH</h3><span class="loc">El Campanario, QRO</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="reims" data-n="4" data-name="Casa Reims" data-loc="El Campanario, QRO">
+      <div class="pj-media">
+        <img src="assets/projects/g/reims-1.jpg" alt="Casa Reims — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>Casa Reims</h3><span class="loc">El Campanario, QRO</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="hausa" data-n="4" data-name="Casa Hausa" data-loc="El Campanario, QRO">
+      <div class="pj-media">
+        <img src="assets/projects/g/hausa-1.jpg" alt="Casa Hausa — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>Casa Hausa</h3><span class="loc">El Campanario, QRO</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="zorrilla" data-n="5" data-name="Casa Zorrilla" data-loc="El Campanario, QRO">
+      <div class="pj-media">
+        <img src="assets/projects/g/zorrilla-1.jpg" alt="Casa Zorrilla — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>Casa Zorrilla</h3><span class="loc">El Campanario, QRO</span></div>
+        <span class="pj-count figures">1 / 5</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="zane" data-n="3" data-name="Casa Zane" data-loc="El Campanario, QRO">
+      <div class="pj-media">
+        <img src="assets/projects/g/zane-1.jpg" alt="Casa Zane — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>Casa Zane</h3><span class="loc">El Campanario, QRO</span></div>
+        <span class="pj-count figures">1 / 3</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="gabor" data-n="4" data-name="Casa Gabor" data-loc="San Miguel de Allende">
+      <div class="pj-media">
+        <img src="assets/projects/g/gabor-1.jpg" alt="Casa Gabor — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>Casa Gabor</h3><span class="loc">San Miguel de Allende</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="campestre" data-n="4" data-name="Casa Campestre" data-loc="Querétaro">
+      <div class="pj-media">
+        <img src="assets/projects/g/campestre-1.jpg" alt="Casa Campestre — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>Casa Campestre</h3><span class="loc">Querétaro</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="punta-serra" data-n="4" data-name="Punta Serra" data-loc="Querétaro">
+      <div class="pj-media">
+        <img src="assets/projects/g/punta-serra-1.jpg" alt="Punta Serra — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>Punta Serra</h3><span class="loc">Querétaro</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="queretaro" data-n="4" data-name="Residencia Querétaro" data-loc="Querétaro">
+      <div class="pj-media">
+        <img src="assets/projects/g/queretaro-1.jpg" alt="Residencia Querétaro — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>Residencia Querétaro</h3><span class="loc">Querétaro</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="jurica" data-n="4" data-name="Casa Jurica" data-loc="Querétaro">
+      <div class="pj-media">
+        <img src="assets/projects/g/jurica-1.jpg" alt="Casa Jurica — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>Casa Jurica</h3><span class="loc">Querétaro</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="alamos" data-n="4" data-name="Casa Álamos" data-loc="Querétaro">
+      <div class="pj-media">
+        <img src="assets/projects/g/alamos-1.jpg" alt="Casa Álamos — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>Casa Álamos</h3><span class="loc">Querétaro</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="campestre-1" data-n="4" data-name="Campestre I" data-loc="Querétaro">
+      <div class="pj-media">
+        <img src="assets/projects/g/campestre-1-1.jpg" alt="Campestre I — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>Campestre I</h3><span class="loc">Querétaro</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="campanario-2" data-n="4" data-name="El Campanario II" data-loc="Querétaro">
+      <div class="pj-media">
+        <img src="assets/projects/g/campanario-2-1.jpg" alt="El Campanario II — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>El Campanario II</h3><span class="loc">Querétaro</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="campanario-3" data-n="4" data-name="El Campanario III" data-loc="Querétaro">
+      <div class="pj-media">
+        <img src="assets/projects/g/campanario-3-1.jpg" alt="El Campanario III — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>El Campanario III</h3><span class="loc">Querétaro</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="campanario-8" data-n="4" data-name="El Campanario VIII" data-loc="Querétaro">
+      <div class="pj-media">
+        <img src="assets/projects/g/campanario-8-1.jpg" alt="El Campanario VIII — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>El Campanario VIII</h3><span class="loc">Querétaro</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="campanario-9" data-n="4" data-name="El Campanario IX" data-loc="Querétaro">
+      <div class="pj-media">
+        <img src="assets/projects/g/campanario-9-1.jpg" alt="El Campanario IX — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>El Campanario IX</h3><span class="loc">Querétaro</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="campanario-11" data-n="4" data-name="El Campanario XI" data-loc="Querétaro">
+      <div class="pj-media">
+        <img src="assets/projects/g/campanario-11-1.jpg" alt="El Campanario XI — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>El Campanario XI</h3><span class="loc">Querétaro</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="campanario-12" data-n="4" data-name="El Campanario XII" data-loc="Querétaro">
+      <div class="pj-media">
+        <img src="assets/projects/g/campanario-12-1.jpg" alt="El Campanario XII — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>El Campanario XII</h3><span class="loc">Querétaro</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="san-miguel-1" data-n="4" data-name="San Miguel I" data-loc="San Miguel de Allende">
+      <div class="pj-media">
+        <img src="assets/projects/g/san-miguel-1-1.jpg" alt="San Miguel I — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>San Miguel I</h3><span class="loc">San Miguel de Allende</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+    <article class="pj-card" data-slug="san-miguel-3" data-n="4" data-name="San Miguel III" data-loc="San Miguel de Allende">
+      <div class="pj-media">
+        <img src="assets/projects/g/san-miguel-3-1.jpg" alt="San Miguel III — proyecto equipado por HOMEA" loading="lazy">
+        <div class="pj-nav">
+          <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
+          <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
+        </div>
+      </div>
+      <div class="pj-cap">
+        <div class="pj-t"><h3>San Miguel III</h3><span class="loc">San Miguel de Allende</span></div>
+        <span class="pj-count figures">1 / 4</span>
+      </div>
+    </article>
+  </div>
+
+  <p class="pj-more"><a class="arrow-link" href="https://www.instagram.com/stories/highlights/17974001627596557/" target="_blank" rel="noopener" data-track="instagram_click" data-label="ig_proyectos">Ver más proyectos en nuestro Instagram <span class="ln"></span><span class="ar">→</span></a></p>
+</div>
+
+<!-- Lightbox — vista grande de la imagen -->
+<div class="pj-lb" id="pjLb" hidden role="dialog" aria-modal="true" aria-label="Imagen del proyecto">
+  <button type="button" class="lbx" aria-label="Cerrar">&times;</button>
+  <button type="button" class="lba lbp" aria-label="Imagen anterior">&#8249;</button>
+  <figure>
+    <img src="" alt="">
+    <figcaption><span class="t"></span><span class="c figures"></span></figcaption>
+  </figure>
+  <button type="button" class="lba lbn" aria-label="Imagen siguiente">&#8250;</button>
+</div>
+</section>
+
+<script>
+/* Proyectos destacados: mini-carrusel por tarjeta (solo flechas, sin auto-avance)
+   + lightbox al hacer clic en la imagen. */
+(function () {
+  var sec = document.getElementById("proyectos-destacados");
+  if (!sec || sec.dataset.pjInit) return;
+  sec.dataset.pjInit = "1";
+  var BASE = "/assets/projects/g/";
+
+  /* ---- Lightbox ---- */
+  var lb = document.getElementById("pjLb");
+  var lbImg = lb.querySelector("img");
+  var lbT = lb.querySelector(".t");
+  var lbC = lb.querySelector(".c");
+  var lbList = [], lbIdx = 0, lbName = "";
+  function lbRender() {
+    lbIdx = (lbIdx % lbList.length + lbList.length) % lbList.length;
+    lbImg.src = lbList[lbIdx];
+    lbImg.alt = lbName + " — imagen " + (lbIdx + 1);
+    lbC.textContent = (lbIdx + 1) + " / " + lbList.length;
+  }
+  function lbOpen(name, loc, list, idx) {
+    lbName = name;
+    lbT.textContent = name + " · " + loc;
+    lbList = list; lbIdx = idx;
+    lbRender();
+    lb.hidden = false;
+    document.body.style.overflow = "hidden";
+    requestAnimationFrame(function () { lb.classList.add("on"); });
+  }
+  function lbClose() {
+    lb.classList.remove("on");
+    document.body.style.overflow = "";
+    setTimeout(function () { lb.hidden = true; }, 240);
+  }
+  lb.querySelector(".lbx").addEventListener("click", lbClose);
+  lb.querySelector(".lbp").addEventListener("click", function () { lbIdx--; lbRender(); });
+  lb.querySelector(".lbn").addEventListener("click", function () { lbIdx++; lbRender(); });
+  lb.addEventListener("click", function (e) { if (e.target === lb) lbClose(); });
+  document.addEventListener("keydown", function (e) {
+    if (lb.hidden) return;
+    if (e.key === "Escape") lbClose();
+    else if (e.key === "ArrowLeft") { lbIdx--; lbRender(); }
+    else if (e.key === "ArrowRight") { lbIdx++; lbRender(); }
+  });
+
+  /* ---- Tarjetas ---- */
+  Array.prototype.forEach.call(sec.querySelectorAll(".pj-card"), function (card) {
+    var slug = card.getAttribute("data-slug");
+    var total = parseInt(card.getAttribute("data-n"), 10) || 1;
+    var name = card.getAttribute("data-name") || "";
+    var loc = card.getAttribute("data-loc") || "";
+    var imgs = [];
+    for (var k = 1; k <= total; k++) imgs.push(BASE + slug + "-" + k + ".jpg");
+    var i = 0;
+    var img = card.querySelector(".pj-media img");
+    var count = card.querySelector(".pj-count");
+    function show(n) {
+      i = (n % imgs.length + imgs.length) % imgs.length;
+      img.src = imgs[i];
+      count.textContent = (i + 1) + " / " + imgs.length;
+    }
+    card.querySelector(".pj-prev").addEventListener("click", function (e) { e.stopPropagation(); show(i - 1); });
+    card.querySelector(".pj-next").addEventListener("click", function (e) { e.stopPropagation(); show(i + 1); });
+    card.querySelector(".pj-media").addEventListener("click", function (e) {
+      if (e.target.closest && e.target.closest(".pj-arrow")) return;
+      lbOpen(name, loc, imgs, i);
+    });
+    /* Precarga la segunda imagen al primer hover. */
+    card.addEventListener("mouseenter", function () { var pre = new Image(); pre.src = imgs[(i + 1) % imgs.length]; }, { once: true });
+  });
+
+  /* "Ver proyectos" (hero) → baja suave y deja la sección al ras del nav sticky. */
+  var cta = document.querySelector('.ph2-cta[href="#proyectos-destacados"]');
+  if (cta) {
+    cta.addEventListener("click", function (e) {
+      e.preventDefault();
+      var nav = document.querySelector(".site-nav");
+      var navH = nav ? nav.offsetHeight : 80;
+      var top = sec.getBoundingClientRect().top + window.scrollY - navH;
+      window.scrollTo({ top: top, behavior: "smooth" });
+    });
+  }
+})();
+</script>
+
+<!-- Clientes — muro de logos (de homea.mx, sin enlaces) -->
+<section class="sec on-espresso" id="clientes"><div class="container">
+  <div class="sec-head">
+    <div class="eyebrow eyebrow-bright">Confianza construida</div>
+    <span class="rule-gold"></span>
+    <h2>Algunos de nuestros <i>clientes</i>.</h2>
+    <p class="sub">Despachos de arquitectura, desarrolladores y proyectos turísticos que han equipado con HOMEA.</p>
+  </div>
+
+  <div class="cl-group reveal">
+    <div class="cl-label">Arquitectos · Interioristas</div>
+    <div class="cl-wall">
+      <span class="cl-tile"><img src="assets/clients/artigas-logo.jpg" alt="Artigas Arquitectos" loading="lazy"></span>
+      <span class="cl-tile cl-name">Arq. Jorge Reims</span>
+      <span class="cl-tile"><img src="assets/clients/kelly-juan-carlos-lab-arq.png" alt="LAB arq" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/de-la-torre-xiii.jpg" alt="De la Torre X — proyecto y construcción" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/kah-arquitectura.png" alt="Grupo KAH Arquitectura" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/hausa-logo.jpg" alt="HAUSA Arquitectura y Construcción" loading="lazy"></span>
+      <span class="cl-tile cl-name">Arq. Gonzalo Anaya</span>
+      <span class="cl-tile"><img src="assets/clients/garcia-gudin-o-logo.jpg" alt="García + Gudiño Arquitectos" loading="lazy"></span>
+      <span class="cl-tile cl-name">Arq. Jorge Garibay</span>
+      <span class="cl-tile"><img src="assets/clients/gabor-goded-logo.jpg" alt="Gabor Goded — Arquitectura y Construcción" loading="lazy"></span>
+      <span class="cl-tile cl-name">Arq. Sebastian Zavala</span>
+      <span class="cl-tile"><img src="assets/clients/alicia-carrera-logo.jpg" alt="AC Arquitectura e Interiorismo" loading="lazy"></span>
+      <span class="cl-tile cl-name">Arq. Nicole Bisgard</span>
+      <span class="cl-tile"><img src="assets/clients/central-buro-de-arquitectos-logo.jpg" alt="CNTRAL Buró de Arquitectos" loading="lazy"></span>
+      <span class="cl-tile cl-name">Arq. Hector Stevens</span>
+      <span class="cl-tile"><img src="assets/clients/transformarte-home-logo.jpg" alt="HOME TransformArte Interiorismo" loading="lazy"></span>
+      <span class="cl-tile cl-name">Arq. Cecilia Bremer</span>
+      <span class="cl-tile cl-name">Arq. Aniceto Orantes</span>
+      <span class="cl-tile cl-name">Arq. Ana Delia Lopez</span>
+      <span class="cl-tile"><img src="assets/clients/heredia-casique-logo.jpg" alt="Heredia Casique Arquitectos" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/epm-jesus-godinez-logo.jpg" alt="EPM Constructora e Inmobiliaria" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/duna-arq-logo.jpg" alt="DUNA" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/arquiluxury-logo.jpg" alt="Arqui Luxury" loading="lazy"></span>
+    </div>
+  </div>
+
+  <div class="cl-group reveal">
+    <div class="cl-label">Desarrolladores inmobiliarios</div>
+    <div class="cl-wall">
+      <span class="cl-tile"><img src="assets/clients/sadasi-logo.jpg" alt="Grupo Sadasi" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/thor-urbana.jpg" alt="Thor Urbana" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/ruba-logo.jpg" alt="RUBA Residencial" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/atlas-logo.jpg" alt="Atlas" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/arpada-logo.jpg" alt="Arpada" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/casas-san-miguelito-logo.jpg" alt="Casas San Miguelito" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/construcciones-chirinos-logo.png" alt="Construcciones Chirino" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/devarana-logo.jpg" alt="Devarana" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/vialli-logo.jpg" alt="Vialli Grupo Inmobiliario" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/grupo-nippo-logo.jpg" alt="Grupo Nippo" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/altta-homes-logo.jpg" alt="Altta Homes" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/casas-geo-logo.jpg" alt="Casas GEO" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/homex-logo.jpg" alt="Homex" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/pulte-homes-logo.jpg" alt="Pulte Homes" loading="lazy"></span>
+    </div>
+  </div>
+
+  <div class="cl-group reveal">
+    <div class="cl-label">Proyectos turísticos</div>
+    <div class="cl-wall">
+      <span class="cl-tile"><img src="assets/clients/naukanayarit-logo.jpg" alt="Nauka Nayarit" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/vidanta-logo.jpg" alt="Grupo Vidanta" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/palmilla-logo.jpg" alt="One&amp;Only Palmilla, Los Cabos" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/querencia-logo.jpg" alt="Querencia Private Golf &amp; Beach Club" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/las-palomas-logo.jpg" alt="Las Palomas Beach &amp; Golf Resort" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/pueblo-bonito-logo.jpg" alt="Pueblo Bonito Golf &amp; Spa Resorts" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/loreto-bay-logo.jpg" alt="Loreto Bay Golf Resort &amp; Spa" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/las-ventanas-logo.jpg" alt="The Residences Las Ventanas al Paraíso" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/xcaret-logo.jpg" alt="Grupo Xcaret" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/sonoran-sun-logo.jpg" alt="Sonoran Sun Resort" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/aldea-thai.jpg" alt="Aldea Thai" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/blue-bay-logo.jpg" alt="BlueBay Hotels &amp; Resorts" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/grupo-velas-logo.jpg" alt="Grupo Velas Desarrollos Inmobiliarios" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/pacifica-ixtapa.jpg" alt="Pacífica Resort Ixtapa" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/montecristo-logo.jpg" alt="Pueblo Bonito Montecristo Estates" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/emerald-logo.png" alt="Pueblo Bonito Emerald Estates" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/laguna-shores.jpg" alt="Laguna Shores Oceanfront Resort" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/el-encanto-de-la-laguna-logo.jpg" alt="El Encanto de la Laguna" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/sonora-sky-logo.jpg" alt="Sonoran Sky Resort" loading="lazy"></span>
+      <span class="cl-tile"><img src="assets/clients/barrio-santo-logo.jpg" alt="Barrio Santo" loading="lazy"></span>
+    </div>
+  </div>
+</div></section>
+
+<!-- Tipos de cliente — columnas editoriales numeradas -->
+<section class="sec on-greige" id="acompanamos"><div class="container">
   <div class="sec-head">
     <div class="eyebrow">A quién acompañamos</div>
     <span class="rule-gold"></span>
@@ -222,7 +879,7 @@
   </div>
   <div class="client-grid reveal">
     <div class="client-card">
-      <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.6" r="1.7"/><path d="M12 6.3 6.4 20M12 6.3 17.6 20M9.6 14.2h4.8"/></svg></span>
+      <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M12 6.1v1.4"/><path d="M11.2 7.5 6 20"/><path d="M12.8 7.5 18 20"/><path d="M7.6 16.2a8.2 8.2 0 0 0 8.8 0"/></svg></span>
       <div class="eyebrow">Arquitectos · Interioristas</div>
       <h3>Specs listos para <i>plano</i>.</h3>
       <span class="dotlist">Fichas técnicas <span class="dot">·</span> medidas y cargas <span class="dot">·</span> render assets</span>
@@ -230,7 +887,7 @@
       <a class="arrow-link" href="contacto.html">Empezar <span class="ln"></span><span class="ar">→</span></a>
     </div>
     <div class="client-card">
-      <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 21V6l6-3v18M18 21V10l-6-3M9 9h.5M9 12.5h.5M9 16h.5M14.5 12.5h.5M14.5 16h.5"/></svg></span>
+      <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V3h12v18"/><path d="M3.5 21h17"/><path d="M9.5 7h1.6M12.9 7h1.6M9.5 10.5h1.6M12.9 10.5h1.6M9.5 14h1.6M12.9 14h1.6"/><path d="M10.7 21v-3.2h2.6V21"/></svg></span>
       <div class="eyebrow">Desarrolladores</div>
       <h3>Volumen con <i>tiempos</i> de obra.</h3>
       <span class="dotlist">Precios mayoreo <span class="dot">·</span> entregas por etapa <span class="dot">·</span> facturación</span>
@@ -238,7 +895,7 @@
       <a class="arrow-link" href="contacto.html">Empezar <span class="ln"></span><span class="ar">→</span></a>
     </div>
     <div class="client-card">
-      <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 18.5h17M5.5 18.5v-1.5h13v1.5M12 6.5a6 6 0 0 0-6 6v1.5h12v-1.5a6 6 0 0 0-6-6ZM12 6.5V4.6M10.7 4.6h2.6"/></svg></span>
+      <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 17a6.5 6.5 0 0 1 13 0"/><path d="M12 10.5V8.6"/><circle cx="12" cy="7.2" r="1.4"/><path d="M3.5 17h17"/><path d="M6 20h12"/></svg></span>
       <div class="eyebrow">Hotelería · Hospitality</div>
       <h3>Equipamiento que <i>rinde</i>.</h3>
       <span class="dotlist">Cocina <span class="dot">·</span> lavandería <span class="dot">·</span> áreas comunes</span>
@@ -246,7 +903,7 @@
       <a class="arrow-link" href="contacto.html">Empezar <span class="ln"></span><span class="ar">→</span></a>
     </div>
     <div class="client-card">
-      <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3.5" width="16" height="17"/><path d="M12 3.5v17M8.6 7.4h.6M14.8 7.4h.6"/></svg></span>
+      <span class="client-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16"/><path d="M4 11h16"/><path d="M12 11v9"/><path d="M10 8h4"/><path d="M9.5 14.5v2M14.5 14.5v2"/></svg></span>
       <div class="eyebrow">Cocinas integrales</div>
       <h3>El equipo que tu mueble <i>merece</i>.</h3>
       <span class="dotlist">Panelable <span class="dot">·</span> sobremedida <span class="dot">·</span> instalación certificada</span>
@@ -256,224 +913,9 @@
   </div>
 </div></section>
 
-<!-- Método espresso -->
-<section class="sec on-espresso" id="metodo"><div class="container">
-  <div class="sec-head">
-    <div class="eyebrow eyebrow-bright">Método · Sin prisa</div>
-    <span class="rule-gold"></span>
-    <h2 style="color:var(--dark-fg)">Escuchamos primero. <i>Especificamos</i> después.</h2>
-  </div>
-  <div class="steps reveal">
-    <div class="step">
-      <span class="n figures">01</span>
-      <h3>Escucha</h3>
-      <p>Una sesión con tu plano sobre la mesa: programa, presupuesto por partida y fechas de obra.</p>
-    </div>
-    <div class="step">
-      <span class="n figures">02</span>
-      <h3>Especificación</h3>
-      <p>Propuesta por escrito con alternativas por gama, cargas eléctricas, ventilaciones y tiempos de importación.</p>
-    </div>
-    <div class="step">
-      <span class="n figures">03</span>
-      <h3>Acompañamiento</h3>
-      <p>Entregas por etapa, instalación certificada y puesta en marcha. Un interlocutor de principio a fin.</p>
-    </div>
-  </div>
-</div></section>
-
-<!-- Galería de proyectos — filtrable por tipo de cliente -->
-<section class="sec" id="proyectos-galeria"><div class="container">
-  <div class="sec-head">
-    <div class="eyebrow">Proyectos instalados</div>
-    <span class="rule-gold"></span>
-    <h2>Equipo HOMEA, <i>en obra</i>.</h2>
-    <p class="sub">Una muestra de residencias, desarrollos y hotelería que equipamos. Filtra por el perfil que te interesa.</p>
-  </div>
-
-  <div class="proj-filter" role="tablist" aria-label="Filtrar proyectos por tipo de cliente">
-    <button class="pf on" data-filter="all" aria-pressed="true">Todos</button>
-    <button class="pf" data-filter="arquitectos" aria-pressed="false">Arquitectos</button>
-    <button class="pf" data-filter="desarrolladores" aria-pressed="false">Desarrolladores</button>
-    <button class="pf" data-filter="hoteleria" aria-pressed="false">Hotelería</button>
-    <button class="pf" data-filter="cocinas" aria-pressed="false">Cocinas integrales</button>
-    <button class="pf" data-filter="residencial" aria-pressed="false">Residencial</button>
-  </div>
-
-  <div class="proj-grid reveal">
-    <button type="button" class="proj-card" data-cat="arquitectos residencial" data-slug="casa-artigas" data-title="Casa Artigas" data-loc="El Campanario, QRO" data-fallback="assets/photos/proyecto-1.jpg">
-      <div class="pc-media"><img src="assets/projects/casa-artigas.jpg" alt="Casa Artigas — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-1.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
-      <div class="pc-body"><span class="pc-loc">El Campanario, QRO</span><h3>Casa Artigas</h3><p>Cocina residencial con refrigeración y cocción de alta gama.</p></div>
-    </button>
-    <button type="button" class="proj-card" data-cat="arquitectos residencial" data-slug="casa-kah" data-title="Casa KAH" data-loc="El Campanario, QRO" data-fallback="assets/photos/proyecto-2.jpg">
-      <div class="pc-media"><img src="assets/projects/casa-kah.jpg" alt="Casa KAH — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-2.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
-      <div class="pc-body"><span class="pc-loc">El Campanario, QRO</span><h3>Casa KAH</h3><p>Integración built-in coordinada con KAH Arquitectura.</p></div>
-    </button>
-    <button type="button" class="proj-card" data-cat="arquitectos residencial" data-slug="casa-reims" data-title="Casa Reims" data-loc="El Campanario, QRO" data-fallback="assets/photos/proyecto-3.jpg">
-      <div class="pc-media"><img src="assets/projects/casa-reims.jpg" alt="Casa Reims — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-3.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
-      <div class="pc-body"><span class="pc-loc">El Campanario, QRO</span><h3>Casa Reims</h3><p>Especificación por partida, del plano a la puesta en marcha.</p></div>
-    </button>
-    <button type="button" class="proj-card" data-cat="desarrolladores" data-slug="club-campestre" data-title="Club Campestre" data-loc="Querétaro" data-fallback="assets/photos/hero-proyecto-residencial.jpg">
-      <div class="pc-media"><img src="assets/projects/club-campestre.jpg" alt="Club Campestre — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/hero-proyecto-residencial.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
-      <div class="pc-body"><span class="pc-loc">Querétaro</span><h3>Club Campestre</h3><p>Paquete por prototipo para varias unidades residenciales.</p></div>
-    </button>
-    <button type="button" class="proj-card" data-cat="desarrolladores" data-slug="desarrollo-vertical" data-title="Desarrollo Vertical" data-loc="Querétaro" data-fallback="assets/photos/b2b-hero.jpg">
-      <div class="pc-media"><img src="assets/projects/desarrollo-vertical.jpg" alt="Desarrollo vertical — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/b2b-hero.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
-      <div class="pc-body"><span class="pc-loc">Querétaro</span><h3>Desarrollo Vertical</h3><p>Entregas por etapa para torre en construcción.</p></div>
-    </button>
-    <button type="button" class="proj-card" data-cat="hoteleria" data-slug="hotel-boutique" data-title="Hotel Boutique" data-loc="México" data-fallback="assets/photos/hero-proyecto.jpg">
-      <div class="pc-media"><img src="assets/projects/hotel-boutique.jpg" alt="Hotel Boutique — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/hero-proyecto.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
-      <div class="pc-body"><span class="pc-loc">México</span><h3>Hotel Boutique</h3><p>Cocina y áreas comunes de uso intensivo, con soporte post-venta.</p></div>
-    </button>
-    <button type="button" class="proj-card" data-cat="cocinas" data-slug="cocina-encino" data-title="Cocina Integral Encino" data-loc="Querétaro" data-fallback="assets/photos/proyecto-1.jpg">
-      <div class="pc-media"><img src="assets/projects/cocina-encino.jpg" alt="Cocina Integral Encino — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-1.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
-      <div class="pc-body"><span class="pc-loc">Querétaro</span><h3>Cocina Integral Encino</h3><p>Panelables sobremedida coordinados con la producción del mueble.</p></div>
-    </button>
-    <button type="button" class="proj-card" data-cat="residencial arquitectos" data-slug="residencia-lomas" data-title="Residencia" data-loc="Querétaro" data-fallback="assets/photos/proyecto-2.jpg">
-      <div class="pc-media"><img src="assets/projects/residencia-lomas.jpg" alt="Residencia — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-2.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
-      <div class="pc-body"><span class="pc-loc">Querétaro</span><h3>Residencia</h3><p>Cocina completa de 9 piezas, instalación certificada.</p></div>
-    </button>
-    <button type="button" class="proj-card" data-cat="residencial" data-slug="penthouse" data-title="Penthouse" data-loc="CDMX" data-fallback="assets/photos/proyecto-3.jpg">
-      <div class="pc-media"><img src="assets/projects/penthouse.jpg" alt="Penthouse — proyecto HOMEA" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/proyecto-3.jpg'"><span class="pc-badge" aria-hidden="true">Ver galería</span></div>
-      <div class="pc-body"><span class="pc-loc">CDMX</span><h3>Penthouse</h3><p>Equipo built-in y bar integrados a la arquitectura.</p></div>
-    </button>
-  </div>
-  <p class="proj-empty" hidden>No hay proyectos en este filtro todavía.</p>
-</div>
-
-<!-- Lightbox de galería de proyecto -->
-<div class="lightbox" id="projLightbox" hidden role="dialog" aria-modal="true" aria-label="Galería del proyecto">
-  <button type="button" class="lb-close" aria-label="Cerrar galería">&times;</button>
-  <button type="button" class="lb-nav lb-prev" aria-label="Imagen anterior">&#8249;</button>
-  <figure class="lb-stage">
-    <img class="lb-img" src="" alt="">
-    <figcaption class="lb-cap"><span class="lb-title"></span><span class="lb-count figures"></span></figcaption>
-  </figure>
-  <button type="button" class="lb-nav lb-next" aria-label="Imagen siguiente">&#8250;</button>
-</div>
-</section>
-
-<script>
-/* Galería de proyectos: filtro por tipo de cliente + lightbox multi-imagen. */
-(function () {
-  var wrap = document.getElementById("proyectos-galeria");
-  if (!wrap) return;
-  var cards = Array.prototype.slice.call(wrap.querySelectorAll(".proj-card"));
-
-  /* ---- Filtro por tipo de cliente ---- */
-  var chips = Array.prototype.slice.call(wrap.querySelectorAll(".proj-filter .pf"));
-  var empty = wrap.querySelector(".proj-empty");
-  chips.forEach(function (chip) {
-    chip.addEventListener("click", function () {
-      var f = chip.getAttribute("data-filter");
-      chips.forEach(function (c) {
-        var on = c === chip;
-        c.classList.toggle("on", on);
-        c.setAttribute("aria-pressed", on ? "true" : "false");
-      });
-      var shown = 0;
-      cards.forEach(function (card) {
-        var cats = " " + (card.getAttribute("data-cat") || "") + " ";
-        var show = f === "all" || cats.indexOf(" " + f + " ") >= 0;
-        card.classList.toggle("hide", !show);
-        if (show) shown++;
-      });
-      if (empty) empty.hidden = shown !== 0;
-    });
-  });
-
-  /* ---- Lightbox: abre las fotos del proyecto ----
-     Detecta automáticamente <slug>.jpg, <slug>-2.jpg … <slug>-12.jpg y muestra
-     solo las que existan. Si aún no hay ninguna, cae a la foto de respaldo. */
-  var lb = document.getElementById("projLightbox");
-  if (!lb) return;
-  var lbImg = lb.querySelector(".lb-img");
-  var lbTitle = lb.querySelector(".lb-title");
-  var lbCount = lb.querySelector(".lb-count");
-  var btnPrev = lb.querySelector(".lb-prev");
-  var btnNext = lb.querySelector(".lb-next");
-  var btnClose = lb.querySelector(".lb-close");
-  var shots = [], idx = 0, token = 0, curTitle = "";
-  var MAX = 12;
-
-  function render() {
-    if (!shots.length) return;
-    idx = (idx % shots.length + shots.length) % shots.length;
-    lbImg.src = shots[idx];
-    lbImg.alt = curTitle + " — imagen " + (idx + 1);
-    lbCount.textContent = shots.length > 1 ? (idx + 1) + " / " + shots.length : "";
-    var multi = shots.length > 1;
-    btnPrev.hidden = !multi;
-    btnNext.hidden = !multi;
-  }
-  function open() {
-    lb.hidden = false;
-    document.body.style.overflow = "hidden";
-    requestAnimationFrame(function () { lb.classList.add("on"); });
-    btnClose.focus();
-  }
-  function close() {
-    lb.classList.remove("on");
-    document.body.style.overflow = "";
-    token++;
-    setTimeout(function () { lb.hidden = true; }, 260);
-  }
-  function openProject(card) {
-    var slug = card.getAttribute("data-slug");
-    var title = card.getAttribute("data-title") || "";
-    var loc = card.getAttribute("data-loc") || "";
-    var fallback = card.getAttribute("data-fallback");
-    var coverImg = card.querySelector("img");
-    curTitle = title;
-    lbTitle.textContent = title + (loc ? " · " + loc : "");
-    /* Muestra la portada al instante mientras se detectan las demás. */
-    shots = [coverImg ? coverImg.src : fallback];
-    idx = 0;
-    render();
-    open();
-    /* Sondeo de imágenes reales del proyecto. */
-    var my = ++token;
-    var base = "/assets/projects/" + slug;
-    var found = {}, pending = MAX;
-    for (var n = 1; n <= MAX; n++) {
-      (function (n) {
-        var src = base + (n === 1 ? "" : "-" + n) + ".jpg";
-        var im = new Image();
-        im.onload = function () { found[n] = src; settle(); };
-        im.onerror = settle;
-        im.src = src;
-      })(n);
-    }
-    function settle() {
-      if (my !== token) return;      /* se cerró o se abrió otro proyecto */
-      if (--pending > 0) return;
-      var ordered = Object.keys(found).map(Number).sort(function (a, b) { return a - b; })
-        .map(function (k) { return found[k]; });
-      shots = ordered.length ? ordered : [fallback];
-      idx = 0;
-      render();
-    }
-  }
-
-  cards.forEach(function (card) {
-    card.addEventListener("click", function () { openProject(card); });
-  });
-  btnPrev.addEventListener("click", function () { idx--; render(); });
-  btnNext.addEventListener("click", function () { idx++; render(); });
-  btnClose.addEventListener("click", close);
-  lb.addEventListener("click", function (e) { if (e.target === lb) close(); });
-  document.addEventListener("keydown", function (e) {
-    if (lb.hidden) return;
-    if (e.key === "Escape") close();
-    else if (e.key === "ArrowLeft") { idx--; render(); }
-    else if (e.key === "ArrowRight") { idx++; render(); }
-  });
-})();
-</script>
-
 <!-- CTA -->
 <section class="sec on-dark cta-band">
-  <div class="glow"></div><div class="iso"></div>
+  <div class="glow"></div>
   <div class="container"><div class="inner reveal">
     <div class="eyebrow eyebrow-bright">Proyectos · B2B</div>
     <h2>Pon tu plano sobre la mesa. <i>Nosotros lo demás</i>.</h2>

@@ -38,3 +38,6 @@ catalogo-shopify/.env.shopify
 
 # archivos temporales de Excel
 ~\$*.xlsx
+
+# Fotos fuente de proyectos (491MB, material crudo — los exports viven en preview/public assets)
+PROYECTOS/
