@@ -82,20 +82,23 @@ export default function PreviewRouter() {
     window.__homeaInitPage?.();
   }, [pathname]);
 
-  // Auto-recuperación: si el contenido de <main> se re-monta (Fast Refresh en dev,
-  // o cualquier reemplazo del subárbol), los observers de reveal de v2.js quedan
-  // sobre nodos viejos y las secciones nunca aparecen al hacer scroll. Re-ligar.
-  // Sólo escucha el reemplazo de los hijos DIRECTOS de <main> (no interacciones
-  // internas), y bindPage es idempotente (aborta el contexto previo). Inerte en prod.
+  // Auto-recuperación: si el contenido de <main> o el cromo del nav se re-montan
+  // (Fast Refresh en dev, o React reemplazando el HTML inyectado del layout al
+  // navegar), los listeners de v2.js quedan sobre nodos viejos: los reveals no
+  // aparecen y el hover del mega-menú muere. Re-ligar. Sólo escucha el reemplazo
+  // de los hijos DIRECTOS (no interacciones internas); __homeaInitPage es
+  // idempotente (guard por nodo en chrome, abort del contexto previo en página).
   useEffect(() => {
     const main = document.querySelector("main");
-    if (!main) return;
+    const chrome = document.querySelector(".site-chrome");
+    if (!main && !chrome) return;
     let raf = 0;
     const obs = new MutationObserver(() => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => window.__homeaInitPage?.());
     });
-    obs.observe(main, { childList: true });
+    if (main) obs.observe(main, { childList: true });
+    if (chrome) obs.observe(chrome, { childList: true });
     return () => {
       obs.disconnect();
       cancelAnimationFrame(raf);

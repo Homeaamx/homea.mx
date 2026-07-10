@@ -2,9 +2,11 @@
    Nav scroll · hero rotativo · reveals on-scroll · tabs · marquesina · reseñas.
 
    Reestructurado para navegación SPA (sin recargar):
-   - bindChrome(): se ejecuta UNA sola vez. Liga el cromo persistente (nav + footer
-     viven en el layout y no se reemplazan al navegar): scroll de nav, tipo de cambio,
-     mega-menú y menú móvil.
+   - bindChrome(): liga el cromo (nav + footer): scroll de nav, tipo de cambio,
+     mega-menú y menú móvil. Se ejecuta al cargar Y tras cada navegación, porque
+     React puede reemplazar el DOM inyectado del nav al re-renderizar el layout
+     (y con él mueren los listeners). Guard por NODO: si el nav es el mismo, no
+     hace nada; si cambió, aborta el contexto anterior y re-liga el DOM nuevo.
    - bindPage(): se ejecuta en CADA render de <main>. Liga las interacciones del
      contenido de página (hero, reveals, tabs, parallax, marquesina, reseñas). Cada
      llamada aborta la anterior (AbortController) para que los listeners de scroll,
@@ -29,18 +31,23 @@
   }
 
   /* =====================================================================
-     FASE CROMO — una sola vez (nav + footer persisten entre navegaciones).
+     FASE CROMO — al cargar y tras cada navegación (guard por nodo del nav).
      ===================================================================== */
   function bindChrome() {
-    if (window.__homeaChromeBound) { return; }
-    window.__homeaChromeBound = true;
+    var navEl = document.querySelector(".site-nav");
+    if (navEl && navEl === window.__homeaChromeNav) { return; }
+    if (window.__homeaChrome) { window.__homeaChrome.abort(); }
+    var ctx = makePageCtx();
+    window.__homeaChrome = ctx;
+    window.__homeaChromeNav = navEl;
+    var on = ctx.on;
 
     /* ---------- Nav: claro → oscuro al hacer scroll ---------- */
-    var nav = document.querySelector(".site-nav");
+    var nav = navEl;
     if (nav) {
       var onScroll = function () { nav.classList.toggle("scrolled", window.scrollY > 24); };
       onScroll();
-      window.addEventListener("scroll", onScroll, { passive: true });
+      on(window, "scroll", onScroll, { passive: true });
     }
 
     /* ---------- Tipo de cambio del día (slot de temporada del ubar) ----------
@@ -52,7 +59,7 @@
       var fxNum = fxEl.querySelector("strong");
       var setFx = function (rate) {
         var n = parseFloat(rate);
-        if (fxNum && n) { fxNum.textContent = n.toFixed(2); }
+        if (fxNum && n) { fxNum.textContent = n.toFixed(2); window.__homeaFxRate = n; }
       };
       var fromMarket = function () {
         return fetch("https://open.er-api.com/v6/latest/USD")
@@ -67,7 +74,10 @@
               .then(function (d) { if (d && d.rates && d.rates.MXN) { setFx(d.rates.MXN); } });
           });
       };
-      if (BANXICO_TOKEN) {
+      if (window.__homeaFxRate) {
+        /* Ya se obtuvo en esta sesión: re-aplicar al nav nuevo sin refetch. */
+        setFx(window.__homeaFxRate);
+      } else if (BANXICO_TOKEN) {
         fetch("https://www.banxico.org.mx/SieAPIRest/service/v1/series/SF43718/datos/oportuno?token=" + BANXICO_TOKEN + "&mediaType=json")
           .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
           .then(function (d) {
@@ -115,12 +125,12 @@
           activate(c.dataset.pane, c.dataset.img, c.dataset.label, c.dataset.pos);
           if (featEl && c.dataset.href) { featEl.setAttribute("href", c.dataset.href); }
         };
-        c.addEventListener("mouseenter", go);
-        c.addEventListener("focus", go);
+        on(c, "mouseenter", go);
+        on(c, "focus", go);
         /* La navegación vive en la macrocategoría: clic en el riel → su página. */
         if (c.dataset.href) {
           c.style.cursor = "pointer";
-          c.addEventListener("click", function () { window.location.href = c.dataset.href; });
+          on(c, "click", function () { window.location.href = c.dataset.href; });
         }
       });
       var reset = function () {
@@ -130,7 +140,7 @@
         mega.classList.remove("cat-active");
       };
       var wrap = mega.closest(".has-mega");
-      if (wrap) { wrap.addEventListener("mouseleave", reset); }
+      if (wrap) { on(wrap, "mouseleave", reset); }
     }
 
     /* ---- Apertura/cierre de los mega-menús: un solo panel a la vez ----
@@ -139,10 +149,11 @@
        (título o su panel) y se abre solo ese; el resto se cierra al instante. Así
        nunca queda "pegado" el panel anterior al cambiar de título (p. ej. de
        Marcas a Productos). Al salir de la barra se cierra tras una breve gracia. */
-    var siteNav = document.querySelector(".site-nav");
+    var siteNav = navEl;
     var megaWraps = document.querySelectorAll(".has-mega");
     if (siteNav && megaWraps.length) {
       var closeTimer = null;
+      ctx.onAbort(function () { if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; } });
       var closeAllMega = function () {
         if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
         megaWraps.forEach(function (w) { w.classList.remove("is-open"); });
@@ -155,41 +166,41 @@
         if (closeTimer) { clearTimeout(closeTimer); }
         closeTimer = setTimeout(closeAllMega, 140);
       };
-      siteNav.addEventListener("mouseover", function (e) {
+      on(siteNav, "mouseover", function (e) {
         var w = e.target.closest(".has-mega");
         if (w) { openMega(w); }
         /* Sobre un elemento interactivo de la barra que NO es mega → cerrar.
            El espacio vacío entre enlaces no dispara nada (evita parpadeo al cruzar). */
         else if (e.target.closest("a, button, .btn, .nav-search")) { closeAllMega(); }
       });
-      siteNav.addEventListener("mouseleave", closeSoon);
+      on(siteNav, "mouseleave", closeSoon);
       /* Al pulsar cualquier enlace de la barra (incluido el título con panel o un
          item del panel) el mega se cierra al instante para dejar ver la página.
          Con clic de ratón (e.detail > 0) se quita el foco del enlace para que no
          quede el recuadro de foco ni un panel "pegado"; el foco de teclado (Enter,
          e.detail === 0) se respeta para no romper la navegación accesible. */
-      siteNav.addEventListener("click", function (e) {
+      on(siteNav, "click", function (e) {
         var a = e.target.closest("a");
         if (a) { closeAllMega(); if (e.detail > 0) { a.blur(); } }
       });
-      document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeAllMega(); } });
+      on(document, "keydown", function (e) { if (e.key === "Escape") { closeAllMega(); } });
     }
 
     /* ---------- Menú móvil (hamburguesa) ---------- */
-    var mnav = document.querySelector(".site-nav");
+    var mnav = navEl;
     var toggle = mnav && mnav.querySelector(".nav-toggle");
     if (mnav && toggle) {
       var close = function () { mnav.classList.remove("nav-open"); toggle.setAttribute("aria-expanded", "false"); };
-      toggle.addEventListener("click", function () {
+      on(toggle, "click", function () {
         var open = mnav.classList.toggle("nav-open");
         toggle.setAttribute("aria-expanded", open ? "true" : "false");
       });
       mnav.querySelectorAll(".nav-links a, .nav-right a, .btn-ghost").forEach(function (a) {
-        a.addEventListener("click", close);
+        on(a, "click", close);
       });
       /* "Productos" NO navega (no existe índice /productos): solo abre el desplegable.
          La navegación ocurre al elegir una macrocategoría del riel. */
-      document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+      on(document, "keydown", function (e) { if (e.key === "Escape") close(); });
     }
   }
 
@@ -824,8 +835,10 @@
     }
   }
 
-  /* Arranque + API para re-inicializar tras navegación cliente (PreviewRouter). */
+  /* Arranque + API para re-inicializar tras navegación cliente (PreviewRouter).
+     bindChrome también se re-evalúa: si React reemplazó el nodo del nav al navegar,
+     hay que re-ligar el mega-menú y demás listeners del cromo (guard por nodo). */
   bindChrome();
   bindPage();
-  window.__homeaInitPage = bindPage;
+  window.__homeaInitPage = function () { bindChrome(); bindPage(); };
 })();

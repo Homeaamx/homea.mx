@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <HomeNavSticky />
         <PreviewRouter />
         {/* Interacciones del preview (nav scroll, mega flyout, reveals, hero, marquee). */}
-        <Script src="/v2.js?v=34" strategy="afterInteractive" />
+        <Script src="/v2.js?v=35" strategy="afterInteractive" />
       </body>
     </html>
   );
