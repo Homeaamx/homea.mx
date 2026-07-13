@@ -11,7 +11,7 @@
    para que la sección no quede oculta tras la barra fija. */
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-:where([id]) { scroll-margin-top: calc(var(--nav-h) + 24px); }
+:where([id]) { scroll-margin-top: calc(var(--nav-h) - 1px); }
 .container { max-width: var(--container); margin: 0 auto; padding-left: 48px; padding-right: 48px; }
 .sec  { padding: 110px 0; }
 .sec.tight { padding: 72px 0; }
@@ -490,7 +490,11 @@ html { scroll-behavior: smooth; }
   background: linear-gradient(90deg, rgba(10,10,10,.78) 0%, rgba(10,10,10,.55) 42%, rgba(10,10,10,.18) 100%); }
 .hero-cine .hero-inner { position: relative; width: 100%; }
 .hero-cine .hero-copy { display: flex; flex-direction: column; gap: 26px; align-items: flex-start; max-width: 620px; will-change: transform, opacity; }
-.hero-cine .hero-msg { min-height: 0; }
+/* Altura reservada = titular de 3 líneas (peor caso, lh-tight 1.06 → 3.18em):
+   los CTAs y el pager quedan SIEMPRE en el mismo sitio aunque el mensaje rote
+   entre títulos de 2 y 3 líneas. */
+.hero-cine .hero-msg { min-height: calc(124px + 3.18 * clamp(40px, 5vw, 72px)); }
+@media (max-width: 767px) { .hero-cine .hero-msg { min-height: 316px; } }
 .hero-cine .hero-prog .idx { color: var(--homea-bone); }
 .hero-cine .hero-prog .idx span { color: var(--dark-fg-muted); }
 .hero-cine .hero-bars button { background: rgba(247,243,236,.22); }
@@ -1852,6 +1856,7 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
   .hero-cine .hero-copy { max-width: 760px; }
   .hero-msg h1 { max-width: 720px; font-size: clamp(40px, 5vw, 88px); }
   .hero-msg .sub { max-width: 560px; }
+  .hero-cine .hero-msg { min-height: calc(124px + 3.18 * clamp(40px, 5vw, 88px)); }
 
   /* "Empecemos por escucharte" */
   .cta-band h2 { font-size: calc(clamp(32px, 4vw, 64px) * 1.05); }

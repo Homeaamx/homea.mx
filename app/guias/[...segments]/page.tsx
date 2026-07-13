@@ -154,7 +154,7 @@ function MacroIndex({ macro, node }: { macro: Macrocategoria; node: RouteNode })
         />
         <section className="sec">
           <div className="container category-layout">
-            <CategoryList variant="leaves" leaves={leafFiltros(macro)} railHead="Categorías" />
+            <CategoryList variant="leaves" leaves={leafFiltros(macro)} railHead="Explora por categoría" />
             <div className="category-main">
               <GuideTypeFilter cards={cards} tipos={getTiposDeGuia()} />
             </div>
@@ -235,7 +235,7 @@ function CategoryIndex({
       </PageHero>
       <section className="sec">
         <div className="container category-layout">
-          <CategoryList variant="leaves" leaves={sub1.subcategorias2 ?? []} railHead="Categorías" />
+          <CategoryList variant="leaves" leaves={sub1.subcategorias2 ?? []} railHead="Explora por categoría" />
           <div className="category-main">
             <GuideTypeFilter cards={cards} tipos={getTiposDeGuia()} />
           </div>

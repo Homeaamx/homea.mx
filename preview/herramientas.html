@@ -14,21 +14,61 @@
    repetir la misma tarjeta cinco veces. Esquinas vivas, cifras tabulares. */
 
 /* ---- 0 · Índice editorial (tabla de contenidos con anclas) ---- */
-.hrm-ix { border-top: 1px solid var(--border); margin-top: 44px; }
-.hrm-ix a { display: grid; grid-template-columns: 64px 300px 1fr auto; gap: 28px; align-items: baseline;
-  padding: 26px 10px; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit;
-  transition: background .3s ease, padding-left .3s ease; }
-.hrm-ix a:hover { background: var(--surface-alt); padding-left: 22px; }
+.hrm-ix { margin-top: 44px; display: flex; flex-direction: column; gap: 14px; }
+.hrm-ix a { position: relative; display: grid; grid-template-columns: 64px 300px 1fr auto; gap: 28px; align-items: baseline;
+  padding: 30px 34px; background: var(--surface); border: 1px solid var(--border);
+  text-decoration: none; color: inherit;
+  transition: transform .35s cubic-bezier(.33,0,.2,1), box-shadow .35s ease; }
+.hrm-ix a::before, .hrm-ix a::after { content: ""; position: absolute; left: 0; right: 0; height: 2px;
+  background: var(--homea-gold); transform: scaleX(0); transform-origin: left center;
+  transition: transform .45s cubic-bezier(.33,0,.2,1); }
+.hrm-ix a::before { top: -1px; }
+.hrm-ix a::after { bottom: -1px; }
+.hrm-ix a:hover { transform: scale(1.02); box-shadow: var(--shadow-md); }
+.hrm-ix a:hover::before, .hrm-ix a:hover::after { transform: scaleX(1); }
 .hrm-ix .n { font-size: 13px; letter-spacing: .18em; color: var(--accent-text); font-weight: 600; }
 .hrm-ix h3 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 27px; line-height: 1.15; }
 .hrm-ix h3 i { color: var(--accent-text); }
 .hrm-ix p { margin: 0; font-size: 15px; font-weight: 300; color: var(--fg-muted); max-width: 480px; }
-.hrm-ix .ar { font-size: 18px; color: var(--accent-text); transition: transform .3s ease; }
-.hrm-ix a:hover .ar { transform: translateX(6px); }
+.hrm-ix .ar { align-self: center; position: relative; width: 44px; height: 1.5px;
+  background: var(--homea-gold); transition: width .4s cubic-bezier(.33,0,.2,1); }
+.hrm-ix .ar::after { content: ""; position: absolute; right: 0; top: 50%; width: 9px; height: 9px;
+  border-top: 1.5px solid var(--homea-gold); border-right: 1.5px solid var(--homea-gold);
+  transform: translateY(-50%) rotate(45deg); }
+.hrm-ix a:hover .ar { width: 76px; }
 @media (max-width: 860px) {
   .hrm-ix a { grid-template-columns: 44px 1fr auto; }
   .hrm-ix p { display: none; }
   .hrm-ix h3 { font-size: 21px; }
+}
+
+/* ---- 0.5 · Hero: alzado técnico que se dibuja (ref. cocina Café) ---- */
+.hrm-hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+.hrm-hero-plano { margin: 0; }
+.hrm-hero-plano svg { width: 100%; height: auto; display: block; }
+.hrm-hero-plano .ln { fill: none; stroke: var(--fg); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.hrm-hero-plano .soft { stroke-width: 1; opacity: .55; }
+.hrm-hero-plano .fur { stroke-width: .9; opacity: .4; }
+.hrm-hero-plano .dk { fill: var(--homea-espresso-raised); stroke: none; }
+.hrm-hero-plano .au { fill: none; stroke: var(--homea-gold); stroke-width: 1.4; stroke-linecap: round; }
+.hrm-hero-plano .au-fill { fill: var(--homea-gold); stroke: none; }
+.hrm-hero-plano .cota { fill: none; stroke: var(--homea-gold); stroke-width: 1; }
+.hrm-hero-plano .cota-t { font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: .08em; fill: var(--accent-text); font-variant-numeric: tabular-nums; }
+.pd { stroke-dasharray: 101; stroke-dashoffset: 101; animation: hrmDraw 1.1s cubic-bezier(.33,0,.2,1) forwards; }
+.pd.g1 { animation-delay: .15s; } .pd.g2 { animation-delay: .5s; }
+.pd.g3 { animation-delay: .85s; } .pd.g4 { animation-delay: 1.2s; }
+.pf { opacity: 0; animation: hrmFade .7s ease forwards; animation-delay: 2s; }
+@keyframes hrmDraw { to { stroke-dashoffset: 0; } }
+@keyframes hrmFade { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .pd { animation: none; stroke-dashoffset: 0; }
+  .pf { animation: none; opacity: 1; }
+}
+@media (max-width: 1080px) { .hrm-hero { gap: 40px; } }
+@media (max-width: 860px) {
+  .hrm-hero { grid-template-columns: 1fr; gap: 12px; }
+  .hrm-hero-plano { max-width: 440px; margin-top: 14px; }
 }
 
 /* ---- 1 · Paquetes: riel por presupuesto (banda espresso) ---- */
@@ -131,8 +171,6 @@
 .hrm-finder .f-micro { margin: 22px 0 0; font-size: 13px; font-weight: 300; color: var(--fg-muted); }
 @media (max-width: 960px) { .hrm-fichas { grid-template-columns: 1fr; gap: 40px; } }
 
-/* Ancla: compensar el nav sticky al saltar del índice */
-#paquetes, #comparativos, #tips, #fichas { scroll-margin-top: 86px; }
 </style>
 </head>
 <body>
@@ -255,7 +293,7 @@
       </div>
     </div>
     <a href="b2b.html">Proyectos</a>
-    <a href="home.html">Ofertas</a>
+    <a href="ofertas.html">Ofertas</a>
     <a href="guias.html">Guías</a>
   </div>
   <div class="nav-right">
@@ -268,11 +306,92 @@
 
 
 <!-- Page hero + índice: intro de lo que el cliente encuentra aquí -->
-<header class="page-hero"><div class="container">
-  <div class="crumbs"><a href="home.html">Inicio</a><span class="sep">·</span><span>Herramientas</span></div>
-  <div class="eyebrow" style="margin-bottom:18px">Herramientas · Para decidir mejor</div>
-  <h1>Herramientas para <i>elegir bien</i>.</h1>
-  <p class="sub">Reunimos aquí los recursos que usamos todos los días con nuestros clientes: paquetes de cocina armados por presupuesto, comparativos entre tipos y marcas, tips de nuestros especialistas y las fichas técnicas de cada producto. Ya seas cocinero, arquitecto, constructor o diseñador de interiores, este es el punto de partida de tu proyecto.</p>
+<header class="page-hero"><div class="container hrm-hero">
+  <div class="hrm-hero-copy">
+    <div class="crumbs"><a href="home.html">Inicio</a><span class="sep">·</span><span>Herramientas</span></div>
+    <div class="eyebrow" style="margin-bottom:18px">Herramientas · Para decidir mejor</div>
+    <h1>Herramientas para nuestros <i>clientes frecuentes</i>.</h1>
+    <p class="sub">Si especificas, construyes o asesoras, aquí empieza tu proyecto: presupuestos cerrados por gama, decisiones respaldadas con datos y el detalle técnico de cada modelo — listo para compartir con tus clientes.</p>
+  </div>
+
+  <!-- Alzado de línea (ref.: cocina Café, perillas y jaladeras de latón).
+       Se dibuja al cargar: grupos g1→g4, detalles en oro aparecen al final. -->
+  <figure class="hrm-hero-plano" aria-hidden="true">
+    <svg viewBox="0 0 560 430" xmlns="http://www.w3.org/2000/svg">
+      <!-- g1 · mobiliario en trazo ligero: mantel, gabinetes, vitrina, péndulo -->
+      <g>
+        <rect class="ln fur pd g1" pathLength="100" x="40" y="36" width="110" height="88"/>
+        <rect class="ln fur pd g1" pathLength="100" x="52" y="48" width="86" height="64"/>
+        <path class="ln fur pd g1" pathLength="100" d="M158 36 H392 V58 H158 Z"/>
+        <path class="ln fur pd g1" pathLength="100" d="M158 58 H186 V214 H158 Z M364 58 H392 V214 H364 Z"/>
+        <path class="ln fur pd g1" pathLength="100" d="M186 214 V178 Q275 106 364 178 V214"/>
+        <rect class="ln fur pd g1" pathLength="100" x="414" y="36" width="126" height="110"/>
+        <line class="ln fur pd g1" pathLength="100" x1="477" y1="36" x2="477" y2="146"/>
+        <rect class="ln fur pd g1" pathLength="100" x="424" y="46" width="44" height="90"/>
+        <rect class="ln fur pd g1" pathLength="100" x="486" y="46" width="44" height="90"/>
+        <path class="ln fur pd g1" pathLength="100" d="M434 114 q6 10 12 0 M440 119 v9 M435 128 h10 M496 114 q6 10 12 0 M502 119 v9 M497 128 h10"/>
+        <line class="ln fur pd g1" pathLength="100" x1="40" y1="250" x2="540" y2="250"/>
+        <rect class="ln fur pd g1" pathLength="100" x="40" y="256" width="160" height="128"/>
+        <line class="ln fur pd g1" pathLength="100" x1="40" y1="300" x2="200" y2="300"/>
+        <line class="ln fur pd g1" pathLength="100" x1="120" y1="256" x2="120" y2="384"/>
+        <rect class="ln fur pd g1" pathLength="100" x="476" y="256" width="64" height="128"/>
+        <line class="ln fur pd g1" pathLength="100" x1="476" y1="298" x2="540" y2="298"/>
+        <line class="ln fur pd g1" pathLength="100" x1="476" y1="336" x2="540" y2="336"/>
+      </g>
+      <!-- g2 · campana: chimenea, dosel con visor de cristal -->
+      <g>
+        <rect class="ln pd g2" pathLength="100" x="252" y="92" width="46" height="64"/>
+        <rect class="ln pd g2" pathLength="100" x="195" y="156" width="160" height="13"/>
+        <line class="ln soft pd g2" pathLength="100" x1="205" y1="175" x2="345" y2="175"/>
+      </g>
+      <!-- g3 · estufa 36": cuerpo, tablero, puerta y patas -->
+      <g>
+        <rect class="ln pd g3" pathLength="100" x="200" y="256" width="160" height="128"/>
+        <line class="ln soft pd g3" pathLength="100" x1="200" y1="262" x2="360" y2="262"/>
+        <rect class="ln pd g3" pathLength="100" x="206" y="306" width="148" height="66"/>
+        <rect class="ln soft pd g3" pathLength="100" x="222" y="316" width="116" height="46" rx="3"/>
+        <rect class="ln pd g3" pathLength="100" x="212" y="384" width="14" height="11" rx="3"/>
+        <rect class="ln pd g3" pathLength="100" x="334" y="384" width="14" height="11" rx="3"/>
+      </g>
+      <!-- g4 · lavavajillas: panel liso, zócalo -->
+      <g>
+        <rect class="ln pd g4" pathLength="100" x="380" y="256" width="96" height="120"/>
+        <line class="ln soft pd g4" pathLength="100" x1="386" y1="366" x2="470" y2="366"/>
+      </g>
+      <!-- cristal negro y testigos (aparecen con los latones) -->
+      <g class="pf">
+        <rect class="dk" x="224" y="318" width="112" height="42" rx="3"/>
+        <rect class="dk" x="271" y="264" width="18" height="10"/>
+        <rect class="dk" x="452" y="261" width="14" height="6"/>
+        <rect class="dk" x="388" y="368" width="80" height="8"/>
+      </g>
+      <!-- oro · 7 perillas, jaladeras con poste, botonera y cotas -->
+      <g class="pf">
+        <circle class="au-fill" cx="216" cy="278" r="5"/>
+        <circle class="au-fill" cx="236" cy="278" r="5"/>
+        <circle class="au-fill" cx="256" cy="278" r="5"/>
+        <circle class="au-fill" cx="280" cy="281" r="6"/>
+        <circle class="au-fill" cx="304" cy="278" r="5"/>
+        <circle class="au-fill" cx="324" cy="278" r="5"/>
+        <circle class="au-fill" cx="344" cy="278" r="5"/>
+        <path class="au" style="stroke-width:3" d="M212 298 H348"/>
+        <path class="au" style="stroke-width:2" d="M220 298 V306 M340 298 V306"/>
+        <path class="au" style="stroke-width:3" d="M390 274 H466"/>
+        <path class="au" style="stroke-width:2" d="M398 274 V282 M458 274 V282"/>
+        <circle class="au-fill" cx="266" cy="162" r="1.8"/>
+        <circle class="au-fill" cx="275" cy="162" r="1.8"/>
+        <circle class="au-fill" cx="284" cy="162" r="1.8"/>
+      </g>
+      <g class="pf">
+        <path class="cota" d="M200 406 H360 M200 400 v12 M360 400 v12"/>
+        <text class="cota-t" x="255" y="424">91.4 cm</text>
+        <path class="cota" d="M195 194 H355 M195 188 v12 M355 188 v12"/>
+        <text class="cota-t" x="250" y="212">91.4 cm</text>
+        <path class="cota" d="M552 256 V376 M546 256 h12 M546 376 h12"/>
+        <text class="cota-t" x="494" y="400">86.4 cm</text>
+      </g>
+    </svg>
+  </figure>
 </div></header>
 
 <!-- Índice editorial con anclas -->
@@ -282,25 +401,25 @@
       <span class="n figures">01</span>
       <h3>Paquetes de <i>cocina</i></h3>
       <p>Cocinas completas por marca, de gama de acceso a ultra premium, con precio cerrado.</p>
-      <span class="ar" aria-hidden="true">→</span>
+      <span class="ar" aria-hidden="true"></span>
     </a>
     <a href="#comparativos">
       <span class="n figures">02</span>
       <h3>Comparativos</h3>
       <p>Tipos de electrodoméstico y marcas frente a frente, para decidir con datos.</p>
-      <span class="ar" aria-hidden="true">→</span>
+      <span class="ar" aria-hidden="true"></span>
     </a>
     <a href="#tips">
       <span class="n figures">03</span>
       <h3>Tips y <i>videos</i></h3>
       <p>Consejos breves de nuestros especialistas antes de comprar, instalar o usar.</p>
-      <span class="ar" aria-hidden="true">→</span>
+      <span class="ar" aria-hidden="true"></span>
     </a>
     <a href="#fichas">
       <span class="n figures">04</span>
       <h3>Fichas técnicas</h3>
       <p>Especificaciones, medidas y manuales por modelo, listos para tu proyecto.</p>
-      <span class="ar" aria-hidden="true">→</span>
+      <span class="ar" aria-hidden="true"></span>
     </a>
   </nav>
 </div></section>
@@ -471,7 +590,7 @@
       <a href="home.html">Productos</a>
       <a href="marcas.html">Marcas</a>
       <a href="marcas.html">Listas de precio</a>
-      <a class="soon" href="ofertas.html" aria-disabled="true" tabindex="-1">Ofertas</a>
+      <a href="ofertas.html">Ofertas</a>
       <a href="guias.html">Guías</a>
       <a href="herramientas.html">Herramientas</a></div>
     <div class="lnk"><div class="f-eyebrow">HOMEA</div>
