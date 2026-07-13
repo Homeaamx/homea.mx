@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PROPUESTA — Ofertas por temporada · HOMEA</title>
+<link rel="icon" type="image/png" href="assets/favicon-circle.png">
+<link rel="stylesheet" href="tokens-v2.css">
+<link rel="stylesheet" href="theme.css?v=60">
+<style>
+/* ===== PROPUESTA · /ofertas — sistema de temporadas (borrador visual) =====
+   Mantiene el concepto aprobado: 1 hero de temporada (datos) · 2 outlet
+   permanente (filtros Shopify) · 3 promos de marca (PDF domesticado) ·
+   4 estado entre-temporadas · 5 cierre consultivo. */
+
+/* Anotaciones de la propuesta (no van en producción) */
+.nota { max-width: var(--container); margin: 0 auto; padding: 34px 48px 14px; }
+.nota .n { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--accent-text); }
+.nota p { margin: 6px 0 0; font-size: 13px; color: var(--fg-muted); max-width: 620px; }
+
+/* 1 · Hero de temporada */
+.of-hero { position: relative; overflow: hidden; min-height: clamp(520px, 66vh, 740px); display: flex; align-items: center; background: var(--homea-black); }
+.of-hero img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; }
+.of-hero .veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,10,10,.82) 0%, rgba(10,10,10,.55) 45%, rgba(10,10,10,.15) 100%); }
+.of-hero .container { position: relative; padding-top: 72px; padding-bottom: 72px; }
+.of-vig { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 22px;
+  border: 1px solid rgba(189,155,94,.5); padding: 8px 14px;
+  font-size: 12px; font-weight: 600; letter-spacing: .12em; color: var(--homea-bone);
+  font-variant-numeric: tabular-nums; }
+.of-vig b { color: var(--homea-gold-bright); font-weight: 600; }
+.of-hero h1 { max-width: 640px; color: var(--homea-bone); font-size: clamp(40px, 4.6vw, 66px); }
+.of-hero .marcas { margin: 18px 0 0; font-size: 14px; font-weight: 300; color: #cfc8bb; }
+.of-hero .marcas a { color: var(--homea-gold-bright); }
+.of-hero .ctas { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+
+/* 2 · Outlet permanente — tile-foto */
+.of-outlet { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.of-tile { position: relative; overflow: hidden; aspect-ratio: 16 / 11; display: flex; align-items: flex-end;
+  color: var(--homea-bone); border-top: 2px solid transparent;
+  transition: transform var(--dur-med) var(--ease-standard), border-color var(--dur-med) var(--ease-standard), box-shadow var(--dur-med) var(--ease-standard); }
+.of-tile:hover { transform: translateY(-4px); border-top-color: var(--homea-gold); box-shadow: var(--shadow-md); }
+.of-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1200ms var(--ease-reveal); }
+.of-tile:hover img { transform: scale(1.04); }
+.of-tile .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,.05) 30%, rgba(10,10,10,.82) 100%); }
+.of-tile .inner { position: relative; padding: 30px 32px; width: 100%; }
+.of-tile .eyebrow { color: var(--homea-gold-bright); margin-bottom: 10px; }
+.of-tile h3 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 2.4vw, 36px); line-height: 1.1; color: var(--homea-bone); }
+.of-tile .cond { margin: 8px 0 0; font-size: 13px; font-weight: 300; color: #d8d2c5; }
+.of-tile .go { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px;
+  font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--homea-gold-bright); }
+.of-tile .go .ln { width: 34px; height: 1.5px; background: var(--homea-gold); transition: width .4s cubic-bezier(.33,0,.2,1); }
+.of-tile:hover .go .ln { width: 56px; }
+
+/* 3 · Promos de marca */
+.of-brands { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.of-bcard { background: var(--surface); border: 1px solid var(--border); border-top: 2px solid transparent; display: flex; flex-direction: column;
+  transition: transform var(--dur-med) var(--ease-standard), border-color var(--dur-med) var(--ease-standard), box-shadow var(--dur-med) var(--ease-standard); }
+.of-bcard:hover { transform: translateY(-4px); border-top-color: var(--homea-gold); box-shadow: var(--shadow-md); }
+.of-bcard .foto { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--bg-greige); }
+.of-bcard .foto img { width: 100%; height: 100%; object-fit: cover; }
+.of-bcard .foto .logo { position: absolute; left: 18px; bottom: 14px; background: rgba(247,243,236,.92); padding: 7px 12px; }
+.of-bcard .foto .logo img { display: block; height: 16px; width: auto; object-fit: contain; }
+.of-bcard .body { padding: 22px 24px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.of-bcard .mec { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 20px; line-height: 1.25; color: var(--fg); flex: 1; }
+.of-bcard .vence { font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--fg-subtle); font-variant-numeric: tabular-nums; }
+.of-bcard .acts { display: flex; gap: 18px; border-top: 1px solid var(--border); padding-top: 14px; margin-top: 4px;
+  font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.of-bcard .acts a { color: var(--accent-text); border-bottom: none; }
+.of-bcard .acts a:hover { color: var(--fg); }
+
+/* 4 · Entre temporadas */
+.of-next { display: grid; grid-template-columns: 1.1fr .9fr; background: var(--homea-greige); border: 1px solid var(--border); overflow: hidden; }
+.of-next .txt { padding: clamp(32px, 4vw, 60px); display: flex; flex-direction: column; align-items: flex-start; gap: 16px; justify-content: center; }
+.of-next h2 { margin: 0; font-size: clamp(28px, 2.8vw, 44px); }
+.of-next p { margin: 0; font-size: var(--fs-md); font-weight: 300; color: var(--fg-muted); max-width: 460px; }
+.of-next .foto { position: relative; min-height: 300px; }
+.of-next .foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* 5 · Cierre consultivo */
+.of-close { text-align: center; }
+.of-close h2 { color: var(--homea-bone); font-size: clamp(32px, 3.6vw, 56px); max-width: 720px; margin: 0 auto; }
+.of-close p { color: var(--dark-fg-muted); margin: 18px auto 30px; max-width: 520px; font-weight: 300; }
+
+@media (max-width: 900px) {
+  .of-outlet, .of-brands { grid-template-columns: 1fr; }
+  .of-next { grid-template-columns: 1fr; }
+  .nota { padding: 28px 24px 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- barra de propuesta -->
+<div style="background:var(--homea-black); color:var(--homea-bone); padding:12px 0;">
+  <div class="container" style="display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+    <span style="font-size:11px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--homea-gold-bright);">Propuesta · página /ofertas</span>
+    <span style="font-size:11px; letter-spacing:.1em; color:#cfc8bb;">Sistema de temporadas · misma URL todo el año · contenido por datos</span>
+  </div>
+</div>
+
+<div class="nota">
+  <span class="n">01 · Hero de temporada</span>
+  <p>Foto de campaña + vigencia en cifras tabulares. Al cambiar de temporada solo cambian datos: eyebrow, titular, foto y fechas. Vencida la campaña, este hero se sustituye solo por el estado 04.</p>
+</div>
+<header class="of-hero">
+  <img class="bg" src="assets/photos/hero-thermador-cocina.jpg" alt="">
+  <div class="veil"></div>
+  <div class="container">
+    <div class="eyebrow eyebrow-bright" style="margin-bottom:16px">Temporada · Hot Sale 2026</div>
+    <div class="of-vig figures">Vigencia <b>26.MAY — 03.JUN</b> · quedan <b>4 días</b></div>
+    <h1>Hasta 60% en <em>marcas seleccionadas</em>.</h1>
+    <p class="marcas">Gaggenau · Monogram · Miele · Thermador · Café · Smeg &nbsp;—&nbsp; <a href="#">ver las 22 marcas participantes</a></p>
+    <div class="ctas">
+      <a class="btn btn-bone" href="#">Ver ofertas</a>
+      <a class="btn btn-ghost-light" href="#">Cotizar por WhatsApp</a>
+    </div>
+  </div>
+</header>
+
+<div class="nota">
+  <span class="n">02 · Outlet permanente</span>
+  <p>Siempre visible, con o sin temporada. Cada tile liga a su filtro de Shopify (outlet-premium / outlet-esencial). Tile-foto como en Marcas: la fotografía vende, el texto precisa.</p>
+</div>
+<section class="sec tight" style="padding-top:12px"><div class="container">
+  <div class="of-outlet">
+    <a class="of-tile" href="#">
+      <img src="assets/photos/hero-subzero-wolf-cocina.jpg" alt="Cocina Sub-Zero y Wolf — outlet premium">
+      <div class="shade"></div>
+      <div class="inner">
+        <div class="eyebrow">Outlet · Premium</div>
+        <h3>Del 60% <em>al 40%</em> de descuento.</h3>
+        <p class="cond">En producto nuevo · Sub-Zero, Wolf, Gaggenau, Miele y más.</p>
+        <span class="go"><span class="ln"></span>Ver inventario</span>
+      </div>
+    </a>
+    <a class="of-tile" href="#">
+      <img src="assets/photos/cat-cuidado-ropa-bosch-lavadora-secadora.jpg" alt="Lavadora y secadora Bosch — outlet esencial">
+      <div class="shade"></div>
+      <div class="inner">
+        <div class="eyebrow">Outlet · Esencial</div>
+        <h3>Del 60% <em>al 40%</em> de descuento.</h3>
+        <p class="cond">En producto nuevo · Bosch, Whirlpool, Mabe, Teka y más.</p>
+        <span class="go"><span class="ln"></span>Ver inventario</span>
+      </div>
+    </a>
+  </div>
+</div></section>
+
+<div class="nota">
+  <span class="n">03 · Promos de marca vigentes</span>
+  <p>El folleto del proveedor se domestica: foto de la marca, mecánica en texto real, vigencia y dos salidas — el PDF oficial y el asesor. Vencida la promo, la tarjeta desaparece sola.</p>
+</div>
+<section class="sec tight" style="padding-top:12px"><div class="container">
+  <div class="of-brands">
+    <article class="of-bcard">
+      <div class="foto">
+        <img src="assets/photos/brands/thermador.jpg" alt="Cocina Thermador">
+        <span class="logo"><img src="assets/logos/thermador.png" alt="Thermador"></span>
+      </div>
+      <div class="body">
+        <p class="mec">Productos al 50% + lavavajillas o campana <em>gratis</em>.</p>
+        <span class="vence figures">Vence 31.AGO.2026</span>
+        <div class="acts"><a href="#">Folleto PDF ↗</a><a href="#">Cotizar →</a></div>
+      </div>
+    </article>
+    <article class="of-bcard">
+      <div class="foto">
+        <img src="assets/photos/brands/cafe.webp" alt="Cocina Café">
+        <span class="logo"><img src="assets/logos/cafe.png" alt="Café"></span>
+      </div>
+      <div class="body">
+        <p class="mec">Buy more, save more: % de descuento <em>acumulable</em> por equipo.</p>
+        <span class="vence figures">Vence 30.SEP.2026</span>
+        <div class="acts"><a href="#">Folleto PDF ↗</a><a href="#">Cotizar →</a></div>
+      </div>
+    </article>
+    <article class="of-bcard">
+      <div class="foto">
+        <img src="assets/photos/brands/monogram.webp" alt="Cocina Monogram">
+        <span class="logo"><img src="assets/logos/monogram.png" alt="Monogram"></span>
+      </div>
+      <div class="body">
+        <p class="mec">Save with style: acumula % al <em>agregar equipos</em> a tu pedido.</p>
+        <span class="vence figures">Vence 30.SEP.2026</span>
+        <div class="acts"><a href="#">Folleto PDF ↗</a><a href="#">Cotizar →</a></div>
+      </div>
+    </article>
+  </div>
+</div></section>
+
+<div class="nota">
+  <span class="n">04 · Estado entre temporadas</span>
+  <p>Cuando no hay campaña activa (hoy), el hero de temporada se sustituye por esta banda: anuncia la próxima fecha y captura el lead. El outlet y las promos de marca siguen visibles debajo.</p>
+</div>
+<section class="sec tight" style="padding-top:12px"><div class="container">
+  <div class="of-next">
+    <div class="txt">
+      <div class="eyebrow">Próxima temporada · Buen Fin</div>
+      <h2>Las ofertas llegan el <em>13 de noviembre</em>.</h2>
+      <p>El outlet nunca descansa: mientras tanto, hasta 60% de descuento en producto nuevo de piso y las promociones vigentes de marca.</p>
+      <a class="btn btn-dark" href="#">Avísame por WhatsApp</a>
+    </div>
+    <div class="foto"><img src="assets/photos/hero-miele-cocina.jpg" alt=""></div>
+  </div>
+</div></section>
+
+<div class="nota">
+  <span class="n">05 · Cierre consultivo</span>
+  <p>La promesa comercial que ya es tuya, como banda de cierre. Convierte la página en captadora de leads incluso sin campaña.</p>
+</div>
+<section class="sec on-dark of-close"><div class="container">
+  <div class="eyebrow eyebrow-bright" style="margin-bottom:18px">Ofertas · Todo el año</div>
+  <h2>Mejoramos <em>cualquier oferta</em>.</h2>
+  <p>¿Viste un mejor precio en otro lado? Mándanos la cotización y un asesor te responde el mismo día.</p>
+  <a class="btn btn-gold" href="https://api.whatsapp.com/send/?phone=524461446318" target="_blank" rel="noopener">Enviar cotización por WhatsApp</a>
+</div></section>
+
+</body>
+</html>

@@ -3,10 +3,98 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HOMEA — Garantías & Instalación · Servicio técnico post-venta</title>
+<title>HOMEA — Ofertas y Promociones</title>
 <link rel="icon" type="image/png" href="assets/favicon-circle.png">
 <link rel="stylesheet" href="tokens-v2.css">
 <link rel="stylesheet" href="theme.css?v=60">
+<style>
+/* ===== Ofertas — sistema de temporadas =====
+   Una sola URL todo el año. El contenido rota por datos:
+   - Hero de temporada (visible solo dentro de su vigencia data-inicio/fin).
+   - Estado entre temporadas (default sin JS, y cuando no hay campaña).
+   - Promos de marca con data-vence: vencida → la tarjeta se remueve sola. */
+
+/* 1 · Hero de temporada (campaña activa) */
+.of-hero[hidden], .of-nexthero[hidden] { display: none !important; }
+.of-hero { position: relative; overflow: hidden; min-height: clamp(520px, 66vh, 740px); display: flex; align-items: center; background: var(--homea-black); }
+.of-hero img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; }
+.of-hero .veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,10,10,.82) 0%, rgba(10,10,10,.55) 45%, rgba(10,10,10,.15) 100%); }
+.of-hero .container { position: relative; padding-top: 72px; padding-bottom: 72px; }
+.of-hero .crumbs a, .of-hero .crumbs span { color: #cfc8bb; }
+.of-vig { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 22px;
+  border: 1px solid rgba(189,155,94,.5); padding: 8px 14px;
+  font-size: 12px; font-weight: 600; letter-spacing: .12em; color: var(--homea-bone);
+  font-variant-numeric: tabular-nums; }
+.of-vig b { color: var(--homea-gold-bright); font-weight: 600; }
+.of-hero h1 { max-width: 640px; color: var(--homea-bone); font-size: clamp(40px, 4.6vw, 66px); }
+.of-hero .marcas { margin: 18px 0 0; font-size: 14px; font-weight: 300; color: #cfc8bb; }
+.of-hero .marcas a { color: var(--homea-gold-bright); }
+.of-hero .ctas { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+
+/* 1b · Hero entre temporadas */
+.of-nexthero { padding: 30px 0 0; }
+.of-next { display: grid; grid-template-columns: 1.05fr .95fr; background: var(--homea-greige); border: 1px solid var(--border); overflow: hidden; margin-top: 22px; }
+.of-next .txt { padding: clamp(36px, 4.5vw, 72px); display: flex; flex-direction: column; align-items: flex-start; gap: 18px; justify-content: center; }
+.of-next h1 { margin: 0; font-size: clamp(34px, 3.6vw, 56px); max-width: 520px; }
+.of-next p { margin: 0; font-size: var(--fs-md); font-weight: 300; color: var(--fg-muted); max-width: 470px; }
+.of-next .ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+.of-next .foto { position: relative; min-height: 340px; }
+.of-next .foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* 2 · Outlet permanente — tile-foto */
+.of-outlet { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.of-tile { position: relative; overflow: hidden; aspect-ratio: 16 / 11; display: flex; align-items: flex-end;
+  color: var(--homea-bone); border-top: 2px solid transparent;
+  transition: transform var(--dur-med) var(--ease-standard), border-color var(--dur-med) var(--ease-standard), box-shadow var(--dur-med) var(--ease-standard); }
+.of-tile:hover { transform: translateY(-4px); border-top-color: var(--homea-gold); box-shadow: var(--shadow-md); }
+.of-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1200ms var(--ease-reveal); }
+.of-tile:hover img { transform: scale(1.04); }
+.of-tile .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,.05) 30%, rgba(10,10,10,.82) 100%); }
+.of-tile .inner { position: relative; padding: 30px 32px; width: 100%; }
+.of-tile .eyebrow { color: var(--homea-gold-bright); margin-bottom: 10px; }
+.of-tile h3 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 2.4vw, 36px); line-height: 1.1; color: var(--homea-bone); }
+.of-tile .cond { margin: 8px 0 0; font-size: 13px; font-weight: 300; color: #d8d2c5; }
+.of-tile .go { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px;
+  font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--homea-gold-bright); }
+.of-tile .go .ln { width: 34px; height: 1.5px; background: var(--homea-gold); transition: width .4s cubic-bezier(.33,0,.2,1); }
+.of-tile:hover .go .ln { width: 56px; }
+
+/* 3 · Promos de marca */
+.of-brands { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.of-bcard { background: var(--surface); border: 1px solid var(--border); border-top: 2px solid transparent; display: flex; flex-direction: column;
+  transition: transform var(--dur-med) var(--ease-standard), border-color var(--dur-med) var(--ease-standard), box-shadow var(--dur-med) var(--ease-standard); }
+.of-bcard:hover { transform: translateY(-4px); border-top-color: var(--homea-gold); box-shadow: var(--shadow-md); }
+.of-bcard .foto { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--bg-greige); }
+.of-bcard .foto img { width: 100%; height: 100%; object-fit: cover; }
+.of-bcard .foto .logo { position: absolute; left: 16px; bottom: 12px; background: rgba(247,243,236,.92); padding: 6px 11px; }
+.of-bcard .foto .logo img { display: block; height: 15px; width: auto; object-fit: contain; }
+.of-bcard .body { padding: 20px 22px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.of-bcard .mec { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 19px; line-height: 1.25; color: var(--fg); flex: 1; }
+.of-bcard .vence { font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--fg-subtle); font-variant-numeric: tabular-nums; }
+.of-bcard .acts { display: flex; gap: 16px; border-top: 1px solid var(--border); padding-top: 13px; margin-top: 4px;
+  font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.of-bcard .acts a { color: var(--accent-text); border-bottom: none; }
+.of-bcard .acts a:hover { color: var(--fg); }
+
+/* 3b · Puente a paquetes (Herramientas) */
+.of-paq { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  background: var(--surface); border: 1px solid var(--border); border-left: 2px solid var(--homea-gold); padding: 26px 32px; }
+.of-paq h3 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 24px; }
+.of-paq p { margin: 4px 0 0; font-size: var(--fs-sm); color: var(--fg-muted); }
+
+/* 5 · Cierre consultivo */
+.of-close { text-align: center; }
+.of-close h2 { color: var(--homea-bone); font-size: clamp(32px, 3.6vw, 56px); max-width: 720px; margin: 0 auto; }
+.of-close p { color: var(--dark-fg-muted); margin: 18px auto 30px; max-width: 520px; font-weight: 300; }
+
+@media (max-width: 1080px) { .of-brands { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 900px) {
+  .of-outlet { grid-template-columns: 1fr; }
+  .of-next { grid-template-columns: 1fr; }
+  .of-next .foto { min-height: 240px; order: -1; }
+}
+@media (max-width: 640px) { .of-brands { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
 
@@ -129,7 +217,7 @@
     </div>
     <a href="b2b.html">Proyectos</a>
     <a href="ofertas.html">Ofertas</a>
-    <a href="#">Guías</a>
+    <a href="guias.html">Guías</a>
   </div>
   <div class="nav-right">
     <a href="herramientas.html">Herramientas</a>
@@ -139,143 +227,172 @@
   <a class="btn btn-ghost" href="#">Wishlist</a>
 </div></nav>
 
-<!-- Page hero -->
-<header class="page-hero"><div class="container">
-  <div class="crumbs"><a href="home.html">Inicio</a><span class="sep">·</span><span>Garantías &amp; Instalación</span></div>
-  <div class="eyebrow" style="margin-bottom:18px">Servicio post-venta</div>
-  <h1>Servicio técnico, garantías &amp; <i>instalación</i>.</h1>
-  <p class="sub">Llena la solicitud con los datos de la persona a contactar para agendar visita o brindar asesoría. Recibirás folio, fechas y seguimiento por correo.</p>
+<!-- ============ 1 · HERO ============
+     Dos estados excluyentes. Sin JS (o sin campaña activa) se muestra el estado
+     "entre temporadas". El hero de temporada se enciende solo dentro de su
+     vigencia (data-inicio / data-fin, formato ISO). -->
+
+<!-- 1b · Entre temporadas (default) -->
+<header class="of-nexthero" id="of-hero-next"><div class="container">
+  <div class="crumbs"><a href="home.html">Inicio</a><span class="sep">·</span><span>Ofertas</span></div>
+  <div class="of-next">
+    <div class="txt reveal">
+      <div class="eyebrow">Próxima temporada · Buen Fin</div>
+      <h1>Las ofertas llegan el <em>13 de noviembre</em>.</h1>
+      <p>El outlet nunca descansa: mientras tanto, hasta 60% de descuento en producto nuevo de piso y las promociones vigentes de marca.</p>
+      <div class="ctas">
+        <a class="btn btn-dark" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Av%C3%ADsenme%20cuando%20empiecen%20las%20ofertas%20del%20Buen%20Fin." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_ofertas_avisame">Avísame por WhatsApp</a>
+        <a class="btn btn-ghost" href="#outlet">Ver outlet</a>
+      </div>
+    </div>
+    <div class="foto"><img src="assets/photos/hero-miele-cocina.jpg" alt="Cocina equipada con electrodomésticos Miele" style="object-position:center 65%"></div>
+  </div>
 </div></header>
 
-<!-- Banda CTA post-venta muy visible -->
-<section class="sec tight" style="padding-top:24px;padding-bottom:0"><div class="container">
-  <div class="svc-cta reveal">
-    <div class="svc-cta-txt">
-      <div class="eyebrow eyebrow-bright">Atención inmediata</div>
-      <h2>¿Caso abierto o una urgencia?</h2>
-      <p>Habla directo con nuestro equipo de servicio post-venta.</p>
+<!-- 1 · Temporada activa (plantilla de campaña; editar datos por temporada) -->
+<header class="of-hero" id="of-hero-temporada" data-inicio="2026-05-26" data-fin="2026-06-03" hidden>
+  <img class="bg" src="assets/photos/hero-thermador-cocina.jpg" alt="">
+  <div class="veil"></div>
+  <div class="container">
+    <div class="crumbs"><a href="home.html">Inicio</a><span class="sep">·</span><span>Ofertas</span></div>
+    <div class="eyebrow eyebrow-bright" style="margin:10px 0 16px">Temporada · Hot Sale 2026</div>
+    <div class="of-vig figures">Vigencia <b>26.MAY — 03.JUN</b> · quedan <b><span data-of-dias>—</span> días</b></div>
+    <h1>Hasta 60% en <em>marcas seleccionadas</em>.</h1>
+    <p class="marcas">Gaggenau · Monogram · Miele · Thermador · Café · Smeg</p>
+    <div class="ctas">
+      <a class="btn btn-bone" href="#outlet">Ver ofertas</a>
+      <a class="btn btn-ghost-light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesan%20las%20ofertas%20de%20temporada." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_ofertas_temporada">Cotizar por WhatsApp</a>
     </div>
-    <div class="svc-cta-actions">
-      <a class="btn btn-gold wa-track" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_postventa_top">WhatsApp post-venta</a>
-      <a class="btn btn-ghost-light" href="tel:+524422163552">Tel. (442) 216 3552</a>
+  </div>
+</header>
+
+<!-- ============ 2 · OUTLET PERMANENTE ============
+     Siempre visible. TODO Fase 4: cambiar los href al filtro de la colección
+     outlet en Shopify (homeashop) cuando exista; hoy ligan al outlet vivo. -->
+<section class="sec" id="outlet"><div class="container">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Outlet · Todo el año</div>
+    <h2>Producto nuevo, <em>precio de salida</em>.</h2>
+  </div>
+  <div class="of-outlet reveal">
+    <a class="of-tile" href="https://homea.mx/outlet-gama-premium-c102x4397668" target="_blank" rel="noopener" data-track="offer_click" data-label="outlet_premium">
+      <img src="assets/photos/hero-subzero-wolf-cocina.jpg" alt="Cocina Sub-Zero y Wolf — outlet premium">
+      <div class="shade"></div>
+      <div class="inner">
+        <div class="eyebrow">Outlet · Premium</div>
+        <h3>Del 60% <em>al 40%</em> de descuento.</h3>
+        <p class="cond">En producto nuevo · Sub-Zero, Wolf, Gaggenau, Miele y más.</p>
+        <span class="go"><span class="ln"></span>Ver inventario</span>
+      </div>
+    </a>
+    <a class="of-tile" href="https://homea.mx/outlet-gama-escencial-c102x4397248" target="_blank" rel="noopener" data-track="offer_click" data-label="outlet_esencial">
+      <img src="assets/photos/cat-cuidado-ropa-bosch-lavadora-secadora.jpg" alt="Lavadora y secadora Bosch — outlet esencial">
+      <div class="shade"></div>
+      <div class="inner">
+        <div class="eyebrow">Outlet · Esencial</div>
+        <h3>Del 60% <em>al 40%</em> de descuento.</h3>
+        <p class="cond">En producto nuevo · Bosch, Whirlpool, Mabe, Teka y más.</p>
+        <span class="go"><span class="ln"></span>Ver inventario</span>
+      </div>
+    </a>
+  </div>
+</div></section>
+
+<!-- ============ 3 · PROMOS DE MARCA ============
+     data-vence (ISO): al vencer, la tarjeta desaparece sola. Los PDF de
+     proveedor van en assets/ofertas/ (subir y ligar aquí). -->
+<section class="sec on-greige" id="promos"><div class="container">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Promociones vigentes · De marca</div>
+    <h2>Lo que las marcas traen <em>este año</em>.</h2>
+  </div>
+  <div class="of-brands reveal">
+    <article class="of-bcard" data-vence="2026-12-31">
+      <div class="foto">
+        <img src="assets/photos/brands/thermador.jpg" alt="Cocina Thermador">
+        <span class="logo"><img src="assets/logos/thermador.png" alt="Thermador"></span>
+      </div>
+      <div class="body">
+        <p class="mec">Productos al 50% + lavavajillas y/o campanas <em>gratis</em>.</p>
+        <span class="vence figures">Vigente · 2026</span>
+        <div class="acts"><a href="#" aria-disabled="true">Folleto PDF ↗</a><a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20la%20promoci%C3%B3n%20de%20Thermador." target="_blank" rel="noopener" data-track="offer_click" data-label="promo_thermador">Cotizar →</a></div>
+      </div>
+    </article>
+    <article class="of-bcard" data-vence="2026-12-31">
+      <div class="foto">
+        <img src="assets/photos/brands/cafe.webp" alt="Cocina Café">
+        <span class="logo"><img src="assets/logos/cafe.png" alt="Café"></span>
+      </div>
+      <div class="body">
+        <p class="mec">Buy more, save more: descuento <em>acumulable</em> por equipo.</p>
+        <span class="vence figures">Vigente · 2026</span>
+        <div class="acts"><a href="#" aria-disabled="true">Folleto PDF ↗</a><a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20la%20promoci%C3%B3n%20de%20Caf%C3%A9." target="_blank" rel="noopener" data-track="offer_click" data-label="promo_cafe">Cotizar →</a></div>
+      </div>
+    </article>
+    <article class="of-bcard" data-vence="2026-12-31">
+      <div class="foto">
+        <img src="assets/photos/brands/monogram.webp" alt="Cocina Monogram">
+        <span class="logo"><img src="assets/logos/monogram.png" alt="Monogram"></span>
+      </div>
+      <div class="body">
+        <p class="mec">Save with style: acumula % al <em>agregar equipos</em>.</p>
+        <span class="vence figures">Vigente · 2026</span>
+        <div class="acts"><a href="#" aria-disabled="true">Folleto PDF ↗</a><a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20la%20promoci%C3%B3n%20de%20Monogram." target="_blank" rel="noopener" data-track="offer_click" data-label="promo_monogram">Cotizar →</a></div>
+      </div>
+    </article>
+    <article class="of-bcard" data-vence="2026-12-31">
+      <div class="foto">
+        <img src="assets/photos/brands/bertazzoni.jpg" alt="Cocina Bertazzoni">
+        <span class="logo"><img src="assets/logos/bertazzoni.png" alt="Bertazzoni"></span>
+      </div>
+      <div class="body">
+        <p class="mec">Productos seleccionados <em>al 50%</em>.</p>
+        <span class="vence figures">Vigente · 2026</span>
+        <div class="acts"><a href="#" aria-disabled="true">Folleto PDF ↗</a><a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20la%20promoci%C3%B3n%20de%20Bertazzoni." target="_blank" rel="noopener" data-track="offer_click" data-label="promo_bertazzoni">Cotizar →</a></div>
+      </div>
+    </article>
+  </div>
+
+  <div class="of-paq reveal" style="margin-top:44px">
+    <div>
+      <h3>¿Cocina completa? Mira los <em>paquetes por presupuesto</em>.</h3>
+      <p>Cocinas armadas por marca con precio cerrado, de gama de acceso a ultra premium.</p>
     </div>
+    <a class="btn btn-dark" href="herramientas.html#paquetes">Ver paquetes</a>
   </div>
 </div></section>
 
-<!-- Solicitud de servicio + lateral -->
-<section class="sec tight" style="padding-top:40px"><div class="container">
-  <div class="grid-2" style="gap:72px;align-items:start">
-
-    <!-- Formulario de servicio → KOMMO/registro (construcción: API/webhook) -->
-    <form class="svc-form reveal" onsubmit="event.preventDefault();alert('Demo — se conecta a KOMMO/registro en la construcción del front-end.')">
-      <p class="svc-note"><b>Importante:</b> los técnicos son independientes a HOMEA — especialistas contratados y autorizados por cada marca. Llena todos los campos con los datos de la persona a contactar.</p>
-
-      <fieldset class="q">
-        <legend class="q-title">1. ¿Quién le atiende en HOMEA? <span class="req">*</span></legend>
-        <label class="opt"><input type="radio" name="asesor" required><span>Aurora</span></label>
-        <label class="opt"><input type="radio" name="asesor"><span>Ricardo</span></label>
-        <label class="opt"><input type="radio" name="asesor"><span>Stephanie</span></label>
-        <label class="opt"><input type="radio" name="asesor"><span>Rene</span></label>
-        <label class="opt"><input type="radio" name="asesor"><span>Christian</span></label>
-        <label class="opt"><input type="radio" name="asesor"><span>Carla</span></label>
-        <label class="opt opt-other"><input type="radio" name="asesor"><input type="text" placeholder="Otra"></label>
-      </fieldset>
-
-      <div class="field"><label>2. Nombre y apellido de la persona de contacto <span class="req">*</span></label>
-        <input required placeholder="Escriba su respuesta"></div>
-      <div class="field"><label>3. Teléfono celular — 10 dígitos <span class="req">*</span></label>
-        <input required type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="10 dígitos"></div>
-      <div class="field"><label>4. Correo electrónico — a donde llegarán folios, fechas y seguimiento <span class="req">*</span></label>
-        <input required type="email" placeholder="tu@correo.mx"></div>
-
-      <fieldset class="q">
-        <legend class="q-title">5. ¿En qué le podemos apoyar? <span class="req">*</span></legend>
-        <label class="opt"><input type="radio" name="apoyo" required><span>Instalación de equipos</span></label>
-        <label class="opt"><input type="radio" name="apoyo"><span>Asesoría técnica</span></label>
-        <label class="opt"><input type="radio" name="apoyo"><span>Garantía o solicitud de refacciones</span></label>
-        <label class="opt"><input type="radio" name="apoyo"><span>Mantenimiento post garantía</span></label>
-      </fieldset>
-
-      <button class="btn btn-primary btn-block" type="submit">Enviar solicitud</button>
-      <p class="form-fine">Al enviar aceptas nuestro aviso de privacidad. Nunca compartimos tus datos.</p>
-    </form>
-
-    <!-- Lateral: ten a la mano + contacto directo -->
-    <aside class="reveal" style="display:flex;flex-direction:column;gap:36px;align-items:flex-start">
-      <div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start;width:100%">
-        <div class="eyebrow">Ten a la mano</div>
-        <span class="rule-gold"></span>
-        <ul class="meta-list">
-          <li><b>Equipo</b> Marca y modelo</li>
-          <li><b>Serie</b> Número de serie del equipo</li>
-          <li><b>Compra</b> Factura o folio HOMEA</li>
-          <li><b>Evidencia</b> Fotos o video de la falla</li>
-        </ul>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start;width:100%">
-        <div class="eyebrow">Contacto directo</div>
-        <span class="rule-gold"></span>
-        <ul class="meta-list">
-          <li><b>WhatsApp</b> <span class="figures">+52 446 144 6318</span></li>
-          <li><b>Tel. oficina</b> <span class="figures">(442) 216 3552</span></li>
-          <li><b>Email</b> carteaga@homea.mx</li>
-          <li><b>Horario</b> Lun–Vie · 9:00–19:00 · Sáb · 10:00–14:00</li>
-        </ul>
-        <a class="btn btn-gold btn-block wa-track" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_postventa_side">Hablar con post-venta</a>
-      </div>
-    </aside>
-
-  </div>
+<!-- ============ 5 · CIERRE CONSULTIVO ============ -->
+<section class="sec on-dark of-close"><div class="container reveal">
+  <div class="eyebrow eyebrow-bright" style="margin-bottom:18px">Ofertas · Todo el año</div>
+  <h2>Mejoramos <em>cualquier oferta</em>.</h2>
+  <p>¿Viste un mejor precio en otro lado? Mándanos la cotización y un asesor te responde el mismo día.</p>
+  <a class="btn btn-gold" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Encontr%C3%A9%20un%20mejor%20precio%20y%20quiero%20que%20lo%20mejoren." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_ofertas_mejoramos">Enviar cotización por WhatsApp</a>
 </div></section>
 
-<!-- Cómo funciona el servicio -->
-<section class="sec tight on-greige"><div class="container">
-  <div class="sec-head">
-    <div class="eyebrow">Cómo funciona</div>
-    <span class="rule-gold"></span>
-    <h2>Del reporte al <i>cierre</i>.</h2>
-  </div>
-  <div class="proc reveal">
-    <div class="proc-step"><span class="proc-n figures">01</span><h4>Envías la solicitud</h4><p>Completas el formulario con los datos del equipo y la falla.</p></div>
-    <div class="proc-step"><span class="proc-n figures">02</span><h4>Generamos tu folio</h4><p>Registramos el caso; recibes folio y fecha estimada por correo.</p></div>
-    <div class="proc-step"><span class="proc-n figures">03</span><h4>Técnico de marca asignado</h4><p>El especialista autorizado por la marca coordina la visita contigo.</p></div>
-    <div class="proc-step"><span class="proc-n figures">04</span><h4>Seguimiento al cierre</h4><p>Acompañamos el caso hasta resolver, con respaldo de fábrica.</p></div>
-  </div>
-</div></section>
-
-<!-- Lo que conviene saber (movido desde contacto.html) -->
-<section class="sec tight"><div class="container">
-  <div class="sec-head">
-    <div class="eyebrow">Soporte · Antes de comprar</div>
-    <span class="rule-gold"></span>
-    <h2>Lo que conviene <i>saber</i>.</h2>
-  </div>
-  <div class="help-tiles reveal" style="margin-top:48px">
-    <a href="#"><h4>Formas de pago</h4><p>Transferencia, tarjeta y financiamiento por proyecto. MSI en Fase 2.</p>
-      <span class="arrow-link">Ver detalle <span class="ln"></span><span class="ar">→</span></span></a>
-    <a href="#"><h4>Garantías e instalación</h4><p>Garantía de fábrica + extensión HOMEA e instalación certificada.</p>
-      <span class="arrow-link">Ver detalle <span class="ln"></span><span class="ar">→</span></span></a>
-    <a href="#"><h4>Envíos</h4><p>Cobertura nacional coordinada con tu obra, desde Querétaro.</p>
-      <span class="arrow-link">Ver detalle <span class="ln"></span><span class="ar">→</span></span></a>
-    <a href="#"><h4>Devoluciones</h4><p>Política clara por escrito antes de confirmar tu pedido.</p>
-      <span class="arrow-link">Ver detalle <span class="ln"></span><span class="ar">→</span></span></a>
-  </div>
-</div></section>
-
-<!-- Preguntas frecuentes post-venta -->
-<section class="sec tight on-greige"><div class="container">
-  <div class="sec-head">
-    <div class="eyebrow">Preguntas frecuentes</div>
-    <span class="rule-gold"></span>
-    <h2>Garantías y servicio, <i>claras</i>.</h2>
-  </div>
-  <div class="faq reveal" style="margin-top:40px">
-    <details><summary>¿Los técnicos son de HOMEA?</summary><p>No. Son especialistas independientes, contratados y autorizados por cada marca. HOMEA coordina y da seguimiento a tu caso de principio a fin.</p></details>
-    <details><summary>¿Qué cubre la garantía?</summary><p>La garantía de fábrica de cada marca, más la extensión HOMEA cuando aplica. Te confirmamos cobertura y vigencia al abrir tu folio.</p></details>
-    <details><summary>¿Cuánto tarda una visita?</summary><p>Tras registrar tu solicitud recibes folio y fecha estimada por correo. Los tiempos dependen de la marca y la disponibilidad del técnico en tu zona.</p></details>
-    <details><summary>¿Atienden fuera de Querétaro?</summary><p>Sí. Coordinamos servicio e instalación con cobertura nacional. <i>*Aplican restricciones según zona y marca.</i></p></details>
-  </div>
-</div></section>
+<script>
+/* Vigencias de ofertas: enciende el hero de temporada solo dentro de su rango
+   y remueve tarjetas de promo vencidas. Sin JS: estado entre-temporadas. */
+(function () {
+  var hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+  var t = document.getElementById("of-hero-temporada");
+  var n = document.getElementById("of-hero-next");
+  if (t && n) {
+    var ini = new Date(t.getAttribute("data-inicio") + "T00:00:00");
+    var fin = new Date(t.getAttribute("data-fin") + "T23:59:59");
+    var activa = hoy >= ini && hoy <= fin;
+    t.hidden = !activa; n.hidden = activa;
+    if (activa) {
+      var d = Math.max(1, Math.ceil((fin - hoy) / 864e5));
+      var el = t.querySelector("[data-of-dias]");
+      if (el) el.textContent = d;
+    }
+  }
+  document.querySelectorAll("[data-vence]").forEach(function (c) {
+    if (new Date(c.getAttribute("data-vence") + "T23:59:59") < hoy) c.remove();
+  });
+})();
+</script>
 
 <footer class="site-footer"><div class="container">
   <div class="cols">
@@ -320,6 +437,55 @@
 </div></footer>
 
 <a class="wa-float" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-track="whatsapp_click" data-label="wa_float"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg></a>
+<script>
+/* Herramientas — interacciones de página.
+   Delegación en document con guard global: los listeners sobreviven a la
+   navegación SPA (el DOM de <main> se reemplaza, pero document permanece)
+   y consultan el DOM vivo en cada evento. */
+(function () {
+  "use strict";
+  if (window.__hrmBound) { return; }
+  window.__hrmBound = true;
+
+  document.addEventListener("click", function (e) {
+    /* Chips de gama: filtrar el riel de paquetes */
+    var chip = e.target.closest(".hrm-chip");
+    if (chip) {
+      var band = chip.closest(".hrm-band");
+      if (!band) { return; }
+      band.querySelectorAll(".hrm-chip").forEach(function (c) { c.classList.toggle("is-on", c === chip); });
+      var gama = chip.getAttribute("data-gama");
+      band.querySelectorAll(".hrm-pack").forEach(function (p) {
+        p.classList.toggle("is-hidden", gama !== "todas" && p.getAttribute("data-gama") !== gama);
+      });
+      var rail = band.querySelector(".hrm-rail");
+      if (rail) { rail.scrollLeft = 0; }
+      return;
+    }
+    /* Flechas del riel */
+    var btn = e.target.closest("[data-rail]");
+    if (btn) {
+      var band2 = btn.closest(".hrm-band");
+      var rail2 = band2 && band2.querySelector(".hrm-rail");
+      if (rail2) {
+        var dir = parseInt(btn.getAttribute("data-rail"), 10) || 1;
+        rail2.scrollBy({ left: dir * Math.round(rail2.clientWidth * 0.8), behavior: "smooth" });
+      }
+    }
+  });
+
+  /* Buscador de fichas: por ahora canaliza la consulta a WhatsApp */
+  document.addEventListener("submit", function (e) {
+    var form = e.target.closest(".hrm-finder-form");
+    if (!form) { return; }
+    e.preventDefault();
+    var input = form.querySelector("input[name=q]");
+    var q = input && input.value.trim();
+    var msg = "¡Hola! Me interesa la ficha técnica de: " + (q || "(modelo)");
+    window.open("https://api.whatsapp.com/send/?phone=524461446318&text=" + encodeURIComponent(msg), "_blank", "noopener");
+  });
+})();
+</script>
 <script src="v2.js?v=25"></script>
 </body>
 </html>

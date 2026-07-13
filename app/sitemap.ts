@@ -13,6 +13,7 @@ const MARKETING_PATHS = [
   "/nosotros",
   "/contacto",
   "/herramientas",
+  "/ofertas",
   "/garantias-instalacion",
 ];
 

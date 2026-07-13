@@ -24,9 +24,9 @@ const LINK_MAP: Record<string, string> = {
   "herramientas.html": "/herramientas",
   "garantias-instalacion.html": "/garantias-instalacion",
   "guias.html": "/guias/",
-  // No hay índice /productos ni página de ofertas todavía → caen a la home.
+  "ofertas.html": "/ofertas",
+  // No hay índice /productos todavía → cae a la home.
   "coleccion.html": "/",
-  "ofertas.html": "/",
 };
 
 function readPreview(file: string): string {
