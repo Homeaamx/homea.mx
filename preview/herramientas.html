@@ -71,42 +71,106 @@
   .hrm-hero-plano { max-width: 440px; margin-top: 14px; }
 }
 
-/* ---- 1 · Paquetes: riel por presupuesto (banda espresso) ---- */
-.hrm-band .sec-head h2 { max-width: 720px; }
-.hrm-controls { display: flex; justify-content: space-between; align-items: center; gap: 24px;
-  margin: 44px 0 26px; flex-wrap: wrap; }
-.hrm-chips { display: flex; gap: 10px; flex-wrap: wrap; }
-.hrm-chip { appearance: none; cursor: pointer; background: transparent; color: var(--dark-fg-muted);
+/* ---- 1 · Paquetes: explorador en un solo viewport (banda espresso) ---- */
+.pqc-band .sec-head h2 { max-width: 720px; }
+/* ---- consola (banda espresso) ---- */
+.pqc-band { padding: 88px 0 96px; }
+.pqc-controls { display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  margin: 40px 0 22px; flex-wrap: wrap; }
+.pqc-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+.pqc-chip { appearance: none; cursor: pointer; background: transparent; color: var(--dark-fg-muted);
   border: 1px solid var(--dark-border); padding: 10px 18px; font-family: inherit; font-size: 12px;
   font-weight: 600; letter-spacing: .14em; text-transform: uppercase; transition: all .25s ease; }
-.hrm-chip:hover { border-color: var(--homea-gold); color: var(--homea-gold-bright); }
-.hrm-chip.is-on { background: var(--homea-gold); border-color: var(--homea-gold); color: var(--homea-black); }
-.hrm-arrows { display: flex; gap: 8px; }
-.hrm-arrows button { appearance: none; cursor: pointer; width: 44px; height: 44px; background: transparent;
-  border: 1px solid var(--dark-border); color: var(--dark-fg-muted); font-size: 16px; transition: all .25s ease; }
-.hrm-arrows button:hover { border-color: var(--homea-gold); color: var(--homea-gold-bright); }
-.hrm-rail { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory;
-  padding-bottom: 18px; scrollbar-width: thin; scrollbar-color: var(--homea-gold) transparent; }
-.hrm-pack { scroll-snap-align: start; flex: 0 0 292px; display: flex; flex-direction: column; gap: 0;
-  background: var(--homea-espresso); border: 1px solid var(--dark-border); padding: 28px 26px 24px;
-  transition: transform .3s ease, border-color .3s ease; }
-.hrm-pack:hover { transform: translateY(-4px); border-color: var(--homea-gold); }
-.hrm-pack.is-hidden { display: none; }
-.hrm-pack .tag { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--homea-gold-bright); margin-bottom: 14px; }
-.hrm-pack h3 { margin: 0 0 18px; font-family: var(--font-display); font-weight: 500; font-size: 27px; line-height: 1.05; color: var(--dark-fg); }
-.hrm-pack .price { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
-.hrm-pack .price strong { font-size: 26px; font-weight: 500; color: var(--dark-fg); letter-spacing: .01em; }
-.hrm-pack .price span { font-size: 12px; letter-spacing: .1em; color: var(--dark-fg-muted); }
-.hrm-pack .inc { font-size: 13px; font-weight: 300; color: var(--dark-fg-muted); margin: 0 0 22px;
-  padding-bottom: 18px; border-bottom: 1px solid var(--dark-border); }
-.hrm-pack .row { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.hrm-pack .pdf { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;
+.pqc-chip:hover { border-color: var(--homea-gold); color: var(--homea-gold-bright); }
+.pqc-chip.is-on { background: var(--homea-gold); border-color: var(--homea-gold); color: var(--homea-black); }
+
+.pqc-console { display: grid; grid-template-columns: 300px 1fr; align-items: stretch;
+  background: var(--homea-espresso); border: 1px solid var(--dark-border); }
+.pqc-list { max-height: 540px; overflow-y: auto; border-right: 1px solid var(--dark-border);
+  scrollbar-width: thin; scrollbar-color: var(--homea-gold) transparent; }
+.pqc-tab.is-hidden { display: none; }
+.pqc-tab { position: relative; display: flex; justify-content: space-between; align-items: baseline;
+  gap: 14px; width: 100%; text-align: left; appearance: none; cursor: pointer; background: transparent;
+  border: 0; border-bottom: 1px solid var(--dark-border); padding: 15px 22px; font-family: inherit;
+  transition: background .25s ease; }
+.pqc-tab::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--homea-gold); transform: scaleY(0); transform-origin: center;
+  transition: transform .3s cubic-bezier(.33,0,.2,1); }
+.pqc-tab:hover { background: var(--homea-espresso-raised); }
+.pqc-tab.is-on { background: var(--homea-espresso-raised); }
+.pqc-tab.is-on::before { transform: scaleY(1); }
+.pqc-tab .b { font-family: var(--font-display); font-weight: 500; font-size: 19px;
+  color: var(--dark-fg); line-height: 1.1; }
+.pqc-tab .p { font-size: 13px; color: var(--dark-fg-muted); white-space: nowrap; }
+.pqc-tab .p small { font-size: 10px; letter-spacing: .08em; }
+.cur { text-transform: uppercase; letter-spacing: .1em; font-weight: 600; }
+.pqc-tab .cur { margin-left: 5px; }
+.cur.mxn { color: var(--dark-fg-muted); opacity: .8; }
+.cur.usd { color: var(--homea-gold-bright); border: 1px solid var(--homea-gold);
+  padding: 2px 5px 1px; font-size: 9px; }
+.cur.big { font-size: 11px; }
+.cur.usd.big { padding: 3px 7px 2px; }
+.pqc-eq { margin: -6px 0 14px; font-size: 13px; font-weight: 300; color: var(--dark-fg-muted); }
+.pqc-eq strong { font-weight: 500; color: var(--homea-gold-bright); letter-spacing: .01em; }
+.pqc-tab.is-on .p { color: var(--homea-gold-bright); }
+.pqc-tab .bar { position: absolute; left: 0; bottom: -1px; height: 2px; width: var(--w);
+  background: var(--homea-gold); opacity: .38; transition: opacity .25s ease; }
+.pqc-tab:hover .bar, .pqc-tab.is-on .bar { opacity: .9; }
+
+.pqc-panels { min-width: 0; }
+.pqc-item { display: grid; grid-template-columns: 240px 1fr; align-items: stretch; }
+.pqc-item[hidden] { display: none; }
+.pqc-media { position: relative; margin: 0; overflow: hidden; min-height: 100%; }
+.pqc-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pqc-media::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(30,25,20,0) 60%, rgba(30,25,20,.5)); }
+.pqc-body { padding: 30px 34px 30px; min-width: 0; }
+.pqc-logos { display: flex; align-items: center; gap: 16px; margin: 8px 0 16px; }
+.pqc-logo { width: auto; max-width: 210px; object-fit: contain; object-position: left center; }
+.pqc-logo.plate { background: var(--homea-bone); padding: 7px 12px; box-sizing: content-box; }
+.pqc-logos .lsep { width: 1px; height: 26px; background: var(--dark-border); }
+.pqc-sr { position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap; margin: 0; }
+.pqc-ph { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; margin-bottom: 14px; }
+.pqc-ph .tag { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--homea-gold-bright); }
+.pqc-ph .ct { font-size: 12px; letter-spacing: .14em; color: var(--dark-fg-muted); }
+.pqc-item .price { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+.pqc-item .price strong { font-size: 32px; font-weight: 500; color: var(--dark-fg); letter-spacing: .01em; }
+.pqc-item .price span.iva { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--dark-fg-muted); }
+
+.pqc-spec { width: 100%; border-collapse: collapse; }
+.pqc-spec td { padding: 12px 0; border-bottom: 1px solid var(--dark-border); vertical-align: baseline; }
+.pqc-spec .d { font-size: 14px; font-weight: 300; color: var(--dark-fg); padding-right: 14px; }
+.pqc-spec .m { font-size: 12px; color: var(--dark-fg-muted); text-align: right; max-width: 190px; }
+.pqc-note { margin: 16px 0 0; font-size: 13px; font-weight: 300; color: var(--dark-fg-muted); }
+.pqc-pdf { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;
   color: var(--dark-fg-muted); text-decoration: none; border-bottom: 1px solid var(--dark-border);
   padding-bottom: 2px; transition: color .25s ease, border-color .25s ease; }
-.hrm-pack .pdf:hover { color: var(--homea-gold-bright); border-color: var(--homea-gold); }
-.hrm-note { margin: 26px 0 0; font-size: 13px; font-weight: 300; color: var(--dark-fg-muted); }
-.hrm-band .band-foot { display: flex; align-items: center; gap: 26px; margin-top: 36px; flex-wrap: wrap; }
+.pqc-pdf:hover { color: var(--homea-gold-bright); border-color: var(--homea-gold); }
+.pqc-band .band-note { margin: 22px 0 0; font-size: 13px; font-weight: 300; color: var(--dark-fg-muted); }
+
+@media (max-width: 960px) {
+  .pqc-console { grid-template-columns: 1fr; }
+  .pqc-list { display: flex; max-height: none; overflow-x: auto; overflow-y: hidden;
+    border-right: 0; border-bottom: 1px solid var(--dark-border); }
+  .pqc-tab { flex: 0 0 auto; flex-direction: column; align-items: flex-start; gap: 4px;
+    border-bottom: 0; border-right: 1px solid var(--dark-border); padding: 14px 18px; }
+  .pqc-tab::before { width: auto; height: 2px; left: 0; right: 0; top: auto; bottom: 0;
+    transform: scaleX(0); }
+  .pqc-tab.is-on::before { transform: scaleX(1); }
+  .pqc-item { grid-template-columns: 1fr; }
+  .pqc-media { min-height: 0; height: 172px; }
+  .pqc-media::after { background: linear-gradient(180deg, rgba(30,25,20,0) 55%, rgba(30,25,20,.6)); }
+  .pqc-body { padding: 24px 22px 28px; }
+  .pqc-logo { max-width: 170px; }
+  /* Tabla → filas apiladas: descripción arriba, modelo abajo (los modelos
+     compuestos no caben a dos columnas en 375px). */
+  .pqc-spec, .pqc-spec tbody { display: block; }
+  .pqc-spec tr { display: block; padding: 11px 0; border-bottom: 1px solid var(--dark-border); }
+  .pqc-spec td { display: block; padding: 0; border-bottom: 0; }
+  .pqc-spec .m { text-align: left; white-space: normal; margin-top: 3px; }
+}
 
 /* ---- 2 · Comparativos: duelos tipográficos ---- */
 .hrm-vs { border-top: 1px solid var(--border); margin-top: 44px; }
@@ -400,7 +464,7 @@
     <a href="#paquetes">
       <span class="n figures">01</span>
       <h3>Paquetes de <i>cocina</i></h3>
-      <p>Cocinas completas por marca, de gama de acceso a ultra premium, con precio cerrado.</p>
+      <p>Cocinas completas por marca, de gama económica a premium, con precio cerrado.</p>
       <span class="ar" aria-hidden="true"></span>
     </a>
     <a href="#comparativos">
@@ -425,51 +489,522 @@
 </div></section>
 
 <!-- 01 · Paquetes de cocina — riel por presupuesto (banda espresso) -->
-<section class="sec on-dark hrm-band" id="paquetes"><div class="container">
+<section class="sec on-dark pqc-band" id="paquetes"><div class="container">
   <div class="sec-head reveal">
     <div class="eyebrow eyebrow-bright">Paquetes de cocina · 01</div>
     <h2>¿Qué marca se ajusta mejor a tu <i>presupuesto</i>?</h2>
-    <p class="sub" style="color:var(--dark-fg-muted)">Cocinas completas —estufa o parrilla con horno, campana, refrigerador y lavavajillas— armadas por nuestro equipo y ordenadas de menor a mayor inversión. Filtra por gama y compara.</p>
+    <p class="sub" style="color:var(--dark-fg-muted)">Cocinas completas —estufa o parrilla con horno, campana, refrigerador y lavavajillas— armadas por nuestro equipo y ordenadas de menor a mayor inversión, de Mabe a Gaggenau. La barra dorada indica el nivel de inversión de cada marca; filtra por gama y compara pieza por pieza.</p>
   </div>
-  <div class="hrm-controls">
-    <div class="hrm-chips" role="group" aria-label="Filtrar paquetes por gama">
-      <button class="hrm-chip is-on" data-gama="todas" type="button">Todas</button>
-      <button class="hrm-chip" data-gama="acceso" type="button">Gama de acceso</button>
-      <button class="hrm-chip" data-gama="media" type="button">Gama media</button>
-      <button class="hrm-chip" data-gama="alta" type="button">Gama alta</button>
-      <button class="hrm-chip" data-gama="ultra" type="button">Ultra premium</button>
-    </div>
-    <div class="hrm-arrows">
-      <button type="button" data-rail="-1" aria-label="Anteriores">←</button>
-      <button type="button" data-rail="1" aria-label="Siguientes">→</button>
+  <div class="pqc-controls reveal">
+    <div class="pqc-chips" role="group" aria-label="Filtrar paquetes por gama">
+      <button class="pqc-chip is-on" type="button" data-gama="todas">Todas</button>
+      <button class="pqc-chip" type="button" data-gama="acceso">Económica</button>
+      <button class="pqc-chip" type="button" data-gama="media">Media</button>
+      <button class="pqc-chip" type="button" data-gama="alta">Residencial</button>
+      <button class="pqc-chip" type="button" data-gama="ultra">Premium</button>
     </div>
   </div>
-  <div class="hrm-rail" tabindex="0" aria-label="Paquetes de cocina por marca">
-    <article class="hrm-pack" data-gama="acceso"><div class="tag">Gama de acceso</div><h3>Mabe</h3><div class="price"><strong class="figures">$63,745</strong><span>MXN</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Mabe." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_mabe"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="acceso"><div class="tag">Gama de acceso</div><h3>Teka</h3><div class="price"><strong class="figures">$114,994</strong><span>MXN</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Teka." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_teka"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="acceso"><div class="tag">Gama de acceso</div><h3>Tecnolam</h3><div class="price"><strong class="figures">$120,888</strong><span>MXN</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Tecnolam." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_tecnolam"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="acceso"><div class="tag">Gama de acceso</div><h3>IO Mabe</h3><div class="price"><strong class="figures">$152,791</strong><span>MXN</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20IO%20Mabe." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_iomabe"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="acceso"><div class="tag">Gama de acceso</div><h3>Maytag</h3><div class="price"><strong class="figures">$167,293</strong><span>MXN</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Maytag." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_maytag"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="media"><div class="tag">Gama media</div><h3>GE Profile</h3><div class="price"><strong class="figures">$194,493</strong><span>MXN</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20GE%20Profile." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_profile"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="media"><div class="tag">Gama media</div><h3>Whirlpool</h3><div class="price"><strong class="figures">$245,087</strong><span>MXN</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Whirlpool." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_whirlpool"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="media"><div class="tag">Gama media</div><h3>Frigidaire</h3><div class="price"><strong class="figures">$402,991</strong><span>MXN</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Frigidaire." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_frigidaire"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="media"><div class="tag">Gama media</div><h3>Electrolux</h3><div class="price"><strong class="figures">$472,791</strong><span>MXN</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Electrolux." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_electrolux"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="alta"><div class="tag">Gama alta</div><h3>Smeg</h3><div class="price"><strong class="figures">$550,800</strong><span>MXN</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Smeg." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_smeg"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="alta"><div class="tag">Gama alta</div><h3>KitchenAid</h3><div class="price"><strong class="figures">$646,974</strong><span>MXN</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20KitchenAid." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_kitchenaid"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="alta"><div class="tag">Gama alta</div><h3>Miele</h3><div class="price"><strong class="figures">$1,132,300</strong><span>MXN</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Miele." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_miele"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="alta"><div class="tag">Gama alta</div><h3>Bosch</h3><div class="price"><strong class="figures">$19,214</strong><span>USD</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Bosch." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_bosch"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="alta"><div class="tag">Gama alta</div><h3>Bertazzoni</h3><div class="price"><strong class="figures">$32,551</strong><span>USD</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Bertazzoni." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_bertazzoni"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="alta"><div class="tag">Gama alta</div><h3>Café</h3><div class="price"><strong class="figures">$32,694</strong><span>USD</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Caf%C3%A9." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_cafe"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="ultra"><div class="tag">Ultra premium</div><h3>Viking</h3><div class="price"><strong class="figures">$54,303</strong><span>USD</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Viking." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_viking"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="ultra"><div class="tag">Ultra premium</div><h3>Wolf · Sub-Zero</h3><div class="price"><strong class="figures">$62,546</strong><span>USD</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Wolf%20Sub-Zero." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_wolf"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="ultra"><div class="tag">Ultra premium</div><h3>Monogram</h3><div class="price"><strong class="figures">$65,198</strong><span>USD</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Monogram." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_monogram"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="ultra"><div class="tag">Ultra premium</div><h3>Gaggenau</h3><div class="price"><strong class="figures">$90,306</strong><span>USD</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Gaggenau." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_gaggenau"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
-    <article class="hrm-pack" data-gama="ultra"><div class="tag">Ultra premium</div><h3>Thermador</h3><div class="price"><strong class="figures">$114,994</strong><span>USD</span></div><p class="inc">Parrilla · Horno · Campana · Refrigerador · Lavavajillas</p><div class="row"><a class="arrow-link light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20cotizar%20el%20paquete%20de%20cocina%20Thermador." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_thermador"><span class="ln"></span><span class="ar">→</span>Cotizar</a><a class="pdf" href="#">PDF</a></div></article>
+  <div class="pqc-console reveal">
+    <div class="pqc-list" role="tablist" aria-label="Paquetes de cocina por marca">
+    <button class="pqc-tab is-on" type="button" role="tab" id="tab-paquete-mabe" data-pq="mabe" data-gama="acceso" aria-selected="true" aria-controls="paquete-mabe"><span class="b">Mabe</span><span class="p figures">$63,745 <small class="cur mxn">MXN</small></span><span class="bar" style="--w:3.9%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-teka" data-pq="teka" data-gama="acceso" aria-selected="false" aria-controls="paquete-teka"><span class="b">Teka</span><span class="p figures">$114,994 <small class="cur mxn">MXN</small></span><span class="bar" style="--w:7.1%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-tecnolam" data-pq="tecnolam" data-gama="acceso" aria-selected="false" aria-controls="paquete-tecnolam"><span class="b">Tecnolam</span><span class="p figures">$120,888 <small class="cur mxn">MXN</small></span><span class="bar" style="--w:7.4%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-io-mabe" data-pq="io-mabe" data-gama="acceso" aria-selected="false" aria-controls="paquete-io-mabe"><span class="b">IO Mabe</span><span class="p figures">$152,791 <small class="cur mxn">MXN</small></span><span class="bar" style="--w:9.4%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-maytag" data-pq="maytag" data-gama="acceso" aria-selected="false" aria-controls="paquete-maytag"><span class="b">Maytag</span><span class="p figures">$167,293 <small class="cur mxn">MXN</small></span><span class="bar" style="--w:10.3%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-ge-profile" data-pq="ge-profile" data-gama="media" aria-selected="false" aria-controls="paquete-ge-profile"><span class="b">GE Profile</span><span class="p figures">$194,493 <small class="cur mxn">MXN</small></span><span class="bar" style="--w:12.0%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-whirlpool" data-pq="whirlpool" data-gama="media" aria-selected="false" aria-controls="paquete-whirlpool"><span class="b">Whirlpool</span><span class="p figures">$245,087 <small class="cur mxn">MXN</small></span><span class="bar" style="--w:15.1%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-bosch" data-pq="bosch" data-gama="alta" aria-selected="false" aria-controls="paquete-bosch"><span class="b">Bosch</span><span class="p figures">$19,214 <small class="cur usd">USD</small></span><span class="bar" style="--w:21.3%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-frigidaire" data-pq="frigidaire" data-gama="media" aria-selected="false" aria-controls="paquete-frigidaire"><span class="b">Frigidaire</span><span class="p figures">$402,991 <small class="cur mxn">MXN</small></span><span class="bar" style="--w:24.8%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-electrolux" data-pq="electrolux" data-gama="media" aria-selected="false" aria-controls="paquete-electrolux"><span class="b">Electrolux</span><span class="p figures">$472,791 <small class="cur mxn">MXN</small></span><span class="bar" style="--w:29.1%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-smeg" data-pq="smeg" data-gama="alta" aria-selected="false" aria-controls="paquete-smeg"><span class="b">Smeg</span><span class="p figures">$550,800 <small class="cur mxn">MXN</small></span><span class="bar" style="--w:33.9%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-bertazzoni" data-pq="bertazzoni" data-gama="alta" aria-selected="false" aria-controls="paquete-bertazzoni"><span class="b">Bertazzoni</span><span class="p figures">$32,551 <small class="cur usd">USD</small></span><span class="bar" style="--w:36.0%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-cafe" data-pq="cafe" data-gama="alta" aria-selected="false" aria-controls="paquete-cafe"><span class="b">Café</span><span class="p figures">$32,694 <small class="cur usd">USD</small></span><span class="bar" style="--w:36.2%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-kitchenaid" data-pq="kitchenaid" data-gama="alta" aria-selected="false" aria-controls="paquete-kitchenaid"><span class="b">KitchenAid</span><span class="p figures">$646,974 <small class="cur mxn">MXN</small></span><span class="bar" style="--w:39.8%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-viking" data-pq="viking" data-gama="ultra" aria-selected="false" aria-controls="paquete-viking"><span class="b">Viking</span><span class="p figures">$54,303 <small class="cur usd">USD</small></span><span class="bar" style="--w:60.1%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-wolf-sub-zero" data-pq="wolf-sub-zero" data-gama="ultra" aria-selected="false" aria-controls="paquete-wolf-sub-zero"><span class="b">Wolf · Sub-Zero</span><span class="p figures">$62,546 <small class="cur usd">USD</small></span><span class="bar" style="--w:69.3%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-miele" data-pq="miele" data-gama="alta" aria-selected="false" aria-controls="paquete-miele"><span class="b">Miele</span><span class="p figures">$1,132,300 <small class="cur mxn">MXN</small></span><span class="bar" style="--w:69.7%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-monogram" data-pq="monogram" data-gama="ultra" aria-selected="false" aria-controls="paquete-monogram"><span class="b">Monogram</span><span class="p figures">$65,198 <small class="cur usd">USD</small></span><span class="bar" style="--w:72.2%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-thermador" data-pq="thermador" data-gama="ultra" aria-selected="false" aria-controls="paquete-thermador"><span class="b">Thermador</span><span class="p figures">$66,305 <small class="cur usd">USD</small></span><span class="bar" style="--w:73.4%" aria-hidden="true"></span></button>
+    <button class="pqc-tab" type="button" role="tab" id="tab-paquete-gaggenau" data-pq="gaggenau" data-gama="ultra" aria-selected="false" aria-controls="paquete-gaggenau"><span class="b">Gaggenau</span><span class="p figures">$90,306 <small class="cur usd">USD</small></span><span class="bar" style="--w:100.0%" aria-hidden="true"></span></button>
+    </div>
+    <div class="pqc-panels">
+    <article class="pqc-item" id="paquete-mabe" role="tabpanel" aria-labelledby="tab-paquete-mabe">
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-mabe.jpg" alt="Cocina equipada Mabe" ></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Económica</span>
+        <span class="ct figures">01 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo plate" style="height:35px" src="assets/logos/paquetes/mabe.png" alt="Mabe"></div>
+      <h3 class="pqc-sr">Paquete de cocina Mabe</h3>
+      <div class="price"><strong class="figures">$63,745</strong><span class="cur mxn big">MXN</span><span class="iva">IVA incluido</span></div>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 86 cm</td><td class="m figures">PM8615I1</td></tr>
+        <tr><td class="d">Horno de gas 80 cm</td><td class="m figures">HM8020NN1</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">CM9013P0I</td></tr>
+        <tr><td class="d">Microondas 1.4 ft³</td><td class="m figures">HMM114SEJ</td></tr>
+        <tr><td class="d">Refrigerador 83 cm · 482 L</td><td class="m figures">MTM482SENSS0</td></tr>
+        </tbody>
+      </table>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-teka" role="tabpanel" aria-labelledby="tab-paquete-teka" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-teka.jpg" alt="Cocina equipada Teka" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Económica</span>
+        <span class="ct figures">02 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo plate" style="height:42px" src="assets/logos/paquetes/teka.png" alt="Teka" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Teka</h3>
+      <div class="price"><strong class="figures">$114,994</strong><span class="cur mxn big">MXN</span><span class="iva">IVA incluido</span></div>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 86 cm</td><td class="m figures">GSC 96320 WBA IX</td></tr>
+        <tr><td class="d">Horno de gas 60 cm</td><td class="m figures">HSB 756 G SS</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">EASY DJE 90</td></tr>
+        <tr><td class="d">Microondas 60 cm · 20 L</td><td class="m figures">MS 620 BIS</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 15 servicios</td><td class="m figures">TOTAL DFI 46950 WH D</td></tr>
+        <tr><td class="d">Refrigerador 91 cm · 23 ft³</td><td class="m figures">RFD 74900 SS MX</td></tr>
+        </tbody>
+      </table>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-tecnolam" role="tabpanel" aria-labelledby="tab-paquete-tecnolam" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-tecnolam.jpg" alt="Cocina equipada Tecnolam" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Económica</span>
+        <span class="ct figures">03 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo plate" style="height:32px" src="assets/logos/paquetes/tecnolam.png" alt="Tecnolam" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Tecnolam</h3>
+      <div class="price"><strong class="figures">$120,888</strong><span class="cur mxn big">MXN</span><span class="iva">IVA incluido</span></div>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">LG916.AC</td></tr>
+        <tr><td class="d">Horno eléctrico 60 cm</td><td class="m figures">TE60ELETTRICPLUS.NE</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">ANTARES.AC90</td></tr>
+        <tr><td class="d">Microondas 60 cm · 20 L</td><td class="m figures">H45MWCG.NE</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 12 servicios</td><td class="m figures">TECDW60.SS</td></tr>
+        <tr><td class="d">Refrigerador 91 cm · 520 L</td><td class="m figures">TSS905.NE</td></tr>
+        </tbody>
+      </table>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-io-mabe" role="tabpanel" aria-labelledby="tab-paquete-io-mabe" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-io-mabe.jpg" alt="Cocina equipada IO Mabe" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Económica</span>
+        <span class="ct figures">04 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo" style="height:29px" src="assets/logos/paquetes/io-mabe.png" alt="IO Mabe" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina IO Mabe</h3>
+      <div class="price"><strong class="figures">$152,791</strong><span class="cur mxn big">MXN</span><span class="iva">IVA incluido</span></div>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">PIO96KMTI0</td></tr>
+        <tr><td class="d">Horno de gas 80 cm</td><td class="m figures">IO8042HGWD1</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">IO9018CP4I</td></tr>
+        <tr><td class="d">Microondas 1.6 ft³ + trim 80 cm</td><td class="m figures">IO160MDI + JX160</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 16 servicios</td><td class="m figures">IO1702LI6</td></tr>
+        <tr><td class="d">Refrigerador 166 cm · 1,416 L</td><td class="m figures">GEMIDF25EYRCFS</td></tr>
+        </tbody>
+      </table>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-maytag" role="tabpanel" aria-labelledby="tab-paquete-maytag" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-maytag.jpg" alt="Cocina equipada Maytag" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Económica</span>
+        <span class="ct figures">05 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo" style="height:39px" src="assets/logos/paquetes/maytag.png" alt="Maytag" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Maytag</h3>
+      <div class="price"><strong class="figures">$167,293</strong><span class="cur mxn big">MXN</span><span class="iva">IVA incluido</span></div>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">MGC7536DS</td></tr>
+        <tr><td class="d">Horno eléctrico 76 cm</td><td class="m figures">MEW9530FZ</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">MH9036S</td></tr>
+        <tr><td class="d">Microondas 1.6 ft³ + trim 76 cm</td><td class="m figures">7UMC5165GZ</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 14 servicios</td><td class="m figures">MDB4949SKZ</td></tr>
+        <tr><td class="d">Refrigerador 90 cm · 25 ft³</td><td class="m figures">MFI2570FEZ</td></tr>
+        </tbody>
+      </table>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-ge-profile" role="tabpanel" aria-labelledby="tab-paquete-ge-profile" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-ge-profile.jpg" alt="Cocina equipada GE Profile" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Media</span>
+        <span class="ct figures">06 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo" style="height:34px" src="assets/logos/paquetes/ge-profile.png" alt="GE Profile" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina GE Profile</h3>
+      <div class="price"><strong class="figures">$194,493</strong><span class="cur mxn big">MXN</span><span class="iva">IVA incluido</span></div>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">PGP95KMNN0</td></tr>
+        <tr><td class="d">Horno eléctrico 80 cm</td><td class="m figures">HGP8050YE1</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">CGP9019P6I</td></tr>
+        <tr><td class="d">Microondas 1.6 ft³ + trim 80 cm</td><td class="m figures">PEB7227ANDD + JX7230SLSS</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 16 servicios</td><td class="m figures">Por confirmar</td></tr>
+        <tr><td class="d">Refrigerador 166 cm · 1,020 L</td><td class="m figures">GEMPDF19EBTCDS</td></tr>
+        </tbody>
+      </table>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-whirlpool" role="tabpanel" aria-labelledby="tab-paquete-whirlpool" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-whirlpool.jpg" alt="Cocina equipada Whirlpool" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Media</span>
+        <span class="ct figures">07 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo plate" style="height:37px" src="assets/logos/paquetes/whirlpool.png" alt="Whirlpool" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Whirlpool</h3>
+      <div class="price"><strong class="figures">$245,087</strong><span class="cur mxn big">MXN</span><span class="iva">IVA incluido</span></div>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">WP3650S</td></tr>
+        <tr><td class="d">Horno eléctrico 76 cm</td><td class="m figures">WOS72EC0HS</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">WHW9001S</td></tr>
+        <tr><td class="d">Microondas 1.6 ft³ + trim 76 cm</td><td class="m figures">WMCS7022RB + MTK1630PS</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 12 servicios</td><td class="m figures">WDT540HAMZ</td></tr>
+        <tr><td class="d">Refrigerador + congelador 157 cm · 36 ft³</td><td class="m figures">WSR57R18DM + WSZ57L18DM + SKT60M</td></tr>
+        </tbody>
+      </table>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-bosch" role="tabpanel" aria-labelledby="tab-paquete-bosch" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-bosch.jpg" alt="Cocina equipada Bosch" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Residencial</span>
+        <span class="ct figures">08 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo" style="height:31px" src="assets/logos/paquetes/bosch.png" alt="Bosch" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Bosch</h3>
+      <div class="price"><strong class="figures">$19,214</strong><span class="cur usd big">USD</span><span class="iva">IVA incluido</span></div>
+      <p class="pqc-eq" data-usd="19214">≈ <strong class="figures">$331,000</strong> MXN al tipo de cambio del día</p>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">NGM8646UC</td></tr>
+        <tr><td class="d">Horno eléctrico 76 cm</td><td class="m figures">HBL5451UC</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">PRF0157421</td></tr>
+        <tr><td class="d">Horno 76 cm</td><td class="m figures">HMB50152UC</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 16 servicios</td><td class="m figures">SHE3AEM5N</td></tr>
+        <tr><td class="d">Refrigerador 90 cm · 26 ft³</td><td class="m figures">B36FD50SNS</td></tr>
+        </tbody>
+      </table>
+      <p class="pqc-note"> Precio de lista en USD — se cotiza al tipo de cambio del día.</p>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-frigidaire" role="tabpanel" aria-labelledby="tab-paquete-frigidaire" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-frigidaire.jpg" alt="Cocina equipada Frigidaire" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Media</span>
+        <span class="ct figures">09 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo plate" style="height:22px" src="assets/logos/paquetes/frigidaire.png" alt="Frigidaire" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Frigidaire</h3>
+      <div class="price"><strong class="figures">$402,991</strong><span class="cur mxn big">MXN</span><span class="iva">IVA incluido</span></div>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla vitrocerámica 90 cm</td><td class="m figures">FPEC3677RF</td></tr>
+        <tr><td class="d">Horno eléctrico 76 cm</td><td class="m figures">PCWS3080AF</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">FHWC3650RS</td></tr>
+        <tr><td class="d">Microondas 40 L + trim</td><td class="m figures">SFU4300MX + KIT330X</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 16 servicios</td><td class="m figures">FPID2498SF</td></tr>
+        <tr><td class="d">Refrigerador 167 cm · 38 ft³</td><td class="m figures">FPRU19F8WF + FPFU19F8WF + TRMKTEZ2LV79</td></tr>
+        </tbody>
+      </table>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-electrolux" role="tabpanel" aria-labelledby="tab-paquete-electrolux" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-electrolux.jpg" alt="Cocina equipada Electrolux" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Media</span>
+        <span class="ct figures">10 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo plate" style="height:23px" src="assets/logos/paquetes/electrolux.png" alt="Electrolux" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Electrolux</h3>
+      <div class="price"><strong class="figures">$472,791</strong><span class="cur mxn big">MXN</span><span class="iva">IVA incluido</span></div>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla vitrocerámica 90 cm</td><td class="m figures">FPEC3677RF</td></tr>
+        <tr><td class="d">Horno eléctrico 76 cm</td><td class="m figures">ECWS3012AS</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">FHWC3650RS</td></tr>
+        <tr><td class="d">Microondas 40 L + trim</td><td class="m figures">EMBS2411AB + EMTK3011AS</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 16 servicios</td><td class="m figures">FPID2498SF</td></tr>
+        <tr><td class="d">Refrigerador 167 cm · 38 ft³</td><td class="m figures">EI33AF80WS + EI33AR80WS + TRMKTSS2FL79</td></tr>
+        </tbody>
+      </table>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-smeg" role="tabpanel" aria-labelledby="tab-paquete-smeg" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-smeg.jpg" alt="Cocina equipada Smeg" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Residencial</span>
+        <span class="ct figures">11 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo" style="height:28px" src="assets/logos/paquetes/smeg.png" alt="Smeg" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Smeg</h3>
+      <div class="price"><strong class="figures">$550,800</strong><span class="cur mxn big">MXN</span><span class="iva">IVA incluido</span></div>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">RTU366GX</td></tr>
+        <tr><td class="d">Horno eléctrico 76 cm</td><td class="m figures">SOPA3302TPX</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">KI90XT</td></tr>
+        <tr><td class="d">Microondas 40 L + trim</td><td class="m figures">SFU4300MX + KIT330X</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 16 servicios</td><td class="m figures">STX315SMX</td></tr>
+        <tr><td class="d">2 refrigeradores bottom-mount 152 cm (30&quot;+30&quot;) · 928 L</td><td class="m figures">CB465UI + CB465UI panelable</td></tr>
+        </tbody>
+      </table>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-bertazzoni" role="tabpanel" aria-labelledby="tab-paquete-bertazzoni" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-bertazzoni.jpg" alt="Cocina equipada Bertazzoni" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Residencial</span>
+        <span class="ct figures">12 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo" style="height:29px" src="assets/logos/paquetes/bertazzoni.png" alt="Bertazzoni" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Bertazzoni</h3>
+      <div class="price"><strong class="figures">$32,551</strong><span class="cur usd big">USD</span><span class="iva">IVA incluido</span></div>
+      <p class="pqc-eq" data-usd="32551">≈ <strong class="figures">$560,000</strong> MXN al tipo de cambio del día</p>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">PROF366RTBXT</td></tr>
+        <tr><td class="d">Horno eléctrico 76 cm</td><td class="m figures">PROF30FSEXT</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">KC36HERTX + K36HERTX</td></tr>
+        <tr><td class="d">Horno multifunción 76 cm</td><td class="m figures">PROF30SOEX</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 15 servicios</td><td class="m figures">DW24T3IPV</td></tr>
+        <tr><td class="d">Refrigerador panelable 120 cm (30&quot;+18&quot;) · 25 ft³</td><td class="m figures">REF30RCBPNV + REF18FCBIPLV</td></tr>
+        </tbody>
+      </table>
+      <p class="pqc-note">Refrigerador con paneles y jaladeras incluidos. Precio de lista en USD — se cotiza al tipo de cambio del día.</p>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-cafe" role="tabpanel" aria-labelledby="tab-paquete-cafe" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-cafe.jpg" alt="Cocina equipada Café" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Residencial</span>
+        <span class="ct figures">13 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo" style="height:35px" src="assets/logos/paquetes/cafe.png" alt="Café" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Café</h3>
+      <div class="price"><strong class="figures">$32,694</strong><span class="cur usd big">USD</span><span class="iva">IVA incluido</span></div>
+      <p class="pqc-eq" data-usd="32694">≈ <strong class="figures">$563,000</strong> MXN al tipo de cambio del día</p>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">CGU366P2TS1</td></tr>
+        <tr><td class="d">Horno eléctrico 76 cm</td><td class="m figures">CTS90DP2NS1</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">UVW93642PSS</td></tr>
+        <tr><td class="d">Horno multifunción 76 cm</td><td class="m figures">CSB913P2NS1</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 16 servicios</td><td class="m figures">CDT845P2NS1</td></tr>
+        <tr><td class="d">Refrigerador 120 cm</td><td class="m figures">CSB48WP2NS1</td></tr>
+        </tbody>
+      </table>
+      <p class="pqc-note"> Precio de lista en USD — se cotiza al tipo de cambio del día.</p>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-kitchenaid" role="tabpanel" aria-labelledby="tab-paquete-kitchenaid" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-kitchenaid.jpg" alt="Cocina equipada KitchenAid" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Residencial</span>
+        <span class="ct figures">14 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo" style="height:22px" src="assets/logos/paquetes/kitchenaid.png" alt="KitchenAid" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina KitchenAid</h3>
+      <div class="price"><strong class="figures">$646,974</strong><span class="cur mxn big">MXN</span><span class="iva">IVA incluido</span></div>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">KCGC506JSS</td></tr>
+        <tr><td class="d">Horno doble eléctrico 76 cm</td><td class="m figures">KOCE500ESS</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">KVWC956KSS + UXB1170KYS</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 16 servicios</td><td class="m figures">KDTE204KPS</td></tr>
+        <tr><td class="d">Refrigerador 120 cm · 29 ft³</td><td class="m figures">KBSD708MSS</td></tr>
+        </tbody>
+      </table>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-viking" role="tabpanel" aria-labelledby="tab-paquete-viking" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-viking.jpg" alt="Cocina equipada Viking" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Premium</span>
+        <span class="ct figures">15 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo" style="height:31px" src="assets/logos/paquetes/viking.png" alt="Viking" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Viking</h3>
+      <div class="price"><strong class="figures">$54,303</strong><span class="cur usd big">USD</span><span class="iva">IVA incluido</span></div>
+      <p class="pqc-eq" data-usd="54303">≈ <strong class="figures">$935,000</strong> MXN al tipo de cambio del día</p>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">VRT5366B</td></tr>
+        <tr><td class="d">Horno eléctrico 76 cm</td><td class="m figures">VSOE130</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">VCWH53648 + VINV600</td></tr>
+        <tr><td class="d">Horno multifunción 76 cm</td><td class="m figures">VMDD5306</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 16 servicios</td><td class="m figures">VDWU524</td></tr>
+        <tr><td class="d">Refrigerador 182 cm · 38 ft³</td><td class="m figures">VCRB5363 + VCFB5363</td></tr>
+        </tbody>
+      </table>
+      <p class="pqc-note">Refrigerador con paneles y jaladeras incluidos. Precio de lista en USD — se cotiza al tipo de cambio del día.</p>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-wolf-sub-zero" role="tabpanel" aria-labelledby="tab-paquete-wolf-sub-zero" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-wolf-sub-zero.jpg" alt="Cocina equipada Wolf · Sub-Zero" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Premium</span>
+        <span class="ct figures">16 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo" style="height:33px" src="assets/logos/paquetes/wolf.png" alt="Wolf" loading="lazy"><span class="lsep" aria-hidden="true"></span><img class="pqc-logo" style="height:30px" src="assets/logos/paquetes/sub-zero.png" alt="Sub-Zero" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Wolf · Sub-Zero</h3>
+      <div class="price"><strong class="figures">$62,546</strong><span class="cur usd big">USD</span><span class="iva">IVA incluido</span></div>
+      <p class="pqc-eq" data-usd="62546">≈ <strong class="figures">$1,076,000</strong> MXN al tipo de cambio del día</p>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">SRT366</td></tr>
+        <tr><td class="d">Horno eléctrico 76 cm</td><td class="m figures">SO3050PM/S/P</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">PWC362418 + 814421</td></tr>
+        <tr><td class="d">Horno multifunción 76 cm</td><td class="m figures">SPO30PM/S/PH</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 16 servicios</td><td class="m figures">DW2450 + 9019419 + zócalo</td></tr>
+        <tr><td class="d">Refrigerador 182 cm</td><td class="m figures">DEC3650R/R + DEC3650FI</td></tr>
+        </tbody>
+      </table>
+      <p class="pqc-note">Refrigerador con paneles y jaladeras incluidos. Precio de lista en USD — se cotiza al tipo de cambio del día.</p>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-miele" role="tabpanel" aria-labelledby="tab-paquete-miele" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-miele.jpg" alt="Cocina equipada Miele" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Residencial</span>
+        <span class="ct figures">17 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo" style="height:27px" src="assets/logos/paquetes/miele.png" alt="Miele" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Miele</h3>
+      <div class="price"><strong class="figures">$1,132,300</strong><span class="cur mxn big">MXN</span><span class="iva">IVA incluido</span></div>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">KMR 1134-3 LP</td></tr>
+        <tr><td class="d">Horno eléctrico 76 cm</td><td class="m figures">H 7660 BP CLST</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">DAR 1230-3 + DREB XXL</td></tr>
+        <tr><td class="d">Microondas con convección</td><td class="m figures">H 7870 BM CLST</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 16 servicios</td><td class="m figures">G 7366 SCVi XXL</td></tr>
+        <tr><td class="d">Refrigerador MasterCool 120 cm · 29 ft³</td><td class="m figures">K 2902 Vi + F 2912</td></tr>
+        </tbody>
+      </table>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-monogram" role="tabpanel" aria-labelledby="tab-paquete-monogram" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-monogram.jpg" alt="Cocina equipada Monogram" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Premium</span>
+        <span class="ct figures">18 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo" style="height:42px" src="assets/logos/paquetes/monogram.png" alt="Monogram" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Monogram</h3>
+      <div class="price"><strong class="figures">$65,198</strong><span class="cur usd big">USD</span><span class="iva">IVA incluido</span></div>
+      <p class="pqc-eq" data-usd="65198">≈ <strong class="figures">$1,122,000</strong> MXN al tipo de cambio del día</p>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">ZGU364NDTSS</td></tr>
+        <tr><td class="d">Horno eléctrico 76 cm</td><td class="m figures">ZTS90DPSNSS</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">ZVW1360SPSS</td></tr>
+        <tr><td class="d">Horno multifunción eléctrico 76 cm</td><td class="m figures">ZSB9232NSS</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 16 servicios</td><td class="m figures">ZDT925SPNSS</td></tr>
+        <tr><td class="d">Refrigerador 182 cm</td><td class="m figures">ZIF361NPRII + ZIR361NPRII</td></tr>
+        </tbody>
+      </table>
+      <p class="pqc-note">Refrigerador con paneles y jaladeras incluidos. Precio de lista en USD — se cotiza al tipo de cambio del día.</p>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-thermador" role="tabpanel" aria-labelledby="tab-paquete-thermador" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-thermador.jpg" alt="Cocina equipada Thermador" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Premium</span>
+        <span class="ct figures">19 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo" style="height:34px" src="assets/logos/paquetes/thermador.png" alt="Thermador" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Thermador</h3>
+      <div class="price"><strong class="figures">$66,305</strong><span class="cur usd big">USD</span><span class="iva">IVA incluido</span></div>
+      <p class="pqc-eq" data-usd="66305">≈ <strong class="figures">$1,141,000</strong> MXN al tipo de cambio del día</p>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">PCG366W</td></tr>
+        <tr><td class="d">Horno de gas 76 cm</td><td class="m figures">PO301W</td></tr>
+        <tr><td class="d">Campana de pared 90 cm</td><td class="m figures">HPCN36WS + VTN2FZ</td></tr>
+        <tr><td class="d">Horno multifunción eléctrico 76 cm</td><td class="m figures">MC30WP</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 16 servicios</td><td class="m figures">DWHD560CFP</td></tr>
+        <tr><td class="d">Refrigerador 182 cm</td><td class="m figures">T36IR905SP + T36IF905SP</td></tr>
+        </tbody>
+      </table>
+      <p class="pqc-note">Refrigerador con paneles y jaladeras incluidos. Precio de lista en USD — se cotiza al tipo de cambio del día.</p>
+    
+      </div>
+    </article>
+    <article class="pqc-item" id="paquete-gaggenau" role="tabpanel" aria-labelledby="tab-paquete-gaggenau" hidden>
+      <figure class="pqc-media"><img src="assets/photos/paquetes/paquete-cocina-gaggenau.jpg" alt="Cocina equipada Gaggenau" fetchpriority="low" loading="lazy"></figure>
+      <div class="pqc-body">
+      <div class="pqc-ph">
+        <span class="tag">Premium</span>
+        <span class="ct figures">20 / 20</span>
+      </div>
+      <div class="pqc-logos"><img class="pqc-logo" style="height:25px" src="assets/logos/paquetes/gaggenau.png" alt="Gaggenau" loading="lazy"></div>
+      <h3 class="pqc-sr">Paquete de cocina Gaggenau</h3>
+      <div class="price"><strong class="figures">$90,306</strong><span class="cur usd big">USD</span><span class="iva">IVA incluido</span></div>
+      <p class="pqc-eq" data-usd="90306">≈ <strong class="figures">$1,554,000</strong> MXN al tipo de cambio del día</p>
+      <table class="pqc-spec">
+        <tbody>
+        <tr><td class="d">Parrilla de gas 90 cm</td><td class="m figures">PCG366W</td></tr>
+        <tr><td class="d">Horno eléctrico 76 cm</td><td class="m figures">BO 480 613</td></tr>
+        <tr><td class="d">Campana telescópica 90 cm</td><td class="m figures">AL 400 792 + AR 413 722</td></tr>
+        <tr><td class="d">Horno multifunción eléctrico 76 cm</td><td class="m figures">BM 484 710</td></tr>
+        <tr><td class="d">Lavavajillas 60 cm · 16 servicios</td><td class="m figures">DF 480 701</td></tr>
+        <tr><td class="d">Refrigerador 182 cm</td><td class="m figures">RC 492 705 + RF 491 705</td></tr>
+        </tbody>
+      </table>
+      <p class="pqc-note">Refrigerador con paneles y jaladeras incluidos. Precio de lista en USD — se cotiza al tipo de cambio del día.</p>
+    
+      </div>
+    </article>
+    </div>
   </div>
-  <div class="band-foot">
-    <a class="btn btn-gold" href="#" data-track="paquetes_pdf_all">Descargar todos los paquetes (PDF)</a>
-    <p class="hrm-note">Todos los precios con IVA incluido · Cada paquete puede ajustarse a un armado más económico · Precios de lista en MXN o USD según la marca.</p>
-  </div>
+  <p class="band-note">Todos los precios con IVA incluido · Precios de lista en MXN o USD según la marca (las marcas en USD se ordenan por su equivalente aproximado en MXN) · Cada paquete puede ajustarse a un armado más económico · <a class="pqc-pdf" href="assets/paquetes-de-cocina-homea.pdf" target="_blank" rel="noopener" data-track="paquetes_pdf_all">Descargar los 20 paquetes (PDF)</a></p>
 </div></section>
 
 <!-- 02 · Comparativos — duelos tipográficos -->
@@ -620,33 +1155,6 @@
   if (window.__hrmBound) { return; }
   window.__hrmBound = true;
 
-  document.addEventListener("click", function (e) {
-    /* Chips de gama: filtrar el riel de paquetes */
-    var chip = e.target.closest(".hrm-chip");
-    if (chip) {
-      var band = chip.closest(".hrm-band");
-      if (!band) { return; }
-      band.querySelectorAll(".hrm-chip").forEach(function (c) { c.classList.toggle("is-on", c === chip); });
-      var gama = chip.getAttribute("data-gama");
-      band.querySelectorAll(".hrm-pack").forEach(function (p) {
-        p.classList.toggle("is-hidden", gama !== "todas" && p.getAttribute("data-gama") !== gama);
-      });
-      var rail = band.querySelector(".hrm-rail");
-      if (rail) { rail.scrollLeft = 0; }
-      return;
-    }
-    /* Flechas del riel */
-    var btn = e.target.closest("[data-rail]");
-    if (btn) {
-      var band2 = btn.closest(".hrm-band");
-      var rail2 = band2 && band2.querySelector(".hrm-rail");
-      if (rail2) {
-        var dir = parseInt(btn.getAttribute("data-rail"), 10) || 1;
-        rail2.scrollBy({ left: dir * Math.round(rail2.clientWidth * 0.8), behavior: "smooth" });
-      }
-    }
-  });
-
   /* Buscador de fichas: por ahora canaliza la consulta a WhatsApp */
   document.addEventListener("submit", function (e) {
     var form = e.target.closest(".hrm-finder-form");
@@ -657,6 +1165,581 @@
     var msg = "¡Hola! Me interesa la ficha técnica de: " + (q || "(modelo)");
     window.open("https://api.whatsapp.com/send/?phone=524461446318&text=" + encodeURIComponent(msg), "_blank", "noopener");
   });
+})();
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "ItemList",
+ "name": "Paquetes de equipos de cocina HOMEA",
+ "description": "20 paquetes de cocina completos por marca y presupuesto: estufa o parrilla, horno, campana, refrigerador y lavavajillas.",
+ "numberOfItems": 20,
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Mabe",
+    "brand": {
+     "@type": "Brand",
+     "name": "Mabe"
+    },
+    "description": "Paquete de equipos de cocina Mabe (Económica): Parrilla de gas 86 cm, Horno de gas 80 cm, Campana de pared 90 cm, Microondas 1.4 ft³, Refrigerador 83 cm · 482 L. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-mabe",
+    "offers": {
+     "@type": "Offer",
+     "price": "63745",
+     "priceCurrency": "MXN",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Teka",
+    "brand": {
+     "@type": "Brand",
+     "name": "Teka"
+    },
+    "description": "Paquete de equipos de cocina Teka (Económica): Parrilla de gas 86 cm, Horno de gas 60 cm, Campana de pared 90 cm, Microondas 60 cm · 20 L, Lavavajillas 60 cm · 15 servicios, Refrigerador 91 cm · 23 ft³. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-teka",
+    "offers": {
+     "@type": "Offer",
+     "price": "114994",
+     "priceCurrency": "MXN",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Tecnolam",
+    "brand": {
+     "@type": "Brand",
+     "name": "Tecnolam"
+    },
+    "description": "Paquete de equipos de cocina Tecnolam (Económica): Parrilla de gas 90 cm, Horno eléctrico 60 cm, Campana de pared 90 cm, Microondas 60 cm · 20 L, Lavavajillas 60 cm · 12 servicios, Refrigerador 91 cm · 520 L. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-tecnolam",
+    "offers": {
+     "@type": "Offer",
+     "price": "120888",
+     "priceCurrency": "MXN",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 4,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina IO Mabe",
+    "brand": {
+     "@type": "Brand",
+     "name": "IO Mabe"
+    },
+    "description": "Paquete de equipos de cocina IO Mabe (Económica): Parrilla de gas 90 cm, Horno de gas 80 cm, Campana de pared 90 cm, Microondas 1.6 ft³ + trim 80 cm, Lavavajillas 60 cm · 16 servicios, Refrigerador 166 cm · 1,416 L. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-io-mabe",
+    "offers": {
+     "@type": "Offer",
+     "price": "152791",
+     "priceCurrency": "MXN",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 5,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Maytag",
+    "brand": {
+     "@type": "Brand",
+     "name": "Maytag"
+    },
+    "description": "Paquete de equipos de cocina Maytag (Económica): Parrilla de gas 90 cm, Horno eléctrico 76 cm, Campana de pared 90 cm, Microondas 1.6 ft³ + trim 76 cm, Lavavajillas 60 cm · 14 servicios, Refrigerador 90 cm · 25 ft³. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-maytag",
+    "offers": {
+     "@type": "Offer",
+     "price": "167293",
+     "priceCurrency": "MXN",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 6,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina GE Profile",
+    "brand": {
+     "@type": "Brand",
+     "name": "GE Profile"
+    },
+    "description": "Paquete de equipos de cocina GE Profile (Media): Parrilla de gas 90 cm, Horno eléctrico 80 cm, Campana de pared 90 cm, Microondas 1.6 ft³ + trim 80 cm, Lavavajillas 60 cm · 16 servicios, Refrigerador 166 cm · 1,020 L. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-ge-profile",
+    "offers": {
+     "@type": "Offer",
+     "price": "194493",
+     "priceCurrency": "MXN",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 7,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Whirlpool",
+    "brand": {
+     "@type": "Brand",
+     "name": "Whirlpool"
+    },
+    "description": "Paquete de equipos de cocina Whirlpool (Media): Parrilla de gas 90 cm, Horno eléctrico 76 cm, Campana de pared 90 cm, Microondas 1.6 ft³ + trim 76 cm, Lavavajillas 60 cm · 12 servicios, Refrigerador + congelador 157 cm · 36 ft³. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-whirlpool",
+    "offers": {
+     "@type": "Offer",
+     "price": "245087",
+     "priceCurrency": "MXN",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 8,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Bosch",
+    "brand": {
+     "@type": "Brand",
+     "name": "Bosch"
+    },
+    "description": "Paquete de equipos de cocina Bosch (Residencial): Parrilla de gas 90 cm, Horno eléctrico 76 cm, Campana de pared 90 cm, Horno 76 cm, Lavavajillas 60 cm · 16 servicios, Refrigerador 90 cm · 26 ft³. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-bosch",
+    "offers": {
+     "@type": "Offer",
+     "price": "19214",
+     "priceCurrency": "USD",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 9,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Frigidaire",
+    "brand": {
+     "@type": "Brand",
+     "name": "Frigidaire"
+    },
+    "description": "Paquete de equipos de cocina Frigidaire (Media): Parrilla vitrocerámica 90 cm, Horno eléctrico 76 cm, Campana de pared 90 cm, Microondas 40 L + trim, Lavavajillas 60 cm · 16 servicios, Refrigerador 167 cm · 38 ft³. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-frigidaire",
+    "offers": {
+     "@type": "Offer",
+     "price": "402991",
+     "priceCurrency": "MXN",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 10,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Electrolux",
+    "brand": {
+     "@type": "Brand",
+     "name": "Electrolux"
+    },
+    "description": "Paquete de equipos de cocina Electrolux (Media): Parrilla vitrocerámica 90 cm, Horno eléctrico 76 cm, Campana de pared 90 cm, Microondas 40 L + trim, Lavavajillas 60 cm · 16 servicios, Refrigerador 167 cm · 38 ft³. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-electrolux",
+    "offers": {
+     "@type": "Offer",
+     "price": "472791",
+     "priceCurrency": "MXN",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 11,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Smeg",
+    "brand": {
+     "@type": "Brand",
+     "name": "Smeg"
+    },
+    "description": "Paquete de equipos de cocina Smeg (Residencial): Parrilla de gas 90 cm, Horno eléctrico 76 cm, Campana de pared 90 cm, Microondas 40 L + trim, Lavavajillas 60 cm · 16 servicios, 2 refrigeradores bottom-mount 152 cm (30\"+30\") · 928 L. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-smeg",
+    "offers": {
+     "@type": "Offer",
+     "price": "550800",
+     "priceCurrency": "MXN",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 12,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Bertazzoni",
+    "brand": {
+     "@type": "Brand",
+     "name": "Bertazzoni"
+    },
+    "description": "Paquete de equipos de cocina Bertazzoni (Residencial): Parrilla de gas 90 cm, Horno eléctrico 76 cm, Campana de pared 90 cm, Horno multifunción 76 cm, Lavavajillas 60 cm · 15 servicios, Refrigerador panelable 120 cm (30\"+18\") · 25 ft³. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-bertazzoni",
+    "offers": {
+     "@type": "Offer",
+     "price": "32551",
+     "priceCurrency": "USD",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 13,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Café",
+    "brand": {
+     "@type": "Brand",
+     "name": "Café"
+    },
+    "description": "Paquete de equipos de cocina Café (Residencial): Parrilla de gas 90 cm, Horno eléctrico 76 cm, Campana de pared 90 cm, Horno multifunción 76 cm, Lavavajillas 60 cm · 16 servicios, Refrigerador 120 cm. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-cafe",
+    "offers": {
+     "@type": "Offer",
+     "price": "32694",
+     "priceCurrency": "USD",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 14,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina KitchenAid",
+    "brand": {
+     "@type": "Brand",
+     "name": "KitchenAid"
+    },
+    "description": "Paquete de equipos de cocina KitchenAid (Residencial): Parrilla de gas 90 cm, Horno doble eléctrico 76 cm, Campana de pared 90 cm, Lavavajillas 60 cm · 16 servicios, Refrigerador 120 cm · 29 ft³. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-kitchenaid",
+    "offers": {
+     "@type": "Offer",
+     "price": "646974",
+     "priceCurrency": "MXN",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 15,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Viking",
+    "brand": {
+     "@type": "Brand",
+     "name": "Viking"
+    },
+    "description": "Paquete de equipos de cocina Viking (Premium): Parrilla de gas 90 cm, Horno eléctrico 76 cm, Campana de pared 90 cm, Horno multifunción 76 cm, Lavavajillas 60 cm · 16 servicios, Refrigerador 182 cm · 38 ft³. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-viking",
+    "offers": {
+     "@type": "Offer",
+     "price": "54303",
+     "priceCurrency": "USD",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 16,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Wolf · Sub-Zero",
+    "brand": {
+     "@type": "Brand",
+     "name": "Wolf · Sub-Zero"
+    },
+    "description": "Paquete de equipos de cocina Wolf · Sub-Zero (Premium): Parrilla de gas 90 cm, Horno eléctrico 76 cm, Campana de pared 90 cm, Horno multifunción 76 cm, Lavavajillas 60 cm · 16 servicios, Refrigerador 182 cm. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-wolf-sub-zero",
+    "offers": {
+     "@type": "Offer",
+     "price": "62546",
+     "priceCurrency": "USD",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 17,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Miele",
+    "brand": {
+     "@type": "Brand",
+     "name": "Miele"
+    },
+    "description": "Paquete de equipos de cocina Miele (Residencial): Parrilla de gas 90 cm, Horno eléctrico 76 cm, Campana de pared 90 cm, Microondas con convección, Lavavajillas 60 cm · 16 servicios, Refrigerador MasterCool 120 cm · 29 ft³. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-miele",
+    "offers": {
+     "@type": "Offer",
+     "price": "1132300",
+     "priceCurrency": "MXN",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 18,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Monogram",
+    "brand": {
+     "@type": "Brand",
+     "name": "Monogram"
+    },
+    "description": "Paquete de equipos de cocina Monogram (Premium): Parrilla de gas 90 cm, Horno eléctrico 76 cm, Campana de pared 90 cm, Horno multifunción eléctrico 76 cm, Lavavajillas 60 cm · 16 servicios, Refrigerador 182 cm. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-monogram",
+    "offers": {
+     "@type": "Offer",
+     "price": "65198",
+     "priceCurrency": "USD",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 19,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Thermador",
+    "brand": {
+     "@type": "Brand",
+     "name": "Thermador"
+    },
+    "description": "Paquete de equipos de cocina Thermador (Premium): Parrilla de gas 90 cm, Horno de gas 76 cm, Campana de pared 90 cm, Horno multifunción eléctrico 76 cm, Lavavajillas 60 cm · 16 servicios, Refrigerador 182 cm. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-thermador",
+    "offers": {
+     "@type": "Offer",
+     "price": "66305",
+     "priceCurrency": "USD",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  },
+  {
+   "@type": "ListItem",
+   "position": 20,
+   "item": {
+    "@type": "Product",
+    "name": "Paquete de cocina Gaggenau",
+    "brand": {
+     "@type": "Brand",
+     "name": "Gaggenau"
+    },
+    "description": "Paquete de equipos de cocina Gaggenau (Premium): Parrilla de gas 90 cm, Horno eléctrico 76 cm, Campana telescópica 90 cm, Horno multifunción eléctrico 76 cm, Lavavajillas 60 cm · 16 servicios, Refrigerador 182 cm. Precio con IVA incluido.",
+    "url": "https://www.homea.mx/herramientas#paquete-gaggenau",
+    "offers": {
+     "@type": "Offer",
+     "price": "90306",
+     "priceCurrency": "USD",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@type": "Organization",
+      "name": "HOMEA"
+     }
+    }
+   }
+  }
+ ]
+}
+</script>
+<script>
+/* Paquetes — explorador. Delegación en document con guard global:
+   los listeners sobreviven a la navegación SPA y consultan el DOM vivo. */
+(function () {
+  "use strict";
+  if (window.__pqcBound) { initFromHash(); return; }
+  window.__pqcBound = true;
+
+  function all(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+
+  function select(slug, updateHash) {
+    var con = document.querySelector(".pqc-console");
+    if (!con) { return; }
+    var tab = con.querySelector('.pqc-tab[data-pq="' + slug + '"]');
+    if (!tab) { return; }
+    all(".pqc-tab", con).forEach(function (t) {
+      var on = t === tab;
+      t.classList.toggle("is-on", on);
+      t.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    all(".pqc-item", con).forEach(function (p) { p.hidden = p.id !== "paquete-" + slug; });
+    if (updateHash && history.replaceState) { history.replaceState(null, "", "#paquete-" + slug); }
+    if (tab.scrollIntoView) { tab.scrollIntoView({ block: "nearest", inline: "nearest" }); }
+  }
+
+  function visibleTabs() {
+    return all(".pqc-tab").filter(function (t) { return !t.classList.contains("is-hidden"); });
+  }
+
+  document.addEventListener("click", function (e) {
+    var tab = e.target.closest(".pqc-tab");
+    if (tab) { select(tab.getAttribute("data-pq"), true); return; }
+
+    var chip = e.target.closest(".pqc-chip");
+    if (chip) {
+      var gama = chip.getAttribute("data-gama");
+      all(".pqc-chip").forEach(function (c) { c.classList.toggle("is-on", c === chip); });
+      all(".pqc-tab, .pqc-group").forEach(function (el) {
+        el.classList.toggle("is-hidden", gama !== "todas" && el.getAttribute("data-gama") !== gama);
+      });
+      var vis = visibleTabs();
+      var active = vis.filter(function (t) { return t.classList.contains("is-on"); });
+      if (!active.length && vis.length) { select(vis[0].getAttribute("data-pq"), true); }
+      return;
+    }
+
+    var st = e.target.closest("[data-pqstep]");
+    if (st) {
+      var vis2 = visibleTabs();
+      if (!vis2.length) { return; }
+      var cur = -1;
+      vis2.forEach(function (t, i) { if (t.classList.contains("is-on")) { cur = i; } });
+      var next = (cur + (parseInt(st.getAttribute("data-pqstep"), 10) || 1) + vis2.length) % vis2.length;
+      select(vis2[next].getAttribute("data-pq"), true);
+    }
+  });
+
+  function pqcFx() {
+    var el = document.getElementById("u-fx");
+    var rate = NaN;
+    if (el) {
+      var strong = el.querySelector("strong");
+      rate = parseFloat(strong && strong.textContent);
+      if (!rate) { rate = parseFloat(el.getAttribute("data-fx-fallback")); }
+    }
+    if (!rate) { return; }
+    document.querySelectorAll(".pqc-eq[data-usd]").forEach(function (n) {
+      var usd = parseFloat(n.getAttribute("data-usd"));
+      var aprox = Math.round((usd * rate) / 1000) * 1000;
+      var strong2 = n.querySelector("strong");
+      if (strong2) { strong2.textContent = "$" + aprox.toLocaleString("es-MX"); }
+    });
+  }
+  pqcFx();
+  setTimeout(pqcFx, 4000);
+
+  function initFromHash() {
+    var m = (location.hash || "").match(/^#paquete-([a-z0-9-]+)/);
+    if (m) { select(m[1], false); }
+  }
+  window.addEventListener("hashchange", initFromHash);
+  initFromHash();
 })();
 </script>
 <script src="v2.js?v=25"></script>

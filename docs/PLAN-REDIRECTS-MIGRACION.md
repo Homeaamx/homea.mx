@@ -62,7 +62,9 @@
 
 **Cómo se obtiene el handle nuevo:** al importar el catálogo (Fase 4) Shopify asigna `handle`. Emparejamos **viejo↔nuevo por slug/SKU/título**. Lo más limpio: **forzar que el handle = slug viejo** → match casi 1:1.
 
-⚠️ **Gotcha de query strings:** la herramienta nativa de Shopify maneja mal URLs con parámetros (`?PGFLngID=2`, `PBCPPlayer.asp?id=`). → Validar; si falla, usar **app de redirects** (manejan query strings) para esos casos.
+⚠️ **Gotcha de query strings:** la herramienta nativa de Shopify maneja mal URLs con parámetros (`?PGFLngID=2`, `PBCPPlayer.asp?id=`). → Validar; si falla, usar **app de redirects** (manejan query strings) para esos casos. Nota post-pivot headless: estos redirects viven en `next.config.js`/middleware de Vercel (con `has` para query params), no en Shopify.
+
+> ✅ **Mapeo confirmado (2026-07-20):** `/PBCPPlayer.asp?ID=2420472` (Paquetes de equipos de cocina, 20 láminas) → **`/herramientas#paquetes`** (explorador de paquetes integrado en Herramientas: los 20 paquetes en HTML indexable + JSON-LD ItemList; decisión Carla — sin página aparte). El PDF `/Files/119914/PaquetesCocinaRefrigeradorEstufaHornoParrillaCampanaLavavajillas.pdf` → **`/assets/paquetes-de-cocina-homea.pdf`**.
 
 ---
 
