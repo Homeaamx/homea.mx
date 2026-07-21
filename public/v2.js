@@ -234,9 +234,9 @@
        Si el gesto se movió, se suprime el clic para no navegar al soltar. */
     var scStrip = document.getElementById("subcatStrip");
     if (scStrip) {
-      /* Flechas ← → : desplazan el strip ~3 tarjetas con scroll directo (el suave
-         nativo behavior:"smooth" lo cancela el scroll-snap del strip). Se deshabilitan
-         al llegar al inicio/fin. */
+      /* Flechas ← → : desplazan el strip ~3 tarjetas con scroll suave nativo
+         (sin scroll-snap el glide ya no se cancela). Se deshabilitan al llegar
+         al inicio/fin. */
       var scArrows = Array.prototype.slice.call(document.querySelectorAll(".subcat-band [data-scroll]"));
       function scSyncArrows() {
         var max = scStrip.scrollWidth - scStrip.clientWidth;
@@ -250,17 +250,22 @@
         ctx.on(btn, "click", function () {
           var max = scStrip.scrollWidth - scStrip.clientWidth;
           var delta = 201 * 3 * parseInt(btn.getAttribute("data-scroll"), 10);
-          scStrip.scrollLeft = Math.max(0, Math.min(max, scStrip.scrollLeft + delta));
-          scSyncArrows();
+          scStrip.scrollTo({ left: Math.max(0, Math.min(max, scStrip.scrollLeft + delta)), behavior: "smooth" });
         });
       });
       ctx.on(scStrip, "scroll", scSyncArrows);
       ctx.on(window, "resize", scSyncArrows);
       scSyncArrows();
       var scDown = false, scStartX = 0, scStartLeft = 0, scMoved = 0;
+      /* Inercia: al soltar, el strip sigue deslizándose y se detiene suavemente
+         donde caiga (sin snap a los bordes de tarjeta). */
+      var scVel = 0, scLastX = 0, scLastT = 0, scRaf = null;
+      function scStopGlide() { if (scRaf) { cancelAnimationFrame(scRaf); scRaf = null; } }
       ctx.on(scStrip, "pointerdown", function (e) {
         if (e.button !== 0 || e.pointerType !== "mouse") return;
+        scStopGlide();
         scDown = true; scMoved = 0; scStartX = e.clientX; scStartLeft = scStrip.scrollLeft;
+        scVel = 0; scLastX = e.clientX; scLastT = performance.now();
         try { scStrip.setPointerCapture(e.pointerId); } catch (err) {}
         scStrip.classList.add("dragging");
       });
@@ -268,9 +273,26 @@
         if (!scDown) return;
         var dx = e.clientX - scStartX;
         if (Math.abs(dx) > scMoved) { scMoved = Math.abs(dx); }
+        var now = performance.now(), dt = now - scLastT;
+        if (dt > 0) { scVel = (e.clientX - scLastX) / dt * 16; }
+        scLastX = e.clientX; scLastT = now;
         scStrip.scrollLeft = scStartLeft - dx;
       });
-      var scEnd = function () { if (scDown) { scDown = false; scStrip.classList.remove("dragging"); } };
+      var scEnd = function () {
+        if (!scDown) return;
+        scDown = false; scStrip.classList.remove("dragging");
+        if (Math.abs(scVel) > 2) {
+          var glide = function () {
+            scVel *= 0.94;
+            if (Math.abs(scVel) < 0.5) { scRaf = null; return; }
+            scStrip.scrollLeft -= scVel;
+            scRaf = requestAnimationFrame(glide);
+          };
+          scRaf = requestAnimationFrame(glide);
+        }
+      };
+      ctx.on(scStrip, "wheel", scStopGlide, { passive: true });
+      ctx.onAbort(scStopGlide);
       ctx.on(scStrip, "pointerup", scEnd);
       ctx.on(scStrip, "pointercancel", scEnd);
       ctx.on(scStrip, "click", function (e) {

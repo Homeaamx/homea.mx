@@ -36,7 +36,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <HomeNavSticky />
         <PreviewRouter />
         {/* Interacciones del preview (nav scroll, mega flyout, reveals, hero, marquee). */}
-        <Script src="/v2.js?v=35" strategy="afterInteractive" />
+        <Script src="/v2.js?v=36" strategy="afterInteractive" />
+        {/* Wishlist (localStorage): corazones, badge del nav y drawer de cotización. */}
+        <Script src="/wishlist.js?v=5" strategy="afterInteractive" />
+        {/* Carrito piloto (localStorage → cart permalink de Shopify). */}
+        <Script src="/cart.js?v=3" strategy="afterInteractive" />
       </body>
     </html>
   );

@@ -1881,3 +1881,176 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
   :root { --container: 1660px; }
   .hero-cine { max-height: 1040px; }
 }
+
+/* =====================================================================
+   Wishlist — corazones en tarjetas, badge del nav y drawer lateral
+   ===================================================================== */
+.pcard { position: relative; }
+.wl-heart {
+  position: absolute; top: 10px; right: 10px; z-index: 3;
+  width: 38px; height: 38px; display: grid; place-items: center;
+  background: var(--homea-bone); border: 1px solid var(--border);
+  color: var(--homea-black); cursor: pointer; padding: 0;
+  transition: transform var(--dur-fast) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard);
+}
+.wl-heart svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.wl-heart:hover { transform: translateY(-2px); border-color: var(--homea-black); }
+.wl-heart.on { border-color: var(--accent); }
+.wl-heart.on svg { fill: var(--accent); stroke: var(--accent); }
+@keyframes wl-pop { 0% { transform: scale(1); } 45% { transform: scale(1.22); } 100% { transform: scale(1); } }
+.wl-heart.pop svg { animation: wl-pop .45s var(--ease-standard); }
+
+/* Badge del botón WISHLIST del nav */
+.wl-count {
+  display: inline-grid; place-items: center; min-width: 18px; height: 18px;
+  margin-left: 8px; padding: 0 4px; font-size: 10.5px; font-weight: 600;
+  background: var(--accent); color: var(--homea-black); letter-spacing: 0;
+}
+.wl-count[hidden] { display: none; }
+
+/* Drawer */
+html.wl-lock, html.wl-lock body { overflow: hidden; }
+.wl-overlay {
+  position: fixed; inset: 0; z-index: 90; background: rgba(10, 10, 10, .45);
+  opacity: 0; transition: opacity .26s var(--ease-standard);
+}
+.wl-overlay.open { opacity: 1; }
+.wl-drawer {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 91;
+  width: min(430px, 94vw); background: var(--bg);
+  border-left: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform .26s var(--ease-standard);
+}
+.wl-drawer.open { transform: translateX(0); }
+.wl-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding: 26px 26px 18px; border-bottom: 1px solid var(--border);
+}
+.wl-title { font-size: 26px; margin-top: 6px; }
+.wl-x {
+  background: none; border: none; cursor: pointer; color: var(--fg-muted);
+  font-size: 26px; line-height: 1; padding: 2px 6px;
+}
+.wl-x:hover { color: var(--fg); }
+.wl-list { flex: 1; overflow-y: auto; padding: 8px 26px; }
+.wl-item {
+  display: grid; grid-template-columns: 72px 1fr auto; gap: 14px;
+  align-items: start; padding: 16px 0; border-bottom: 1px solid var(--border);
+}
+.wl-thumb {
+  width: 72px; height: 72px; background: var(--bg-greige);
+  display: grid; place-items: center; padding: 6px;
+}
+.wl-thumb img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.wl-info { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.wl-brand {
+  font-size: 10px; font-weight: 600; letter-spacing: var(--tracking-wider);
+  text-transform: uppercase; color: var(--accent-text);
+}
+.wl-name { font-size: 13px; line-height: 1.35; color: var(--fg); text-decoration: none; }
+.wl-name:hover { color: var(--accent-text); }
+.wl-spec {
+  font-size: 11px; color: var(--fg-muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.wl-price { font-size: 13px; font-weight: 600; margin-top: 3px; }
+.wl-remove {
+  background: none; border: none; cursor: pointer; color: var(--fg-subtle);
+  font-size: 20px; line-height: 1; padding: 0 2px;
+}
+.wl-remove:hover { color: var(--fg); }
+.wl-empty { padding: 34px 0; display: flex; flex-direction: column; gap: 10px; }
+.wl-empty p { font-size: 14px; color: var(--fg); }
+.wl-empty .wl-empty-sub { font-size: 12.5px; color: var(--fg-muted); }
+.wl-empty .arrow-link { margin-top: 8px; }
+.wl-foot { padding: 20px 26px 26px; border-top: 1px solid var(--border); }
+.wl-wa {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 15px 20px; background: var(--homea-black);
+  color: var(--homea-bone); text-decoration: none;
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase;
+  transition: background var(--dur-fast) var(--ease-standard);
+}
+.wl-wa:hover { background: var(--accent-deep); }
+.wl-note { margin-top: 12px; font-size: 11px; color: var(--fg-muted); text-align: center; }
+
+/* =====================================================================
+   Nav: trío de íconos (lupa · wishlist · carrito) + drawer de carrito
+   ===================================================================== */
+.nav-right:empty { display: none; }
+.nav-icons {
+  display: flex; align-items: center; gap: 6px;
+  padding-left: 14px; margin-right: 10px;
+  border-left: 1px solid var(--border);
+}
+.nav-ic {
+  position: relative; width: 40px; height: 40px;
+  display: grid; place-items: center;
+  color: var(--fg); border-bottom: none;
+}
+.nav-ic svg {
+  width: 23px; height: 23px; fill: none; stroke: currentColor;
+  stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+  transition: fill var(--dur-fast) var(--ease-standard),
+              stroke var(--dur-fast) var(--ease-standard),
+              transform var(--dur-fast) var(--ease-standard);
+}
+/* Hover: destello dorado de fondo — un halo radial que florece tras el ícono;
+   el trazo del ícono no cambia (sin relleno). */
+.nav-ic::before {
+  content: ""; position: absolute; inset: 3px; border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(189, 155, 94, .42) 0%, rgba(189, 155, 94, .18) 52%, transparent 74%);
+  opacity: 0; transform: scale(.55);
+  transition: opacity var(--dur-med) var(--ease-standard),
+              transform var(--dur-med) var(--ease-standard);
+  pointer-events: none;
+}
+.nav-ic:hover::before, .nav-ic:focus-visible::before { opacity: 1; transform: scale(1); }
+/* El ícono crece dentro del destello; el trazo no cambia. */
+.nav-ic:hover svg, .nav-ic:focus-visible svg { transform: scale(1.15); }
+.nav-ic.has-items svg { fill: var(--accent); stroke: var(--accent); }
+/* La bolsa del carrito: solo se rellena el cuerpo; el asa queda hueca. */
+.nav-ic.cart-open svg path:last-child { fill: none; }
+.nav-ic .wl-count, .nav-ic .cart-count {
+  position: absolute; top: 0; right: -2px; margin: 0;
+  min-width: 15px; height: 15px; padding: 0 3px;
+  display: inline-grid; place-items: center;
+  font-size: 9px; font-weight: 600; letter-spacing: 0;
+  background: var(--accent); color: var(--homea-black);
+}
+.nav-ic .wl-count[hidden], .nav-ic .cart-count[hidden] { display: none; }
+.site-nav.scrolled .nav-ic { color: var(--homea-bone); }
+.site-nav.scrolled .nav-ic:hover { color: var(--accent); }
+.site-nav.scrolled .nav-icons { border-left-color: var(--dark-border); }
+
+/* Carrito: filas con stepper y subtotal */
+.cart-qty { display: inline-flex; align-items: center; gap: 12px; margin-top: 7px; }
+.cart-qty span { font-size: 12px; font-weight: 600; min-width: 14px; text-align: center; }
+.cart-q {
+  width: 24px; height: 24px; display: grid; place-items: center;
+  background: none; border: 1px solid var(--border); color: var(--fg);
+  cursor: pointer; font-size: 14px; line-height: 1; padding: 0;
+  transition: border-color var(--dur-fast) var(--ease-standard);
+}
+.cart-q:hover { border-color: var(--homea-black); }
+.cart-subtotal {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 13px; margin-bottom: 6px;
+}
+.cart-subtotal span:first-child {
+  font-size: 10px; font-weight: 600; letter-spacing: var(--tracking-wider);
+  text-transform: uppercase; color: var(--fg-muted);
+}
+.cart-subtotal-num { font-size: 16px; font-weight: 600; }
+.cart-tax-note { font-size: 11px; color: var(--fg-muted); margin-bottom: 14px; }
+.cart-drawer .cart-wa-alt { display: inline-flex; margin-top: 14px; font-size: 12px; }
+
+/* Nav: los links del menú no se parten en dos líneas (About us) */
+.nav-right a, .nav-links > a, .nav-links > .has-mega > a { white-space: nowrap; }
+
+/* Tiles de subcategoría: variante fotográfica (la foto llena el tile, sin blend) */
+.subcat .img img.photo { mix-blend-mode: normal; filter: none; object-fit: cover; height: 172px; width: 100%; max-width: 100%; }

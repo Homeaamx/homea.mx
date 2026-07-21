@@ -12,6 +12,8 @@ const PREVIEW_DIR = join(process.cwd(), "preview");
 
 // Prefijo de las páginas de categoría del preview (categoria-<slug>.html).
 const CATEGORIA_PREFIX = "categoria-";
+// Prefijo de las fichas de producto del preview (producto-<slug>.html).
+const PRODUCTO_PREFIX = "producto-";
 
 // Mapeo de páginas del preview → rutas del sitio.
 const LINK_MAP: Record<string, string> = {
@@ -35,9 +37,11 @@ function readPreview(file: string): string {
 
 /** Un archivo .html del preview → su ruta en el sitio. */
 function mapTarget(file: string): string {
-  return file.startsWith(CATEGORIA_PREFIX)
-    ? `/productos/${file.slice(CATEGORIA_PREFIX.length)}`
-    : LINK_MAP[`${file}.html`] ?? "#";
+  if (file.startsWith(CATEGORIA_PREFIX))
+    return `/productos/${file.slice(CATEGORIA_PREFIX.length)}`;
+  if (file.startsWith(PRODUCTO_PREFIX))
+    return `/producto/${file.slice(PRODUCTO_PREFIX.length)}`;
+  return LINK_MAP[`${file}.html`] ?? "#";
 }
 
 /** Rutas relativas de assets → absolutas desde /public. */
@@ -151,4 +155,16 @@ export function categoriaSlugs(): string[] {
 /** Nombre de archivo del preview para una slug de categoría. */
 export function categoriaFile(slug: string): string {
   return `${CATEGORIA_PREFIX}${slug}.html`;
+}
+
+/** Slugs de las fichas de producto del preview (producto-<slug>.html → <slug>). */
+export function productoSlugs(): string[] {
+  return readdirSync(PREVIEW_DIR)
+    .filter((f) => f.startsWith(PRODUCTO_PREFIX) && f.endsWith(".html"))
+    .map((f) => f.slice(PRODUCTO_PREFIX.length, -".html".length));
+}
+
+/** Nombre de archivo del preview para una slug de producto. */
+export function productoFile(slug: string): string {
+  return `${PRODUCTO_PREFIX}${slug}.html`;
 }

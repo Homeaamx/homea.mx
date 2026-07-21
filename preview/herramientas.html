@@ -362,10 +362,13 @@
   </div>
   <div class="nav-right">
     <a href="herramientas.html">Herramientas</a>
-    <a href="nosotros.html">Showroom</a>
-    <a class="nav-search" href="home.html" aria-label="Buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg></a>
+    <a href="nosotros.html">Nosotros</a>
   </div>
-  <a class="btn btn-ghost" href="#">Wishlist</a>
+  <div class="nav-icons" role="group" aria-label="Buscar, wishlist y carrito">
+    <a class="nav-ic nav-ic-search" href="home.html" aria-label="Buscar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg></a>
+    <a class="nav-ic wl-open" href="#" aria-label="Wishlist" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.9 13a4.8 4.8 0 0 1 0-6.8 4.7 4.7 0 0 1 6.7 0l.4.4.4-.4a4.7 4.7 0 0 1 6.7 0 4.8 4.8 0 0 1 0 6.8Z"/></svg><span class="wl-count figures" hidden>0</span></a>
+    <a class="nav-ic cart-open" href="#" aria-label="Carrito" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.6 8.6h8.8l1.95 10.6a1.75 1.75 0 0 1-1.72 2.07H7.37a1.75 1.75 0 0 1-1.72-2.07L7.6 8.6Z"/><path d="M8.9 8.6V7.5a3.1 3.1 0 0 1 6.2 0v1.1"/></svg><span class="cart-count figures" hidden>0</span></a>
+  </div>
 </div></nav>
 
 
@@ -375,7 +378,7 @@
     <div class="crumbs"><a href="home.html">Inicio</a><span class="sep">·</span><span>Herramientas</span></div>
     <div class="eyebrow" style="margin-bottom:18px">Herramientas · Para decidir mejor</div>
     <h1>Herramientas para nuestros <i>clientes frecuentes</i>.</h1>
-    <p class="sub">Si especificas, construyes o asesoras, aquí empieza tu proyecto: presupuestos cerrados por gama, decisiones respaldadas con datos y el detalle técnico de cada modelo — listo para compartir con tus clientes.</p>
+    <p class="sub">Precios finales por paquete, comparativas entre modelos y fichas técnicas. Lo que necesitas para cotizar y presentar a tu cliente.</p>
   </div>
 
   <!-- Alzado de línea (ref.: cocina Café, perillas y jaladeras de latón).
@@ -464,19 +467,19 @@
     <a href="#paquetes">
       <span class="n figures">01</span>
       <h3>Paquetes de <i>cocina</i></h3>
-      <p>Cocinas completas por marca, de gama económica a premium, con precio cerrado.</p>
+      <p>Cocinas completas acomodadas por precio, ¿cuál se ajusta a tu presupuesto?</p>
       <span class="ar" aria-hidden="true"></span>
     </a>
     <a href="#comparativos">
       <span class="n figures">02</span>
       <h3>Comparativos</h3>
-      <p>Tipos de electrodoméstico y marcas frente a frente, para decidir con datos.</p>
+      <p>Compara electrodomésticos para ver cuál necesitas en tu espacio, ¿parrilla eléctrica o de gas?</p>
       <span class="ar" aria-hidden="true"></span>
     </a>
     <a href="#tips">
       <span class="n figures">03</span>
       <h3>Tips y <i>videos</i></h3>
-      <p>Consejos breves de nuestros especialistas antes de comprar, instalar o usar.</p>
+      <p>Consejos de expertos para resolver tus dudas, ¿tu fábrica de hielo necesita bomba o no?</p>
       <span class="ar" aria-hidden="true"></span>
     </a>
     <a href="#fichas">
@@ -1129,7 +1132,7 @@
       <a href="guias.html">Guías</a>
       <a href="herramientas.html">Herramientas</a></div>
     <div class="lnk"><div class="f-eyebrow">HOMEA</div>
-      <a href="nosotros.html">Quiénes somos</a><a href="nosotros.html">Showroom</a>
+      <a href="nosotros.html">Nosotros</a>
       <a href="b2b.html">Proyectos</a><a href="#">Blog &amp; Newsletter</a>
       <a href="contacto.html">Contacto</a></div>
     <div class="lnk"><div class="f-eyebrow">Atención al cliente</div>
@@ -1743,5 +1746,7 @@
 })();
 </script>
 <script src="v2.js?v=25"></script>
+<script src="wishlist.js?v=5"></script>
+<script src="cart.js?v=3"></script>
 </body>
 </html>
