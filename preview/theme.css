@@ -118,27 +118,31 @@ html { scroll-behavior: smooth; }
 .mega-brands-cols { column-count: 4; column-gap: 32px; }
 .mega-brands-cols a {
   display: block; break-inside: avoid; border-bottom: none;
-  padding: 5px 10px; white-space: nowrap;
+  border-left: 2px solid transparent;
+  padding: 5px 10px 5px 8px; white-space: nowrap;
   font-family: var(--font-sans); font-weight: 500; font-size: 11.5px;
   letter-spacing: .06em; text-transform: uppercase; color: var(--fg);
   transition: color var(--dur-fast) var(--ease-standard),
-              background-color var(--dur-fast) var(--ease-standard);
+              background-color var(--dur-fast) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard);
 }
-.mega-brands-cols a:hover { background: #e4c480; color: var(--homea-black); font-weight: 700; border-bottom-color: transparent; }
+.mega-brands-cols a:hover { background: var(--homea-greige); color: var(--fg); border-left-color: var(--homea-gold); border-bottom-color: transparent; }
 
 .mega-grid { display: grid; grid-template-columns: 1.5fr repeat(5, 1fr); gap: 28px; }
 .mega-col-cat a { white-space: nowrap; }
 .mega-col h4 {
   font-size: 10px; font-weight: 600; letter-spacing: var(--tracking-wider);
-  text-transform: uppercase; color: var(--fg-muted);
+  text-transform: uppercase; color: var(--accent-text);
   padding-bottom: 12px; margin-bottom: 14px; border-bottom: 1px solid var(--border);
 }
 .mega-col a {
   display: block; font-size: 14px; color: var(--fg);
-  padding: 6px 10px; margin: 0 -10px; border-bottom: none;
-  transition: color var(--dur-fast) var(--ease-standard), background-color var(--dur-fast) var(--ease-standard);
+  padding: 6px 10px 6px 8px; margin: 0 -10px; border-bottom: none;
+  border-left: 2px solid transparent;
+  transition: color var(--dur-fast) var(--ease-standard), background-color var(--dur-fast) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard);
 }
-.mega-col a:hover { background: #e4c480; color: var(--homea-black); font-weight: 600; border-bottom-color: transparent; }
+.mega-col a:hover { background: var(--homea-greige); color: var(--fg); border-left-color: var(--homea-gold); border-bottom-color: transparent; }
 
 /* ---------- Mega-menú maestro-detalle (flyout) ---------------------------- */
 /* Colapsado al abrir: solo el riel de macro categorías. Se expande al pasar el cursor.
@@ -198,11 +202,27 @@ html { scroll-behavior: smooth; }
    bajo el texto quede alineada aunque "Dispensadores & Filtros de agua" envuelva. */
 .mega-subcols.is-fixed .mega-col > .mega-subcol:last-child h5 { min-height: 46px; }
 .mega-subcol h5 { font-family: var(--font-sans); font-size: 12.5px; font-weight: 700;
-  letter-spacing: .14em; text-transform: uppercase; color: var(--fg-muted);
+  letter-spacing: .14em; text-transform: uppercase; color: var(--accent-text);
   margin: 0 0 8px; padding-bottom: 7px; border-bottom: 1px solid var(--border); }
-.mega-subcol a { display: block; font-size: 15.5px; color: var(--fg); padding: 6px 10px; margin: 0 -10px; line-height: 1.28;
-  transition: color var(--dur-fast) var(--ease-standard), background-color var(--dur-fast) var(--ease-standard); }
-.mega-subcol a:hover { background: #e4c480; color: var(--homea-black); font-weight: 600; border-bottom-color: transparent; }
+.mega-subcol a { display: block; font-size: 15.5px; color: var(--fg); padding: 6px 10px 6px 8px; margin: 0 -10px; line-height: 1.28;
+  border-left: 2px solid transparent;
+  transition: color var(--dur-fast) var(--ease-standard), background-color var(--dur-fast) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard); }
+.mega-subcol a:hover { background: var(--homea-greige); color: var(--fg); border-left-color: var(--homea-gold); border-bottom-color: transparent; }
+/* Título de grupo como link (lleva a la página de subcategoría nivel 1).
+   Hover distintivo: oro profundo + subrayado que se llena una vez (1.6s) y queda lleno.
+   En reposo queda un segmento dorado de 28px sobre el hairline.
+   border-left: 0 → anula el tick de los items (.mega-subcol a), que aquí sobra. */
+.mega-subcol h5 a { display: inline; font-size: inherit; color: inherit; padding: 0; margin: 0; line-height: inherit; border-left: 0; }
+.mega-subcol h5 a:hover { background: none; color: var(--homea-gold-deep); }
+.mega-subcol h5 { position: relative; }
+.mega-subcol h5::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 3px;
+  width: 28px; background: var(--homea-gold); pointer-events: none; }
+.mega-subcol h5:has(a:hover)::after { animation: megaFill 1.6s linear forwards; }
+@keyframes megaFill { from { width: 28px; } to { width: 100%; } }
+@media (prefers-reduced-motion: reduce) {
+  .mega-subcol h5:has(a:hover)::after { animation: none; width: 100%; }
+}
 .mega-all { display: inline-block; margin-top: auto; padding-top: 20px; font-family: var(--font-sans);
   font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-text); }
 /* Tarjetas de subcategoría — tile con foto + texto (estilo grid de categorías) */

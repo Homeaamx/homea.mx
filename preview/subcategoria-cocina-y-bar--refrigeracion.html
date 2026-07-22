@@ -3,171 +3,106 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HOMEA — Exterior · Catálogo</title>
+<title>HOMEA — Refrigeración · Cocina y Bar</title>
+<meta name="description" content="Refrigeradores, congeladores, cavas de vino, máquinas de hielo y más. Sub-Zero, Gaggenau, Miele y Thermador con asesoría experta de HOMEA.">
 <link rel="icon" type="image/png" href="assets/favicon-circle.png">
 <link rel="stylesheet" href="tokens-v2.css">
 <link rel="stylesheet" href="theme.css?v=60">
 <link rel="stylesheet" href="placeholders.css">
 <style>
-/* ── Página de macrocategoría (mockup) ─────────────────────────── */
+/* ── Página de subcategoría nivel 1 (Cocina y Bar) ─────────────────── */
 
-/* ── Hero de escena a todo lo ancho: spotlight por electrodoméstico ─ */
-/* La primera vista cabe completa: alto = viewport − barras; la escena (aspect fijo para no
-   descuadrar los puntos) cubre el ancho y se ancla ABAJO — si algo se recorta es cielo, nunca el título. */
-.cathero { position: relative; width: 100%; margin: 0; background: var(--homea-espresso);
-  height: calc(100svh - var(--hero-chrome, 116px)); min-height: 480px; overflow: hidden; }
-.hscene { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: max(100%, calc((100svh - var(--hero-chrome, 116px)) * 1.776));
-  aspect-ratio: 2000 / 1126; background: var(--homea-espresso); }
-@media (max-width: 760px) {
-  .cathero { height: auto; min-height: 0; }
-  .hscene { position: relative; left: 0; transform: none; width: 100%; }
-}
-
-/* Título integrado: centrado en la parte baja de la escena, sobre el piso (zona libre de equipos) */
-.cathero-scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(to top, rgba(10,9,7,.62) 0%, rgba(10,9,7,.34) 14%, transparent 34%);
-  transition: opacity .5s var(--ease); }
-.cathero-cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; pointer-events: none;
-  text-align: center; padding: 0 24px clamp(22px, 3.2vw, 48px);
-  transition: opacity .45s var(--ease), transform .45s var(--ease); }
-.cathero-cap a { pointer-events: auto; }
-.cathero-crumbs { font-family: var(--font-sans); font-size: 11px; letter-spacing: var(--tracking-wider);
-  text-transform: uppercase; color: rgba(247,243,236,.68); margin-bottom: 14px; display: block; }
-.cathero-crumbs a { color: rgba(247,243,236,.68); border-bottom: none; transition: color var(--dur) var(--ease); }
-.cathero-crumbs a:hover { color: var(--homea-gold-light); }
-.cathero-crumbs .sep { color: var(--homea-gold); padding: 0 .55em; }
-.cathero-cap h1 { font-family: var(--font-display); color: var(--homea-bone); font-weight: 400;
-  font-size: clamp(40px, 5.6vw, 86px); line-height: 1; letter-spacing: -0.01em; margin: 0;
-  text-shadow: 0 2px 34px rgba(0,0,0,.5); }
-.cathero-cap h1 i { font-style: italic; }
-.cathero-hint { display: inline-block; margin-top: 16px; font-family: var(--font-sans); font-weight: 500;
-  font-size: 11.5px; letter-spacing: var(--tracking-wide); color: rgba(247,243,236,.72);
-  text-shadow: 0 1px 10px rgba(0,0,0,.55); }
-.cathero-hint::before, .cathero-hint::after { content: ""; display: inline-block; width: 24px; height: 1px;
+/* Hero compacto: foto de la subcategoría + migas + título → directo al catálogo */
+.subhero { position: relative; background: var(--homea-espresso); overflow: hidden; }
+.subhero-bg { position: absolute; inset: 0; }
+.subhero-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.subhero-scrim { position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(10,9,7,.66) 0%, rgba(10,9,7,.34) 26%, rgba(10,9,7,.10) 52%, rgba(10,9,7,.26) 100%); }
+.subhero-inner { position: relative; z-index: 2; min-height: clamp(300px, 40vh, 440px);
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: center; text-align: center;
+  padding: clamp(72px, 10vh, 120px) 24px clamp(28px, 4.5vh, 48px); }
+.subhero-crumbs { font-family: var(--font-sans); font-size: 11px; letter-spacing: var(--tracking-wider);
+  text-transform: uppercase; color: rgba(247,243,236,.68); margin-bottom: clamp(6px, 1.4vh, 14px); display: block; }
+.subhero-crumbs a { color: rgba(247,243,236,.68); border-bottom: none; transition: color var(--dur) var(--ease); }
+.subhero-crumbs a:hover { color: var(--homea-gold-light); }
+.subhero-crumbs .sep { color: var(--homea-gold); padding: 0 .55em; }
+.subhero-crumbs [aria-current] { color: rgba(247,243,236,.92); }
+.subhero h1 { font-family: var(--font-display); color: var(--homea-bone); font-weight: 400;
+  font-size: clamp(34px, 5vw, 68px); line-height: 1.02; letter-spacing: -0.01em; margin: 0;
+  text-shadow: 0 2px 30px rgba(0,0,0,.5); }
+.subhero h1 i { font-style: italic; }
+.subhero-meta { display: inline-block; margin-top: clamp(10px, 1.8vh, 18px); font-family: var(--font-sans);
+  font-weight: 500; font-size: 11.5px; letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  color: rgba(247,243,236,.74); text-shadow: 0 1px 10px rgba(0,0,0,.55); }
+.subhero-meta .dot { color: var(--homea-gold); padding: 0 .45em; }
+.subhero-meta::before, .subhero-meta::after { content: ""; display: inline-block; width: 24px; height: 1px;
   background: var(--homea-gold); vertical-align: middle; }
-.cathero-hint::before { margin-right: 12px; }
-.cathero-hint::after { margin-left: 12px; }
-/* Al explorar una pieza, el título se retira para dejar limpio el spotlight */
-.hscene.has-active .cathero-cap { opacity: 0; transform: translateY(10px); }
-.hscene.has-active .cathero-scrim { opacity: 0; }
-.hscene > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.hscene > svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.hscene .sg { opacity: 0; transition: opacity .45s var(--ease); }
-.hscene .sg.on { opacity: 1; }
-.hscene .sg .dim { fill: #14100C; fill-opacity: .68; }
-.hscene .sg line { stroke: var(--homea-gold); stroke-width: 2.5; stroke-dasharray: 900; stroke-dashoffset: 900; }
-.hscene .sg.on line { animation: hline .55s var(--ease-reveal) .08s forwards; }
-@keyframes hline { to { stroke-dashoffset: 0; } }
-.hscene .sg .chip { fill: var(--homea-bone); }
-.hscene .sg .chip-bullet { fill: var(--homea-gold); }
-.hscene .sg text { font-family: var(--font-sans); font-weight: 600; font-size: 30px;
-  letter-spacing: .18em; fill: var(--homea-espresso); text-transform: uppercase; }
-/* La etiqueta también es clicable, pero sólo cuando su grupo está activo (evita zonas muertas) */
-.hscene .sg .chiplink { pointer-events: none; }
-.hscene .sg.on .chiplink { pointer-events: auto; cursor: pointer; }
-.hscene .sg .chiplink text, .hscene .sg .chiplink .chip { transition: fill var(--dur) var(--ease); }
-.hscene .sg .chiplink:hover .chip { fill: #fff; }
-.hscene .sg .chiplink:hover text { fill: var(--homea-gold-deep); }
-/* Marcadores */
-.hspot { position: absolute; width: 44px; height: 44px; transform: translate(-50%,-50%);
-  display: grid; place-items: center; z-index: 3; border-bottom: none; }
-.hspot-box { width: 21px; height: 21px; border: 1.5px solid var(--homea-gold); background: rgba(20,16,12,.38);
-  display: grid; place-items: center; transition: background var(--dur) var(--ease); position: relative;
-  animation: hbreathe 3.2s ease-in-out infinite; }
-.hspot-box::after { content: ""; position: absolute; inset: -1.5px; border: 1.5px solid var(--homea-gold);
-  animation: hpulse 2.6s var(--ease) infinite; }
-.hspot-box i { width: 7px; height: 7px; background: var(--homea-gold); }
-.hspot:nth-child(2) .hspot-box, .hspot:nth-child(2) .hspot-box::after { animation-delay: .5s; }
-.hspot:nth-child(3) .hspot-box, .hspot:nth-child(3) .hspot-box::after { animation-delay: 1s; }
-.hspot:nth-child(4) .hspot-box, .hspot:nth-child(4) .hspot-box::after { animation-delay: 1.5s; }
-.hspot:nth-child(5) .hspot-box, .hspot:nth-child(5) .hspot-box::after { animation-delay: 2s; }
-.hspot:hover .hspot-box, .hspot:focus-visible .hspot-box { animation: none; transform: scale(1.25); background: rgba(20,16,12,.62); }
-.hspot:hover .hspot-box::after, .hspot:focus-visible .hspot-box::after { animation: none; opacity: 0; }
-@keyframes hpulse { 0% { transform: scale(1); opacity: .9; } 70%, 100% { transform: scale(2.1); opacity: 0; } }
-@keyframes hbreathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
-.hscene.has-active .hspot:not(.act) { opacity: .3; transition: opacity .3s var(--ease); }
-@media (prefers-reduced-motion: reduce) {
-  .hspot-box { animation: none; }
-  .hspot-box::after { animation: none; display: none; }
-  .hscene .sg line { stroke-dashoffset: 0; animation: none; }
-}
-@media (max-width: 760px) { .cathero-hint { display: none; } .hscene .sg text { font-size: 44px; } }
+.subhero-meta::before { margin-right: 12px; }
+.subhero-meta::after { margin-left: 12px; }
+@media (max-width: 640px) { .subhero-meta::before, .subhero-meta::after { display: none; } }
 
-/* Slider de subcategorías nivel 1 (patrón Artexa, superficie greige) */
+/* Slider de tipos (subcategorías nivel 2 · patrón Artexa, superficie greige) */
 .subcat-band { background: var(--homea-greige); border-block: 1px solid var(--border); }
-.subcat-strip { display: flex; gap: 1px; overflow-x: auto;
-  background: var(--border); scrollbar-width: none; }
+.subcat-band .container { padding-top: 34px; padding-bottom: 30px; }
+.subcat-carousel { display: flex; align-items: center; gap: clamp(32px, 4vw, 72px); }
+.subcat-carousel .subcat-strip { flex: 1 1 auto; min-width: 0; }
+.subcat-strip { display: flex; gap: 1px; overflow-x: auto; background: var(--border);
+  scrollbar-width: none; cursor: grab; }
 .subcat-strip::-webkit-scrollbar { display: none; }
-.subcat { flex: 0 0 200px; background: var(--homea-greige);
+.subcat-strip img { -webkit-user-drag: none; user-select: none; }
+.subcat-strip.dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; user-select: none; }
+.subcat { flex: 1 0 200px; background: var(--homea-greige); /* crece: sin hueco al final en strips cortos */
   padding: 30px 22px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
   color: inherit; border-bottom: none; transition: background var(--dur) var(--ease), transform var(--dur) var(--ease); }
 .subcat:hover { background: var(--homea-greige-deep); transform: translateY(-4px); }
 .subcat .img { height: 172px; width: 100%; display: grid; place-items: center; }
 .subcat .img img { max-height: 172px; max-width: 94%; object-fit: contain;
   mix-blend-mode: multiply; filter: saturate(.92); }
-.subcat .img .ph { height: 150px; width: 90%; }
+.subcat .img img.photo { mix-blend-mode: normal; filter: none; object-fit: cover; height: 172px; width: 100%; max-width: 100%; }
 .subcat .lbl { font-family: var(--font-sans); font-weight: 600; font-size: 12px;
   letter-spacing: var(--tracking-wide); text-transform: uppercase; text-align: center; color: var(--fg); }
-.subcat .n { font-size: 11px; color: var(--fg-muted); letter-spacing: var(--tracking-wider); }
-.subcat.is-active { box-shadow: inset 0 -2px 0 var(--homea-gold); }
-.subcat-head { display: flex; justify-content: flex-end; align-items: baseline; padding: 26px 0 18px; }
-.subcat-head .eyebrow { margin: 0; }
-.subcat-nav { display: flex; gap: 10px; }
-.subcat-nav button { width: 34px; height: 34px; border: 1px solid var(--border-strong); background: transparent;
-  color: var(--fg); cursor: pointer; font-size: 15px; line-height: 1; transition: all var(--dur) var(--ease); }
-.subcat-nav button:hover { background: var(--homea-espresso); color: var(--homea-bone); border-color: var(--homea-espresso); }
+.subcat.is-active { box-shadow: inset 0 -2px 0 var(--homea-gold); background: var(--homea-greige-deep); }
+.subcat .ph { background: var(--homea-n100); color: var(--homea-n600); height: 150px; width: 90%; }
+.subcat .ph .ph-inner { font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; padding: 0 12px; text-align: center; }
+.subcat-arrow { flex: 0 0 auto; width: 52px; height: 52px; display: grid; place-items: center;
+  background: var(--homea-espresso); color: var(--homea-bone); border: none; cursor: pointer;
+  box-shadow: 0 10px 30px rgba(30, 25, 20, .16);
+  transition: background .35s var(--ease), color .35s var(--ease), box-shadow .35s var(--ease), opacity .35s var(--ease); }
+.subcat-arrow svg { width: 22px; height: 22px; fill: none; stroke: currentColor;
+  stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: transform .35s var(--ease); }
+.subcat-arrow:hover { background: var(--homea-bone); color: var(--homea-espresso); box-shadow: 0 14px 38px rgba(30, 25, 20, .24); }
+.subcat-arrow.prev:hover svg { transform: translateX(-3px); }
+.subcat-arrow.next:hover svg { transform: translateX(3px); }
+.subcat-arrow:disabled { opacity: .28; cursor: default; box-shadow: none; }
+.subcat-arrow:disabled:hover { background: var(--homea-espresso); color: var(--homea-bone); }
+@media (max-width: 640px) { .subcat-arrow { display: none; } }
 
-/* Tarjeta de producto: recorte PNG sobre greige (registro Sub-Zero) */
+/* Tarjeta de producto: recorte PNG sobre greige + tarjetas compactas (3 por fila) */
 .pcard .imgw.cutout { display: grid; place-items: center; padding: 18px; }
 .pcard .imgw.cutout img { object-fit: contain; max-height: 100%; max-width: 100%; mix-blend-mode: multiply; transition: transform var(--dur-slow) var(--ease-reveal); }
-
-/* Tarjetas compactas: 3 por fila dentro del viewport */
 .plp { grid-template-columns: 220px minmax(0, 1fr); gap: 44px; }
 .plp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .pcard .imgw { aspect-ratio: 1 / 1; max-height: 240px; width: 100%; }
 .pcard .body { padding: 16px 16px 20px; gap: 7px; }
 .pcard h3 { font-size: 14.5px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .pcard .dotlist { font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
-.pcard .avail { font-size: 9.5px; }
 .pcard .row { margin-top: 4px; flex-wrap: wrap; row-gap: 2px; }
-.pcard .price-tag { font-size: 16px; }
 .pcard .arrow-link { font-size: 11px; }
+.pcard .avail { font-family: var(--font-sans); font-size: 10.5px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--homea-gold-text); }
+.pcard .price-note { font-size: 11px; color: var(--fg-muted); }
+.pcard .price-tag { display: inline-flex; align-items: baseline; gap: 6px; white-space: nowrap; font-size: 16px; }
 .quote-card { padding: 24px; }
 .quote-card h3 { font-size: 18px; }
 @media (max-width: 1023px) { .plp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .plp-grid { grid-template-columns: 1fr; } }
-.pcard .avail { font-family: var(--font-sans); font-size: 10.5px; font-weight: 600;
-  letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--homea-gold-text); }
-.pcard .price-note { font-size: 11px; color: var(--fg-muted); }
-.pcard .price-tag { display: inline-flex; align-items: baseline; gap: 6px; white-space: nowrap; }
-.subcat .ph { background: var(--homea-n100); color: var(--homea-n600); }
-.subcat .ph .ph-inner { font-family: var(--font-sans); font-size: 10px; font-weight: 600;
-  letter-spacing: .14em; text-transform: uppercase; padding: 0 12px; text-align: center; }
 .filters .flink { font-size: 12px; color: var(--accent-text); border-bottom: none; display: inline-block; margin-top: 6px; }
-/* Acordeón Subcategoría (nivel 1 → tipos nivel 2, según taxonomía) */
-.fsub { border-bottom: 1px solid var(--border); }
-.fsub:last-of-type { border-bottom: none; }
-.fsub summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-  padding: 9px 0; font-family: var(--font-sans); font-size: 12.5px; font-weight: 500; color: var(--fg);
-  transition: color var(--dur) var(--ease); }
-.fsub summary::-webkit-details-marker { display: none; }
-.fsub summary::after { content: "+"; font-size: 14px; color: var(--homea-gold-text); line-height: 1; }
-.fsub[open] summary { font-weight: 600; }
-.fsub[open] summary::after { content: "–"; }
-.fsub summary:hover { color: var(--accent-text); }
-.fsub-list { display: flex; flex-direction: column; gap: 8px; padding: 2px 0 12px 12px;
-  border-left: 1px solid var(--homea-gold-soft); margin-left: 1px; }
-/* Filtro con buscador + lista desplazable (Ancho) */
-.fsearch { width: 100%; border: 1px solid var(--border-strong); background: var(--surface);
-  padding: 8px 10px; font-family: var(--font-sans); font-size: 12px; color: var(--fg);
-  border-radius: 0; margin-bottom: 10px; outline: none; -webkit-appearance: none; appearance: none; }
-.fsearch:focus { border-color: var(--homea-gold); }
-.fsearch::placeholder { color: var(--fg-muted); }
-.fscroll { max-height: 218px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;
-  padding-right: 6px; scrollbar-width: thin; scrollbar-color: var(--homea-n300) transparent; }
 .filters .fnote { font-size: 11.5px; color: var(--fg-muted); line-height: 1.5; margin-top: 4px; }
 .fgroup .swatches { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.fgroup .sw { width: 22px; height: 22px; border: 1px solid var(--border-strong); cursor: pointer; position: relative; }
+.fgroup .sw:hover { outline: 2px solid var(--homea-gold); outline-offset: 1px; }
+
 /* Slider de precio (doble handle, esquinas vivas, oro champagne) */
 .price-slider { margin-top: 6px; }
 .ps-values { display: flex; align-items: baseline; gap: 6px; font-size: 13px; font-weight: 600;
@@ -186,24 +121,15 @@
 .ps-track-wrap input[type=range]::-webkit-slider-thumb:hover { background: var(--homea-gold-soft); }
 .ps-track-wrap input[type=range]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 0;
   background: var(--homea-bone); border: 1.5px solid var(--homea-gold-deep); cursor: pointer; pointer-events: auto; }
-.fgroup .sw { width: 22px; height: 22px; border: 1px solid var(--border-strong); cursor: pointer; position: relative; }
-.fgroup .sw:hover { outline: 2px solid var(--homea-gold); outline-offset: 1px; }
 
-/* ── Placeholders de esta página (catálogo en preparación) ───────── */
-.hscene--ph > .ph { position: absolute; inset: 0; background: var(--homea-espresso); color: var(--homea-n400);
-  place-items: start center; }
-.hscene--ph > .ph .ph-inner { font-family: var(--font-sans); font-weight: 600; font-size: 11px;
-  letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-top: clamp(28px, 9vh, 96px); }
-@media (max-width: 900px) { .hscene--ph > .ph .ph-inner { display: none; } }
-.subcat .img .ph { width: 78%; height: 108px; }
-.pcard--ph { cursor: default; }
-.pcard--ph .imgw .ph { background: var(--homea-n100); color: var(--homea-n500); }
-.pcard--ph .imgw .ph .ph-inner { font-family: var(--font-sans); font-weight: 600; font-size: 10px;
-  letter-spacing: var(--tracking-wider); text-transform: uppercase; }
-.pcard--ph .imgw .ph::before { opacity: .5; }
-.skl { display: block; height: 12px; background: var(--homea-n100); }
-.skl-title { height: 16px; }
-.filters .skl { height: 11px; margin: 4px 0; }
+/* Nota de catálogo en migración (subcategorías aún sin piezas en línea) */
+.mig-note { border: 1px solid var(--border-strong); background: var(--surface);
+  padding: clamp(30px, 5vw, 56px) clamp(22px, 4vw, 48px); display: flex; flex-direction: column;
+  align-items: center; text-align: center; gap: 14px; }
+.mig-note h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(22px, 2.6vw, 30px); margin: 0; }
+.mig-note h3 i { font-style: italic; }
+.mig-note p { max-width: 560px; color: var(--fg-muted); font-size: 14px; line-height: 1.6; margin: 0; }
+.mig-cta { display: flex; gap: 26px; align-items: center; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -213,12 +139,14 @@
     <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.8 3.5h2.7l1.4 3.8-2 1.4a11.5 11.5 0 0 0 4.4 4.4l1.4-2 3.8 1.4v2.7a2 2 0 0 1-2.2 2A15.2 15.2 0 0 1 4.8 5.7a2 2 0 0 1 2-2.2Z"/></svg>
     Tel. oficina · (442) 216 3552
   </a>
+  <!-- Slot de temporada: por ahora muestra el tipo de cambio del día (FIX DOF/Banxico, en vivo vía JS). En temporadas, reemplazar por el mensaje de campaña. -->
   <span class="u-fx" id="u-fx" data-fx-fallback="17.21">Tipo de cambio · 1 USD = <strong>17.21</strong> MXN</span>
   <div class="u-right">
     <a href="#">Cuenta</a>
   </div>
 </div></div>
 
+<!-- Nav -->
 <nav class="site-nav"><div class="container">
   <a class="brand" href="home.html" aria-label="Inicio">
     <img src="assets/wordmark-black.png" alt="HOMEA Premium">
@@ -326,11 +254,9 @@
     </div>
     <a href="b2b.html">Proyectos</a>
     <a href="ofertas.html">Ofertas</a>
-    <a href="#">Guías</a>
-  </div>
-  <div class="nav-right">
-    <a href="herramientas.html">Herramientas</a>
-    <a href="nosotros.html">Nosotros</a>
+    <a href="guias.html">Guías</a>
+    <a class="nav-sec" href="herramientas.html">Herramientas</a>
+    <a class="nav-sec" href="nosotros.html">Nosotros</a>
   </div>
   <div class="nav-icons" role="group" aria-label="Buscar, wishlist y carrito">
     <a class="nav-ic nav-ic-search" href="home.html" aria-label="Buscar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg></a>
@@ -339,62 +265,84 @@
   </div>
 </div></nav>
 
-<!-- Hero de macrocategoría con imagen de escena. Spotlights interactivos:
-     pendientes de marcar coordenadas por pieza (patrón de categoria-cocina-y-bar.html). -->
-<header class="cathero">
-  <div class="hscene" id="hscene">
-    <img src="assets/photos/hero-exterior-cocina-asador.jpg" alt="Cocina exterior con asador empotrado en terraza" fetchpriority="high" style="object-position:center 70%">
-    <div class="cathero-scrim" aria-hidden="true"></div>
-    <div class="cathero-cap">
-      <nav class="cathero-crumbs" aria-label="Migas de pan"><a href="home.html">Inicio</a><span class="sep">·</span><a href="categoria-exterior.html">Productos</a></nav>
-      <h1>Exterior</h1>
-    </div>
+<!-- Hero compacto de subcategoría nivel 1 → directo al catálogo filtrable -->
+<header class="subhero">
+  <div class="subhero-bg"><img src="assets/photos/hero-sub1-refrigeracion-subzero.jpg" alt="Columnas de refrigeración Sub-Zero panelables en cocina premium" style="object-position:center 50%" fetchpriority="high"></div>
+  <div class="subhero-scrim" aria-hidden="true"></div>
+  <div class="subhero-inner">
+    <nav class="subhero-crumbs" aria-label="Migas de pan"><a href="home.html">Inicio</a><span class="sep">·</span><a href="categoria-cocina-y-bar.html">Cocina y Bar</a><span class="sep">·</span><span aria-current="page">Refrigeración</span></nav>
+    <h1>Refrigeración</h1>
+    <span class="subhero-meta">8 tipos <span class="dot">·</span> Sub-Zero <span class="dot">·</span> Gaggenau <span class="dot">·</span> Miele <span class="dot">·</span> Monogram</span>
   </div>
 </header>
 
-<!-- Slider de subcategorías nivel 1 (patrón Artexa · PROPUESTA-FILTROS §4.5) -->
+<!-- Slider de tipos (subcategorías nivel 2 · patrón Artexa) -->
 <section class="subcat-band"><div class="container">
   <div class="subcat-carousel">
     <button type="button" class="subcat-arrow prev" data-scroll="-1" aria-label="Anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="6" y2="12"/><polyline points="12 6 6 12 12 18"/></svg></button>
     <div class="subcat-strip" id="subcatStrip">
-    <a class="subcat" href="categoria-exterior.html">
-      <span class="img"><img src="assets/photos/subcats/asadores-y-hornos.png" alt="Asadores y Hornos"></span>
-      <span class="lbl">Asadores &amp; Hornos</span>
+    <a class="subcat" data-tipo="refrigeradores" href="?tipo=refrigeradores">
+      <span class="img"><img src="assets/photos/gaggenau/gaggenau-rb282705.png" alt="Refrigeradores"></span>
+      <span class="lbl">Refrigeradores</span>
     </a>
-    <a class="subcat" href="categoria-exterior.html">
-      <span class="img"><img src="assets/photos/subcats/alberca.jpg" alt="Alberca" class="photo"></span>
-      <span class="lbl">Alberca</span>
+    <a class="subcat" data-tipo="congeladores" href="?tipo=congeladores">
+      <span class="img"><span class="ph"><span class="ph-inner">Congeladores</span></span></span>
+      <span class="lbl">Congeladores</span>
+    </a>
+    <a class="subcat" data-tipo="centros-de-bebida" href="?tipo=centros-de-bebida">
+      <span class="img"><span class="ph"><span class="ph-inner">Centros de bebida</span></span></span>
+      <span class="lbl">Centros de bebida</span>
+    </a>
+    <a class="subcat" data-tipo="frigobares" href="?tipo=frigobares">
+      <span class="img"><span class="ph"><span class="ph-inner">Frigobares</span></span></span>
+      <span class="lbl">Frigobares</span>
+    </a>
+    <a class="subcat" data-tipo="maquinas-de-hielo" href="?tipo=maquinas-de-hielo">
+      <span class="img"><img src="assets/photos/maquina-de-hielo.png" alt="Máquinas de hielo"></span>
+      <span class="lbl">Máquinas de hielo</span>
+    </a>
+    <a class="subcat" data-tipo="cavas-de-vino" href="?tipo=cavas-de-vino">
+      <span class="img"><span class="ph"><span class="ph-inner">Cavas de vino</span></span></span>
+      <span class="lbl">Cavas de vino</span>
+    </a>
+    <a class="subcat" data-tipo="cajones-frios" href="?tipo=cajones-frios">
+      <span class="img"><span class="ph"><span class="ph-inner">Cajones fríos</span></span></span>
+      <span class="lbl">Cajones fríos</span>
+    </a>
+    <a class="subcat" data-tipo="accesorios-refrigeracion" href="?tipo=accesorios-refrigeracion">
+      <span class="img"><span class="ph"><span class="ph-inner">Accesorios de refrigeración</span></span></span>
+      <span class="lbl">Accesorios de refrigeración</span>
     </a>
   </div>
     <button type="button" class="subcat-arrow next" data-scroll="1" aria-label="Siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="18" y2="12"/><polyline points="12 6 18 12 12 18"/></svg></button>
   </div>
 </div></section>
 
-<!-- PLP: filtros + grid -->
+<!-- PLP: filtros específicos de Refrigeración + grid -->
 <section class="sec tight" style="padding-top:48px"><div class="container">
   <div class="plp">
     <!-- Filtros (Shopify Search & Discovery: vendor / type / metafields / opciones de variante) -->
     <aside class="filters">
-      <div class="fgroup"><h6>Subcategoría</h6>
-        <details class="fsub" open>
-          <summary>Asadores &amp; Hornos</summary>
-          <div class="fsub-list">
-            <label><input type="checkbox"> Asadores empotrables</label>
-            <label><input type="checkbox"> Asadores con carrito</label>
-            <label><input type="checkbox"> Hornos de pizza</label>
-            <label><input type="checkbox"> Accesorios Asadores &amp; Hornos</label>
-          </div>
-        </details>
-        <details class="fsub">
-          <summary>Alberca</summary>
-          <div class="fsub-list">
-            <label><input type="checkbox"> Mosaicos</label>
-          </div>
-        </details>
+      <div class="fgroup"><h6>Tipo</h6>
+          <label data-tipo="refrigeradores"><input type="checkbox"> Refrigeradores</label>
+          <label data-tipo="congeladores"><input type="checkbox"> Congeladores</label>
+          <label data-tipo="centros-de-bebida"><input type="checkbox"> Centros de bebida</label>
+          <label data-tipo="frigobares"><input type="checkbox"> Frigobares</label>
+          <label data-tipo="maquinas-de-hielo"><input type="checkbox"> Máquinas de hielo</label>
+          <label data-tipo="cavas-de-vino"><input type="checkbox"> Cavas de vino</label>
+          <label data-tipo="cajones-frios"><input type="checkbox"> Cajones fríos</label>
+          <label data-tipo="accesorios-refrigeracion"><input type="checkbox"> Accesorios de refrigeración</label>
       </div>
       <div class="fgroup"><h6>Marca</h6>
-        <span class="skl" style="width:72%"></span><span class="skl" style="width:58%"></span><span class="skl" style="width:66%"></span><span class="skl" style="width:49%"></span>
-        <p class="fnote">Marcas y conteos se poblarán al cargar el catálogo de esta macrocategoría.</p>
+        <label><input type="checkbox"> Sub-Zero</label>
+        <label><input type="checkbox"> Gaggenau</label>
+        <label><input type="checkbox"> Miele</label>
+        <label><input type="checkbox"> Thermador</label>
+        <label><input type="checkbox"> Monogram</label>
+        <label><input type="checkbox"> U-Line</label>
+        <label><input type="checkbox"> Scotsman</label>
+        <label><input type="checkbox"> Hoshizaki</label>
+        <a class="flink" href="marcas.html">Ver las 46 marcas →</a>
       </div>
       <div class="fgroup"><h6>Gama</h6>
         <label><input type="checkbox"> Premium</label>
@@ -402,18 +350,22 @@
         <label><input type="checkbox"> Media</label>
         <label><input type="checkbox"> Económica</label>
       </div>
-      <div class="fgroup"><h6>Combustible</h6>
-        <label><input type="checkbox"> Gas natural</label>
-        <label><input type="checkbox"> Gas LP</label>
-        <label><input type="checkbox"> Carbón</label>
-        <label><input type="checkbox"> Leña</label>
-        <label><input type="checkbox"> Kamado</label>
-        <label><input type="checkbox"> Pellets</label>
+      <div class="fgroup"><h6>Instalación</h6>
+        <label><input type="checkbox"> Empotrado / a ras</label>
+        <label><input type="checkbox"> Panelable</label>
+        <label><input type="checkbox"> Bajo cubierta</label>
+        <label><input type="checkbox"> De piso</label>
+        <label><input type="checkbox"> Columna</label>
       </div>
-      <div class="fgroup"><h6>Características</h6>
-        <label><input type="checkbox"> Con rotisserie</label>
-        <label><input type="checkbox"> Con quemador lateral</label>
-        <label><input type="checkbox"> Cabezal desmontable</label>
+      <div class="fgroup"><h6>Ancho</h6>
+        <label><input type="checkbox"> 15&quot;</label>
+        <label><input type="checkbox"> 18&quot;</label>
+        <label><input type="checkbox"> 24&quot;</label>
+        <label><input type="checkbox"> 30&quot;</label>
+        <label><input type="checkbox"> 36&quot;</label>
+        <label><input type="checkbox"> 42&quot;</label>
+        <label><input type="checkbox"> 48&quot;</label>
+        <label><input type="checkbox"> 60&quot;</label>
       </div>
       <div class="fgroup"><h6>Color / Acabado</h6>
         <div class="swatches">
@@ -424,10 +376,6 @@
           <span class="sw" title="Cromo" style="background:linear-gradient(135deg,#e8eaec,#b9bec4)"></span>
         </div>
         <p class="fnote">Filtra por variantes disponibles (opción Color/Acabado del producto).</p>
-      </div>
-      <div class="fgroup"><h6>Colección · Serie</h6>
-        <span class="skl" style="width:72%"></span><span class="skl" style="width:58%"></span><span class="skl" style="width:66%"></span><span class="skl" style="width:49%"></span>
-        <p class="fnote">Se puebla según la marca activa (metafield <em>specs.serie</em>).</p>
       </div>
       <div class="fgroup"><h6>Precio <span style="font-weight:400;color:var(--fg-muted);letter-spacing:.08em">· MXN aprox.</span></h6>
         <div class="price-slider" id="priceSlider">
@@ -442,69 +390,31 @@
         <p class="fnote">Filtra por el equivalente aproximado en pesos (metafield <em>filtros.precio_ref_mxn</em>). Cada pieza muestra su precio en su moneda de lista, sin IVA.</p>
       </div>
     </aside>
-
-    <!-- Grid: los 5 Gaggenau reales ya enriquecidos en homeashop.mx -->
     <div>
       <div class="toolbar">
-        <span class="results figures">Catálogo en preparación · las piezas de Exterior aparecerán aquí</span>
+        <span class="results figures" id="plpResults">1 pieza en línea · 8 tipos</span>
         <select aria-label="Ordenar"><option>Relevancia</option><option>Precio ↑</option><option>Precio ↓</option><option>Novedades</option></select>
       </div>
       <div class="plp-grid">
-        <div class="pcard pcard--ph" aria-hidden="true">
-          <div class="imgw"><span class="ph"><span class="ph-inner">Producto</span></span></div>
+
+<a class="pcard" href="producto-rb282705.html">
+          <button class="wl-heart" type="button" data-wl-id="RB282705" aria-label="Guardar en wishlist" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.9 13a4.8 4.8 0 0 1 0-6.8 4.7 4.7 0 0 1 6.7 0l.4.4.4-.4a4.7 4.7 0 0 1 6.7 0 4.8 4.8 0 0 1 0 6.8Z"/></svg></button>
+          <div class="imgw cutout"><img src="assets/photos/gaggenau/gaggenau-rb282705.png" alt="Refrigerador Gaggenau RB282705" onerror="this.closest('.imgw').innerHTML='&lt;span class=&quot;ph&quot; style=&quot;height:100%&quot;&gt;&lt;span class=&quot;ph-inner&quot;&gt;Refrigerador integrado&lt;/span&gt;&lt;/span&gt;'"></div>
           <div class="body">
-            <span class="skl" style="width:34%"></span>
-            <span class="skl skl-title" style="width:92%"></span>
-            <span class="skl skl-title" style="width:64%"></span>
-            <span class="skl" style="width:56%"></span>
-            <div class="row"><span class="skl" style="width:38%"></span></div>
+            <span class="brand">Gaggenau</span>
+            <h3>Refrigerador Empotrable con Congelador Bottom Mount Home Connect 24" — Serie 200</h3>
+            <span class="dotlist">Serie 200 <span class="dot">·</span> panelable <span class="dot">·</span> 36 dB <span class="dot">·</span> RB282705</span>
+            <span class="avail">Bajo pedido</span>
+            <div class="row"><span class="price-tag figures">$9,406.62<span class="currency">USD</span> <span class="price-note">+ IVA</span></span>
+              <span class="arrow-link">Cotizar <span class="ln"></span><span class="ar">→</span></span></div>
           </div>
-        </div>
-        <div class="pcard pcard--ph" aria-hidden="true">
-          <div class="imgw"><span class="ph"><span class="ph-inner">Producto</span></span></div>
-          <div class="body">
-            <span class="skl" style="width:34%"></span>
-            <span class="skl skl-title" style="width:92%"></span>
-            <span class="skl skl-title" style="width:64%"></span>
-            <span class="skl" style="width:56%"></span>
-            <div class="row"><span class="skl" style="width:38%"></span></div>
-          </div>
-        </div>
-        <div class="pcard pcard--ph" aria-hidden="true">
-          <div class="imgw"><span class="ph"><span class="ph-inner">Producto</span></span></div>
-          <div class="body">
-            <span class="skl" style="width:34%"></span>
-            <span class="skl skl-title" style="width:92%"></span>
-            <span class="skl skl-title" style="width:64%"></span>
-            <span class="skl" style="width:56%"></span>
-            <div class="row"><span class="skl" style="width:38%"></span></div>
-          </div>
-        </div>
-        <div class="pcard pcard--ph" aria-hidden="true">
-          <div class="imgw"><span class="ph"><span class="ph-inner">Producto</span></span></div>
-          <div class="body">
-            <span class="skl" style="width:34%"></span>
-            <span class="skl skl-title" style="width:92%"></span>
-            <span class="skl skl-title" style="width:64%"></span>
-            <span class="skl" style="width:56%"></span>
-            <div class="row"><span class="skl" style="width:38%"></span></div>
-          </div>
-        </div>
-        <div class="pcard pcard--ph" aria-hidden="true">
-          <div class="imgw"><span class="ph"><span class="ph-inner">Producto</span></span></div>
-          <div class="body">
-            <span class="skl" style="width:34%"></span>
-            <span class="skl skl-title" style="width:92%"></span>
-            <span class="skl skl-title" style="width:64%"></span>
-            <span class="skl" style="width:56%"></span>
-            <div class="row"><span class="skl" style="width:38%"></span></div>
-          </div>
-        </div>
+        </a>
+
         <!-- Lead embebido: alto ticket → especialista -->
         <div class="quote-card">
-          <div class="eyebrow eyebrow-bright">Asesoría HOMEA</div>
-          <h3>¿Ya sabes qué <i>pieza</i> necesitas?</h3>
-          <p>Mientras cargamos el catálogo de Exterior, un especialista te ayuda a especificarla. Sin costo.</p>
+          <div class="eyebrow eyebrow-bright">Proyecto de cocina</div>
+          <h3>¿Especificando una cocina <i>completa</i>?</h3>
+          <p>Un especialista arma contigo el paquete por marca: medidas, cargas eléctricas, ventilación y paneles. Sin costo.</p>
           <a class="arrow-link light" href="contacto.html">Cotizar con especialista <span class="ln"></span><span class="ar">→</span></a>
         </div>
       </div>
@@ -517,7 +427,6 @@
   </div>
 </div></section>
 
-<!-- CTA -->
 <section class="sec on-dark cta-band">
   <div class="glow"></div><div class="iso"></div>
   <div class="container"><div class="inner reveal">
@@ -557,28 +466,21 @@
 </div></footer>
 
 <a class="wa-float" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-track="whatsapp_click" data-label="wa_float"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg></a>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"Inicio","item":"https://www.homea.mx/"},
+ {"@type":"ListItem","position":2,"name":"Cocina y Bar","item":"https://www.homea.mx/productos/cocina-y-bar"},
+ {"@type":"ListItem","position":3,"name":"Refrigeración","item":"https://www.homea.mx/productos/cocina-y-bar/refrigeracion"}
+]}
+</script>
 <script src="v2.js?v=25"></script>
 <script src="wishlist.js?v=5"></script>
 <script src="cart.js?v=3"></script>
 <script>
-// Alto real de las barras superiores → --hero-chrome (la primera vista del hero cabe sin cortar el título)
-(function(){
-  function chrome(){
-    var h = 0;
-    var ubar = document.querySelector('.ubar'); if (ubar) h += ubar.offsetHeight;
-    var nav = document.querySelector('.site-nav'); if (nav) h += nav.offsetHeight;
-    document.documentElement.style.setProperty('--hero-chrome', h + 'px');
-  }
-  chrome();
-  window.addEventListener('resize', chrome);
-})();
-
-// PENDIENTE: spotlight del hero — copiar patrón de categoria-cocina-y-bar.html al recibir la imagen.
-
-
 // Slider de precio (doble handle)
 (function(){
   var lo = document.getElementById('psLo'), hi = document.getElementById('psHi');
+  if (!lo || !hi) return;
   var fill = document.getElementById('psFill'), vMin = document.getElementById('psMin'), vMax = document.getElementById('psMax');
   var MAX = parseInt(hi.max, 10);
   function fmt(n){ return '$' + n.toLocaleString('en-US'); }
@@ -589,8 +491,22 @@
     fill.style.left = (a / MAX * 100) + '%';
     fill.style.width = ((b - a) / MAX * 100) + '%';
   }
-  lo.value = 0; hi.value = MAX; // estado demo (evita la restauración de formulario del navegador)
+  lo.value = 0; hi.value = MAX; // estado inicial (evita la restauración de formulario del navegador)
   lo.addEventListener('input', paint); hi.addEventListener('input', paint); paint();
+})();
+
+// ?tipo=<slug>: marca el tile y el checkbox del tipo correspondiente (deep-link desde nav/hero)
+(function(){
+  var tipo = new URLSearchParams(location.search).get('tipo');
+  if (!tipo) return;
+  var nombre = null;
+  document.querySelectorAll('[data-tipo]').forEach(function(el){
+    if (el.getAttribute('data-tipo') !== tipo) return;
+    if (el.classList.contains('subcat')) { el.classList.add('is-active'); }
+    else { var cb = el.querySelector('input'); if (cb) cb.checked = true; nombre = el.textContent.trim(); }
+  });
+  var r = document.getElementById('plpResults');
+  if (r && nombre) r.textContent += ' · tipo: ' + nombre;
 })();
 </script>
 </body>

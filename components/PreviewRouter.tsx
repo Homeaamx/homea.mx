@@ -53,6 +53,9 @@ export default function PreviewRouter() {
       const href = internalHref(a);
       if (!href) return;
       e.preventDefault();
+      // Cierre garantizado del mega-menú al navegar: no depende de los listeners
+      // de v2.js (pueden morir si React reemplaza el nav inyectado).
+      document.querySelectorAll(".has-mega.is-open").forEach((w) => w.classList.remove("is-open"));
       router.push(href);
     };
 

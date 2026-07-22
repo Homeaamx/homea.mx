@@ -90,6 +90,7 @@ Estado: 🔵 pendiente · 🟡 en curso · ✅ hecho
 
 ### 4.1 Preparación / homologación de datos
 - [ ] Exportar ~25k productos (SAE/COI/OXATIS); limpiar duplicados, nomenclaturas, categorías, marcas, características, precios.
+- [ ] **Marcar la moneda de cada producto (MXN vs USD)** durante la homologación → tag/metafield `moneda:USD` + metafield `precio_usd`. Shopify solo maneja una moneda de tienda (MXN), así que el precio en dólares vive en metafield y el producto USD queda **no comprable** en checkout. Alimenta la regla "USD = solo con ejecutivo" de 4.5.
 - [ ] Estructurar para Shopify (CSV/Matrixify): handle, título, tipo, vendor, tags, variantes, precio, **metafields**.
 - [ ] Definir la **plantilla de nomenclatura SEO de imágenes** (`marca-producto-categoria-atributo`) como parte de la homologación → alimenta 4.2.
 
@@ -107,10 +108,14 @@ Estado: 🔵 pendiente · 🟡 en curso · ✅ hecho
 ### 4.4 Filtros / navegación facetada ⭐
 - [ ] Taxonomía: **tipo, marca, características** (medidas, color, panelable, combustible, etc.).
 - [ ] Implementar con metafields/tags de Shopify + lógica de filtros en el front-end. Filtros **precisos por categoría**.
+- [ ] **Filtros específicos por subcat.2** ⭐ (pendiente desde 2026-07-22): las páginas de subcat.1 de Cocina y Bar (`/productos/cocina-y-bar/<sub>`) ya existen con filtros a nivel subcat.1 y deep-link `?tipo=<subcat.2>`; falta definir e implementar el **set de filtros propio de cada subcat.2** (p. ej. Refrigeradores: estilo French Door/Duplex/Bottom Mount, panelable; Campanas: tipo de instalación y capacidad de extracción; Tarjas: nº de tazones). Se trabaja al conectar Shopify Search & Discovery / Storefront API, subcat.2 por subcat.2, partiendo de las fichas de tipo de `GUIAS/taxonomia-guias.json` (campo `filtros`) y de `docs/PATRON-FICHAS-TIPO.md`. Replicar después en las demás macrocategorías.
 
 ### 4.5 Lógica comercial y checkout
 - [ ] **"Cotizar" vs "Comprar"** por colección/etiqueta.
 - [ ] **Checkout hospedado en Shopify** para bajo ticket (cart → checkout URL).
+- [ ] **Definir cómo se cotiza cada caso** ⭐: (a) MXN bajo ticket → compra directa en checkout; (b) MXN alto ticket → CTA "Cotizar" → lead/WhatsApp; (c) **USD → si o sí pasa con un ejecutivo, sin excepción**. Identificar los productos USD viene de la homologación (4.1, tag `moneda:USD`).
+- [ ] **Productos en USD → SIEMPRE con ejecutivo** ⭐: en la PDP mostrar la nota *"Este producto se cotiza en dólares (USD). El tipo de cambio y el descuento los confirma tu ejecutivo de ventas"* (cláusula 6 del formato de cotización: TC Santander a la venta). Al intentar agregarlo al carrito se **intercepta** y se manda al usuario **directo a cotizar por WhatsApp** con el modelo prellenado — el vendedor revisa precio, descuento y tipo de cambio manualmente. **Un producto USD nunca llega al checkout de Shopify.**
+- [ ] **Lista de cotización (wishlist → vendedor)** ⭐: el usuario arma su lista de productos y la envía directo al vendedor en **formato de cotización simplificado** — solo **modelo + título + imagen principal** por partida (versión sencilla del formato SAE). Flujo: wishlist (localStorage, ya en fase 1 en `preview/wishlist.js`) → route `/api/cotizacion` en Vercel genera el documento (XLSX/PDF con folio y fecha) → URL del documento → se comparte **automáticamente por WhatsApp al ejecutivo** junto con la lista en texto. 100% front-end + serverless: **no toca Shopify** (su carrito/checkout sigue intacto para MXN bajo ticket). Opcional: el mismo envío crea el lead en **KOMMO** vía webhook.
 
 ### 4.6 Google Shopping — Merchant Center + feed + campaña ⭐ NUEVO
 *Anuncios de Shopping (las fichas con foto/precio del buscador) con **conexión directa al ecommerce**. Depende de catálogo con datos+imágenes (4.1/4.2) y del tracking de la Fase 3.5. Puede arrancar con un **set curado de productos prioritarios** antes de tener los 25k.*
@@ -136,6 +141,7 @@ Estado: 🔵 pendiente · 🟡 en curso · ✅ hecho
 
 ## 🔵 Fase 5 — Función general, QA y lanzamiento
 - [ ] **QA FUNCIONAL:** búsqueda, **filtros**, carrito, checkout, formularios→KOMMO, WhatsApp, enlaces. Todo debe funcionar de verdad.
+- [ ] **QA de la regla USD → solo ejecutivo:** verificar que **ningún producto en dólares** pueda llegar al checkout de Shopify; el intercepto a WhatsApp debe funcionar en PLP, PDP y carrito.
 - [ ] Responsive, accesibilidad (WCAG), **Core Web Vitals** móvil (la gran oportunidad vs OXATIS).
 - [ ] **Corte de migración:** apuntar **DNS de `homea.mx` (GoDaddy) a Vercel**, activar **todos los 301**, subir **sitemap propio** a GSC, validar indexación.
 - [ ] **Análisis de comportamiento con Microsoft Clarity** ⭐ NUEVO: instalar **Microsoft Clarity** (gratis) en el front-end **en el corte de lanzamiento** para que capture datos desde el día 1 — **heatmaps** (clics, scroll, áreas muertas) y **grabaciones de sesión**. Complementa GA4/Meta Pixel (que miden *qué* pasa) mostrando *cómo* navegan los usuarios. Durante el **monitoreo post-lanzamiento**, revisar: dónde abandonan, qué CTAs ("Cotizar"/WhatsApp/"Comprar") se ven y cuáles se ignoran, rage-clicks y fricción en filtros/PDP → alimenta iteración de conversión.

@@ -180,8 +180,8 @@
          quede el recuadro de foco ni un panel "pegado"; el foco de teclado (Enter,
          e.detail === 0) se respeta para no romper la navegación accesible. */
       on(siteNav, "click", function (e) {
-        var a = e.target.closest("a");
-        if (a) { closeAllMega(); if (e.detail > 0) { a.blur(); } }
+        var hit = e.target.closest("a, button");
+        if (hit) { closeAllMega(); if (e.detail > 0 && hit.blur) { hit.blur(); } }
       });
       on(document, "keydown", function (e) { if (e.key === "Escape") { closeAllMega(); } });
     }
@@ -256,7 +256,7 @@
       ctx.on(scStrip, "scroll", scSyncArrows);
       ctx.on(window, "resize", scSyncArrows);
       scSyncArrows();
-      var scDown = false, scStartX = 0, scStartLeft = 0, scMoved = 0;
+      var scDown = false, scStartX = 0, scStartLeft = 0, scMoved = 0, scPid = null;
       /* Inercia: al soltar, el strip sigue deslizándose y se detiene suavemente
          donde caiga (sin snap a los bordes de tarjeta). */
       var scVel = 0, scLastX = 0, scLastT = 0, scRaf = null;
@@ -265,14 +265,19 @@
         if (e.button !== 0 || e.pointerType !== "mouse") return;
         scStopGlide();
         scDown = true; scMoved = 0; scStartX = e.clientX; scStartLeft = scStrip.scrollLeft;
-        scVel = 0; scLastX = e.clientX; scLastT = performance.now();
-        try { scStrip.setPointerCapture(e.pointerId); } catch (err) {}
+        scVel = 0; scLastX = e.clientX; scLastT = performance.now(); scPid = e.pointerId;
+        /* OJO: NO capturar el puntero aquí — con setPointerCapture el click se
+           re-dirige al strip y los tiles (links a subcategoría) dejan de navegar.
+           Se captura hasta que el gesto ya es un arrastre real (ver pointermove). */
         scStrip.classList.add("dragging");
       });
       ctx.on(scStrip, "pointermove", function (e) {
         if (!scDown) return;
         var dx = e.clientX - scStartX;
         if (Math.abs(dx) > scMoved) { scMoved = Math.abs(dx); }
+        if (scMoved > 6 && scPid !== null && !scStrip.hasPointerCapture(scPid)) {
+          try { scStrip.setPointerCapture(scPid); } catch (err) {}
+        }
         var now = performance.now(), dt = now - scLastT;
         if (dt > 0) { scVel = (e.clientX - scLastX) / dt * 16; }
         scLastX = e.clientX; scLastT = now;
@@ -297,6 +302,7 @@
       ctx.on(scStrip, "pointercancel", scEnd);
       ctx.on(scStrip, "click", function (e) {
         if (scMoved > 6) { e.preventDefault(); e.stopPropagation(); }
+        scMoved = 0; /* el gesto ya se consumió: el siguiente click (p. ej. teclado) navega */
       }, true);
       // Evita el arrastre nativo del navegador (fantasma de imagen/enlace) que
       // secuestra el gesto del mouse antes de que corra nuestro drag-to-scroll.

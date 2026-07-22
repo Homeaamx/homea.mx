@@ -12,6 +12,10 @@ const PREVIEW_DIR = join(process.cwd(), "preview");
 
 // Prefijo de las páginas de categoría del preview (categoria-<slug>.html).
 const CATEGORIA_PREFIX = "categoria-";
+// Prefijo de las páginas de subcategoría nivel 1
+// (subcategoria-<categoria>--<subcategoria>.html → /productos/<categoria>/<subcategoria>).
+const SUBCATEGORIA_PREFIX = "subcategoria-";
+const SUBCATEGORIA_SEP = "--";
 // Prefijo de las fichas de producto del preview (producto-<slug>.html).
 const PRODUCTO_PREFIX = "producto-";
 
@@ -37,6 +41,12 @@ function readPreview(file: string): string {
 
 /** Un archivo .html del preview → su ruta en el sitio. */
 function mapTarget(file: string): string {
+  if (file.startsWith(SUBCATEGORIA_PREFIX)) {
+    const [cat, sub] = file
+      .slice(SUBCATEGORIA_PREFIX.length)
+      .split(SUBCATEGORIA_SEP);
+    return `/productos/${cat}/${sub}`;
+  }
   if (file.startsWith(CATEGORIA_PREFIX))
     return `/productos/${file.slice(CATEGORIA_PREFIX.length)}`;
   if (file.startsWith(PRODUCTO_PREFIX))
@@ -71,10 +81,11 @@ function isExecutableJs(attrs: string): boolean {
  *  y el JS inline de página se re-inyecta vía next/script (ver getScripts). Los
  *  scripts de datos (application/json / ld+json) se conservan. */
 function rewrite(html: string): string {
-  // Enlaces internos *.html → rutas limpias (conserva #fragmento).
+  // Enlaces internos *.html → rutas limpias (conserva ?query y #fragmento).
   html = html.replace(
-    /href="([a-z0-9-]+)\.html(#[^"]*)?"/gi,
-    (_m, file: string, frag = "") => `href="${mapTarget(file)}${frag || ""}"`
+    /href="([a-z0-9-]+)\.html(\?[^"#]*)?(#[^"]*)?"/gi,
+    (_m, file: string, query = "", frag = "") =>
+      `href="${mapTarget(file)}${query || ""}${frag || ""}"`
   );
   html = rewriteAssets(html);
   html = html.replace(RE_SCRIPT, (m, attrs: string) =>
@@ -155,6 +166,31 @@ export function categoriaSlugs(): string[] {
 /** Nombre de archivo del preview para una slug de categoría. */
 export function categoriaFile(slug: string): string {
   return `${CATEGORIA_PREFIX}${slug}.html`;
+}
+
+/** Pares {categoria, subcategoria} de las páginas de subcategoría nivel 1
+ *  (subcategoria-<categoria>--<subcategoria>.html). */
+export function subcategoriaParams(): {
+  categoria: string;
+  subcategoria: string;
+}[] {
+  return readdirSync(PREVIEW_DIR)
+    .filter((f) => f.startsWith(SUBCATEGORIA_PREFIX) && f.endsWith(".html"))
+    .map((f) => {
+      const [categoria, subcategoria] = f
+        .slice(SUBCATEGORIA_PREFIX.length, -".html".length)
+        .split(SUBCATEGORIA_SEP);
+      return { categoria, subcategoria };
+    })
+    .filter((p) => Boolean(p.categoria && p.subcategoria));
+}
+
+/** Nombre de archivo del preview para una página de subcategoría nivel 1. */
+export function subcategoriaFile(
+  categoria: string,
+  subcategoria: string
+): string {
+  return `${SUBCATEGORIA_PREFIX}${categoria}${SUBCATEGORIA_SEP}${subcategoria}.html`;
 }
 
 /** Slugs de las fichas de producto del preview (producto-<slug>.html → <slug>). */

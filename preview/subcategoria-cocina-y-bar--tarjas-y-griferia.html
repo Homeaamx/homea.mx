@@ -3,17 +3,133 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HOMEA — Gaggenau Lavavajillas Totalmente Integrado Push-to-Open 24" — Serie 400 · DF480701</title>
+<title>HOMEA — Tarjas y Grifería · Cocina y Bar</title>
+<meta name="description" content="Tarjas, grifería, dispensadores y accesorios. Blanco, Franke, Elkay y The Galley con asesoría experta de HOMEA.">
 <link rel="icon" type="image/png" href="assets/favicon-circle.png">
 <link rel="stylesheet" href="tokens-v2.css">
 <link rel="stylesheet" href="theme.css?v=60">
+<link rel="stylesheet" href="placeholders.css">
 <style>
-/* Ficha Gaggenau: imagen de producto (PNG recortado) sobre greige */
-.gallery .main.pdp-cutout { position: relative; background: var(--bg-greige); display: grid; place-items: center; aspect-ratio: 1 / 1; padding: 56px; }
-.gallery .main.pdp-cutout img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
-.pcard .imgw.cutout { display: grid; place-items: center; padding: 18px; background: var(--bg-greige); aspect-ratio: 1 / 1; }
-.pcard .imgw.cutout img { object-fit: contain; max-height: 100%; max-width: 100%; mix-blend-mode: multiply; }
-.pcard { position: relative; }
+/* ── Página de subcategoría nivel 1 (Cocina y Bar) ─────────────────── */
+
+/* Hero compacto: foto de la subcategoría + migas + título → directo al catálogo */
+.subhero { position: relative; background: var(--homea-espresso); overflow: hidden; }
+.subhero-bg { position: absolute; inset: 0; }
+.subhero-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.subhero-scrim { position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(10,9,7,.66) 0%, rgba(10,9,7,.34) 26%, rgba(10,9,7,.10) 52%, rgba(10,9,7,.26) 100%); }
+.subhero-inner { position: relative; z-index: 2; min-height: clamp(300px, 40vh, 440px);
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: center; text-align: center;
+  padding: clamp(72px, 10vh, 120px) 24px clamp(28px, 4.5vh, 48px); }
+.subhero-crumbs { font-family: var(--font-sans); font-size: 11px; letter-spacing: var(--tracking-wider);
+  text-transform: uppercase; color: rgba(247,243,236,.68); margin-bottom: clamp(6px, 1.4vh, 14px); display: block; }
+.subhero-crumbs a { color: rgba(247,243,236,.68); border-bottom: none; transition: color var(--dur) var(--ease); }
+.subhero-crumbs a:hover { color: var(--homea-gold-light); }
+.subhero-crumbs .sep { color: var(--homea-gold); padding: 0 .55em; }
+.subhero-crumbs [aria-current] { color: rgba(247,243,236,.92); }
+.subhero h1 { font-family: var(--font-display); color: var(--homea-bone); font-weight: 400;
+  font-size: clamp(34px, 5vw, 68px); line-height: 1.02; letter-spacing: -0.01em; margin: 0;
+  text-shadow: 0 2px 30px rgba(0,0,0,.5); }
+.subhero h1 i { font-style: italic; }
+.subhero-meta { display: inline-block; margin-top: clamp(10px, 1.8vh, 18px); font-family: var(--font-sans);
+  font-weight: 500; font-size: 11.5px; letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  color: rgba(247,243,236,.74); text-shadow: 0 1px 10px rgba(0,0,0,.55); }
+.subhero-meta .dot { color: var(--homea-gold); padding: 0 .45em; }
+.subhero-meta::before, .subhero-meta::after { content: ""; display: inline-block; width: 24px; height: 1px;
+  background: var(--homea-gold); vertical-align: middle; }
+.subhero-meta::before { margin-right: 12px; }
+.subhero-meta::after { margin-left: 12px; }
+@media (max-width: 640px) { .subhero-meta::before, .subhero-meta::after { display: none; } }
+
+/* Slider de tipos (subcategorías nivel 2 · patrón Artexa, superficie greige) */
+.subcat-band { background: var(--homea-greige); border-block: 1px solid var(--border); }
+.subcat-band .container { padding-top: 34px; padding-bottom: 30px; }
+.subcat-carousel { display: flex; align-items: center; gap: clamp(32px, 4vw, 72px); }
+.subcat-carousel .subcat-strip { flex: 1 1 auto; min-width: 0; }
+.subcat-strip { display: flex; gap: 1px; overflow-x: auto; background: var(--border);
+  scrollbar-width: none; cursor: grab; }
+.subcat-strip::-webkit-scrollbar { display: none; }
+.subcat-strip img { -webkit-user-drag: none; user-select: none; }
+.subcat-strip.dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; user-select: none; }
+.subcat { flex: 1 0 200px; background: var(--homea-greige); /* crece: sin hueco al final en strips cortos */
+  padding: 30px 22px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+  color: inherit; border-bottom: none; transition: background var(--dur) var(--ease), transform var(--dur) var(--ease); }
+.subcat:hover { background: var(--homea-greige-deep); transform: translateY(-4px); }
+.subcat .img { height: 172px; width: 100%; display: grid; place-items: center; }
+.subcat .img img { max-height: 172px; max-width: 94%; object-fit: contain;
+  mix-blend-mode: multiply; filter: saturate(.92); }
+.subcat .img img.photo { mix-blend-mode: normal; filter: none; object-fit: cover; height: 172px; width: 100%; max-width: 100%; }
+.subcat .lbl { font-family: var(--font-sans); font-weight: 600; font-size: 12px;
+  letter-spacing: var(--tracking-wide); text-transform: uppercase; text-align: center; color: var(--fg); }
+.subcat.is-active { box-shadow: inset 0 -2px 0 var(--homea-gold); background: var(--homea-greige-deep); }
+.subcat .ph { background: var(--homea-n100); color: var(--homea-n600); height: 150px; width: 90%; }
+.subcat .ph .ph-inner { font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; padding: 0 12px; text-align: center; }
+.subcat-arrow { flex: 0 0 auto; width: 52px; height: 52px; display: grid; place-items: center;
+  background: var(--homea-espresso); color: var(--homea-bone); border: none; cursor: pointer;
+  box-shadow: 0 10px 30px rgba(30, 25, 20, .16);
+  transition: background .35s var(--ease), color .35s var(--ease), box-shadow .35s var(--ease), opacity .35s var(--ease); }
+.subcat-arrow svg { width: 22px; height: 22px; fill: none; stroke: currentColor;
+  stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: transform .35s var(--ease); }
+.subcat-arrow:hover { background: var(--homea-bone); color: var(--homea-espresso); box-shadow: 0 14px 38px rgba(30, 25, 20, .24); }
+.subcat-arrow.prev:hover svg { transform: translateX(-3px); }
+.subcat-arrow.next:hover svg { transform: translateX(3px); }
+.subcat-arrow:disabled { opacity: .28; cursor: default; box-shadow: none; }
+.subcat-arrow:disabled:hover { background: var(--homea-espresso); color: var(--homea-bone); }
+@media (max-width: 640px) { .subcat-arrow { display: none; } }
+
+/* Tarjeta de producto: recorte PNG sobre greige + tarjetas compactas (3 por fila) */
+.pcard .imgw.cutout { display: grid; place-items: center; padding: 18px; }
+.pcard .imgw.cutout img { object-fit: contain; max-height: 100%; max-width: 100%; mix-blend-mode: multiply; transition: transform var(--dur-slow) var(--ease-reveal); }
+.plp { grid-template-columns: 220px minmax(0, 1fr); gap: 44px; }
+.plp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.pcard .imgw { aspect-ratio: 1 / 1; max-height: 240px; width: 100%; }
+.pcard .body { padding: 16px 16px 20px; gap: 7px; }
+.pcard h3 { font-size: 14.5px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.pcard .dotlist { font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+.pcard .row { margin-top: 4px; flex-wrap: wrap; row-gap: 2px; }
+.pcard .arrow-link { font-size: 11px; }
+.pcard .avail { font-family: var(--font-sans); font-size: 10.5px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--homea-gold-text); }
+.pcard .price-note { font-size: 11px; color: var(--fg-muted); }
+.pcard .price-tag { display: inline-flex; align-items: baseline; gap: 6px; white-space: nowrap; font-size: 16px; }
+.quote-card { padding: 24px; }
+.quote-card h3 { font-size: 18px; }
+@media (max-width: 1023px) { .plp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .plp-grid { grid-template-columns: 1fr; } }
+.filters .flink { font-size: 12px; color: var(--accent-text); border-bottom: none; display: inline-block; margin-top: 6px; }
+.filters .fnote { font-size: 11.5px; color: var(--fg-muted); line-height: 1.5; margin-top: 4px; }
+.fgroup .swatches { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.fgroup .sw { width: 22px; height: 22px; border: 1px solid var(--border-strong); cursor: pointer; position: relative; }
+.fgroup .sw:hover { outline: 2px solid var(--homea-gold); outline-offset: 1px; }
+
+/* Slider de precio (doble handle, esquinas vivas, oro champagne) */
+.price-slider { margin-top: 6px; }
+.ps-values { display: flex; align-items: baseline; gap: 6px; font-size: 13px; font-weight: 600;
+  letter-spacing: var(--tracking-wide); margin-bottom: 14px; }
+.ps-values .ps-cur { font-size: 10px; color: var(--fg-muted); letter-spacing: var(--tracking-wider); }
+.ps-values .ps-sep { color: var(--homea-gold); }
+.ps-track-wrap { position: relative; height: 18px; }
+.ps-track { position: absolute; top: 8px; left: 0; right: 0; height: 2px; background: var(--border); }
+.ps-fill { position: absolute; top: 8px; height: 2px; background: var(--homea-gold); }
+.ps-track-wrap input[type=range] { position: absolute; inset: 0; width: 100%; margin: 0;
+  -webkit-appearance: none; appearance: none; background: none; pointer-events: none; height: 18px; }
+.ps-track-wrap input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none;
+  width: 14px; height: 14px; border-radius: 0; background: var(--homea-bone);
+  border: 1.5px solid var(--homea-gold-deep); cursor: pointer; pointer-events: auto;
+  box-shadow: 0 1px 2px rgba(10,10,10,.18); transition: background var(--dur) var(--ease); }
+.ps-track-wrap input[type=range]::-webkit-slider-thumb:hover { background: var(--homea-gold-soft); }
+.ps-track-wrap input[type=range]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 0;
+  background: var(--homea-bone); border: 1.5px solid var(--homea-gold-deep); cursor: pointer; pointer-events: auto; }
+
+/* Nota de catálogo en migración (subcategorías aún sin piezas en línea) */
+.mig-note { border: 1px solid var(--border-strong); background: var(--surface);
+  padding: clamp(30px, 5vw, 56px) clamp(22px, 4vw, 48px); display: flex; flex-direction: column;
+  align-items: center; text-align: center; gap: 14px; }
+.mig-note h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(22px, 2.6vw, 30px); margin: 0; }
+.mig-note h3 i { font-style: italic; }
+.mig-note p { max-width: 560px; color: var(--fg-muted); font-size: 14px; line-height: 1.6; margin: 0; }
+.mig-cta { display: flex; gap: 26px; align-items: center; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -30,6 +146,7 @@
   </div>
 </div></div>
 
+<!-- Nav -->
 <nav class="site-nav"><div class="container">
   <a class="brand" href="home.html" aria-label="Inicio">
     <img src="assets/wordmark-black.png" alt="HOMEA Premium">
@@ -138,10 +255,8 @@
     <a href="b2b.html">Proyectos</a>
     <a href="ofertas.html">Ofertas</a>
     <a href="guias.html">Guías</a>
-  </div>
-  <div class="nav-right">
-    <a href="herramientas.html">Herramientas</a>
-    <a href="nosotros.html">Nosotros</a>
+    <a class="nav-sec" href="herramientas.html">Herramientas</a>
+    <a class="nav-sec" href="nosotros.html">Nosotros</a>
   </div>
   <div class="nav-icons" role="group" aria-label="Buscar, wishlist y carrito">
     <a class="nav-ic nav-ic-search" href="home.html" aria-label="Buscar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg></a>
@@ -150,120 +265,128 @@
   </div>
 </div></nav>
 
-<!-- PDP: la tabla de specs es el héroe — precisión es respeto -->
-<section class="sec tight" style="padding-top:40px"><div class="container">
-  <div class="crumbs" style="font-size:12px;color:var(--fg-muted);margin-bottom:36px">
-    <a href="home.html" style="color:var(--fg-muted);border-bottom:none">Inicio</a><span class="sep" style="color:var(--homea-gold);padding:0 .6em">·</span>
-    <a href="categoria-cocina-y-bar.html" style="color:var(--fg-muted);border-bottom:none">Cocina y Bar</a><span class="sep" style="color:var(--homea-gold);padding:0 .6em">·</span>
-    <span class="figures">Gaggenau DF480701</span>
+<!-- Hero compacto de subcategoría nivel 1 → directo al catálogo filtrable -->
+<header class="subhero">
+  <div class="subhero-bg"><img src="assets/photos/hero-sub1-tarjas-griferia-blanco.jpg" alt="Tarja y grifería premium Blanco en cubierta de cocina" style="object-position:center 50%" fetchpriority="high"></div>
+  <div class="subhero-scrim" aria-hidden="true"></div>
+  <div class="subhero-inner">
+    <nav class="subhero-crumbs" aria-label="Migas de pan"><a href="home.html">Inicio</a><span class="sep">·</span><a href="categoria-cocina-y-bar.html">Cocina y Bar</a><span class="sep">·</span><span aria-current="page">Tarjas y Grifería</span></nav>
+    <h1>Tarjas y <i>Grifería</i></h1>
+    <span class="subhero-meta">4 tipos <span class="dot">·</span> Blanco <span class="dot">·</span> Franke <span class="dot">·</span> Elkay <span class="dot">·</span> The Galley</span>
   </div>
+</header>
 
-  <div class="pdp">
-    <div class="gallery reveal-img">
-      <div class="main pdp-cutout"><button class="wl-heart" type="button" data-wl-id="DF480701" data-wl-brand="Gaggenau" data-wl-name="Lavavajillas Totalmente Integrado Push-to-Open 24&quot; — Serie 400" data-wl-spec="Serie 400 · 42 dB · zeolita · DF480701" data-wl-price="$6,163.52 USD + IVA" data-wl-img="assets/photos/gaggenau/gaggenau-df480701.png" data-wl-href="producto-df480701.html" aria-label="Guardar en wishlist" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.9 13a4.8 4.8 0 0 1 0-6.8 4.7 4.7 0 0 1 6.7 0l.4.4.4-.4a4.7 4.7 0 0 1 6.7 0 4.8 4.8 0 0 1 0 6.8Z"/></svg></button><img src="assets/photos/gaggenau/gaggenau-df480701.png" alt="Gaggenau Lavavajillas Totalmente Integrado Push-to-Open 24" — Serie 400 (DF480701)"></div>
-    </div>
-    <div class="info reveal">
-      <div class="eyebrow">Gaggenau · Lavavajillas</div>
-      <span class="rule-gold"></span>
-      <h1>Lavavajillas Totalmente Integrado Push-to-Open 24" <b>Serie 400</b></h1>
-      <p class="lead-serif">Secado con zeolita, 42 dB y apertura push-to-open para frentes sin tirador: el lavavajillas que desaparece en la cocina.</p>
-      <span class="price-big figures">$6,163.52<span class="currency">USD</span> <span class="price-note">+ IVA</span></span>
-      <p class="note figures" style="margin-top:-4px">≈ $107,430.15 MXN + IVA · FIX 17.43</p>
+<!-- Slider de tipos (subcategorías nivel 2 · patrón Artexa) -->
+<section class="subcat-band"><div class="container">
+  <div class="subcat-carousel">
+    <button type="button" class="subcat-arrow prev" data-scroll="-1" aria-label="Anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="6" y2="12"/><polyline points="12 6 6 12 12 18"/></svg></button>
+    <div class="subcat-strip" id="subcatStrip">
+    <a class="subcat" data-tipo="tarjas" href="?tipo=tarjas">
+      <span class="img"><img src="assets/photos/tarjas-y-griferia-blanco.png" alt="Tarjas"></span>
+      <span class="lbl">Tarjas</span>
+    </a>
+    <a class="subcat" data-tipo="griferia" href="?tipo=griferia">
+      <span class="img"><span class="ph"><span class="ph-inner">Grifería</span></span></span>
+      <span class="lbl">Grifería</span>
+    </a>
+    <a class="subcat" data-tipo="dispensadores-de-agua-tarja" href="?tipo=dispensadores-de-agua-tarja">
+      <span class="img"><img src="assets/photos/dispensadores-filtros-grifo-purificador.webp" alt="Dispensadores de Agua"></span>
+      <span class="lbl">Dispensadores de Agua</span>
+    </a>
+    <a class="subcat" data-tipo="accesorios-tarjas-griferia" href="?tipo=accesorios-tarjas-griferia">
+      <span class="img"><span class="ph"><span class="ph-inner">Accesorios de Tarjas &amp; Grifería</span></span></span>
+      <span class="lbl">Accesorios de Tarjas &amp; Grifería</span>
+    </a>
+  </div>
+    <button type="button" class="subcat-arrow next" data-scroll="1" aria-label="Siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="18" y2="12"/><polyline points="12 6 18 12 12 18"/></svg></button>
+  </div>
+</div></section>
 
-      <div class="spec" style="width:100%;margin-top:8px">
-        <div class="spec-row"><span class="spec-label">Marca</span><span class="spec-value figures">Gaggenau · Serie 400</span></div>
-        <div class="spec-row"><span class="spec-label">Medidas</span><span class="spec-value figures">59.8 × 81.7–87.7 × 55.0 cm · 24" · ADA</span></div>
-        <div class="spec-row"><span class="spec-label">Capacidad</span><span class="spec-value figures">13 servicios · hasta 23 copas</span></div>
-        <div class="spec-row"><span class="spec-label">Programas</span><span class="spec-value figures">8 + 4 opciones · Power desde 57 min · Sanitize</span></div>
-        <div class="spec-row"><span class="spec-label">Secado</span><span class="spec-value">Zeolita a baja temperatura (ideal cristal)</span></div>
-        <div class="spec-row"><span class="spec-label">Ruido</span><span class="spec-value figures">42 dB(A)</span></div>
-        <div class="spec-row"><span class="spec-label">Canastillas</span><span class="spec-value figures">3er nivel de cubiertos · Rackmatic ±5 cm</span></div>
-        <div class="spec-row"><span class="spec-label">Panelable</span><span class="spec-value figures">Push-to-open · frente hasta 8 kg</span></div>
-        <div class="spec-row"><span class="spec-label">Conectividad</span><span class="spec-value">Home Connect · proyección de tiempo en piso</span></div>
-        <div class="spec-row"><span class="spec-label">Eficiencia</span><span class="spec-value figures">ENERGY STAR · 240 kWh/año</span></div>
-        <div class="spec-row"><span class="spec-label">Alimentación</span><span class="spec-value figures">120 V · 1,440 W · clavija NEMA 5-15</span></div>
-        <div class="spec-row"><span class="spec-label">SKU</span><span class="spec-value figures">DF480701</span></div>
-        <div class="spec-row"><span class="spec-label">Disponibilidad</span><span class="spec-value">Bajo pedido · importación</span></div>
+<!-- PLP: filtros específicos de Tarjas y Grifería + grid -->
+<section class="sec tight" style="padding-top:48px"><div class="container">
+  <div class="plp">
+    <!-- Filtros (Shopify Search & Discovery: vendor / type / metafields / opciones de variante) -->
+    <aside class="filters">
+      <div class="fgroup"><h6>Tipo</h6>
+          <label data-tipo="tarjas"><input type="checkbox"> Tarjas</label>
+          <label data-tipo="griferia"><input type="checkbox"> Grifería</label>
+          <label data-tipo="dispensadores-de-agua-tarja"><input type="checkbox"> Dispensadores de Agua</label>
+          <label data-tipo="accesorios-tarjas-griferia"><input type="checkbox"> Accesorios de Tarjas &amp; Grifería</label>
       </div>
-
-      <div style="display:flex;gap:16px;margin-top:16px;flex-wrap:wrap">
-        <button class="btn btn-primary cart-add" type="button" data-cart-sku="DF480701" data-cart-vid="45827476127804" data-cart-name="Lavavajillas Totalmente Integrado Push-to-Open 24&quot; — Serie 400" data-cart-brand="Gaggenau" data-cart-spec="Serie 400 · 42 dB · zeolita" data-cart-mxn="107430.15" data-cart-usd="$6,163.52 USD + IVA" data-cart-img="assets/photos/gaggenau/gaggenau-df480701.png" data-cart-href="producto-df480701.html">Agregar al carrito</button>
-        <a class="btn btn-ghost" href="contacto.html">Cotizar con especialista</a>
+      <div class="fgroup"><h6>Marca</h6>
+        <label><input type="checkbox"> Blanco</label>
+        <label><input type="checkbox"> Franke</label>
+        <label><input type="checkbox"> Elkay</label>
+        <label><input type="checkbox"> The Galley</label>
+        <label><input type="checkbox"> Gessi</label>
+        <label><input type="checkbox"> Schock</label>
+        <label><input type="checkbox"> Dawn</label>
+        <a class="flink" href="marcas.html">Ver las 46 marcas →</a>
       </div>
-      <p class="note">Entrega coordinada con tu obra · Instalación certificada incluida en Querétaro.</p>
-      <p class="note">Compra directa en piloto · El IVA se calcula en el pago (checkout Shopify).</p>
+      <div class="fgroup"><h6>Gama</h6>
+        <label><input type="checkbox"> Premium</label>
+        <label><input type="checkbox"> Residencial</label>
+        <label><input type="checkbox"> Media</label>
+        <label><input type="checkbox"> Económica</label>
+      </div>
+      <div class="fgroup"><h6>Material</h6>
+        <label><input type="checkbox"> Acero inoxidable</label>
+        <label><input type="checkbox"> Granito compuesto</label>
+        <label><input type="checkbox"> Fireclay</label>
+        <label><input type="checkbox"> Latón</label>
+      </div>
+      <div class="fgroup"><h6>Instalación</h6>
+        <label><input type="checkbox"> Submontar</label>
+        <label><input type="checkbox"> Sobre cubierta</label>
+        <label><input type="checkbox"> Farmhouse / Apron</label>
+      </div>
+      <div class="fgroup"><h6>Color / Acabado</h6>
+        <div class="swatches">
+          <span class="sw" title="Acero inoxidable" style="background:linear-gradient(135deg,#d8d8d6,#aeb0b2)"></span>
+          <span class="sw" title="Negro" style="background:#1c1c1c"></span>
+          <span class="sw" title="Blanco" style="background:#f4f2ee"></span>
+          <span class="sw" title="Bronce / Latón" style="background:linear-gradient(135deg,#c9a26a,#8e6f3a)"></span>
+          <span class="sw" title="Cromo" style="background:linear-gradient(135deg,#e8eaec,#b9bec4)"></span>
+        </div>
+        <p class="fnote">Filtra por variantes disponibles (opción Color/Acabado del producto).</p>
+      </div>
+      <div class="fgroup"><h6>Precio <span style="font-weight:400;color:var(--fg-muted);letter-spacing:.08em">· MXN aprox.</span></h6>
+        <div class="price-slider" id="priceSlider">
+          <div class="ps-values figures"><span id="psMin">$0</span><span class="ps-sep">—</span><span id="psMax">$250,000+</span><span class="ps-cur">MXN</span></div>
+          <div class="ps-track-wrap">
+            <div class="ps-track"></div>
+            <div class="ps-fill" id="psFill"></div>
+            <input type="range" min="0" max="250000" step="5000" value="0" id="psLo" aria-label="Precio mínimo">
+            <input type="range" min="0" max="250000" step="5000" value="250000" id="psHi" aria-label="Precio máximo">
+          </div>
+        </div>
+        <p class="fnote">Filtra por el equivalente aproximado en pesos (metafield <em>filtros.precio_ref_mxn</em>). Cada pieza muestra su precio en su moneda de lista, sin IVA.</p>
+      </div>
+    </aside>
+    <div>
+      <div class="toolbar">
+        <span class="results figures" id="plpResults">0 piezas en línea · 4 tipos</span>
+        <select aria-label="Ordenar"><option>Relevancia</option><option>Precio ↑</option><option>Precio ↓</option><option>Novedades</option></select>
+      </div>
+      <div class="mig-note">
+        <div class="eyebrow">Catálogo en migración</div>
+        <h3>Las piezas de Tarjas y Grifería <i>están por publicarse</i>.</h3>
+        <p>Estamos migrando el catálogo completo (~25,000 piezas) a la nueva plataforma. Mientras tanto, un especialista te comparte hoy mismo modelos, precios y existencias de esta categoría.</p>
+        <div class="mig-cta">
+          <a class="btn btn-gold" href="contacto.html">Hablar con un especialista</a>
+          <a class="arrow-link" href="https://api.whatsapp.com/send/?phone=524461446318&amp;text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="plp_tarjas-y-griferia">Cotizar por WhatsApp <span class="ln"></span><span class="ar">→</span></a>
+        </div>
+      </div>
     </div>
   </div>
 </div></section>
 
-<!-- Asesoría de especificación -->
-<section class="sec tight on-greige"><div class="container">
-  <div class="split">
-    <div class="text reveal">
-      <div class="eyebrow">Especificación · Sin costo</div>
-      <span class="rule-gold"></span>
-      <h2>Esta pieza se especifica <i>con un experto</i>.</h2>
-      <p style="margin:0;color:var(--fg-muted)">Paneles sobremedida, ventilación, cargas eléctricas y bisagras: un asesor revisa tu plano antes de confirmar el pedido, para que llegue bien a la primera.</p>
-      <a class="arrow-link" href="contacto.html">Hablar con un asesor <span class="ln"></span><span class="ar">→</span></a>
-    </div>
-    <div class="imgw reveal-img" style="aspect-ratio:16/10"><img src="assets/photos/proyecto-1.jpg" alt="Integración panelable en encino, proyecto HOMEA"></div>
-  </div>
-</div></section>
-
-<!-- Relacionados -->
-<section class="sec"><div class="container">
-  <div class="sec-head-row">
-    <div class="sec-head">
-      <div class="eyebrow">Curaduría · Relacionados</div>
-      <span class="rule-gold"></span>
-      <h2>Completa la <b>cocina</b>.</h2>
-    </div>
-    <a class="arrow-link" href="categoria-cocina-y-bar.html">Ver Cocina y Bar <span class="ln"></span><span class="ar">→</span></a>
-  </div>
-  <div class="grid-3 reveal" style="margin-top:64px">
-    <a class="pcard" href="producto-vg295250ca.html">
-      <button class="wl-heart" type="button" data-wl-id="VG295250CA" aria-label="Guardar en wishlist" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.9 13a4.8 4.8 0 0 1 0-6.8 4.7 4.7 0 0 1 6.7 0l.4.4.4-.4a4.7 4.7 0 0 1 6.7 0 4.8 4.8 0 0 1 0 6.8Z"/></svg></button>
-      <div class="imgw cutout"><img src="assets/photos/gaggenau/gaggenau-vg295250ca.png" alt="Gaggenau VG295250CA"></div>
-      <div class="body">
-        <span class="brand">Gaggenau</span>
-        <h3>Parrilla de Gas Natural 5 Quemadores 36"</h3>
-        <span class="dotlist">Serie 200 <span class="dot">·</span> 36" <span class="dot">·</span> wok 18,800 BTU</span>
-        <div class="row"><span class="price-tag figures">$8,677.85<span class="currency">USD</span> <span class="price-note">+ IVA</span></span>
-          <span class="arrow-link">Ver pieza <span class="ln"></span><span class="ar">→</span></span></div>
-      </div>
-    </a>
-    <a class="pcard" href="producto-bop250612.html">
-      <button class="wl-heart" type="button" data-wl-id="BOP250612" aria-label="Guardar en wishlist" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.9 13a4.8 4.8 0 0 1 0-6.8 4.7 4.7 0 0 1 6.7 0l.4.4.4-.4a4.7 4.7 0 0 1 6.7 0 4.8 4.8 0 0 1 0 6.8Z"/></svg></button>
-      <div class="imgw cutout"><img src="assets/photos/gaggenau/gaggenau-bop250612.png" alt="Gaggenau BOP250612"></div>
-      <div class="body">
-        <span class="brand">Gaggenau</span>
-        <h3>Horno Empotrable Apertura Derecha 24"</h3>
-        <span class="dotlist">Serie 200 <span class="dot">·</span> 24" <span class="dot">·</span> pirolítico</span>
-        <div class="row"><span class="price-tag figures">$11,107.47<span class="currency">USD</span> <span class="price-note">+ IVA</span></span>
-          <span class="arrow-link">Ver pieza <span class="ln"></span><span class="ar">→</span></span></div>
-      </div>
-    </a>
-    <a class="pcard" href="producto-rb282705.html">
-      <button class="wl-heart" type="button" data-wl-id="RB282705" aria-label="Guardar en wishlist" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.9 13a4.8 4.8 0 0 1 0-6.8 4.7 4.7 0 0 1 6.7 0l.4.4.4-.4a4.7 4.7 0 0 1 6.7 0 4.8 4.8 0 0 1 0 6.8Z"/></svg></button>
-      <div class="imgw cutout"><img src="assets/photos/gaggenau/gaggenau-rb282705.png" alt="Gaggenau RB282705"></div>
-      <div class="body">
-        <span class="brand">Gaggenau</span>
-        <h3>Refrigerador Empotrable con Congelador Bottom Mount Home Connect 24"</h3>
-        <span class="dotlist">Serie 200 <span class="dot">·</span> panelable <span class="dot">·</span> 37 dB</span>
-        <div class="row"><span class="price-tag figures">$9,406.62<span class="currency">USD</span> <span class="price-note">+ IVA</span></span>
-          <span class="arrow-link">Ver pieza <span class="ln"></span><span class="ar">→</span></span></div>
-      </div>
-    </a>
-  </div>
-</div></section>
-
-<!-- CTA -->
 <section class="sec on-dark cta-band">
   <div class="glow"></div><div class="iso"></div>
   <div class="container"><div class="inner reveal">
-    <div class="eyebrow eyebrow-bright">Empecemos por escucharte</div>
-    <h2>¿Es la pieza correcta para tu cocina? <i>Veámoslo</i>.</h2>
-    <a class="btn btn-gold" href="contacto.html">Agendar asesoría</a>
+    <div class="eyebrow eyebrow-bright">¿No encuentras la pieza?</div>
+    <h2>25,000 piezas en catálogo. <i>Pregúntanos</i>.</h2>
+    <a class="btn btn-gold" href="contacto.html">Hablar con un especialista</a>
     <p>Respuesta promedio en 2 horas · Atención personal, sin call centers.</p>
   </div></div>
 </section>
@@ -277,7 +400,7 @@
       <span class="dotlist">Sub-Zero <span class="dot">·</span> Wolf <span class="dot">·</span> Miele <span class="dot">·</span> Thermador <span class="dot">·</span> Monogram <span class="dot">·</span> Viking</span>
     </div>
     <div class="lnk"><div class="f-eyebrow">Catálogo</div>
-      <a href="home.html">Cocina</a><a href="home.html">Refrigeración</a>
+      <a href="categoria-cocina-y-bar.html">Cocina y Bar</a><a href="home.html">Refrigeración</a>
       <a href="home.html">Bar &amp; Vinos</a><a href="home.html">Exterior</a>
       <a href="marcas.html">Marcas</a><a href="home.html">Outlet &amp; Ofertas</a></div>
     <div class="lnk"><div class="f-eyebrow">HOMEA</div>
@@ -286,7 +409,7 @@
       <a href="contacto.html">Contacto</a></div>
     <div class="lnk"><div class="f-eyebrow">Comprar con confianza</div>
       <a href="#">Formas de pago</a><a href="#">Financiamiento · MSI (Fase 2)</a>
-      <a href="#">Garantías e instalación</a><a href="#">Gastos de envío</a>
+      <a href="garantias-instalacion.html">Garantías e instalación</a><a href="#">Gastos de envío</a>
       <a href="#">Devoluciones</a><a href="marcas.html">Listas de precios</a></div>
   </div>
   <div class="foot-bottom">
@@ -297,9 +420,48 @@
 </div></footer>
 
 <a class="wa-float" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-track="whatsapp_click" data-label="wa_float"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg></a>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"Inicio","item":"https://www.homea.mx/"},
+ {"@type":"ListItem","position":2,"name":"Cocina y Bar","item":"https://www.homea.mx/productos/cocina-y-bar"},
+ {"@type":"ListItem","position":3,"name":"Tarjas y Grifería","item":"https://www.homea.mx/productos/cocina-y-bar/tarjas-y-griferia"}
+]}
+</script>
 <script src="v2.js?v=25"></script>
 <script src="wishlist.js?v=5"></script>
 <script src="cart.js?v=3"></script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Product", "name": "Lavavajillas Totalmente Integrado Push-to-Open 24\" — Serie 400", "sku": "DF480701", "mpn": "DF480701", "brand": {"@type": "Brand", "name": "Gaggenau"}, "image": "assets/photos/gaggenau/gaggenau-df480701.png", "description": "Lavavajillas totalmente integrado Gaggenau Serie 400 de 24 pulgadas con apertura push-to-open, secado con zeolita, 42 dB, 13 servicios y Home Connect.", "offers": {"@type": "Offer", "priceCurrency": "USD", "price": "6163.52", "availability": "https://schema.org/PreOrder", "url": "producto-df480701.html", "seller": {"@type": "Organization", "name": "HOMEA"}}}</script>
+<script>
+// Slider de precio (doble handle)
+(function(){
+  var lo = document.getElementById('psLo'), hi = document.getElementById('psHi');
+  if (!lo || !hi) return;
+  var fill = document.getElementById('psFill'), vMin = document.getElementById('psMin'), vMax = document.getElementById('psMax');
+  var MAX = parseInt(hi.max, 10);
+  function fmt(n){ return '$' + n.toLocaleString('en-US'); }
+  function paint(){
+    var a = Math.min(+lo.value, +hi.value), b = Math.max(+lo.value, +hi.value);
+    vMin.textContent = fmt(a);
+    vMax.textContent = b >= MAX ? fmt(MAX) + '+' : fmt(b);
+    fill.style.left = (a / MAX * 100) + '%';
+    fill.style.width = ((b - a) / MAX * 100) + '%';
+  }
+  lo.value = 0; hi.value = MAX; // estado inicial (evita la restauración de formulario del navegador)
+  lo.addEventListener('input', paint); hi.addEventListener('input', paint); paint();
+})();
+
+// ?tipo=<slug>: marca el tile y el checkbox del tipo correspondiente (deep-link desde nav/hero)
+(function(){
+  var tipo = new URLSearchParams(location.search).get('tipo');
+  if (!tipo) return;
+  var nombre = null;
+  document.querySelectorAll('[data-tipo]').forEach(function(el){
+    if (el.getAttribute('data-tipo') !== tipo) return;
+    if (el.classList.contains('subcat')) { el.classList.add('is-active'); }
+    else { var cb = el.querySelector('input'); if (cb) cb.checked = true; nombre = el.textContent.trim(); }
+  });
+  var r = document.getElementById('plpResults');
+  if (r && nombre) r.textContent += ' · tipo: ' + nombre;
+})();
+</script>
 </body>
 </html>

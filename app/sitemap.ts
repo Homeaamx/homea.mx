@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { allGuiasUrls } from "@/lib/guias";
-import { categoriaSlugs } from "@/lib/preview";
+import { categoriaSlugs, subcategoriaParams } from "@/lib/preview";
 import { absUrl } from "@/lib/site";
 
 // Páginas de marketing (front-end propio). Las de Guías y las de categoría se agregan
@@ -31,11 +31,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const subcategorias = subcategoriaParams().map(
+    ({ categoria, subcategoria }) => ({
+      url: absUrl(`/productos/${categoria}/${subcategoria}`),
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    })
+  );
+
   const guias = allGuiasUrls().map((path) => ({
     url: absUrl(path),
     changeFrequency: "weekly" as const,
     priority: path === "/guias/" ? 0.8 : 0.6,
   }));
 
-  return [...marketing, ...categorias, ...guias];
+  return [...marketing, ...categorias, ...subcategorias, ...guias];
 }
