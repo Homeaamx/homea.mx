@@ -126,7 +126,7 @@ PAGES = [
                 ("microondas", "Microondas", None, ""),
                 ("campanas", "Campanas", GG + "gaggenau-aw442720.png", ""),
                 ("cajones", "Cajones", None, ""),
-                ("cafeteras-empotrables", "Cafeteras", "assets/photos/miele-cafetera.jpg", "photo"),
+                ("cafeteras-empotrables", "Cafeteras", "assets/photos/subcat-tiles/cafeteras-empotrables-bosch.png", ""),
                 ("accesorios-coccion", "Accesorios de cocción", None, "")],
          marcas=["Wolf", "Gaggenau", "Thermador", "Miele", "Bertazzoni", "La Cornue", "Smeg"],
          extras=[("Combustible", ["Gas", "Eléctrico", "Dual", "Inducción"]),

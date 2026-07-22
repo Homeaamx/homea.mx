@@ -606,6 +606,9 @@
             subs.style.columnCount = cols;
             subs.style.width = (cols * COLW + (cols - 1) * GAP) + "px";
           }
+          /* Foto de tamaño ESTABLE entre categorías: solo el pane de columnas
+             fijas (Cocina y Bar) ensancha el detalle y encoge la foto. */
+          mega.classList.toggle("detail-wide", !!(subs && subs.classList.contains("is-fixed")));
         }
         if (featImg && img) { featImg.src = img; featImg.style.objectPosition = pos || "50% 50%"; }
         if (featLab && label) { featLab.innerHTML = label; }

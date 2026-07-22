@@ -151,9 +151,13 @@ html { scroll-behavior: smooth; }
   left: calc(50% - min(616px, 47vw)); transform: none; }
 /* Altura FIJA e idéntica en los dos estados (intro con la H y categoría activa),
    acotada al viewport para que nunca se salga. Evita el "salto" de tamaño al hacer hover. */
-.mega-flyout-main { display: grid; grid-template-columns: 248px auto minmax(300px, 1fr);
+.mega-flyout-main { display: grid; grid-template-columns: 248px minmax(0, 1fr) min(430px, 38vw);
   grid-template-rows: minmax(0, 1fr);
   height: min(588px, calc(100vh - 128px)); }
+/* Foto ESTABLE entre categorías: 430px (~⅓ del panel, retrato ~3:4) para todas.
+   Excepción: Cocina y Bar (.detail-wide, columnas fijas) necesita el ancho para
+   sus 3 columnas → el detalle manda y la foto se queda con el resto (~300px). */
+.mega-panel.detail-wide .mega-flyout-main { grid-template-columns: 248px auto minmax(300px, 1fr); }
 /* Colocación explícita: la intro (H de marca) se superpone sobre detalle+imagen
    y se ve al abrir; al pasar el cursor por una categoría se oculta (.cat-active). */
 .mega-flyout-main > .mega-rail    { grid-area: 1 / 1; }
@@ -210,21 +214,32 @@ html { scroll-behavior: smooth; }
               border-color var(--dur-fast) var(--ease-standard); }
 .mega-subcol a:hover { background: var(--homea-greige); color: var(--fg); border-left-color: var(--homea-gold); border-bottom-color: transparent; }
 /* Título de grupo como link (lleva a la página de subcategoría nivel 1).
-   Hover distintivo: oro profundo + subrayado que se llena una vez (1.6s) y queda lleno.
+   Hover distintivo: oro profundo + subrayado que se llena una vez (1.2s) y queda lleno.
    En reposo queda un segmento dorado de 28px sobre el hairline.
    border-left: 0 → anula el tick de los items (.mega-subcol a), que aquí sobra. */
 .mega-subcol h5 a { display: inline; font-size: inherit; color: inherit; padding: 0; margin: 0; line-height: inherit; border-left: 0; }
 .mega-subcol h5 a:hover { background: none; color: var(--homea-gold-deep); }
 .mega-subcol h5 { position: relative; }
-.mega-subcol h5::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 3px;
+.mega-subcol h5::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 2px;
   width: 28px; background: var(--homea-gold); pointer-events: none; }
-.mega-subcol h5:has(a:hover)::after { animation: megaFill 1.6s linear forwards; }
+.mega-subcol h5:has(a:hover)::after { animation: megaFill 1.2s linear forwards; }
 @keyframes megaFill { from { width: 28px; } to { width: 100%; } }
 @media (prefers-reduced-motion: reduce) {
   .mega-subcol h5:has(a:hover)::after { animation: none; width: 100%; }
 }
 .mega-all { display: inline-block; margin-top: auto; padding-top: 20px; font-family: var(--font-sans);
   font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-text); }
+/* Flecha fina dibujada (trazo 1.1px, no el glifo → de Montserrat): aparece al
+   hover deslizándose; hereda el color del link (oro AA → oro profundo). */
+.mega-all::after { content: ""; display: inline-block; width: 20px; height: 10px;
+  margin-left: 8px; vertical-align: -1px; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 10' fill='none' stroke='%23000' stroke-width='1.1'%3E%3Cpath d='M0 5h18M13.5 1l4.5 4-4.5 4'/%3E%3C/svg%3E") no-repeat center / contain;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 10' fill='none' stroke='%23000' stroke-width='1.1'%3E%3Cpath d='M0 5h18M13.5 1l4.5 4-4.5 4'/%3E%3C/svg%3E") no-repeat center / contain;
+  opacity: 0; transform: translateX(-6px);
+  transition: opacity var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard); }
+.mega-all:hover::after { opacity: 1; transform: translateX(0); }
+/* Sin el subrayado global de links: la flecha es el único gesto del hover. */
+.mega-all:hover { border-bottom-color: transparent; }
 /* Tarjetas de subcategoría — tile con foto + texto (estilo grid de categorías) */
 .mega-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .mega-card { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; background: var(--bg-greige); }
@@ -2074,3 +2089,21 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 
 /* Tiles de subcategoría: variante fotográfica (la foto llena el tile, sin blend) */
 .subcat .img img.photo { mix-blend-mode: normal; filter: none; object-fit: cover; height: 172px; width: 100%; max-width: 100%; }
+
+/* Anti-parpadeo del hover con lift: al elevarse la tarjeta (translateY(-4px))
+   su borde inferior deja un hueco de 4px; si el cursor está ahí se pierde el
+   :hover, la tarjeta baja, vuelve a entrar el cursor… y oscila. El ::after
+   devuelve esos píxeles al área sensible sin alterar el layout ni el diseño.
+   Solo existe durante :hover — un ::after permanente desbordaba el carril de
+   tipos (contenedor con scroll) y al arrastrarlo asomaba una banda greige. */
+.subcat, .help-tiles a, .client-card, .bene-card { position: relative; }
+.subcat:hover::after, .pcard:hover::after, .help-tiles a:hover::after,
+.client-card:hover::after, .bene-card:hover::after {
+  content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 5px;
+}
+.subcat:hover::after { height: 4px; }     /* exacto al lift: no desborda el carril */
+.bene-card:hover::after { height: 9px; }  /* esta levita 8px */
+
+/* El carril de tipos solo se desplaza en horizontal (evita que el guard, o
+   cualquier desborde de 1-2px, lo vuelva desplazable en vertical) */
+.subcat-strip { overflow-y: hidden; }
