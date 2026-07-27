@@ -35,6 +35,7 @@ Estado: 🔵 pendiente · 🟡 en curso · ✅ hecho
 - [x] Interacciones: hero rotativo, nav claro→oscuro, reveals, filtros, tablas de specs.
 - [x] **Preview offline autocontenido** (`preview/offline/`) para revisión sin servidor.
 - [ ] Ajustes finales de diseño según feedback de Carla (en curso).
+- [ ] ⭐ **Rehacer la página de Garantías** (`/garantias-instalacion`) — pendiente marcado por Carla el 2026-07-27. Ya está enlazada desde el nav (botón "Garantías"), pero el contenido/diseño se queda corto: hero con mucho aire vacío, banda "¿Caso abierto o una urgencia?" en gris plano fuera del sistema v2 y formulario de solicitud sin trabajar. Falta definir con Carla el alcance (qué debe comunicar y qué hace el formulario).
 
 > 🔁 **Recordatorio de respaldo (Carla):** aunque el sitio **aún NO está publicado**, **subir `test` → `main` de vez en cuando** (`git push origin test:main`) para mantener `main` como copia segura del avance. Hacerlo después de cada bloque de cambios del preview.
 

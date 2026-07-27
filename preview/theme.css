@@ -44,17 +44,24 @@ html { scroll-behavior: smooth; }
   transition: background var(--dur-med) var(--ease-standard),
               border-color var(--dur-med) var(--ease-standard);
 }
-.site-nav .container { height: 100%; display: flex; align-items: center; gap: 40px; }
+/* Márgenes de aire de la banda: marca→enlaces y enlaces→íconos. Ceden un poco
+   antes que el espacio entre botones (que se mantiene constante). */
+.site-nav .container { height: 100%; display: flex; align-items: center; gap: clamp(28px, 2.4vw, 34px); }
 .site-nav .brand { border-bottom: none; display: flex; align-items: center; margin-right: 8px; flex-shrink: 0; }
 .site-nav .btn { flex-shrink: 0; }
 .site-nav .brand img {
   height: 34px; width: auto;
   transition: filter var(--dur-med) var(--ease-standard);
 }
-.nav-links { display: flex; gap: 30px; flex: 1; align-items: center; height: 100%; }
+/* 8 botones: hueco idéntico entre todos (no fluido) para que la banda se lea
+   pareja; el aire sobrante se va al hueco enlaces→íconos vía flex: 1.
+   OJO: el .container tope 1240px con padding 4vw → a MÁS ancho de pantalla,
+   MENOS ancho útil; por eso el tipo del nav es 11.5px/0.10em (no 12/0.14) —
+   con 8 botones la fila no cabía y empujaba los íconos fuera del margen. */
+.nav-links { display: flex; justify-content: space-between; gap: 20px; flex: 1; align-items: center; height: 100%; }
 .nav-links > a, .nav-links .has-mega > span, .nav-links .has-mega > a {
-  font-family: var(--font-sans); font-weight: 600; font-size: 12px;
-  letter-spacing: var(--tracking-wider); text-transform: uppercase;
+  font-family: var(--font-sans); font-weight: 600; font-size: 11.5px;
+  letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--fg); border-bottom: 2px solid transparent; padding-bottom: 4px;
   cursor: pointer; transition: color var(--dur-fast) var(--ease-standard);
 }
@@ -1732,6 +1739,9 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 /* Tablet: Herramientas/Showroom se ocultan (como antes vivían en .nav-right) */
 @media (min-width: 721px) and (max-width: 1080px) {
   .nav-links .nav-sec { display: none; }
+  /* Con sólo 5 botones sobra ancho: repartirlo estiraría los huecos a ~68px.
+     Se empaquetan a la izquierda y el aire sobrante queda antes de los íconos. */
+  .nav-links { justify-content: flex-start; }
 }
 @media (max-width: 1080px) {
   .nav-right { display: none; }

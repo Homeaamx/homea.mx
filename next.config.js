@@ -28,13 +28,31 @@ const nextConfig = {
       "/garantias-instalacion.html": "/garantias-instalacion",
       "/guias.html": "/guias/",
     };
+    // Familia "agua" (docs/PLAN-REDIRECTS-MIGRACION.md §5.b): la taxonomía separó
+    // purificadores/filtros · monomandos de agua filtrada · despachadores de garrafón,
+    // que en OXATIS vivían mezclados. 301 explícito (Next emite 308 con permanent).
+    // Nota: el destino de despachadores apunta a la macro mientras Electrodomésticos
+    // menores no tenga páginas de subcat.1 (evita 404).
+    const oxatisAgua = {
+      "/filtros-de-agua-c102x3166686": "/productos/cocina-y-bar/filtros-y-purificadores-de-agua",
+      "/dispensadores-de-agua-c102x2874855": "/productos/cocina-y-bar/filtros-y-purificadores-de-agua",
+      "/despachadores-de-agua-garrafon-c102x3177457": "/productos/electrodomesticos-menores",
+      "/monomando-para-filtro-de-agua-c106x4342728":
+        "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos-de-agua-filtrada",
+    };
+
     return [
       ...Object.entries(legacyHtml).map(([source, destination]) => ({
         source,
         destination,
         permanent: true,
       })),
-      // El mapa OXATIS 1:1 (docs/PLAN-REDIRECTS-MIGRACION.md) se añade en Fase 4.
+      ...Object.entries(oxatisAgua).map(([source, destination]) => ({
+        source,
+        destination,
+        statusCode: 301,
+      })),
+      // El resto del mapa OXATIS 1:1 (docs/PLAN-REDIRECTS-MIGRACION.md) se añade en Fase 4.
     ];
   },
 };

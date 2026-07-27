@@ -109,6 +109,32 @@
 
 ---
 
+## 5.b Familia "agua": redirects derivados de la reestructura de taxonomía (2026-07-27)
+
+> Decisión de Carla: el nodo "Dispensadores de Agua" estaba duplicado (subcat.2 de Tarjas y
+> Grifería **y** subcat.1 propia). Al revisar el catálogo real de Oxatis + GSC resultaron ser
+> **tres productos distintos**: purificadores/filtros, monomandos de agua filtrada (grifería) y
+> despachadores de garrafón (electrodoméstico menor). La taxonomía se reordenó en consecuencia
+> (`GUIAS/taxonomia-guias.json`) y de ahí salen estos 4 redirects.
+
+| Old URL (path) | Clics | Impresiones | → Nueva URL |
+|---|---|---|---|
+| `/filtros-de-agua-c102x3166686` | 62 | 6,909 | `/productos/cocina-y-bar/filtros-y-purificadores-de-agua` |
+| `/despachadores-de-agua-garrafon-c102x3177457` | 181 | 14,945 | `/productos/electrodomesticos-menores/despachadores-de-agua` |
+| `/dispensadores-de-agua-c102x2874855` | 0 | — | `/productos/cocina-y-bar/filtros-y-purificadores-de-agua` |
+| `/monomando-para-filtro-de-agua-c106x4342728` | 0 | — | `/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos-de-agua-filtrada` |
+
+Contexto de tráfico de la familia completa (GSC, 16 meses, top-1000 de páginas → son pisos):
+**purificadores y filtros 678 clics / 43,333 impr.** · **despachadores de garrafón 209 / 15,818** ·
+**monomandos de agua filtrada 69 / 1,678**. Las ~18 fichas de producto de esta familia (Mabe
+PMO050X2BB0 = 200 clics, Whirlpool WK3901Q = 55) llevan su 301 1:1 dentro del mapa general.
+
+⚠️ El destino de `/despachadores-de-agua-...` asume que Electrodomésticos menores tendrá páginas
+de subcat.1 (hoy solo Cocina y Bar y Exterior las tienen). Mientras no exista, el redirect debe
+apuntar a `/productos/electrodomesticos-menores` para no generar un 404.
+
+---
+
 ## 6. Implementación en Shopify
 
 1. Construir el **CSV de redirects** completo (columnas: `Redirect from`, `Redirect to`) a partir del sitemap + reglas del §3, una vez existan los handles (Fase 4).

@@ -1262,9 +1262,9 @@
        "rutaFiltros": "/guias/cocina-y-bar/tarjas-y-griferia/griferia/"
       },
       {
-       "nombre": "Dispensadores de Agua",
-       "slug": "dispensadores-de-agua-tarja",
-       "filtro": "/productos/dispensadores-de-agua-tarja/"
+       "nombre": "Monomandos de agua filtrada y caliente",
+       "slug": "monomandos-de-agua-filtrada",
+       "filtro": "/productos/monomandos-de-agua-filtrada/"
       },
       {
        "nombre": "Accesorios de Tarjas & Grifería",
@@ -1359,24 +1359,19 @@
      ]
     },
     {
-     "slug": "dispensadores-y-filtros-de-agua",
-     "nombre": "Dispensadores & Filtros de agua",
+     "slug": "filtros-y-purificadores-de-agua",
+     "nombre": "Filtros y Purificadores de Agua",
      "esLeaf": false,
-     "rutaGuias": "/guias/cocina-y-bar/dispensadores-y-filtros-de-agua/",
+     "rutaGuias": "/guias/cocina-y-bar/filtros-y-purificadores-de-agua/",
      "subcategorias2": [
       {
-       "nombre": "Dispensadores de agua",
-       "slug": "dispensadores-de-agua",
-       "filtro": "/productos/dispensadores-de-agua/"
-      },
-      {
-       "nombre": "Filtros de agua",
-       "slug": "filtros-de-agua",
-       "filtro": "/productos/filtros-de-agua/",
+       "nombre": "Purificadores de agua",
+       "slug": "purificadores-de-agua",
+       "filtro": "/productos/purificadores-de-agua/",
        "filtros": [
         {
          "nombre": "Filtro de Ósmosis Inversa",
-         "filtro": "/productos/filtros-de-agua/?f=filtro-de-osmosis-inversa",
+         "filtro": "/productos/purificadores-de-agua/?f=filtro-de-osmosis-inversa",
          "ficha": {
           "grupo": "tipo",
           "diagrama": "filtro-osmosis",
@@ -1386,32 +1381,67 @@
         },
         {
          "nombre": "Tanque con Filtro",
-         "filtro": "/productos/filtros-de-agua/?f=tanque-con-filtro",
+         "filtro": "/productos/purificadores-de-agua/?f=tanque-con-filtro",
          "ficha": {
           "grupo": "tipo",
           "diagrama": "filtro-tanque",
           "descripcion": "Tanque presurizado con cartucho: flujo constante y mantenimiento simple.",
           "specs": "Tanque + cartucho"
          }
+        },
+        {
+         "nombre": "Bajo cubierta",
+         "filtro": "/productos/purificadores-de-agua/?instalacion=bajo-cubierta",
+         "ficha": {
+          "grupo": "instalacion",
+          "diagrama": "filtro-bajo-cubierta",
+          "descripcion": "Oculto dentro del mueble de la tarja: solo se ve la llave de agua purificada.",
+          "specs": "Bajo tarja"
+         }
+        },
+        {
+         "nombre": "De mesa",
+         "filtro": "/productos/purificadores-de-agua/?instalacion=de-mesa",
+         "ficha": {
+          "grupo": "instalacion",
+          "diagrama": "filtro-de-mesa",
+          "descripcion": "Se apoya en la cubierta y no requiere obra: purificación sin instalar nada.",
+          "specs": "Sobre cubierta"
+         }
+        },
+        {
+         "nombre": "De piso",
+         "filtro": "/productos/purificadores-de-agua/?instalacion=de-piso",
+         "ficha": {
+          "grupo": "instalacion",
+          "diagrama": "filtro-de-piso",
+          "descripcion": "Mueble independiente con tanque: abastece un punto de servicio completo.",
+          "specs": "Libre, de piso"
+         }
         }
        ],
-       "rutaFiltros": "/guias/cocina-y-bar/dispensadores-y-filtros-de-agua/filtros-de-agua/"
+       "rutaFiltros": "/guias/cocina-y-bar/filtros-y-purificadores-de-agua/purificadores-de-agua/"
+      },
+      {
+       "nombre": "Filtros y repuestos",
+       "slug": "filtros-y-repuestos",
+       "filtro": "/productos/filtros-y-repuestos/"
       }
      ],
      "guias": [
       {
        "titulo": "Guía de filtración de agua para tu cocina",
        "tipo": "guia-de-compra",
-       "ruta": "/guias/cocina-y-bar/dispensadores-y-filtros-de-agua/guia-de-compra/guia-filtracion-agua/",
+       "ruta": "/guias/cocina-y-bar/filtros-y-purificadores-de-agua/guia-de-compra/guia-filtracion-agua/",
        "resumen": "Ósmosis inversa, carbón y sistemas bajo tarja.",
        "secciones": [
         {
          "titulo": "Sistemas de ósmosis inversa",
-         "filtro": "/productos/filtros-de-agua/?tipo=osmosis-inversa"
+         "filtro": "/productos/purificadores-de-agua/?tipo=osmosis-inversa"
         },
         {
-         "titulo": "Dispensadores de agua caliente/fría",
-         "filtro": "/productos/dispensadores-de-agua/?caracteristica=caliente-fria"
+         "titulo": "Monomandos de agua filtrada y caliente",
+         "filtro": "/productos/monomandos-de-agua-filtrada/?caracteristica=caliente-fria"
         }
        ]
       }
@@ -1644,6 +1674,12 @@
      "slug": "accesorios-cocina-pequenos",
      "esLeaf": true,
      "filtro": "/productos/accesorios-cocina-pequenos/"
+    },
+    {
+     "nombre": "Despachadores de Agua (Garrafón)",
+     "slug": "despachadores-de-agua",
+     "esLeaf": true,
+     "filtro": "/productos/despachadores-de-agua/"
     }
    ],
    "guias": [

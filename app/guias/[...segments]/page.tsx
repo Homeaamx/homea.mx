@@ -97,7 +97,7 @@ const HERO_FOTO_SUB1: Record<string, { src: string; pos?: string; flip?: boolean
   lavavajillas: { src: "/assets/photos/hero-sub1-lavavajillas-bosch.webp", pos: "center 50%" },
   "tarjas-y-griferia": { src: "/assets/photos/hero-sub1-tarjas-griferia-blanco.jpg", pos: "center 50%" },
   trituradores: { src: "/assets/photos/hero-sub1-trituradores-insinkerator.jpg", pos: "center 100%" },
-  "dispensadores-y-filtros-de-agua": { src: "/assets/photos/hero-sub1-dispensadores-delta.jpg", pos: "center 50%" },
+  "filtros-y-purificadores-de-agua": { src: "/assets/photos/hero-sub1-filtros-purificadores-agua.jpg", pos: "center 50%" },
 };
 
 // --------------------------------------------------------------------------

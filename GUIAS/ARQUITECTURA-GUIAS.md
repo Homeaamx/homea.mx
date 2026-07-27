@@ -95,15 +95,15 @@ Sub2: Lavavajillas.
 Guías: Guía de compra de lavavajillas *(guía-de-compra)* · Mejores lavavajillas silenciosos *(top-picks)* · Cómo cuidar tu lavavajillas *(mantenimiento)*.
 
 **Tarjas y Grifería** → `/guias/cocina-y-bar/tarjas-y-griferia/`
-Sub2: Tarjas · Grifería · Dispensadores de Agua · Accesorios de Tarjas & Grifería.
+Sub2: Tarjas · Grifería · Monomandos de agua filtrada y caliente · Accesorios de Tarjas & Grifería.
 Guías: Guía de compra de tarjas *(guía-de-compra)* · Cómo elegir tu grifería *(como-elegir)*.
 
 **Trituradores** → `/guias/cocina-y-bar/trituradores/`
 Sub2: Trituradores.
 Guías: Guía de compra de triturador *(guía-de-compra)* · ¿Vale la pena un triturador? *(comparativa)*.
 
-**Dispensadores & Filtros de agua** → `/guias/cocina-y-bar/dispensadores-y-filtros-de-agua/`
-Sub2: Dispensadores de agua · Filtros de agua.
+**Filtros y Purificadores de Agua** → `/guias/cocina-y-bar/filtros-y-purificadores-de-agua/`
+Sub2: Purificadores de agua · Filtros y repuestos.
 Guías: Guía de filtración de agua *(guía-de-compra)*.
 
 ### B. Exterior — `/guias/exterior/` · *(3 niveles · guías en Sub1)*
