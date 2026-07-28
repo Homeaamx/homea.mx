@@ -56,6 +56,16 @@ Estado: 🔵 pendiente · 🟡 en curso · ✅ hecho
 - [ ] Crear **app personalizada / canal Headless** en Shopify → **token privado** Storefront API.
 - [ ] **Proteger con contraseña** la tienda `homeashop.mx` (no indexable) — *Opción A, pendiente de activar.*
 - [ ] Traer productos vía Storefront API (empezando por los 3 de prueba).
+- [ ] ⭐ **Conectar el PLP de Refrigeradores a productos reales** (pendiente Carla, 2026-07-29).
+  La página `/productos/cocina-y-bar/refrigeracion/refrigeradores` ya está completa
+  de interacción: el mosaico de subcat.3 marca el tipo elegido, refleja el filtro
+  en la barra lateral, lleva el estado en la URL (`?f=<tipo>`) y baja solo al
+  catálogo. **Lo único que falta son los productos**: hoy la rejilla muestra
+  placeholders. Al cargar el catálogo hay que (a) sustituir los placeholders por
+  las tarjetas reales de Shopify vía Storefront API, (b) traducir `?f=<tipo>` al
+  filtro de Shopify (metafield `facetas.instalacion` / `facetas.diseno` según el
+  eje del tipo) y (c) actualizar el contador "N piezas en línea". El resto de los
+  filtros de la barra (`lib/filtrosPlp.ts`) se conectan en el mismo paso.
 
 ### 3.3 SEO técnico (lo construimos nosotros)
 - [ ] **Redirects 301** del mapa → `next.config.js`/`vercel.json`.

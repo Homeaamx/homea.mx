@@ -42,10 +42,13 @@ function readPreview(file: string): string {
 /** Un archivo .html del preview → su ruta en el sitio. */
 function mapTarget(file: string): string {
   if (file.startsWith(SUBCATEGORIA_PREFIX)) {
-    const [cat, sub] = file
+    // 2 segmentos → Subcategoría 1; 3 → Subcategoría 2 con página propia
+    // (subcategoria-cocina-y-bar--refrigeracion--refrigeradores.html →
+    //  /productos/cocina-y-bar/refrigeracion/refrigeradores).
+    const segmentos = file
       .slice(SUBCATEGORIA_PREFIX.length)
       .split(SUBCATEGORIA_SEP);
-    return `/productos/${cat}/${sub}`;
+    return `/productos/${segmentos.join("/")}`;
   }
   if (file.startsWith(CATEGORIA_PREFIX))
     return `/productos/${file.slice(CATEGORIA_PREFIX.length)}`;

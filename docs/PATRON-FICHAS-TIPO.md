@@ -54,10 +54,12 @@ categoría a medio definir nunca se rompe.
 }
 ```
 
-- **`grupo`** — fila donde vive la tarjeta. Valores actuales (taxonomía interna de
-  Carla): `tipo` ("Por tipo": cómo se instala — De Piso, Empotrado) y `estilo`
-  ("Por estilo": formato/configuración — Parejas, French Door, Duplex, Bottom/Top
-  Mount, Columna, Glass Door, 4/5 puertas, Bajo cubierta). Orden de render:
+- **`grupo`** — fila donde vive la tarjeta. Valores actuales: `tipo` (se muestra
+  como **"Tipo de instalación"**: De Piso, Empotrado, Counter Depth) y `estilo`
+  (se muestra como **"Diseño"**: Parejas, French Door, Duplex, Bottom/Top Mount,
+  Columna, Glass Door, 1 puerta, 4/5 puertas, Bajo cubierta). Las etiquetas son
+  las mismas que los filtros del PLP (`lib/filtrosPlp.ts`) — guía y filtro deben
+  nombrar igual el mismo eje. Orden de render:
   tipo → estilo; dentro de cada grupo se respeta el orden del JSON. Si una
   categoría nueva necesita otro eje, añadirlo a `GrupoFicha` (types) y a `GRUPOS`
   (FilterShowcase) con su etiqueta.
@@ -128,3 +130,20 @@ categoría a medio definir nunca se rompe.
 - `prefers-reduced-motion`: sin animación de puertas ni lift.
 - La tarjeta completa es UN enlace (`CtaProducto`, fallback WhatsApp contextual
   mientras `PLP_READY=false`).
+
+## 8. El mismo patrón en el PLP (2026-07-28)
+
+La página de producto `/productos/<macro>/<sub1>/<tipo>` reusa estos diagramas en
+versión **compacta** (`components/TipoGrid.tsx`, prefijo `.tpg-`): solo diagrama +
+nombre, agrupados por los mismos dos ejes. Es el equivalente al mosaico visual de
+AJ Madison (`/refrigerators/`), pero en el sistema v2.
+
+**Regla anti-canibalización:** la descripción y las specs viven SOLO en la guía. El
+PLP no repite ese copy — cierra con un enlace a la guía. Así las dos páginas no
+compiten por la misma consulta (regla de oro del proyecto: no perder SEO).
+La anatomía CSS del diagrama se comparte vía `:is(.tfk-diagram, .tpg-diagram)`;
+no se duplica ninguna regla.
+
+**Nomenclatura (Carla, 2026-07-28):** estos tipos son la **Subcategoría 3** de la
+taxonomía — son filtro y, cuando la Subcategoría 2 lo amerite, página propia. Ver
+`GUIAS/ARQUITECTURA-GUIAS.md` §2.

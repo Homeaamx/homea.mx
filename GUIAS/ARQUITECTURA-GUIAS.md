@@ -12,7 +12,7 @@ GUÍAS no es un blog suelto: es un **embudo editorial**. Cada guía educa al usu
 
 ---
 
-## 2. Jerarquía de 3 niveles (identificación corregida)
+## 2. Jerarquía de niveles (identificación corregida)
 
 ```
 MACROCATEGORÍA      →  SUBCATEGORÍA 1            →  SUBCATEGORÍA 2
@@ -23,6 +23,18 @@ agrupación del hub     "categoría para guías"       tipo de producto / leaf d
 - **Macrocategoría** (10): Cocina y Bar · Exterior · Electrodomésticos Menores · Lavandería · Baños · Minisplits · Vapor y Sauna · Wellness · Recubrimientos y Superficies · Chimeneas & Calentadores.
 - **Subcategoría 1**: las categorías bajo cada macro (Refrigeración, Cocción, Lavavajillas…). **Aquí se anclan las guías** cuando la rama llega a Subcategoría 2.
 - **Subcategoría 2**: el tipo de producto (Refrigeradores, Estufas…). Es el **leaf de filtro**: a esto enlazan las secciones de cada guía.
+
+- **Subcategoría 3** *(decisión Carla, 2026-07-28)*: los **tipos** dentro de una
+  Subcategoría 2 compleja. En Refrigeradores son 14, en dos ejes:
+  **Tipo de instalación** (Piso · Empotrado · Counter Depth) y **Diseño**
+  (Parejas · French Door · Duplex · Bottom Mount · Top Mount · Columna ·
+  Glass Door · 1 puerta · 4 puertas · 5 puertas · Bajo cubierta).
+  Son a la vez **filtros** del PLP y **candidatos a página propia**: cuando una
+  Subcategoría 2 es compleja, se le crea su página
+  (`/productos/{macro}/{sub1}/{sub2}`) con el mosaico visual de sus Subcategorías 3
+  — ver `docs/PATRON-FICHAS-TIPO.md` §8. Mientras esas páginas no existan, cada
+  tipo enlaza como filtro (`?f={slug}`) de su Subcategoría 2; la ruta reservada
+  para cuando tengan página es `/productos/{macro}/{sub1}/{sub2}/{sub3}`.
 
 **Algunas ramas no llegan a Subcategoría 2.** En esos casos (Electrodomésticos Menores, Lavandería, Baños, Minisplits, Vapor y Sauna, Wellness, Recubrimientos y Superficies, Chimeneas & Calentadores), las **Subcategorías 1 son los leaves de filtro** y las **guías se anclan en la Macrocategoría**.
 

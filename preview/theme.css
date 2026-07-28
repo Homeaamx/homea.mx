@@ -112,9 +112,12 @@ html { scroll-behavior: smooth; }
 }
 
 /* ---------- Mega menú · Marcas (3 columnas A–Z) -------------------------- */
+/* Cabe completo en el viewport: el ancho da más columnas (menos renglones) y el
+   max-height es la red de seguridad si el catálogo de marcas sigue creciendo. */
 .mega-panel.mega-brands {
-  width: min(1180px, 95vw);
+  width: min(1280px, 94vw);
   padding: 24px 40px 28px;
+  max-height: calc(100vh - 148px); overflow-y: auto;
 }
 .mega-brands-head {
   display: flex; justify-content: space-between; align-items: baseline; gap: 24px;
@@ -122,11 +125,14 @@ html { scroll-behavior: smooth; }
 }
 .mega-brands-head .eyebrow { color: var(--accent-text); margin: 0; }
 .mega-brands-head .mega-all { margin-top: 0; padding-top: 0; }
-.mega-brands-cols { column-count: 4; column-gap: 32px; }
+/* column-width en vez de column-count: el navegador mete tantas columnas como
+   quepan (6 en escritorio, 5 en ventanas angostas) sin cortar nunca un nombre
+   largo tipo "AMERICAN STANDARD" (147px de texto + 18px de padding). */
+.mega-brands-cols { column-count: auto; column-width: 160px; column-gap: 20px; }
 .mega-brands-cols a {
   display: block; break-inside: avoid; border-bottom: none;
   border-left: 2px solid transparent;
-  padding: 5px 10px 5px 8px; white-space: nowrap;
+  padding: 3px 10px 3px 8px; white-space: nowrap;
   font-family: var(--font-sans); font-weight: 500; font-size: 11.5px;
   letter-spacing: .06em; text-transform: uppercase; color: var(--fg);
   transition: color var(--dur-fast) var(--ease-standard),
@@ -209,9 +215,18 @@ html { scroll-behavior: smooth; }
 .mega-subcols.is-fixed .mega-col { display: contents; }
 .mega-subcols.is-fixed .mega-col > .mega-subcol { margin-top: 0; }
 .mega-subcols.is-fixed .mega-col > .mega-subcol:last-child { margin-bottom: 0; }
-/* Reserva 2 líneas en los encabezados de la fila inferior para que la línea
-   bajo el texto quede alineada aunque "Dispensadores & Filtros de agua" envuelva. */
-.mega-subcols.is-fixed .mega-col > .mega-subcol:last-child h5 { min-height: 46px; }
+/* Encabezados a la misma altura entre columnas: se reserva el alto del título más
+   largo de cada fila para que la línea dorada y el primer item queden alineados
+   aunque el nombre envuelva. Fila 1 → 2 renglones ("Tarjas y Monomandos");
+   fila 2 → 3 renglones ("Purificadores y Despachadores de Agua").
+   Un renglón mide 19.5px (12.5px · 1.56) + 7px de padding-bottom.
+   Si cambian los nombres del menú, revisar estos dos valores. */
+.mega-subcols.is-fixed .mega-col > .mega-subcol:first-child h5 { min-height: 46px; }
+.mega-subcols.is-fixed .mega-col > .mega-subcol:last-child h5 { min-height: 66px; }
+/* El texto se centra en el alto reservado: así un título de un renglón queda a la
+   misma altura que el renglón central del título largo de su fila, en vez de
+   pegarse arriba y dejar el hueco antes de la línea dorada. */
+.mega-subcols.is-fixed .mega-col > .mega-subcol h5 { display: flex; align-items: center; }
 .mega-subcol h5 { font-family: var(--font-sans); font-size: 12.5px; font-weight: 700;
   letter-spacing: .14em; text-transform: uppercase; color: var(--accent-text);
   margin: 0 0 8px; padding-bottom: 7px; border-bottom: 1px solid var(--border); }

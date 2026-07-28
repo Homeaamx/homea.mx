@@ -57,6 +57,58 @@ const DIAGRAMAS: Record<string, JSX.Element> = {
     </>
   ),
 
+  /* Counter Depth: fondo al ras de la cubierta. Lo que lo distingue no es el
+     frente sino que NO sobresale: se dibujan las cubiertas laterales alineadas
+     con el frente del aparato (a diferencia de "empotrado", sin gabinete arriba). */
+  "counter-depth": (
+    <>
+      <line x1="12" y1="124" x2="128" y2="124" className="fl" />
+      <rect x="16" y="66" width="28" height="58" className="cab" />
+      <rect x="96" y="66" width="28" height="58" className="cab" />
+      <line x1="16" y1="66" x2="44" y2="66" className="ln" />
+      <line x1="96" y1="66" x2="124" y2="66" className="ln" />
+      <rect x="44" y="14" width="52" height="110" className="fb" />
+      <g className="in">
+        <rect x="46" y="16" width="48" height="66" className="zone" />
+        <line x1="52" y1="40" x2="88" y2="40" />
+        <line x1="52" y1="62" x2="88" y2="62" />
+        <rect x="46" y="86" width="48" height="36" className="zone" />
+        <line x1="52" y1="104" x2="88" y2="104" />
+      </g>
+      <g className="dr hl">
+        <rect x="44" y="14" width="52" height="70" />
+        <line x1="90" y1="34" x2="90" y2="56" />
+      </g>
+      <g className="dw">
+        <rect x="44" y="84" width="52" height="40" />
+        <line x1="60" y1="98" x2="80" y2="98" />
+      </g>
+    </>
+  ),
+
+  /* 1 puerta (todo refrigerador): una sola puerta de piso a techo y el interior
+     entero refrigerando —sin zona de congelador—. Esquinas redondeadas y patas
+     a la vista: el perfil retro tipo Smeg, que es como se reconoce este formato. */
+  "una-puerta": (
+    <>
+      <line x1="30" y1="124" x2="110" y2="124" className="fl" />
+      <rect x="44" y="10" width="52" height="106" rx="14" className="fb" />
+      <g className="in">
+        <rect x="47" y="13" width="46" height="100" rx="12" className="zone" />
+        <line x1="53" y1="38" x2="87" y2="38" />
+        <line x1="53" y1="58" x2="87" y2="58" />
+        <line x1="53" y1="78" x2="87" y2="78" />
+        <line x1="53" y1="98" x2="87" y2="98" />
+      </g>
+      <g className="dr hl">
+        <rect x="44" y="10" width="52" height="106" rx="14" />
+        <line x1="74" y1="47" x2="90" y2="47" />
+      </g>
+      <line x1="53" y1="116" x2="53" y2="124" className="ln" />
+      <line x1="87" y1="116" x2="87" y2="124" className="ln" />
+    </>
+  ),
+
   columna: (
     <>
       <line x1="34" y1="124" x2="106" y2="124" className="fl" />
@@ -1593,10 +1645,18 @@ const DIAGRAMAS: Record<string, JSX.Element> = {
   ),
 };
 
-export default function FiltroDiagrama({ tipo }: { tipo: string }) {
+export default function FiltroDiagrama({
+  tipo,
+  children,
+}: {
+  tipo: string;
+  /** Capas extra dentro del mismo <svg> (contenido del PLP, ver ContenidoTipo). */
+  children?: React.ReactNode;
+}) {
   return (
     <svg viewBox="0 0 140 130" aria-hidden="true" focusable="false">
       {DIAGRAMAS[tipo] ?? DIAGRAMAS.generic}
+      {children}
     </svg>
   );
 }

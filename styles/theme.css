@@ -128,9 +128,12 @@ html { scroll-behavior: smooth; }
 }
 
 /* ---------- Mega menú · Marcas (3 columnas A–Z) -------------------------- */
+/* Cabe completo en el viewport: el ancho da más columnas (menos renglones) y el
+   max-height es la red de seguridad si el catálogo de marcas sigue creciendo. */
 .mega-panel.mega-brands {
-  width: min(1180px, 95vw);
+  width: min(1280px, 94vw);
   padding: 24px 40px 28px;
+  max-height: calc(100vh - 148px); overflow-y: auto;
 }
 .mega-brands-head {
   display: flex; justify-content: space-between; align-items: baseline; gap: 24px;
@@ -138,11 +141,14 @@ html { scroll-behavior: smooth; }
 }
 .mega-brands-head .eyebrow { color: var(--accent-text); margin: 0; }
 .mega-brands-head .mega-all { margin-top: 0; padding-top: 0; }
-.mega-brands-cols { column-count: 4; column-gap: 32px; }
+/* column-width en vez de column-count: el navegador mete tantas columnas como
+   quepan (6 en escritorio, 5 en ventanas angostas) sin cortar nunca un nombre
+   largo tipo "AMERICAN STANDARD" (147px de texto + 18px de padding). */
+.mega-brands-cols { column-count: auto; column-width: 160px; column-gap: 20px; }
 .mega-brands-cols a {
   display: block; break-inside: avoid; border-bottom: none;
   border-left: 2px solid transparent;
-  padding: 5px 10px 5px 8px; white-space: nowrap;
+  padding: 3px 10px 3px 8px; white-space: nowrap;
   font-family: var(--font-sans); font-weight: 500; font-size: 11.5px;
   letter-spacing: .06em; text-transform: uppercase; color: var(--fg);
   transition: color var(--dur-fast) var(--ease-standard),
@@ -225,9 +231,18 @@ html { scroll-behavior: smooth; }
 .mega-subcols.is-fixed .mega-col { display: contents; }
 .mega-subcols.is-fixed .mega-col > .mega-subcol { margin-top: 0; }
 .mega-subcols.is-fixed .mega-col > .mega-subcol:last-child { margin-bottom: 0; }
-/* Reserva 2 líneas en los encabezados de la fila inferior para que la línea
-   bajo el texto quede alineada aunque "Dispensadores & Filtros de agua" envuelva. */
-.mega-subcols.is-fixed .mega-col > .mega-subcol:last-child h5 { min-height: 46px; }
+/* Encabezados a la misma altura entre columnas: se reserva el alto del título más
+   largo de cada fila para que la línea dorada y el primer item queden alineados
+   aunque el nombre envuelva. Fila 1 → 2 renglones ("Tarjas y Monomandos");
+   fila 2 → 3 renglones ("Purificadores y Despachadores de Agua").
+   Un renglón mide 19.5px (12.5px · 1.56) + 7px de padding-bottom.
+   Si cambian los nombres del menú, revisar estos dos valores. */
+.mega-subcols.is-fixed .mega-col > .mega-subcol:first-child h5 { min-height: 46px; }
+.mega-subcols.is-fixed .mega-col > .mega-subcol:last-child h5 { min-height: 66px; }
+/* El texto se centra en el alto reservado: así un título de un renglón queda a la
+   misma altura que el renglón central del título largo de su fila, en vez de
+   pegarse arriba y dejar el hueco antes de la línea dorada. */
+.mega-subcols.is-fixed .mega-col > .mega-subcol h5 { display: flex; align-items: center; }
 .mega-subcol h5 { font-family: var(--font-sans); font-size: 12.5px; font-weight: 700;
   letter-spacing: .14em; text-transform: uppercase; color: var(--accent-text);
   margin: 0 0 8px; padding-bottom: 7px; border-bottom: 1px solid var(--border); }
@@ -2176,3 +2191,40 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 /* El carril de tipos solo se desplaza en horizontal (evita que el guard, o
    cualquier desborde de 1-2px, lo vuelva desplazable en vertical) */
 .subcat-strip { overflow-y: hidden; }
+
+
+/* ---------------------------------------------------------------------------
+   Hero de página de producto (.subhero) — plantilla de las páginas de PRODUCTOS.
+   Vivía solo en el <style> inline de cada preview/*.html; se sube aquí para que
+   las páginas nativas de Next (p. ej. el PLP de Subcategoría 2) usen EXACTAMENTE
+   la misma plantilla sin duplicar reglas. Copia literal del preview: si cambia
+   allá, cambia aquí.
+   --------------------------------------------------------------------------- */
+.subhero { position: relative; background: var(--homea-espresso); overflow: hidden; }
+.subhero-bg { position: absolute; inset: 0; }
+.subhero-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.subhero-scrim { position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(10,9,7,.66) 0%, rgba(10,9,7,.34) 26%, rgba(10,9,7,.10) 52%, rgba(10,9,7,.26) 100%); }
+.subhero-inner { position: relative; z-index: 2; min-height: clamp(300px, 40vh, 440px);
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: center; text-align: center;
+  padding: clamp(72px, 10vh, 120px) 24px clamp(28px, 4.5vh, 48px); }
+.subhero-crumbs { font-family: var(--font-sans); font-size: 11px; letter-spacing: var(--tracking-wider);
+  text-transform: uppercase; color: rgba(247,243,236,.68); margin-bottom: clamp(6px, 1.4vh, 14px); display: block; }
+.subhero-crumbs a { color: rgba(247,243,236,.68); border-bottom: none; transition: color var(--dur) var(--ease); }
+.subhero-crumbs a:hover { color: var(--homea-gold-light); }
+.subhero-crumbs .sep { color: var(--homea-gold); padding: 0 .55em; }
+.subhero-crumbs [aria-current] { color: rgba(247,243,236,.92); }
+.subhero h1 { font-family: var(--font-display); color: var(--homea-bone); font-weight: 400;
+  font-size: clamp(34px, 5vw, 68px); line-height: 1.02; letter-spacing: -0.01em; margin: 0;
+  text-shadow: 0 2px 30px rgba(0,0,0,.5); }
+.subhero h1 i { font-style: italic; }
+.subhero-meta { display: inline-block; margin-top: clamp(10px, 1.8vh, 18px); font-family: var(--font-sans);
+  font-weight: 500; font-size: 11.5px; letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  color: rgba(247,243,236,.74); text-shadow: 0 1px 10px rgba(0,0,0,.55); }
+.subhero-meta .dot { color: var(--homea-gold); padding: 0 .45em; }
+.subhero-meta .it { white-space: nowrap; }
+.subhero-meta::before, .subhero-meta::after { content: ""; display: inline-block; width: 24px; height: 1px;
+  background: var(--homea-gold); vertical-align: middle; }
+.subhero-meta::before { margin-right: 12px; }
+.subhero-meta::after { margin-left: 12px; }
+@media (max-width: 640px) { .subhero-meta::before, .subhero-meta::after { display: none; } }

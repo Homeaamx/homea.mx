@@ -183,33 +183,41 @@
 .tfk-card:hover .tfk-arrow::after { color: var(--accent-text); }
 
 /* — Diagrama: anatomía y animación de puertas — */
-.tfk-diagram .fb { fill: var(--homea-bone); stroke: var(--homea-espresso); stroke-width: 1.5; }
-.tfk-diagram .dr rect, .tfk-diagram .dw rect { fill: var(--homea-bone); stroke: var(--homea-espresso); stroke-width: 1.5; }
-.tfk-diagram .dr line, .tfk-diagram .dw line { stroke: var(--homea-espresso); stroke-width: 1.5; stroke-linecap: round; }
-.tfk-diagram .dr, .tfk-diagram .dw {
+:is(.tfk-diagram, .tpg-diagram) .fb { fill: url(#dgm-acero); stroke: var(--dgm-canto); stroke-width: 1.5; }
+:is(.tfk-diagram, .tpg-diagram) .dr rect, :is(.tfk-diagram, .tpg-diagram) .dw rect { fill: url(#dgm-acero); stroke: var(--dgm-canto); stroke-width: 1.5; }
+:is(.tfk-diagram, .tpg-diagram) .dr line, :is(.tfk-diagram, .tpg-diagram) .dw line { stroke: var(--dgm-manija); stroke-width: 2; stroke-linecap: round; }
+:is(.tfk-diagram, .tpg-diagram) .dr, :is(.tfk-diagram, .tpg-diagram) .dw {
   transform-box: fill-box;
   transition: transform 550ms var(--ease-reveal);
 }
-.tfk-diagram .hl { transform-origin: left center; }
-.tfk-diagram .hr { transform-origin: right center; }
-.tfk-card:hover .hl, .tfk-card:hover .hr { transform: scaleX(0.13); }
-.tfk-card:hover .dw { transform: translateY(7px); }
-.tfk-diagram .in { opacity: 0; transition: opacity var(--dur-slow) var(--ease-standard) 80ms; }
-.tfk-card:hover .in { opacity: 1; }
-.tfk-diagram .in .zone { fill: var(--homea-gold); opacity: 0.25; }
-.tfk-diagram .in line { stroke: var(--accent-text); stroke-width: 1.2; opacity: 0.7; }
-.tfk-diagram .fl { stroke: var(--homea-espresso); stroke-width: 1; opacity: 0.3; }
-.tfk-diagram .cab { stroke: var(--homea-espresso); stroke-width: 1; opacity: 0.35; stroke-dasharray: 3 3; fill: none; }
-.tfk-diagram .glass { fill: none; stroke: var(--homea-espresso); stroke-width: 1; opacity: 0.55; }
-.tfk-diagram .glass-shelf { stroke-width: 1 !important; opacity: 0.45; }
-.tfk-diagram .ln { fill: none; stroke: var(--homea-espresso); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+:is(.tfk-diagram, .tpg-diagram) .hl { transform-origin: left center; }
+:is(.tfk-diagram, .tpg-diagram) .hr { transform-origin: right center; }
+:is(.tfk-card, .tpg-card):hover .hl, :is(.tfk-card, .tpg-card):hover .hr { transform: scaleX(0.13); }
+:is(.tfk-card, .tpg-card):hover .dw { transform: translateY(7px); }
+:is(.tfk-diagram, .tpg-diagram) .in { opacity: 0; transition: opacity var(--dur-slow) var(--ease-standard) 80ms; }
+:is(.tfk-card, .tpg-card):hover .in { opacity: 1; }
+:is(.tfk-diagram, .tpg-diagram) .in .zone {
+  fill: url(#dgm-cavidad); opacity: 1;
+  stroke: var(--dgm-repisa); stroke-width: 0.6; stroke-opacity: 0.45;
+  filter: url(#dgm-hueco);
+}
+/* Repisas: canto de cristal — trazo frío con reflejo blanco debajo. */
+:is(.tfk-diagram, .tpg-diagram) .in line {
+  stroke: var(--dgm-repisa); stroke-width: 2; opacity: 0.95; stroke-linecap: butt;
+  filter: drop-shadow(0 0.8px 0 rgba(255, 255, 255, 0.95));
+}
+:is(.tfk-diagram, .tpg-diagram) .fl { stroke: var(--homea-espresso); stroke-width: 1; opacity: 0.3; }
+:is(.tfk-diagram, .tpg-diagram) .cab { stroke: var(--homea-espresso); stroke-width: 1; opacity: 0.35; stroke-dasharray: 3 3; fill: none; }
+:is(.tfk-diagram, .tpg-diagram) .glass { fill: none; stroke: var(--homea-espresso); stroke-width: 1; opacity: 0.55; }
+:is(.tfk-diagram, .tpg-diagram) .glass-shelf { stroke-width: 1 !important; opacity: 0.45; }
+:is(.tfk-diagram, .tpg-diagram) .ln { fill: none; stroke: var(--homea-espresso); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 /* Tapa que se levanta al hover (arcones, asadores, campana retráctil). */
-.tfk-diagram .lid { transform-box: fill-box; transition: transform 550ms var(--ease-reveal); }
-.tfk-card:hover .lid { transform: translateY(-8px); }
+:is(.tfk-diagram, .tpg-diagram) .lid { transform-box: fill-box; transition: transform 550ms var(--ease-reveal); }
+:is(.tfk-card, .tpg-card):hover .lid { transform: translateY(-8px); }
 /* Revelados oro adicionales: trazos (agua/vapor/flamas) y aros (quemadores/hielo). */
-.tfk-diagram .in path { stroke: var(--accent-text); fill: none; stroke-width: 1.2; opacity: 0.7; }
-.tfk-diagram .in .ring { fill: none; stroke: var(--accent-text); stroke-width: 1.5; opacity: 0.8; }
-.tfk-diagram .in circle.zone, .tfk-diagram .in rect.zone { stroke: none; }
+:is(.tfk-diagram, .tpg-diagram) .in path { stroke: var(--accent-text); fill: none; stroke-width: 1.2; opacity: 0.7; }
+:is(.tfk-diagram, .tpg-diagram) .in .ring { fill: none; stroke: var(--accent-text); stroke-width: 1.5; opacity: 0.8; }
+:is(.tfk-diagram, .tpg-diagram) .in circle.zone, :is(.tfk-diagram, .tpg-diagram) .in rect.zone { stroke: none; }
 
 /* Táctil (sin hover): specs siempre visibles; el diagrama descansa cerrado. */
 @media (hover: none) {
@@ -217,11 +225,11 @@
 }
 /* Movimiento reducido: sin animación de puertas ni lift; specs visibles. */
 @media (prefers-reduced-motion: reduce) {
-  .tfk-card, .tfk-diagram .dr, .tfk-diagram .dw, .tfk-diagram .lid, .tfk-diagram .in,
+  :is(.tfk-card, .tpg-card), :is(.tfk-diagram, .tpg-diagram) .dr, :is(.tfk-diagram, .tpg-diagram) .dw, :is(.tfk-diagram, .tpg-diagram) .lid, :is(.tfk-diagram, .tpg-diagram) .in,
   .tfk-meta, .tfk-arrow { transition: none; }
-  .tfk-card:hover { transform: none; }
-  .tfk-card:hover .hl, .tfk-card:hover .hr, .tfk-card:hover .dw,
-  .tfk-card:hover .lid { transform: none; }
+  :is(.tfk-card, .tpg-card):hover { transform: none; }
+  :is(.tfk-card, .tpg-card):hover .hl, :is(.tfk-card, .tpg-card):hover .hr, :is(.tfk-card, .tpg-card):hover .dw,
+  :is(.tfk-card, .tpg-card):hover .lid { transform: none; }
 }
 
 /* Migas de pan sobre fondo claro, encima de "Explora por categoría". */
@@ -389,3 +397,143 @@
   .guide-grid, .category-cards { grid-template-columns: 1fr; }
   .guide-hero-icon { display: none; }
 }
+
+/* ---------------------------------------------------------------------------
+   TipoGrid — mosaico visual de tipos en el PLP (/productos/<macro>/<sub1>/<tipo>).
+   Versión compacta del patrón "Planos de cocina": el mismo diagrama de línea,
+   sin descripción ni specs (esas viven en la guía). Prefijo .tpg-
+   --------------------------------------------------------------------------- */
+.tpg-sec { padding-top: 44px; }
+.tpg-group + .tpg-group { margin-top: 40px; }
+.tpg-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 20px;
+  margin: 0 0 18px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+}
+.tpg-label { margin: 0; }
+.tpg-count { font-size: 12px; color: var(--fg-muted); }
+.tpg-grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+}
+.tpg-card {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 18px 12px 16px; background: var(--surface);
+  border: 1px solid var(--border); text-decoration: none;
+  transition: transform var(--dur-med) var(--ease-standard),
+              border-color var(--dur-med) var(--ease-standard),
+              box-shadow var(--dur-med) var(--ease-standard);
+}
+.tpg-card:hover {
+  transform: translateY(-4px); border-color: var(--homea-gold);
+  box-shadow: var(--shadow-md);
+}
+.tpg-diagram { display: block; }
+.tpg-diagram svg { height: 115px; width: auto; display: block; }
+.tpg-name {
+  font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--fg);
+  text-align: center; line-height: 1.35;
+}
+.tpg-card:hover .tpg-name { color: var(--accent-text); }
+.tpg-guia { margin: 34px 0 0; font-size: 14px; color: var(--fg-muted); }
+/* La anatomía y la animación del diagrama se comparten con las fichas de Guías
+   (bloque .tfk-diagram / .tfk-card, arriba): el mosaico del PLP hereda las
+   mismas puertas que se abren, sin duplicar una sola regla. */
+/* Nota de filtro sin valores fijos (Precio, Marca) en la barra de filtros. */
+.fnote { font-size: 12.5px; line-height: 1.5; color: var(--fg-muted); }
+
+/* ---------------------------------------------------------------------------
+   Diagramas realistas — acero inoxidable + cavidad iluminada (Carla, 2026-07-28)
+   Referencia: puerta de columna Thermador y interior Bosch side-by-side.
+   El silueteado sigue siendo de línea (doctrina de precisión v2); lo que cambia
+   es el material: puertas de acero cepillado y, al abrir, un interior blanco
+   iluminado con repisas de cristal en vez del relleno oro.
+   Los <stop> de los degradados (components/DiagramaDefs.tsx) toman color aquí.
+   --------------------------------------------------------------------------- */
+:root {
+  --dgm-acero-1: #A9AEB3;   /* banda oscura del cepillado */
+  --dgm-acero-2: #E8EAEC;   /* reflejo */
+  --dgm-acero-3: #C2C7CC;   /* banda media */
+  --dgm-acero-4: #F2F4F5;   /* brillo central */
+  --dgm-canto:   #6E7479;   /* canto/perfil del aparato */
+  --dgm-manija:  #7C8288;   /* jaladera cromada */
+  --dgm-luz:     #FFFFFF;   /* LED del techo de la cavidad */
+  --dgm-frio:    #F1F5F8;   /* pared blanca iluminada */
+  --dgm-fondo:   #D9E0E5;   /* fondo de la cavidad, más frío */
+  --dgm-repisa:  #9FB0BB;   /* canto de las repisas de cristal */
+  --dgm-cristal: #A8C4D6;       /* puerta de cristal: azulado, no acero */
+  --dgm-cristal-canto: #7C9CB2; /* perfil de la puerta de cristal */
+}
+.dgm-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+#dgm-acero .a1 { stop-color: var(--dgm-acero-1); }
+#dgm-acero .a2 { stop-color: var(--dgm-acero-2); }
+#dgm-acero .a3 { stop-color: var(--dgm-acero-3); }
+#dgm-acero .a4 { stop-color: var(--dgm-acero-4); }
+#dgm-cavidad .c1 { stop-color: var(--dgm-luz); }
+#dgm-cavidad .c2 { stop-color: var(--dgm-frio); }
+#dgm-cavidad .c3 { stop-color: var(--dgm-fondo); }
+#dgm-vidrio .v1 { stop-color: var(--dgm-luz); stop-opacity: 0.9; }
+#dgm-vidrio .v2 { stop-color: var(--dgm-repisa); stop-opacity: 0.5; }
+#dgm-vitrina .t1 { stop-color: #EAF3F8; }
+#dgm-vitrina .t2 { stop-color: #CFE1EC; }
+#dgm-vitrina .t3 { stop-color: #A9C6D8; }
+#dgm-hueco .sombra { flood-color: #56646C; flood-opacity: 0.42; }
+/* Cristal (puertas Glass Door, charolas): translúcido sobre la cavidad. */
+:is(.tfk-diagram, .tpg-diagram) .glass { stroke: var(--dgm-canto); opacity: 0.5; }
+:is(.tfk-diagram, .tpg-diagram) .in .ring { stroke: var(--dgm-repisa); }
+:is(.tfk-diagram, .tpg-diagram) .in path { stroke: var(--dgm-repisa); }
+
+/* ---------------------------------------------------------------------------
+   PLP · capas exclusivas del mosaico de PRODUCTOS (Carla, 2026-07-28).
+   NO aplican en Guías: todo va scoped a .tpg-.
+   .cnt = contenido que explica el tipo, revelado junto con el interior.
+   (La barra de ancho y la vista de planta se probaron y se retiraron 2026-07-29.)
+   --------------------------------------------------------------------------- */
+.tpg-diagram { position: relative; }
+/* 1 · Contenido interior --------------------------------------------------- */
+.tpg-diagram .cnt { opacity: 0; transition: opacity var(--dur-slow) var(--ease-standard) 140ms; }
+.tpg-card:hover .cnt { opacity: 1; }
+.tpg-diagram .cnt .pieza { fill: var(--dgm-luz); stroke: var(--dgm-repisa); stroke-width: 0.7; }
+.tpg-diagram .cnt .canto { stroke: var(--dgm-repisa); stroke-width: 1.4; }
+.tpg-diagram .cnt .bandeja { fill: var(--dgm-frio); stroke: var(--dgm-repisa); stroke-width: 0.7; opacity: 0.9; }
+/* La zona flex es el rasgo que define a 4 y 5 puertas → única nota de oro. */
+.tpg-diagram .cnt .flex { fill: var(--homea-gold); fill-opacity: 0.22; stroke: var(--accent-text); stroke-width: 0.8; }
+@media (hover: none) {
+  /* Táctil: sin hover → el contenido del interior va siempre visible. */
+  .tpg-diagram .cnt { opacity: 1; transition: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tpg-diagram .cnt { transition: none; }
+}
+
+/* Glass Door: SOLO el vidrio cambia de tono. El cuerpo y el marco de la puerta
+   siguen en acero como todos los demás (regla Carla, 2026-07-29); lo que
+   distingue al tipo es el paño de cristal: se ve a través de él el interior
+   iluminado con tinte frío, y las repisas se leen detrás. */
+.tpg-diagram.es-cristal .dr rect.glass {
+  fill: url(#dgm-vitrina); fill-opacity: 1;
+  stroke: var(--dgm-cristal-canto); stroke-width: 1;
+}
+.tpg-diagram.es-cristal .glass-shelf { stroke: var(--dgm-cristal-canto); opacity: 0.75; }
+
+/* Tipo seleccionado en el mosaico del PLP: tiene que quedar EVIDENTE cuál se
+   eligió, porque el catálogo filtrado queda más abajo, fuera de pantalla. */
+.tpg-card.is-active {
+  border-color: var(--homea-gold); background: var(--homea-greige);
+  box-shadow: inset 0 0 0 1px var(--homea-gold);
+}
+.tpg-card.is-active .tpg-name { color: var(--accent-text); }
+.tpg-quitar {
+  font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--accent-text);
+  opacity: .75;
+}
+/* Placeholders del catálogo mientras no hay productos cargados. */
+.pcard--ph { pointer-events: none; }
+.pcard--ph .imgw { aspect-ratio: 1 / 1; max-height: 240px; width: 100%; }
+.pcard--ph .body { display: flex; flex-direction: column; gap: 9px; padding: 16px 16px 22px; }
+.ph-line { display: block; height: 10px; width: 100%; background: var(--homea-greige); }
+.ph-line--md { width: 70%; }
+.ph-line--sm { width: 40%; }
+.plp-aviso { margin: 30px 0 0; font-size: 13px; color: var(--fg-muted); }
+.plp-aviso .arrow-link { margin-left: 6px; }

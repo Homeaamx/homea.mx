@@ -12,11 +12,15 @@
 import type { FiltroProducto, GrupoFicha } from "@/types/guias";
 import CtaProducto from "./CtaProducto";
 import FiltroDiagrama from "./FiltroDiagrama";
+import DiagramaDefs from "./DiagramaDefs";
 import FilterList from "./FilterList";
 
+// Las etiquetas son EXACTAMENTE los nombres de los filtros del PLP (tabla de
+// filtros de Carla, 2026-07-28): la guía y el filtro deben nombrar igual el
+// mismo eje para que el usuario reconozca dónde está parado.
 const GRUPOS: { key: GrupoFicha; label: string }[] = [
-  { key: "tipo", label: "Por tipo" },
-  { key: "estilo", label: "Por estilo" },
+  { key: "tipo", label: "Tipo de instalación" },
+  { key: "estilo", label: "Diseño" },
 ];
 
 interface Props {
@@ -32,6 +36,7 @@ export default function FilterShowcase({ filtros, contexto }: Props) {
 
   return (
     <div className="tfk">
+      <DiagramaDefs />
       {GRUPOS.map(({ key, label }) => {
         const grupo = conFicha.filter((f) => f.ficha!.grupo === key);
         if (grupo.length === 0) return null;
