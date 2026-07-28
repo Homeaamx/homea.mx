@@ -1,0 +1,68 @@
+CAMPO	NIVEL	DESTINO EN SHOPIFY	QUIÉN LO LLENA	REGLA / FORMATO	EJEMPLO — Refrigerador 36" acero inoxidable con máquina de hielo
+— BLOQUE A · IDENTIFICACIÓN —					
+SKU_MODELO	OBLIGATORIO	Variant SKU	Equipo	Clave del fabricante, tal cual. Única. Sin espacios ni guiones inventados.	CL3650SD/S/T
+CLAVE_SAE	OBLIGATORIO	Metafield custom.clave_sae	Equipo	Clave con la que el producto vive en SAE. Es el puente pedido↔facturación.	SUB-CL3650
+MARCA	OBLIGATORIO	Vendor	Equipo	Nombre exacto de la marca como aparece en la página de Marcas.	Sub-Zero
+EAN_UPC	OPCIONAL	Variant Barcode	Equipo	Solo si el proveedor lo da.	
+— BLOQUE B · CLASIFICACIÓN (define dónde aparece en el menú) —					
+MACROCATEGORIA	OBLIGATORIO	Tag + colección madre	Equipo	Una sola. De las 11 del mega-menú.	Cocina y Bar
+SUBCATEGORIA_1	OBLIGATORIO	Tag + colección	Equipo	Una sola. Nivel 1 de la taxonomía.	Refrigeración
+TIPO	OBLIGATORIO	Product Type + colección hija	Equipo	UNO SOLO (regla anti-duplicados). Nivel 2 de la taxonomía.	Refrigeradores
+CATEGORIA_SHOPIFY	OBLIGATORIO	Product Category (taxonomía estándar)	Yo	La asigno yo desde el TIPO; el equipo solo confirma. Sirve para Google Shopping y metafields automáticos.	Home & Garden > Kitchen & Dining > Kitchen Appliances > Refrigerators
+SERIE_COLECCION	IMPORTANTE	Metafield specs.serie + tag	Equipo	Serie/línea de la marca. Es filtro en el sitio.	Classic
+GAMA	OBLIGATORIO	Metafield facetas.gama	Yo	Sale de TABLA-MARCA-GAMA (por marca). Premium / Media / Residencial / Económica.	Premium
+TAGS_EXTRA	OPCIONAL	Tags	Equipo	Solo cruces especiales, formato faceta:valor. Ej: agua-filtrada, refaccion, requiere-kit, outlet.	requiere-kit
+— BLOQUE C · CONTENIDO —					
+TITULO	OBLIGATORIO	Title	Yo (equipo valida)	Reglas GUIA-TITULOS: [Tipo][Instalación][rasgo clave][configuración][medida]. SIN marca. Pulgadas con ". Title Case. Apertura Izquierda/Derecha (nunca 'bisagra'). Sin SKU.	Refrigerador de Piso Side-by-Side con Máquina de Hielo y Despachador 36"
+GANCHO_1_FRASE	OBLIGATORIO	Metafield homea.lead	Equipo	Una frase, máx. 160 caracteres, comercial, sin adjetivos vacíos. Es lo primero que se lee en la ficha.	Dos compresores independientes y máquina de hielo integrada, tras un frente de acero inoxidable de 36".
+DESCRIPCION_LARGA	OBLIGATORIO	Body (HTML)	Equipo	Párrafo comercial + bullets + medidas. SÍ menciona marca y serie. Incluye requisitos de instalación. Semilla: descripción larga de SAE + PDF de la marca.	Refrigerador Sub-Zero de la Serie Classic... (3-5 párrafos)
+DESTACADOS_5	OBLIGATORIO	Metafield specs.destacados	Equipo	Exactamente 5 bullets, uno por línea (o separados por |). Beneficio, no spec cruda.	Máquina de hielo integrada en el congelador | Doble sistema de refrigeración... 
+TABLA_SPECS	OBLIGATORIO	Metafield specs.tabla	Equipo	Pares Concepto = Dato, separados por punto y coma. Mínimo: Serie, Modelo, Tipo, Ancho, Dimensiones, Nicho, Capacidad, Instalación, Eléctrico, Certificaciones, Incluye.	Serie = Classic; Modelo = CL3650SD/S/T; Ancho nominal = 36" (91.4 cm); ...
+REQUISITOS_INSTALACION	OBLIGATORIO	Body (HTML) + tag requiere-kit	Equipo	Kits, paneles, jaladeras, ducto, voltaje, toma de agua. Si requiere algo para funcionar, va aquí SIEMPRE.	Requiere toma de agua de 1/4"; jaladera y zoclo se venden por separado.
+SKUS_COMPLEMENTARIOS	IMPORTANTE	Metafield complementary_products	Equipo	SKUs separados por coma. Kits obligatorios, paneles, jaladeras, filtros de agua de repuesto.	7042287, 7025216
+SEO_TITULO	OPCIONAL	SEO title	Yo	Lo genero del título + marca + medida si el equipo no lo pone.	
+SEO_DESCRIPCION	OPCIONAL	SEO description	Yo	Lo genero del gancho.	
+— BLOQUE D · MULTIMEDIA —					
+IMAGEN_PRINCIPAL	OBLIGATORIO	Media (posición 1)	Equipo	Packshot del producto, fondo blanco o transparente, mín. 2000px. Nombre de archivo descriptivo en español-SEO, sin acentos, con guiones.	refrigerador-sub-zero-classic-36-acero-inoxidable-maquina-hielo.png
+ALT_IMAGEN_PRINCIPAL	OBLIGATORIO	Media alt text	Equipo	Describe lo que se ve, incluye marca y medida. No repetir el título tal cual.	Refrigerador Sub-Zero Classic de 36 pulgadas en acero inoxidable con despachador
+IMAGENES_ADICIONALES	IMPORTANTE	Media (posición 2+)	Equipo	Nombres de archivo separados por coma, en el orden en que deben salir: ambiente, interior, detalle, dibujo técnico.	...-ambiente-cocina.jpg, ...-interior-cajones.jpg, ...-dibujo-tecnico.png
+VIDEO_URL	OPCIONAL	Media (video)	Equipo	URL de YouTube/Vimeo oficial de la marca.	
+FICHA_TECNICA_PDF	IMPORTANTE	Metafield homea.ficha_pdf	Equipo	URL o nombre del PDF oficial. Es la fuente que sustenta las specs.	subzero-cl3650sd-spec-sheet.pdf
+— BLOQUE E · PRECIO —					
+PRECIO_LISTA	OBLIGATORIO	Variant Price	Equipo	En su MONEDA ORIGINAL, sin convertir. Solo número, punto decimal, sin símbolo ni comas.	14285.00
+MONEDA	OBLIGATORIO	Tag 'Moneda USD|MXN' + metafield custom.moneda	Equipo	USD o MXN. Los USD no van al checkout: operan como Cotizar.	USD
+IVA_INCLUIDO	OBLIGATORIO	Metafield facetas.iva	Equipo	Sí / No. Las listas USD normalmente son + IVA.	No
+PRECIO_ANTERIOR	OPCIONAL	Compare-at price	Equipo	Solo si hay promoción real.	
+COSTO	OPCIONAL	Cost per item	Equipo	Costo de compra. No se muestra al público.	
+— BLOQUE F · INVENTARIO —					
+EXISTENCIA	OBLIGATORIO	Variant Inventory Qty	Equipo	Piezas físicas disponibles hoy. 0 si es bajo pedido.	0
+DISPONIBILIDAD	AUTOMÁTICO	Metafield facetas.disponibilidad	Yo	La calculo: >2 Entrega inmediata; 1-2 Últimas unidades; 0 con precio Bajo pedido; sin precio Bajo cotización.	Bajo pedido
+TIEMPO_ENTREGA	IMPORTANTE	Metafield homea.entrega	Equipo	Texto corto y honesto.	8-12 semanas (importación)
+— BLOQUE G · VARIANTES (una FILA por variante) —					
+OPCION1_COLOR_ACABADO	OBLIGATORIO	Option 1	Equipo	El acabado NUNCA va en el título: es variante. Un renglón por acabado, repitiendo SKU propio y precio propio.	Acero Inoxidable
+OPCION2_COMBUSTIBLE	CONDICIONAL	Option 2	Equipo	Solo cocción/exterior: Gas Natural / LP.	
+OPCION3_APERTURA	CONDICIONAL	Option 3	Equipo	Solo refrigeración: Apertura Izquierda / Apertura Derecha / Reversible.	Apertura Derecha
+— BLOQUE H · FACETAS FILTRABLES (son los filtros del sitio) —					
+ANCHO	OBLIGATORIO	Metafield facetas.ancho	Equipo	Valor cerrado: 15", 18", 24", 30", 36", 42", 48", 60", 66".	36"
+INSTALACION	OBLIGATORIO	Metafield facetas.instalacion	Equipo	Refrigeración: Empotrado / Bajo cubierta / De piso / Columna.	De piso
+COLOR	OBLIGATORIO	Metafield facetas.color	Equipo	Valor cerrado: Inoxidable, Cromo, Negro, Blanco, Gris, Bronce, Dorado/Latón, Níquel, + paleta de marca.	Inoxidable
+TIPO_ACABADO	OPCIONAL	Metafield facetas.acabado	Equipo	Mate / Cepillado / Pulido.	Cepillado
+PANELABLE	CONDICIONAL	Metafield facetas.panelable	Equipo	Sí / No. Si es Sí, los paneles compatibles van en SKUS_COMPLEMENTARIOS.	No
+MAQUINA_HIELO	CONDICIONAL	Metafield facetas.maquina_hielo	Equipo	Sí / No. Es filtro propio de refrigeración.	Sí
+DESPACHADOR	CONDICIONAL	Metafield facetas.despachador	Equipo	Sí / No (agua y hielo en la puerta).	Sí
+CAPACIDAD	IMPORTANTE	Metafield facetas.capacidad	Equipo	Con unidad: pies³ para refrigeración, botellas para cavas, lbs/día para hielo.	22.7 pies³
+ZONAS_TEMPERATURA	CONDICIONAL	Metafield facetas.zonas	Equipo	Número de zonas independientes.	2
+DIMENSIONES_PRODUCTO	OBLIGATORIO	specs.tabla	Equipo	Al × An × F en cm (y pulgadas si el PDF las da).	213.4 × 91.4 × 61.0 cm
+NICHO_EMPOTRE	CONDICIONAL	specs.tabla	Equipo	Solo empotrables/columnas. Con holguras y ventilación.	
+PESO_KG	OPCIONAL	specs.tabla	Equipo	Neto, en kg.	215 kg
+NIVEL_RUIDO_DB	OPCIONAL	facetas.ruido	Equipo	Solo el número + dB.	
+ENERGY_STAR	OPCIONAL	facetas.energy_star	Equipo	Sí / No.	Sí
+VOLTAJE_CONEXION	IMPORTANTE	specs.tabla	Equipo	Voltaje, watts, amperes y si es clavija o conexión fija.	115 V / 60 Hz · 15 A · clavija de 3 patas
+CONECTIVIDAD	OPCIONAL	facetas.conectividad	Equipo	WiFi / App / Ninguna.	WiFi
+GARANTIA	IMPORTANTE	Metafield homea.garantia	Equipo	Como la da la marca en México.	2 años completa · 12 años sistema sellado
+PAIS_ORIGEN	OPCIONAL	Country of origin	Equipo	Para importación.	Estados Unidos
+— BLOQUE I · CONTROL —					
+ESTADO	OBLIGATORIO	Status	Yo	Siempre entra como draft; se activa tras revisión.	draft
+FUENTE_DEL_DATO	OBLIGATORIO	(control interno)	Equipo	De dónde salieron las specs. Si no hay fuente, el campo se deja VACÍO — nunca se inventa.	Spec sheet oficial Sub-Zero, junio 2026
+RESPONSABLE	OBLIGATORIO	(control interno)	Equipo	Quién capturó.	N. Apellido
+FECHA_CAPTURA	OBLIGATORIO	(control interno)	Equipo	AAAA-MM-DD.	2026-07-28

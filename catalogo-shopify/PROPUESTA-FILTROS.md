@@ -41,7 +41,7 @@ en lugar de precio. El filtro Disponibilidad los agrupa en "Bajo cotización" �
   Nº de quemadores, Tipo de campana (Pared 601 · Isla 172 · Liner/Inserto · Bajo gabinete),
   Con plancha/comal/grill, Ancho, Serie.
 - **Lavavajillas**: Instalación (Empotrable / Panelable / De piso), Ancho (18"/24"), Nº servicios.
-- **Tarjas y Grifería**: Instalación (Sobre cubierta / Submontar / Pared — como Artexa),
+- **Tarjas y Monomandos**: Instalación (Sobre cubierta / Submontar / Pared — como Artexa),
   Material (Acero inox / Granito compuesto SILGRANIT / Fireclay), Nº de tazones,
   Función grifería (Extraíble pull-down / Pull-out / Pot filler / Touch/Electrónica), Colección, Color/Acabado.
 - **Trituradores**: Potencia (HP), Alimentación (Continua / Batch).
@@ -90,7 +90,7 @@ sitio (mega-menú Productos, mosaico de Guías, CTAs) **redirigen a Shopify**. P
    (como el carrusel de Artexa: Refrigeración → refrigerador French Door, Cocción → range pro,
    Campanas → campana de pared, Trituradores, Cajones, Tarjas, Grifería, Cafeteras, Máquinas de hielo…).
 2. **Una colección por subcategoría 1** de la taxonomía (Refrigeración, Cocción, Lavavajillas,
-   Tarjas y Grifería, Trituradores, Filtros y Purificadores de Agua…) y **por tipo** (nivel 2:
+   Tarjas y Monomandos, Trituradores, Purificadores y Despachadores de Agua…) y **por tipo** (nivel 2:
    Refrigeradores, Congeladores, Cavas…), con los filtros de la sección 2/3 activos vía Search & Discovery.
 3. Mapeo 1:1 con la taxonomía del sitio para que cada botón del front tenga su URL destino en Shopify:
    `macrocategoría → colección madre`, `subcategoría1 → colección`, `tipo → colección hija`.
@@ -105,15 +105,15 @@ legítimos se resuelven con **tags + colecciones automáticas**, nunca duplicand
 |---|---|---|---|
 | Mabe PMO/PMU, Whirlpool WK3901Q (ósmosis inversa) | `Purificadores de agua` | `filtros-y-purificadores-de-agua` | `instalacion:bajo-cubierta` · `instalacion:de-mesa` · `instalacion:de-piso` · `tipo:osmosis-inversa` |
 | Cartuchos y repuestos, tanque+filtro InSinkErator SWT-FLTR-4, kit para refrigerador | `Filtros y repuestos` | `filtros-y-purificadores-de-agua` | `refaccion` |
-| InSinkErator HC3300/HC1100/GN1100, Kele KSS2702B | `Grifería` | `tarjas-y-griferia` | `tipo:monomando-agua-filtrada` · **`agua-filtrada`** |
-| Mabe EMDPCCB3/EMBL01S, Whirlpool WK5053Q, Hypermark HM0022W | `Despachadores de agua` | `electrodomesticos-menores` | `garrafon` |
+| InSinkErator HC3300/HC1100/GN1100, Kele KSS2702B | `Monomandos` | `tarjas-y-griferia` | `tipo:monomando-agua-filtrada` · **`agua-filtrada`** |
+| Mabe EMDPCCB3/EMBL01S, Whirlpool WK5053Q, Hypermark HM0022W | `Despachadores de agua` | `filtros-y-purificadores-de-agua` | `garrafon` |
 
 El tag `agua-filtrada` es el que resuelve el caso frontera: el monomando InSinkErator vive una sola vez
-en el menú (bajo Grifería) pero la colección automática de Filtros y Purificadores lo incluye por tag.
+en el menú (bajo Monomandos) pero la colección automática de Purificadores y Despachadores lo incluye por tag.
 **Aplicar el mismo criterio en las 8 macrocategorías restantes** al homologar el catálogo.
 
 **Imágenes representativas requeridas (subcategorías nivel 1, prioridad cocinas):**
-Refrigeración · Cocción · Lavavajillas · Tarjas y Grifería · Trituradores · Filtros y Purificadores ·
+Refrigeración · Cocción · Lavavajillas · Tarjas y Monomandos · Trituradores · Purificadores y Despachadores ·
 Asadores & Hornos (Exterior) · Lavadoras/Secadoras · Baños (lavabo/monomando) · Minisplits —
 todas en PNG sin fondo, producto icónico de marca premium (se extraen de los catálogos de marca o web oficial).
 
