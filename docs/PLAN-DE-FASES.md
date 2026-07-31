@@ -100,7 +100,43 @@ Estado: 🔵 pendiente · 🟡 en curso · ✅ hecho
 *4.1 y 4.2 (datos + imágenes) pueden correr **en paralelo** desde ya (skill `homea-operaciones`).*
 
 ### 4.1 Preparación / homologación de datos
+
+> ⭐ **Estándar de calidad — SAE ≠ Shopify (regla Carla, 2026-07-30).**
+> **SAE es solo para cotizar**, así que tolera datos abreviados: claves incompletas, sin acentos
+> (`CAFE` en vez de `Café`), mayúsculas inconsistentes, descripciones truncadas. **Eso está bien y
+> no se corrige.** **Shopify es cara al cliente y debe estar completo y correcto: descripción,
+> precio, imágenes y SKU.** No se publica un producto a medias.
+>
+> **El SKU es el caso más delicado:** la clave de SAE es interna y **no** es el número de modelo del
+> fabricante. La propia plantilla lo ejemplifica — `CLAVE_SAE = SUB-CL3650` mientras que el
+> `SKU_MODELO` real es `CL3650SD/S/T`. En el maestro hay además claves con espacios (`EA 64 BZ`,
+> `CHEN100X 078`) y con mayúsculas inconsistentes (`Ms150e`, `MAi805-BSS90` vs `MAI805-BSS90BEV`).
+> **A Shopify va el SKU completo del fabricante**; la clave SAE se conserva aparte, en el metafield
+> `custom.clave_sae`, como puente hacia pedido/facturación.
+
 - [ ] Exportar ~25k productos (SAE/COI/OXATIS); limpiar duplicados, nomenclaturas, categorías, marcas, características, precios.
+- [ ] **Completar SKUs**: reconstruir el número de modelo del fabricante donde la clave SAE esté truncada o abreviada (fuente: listas de proveedor y fichas técnicas). Normalizar mayúsculas y quitar espacios internos.
+- [ ] **Corregir la columna `MARCA`** ⭐: 871 filas de 47,133 (1.8%) en **50 valores** no empatan con las 77 marcas oficiales de `preview/marcas.html`. Tres causas: (a) marcas de dos palabras cortadas por el extractor —`THE`+`GALLEY`=The Galley, `MONT`=Mont Alpi, `FULGOR`, `BROIL`, `MR`, `ALFA`, `KAMADO`—; (b) tipo de producto en el campo marca —`TARJA`(Schock/Tecnolam), `LLAVE`(Eclipse), `HORNO`, `LAVAVAJILLAS`, `KIT`, `REFACCION`—; (c) marcas reales ausentes de la página de Marcas —KELE 193, PIZARRO 117, KRAUS 81, SEDONA 50, FIRPLAK 30, POLETTI, COMMODORE, HERGOM— (ver pendiente en `catalogo-shopify/TABLA-MARCA-GAMA.md`). Impacto: `MARCA` alimenta el `Vendor` de Shopify = el filtro de marca del sitio; sin corregir, The Galley sale partido en dos filtros.
+- [ ] **Definición de "listo para publicar"** (checklist por producto, todo o nada): SKU completo del fabricante · marca normalizada · tipo/taxonomía asignada · título según `GUIA-TITULOS.md` · descripción y specs · precio con moneda · al menos la imagen principal con nombre SEO. Sin los 7, el producto se queda en borrador.
+
+#### ⭐ DECISIÓN ABIERTA — ¿en qué orden se depura? (pendiente Carla, 2026-07-30)
+Dos opciones sobre la mesa: **proveedor por proveedor** o **alfabético por marca**.
+
+**Mi recomendación: por proveedor, y dentro de eso por prioridad de negocio — no alfabético.**
+Razón: el proveedor es la unidad natural del dato. La lista de precios, el formato, el portal de
+imágenes y el contacto para pedir fichas técnicas son **uno por proveedor**; abrir un proveedor
+una sola vez y agotarlo evita repetir el mismo trabajo de extracción. Los cruces ya hechos
+(`02`–`05`) también están organizados así. El orden alfabético en cambio no agrupa nada que
+comparta origen de datos y mezcla marcas de 17,020 SKUs (Delta) con marcas de 2 (Scotsman).
+
+**Arranque sugerido: Sub-Zero / Wolf / Cove** (~1,000 SKUs). Son un solo origen, son la franquicia
+SEO real del sitio (`seo-data/ANALISIS-GSC.md`: refrigeración panelable/built-in), son premium, y
+su nomenclatura **ya está decodificada** en `catalogo-shopify/CALIBRACION-MARCAS.md`. Gaggenau ya
+sirvió de piloto del patrón (5 fichas + import en borrador).
+
+- [ ] **Carla decide el orden** antes de arrancar la depuración masiva.
+
+
 - [ ] **Marcar la moneda de cada producto (MXN vs USD)** durante la homologación → tag/metafield `moneda:USD` + metafield `precio_usd`. Shopify solo maneja una moneda de tienda (MXN), así que el precio en dólares vive en metafield y el producto USD queda **no comprable** en checkout. Alimenta la regla "USD = solo con ejecutivo" de 4.5.
 - [ ] Estructurar para Shopify (CSV/Matrixify): handle, título, tipo, vendor, tags, variantes, precio, **metafields**.
 - [ ] Definir la **plantilla de nomenclatura SEO de imágenes** (`marca-producto-categoria-atributo`) como parte de la homologación → alimenta 4.2.
