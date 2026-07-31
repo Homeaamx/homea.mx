@@ -67,6 +67,49 @@ export const FILTROS_PLP: Record<string, FiltroPlp[]> = {
       valores: ["Outlet", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "50%", "60%"],
     },
   ],
+
+  "cocina-y-bar/coccion/parrillas": [
+    { nombre: "Marca", control: "multi", nota: "Depende del producto — sale del Vendor de Shopify" },
+    { nombre: "Precio", control: "slider" },
+    {
+      nombre: "Acabado",
+      control: "multi",
+      valores: ["Inoxidable", "Negro", "Gris", "Blanco"],
+    },
+    {
+      nombre: "Tipo de instalación",
+      control: "multi",
+      valores: ["Profesional", "Tradicional"],
+    },
+    {
+      nombre: "Tipo de funcionamiento",
+      control: "multi",
+      valores: [
+        "Gas",
+        "Vitrocerámica",
+        "Inducción",
+        "Inducción con sistema de Extracción",
+        "Híbrida (Gas + Inducción)",
+        "Submontar",
+        "Invisible",
+        "Modulares",
+      ],
+    },
+    { nombre: "Tipo de gas", control: "multi", valores: ["Natural", "LP"] },
+    {
+      nombre: "Ancho",
+      control: "multi",
+      valores: ['11"', '15"', '24"', '30"', '36"', '48"'],
+    },
+    { nombre: "Voltaje", control: "multi", valores: ["110 V", "220 V"] },
+    { nombre: "Disponibilidad", control: "multi", valores: ["En stock", "Bajo pedido"] },
+    { nombre: "Garantía", control: "multi", valores: ["1 año", "2 años", "3 años"] },
+    {
+      nombre: "Promoción",
+      control: "multi",
+      valores: ["Outlet", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "50%", "60%"],
+    },
+  ],
 };
 
 export function getFiltrosPlp(macro: string, sub1: string, tipo: string): FiltroPlp[] {

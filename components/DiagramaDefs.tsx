@@ -34,6 +34,16 @@ export default function DiagramaDefs() {
           <stop offset="100%" className="c3" />
         </linearGradient>
 
+        {/* Cristal negro (vitrocerámica / inducción): superficie oscura con un
+            reflejo diagonal — es lo que separa una placa de vidrio de una de acero. */}
+        <linearGradient id="dgm-negro" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" className="n1" />
+          <stop offset="42%" className="n1" />
+          <stop offset="54%" className="n2" />
+          <stop offset="66%" className="n1" />
+          <stop offset="100%" className="n3" />
+        </linearGradient>
+
         {/* Vitrina: lo que se ve A TRAVÉS del cristal — interior iluminado con
             tinte frío. Es lo que separa una puerta de cristal de una de acero. */}
         <linearGradient id="dgm-vitrina" x1="0" y1="0" x2="0" y2="1">

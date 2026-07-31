@@ -27,9 +27,11 @@ interface Props {
   filtros: FiltroProducto[];
   /** Nombre del tipo de producto (p.ej. "Refrigeradores") para el CTA y WhatsApp. */
   contexto: string;
+  /** Nombres de eje que difieren del default (taxonomía → etiquetasGrupos). */
+  etiquetas?: Partial<Record<GrupoFicha, string>>;
 }
 
-export default function FilterShowcase({ filtros, contexto }: Props) {
+export default function FilterShowcase({ filtros, contexto, etiquetas }: Props) {
   const conFicha = filtros.filter((f) => f.ficha);
   const sinFicha = filtros.filter((f) => !f.ficha);
   const ctaLabel = `Ver ${contexto.toLowerCase()}`;
@@ -37,7 +39,8 @@ export default function FilterShowcase({ filtros, contexto }: Props) {
   return (
     <div className="tfk">
       <DiagramaDefs />
-      {GRUPOS.map(({ key, label }) => {
+      {GRUPOS.map(({ key, label: labelDefault }) => {
+        const label = etiquetas?.[key] ?? labelDefault;
         const grupo = conFicha.filter((f) => f.ficha!.grupo === key);
         if (grupo.length === 0) return null;
         return (

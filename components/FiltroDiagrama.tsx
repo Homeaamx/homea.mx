@@ -640,47 +640,221 @@ const DIAGRAMAS: Record<string, JSX.Element> = {
   ),
 
   // ——— Parrillas (vista superior) ——————————————————————————————————
+  // Materiales realistas: acero (.fb) solo donde el aparato ES de acero; las
+  // placas eléctricas van en cristal negro (.fbn) con serigrafía clara (.rn) y
+  // las de gas llevan rejilla de hierro (.grate). Hover: zonas encendidas
+  // (.ring.warm = calor) o activas (.ring frío en inducción, que no brilla).
 
+  /* Profesional (instalación): rangetop tipo Thermador — arriba la cubierta con
+     cama de rejillas continuas de hierro (oscura) y sus quemadores; abajo el
+     frente de acero con la fila de perillas, que es como se reconoce al pro. */
+  "parrilla-profesional": (
+    <>
+      {/* Cubierta: marco de acero + cama de hierro con 3 secciones de rejilla */}
+      <rect x="22" y="22" width="96" height="54" className="fb" />
+      <rect x="27" y="27" width="86" height="44" rx="1.5" className="hierro" />
+      <line x1="56" y1="27" x2="56" y2="71" className="reja" />
+      <line x1="84" y1="27" x2="84" y2="71" className="reja" />
+      <circle cx="41" cy="38" r="6.5" className="fb" />
+      <circle cx="70" cy="38" r="6.5" className="fb" />
+      <circle cx="99" cy="38" r="6.5" className="fb" />
+      <circle cx="41" cy="60" r="6.5" className="fb" />
+      <circle cx="70" cy="60" r="6.5" className="fb" />
+      <circle cx="99" cy="60" r="6.5" className="fb" />
+      <circle cx="41" cy="38" r="1.8" className="ln" />
+      <circle cx="70" cy="38" r="1.8" className="ln" />
+      <circle cx="99" cy="38" r="1.8" className="ln" />
+      <circle cx="41" cy="60" r="1.8" className="ln" />
+      <circle cx="70" cy="60" r="1.8" className="ln" />
+      <circle cx="99" cy="60" r="1.8" className="ln" />
+      {/* Frente de acero con perillas */}
+      <rect x="22" y="76" width="96" height="32" className="fb" />
+      <circle cx="34" cy="92" r="5" className="fb" />
+      <circle cx="48" cy="92" r="5" className="fb" />
+      <circle cx="62" cy="92" r="5" className="fb" />
+      <circle cx="76" cy="92" r="5" className="fb" />
+      <circle cx="90" cy="92" r="5" className="fb" />
+      <circle cx="104" cy="92" r="5" className="fb" />
+      <line x1="34" y1="88.5" x2="34" y2="92" className="ln" />
+      <line x1="48" y1="88.5" x2="48" y2="92" className="ln" />
+      <line x1="62" y1="88.5" x2="62" y2="92" className="ln" />
+      <line x1="76" y1="88.5" x2="76" y2="92" className="ln" />
+      <line x1="90" y1="88.5" x2="90" y2="92" className="ln" />
+      <line x1="104" y1="88.5" x2="104" y2="92" className="ln" />
+      <g className="in">
+        <circle cx="41" cy="38" r="8.5" className="ring warm" />
+        <circle cx="70" cy="38" r="8.5" className="ring warm" />
+        <circle cx="99" cy="38" r="8.5" className="ring warm" />
+        <circle cx="41" cy="60" r="8.5" className="ring warm" />
+        <circle cx="70" cy="60" r="8.5" className="ring warm" />
+        <circle cx="99" cy="60" r="8.5" className="ring warm" />
+      </g>
+    </>
+  ),
+
+  /* Tradicional (instalación): placa de empotre asentada en el corte de la
+     cubierta (punteada) con su marco visible. */
   "parrilla-tradicional": (
     <>
+      <rect x="18" y="24" width="104" height="84" className="cab" />
       <rect x="30" y="30" width="80" height="72" className="fb" />
+      <rect x="34" y="34" width="72" height="64" className="glass" />
       <circle cx="52" cy="52" r="10" className="fb" />
       <circle cx="88" cy="52" r="10" className="fb" />
       <circle cx="52" cy="82" r="10" className="fb" />
       <circle cx="88" cy="82" r="10" className="fb" />
+      <circle cx="52" cy="52" r="2" className="ln" />
+      <circle cx="88" cy="52" r="2" className="ln" />
+      <circle cx="52" cy="82" r="2" className="ln" />
+      <circle cx="88" cy="82" r="2" className="ln" />
       <g className="in">
-        <circle cx="52" cy="52" r="10" className="ring" />
-        <circle cx="88" cy="52" r="10" className="ring" />
-        <circle cx="52" cy="82" r="10" className="ring" />
-        <circle cx="88" cy="82" r="10" className="ring" />
+        <circle cx="52" cy="52" r="10" className="ring warm" />
+        <circle cx="88" cy="52" r="10" className="ring warm" />
+        <circle cx="52" cy="82" r="10" className="ring warm" />
+        <circle cx="88" cy="82" r="10" className="ring warm" />
       </g>
     </>
   ),
 
-  "parrilla-profesional": (
+  /* Gas: acero con rejillas de hierro individuales sobre cada quemador —
+     la rejilla redondeada es lo que lo distingue de un quemador eléctrico. */
+  "parrilla-gas": (
     <>
-      <rect x="22" y="26" width="96" height="80" className="fb" />
-      <line x1="38" y1="26" x2="38" y2="106" className="glass" />
-      <line x1="70" y1="26" x2="70" y2="106" className="glass" />
-      <line x1="102" y1="26" x2="102" y2="106" className="glass" />
-      <circle cx="46" cy="48" r="9" className="fb" />
-      <circle cx="94" cy="48" r="9" className="fb" />
-      <circle cx="46" cy="84" r="9" className="fb" />
-      <circle cx="94" cy="84" r="9" className="fb" />
-      <circle cx="70" cy="66" r="9" className="fb" />
+      <rect x="28" y="30" width="84" height="72" className="fb" />
+      <rect x="34" y="36" width="30" height="28" rx="5" className="grate" />
+      <rect x="76" y="36" width="30" height="28" rx="5" className="grate" />
+      <rect x="34" y="68" width="30" height="28" rx="5" className="grate" />
+      <rect x="76" y="68" width="30" height="28" rx="5" className="grate" />
+      <circle cx="49" cy="50" r="7" className="fb" />
+      <circle cx="91" cy="50" r="7" className="fb" />
+      <circle cx="49" cy="82" r="7" className="fb" />
+      <circle cx="91" cy="82" r="7" className="fb" />
+      <circle cx="49" cy="50" r="2" className="ln" />
+      <circle cx="91" cy="50" r="2" className="ln" />
+      <circle cx="49" cy="82" r="2" className="ln" />
+      <circle cx="91" cy="82" r="2" className="ln" />
       <g className="in">
-        <circle cx="46" cy="48" r="9" className="ring" />
-        <circle cx="94" cy="48" r="9" className="ring" />
-        <circle cx="46" cy="84" r="9" className="ring" />
-        <circle cx="94" cy="84" r="9" className="ring" />
-        <circle cx="70" cy="66" r="9" className="ring" />
+        <circle cx="49" cy="50" r="9" className="ring warm" />
+        <circle cx="91" cy="50" r="9" className="ring warm" />
+        <circle cx="49" cy="82" r="9" className="ring warm" />
+        <circle cx="91" cy="82" r="9" className="ring warm" />
       </g>
     </>
   ),
 
+  /* Vitrocerámica: cristal negro liso, zonas radiantes serigrafiadas (anillo
+     doble) y botonera táctil al frente. Al hover las zonas se encienden. */
+  "parrilla-vitroceramica": (
+    <>
+      <rect x="28" y="30" width="84" height="72" className="fbn" />
+      <circle cx="50" cy="50" r="11" className="rn" />
+      <circle cx="50" cy="50" r="6" className="rn" />
+      <circle cx="90" cy="50" r="11" className="rn" />
+      <circle cx="90" cy="50" r="6" className="rn" />
+      <circle cx="50" cy="80" r="11" className="rn" />
+      <circle cx="50" cy="80" r="6" className="rn" />
+      <circle cx="90" cy="80" r="11" className="rn" />
+      <circle cx="90" cy="80" r="6" className="rn" />
+      <circle cx="58" cy="96" r="1.6" className="rn-dot" />
+      <circle cx="66" cy="96" r="1.6" className="rn-dot" />
+      <circle cx="74" cy="96" r="1.6" className="rn-dot" />
+      <circle cx="82" cy="96" r="1.6" className="rn-dot" />
+      <g className="in">
+        <circle cx="50" cy="50" r="11" className="ring warm" />
+        <circle cx="90" cy="50" r="11" className="ring warm" />
+        <circle cx="50" cy="80" r="11" className="ring warm" />
+        <circle cx="90" cy="80" r="11" className="ring warm" />
+      </g>
+    </>
+  ),
+
+  /* Inducción: cristal negro con zonas marcadas por una cruz (+) — la marca de
+     inducción — y barra táctil. Al hover aparece el sartén: aquí se calienta la
+     olla, no la placa, así que el anillo se queda frío. */
+  "parrilla-induccion": (
+    <>
+      <rect x="28" y="30" width="84" height="72" className="fbn" />
+      <circle cx="50" cy="50" r="10" className="rn" />
+      <circle cx="90" cy="50" r="10" className="rn" />
+      <circle cx="50" cy="80" r="10" className="rn" />
+      <circle cx="90" cy="80" r="10" className="rn" />
+      <line x1="47" y1="50" x2="53" y2="50" className="rn" />
+      <line x1="50" y1="47" x2="50" y2="53" className="rn" />
+      <line x1="87" y1="50" x2="93" y2="50" className="rn" />
+      <line x1="90" y1="47" x2="90" y2="53" className="rn" />
+      <line x1="47" y1="80" x2="53" y2="80" className="rn" />
+      <line x1="50" y1="77" x2="50" y2="83" className="rn" />
+      <line x1="87" y1="80" x2="93" y2="80" className="rn" />
+      <line x1="90" y1="77" x2="90" y2="83" className="rn" />
+      <line x1="62" y1="96" x2="78" y2="96" className="rn" />
+      <g className="in">
+        <circle cx="90" cy="50" r="8" className="ring" />
+        <line x1="82" y1="50" x2="72" y2="50" className="ln-cool" />
+        <circle cx="50" cy="80" r="10" className="ring" />
+        <circle cx="90" cy="80" r="10" className="ring" />
+        <circle cx="50" cy="50" r="10" className="ring" />
+      </g>
+    </>
+  ),
+
+  /* Inducción con extracción: cristal negro con la rejilla de extracción
+     descendente al centro y dos zonas por lado. Al hover la rejilla se activa. */
+  "parrilla-induccion-extraccion": (
+    <>
+      <rect x="28" y="30" width="84" height="72" className="fbn" />
+      <rect x="63" y="38" width="14" height="56" rx="2" className="rn" />
+      <line x1="66" y1="46" x2="74" y2="46" className="rn" />
+      <line x1="66" y1="54" x2="74" y2="54" className="rn" />
+      <line x1="66" y1="62" x2="74" y2="62" className="rn" />
+      <line x1="66" y1="70" x2="74" y2="70" className="rn" />
+      <line x1="66" y1="78" x2="74" y2="78" className="rn" />
+      <line x1="66" y1="86" x2="74" y2="86" className="rn" />
+      <circle cx="45" cy="52" r="9" className="rn" />
+      <circle cx="45" cy="80" r="9" className="rn" />
+      <circle cx="95" cy="52" r="9" className="rn" />
+      <circle cx="95" cy="80" r="9" className="rn" />
+      <g className="in">
+        <rect x="63" y="38" width="14" height="56" rx="2" className="zone" />
+        <circle cx="45" cy="52" r="9" className="ring" />
+        <circle cx="45" cy="80" r="9" className="ring" />
+        <circle cx="95" cy="52" r="9" className="ring" />
+        <circle cx="95" cy="80" r="9" className="ring" />
+      </g>
+    </>
+  ),
+
+  /* Híbrida: una placa, dos mundos — mitad de acero con rejillas de gas y
+     mitad de cristal negro con zonas de inducción. */
+  "parrilla-hibrida": (
+    <>
+      <rect x="28" y="30" width="84" height="72" className="fb" />
+      <rect x="70" y="30" width="42" height="72" className="fbn" />
+      <rect x="33" y="36" width="30" height="28" rx="5" className="grate" />
+      <rect x="33" y="68" width="30" height="28" rx="5" className="grate" />
+      <circle cx="48" cy="50" r="7" className="fb" />
+      <circle cx="48" cy="82" r="7" className="fb" />
+      <circle cx="48" cy="50" r="2" className="ln" />
+      <circle cx="48" cy="82" r="2" className="ln" />
+      <circle cx="91" cy="50" r="9" className="rn" />
+      <circle cx="91" cy="82" r="9" className="rn" />
+      <line x1="88" y1="50" x2="94" y2="50" className="rn" />
+      <line x1="91" y1="47" x2="91" y2="53" className="rn" />
+      <line x1="88" y1="82" x2="94" y2="82" className="rn" />
+      <line x1="91" y1="79" x2="91" y2="85" className="rn" />
+      <g className="in">
+        <circle cx="48" cy="50" r="9" className="ring warm" />
+        <circle cx="48" cy="82" r="9" className="ring warm" />
+        <circle cx="91" cy="50" r="9" className="ring" />
+        <circle cx="91" cy="82" r="9" className="ring" />
+      </g>
+    </>
+  ),
+
+  /* Submontar (Pitt Cooking): quemadores individuales de acero montados
+     directamente en la cubierta — la piedra es la placa. */
   "parrilla-submontar": (
     <>
-      <rect x="20" y="26" width="100" height="80" className="cab" />
+      <rect x="20" y="26" width="100" height="80" className="stone" />
       <circle cx="45" cy="66" r="12" className="fb" />
       <circle cx="70" cy="66" r="12" className="fb" />
       <circle cx="95" cy="66" r="12" className="fb" />
@@ -688,16 +862,20 @@ const DIAGRAMAS: Record<string, JSX.Element> = {
       <circle cx="70" cy="66" r="5" className="glass" />
       <circle cx="95" cy="66" r="5" className="glass" />
       <g className="in">
-        <circle cx="45" cy="66" r="12" className="ring" />
-        <circle cx="70" cy="66" r="12" className="ring" />
-        <circle cx="95" cy="66" r="12" className="ring" />
+        <circle cx="45" cy="66" r="12" className="ring warm" />
+        <circle cx="70" cy="66" r="12" className="ring warm" />
+        <circle cx="95" cy="66" r="12" className="ring warm" />
       </g>
     </>
   ),
 
-  "parrilla-bajo-cubierta": (
+  /* Invisible (estilo Invisacook): cubierta de piedra continua — la inducción
+     vive DEBAJO (círculos punteados) y solo se revela al hover. */
+  "parrilla-invisible": (
     <>
-      <rect x="24" y="28" width="92" height="76" className="fb" />
+      <rect x="24" y="28" width="92" height="76" className="stone" />
+      <line x1="34" y1="92" x2="58" y2="40" className="veta" />
+      <line x1="76" y1="96" x2="102" y2="42" className="veta" />
       <circle cx="52" cy="66" r="13" className="cab" />
       <circle cx="88" cy="66" r="13" className="cab" />
       <g className="in">
@@ -709,55 +887,29 @@ const DIAGRAMAS: Record<string, JSX.Element> = {
     </>
   ),
 
+  /* Modulares (dominó): módulos independientes — uno de gas en acero, uno de
+     inducción en cristal negro — instalados lado a lado. */
   "parrilla-modular": (
     <>
       <rect x="30" y="32" width="36" height="68" className="fb" />
-      <rect x="74" y="32" width="36" height="68" className="fb" />
-      <circle cx="48" cy="52" r="9" className="fb" />
-      <circle cx="48" cy="80" r="9" className="fb" />
-      <rect x="82" y="44" width="20" height="18" className="glass" />
-      <rect x="82" y="70" width="20" height="18" className="glass" />
+      <rect x="74" y="32" width="36" height="68" className="fbn" />
+      <rect x="34" y="37" width="28" height="26" rx="4" className="grate" />
+      <rect x="34" y="69" width="28" height="26" rx="4" className="grate" />
+      <circle cx="48" cy="50" r="6" className="fb" />
+      <circle cx="48" cy="82" r="6" className="fb" />
+      <circle cx="48" cy="50" r="1.8" className="ln" />
+      <circle cx="48" cy="82" r="1.8" className="ln" />
+      <circle cx="92" cy="50" r="8" className="rn" />
+      <circle cx="92" cy="82" r="8" className="rn" />
+      <line x1="89" y1="50" x2="95" y2="50" className="rn" />
+      <line x1="92" y1="47" x2="92" y2="53" className="rn" />
+      <line x1="89" y1="82" x2="95" y2="82" className="rn" />
+      <line x1="92" y1="79" x2="92" y2="85" className="rn" />
       <g className="in">
-        <circle cx="48" cy="52" r="9" className="ring" />
-        <circle cx="48" cy="80" r="9" className="ring" />
-        <rect x="82" y="44" width="20" height="18" className="zone" />
-        <rect x="82" y="70" width="20" height="18" className="zone" />
-      </g>
-    </>
-  ),
-
-  "parrilla-hibrida": (
-    <>
-      <rect x="28" y="30" width="84" height="72" className="fb" />
-      <line x1="70" y1="30" x2="70" y2="102" className="glass" />
-      <circle cx="49" cy="50" r="9" className="fb" />
-      <circle cx="49" cy="82" r="9" className="fb" />
-      <rect x="80" y="42" width="20" height="18" className="glass" />
-      <rect x="80" y="72" width="20" height="18" className="glass" />
-      <g className="in">
-        <circle cx="49" cy="50" r="9" className="ring" />
-        <circle cx="49" cy="82" r="9" className="ring" />
-        <rect x="80" y="42" width="20" height="18" className="zone" />
-        <rect x="80" y="72" width="20" height="18" className="zone" />
-      </g>
-    </>
-  ),
-
-  "parrilla-campana": (
-    <>
-      <rect x="28" y="30" width="84" height="72" className="fb" />
-      <rect x="63" y="34" width="14" height="64" className="fb" />
-      <line x1="70" y1="40" x2="70" y2="92" className="glass" />
-      <circle cx="46" cy="52" r="9" className="fb" />
-      <circle cx="46" cy="82" r="9" className="fb" />
-      <circle cx="95" cy="52" r="9" className="fb" />
-      <circle cx="95" cy="82" r="9" className="fb" />
-      <g className="in">
-        <circle cx="46" cy="52" r="9" className="ring" />
-        <circle cx="46" cy="82" r="9" className="ring" />
-        <circle cx="95" cy="52" r="9" className="ring" />
-        <circle cx="95" cy="82" r="9" className="ring" />
-        <rect x="63" y="34" width="14" height="64" className="zone" />
+        <circle cx="48" cy="50" r="8" className="ring warm" />
+        <circle cx="48" cy="82" r="8" className="ring warm" />
+        <circle cx="92" cy="50" r="8" className="ring" />
+        <circle cx="92" cy="82" r="8" className="ring" />
       </g>
     </>
   ),

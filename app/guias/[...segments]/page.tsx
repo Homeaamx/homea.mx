@@ -283,7 +283,11 @@ function FilterIndex({
       <section className="sec">
         <div className="container">
           {conFichas ? (
-            <FilterShowcase filtros={filtros} contexto={sub2.nombre} />
+            <FilterShowcase
+              filtros={filtros}
+              contexto={sub2.nombre}
+              etiquetas={sub2.etiquetasGrupos}
+            />
           ) : (
             <FilterList filtros={filtros} />
           )}

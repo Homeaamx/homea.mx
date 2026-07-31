@@ -24,6 +24,20 @@ interface Params {
   searchParams?: Promise<{ f?: string }>;
 }
 
+/** Foto del hero por PLP (misma familia visual que HERO_FOTO_SUB1 de Guías). */
+const HERO_PLP: Record<string, { src: string; alt: string; pos?: string }> = {
+  "cocina-y-bar/refrigeracion/refrigeradores": {
+    src: "/assets/photos/hero-sub1-refrigeracion-subzero.jpg",
+    alt: "Columnas de refrigeración Sub-Zero panelables en cocina premium",
+    pos: "center 50%",
+  },
+  "cocina-y-bar/coccion/parrillas": {
+    src: "/assets/photos/hero-sub1-coccion-pitt.jpg",
+    alt: "Parrilla de quemadores submontados Pitt Cooking en cubierta de piedra",
+    pos: "center 60%",
+  },
+};
+
 /** "Bajo cubierta" → "bajo-cubierta" (para casar valor de filtro ↔ ?f=). */
 function slug(v: string): string {
   return v
@@ -53,6 +67,7 @@ export default async function Page({ params, searchParams }: Params) {
   if (filtros.length === 0) notFound();
 
   const base = `/productos/${categoria}/${subcategoria}/${tipo}`;
+  const hero = HERO_PLP[`${categoria}/${subcategoria}/${tipo}`];
   const tipos = sub2.filtros ?? [];
   const conFicha = tipos.filter((f) => f.ficha).length;
   const nombreActivo = tipos.find(
@@ -63,12 +78,14 @@ export default async function Page({ params, searchParams }: Params) {
     <>
       <header className="subhero">
         <div className="subhero-bg">
-          <img
-            src="/assets/photos/hero-sub1-refrigeracion-subzero.jpg"
-            alt="Columnas de refrigeración Sub-Zero panelables en cocina premium"
-            style={{ objectPosition: "center 50%" }}
-            fetchPriority="high"
-          />
+          {hero && (
+            <img
+              src={hero.src}
+              alt={hero.alt}
+              style={{ objectPosition: hero.pos ?? "center 50%" }}
+              fetchPriority="high"
+            />
+          )}
         </div>
         <div className="subhero-scrim" aria-hidden="true" />
         <div className="subhero-inner">
@@ -97,6 +114,7 @@ export default async function Page({ params, searchParams }: Params) {
         guia={sub2.rutaFiltros}
         contexto={sub2.nombre}
         activo={activo}
+        etiquetas={sub2.etiquetasGrupos}
       />
 
       <Suspense fallback={null}>
@@ -236,9 +254,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!node || node.kind !== "filtros") return {};
   const { sub1, sub2 } = node;
   const url = `${SITE_URL}/productos/${categoria}/${subcategoria}/${tipo}`;
+  const ejeEstilo = (sub2.etiquetasGrupos?.estilo ?? "Diseño").toLowerCase();
   return {
     title: `${sub2.nombre} · ${sub1.nombre}`,
-    description: `${sub2.nombre} premium por tipo de instalación y diseño. Asesoría de especificación y entrega en todo México.`,
+    description: `${sub2.nombre} premium por tipo de instalación y ${ejeEstilo}. Asesoría de especificación y entrega en todo México.`,
     alternates: { canonical: url },
   };
 }

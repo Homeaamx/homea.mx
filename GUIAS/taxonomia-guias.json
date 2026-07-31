@@ -542,17 +542,8 @@
               "nombre": "Parrillas",
               "slug": "parrillas",
               "filtro": "/productos/parrillas/",
+              "etiquetasGrupos": { "estilo": "Tipo de funcionamiento" },
               "filtros": [
-                {
-                  "nombre": "Tradicional",
-                  "filtro": "/productos/parrillas/?f=tradicional",
-                  "ficha": {
-                    "grupo": "tipo",
-                    "diagrama": "parrilla-tradicional",
-                    "descripcion": "La placa de empotre estándar: se asienta en el corte de la cubierta con marco visible.",
-                    "specs": "Anchos 24–36″ · Gas o eléctrica"
-                  }
-                },
                 {
                   "nombre": "Profesional",
                   "filtro": "/productos/parrillas/?f=profesional",
@@ -564,53 +555,93 @@
                   }
                 },
                 {
+                  "nombre": "Tradicional",
+                  "filtro": "/productos/parrillas/?f=tradicional",
+                  "ficha": {
+                    "grupo": "tipo",
+                    "diagrama": "parrilla-tradicional",
+                    "descripcion": "La placa de empotre estándar: se asienta en el corte de la cubierta con marco visible.",
+                    "specs": "Anchos 24–36″ · Gas o eléctrica"
+                  }
+                },
+                {
+                  "nombre": "Gas",
+                  "filtro": "/productos/parrillas/?f=gas",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "parrilla-gas",
+                    "descripcion": "Flama abierta sobre rejillas de hierro: el fuego a la vista y potencia inmediata con cualquier sartén.",
+                    "specs": "Gas natural o LP"
+                  }
+                },
+                {
+                  "nombre": "Vitrocerámica",
+                  "filtro": "/productos/parrillas/?f=vitroceramica",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "parrilla-vitroceramica",
+                    "descripcion": "Zonas radiantes bajo cristal liso: superficie continua que se limpia de un solo paño.",
+                    "specs": "Cristal continuo · 220 V"
+                  }
+                },
+                {
+                  "nombre": "Inducción",
+                  "filtro": "/productos/parrillas/?f=induccion",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "parrilla-induccion",
+                    "descripcion": "Calienta el sartén, no la placa: precisión al grado, rapidez y un cristal que apenas entibia.",
+                    "specs": "220 V · La más rápida"
+                  }
+                },
+                {
+                  "nombre": "Inducción con sistema de Extracción",
+                  "filtro": "/productos/parrillas/?f=induccion-con-sistema-de-extraccion",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "parrilla-induccion-extraccion",
+                    "descripcion": "Inducción con extracción descendente integrada: los humos se capturan en la placa, sin campana arriba.",
+                    "specs": "Extracción integrada · Sin campana"
+                  }
+                },
+                {
+                  "nombre": "Híbrida (Gas + Inducción)",
+                  "filtro": "/productos/parrillas/?f=hibrida-gas-induccion",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "parrilla-hibrida",
+                    "descripcion": "Gas e inducción en una misma placa: fuego directo y precisión eléctrica sin elegir.",
+                    "specs": "Doble tecnología · Gas + 220 V"
+                  }
+                },
+                {
                   "nombre": "Submontar",
                   "filtro": "/productos/parrillas/?f=submontar",
                   "ficha": {
-                    "grupo": "tipo",
+                    "grupo": "estilo",
                     "diagrama": "parrilla-submontar",
                     "descripcion": "Quemadores individuales montados directamente en la cubierta (estilo Pitt Cooking): la superficie es la cocina.",
                     "specs": "Módulos en cubierta · A ras"
                   }
                 },
                 {
-                  "nombre": "Bajo cubierta",
-                  "filtro": "/productos/parrillas/?f=bajo-cubierta",
+                  "nombre": "Invisible",
+                  "filtro": "/productos/parrillas/?f=invisible",
                   "ficha": {
-                    "grupo": "tipo",
-                    "diagrama": "parrilla-bajo-cubierta",
-                    "descripcion": "Inducción invisible instalada debajo de la cubierta (estilo Invisacook): cocinas sobre la piedra misma.",
+                    "grupo": "estilo",
+                    "diagrama": "parrilla-invisible",
+                    "descripcion": "Inducción instalada debajo de la cubierta (estilo Invisacook): cocinas sobre la piedra misma.",
                     "specs": "Inducción oculta · Cubierta limpia"
                   }
                 },
                 {
-                  "nombre": "Modulares (2 pzas)",
-                  "filtro": "/productos/parrillas/?f=modulares-2-pzas",
+                  "nombre": "Modulares",
+                  "filtro": "/productos/parrillas/?f=modulares",
                   "ficha": {
-                    "grupo": "tipo",
+                    "grupo": "estilo",
                     "diagrama": "parrilla-modular",
-                    "descripcion": "Dos módulos independientes (dominó) para combinar gas, inducción o teppan a la medida.",
-                    "specs": "2 módulos · Combinables"
-                  }
-                },
-                {
-                  "nombre": "Híbridas (Gas + Inducción)",
-                  "filtro": "/productos/parrillas/?f=hibridas-gas-induccion",
-                  "ficha": {
-                    "grupo": "tipo",
-                    "diagrama": "parrilla-hibrida",
-                    "descripcion": "Gas e inducción en una misma placa: fuego directo y precisión eléctrica sin elegir.",
-                    "specs": "Doble tecnología"
-                  }
-                },
-                {
-                  "nombre": "Parrillas con campana",
-                  "filtro": "/productos/parrillas/?f=parrillas-con-campana",
-                  "ficha": {
-                    "grupo": "tipo",
-                    "diagrama": "parrilla-campana",
-                    "descripcion": "La placa integra su propia extracción descendente: humos capturados sin campana arriba.",
-                    "specs": "Extracción integrada"
+                    "descripcion": "Módulos independientes (dominó) para combinar gas, inducción o teppan a la medida.",
+                    "specs": "Módulos combinables"
                   }
                 }
               ],

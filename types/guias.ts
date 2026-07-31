@@ -62,6 +62,12 @@ export interface Subcategoria2 {
   slug: string;
   /** Ruta de filtro PLP del leaf (destino directo cuando NO hay varios filtros). */
   filtro: string;
+  /**
+   * Nombre del eje por grupo cuando difiere del default ("Tipo de instalación" /
+   * "Diseño"). P.ej. Parrillas: estilo = "Tipo de funcionamiento". Debe nombrar
+   * EXACTAMENTE igual que el filtro del PLP (tabla de filtros de Carla).
+   */
+  etiquetasGrupos?: Partial<Record<GrupoFicha, string>>;
   /** Página de filtros de este tipo de producto (cuando `filtros` tiene varios). */
   rutaFiltros?: string;
   /** Filtros que subdividen este tipo de producto. */

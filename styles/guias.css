@@ -427,8 +427,13 @@
   transform: translateY(-4px); border-color: var(--homea-gold);
   box-shadow: var(--shadow-md);
 }
-.tpg-diagram { display: block; }
+.tpg-diagram { display: flex; align-items: center; justify-content: center; height: 150px; }
 .tpg-diagram svg { height: 115px; width: auto; display: block; }
+/* Foto real del tipo (packshot sobre blanco): misma caja que el diagrama para
+   que el grid mixto alinee. La imagen NUNCA se anima — el hover vive en la
+   tarjeta (borde oro + lift), no en la foto. */
+.tpg-photo { display: flex; align-items: center; justify-content: center; height: 150px; width: 100%; }
+.tpg-photo img { max-height: 100%; max-width: 100%; object-fit: contain; display: block; }
 .tpg-name {
   font-family: var(--font-sans); font-size: 12px; font-weight: 600;
   letter-spacing: .1em; text-transform: uppercase; color: var(--fg);
@@ -463,6 +468,14 @@
   --dgm-repisa:  #9FB0BB;   /* canto de las repisas de cristal */
   --dgm-cristal: #A8C4D6;       /* puerta de cristal: azulado, no acero */
   --dgm-cristal-canto: #7C9CB2; /* perfil de la puerta de cristal */
+  /* Parrillas — materiales que NO son acero (Carla, 2026-07-31): */
+  --dgm-negro-1: #23262B;       /* cristal negro (vitro/inducción) */
+  --dgm-negro-2: #3C424A;       /* reflejo diagonal del cristal */
+  --dgm-negro-3: #15171A;       /* borde profundo del cristal */
+  --dgm-negro-canto: #0D0F11;   /* canto de la placa de vidrio */
+  --dgm-serigrafia: #9AA1A8;    /* marcas serigrafiadas sobre el cristal */
+  --dgm-hierro: #43484E;        /* rejilla de hierro de los quemadores */
+  --dgm-calor: #C4744A;         /* zona encendida al hover (flama/radiante) */
 }
 .dgm-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
 #dgm-acero .a1 { stop-color: var(--dgm-acero-1); }
@@ -482,6 +495,22 @@
 :is(.tfk-diagram, .tpg-diagram) .glass { stroke: var(--dgm-canto); opacity: 0.5; }
 :is(.tfk-diagram, .tpg-diagram) .in .ring { stroke: var(--dgm-repisa); }
 :is(.tfk-diagram, .tpg-diagram) .in path { stroke: var(--dgm-repisa); }
+
+/* Parrillas: placa de cristal negro, serigrafía, rejillas y piedra. */
+#dgm-negro .n1 { stop-color: var(--dgm-negro-1); }
+#dgm-negro .n2 { stop-color: var(--dgm-negro-2); }
+#dgm-negro .n3 { stop-color: var(--dgm-negro-3); }
+:is(.tfk-diagram, .tpg-diagram) .fbn { fill: url(#dgm-negro); stroke: var(--dgm-negro-canto); stroke-width: 1.5; }
+:is(.tfk-diagram, .tpg-diagram) .rn { fill: none; stroke: var(--dgm-serigrafia); stroke-width: 1.2; stroke-linecap: round; opacity: 0.85; }
+:is(.tfk-diagram, .tpg-diagram) .rn-dot { fill: var(--dgm-serigrafia); stroke: none; opacity: 0.8; }
+:is(.tfk-diagram, .tpg-diagram) .grate { fill: none; stroke: var(--dgm-hierro); stroke-width: 1.6; stroke-linecap: round; opacity: 0.9; }
+/* Rangetop profesional: cama oscura de rejillas continuas + divisiones claras. */
+:is(.tfk-diagram, .tpg-diagram) .hierro { fill: var(--dgm-negro-1); stroke: var(--dgm-negro-canto); stroke-width: 1; }
+:is(.tfk-diagram, .tpg-diagram) .reja { fill: none; stroke: #7A828A; stroke-width: 1.4; opacity: 0.7; }
+:is(.tfk-diagram, .tpg-diagram) .stone { fill: var(--homea-greige); stroke: var(--dgm-canto); stroke-width: 1.5; }
+:is(.tfk-diagram, .tpg-diagram) .veta { stroke: var(--homea-espresso); stroke-width: 0.8; opacity: 0.12; }
+:is(.tfk-diagram, .tpg-diagram) .in .ring.warm { stroke: var(--dgm-calor); }
+:is(.tfk-diagram, .tpg-diagram) .in .ln-cool { stroke: var(--dgm-repisa); stroke-width: 2.5; stroke-linecap: round; }
 
 /* ---------------------------------------------------------------------------
    PLP · capas exclusivas del mosaico de PRODUCTOS (Carla, 2026-07-28).
