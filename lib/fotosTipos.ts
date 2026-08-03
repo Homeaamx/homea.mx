@@ -81,16 +81,20 @@ export const FOTOS_TIPOS: Record<string, Record<string, FotoTipo>> = {
       alt: "Parrilla de gas empotrable con quemadores de latón y rejillas de hierro",
     },
     submontar: {
-      src: "/assets/photos/tipos/parrilla-submontar-quemadores-piedra.jpg",
-      alt: "Quemadores individuales submontados directamente en cubierta de piedra",
+      src: "/assets/photos/tipos/parrilla-submontar-quemadores-en-cubierta.jpg",
+      alt: "Quemadores de gas individuales submontados en la cubierta, vistos desde arriba",
     },
     invisible: {
-      src: "/assets/photos/tipos/parrilla-invisible-induccion-bajo-piedra.jpg",
-      alt: "Olla hirviendo directamente sobre cubierta de piedra con inducción invisible",
+      src: "/assets/photos/tipos/parrilla-invisible-induccion-bajo-cubierta.jpg",
+      alt: "Módulo de inducción invisible de cuatro zonas que se instala bajo la cubierta",
     },
     "induccion-con-sistema-de-extraccion": {
-      src: "/assets/photos/tipos/parrilla-induccion-extraccion-integrada.jpg",
+      src: "/assets/photos/tipos/parrilla-induccion-extraccion-downdraft-central.jpg",
       alt: "Parrilla de inducción con extracción descendente integrada al centro",
+    },
+    "hibrida-gas-induccion": {
+      src: "/assets/photos/tipos/parrilla-hibrida-gas-induccion-cristal-negro.jpg",
+      alt: "Parrilla híbrida de cristal negro con quemadores de gas encendidos y zonas de inducción",
     },
     profesional: {
       src: "/assets/photos/tipos/parrilla-profesional-rangetop-perillas-acero.jpg",
@@ -101,16 +105,18 @@ export const FOTOS_TIPOS: Record<string, Record<string, FotoTipo>> = {
       alt: "Parrilla de gas de empotre al ras de la cubierta con perillas arriba",
     },
     vitroceramica: {
-      src: "/assets/photos/tipos/parrilla-vitroceramica-radiante.jpg",
-      alt: "Parrilla vitrocerámica de cristal negro con zonas radiantes",
+      src: "/assets/photos/tipos/parrilla-vitroceramica-cristal-negro-5-zonas.jpg",
+      alt: "Parrilla vitrocerámica de cristal negro con cinco zonas radiantes encendidas",
     },
     induccion: {
-      src: "/assets/photos/tipos/parrilla-induccion-cristal-negro.jpg",
-      alt: "Parrilla de inducción de cristal negro con sartén y teppanyaki",
+      src: "/assets/photos/tipos/parrilla-induccion-vista-superior-acero.jpg",
+      alt: "Parrilla de inducción vista desde arriba con cinco zonas y controles al frente",
     },
+    // Los tres módulos Vario montados a tope, en el mismo orden en que se
+    // instalan en la cubierta: gas · grill · inducción.
     modulares: {
-      src: "/assets/photos/tipos/parrilla-modulares-vario.jpg",
-      alt: "Módulos dominó combinados en línea: gas, teppan y extracción",
+      src: "/assets/photos/tipos/parrilla-modulares-vario-gas-grill-induccion.jpg",
+      alt: "Tres módulos dominó instalados en línea en la cubierta: gas, grill e inducción",
     },
   },
 };
