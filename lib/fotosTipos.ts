@@ -22,8 +22,8 @@ export const FOTOS_TIPOS: Record<string, Record<string, FotoTipo>> = {
       alt: "Pareja de columnas de refrigerador y congelador en acero inoxidable",
     },
     columna: {
-      src: "/assets/photos/tipos/refrigerador-columna-empotrable-interior.webp",
-      alt: "Columna de refrigeración empotrable con puerta abierta e interior iluminado",
+      src: "/assets/photos/tipos/refrigerador-columna-congelador-acero.png",
+      alt: "Columna de refrigeración empotrable con frente de acero inoxidable",
     },
     "duplex-side-by-side": {
       src: "/assets/photos/tipos/refrigerador-duplex-side-by-side-acero.jpg",
@@ -34,35 +34,43 @@ export const FOTOS_TIPOS: Record<string, Record<string, FotoTipo>> = {
       alt: "Refrigerador French Door de 5 puertas en acero inoxidable",
     },
     "bajo-cubierta": {
-      src: "/assets/photos/tipos/refrigerador-bajo-cubierta-acero.webp",
-      alt: "Refrigerador bajo cubierta de acero inoxidable para bar o isla",
+      src: "/assets/photos/tipos/refrigerador-bajo-cubierta-cava-acero.jpg",
+      alt: "Cava bajo cubierta de acero inoxidable con puerta de cristal para bar o isla",
     },
     "french-door": {
-      src: "/assets/photos/tipos/refrigerador-french-door-acero.jpg",
-      alt: "Refrigerador French Door de acero con dos puertas y cajón congelador",
+      src: "/assets/photos/tipos/refrigerador-french-door-empotrable-acero.jpg",
+      alt: "Refrigerador French Door empotrable de acero con dos puertas y cajón congelador",
+    },
+    "bottom-mount": {
+      src: "/assets/photos/tipos/refrigerador-bottom-mount-congelador-inferior-acero.jpg",
+      alt: "Refrigerador bottom mount de acero con congelador inferior",
+    },
+    "4-puertas": {
+      src: "/assets/photos/tipos/refrigerador-4-puertas-acero.jpg",
+      alt: "Refrigerador de 4 puertas en acero inoxidable",
     },
     "de-piso": {
-      src: "/assets/photos/tipos/refrigerador-de-piso-french-door.jpg",
-      alt: "Refrigerador French Door de instalación libre con despachador",
+      src: "/assets/photos/tipos/refrigerador-de-piso-profesional-acero.jpg",
+      alt: "Refrigerador profesional de piso con puerta de cristal y patas vistas",
     },
     "counter-depth": {
-      src: "/assets/photos/tipos/refrigerador-counter-depth-al-ras.jpg",
-      alt: "Refrigerador de fondo reducido al ras de la carpintería en cocina premium",
+      src: "/assets/photos/tipos/refrigerador-counter-depth-french-door-al-ras.jpg",
+      alt: "Refrigerador French Door de fondo reducido al ras de la carpintería de madera",
     },
     empotrado: {
-      src: "/assets/photos/tipos/refrigerador-empotrado-panelable.jpg",
-      alt: "Refrigerador panelable integrado por completo en la carpintería",
+      src: "/assets/photos/tipos/refrigerador-empotrado-panelable-blanco.jpg",
+      alt: "Refrigerador empotrado panelable integrado a la carpintería blanca",
     },
     "1-puerta": {
-      src: "/assets/photos/tipos/refrigerador-1-puerta-retro.jpg",
-      alt: "Refrigerador retro de una puerta en color claro",
+      src: "/assets/photos/tipos/refrigerador-1-puerta-acero.webp",
+      alt: "Refrigerador de una puerta en acero inoxidable",
     },
     "glass-door": {
-      src: "/assets/photos/tipos/refrigerador-glass-door-cava.png",
+      src: "/assets/photos/tipos/refrigerador-glass-door-puerta-cristal-acero.png",
       alt: "Refrigerador con puerta de cristal e interior iluminado",
     },
     "top-mount": {
-      src: "/assets/photos/tipos/refrigerador-top-mount-acero.jpg",
+      src: "/assets/photos/tipos/refrigerador-top-mount-congelador-superior-acero.jpg",
       alt: "Refrigerador top mount de acero con congelador superior",
     },
   },

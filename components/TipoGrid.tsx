@@ -19,6 +19,7 @@ import FiltroDiagrama from "./FiltroDiagrama";
 import DiagramaDefs from "./DiagramaDefs";
 import { ContenidoTipo } from "./ContenidoTipo";
 import { getFotoTipo } from "@/lib/fotosTipos";
+import CorteInstalacion, { esTipoInstalacion } from "./CorteInstalacion";
 
 const GRUPOS: { key: GrupoFicha; label: string }[] = [
   { key: "tipo", label: "Tipo de instalación" },
@@ -61,7 +62,9 @@ export default function TipoGrid({ filtros, base, guia, contexto, activo, etique
                 <p className="eyebrow tpg-label">{label}</p>
                 <span className="tpg-count figures">{grupo.length} opciones</span>
               </div>
-              <div className="tpg-grid">
+              {/* El eje de instalación tiene pocas opciones (3): sus tarjetas
+                  se reparten el ancho completo de la sección, en grande. */}
+              <div className={`tpg-grid${key === "tipo" ? " tpg-grid--full" : ""}`}>
                 {grupo.map((f) => {
                   const dgm = f.ficha!.diagrama;
                   const slug = slugDeFiltro(f.filtro);
@@ -83,10 +86,22 @@ export default function TipoGrid({ filtros, base, guia, contexto, activo, etique
                       aria-current={esActivo ? "true" : undefined}
                     >
                       {foto ? (
-                        <span className="tpg-photo">
+                        <span
+                          className={`tpg-photo${
+                            key === "tipo" && esTipoInstalacion(slug) ? " has-corte" : ""
+                          }`}
+                        >
                           {/* Sin loading=lazy: el mosaico es el contenido primario
                               de la página, justo bajo el hero. */}
                           <img src={foto.src} alt={foto.alt} />
+                          {/* Hover: la foto cede al corte lateral animado que
+                              explica la instalación (sobresale / al ras / tras
+                              panel). Solo tiles de instalación de refrigeración. */}
+                          {key === "tipo" && esTipoInstalacion(slug) && (
+                            <span className="tpg-corte" aria-hidden="true">
+                              <CorteInstalacion tipo={slug} />
+                            </span>
+                          )}
                         </span>
                       ) : (
                         <span
@@ -107,13 +122,35 @@ export default function TipoGrid({ filtros, base, guia, contexto, activo, etique
           );
         })}
         {guia && (
-          <p className="tpg-guia">
-            ¿No sabes cuál te conviene?{" "}
-            <Link href={guia} className="arrow-link">
-              Guía de {contexto.toLowerCase()} <span className="ln" />
-              <span className="ar">→</span>
-            </Link>
-          </p>
+          /* Banner compacto de guía — misma anatomía que .cat-guide del home
+             (regla oro + serif con itálica + botón negro + garabato dorado),
+             a escala del mosaico para que la guía no pase desapercibida. */
+          <div className="tpg-banner">
+            <div className="tpg-banner-body">
+              <span className="rule-gold" />
+              <p>
+                ¿No sabes cuál te conviene? No te preocupes,{" "}
+                <em>nosotros te guiamos</em>.
+              </p>
+              <Link href={guia} className="btn btn-primary">
+                Guía de {contexto.toLowerCase()}
+              </Link>
+            </div>
+            <span className="tpg-banner-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="6" cy="19" r="2" />
+                <circle cx="18" cy="5" r="2" />
+                <path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
+              </svg>
+            </span>
+          </div>
         )}
       </div>
     </section>

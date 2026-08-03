@@ -415,6 +415,19 @@
   display: grid; gap: 16px;
   grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
 }
+/* Variante del eje de instalación: pocas opciones → las tarjetas se estiran
+   a repartirse todo el ancho de la sección (auto-fit) y la foto crece en
+   proporción. El corte animado escala solo (svg a height 100%). */
+.tpg-grid--full { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.tpg-grid--full .tpg-card { padding: 21px 14px 18px; gap: 12px; }
+.tpg-grid--full .tpg-photo, .tpg-grid--full .tpg-diagram { height: 240px; }
+/* Fotos de instalación uniformes: misma caja 3:4 para las tres, recortando
+   (cover) si la fuente trae otra proporción. */
+.tpg-grid--full .tpg-photo img { aspect-ratio: 3 / 4; height: 100%; width: auto; object-fit: cover; }
+.tpg-grid--full .tpg-name { font-size: 13px; }
+@media (max-width: 640px) {
+  .tpg-grid--full .tpg-photo, .tpg-grid--full .tpg-diagram { height: 176px; }
+}
 .tpg-card {
   display: flex; flex-direction: column; align-items: center; gap: 10px;
   padding: 18px 12px 16px; background: var(--surface);
@@ -431,16 +444,98 @@
 .tpg-diagram svg { height: 115px; width: auto; display: block; }
 /* Foto real del tipo (packshot sobre blanco): misma caja que el diagrama para
    que el grid mixto alinee. La imagen NUNCA se anima — el hover vive en la
-   tarjeta (borde oro + lift), no en la foto. */
-.tpg-photo { display: flex; align-items: center; justify-content: center; height: 150px; width: 100%; }
+   tarjeta (borde oro + lift), no en la foto. Excepción: los tiles de
+   instalación (.has-corte), donde la foto cede al corte lateral. */
+.tpg-photo { position: relative; display: flex; align-items: center; justify-content: center; height: 150px; width: 100%; }
 .tpg-photo img { max-height: 100%; max-width: 100%; object-fit: contain; display: block; }
+
+/* Corte de instalación — hover de "Tipo de instalación" (refrigeración).
+   Coreografía en 3 tiempos sobre components/CorteInstalacion.tsx:
+     1. el plano se dibuja (muro, piso, mueble — trazo .cin-line)
+     2. el refrigerador se desliza a su posición (.cin-fridge)
+     3. el remate oro aterriza al final (.cin-gold; en empotrado antes cae el
+        panel .cin-panel que lo cubre)
+   La salida (mouse fuera) es corta y sin delays para que el tile se sienta
+   vivo, no lento. Teclado: :focus-visible reproduce el hover completo. */
+.tpg-photo.has-corte img { transition: opacity var(--dur-med) var(--ease-standard); }
+.tpg-corte {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: var(--surface); opacity: 0; pointer-events: none;
+  transition: opacity var(--dur-med) var(--ease-standard);
+}
+.tpg-corte svg { height: 100%; max-width: 100%; display: block; }
+.tpg-card:hover .has-corte img,
+.tpg-card:focus-visible .has-corte img { opacity: 0; }
+.tpg-card:hover .tpg-corte,
+.tpg-card:focus-visible .tpg-corte { opacity: 1; }
+
+.cin-line {
+  stroke-dasharray: 340; stroke-dashoffset: 340;
+  transition: stroke-dashoffset .18s var(--ease-standard);
+}
+.cin-fridge { transform: translateX(54px); transition: transform .22s var(--ease-standard); }
+.cin-panel {
+  opacity: 0; transform: translateX(10px);
+  transition: opacity .18s var(--ease-standard), transform .18s var(--ease-standard);
+}
+.cin-gold { opacity: 0; transition: opacity .18s var(--ease-standard); }
+
+.tpg-card:hover .cin-line,
+.tpg-card:focus-visible .cin-line {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset .55s var(--ease-standard) .08s;
+}
+.tpg-card:hover .cin-fridge,
+.tpg-card:focus-visible .cin-fridge {
+  transform: translateX(0);
+  transition: transform .7s var(--ease-standard) .3s;
+}
+.tpg-card:hover .cin-panel,
+.tpg-card:focus-visible .cin-panel {
+  opacity: 1; transform: translateX(0);
+  transition: opacity .35s var(--ease-standard) .95s, transform .35s var(--ease-standard) .95s;
+}
+.tpg-card:hover .cin-gold,
+.tpg-card:focus-visible .cin-gold {
+  opacity: 1;
+  transition: opacity .4s var(--ease-standard) 1.05s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tpg-photo.has-corte img, .tpg-corte, .cin-line, .cin-fridge, .cin-panel, .cin-gold {
+    transition: none;
+  }
+  .cin-line { stroke-dashoffset: 0; }
+  .cin-fridge { transform: none; }
+  .cin-panel { opacity: 1; transform: none; }
+  .cin-gold { opacity: 1; }
+}
 .tpg-name {
   font-family: var(--font-sans); font-size: 12px; font-weight: 600;
   letter-spacing: .1em; text-transform: uppercase; color: var(--fg);
   text-align: center; line-height: 1.35;
 }
 .tpg-card:hover .tpg-name { color: var(--accent-text); }
-.tpg-guia { margin: 34px 0 0; font-size: 14px; color: var(--fg-muted); }
+/* Banner compacto de guía al pie del mosaico — réplica a escala del
+   .cat-guide del home: tarjeta blanca, regla oro, pregunta en serif con
+   acento en itálica, botón negro y garabato dorado a la derecha. */
+.tpg-banner {
+  margin-top: 34px;
+  padding: clamp(22px, 3vw, 36px) clamp(22px, 3.5vw, 52px);
+  background: var(--surface); border: 1px solid var(--border);
+  display: flex; align-items: center; gap: clamp(20px, 3vw, 48px);
+}
+.tpg-banner-body { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.tpg-banner .rule-gold { margin: 0; }
+.tpg-banner p {
+  margin: 0; font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(20px, 1.9vw, 27px); line-height: 1.32; color: var(--fg);
+  max-width: 22em;
+}
+.tpg-banner p em { font-style: italic; }
+.tpg-banner .btn { margin-top: 6px; }
+.tpg-banner-icon { flex: 0 0 auto; display: flex; align-items: center; color: #EAD8A0; }
+.tpg-banner-icon svg { width: clamp(72px, 8vw, 112px); height: auto; display: block; }
+@media (max-width: 760px) { .tpg-banner-icon { display: none; } }
 /* La anatomía y la animación del diagrama se comparten con las fichas de Guías
    (bloque .tfk-diagram / .tfk-card, arriba): el mosaico del PLP hereda las
    mismas puertas que se abren, sin duplicar una sola regla. */
