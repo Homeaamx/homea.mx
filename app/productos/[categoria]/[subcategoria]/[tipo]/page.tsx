@@ -34,7 +34,7 @@ const HERO_PLP: Record<string, { src: string; alt: string; pos?: string }> = {
   "cocina-y-bar/coccion/parrillas": {
     src: "/assets/photos/hero-sub1-coccion-pitt.jpg",
     alt: "Parrilla de quemadores submontados Pitt Cooking en cubierta de piedra",
-    pos: "center 60%",
+    pos: "center 90%",
   },
 };
 

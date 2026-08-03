@@ -132,7 +132,7 @@ export default function TipoGrid({ filtros, base, guia, contexto, activo, etique
                 ¿No sabes cuál te conviene? No te preocupes,{" "}
                 <em>nosotros te guiamos</em>.
               </p>
-              <Link href={guia} className="btn btn-primary">
+              <Link href={guia} className="btn btn-gold">
                 Guía de {contexto.toLowerCase()}
               </Link>
             </div>

@@ -93,12 +93,12 @@ export const FOTOS_TIPOS: Record<string, Record<string, FotoTipo>> = {
       alt: "Parrilla de inducción con extracción descendente integrada al centro",
     },
     profesional: {
-      src: "/assets/photos/tipos/parrilla-profesional-rangetop-perillas.jpg",
+      src: "/assets/photos/tipos/parrilla-profesional-rangetop-perillas-acero.jpg",
       alt: "Rangetop profesional de acero con rejillas continuas y perillas al frente",
     },
     tradicional: {
-      src: "/assets/photos/tipos/parrilla-tradicional-empotre-gas.jpg",
-      alt: "Parrilla de gas de empotre con marco de acero asentada en la cubierta",
+      src: "/assets/photos/tipos/parrilla-tradicional-empotre-cubierta.jpg",
+      alt: "Parrilla de gas de empotre al ras de la cubierta con perillas arriba",
     },
     vitroceramica: {
       src: "/assets/photos/tipos/parrilla-vitroceramica-radiante.jpg",

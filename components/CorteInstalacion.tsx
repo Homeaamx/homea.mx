@@ -16,10 +16,23 @@
 //   counter-depth → fondo reducido (60 cm): aterriza AL RAS del plano
 //   empotrado     → entra al nicho con holgura trasera y un panel lo cubre
 
-export type TipoInstalacion = "de-piso" | "empotrado" | "counter-depth";
+export type TipoInstalacion =
+  | "de-piso"
+  | "empotrado"
+  | "counter-depth"
+  | "profesional"
+  | "tradicional";
+
+const TIPOS: TipoInstalacion[] = [
+  "de-piso",
+  "empotrado",
+  "counter-depth",
+  "profesional",
+  "tradicional",
+];
 
 export function esTipoInstalacion(slug: string): slug is TipoInstalacion {
-  return slug === "de-piso" || slug === "empotrado" || slug === "counter-depth";
+  return (TIPOS as string[]).includes(slug);
 }
 
 const STROKE = "var(--fg)";
@@ -213,8 +226,116 @@ function Empotrado() {
   );
 }
 
+/* --- Parrillas (referencias dimensionales ZLINE aprobadas 2026-08-03) ------
+   Aquí el corte es la CUBIERTA: gabinete bajo + losa de cubierta, y la
+   parrilla CAE desde arriba a su posición (.cin-drop). La diferencia entre
+   tipos es cuánto cuerpo queda sobre el plano de la cubierta. */
+
+/** Gabinete bajo + losa de cubierta + piso: escena de las parrillas.
+    `corte` = [x1, x2] parte la losa en dos (el hueco donde cae el empotre). */
+function EscenaCubierta({ corte }: { corte?: [number, number] }) {
+  return (
+    <g fill="none" strokeLinecap="round">
+      <line className="cin-line" x1="12" y1="138" x2="208" y2="138" stroke={STROKE} strokeWidth="1.5" />
+      <g stroke={MUTED} strokeWidth="1">
+        <line className="cin-line" x1="60" y1="138" x2="52" y2="146" />
+        <line className="cin-line" x1="110" y1="138" x2="102" y2="146" />
+        <line className="cin-line" x1="160" y1="138" x2="152" y2="146" />
+      </g>
+      <rect className="cin-line" x="40" y="92" width="140" height="46" fill={GREIGE} stroke={STROKE} strokeWidth="1.25" />
+      {corte ? (
+        <>
+          <rect className="cin-line" x="32" y="86" width={corte[0] - 32} height="6" fill={BLANCO} stroke={STROKE} strokeWidth="1.5" />
+          <rect className="cin-line" x={corte[1]} y="86" width={188 - corte[1]} height="6" fill={BLANCO} stroke={STROKE} strokeWidth="1.5" />
+        </>
+      ) : (
+        <rect className="cin-line" x="32" y="86" width="156" height="6" fill={BLANCO} stroke={STROKE} strokeWidth="1.5" />
+      )}
+    </g>
+  );
+}
+
+/** Cota vertical estilo plano: línea con rayitas terminales horizontales. */
+function CotaV({ x, y1, y2 }: { x: number; y1: number; y2: number }) {
+  return (
+    <g stroke={GOLD} strokeWidth="1.5" strokeLinecap="round">
+      <line x1={x} y1={y1} x2={x} y2={y2} />
+      <line x1={x - 3.5} y1={y1} x2={x + 3.5} y2={y1} />
+      <line x1={x - 3.5} y1={y2} x2={x + 3.5} y2={y2} />
+    </g>
+  );
+}
+
+/* Profesional (rangetop): EMPOTRADA — el cuerpo cae dentro del corte de la
+   cubierta (referencia Wolf) y solo asoman las rejillas y el panel de
+   perillas al frente, sobre el gabinete. */
+function Profesional() {
+  return (
+    <svg viewBox="0 -14 220 164" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+      <EscenaCubierta corte={[64, 156]} />
+      <g className="cin-drop">
+        {/* rejillas continuas arriba */}
+        <g fill="none" stroke={STROKE} strokeWidth="1.25">
+          <rect x="70" y="68" width="16" height="6" />
+          <rect x="102" y="68" width="16" height="6" />
+          <rect x="134" y="68" width="16" height="6" />
+        </g>
+        {/* cuerpo en el corte: la mitad asoma, el panel baja frente al gabinete */}
+        <rect x="64" y="74" width="92" height="30" fill={BLANCO} stroke={STROKE} strokeWidth="1.5" />
+        {/* perillas AL FRENTE — la firma del rangetop profesional */}
+        <g fill="none" stroke={STROKE} strokeWidth="1.25">
+          <circle cx="78" cy="95" r="2.6" />
+          <circle cx="96" cy="95" r="2.6" />
+          <circle cx="124" cy="95" r="2.6" />
+          <circle cx="142" cy="95" r="2.6" />
+        </g>
+      </g>
+      <g className="cin-gold">
+        <CotaV x={172} y1={74} y2={104} />
+        <Etiqueta x={110} y={-2}>
+          EMPOTRADA
+        </Etiqueta>
+      </g>
+    </svg>
+  );
+}
+
+/* Tradicional (empotre): cae al corte de la cubierta y queda al ras;
+   solo rejillas y perillas asoman sobre el plano. */
+function Tradicional() {
+  return (
+    <svg viewBox="0 -14 220 164" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+      <EscenaCubierta />
+      <g className="cin-drop">
+        {/* rejillas sobre el marco */}
+        <g fill="none" stroke={STROKE} strokeWidth="1.25">
+          <rect x="70" y="74" width="16" height="5" />
+          <rect x="102" y="74" width="16" height="5" />
+          <rect x="134" y="74" width="16" height="5" />
+        </g>
+        {/* perillas ARRIBA, sobre el marco */}
+        <rect x="126" y="79" width="4" height="2" fill={STROKE} />
+        <rect x="146" y="79" width="4" height="2" fill={STROKE} />
+        {/* marco al ras + cuerpo de empotre (8 cm) dentro del gabinete */}
+        <rect x="62" y="81" width="96" height="5" fill={BLANCO} stroke={STROKE} strokeWidth="1.25" />
+        <rect x="68" y="86" width="84" height="12" fill={BLANCO} stroke={STROKE} strokeWidth="1.25" />
+      </g>
+      <g className="cin-gold">
+        {/* plano de la cubierta: el marco aterriza al ras */}
+        <line x1="32" y1="86" x2="188" y2="86" stroke={GOLD} strokeWidth="1.5" />
+        <CotaV x={168} y1={86} y2={98} />
+        <Etiqueta x={110} y={-2}>
+          SOBRE CUBIERTA
+        </Etiqueta>
+      </g>
+    </svg>
+  );
+}
+
 export default function CorteInstalacion({ tipo }: { tipo: TipoInstalacion }) {
   if (tipo === "de-piso") return <DePiso />;
   if (tipo === "counter-depth") return <CounterDepth />;
+  if (tipo === "profesional") return <Profesional />;
+  if (tipo === "tradicional") return <Tradicional />;
   return <Empotrado />;
 }

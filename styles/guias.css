@@ -421,9 +421,10 @@
 .tpg-grid--full { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
 .tpg-grid--full .tpg-card { padding: 21px 14px 18px; gap: 12px; }
 .tpg-grid--full .tpg-photo, .tpg-grid--full .tpg-diagram { height: 240px; }
-/* Fotos de instalación uniformes: misma caja 3:4 para las tres, recortando
-   (cover) si la fuente trae otra proporción. */
-.tpg-grid--full .tpg-photo img { aspect-ratio: 3 / 4; height: 100%; width: auto; object-fit: cover; }
+/* Fotos de instalación uniformes: mismo ALTO para todas y la proporción la
+   da la fuente — las curamos iguales por categoría (refrigeradores 3:4,
+   parrillas 1:1) para que la imagen entre completa, sin recorte forzado. */
+.tpg-grid--full .tpg-photo img { height: 100%; width: auto; }
 .tpg-grid--full .tpg-name { font-size: 13px; }
 @media (max-width: 640px) {
   .tpg-grid--full .tpg-photo, .tpg-grid--full .tpg-diagram { height: 176px; }
@@ -474,6 +475,8 @@
   transition: stroke-dashoffset .18s var(--ease-standard);
 }
 .cin-fridge { transform: translateX(54px); transition: transform .22s var(--ease-standard); }
+/* Parrillas: el aparato CAE a la cubierta en vez de deslizarse de lado. */
+.cin-drop { transform: translateY(-48px); transition: transform .22s var(--ease-standard); }
 .cin-panel {
   opacity: 0; transform: translateX(10px);
   transition: opacity .18s var(--ease-standard), transform .18s var(--ease-standard);
@@ -490,6 +493,11 @@
   transform: translateX(0);
   transition: transform .7s var(--ease-standard) .3s;
 }
+.tpg-card:hover .cin-drop,
+.tpg-card:focus-visible .cin-drop {
+  transform: translateY(0);
+  transition: transform .7s var(--ease-standard) .3s;
+}
 .tpg-card:hover .cin-panel,
 .tpg-card:focus-visible .cin-panel {
   opacity: 1; transform: translateX(0);
@@ -501,11 +509,11 @@
   transition: opacity .4s var(--ease-standard) 1.05s;
 }
 @media (prefers-reduced-motion: reduce) {
-  .tpg-photo.has-corte img, .tpg-corte, .cin-line, .cin-fridge, .cin-panel, .cin-gold {
+  .tpg-photo.has-corte img, .tpg-corte, .cin-line, .cin-fridge, .cin-drop, .cin-panel, .cin-gold {
     transition: none;
   }
   .cin-line { stroke-dashoffset: 0; }
-  .cin-fridge { transform: none; }
+  .cin-fridge, .cin-drop { transform: none; }
   .cin-panel { opacity: 1; transform: none; }
   .cin-gold { opacity: 1; }
 }
@@ -516,22 +524,23 @@
 }
 .tpg-card:hover .tpg-name { color: var(--accent-text); }
 /* Banner compacto de guía al pie del mosaico — réplica a escala del
-   .cat-guide del home: tarjeta blanca, regla oro, pregunta en serif con
-   acento en itálica, botón negro y garabato dorado a la derecha. */
+   .cat-guide del home, en ESPRESSO (decisión Carla 2026-08-03): superficie
+   oscura, texto en bone con el acento itálico en oro claro, botón oro y
+   garabato dorado a la derecha. */
 .tpg-banner {
   margin-top: 34px;
   padding: clamp(22px, 3vw, 36px) clamp(22px, 3.5vw, 52px);
-  background: var(--surface); border: 1px solid var(--border);
+  background: var(--homea-espresso); border: 1px solid var(--homea-espresso);
   display: flex; align-items: center; gap: clamp(20px, 3vw, 48px);
 }
 .tpg-banner-body { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
 .tpg-banner .rule-gold { margin: 0; }
 .tpg-banner p {
   margin: 0; font-family: var(--font-display); font-weight: 400;
-  font-size: clamp(20px, 1.9vw, 27px); line-height: 1.32; color: var(--fg);
+  font-size: clamp(20px, 1.9vw, 27px); line-height: 1.32; color: var(--homea-bone);
   max-width: 22em;
 }
-.tpg-banner p em { font-style: italic; }
+.tpg-banner p em { font-style: italic; color: var(--homea-gold-soft); }
 .tpg-banner .btn { margin-top: 6px; }
 .tpg-banner-icon { flex: 0 0 auto; display: flex; align-items: center; color: #EAD8A0; }
 .tpg-banner-icon svg { width: clamp(72px, 8vw, 112px); height: auto; display: block; }
