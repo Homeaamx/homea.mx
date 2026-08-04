@@ -1,0 +1,47 @@
+#!/bin/sh
+# Respaldo del proyecto en OneDrive al hacer push de 'test' o 'main'.
+#
+# git entrega por stdin: <local ref> <local sha> <remote ref> <remote sha>
+# Espejo del ÁRBOL DE TRABAJO (no del commit): respalda también lo que aún no
+# se ha commiteado. No bloquea el push si algo falla.
+#
+# ⚠️ Este archivo es la COPIA VERSIONADA. El que git ejecuta vive en
+# .git/hooks/pre-push, que no se versiona. Si se clona el repo de cero hay que
+# reinstalarlo:
+#
+#     cp scripts/hooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push
+
+SRC="/Users/carlaarteaga/Desktop/Homea Landing Page Oficial/"
+DST="/Users/carlaarteaga/Library/CloudStorage/OneDrive-Homea/HOMEA ONE DRIVE/PAGINA WEB/LANDING PAGE 2026 HTML/"
+
+respaldar() {
+  if [ ! -d "$DST" ]; then
+    echo "[respaldo] AVISO: carpeta de OneDrive no encontrada, se omite el backup." >&2
+    return
+  fi
+  echo "[respaldo] Actualizando backup en OneDrive…" >&2
+  # --delete deja el destino como espejo exacto del origen.
+  # Se excluyen dependencias y artefactos de compilación: son regenerables, pesan
+  # más que el proyecto entero (.next rondaba los 39 MB de 111 MB) y obligaban a
+  # OneDrive a re-sincronizar miles de archivos en cada push.
+  # --delete-excluded borra del destino lo que antes sí se copiaba y ya no aplica.
+  rsync -a --delete --delete-excluded \
+    --exclude='.git/' \
+    --exclude='.next/' \
+    --exclude='node_modules/' \
+    --exclude='.vercel/' \
+    --exclude='*.tsbuildinfo' \
+    --exclude='.DS_Store' \
+    --exclude='.meta_uploads/' \
+    "$SRC" "$DST" \
+    && echo "[respaldo] OneDrive actualizado: $DST" >&2 \
+    || echo "[respaldo] AVISO: rsync falló (el push continúa de todas formas)." >&2
+}
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  case "$remote_ref" in
+    refs/heads/test|refs/heads/main) respaldar ;;
+  esac
+done
+
+exit 0
