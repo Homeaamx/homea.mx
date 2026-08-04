@@ -98,7 +98,7 @@
       '<div class="wl-list" role="list"></div>' +
       '<div class="wl-foot">' +
       '  <a class="wl-wa" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_wishlist">Cotizar esta lista por WhatsApp <span class="ar">→</span></a>' +
-      '  <p class="wl-note">Respuesta promedio en 2 horas · Showroom en Querétaro.</p>' +
+      '  <p class="wl-note">Showroom en Querétaro.</p>' +
       '</div>';
     document.body.appendChild(overlay);
     document.body.appendChild(drawer);
