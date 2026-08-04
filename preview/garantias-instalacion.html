@@ -7,6 +7,142 @@
 <link rel="icon" type="image/png" href="assets/favicon-circle.png">
 <link rel="stylesheet" href="tokens-v2.css">
 <link rel="stylesheet" href="theme.css?v=60">
+<style>
+/* ══ Garantías por marca — muro de logos ══ */
+.gw-toolbar{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;margin:44px 0 26px}
+.gw-search{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--fg);padding:10px 2px;flex:0 1 360px}
+.gw-search svg{width:17px;height:17px;stroke:var(--fg);fill:none;stroke-width:2;flex:none}
+.gw-search input{border:0;outline:0;font:inherit;font-size:16px;width:100%;background:transparent;color:var(--fg)}
+.gw-search input::placeholder{color:var(--fg-subtle)}
+.gw-filters{display:flex;gap:8px;flex-wrap:wrap}
+.gw-chip{display:flex;align-items:center;gap:11px;font-family:var(--font-sans);font-size:13.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;padding:11px 17px;border:1px solid transparent;cursor:pointer;background:none;color:var(--fg-muted);transition:border-color .25s,color .25s}
+.gw-chip:hover{color:var(--fg)}
+.gw-chip.on{border-color:var(--fg);color:var(--fg)}
+/* tonos por tipo de instalación: dorado · greige · blanco */
+.gw-mark{display:inline-block;flex:none;width:14px;height:14px;border-radius:50%}
+.gw-mark--inc{background:var(--accent)}
+.gw-mark--costo{background:#A79E90}
+.gw-mark--no{background:transparent;box-shadow:inset 0 0 0 1.5px rgba(30,25,20,.5)}
+.gw-mark--na{background:transparent;box-shadow:inset 0 0 0 1.5px rgba(30,25,20,.5)}
+/* muro */
+.gw-wall{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.gw-tile{position:relative;background:#fff;border:1px solid var(--border);cursor:pointer;display:flex;flex-direction:column;padding:0;text-align:center;font-family:var(--font-sans);transition:transform .45s var(--ease-standard),box-shadow .45s var(--ease-standard),border-color .3s}
+.gw-tile:hover{transform:translateY(-4px);box-shadow:0 18px 40px -26px rgba(30,25,20,.4);border-color:var(--accent)}
+.gw-tile::after{content:"";position:absolute;left:0;right:0;top:100%;height:8px}
+/* el tono en reposo: línea inferior de la tarjeta */
+.gw-tile[data-tipo="inc"]{border-bottom:5px solid var(--accent)}
+.gw-tile[data-tipo="costo"]{border-bottom:5px solid #A79E90}
+.gw-tile[data-tipo="no"],.gw-tile[data-tipo="na"]{border-bottom:5px solid #0A0A0A}
+.gw-tile[data-tipo="no"]:hover,.gw-tile[data-tipo="na"]:hover{border-bottom-color:#fff}
+.gw-tile-logo{height:112px;display:flex;align-items:center;justify-content:center;padding:22px 26px 12px}
+.gw-tile-logo img{max-width:100%;max-height:70px;object-fit:contain}
+.gw-tile-logo .gw-noimg{font-family:var(--font-display);font-size:22px;color:var(--fg)}
+/* franja inferior: blanca en reposo, se rellena en negro al hover */
+.gw-tile-meta{display:flex;align-items:center;justify-content:center;gap:11px;padding:14px 14px 16px;border-top:1px solid var(--border);background:#fff;transition:background .35s var(--ease-standard)}
+.gw-tile[data-tipo="inc"]:hover .gw-tile-meta{background:var(--accent)}
+.gw-tile[data-tipo="costo"]:hover .gw-tile-meta{background:#A79E90}
+.gw-tile[data-tipo="no"]:hover .gw-tile-meta,.gw-tile[data-tipo="na"]:hover .gw-tile-meta{background:#0A0A0A}
+.gw-tile-yrs{font-family:var(--font-display);font-size:36px;line-height:1;color:var(--fg);font-variant-numeric:tabular-nums;transition:color .35s var(--ease-standard)}
+.gw-tile-yrs small{font-family:var(--font-sans);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-muted);margin-left:6px;transition:color .35s var(--ease-standard)}
+.gw-tile[data-tipo="inc"]:hover .gw-tile-yrs,.gw-tile[data-tipo="costo"]:hover .gw-tile-yrs{color:#0A0A0A}
+.gw-tile[data-tipo="inc"]:hover .gw-tile-yrs small,.gw-tile[data-tipo="costo"]:hover .gw-tile-yrs small{color:rgba(10,10,10,.68)}
+.gw-tile[data-tipo="no"]:hover .gw-tile-yrs,.gw-tile[data-tipo="na"]:hover .gw-tile-yrs{color:#fff}
+.gw-tile[data-tipo="no"]:hover .gw-tile-yrs small,.gw-tile[data-tipo="na"]:hover .gw-tile-yrs small{color:rgba(255,255,255,.72)}
+.gw-empty{padding:56px 0;text-align:center;color:var(--fg-muted);font-size:14.5px;display:none}
+/* leyenda inferior */
+.gw-foot{margin-top:26px;display:flex;justify-content:center;gap:26px;flex-wrap:wrap;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted)}
+.gw-foot span{display:flex;align-items:center;gap:8px}
+/* ficha modal */
+.gw-veil{position:fixed;inset:0;background:rgba(10,10,10,.58);display:none;align-items:center;justify-content:center;padding:22px;z-index:80}
+.gw-veil.open{display:flex}
+.gw-panel{background:var(--bg);max-width:780px;width:100%;max-height:92vh;overflow:auto;position:relative;animation:gwUp .45s var(--ease-standard)}
+@keyframes gwUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.gw-x{position:absolute;top:12px;right:16px;background:none;border:0;font-family:var(--font-display);font-size:30px;line-height:1;cursor:pointer;color:var(--fg);z-index:2}
+.gw-head{display:flex;align-items:center;gap:28px;padding:32px 38px 22px;border-bottom:1px solid var(--border)}
+.gw-head img{max-height:52px;max-width:180px;object-fit:contain}
+.gw-head-yrs{margin-left:auto;text-align:right}
+.gw-head-yrs b{font-family:var(--font-display);font-weight:500;font-size:42px;line-height:1;color:var(--fg);font-variant-numeric:tabular-nums}
+.gw-head-yrs span{display:block;font-family:var(--font-sans);font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-text);margin-top:4px}
+.gw-body{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:24px 38px 32px}
+.gw-b h5{font-family:var(--font-sans);font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-text);margin:0 0 12px}
+.gw-b ul{list-style:none;margin:0;padding:0}
+.gw-b li{padding:6px 0;border-bottom:1px dotted var(--border);font-size:14px;display:flex;gap:14px;align-items:baseline}
+.gw-b li b{font-weight:600;min-width:78px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-subtle)}
+.gw-b li a{color:var(--fg);text-decoration:none}
+.gw-b li a:hover{color:var(--accent-text)}
+.gw-badge{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-top:16px;color:var(--fg)}
+.gw-docs{display:flex;flex-direction:column;gap:9px}
+.gw-doc{font-family:var(--font-sans);font-size:12.5px;font-weight:600;letter-spacing:.05em;border:1px solid var(--fg);padding:11px 16px;text-decoration:none;color:var(--fg);text-align:center;transition:background .25s,color .25s}
+.gw-doc:hover{background:var(--fg);color:var(--bg)}
+.gw-doc--gold{background:var(--accent);border-color:var(--accent);color:var(--dark-bg)}
+.gw-doc--gold:hover{background:var(--accent-deep,#9a7c45);border-color:var(--accent-deep,#9a7c45);color:#fff}
+.gw-note{margin:0 38px 30px;font-size:13.5px;color:var(--accent-text);border-left:2px solid var(--accent);padding-left:14px}
+/* ══ Tres formas de instalar — franja espresso ══ */
+.gw-tipos{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px;background:rgba(244,239,230,.14)}
+.gw-tipo{background:var(--dark-bg);padding:36px 30px 32px;display:flex;flex-direction:column;gap:13px;border-top:3px solid transparent}
+.gw-tipo--inc{border-top-color:var(--accent)}
+.gw-tipo--costo{border-top-color:#A79E90}
+.gw-tipo--no{border-top-color:#fff}
+.gw-tipo-fig{height:54px;display:flex;align-items:center}
+.gw-tipo-fig i{display:block;width:40px;height:40px;border-radius:50%}
+.gw-tipo--inc .gw-tipo-fig i{background:var(--accent)}
+.gw-tipo--costo .gw-tipo-fig i{background:#A79E90}
+.gw-tipo--no .gw-tipo-fig i{background:transparent;border:2px solid #fff}
+.gw-tipo-n{font-family:var(--font-display);font-style:italic;font-size:15px;color:var(--accent)}
+.gw-tipo h4{font-family:var(--font-display);font-weight:500;font-size:24px;color:#F4EFE6;margin:0}
+.gw-tipo p{font-size:13.5px;color:rgba(237,231,220,.72);margin:0}
+.gw-tipo-brands{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(237,231,220,.5)}
+.gw-tipo a{margin-top:auto;align-self:flex-start;font-family:var(--font-sans);font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:3px}
+@media(max-width:1080px){.gw-wall{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:860px){.gw-wall{grid-template-columns:repeat(2,1fr)}.gw-tipos{grid-template-columns:1fr}}
+@media(max-width:600px){
+  .gw-wall{grid-template-columns:repeat(2,1fr)}
+  .gw-body{grid-template-columns:1fr;padding:22px 24px 26px}
+  .gw-head{padding:26px 24px 18px;gap:16px;flex-wrap:wrap}
+  .gw-note{margin:0 24px 24px}
+}
+/* hero espresso con herramientas en dibujo de línea */
+.page-hero.gw-hero-dark{background:var(--dark-bg);padding:72px 0 80px}
+.gw-hero-dark .crumbs{color:rgba(237,231,220,.55)}
+.gw-hero-dark .crumbs a{color:rgba(237,231,220,.55)}
+.gw-hero-dark .crumbs a:hover{color:var(--accent)}
+.gw-hero-dark h1{color:#F4EFE6}
+.gw-hero-dark h1 i{color:var(--accent)}
+.gw-hero-dark .sub{color:rgba(237,231,220,.66)}
+.gw-hero{display:flex;align-items:center;justify-content:space-between;gap:56px}
+.gw-hero-txt{max-width:640px}
+.gw-hero-icon{flex:none;width:clamp(180px,24vw,320px);color:var(--accent)}
+.gw-hero-icon svg{display:block;width:100%;height:auto;overflow:visible}
+.gw-hero-icon [data-draw]{stroke-dasharray:1;stroke-dashoffset:1;animation:gwDraw 1.5s var(--ease-standard) forwards}
+.gw-hero-icon [data-draw="2"]{animation-delay:.45s}
+.gw-hero-icon [data-draw="3"]{animation-delay:.8s}
+.gw-hero-icon [data-draw="4"]{animation-delay:1.05s}
+.gw-hero-icon [data-draw="5"]{animation-delay:1.3s}
+@keyframes gwDraw{to{stroke-dashoffset:0}}
+.gw-hero-float{animation:gwFloat 7s ease-in-out infinite alternate}
+@keyframes gwFloat{from{transform:translateY(0)}to{transform:translateY(-10px)}}
+.gw-seal-rot{animation:gwRot 60s linear infinite;transform-origin:130px 118px}
+@keyframes gwRot{to{transform:rotate(360deg)}}
+.gw-ribbon{fill:var(--dark-bg)}
+.gw-ribbon-txt{fill:var(--accent);stroke:none;font-size:14px;font-weight:600;letter-spacing:.34em}
+.gw-fade{opacity:0;animation:gwFade .9s ease forwards 1.8s}
+@keyframes gwFade{to{opacity:1}}
+@media(prefers-reduced-motion:reduce){
+  .gw-hero-icon [data-draw]{animation:none;stroke-dashoffset:0}
+  .gw-hero-float,.gw-seal-rot{animation:none}
+  .gw-fade{animation:none;opacity:1}
+}
+@media(max-width:760px){.gw-hero{gap:24px}.gw-hero-icon{width:110px;opacity:.7}}
+/* banda post-venta en tono contrastante (oro champagne) */
+.svc-cta--gold{background:var(--accent);border-color:var(--accent)}
+.svc-cta--gold .eyebrow-bright{color:rgba(10,10,10,.75)}
+.svc-cta--gold h2{color:var(--dark-bg)}
+.svc-cta--gold p{color:rgba(10,10,10,.72)}
+.svc-cta--gold .btn-gold{background:var(--dark-bg);border-color:var(--dark-bg);color:var(--bg)}
+.svc-cta--gold .btn-gold:hover{background:#000;border-color:#000}
+.svc-cta--gold .btn-ghost-light{border-color:rgba(10,10,10,.55);color:var(--dark-bg)}
+.svc-cta--gold .btn-ghost-light:hover{background:rgba(10,10,10,.08);border-color:var(--dark-bg)}
+</style>
 </head>
 <body>
 
@@ -142,16 +278,103 @@
 </div></nav>
 
 <!-- Page hero -->
-<header class="page-hero"><div class="container">
+<header class="page-hero gw-hero-dark"><div class="container">
   <div class="crumbs"><a href="home.html">Inicio</a><span class="sep">·</span><span>Garantías &amp; Instalación</span></div>
-  <div class="eyebrow" style="margin-bottom:18px">Servicio post-venta</div>
-  <h1>Servicio técnico, garantías &amp; <i>instalación</i>.</h1>
-  <p class="sub">Llena la solicitud con los datos de la persona a contactar para agendar visita o brindar asesoría. Recibirás folio, fechas y seguimiento por correo.</p>
+  <div class="gw-hero">
+    <div class="gw-hero-txt">
+      <h1>Servicio técnico, garantías &amp; <i>instalación</i>.</h1>
+      <p class="sub">Recibe apoyo post-venta y conoce los beneficios que brinda cada marca. Años de garantía, teléfono de servicio al cliente y términos de instalación.</p>
+    </div>
+    <div class="gw-hero-icon gw-hero-float" aria-hidden="true">
+      <svg viewBox="0 0 260 272" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="font-family:var(--font-sans)">
+        <!-- sello: estrella dentada giratoria -->
+        <g class="gw-seal-rot">
+          <path data-draw="1" pathLength="1" stroke-width="1.5"
+            d="M130.0,18.0L139.9,30.6L152.3,20.5L159.1,34.9L173.4,27.9L176.8,43.5L192.3,39.8L192.2,55.8L208.2,55.7L204.5,71.2L220.1,74.6L213.1,88.9L227.5,95.7L217.4,108.1L230.0,118.0L217.4,127.9L227.5,140.3L213.1,147.1L220.1,161.4L204.5,164.8L208.2,180.3L192.2,180.2L192.3,196.2L176.8,192.5L173.4,208.1L159.1,201.1L152.3,215.5L139.9,205.4L130.0,218.0L120.1,205.4L107.7,215.5L100.9,201.1L86.6,208.1L83.2,192.5L67.7,196.2L67.8,180.2L51.8,180.3L55.5,164.8L39.9,161.4L46.9,147.1L32.5,140.3L42.6,127.9L30.0,118.0L42.6,108.1L32.5,95.7L46.9,88.9L39.9,74.6L55.5,71.2L51.8,55.7L67.8,55.8L67.7,39.8L83.2,43.5L86.6,27.9L100.9,34.9L107.7,20.5L120.1,30.6Z"/>
+        </g>
+        <!-- anillo interior -->
+        <circle data-draw="2" pathLength="1" stroke-width="1.3" cx="130" cy="118" r="78"/>
+        <!-- herramientas cruzadas (imagen) -->
+        <image class="gw-fade" href="assets/badge-herramientas.png" x="84" y="72" width="92" height="92" preserveAspectRatio="xMidYMid meet"/>
+        <!-- listón -->
+        <path class="gw-ribbon-tail" data-draw="5" pathLength="1" stroke-width="1.4" d="M24 212 L4 224 L24 236"/>
+        <path class="gw-ribbon-tail" data-draw="5" pathLength="1" stroke-width="1.4" d="M236 212 L256 224 L236 236"/>
+        <path class="gw-ribbon" data-draw="5" pathLength="1" stroke-width="1.5" d="M24 206 H236 V242 H24 Z"/>
+        <text class="gw-ribbon-txt gw-fade" x="130" y="229" text-anchor="middle">GARANTÍAS</text>
+      </svg>
+    </div>
+  </div>
 </div></header>
 
-<!-- Banda CTA post-venta muy visible -->
-<section class="sec tight" style="padding-top:24px;padding-bottom:0"><div class="container">
-  <div class="svc-cta reveal">
+<!-- Muro de marcas: garantías por marca -->
+<section class="sec tight" id="marcas" style="padding-top:64px"><div class="container">
+  <div class="sec-head">
+    <span class="rule-gold"></span>
+    <h2>Encuentra tu marca, <i>conoce tu respaldo</i>.</h2>
+    <p class="sub" style="max-width:560px">Dale click a la marca que te interesa conocer. Descubre sus años de garantía, el centro de servicio y su teléfono.</p>
+  </div>
+
+  <div class="gw-toolbar reveal">
+    <label class="gw-search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="gw-q" type="search" placeholder="Busca tu marca…" aria-label="Buscar marca">
+    </label>
+    <div class="gw-filters" role="group" aria-label="Filtrar por tipo de instalación">
+      <button class="gw-chip on" data-f="all">Todas</button>
+      <button class="gw-chip" data-f="inc"><span class="gw-mark gw-mark--inc"></span>Instalación incluida</button>
+      <button class="gw-chip" data-f="costo"><span class="gw-mark gw-mark--costo"></span>Con costo</button>
+      <button class="gw-chip" data-f="no"><span class="gw-mark gw-mark--no"></span>No incluida</button>
+    </div>
+  </div>
+
+  <div class="gw-wall reveal" id="gw-wall" role="list"></div>
+  <p class="gw-empty" id="gw-empty">Ninguna marca coincide con tu búsqueda. ¿No encuentras la tuya? <a href="#svc-form" style="color:var(--accent-text)">Escríbenos</a> y te canalizamos.</p>
+
+  <div class="gw-foot">
+    <span><span class="gw-mark gw-mark--inc"></span> Instalación incluida</span>
+    <span><span class="gw-mark gw-mark--costo"></span> Instalación con costo</span>
+    <span><span class="gw-mark gw-mark--no"></span> Instalación no incluida</span>
+  </div>
+</div></section>
+
+<!-- Tres formas de instalar: franja espresso -->
+<section class="sec tight on-dark" id="tipos-instalacion" style="background:var(--dark-bg)"><div class="container">
+  <div class="sec-head">
+    <div class="eyebrow" style="color:var(--accent)">Conoce antes de comprar</div>
+    <span class="rule-gold"></span>
+    <h2 style="color:#F4EFE6">Tres formas de <i>instalar</i>.</h2>
+  </div>
+  <div class="gw-tipos reveal">
+    <div class="gw-tipo gw-tipo--inc">
+      <div class="gw-tipo-fig"><i></i></div>
+      <span class="gw-tipo-n">01 · tono dorado</span>
+      <h4>Incluida, sin costo</h4>
+      <p>En las marcas premium la instalación certificada viene con tu compra. El técnico autorizado por la marca coordina la visita directamente contigo.</p>
+      <span class="gw-tipo-brands">Gaggenau · Thermador · Wolf · Sub-Zero · Viking · La Cornue…</span>
+      <a href="assets/docs/instalacion-sin-costo.pdf" target="_blank" rel="noopener">Descargar detalle →</a>
+    </div>
+    <div class="gw-tipo gw-tipo--costo">
+      <div class="gw-tipo-fig"><i></i></div>
+      <span class="gw-tipo-n">02 · tono greige</span>
+      <h4>Con costo, por técnico de marca</h4>
+      <p>Miele, Smeg y Tecnolam instalan con técnico propio bajo tarifa publicada. En Smeg, instalar con su técnico suma un año más de garantía.</p>
+      <span class="gw-tipo-brands">Miele · Smeg · Tecnolam</span>
+      <a href="assets/docs/instalacion-con-costo.pdf" target="_blank" rel="noopener">Descargar guía →</a>
+    </div>
+    <div class="gw-tipo gw-tipo--no">
+      <div class="gw-tipo-fig"><i></i></div>
+      <span class="gw-tipo-n">03 · tono blanco</span>
+      <h4>No incluida</h4>
+      <p>En líneas de volumen la instalación corre por cuenta del cliente. Te orientamos sobre los requisitos de conexión antes de la entrega.</p>
+      <span class="gw-tipo-brands">Whirlpool · Mabe · Electrolux · Teka · KitchenAid…</span>
+      <a href="assets/docs/instalacion-no-incluida.pdf" target="_blank" rel="noopener">Descargar requisitos →</a>
+    </div>
+  </div>
+</div></section>
+
+<!-- Banda CTA post-venta en oro (contraste tras la franja espresso) -->
+<section class="sec tight" style="padding-top:56px;padding-bottom:0"><div class="container">
+  <div class="svc-cta svc-cta--gold reveal" style="border:0">
     <div class="svc-cta-txt">
       <div class="eyebrow eyebrow-bright">Atención inmediata</div>
       <h2>¿Caso abierto o una urgencia?</h2>
@@ -164,12 +387,182 @@
   </div>
 </div></section>
 
+<!-- Ficha de marca (modal) -->
+<div class="gw-veil" id="gw-veil" role="dialog" aria-modal="true" aria-label="Ficha de garantía de la marca">
+  <div class="gw-panel">
+    <button class="gw-x" id="gw-x" aria-label="Cerrar">×</button>
+    <div class="gw-head">
+      <img id="gw-m-logo" src="" alt="">
+      <div class="gw-head-yrs"><b id="gw-m-yrs"></b><span id="gw-m-yrsl"></span></div>
+    </div>
+    <div class="gw-body">
+      <div class="gw-b">
+        <h5>Centro de servicio autorizado</h5>
+        <ul id="gw-m-contact"></ul>
+        <div class="gw-badge" id="gw-m-badge"></div>
+      </div>
+      <div class="gw-b">
+        <h5>Documentos y solicitud</h5>
+        <div class="gw-docs" id="gw-m-docs"></div>
+      </div>
+    </div>
+    <p class="gw-note" id="gw-m-note" hidden></p>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* ── Centros de servicio ── */
+  var SVC = {
+    artexa:  {n:'Artexa Service', tel:'(81) 1080 1712', email:'servicio1@artexa.com'},
+    subzero: {n:'Sub-Zero México', tel:'(800) 400 4372', url:['sub-zeromx.com/servicio-tecnico','https://sub-zeromx.com/servicio-tecnico/']},
+    viking:  {n:'Servicio Viking', tel:'(55) 4388 1710'},
+    mabep:   {n:'Mabe Premium', tel:'(55) 9088 6223', wa:'(56) 6214 1659', email:'serviciopremium@mabe.com.mx'},
+    mabe:    {n:'Servicio Mabe', tel:'(55) 9088 6223', wa:'(56) 6214 1659', email:'servicio@mabe.com.mx', url:['servicio.mabeglobal.com','https://servicio.mabeglobal.com/']},
+    whirl:   {n:'Whirlpool México', tel:'(81) 8329 2100', wa:'(81) 2516 1867', email:'servicio@whirlpool.com'},
+    miele:   {n:'Miele México', tel:'(800) 643 5300', email:'info@miele.com.mx'},
+    smeg:    {n:'Smeg México', tel:'(800) 111 7634', wa:'(55) 4067 7705', email:'servicioalcliente@smeg.com.mx'},
+    elux:    {n:'Electrolux México', tel:'(800) 112 2215', tel2:'(800) 112 2216', email:'servicioalcliente@electrolux.com'},
+    tecno:   {n:'Tecnolam', tel:'(55) 4032 8654', email:'serviciotecnico@tecnolam.mx'},
+    teka:    {n:'Teka México', tel:'(55) 5133 0493'},
+    supra:   {n:'Supra', tel:'(55) 5507 6373', wa:'(55) 7962 3967', email:'serviciotecnico@supra.com'},
+    homea:   {n:'HOMEA', tel:'(442) 216 3552', email:'homea@homea.mx'}
+  };
+  /* ── Documentos compartidos ── */
+  var D = {
+    polAtxa:['Póliza de garantía · PDF','assets/docs/garantia-artexa.pdf'],
+    guiaInc:['Guía · instalación sin costo','assets/docs/instalacion-sin-costo.pdf'],
+    guiaNo:['Guía · instalación no incluida','assets/docs/instalacion-no-incluida.pdf'],
+    guiaCosto:['Guía · instalación con costo','assets/docs/instalacion-con-costo-miele-tecnolam-smeg.pdf'],
+    costosAtxa:['Costos de instalación 2026 · PDF','assets/docs/costos-instalacion-artexa-2026.pdf'],
+    formAtxa:['Solicitar servicio Artexa','https://artexa.com/artexa-service#formulario','gold'],
+    formSz:['Solicitar en sub-zeromx.com','https://sub-zeromx.com/servicio-tecnico/','gold'],
+    polSz:['Póliza de garantía','https://homea.oxatis.com/PBCPPlayer.asp?PW=1&ID=1832734'],
+    polVk:['Póliza de garantía','https://homea.oxatis.com/PBCPPlayer.asp?PW=1&ID=1832756']
+  };
+  var ATXA_FULL = [D.polAtxa, D.guiaInc, D.costosAtxa, D.formAtxa];
+  var ATXA_BASE = [D.polAtxa, D.guiaInc, D.formAtxa];
+  var NOTA_VK = '2 años de garantía en equipos de interior · 1 año en equipos de exterior.';
+  /* ── 43 marcas — mismo orden (por gama) que la página Marcas ── */
+  var B = [
+    {s:'la-cornue', x:'png', n:'La Cornue', y:'2+1', yl:'int · ext', t:'inc', g:'viking', docs:[D.polVk, D.guiaInc], note:NOTA_VK},
+    {s:'gaggenau', x:'jpg', n:'Gaggenau', y:'2', yl:'años', t:'inc', g:'artexa', docs:ATXA_FULL},
+    {s:'thermador', x:'jpg', n:'Thermador', y:'2', yl:'años', t:'inc', g:'artexa', docs:ATXA_FULL},
+    {s:'monogram', x:'jpg', n:'Monogram', y:'1', yl:'año', t:'inc', g:'mabep', docs:[D.guiaInc], note:'Línea premium de Mabe — atención por su equipo dedicado.'},
+    {s:'miele', x:'png', n:'Miele', y:'2', yl:'años', t:'costo', g:'miele', docs:[['Formato de solicitud · PDF','assets/docs/solicitud-garantia-miele.pdf'], D.guiaCosto], note:'Para garantía, servicio o instalación: llena el formato y envíalo a info@miele.com.mx.'},
+    {s:'viking', x:'jpg', n:'Viking', y:'2+1', yl:'int · ext', t:'inc', g:'viking', docs:[D.polVk, D.guiaInc], note:NOTA_VK},
+    {s:'wolf', x:'jpg', n:'Wolf', y:'2', yl:'años', t:'inc', g:'subzero', docs:[D.polSz, D.guiaInc, D.formSz]},
+    {s:'sub-zero', x:'png', n:'Sub-Zero', y:'2', yl:'años', t:'inc', g:'subzero', docs:[D.polSz, D.guiaInc, D.formSz]},
+    {s:'cove', x:'png', n:'Cove', y:'2', yl:'años', t:'inc', g:'subzero', docs:[D.polSz, D.guiaInc, D.formSz]},
+    {s:'pitt-cooking', x:'png', n:'Pitt Cooking', y:'1', yl:'año', t:'inc', g:'artexa', docs:ATXA_FULL},
+    {s:'invisacook', x:'jpg', n:'Invisacook', y:'3', yl:'años', t:'na', g:'homea', docs:[['Póliza de garantía · PDF','assets/docs/garantia-invisacook.pdf']], note:'La garantía la gestiona HOMEA directamente; instalación: consúltala con tu asesor.'},
+    {s:'benessi', x:'jpg', n:'Benessi', y:'3', yl:'años', t:'inc', g:'artexa', docs:ATXA_FULL},
+    {s:'bosch', x:'jpg', n:'Bosch', y:'1', yl:'año', t:'inc', g:'artexa', docs:ATXA_FULL},
+    {s:'thor', x:'jpg', n:'Thor Kitchen', y:'1', yl:'año', t:'inc', g:'artexa', docs:ATXA_FULL},
+    {s:'asko', x:'png', n:'Asko', y:'1', yl:'año', t:'inc', g:'subzero', docs:[D.guiaInc, D.formSz]},
+    {s:'scotsman', x:'png', n:'Scotsman', y:'1', yl:'año', t:'inc', g:'subzero', docs:[D.guiaInc, D.formSz]},
+    {s:'elica', x:'jpg', n:'Elica', y:'1', yl:'año', t:'inc', g:'artexa', docs:ATXA_BASE},
+    {s:'falmec', x:'png', n:'Falmec', y:'1', yl:'año', t:'inc', g:'tecno', docs:[D.guiaInc], note:'El servicio técnico lo atiende Tecnolam.'},
+    {s:'faber', x:'jpg', n:'Faber', y:'2+1', yl:'int · ext', t:'no', g:'viking', docs:[D.guiaNo], note:NOTA_VK},
+    {s:'cafe', x:'jpg', n:'Café', y:'1', yl:'año', t:'inc', g:'mabep', docs:[D.guiaInc], note:'Línea premium de Mabe — atención por su equipo dedicado.'},
+    {s:'kitchenaid', x:'png', n:'KitchenAid', y:'1', yl:'año', t:'no', g:'whirl', docs:[D.guiaNo]},
+    {s:'hoshizaki', x:'jpg', n:'Hoshizaki', y:'1', yl:'año', t:'inc', g:'artexa', docs:ATXA_FULL},
+    {s:'electrolux', x:'jpg', n:'Electrolux', y:'1', yl:'año', t:'no', g:'elux', docs:[['Póliza de garantía · PDF','assets/docs/garantia-electrolux-frigidaire.pdf'], D.guiaNo]},
+    {s:'frigidaire', x:'jpg', n:'Frigidaire Professional', y:'1', yl:'año', t:'no', g:'elux', docs:[['Póliza de garantía · PDF','assets/docs/garantia-electrolux-frigidaire.pdf'], D.guiaNo]},
+    {s:'smeg', x:'jpg', n:'Smeg', y:'1+1', yl:'ver nota', t:'costo', g:'smeg', docs:[D.guiaCosto, ['Costos de instalación Smeg · PDF','assets/docs/costos-instalacion-smeg-2026.pdf']], note:'1 año de garantía — se extiende a 2 años si la instalación la realiza un técnico Smeg.'},
+    {s:'bertazzoni', x:'jpg', n:'Bertazzoni', y:'2', yl:'años', t:'inc', g:'artexa', docs:ATXA_FULL},
+    {s:'maytag', x:'jpg', n:'Maytag', y:'1', yl:'año', t:'no', g:'whirl', docs:[D.guiaNo]},
+    {s:'ge-profile', x:'png', n:'GE Profile', y:'1', yl:'año', t:'no', g:'mabe', docs:[D.guiaNo]},
+    {s:'whirlpool', x:'png', n:'Whirlpool', y:'1', yl:'año', t:'no', g:'whirl', docs:[D.guiaNo]},
+    {s:'io-mabe', x:'jpg', n:'IO Mabe', y:'1', yl:'año', t:'no', g:'mabe', docs:[D.guiaNo]},
+    {s:'teka', x:'jpg', n:'Teka', y:'1', yl:'año', t:'no', g:'teka', docs:[D.guiaNo]},
+    {s:'dexa', x:'jpg', n:'Dexa', y:'1', yl:'año', t:'no', g:'subzero', docs:[D.polSz, D.guiaNo]},
+    {s:'tecnolam', x:'jpg', n:'Tecnolam', y:'1', yl:'año', t:'costo', g:'tecno', docs:[['Póliza de garantía','assets/docs/garantia-tecnolam.jpg'], D.guiaCosto, ['Costos de instalación','assets/docs/costos-instalacion-tecnolam.jpg']]},
+    {s:'mabe', x:'jpg', n:'Mabe', y:'1', yl:'año', t:'no', g:'mabe', docs:[D.guiaNo]},
+    {s:'supra', x:'jpg', n:'Supra', y:'2', yl:'años', t:'no', g:'supra', docs:[D.guiaNo]},
+    {s:'brizo', x:'jpg', n:'Brizo', y:'1', yl:'año', t:'inc', g:'artexa', docs:ATXA_BASE},
+    {s:'blanco', x:'jpg', n:'Blanco', y:'1', yl:'año', t:'inc', g:'artexa', docs:ATXA_BASE},
+    {s:'kraus', x:'jpg', n:'Kraus', y:'∞', yl:'de por vida', t:'inc', g:'artexa', docs:[D.polAtxa, D.formAtxa], note:'Garantía de por vida respetando el manual de cuidado y limpieza.'},
+    {s:'gessi', x:'jpg', n:'Gessi', y:'1', yl:'año', t:'inc', g:'artexa', docs:ATXA_BASE},
+    {s:'insinkerator', x:'png', n:'InSinkErator', y:'1–6', yl:'según modelo', t:'inc', g:'artexa', docs:ATXA_FULL, note:'La vigencia de la garantía depende del modelo: de 1 a 6 años.'},
+    {s:'alfresco', x:'jpg', n:'Alfresco', y:'1', yl:'año', t:'inc', g:'artexa', docs:ATXA_FULL},
+    {s:'coyote', x:'jpg', n:'Coyote', y:'1', yl:'año', t:'inc', g:'homea', docs:[D.guiaInc], note:'Contacto de servicio en actualización — repórtalo con HOMEA y te canalizamos con el técnico autorizado.'},
+    {s:'artisan', x:'png', n:'Artisan', y:'1', yl:'año', t:'inc', g:'artexa', docs:ATXA_FULL}
+  ];
+  var TIPO = {inc:['Instalación incluida','gw-mark--inc'], costo:['Instalación con costo','gw-mark--costo'], no:['Instalación no incluida','gw-mark--no'], na:['Instalación · consultar','gw-mark--na']};
+
+  /* ── Muro ── */
+  var wall = document.getElementById('gw-wall');
+  B.forEach(function(b, i){
+    var t = document.createElement('button');
+    t.className = 'gw-tile'; t.type = 'button'; t.setAttribute('role','listitem');
+    t.dataset.tipo = b.t; t.dataset.n = b.n.toLowerCase();
+    t.setAttribute('aria-label', b.n + ' — ver garantía y servicio');
+    t.innerHTML =
+      '<span class="gw-tile-logo"><img src="assets/logos/color/' + b.s + '.' + b.x + '" alt="' + b.n + '" loading="lazy" ' +
+      'onerror="this.outerHTML=\'<span class=&quot;gw-noimg&quot;>' + b.n + '</span>\'"></span>' +
+      '<span class="gw-tile-meta" title="' + TIPO[b.t][0] + '"><span class="gw-tile-yrs">' + b.y + '<small>' + b.yl + '</small></span></span>';
+    t.addEventListener('click', function(){ openFicha(i); });
+    wall.appendChild(t);
+  });
+
+  /* ── Ficha ── */
+  var veil = document.getElementById('gw-veil');
+  function openFicha(i){
+    var b = B[i], s = SVC[b.g];
+    var logo = document.getElementById('gw-m-logo');
+    logo.src = 'assets/logos/color/' + b.s + '.' + b.x; logo.alt = b.n;
+    document.getElementById('gw-m-yrs').textContent = b.y;
+    document.getElementById('gw-m-yrsl').textContent = (b.yl === 'años' || b.yl === 'año') ? b.yl + ' de garantía' : b.yl;
+    var c = '<li><b>Atiende</b> ' + s.n + '</li>';
+    c += '<li><b>Tel.</b> <a class="figures" href="tel:+52' + s.tel.replace(/\D/g,'') + '">' + s.tel + '</a></li>';
+    if (s.tel2) c += '<li><b>Tel. 2</b> <a class="figures" href="tel:+52' + s.tel2.replace(/\D/g,'') + '">' + s.tel2 + '</a></li>';
+    if (s.wa) c += '<li><b>WhatsApp</b> <a class="figures" href="https://wa.me/52' + s.wa.replace(/\D/g,'') + '" target="_blank" rel="noopener">' + s.wa + '</a></li>';
+    if (s.email) c += '<li><b>Email</b> <a href="mailto:' + s.email + '">' + s.email + '</a></li>';
+    if (s.url) c += '<li><b>Portal</b> <a href="' + s.url[1] + '" target="_blank" rel="noopener">' + s.url[0] + '</a></li>';
+    document.getElementById('gw-m-contact').innerHTML = c;
+    document.getElementById('gw-m-badge').innerHTML = '<span class="gw-mark ' + TIPO[b.t][1] + '"></span> ' + TIPO[b.t][0];
+    document.getElementById('gw-m-docs').innerHTML = b.docs.map(function(d){
+      var ext = /^https?:/.test(d[1]) ? ' target="_blank" rel="noopener"' : ' target="_blank"';
+      return '<a class="gw-doc' + (d[2] === 'gold' ? ' gw-doc--gold' : '') + '" href="' + d[1] + '"' + ext + '>' + d[0] + '</a>';
+    }).join('');
+    var note = document.getElementById('gw-m-note');
+    note.hidden = !b.note; note.textContent = b.note || '';
+    veil.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeFicha(){ veil.classList.remove('open'); document.body.style.overflow = ''; }
+  document.getElementById('gw-x').addEventListener('click', closeFicha);
+  veil.addEventListener('click', function(e){ if (e.target === veil) closeFicha(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeFicha(); });
+
+  /* ── Filtros + búsqueda ── */
+  var chips = document.querySelectorAll('.gw-chip'), q = document.getElementById('gw-q'), f = 'all';
+  function apply(){
+    var t = q.value.trim().toLowerCase(), shown = 0;
+    wall.querySelectorAll('.gw-tile').forEach(function(el){
+      var ok = (f === 'all' || el.dataset.tipo === f) && (!t || el.dataset.n.indexOf(t) !== -1);
+      el.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    });
+    document.getElementById('gw-empty').style.display = shown ? 'none' : 'block';
+  }
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      chips.forEach(function(x){ x.classList.remove('on'); });
+      c.classList.add('on'); f = c.dataset.f; apply();
+    });
+  });
+  q.addEventListener('input', apply);
+})();
+</script>
+
 <!-- Solicitud de servicio + lateral -->
 <section class="sec tight" style="padding-top:40px"><div class="container">
   <div class="grid-2" style="gap:72px;align-items:start">
 
     <!-- Formulario de servicio → KOMMO/registro (construcción: API/webhook) -->
-    <form class="svc-form reveal" onsubmit="event.preventDefault();alert('Demo — se conecta a KOMMO/registro en la construcción del front-end.')">
+    <form class="svc-form reveal" id="svc-form" onsubmit="event.preventDefault();alert('Demo — se conecta a KOMMO/registro en la construcción del front-end.')">
       <p class="svc-note"><b>Importante:</b> los técnicos son independientes a HOMEA — especialistas contratados y autorizados por cada marca. Llena todos los campos con los datos de la persona a contactar.</p>
 
       <fieldset class="q">
