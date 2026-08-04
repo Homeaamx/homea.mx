@@ -5,6 +5,7 @@ import "@/styles/theme.css";
 import "@/styles/guias.css";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { getChrome } from "@/lib/preview";
+import BuscadorOverlay from "@/components/BuscadorOverlay";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import NavActive from "@/components/NavActive";
 import HomeNavSticky from "@/components/HomeNavSticky";
@@ -31,6 +32,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="site-chrome" dangerouslySetInnerHTML={{ __html: nav }} />
         <main>{children}</main>
         <div dangerouslySetInnerHTML={{ __html: footer }} />
+        {/* Buscador de catálogo: se engancha a la lupa del nav (a.nav-ic-search). */}
+        <BuscadorOverlay />
         <WhatsAppFloat />
         <NavActive />
         <HomeNavSticky />

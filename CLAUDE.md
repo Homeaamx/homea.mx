@@ -56,6 +56,7 @@ Una landing page moderna con **dos objetivos simultáneos**:
 - **Infra/DNS:** GoDaddy (DNS) → **apuntar `www.homea.mx` a Vercel** (CNAME/A). Shopify queda como API + checkout.
 - **Analítica:** GA4 + Meta Pixel/CAPI, **inyectados desde el front-end** (tracking limpio, sin GTM heredado).
 - **SEO técnico (propio):** `sitemap.ts`, `robots.txt`, canónicos (Metadata API), JSON-LD, redirects 301 en `next.config.js`/`vercel.json`.
+- **Buscador del catálogo (lupa del nav):** capa propia (`components/BuscadorOverlay.tsx` → `/api/buscar` → `lib/catalogo.ts`) con autocompletado en línea. ⚠️ **No consulta Shopify en vivo**: lee `data/catalogo-index.json`, que genera `node scripts/build-search-index.mjs` desde los CSV de `catalogo-shopify/import/`. **Cada vez que cambie el catálogo hay que volver a correr ese comando** o el buscador se queda con el catálogo viejo. Migra a Storefront API (`predictiveSearch`) cuando exista el token — ver `docs/PLAN-DE-FASES.md` §4.4.
 - **Imágenes:** producto → **Shopify CDN** (vía `next/image` con loader); editoriales → **Vercel/`next/image`**. Optimización siempre (AVIF/WebP, `srcset`, lazy, hero `priority`) + **nombres de archivo SEO** (descriptivos, trends). Detalle: `docs/ESTRATEGIA-IMAGENES.md`.
 - **Dominio:** `www.homea.mx` (se conserva — activo de autoridad SEO).
 

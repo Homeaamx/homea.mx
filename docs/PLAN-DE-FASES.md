@@ -151,11 +151,28 @@ sirvió de piloto del patrón (5 fichas + import en borrador).
 ### 4.3 Import a Shopify + consumo headless
 - [ ] Carga masiva (Shopify MCP / Matrixify); validación de integridad.
 - [ ] Consumo por **Storefront API** con **ISR / on-demand revalidation** (no se construyen 25k de golpe).
+- [ ] ⭐ **REGENERAR EL ÍNDICE DEL BUSCADOR** después de cada carga o cambio de catálogo:
+
+  ```bash
+  node scripts/build-search-index.mjs
+  ```
+
+  **No es opcional.** El buscador de la lupa no consulta Shopify en vivo: lee `data/catalogo-index.json`, generado desde los CSV de `catalogo-shopify/import/`. Si no se regenera, el sitio seguirá buscando en el catálogo viejo (hoy: 305 Gaggenau) por más productos que haya en Shopify. Ver 4.4 · Buscador.
 
 ### 4.4 Filtros / navegación facetada ⭐
 - [ ] Taxonomía: **tipo, marca, características** (medidas, color, panelable, combustible, etc.).
 - [ ] Implementar con metafields/tags de Shopify + lógica de filtros en el front-end. Filtros **precisos por categoría**.
 - [ ] **Filtros específicos por subcat.2** ⭐ (pendiente desde 2026-07-22): las páginas de subcat.1 de Cocina y Bar (`/productos/cocina-y-bar/<sub>`) ya existen con filtros a nivel subcat.1 y deep-link `?tipo=<subcat.2>`; falta definir e implementar el **set de filtros propio de cada subcat.2** (p. ej. Refrigeradores: estilo French Door/Duplex/Bottom Mount, panelable; Campanas: tipo de instalación y capacidad de extracción; Tarjas: nº de tazones). Se trabaja al conectar Shopify Search & Discovery / Storefront API, subcat.2 por subcat.2, partiendo de las fichas de tipo de `GUIAS/taxonomia-guias.json` (campo `filtros`) y de `docs/PATRON-FICHAS-TIPO.md`. Replicar después en las demás macrocategorías.
+
+#### Buscador del catálogo (lupa del nav) ⭐ — construido, pendiente de reconectar
+*Estado (2026-08-04): funcionando en `localhost` con los 305 Gaggenau. Piezas: `components/BuscadorOverlay.tsx` (capa que abre sin salir de la página, con autocompletado en línea) → `app/api/buscar/route.ts` → `lib/catalogo.ts` → `data/catalogo-index.json` ← `scripts/build-search-index.mjs`. Cada fila muestra marca, SKU, nombre corto, precio **con IVA** en su moneda e imagen.*
+
+- [ ] **Regenerar el índice al cerrar el catálogo** (`node scripts/build-search-index.mjs`) — mismo paso que 4.3, aquí queda por si se entra por esta sección.
+- [ ] **Revisar los diccionarios del script con el catálogo completo**: `RE_APARATO` (qué sustantivos abren un aparato vs. una refacción) y `CATEGORIAS` (título → categoría, que decide la imagen) se calibraron **solo con Gaggenau**. Con 77 marcas van a aparecer casos nuevos — tarjas, grifería, minisplits, chimeneas.
+- [ ] **Decidir si el buscador muestra productos en Draft.** Hoy los muestra (de los 309 de Shopify, 304 están en borrador). Antes de publicar hay que filtrarlo a productos publicados.
+- [ ] **Migrar a Storefront API** cuando exista el token y el catálogo esté vivo: sustituir `buscar()` por `predictiveSearch` de Shopify. El contrato `ResultadoBusqueda` es lo que consume el overlay, así que **el componente no se toca**. A ~25k productos el índice en JSON deja de ser la opción cómoda.
+- [ ] **Enlazar los resultados a su PDP.** Hoy solo los 5 con ficha publicada abren página propia; el resto cae a WhatsApp con el SKU prellenado. Al existir las PDP masivas, `fichaDeSku()` debe apuntar a la ruta real.
+- [ ] Imágenes: hoy el buscador usa packshot por SKU cuando existe y foto de categoría si no. Al cargar las imágenes reales (4.2) **quitar el fallback por categoría** — cada producto con la suya.
 
 ### 4.5 Lógica comercial y checkout
 - [ ] **"Cotizar" vs "Comprar"** por colección/etiqueta.
@@ -188,6 +205,7 @@ sirvió de piloto del patrón (5 fichas + import en borrador).
 
 ## 🔵 Fase 5 — Función general, QA y lanzamiento
 - [ ] **QA FUNCIONAL:** búsqueda, **filtros**, carrito, checkout, formularios→KOMMO, WhatsApp, enlaces. Todo debe funcionar de verdad.
+- [ ] **QA del buscador:** que el índice esté regenerado con el catálogo final (`node scripts/build-search-index.mjs`), que busque por SKU y por lenguaje natural, que el precio con IVA cuadre con la PDP y que **no aparezcan productos en borrador**.
 - [ ] **QA de la regla USD → solo ejecutivo:** verificar que **ningún producto en dólares** pueda llegar al checkout de Shopify; el intercepto a WhatsApp debe funcionar en PLP, PDP y carrito.
 - [ ] Responsive, accesibilidad (WCAG), **Core Web Vitals** móvil (la gran oportunidad vs OXATIS).
 - [ ] **Corte de migración:** apuntar **DNS de `homea.mx` (GoDaddy) a Vercel**, activar **todos los 301**, subir **sitemap propio** a GSC, validar indexación.

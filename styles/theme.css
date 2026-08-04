@@ -2228,3 +2228,241 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .subhero-meta::before { margin-right: 12px; }
 .subhero-meta::after { margin-left: 12px; }
 @media (max-width: 640px) { .subhero-meta::before, .subhero-meta::after { display: none; } }
+
+/* =====================================================================
+   Buscador de catálogo (lupa del nav) — capa sobre la página actual
+   Paleta calcada del mega-menú de Marcas: superficie bone/blanca, filo
+   superior en oro, hover greige con borde izquierdo dorado.
+   ===================================================================== */
+.bsc-scrim {
+  position: fixed; inset: 0; z-index: 120;
+  display: flex; justify-content: center; align-items: flex-start;
+  padding: clamp(56px, 9vh, 108px) 20px 32px;
+  background: rgba(30, 25, 20, .52);
+  backdrop-filter: blur(6px) saturate(.9);
+  -webkit-backdrop-filter: blur(6px) saturate(.9);
+  animation: bsc-fade var(--dur-med) var(--ease-standard);
+}
+@keyframes bsc-fade { from { opacity: 0 } to { opacity: 1 } }
+
+.bsc-panel {
+  position: relative;
+  width: min(1000px, 100%);
+  max-height: calc(100vh - clamp(88px, 12vh, 140px));
+  display: flex; flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--homea-gold);
+  box-shadow: var(--shadow-lg);
+  animation: bsc-drop var(--dur-med) var(--ease-standard);
+}
+@keyframes bsc-drop {
+  from { opacity: 0; translate: 0 -10px }
+  to   { opacity: 1; translate: 0 0 }
+}
+
+.bsc-close {
+  position: absolute; top: 10px; right: 10px; z-index: 2;
+  width: 34px; height: 34px; display: grid; place-items: center;
+  background: none; border: 0; cursor: pointer; color: var(--fg-muted);
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+.bsc-close:hover { color: var(--fg); }
+.bsc-close svg { width: 17px; height: 17px; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+
+/* ---- Barra de búsqueda ---- */
+.bsc-bar {
+  display: flex; align-items: center; gap: 16px;
+  padding: 22px 58px 20px 28px;
+  border-bottom: 1px solid var(--border);
+}
+.bsc-lupa { display: grid; place-items: center; flex: none; color: var(--accent-text); }
+.bsc-lupa svg {
+  width: 22px; height: 22px; fill: none; stroke: currentColor;
+  stroke-width: 1.5; stroke-linecap: round;
+}
+/* Campo con autocompletado en línea: el input va encima (fondo transparente) y
+   el "ghost" debajo. Ambos comparten tipografía EXACTA — cualquier diferencia de
+   fuente, tamaño o tracking desalinea el tramo gris carácter a carácter. */
+.bsc-campo { position: relative; flex: 1; min-width: 0; }
+.bsc-input, .bsc-ghost {
+  font-family: var(--font-display); font-size: clamp(20px, 2.6vw, 27px);
+  font-weight: 400; letter-spacing: -.01em; line-height: 1.34;
+  padding: 2px 0;
+}
+.bsc-input {
+  position: relative; z-index: 1; width: 100%;
+  background: none; border: 0; outline: 0; color: var(--fg);
+}
+.bsc-ghost {
+  position: absolute; inset: 0; z-index: 0;
+  white-space: pre; overflow: hidden;
+  color: var(--homea-n300); pointer-events: none; user-select: none;
+}
+/* Lo ya tecleado se reserva en transparente: sostiene el hueco para que la
+   continuación empiece justo donde termina el texto real. */
+.bsc-ghost-esc { color: transparent; }
+.bsc-input::placeholder { color: var(--homea-n400); }
+.bsc-input::-webkit-search-cancel-button { display: none; }
+.bsc-count {
+  flex: none; font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--fg-muted);
+  white-space: nowrap;
+}
+
+/* ---- Cuerpo ---- */
+.bsc-body { overflow-y: auto; overscroll-behavior: contain; }
+.bsc-hint {
+  margin: 0; padding: 26px 28px;
+  font-family: var(--font-sans); font-size: 13px; color: var(--fg-muted);
+}
+.bsc-vacio { padding: 8px 28px 26px; }
+.bsc-vacio .bsc-hint { padding: 18px 0 14px; }
+
+.bsc-lista { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 780px) { .bsc-lista { grid-template-columns: 1fr } }
+
+.bsc-row {
+  display: grid; grid-template-columns: 62px minmax(0, 1fr) auto;
+  align-items: center; gap: 16px;
+  padding: 13px 20px 13px 14px;
+  border-bottom: 1px solid var(--border);
+  border-left: 2px solid transparent;
+  text-decoration: none; color: inherit;
+  transition: background-color var(--dur-fast) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard);
+}
+/* Hueco de relleno de la última página: reserva el alto de una fila real (lleva
+   su mismo esqueleto) pero no se ve ni responde al cursor. */
+.bsc-row--hueco { visibility: hidden; pointer-events: none; }
+.bsc-row:hover, .bsc-row.is-cursor {
+  background: var(--homea-greige);
+  border-left-color: var(--homea-gold);
+  border-bottom-color: transparent;
+}
+
+.bsc-thumb {
+  width: 62px; height: 62px; display: grid; place-items: center;
+  background: var(--homea-white); border: 1px solid var(--border); overflow: hidden;
+}
+.bsc-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+.bsc-thumb-ph {
+  width: 20px; height: 20px;
+  background: var(--homea-n200);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+/* min-height = el alto del caso peor (marca + título de 2 líneas + SKU). Fija el
+   alto de la fila para que el panel no cambie de tamaño al paginar, y el
+   `justify-content` centra el bloque cuando el título ocupa una sola línea —
+   si no, el SKU quedaba descolgado con un hueco encima. */
+.bsc-datos {
+  display: flex; flex-direction: column; justify-content: center; gap: 1px;
+  /* 75px = el caso de 2 líneas mide 74.42; se redondea hacia arriba para que
+     NINGUNA fila lo rebase, si no el alto del panel bailaba 2px al paginar. */
+  min-width: 0; min-height: 75px;
+}
+.bsc-marca {
+  font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--accent-text);
+  /* Una línea siempre: "GAGGENAU · SERIE EXPRESSIVE" en columna angosta se
+     partía en dos y volvía a descuadrar el alto de la fila. */
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.bsc-serie { color: var(--fg-muted); letter-spacing: .12em; }
+.bsc-nombre {
+  font-family: var(--font-display); font-size: 15.5px; line-height: 1.28; color: var(--fg);
+  /* Dos renglones EXACTOS, siempre: como máximo por el clamp y como mínimo por
+     el min-height. Sin el mínimo, una página de títulos cortos deja filas más
+     bajas que la siguiente y el panel entero cambia de alto al paginar. */
+  /* Dos renglones como máximo; el alto constante de la fila lo garantiza el
+     min-height de .bsc-datos, no éste. */
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.bsc-sku {
+  font-family: var(--font-sans); font-size: 10.5px; font-weight: 500;
+  letter-spacing: .1em; color: var(--fg-muted); margin-top: 2px;
+}
+
+.bsc-precio { display: flex; flex-direction: column; align-items: flex-end; text-align: right; flex: none; }
+.bsc-moneda {
+  font-family: var(--font-sans); font-size: 9.5px; font-weight: 600;
+  letter-spacing: .16em; color: var(--fg-muted);
+}
+.bsc-cifra { font-family: var(--font-sans); font-size: 14px; font-weight: 600; color: var(--fg); }
+.bsc-iva {
+  font-family: var(--font-sans); font-size: 9px; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--homea-n400);
+}
+
+/* ---- Pie ---- */
+.bsc-pie {
+  display: flex; justify-content: space-between; align-items: center; gap: 20px;
+  padding: 11px 28px; border-top: 1px solid var(--border);
+  background: var(--homea-n050);
+  font-family: var(--font-sans); font-size: 10.5px; color: var(--fg-muted);
+  letter-spacing: .04em;
+}
+.bsc-pie kbd {
+  display: inline-grid; place-items: center; min-width: 17px; height: 17px; padding: 0 4px;
+  background: var(--surface); border: 1px solid var(--border);
+  font-family: var(--font-sans); font-size: 9.5px; color: var(--fg);
+}
+@media (max-width: 620px) { .bsc-teclas { display: none } }
+
+/* Paginador: en oro para que se lea como control accionable y no como nota al
+   pie — es lo único del pie en lo que se puede hacer clic. */
+.bsc-pager { display: flex; align-items: center; gap: 10px; flex: none; }
+.bsc-pg {
+  width: 26px; height: 26px; display: grid; place-items: center;
+  background: var(--surface); border: 1px solid var(--homea-gold);
+  color: var(--accent-text); cursor: pointer; padding: 0;
+  transition: background-color var(--dur-fast) var(--ease-standard),
+              color var(--dur-fast) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard);
+}
+.bsc-pg svg {
+  width: 15px; height: 15px; fill: none; stroke: currentColor;
+  stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round;
+}
+.bsc-pg:hover:not(:disabled) { background: var(--homea-gold); color: var(--homea-black); }
+.bsc-pg:disabled {
+  border-color: var(--border); color: var(--homea-n300); cursor: default;
+}
+.bsc-pg-num {
+  font-family: var(--font-sans); font-size: 11px; letter-spacing: .1em;
+  color: var(--fg-muted); white-space: nowrap;
+}
+/* La página actual, en oro y seminegra: el dato que el usuario busca de reojo. */
+.bsc-pg-num b { color: var(--accent-text); font-weight: 700; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bsc-scrim, .bsc-panel { animation: none }
+}
+
+/* Buscador · móvil: la capa toma casi toda la pantalla y la fila se aprieta.
+   El contador de resultados se va —le robaba ancho al campo, que es lo único
+   que importa mientras se teclea— y reaparece en el pie. */
+@media (max-width: 620px) {
+  .bsc-scrim { padding: 0; align-items: stretch; }
+  .bsc-panel { width: 100%; max-height: 100vh; max-height: 100dvh; border: 0; border-top: 2px solid var(--homea-gold); }
+  .bsc-bar { padding: 16px 46px 14px 16px; gap: 10px; }
+  /* El ghost sigue al input: si solo se cambiara uno, el tramo gris se corre. */
+  .bsc-input, .bsc-ghost { font-size: 18px; }
+  .bsc-count { display: none; }
+  .bsc-close { top: 6px; right: 4px; }
+  .bsc-body { flex: 1; }
+  .bsc-hint, .bsc-vacio { padding-left: 16px; padding-right: 16px; }
+  .bsc-row { grid-template-columns: 48px minmax(0, 1fr) auto; gap: 11px; padding: 11px 12px 11px 10px; }
+  .bsc-thumb { width: 48px; height: 48px; }
+  .bsc-nombre { font-size: 14px; -webkit-line-clamp: 2; }
+  /* Mismo criterio que en escritorio, recalculado con las tipografías de móvil:
+     el caso de 2 líneas mide 69.08, se redondea a 70. */
+  .bsc-datos { min-height: 70px; }
+  .bsc-marca { font-size: 9px; letter-spacing: .14em; }
+  .bsc-serie { display: none; }
+  .bsc-cifra { font-size: 13px; }
+  /* El "IVA incluido" se queda: es la razón por la que la cifra es creíble. */
+  .bsc-iva { font-size: 8px; letter-spacing: .06em; }
+  .bsc-pie { padding: 10px 16px; justify-content: flex-end; }
+}
