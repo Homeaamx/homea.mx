@@ -1,4 +1,4 @@
-CAMPO	NIVEL	DESTINO EN SHOPIFY	QUIÉN LO LLENA	REGLA / FORMATO	EJEMPLO — Refrigerador 36" acero inoxidable con máquina de hielo
+CAMPO	NIVEL	DESTINO EN SHOPIFY	QUIÉN LO LLENA	REGLA / FORMATO	"EJEMPLO — Refrigerador 36"" acero inoxidable con máquina de hielo"
 — BLOQUE A · IDENTIFICACIÓN —					
 SKU_MODELO	OBLIGATORIO	Variant SKU	Equipo	Clave del fabricante, tal cual. Única. Sin espacios ni guiones inventados.	CL3650SD/S/T
 CLAVE_SAE	OBLIGATORIO	Metafield custom.clave_sae	Equipo	Clave con la que el producto vive en SAE. Es el puente pedido↔facturación.	SUB-CL3650
@@ -13,12 +13,12 @@ SERIE_COLECCION	IMPORTANTE	Metafield specs.serie + tag	Equipo	Serie/línea de la
 GAMA	OBLIGATORIO	Metafield facetas.gama	Yo	Sale de TABLA-MARCA-GAMA (por marca). Premium / Media / Residencial / Económica.	Premium
 TAGS_EXTRA	OPCIONAL	Tags	Equipo	Solo cruces especiales, formato faceta:valor. Ej: agua-filtrada, refaccion, requiere-kit, outlet.	requiere-kit
 — BLOQUE C · CONTENIDO —					
-TITULO	OBLIGATORIO	Title	Yo (equipo valida)	Reglas GUIA-TITULOS: [Tipo][Instalación][rasgo clave][configuración][medida]. SIN marca. Pulgadas con ". Title Case. Apertura Izquierda/Derecha (nunca 'bisagra'). Sin SKU.	Refrigerador de Piso Side-by-Side con Máquina de Hielo y Despachador 36"
-GANCHO_1_FRASE	OBLIGATORIO	Metafield homea.lead	Equipo	Una frase, máx. 160 caracteres, comercial, sin adjetivos vacíos. Es lo primero que se lee en la ficha.	Dos compresores independientes y máquina de hielo integrada, tras un frente de acero inoxidable de 36".
+TITULO	OBLIGATORIO	Title	Yo (equipo valida)	"Reglas GUIA-TITULOS: [Tipo][Instalación][rasgo clave][configuración][medida]. SIN marca. Pulgadas con "". Title Case. Apertura Izquierda/Derecha (nunca 'bisagra'). Sin SKU."	"Refrigerador de Piso Side-by-Side con Máquina de Hielo y Despachador 36"""
+GANCHO_1_FRASE	OBLIGATORIO	Metafield homea.lead	Equipo	Una frase, máx. 160 caracteres, comercial, sin adjetivos vacíos. Es lo primero que se lee en la ficha.	"Dos compresores independientes y máquina de hielo integrada, tras un frente de acero inoxidable de 36""."
 DESCRIPCION_LARGA	OBLIGATORIO	Body (HTML)	Equipo	Párrafo comercial + bullets + medidas. SÍ menciona marca y serie. Incluye requisitos de instalación. Semilla: descripción larga de SAE + PDF de la marca.	Refrigerador Sub-Zero de la Serie Classic... (3-5 párrafos)
 DESTACADOS_5	OBLIGATORIO	Metafield specs.destacados	Equipo	Exactamente 5 bullets, uno por línea (o separados por |). Beneficio, no spec cruda.	Máquina de hielo integrada en el congelador | Doble sistema de refrigeración... 
-TABLA_SPECS	OBLIGATORIO	Metafield specs.tabla	Equipo	Pares Concepto = Dato, separados por punto y coma. Mínimo: Serie, Modelo, Tipo, Ancho, Dimensiones, Nicho, Capacidad, Instalación, Eléctrico, Certificaciones, Incluye.	Serie = Classic; Modelo = CL3650SD/S/T; Ancho nominal = 36" (91.4 cm); ...
-REQUISITOS_INSTALACION	OBLIGATORIO	Body (HTML) + tag requiere-kit	Equipo	Kits, paneles, jaladeras, ducto, voltaje, toma de agua. Si requiere algo para funcionar, va aquí SIEMPRE.	Requiere toma de agua de 1/4"; jaladera y zoclo se venden por separado.
+TABLA_SPECS	OBLIGATORIO	Metafield specs.tabla	Equipo	Pares Concepto = Dato, separados por punto y coma. Mínimo: Serie, Modelo, Tipo, Ancho, Dimensiones, Nicho, Capacidad, Instalación, Eléctrico, Certificaciones, Incluye.	"Serie = Classic; Modelo = CL3650SD/S/T; Ancho nominal = 36"" (91.4 cm); ..."
+REQUISITOS_INSTALACION	OBLIGATORIO	Body (HTML) + tag requiere-kit	Equipo	Kits, paneles, jaladeras, ducto, voltaje, toma de agua. Si requiere algo para funcionar, va aquí SIEMPRE.	"Requiere toma de agua de 1/4""; jaladera y zoclo se venden por separado."
 SKUS_COMPLEMENTARIOS	IMPORTANTE	Metafield complementary_products	Equipo	SKUs separados por coma. Kits obligatorios, paneles, jaladeras, filtros de agua de repuesto.	7042287, 7025216
 SEO_TITULO	OPCIONAL	SEO title	Yo	Lo genero del título + marca + medida si el equipo no lo pone.	
 SEO_DESCRIPCION	OPCIONAL	SEO description	Yo	Lo genero del gancho.	
@@ -43,8 +43,8 @@ OPCION1_COLOR_ACABADO	OBLIGATORIO	Option 1	Equipo	El acabado NUNCA va en el tít
 OPCION2_COMBUSTIBLE	CONDICIONAL	Option 2	Equipo	Solo cocción/exterior: Gas Natural / LP.	
 OPCION3_APERTURA	CONDICIONAL	Option 3	Equipo	Solo refrigeración: Apertura Izquierda / Apertura Derecha / Reversible.	Apertura Derecha
 — BLOQUE H · FACETAS FILTRABLES (son los filtros del sitio) —					
-ANCHO	OBLIGATORIO	Metafield facetas.ancho	Equipo	Valor cerrado: 15", 18", 24", 30", 36", 42", 48", 60", 66".	36"
-INSTALACION	OBLIGATORIO	Metafield facetas.instalacion	Equipo	Refrigeración: Empotrado / Bajo cubierta / De piso / Columna.	De piso
+ANCHO	OBLIGATORIO	Metafield facetas.ancho	Equipo	"Valor cerrado: 15"", 18"", 24"", 30"", 36"", 42"", 48"", 60"", 66""."	"36"""
+INSTALACION	OBLIGATORIO	Metafield facetas.instalacion	Equipo	Refrigeración: Empotrado / Bajo cubierta / De piso / Columna. Campanas: De pared / De isla.	De piso
 COLOR	OBLIGATORIO	Metafield facetas.color	Equipo	Valor cerrado: Inoxidable, Cromo, Negro, Blanco, Gris, Bronce, Dorado/Latón, Níquel, + paleta de marca.	Inoxidable
 TIPO_ACABADO	OPCIONAL	Metafield facetas.acabado	Equipo	Mate / Cepillado / Pulido.	Cepillado
 PANELABLE	CONDICIONAL	Metafield facetas.panelable	Equipo	Sí / No. Si es Sí, los paneles compatibles van en SKUS_COMPLEMENTARIOS.	No
@@ -52,6 +52,11 @@ MAQUINA_HIELO	CONDICIONAL	Metafield facetas.maquina_hielo	Equipo	Sí / No. Es fi
 DESPACHADOR	CONDICIONAL	Metafield facetas.despachador	Equipo	Sí / No (agua y hielo en la puerta).	Sí
 CAPACIDAD	IMPORTANTE	Metafield facetas.capacidad	Equipo	Con unidad: pies³ para refrigeración, botellas para cavas, lbs/día para hielo.	22.7 pies³
 ZONAS_TEMPERATURA	CONDICIONAL	Metafield facetas.zonas	Equipo	Número de zonas independientes.	2
+DISENO	OBLIGATORIO	Metafield facetas.diseno	Equipo	Campanas: Rectas / T invertida / De Cristal / Piramidal / Cilíndrica ó Cuadrada / Tipo Inserto / Bajo mueble / Slider / Para revestir / A techo / Decorativas / Retráctiles / Gran formato / Tipo Repisa / Monolith / Inducción con sistema de Extracción.	Piramidal
+TIPO_EXTRACCION	CONDICIONAL	Metafield facetas.tipo_extraccion	Equipo	Campanas: Recirculante / Extractora / Convertible.	Convertible
+TIPO_MOTOR	CONDICIONAL	Metafield facetas.motor	Equipo	Campanas: Incluido / Con costo (Interno, Inline ó Externo). Si es con costo, el SKU del motor va en SKUS_COMPLEMENTARIOS.	Incluido
+POTENCIA_CFM	CONDICIONAL	Metafield facetas.cfm	Equipo	Campanas: solo el número (300 / 355 / 360 / 400 / 600 / 1200).	600
+USO	CONDICIONAL	Metafield facetas.uso	Equipo	Interior / Exterior. Filtro propio de campanas y equipo de cocina exterior.	Interior
 DIMENSIONES_PRODUCTO	OBLIGATORIO	specs.tabla	Equipo	Al × An × F en cm (y pulgadas si el PDF las da).	213.4 × 91.4 × 61.0 cm
 NICHO_EMPOTRE	CONDICIONAL	specs.tabla	Equipo	Solo empotrables/columnas. Con holguras y ventilación.	
 PESO_KG	OPCIONAL	specs.tabla	Equipo	Neto, en kg.	215 kg

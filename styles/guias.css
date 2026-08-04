@@ -449,6 +449,16 @@
    instalación (.has-corte), donde la foto cede al corte lateral. */
 .tpg-photo { position: relative; display: flex; align-items: center; justify-content: center; height: 150px; width: 100%; }
 .tpg-photo img { max-height: 100%; max-width: 100%; object-fit: contain; display: block; }
+/* Foto pendiente: MISMA caja que la foto real (150px, o 240px en el eje de
+   instalación), para que el mosaico ya esté maquetado a su tamaño final y los
+   packshots entren sin recorrer nada. En los tiles de instalación el hover
+   sigue revelando el corte, así que el hueco nunca se siente vacío. */
+.tpg-photo.es-pendiente { background: var(--homea-greige); outline: 1px dashed var(--border-strong); outline-offset: -1px; }
+.tpg-ph {
+  display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;
+  font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-muted);
+}
 
 /* Corte de instalación — hover de "Tipo de instalación" (refrigeración).
    Coreografía en 3 tiempos sobre components/CorteInstalacion.tsx:
@@ -540,7 +550,10 @@
   font-size: clamp(20px, 1.9vw, 27px); line-height: 1.32; color: var(--homea-bone);
   max-width: 22em;
 }
-.tpg-banner p em { font-style: italic; color: var(--homea-gold-soft); }
+/* La frase en itálica no se parte: cae completa al renglón de abajo en vez de
+   quedar "nosotros / te guiamos" a caballo entre dos líneas. Cabe de sobra en
+   el max-width: 22em del párrafo, así que no desborda ni en móvil. */
+.tpg-banner p em { font-style: italic; color: var(--homea-gold-soft); white-space: nowrap; }
 .tpg-banner .btn { margin-top: 6px; }
 .tpg-banner-icon { flex: 0 0 auto; display: flex; align-items: center; color: #EAD8A0; }
 .tpg-banner-icon svg { width: clamp(72px, 8vw, 112px); height: auto; display: block; }
@@ -661,6 +674,10 @@
   letter-spacing: .12em; text-transform: uppercase; color: var(--accent-text);
   opacity: .75;
 }
+/* La etiqueta ocupa su lugar SIEMPRE, aunque el tipo no esté activo: si sólo
+   apareciera al seleccionar, la tarjeta crecería y encogería y el contenido de
+   abajo daría un brinco de ~27px al poner o quitar el filtro. */
+.tpg-quitar.es-hueco { visibility: hidden; }
 /* Placeholders del catálogo mientras no hay productos cargados. */
 .pcard--ph { pointer-events: none; }
 .pcard--ph .imgw { aspect-ratio: 1 / 1; max-height: 240px; width: 100%; }

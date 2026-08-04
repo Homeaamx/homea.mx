@@ -21,7 +21,9 @@ export type TipoInstalacion =
   | "empotrado"
   | "counter-depth"
   | "profesional"
-  | "tradicional";
+  | "tradicional"
+  | "de-pared"
+  | "de-isla";
 
 const TIPOS: TipoInstalacion[] = [
   "de-piso",
@@ -29,6 +31,8 @@ const TIPOS: TipoInstalacion[] = [
   "counter-depth",
   "profesional",
   "tradicional",
+  "de-pared",
+  "de-isla",
 ];
 
 export function esTipoInstalacion(slug: string): slug is TipoInstalacion {
@@ -332,10 +336,124 @@ function Tradicional() {
   );
 }
 
+/* ——— Campanas ————————————————————————————————————————————————————————
+   En campanas lo que decide la compra NO es el mueble sino la ALTURA LIBRE
+   sobre la placa (65–75 cm: menos ahoga, más pierde captura). Por eso el
+   remate en oro es esa cota, y lo que cambia entre las dos tarjetas es de
+   dónde cuelga la campana: del muro o del techo. */
+
+/** Escena de campana: referencia arriba (techo) o a la izquierda (muro). */
+function EscenaCampana({ techo }: { techo?: boolean }) {
+  return (
+    <g fill="none" strokeLinecap="round">
+      <line className="cin-line" x1="12" y1="138" x2="208" y2="138" stroke={STROKE} strokeWidth="1.5" />
+      {techo ? (
+        <>
+          <line className="cin-line" x1="12" y1="10" x2="208" y2="10" stroke={STROKE} strokeWidth="1.5" />
+          <g stroke={MUTED} strokeWidth="1">
+            <line className="cin-line" x1="60" y1="10" x2="52" y2="4" />
+            <line className="cin-line" x1="110" y1="10" x2="102" y2="4" />
+            <line className="cin-line" x1="160" y1="10" x2="152" y2="4" />
+          </g>
+        </>
+      ) : (
+        <>
+          <line className="cin-line" x1="30" y1="-4" x2="30" y2="138" stroke={STROKE} strokeWidth="1.5" />
+          <g stroke={MUTED} strokeWidth="1">
+            <line className="cin-line" x1="30" y1="20" x2="22" y2="28" />
+            <line className="cin-line" x1="30" y1="58" x2="22" y2="66" />
+            <line className="cin-line" x1="30" y1="96" x2="22" y2="104" />
+          </g>
+        </>
+      )}
+      <g stroke={MUTED} strokeWidth="1">
+        <line className="cin-line" x1="60" y1="138" x2="52" y2="146" />
+        <line className="cin-line" x1="110" y1="138" x2="102" y2="146" />
+        <line className="cin-line" x1="160" y1="138" x2="152" y2="146" />
+      </g>
+    </g>
+  );
+}
+
+/** Mueble + cubierta con la placa empotrada al ras (la referencia de la cota).
+ *  `alMuro`: el gabinete arranca pegado al muro y solo vuela por el frente;
+ *  en isla vuela por los dos lados. */
+function CubiertaConPlaca({ x, w, alMuro }: { x: number; w: number; alMuro?: boolean }) {
+  const centro = x + w / 2;
+  const gx = alMuro ? x : x + 8;
+  const gw = alMuro ? w - 8 : w - 16;
+  return (
+    <>
+      <rect className="cin-line" x={gx} y="92" width={gw} height="46" fill={GREIGE} stroke={STROKE} strokeWidth="1.25" />
+      <rect className="cin-line" x={x} y="86" width={w} height="6" fill={BLANCO} stroke={STROKE} strokeWidth="1.5" />
+      <rect className="cin-line" x={centro - 32} y="82" width="64" height="4" fill={BLANCO} stroke={STROKE} strokeWidth="1.25" />
+      <g className="cin-line" stroke={STROKE} strokeWidth="1.25">
+        <line x1={centro - 20} y1="79" x2={centro - 20} y2="82" />
+        <line x1={centro} y1="79" x2={centro} y2="82" />
+        <line x1={centro + 20} y1="79" x2={centro + 20} y2="82" />
+      </g>
+    </>
+  );
+}
+
+/* De pared: cuelga del muro, con el respaldo cerrado — por eso captura más
+   con el mismo CFM. El ducto sube pegado al muro. */
+function DePared() {
+  return (
+    <svg viewBox="0 -14 220 164" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+      <EscenaCampana />
+      <CubiertaConPlaca x={32} w={126} alMuro />
+      <g className="cin-drop">
+        <rect x="36" y="-4" width="20" height="36" fill={BLANCO} stroke={STROKE} strokeWidth="1.5" />
+        <path d="M32 58 L126 58 L104 30 L32 30 Z" fill={BLANCO} stroke={STROKE} strokeWidth="1.5" />
+        <line x1="42" y1="54" x2="116" y2="54" stroke={MUTED} strokeWidth="1" />
+      </g>
+      <g className="cin-gold">
+        <CotaV x={142} y1={58} y2={82} />
+        {/* La cifra vive a la derecha de la cota: centrada se montaba sobre el
+            faldón inclinado de la campana. */}
+        <Etiqueta x={166} y={48}>
+          65–75 cm
+        </Etiqueta>
+        <Etiqueta x={110} y={-2}>
+          AL MURO
+        </Etiqueta>
+      </g>
+    </svg>
+  );
+}
+
+/* De isla: cuelga del techo y no tiene respaldo — se ve por los cuatro lados
+   y necesita más CFM para capturar lo mismo que una de pared. */
+function DeIsla() {
+  return (
+    <svg viewBox="0 -14 220 164" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+      <EscenaCampana techo />
+      <CubiertaConPlaca x={54} w={112} />
+      <g className="cin-drop">
+        <rect x="103" y="10" width="14" height="22" fill={BLANCO} stroke={STROKE} strokeWidth="1.5" />
+        <path d="M66 58 L154 58 L138 30 L82 30 Z" fill={BLANCO} stroke={STROKE} strokeWidth="1.5" />
+        <line x1="76" y1="54" x2="144" y2="54" stroke={MUTED} strokeWidth="1" />
+      </g>
+      <g className="cin-gold">
+        <CotaV x={184} y1={58} y2={82} />
+        <Etiqueta x={184} y={46}>
+          65–75 cm
+        </Etiqueta>
+        <Etiqueta x={110} y={-2}>
+          AL TECHO
+        </Etiqueta>
+      </g>
+    </svg>
+  );
+}
+
 export default function CorteInstalacion({ tipo }: { tipo: TipoInstalacion }) {
   if (tipo === "de-piso") return <DePiso />;
   if (tipo === "counter-depth") return <CounterDepth />;
   if (tipo === "profesional") return <Profesional />;
   if (tipo === "tradicional") return <Tradicional />;
+  if (tipo === "de-pared") return <DePared />;
+  if (tipo === "de-isla") return <DeIsla />;
   return <Empotrado />;
 }

@@ -36,6 +36,14 @@ const HERO_PLP: Record<string, { src: string; alt: string; pos?: string }> = {
     alt: "Parrilla de quemadores submontados Pitt Cooking en cubierta de piedra",
     pos: "center 90%",
   },
+  // El hero recorta ~46% del alto: centrado (50%) caía en la cubierta y dejaba
+  // la campana fuera de cuadro. A 12% la banda abarca la campana completa y
+  // alcanza a mostrar la isla debajo.
+  "cocina-y-bar/coccion/campanas": {
+    src: "/assets/photos/hero-sub1-coccion-campanas-isla.jpg",
+    alt: "Campana de isla suspendida sobre la isla de una cocina contemporánea",
+    pos: "center 12%",
+  },
 };
 
 /** "Bajo cubierta" → "bajo-cubierta" (para casar valor de filtro ↔ ?f=). */

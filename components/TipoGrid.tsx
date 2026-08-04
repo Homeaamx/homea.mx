@@ -18,7 +18,7 @@ import type { FiltroProducto, GrupoFicha } from "@/types/guias";
 import FiltroDiagrama from "./FiltroDiagrama";
 import DiagramaDefs from "./DiagramaDefs";
 import { ContenidoTipo } from "./ContenidoTipo";
-import { getFotoTipo } from "@/lib/fotosTipos";
+import { getFotoTipo, usaFotos } from "@/lib/fotosTipos";
 import CorteInstalacion, { esTipoInstalacion } from "./CorteInstalacion";
 
 const GRUPOS: { key: GrupoFicha; label: string }[] = [
@@ -69,9 +69,15 @@ export default function TipoGrid({ filtros, base, guia, contexto, activo, etique
                   const dgm = f.ficha!.diagrama;
                   const slug = slugDeFiltro(f.filtro);
                   const esActivo = slug === activo;
-                  // Foto real del tipo (packshot) cuando existe; diagrama como
-                  // fallback mientras se completa el set de imágenes.
-                  const foto = getFotoTipo(base.replace("/productos/", ""), slug);
+                  // Foto real del tipo (packshot) cuando existe. Si la categoría
+                  // ya es de foto pero ese tipo aún no la tiene, se deja el HUECO
+                  // reservado (misma caja) en vez de caer al diagrama: así el
+                  // layout ya es el definitivo y los packshots entran sin mover
+                  // nada. El diagrama de línea vive en Guías, no aquí.
+                  const plpKey = base.replace("/productos/", "");
+                  const foto = getFotoTipo(plpKey, slug);
+                  const conFoto = Boolean(foto) || usaFotos(plpKey);
+                  const conCorte = key === "tipo" && esTipoInstalacion(slug);
                   return (
                     <Link
                       key={f.filtro}
@@ -85,19 +91,23 @@ export default function TipoGrid({ filtros, base, guia, contexto, activo, etique
                       className={`tpg-card${esActivo ? " is-active" : ""}`}
                       aria-current={esActivo ? "true" : undefined}
                     >
-                      {foto ? (
+                      {conFoto ? (
                         <span
-                          className={`tpg-photo${
-                            key === "tipo" && esTipoInstalacion(slug) ? " has-corte" : ""
+                          className={`tpg-photo${conCorte ? " has-corte" : ""}${
+                            foto ? "" : " es-pendiente"
                           }`}
                         >
                           {/* Sin loading=lazy: el mosaico es el contenido primario
                               de la página, justo bajo el hero. */}
-                          <img src={foto.src} alt={foto.alt} />
+                          {foto ? (
+                            <img src={foto.src} alt={foto.alt} />
+                          ) : (
+                            <span className="tpg-ph">Foto pendiente</span>
+                          )}
                           {/* Hover: la foto cede al corte lateral animado que
                               explica la instalación (sobresale / al ras / tras
-                              panel). Solo tiles de instalación de refrigeración. */}
-                          {key === "tipo" && esTipoInstalacion(slug) && (
+                              panel; en campanas, la altura libre sobre la placa). */}
+                          {conCorte && (
                             <span className="tpg-corte" aria-hidden="true">
                               <CorteInstalacion tipo={slug} />
                             </span>
@@ -113,7 +123,14 @@ export default function TipoGrid({ filtros, base, guia, contexto, activo, etique
                         </span>
                       )}
                       <span className="tpg-name">{f.nombre}</span>
-                      {esActivo && <span className="tpg-quitar">Quitar filtro ×</span>}
+                      {/* Siempre en el DOM (oculta si no está activa) para que la
+                          tarjeta no cambie de alto al poner/quitar el filtro. */}
+                      <span
+                        className={`tpg-quitar${esActivo ? "" : " es-hueco"}`}
+                        aria-hidden={esActivo ? undefined : true}
+                      >
+                        Quitar filtro ×
+                      </span>
                     </Link>
                   );
                 })}

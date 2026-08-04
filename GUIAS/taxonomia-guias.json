@@ -542,7 +542,9 @@
               "nombre": "Parrillas",
               "slug": "parrillas",
               "filtro": "/productos/parrillas/",
-              "etiquetasGrupos": { "estilo": "Tipo de funcionamiento" },
+              "etiquetasGrupos": {
+                "estilo": "Tipo de funcionamiento"
+              },
               "filtros": [
                 {
                   "nombre": "Profesional",
@@ -794,8 +796,8 @@
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "camp-pared",
-                    "descripcion": "Anclada al muro sobre la estufa: la campana clásica de mayor captura.",
-                    "specs": "Anchos 30–48″ · Muro"
+                    "descripcion": "Anclada al muro sobre la estufa: la instalación clásica y la de mayor captura por su respaldo.",
+                    "specs": "Anchos 30–48″ · Al muro"
                   }
                 },
                 {
@@ -804,37 +806,117 @@
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "camp-isla",
-                    "descripcion": "Suspendida del techo sobre la isla, presente por los cuatro costados.",
-                    "specs": "Anchos 36–48″ · Isla"
+                    "descripcion": "Suspendida del techo sobre la isla: se ve por los cuatro costados, así que el diseño pesa tanto como el CFM.",
+                    "specs": "Anchos 36–48″ · Al techo"
+                  }
+                },
+                {
+                  "nombre": "Rectas",
+                  "filtro": "/productos/campanas/?f=rectas",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "camp-recta",
+                    "descripcion": "Chimenea y campana en un solo prisma sin quiebres: la silueta más sobria y la que mejor se alinea a gabinetes rectos.",
+                    "specs": "Perfil recto · La más neutra"
+                  }
+                },
+                {
+                  "nombre": "T invertida",
+                  "filtro": "/productos/campanas/?f=t-invertida",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "camp-t-invertida",
+                    "descripcion": "Ducto angosto sobre una visera ancha y plana: capta a lo largo de toda la estufa sin robar altura visual.",
+                    "specs": "Visera ancha · Perfil bajo"
+                  }
+                },
+                {
+                  "nombre": "De Cristal",
+                  "filtro": "/productos/campanas/?f=de-cristal",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "camp-cristal",
+                    "descripcion": "Visera de cristal templado sobre el grupo de extracción: filtra el humo sin cortar la vista de la cocina.",
+                    "specs": "Cristal templado · Ligera"
+                  }
+                },
+                {
+                  "nombre": "Piramidal",
+                  "filtro": "/productos/campanas/?f=piramidal",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "camp-piramidal",
+                    "descripcion": "Faldón inclinado que se cierra hacia el ducto: la forma tradicional de campana, con buen volumen de captura.",
+                    "specs": "Faldón inclinado · Alta captura"
+                  }
+                },
+                {
+                  "nombre": "Cilíndrica ó Cuadrada",
+                  "filtro": "/productos/campanas/?f=cilindrica-o-cuadrada",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "camp-cilindrica",
+                    "descripcion": "Volumen exento colgado del techo, redondo o prismático: funciona como luminaria además de extractor.",
+                    "specs": "Pieza exenta · Isla"
+                  }
+                },
+                {
+                  "nombre": "Tipo Inserto",
+                  "filtro": "/productos/campanas/?f=tipo-inserto",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "camp-inserto",
+                    "descripcion": "Solo el grupo motor, para montarse dentro de un mueble o campana de obra: a la vista queda la carpintería, no el aparato.",
+                    "specs": "Grupo oculto · Dentro del mueble"
                   }
                 },
                 {
                   "nombre": "Bajo mueble",
                   "filtro": "/productos/campanas/?f=bajo-mueble",
                   "ficha": {
-                    "grupo": "tipo",
+                    "grupo": "estilo",
                     "diagrama": "camp-bajo-mueble",
-                    "descripcion": "Compacta bajo la alacena: extracción discreta sin sacrificar gabinetes.",
-                    "specs": "Perfil bajo · Alacena"
+                    "descripcion": "Compacta bajo la alacena: extracción discreta cuando no quieres perder gabinete arriba de la estufa.",
+                    "specs": "Perfil bajo · Bajo alacena"
+                  }
+                },
+                {
+                  "nombre": "Slider",
+                  "filtro": "/productos/campanas/?f=slider",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "camp-slider",
+                    "descripcion": "Visera telescópica que sale al cocinar y duplica la superficie de captura; al terminar se guarda en el mueble.",
+                    "specs": "Visera extraíble · Bajo alacena"
+                  }
+                },
+                {
+                  "nombre": "Para revestir",
+                  "filtro": "/productos/campanas/?f=para-revestir",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "camp-revestir",
+                    "descripcion": "Estructura desnuda pensada para forrarse con el mismo acabado de la cocina: desaparece dentro del diseño.",
+                    "specs": "Se forra en obra · A medida"
                   }
                 },
                 {
                   "nombre": "A techo",
                   "filtro": "/productos/campanas/?f=a-techo",
                   "ficha": {
-                    "grupo": "tipo",
+                    "grupo": "estilo",
                     "diagrama": "camp-techo",
-                    "descripcion": "Empotrada al ras del plafón: extracción invisible sobre la isla.",
-                    "specs": "Al ras del plafón"
+                    "descripcion": "Empotrada al ras del plafón: la extracción se vuelve invisible y la isla queda despejada.",
+                    "specs": "Al ras del plafón · Invisible"
                   }
                 },
                 {
                   "nombre": "Decorativas",
                   "filtro": "/productos/campanas/?f=decorativas",
                   "ficha": {
-                    "grupo": "tipo",
+                    "grupo": "estilo",
                     "diagrama": "camp-decorativa",
-                    "descripcion": "Pieza escultural que preside la cocina sin dejar de extraer.",
+                    "descripcion": "Pieza escultural que preside la cocina: se elige por presencia y remata el proyecto como una lámpara.",
                     "specs": "Diseño protagonista"
                   }
                 },
@@ -842,10 +924,50 @@
                   "nombre": "Retráctiles",
                   "filtro": "/productos/campanas/?f=retractiles",
                   "ficha": {
-                    "grupo": "tipo",
+                    "grupo": "estilo",
                     "diagrama": "camp-retractil",
-                    "descripcion": "Emerge de la cubierta solo cuando cocinas (downdraft) y desaparece al terminar.",
-                    "specs": "Downdraft · Oculta"
+                    "descripcion": "Emerge de la cubierta solo cuando cocinas (downdraft) y desaparece al terminar: cero volumen sobre la isla.",
+                    "specs": "Downdraft · Se oculta"
+                  }
+                },
+                {
+                  "nombre": "Gran formato",
+                  "filtro": "/productos/campanas/?f=gran-formato",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "camp-gran-formato",
+                    "descripcion": "Campana de anchos grandes para estufas profesionales o dobles: cubre toda la zona de cocción de un solo tramo.",
+                    "specs": "Anchos 55–82″ · Estufa profesional"
+                  }
+                },
+                {
+                  "nombre": "Tipo Repisa",
+                  "filtro": "/productos/campanas/?f=tipo-repisa",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "camp-repisa",
+                    "descripcion": "La extracción va en el canto de una repisa: resuelve el humo y suma superficie de apoyo en el muro.",
+                    "specs": "Repisa + extracción · Al muro"
+                  }
+                },
+                {
+                  "nombre": "Monolith",
+                  "filtro": "/productos/campanas/?f=monolith",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "camp-monolith",
+                    "descripcion": "Un solo bloque del techo a la cubierta, sin junta entre ducto y campana: la lectura más limpia sobre la isla.",
+                    "specs": "Bloque continuo · Isla"
+                  }
+                },
+                {
+                  "nombre": "Inducción con sistema de Extracción",
+                  "filtro": "/productos/campanas/?f=induccion-con-sistema-de-extraccion",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "camp-induccion-extraccion",
+                    "descripcion": "No hay campana: la extracción va integrada en la placa de inducción y baja los humos por la cubierta.",
+                    "specs": "Extracción en la placa · Sin campana"
                   }
                 }
               ],

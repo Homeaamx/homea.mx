@@ -11,6 +11,13 @@
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
+declare global {
+  interface Window {
+    /** Scroll lento compartido (public/tipos.js): mismo recorrido que el riel de subcat.1. */
+    __homeaScrollA?: (el: Element, aire?: number) => void;
+  }
+}
+
 export default function ScrollAFiltros({ destino }: { destino: string }) {
   const f = useSearchParams().get("f");
 
@@ -25,7 +32,10 @@ export default function ScrollAFiltros({ destino }: { destino: string }) {
     // Pequeño respiro para que el usuario alcance a ver la tarjeta marcada
     // antes de que la página baje.
     const t = setTimeout(() => {
-      el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      // Mismo recorrido que el riel de subcat.1 (900ms, con el nav sticky
+      // descontado). Si tipos.js aún no cargó, el salto nativo sirve de red.
+      if (window.__homeaScrollA && !reduce) window.__homeaScrollA(el, 8);
+      else el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
     }, 260);
     return () => clearTimeout(t);
   }, [f, destino]);

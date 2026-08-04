@@ -44,7 +44,7 @@ OPCION2_COMBUSTIBLE,CONDICIONAL,Option 2,Equipo,Solo cocción/exterior: Gas Natu
 OPCION3_APERTURA,CONDICIONAL,Option 3,Equipo,Solo refrigeración: Apertura Izquierda / Apertura Derecha / Reversible.,Apertura Derecha
 — BLOQUE H · FACETAS FILTRABLES (son los filtros del sitio) —,,,,,
 ANCHO,OBLIGATORIO,Metafield facetas.ancho,Equipo,"Valor cerrado: 15"", 18"", 24"", 30"", 36"", 42"", 48"", 60"", 66"".","36"""
-INSTALACION,OBLIGATORIO,Metafield facetas.instalacion,Equipo,Refrigeración: Empotrado / Bajo cubierta / De piso / Columna.,De piso
+INSTALACION,OBLIGATORIO,Metafield facetas.instalacion,Equipo,Refrigeración: Empotrado / Bajo cubierta / De piso / Columna. Campanas: De pared / De isla.,De piso
 COLOR,OBLIGATORIO,Metafield facetas.color,Equipo,"Valor cerrado: Inoxidable, Cromo, Negro, Blanco, Gris, Bronce, Dorado/Latón, Níquel, + paleta de marca.",Inoxidable
 TIPO_ACABADO,OPCIONAL,Metafield facetas.acabado,Equipo,Mate / Cepillado / Pulido.,Cepillado
 PANELABLE,CONDICIONAL,Metafield facetas.panelable,Equipo,"Sí / No. Si es Sí, los paneles compatibles van en SKUS_COMPLEMENTARIOS.",No
@@ -52,6 +52,11 @@ MAQUINA_HIELO,CONDICIONAL,Metafield facetas.maquina_hielo,Equipo,Sí / No. Es fi
 DESPACHADOR,CONDICIONAL,Metafield facetas.despachador,Equipo,Sí / No (agua y hielo en la puerta).,Sí
 CAPACIDAD,IMPORTANTE,Metafield facetas.capacidad,Equipo,"Con unidad: pies³ para refrigeración, botellas para cavas, lbs/día para hielo.",22.7 pies³
 ZONAS_TEMPERATURA,CONDICIONAL,Metafield facetas.zonas,Equipo,Número de zonas independientes.,2
+DISENO,OBLIGATORIO,Metafield facetas.diseno,Equipo,Campanas: Rectas / T invertida / De Cristal / Piramidal / Cilíndrica ó Cuadrada / Tipo Inserto / Bajo mueble / Slider / Para revestir / A techo / Decorativas / Retráctiles / Gran formato / Tipo Repisa / Monolith / Inducción con sistema de Extracción.,Piramidal
+TIPO_EXTRACCION,CONDICIONAL,Metafield facetas.tipo_extraccion,Equipo,Campanas: Recirculante / Extractora / Convertible.,Convertible
+TIPO_MOTOR,CONDICIONAL,Metafield facetas.motor,Equipo,"Campanas: Incluido / Con costo (Interno, Inline ó Externo). Si es con costo, el SKU del motor va en SKUS_COMPLEMENTARIOS.",Incluido
+POTENCIA_CFM,CONDICIONAL,Metafield facetas.cfm,Equipo,Campanas: solo el número (300 / 355 / 360 / 400 / 600 / 1200).,600
+USO,CONDICIONAL,Metafield facetas.uso,Equipo,Interior / Exterior. Filtro propio de campanas y equipo de cocina exterior.,Interior
 DIMENSIONES_PRODUCTO,OBLIGATORIO,specs.tabla,Equipo,Al × An × F en cm (y pulgadas si el PDF las da).,213.4 × 91.4 × 61.0 cm
 NICHO_EMPOTRE,CONDICIONAL,specs.tabla,Equipo,Solo empotrables/columnas. Con holguras y ventilación.,
 PESO_KG,OPCIONAL,specs.tabla,Equipo,"Neto, en kg.",215 kg

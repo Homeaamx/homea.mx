@@ -1238,20 +1238,234 @@ const DIAGRAMAS: Record<string, JSX.Element> = {
   ),
 
   "camp-retractil": (
+    // Misma base que el resto de campanas (cubierta en y=106) para que las 16
+    // siluetas se comparen; aquí lo que sube al hover es el panel downdraft.
     <>
-      <line x1="16" y1="124" x2="124" y2="124" className="fl" />
-      <rect x="24" y="78" width="92" height="8" className="fb" />
-      <rect x="28" y="86" width="84" height="38" className="cab" />
-      <circle cx="46" cy="72" r="6" className="glass" />
-      <circle cx="64" cy="72" r="6" className="glass" />
+      <line x1="24" y1="106" x2="116" y2="106" className="ln" />
+      <circle cx="50" cy="100" r="6" className="glass" />
+      <circle cx="72" cy="100" r="6" className="glass" />
+      <rect x="92" y="98" width="16" height="8" className="fb" />
       <g className="lid">
-        <rect x="82" y="46" width="26" height="32" className="fb" />
-        <line x1="86" y1="52" x2="104" y2="52" className="glass-shelf" />
-        <line x1="86" y1="58" x2="104" y2="58" className="glass-shelf" />
+        <rect x="94" y="66" width="12" height="32" className="fb" />
+        <line x1="97" y1="74" x2="103" y2="74" className="glass-shelf" />
+        <line x1="97" y1="82" x2="103" y2="82" className="glass-shelf" />
       </g>
+      <rect x="30" y="106" width="80" height="18" className="cab" />
       <g className="in">
-        <line x1="50" y1="62" x2="78" y2="56" strokeDasharray="3 4" />
-        <line x1="56" y1="70" x2="80" y2="66" strokeDasharray="3 4" />
+        <line x1="56" y1="94" x2="90" y2="80" strokeDasharray="3 4" />
+        <line x1="78" y1="94" x2="90" y2="90" strokeDasharray="3 4" />
+      </g>
+    </>
+  ),
+
+  "camp-induccion-extraccion": (
+    // La única sin campana: arriba queda vacío a propósito y el aire BAJA por la
+    // ranura central de la placa. El contraste con las otras 15 es el mensaje.
+    <>
+      <line x1="24" y1="106" x2="116" y2="106" className="ln" />
+      <circle cx="52" cy="100" r="6" className="glass" />
+      <circle cx="88" cy="100" r="6" className="glass" />
+      <rect x="64" y="96" width="12" height="10" className="fb" />
+      <rect x="34" y="106" width="72" height="18" className="cab" />
+      <g className="in">
+        <line x1="52" y1="94" x2="64" y2="98" strokeDasharray="3 4" />
+        <line x1="88" y1="94" x2="76" y2="98" strokeDasharray="3 4" />
+        <line x1="70" y1="106" x2="70" y2="122" strokeDasharray="3 4" />
+      </g>
+    </>
+  ),
+
+  // ——— Campanas · por diseño ————————————————————————————————————————
+  // Eje "Diseño": lo que cambia es la FORMA de la campana, no dónde se instala.
+  // Base común (cubierta en y=106 + dos quemadores) para que las 16 tarjetas se
+  // comparen entre sí y solo destaque la silueta.
+
+  "camp-recta": (
+    <>
+      <rect x="62" y="14" width="16" height="30" className="fb" />
+      <rect x="42" y="44" width="56" height="26" className="fb" />
+      <line x1="42" y1="64" x2="98" y2="64" className="glass-shelf" />
+      <line x1="24" y1="106" x2="116" y2="106" className="ln" />
+      <circle cx="56" cy="100" r="6" className="glass" />
+      <circle cx="84" cy="100" r="6" className="glass" />
+      <g className="in">
+        <line x1="56" y1="96" x2="58" y2="76" strokeDasharray="3 4" />
+        <line x1="70" y1="98" x2="70" y2="76" strokeDasharray="3 4" />
+        <line x1="84" y1="96" x2="82" y2="76" strokeDasharray="3 4" />
+      </g>
+    </>
+  ),
+
+  "camp-t-invertida": (
+    <>
+      <rect x="64" y="14" width="12" height="36" className="fb" />
+      <rect x="30" y="50" width="80" height="14" className="fb" />
+      <line x1="30" y1="60" x2="110" y2="60" className="glass-shelf" />
+      <line x1="24" y1="106" x2="116" y2="106" className="ln" />
+      <circle cx="56" cy="100" r="6" className="glass" />
+      <circle cx="84" cy="100" r="6" className="glass" />
+      <g className="in">
+        <line x1="52" y1="96" x2="46" y2="70" strokeDasharray="3 4" />
+        <line x1="70" y1="98" x2="70" y2="70" strokeDasharray="3 4" />
+        <line x1="88" y1="96" x2="94" y2="70" strokeDasharray="3 4" />
+      </g>
+    </>
+  ),
+
+  "camp-cristal": (
+    <>
+      <rect x="62" y="14" width="16" height="26" className="fb" />
+      <rect x="46" y="40" width="48" height="10" className="fb" />
+      <path d="M34 72 L106 72 L94 50 L46 50 Z" className="glass" />
+      <line x1="40" y1="62" x2="100" y2="62" className="glass-shelf" />
+      <line x1="24" y1="106" x2="116" y2="106" className="ln" />
+      <circle cx="56" cy="100" r="6" className="glass" />
+      <circle cx="84" cy="100" r="6" className="glass" />
+      <g className="in">
+        <line x1="56" y1="96" x2="56" y2="78" strokeDasharray="3 4" />
+        <line x1="70" y1="98" x2="70" y2="78" strokeDasharray="3 4" />
+        <line x1="84" y1="96" x2="84" y2="78" strokeDasharray="3 4" />
+      </g>
+    </>
+  ),
+
+  "camp-piramidal": (
+    <>
+      <rect x="64" y="14" width="12" height="20" className="fb" />
+      <path d="M34 74 L106 74 L78 34 L62 34 Z" className="fb" />
+      <line x1="42" y1="68" x2="98" y2="68" className="glass-shelf" />
+      <line x1="24" y1="106" x2="116" y2="106" className="ln" />
+      <circle cx="56" cy="100" r="6" className="glass" />
+      <circle cx="84" cy="100" r="6" className="glass" />
+      <g className="in">
+        <line x1="56" y1="96" x2="60" y2="80" strokeDasharray="3 4" />
+        <line x1="70" y1="98" x2="70" y2="80" strokeDasharray="3 4" />
+        <line x1="84" y1="96" x2="80" y2="80" strokeDasharray="3 4" />
+      </g>
+    </>
+  ),
+
+  "camp-cilindrica": (
+    <>
+      <line x1="20" y1="12" x2="120" y2="12" className="fl" />
+      <line x1="70" y1="12" x2="70" y2="30" className="ln" />
+      <ellipse cx="70" cy="34" rx="24" ry="6" className="fb" />
+      <rect x="46" y="34" width="48" height="32" className="fb" />
+      <ellipse cx="70" cy="66" rx="24" ry="6" className="glass" />
+      <line x1="24" y1="106" x2="116" y2="106" className="ln" />
+      <circle cx="56" cy="100" r="6" className="glass" />
+      <circle cx="84" cy="100" r="6" className="glass" />
+      <g className="in">
+        <line x1="56" y1="96" x2="58" y2="74" strokeDasharray="3 4" />
+        <line x1="70" y1="98" x2="70" y2="74" strokeDasharray="3 4" />
+        <line x1="84" y1="96" x2="82" y2="74" strokeDasharray="3 4" />
+      </g>
+    </>
+  ),
+
+  "camp-inserto": (
+    <>
+      {/* El mueble a la vista; el grupo de extracción va oculto adentro. */}
+      <rect x="30" y="14" width="80" height="46" className="cab" />
+      <rect x="44" y="46" width="52" height="14" className="fb" />
+      <line x1="50" y1="53" x2="90" y2="53" className="glass-shelf" />
+      <line x1="24" y1="106" x2="116" y2="106" className="ln" />
+      <circle cx="56" cy="100" r="6" className="glass" />
+      <circle cx="84" cy="100" r="6" className="glass" />
+      <g className="in">
+        <line x1="56" y1="96" x2="58" y2="66" strokeDasharray="3 4" />
+        <line x1="70" y1="98" x2="70" y2="66" strokeDasharray="3 4" />
+        <line x1="84" y1="96" x2="82" y2="66" strokeDasharray="3 4" />
+      </g>
+    </>
+  ),
+
+  "camp-slider": (
+    <>
+      {/* Visera telescópica: al hover sale del mueble y duplica la superficie. */}
+      <rect x="30" y="14" width="80" height="40" className="cab" />
+      <rect x="34" y="54" width="72" height="12" className="fb" />
+      <g className="lid">
+        <rect x="40" y="66" width="60" height="8" className="fb" />
+        <line x1="46" y1="70" x2="94" y2="70" className="glass-shelf" />
+      </g>
+      <line x1="24" y1="106" x2="116" y2="106" className="ln" />
+      <circle cx="56" cy="100" r="6" className="glass" />
+      <circle cx="84" cy="100" r="6" className="glass" />
+      <g className="in">
+        <line x1="56" y1="96" x2="58" y2="80" strokeDasharray="3 4" />
+        <line x1="70" y1="98" x2="70" y2="80" strokeDasharray="3 4" />
+        <line x1="84" y1="96" x2="82" y2="80" strokeDasharray="3 4" />
+      </g>
+    </>
+  ),
+
+  "camp-revestir": (
+    <>
+      {/* El grupo (fb) y, punteado, el forro de carpintería que lo cubrirá. */}
+      <path d="M28 72 L112 72 L112 22 L28 22 Z" className="cab" />
+      <rect x="46" y="40" width="48" height="28" className="fb" />
+      <line x1="46" y1="62" x2="94" y2="62" className="glass-shelf" />
+      <line x1="24" y1="106" x2="116" y2="106" className="ln" />
+      <circle cx="56" cy="100" r="6" className="glass" />
+      <circle cx="84" cy="100" r="6" className="glass" />
+      <g className="in">
+        <line x1="56" y1="96" x2="58" y2="74" strokeDasharray="3 4" />
+        <line x1="70" y1="98" x2="70" y2="74" strokeDasharray="3 4" />
+        <line x1="84" y1="96" x2="82" y2="74" strokeDasharray="3 4" />
+      </g>
+    </>
+  ),
+
+  "camp-gran-formato": (
+    <>
+      <rect x="62" y="14" width="16" height="22" className="fb" />
+      <path d="M18 70 L122 70 L108 36 L32 36 Z" className="fb" />
+      <line x1="26" y1="64" x2="114" y2="64" className="glass-shelf" />
+      <line x1="18" y1="106" x2="122" y2="106" className="ln" />
+      <circle cx="46" cy="100" r="6" className="glass" />
+      <circle cx="70" cy="100" r="6" className="glass" />
+      <circle cx="94" cy="100" r="6" className="glass" />
+      <g className="in">
+        <line x1="46" y1="96" x2="42" y2="76" strokeDasharray="3 4" />
+        <line x1="70" y1="98" x2="70" y2="76" strokeDasharray="3 4" />
+        <line x1="94" y1="96" x2="98" y2="76" strokeDasharray="3 4" />
+      </g>
+    </>
+  ),
+
+  "camp-repisa": (
+    <>
+      {/* Repisa a la vista; la extracción va en el canto inferior. */}
+      <rect x="26" y="34" width="88" height="10" className="fb" />
+      <rect x="40" y="44" width="60" height="8" className="fb" />
+      <line x1="46" y1="48" x2="94" y2="48" className="glass-shelf" />
+      <line x1="34" y1="34" x2="34" y2="22" className="cab" />
+      <line x1="106" y1="34" x2="106" y2="22" className="cab" />
+      <line x1="24" y1="106" x2="116" y2="106" className="ln" />
+      <circle cx="56" cy="100" r="6" className="glass" />
+      <circle cx="84" cy="100" r="6" className="glass" />
+      <g className="in">
+        <line x1="56" y1="96" x2="58" y2="58" strokeDasharray="3 4" />
+        <line x1="70" y1="98" x2="70" y2="58" strokeDasharray="3 4" />
+        <line x1="84" y1="96" x2="82" y2="58" strokeDasharray="3 4" />
+      </g>
+    </>
+  ),
+
+  "camp-monolith": (
+    <>
+      {/* Un solo bloque del techo a la cubierta: sin quiebre entre ducto y campana. */}
+      <line x1="20" y1="12" x2="120" y2="12" className="fl" />
+      <rect x="50" y="12" width="40" height="58" className="fb" />
+      <line x1="50" y1="64" x2="90" y2="64" className="glass-shelf" />
+      <line x1="24" y1="106" x2="116" y2="106" className="ln" />
+      <circle cx="56" cy="100" r="6" className="glass" />
+      <circle cx="84" cy="100" r="6" className="glass" />
+      <g className="in">
+        <line x1="56" y1="96" x2="60" y2="74" strokeDasharray="3 4" />
+        <line x1="70" y1="98" x2="70" y2="74" strokeDasharray="3 4" />
+        <line x1="84" y1="96" x2="80" y2="74" strokeDasharray="3 4" />
       </g>
     </>
   ),

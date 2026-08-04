@@ -44,6 +44,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script src="/wishlist.js?v=5" strategy="afterInteractive" />
         {/* Carrito piloto (localStorage → cart permalink de Shopify). */}
         <Script src="/cart.js?v=3" strategy="afterInteractive" />
+        {/* Filtro de tipo del riel de subcat.1 (?tipo=…) y su scroll lento. */}
+        <Script src="/tipos.js?v=1" strategy="afterInteractive" />
       </body>
     </html>
   );
