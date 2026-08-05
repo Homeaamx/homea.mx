@@ -151,6 +151,10 @@
 .gw-req p{font-size:13.5px;line-height:1.6;color:var(--fg-muted);margin:0}
 .gw-req p b{color:var(--fg);font-weight:600}
 .gw-req-nota{margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:12.5px;color:var(--fg-subtle)}
+/* Aviso "técnicos independientes" (movido del formulario; mismo lenguaje que .svc-note) */
+.gw-alerta{display:flex;gap:16px;align-items:flex-start;padding:16px 20px;margin:0 0 26px;background:color-mix(in srgb,var(--accent) 9%,transparent);border-left:2px solid var(--accent);font-size:13px;line-height:var(--lh-loose);color:var(--fg-muted)}
+.gw-alerta b{color:var(--fg)}
+.gw-alerta .bang{flex:none;width:22px;height:22px;margin-top:2px;border:1.5px solid var(--accent-text);color:var(--accent-text);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-sans);font-weight:600;font-size:13px}
 @media(max-width:860px){.gw-req{grid-template-columns:1fr}.gw-req li:nth-child(2){border-top:1px solid var(--border)}}
 </style>
 </head>
@@ -404,6 +408,7 @@
     <span class="rule-gold"></span>
     <h2>Lo <i>esencial</i> para el día de la visita.</h2>
   </div>
+  <p class="gw-alerta reveal"><span class="bang" aria-hidden="true">!</span><span><b>Importante:</b> los técnicos son independientes a HOMEA — especialistas contratados y autorizados por cada marca. Llena todos los campos con los datos de la persona a contactar.</span></p>
   <ol class="gw-req reveal">
     <li><span class="n">01</span><p><b>Obra terminada.</b> No se instala si aún entran trabajadores a la casa o si las carpinterías no están terminadas.</p></li>
     <li><span class="n">02</span><p><b>Electricidad al 100%.</b> Voltaje verificado con multímetro en los contactos: una sobrecarga daña las tarjetas electrónicas.</p></li>
@@ -593,28 +598,15 @@
 
     <!-- Formulario de servicio → KOMMO/registro (construcción: API/webhook) -->
     <form class="svc-form reveal" id="svc-form" onsubmit="event.preventDefault();alert('Demo — se conecta a KOMMO/registro en la construcción del front-end.')">
-      <p class="svc-note"><b>Importante:</b> los técnicos son independientes a HOMEA — especialistas contratados y autorizados por cada marca. Llena todos los campos con los datos de la persona a contactar.</p>
-
-      <fieldset class="q">
-        <legend class="q-title">1. ¿Quién le atiende en HOMEA? <span class="req">*</span></legend>
-        <label class="opt"><input type="radio" name="asesor" required><span>Aurora</span></label>
-        <label class="opt"><input type="radio" name="asesor"><span>Ricardo</span></label>
-        <label class="opt"><input type="radio" name="asesor"><span>Stephanie</span></label>
-        <label class="opt"><input type="radio" name="asesor"><span>Rene</span></label>
-        <label class="opt"><input type="radio" name="asesor"><span>Christian</span></label>
-        <label class="opt"><input type="radio" name="asesor"><span>Carla</span></label>
-        <label class="opt opt-other"><input type="radio" name="asesor"><input type="text" placeholder="Otra"></label>
-      </fieldset>
-
-      <div class="field"><label>2. Nombre y apellido de la persona de contacto <span class="req">*</span></label>
+      <div class="field"><label>1. Nombre y apellido de la persona de contacto <span class="req">*</span></label>
         <input required placeholder="Escriba su respuesta"></div>
-      <div class="field"><label>3. Teléfono celular — 10 dígitos <span class="req">*</span></label>
+      <div class="field"><label>2. Teléfono celular — 10 dígitos <span class="req">*</span></label>
         <input required type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="10 dígitos"></div>
-      <div class="field"><label>4. Correo electrónico — a donde llegarán folios, fechas y seguimiento <span class="req">*</span></label>
+      <div class="field"><label>3. Correo electrónico — a donde llegarán folios, fechas y seguimiento <span class="req">*</span></label>
         <input required type="email" placeholder="tu@correo.mx"></div>
 
       <fieldset class="q">
-        <legend class="q-title">5. ¿En qué le podemos apoyar? <span class="req">*</span></legend>
+        <legend class="q-title">4. ¿En qué le podemos apoyar? <span class="req">*</span></legend>
         <label class="opt"><input type="radio" name="apoyo" required><span>Instalación de equipos</span></label>
         <label class="opt"><input type="radio" name="apoyo"><span>Asesoría técnica</span></label>
         <label class="opt"><input type="radio" name="apoyo"><span>Garantía o solicitud de refacciones</span></label>
@@ -625,18 +617,8 @@
       <p class="form-fine">Al enviar aceptas nuestro aviso de privacidad. Nunca compartimos tus datos.</p>
     </form>
 
-    <!-- Lateral: ten a la mano + contacto directo -->
+    <!-- Lateral: contacto directo -->
     <aside class="reveal" style="display:flex;flex-direction:column;gap:36px;align-items:flex-start">
-      <div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start;width:100%">
-        <div class="eyebrow">Ten a la mano</div>
-        <span class="rule-gold"></span>
-        <ul class="meta-list">
-          <li><b>Equipo</b> Marca y modelo</li>
-          <li><b>Serie</b> Número de serie del equipo</li>
-          <li><b>Compra</b> Factura o folio HOMEA</li>
-          <li><b>Evidencia</b> Fotos o video de la falla</li>
-        </ul>
-      </div>
       <div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start;width:100%">
         <div class="eyebrow">Contacto directo</div>
         <span class="rule-gold"></span>
