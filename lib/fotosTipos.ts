@@ -193,6 +193,10 @@ export const FOTOS_TIPOS: Record<string, Record<string, FotoTipo>> = {
       src: "/assets/photos/tipos/campana-monolith-bloque-negro-falmec.webp",
       alt: "Campana monolítica: un solo bloque negro continuo, sin junta entre ducto y campana",
     },
+    airwall: {
+      src: "/assets/photos/tipos/campana-airwall-panel-mural-blanco-falmec.jpg",
+      alt: "Campana Airwall: panel vertical al muro con barra de extracción frontal sobre la placa",
+    },
     "induccion-con-sistema-de-extraccion": {
       src: "/assets/photos/tipos/parrilla-induccion-extraccion-integrada-negra.webp",
       alt: "Placa de inducción con extractor integrado en la cubierta, sin campana",

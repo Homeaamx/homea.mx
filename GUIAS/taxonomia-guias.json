@@ -961,6 +961,16 @@
                   }
                 },
                 {
+                  "nombre": "Airwall",
+                  "filtro": "/productos/campanas/?f=airwall",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "camp-airwall",
+                    "descripcion": "Panel vertical al muro tras la placa: extrae de frente a la altura del vapor, sin ningún volumen sobre la cubierta.",
+                    "specs": "Panel al muro · Extracción frontal"
+                  }
+                },
+                {
                   "nombre": "Inducción con sistema de Extracción",
                   "filtro": "/productos/campanas/?f=induccion-con-sistema-de-extraccion",
                   "ficha": {

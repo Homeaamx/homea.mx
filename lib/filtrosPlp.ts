@@ -125,7 +125,7 @@ export const FILTROS_PLP: Record<string, FiltroPlp[]> = {
       valores: ["De pared", "De isla"],
     },
     {
-      // Los 16 valores son los ejes del mosaico (TipoGrid, grupo "estilo"): el
+      // Los 17 valores son los ejes del mosaico (TipoGrid, grupo "estilo"): el
       // orden de aquí es el que se ve en la página.
       nombre: "Diseño",
       control: "multi",
@@ -145,6 +145,7 @@ export const FILTROS_PLP: Record<string, FiltroPlp[]> = {
         "Gran formato",
         "Tipo Repisa",
         "Monolith",
+        "Airwall",
         "Inducción con sistema de Extracción",
       ],
     },

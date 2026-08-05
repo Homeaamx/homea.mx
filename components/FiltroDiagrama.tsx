@@ -1470,6 +1470,22 @@ const DIAGRAMAS: Record<string, JSX.Element> = {
     </>
   ),
 
+  "camp-airwall": (
+    <>
+      {/* Panel plano al muro tras la placa; la barra a media altura extrae de frente. */}
+      <rect x="34" y="24" width="72" height="58" className="fb" />
+      <line x1="42" y1="52" x2="98" y2="52" className="glass-shelf" />
+      <line x1="24" y1="106" x2="116" y2="106" className="ln" />
+      <circle cx="56" cy="100" r="6" className="glass" />
+      <circle cx="84" cy="100" r="6" className="glass" />
+      <g className="in">
+        <path d="M56 94 Q58 74 66 58" strokeDasharray="3 4" fill="none" />
+        <path d="M70 96 Q70 76 70 58" strokeDasharray="3 4" fill="none" />
+        <path d="M84 94 Q82 74 74 58" strokeDasharray="3 4" fill="none" />
+      </g>
+    </>
+  ),
+
   // ——— Cafeteras ———————————————————————————————————————————————————
 
   "cafe-mesa": (
