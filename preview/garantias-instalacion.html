@@ -139,8 +139,8 @@
 .svc-cta--gold h2{color:var(--dark-bg)}
 .svc-cta--gold p{color:rgba(10,10,10,.72)}
 .svc-cta--gold .btn-gold{background:var(--dark-bg);border-color:var(--dark-bg);color:var(--bg)}
-/* Hover a tono más claro (espresso suave), no a negro pleno. */
-.svc-cta--gold .btn-gold:hover{background:#3B3227;border-color:#3B3227}
+/* Hover contrastante: el botón negro invierte a hueso sobre la banda dorada. */
+.svc-cta--gold .btn-gold:hover{background:var(--bg);border-color:var(--bg);color:var(--dark-bg)}
 /* Botones siempre a la derecha: el título largo empujaba las acciones a una
    segunda fila (flex-wrap del .svc-cta base). El texto cede y envuelve. */
 .svc-cta--gold{flex-wrap:nowrap}
@@ -150,9 +150,10 @@
 .svc-cta--gold .btn-ghost-light{border-color:rgba(10,10,10,.55);color:var(--dark-bg)}
 .svc-cta--gold .btn-ghost-light:hover{background:rgba(10,10,10,.08);border-color:var(--dark-bg)}
 /* Requisitos de instalación (resumen de la página OXATIS) */
-.gw-req{display:grid;grid-template-columns:repeat(2,1fr);gap:0 48px;margin:8px 0 0;padding:0}
+/* Flujo por COLUMNA (01–04 a la izquierda, 05–08 a la derecha), no por fila. */
+.gw-req{display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(4,auto);grid-auto-flow:column;gap:0 48px;margin:8px 0 0;padding:0}
 .gw-req li{list-style:none;display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--border)}
-.gw-req li:nth-child(-n+2){border-top:0}
+.gw-req li:nth-child(1),.gw-req li:nth-child(5){border-top:0}
 .gw-req .n{font-family:var(--font-sans);font-weight:600;font-size:12px;letter-spacing:.08em;color:var(--accent-text);font-variant-numeric:tabular-nums;padding-top:2px}
 .gw-req p{font-size:13.5px;line-height:1.6;color:var(--fg-muted);margin:0}
 .gw-req p b{color:var(--fg);font-weight:600}
@@ -161,7 +162,7 @@
 .gw-alerta{display:flex;gap:16px;align-items:flex-start;padding:16px 20px;margin:0 0 26px;background:color-mix(in srgb,var(--accent) 9%,transparent);border-left:2px solid var(--accent);font-size:13px;line-height:var(--lh-loose);color:var(--fg-muted)}
 .gw-alerta b{color:var(--fg)}
 .gw-alerta .bang{flex:none;width:22px;height:22px;margin-top:2px;border:1.5px solid var(--accent-text);color:var(--accent-text);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-sans);font-weight:600;font-size:13px}
-@media(max-width:860px){.gw-req{grid-template-columns:1fr}.gw-req li:nth-child(2){border-top:1px solid var(--border)}}
+@media(max-width:860px){.gw-req{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}.gw-req li:nth-child(5){border-top:1px solid var(--border)}}
 </style>
 </head>
 <body>
@@ -348,7 +349,7 @@
   </div>
 
   <div class="gw-wall reveal" id="gw-wall" role="list"></div>
-  <p class="gw-empty" id="gw-empty">Ninguna marca coincide con tu búsqueda. ¿No encuentras la tuya? <a href="#svc-form" style="color:var(--accent-text)">Escríbenos</a> y te canalizamos.</p>
+  <p class="gw-empty" id="gw-empty">Ninguna marca coincide con tu búsqueda. ¿No encuentras la tuya? <a class="wa-track" href="https://wa.me/5214461423051?text=%C2%A1Hola%21%20No%20encuentro%20mi%20marca%20en%20la%20p%C3%A1gina%20de%20garant%C3%ADas%2C%20%C2%BFme%20pueden%20orientar%3F" target="_blank" rel="noopener" style="color:var(--accent-text)" data-track="whatsapp_click" data-label="wa_marca_no_listada">Escríbenos</a> y te canalizamos.</p>
 
   <div class="gw-foot">
     <span><span class="gw-mark gw-mark--inc"></span> Instalación incluida</span>
@@ -598,49 +599,6 @@
   q.addEventListener('input', apply);
 })();
 </script>
-
-<!-- Solicitud de servicio + lateral -->
-<section class="sec tight" style="padding-top:40px"><div class="container">
-  <div class="grid-2" style="gap:72px;align-items:start">
-
-    <!-- Formulario de servicio → KOMMO/registro (construcción: API/webhook) -->
-    <form class="svc-form reveal" id="svc-form" onsubmit="event.preventDefault();alert('Demo — se conecta a KOMMO/registro en la construcción del front-end.')">
-      <div class="field"><label>1. Nombre y apellido de la persona de contacto <span class="req">*</span></label>
-        <input required placeholder="Escriba su respuesta"></div>
-      <div class="field"><label>2. Teléfono celular — 10 dígitos <span class="req">*</span></label>
-        <input required type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="10 dígitos"></div>
-      <div class="field"><label>3. Correo electrónico — a donde llegarán folios, fechas y seguimiento <span class="req">*</span></label>
-        <input required type="email" placeholder="tu@correo.mx"></div>
-
-      <fieldset class="q">
-        <legend class="q-title">4. ¿En qué le podemos apoyar? <span class="req">*</span></legend>
-        <label class="opt"><input type="radio" name="apoyo" required><span>Instalación de equipos</span></label>
-        <label class="opt"><input type="radio" name="apoyo"><span>Asesoría técnica</span></label>
-        <label class="opt"><input type="radio" name="apoyo"><span>Garantía o solicitud de refacciones</span></label>
-        <label class="opt"><input type="radio" name="apoyo"><span>Mantenimiento post garantía</span></label>
-      </fieldset>
-
-      <button class="btn btn-primary btn-block" type="submit">Enviar solicitud</button>
-      <p class="form-fine">Al enviar aceptas nuestro aviso de privacidad. Nunca compartimos tus datos.</p>
-    </form>
-
-    <!-- Lateral: contacto directo -->
-    <aside class="reveal" style="display:flex;flex-direction:column;gap:36px;align-items:flex-start">
-      <div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start;width:100%">
-        <div class="eyebrow">Contacto directo</div>
-        <span class="rule-gold"></span>
-        <ul class="meta-list">
-          <li><b>WhatsApp</b> <span class="figures">+52 446 144 6318</span></li>
-          <li><b>Tel. oficina</b> <span class="figures">(442) 216 3552</span></li>
-          <li><b>Email</b> carteaga@homea.mx</li>
-          <li><b>Horario</b> Lun–Vie · 9:00–19:00 · Sáb · 10:00–14:00</li>
-        </ul>
-        <a class="btn btn-gold btn-block wa-track" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_postventa_side">Hablar con post-venta</a>
-      </div>
-    </aside>
-
-  </div>
-</div></section>
 
 <!-- Cómo funciona el servicio -->
 <section class="sec tight on-greige"><div class="container">
