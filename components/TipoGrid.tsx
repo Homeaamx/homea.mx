@@ -28,8 +28,6 @@ const GRUPOS: { key: GrupoFicha; label: string }[] = [
 
 interface Props {
   filtros: FiltroProducto[];
-  /** Slug del tipo elegido (?f=…): se marca como seleccionado. */
-  activo?: string;
   /** Ruta del PLP; cada tile enlaza a `<base>?f=<slug>`. */
   base: string;
   /** Ruta de la guía del mismo tipo de producto, para el enlace de ayuda. */
@@ -44,7 +42,7 @@ function slugDeFiltro(filtro: string): string {
   return filtro.split("?f=")[1] ?? "";
 }
 
-export default function TipoGrid({ filtros, base, guia, contexto, activo, etiquetas }: Props) {
+export default function TipoGrid({ filtros, base, guia, contexto, etiquetas }: Props) {
   const conFicha = filtros.filter((f) => f.ficha);
   if (conFicha.length === 0) return null;
 
@@ -68,7 +66,6 @@ export default function TipoGrid({ filtros, base, guia, contexto, activo, etique
                 {grupo.map((f) => {
                   const dgm = f.ficha!.diagrama;
                   const slug = slugDeFiltro(f.filtro);
-                  const esActivo = slug === activo;
                   // Foto real del tipo (packshot) cuando existe. Si la categoría
                   // ya es de foto pero ese tipo aún no la tiene, se deja el HUECO
                   // reservado (misma caja) en vez de caer al diagrama: así el
@@ -79,17 +76,16 @@ export default function TipoGrid({ filtros, base, guia, contexto, activo, etique
                   const conFoto = Boolean(foto) || usaFotos(plpKey);
                   const conCorte = key === "tipo" && esTipoInstalacion(slug);
                   return (
-                    <Link
+                    // <a> plana, no next/Link: la página es estática y el estado
+                    // activo (?f=) lo resuelve PlpFiltro en el cliente — clic →
+                    // pushState + sync de clases, sin recargar ni saltar al tope.
+                    // Volver a hacer clic en el tipo activo lo quita (PlpFiltro
+                    // reescribe el href del tile activo a `base`).
+                    <a
                       key={f.filtro}
-                      // Volver a hacer clic en el tipo activo lo quita: es la
-                      // única forma intuitiva de deshacer el filtro desde aquí.
-                      href={esActivo ? base : `${base}?f=${slug}`}
-                      // Sin scroll-al-tope de Next: el viewport se queda en el
-                      // mosaico y ScrollAFiltros baja suave al catálogo — sin
-                      // esto el clic "recarga" (salta arriba y vuelve a bajar).
-                      scroll={false}
-                      className={`tpg-card${esActivo ? " is-active" : ""}`}
-                      aria-current={esActivo ? "true" : undefined}
+                      href={`${base}?f=${slug}`}
+                      data-f={slug}
+                      className="tpg-card"
                     >
                       {conFoto ? (
                         <span
@@ -125,13 +121,10 @@ export default function TipoGrid({ filtros, base, guia, contexto, activo, etique
                       <span className="tpg-name">{f.nombre}</span>
                       {/* Siempre en el DOM (oculta si no está activa) para que la
                           tarjeta no cambie de alto al poner/quitar el filtro. */}
-                      <span
-                        className={`tpg-quitar${esActivo ? "" : " es-hueco"}`}
-                        aria-hidden={esActivo ? undefined : true}
-                      >
+                      <span className="tpg-quitar es-hueco" aria-hidden="true">
                         Quitar filtro ×
                       </span>
-                    </Link>
+                    </a>
                   );
                 })}
               </div>

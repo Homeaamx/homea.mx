@@ -16,12 +16,17 @@ import { FILTROS_PLP, getFiltrosPlp } from "@/lib/filtrosPlp";
 import { SITE_URL } from "@/lib/site";
 import TipoGrid from "@/components/TipoGrid";
 import ScrollAFiltros from "@/components/ScrollAFiltros";
+import PlpFiltro from "@/components/PlpFiltro";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppCta from "@/components/WhatsAppCta";
 
+// ⚠️ La página NO lee searchParams en el servidor: hacerlo la vuelve dinámica
+// (desaparece del prerender-manifest y Vercel la sirve con no-store, render por
+// request). El filtro ?f= es estado de cliente — lo aplica PlpFiltro tras
+// hidratar. Así las tres PLP quedan pre-generadas (SSG), que es lo que exige la
+// regla de oro SEO del proyecto.
 interface Params {
   params: Promise<{ categoria: string; subcategoria: string; tipo: string }>;
-  searchParams?: Promise<{ f?: string }>;
 }
 
 /** Foto del hero por PLP (misma familia visual que HERO_FOTO_SUB1 de Guías). */
@@ -64,9 +69,8 @@ export function generateStaticParams() {
   });
 }
 
-export default async function Page({ params, searchParams }: Params) {
+export default async function Page({ params }: Params) {
   const { categoria, subcategoria, tipo } = await params;
-  const activo = (await searchParams)?.f;
   const node = getRoute([categoria, subcategoria, tipo]);
   if (!node || node.kind !== "filtros") notFound();
 
@@ -78,9 +82,12 @@ export default async function Page({ params, searchParams }: Params) {
   const hero = HERO_PLP[`${categoria}/${subcategoria}/${tipo}`];
   const tipos = sub2.filtros ?? [];
   const conFicha = tipos.filter((f) => f.ficha).length;
-  const nombreActivo = tipos.find(
-    (f) => f.filtro.split("?f=")[1] === activo,
-  )?.nombre;
+  // slug → nombre visible, para la etiqueta "tipo: X" que pinta PlpFiltro.
+  const nombresPorSlug = Object.fromEntries(
+    tipos
+      .map((f) => [f.filtro.split("?f=")[1], f.nombre])
+      .filter(([slug]) => Boolean(slug)),
+  );
 
   return (
     <>
@@ -121,10 +128,10 @@ export default async function Page({ params, searchParams }: Params) {
         base={base}
         guia={sub2.rutaFiltros}
         contexto={sub2.nombre}
-        activo={activo}
         etiquetas={sub2.etiquetasGrupos}
       />
 
+      <PlpFiltro base={base} tipos={nombresPorSlug} />
       <Suspense fallback={null}>
         <ScrollAFiltros destino="catalogo" />
       </Suspense>
@@ -141,14 +148,9 @@ export default async function Page({ params, searchParams }: Params) {
                   ) : f.valores ? (
                     f.valores.map((v) => (
                       <label key={v} data-tipo={slug(v)}>
-                        {/* key con el filtro activo: al navegar entre ?f= React
-                            reusa el input y `defaultChecked` no se re-aplica. */}
-                        <input
-                          key={`${v}-${activo ?? ""}`}
-                          type="checkbox"
-                          defaultChecked={slug(v) === activo}
-                        />{" "}
-                        {v}
+                        {/* El check del tipo activo (?f=) lo pone PlpFiltro en
+                            el cliente: el HTML estático es igual para todos. */}
+                        <input type="checkbox" /> {v}
                       </label>
                     ))
                   ) : (
@@ -162,7 +164,8 @@ export default async function Page({ params, searchParams }: Params) {
               <div className="toolbar">
                 <span className="results figures">
                   0 piezas en línea · {conFicha} tipos
-                  {nombreActivo && <> · tipo: {nombreActivo}</>}
+                  {/* "· tipo: X" lo pinta PlpFiltro según el ?f= de la URL. */}
+                  <span id="plp-tipo-activo" />
                 </span>
                 <select aria-label="Ordenar">
                   <option>Relevancia</option>

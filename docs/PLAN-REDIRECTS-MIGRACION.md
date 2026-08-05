@@ -109,6 +109,13 @@
 
 ---
 
+> ✅ **Implementado (2026-08-05):** las categorías Tier 1–2 y todas las de ≥20 clics de las
+> familias con página nueva ya tienen su 301 en `next.config.js` (bloque `oxatisTier12`, ~55
+> reglas): refrigeradores/parrillas/campanas → su PLP con `?f=` exacto de la taxonomía;
+> asadores/tarjas/estufas/cavas/hielo → subcat.1 o macro existente (provisional-válido, se
+> afina en Fase 4). ⚠️ Los destinos de la tabla de arriba (`/collections/`, `/products/`) son
+> de la era "todo en Shopify" y quedaron obsoletos — la implementación real es la del config.
+
 ## 5.b Familia "agua": redirects derivados de la reestructura de taxonomía (2026-07-27)
 
 > Decisión de Carla: el nodo "Dispensadores de Agua" estaba duplicado (subcat.2 de Tarjas y
