@@ -158,6 +158,8 @@
 .gw-req p{font-size:13.5px;line-height:1.6;color:var(--fg-muted);margin:0}
 .gw-req p b{color:var(--fg);font-weight:600}
 .gw-req-nota{margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:12.5px;color:var(--fg-subtle)}
+/* Más aire entre secciones en esta página (base .sec.tight = 72px). */
+.sec.tight{padding-top:96px;padding-bottom:96px}
 /* Aviso "técnicos independientes" (movido del formulario; mismo lenguaje que .svc-note) */
 .gw-alerta{display:flex;gap:16px;align-items:flex-start;padding:16px 20px;margin:0 0 26px;background:color-mix(in srgb,var(--accent) 9%,transparent);border-left:2px solid var(--accent);font-size:13px;line-height:var(--lh-loose);color:var(--fg-muted)}
 .gw-alerta b{color:var(--fg)}
@@ -409,7 +411,7 @@
 <!-- Requisitos de instalación: resumen de la página OXATIS
      /PBCPPlayer.asp?ADContext=1&ID=2437566 (candidata a 301 hacia esta sección).
      El contrato completo se firma al agendar; aquí solo lo esencial. -->
-<section class="sec tight" id="requisitos-instalacion" style="padding-bottom:0"><div class="container">
+<section class="sec tight" id="requisitos-instalacion"><div class="container">
   <div class="sec-head">
     <div class="eyebrow">Antes de tu instalación</div>
     <span class="rule-gold"></span>
@@ -599,13 +601,12 @@
 })();
 </script>
 
-<!-- Lo que conviene saber (movido desde contacto.html) — en greige para
-     contrastar con los requisitos (bone) tras quitar "Del reporte al cierre". -->
-<section class="sec tight on-greige"><div class="container">
+<!-- Lo que conviene saber (movido desde contacto.html) — franja espresso para
+     contrastar con los requisitos (bone); las tarjetas blancas resaltan encima. -->
+<section class="sec tight on-dark" style="background:var(--dark-bg)"><div class="container">
   <div class="sec-head">
-    <div class="eyebrow">Soporte · Antes de comprar</div>
     <span class="rule-gold"></span>
-    <h2>Lo que conviene <i>saber</i>.</h2>
+    <h2 style="color:#F4EFE6">Lo que conviene <i>saber</i>.</h2>
   </div>
   <div class="help-tiles reveal" style="margin-top:48px">
     <a href="#"><h4>Formas de pago</h4><p>Transferencia, tarjeta y financiamiento por proyecto. MSI en Fase 2.</p>
