@@ -50,8 +50,8 @@ export const FOTOS_TIPOS: Record<string, Record<string, FotoTipo>> = {
       alt: "Refrigerador de 4 puertas en acero inoxidable",
     },
     "de-piso": {
-      src: "/assets/photos/tipos/refrigerador-de-piso-profesional-acero.jpg",
-      alt: "Refrigerador profesional de piso con puerta de cristal y patas vistas",
+      src: "/assets/photos/tipos/refrigerador-de-piso-ge-profile-acero.jpg",
+      alt: "Refrigerador de piso GE Profile en acero inoxidable, dúplex con puerta abierta",
     },
     "counter-depth": {
       src: "/assets/photos/tipos/refrigerador-counter-depth-french-door-al-ras.jpg",
