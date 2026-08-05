@@ -139,7 +139,8 @@
 .svc-cta--gold h2{color:var(--dark-bg)}
 .svc-cta--gold p{color:rgba(10,10,10,.72)}
 .svc-cta--gold .btn-gold{background:var(--dark-bg);border-color:var(--dark-bg);color:var(--bg)}
-.svc-cta--gold .btn-gold:hover{background:#000;border-color:#000}
+/* Hover a tono más claro (espresso suave), no a negro pleno. */
+.svc-cta--gold .btn-gold:hover{background:#3B3227;border-color:#3B3227}
 .svc-cta--gold .btn-ghost-light{border-color:rgba(10,10,10,.55);color:var(--dark-bg)}
 .svc-cta--gold .btn-ghost-light:hover{background:rgba(10,10,10,.08);border-color:var(--dark-bg)}
 /* Requisitos de instalación (resumen de la página OXATIS) */
@@ -387,8 +388,9 @@
       <p>Ten a la mano tu factura de compra.</p>
     </div>
     <div class="svc-cta-actions">
-      <a class="btn btn-gold wa-track" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Quiero%20solicitar%20la%20instalaci%C3%B3n%20de%20mis%20equipos.%20Tengo%20mi%20factura%20a%20la%20mano." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_solicitar_instalacion">WhatsApp post-venta</a>
-      <a class="btn btn-ghost-light" href="tel:+524422163552">Tel. (442) 216 3552</a>
+      <a class="btn btn-gold" href="#svc-form">Solicitar instalación</a>
+      <!-- Línea directa de post-venta (distinta del flotante de ventas). -->
+      <a class="btn btn-ghost-light wa-track" href="https://wa.me/5214461423051?text=%C2%A1Hola%21%20Quiero%20solicitar%20la%20instalaci%C3%B3n%20de%20mis%20equipos.%20Tengo%20mi%20factura%20a%20la%20mano." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_postventa_instalacion">WhatsApp post-venta</a>
     </div>
   </div>
 </div></section>
