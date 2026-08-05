@@ -142,6 +142,15 @@
 .svc-cta--gold .btn-gold:hover{background:#000;border-color:#000}
 .svc-cta--gold .btn-ghost-light{border-color:rgba(10,10,10,.55);color:var(--dark-bg)}
 .svc-cta--gold .btn-ghost-light:hover{background:rgba(10,10,10,.08);border-color:var(--dark-bg)}
+/* Requisitos de instalación (resumen de la página OXATIS) */
+.gw-req{display:grid;grid-template-columns:repeat(2,1fr);gap:0 48px;margin:8px 0 0;padding:0}
+.gw-req li{list-style:none;display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--border)}
+.gw-req li:nth-child(-n+2){border-top:0}
+.gw-req .n{font-family:var(--font-sans);font-weight:600;font-size:12px;letter-spacing:.08em;color:var(--accent-text);font-variant-numeric:tabular-nums;padding-top:2px}
+.gw-req p{font-size:13.5px;line-height:1.6;color:var(--fg-muted);margin:0}
+.gw-req p b{color:var(--fg);font-weight:600}
+.gw-req-nota{margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:12.5px;color:var(--fg-subtle)}
+@media(max-width:860px){.gw-req{grid-template-columns:1fr}.gw-req li:nth-child(2){border-top:1px solid var(--border)}}
 </style>
 </head>
 <body>
@@ -373,15 +382,37 @@
 <section class="sec tight" style="padding-top:56px;padding-bottom:0"><div class="container">
   <div class="svc-cta svc-cta--gold reveal" style="border:0">
     <div class="svc-cta-txt">
-      <div class="eyebrow eyebrow-bright">Atención inmediata</div>
-      <h2>¿Caso abierto o una urgencia?</h2>
-      <p>Habla directo con nuestro equipo de servicio post-venta.</p>
+      <div class="eyebrow eyebrow-bright">Instalación de equipos</div>
+      <h2>Solicita la instalación de tus <i>equipos</i>.</h2>
+      <p>Ten a la mano tu factura de compra.</p>
     </div>
     <div class="svc-cta-actions">
-      <a class="btn btn-gold wa-track" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_postventa_top">WhatsApp post-venta</a>
+      <a class="btn btn-gold wa-track" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Quiero%20solicitar%20la%20instalaci%C3%B3n%20de%20mis%20equipos.%20Tengo%20mi%20factura%20a%20la%20mano." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_solicitar_instalacion">WhatsApp post-venta</a>
       <a class="btn btn-ghost-light" href="tel:+524422163552">Tel. (442) 216 3552</a>
     </div>
   </div>
+</div></section>
+
+<!-- Requisitos de instalación: resumen de la página OXATIS
+     /PBCPPlayer.asp?ADContext=1&ID=2437566 (candidata a 301 hacia esta sección).
+     El contrato completo se firma al agendar; aquí solo lo esencial. -->
+<section class="sec tight" id="requisitos-instalacion" style="padding-bottom:0"><div class="container">
+  <div class="sec-head">
+    <div class="eyebrow">Antes de tu instalación</div>
+    <span class="rule-gold"></span>
+    <h2>Lo <i>esencial</i> para el día de la visita.</h2>
+  </div>
+  <ol class="gw-req reveal">
+    <li><span class="n">01</span><p><b>Obra terminada.</b> No se instala si aún entran trabajadores a la casa o si las carpinterías no están terminadas.</p></li>
+    <li><span class="n">02</span><p><b>Electricidad al 100%.</b> Voltaje verificado con multímetro en los contactos: una sobrecarga daña las tarjetas electrónicas.</p></li>
+    <li><span class="n">03</span><p><b>Gas terminado y regulador verificado.</b> Indispensable antes de conectar hornos, parrillas o asadores.</p></li>
+    <li><span class="n">04</span><p><b>Fotos de los huecos.</b> Envía a tu ejecutivo fotos de las carpinterías para validar medidas y tomas antes de la visita.</p></li>
+    <li><span class="n">05</span><p><b>Regulador de voltaje en refrigeración.</b> Uno por equipo — sin él se invalida la garantía (Sub-Zero lo incluye). Considera su espacio en muro o carpintería.</p></li>
+    <li><span class="n">06</span><p><b>Campanas: solo puesta en marcha.</b> No incluye ductería, accesorios ni acometida eléctrica; la campana debe estar colocada y conectada al motor.</p></li>
+    <li><span class="n">07</span><p><b>Tipo de gas verificado.</b> LP o Natural: según la marca, la conversión es sin costo, con costo o se pide de origen.</p></li>
+    <li><span class="n">08</span><p><b>Equipos en su lugar y empaque original.</b> Los técnicos no mueven equipos. Toma en cuenta que algunos no traen clavija.</p></li>
+  </ol>
+  <p class="gw-req-nota">Aplica a equipos comprados en HOMEA. Si el día de la visita las preparaciones no están listas, se reprograma y se cobran visita y viáticos. Antes de proceder se lee y firma el contrato de instalación — nuestro equipo te lo comparte al agendar.</p>
 </div></section>
 
 <!-- Ficha de marca (modal) -->
