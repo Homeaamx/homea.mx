@@ -1284,11 +1284,95 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .page-hero--flip { transform: scaleX(-1); }
 .page-hero--flip > * { transform: scaleX(-1); }
 .page-hero--photo .crumbs,
-.page-hero--photo .crumbs a { color: rgba(247,243,236,.78); }
-.page-hero--photo .crumbs a:hover { color: var(--homea-bone); }
-.page-hero--photo .eyebrow { color: var(--homea-gold); }
-.page-hero--photo h1 { color: var(--homea-bone); }
-.page-hero--photo .sub { color: rgba(247,243,236,.82); }
+.page-hero--photo .crumbs a,
+.page-hero--plano .crumbs,
+.page-hero--plano .crumbs a { color: rgba(247,243,236,.78); }
+.page-hero--photo .crumbs a:hover,
+.page-hero--plano .crumbs a:hover { color: var(--homea-bone); }
+.page-hero--photo .eyebrow,
+.page-hero--plano .eyebrow { color: var(--homea-gold); }
+.page-hero--photo h1,
+.page-hero--plano h1 { color: var(--homea-bone); }
+.page-hero--photo .sub,
+.page-hero--plano .sub { color: rgba(247,243,236,.82); }
+
+/* ---------- Page hero · variante "plano técnico" (Subcategoría 2 de Guías) ----
+   Estas páginas no tienen foto propia (son 19 y el activo no existe), pero sí
+   tienen el dibujo del equipo: se reusa el diagrama de línea de la ficha de tipo
+   como fondo. Espresso + retícula de plano al borde de lo visible, para que el
+   hero anuncie el mismo lenguaje técnico de las fichas que vienen debajo. */
+.page-hero--plano {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--homea-espresso);
+  padding: 96px 0 84px;
+}
+.page-hero--plano::before {
+  content: ""; position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(247,243,236,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247,243,236,.045) 1px, transparent 1px);
+  background-size: 34px 34px;
+  /* La retícula arranca donde termina el texto: nunca compite con la lectura. */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 38%, #000 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 38%, #000 100%);
+}
+.page-hero--plano .container { position: relative; z-index: 2; }
+
+/* El diagrama: alineado con el margen del container y CENTRADO en vertical.
+   No se ancla al piso porque no todos los diagramas dibujan hasta abajo del
+   viewBox (una grifería termina en y=104; un refrigerador en y=124): anclarlos
+   dejaría a unos flotando. Centrado, todos se leen igual — que es como se
+   comportan dentro de las fichas de tipo. */
+.page-hero__art {
+  position: absolute; z-index: 1; pointer-events: none;
+  right: max(clamp(48px, 4vw, 96px), calc((100% - var(--container)) / 2 + clamp(48px, 4vw, 96px)));
+  top: 50%; transform: translateY(-50%);
+  height: 300px; opacity: .62;
+}
+.page-hero__art svg { display: block; height: 100%; width: auto; overflow: visible; }
+
+/* Repintado del diagrama para fondo oscuro: sin rellenos, trazo bone, interior
+   en oro. (En las fichas el mismo SVG va en claro — ver styles/guias.css.) */
+.page-hero__art .fb,
+.page-hero__art .fbn,
+.page-hero__art .stone,
+.page-hero__art .hierro,
+.page-hero__art .dr rect,
+.page-hero__art .dw rect,
+.page-hero__art .lid rect  { fill: none; stroke: var(--homea-bone); stroke-width: 1.1; }
+.page-hero__art .dr line,
+.page-hero__art .dw line,
+.page-hero__art .lid line  { stroke: var(--homea-bone); stroke-width: 1.5; stroke-linecap: round; }
+.page-hero__art .ln,
+.page-hero__art .rn,
+.page-hero__art .grate,
+.page-hero__art .reja      { fill: none; stroke: var(--homea-bone); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.page-hero__art .rn-dot    { fill: var(--homea-bone); stroke: none; opacity: .8; }
+.page-hero__art .glass,
+.page-hero__art .glass-shelf { fill: none; stroke: var(--homea-bone); stroke-width: 1; opacity: .58; }
+.page-hero__art .veta      { stroke: var(--homea-bone); opacity: .2; }
+.page-hero__art .cab       { fill: none; stroke: var(--homea-bone); stroke-width: 1; stroke-dasharray: 3 3; opacity: .42; }
+.page-hero__art .fl        { stroke: var(--homea-bone); stroke-width: 1; opacity: .38; }
+/* El interior va visible (aquí no hay hover que lo revele): es lo que da el
+   acento de oro y distingue una categoría de otra de un vistazo. */
+.page-hero__art .in        { opacity: 1; }
+.page-hero__art .in .zone  { fill: rgba(189,155,94,.14); stroke: none; }
+.page-hero__art .in line,
+.page-hero__art .in path   { stroke: var(--homea-gold); stroke-width: 1.2; fill: none; opacity: .75; }
+.page-hero__art .in .ring  { fill: none; stroke: var(--homea-gold); stroke-width: 1.4; opacity: .85; }
+
+@media (max-width: 900px) {
+  .page-hero--plano { padding: 72px 0 76px; }
+  /* En móvil el texto ocupa todo el ancho, así que el dibujo NO puede quedar
+     centrado (se cruzaría con el subtítulo): baja al hueco libre del hero,
+     pegado al borde derecho y con menos peso. */
+  .page-hero__art {
+    top: auto; bottom: 10px; transform: none;
+    right: -18px; height: 132px; opacity: .3;
+  }
+}
 
 /* ---------- PLP: filtros + grid ---------------------------------------------- */
 .plp { display: grid; grid-template-columns: 240px 1fr; gap: 56px; align-items: start; }

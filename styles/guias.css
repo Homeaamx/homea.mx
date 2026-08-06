@@ -714,6 +714,9 @@
 .apc-card h3 i { font-style: italic; color: var(--homea-gold-soft); }
 .apc-card p { margin: 0; font-size: 15px; line-height: 1.6; color: rgba(237,231,220,.75); max-width: 34em; }
 .apc-card .btn { margin-top: 8px; }
+/* Sobre el hero espresso la tarjeta necesita despegarse del fondo: sube al
+   tono elevado (espresso +18% bone) en lugar de perder su borde. */
+.page-hero--plano .apc-card { background: var(--homea-espresso-raised); }
 
 /* Overlay. */
 .apc-veil {

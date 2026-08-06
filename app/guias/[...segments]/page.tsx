@@ -16,6 +16,7 @@ import { absUrl } from "@/lib/site";
 import type { Guia, Macrocategoria, Subcategoria1, Subcategoria2 } from "@/types/guias";
 
 import AprendeCampanas from "@/components/AprendeCampanas";
+import FiltroDiagrama from "@/components/FiltroDiagrama";
 import PageHero from "@/components/PageHero";
 import CategoryList from "@/components/CategoryList";
 import FilterList from "@/components/FilterList";
@@ -269,6 +270,18 @@ function FilterIndex({
   // sin fichas (categoría aún sin definir) → chips clásicos.
   const conFichas = filtros.some((f) => f.ficha);
 
+  // Fondo del hero: estas 19 páginas no tienen foto propia, así que el fondo lo
+  // pone el dibujo del equipo. Se elige el primer tipo del grupo "tipo" (el que
+  // define la categoría; los de grupo "estilo" son acabados) y, si no hay, el
+  // primero con ficha. Con aside (Campanas) el hueco derecho ya está ocupado.
+  const aside = sub2.slug === "campanas" ? <AprendeCampanas /> : undefined;
+  const fichaHero =
+    filtros.find((f) => f.ficha?.grupo === "tipo")?.ficha ??
+    filtros.find((f) => f.ficha)?.ficha;
+  // Sin DiagramaDefs: aquí el dibujo va a puro trazo (theme.css lo repinta en
+  // bone/oro), así que no se usan los degradados de acero/cavidad.
+  const art = !aside && fichaHero ? <FiltroDiagrama tipo={fichaHero.diagrama} /> : undefined;
+
   return (
     <>
       <PageHero
@@ -280,9 +293,13 @@ function FilterIndex({
             ? `Cada tipo de ${sub2.nombre.toLowerCase()} resuelve una cocina distinta. Compara y elige el tuyo.`
             : `Elige un filtro para ver los ${sub2.nombre.toLowerCase()} de ${sub1.nombre} que buscas.`
         }
+        art={art}
+        // Espresso en las 19 subcat.2, con o sin dibujo, para que la sección
+        // completa se lea como un solo nivel de la jerarquía.
+        plano
         // Guía educativa del sitio viejo (láminas OXATIS) en overlay; por ahora
         // solo Campanas la tiene. Deep-link: #aprende (botón del PLP).
-        aside={sub2.slug === "campanas" ? <AprendeCampanas /> : undefined}
+        aside={aside}
       />
       <section className="sec">
         <div className="container">

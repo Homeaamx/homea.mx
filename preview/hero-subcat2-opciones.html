@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hero subcat.2 · 3 opciones — HOMEA</title>
+<link rel="stylesheet" href="tokens-v2.css" />
+<link rel="stylesheet" href="theme.css" />
+<style>
+/* ==========================================================================
+   PROPUESTA — fondo del hero de subcategoría 2 en GUÍAS
+   3 opciones sobre el mismo contenido real (Máquinas de hielo / Grifería).
+   Nada de esto toca aún el sitio: es una maqueta para elegir.
+   ========================================================================== */
+
+/* --- Base común de las 3 opciones: hero oscuro ---------------------------- */
+.hero2 {
+  position: relative;
+  overflow: hidden;
+  background: var(--homea-espresso, #1E1914);
+  padding: 96px 0 84px;
+  isolation: isolate;
+}
+.hero2 .container { position: relative; z-index: 2; }
+.hero2 .crumbs { font-size: 12px; color: rgba(247,243,236,.62); margin-bottom: 28px; letter-spacing: .02em; }
+.hero2 .crumbs a { color: rgba(247,243,236,.62); text-decoration: none; }
+.hero2 .crumbs .sep { color: var(--homea-gold); padding: 0 .6em; }
+.hero2 .eyebrow { color: var(--homea-gold); margin-bottom: 18px; }
+.hero2 h1 { font-size: clamp(38px, 4.5vw, 60px); max-width: 720px; color: var(--homea-bone); margin: 0; }
+.hero2 .sub { margin: 18px 0 0; max-width: 520px; font-size: var(--fs-md); font-weight: 300; color: rgba(247,243,236,.78); }
+
+/* --- Arte de línea: los MISMOS diagramas de las fichas de tipo ------------ */
+.h2-art { position: absolute; z-index: 1; pointer-events: none; }
+.h2-art svg { display: block; height: 100%; width: auto; overflow: visible; }
+.h2-art .fb,
+.h2-art .dr rect,
+.h2-art .dw rect  { fill: none; stroke: var(--homea-bone); stroke-width: 1.1; }
+.h2-art .dr line,
+.h2-art .dw line  { stroke: var(--homea-bone); stroke-width: 1.5; stroke-linecap: round; }
+.h2-art .ln       { fill: none; stroke: var(--homea-bone); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.h2-art .glass    { fill: none; stroke: var(--homea-bone); stroke-width: 1; opacity: .6; }
+.h2-art .glass-shelf { stroke: var(--homea-bone); stroke-width: 1; opacity: .5; }
+.h2-art .cab      { fill: none; stroke: var(--homea-bone); stroke-width: 1; stroke-dasharray: 3 3; opacity: .42; }
+.h2-art .fl       { stroke: var(--homea-bone); stroke-width: 1; opacity: .38; }
+.h2-art .in       { opacity: 1; }
+.h2-art .in .zone { fill: rgba(189,155,94,.14); stroke: none; }
+.h2-art .in line,
+.h2-art .in path  { stroke: var(--homea-gold); stroke-width: 1.2; fill: none; opacity: .75; }
+.h2-art .in .ring { fill: none; stroke: var(--homea-gold); stroke-width: 1.4; opacity: .85; }
+
+/* ==========================================================================
+   OPCIÓN A — "Plano técnico"
+   Retícula de plano casi invisible + el diagrama del tipo principal a gran
+   escala, alineado a la derecha y anclado al piso del hero.
+   ========================================================================== */
+.hero2--a::before {
+  content: ""; position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(247,243,236,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247,243,236,.045) 1px, transparent 1px);
+  background-size: 34px 34px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 38%, #000 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 38%, #000 100%);
+}
+.hero2--a .h2-art {
+  right: max(4vw, calc((100% - 1240px) / 2)); bottom: 0;
+  height: 330px; opacity: .62;
+}
+/* Cotas técnicas: dos marcas de medida verticales al costado del dibujo. */
+.hero2--a .h2-dim { position: absolute; right: 0; bottom: 0; height: 330px; width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(189,155,94,.45)); }
+
+/* ==========================================================================
+   OPCIÓN B — "Cenefa de tipos"
+   Fondo liso. En la banda inferior, la fila completa de tipos de esa
+   subcategoría en trazo oro tenue, desvanecida hacia la izquierda.
+   ========================================================================== */
+.hero2--b { padding-bottom: 120px; }
+.hero2--b .h2-strip {
+  position: absolute; z-index: 1; right: 0; bottom: 0; left: 48%;
+  display: flex; align-items: flex-end; justify-content: flex-end; gap: 42px;
+  padding: 0 max(4vw, calc((100% - 1240px) / 2)) 24px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 8%, #000 46%);
+          mask-image: linear-gradient(90deg, transparent 0%, transparent 8%, #000 46%);
+}
+.hero2--b .h2-art { position: relative; right: auto; bottom: auto; height: 148px; opacity: .5; }
+.hero2--b .h2-art .fb, .hero2--b .h2-art .dr rect, .hero2--b .h2-art .dw rect,
+.hero2--b .h2-art .ln, .hero2--b .h2-art .dr line, .hero2--b .h2-art .dw line { stroke: var(--homea-gold); }
+.hero2--b .h2-art .glass, .hero2--b .h2-art .glass-shelf,
+.hero2--b .h2-art .cab, .hero2--b .h2-art .fl { stroke: var(--homea-gold); }
+.hero2--b .h2-art .in { opacity: 0; }
+/* Filete de oro que cierra la banda, como el canto de una lámina. */
+.hero2--b::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; z-index: 3;
+  background: linear-gradient(90deg, transparent, rgba(189,155,94,.55) 55%, rgba(189,155,94,.2));
+}
+
+/* ==========================================================================
+   OPCIÓN C — "Halo de showroom"
+   Sin retícula. Foco radial de oro detrás de un único objeto grande, con las
+   zonas interiores encendidas: atmósfera de vitrina, no de plano.
+   ========================================================================== */
+.hero2--c { background: radial-gradient(120% 130% at 78% 55%, #2A2420 0%, #1E1914 46%, #14100D 100%); }
+.hero2--c::before {
+  content: ""; position: absolute; z-index: 0;
+  right: 6%; bottom: -14%; width: 620px; height: 620px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(189,155,94,.20) 0%, rgba(189,155,94,.07) 42%, transparent 68%);
+}
+.hero2--c .h2-art {
+  right: max(6vw, calc((100% - 1180px) / 2)); bottom: 0;
+  height: 372px; opacity: .9;
+}
+.hero2--c .h2-art .fb, .hero2--c .h2-art .dr rect,
+.hero2--c .h2-art .dw rect, .hero2--c .h2-art .ln { stroke: rgba(247,243,236,.72); }
+.hero2--c .h2-art .in .zone { fill: rgba(189,155,94,.22); }
+
+/* ==========================================================================
+   Cascarón de la maqueta (no forma parte del diseño propuesto)
+   ========================================================================== */
+body { background: var(--homea-bone); }
+.mk-head { padding: 44px 0 10px; }
+.mk-head h2 { font-size: 26px; margin: 0 0 6px; }
+.mk-head p { max-width: 760px; color: var(--fg-muted); font-size: 15px; margin: 0; }
+.mk-tag { display: inline-block; font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--accent-text); margin-bottom: 12px; }
+.mk-note { padding: 18px 0 52px; }
+.mk-note ul { margin: 0; padding-left: 18px; color: var(--fg-muted); font-size: 14.5px; line-height: 1.75; max-width: 780px; }
+.mk-sep { height: 1px; background: var(--border); margin: 0; }
+.mk-alt { padding: 0 0 6px; }
+.mk-alt .lbl { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--fg-subtle); padding: 26px 0 12px; }
+@media (max-width: 900px) {
+  .hero2 { padding: 72px 0 64px; }
+  .hero2--a .h2-art, .hero2--c .h2-art { height: 190px; opacity: .34; }
+  .hero2--b .h2-strip { left: 0; gap: 26px; }
+  .hero2--b .h2-art { height: 108px; }
+  .hero2 h1, .hero2 .sub { position: relative; }
+}
+</style>
+</head>
+<body>
+
+<div class="container mk-head" style="padding-top:56px">
+  <span class="mk-tag">Propuesta · Guías · Subcategoría 2</span>
+  <h2>Fondo del hero — 3 opciones</h2>
+  <p>Las tres usan el mismo motor: los <strong>diagramas de línea ya existentes</strong> de cada tipo de producto (los mismos de las fichas “Planos de cocina”), así que funcionan automáticamente en las 19 subcategorías 2 sin pedir foto ni ilustración nueva. Cambia el tratamiento.</p>
+</div>
+
+<!-- ══════════════════════ OPCIÓN A ══════════════════════ -->
+<div class="container mk-head">
+  <span class="mk-tag">Opción A</span>
+  <h2>Plano técnico</h2>
+  <p>Espresso con retícula de plano casi invisible y el diagrama del tipo principal a gran escala, anclado al piso del hero. Continuidad directa con las fichas de tipo que vienen justo debajo.</p>
+</div>
+<header class="hero2 hero2--a">
+  <div class="h2-art" aria-hidden="true">
+    <svg viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+      <line x1="16" y1="124" x2="124" y2="124" class="fl" />
+      <rect x="16" y="24" width="108" height="8" class="fb" />
+      <rect x="20" y="40" width="24" height="84" class="cab" />
+      <rect x="96" y="40" width="24" height="84" class="cab" />
+      <rect x="48" y="40" width="44" height="84" class="fb" />
+      <g class="in">
+        <rect x="50" y="42" width="40" height="80" class="zone" />
+        <circle cx="58" cy="96" r="3" class="ring" />
+        <circle cx="70" cy="100" r="3" class="ring" />
+        <circle cx="82" cy="96" r="3" class="ring" />
+        <circle cx="64" cy="108" r="3" class="ring" />
+        <circle cx="76" cy="110" r="3" class="ring" />
+      </g>
+      <g class="dr hl">
+        <rect x="48" y="40" width="44" height="84" />
+        <line x1="55" y1="48" x2="79" y2="48" />
+      </g>
+    </svg>
+  </div>
+  <div class="container">
+    <nav class="crumbs">Inicio<span class="sep">·</span>Guías<span class="sep">·</span>Cocina y Bar<span class="sep">·</span>Refrigeración<span class="sep">·</span>Máquinas de hielo</nav>
+    <div class="eyebrow">Refrigeración</div>
+    <h1>Máquinas de hielo</h1>
+    <p class="sub">Cada tipo de máquinas de hielo resuelve una cocina distinta. Compara y elige el tuyo.</p>
+  </div>
+</header>
+<div class="container mk-alt">
+  <div class="lbl">La misma opción A en otra subcategoría</div>
+</div>
+<header class="hero2 hero2--a">
+  <div class="h2-art" aria-hidden="true">
+    <svg viewBox="0 0 140 118" xmlns="http://www.w3.org/2000/svg">
+      <line x1="24" y1="104" x2="116" y2="104" class="ln" />
+      <rect x="58" y="94" width="14" height="10" class="fb" />
+      <line x1="65" y1="94" x2="65" y2="60" class="ln" />
+      <path d="M65 60 Q65 44 82 44 Q94 44 94 54" class="ln" />
+      <line x1="56" y1="56" x2="70" y2="50" class="ln" />
+      <g class="in">
+        <path d="M94 56 Q92 74 94 92 Q96 98 94 100" />
+        <circle cx="90" cy="102" r="1.5" class="ring" />
+        <circle cx="98" cy="102" r="1.5" class="ring" />
+      </g>
+    </svg>
+  </div>
+  <div class="container">
+    <nav class="crumbs">Inicio<span class="sep">·</span>Guías<span class="sep">·</span>Cocina y Bar<span class="sep">·</span>Tarjas y Grifería<span class="sep">·</span>Grifería</nav>
+    <div class="eyebrow">Tarjas y Grifería</div>
+    <h1>Grifería</h1>
+    <p class="sub">Cada tipo de grifería resuelve una cocina distinta. Compara y elige el tuyo.</p>
+  </div>
+</header>
+<div class="container mk-note">
+  <ul>
+    <li><strong>A favor:</strong> es el lenguaje que la página ya habla — el hero anuncia el dibujo técnico que el usuario va a encontrar abajo en las fichas.</li>
+    <li><strong>Riesgo:</strong> la retícula puede leerse “de ingeniería” si se sube de opacidad; hay que mantenerla al borde de lo visible.</li>
+  </ul>
+</div>
+<div class="mk-sep"></div>
+
+<!-- ══════════════════════ OPCIÓN B ══════════════════════ -->
+<div class="container mk-head">
+  <span class="mk-tag">Opción B</span>
+  <h2>Cenefa de tipos</h2>
+  <p>Fondo liso, sin retícula. En la banda inferior corre la fila completa de tipos de esa subcategoría en trazo oro, desvanecida hacia el texto. Es la opción más silenciosa y la que mejor comunica “aquí hay variedad para comparar”.</p>
+</div>
+<header class="hero2 hero2--b">
+  <div class="h2-strip" aria-hidden="true">
+    <div class="h2-art">
+      <svg viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+        <line x1="16" y1="124" x2="124" y2="124" class="fl" />
+        <rect x="16" y="24" width="108" height="8" class="fb" />
+        <rect x="20" y="40" width="24" height="84" class="cab" />
+        <rect x="96" y="40" width="24" height="84" class="cab" />
+        <rect x="48" y="40" width="44" height="84" class="fb" />
+        <g class="dr hl"><rect x="48" y="40" width="44" height="84" /><line x1="55" y1="48" x2="79" y2="48" /></g>
+      </svg>
+    </div>
+    <div class="h2-art">
+      <svg viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+        <line x1="30" y1="124" x2="110" y2="124" class="fl" />
+        <rect x="44" y="22" width="52" height="102" class="fb" />
+        <g class="dr hl"><rect x="44" y="22" width="52" height="102" /><line x1="90" y1="52" x2="90" y2="76" /></g>
+      </svg>
+    </div>
+    <div class="h2-art">
+      <svg viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+        <line x1="30" y1="124" x2="110" y2="124" class="fl" />
+        <rect x="44" y="30" width="52" height="94" class="fb" />
+        <line x1="50" y1="118" x2="60" y2="118" class="glass-shelf" />
+        <line x1="64" y1="118" x2="74" y2="118" class="glass-shelf" />
+        <line x1="78" y1="118" x2="88" y2="118" class="glass-shelf" />
+        <g class="dr hl"><rect x="44" y="30" width="52" height="82" /><line x1="50" y1="38" x2="90" y2="38" /></g>
+      </svg>
+    </div>
+    <div class="h2-art">
+      <svg viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+        <line x1="30" y1="124" x2="110" y2="124" class="fl" />
+        <rect x="44" y="30" width="52" height="94" class="fb" />
+        <g class="dr hl"><rect x="44" y="30" width="52" height="94" /><rect x="50" y="38" width="40" height="78" class="cab" /><line x1="50" y1="34" x2="90" y2="34" /></g>
+      </svg>
+    </div>
+  </div>
+  <div class="container">
+    <nav class="crumbs">Inicio<span class="sep">·</span>Guías<span class="sep">·</span>Cocina y Bar<span class="sep">·</span>Refrigeración<span class="sep">·</span>Máquinas de hielo</nav>
+    <div class="eyebrow">Refrigeración</div>
+    <h1>Máquinas de hielo</h1>
+    <p class="sub">Cada tipo de máquinas de hielo resuelve una cocina distinta. Compara y elige el tuyo.</p>
+  </div>
+</header>
+<div class="container mk-alt">
+  <div class="lbl">La misma opción B en otra subcategoría</div>
+</div>
+<header class="hero2 hero2--b">
+  <div class="h2-strip" aria-hidden="true">
+    <div class="h2-art">
+      <svg viewBox="0 0 140 118" xmlns="http://www.w3.org/2000/svg">
+        <line x1="24" y1="104" x2="116" y2="104" class="ln" />
+        <rect x="58" y="94" width="14" height="10" class="fb" />
+        <line x1="65" y1="94" x2="65" y2="60" class="ln" />
+        <path d="M65 60 Q65 44 82 44 Q94 44 94 54" class="ln" />
+        <line x1="56" y1="56" x2="70" y2="50" class="ln" />
+      </svg>
+    </div>
+    <div class="h2-art">
+      <svg viewBox="0 0 140 118" xmlns="http://www.w3.org/2000/svg">
+        <line x1="24" y1="104" x2="116" y2="104" class="ln" />
+        <line x1="65" y1="104" x2="65" y2="60" class="ln" />
+        <path d="M65 60 Q65 44 82 44 Q94 44 94 54" class="ln" />
+        <line x1="42" y1="96" x2="42" y2="104" class="ln" />
+        <line x1="36" y1="96" x2="48" y2="96" class="ln" />
+        <line x1="88" y1="96" x2="88" y2="104" class="ln" />
+        <line x1="82" y1="96" x2="94" y2="96" class="ln" />
+      </svg>
+    </div>
+    <div class="h2-art">
+      <svg viewBox="0 0 140 118" xmlns="http://www.w3.org/2000/svg">
+        <line x1="24" y1="104" x2="116" y2="104" class="ln" />
+        <rect x="58" y="96" width="12" height="8" class="fb" />
+        <line x1="64" y1="96" x2="64" y2="44" class="ln" />
+        <path d="M64 44 Q64 30 80 30 Q92 30 92 40" class="ln" />
+        <rect x="88" y="40" width="8" height="14" class="fb" />
+        <path d="M92 54 Q98 72 88 84 Q80 92 72 86" class="cab" />
+      </svg>
+    </div>
+    <div class="h2-art">
+      <svg viewBox="0 0 140 118" xmlns="http://www.w3.org/2000/svg">
+        <line x1="24" y1="104" x2="116" y2="104" class="ln" />
+        <rect x="56" y="96" width="14" height="8" class="fb" />
+        <line x1="63" y1="96" x2="63" y2="38" class="ln" />
+        <circle cx="63" cy="52" r="9" class="glass" />
+        <circle cx="63" cy="64" r="9" class="glass" />
+        <circle cx="63" cy="76" r="9" class="glass" />
+        <path d="M63 38 Q63 28 76 28 Q88 28 90 40 L90 50" class="ln" />
+      </svg>
+    </div>
+    <div class="h2-art">
+      <svg viewBox="0 0 140 118" xmlns="http://www.w3.org/2000/svg">
+        <line x1="34" y1="20" x2="34" y2="110" class="ln" />
+        <line x1="24" y1="110" x2="116" y2="110" class="ln" />
+        <line x1="34" y1="48" x2="62" y2="56" class="ln" />
+        <circle cx="64" cy="56" r="3" class="glass" />
+        <line x1="66" y1="56" x2="94" y2="48" class="ln" />
+        <line x1="94" y1="48" x2="94" y2="56" class="ln" />
+        <rect x="80" y="94" width="28" height="16" class="ln" />
+        <line x1="76" y1="94" x2="112" y2="94" class="ln" />
+      </svg>
+    </div>
+  </div>
+  <div class="container">
+    <nav class="crumbs">Inicio<span class="sep">·</span>Guías<span class="sep">·</span>Cocina y Bar<span class="sep">·</span>Tarjas y Grifería<span class="sep">·</span>Grifería</nav>
+    <div class="eyebrow">Tarjas y Grifería</div>
+    <h1>Grifería</h1>
+    <p class="sub">Cada tipo de grifería resuelve una cocina distinta. Compara y elige el tuyo.</p>
+  </div>
+</header>
+<div class="container mk-note">
+  <ul>
+    <li><strong>A favor:</strong> la más minimalista; el texto respira y el fondo no compite. Escala sola: 2 tipos o 19, la cenefa se ajusta.</li>
+    <li><strong>Riesgo:</strong> en categorías con muchos tipos (Campanas, 19) hay que limitar la cenefa a 5–6 para que no se vuelva ruido.</li>
+  </ul>
+</div>
+<div class="mk-sep"></div>
+
+<!-- ══════════════════════ OPCIÓN C ══════════════════════ -->
+<div class="container mk-head">
+  <span class="mk-tag">Opción C</span>
+  <h2>Halo de showroom</h2>
+  <p>Sin retícula ni repetición: un foco radial de oro muy tenue detrás de un único objeto grande, con las zonas interiores encendidas. Atmósfera de vitrina en lugar de plano técnico — el registro más “lujo” de los tres.</p>
+</div>
+<header class="hero2 hero2--c">
+  <div class="h2-art" aria-hidden="true">
+    <svg viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+      <line x1="16" y1="124" x2="124" y2="124" class="fl" />
+      <rect x="16" y="24" width="108" height="8" class="fb" />
+      <rect x="20" y="40" width="24" height="84" class="cab" />
+      <rect x="96" y="40" width="24" height="84" class="cab" />
+      <rect x="48" y="40" width="44" height="84" class="fb" />
+      <g class="in">
+        <rect x="50" y="42" width="40" height="80" class="zone" />
+        <circle cx="58" cy="96" r="3" class="ring" />
+        <circle cx="70" cy="100" r="3" class="ring" />
+        <circle cx="82" cy="96" r="3" class="ring" />
+        <circle cx="64" cy="108" r="3" class="ring" />
+        <circle cx="76" cy="110" r="3" class="ring" />
+      </g>
+      <g class="dr hl">
+        <rect x="48" y="40" width="44" height="84" />
+        <line x1="55" y1="48" x2="79" y2="48" />
+      </g>
+    </svg>
+  </div>
+  <div class="container">
+    <nav class="crumbs">Inicio<span class="sep">·</span>Guías<span class="sep">·</span>Cocina y Bar<span class="sep">·</span>Refrigeración<span class="sep">·</span>Máquinas de hielo</nav>
+    <div class="eyebrow">Refrigeración</div>
+    <h1>Máquinas de hielo</h1>
+    <p class="sub">Cada tipo de máquinas de hielo resuelve una cocina distinta. Compara y elige el tuyo.</p>
+  </div>
+</header>
+<div class="container mk-alt">
+  <div class="lbl">La misma opción C en otra subcategoría</div>
+</div>
+<header class="hero2 hero2--c">
+  <div class="h2-art" aria-hidden="true">
+    <svg viewBox="0 0 140 118" xmlns="http://www.w3.org/2000/svg">
+      <line x1="24" y1="104" x2="116" y2="104" class="ln" />
+      <rect x="58" y="94" width="14" height="10" class="fb" />
+      <line x1="65" y1="94" x2="65" y2="60" class="ln" />
+      <path d="M65 60 Q65 44 82 44 Q94 44 94 54" class="ln" />
+      <line x1="56" y1="56" x2="70" y2="50" class="ln" />
+      <g class="in">
+        <path d="M94 56 Q92 74 94 92 Q96 98 94 100" />
+        <circle cx="90" cy="102" r="1.5" class="ring" />
+        <circle cx="98" cy="102" r="1.5" class="ring" />
+      </g>
+    </svg>
+  </div>
+  <div class="container">
+    <nav class="crumbs">Inicio<span class="sep">·</span>Guías<span class="sep">·</span>Cocina y Bar<span class="sep">·</span>Tarjas y Grifería<span class="sep">·</span>Grifería</nav>
+    <div class="eyebrow">Tarjas y Grifería</div>
+    <h1>Grifería</h1>
+    <p class="sub">Cada tipo de grifería resuelve una cocina distinta. Compara y elige el tuyo.</p>
+  </div>
+</header>
+<div class="container mk-note">
+  <ul>
+    <li><strong>A favor:</strong> el registro más cálido y de marca; el objeto se ve iluminado, no dibujado.</li>
+    <li><strong>Riesgo:</strong> rompe con el resto de heros de Guías (que son foto real) y con el lenguaje plano de las fichas; es el más “efecto”.</li>
+  </ul>
+</div>
+
+</body>
+</html>

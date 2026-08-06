@@ -18,6 +18,13 @@ interface Props {
   bgPosition?: string;
   /** Espejo horizontal de la foto (el texto queda normal). */
   bgFlip?: boolean;
+  /** Arte de línea de fondo (diagrama del equipo) sobre espresso — sin foto.
+   *  Se usa donde no existe activo fotográfico por categoría; ver theme.css
+   *  (.page-hero--plano). Ignorado si hay bgImage. */
+  art?: React.ReactNode;
+  /** Fuerza el fondo espresso aunque no haya arte (p. ej. cuando el hueco
+   *  derecho lo ocupa un `aside`). Implícito si se pasa `art`. */
+  plano?: boolean;
   children?: React.ReactNode;
   /** Columna derecha del hero (p. ej. tarjeta "Aprende sobre campanas"). */
   aside?: React.ReactNode;
@@ -32,13 +39,18 @@ export default function PageHero({
   bgImage,
   bgPosition,
   bgFlip,
+  art,
+  plano: planoProp,
   children,
   aside,
 }: Props) {
   const photo = Boolean(bgImage);
+  const plano = !photo && (Boolean(art) || Boolean(planoProp));
   const cls = photo
     ? `page-hero page-hero--photo${bgFlip ? " page-hero--flip" : ""}`
-    : "page-hero";
+    : plano
+      ? "page-hero page-hero--plano"
+      : "page-hero";
   const main = (
     <>
       <Breadcrumb crumbs={crumbs} />
@@ -66,6 +78,11 @@ export default function PageHero({
       }
     >
       {photo && <div className="page-hero__veil" aria-hidden="true" />}
+      {plano && art && (
+        <div className="page-hero__art" aria-hidden="true">
+          {art}
+        </div>
+      )}
       <div className="container">
         {aside ? (
           <div className="hero-split">
