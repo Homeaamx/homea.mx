@@ -32,6 +32,8 @@ interface Props {
   base: string;
   /** Ruta de la guía del mismo tipo de producto, para el enlace de ayuda. */
   guia?: string;
+  /** Deep-link a la guía educativa en overlay (p. ej. `<guia>#aprende`). */
+  aprendeHref?: string;
   contexto: string;
   /** Nombres de eje que difieren del default (taxonomía → etiquetasGrupos). */
   etiquetas?: Partial<Record<GrupoFicha, string>>;
@@ -42,7 +44,7 @@ function slugDeFiltro(filtro: string): string {
   return filtro.split("?f=")[1] ?? "";
 }
 
-export default function TipoGrid({ filtros, base, guia, contexto, etiquetas }: Props) {
+export default function TipoGrid({ filtros, base, guia, aprendeHref, contexto, etiquetas }: Props) {
   const conFicha = filtros.filter((f) => f.ficha);
   if (conFicha.length === 0) return null;
 
@@ -142,9 +144,19 @@ export default function TipoGrid({ filtros, base, guia, contexto, etiquetas }: P
                 ¿No sabes cuál te conviene? No te preocupes,{" "}
                 <em>nosotros te guiamos</em>.
               </p>
-              <Link href={guia} className="btn btn-gold">
-                Guía de {contexto.toLowerCase()}
-              </Link>
+              <div className="tpg-banner-cta">
+                <Link href={guia} className="btn btn-gold">
+                  Guía de {contexto.toLowerCase()}
+                </Link>
+                {aprendeHref && (
+                  // El hash #aprende abre el overlay educativo al llegar a la guía
+                  // (AprendeCampanas) — el equivalente al botón "Aprende un poco
+                  // sobre campanas" del sitio OXATIS.
+                  <Link href={aprendeHref} className="btn btn-ghost-light">
+                    Aprende a elegir
+                  </Link>
+                )}
+              </div>
             </div>
             <span className="tpg-banner-icon" aria-hidden="true">
               <svg

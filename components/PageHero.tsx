@@ -19,6 +19,8 @@ interface Props {
   /** Espejo horizontal de la foto (el texto queda normal). */
   bgFlip?: boolean;
   children?: React.ReactNode;
+  /** Columna derecha del hero (p. ej. tarjeta "Aprende sobre campanas"). */
+  aside?: React.ReactNode;
 }
 
 export default function PageHero({
@@ -31,11 +33,26 @@ export default function PageHero({
   bgPosition,
   bgFlip,
   children,
+  aside,
 }: Props) {
   const photo = Boolean(bgImage);
   const cls = photo
     ? `page-hero page-hero--photo${bgFlip ? " page-hero--flip" : ""}`
     : "page-hero";
+  const main = (
+    <>
+      <Breadcrumb crumbs={crumbs} />
+      {eyebrow && (
+        <div className="eyebrow" style={{ marginBottom: 18 }}>
+          {eyebrow}
+        </div>
+      )}
+      {rule && <span className="rule-gold" style={{ marginBottom: 22 }} />}
+      <h1>{title}</h1>
+      {sub && <p className="sub">{sub}</p>}
+      {children}
+    </>
+  );
   return (
     <header
       className={cls}
@@ -50,16 +67,14 @@ export default function PageHero({
     >
       {photo && <div className="page-hero__veil" aria-hidden="true" />}
       <div className="container">
-        <Breadcrumb crumbs={crumbs} />
-        {eyebrow && (
-          <div className="eyebrow" style={{ marginBottom: 18 }}>
-            {eyebrow}
+        {aside ? (
+          <div className="hero-split">
+            <div className="hero-split-main">{main}</div>
+            <div className="hero-split-aside">{aside}</div>
           </div>
+        ) : (
+          main
         )}
-        {rule && <span className="rule-gold" style={{ marginBottom: 22 }} />}
-        <h1>{title}</h1>
-        {sub && <p className="sub">{sub}</p>}
-        {children}
       </div>
     </header>
   );

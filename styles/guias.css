@@ -687,3 +687,151 @@
 .ph-line--sm { width: 40%; }
 .plp-aviso { margin: 30px 0 0; font-size: 13px; color: var(--fg-muted); }
 .plp-aviso .arrow-link { margin-left: 6px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Aprende sobre campanas — banner en el hero de Guías + overlay de 5 pasos
+   (láminas del sitio OXATIS dentro de la plantilla v2). Prefijo: .apc-
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Hero con columna derecha (PageHero aside). */
+.hero-split { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+.hero-split-main { min-width: 0; }
+.hero-split-aside { min-width: 0; }
+@media (max-width: 900px) { .hero-split { grid-template-columns: 1fr; } }
+
+/* Tarjeta espresso del hero. */
+.apc-card {
+  background: var(--homea-espresso); border-top: 3px solid var(--homea-gold);
+  padding: clamp(24px, 2.6vw, 34px) clamp(24px, 2.8vw, 36px);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
+  position: relative; overflow: hidden;
+}
+.apc-card .eyebrow { color: var(--homea-gold); }
+.apc-card h3 {
+  margin: 0; font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(22px, 2vw, 26px); line-height: 1.22; color: #F4EFE6;
+}
+.apc-card h3 i { font-style: italic; color: var(--homea-gold-soft); }
+.apc-card p { margin: 0; font-size: 15px; line-height: 1.6; color: rgba(237,231,220,.75); max-width: 34em; }
+.apc-card .btn { margin-top: 8px; }
+
+/* Overlay. */
+.apc-veil {
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(10,10,10,.62);
+  display: flex; align-items: center; justify-content: center;
+  padding: clamp(14px, 3vw, 30px);
+}
+.apc-panel {
+  background: var(--bg); width: min(1040px, 100%); max-height: 92vh;
+  overflow: auto; position: relative;
+  animation: apcUp .45s var(--ease-standard);
+}
+@keyframes apcUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+.apc-x {
+  position: absolute; top: 12px; right: 20px; z-index: 2;
+  background: none; border: 0; cursor: pointer;
+  font-family: var(--font-display); font-size: 34px; line-height: 1; color: var(--fg);
+}
+.apc-head { padding: clamp(26px, 3.4vw, 40px) clamp(24px, 4.4vw, 50px) 0; }
+.apc-head h2 {
+  margin: 10px 0 0; font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(25px, 3vw, 34px); line-height: 1.12;
+}
+.apc-head h2 i { font-style: italic; color: var(--accent-text); }
+
+.apc-steps { display: flex; gap: 4px; flex-wrap: wrap; padding: 22px clamp(24px, 4.4vw, 50px) 0; }
+.apc-step {
+  display: flex; gap: 9px; align-items: center;
+  font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+  letter-spacing: .09em; text-transform: uppercase;
+  padding: 12px 15px; border: 1px solid transparent; background: none;
+  cursor: pointer; color: var(--fg-muted);
+  transition: border-color .25s, color .25s;
+}
+.apc-step em { font-family: var(--font-display); font-style: italic; font-size: 15px; color: var(--homea-gold); font-variant-numeric: tabular-nums; }
+.apc-step:hover { color: var(--fg); }
+.apc-step.on { border-color: var(--fg); color: var(--fg); }
+
+.apc-body {
+  display: grid; grid-template-columns: 1.12fr 1fr; gap: clamp(24px, 3.6vw, 44px);
+  padding: 26px clamp(24px, 4.4vw, 50px) 26px; align-items: stretch;
+}
+/* Columna de texto en flex para poder anclar elementos al pie de la lámina
+   (p. ej. el enlace al video de downdraft). */
+.apc-txt { display: flex; flex-direction: column; align-items: flex-start; }
+.apc-txt a.apc-video { margin-top: auto; padding-top: 28px; }
+.apc-fig { margin: 0; background: #fff; border: 1px solid var(--border); padding: 14px 14px 6px; }
+/* Marco de proporción fija (la lámina más alta es 1200×871): las 9 imágenes
+   están montadas siempre y solo se alterna la visible — cambiar de paso no
+   re-descarga nada ni mueve la altura del panel. */
+.apc-imgs { display: block; position: relative; aspect-ratio: 1200 / 871; }
+.apc-imgs img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+  opacity: 0; transition: opacity .25s ease; pointer-events: none;
+}
+.apc-imgs img.on { opacity: 1; }
+.apc-fig figcaption {
+  border-top: 1px solid var(--border); margin-top: 12px; padding: 10px 2px 6px;
+  font-size: 11.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--fg-muted); text-align: center;
+}
+.apc-txt h3 { margin: 8px 0 12px; font-family: var(--font-display); font-weight: 500; font-size: clamp(21px, 2.2vw, 26px); line-height: 1.18; }
+.apc-txt p { margin: 0 0 12px; font-size: 15.5px; line-height: 1.65; color: var(--fg-muted); }
+.apc-txt p b { color: var(--fg); font-weight: 600; }
+.apc-dato {
+  border-left: 2px solid var(--homea-gold); padding-left: 13px; margin-top: 16px;
+  font-size: 13.5px; color: var(--accent-text);
+}
+.apc-txt .arrow-link { margin-top: 6px; }
+
+/* Leyenda de motores (paso 02). */
+.apc-leyenda { margin: 14px 0 0; padding: 0; border-top: 1px solid var(--border); }
+.apc-leyenda li { list-style: none; display: flex; gap: 13px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14.5px; color: var(--fg-muted); }
+.apc-leyenda li b { color: var(--fg); font-weight: 600; }
+.apc-leyenda .n {
+  flex: none; width: 26px; height: 26px; border-radius: 50%;
+  border: 1.7px solid var(--fg); display: flex; align-items: center; justify-content: center;
+  font-size: 12.5px; font-weight: 600; color: var(--fg);
+}
+.apc-leyenda .r { margin-left: auto; font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-subtle); }
+
+/* Sub-pestañas del paso 03 (las 5 láminas de la Nota 3). */
+.apc-subtabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 2px 0 14px; }
+.apc-subtabs button {
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: .09em; text-transform: uppercase; padding: 9px 13px;
+  border: 1px solid var(--border); background: #fff; cursor: pointer; color: var(--fg-muted);
+  transition: border-color .25s, color .25s, background .25s;
+}
+.apc-subtabs button:hover {
+  color: var(--fg); border-color: var(--homea-gold);
+  background: color-mix(in srgb, var(--homea-gold) 14%, #fff);
+  transform: translateY(-2px);
+}
+.apc-subtabs button { transition: border-color .25s, color .25s, background .25s, transform .25s; }
+.apc-subtabs button.on { border-color: var(--fg); color: var(--fg); background: var(--homea-greige); }
+
+.apc-foot {
+  display: flex; justify-content: flex-end; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding: 0 clamp(24px, 4.4vw, 50px) clamp(26px, 3.4vw, 38px);
+}
+.apc-nav { display: flex; gap: 10px; }
+.apc-nav button {
+  font-family: var(--font-sans); font-size: 12.5px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; padding: 13px 22px;
+  border: 1px solid var(--fg); background: none; color: var(--fg); cursor: pointer;
+  transition: background .25s, color .25s, opacity .25s;
+}
+.apc-nav button:disabled { opacity: .35; cursor: default; }
+.apc-nav button.primario { background: var(--fg); color: var(--bg); }
+.apc-nav button.primario:hover { background: var(--homea-gold); border-color: var(--homea-gold); color: var(--homea-black); }
+
+@media (max-width: 840px) {
+  .apc-body { grid-template-columns: 1fr; }
+  .apc-nav { margin-left: auto; }
+}
+
+/* Doble CTA en la banda del PLP (Guía de… + Aprende sobre…). */
+.tpg-banner-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+.tpg-banner-cta .btn { margin-top: 0; }

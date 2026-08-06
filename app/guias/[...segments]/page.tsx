@@ -15,6 +15,7 @@ import {
 import { absUrl } from "@/lib/site";
 import type { Guia, Macrocategoria, Subcategoria1, Subcategoria2 } from "@/types/guias";
 
+import AprendeCampanas from "@/components/AprendeCampanas";
 import PageHero from "@/components/PageHero";
 import CategoryList from "@/components/CategoryList";
 import FilterList from "@/components/FilterList";
@@ -279,6 +280,9 @@ function FilterIndex({
             ? `Cada tipo de ${sub2.nombre.toLowerCase()} resuelve una cocina distinta. Compara y elige el tuyo.`
             : `Elige un filtro para ver los ${sub2.nombre.toLowerCase()} de ${sub1.nombre} que buscas.`
         }
+        // Guía educativa del sitio viejo (láminas OXATIS) en overlay; por ahora
+        // solo Campanas la tiene. Deep-link: #aprende (botón del PLP).
+        aside={sub2.slug === "campanas" ? <AprendeCampanas /> : undefined}
       />
       <section className="sec">
         <div className="container">

@@ -127,6 +127,8 @@ export default async function Page({ params }: Params) {
         filtros={tipos}
         base={base}
         guia={sub2.rutaFiltros}
+        // Solo Campanas tiene guía educativa en overlay por ahora (#aprende).
+        aprendeHref={tipo === "campanas" ? `${sub2.rutaFiltros}#aprende` : undefined}
         contexto={sub2.nombre}
         etiquetas={sub2.etiquetasGrupos}
       />
