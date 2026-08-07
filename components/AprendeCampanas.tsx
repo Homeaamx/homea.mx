@@ -10,6 +10,7 @@
 // cargar — es el destino del botón "Aprende sobre campanas" del PLP (TipoGrid).
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 const IMG = "/assets/guias/aprende-campanas/homea-campanas-guia-para-comprar";
 
@@ -152,7 +153,11 @@ export default function AprendeCampanas() {
         </button>
       </div>
 
-      {open && (
+      {/* El overlay se monta en <body> vía portal: el hero (.page-hero--plano)
+          tiene `isolation: isolate`, y sin portal el `position: fixed` del velo
+          queda atrapado en ese contexto de apilamiento — el nav sticky (z:50)
+          se pintaría encima del panel. `open` solo puede ser true en cliente. */}
+      {open && createPortal(
         <div
           className="apc-veil"
           role="dialog"
@@ -382,7 +387,8 @@ export default function AprendeCampanas() {
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

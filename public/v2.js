@@ -873,3 +873,55 @@
   bindPage();
   window.__homeaInitPage = function () { bindChrome(); bindPage(); };
 })();
+
+/* ---------- Oro que sigue al cursor en las bandas CTA ----------------------
+   Un solo listener delegado en document: vale para todas las páginas y
+   sobrevive a la navegación cliente (React puede reemplazar la banda sin que
+   haya que re-ligar nada). El orbe persigue al puntero con inercia (lerp) y se
+   mueve por transform, así que el trabajo se queda en el compositor.
+   Se activa sólo con puntero fino y respeta prefers-reduced-motion. */
+(function () {
+  var fino = window.matchMedia && window.matchMedia("(pointer: fine)").matches;
+  var quieto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!fino || quieto) return;
+
+  var banda = null;      // banda bajo el cursor
+  var dx = 0, dy = 0;    // destino (cursor)
+  var x = 0, y = 0;      // posición actual del orbe
+  var raf = 0;
+
+  function pintar() {
+    raf = 0;
+    if (!banda) return;
+    x += (dx - x) * 0.14;                       // inercia
+    y += (dy - y) * 0.14;
+    banda.style.setProperty("--glow-x", x.toFixed(1) + "px");
+    banda.style.setProperty("--glow-y", y.toFixed(1) + "px");
+    if (Math.abs(dx - x) > 0.5 || Math.abs(dy - y) > 0.5) raf = requestAnimationFrame(pintar);
+  }
+
+  function salir() {
+    if (!banda) return;
+    banda.classList.remove("is-glowing");
+    banda = null;
+  }
+
+  document.addEventListener("pointermove", function (e) {
+    if (e.pointerType && e.pointerType !== "mouse") return;
+    var el = e.target && e.target.closest ? e.target.closest(".cta-band") : null;
+    if (!el) { salir(); return; }
+    var r = el.getBoundingClientRect();
+    dx = e.clientX - r.left;
+    dy = e.clientY - r.top;
+    if (el !== banda) {                          // al entrar, el orbe nace donde está el cursor
+      salir();
+      banda = el;
+      x = dx; y = dy;
+      banda.classList.add("is-glowing");
+    }
+    if (!raf) raf = requestAnimationFrame(pintar);
+  }, { passive: true });
+
+  document.addEventListener("pointerleave", salir, { passive: true });
+  window.addEventListener("blur", salir);
+})();

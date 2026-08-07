@@ -6,7 +6,58 @@
 <title>HOMEA — Quiénes somos · Showroom Querétaro</title>
 <link rel="icon" type="image/png" href="assets/favicon-circle.png">
 <link rel="stylesheet" href="tokens-v2.css">
-<link rel="stylesheet" href="theme.css?v=60">
+<link rel="stylesheet" href="theme.css?v=62">
+<style>
+/* ══ Misión · Visión · Valores — tres tarjetas de igual proporción ══
+   Reposo: superficie bone con filo de oro arriba. Hover: el espresso sube
+   desde el piso (wipe de 520ms), el texto pasa a bone y el índice se enciende
+   en oro. Motion contenido, en la línea del sistema v2. Prefijo: .mvv- */
+.mvv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 58px; }
+.mvv {
+  position: relative; isolation: isolate; overflow: hidden;
+  background: var(--bg); border-top: 3px solid var(--homea-gold);
+  padding: clamp(30px, 3vw, 44px) clamp(26px, 2.6vw, 38px) clamp(34px, 3.4vw, 48px);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 14px;
+  transition: transform .5s var(--ease-standard), box-shadow .5s var(--ease-standard);
+}
+/* El relleno: una capa que crece desde abajo (no un cambio de color seco). */
+.mvv::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: var(--homea-espresso);
+  transform: scaleY(0); transform-origin: 50% 100%;
+  transition: transform .52s var(--ease-reveal);
+}
+.mvv:hover { transform: translateY(-4px); box-shadow: 0 26px 54px -34px rgba(30,25,20,.55); }
+.mvv:hover::before { transform: scaleY(1); }
+
+.mvv-n {
+  font-family: var(--font-display); font-style: italic; font-size: 22px; line-height: 1;
+  color: var(--accent-text); font-variant-numeric: tabular-nums;
+  transition: color .4s var(--ease-standard);
+}
+.mvv h3 {
+  margin: 0; font-family: var(--font-sans); font-size: 18px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--fg);
+  transition: color .4s var(--ease-standard);
+}
+/* La regla de oro se estira de 28 a 100% al pasar el cursor. */
+.mvv-rule { display: block; width: 28px; height: 2px; background: var(--homea-gold); transition: width .52s var(--ease-reveal); }
+.mvv:hover .mvv-rule { width: 100%; }
+.mvv p {
+  margin: 0; font-size: 16px; line-height: 1.62; color: var(--homea-n600);
+  transition: color .4s var(--ease-standard);
+}
+.mvv p + p { margin-top: 10px; padding-top: 12px; border-top: 1px dotted var(--border); transition: color .4s var(--ease-standard), border-color .4s var(--ease-standard); }
+.mvv:hover .mvv-n { color: var(--homea-gold); }
+.mvv:hover h3 { color: var(--homea-bone); }
+.mvv:hover p { color: rgba(237,231,220,.82); }
+.mvv:hover p + p { border-top-color: rgba(247,243,236,.22); }
+@media (max-width: 900px) { .mvv-grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) {
+  .mvv, .mvv::before, .mvv-rule { transition: none; }
+  .mvv:hover { transform: none; }
+}
+</style>
 </head>
 <body>
 
@@ -146,31 +197,31 @@
   <div style="display:flex;flex-direction:column;gap:24px;align-items:flex-start">
     <div class="eyebrow">Desde · 2004</div>
     <span class="rule-gold"></span>
-    <h1 class="h-display" style="font-size:clamp(38px,4.6vw,64px)">22 años abriendo la puerta a un hogar bien <i>equipado</i>.</h1>
-    <p style="margin:0;max-width:460px;font-size:var(--fs-md);font-weight:300;color:var(--fg-muted)">
-      Somos distribuidor especializado en equipamiento premium. Asesoría consultiva, respaldo postventa y un showroom donde el equipo se vive antes de decidirse.</p>
+    <h1 class="h-display" style="font-size:clamp(38px,4.6vw,64px)">22 años innovando <i>tu hogar</i>.</h1>
+    <p style="margin:0;max-width:460px;font-size:var(--fs-md);font-weight:300;color:var(--homea-n600)">
+      Somos distribuidor especializado en equipamiento para tu cocina. Ofrecemos asesoría consultiva, respaldo postventa y un showroom donde el equipo se vive antes de decidirse.</p>
     <a class="btn btn-primary" href="#showroom">Conocer el showroom</a>
   </div>
   <div class="hero-visual" style="aspect-ratio:4/3.4;max-height:520px">
-    <div class="hi on"><img src="assets/photos/historia.jpg" alt="Cocina equipada por HOMEA"></div>
+    <div class="hi on"><img src="assets/photos/hero-nosotros-showroom-cocina-equipada.jpg" alt="Cocina equipada por HOMEA: parrilla profesional, campana de isla, refrigerador y cava empotrados"></div>
   </div>
 </div></section>
 
 <!-- Stats con scroll: cada cifra con su imagen de fondo (movido desde home) -->
 <section class="statscroll" id="statscroll" aria-label="HOMEA en números">
   <div class="ss-pin">
-    <div class="ss-bg on" style="background-image:url('assets/photos/historia.jpg')"></div>
-    <div class="ss-bg" style="background-image:url('assets/photos/showroom.jpg')"></div>
-    <div class="ss-bg" style="background-image:url('assets/photos/prod-subzero.jpg')"></div>
+    <div class="ss-bg on" style="background-image:url('assets/photos/stats-cocina-bertazzoni-refrigerador-panelable.jpg')"></div>
+    <div class="ss-bg" style="background-image:url('assets/photos/stats-cocina-bertazzoni-estufa-profesional.jpg')"></div>
+    <div class="ss-bg" style="background-image:url('assets/photos/stats-refrigeracion-gaggenau-columnas-cavas.jpg')"></div>
     <div class="ss-bg" style="background-image:url('assets/photos/cat-cocina.jpg')"></div>
     <div class="ss-veil"></div>
     <div class="container ss-inner">
       <div class="eyebrow eyebrow-bright">Oficio · en números</div>
       <div class="ss-stack">
-        <div class="ss-item on"><span class="ss-n figures">22</span><span class="ss-l">años de oficio</span></div>
-        <div class="ss-item"><span class="ss-n figures">2 h</span><span class="ss-l">respuesta promedio</span></div>
-        <div class="ss-item"><span class="ss-n figures">96</span><span class="ss-l">marcas premium</span></div>
-        <div class="ss-item"><span class="ss-n figures">25,000</span><span class="ss-l">piezas en catálogo</span></div>
+        <div class="ss-item on"><span class="ss-n figures">22</span><span class="ss-l">años de experiencia</span></div>
+        <div class="ss-item"><span class="ss-n figures">10,000</span><span class="ss-l">proyectos entregados</span></div>
+        <div class="ss-item"><span class="ss-n figures">+100</span><span class="ss-l">marcas en catálogo</span></div>
+        <div class="ss-item"><span class="ss-n figures">25,000</span><span class="ss-l">productos disponibles</span></div>
       </div>
       <div class="ss-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
     </div>
@@ -180,103 +231,66 @@
 <!-- Historia -->
 <section class="sec on-greige"><div class="container">
   <div class="split">
-    <div class="imgw reveal-img"><img src="assets/photos/hero-cocina.jpg" alt="Cocina europea equipada"></div>
+    <!-- La foto va recortada al grupo (sin los letreros del piso): el marco toma
+         su proporción para que el 4/3 del .split no vuelva a recortar por los lados. -->
+    <div class="imgw reveal-img" style="aspect-ratio:1800/950"><img src="assets/photos/nuestra-historia-equipo-homea-torneo-campanario.jpg" alt="Equipo HOMEA en su stand de marcas premium durante el Torneo Campanario 2026"></div>
     <div class="text reveal">
       <div class="eyebrow">Nuestra historia</div>
       <span class="rule-gold"></span>
       <h2>Más que vender: <i>asesorar</i>.</h2>
-      <p style="margin:0;color:var(--fg-muted)">Nacimos para acercar las mejores casas del mundo al hogar mexicano, con conocimiento de producto y el acompañamiento que un equipo de alta gama merece — del interés al cierre, y después.</p>
-      <p style="margin:0;color:var(--fg-muted)">El cliente debe sentirse <b>escuchado y entendido</b> antes de que le vendamos nada. Esa es la casa.</p>
+      <p style="margin:0;color:var(--fg-muted)">HOMEA abrió en <b>2004</b> en Querétaro, fundada por alguien que ya llevaba trece años dentro de la industria, en Mabe y GE, y que conocía el problema desde adentro: los equipos que definen una casa se compraban a ciegas, por catálogo, sin saber qué se estaba pagando.</p>
+      <p style="margin:0;color:var(--fg-muted)">Hoy somos distribuidor autorizado de <b>más de cien marcas</b> — Sub-Zero, Wolf, Viking, Gaggenau, Thermador, La Cornue, Miele —, con showroom y bodega propios, <b>más de 10,000 productos de entrega inmediata</b> y cobertura en todo México. No solo cocina: baño, lavandería, clima y exterior.</p>
+      <p style="margin:0;color:var(--fg-muted)">Trabajamos igual que entonces: especificamos con el arquitecto, revisamos medidas y cargas antes de cotizar, coordinamos la entrega con la obra y respondemos por la instalación y la garantía. <b>Nadie compra aquí sin entender antes qué está comprando.</b></p>
+      <p style="margin:0;color:var(--fg-muted)">Y no terminamos ahí. Un equipo que instalamos hace diez años sigue siendo nuestro. Las garantías las otorga la fábrica, pero <b>quien contesta el teléfono somos nosotros</b> — el primer año y el décimo.</p>
     </div>
   </div>
 </div></section>
 
-<!-- Showroom -->
-<section class="sec" id="showroom"><div class="container">
+<!-- Misión · Visión · Valores -->
+<section class="sec" id="mision-vision-valores"><div class="container">
+  <div class="sec-head">
+    <span class="rule-gold"></span>
+    <h2>Misión, visión y <i>valores</i>.</h2>
+  </div>
+  <div class="mvv-grid reveal">
+    <article class="mvv">
+      <span class="mvv-n">01</span>
+      <h3>Misión</h3>
+      <span class="mvv-rule"></span>
+      <p>Que cada cliente encuentre la marca correcta al precio correcto, con la especificación bien hecha desde el primer día. Desarrolladores, arquitectos, hoteles, fabricantes de cocina o una familia que remodela: el mismo criterio para todos.</p>
+    </article>
+    <article class="mvv">
+      <span class="mvv-n">02</span>
+      <h3>Visión</h3>
+      <span class="mvv-rule"></span>
+      <p>Ser el distribuidor al que se acude cuando el proyecto no admite errores.</p>
+    </article>
+    <article class="mvv">
+      <span class="mvv-n">03</span>
+      <h3>Valores</h3>
+      <span class="mvv-rule"></span>
+      <p>Respeto, humildad y honestidad en cómo tratamos a la gente.</p>
+      <p>Trabajo en equipo, comunicación y responsabilidad en cómo entregamos.</p>
+    </article>
+  </div>
+</div></section>
+
+<!-- Showroom — mismo bloque (datos y tratamiento) que la home -->
+<section class="sec on-greige loc-full" id="showroom"><div class="container">
   <div class="split">
-    <div class="text reveal">
+    <div class="imgw reveal-img"><img src="assets/photos/showroom.jpg" alt="Showroom HOMEA"></div>
+    <div class="text reveal on-dark">
+      <a class="loc-map" href="https://maps.app.goo.gl/LS9rqfHgK3qjFV926" target="_blank" rel="noopener" aria-label="Ver ubicación en Google Maps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></a>
       <div class="eyebrow">Showroom · Querétaro</div>
       <span class="rule-gold"></span>
       <h2>Vívelo antes de <i>decidirlo</i>.</h2>
       <ul class="meta-list">
-        <li><b>Dirección</b> Querétaro, Qro. · México</li>
-        <li><b>Horario</b> Lun–Sáb · 10:00–19:00</li>
+        <li><b>Dirección</b> Ahuehuetes 7, Álamos 1a Secc. Querétaro, Qro. 76160, México</li>
+        <li><b>Horario</b> Lun–Vie · 9:00–19:00<br>Sáb · 10:00–14:00</li>
         <li><b>Cita</b> Asesoría personalizada con especialista</li>
-        <li><b>En sitio</b> Cocinas activas · demostraciones · café</li>
       </ul>
-      <a class="btn btn-primary" href="contacto.html">Agendar visita</a>
+      <a class="btn btn-bone" href="contacto.html">Agendar visita</a>
     </div>
-    <div class="imgw reveal-img"><img src="assets/photos/showroom.jpg" alt="Showroom HOMEA"></div>
-  </div>
-</div></section>
-
-<!-- Método -->
-<section class="sec on-espresso"><div class="container">
-  <div class="sec-head">
-    <div class="eyebrow eyebrow-bright">Cómo trabajamos</div>
-    <span class="rule-gold"></span>
-    <h2 style="color:var(--dark-fg)">Escuchamos primero. <i>Especificamos</i> después.</h2>
-  </div>
-  <div class="steps reveal">
-    <div class="step">
-      <span class="n figures">01</span>
-      <h3>Escucha</h3>
-      <p>45 minutos contigo, en showroom o en obra. Antes de mostrar un solo equipo, entendemos cómo cocinas, lavas y vives.</p>
-    </div>
-    <div class="step">
-      <span class="n figures">02</span>
-      <h3>Especificación</h3>
-      <p>Planos, cargas eléctricas y medidas revisadas al milímetro. Una propuesta por escrito, con alternativas y por qué.</p>
-    </div>
-    <div class="step">
-      <span class="n figures">03</span>
-      <h3>Acompañamiento</h3>
-      <p>Entrega coordinada con tu obra, instalación certificada y puesta en marcha. Seguimos aquí después de la factura.</p>
-    </div>
-  </div>
-  <div class="stats reveal">
-    <div class="stat"><span class="n figures">2 h</span><span class="l">respuesta promedio</span></div>
-    <div class="stat"><span class="n figures">0</span><span class="l">call centers</span></div>
-    <div class="stat"><span class="n figures">25,000</span><span class="l">piezas en catálogo</span></div>
-  </div>
-</div></section>
-
-<!-- Proyectos instalados -->
-<section class="sec"><div class="container">
-  <div class="sec-head-row">
-    <div class="sec-head">
-      <div class="eyebrow">Proyectos instalados</div>
-      <span class="rule-gold"></span>
-      <h2>Equipo HOMEA, <i>en casa</i>.</h2>
-    </div>
-    <a class="arrow-link" href="b2b.html">Ver Proyectos <span class="ln"></span><span class="ar">→</span></a>
-  </div>
-  <div class="grid-3 reveal" style="margin-top:64px">
-    <div class="cat">
-      <div class="imgw"><img src="assets/photos/proyecto-1.jpg" alt="Integración panelable en encino"></div>
-      <h3 style="font-size:22px">Integración panelable</h3>
-      <span class="dotlist">Encino sobremedida <span class="dot">·</span> columnas built-in</span>
-    </div>
-    <div class="cat">
-      <div class="imgw"><img src="assets/photos/proyecto-2.jpg" alt="Proyecto residencial"></div>
-      <h3 style="font-size:22px">Residencial QRO</h3>
-      <span class="dotlist">Cocina completa <span class="dot">·</span> 9 piezas</span>
-    </div>
-    <div class="cat">
-      <div class="imgw"><img src="assets/photos/cat-exterior.jpg" alt="Cocina exterior con asador"></div>
-      <h3 style="font-size:22px">Cocina exterior</h3>
-      <span class="dotlist">Asador <span class="dot">·</span> bar <span class="dot">·</span> refrigeración</span>
-    </div>
-  </div>
-</div></section>
-
-<!-- Testimonio -->
-<section class="sec on-greige"><div class="container">
-  <div class="testimonial reveal">
-    <span class="rule-gold"></span>
-    <blockquote>«Nos escucharon dos horas antes de enseñarnos un solo horno.
-    La cocina quedó como la <i>imaginamos</i>, no como nos la quisieron vender.»</blockquote>
-    <div class="who figures">A. Sordo <span class="dot">·</span> Querétaro</div>
   </div>
 </div></section>
 
@@ -287,7 +301,7 @@
     <div class="eyebrow eyebrow-bright">Empecemos por escucharte</div>
     <h2>Ven a vivir el equipo al <i>showroom</i>.</h2>
     <a class="btn btn-gold" href="contacto.html">Agendar visita</a>
-    <p>Querétaro, Qro. · Lun–Sáb 10:00–19:00 · Asesoría sin costo.</p>
+    <p>Querétaro, Qro. · Lun–Vie 9:00–19:00 · Sáb 10:00–14:00 · Asesoría sin costo.</p>
   </div></div>
 </section>
 
@@ -320,7 +334,7 @@
 </div></footer>
 
 <a class="wa-float" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-track="whatsapp_click" data-label="wa_float"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg></a>
-<script src="v2.js?v=26"></script>
+<script src="v2.js?v=27"></script>
 <script src="wishlist.js?v=5"></script>
 <script src="cart.js?v=3"></script>
 </body>

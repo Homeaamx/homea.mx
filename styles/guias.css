@@ -711,7 +711,9 @@
   margin: 0; font-family: var(--font-display); font-weight: 500;
   font-size: clamp(22px, 2vw, 26px); line-height: 1.22; color: #F4EFE6;
 }
-.apc-card h3 i { font-style: italic; color: var(--homea-gold-soft); }
+/* "en 6 pasos." no se parte: si no cabe en el primer renglón baja completo
+   —nunca "…en 6 / pasos.". */
+.apc-card h3 i { font-style: italic; color: var(--homea-gold-soft); white-space: nowrap; }
 .apc-card p { margin: 0; font-size: 15px; line-height: 1.6; color: rgba(237,231,220,.75); max-width: 34em; }
 .apc-card .btn { margin-top: 8px; }
 /* Sobre el hero espresso la tarjeta necesita despegarse del fondo: sube al

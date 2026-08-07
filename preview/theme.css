@@ -573,17 +573,21 @@ html { scroll-behavior: smooth; }
 .statscroll .ss-bg.on { opacity: 1; transform: scale(1); }
 .statscroll .ss-veil { position: absolute; inset: 0; background: rgba(10,10,10,.56); }
 .statscroll .ss-inner { position: relative; width: 100%; }
-.statscroll .ss-inner .eyebrow-bright { margin-bottom: 30px; }
+/* Sobre foto a pantalla completa el texto necesita más cuerpo que en una
+   sección normal: eyebrow y etiqueta suben de escalón. */
+/* Eyebrow y etiqueta en el MISMO oro de marca (#BD9B5E). El gold-bright del
+   logo no va en UI — se leía amarillo junto al oro plano de la etiqueta. */
+.statscroll .ss-inner .eyebrow-bright { margin-bottom: 30px; font-size: 16px; letter-spacing: .26em; color: var(--homea-gold); }
 .statscroll .ss-stack { position: relative; min-height: clamp(180px, 24vh, 240px); }
 .statscroll .ss-item { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; gap: 14px;
   opacity: 0; transform: translateY(28px); transition: opacity .6s var(--ease-reveal), transform .6s var(--ease-reveal); }
 .statscroll .ss-item.on { opacity: 1; transform: none; }
 .statscroll .ss-n { font-family: var(--font-display); font-weight: 400; line-height: .88;
   font-size: clamp(72px, 13vw, 184px); color: var(--homea-bone); font-variant-numeric: tabular-nums; }
-.statscroll .ss-l { font-family: var(--font-sans); font-weight: 600; font-size: 14px;
+.statscroll .ss-l { font-family: var(--font-sans); font-weight: 600; font-size: 19px;
   letter-spacing: .2em; text-transform: uppercase; color: var(--homea-gold); }
-.statscroll .ss-dots { display: flex; gap: 10px; margin-top: 44px; }
-.statscroll .ss-dots i { width: 30px; height: 2px; background: rgba(247,243,236,.28); }
+.statscroll .ss-dots { display: flex; gap: 14px; margin-top: 44px; }
+.statscroll .ss-dots i { width: 54px; height: 4px; background: rgba(247,243,236,.28); }
 .statscroll .ss-dots i.on { background: var(--homea-gold); }
 @media (max-width: 767px) {
   .statscroll { height: 100svh; }
@@ -1138,7 +1142,22 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 
 /* ---------- CTA banda negra ------------------------------------------------- */
 .cta-band { position: relative; overflow: hidden; }
-.cta-band .glow { position: absolute; inset: 0; background-image: var(--grad-gold-glow); }
+/* Sin degradado fijo: el único oro de la banda es el orbe que sigue al cursor. */
+.cta-band .glow { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+/* Orbe de oro que sigue al cursor dentro de la banda (lo mueve v2.js escribiendo
+   --glow-x / --glow-y). Se mueve por transform: va al compositor, no repinta.
+   Sin puntero fino —móvil, o reduced-motion— no aparece y queda el degradado fijo. */
+.cta-band .glow::after {
+  content: ""; position: absolute; top: 0; left: 0;
+  width: 760px; height: 760px; margin: -380px 0 0 -380px;
+  background: radial-gradient(circle closest-side,
+                rgba(189, 155, 94, .34), rgba(189, 155, 94, .10) 55%, transparent 78%);
+  transform: translate3d(var(--glow-x, 50%), var(--glow-y, 50%), 0);
+  opacity: 0; transition: opacity .45s var(--ease-standard);
+  will-change: transform, opacity;
+}
+.cta-band.is-glowing .glow::after { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .cta-band .glow::after { display: none; } }
 .cta-band .inner { position: relative; max-width: 720px; margin: 0 auto; text-align: center;
   display: flex; flex-direction: column; align-items: center; gap: 28px; }
 .cta-band h2 { color: var(--dark-fg); font-size: calc(clamp(32px, 4vw, 52px) * 1.05); }
