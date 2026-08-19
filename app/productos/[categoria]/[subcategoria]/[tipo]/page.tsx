@@ -10,6 +10,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import Link from "next/link";
+import { srcSet, SIZES_SANGRE } from "@/lib/imagenResponsiva";
 import { notFound } from "next/navigation";
 import { getRoute } from "@/lib/guias";
 import { FILTROS_PLP, getFiltrosPlp } from "@/lib/filtrosPlp";
@@ -32,12 +33,12 @@ interface Params {
 /** Foto del hero por PLP (misma familia visual que HERO_FOTO_SUB1 de Guías). */
 const HERO_PLP: Record<string, { src: string; alt: string; pos?: string }> = {
   "cocina-y-bar/refrigeracion/refrigeradores": {
-    src: "/assets/photos/hero-sub1-refrigeracion-subzero.jpg",
+    src: "/assets/photos/hero-sub1-refrigeracion-subzero.webp",
     alt: "Columnas de refrigeración Sub-Zero panelables en cocina premium",
     pos: "center 50%",
   },
   "cocina-y-bar/coccion/parrillas": {
-    src: "/assets/photos/hero-sub1-coccion-pitt.jpg",
+    src: "/assets/photos/hero-sub1-coccion-pitt.webp",
     alt: "Parrilla de quemadores submontados Pitt Cooking en cubierta de piedra",
     pos: "center 90%",
   },
@@ -45,7 +46,7 @@ const HERO_PLP: Record<string, { src: string; alt: string; pos?: string }> = {
   // la campana fuera de cuadro. A 12% la banda abarca la campana completa y
   // alcanza a mostrar la isla debajo.
   "cocina-y-bar/coccion/campanas": {
-    src: "/assets/photos/hero-sub1-coccion-campanas-isla.jpg",
+    src: "/assets/photos/hero-sub1-coccion-campanas-isla.webp",
     alt: "Campana de isla suspendida sobre la isla de una cocina contemporánea",
     pos: "center 12%",
   },
@@ -96,6 +97,8 @@ export default async function Page({ params }: Params) {
           {hero && (
             <img
               src={hero.src}
+              srcSet={srcSet(hero.src)}
+              sizes={SIZES_SANGRE}
               alt={hero.alt}
               style={{ objectPosition: hero.pos ?? "center 50%" }}
               fetchPriority="high"

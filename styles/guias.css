@@ -45,7 +45,7 @@
   display: flex; flex-direction: column;
   min-height: calc(100vh - var(--nav-h));
   background: var(--homea-espresso) center / cover no-repeat;
-  background-image: url("/assets/photos/hero-guias-thermador.jpg");
+  background-image: url("/assets/photos/hero-guias-thermador.webp");
   color: var(--homea-bone);
   /* Sin overflow:hidden — el panel de búsqueda debe poder desbordar el hero. */
 }

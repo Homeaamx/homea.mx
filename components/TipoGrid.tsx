@@ -14,6 +14,7 @@
 // (Carla, 2026-07-29): ensuciaban la tarjeta. El código sigue en el historial.
 
 import Link from "next/link";
+import { srcSet, SIZES_TILE } from "@/lib/imagenResponsiva";
 import type { FiltroProducto, GrupoFicha } from "@/types/guias";
 import FiltroDiagrama from "./FiltroDiagrama";
 import DiagramaDefs from "./DiagramaDefs";
@@ -98,7 +99,7 @@ export default function TipoGrid({ filtros, base, guia, aprendeHref, contexto, e
                           {/* Sin loading=lazy: el mosaico es el contenido primario
                               de la página, justo bajo el hero. */}
                           {foto ? (
-                            <img src={foto.src} alt={foto.alt} />
+                            <img src={foto.src} srcSet={srcSet(foto.src)} sizes={SIZES_TILE} alt={foto.alt} loading="lazy" decoding="async" />
                           ) : (
                             <span className="tpg-ph">Foto pendiente</span>
                           )}

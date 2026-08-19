@@ -35,7 +35,7 @@ export default function GuideArticle({ node }: { node: GuiaNode }) {
       "@type": "Organization",
       name: SITE_NAME,
       url: absUrl("/"),
-      logo: { "@type": "ImageObject", url: absUrl("/assets/wordmark-black.png") },
+      logo: { "@type": "ImageObject", url: absUrl("/assets/wordmark-black.webp") },
     },
   };
 

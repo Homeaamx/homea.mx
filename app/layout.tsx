@@ -29,6 +29,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <body>
+        {/* Las dos fuentes del primer render. Sin preload el navegador solo las
+            descubre al parsear el CSS y con internet lento el texto definitivo
+            tarda de más. rel="preload" es válido dentro de <body>; un <head>
+            manual no lo es en el App Router. Los demás subsets (latin-ext,
+            itálicas) se piden solo si la página los usa. */}
+        <link rel="preload" href="/fonts/Newsreader-Roman-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/Montserrat-Roman-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <noscript>
+          {/* Sin JS nadie añade .bg-ready: se pintan todos los fondos de una vez. */}
+          <style>{`.mq-chip,.brandtile,.cat-media,.ss-bg{background-image:var(--bg)}`}</style>
+        </noscript>
         <div className="site-chrome" dangerouslySetInnerHTML={{ __html: nav }} />
         <main>{children}</main>
         <div dangerouslySetInnerHTML={{ __html: footer }} />
@@ -39,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <HomeNavSticky />
         <PreviewRouter />
         {/* Interacciones del preview (nav scroll, mega flyout, reveals, hero, marquee). */}
-        <Script src="/v2.js?v=40" strategy="afterInteractive" />
+        <Script src="/v2.js?v=51" strategy="afterInteractive" />
         {/* Wishlist (localStorage): corazones, badge del nav y drawer de cotización. */}
         <Script src="/wishlist.js?v=5" strategy="afterInteractive" />
         {/* Carrito piloto (localStorage → cart permalink de Shopify). */}

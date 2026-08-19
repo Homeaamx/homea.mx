@@ -330,6 +330,24 @@
       var btnS = ctaLinks[1] || null;
       var idx = 0, timer = null;
 
+      /* Las diapositivas 2..N guardan su URL en data-src: con internet lento
+         competían con la primera (el LCP) y retrasaban el hero varios segundos.
+         Se piden al mostrarse y, si no, en cuanto la página termina de cargar. */
+      function hidratar(j) {
+        var im = imgs[((j % imgs.length) + imgs.length) % imgs.length];
+        var el = im && im.querySelector("img[data-src]");
+        if (!el) { return; }
+        // El srcset debe ponerse ANTES que el src: si no, el navegador ya empezó
+        // a bajar el candidato equivocado (el de mayor ancho).
+        var set = el.getAttribute("data-srcset");
+        if (set) { el.srcset = set; el.removeAttribute("data-srcset"); }
+        el.src = el.getAttribute("data-src");
+        el.removeAttribute("data-src");
+      }
+      /* No se precargan las cinco: render() ya pide la actual y la siguiente, y
+         entre giro y giro hay segundos de sobra. Descargar las cinco al arrancar
+         eran ~90 KB compitiendo con el hero justo cuando más duele. */
+
       function setCtaLink(el, url) {
         el.setAttribute("href", url);
         if (/^https?:\/\//i.test(url)) { el.setAttribute("target", "_blank"); el.setAttribute("rel", "noopener"); }
@@ -340,6 +358,9 @@
       var heroCtasRow = hero.querySelector(".hero-ctas");
       function alignCtaFloat() {
         if (!ctaFloat || !heroCtasRow) { return; }
+        // En móvil la píldora está oculta (ver theme.css): sin esto se le seguía
+        // calculando una posición y reaparecía al cambiar de orientación.
+        if (!ctaFloat.offsetParent && getComputedStyle(ctaFloat).display === "none") { return; }
         var hb = hero.getBoundingClientRect();
         var cb = heroCtasRow.getBoundingClientRect();
         var centerY = (cb.top - hb.top) + cb.height / 2;
@@ -371,6 +392,8 @@
           }
         });
         imgs.forEach(function (im, j) { im.classList.toggle("on", j === idx); });
+        // La que se va a ver y la siguiente se piden ya; el resto espera a load.
+        hidratar(idx); hidratar(idx + 1);
         alignCtaFloat();
       }
 
@@ -924,4 +947,85 @@
 
   document.addEventListener("pointerleave", salir, { passive: true });
   window.addEventListener("blur", salir);
+})();
+
+/* ==========================================================================
+   Fondos diferidos — pareja de scripts/lazy-backgrounds.mjs
+
+   Los mosaicos de categoría y las fotos del carrusel de marcas guardan su URL
+   en la variable --bg y no se descargan hasta que el elemento se acerca al
+   viewport: antes pesaban ~1.4 MB en la carga inicial de la home sin que nadie
+   los llegara a ver.
+   ========================================================================== */
+(function () {
+  var SEL = ".mq-chip, .brandtile, .cat-media, .ss-bg";
+
+  /* Cuánto se adelanta la carga. Proporcional a la pantalla en vez de un fijo de
+     600 px: en /marcas, con 77 tiles, aquel margen disparaba 47 imágenes en la
+     carga inicial y le quitaba ancho de banda al hero. */
+  function margen() {
+    var alto = window.innerHeight || 800;
+    return Math.max(250, Math.round(alto * 0.4));
+  }
+
+  /* La referencia vive fuera de arrancar(): un IntersectionObserver que solo
+     existe dentro de la función que lo creó puede recolectarse aunque tenga
+     elementos observados, y deja de avisar. */
+  var io = null;
+
+  function activar(el) { el.classList.add("bg-ready"); }
+
+  function arrancar() {
+    var els = document.querySelectorAll(SEL);
+    if (!els.length) { return; }
+
+    // Sin IntersectionObserver (navegadores viejos) se pintan todos: es preferible
+    // gastar ancho de banda a dejar la sección sin imagen.
+    if (!("IntersectionObserver" in window)) {
+      Array.prototype.forEach.call(els, activar);
+      return;
+    }
+
+    if (!io) {
+      io = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (e) {
+          if (!e.isIntersecting) { return; }
+          activar(e.target);
+          io.unobserve(e.target);
+        });
+      }, { rootMargin: margen() + "px 0px" });
+    }
+
+    Array.prototype.forEach.call(els, function (el) {
+      if (!el.classList.contains("bg-ready")) { io.observe(el); }
+    });
+  }
+
+  /* Si la pestaña arranca en segundo plano el navegador no calcula posiciones y
+     el observer no llega a avisar. Al volver a primer plano se vuelve a observar. */
+  document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) { arrancar(); }
+  });
+
+  /* Se espera a que la página termine de cargar (o a 1,5 s, lo que ocurra antes)
+     para que estas imágenes no compitan con el hero, que es el LCP. Con buena
+     conexión no se nota; con mala es la diferencia entre ver la portada rápido
+     o esperar a que baje medio catálogo de fondos. */
+  var lanzado = false;
+  function lanzar() {
+    if (lanzado) { return; }
+    lanzado = true;
+    arrancar();
+  }
+  if (document.readyState === "complete") { lanzar(); }
+  else { window.addEventListener("load", lanzar); }
+  setTimeout(lanzar, 1500);
+
+  // El sitio navega como SPA (PreviewRouter reemplaza <main> y llama a
+  // __homeaInitPage): hay que observar los elementos de la página nueva.
+  var initPrevio = window.__homeaInitPage;
+  window.__homeaInitPage = function () {
+    if (initPrevio) { initPrevio(); }
+    arrancar();
+  };
 })();

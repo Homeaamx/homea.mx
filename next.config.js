@@ -19,6 +19,27 @@ const nextConfig = {
   // Redirects 301 del mapa de migración OXATIS → Next.
   // Nota SEO (CLAUDE.md §3): Next emite 308 con permanent:true; Google trata 301≈308.
   // El mapa real se cargará en la fase de migración; aquí queda el hook listo.
+  // Caché de estáticos. Por defecto Vercel sirve lo de public/ con max-age=0, así
+  // que cada visita revalida archivo por archivo: con latencia alta eso son
+  // decenas de viajes de ida y vuelta antes de ver la página completa.
+  async headers() {
+    return [
+      {
+        // Las fuentes nunca cambian de contenido bajo el mismo nombre.
+        source: "/fonts/:archivo*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+      {
+        // Las imágenes sí pueden reemplazarse: un día de caché y una semana de
+        // servir la copia vieja mientras se refresca por detrás.
+        source: "/assets/:ruta*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" },
+        ],
+      },
+    ];
+  },
+
   async redirects() {
     // Red de seguridad: los nombres de archivo .html del preview/legacy → ruta limpia.
     // Evita 404 en marcadores viejos, enlaces indexados y CTAs cuyo destino aún

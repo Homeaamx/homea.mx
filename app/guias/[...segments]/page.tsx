@@ -80,26 +80,26 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
 
 // Foto de fondo del encabezado por macrocategoría (ruta en /public).
 const HERO_FOTO_MACRO: Record<string, { src: string; pos?: string; flip?: boolean }> = {
-  "cocina-y-bar": { src: "/assets/photos/hero-cocina-bar-smeg.jpg", pos: "center 60%" },
-  exterior: { src: "/assets/photos/hero-exterior-subzero-wolf-cocina.jpg", pos: "center 55%" },
-  "electrodomesticos-menores": { src: "/assets/photos/hero-electrodomesticos-menores-smeg.jpg", pos: "center 50%", flip: true },
-  lavanderia: { src: "/assets/photos/hero-lavanderia-bosch.jpg", pos: "center 50%" },
-  banos: { src: "/assets/photos/hero-banos-hansgrohe.jpg", pos: "center 35%" },
-  minisplits: { src: "/assets/photos/hero-minisplits.jpg", pos: "center 12%" },
+  "cocina-y-bar": { src: "/assets/photos/hero-cocina-bar-smeg.webp", pos: "center 60%" },
+  exterior: { src: "/assets/photos/hero-exterior-subzero-wolf-cocina.webp", pos: "center 55%" },
+  "electrodomesticos-menores": { src: "/assets/photos/hero-electrodomesticos-menores-smeg.webp", pos: "center 50%", flip: true },
+  lavanderia: { src: "/assets/photos/hero-lavanderia-bosch.webp", pos: "center 50%" },
+  banos: { src: "/assets/photos/hero-banos-hansgrohe.webp", pos: "center 35%" },
+  minisplits: { src: "/assets/photos/hero-minisplits.webp", pos: "center 12%" },
   "vapor-y-sauna": { src: "/assets/photos/hero-vapor-sauna-artexa.webp", pos: "center 50%" },
-  wellness: { src: "/assets/photos/hero-wellness-artexa-sauna.jpg", pos: "center 80%" },
-  "recubrimientos-y-superficies": { src: "/assets/photos/hero-recubrimientos-laminam.jpg", pos: "center 50%" },
-  "chimeneas-y-calentadores": { src: "/assets/photos/hero-chimeneas-hergom.jpg", pos: "center 50%", flip: true },
+  wellness: { src: "/assets/photos/hero-wellness-artexa-sauna.webp", pos: "center 80%" },
+  "recubrimientos-y-superficies": { src: "/assets/photos/hero-recubrimientos-laminam.webp", pos: "center 50%" },
+  "chimeneas-y-calentadores": { src: "/assets/photos/hero-chimeneas-hergom.webp", pos: "center 50%", flip: true },
 };
 
 // Foto de fondo del encabezado por Subcategoría 1 (ruta en /public), keyed por slug.
 const HERO_FOTO_SUB1: Record<string, { src: string; pos?: string; flip?: boolean }> = {
-  refrigeracion: { src: "/assets/photos/hero-sub1-refrigeracion-subzero.jpg", pos: "center 50%" },
-  coccion: { src: "/assets/photos/hero-sub1-coccion-gaggenau.jpg", pos: "center 75%" },
+  refrigeracion: { src: "/assets/photos/hero-sub1-refrigeracion-subzero.webp", pos: "center 50%" },
+  coccion: { src: "/assets/photos/hero-sub1-coccion-gaggenau.webp", pos: "center 75%" },
   lavavajillas: { src: "/assets/photos/hero-sub1-lavavajillas-bosch.webp", pos: "center 50%" },
-  "tarjas-y-griferia": { src: "/assets/photos/hero-sub1-tarjas-griferia-blanco.jpg", pos: "center 50%" },
-  trituradores: { src: "/assets/photos/hero-sub1-trituradores-insinkerator.jpg", pos: "center 100%" },
-  "filtros-y-purificadores-de-agua": { src: "/assets/photos/hero-sub1-filtros-purificadores-agua.jpg", pos: "center 50%" },
+  "tarjas-y-griferia": { src: "/assets/photos/hero-sub1-tarjas-griferia-blanco.webp", pos: "center 50%" },
+  trituradores: { src: "/assets/photos/hero-sub1-trituradores-insinkerator.webp", pos: "center 100%" },
+  "filtros-y-purificadores-de-agua": { src: "/assets/photos/hero-sub1-filtros-purificadores-agua.webp", pos: "center 50%" },
 };
 
 // --------------------------------------------------------------------------

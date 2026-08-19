@@ -10,6 +10,7 @@
 // cargar — es el destino del botón "Aprende sobre campanas" del PLP (TipoGrid).
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { srcSet, SIZES_SANGRE } from "@/lib/imagenResponsiva";
 import { createPortal } from "react-dom";
 
 const IMG = "/assets/guias/aprende-campanas/homea-campanas-guia-para-comprar";
@@ -213,7 +214,11 @@ export default function AprendeCampanas() {
                     <img
                       key={im.src}
                       src={im.src}
+                      srcSet={srcSet(im.src)}
+                      sizes={SIZES_SANGRE}
                       alt={im.alt}
+                      loading="lazy"
+                      decoding="async"
                       className={im.src === laminaActiva ? "on" : undefined}
                     />
                   ))}
