@@ -753,7 +753,10 @@
     var name = card.getAttribute("data-name") || "";
     var loc = card.getAttribute("data-loc") || "";
     var imgs = [];
-    for (var k = 1; k <= total; k++) imgs.push(BASE + slug + "-" + k + ".jpg");
+    /* .webp: el catálogo se convirtió entero (ver scripts/optimize-images.mjs).
+       Esta ruta se arma concatenando, así que la reescritura de referencias no
+       la alcanzaba y la galería se quedaba sin fotos. */
+    for (var k = 1; k <= total; k++) imgs.push(BASE + slug + "-" + k + ".webp");
     var i = 0;
     var img = card.querySelector(".pj-media img");
     var count = card.querySelector(".pj-count");

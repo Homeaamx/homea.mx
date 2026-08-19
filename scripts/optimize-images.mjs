@@ -184,6 +184,23 @@ async function main() {
     }
   }
   console.log(`Originales eliminados: ${removed} (conservados por referencia viva: ${kept}).`);
+
+  // ---------- 4. Integridad ----------
+  // Si el proceso muere a media escritura (pasó con SIGBUS) queda un archivo de
+  // 0 bytes que el navegador sirve con 200 pero no puede decodificar: la imagen
+  // simplemente no aparece y nada lo delata. Se revisa al terminar.
+  const truncados = [];
+  for (const f of await walk(path.join(ROOT, "public/assets"))) {
+    if (!/\.(webp|avif|jpe?g|png)$/i.test(f)) continue;
+    if ((await stat(f)).size === 0) truncados.push(path.relative(ROOT, f));
+  }
+  if (truncados.length) {
+    console.error(`\n❌ ${truncados.length} archivo(s) quedaron vacíos — recupéralos con git y vuelve a correr:`);
+    for (const f of truncados) console.error(`   ${f}`);
+    process.exitCode = 1;
+  } else {
+    console.log("Integridad: ningún archivo vacío.");
+  }
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

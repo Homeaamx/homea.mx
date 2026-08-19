@@ -136,6 +136,32 @@ function medidasPng(ruta) {
   return { ancho: buf.readUInt32BE(16), alto: buf.readUInt32BE(20) };
 }
 
+/** Medidas de un WebP leyendo la cabecera (VP8 / VP8L / VP8X), sin dependencias. */
+function medidasWebp(ruta) {
+  const buf = readFileSync(ruta);
+  if (buf.length < 30 || buf.toString("ascii", 0, 4) !== "RIFF" || buf.toString("ascii", 8, 12) !== "WEBP") return null;
+  const tipo = buf.toString("ascii", 12, 16);
+  if (tipo === "VP8 ") {
+    return { ancho: buf.readUInt16LE(26) & 0x3fff, alto: buf.readUInt16LE(28) & 0x3fff };
+  }
+  if (tipo === "VP8L") {
+    const b = buf.readUInt32LE(21);
+    return { ancho: (b & 0x3fff) + 1, alto: ((b >> 14) & 0x3fff) + 1 };
+  }
+  if (tipo === "VP8X") {
+    const leer24 = (o) => buf[o] | (buf[o + 1] << 8) | (buf[o + 2] << 16);
+    return { ancho: leer24(24) + 1, alto: leer24(27) + 1 };
+  }
+  return null;
+}
+
+/** Medidas por extensión. Devuelve null si el formato no se sabe leer. */
+function medidas(ruta, ext) {
+  if (ext === "png") return medidasPng(ruta);
+  if (ext === "webp") return medidasWebp(ruta);
+  return null; // jpg: no se mide, se acepta tal cual (comportamiento previo)
+}
+
 // Umbral de proporción para la miniatura de 62 px: una foto muy apaisada (la de
 // la parrilla es 1600×902) se reduce a una tira de 35 px de alto y se lee como
 // un cuadro vacío. Por encima de esto gana el packshot cuadrado de la categoría.
@@ -148,10 +174,11 @@ function packshotDeSku(sku) {
     for (const ext of ["png", "jpg", "webp"]) {
       const abs = join(DIR_PACKSHOTS, marca, `${marca}-${slug}.${ext}`);
       if (!existsSync(abs)) continue;
-      if (ext === "png") {
-        const m = medidasPng(abs);
-        if (m && m.ancho / m.alto > RATIO_MAX_THUMB) return null;
-      }
+      // El filtro de proporción antes solo miraba .png; al convertir el catálogo a
+      // WebP dejaba pasar packshots apaisados que como miniatura de 62 px se ven
+      // como una tira vacía.
+      const m = medidas(abs, ext);
+      if (m && m.ancho / m.alto > RATIO_MAX_THUMB) return null;
       return `/assets/photos/${marca}/${marca}-${slug}.${ext}`;
     }
   }
