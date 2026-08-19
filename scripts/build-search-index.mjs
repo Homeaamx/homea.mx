@@ -79,18 +79,18 @@ const CATEGORIAS = [
 
 /** Imagen representativa por categoría — packshots ya curados en /public. */
 const IMG_CATEGORIA = {
-  refrigeradores: "/assets/photos/tipos/refrigerador-columna-congelador-acero.png",
-  congeladores: "/assets/photos/tipos/refrigerador-columna-congelador-acero.png",
-  cavas: "/assets/photos/tipos/refrigerador-bajo-cubierta-cava-acero.jpg",
-  parrillas: "/assets/photos/tipos/parrilla-gas-quemadores-laton.png",
-  asadores: "/assets/photos/tipos/parrilla-profesional-rangetop-perillas-acero.jpg",
-  estufas: "/assets/photos/tipos/parrilla-profesional-rangetop-perillas-acero.jpg",
-  hornos: "/assets/photos/gaggenau/gaggenau-bop250612.png",
-  "hornos-pizza": "/assets/photos/gaggenau/gaggenau-bop250612.png",
-  microondas: "/assets/photos/gaggenau/gaggenau-bop250612.png",
-  cajones: "/assets/photos/gaggenau/gaggenau-bop250612.png",
-  campanas: "/assets/photos/gaggenau/gaggenau-aw442720.png",
-  lavavajillas: "/assets/photos/gaggenau/gaggenau-df480701.png",
+  refrigeradores: "/assets/photos/tipos/refrigerador-columna-congelador-acero.webp",
+  congeladores: "/assets/photos/tipos/refrigerador-columna-congelador-acero.webp",
+  cavas: "/assets/photos/tipos/refrigerador-bajo-cubierta-cava-acero.webp",
+  parrillas: "/assets/photos/tipos/parrilla-gas-quemadores-laton.webp",
+  asadores: "/assets/photos/tipos/parrilla-profesional-rangetop-perillas-acero.webp",
+  estufas: "/assets/photos/tipos/parrilla-profesional-rangetop-perillas-acero.webp",
+  hornos: "/assets/photos/gaggenau/gaggenau-bop250612.webp",
+  "hornos-pizza": "/assets/photos/gaggenau/gaggenau-bop250612.webp",
+  microondas: "/assets/photos/gaggenau/gaggenau-bop250612.webp",
+  cajones: "/assets/photos/gaggenau/gaggenau-bop250612.webp",
+  campanas: "/assets/photos/gaggenau/gaggenau-aw442720.webp",
+  lavavajillas: "/assets/photos/gaggenau/gaggenau-df480701.webp",
 };
 
 function categoriaDe(titulo, tipo) {

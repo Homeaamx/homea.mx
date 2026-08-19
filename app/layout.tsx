@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" href="/fonts/Montserrat-Roman-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <noscript>
           {/* Sin JS nadie añade .bg-ready: se pintan todos los fondos de una vez. */}
-          <style>{`.mq-chip,.brandtile,.cat-media,.ss-bg{background-image:var(--bg)}`}</style>
+          <style>{`.mq-chip,.brandtile,.cat-media,.ss-bg{background-image:var(--lazy-bg)}`}</style>
         </noscript>
         <div className="site-chrome" dangerouslySetInnerHTML={{ __html: nav }} />
         <main>{children}</main>
@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <HomeNavSticky />
         <PreviewRouter />
         {/* Interacciones del preview (nav scroll, mega flyout, reveals, hero, marquee). */}
-        <Script src="/v2.js?v=51" strategy="afterInteractive" />
+        <Script src="/v2.js?v=53" strategy="afterInteractive" />
         {/* Wishlist (localStorage): corazones, badge del nav y drawer de cotización. */}
         <Script src="/wishlist.js?v=5" strategy="afterInteractive" />
         {/* Carrito piloto (localStorage → cart permalink de Shopify). */}

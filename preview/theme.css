@@ -988,25 +988,25 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .mq-chip.no-logo .mq-logo { display: none; }
 .mq-chip.no-logo .mq-name { display: inline-block; }
 /* Foto de fondo por marca (data-brand) */
-.mq-chip[data-brand="sub-zero"]   { --bg: url('assets/photos/brands/sub-zero.webp'); }
-.mq-chip[data-brand="wolf"]       { --bg: url('assets/photos/brands/wolf.webp'); }
-.mq-chip[data-brand="cove"]       { --bg: url('assets/photos/brands/cove.webp'); background-position: center 65%; }
-.mq-chip[data-brand="miele"]      { --bg: url('assets/photos/brands/miele.webp'); }
-.mq-chip[data-brand="thermador"]  { --bg: url('assets/photos/brands/thermador.webp'); }
-.mq-chip[data-brand="monogram"]   { --bg: url('assets/photos/brands/monogram.webp'); background-position: center 85%; }
-.mq-chip[data-brand="viking"]     { --bg: url('assets/photos/brands/viking.webp'); }
-.mq-chip[data-brand="gaggenau"]   { --bg: url('assets/photos/brands/gaggenau.webp'); }
-.mq-chip[data-brand="la-cornue"]  { --bg: url('assets/photos/brands/la-cornue.webp'); background-position: center 100%; }
-.mq-chip[data-brand="smeg"]       { --bg: url('assets/photos/brands/smeg.webp'); }
-.mq-chip[data-brand="bertazzoni"] { --bg: url('assets/photos/brands/bertazzoni.webp'); }
-.mq-chip[data-brand="kitchenaid"] { --bg: url('assets/photos/brands/kitchenaid.webp'); }
-.mq-chip[data-brand="bosch"]      { --bg: url('assets/photos/brands/bosch.webp'); }
-.mq-chip[data-brand="elica"]      { --bg: url('assets/photos/brands/elica.webp'); }
-.mq-chip[data-brand="pitt-cooking"] { --bg: url('assets/photos/brands/pitt-cooking.webp'); }
-.mq-chip[data-brand="hoshizaki"]  { --bg: url('assets/photos/brands/hoshizaki.webp'); }
-.mq-chip[data-brand="alfresco"]   { --bg: url('assets/photos/brands/alfresco.webp'); }
-.mq-chip[data-brand="lynx"]       { --bg: url('assets/photos/brands/lynx.webp'); }
-.mq-chip[data-brand="kamado-joe"] { --bg: url('assets/photos/brands/kamado-joe.webp'); }
+.mq-chip[data-brand="sub-zero"]   { --lazy-bg: url('assets/photos/brands/sub-zero.webp'); }
+.mq-chip[data-brand="wolf"]       { --lazy-bg: url('assets/photos/brands/wolf.webp'); }
+.mq-chip[data-brand="cove"]       { --lazy-bg: url('assets/photos/brands/cove.webp'); background-position: center 65%; }
+.mq-chip[data-brand="miele"]      { --lazy-bg: url('assets/photos/brands/miele.webp'); }
+.mq-chip[data-brand="thermador"]  { --lazy-bg: url('assets/photos/brands/thermador.webp'); }
+.mq-chip[data-brand="monogram"]   { --lazy-bg: url('assets/photos/brands/monogram.webp'); background-position: center 85%; }
+.mq-chip[data-brand="viking"]     { --lazy-bg: url('assets/photos/brands/viking.webp'); }
+.mq-chip[data-brand="gaggenau"]   { --lazy-bg: url('assets/photos/brands/gaggenau.webp'); }
+.mq-chip[data-brand="la-cornue"]  { --lazy-bg: url('assets/photos/brands/la-cornue.webp'); background-position: center 100%; }
+.mq-chip[data-brand="smeg"]       { --lazy-bg: url('assets/photos/brands/smeg.webp'); }
+.mq-chip[data-brand="bertazzoni"] { --lazy-bg: url('assets/photos/brands/bertazzoni.webp'); }
+.mq-chip[data-brand="kitchenaid"] { --lazy-bg: url('assets/photos/brands/kitchenaid.webp'); }
+.mq-chip[data-brand="bosch"]      { --lazy-bg: url('assets/photos/brands/bosch.webp'); }
+.mq-chip[data-brand="elica"]      { --lazy-bg: url('assets/photos/brands/elica.webp'); }
+.mq-chip[data-brand="pitt-cooking"] { --lazy-bg: url('assets/photos/brands/pitt-cooking.webp'); }
+.mq-chip[data-brand="hoshizaki"]  { --lazy-bg: url('assets/photos/brands/hoshizaki.webp'); }
+.mq-chip[data-brand="alfresco"]   { --lazy-bg: url('assets/photos/brands/alfresco.webp'); }
+.mq-chip[data-brand="lynx"]       { --lazy-bg: url('assets/photos/brands/lynx.webp'); }
+.mq-chip[data-brand="kamado-joe"] { --lazy-bg: url('assets/photos/brands/kamado-joe.webp'); }
 
 @keyframes mqMove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) {
@@ -1570,77 +1570,77 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile:hover .bn { opacity: .15; }
 /* Foto de fondo por marca (data-brand). Las marcas sin entrada quedan en fondo
    oscuro espresso + wordmark. */
-.brandtile[data-brand="la-cornue"]{--bg: url('assets/photos/brands/la-cornue.webp');background-position:center 95%;}
-.brandtile[data-brand="gaggenau"]{--bg: url('assets/photos/brands/gaggenau.webp');}
-.brandtile[data-brand="thermador"]{--bg: url('assets/photos/brands/thermador.webp');}
-.brandtile[data-brand="monogram"]{--bg: url('assets/photos/brands/monogram.webp');}
-.brandtile[data-brand="miele"]{--bg: url('assets/photos/brands/miele.webp');}
-.brandtile[data-brand="viking"]{--bg: url('assets/photos/brands/viking.webp');}
-.brandtile[data-brand="wolf"]{--bg: url('assets/photos/brands/wolf.webp');}
-.brandtile[data-brand="sub-zero"]{--bg: url('assets/photos/brands/sub-zero.webp');}
-.brandtile[data-brand="cove"]{--bg: url('assets/photos/brands/cove.webp');}
-.brandtile[data-brand="pitt-cooking"]{--bg: url('assets/photos/brands/pitt-cooking.webp');}
-.brandtile[data-brand="bosch"]{--bg: url('assets/photos/brands/bosch.webp');}
-.brandtile[data-brand="elica"]{--bg: url('assets/photos/brands/elica.webp');}
-.brandtile[data-brand="kitchenaid"]{--bg: url('assets/photos/brands/kitchenaid.webp');}
-.brandtile[data-brand="hoshizaki"]{--bg: url('assets/photos/brands/hoshizaki.webp');}
-.brandtile[data-brand="smeg"]{--bg: url('assets/photos/brands/smeg.webp');}
-.brandtile[data-brand="bertazzoni"]{--bg: url('assets/photos/brands/bertazzoni.webp');}
-.brandtile[data-brand="lynx"]{--bg: url('assets/photos/brands/lynx.webp');}
-.brandtile[data-brand="alfresco"]{--bg: url('assets/photos/brands/alfresco.webp');}
-.brandtile[data-brand="kamado-joe"]{--bg: url('assets/photos/brands/kamado-joe.webp');}
-.brandtile[data-brand="axor"]{--bg: url('assets/photos/brands/axor.webp');}
-.brandtile[data-brand="blaze"]{--bg: url('assets/photos/brands/blaze.webp');}
-.brandtile[data-brand="broil-king"]{--bg: url('assets/photos/brands/broil-king.webp');}
-.brandtile[data-brand="cafe"]{--bg: url('assets/photos/brands/cafe.webp');}
-.brandtile[data-brand="coyote"]{--bg: url('assets/photos/brands/coyote.webp');}
-.brandtile[data-brand="falmec"]{--bg: url('assets/photos/brands/falmec.webp');}
-.brandtile[data-brand="frigidaire"]{--bg: url('assets/photos/brands/frigidaire.webp');}
-.brandtile[data-brand="electrolux"]{--bg: url('assets/photos/brands/electrolux.webp');}
-.brandtile[data-brand="ge-profile"]{--bg: url('assets/photos/brands/ge-profile.webp');}
-.brandtile[data-brand="insinkerator"]{--bg: url('assets/photos/brands/insinkerator.webp');}
-.brandtile[data-brand="invisacook"]{--bg: url('assets/photos/brands/invisacook.webp');}
-.brandtile[data-brand="io-mabe"]{--bg: url('assets/photos/brands/io-mabe.webp');}
-.brandtile[data-brand="mabe"]{--bg: url('assets/photos/brands/mabe.webp');}
-.brandtile[data-brand="tecnolam"]{--bg: url('assets/photos/brands/tecnolam.webp');}
-.brandtile[data-brand="thor"]{--bg: url('assets/photos/brands/thor.webp');}
-.brandtile[data-brand="whirlpool"]{--bg: url('assets/photos/brands/whirlpool.webp');}
-.brandtile[data-brand="acros"]{--bg: url('assets/photos/brands/acros.webp');}
-.brandtile[data-brand="alfa-forni"]{--bg: url('assets/photos/brands/alfa-forni.webp');}
-.brandtile[data-brand="american-standard"]{--bg: url('assets/photos/brands/american-standard.webp');}
-.brandtile[data-brand="asko"]{--bg: url('assets/photos/brands/asko.webp');}
-.brandtile[data-brand="axcent"]{--bg: url('assets/photos/brands/axcent.webp');}
-.brandtile[data-brand="benessi"]{--bg: url('assets/photos/brands/benessi.webp');}
-.brandtile[data-brand="artisan"]{--bg: url('assets/photos/brands/artisan.webp');}
-.brandtile[data-brand="dawn"]{--bg: url('assets/photos/brands/dawn.webp');}
-.brandtile[data-brand="dexa"]{--bg: url('assets/photos/brands/dexa.webp');}
-.brandtile[data-brand="delta"]{--bg: url('assets/photos/brands/delta.webp');}
-.brandtile[data-brand="blanco"]{--bg: url('assets/photos/brands/blanco.webp');}
-.brandtile[data-brand="brizo"]{--bg: url('assets/photos/brands/brizo.webp');}
-.brandtile[data-brand="eclipse"]{--bg: url('assets/photos/brands/eclipse.webp');}
-.brandtile[data-brand="elkay"]{--bg: url('assets/photos/brands/elkay.webp');}
-.brandtile[data-brand="franke"]{--bg: url('assets/photos/brands/franke.avif');}
-.brandtile[data-brand="fulgor-milano"]{--bg: url('assets/photos/brands/fulgor-milano.webp');}
-.brandtile[data-brand="haier"]{--bg: url('assets/photos/brands/haier.avif');}
-.brandtile[data-brand="hansgrohe"]{--bg: url('assets/photos/brands/hansgrohe.webp');}
-.brandtile[data-brand="i-drain"]{--bg: url('assets/photos/brands/i-drain.webp');}
-.brandtile[data-brand="kalt"]{--bg: url('assets/photos/brands/kalt.webp');}
-.brandtile[data-brand="gessi"]{--bg: url('assets/photos/brands/gessi.webp');}
-.brandtile[data-brand="kele-master-sinks"]{--bg: url('assets/photos/brands/kele-master-sinks.webp');}
-.brandtile[data-brand="mr-steam"]{--bg: url('assets/photos/brands/mr-steam.webp');}
-.brandtile[data-brand="nobili"]{--bg: url('assets/photos/brands/nobili.webp');}
-.brandtile[data-brand="peerless"]{--bg: url('assets/photos/brands/peerless.webp');}
-.brandtile[data-brand="poletti-sinks"]{--bg: url('assets/photos/brands/poletti-sinks.webp');}
-.brandtile[data-brand="sapphire"]{--bg: url('assets/photos/brands/sapphire.webp');}
-.brandtile[data-brand="schock"]{--bg: url('assets/photos/brands/schock.webp');}
-.brandtile[data-brand="scotsman"]{--bg: url('assets/photos/brands/scotsman.webp');}
-.brandtile[data-brand="summit"]{--bg: url('assets/photos/brands/summit.webp');}
-.brandtile[data-brand="teka"]{--bg: url('assets/photos/brands/teka.webp');}
-.brandtile[data-brand="the-galley"]{--bg: url('assets/photos/brands/the-galley.webp');}
-.brandtile[data-brand="tradewind"]{--bg: url('assets/photos/brands/tradewind.webp');}
-.brandtile[data-brand="u-line"]{--bg: url('assets/photos/brands/u-line.avif');}
-.brandtile[data-brand="wppo"]{--bg: url('assets/photos/brands/wppo.webp');}
-.brandtile[data-brand="sedona-by-lynx"]{--bg: url('assets/photos/brands/sedona-by-lynx.webp');}
+.brandtile[data-brand="la-cornue"]{--lazy-bg: url('assets/photos/brands/la-cornue.webp');background-position:center 95%;}
+.brandtile[data-brand="gaggenau"]{--lazy-bg: url('assets/photos/brands/gaggenau.webp');}
+.brandtile[data-brand="thermador"]{--lazy-bg: url('assets/photos/brands/thermador.webp');}
+.brandtile[data-brand="monogram"]{--lazy-bg: url('assets/photos/brands/monogram.webp');}
+.brandtile[data-brand="miele"]{--lazy-bg: url('assets/photos/brands/miele.webp');}
+.brandtile[data-brand="viking"]{--lazy-bg: url('assets/photos/brands/viking.webp');}
+.brandtile[data-brand="wolf"]{--lazy-bg: url('assets/photos/brands/wolf.webp');}
+.brandtile[data-brand="sub-zero"]{--lazy-bg: url('assets/photos/brands/sub-zero.webp');}
+.brandtile[data-brand="cove"]{--lazy-bg: url('assets/photos/brands/cove.webp');}
+.brandtile[data-brand="pitt-cooking"]{--lazy-bg: url('assets/photos/brands/pitt-cooking.webp');}
+.brandtile[data-brand="bosch"]{--lazy-bg: url('assets/photos/brands/bosch.webp');}
+.brandtile[data-brand="elica"]{--lazy-bg: url('assets/photos/brands/elica.webp');}
+.brandtile[data-brand="kitchenaid"]{--lazy-bg: url('assets/photos/brands/kitchenaid.webp');}
+.brandtile[data-brand="hoshizaki"]{--lazy-bg: url('assets/photos/brands/hoshizaki.webp');}
+.brandtile[data-brand="smeg"]{--lazy-bg: url('assets/photos/brands/smeg.webp');}
+.brandtile[data-brand="bertazzoni"]{--lazy-bg: url('assets/photos/brands/bertazzoni.webp');}
+.brandtile[data-brand="lynx"]{--lazy-bg: url('assets/photos/brands/lynx.webp');}
+.brandtile[data-brand="alfresco"]{--lazy-bg: url('assets/photos/brands/alfresco.webp');}
+.brandtile[data-brand="kamado-joe"]{--lazy-bg: url('assets/photos/brands/kamado-joe.webp');}
+.brandtile[data-brand="axor"]{--lazy-bg: url('assets/photos/brands/axor.webp');}
+.brandtile[data-brand="blaze"]{--lazy-bg: url('assets/photos/brands/blaze.webp');}
+.brandtile[data-brand="broil-king"]{--lazy-bg: url('assets/photos/brands/broil-king.webp');}
+.brandtile[data-brand="cafe"]{--lazy-bg: url('assets/photos/brands/cafe.webp');}
+.brandtile[data-brand="coyote"]{--lazy-bg: url('assets/photos/brands/coyote.webp');}
+.brandtile[data-brand="falmec"]{--lazy-bg: url('assets/photos/brands/falmec.webp');}
+.brandtile[data-brand="frigidaire"]{--lazy-bg: url('assets/photos/brands/frigidaire.webp');}
+.brandtile[data-brand="electrolux"]{--lazy-bg: url('assets/photos/brands/electrolux.webp');}
+.brandtile[data-brand="ge-profile"]{--lazy-bg: url('assets/photos/brands/ge-profile.webp');}
+.brandtile[data-brand="insinkerator"]{--lazy-bg: url('assets/photos/brands/insinkerator.webp');}
+.brandtile[data-brand="invisacook"]{--lazy-bg: url('assets/photos/brands/invisacook.webp');}
+.brandtile[data-brand="io-mabe"]{--lazy-bg: url('assets/photos/brands/io-mabe.webp');}
+.brandtile[data-brand="mabe"]{--lazy-bg: url('assets/photos/brands/mabe.webp');}
+.brandtile[data-brand="tecnolam"]{--lazy-bg: url('assets/photos/brands/tecnolam.webp');}
+.brandtile[data-brand="thor"]{--lazy-bg: url('assets/photos/brands/thor.webp');}
+.brandtile[data-brand="whirlpool"]{--lazy-bg: url('assets/photos/brands/whirlpool.webp');}
+.brandtile[data-brand="acros"]{--lazy-bg: url('assets/photos/brands/acros.webp');}
+.brandtile[data-brand="alfa-forni"]{--lazy-bg: url('assets/photos/brands/alfa-forni.webp');}
+.brandtile[data-brand="american-standard"]{--lazy-bg: url('assets/photos/brands/american-standard.webp');}
+.brandtile[data-brand="asko"]{--lazy-bg: url('assets/photos/brands/asko.webp');}
+.brandtile[data-brand="axcent"]{--lazy-bg: url('assets/photos/brands/axcent.webp');}
+.brandtile[data-brand="benessi"]{--lazy-bg: url('assets/photos/brands/benessi.webp');}
+.brandtile[data-brand="artisan"]{--lazy-bg: url('assets/photos/brands/artisan.webp');}
+.brandtile[data-brand="dawn"]{--lazy-bg: url('assets/photos/brands/dawn.webp');}
+.brandtile[data-brand="dexa"]{--lazy-bg: url('assets/photos/brands/dexa.webp');}
+.brandtile[data-brand="delta"]{--lazy-bg: url('assets/photos/brands/delta.webp');}
+.brandtile[data-brand="blanco"]{--lazy-bg: url('assets/photos/brands/blanco.webp');}
+.brandtile[data-brand="brizo"]{--lazy-bg: url('assets/photos/brands/brizo.webp');}
+.brandtile[data-brand="eclipse"]{--lazy-bg: url('assets/photos/brands/eclipse.webp');}
+.brandtile[data-brand="elkay"]{--lazy-bg: url('assets/photos/brands/elkay.webp');}
+.brandtile[data-brand="franke"]{--lazy-bg: url('assets/photos/brands/franke.avif');}
+.brandtile[data-brand="fulgor-milano"]{--lazy-bg: url('assets/photos/brands/fulgor-milano.webp');}
+.brandtile[data-brand="haier"]{--lazy-bg: url('assets/photos/brands/haier.avif');}
+.brandtile[data-brand="hansgrohe"]{--lazy-bg: url('assets/photos/brands/hansgrohe.webp');}
+.brandtile[data-brand="i-drain"]{--lazy-bg: url('assets/photos/brands/i-drain.webp');}
+.brandtile[data-brand="kalt"]{--lazy-bg: url('assets/photos/brands/kalt.webp');}
+.brandtile[data-brand="gessi"]{--lazy-bg: url('assets/photos/brands/gessi.webp');}
+.brandtile[data-brand="kele-master-sinks"]{--lazy-bg: url('assets/photos/brands/kele-master-sinks.webp');}
+.brandtile[data-brand="mr-steam"]{--lazy-bg: url('assets/photos/brands/mr-steam.webp');}
+.brandtile[data-brand="nobili"]{--lazy-bg: url('assets/photos/brands/nobili.webp');}
+.brandtile[data-brand="peerless"]{--lazy-bg: url('assets/photos/brands/peerless.webp');}
+.brandtile[data-brand="poletti-sinks"]{--lazy-bg: url('assets/photos/brands/poletti-sinks.webp');}
+.brandtile[data-brand="sapphire"]{--lazy-bg: url('assets/photos/brands/sapphire.webp');}
+.brandtile[data-brand="schock"]{--lazy-bg: url('assets/photos/brands/schock.webp');}
+.brandtile[data-brand="scotsman"]{--lazy-bg: url('assets/photos/brands/scotsman.webp');}
+.brandtile[data-brand="summit"]{--lazy-bg: url('assets/photos/brands/summit.webp');}
+.brandtile[data-brand="teka"]{--lazy-bg: url('assets/photos/brands/teka.webp');}
+.brandtile[data-brand="the-galley"]{--lazy-bg: url('assets/photos/brands/the-galley.webp');}
+.brandtile[data-brand="tradewind"]{--lazy-bg: url('assets/photos/brands/tradewind.webp');}
+.brandtile[data-brand="u-line"]{--lazy-bg: url('assets/photos/brands/u-line.avif');}
+.brandtile[data-brand="wppo"]{--lazy-bg: url('assets/photos/brands/wppo.webp');}
+.brandtile[data-brand="sedona-by-lynx"]{--lazy-bg: url('assets/photos/brands/sedona-by-lynx.webp');}
 /* Fotos verticales: se sube el encuadre (baja la imagen dentro del tile) para
    ver mejor el asador y que no se corte el grifo de Blanco. */
 .brandtile[data-brand="alfresco"]{ background-position: center 35%; }
@@ -1654,12 +1654,12 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile[data-brand="monogram"]{ background-position: center 75%; }
 .brandtile[data-brand="teka"]{ background-position: center 74%; }
 .brandtile[data-brand="pitt-cooking"]{ background-position: center 72%; }
-.brandtile[data-brand="supra"]{--bg: url('assets/photos/brands/supra.webp');}
-.brandtile[data-brand="keuco"]{--bg: url('assets/photos/brands/keuco.webp');}
-.brandtile[data-brand="masterbuilt"]{--bg: url('assets/photos/brands/masterbuilt.webp');}
-.brandtile[data-brand="maytag"]{--bg: url('assets/photos/brands/maytag.webp');}
-.brandtile[data-brand="moen"]{--bg: url('assets/photos/brands/moen.webp');}
-.brandtile[data-brand="mont-alpi"]{--bg: url('assets/photos/brands/mont-alpi.webp');}
+.brandtile[data-brand="supra"]{--lazy-bg: url('assets/photos/brands/supra.webp');}
+.brandtile[data-brand="keuco"]{--lazy-bg: url('assets/photos/brands/keuco.webp');}
+.brandtile[data-brand="masterbuilt"]{--lazy-bg: url('assets/photos/brands/masterbuilt.webp');}
+.brandtile[data-brand="maytag"]{--lazy-bg: url('assets/photos/brands/maytag.webp');}
+.brandtile[data-brand="moen"]{--lazy-bg: url('assets/photos/brands/moen.webp');}
+.brandtile[data-brand="mont-alpi"]{--lazy-bg: url('assets/photos/brands/mont-alpi.webp');}
 
 /* ---------- Tiles de ayuda / FAQ --------------------------------------------------- */
 .help-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
@@ -2151,13 +2151,13 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .subcat-strip { overflow-y: hidden; }
 
 /* ---------- Fondos diferidos (ver scripts/lazy-backgrounds.mjs) ----------
-   La URL vive en --bg y solo se pide cuando v2.js marca el elemento como
+   La URL vive en --lazy-bg y solo se pide cuando v2.js marca el elemento como
    visible. Sin esta regla el navegador descargaría todo el carrusel de marcas
    y los mosaicos de categoría durante la carga inicial. */
 .mq-chip.bg-ready,
 .brandtile.bg-ready,
 .cat-media.bg-ready,
-.ss-bg.bg-ready { background-image: var(--bg); }
+.ss-bg.bg-ready { background-image: var(--lazy-bg); }
 
 /* ---------- Hero de la home en móvil ---------------------------------------
    Los dos CTAs suman ~435 px de ancho y el contenedor solo tiene 327: el

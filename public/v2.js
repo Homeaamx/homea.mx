@@ -960,6 +960,14 @@
 (function () {
   var SEL = ".mq-chip, .brandtile, .cat-media, .ss-bg";
 
+  /* Rieles horizontales: sus fichas se mueven en el eje X, así que en cualquier
+     momento la mayoría está fuera de la vista LATERALMENTE y el observador nunca
+     las daría por visibles (el margen solo crece en vertical). Si se observaran
+     una a una, las imágenes irían apareciendo a tirones conforme desfila la
+     marquesina. Se activan por riel completo: cuando el riel entra en pantalla,
+     entran todas sus fichas. */
+  var RIEL = ".mq-row";
+
   /* Cuánto se adelanta la carga. Proporcional a la pantalla en vez de un fijo de
      600 px: en /marcas, con 77 tiles, aquel margen disparaba 47 imágenes en la
      carga inicial y le quitaba ancho de banda al hero. */
@@ -973,16 +981,33 @@
      elementos observados, y deja de avisar. */
   var io = null;
 
-  function activar(el) { el.classList.add("bg-ready"); }
+  function activar(el) {
+    if (el.matches && el.matches(RIEL)) {
+      Array.prototype.forEach.call(el.querySelectorAll(SEL), function (h) {
+        h.classList.add("bg-ready");
+      });
+      el.setAttribute("data-bg-listo", "");
+      return;
+    }
+    el.classList.add("bg-ready");
+  }
 
   function arrancar() {
-    var els = document.querySelectorAll(SEL);
-    if (!els.length) { return; }
+    var rieles = Array.prototype.filter.call(
+      document.querySelectorAll(RIEL),
+      function (r) { return !r.hasAttribute("data-bg-listo") && r.querySelector(SEL); }
+    );
+    var sueltos = Array.prototype.filter.call(
+      document.querySelectorAll(SEL),
+      function (el) { return !el.classList.contains("bg-ready") && !el.closest(RIEL); }
+    );
+    var todos = rieles.concat(sueltos);
+    if (!todos.length) { return; }
 
     // Sin IntersectionObserver (navegadores viejos) se pintan todos: es preferible
     // gastar ancho de banda a dejar la sección sin imagen.
     if (!("IntersectionObserver" in window)) {
-      Array.prototype.forEach.call(els, activar);
+      todos.forEach(activar);
       return;
     }
 
@@ -996,9 +1021,7 @@
       }, { rootMargin: margen() + "px 0px" });
     }
 
-    Array.prototype.forEach.call(els, function (el) {
-      if (!el.classList.contains("bg-ready")) { io.observe(el); }
-    });
+    todos.forEach(function (el) { io.observe(el); });
   }
 
   /* Si la pestaña arranca en segundo plano el navegador no calcula posiciones y
@@ -1028,4 +1051,20 @@
     if (initPrevio) { initPrevio(); }
     arrancar();
   };
+
+  /* Hay rejillas que se construyen por JS después de arrancar: la vista
+     "Organizar x categoría" de /marcas clona 96 tiles nuevos. Esos elementos no
+     estaban cuando se registró el observador, así que se quedaban en negro para
+     siempre por mucho scroll que se hiciera. Con esto cada lote nuevo entra.
+
+     Solo se vigila childList: activar un fondo cambia una clase (atributo), que
+     no se observa, así que no se realimenta. */
+  if ("MutationObserver" in window) {
+    var pendiente = null;
+    var mo = new MutationObserver(function () {
+      if (pendiente) { return; }
+      pendiente = setTimeout(function () { pendiente = null; arrancar(); }, 150);
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
 })();

@@ -6,10 +6,10 @@
  * 3.000 px más abajo: el carrusel de marcas y los mosaicos de categoría pedían
  * ~1.4 MB antes de que nadie los viera.
  *
- * Técnica: la URL se guarda en una custom property (--bg). El navegador NO
+ * Técnica: la URL se guarda en una custom property (--lazy-bg). El navegador NO
  * descarga un url() guardado en una variable hasta que alguna propiedad lo usa.
  * v2.js añade la clase .bg-ready cuando el elemento se acerca al viewport, y ahí
- * — y solo ahí — se aplica background-image: var(--bg).
+ * — y solo ahí — se aplica background-image: var(--lazy-bg).
  *
  * Uso:  node scripts/lazy-backgrounds.mjs   (idempotente)
  */
@@ -20,10 +20,10 @@ import path from "node:path";
 const COMPONENTES = ["mq-chip", "brandtile", "cat-media", "ss-bg"];
 const REGLA = `
 /* ---------- Fondos diferidos (ver scripts/lazy-backgrounds.mjs) ----------
-   La URL vive en --bg y solo se pide cuando v2.js marca el elemento como
+   La URL vive en --lazy-bg y solo se pide cuando v2.js marca el elemento como
    visible. Sin esta regla el navegador descargaría todo el carrusel de marcas
    y los mosaicos de categoría durante la carga inicial. */
-${COMPONENTES.map((c) => `.${c}.bg-ready`).join(",\n")} { background-image: var(--bg); }
+${COMPONENTES.map((c) => `.${c}.bg-ready`).join(",\n")} { background-image: var(--lazy-bg); }
 `;
 
 async function main() {
@@ -37,7 +37,7 @@ async function main() {
       `(\\.(?:${COMPONENTES.join("|")})\\[[^\\]]*\\][^{]*\\{[^}]*?)background-image:\\s*(url\\([^)]*\\))`,
       "g"
     );
-    s = s.replace(re, (m, head, url) => { nReglas++; return `${head}--bg: ${url}`; });
+    s = s.replace(re, (m, head, url) => { nReglas++; return `${head}--lazy-bg: ${url}`; });
     if (!s.includes(".bg-ready")) s += REGLA;
     if (s !== orig) { await writeFile(css, s); cssTocado++; }
   }
@@ -49,7 +49,7 @@ async function main() {
     const orig = s;
     s = s.replace(
       new RegExp(`(class="[^"]*(?:${COMPONENTES.join("|")})[^"]*"[^>]*style=")background-image:`, "g"),
-      (m, head) => { nInline++; return `${head}--bg:`; }
+      (m, head) => { nInline++; return `${head}--lazy-bg:`; }
     );
     if (s !== orig) { await writeFile(p, s); inlineTocado++; }
   }

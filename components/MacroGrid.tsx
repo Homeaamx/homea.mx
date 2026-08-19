@@ -11,16 +11,16 @@ import type { Macrocategoria } from "@/types/guias";
 
 // Foto editorial por macro (en /public/assets/photos). Si falta, queda el fondo espresso.
 const FOTO_MACRO: Record<string, { src: string; pos?: string }> = {
-  "cocina-y-bar": { src: "cat-cocina-bar.jpg", pos: "center 80%" },
-  exterior: { src: "cat-exterior-asador.jpg" },
+  "cocina-y-bar": { src: "cat-cocina-bar.webp", pos: "center 80%" },
+  exterior: { src: "cat-exterior-asador.webp" },
   "electrodomesticos-menores": { src: "cat-electro-menores-kitchenaid-mixer.webp", pos: "center 55%" },
-  lavanderia: { src: "cat-cuidado-ropa-bosch-lavadora-secadora.jpg" },
-  banos: { src: "cat-banos.jpg", pos: "center 80%" },
-  minisplits: { src: "minisplit.png" },
-  "vapor-y-sauna": { src: "cat-vapor-sauna.jpg" },
-  wellness: { src: "cat-wellness.jpg" },
-  "recubrimientos-y-superficies": { src: "cat-recubrimientos-laminam-noir-desir.jpg", pos: "center 70%" },
-  "chimeneas-y-calentadores": { src: "cat-chimeneas.jpg" },
+  lavanderia: { src: "cat-cuidado-ropa-bosch-lavadora-secadora.webp" },
+  banos: { src: "cat-banos.webp", pos: "center 80%" },
+  minisplits: { src: "minisplit.webp" },
+  "vapor-y-sauna": { src: "cat-vapor-sauna.webp" },
+  wellness: { src: "cat-wellness.webp" },
+  "recubrimientos-y-superficies": { src: "cat-recubrimientos-laminam-noir-desir.webp", pos: "center 70%" },
+  "chimeneas-y-calentadores": { src: "cat-chimeneas.webp" },
 };
 
 // Mosaico: área (grid-template-areas), tamaño (tipografía) y orden de lectura
