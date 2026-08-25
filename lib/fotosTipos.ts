@@ -109,8 +109,8 @@ export const FOTOS_TIPOS: Record<string, Record<string, FotoTipo>> = {
       alt: "Parrilla vitrocerámica de cristal negro con cinco zonas radiantes encendidas",
     },
     induccion: {
-      src: "/assets/photos/tipos/parrilla-induccion-vista-superior-acero.webp",
-      alt: "Parrilla de inducción vista desde arriba con cinco zonas y controles al frente",
+      src: "/assets/photos/tipos/parrilla-induccion-vista-superior-cristal-negro.webp",
+      alt: "Parrilla de inducción de cristal negro vista desde arriba, con cinco zonas y controles al frente",
     },
     // Los tres módulos Vario montados a tope, en el mismo orden en que se
     // instalan en la cubierta: gas · grill · inducción.

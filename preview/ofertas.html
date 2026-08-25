@@ -6,7 +6,7 @@
 <title>HOMEA — Ofertas y Promociones</title>
 <link rel="icon" type="image/png" href="assets/favicon-circle.webp">
 <link rel="stylesheet" href="tokens-v2.css">
-<link rel="stylesheet" href="theme.css?v=62">
+<link rel="stylesheet" href="theme.css?v=66">
 <style>
 /* ===== Ofertas — sistema de temporadas =====
    Una sola URL todo el año. El contenido rota por datos:
@@ -68,8 +68,18 @@
 .of-bcard .foto img { width: 100%; height: 100%; object-fit: cover; }
 .of-bcard .foto .logo { position: absolute; left: 16px; bottom: 12px; background: rgba(247,243,236,.92); padding: 6px 11px; }
 .of-bcard .foto .logo img { display: block; height: 15px; width: auto; object-fit: contain; }
-.of-bcard .body { padding: 20px 22px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-.of-bcard .mec { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 19px; line-height: 1.25; color: var(--fg); flex: 1; }
+.of-bcard .body { padding: 20px 22px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+/* La mecánica se lee de un golpe: primero la CIFRA y debajo UNA sola línea de
+   matiz. Antes toda la promo iba en una frase serif de dos o tres renglones
+   (y dos de ellas en inglés), así que había que leerla entera para saber de
+   qué iba la oferta. */
+.of-bcard .deal { margin: 0; font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(36px, 3.4vw, 46px); line-height: .94; letter-spacing: -.02em;
+  color: var(--accent-text); font-variant-numeric: tabular-nums; }
+/* Cuando la mecánica no es un número (descuentos que se acumulan) la etiqueta
+   ocupa el mismo lugar pero en cursiva y más chica: no puede gritar como una cifra. */
+.of-bcard .deal.txt { font-size: clamp(23px, 2.1vw, 29px); font-style: italic; letter-spacing: 0; }
+.of-bcard .mec { margin: 0; font-size: 13.5px; line-height: 1.45; color: var(--fg-muted); flex: 1; }
 .of-bcard .vence { font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--fg-subtle); font-variant-numeric: tabular-nums; }
 .of-bcard .acts { display: flex; gap: 16px; border-top: 1px solid var(--border); padding-top: 13px; margin-top: 4px;
   font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
@@ -315,7 +325,8 @@
         <span class="logo"><img width="400" height="112" loading="lazy" decoding="async" src="assets/logos/thermador.webp" alt="Thermador"></span>
       </div>
       <div class="body">
-        <p class="mec">Productos al 50% + lavavajillas y/o campanas <em>gratis</em>.</p>
+        <p class="deal">50%</p>
+        <p class="mec">En línea seleccionada, más lavavajillas o campana gratis.</p>
         <span class="vence figures">Vigente · 2026</span>
         <div class="acts"><a href="#" aria-disabled="true">Folleto PDF ↗</a><a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20la%20promoci%C3%B3n%20de%20Thermador." target="_blank" rel="noopener" data-track="offer_click" data-label="promo_thermador">Cotizar →</a></div>
       </div>
@@ -326,7 +337,8 @@
         <span class="logo"><img width="352" height="103" loading="lazy" decoding="async" src="assets/logos/cafe.png" alt="Café"></span>
       </div>
       <div class="body">
-        <p class="mec">Buy more, save more: descuento <em>acumulable</em> por equipo.</p>
+        <p class="deal txt">Acumulable</p>
+        <p class="mec">El descuento sube con cada equipo que agregas.</p>
         <span class="vence figures">Vigente · 2026</span>
         <div class="acts"><a href="#" aria-disabled="true">Folleto PDF ↗</a><a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20la%20promoci%C3%B3n%20de%20Caf%C3%A9." target="_blank" rel="noopener" data-track="offer_click" data-label="promo_cafe">Cotizar →</a></div>
       </div>
@@ -337,7 +349,8 @@
         <span class="logo"><img width="224" height="160" loading="lazy" decoding="async" src="assets/logos/monogram.png" alt="Monogram"></span>
       </div>
       <div class="body">
-        <p class="mec">Save with style: acumula % al <em>agregar equipos</em>.</p>
+        <p class="deal txt">Acumulable</p>
+        <p class="mec">El porcentaje crece al sumar equipos a la cocina.</p>
         <span class="vence figures">Vigente · 2026</span>
         <div class="acts"><a href="#" aria-disabled="true">Folleto PDF ↗</a><a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20la%20promoci%C3%B3n%20de%20Monogram." target="_blank" rel="noopener" data-track="offer_click" data-label="promo_monogram">Cotizar →</a></div>
       </div>
@@ -348,7 +361,8 @@
         <span class="logo"><img width="400" height="88" loading="lazy" decoding="async" src="assets/logos/bertazzoni.webp" alt="Bertazzoni"></span>
       </div>
       <div class="body">
-        <p class="mec">Productos seleccionados <em>al 50%</em>.</p>
+        <p class="deal">50%</p>
+        <p class="mec">En productos seleccionados.</p>
         <span class="vence figures">Vigente · 2026</span>
         <div class="acts"><a href="#" aria-disabled="true">Folleto PDF ↗</a><a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20la%20promoci%C3%B3n%20de%20Bertazzoni." target="_blank" rel="noopener" data-track="offer_click" data-label="promo_bertazzoni">Cotizar →</a></div>
       </div>
@@ -365,7 +379,12 @@
 </div></section>
 
 <!-- ============ 5 · CIERRE CONSULTIVO ============ -->
-<section class="sec on-dark of-close"><div class="container reveal">
+<!-- cta-band: aporta el orbe de oro que sigue al cursor (v2.js busca .cta-band
+     y el <div class="glow"> es donde vive el orbe). Sin esas dos piezas la
+     banda se quedaba negra y plana, a diferencia del resto del sitio. -->
+<section class="sec on-dark of-close cta-band">
+  <div class="glow"></div>
+  <div class="container reveal">
   <div class="eyebrow eyebrow-bright" style="margin-bottom:18px">Ofertas · Todo el año</div>
   <h2>Mejoramos <em>cualquier oferta</em>.</h2>
   <p>¿Viste un mejor precio en otro lado? Mándanos la cotización y un asesor te responde el mismo día.</p>
@@ -488,7 +507,7 @@
   });
 })();
 </script>
-<script src="v2.js?v=27"></script>
+<script src="v2.js?v=30"></script>
 <script src="wishlist.js?v=5"></script>
 <script src="cart.js?v=3"></script>
 </body>

@@ -7,6 +7,14 @@
   1600,
   2000
  ],
+ "/assets/projects/hero-artigas.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1600,
+  2000
+ ],
  "/assets/projects/hero-campestre.webp": [
   400,
   640,
@@ -22,25 +30,10 @@
   1280,
   1536
  ],
- "/assets/projects/hero-artigas.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1600,
-  2000
- ],
  "/assets/projects/refri-viking.webp": [
   400,
   640,
   796
- ],
- "/assets/projects/hero-qro.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1536
  ],
  "/assets/projects/hero-serra.webp": [
   400,
@@ -54,6 +47,13 @@
   640,
   853
  ],
+ "/assets/projects/hero-qro.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1536
+ ],
  "/assets/projects/cut-thermador-rangetop.webp": [
   400,
   640,
@@ -64,22 +64,16 @@
   400,
   536
  ],
- "/assets/projects/cut-elica-easyux.webp": [
-  400,
-  640,
-  717
- ],
  "/assets/projects/cut-wolf-og36.webp": [
   400,
   640,
   960,
   1129
  ],
- "/assets/projects/g/zorrilla-1.webp": [
+ "/assets/projects/cut-elica-easyux.webp": [
   400,
   640,
-  960,
-  1200
+  717
  ],
  "/assets/projects/g/artigas-1.webp": [
   400,
@@ -87,6 +81,12 @@
   960,
   1280,
   1600
+ ],
+ "/assets/projects/g/zorrilla-1.webp": [
+  400,
+  640,
+  960,
+  1200
  ],
  "/assets/projects/g/hausa-1.webp": [
   400,
@@ -120,20 +120,13 @@
   960,
   1100
  ],
- "/assets/projects/g/campanario-3-1.webp": [
+ "/assets/projects/g/punta-serra-1.webp": [
   400,
   640,
   960,
   1200
  ],
- "/assets/projects/g/campanario-11-1.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1600
- ],
- "/assets/projects/g/punta-serra-1.webp": [
+ "/assets/projects/g/campanario-3-1.webp": [
   400,
   640,
   960,
@@ -144,6 +137,13 @@
   640,
   960,
   1100
+ ],
+ "/assets/projects/g/campanario-11-1.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1600
  ],
  "/assets/projects/g/campanario-8-1.webp": [
   400,
@@ -156,17 +156,6 @@
   640,
   960,
   1199
- ],
- "/assets/projects/g/campanario-12-1.webp": [
-  400,
-  640,
-  900
- ],
- "/assets/projects/g/alamos-1.webp": [
-  400,
-  640,
-  960,
-  1100
  ],
  "/assets/projects/g/queretaro-1.webp": [
   400,
@@ -188,13 +177,10 @@
   1280,
   1600
  ],
- "/assets/photos/hero-banos-griferia-premium.webp": [
+ "/assets/projects/g/campanario-12-1.webp": [
   400,
   640,
-  960,
-  1280,
-  1600,
-  2000
+  900
  ],
  "/assets/projects/g/jurica-1.webp": [
   400,
@@ -209,6 +195,24 @@
   1280,
   1506
  ],
+ "/assets/photos/hero-banos-griferia-premium.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1600,
+  2000
+ ],
+ "/assets/photos/subcats/lavabo-sobreponer-ceramica-blanco.webp": [
+  400,
+  600
+ ],
+ "/assets/projects/g/alamos-1.webp": [
+  400,
+  640,
+  960,
+  1100
+ ],
  "/assets/homea-premium-19.webp": [
   400,
   640,
@@ -216,29 +220,35 @@
   1280,
   1400
  ],
- "/assets/photos/subcats/regadera-lluvia-redonda-cromo.webp": [
-  400,
-  640,
-  716
- ],
  "/assets/photos/subcats/monomando-lavabo-cromo-axor.webp": [
   400,
   640,
   741
- ],
- "/assets/photos/subcats/lavabo-sobreponer-ceramica-blanco.webp": [
-  400,
-  600
  ],
  "/assets/photos/subcats/tinas.webp": [
   400,
   640,
   800
  ],
+ "/assets/photos/subcats/regadera-lluvia-redonda-cromo.webp": [
+  400,
+  640,
+  716
+ ],
  "/assets/photos/subcats/accesorios-bano-dispensador-jabon-cromo.webp": [
   400,
   640,
   680
+ ],
+ "/assets/photos/subcats/calentadores.webp": [
+  400,
+  640,
+  800
+ ],
+ "/assets/photos/subcats/chimeneas.webp": [
+  400,
+  640,
+  800
  ],
  "/assets/photos/hero-chimeneas-calentadores.webp": [
   400,
@@ -248,15 +258,18 @@
   1600,
   1900
  ],
- "/assets/photos/subcats/chimeneas.webp": [
+ "/assets/photos/gaggenau/gaggenau-vg295250ca.webp": [
   400,
   640,
-  800
+  960,
+  1280,
+  1400
  ],
- "/assets/photos/subcats/calentadores.webp": [
+ "/assets/photos/gaggenau/gaggenau-df480701.webp": [
   400,
   640,
-  800
+  960,
+  1261
  ],
  "/assets/photos/hero-cocina-bar-wolf-subzero.webp": [
   400,
@@ -266,41 +279,14 @@
   1600,
   2000
  ],
- "/assets/photos/refrigeracion-subzero-french-door.webp": [
-  400,
-  640,
-  885
- ],
- "/assets/photos/gaggenau/gaggenau-vg295250ca.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1400
- ],
  "/assets/photos/tarjas-y-griferia-blanco.webp": [
   400,
   526
  ],
- "/assets/photos/gaggenau/gaggenau-df480701.webp": [
+ "/assets/photos/refrigeracion-subzero-french-door.webp": [
   400,
   640,
-  960,
-  1261
- ],
- "/assets/photos/trituradores-insinkerator.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1400
- ],
- "/assets/photos/gaggenau/gaggenau-bop250612.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1400
+  885
  ],
  "/assets/photos/dispensadores-filtros-grifo-purificador.webp": [
   400,
@@ -320,11 +306,6 @@
   1280,
   1400
  ],
- "/assets/photos/subcats/batidoras.webp": [
-  400,
-  640,
-  800
- ],
  "/assets/photos/subcats/licuadoras.webp": [
   400,
   640,
@@ -338,10 +319,10 @@
   1600,
   1920
  ],
- "/assets/photos/subcats/accesorios-cocina.webp": [
+ "/assets/photos/subcats/batidoras.webp": [
   400,
   640,
-  694
+  800
  ],
  "/assets/photos/subcats/cafeteras.webp": [
   400,
@@ -353,15 +334,31 @@
   640,
   800
  ],
- "/assets/photos/hero-exterior-cocina-asador.webp": [
+ "/assets/photos/subcats/accesorios-cocina.webp": [
+  400,
+  640,
+  694
+ ],
+ "/assets/photos/trituradores-insinkerator.webp": [
   400,
   640,
   960,
   1280,
-  1600,
-  2000
+  1400
  ],
- "/assets/photos/hero-lavanderia-premium.webp": [
+ "/assets/photos/subcats/asadores-y-hornos.webp": [
+  400,
+  640,
+  800
+ ],
+ "/assets/photos/gaggenau/gaggenau-bop250612.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1400
+ ],
+ "/assets/photos/hero-exterior-cocina-asador.webp": [
   400,
   640,
   960,
@@ -374,21 +371,34 @@
   640,
   800
  ],
- "/assets/photos/subcats/asadores-y-hornos.webp": [
+ "/assets/photos/subcats/secadoras.webp": [
+  400,
+  631
+ ],
+ "/assets/photos/hero-lavanderia-premium.webp": [
   400,
   640,
-  800
+  960,
+  1280,
+  1600,
+  2000
  ],
  "/assets/photos/subcats/lavadoras.webp": [
   400,
   640,
   645
  ],
- "/assets/photos/subcats/secadoras.webp": [
+ "/assets/photos/subcats/lavasecadoras.webp": [
   400,
-  631
+  640,
+  645
  ],
- "/assets/photos/subcats/centros-de-lavado.webp": [
+ "/assets/photos/subcats/minisplit-frio.webp": [
+  400,
+  640,
+  800
+ ],
+ "/assets/photos/subcats/minisplit-frio-calor.webp": [
   400,
   640,
   800
@@ -400,21 +410,6 @@
   1280,
   1599
  ],
- "/assets/photos/subcats/minisplit-frio.webp": [
-  400,
-  640,
-  800
- ],
- "/assets/photos/subcats/lavasecadoras.webp": [
-  400,
-  640,
-  645
- ],
- "/assets/photos/subcats/minisplit-frio-calor.webp": [
-  400,
-  640,
-  800
- ],
  "/assets/photos/hero-recubrimientos-superficies.webp": [
   400,
   640,
@@ -422,13 +417,6 @@
   1280,
   1600,
   1920
- ],
- "/assets/photos/hero-vapor-sauna-spa.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1440
  ],
  "/assets/photos/subcats/vapor.webp": [
   400,
@@ -438,6 +426,13 @@
   400,
   640,
   800
+ ],
+ "/assets/photos/hero-vapor-sauna-spa.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1440
  ],
  "/assets/photos/subcats/sauna-exterior.webp": [
   400,
@@ -449,6 +444,16 @@
   640,
   760
  ],
+ "/assets/photos/subcats/tinas-de-inmersion.webp": [
+  400,
+  640,
+  800
+ ],
+ "/assets/photos/subcats/sillon-para-masajes.webp": [
+  400,
+  640,
+  800
+ ],
  "/assets/photos/hero-wellness-tina-inmersion.webp": [
   400,
   640,
@@ -456,17 +461,7 @@
   1280,
   1500
  ],
- "/assets/photos/subcats/tinas-de-inmersion.webp": [
-  400,
-  640,
-  800
- ],
  "/assets/photos/subcats/jacuzzi.webp": [
-  400,
-  640,
-  800
- ],
- "/assets/photos/subcats/sillon-para-masajes.webp": [
   400,
   640,
   800
@@ -484,6 +479,12 @@
   1100
  ],
  "/assets/photos/paquetes/paquete-cocina-tecnolam.webp": [
+  400,
+  640,
+  960,
+  1100
+ ],
+ "/assets/photos/paquetes/paquete-cocina-ge-profile.webp": [
   400,
   640,
   960,
@@ -507,19 +508,13 @@
   960,
   1100
  ],
- "/assets/photos/paquetes/paquete-cocina-ge-profile.webp": [
+ "/assets/photos/paquetes/paquete-cocina-frigidaire.webp": [
   400,
   640,
   960,
   1100
  ],
  "/assets/photos/paquetes/paquete-cocina-bosch.webp": [
-  400,
-  640,
-  960,
-  1100
- ],
- "/assets/photos/paquetes/paquete-cocina-frigidaire.webp": [
   400,
   640,
   960,
@@ -549,19 +544,25 @@
   960,
   1100
  ],
- "/assets/photos/paquetes/paquete-cocina-kitchenaid.webp": [
-  400,
-  640,
-  960,
-  1100
- ],
  "/assets/photos/paquetes/paquete-cocina-viking.webp": [
   400,
   640,
   960,
   1100
  ],
+ "/assets/photos/paquetes/paquete-cocina-kitchenaid.webp": [
+  400,
+  640,
+  960,
+  1100
+ ],
  "/assets/photos/paquetes/paquete-cocina-wolf-sub-zero.webp": [
+  400,
+  640,
+  960,
+  1100
+ ],
+ "/assets/photos/paquetes/paquete-cocina-thermador.webp": [
   400,
   640,
   960,
@@ -574,12 +575,6 @@
   1100
  ],
  "/assets/photos/paquetes/paquete-cocina-monogram.webp": [
-  400,
-  640,
-  960,
-  1100
- ],
- "/assets/photos/paquetes/paquete-cocina-thermador.webp": [
   400,
   640,
   960,
@@ -604,13 +599,12 @@
   1600,
   2000
  ],
- "/assets/photos/marcas-subzero-wolf-color-range.webp": [
+ "/assets/photos/marcas-band.webp": [
   400,
   640,
   960,
   1280,
-  1600,
-  2000
+  1600
  ],
  "/assets/photos/showroom.webp": [
   400,
@@ -619,18 +613,24 @@
   1280,
   1400
  ],
- "/assets/photos/marcas-band.webp": [
+ "/assets/photos/marcas-subzero-wolf-color-range.webp": [
   400,
   640,
   960,
   1280,
-  1600
+  1600,
+  2000
  ],
  "/assets/photos/hero-nosotros-showroom-cocina-equipada.webp": [
   400,
   640,
   960,
   1280
+ ],
+ "/assets/photos/cat-cuidado-ropa-bosch-lavadora-secadora.webp": [
+  400,
+  640,
+  800
  ],
  "/assets/photos/nuestra-historia-equipo-homea-torneo-campanario.webp": [
   400,
@@ -647,27 +647,12 @@
   1600,
   2000
  ],
- "/assets/photos/cat-cuidado-ropa-bosch-lavadora-secadora.webp": [
-  400,
-  640,
-  800
- ],
- "/assets/photos/brands/thermador.webp": [
-  400,
-  640,
-  700
- ],
- "/assets/photos/brands/cafe.webp": [
-  400,
-  640,
-  700
- ],
  "/assets/photos/brands/monogram.webp": [
   400,
   640,
   700
  ],
- "/assets/photos/brands/bertazzoni.webp": [
+ "/assets/photos/brands/cafe.webp": [
   400,
   640,
   700
@@ -679,18 +664,23 @@
   1280,
   1400
  ],
- "/assets/photos/pdp-subzero.webp": [
+ "/assets/photos/brands/bertazzoni.webp": [
   400,
   640,
-  960,
-  1280,
-  1400
+  700
  ],
  "/assets/photos/proyecto-1.webp": [
   400,
   640,
   960,
   1200
+ ],
+ "/assets/photos/pdp-subzero.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1400
  ],
  "/assets/photos/prod-monogram.webp": [
   400,
@@ -705,6 +695,21 @@
   960,
   1280,
   1600
+ ],
+ "/assets/photos/prod-hoshizaki.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1400
+ ],
+ "/assets/photos/hero-sub1-coccion-gaggenau.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1600,
+  2000
  ],
  "/assets/photos/subcat-tiles/estufas-thermador-prg486wdh.webp": [
   400,
@@ -726,21 +731,6 @@
   400,
   640
  ],
- "/assets/photos/prod-hoshizaki.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1400
- ],
- "/assets/photos/hero-sub1-coccion-gaggenau.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1600,
-  2000
- ],
  "/assets/photos/subcat-tiles/cajones-calientaplatos-gaggenau.webp": [
   400,
   640
@@ -753,13 +743,14 @@
   400,
   640
  ],
- "/assets/photos/subcat-tiles/lavavajillas-empotrable-gaggenau-df480701.webp": [
+ "/assets/photos/subcats/purificadores-de-agua.webp": [
   400,
-  640
+  640,
+  800
  ],
- "/assets/photos/subcat-tiles/lavavajillas-piso-bertazzoni.webp": [
+ "/assets/photos/subcats/despachadores-de-agua.webp": [
   400,
-  640
+  545
  ],
  "/assets/photos/hero-sub1-filtros-purificadores-agua.webp": [
   400,
@@ -769,6 +760,10 @@
   1600,
   2000
  ],
+ "/assets/photos/subcat-tiles/lavavajillas-empotrable-gaggenau-df480701.webp": [
+  400,
+  640
+ ],
  "/assets/photos/hero-sub1-lavavajillas-bosch.webp": [
   400,
   640,
@@ -777,11 +772,11 @@
   1600,
   2000
  ],
- "/assets/photos/subcat-tiles/refrigeradores-thermador-panelable.webp": [
+ "/assets/photos/subcat-tiles/lavavajillas-piso-bertazzoni.webp": [
   400,
   640
  ],
- "/assets/photos/subcat-tiles/congeladores-thermador-panelable.webp": [
+ "/assets/photos/subcat-tiles/refrigeradores-thermador-panelable.webp": [
   400,
   640
  ],
@@ -793,11 +788,11 @@
   1600,
   2000
  ],
- "/assets/photos/subcat-tiles/centro-de-bebidas-monogram.webp": [
+ "/assets/photos/subcat-tiles/congeladores-thermador-panelable.webp": [
   400,
   640
  ],
- "/assets/photos/subcat-tiles/maquinas-de-hielo.webp": [
+ "/assets/photos/subcat-tiles/centro-de-bebidas-monogram.webp": [
   400,
   640
  ],
@@ -809,7 +804,23 @@
   400,
   640
  ],
+ "/assets/photos/subcat-tiles/maquinas-de-hielo.webp": [
+  400,
+  640
+ ],
  "/assets/photos/subcat-tiles/cajones-frios-monogram.webp": [
+  400,
+  640
+ ],
+ "/assets/photos/subcat-tiles/tarjas-acero-inoxidable-bajo-cubierta.webp": [
+  400,
+  640
+ ],
+ "/assets/photos/subcat-tiles/accesorios-refrigeracion-manija-columna.png": [
+  400,
+  640
+ ],
+ "/assets/photos/subcat-tiles/griferia-blancoculina-blanco.webp": [
   400,
   640
  ],
@@ -821,24 +832,16 @@
   1600,
   2000
  ],
- "/assets/photos/subcat-tiles/tarjas-acero-inoxidable-bajo-cubierta.webp": [
-  400,
-  640
- ],
  "/assets/photos/subcat-tiles/accesorios-tarjas-tabla-blanco.webp": [
   400,
   640,
   800
  ],
- "/assets/photos/subcat-tiles/accesorios-refrigeracion-manija-columna.png": [
+ "/assets/photos/subcat-tiles/asadores-con-carrito-broil-king.webp": [
   400,
   640
  ],
- "/assets/photos/subcat-tiles/griferia-blancoculina-blanco.webp": [
-  400,
-  640
- ],
- "/assets/photos/subcat-tiles/hornos-de-pizza-alfa.webp": [
+ "/assets/photos/subcat-tiles/asadores-empotrables-lynx.webp": [
   400,
   640
  ],
@@ -850,11 +853,11 @@
   1600,
   2000
  ],
- "/assets/photos/subcat-tiles/asadores-empotrables-lynx.webp": [
+ "/assets/photos/subcat-tiles/hornos-de-pizza-alfa.webp": [
   400,
   640
  ],
- "/assets/photos/subcat-tiles/asadores-con-carrito-broil-king.webp": [
+ "/assets/photos/subcat-tiles/accesorios-asadores-hornos-rotisserie.webp": [
   400,
   640
  ],
@@ -862,10 +865,6 @@
   400,
   640,
   900
- ],
- "/assets/photos/subcat-tiles/accesorios-asadores-hornos-rotisserie.webp": [
-  400,
-  640
  ],
  "/assets/photos/tipos/refrigerador-duplex-side-by-side-acero.webp": [
   400,
@@ -877,15 +876,15 @@
   640,
   960
  ],
- "/assets/photos/tipos/refrigerador-de-piso-ge-profile-acero.webp": [
-  400,
-  640,
-  675
- ],
  "/assets/photos/tipos/refrigerador-4-puertas-acero.webp": [
   400,
   640,
   671
+ ],
+ "/assets/photos/tipos/refrigerador-de-piso-ge-profile-acero.webp": [
+  400,
+  640,
+  675
  ],
  "/assets/photos/tipos/refrigerador-counter-depth-french-door-al-ras.webp": [
   400,
@@ -918,11 +917,6 @@
   960,
   1099
  ],
- "/assets/photos/tipos/parrilla-hibrida-gas-induccion-cristal-negro.webp": [
-  400,
-  640,
-  839
- ],
  "/assets/photos/tipos/parrilla-invisible-induccion-bajo-cubierta.webp": [
   400,
   640,
@@ -931,9 +925,12 @@
  ],
  "/assets/photos/tipos/parrilla-profesional-rangetop-perillas-acero.webp": [
   400,
+  620
+ ],
+ "/assets/photos/tipos/parrilla-hibrida-gas-induccion-cristal-negro.webp": [
+  400,
   640,
-  960,
-  1021
+  839
  ],
  "/assets/photos/tipos/parrilla-vitroceramica-cristal-negro-5-zonas.webp": [
   400,
@@ -945,15 +942,10 @@
   640,
   960
  ],
- "/assets/photos/tipos/parrilla-induccion-vista-superior-acero.webp": [
+ "/assets/photos/tipos/parrilla-induccion-vista-superior-cristal-negro.webp": [
   400,
   640,
-  908
- ],
- "/assets/photos/tipos/campana-de-pared-acero-sobre-parrilla.webp": [
-  400,
-  640,
-  825
+  944
  ],
  "/assets/photos/tipos/parrilla-modulares-vario-gas-grill-induccion.webp": [
   400,
@@ -961,6 +953,11 @@
   960,
   1280,
   1400
+ ],
+ "/assets/photos/tipos/campana-de-pared-acero-sobre-parrilla.webp": [
+  400,
+  640,
+  825
  ],
  "/assets/photos/tipos/campana-de-isla-suspendida-piramidal.webp": [
   400,
@@ -977,17 +974,7 @@
   640,
   900
  ],
- "/assets/photos/tipos/campana-piramidal-acero-faldon-inclinado.webp": [
-  400,
-  640,
-  775
- ],
  "/assets/photos/tipos/campana-de-cristal-visera-curva-acero.webp": [
-  400,
-  640,
-  900
- ],
- "/assets/photos/tipos/campana-inserto-profesional-48-thermador.webp": [
   400,
   640,
   900
@@ -995,6 +982,16 @@
  "/assets/photos/tipos/campana-cilindrica-isla-tube-pro-acero.webp": [
   400,
   507
+ ],
+ "/assets/photos/tipos/campana-piramidal-acero-faldon-inclinado.webp": [
+  400,
+  640,
+  775
+ ],
+ "/assets/photos/tipos/campana-inserto-profesional-48-thermador.webp": [
+  400,
+  640,
+  900
  ],
  "/assets/photos/tipos/campana-bajo-mueble-80cm-acero-mabe.webp": [
   400,
@@ -1011,14 +1008,14 @@
   640,
   865
  ],
- "/assets/photos/tipos/campana-decorativa-isla-escultural-negra.webp": [
-  400,
-  571
- ],
  "/assets/photos/tipos/campana-a-techo-empotrada-plafon.webp": [
   400,
   640,
   900
+ ],
+ "/assets/photos/tipos/campana-decorativa-isla-escultural-negra.webp": [
+  400,
+  571
  ],
  "/assets/photos/tipos/campana-retractil-downdraft-acero.webp": [
   400,
@@ -1050,7 +1047,7 @@
   640,
   900
  ],
- "/assets/photos/hero-exterior-subzero-wolf-cocina.webp": [
+ "/assets/photos/hero-cocina-bar-smeg.webp": [
   400,
   640,
   960,
@@ -1058,7 +1055,7 @@
   1600,
   2000
  ],
- "/assets/photos/hero-cocina-bar-smeg.webp": [
+ "/assets/photos/hero-exterior-subzero-wolf-cocina.webp": [
   400,
   640,
   960,
@@ -1082,13 +1079,6 @@
   1600,
   2000
  ],
- "/assets/photos/hero-vapor-sauna-artexa.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1440
- ],
  "/assets/photos/hero-minisplits.webp": [
   400,
   640,
@@ -1096,7 +1086,22 @@
   1280,
   1599
  ],
- "/assets/photos/hero-wellness-artexa-sauna.webp": [
+ "/assets/photos/hero-banos-hansgrohe.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1600,
+  2000
+ ],
+ "/assets/photos/hero-vapor-sauna-artexa.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1440
+ ],
+ "/assets/photos/hero-recubrimientos-laminam.webp": [
   400,
   640,
   960,
@@ -1112,7 +1117,7 @@
   1600,
   2000
  ],
- "/assets/photos/hero-recubrimientos-laminam.webp": [
+ "/assets/photos/hero-wellness-artexa-sauna.webp": [
   400,
   640,
   960,
@@ -1121,14 +1126,6 @@
   2000
  ],
  "/assets/photos/hero-sub1-coccion-pitt.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1600,
-  2000
- ],
- "/assets/photos/hero-banos-hansgrohe.webp": [
   400,
   640,
   960,
@@ -1159,5 +1156,10 @@
   1280,
   1600,
   2000
+ ],
+ "/assets/photos/brands/thermador.webp": [
+  400,
+  640,
+  700
  ]
 }

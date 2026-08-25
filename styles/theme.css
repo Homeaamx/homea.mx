@@ -142,20 +142,32 @@ html { scroll-behavior: smooth; }
 .mega-brands-head .eyebrow { color: var(--accent-text); margin: 0; }
 .mega-brands-head .mega-all { margin-top: 0; padding-top: 0; }
 /* column-width en vez de column-count: el navegador mete tantas columnas como
-   quepan (6 en escritorio, 5 en ventanas angostas) sin cortar nunca un nombre
-   largo tipo "AMERICAN STANDARD" (147px de texto + 18px de padding). */
-.mega-brands-cols { column-count: auto; column-width: 160px; column-gap: 20px; }
+   quepan sin cortar nunca un nombre largo tipo "AMERICAN STANDARD" (191px de
+   texto a 15px + 16px de padding = 207). Con este valor caben 5 columnas en
+   todo el rango en que el mega existe (>1080px) y el panel mide ~553px de alto:
+   entra sin scroll incluso en 1280x800, el viewport más apretado. Subir la
+   tipografía a 16px empuja el nombre largo a 222px, deja solo 4 columnas en
+   ventanas de 1280 y el panel se va a 697px > los 652px de max-height: por eso
+   se quedó en 15 (regla de Carla: 16 si cabe, si no 15). */
+.mega-brands-cols { column-count: auto; column-width: 207px; column-gap: 20px; }
 .mega-brands-cols a {
   display: block; break-inside: avoid; border-bottom: none;
   border-left: 2px solid transparent;
-  padding: 3px 10px 3px 8px; white-space: nowrap;
-  font-family: var(--font-sans); font-weight: 500; font-size: 11.5px;
+  padding: 3px 8px; white-space: nowrap;
+  font-family: var(--font-sans); font-weight: 500; font-size: 15px;
   letter-spacing: .06em; text-transform: uppercase; color: var(--fg);
   transition: color var(--dur-fast) var(--ease-standard),
               background-color var(--dur-fast) var(--ease-standard),
               border-color var(--dur-fast) var(--ease-standard);
 }
 .mega-brands-cols a:hover { background: var(--homea-greige); color: var(--fg); border-left-color: var(--homea-gold); border-bottom-color: transparent; }
+/* Ventanas angostas (el mega existe desde 1081px): a 15px solo caben 4 columnas
+   y el panel se va a 667px, más que el max-height disponible con 720px de alto.
+   Ahí se conserva la escala anterior, que entra en 5 columnas sin scroll. */
+@media (max-width: 1279px) {
+  .mega-brands-cols { column-width: 160px; }
+  .mega-brands-cols a { padding: 3px 10px 3px 8px; font-size: 11.5px; }
+}
 
 .mega-grid { display: grid; grid-template-columns: 1.5fr repeat(5, 1fr); gap: 28px; }
 .mega-col-cat a { white-space: nowrap; }
@@ -548,6 +560,10 @@ html { scroll-behavior: smooth; }
 .hero-visual .hi img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.045); transition: transform 1200ms var(--ease-reveal); }
 .hero-visual .hi.on { opacity: 1; }
 .hero-visual .hi.on img { transform: scale(1); }
+/* Reducir movimiento: la portada rota igual, sin fundido ni barra que se llena.
+   La pone v2.js; ver el comentario del rotador ahí. */
+.hero.sin-fundido .hi, .hero.sin-fundido .hi img { transition: none; }
+.hero.sin-fundido .hero-bars button.on .fill { animation: none; transform: scaleX(1); }
 
 /* ---------- Hero cinemático full-bleed (Opción A) — solo home ---------- */
 .btn-bone { background: var(--homea-bone); color: var(--homea-black); border-color: var(--homea-bone); }
@@ -1280,7 +1296,9 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .page-hero .crumbs { font-size: 12px; color: var(--fg-muted); margin-bottom: 28px; }
 .page-hero .crumbs a { color: var(--fg-muted); border-bottom: none; }
 .page-hero .crumbs a:hover { color: var(--accent-text); }
-.page-hero .crumbs .sep { color: var(--homea-gold); padding: 0 .6em; }
+/* Global, NO dentro de .page-hero: hay heros propios (.of-nexthero, .of-hero…)
+   cuyas migas se quedaban pegadas al separador — "Inicio·Ofertas". */
+.crumbs .sep { color: var(--homea-gold); padding: 0 .6em; }
 .page-hero h1 { font-size: clamp(38px, 4.5vw, 60px); max-width: 720px; }
 .page-hero .sub { margin: 18px 0 0; max-width: 560px; font-size: var(--fs-md); font-weight: 300; color: var(--fg-muted); }
 
@@ -1454,11 +1472,54 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
   text-transform: uppercase; color: var(--accent-text);
 }
 .gama-note .arrow { font-size: 16px; color: var(--homea-gold); transition: transform .25s ease; }
+
+/* ---------- Buscador de marcas (bajo el panel de rangos) -------------------
+   Mismo ancho que .gama-desc y que la fila de filtros, para que las tres piezas
+   compartan borde. Sin caja: solo la lupa y una regla inferior que se pone oro
+   al enfocar — el campo no debe competir con las tarjetas de marca. */
+.brand-search {
+  display: flex; align-items: center; gap: 14px;
+  max-width: 720px; margin: -22px 0 30px; padding: 0 2px 12px;
+  border-bottom: 1px solid var(--fg);
+  transition: border-color var(--dur-med) var(--ease-standard);
+}
+.brand-search:focus-within { border-bottom-color: var(--homea-gold); }
+.brand-search .bs-ico {
+  flex: 0 0 auto; width: 22px; height: 22px; fill: none; stroke: var(--fg);
+  stroke-width: 1.7; stroke-linecap: round;
+}
+.brand-search input {
+  flex: 1 1 auto; min-width: 0; border: 0; background: none; padding: 6px 0;
+  font-family: var(--font-sans); font-size: 19px; font-weight: 300; color: var(--fg);
+}
+.brand-search input::placeholder { color: var(--fg-subtle); font-weight: 300; }
+.brand-search input:focus { outline: none; }
+/* La X nativa de type=search es distinta en cada navegador: se apaga y se usa la propia. */
+.brand-search input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+.brand-search .bs-count {
+  flex: 0 0 auto; font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-muted);
+}
+.brand-search .bs-clear {
+  flex: 0 0 auto; width: 26px; height: 26px; display: grid; place-items: center;
+  border: 0; background: none; cursor: pointer; font-size: 20px; line-height: 1;
+  color: var(--fg-muted); transition: color var(--dur-fast) var(--ease-standard);
+}
+.brand-search .bs-clear:hover { color: var(--fg); }
+/* `display:grid` gana sobre el `display:none` que el navegador aplica a [hidden]:
+   sin esta línea la X se ve siempre, incluso con el campo vacío. */
+.brand-search .bs-clear[hidden] { display: none; }
+.brand-search-empty { max-width: 720px; margin: -14px 0 30px; font-size: 14.5px; color: var(--fg-muted); }
+.brand-search-empty a { color: var(--accent-text); }
 .gama-note:hover .arrow { transform: translateX(6px); }
 
 /* ---------- MODO MAGIA: reacomoda las marcas por macrocategoría ---------- */
 .gama-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; margin-bottom: 32px; }
-.gama-bar .gama-tabs { margin-bottom: 0; }
+/* La fila de filtros arranca y termina donde el panel de descripción de abajo
+   (.gama-desc mide 720px): flex-basis igual, y cada botón crece con `flex:1`
+   para repartirse el sobrante. Si el basis cambia aquí, cambiarlo también en
+   el max-width de .gama-desc o dejan de quedar al ras. */
+.gama-bar .gama-tabs { margin-bottom: 0; flex: 0 1 720px; }
 .brands-wrap.hide { display: none; }
 
 .magic-btn {
@@ -1519,8 +1580,9 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
    un rango a otro, se lee de inmediato el tono del nuevo rango. */
 .gama-tabs .t {
   position: relative; overflow: hidden; isolation: isolate;
-  font-size: 10px; font-weight: 600; letter-spacing: var(--tracking-label); text-transform: uppercase;
-  padding: 12px 20px; border: 1px solid var(--border-strong); color: var(--fg);
+  flex: 1 1 auto;
+  font-size: 12px; font-weight: 600; letter-spacing: var(--tracking-label); text-transform: uppercase;
+  padding: 15px 18px; border: 1px solid var(--border-strong); color: var(--fg);
   cursor: pointer; background: transparent;
   box-shadow: inset 0 -3px 0 var(--tone, var(--border-strong));
   transition: color var(--dur-med) var(--ease-standard),

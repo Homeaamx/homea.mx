@@ -169,9 +169,24 @@
         if (closeTimer) { clearTimeout(closeTimer); }
         closeTimer = setTimeout(closeAllMega, 140);
       };
+      /* Tras hacer clic en un título CON panel (Marcas, Productos) el cursor se
+         queda quieto encima. El re-render de la SPA cambia el DOM bajo el cursor y
+         el navegador emite un `mouseover` nuevo — sin que nadie haya movido el
+         ratón — así que el panel se volvía a abrir solo y parecía que el clic no
+         lo cerraba. Se bloquea la reapertura hasta que el puntero se mueva DE
+         VERDAD: los `mouseover` sintéticos del re-render no generan `pointermove`.
+         El umbral de 6px tolera el micro-temblor de la mano al hacer clic. */
+      var reaperturaBloqueada = false;
+      var clicX = 0, clicY = 0;
+      on(document, "pointermove", function (e) {
+        if (reaperturaBloqueada &&
+            (Math.abs(e.clientX - clicX) > 6 || Math.abs(e.clientY - clicY) > 6)) {
+          reaperturaBloqueada = false;
+        }
+      }, { passive: true });
       on(siteNav, "mouseover", function (e) {
         var w = e.target.closest(".has-mega");
-        if (w) { openMega(w); }
+        if (w) { if (!reaperturaBloqueada) { openMega(w); } }
         /* Sobre un elemento interactivo de la barra que NO es mega → cerrar.
            El espacio vacío entre enlaces no dispara nada (evita parpadeo al cruzar). */
         else if (e.target.closest("a, button, .btn, .nav-search")) { closeAllMega(); }
@@ -184,7 +199,14 @@
          e.detail === 0) se respeta para no romper la navegación accesible. */
       on(siteNav, "click", function (e) {
         var hit = e.target.closest("a, button");
-        if (hit) { closeAllMega(); if (e.detail > 0 && hit.blur) { hit.blur(); } }
+        if (!hit) { return; }
+        closeAllMega();
+        /* Solo con ratón (detail > 0): con teclado el cursor no está encima de
+           nada, no hay reapertura que bloquear y hacerlo estorbaría al hover. */
+        if (e.detail > 0) {
+          reaperturaBloqueada = true; clicX = e.clientX; clicY = e.clientY;
+          if (hit.blur) { hit.blur(); }
+        }
       });
       on(document, "keydown", function (e) { if (e.key === "Escape") { closeAllMega(); } });
     }
@@ -402,24 +424,29 @@
       function stop() { if (timer) { clearInterval(timer); timer = null; } }
       ctx.onAbort(stop);
 
+      /* "Reducir movimiento" debe quitar la ANIMACIÓN, no el contenido: la portada
+         sigue rotando cada 10s y lo que se apaga es el fundido entre fotos y el
+         llenado de la barra (clase .sin-fundido, en theme.css). Antes el
+         `if (!reduced)` cancelaba el rotador COMPLETO y la home se quedaba clavada
+         en la primera diapositiva para siempre — el mismo fallo que tenía el hero
+         de /proyectos, y no se nota salvo que tengas el ajuste encendido. */
       var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduced) { hero.classList.add("sin-fundido"); }
       render(0);
       on(window, "resize", alignCtaFloat, { passive: true });
       on(window, "load", alignCtaFloat);
-      if (!reduced) {
-        start();
-        var prog = hero.querySelector(".hero-prog");
-        if (prog) {
-          prog.addEventListener("mouseenter", function () { hero.classList.add("paused"); stop(); });
-          prog.addEventListener("mouseleave", function () { hero.classList.remove("paused"); start(); });
-        }
+      start();
+      var prog = hero.querySelector(".hero-prog");
+      if (prog) {
+        prog.addEventListener("mouseenter", function () { hero.classList.add("paused"); stop(); });
+        prog.addEventListener("mouseleave", function () { hero.classList.remove("paused"); start(); });
       }
       bars.forEach(function (b, j) {
-        b.addEventListener("click", function () { render(j); if (!reduced) start(); });
+        b.addEventListener("click", function () { render(j); start(); });
       });
       var nextBtn = hero.querySelector(".hero-next");
       if (nextBtn) {
-        nextBtn.addEventListener("click", function () { render(idx + 1); if (!reduced) start(); });
+        nextBtn.addEventListener("click", function () { render(idx + 1); start(); });
       }
     }
 
@@ -433,6 +460,13 @@
     var gamaNote = document.querySelector(".gama-note");
     var azRail = document.querySelector(".az-rail");
     var pmRail = document.querySelector(".pm-rail");
+    /* Buscador de marcas (solo existe en marcas.html): filtra las MISMAS tarjetas,
+       compuesto con el filtro de gama. */
+    var searchInput = document.querySelector("#brandSearch");
+    var searchClear = document.querySelector("#brandSearchClear");
+    var searchCount = document.querySelector("#brandSearchCount");
+    var searchEmpty = document.querySelector("#brandSearchEmpty");
+    var searchTerm = "";
     /* Macrocategorías (orden + etiqueta) — secciones de las listas de precios de homea.mx.
        Una marca (data-sub) puede pertenecer a varias → se repite en cada macro al agrupar. */
     var MACROS = [
@@ -468,9 +502,36 @@
     function inMacro(a, key) {
       return (" " + (a.getAttribute("data-sub") || "") + " ").indexOf(" " + key + " ") >= 0;
     }
+    /* Sin acentos y en minúsculas: "cafe" encuentra CAFÉ. */
+    function norm(s) {
+      return (s || "").toString().trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+    /* Además sin guiones ni espacios, para que "subzero" encuentre SUB-ZERO
+       (el nombre visible y el slug no siempre se escriben igual). */
+    function squash(s) { return norm(s).replace(/[^a-z0-9]/g, ""); }
+    function matchesSearch(a) {
+      if (!searchTerm) return true;
+      var hay = norm(a.textContent) + " " + norm(a.getAttribute("data-brand"));
+      return hay.indexOf(searchTerm) >= 0 || squash(hay).indexOf(squash(searchTerm)) >= 0;
+    }
+    /* Marcas ÚNICAS que pasan gama + búsqueda. Se cuenta sobre las tarjetas planas
+       a propósito: en MODO MAGIA una marca se clona en cada macro a la que pertenece
+       y contar los clones inflaría el número. */
+    function matchCount() {
+      var n = 0;
+      brandTiles.forEach(function (a) { if (gamaShows(a, activeFilter) && matchesSearch(a)) { n++; } });
+      return n;
+    }
+    function updateSearchStatus() {
+      if (!searchInput) return;
+      var n = matchCount();
+      if (searchClear) { searchClear.hidden = !searchTerm; }
+      if (searchCount) { searchCount.textContent = searchTerm ? (n + (n === 1 ? " marca" : " marcas")) : ""; }
+      if (searchEmpty) { searchEmpty.hidden = !(searchTerm && n === 0); }
+    }
     /* Vista plana (gama): filtra por gama y ordena (TODAS→alfabético, gama→costo). */
     function renderFlat(filter, animate) {
-      brandTiles.forEach(function (a) { a.classList.toggle("hide", !gamaShows(a, filter)); });
+      brandTiles.forEach(function (a) { a.classList.toggle("hide", !(gamaShows(a, filter) && matchesSearch(a))); });
       var order = filter === "all" ? alphaOrder : costOrder;
       if (brandGrid) { order.forEach(function (a) { brandGrid.appendChild(a); }); }
       if (animate && !gamaReduce.matches) {
@@ -490,7 +551,7 @@
       brandsGrouped.innerHTML = "";
       var reveal = [];
       MACROS.forEach(function (m) {
-        var members = costOrder.filter(function (a) { return inMacro(a, m.key) && gamaShows(a, filter); });
+        var members = costOrder.filter(function (a) { return inMacro(a, m.key) && gamaShows(a, filter) && matchesSearch(a); });
         if (!members.length) return;
         var sec = document.createElement("section");
         sec.className = "brand-group";
@@ -539,11 +600,14 @@
         var gdl = gamaDesc.querySelector(".gd-label"); if (gdl) { gdl.textContent = gd[0]; }
         var gdt = gamaDesc.querySelector(".gd-text"); if (gdt) { gdt.textContent = gd[1]; }
       }
-      if (azRail) { azRail.classList.toggle("hide", magicOn || filter !== "all"); updateAzArrow(); }
-      if (pmRail) { pmRail.classList.toggle("hide", magicOn || filter === "all"); updatePmArrow(); }
+      /* Con una búsqueda activa los rieles A→Z / +→− no dicen nada (quedan dos o tres
+         marcas sueltas), así que se ocultan mientras se busca. */
+      if (azRail) { azRail.classList.toggle("hide", magicOn || filter !== "all" || !!searchTerm); updateAzArrow(); }
+      if (pmRail) { pmRail.classList.toggle("hide", magicOn || filter === "all" || !!searchTerm); updatePmArrow(); }
       if (brandsWrap) { brandsWrap.classList.toggle("hide", magicOn); }
       if (brandsGrouped) { brandsGrouped.classList.toggle("hide", !magicOn); }
       if (magicOn) { renderGrouped(filter, animate); } else { renderFlat(filter, animate); }
+      updateSearchStatus();
     }
     /* Ráfaga de destellos oro que se esparcen sobre las marcas al activar MODO MAGIA. */
     function emitSparkles(host) {
@@ -613,6 +677,32 @@
         if (brandTiles.length) { applyGama(t.getAttribute("data-filter") || "all", true); }
       });
     });
+    if (searchInput) {
+      searchInput.addEventListener("input", function () {
+        var q = norm(searchInput.value);
+        if (q === searchTerm) { return; }
+        searchTerm = q;
+        /* Buscar significa "encuéntrame esta marca": si quedara un filtro de gama
+           puesto, el resultado podría salir vacío aunque la marca exista en el
+           catálogo. Por eso al teclear se vuelve a "Todas". */
+        if (searchTerm && activeFilter !== "all") {
+          tabs.forEach(function (x) { x.classList.toggle("on", x.getAttribute("data-filter") === "all"); });
+          applyGama("all", false);
+        } else {
+          applyGama(activeFilter, false);
+        }
+      });
+      searchInput.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && searchInput.value) { e.preventDefault(); limpiarBusqueda(); }
+      });
+    }
+    function limpiarBusqueda() {
+      if (!searchInput) { return; }
+      searchInput.value = ""; searchTerm = "";
+      applyGama(activeFilter, false);
+      searchInput.focus();
+    }
+    if (searchClear) { searchClear.addEventListener("click", limpiarBusqueda); }
     var activeTab = document.querySelector(".gama-tabs .t.on");
     if (brandTiles.length && activeTab) { applyGama(activeTab.getAttribute("data-filter") || "all", false); }
 
