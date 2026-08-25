@@ -12,7 +12,10 @@
 #     cp scripts/hooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push
 
 SRC="/Users/carlaarteaga/Desktop/Homea Landing Page Oficial/"
-DST="/Users/carlaarteaga/Library/CloudStorage/OneDrive-Homea/HOMEA ONE DRIVE/PAGINA WEB/LANDING PAGE 2026 HTML/"
+# OJO: OneDrive volvió a enlazar la cuenta y renombró la carpeta a
+# "OneDrive-Homea 2" (con espacio y 2). Con la ruta vieja el hook salía por
+# el aviso y el respaldo llevaba semanas sin correr, en silencio.
+DST="/Users/carlaarteaga/Library/CloudStorage/OneDrive-Homea 2/HOMEA ONE DRIVE/PAGINA WEB/LANDING PAGE 2026 HTML/"
 
 respaldar() {
   if [ ! -d "$DST" ]; then
