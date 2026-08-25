@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ofertas · composición elegida — HOMEA</title>
+<link rel="icon" type="image/png" href="assets/favicon-circle.webp">
+<link rel="stylesheet" href="tokens-v2.css" />
+<link rel="stylesheet" href="theme.css?v=66" />
+<style>
+/* ==========================================================================
+   PROPUESTA — rediseño de /ofertas · composición elegida (2026-08-25)
+   1A hero countdown · 2A outlet en greige · 3 paquetes de proveedor
+   (contenido de ¡PROMOCIONES 2026! de OXATIS) · 4B dos bandas de stock ·
+   5 banner original con el copy nuevo. Aún no toca ofertas.html.
+   ========================================================================== */
+
+/* --- Cromo de la maqueta (masthead, índice, notas) — no va en producción --- */
+.mast { background: var(--homea-black); color: var(--homea-bone); padding: 56px 0 48px; }
+.mast .eyebrow { color: var(--homea-gold-bright); margin-bottom: 16px; }
+.mast h1 { color: var(--homea-bone); font-size: clamp(32px, 3.6vw, 48px); max-width: 760px; margin: 0; }
+.mast p { color: var(--dark-fg-muted); max-width: 660px; margin: 16px 0 0; font-weight: 300; }
+.toc { position: sticky; top: 0; z-index: 50; background: var(--homea-espresso); border-bottom: 1px solid var(--dark-border); }
+.toc .container { display: flex; gap: 4px; overflow-x: auto; }
+.toc a { flex: none; padding: 13px 16px; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--dark-fg-muted); border-bottom: none; }
+.toc a:hover { color: var(--homea-gold-bright); }
+.nota { max-width: var(--container); margin: 0 auto; padding: 34px 48px 26px; }
+.nota .n { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--accent-text); }
+.nota p { margin: 6px 0 0; font-size: 13px; color: var(--fg-muted); max-width: 680px; }
+
+/* ==========================================================================
+   1 · HERO — cuenta regresiva cinemática (opción A elegida)
+   ========================================================================== */
+.h1a { position: relative; overflow: hidden; background: var(--homea-black); min-height: clamp(560px, 72vh, 780px); display: flex; align-items: center; }
+.h1a img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; }
+.h1a .veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,10,10,.86) 0%, rgba(10,10,10,.6) 48%, rgba(10,10,10,.18) 100%); }
+.h1a .container { position: relative; z-index: 2; padding-top: 84px; padding-bottom: 116px; }
+.h1a .crumbs a, .h1a .crumbs span { color: #cfc8bb; }
+.h1a h1 { color: var(--homea-bone); font-size: clamp(42px, 5vw, 72px); max-width: 700px; margin: 0; }
+.h1a .sub { color: rgba(247,243,236,.78); font-weight: 300; max-width: 520px; margin: 18px 0 0; }
+.cdown { display: flex; gap: clamp(18px, 3vw, 42px); margin: 34px 0 6px; }
+.cdown .cell { text-align: left; }
+.cdown .num { font-family: var(--font-display); font-weight: 400; font-size: clamp(44px, 5.4vw, 78px); line-height: 1;
+  color: var(--homea-gold-bright); font-variant-numeric: tabular-nums; }
+.cdown .lbl { margin-top: 8px; font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: rgba(247,243,236,.6); }
+.cdown .sep { font-family: var(--font-display); font-size: clamp(34px, 4vw, 58px); color: rgba(189,155,94,.45); line-height: 1.2; }
+.h1a .ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
+.h1a .mq { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; border-top: 1px solid rgba(189,155,94,.35);
+  background: rgba(10,10,10,.55); backdrop-filter: blur(4px); overflow: hidden; padding: 14px 0; }
+.h1a .mq .track { display: flex; gap: 56px; white-space: nowrap; animation: h1a-mq 38s linear infinite; width: max-content; }
+.h1a .mq span { font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: rgba(247,243,236,.66); }
+.h1a .mq b { color: var(--homea-gold-bright); font-weight: 600; }
+@keyframes h1a-mq { to { transform: translateX(-50%); } }
+
+/* ==========================================================================
+   2 · OUTLET — la cifra que respira, en claro (opción A con tonos invertidos:
+   fondo greige, textos oscuros; las puertas siguen siendo tiles de foto)
+   ========================================================================== */
+.o2a { background: var(--homea-greige); }
+.o2a .top { display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 64px); align-items: flex-end; margin-bottom: 54px; }
+.o2a .big { flex: none; font-family: var(--font-display); font-weight: 400; line-height: .82; letter-spacing: -.03em;
+  font-size: clamp(96px, 12.5vw, 190px); color: var(--homea-black); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.o2a .big em { font-style: italic; color: var(--accent-text); }
+.o2a .big .pct { font-size: .42em; vertical-align: .62em; }
+.o2a aside { flex: 1 1 300px; min-width: 280px; }
+.o2a aside h2 { font-size: clamp(24px, 2.2vw, 34px); margin: 0; max-width: 420px; }
+.o2a aside p { color: var(--fg-muted); font-weight: 300; margin: 12px 0 0; max-width: 420px; font-size: var(--fs-sm); }
+.o2a .steps { display: flex; gap: 0; margin-top: 22px; border: 1px solid var(--border-strong); background: var(--homea-bone); width: max-content; }
+.o2a .steps span { padding: 9px 18px; font-size: 12px; font-weight: 600; letter-spacing: .14em; font-variant-numeric: tabular-nums;
+  color: var(--fg-muted); border-right: 1px solid var(--border-strong); }
+.o2a .steps span:last-child { border-right: 0; }
+.o2a .steps b { color: var(--accent-text); font-weight: 600; }
+.o2a .doors { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.o2a .door { position: relative; overflow: hidden; aspect-ratio: 16 / 10; display: flex; align-items: flex-end;
+  color: var(--homea-bone); border-top: 2px solid transparent;
+  transition: transform var(--dur-med, .3s), border-color var(--dur-med, .3s), box-shadow var(--dur-med, .3s); }
+.o2a .door:hover { transform: translateY(-4px); border-top-color: var(--homea-gold); box-shadow: var(--shadow-md); }
+.o2a .door img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1200ms var(--ease-reveal, ease); }
+.o2a .door:hover img { transform: scale(1.04); }
+.o2a .door .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,.06) 30%, rgba(10,10,10,.85) 100%); }
+.o2a .door .inner { position: relative; padding: 28px 30px; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; }
+.o2a .door h3 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(24px, 2.2vw, 32px); color: var(--homea-bone); }
+.o2a .door .cond { margin: 6px 0 0; font-size: 13px; font-weight: 300; color: #d8d2c5; }
+.o2a .door .eyebrow { color: var(--homea-gold-bright); margin-bottom: 8px; }
+.o2a .door .go { flex: none; display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--homea-gold-bright); }
+.o2a .door .go .ln { width: 34px; height: 1.5px; background: var(--homea-gold); transition: width .4s cubic-bezier(.33,0,.2,1); }
+.o2a .door:hover .go .ln { width: 56px; }
+
+/* ==========================================================================
+   3 · PAQUETES DE PROVEEDOR — ¡Promociones 2026!
+   Contenido de la página OXATIS (ONE·TWO·FREE): los paquetes que las marcas
+   dan directo para cliente final. Refrigerador · estufa · parrilla ·
+   cafetera · campana; la marca pone el descuento.
+   ========================================================================== */
+.p3 { background: var(--homea-bone); }
+.p3 .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.p3 .card { background: var(--surface); border: 1px solid var(--border); border-top: 2px solid transparent; display: flex; flex-direction: column;
+  transition: transform var(--dur-med, .3s), border-color var(--dur-med, .3s), box-shadow var(--dur-med, .3s); }
+.p3 .card:hover { transform: translateY(-4px); border-top-color: var(--homea-gold); box-shadow: var(--shadow-md); }
+.p3 .card .foto { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--bg-greige); }
+.p3 .card .foto img { width: 100%; height: 100%; object-fit: cover; transition: transform 1200ms var(--ease-reveal, ease); }
+.p3 .card:hover .foto img { transform: scale(1.04); }
+.p3 .card .foto .logo { position: absolute; left: 14px; bottom: 12px; background: rgba(247,243,236,.94); padding: 6px 11px; }
+.p3 .card .foto .logo img { display: block; height: 15px; width: auto; object-fit: contain; }
+.p3 .card .body { padding: 20px 22px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.p3 .card .deal { margin: 0; font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(36px, 3.4vw, 46px); line-height: .94; letter-spacing: -.02em;
+  color: var(--accent-text); font-variant-numeric: tabular-nums; }
+.p3 .card .deal.txt { font-size: clamp(23px, 2.1vw, 29px); font-style: italic; letter-spacing: 0; }
+.p3 .card .mec { margin: 0; font-size: 13.5px; line-height: 1.45; color: var(--fg-muted); flex: 1; }
+.p3 .card .eq { margin: 0; padding-top: 10px; border-top: 1px dashed var(--border); font-size: 11.5px; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--fg-subtle); line-height: 1.8; }
+.p3 .card .acts { display: flex; gap: 16px; border-top: 1px solid var(--border); padding-top: 13px; margin-top: 4px;
+  font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.p3 .card .acts a { color: var(--accent-text); border-bottom: none; }
+.p3 .card .acts a:hover { color: var(--fg); }
+.p3 .lead { margin: 0 0 40px; max-width: 620px; font-size: var(--fs-md); font-weight: 300; color: var(--fg-muted); }
+
+/* ==========================================================================
+   4 · STOCK CON PRECIO ESPECIAL — dos bandas (opción B elegida)
+   ========================================================================== */
+.s4b-dark { background: var(--homea-espresso); }
+.s4b-rail { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(240px, 24vw, 320px); gap: 16px;
+  overflow-x: auto; scroll-behavior: smooth; padding-bottom: 8px; scrollbar-width: none; }
+.s4b-rail::-webkit-scrollbar { display: none; }
+.s4b-card { background: var(--homea-white); border: 1px solid var(--border); display: flex; flex-direction: column;
+  transition: transform var(--dur-med, .3s), box-shadow var(--dur-med, .3s); }
+.s4b-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.s4b-card .foto { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+.s4b-card .foto img { width: 100%; height: 100%; object-fit: cover; }
+.s4b-card .off { position: absolute; top: 0; left: 0; background: var(--homea-gold); color: var(--homea-black);
+  font-size: 12px; font-weight: 600; letter-spacing: .08em; padding: 6px 11px; font-variant-numeric: tabular-nums; }
+.s4b-card .st { position: absolute; right: 10px; top: 10px; font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--fg-muted); background: rgba(247,243,236,.92); padding: 5px 9px; }
+.s4b-card .body { padding: 14px 16px 16px; }
+.s4b-card .b { font-size: 10.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--fg-subtle); }
+.s4b-card h3 { margin: 3px 0 0; font-size: 13.5px; font-weight: 600; line-height: 1.35; }
+.s4b-card .pr { margin-top: 10px; display: flex; align-items: baseline; gap: 10px; }
+.s4b-card .now { font-family: var(--font-display); font-size: 21px; color: var(--accent-text); font-variant-numeric: tabular-nums; }
+.s4b-card .was { font-size: 12px; color: var(--fg-subtle); text-decoration: line-through; font-variant-numeric: tabular-nums; }
+.s4b-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 30px; }
+.s4b-head h2 { margin: 0; }
+.s4b-dark h2, .s4b-dark .arrow-link { color: var(--homea-bone); }
+.s4b-dark .eyebrow { color: var(--homea-gold-bright); }
+
+/* ==========================================================================
+   5 · BANNER PAQUETES — diseño original (of-paq) con el copy nuevo
+   ========================================================================== */
+.of-paq { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  background: var(--surface); border: 1px solid var(--border); border-left: 2px solid var(--homea-gold); padding: 26px 32px; }
+.of-paq h3 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 24px; }
+.of-paq p { margin: 4px 0 0; font-size: var(--fs-sm); color: var(--fg-muted); }
+
+/* --- Responsive --- */
+@media (max-width: 1080px) { .p3 .grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 900px) { .o2a .doors { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .p3 .grid { grid-template-columns: 1fr; } .cdown { flex-wrap: wrap; } }
+</style>
+</head>
+<body>
+
+<!-- ===================== MASTHEAD DE LA MAQUETA ===================== -->
+<header class="mast"><div class="container">
+  <div class="eyebrow">Propuesta · /ofertas — composición elegida</div>
+  <h1>Hero con cuenta regresiva · outlet en claro · paquetes de proveedor · dos bandas de stock · banner original.</h1>
+  <p>Decisiones aplicadas: 1A · 2A con tonos invertidos (greige, textos oscuros) · 3 con el contenido de ¡Promociones 2026! (paquetes que dan los proveedores directo a cliente final) · 4B · 5 banner original con el copy nuevo. Aún no toca ofertas.html.</p>
+</div></header>
+<nav class="toc"><div class="container">
+  <a href="#s1">1 · Hero</a>
+  <a href="#s2">2 · Outlet</a>
+  <a href="#s3">3 · Paquetes de proveedor</a>
+  <a href="#s4">4 · Stock especial</a>
+  <a href="#s5">5 · Banner presupuesto</a>
+</div></nav>
+
+<!-- ============================================================
+     1 · HERO — cuenta regresiva cinemática (1A)
+     ============================================================ -->
+<div id="s1" class="nota"><span class="n">1 · Hero — cuenta regresiva cinemática (opción A)</span></div>
+<header class="h1a">
+  <img class="bg" src="assets/photos/hero-thermador-cocina.webp" srcset="assets/photos/hero-thermador-cocina-960.webp 960w, assets/photos/hero-thermador-cocina-1600.webp 1600w, assets/photos/hero-thermador-cocina.webp 2000w" sizes="100vw" alt="" decoding="async">
+  <div class="veil"></div>
+  <div class="container">
+    <div class="crumbs"><a href="home.html">Inicio</a><span class="sep">·</span><span>Ofertas</span></div>
+    <div class="eyebrow eyebrow-bright" style="margin:10px 0 16px">Próxima temporada · Buen Fin 2026</div>
+    <h1>Lo mejor del año <em>está por empezar</em>.</h1>
+    <div class="cdown figures" data-cdown="2026-11-13T00:00:00">
+      <div class="cell"><div class="num" data-cd="d">—</div><div class="lbl">Días</div></div>
+      <div class="sep">·</div>
+      <div class="cell"><div class="num" data-cd="h">—</div><div class="lbl">Horas</div></div>
+      <div class="sep">·</div>
+      <div class="cell"><div class="num" data-cd="m">—</div><div class="lbl">Min</div></div>
+      <div class="sep">·</div>
+      <div class="cell"><div class="num" data-cd="s">—</div><div class="lbl">Seg</div></div>
+    </div>
+    <p class="sub">Mientras llega, el outlet nunca descansa: hasta 60% en producto nuevo de piso.</p>
+    <div class="ctas">
+      <a class="btn btn-bone" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Av%C3%ADsenme%20cuando%20empiecen%20las%20ofertas%20del%20Buen%20Fin." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_ofertas_avisame">Avísame por WhatsApp</a>
+      <a class="btn btn-ghost-light" href="#s2">Ver outlet</a>
+    </div>
+  </div>
+  <div class="mq" aria-hidden="true"><div class="track">
+    <span>Sub-Zero</span><span>Wolf</span><span>Gaggenau</span><span>Miele</span><span>Thermador</span><span>Monogram</span><span>Viking</span><span>Café</span><span>Smeg</span><span><b>Buen Fin · 13—17 Nov</b></span>
+    <span>Sub-Zero</span><span>Wolf</span><span>Gaggenau</span><span>Miele</span><span>Thermador</span><span>Monogram</span><span>Viking</span><span>Café</span><span>Smeg</span><span><b>Buen Fin · 13—17 Nov</b></span>
+  </div></div>
+</header>
+
+<!-- ============================================================
+     2 · OUTLET — la cifra que respira, en greige (2A invertida)
+     ============================================================ -->
+<div id="s2" class="nota"><span class="n">2 · Outlet — la cifra que respira (opción A · tonos invertidos a greige)</span></div>
+<section class="o2a sec"><div class="container">
+  <div class="top">
+    <div class="big figures"><span data-count="60">40</span><span class="pct">%</span><em> al 40%</em></div>
+    <aside>
+      <div class="eyebrow" style="margin-bottom:12px">Outlet · Todo el año</div>
+      <h2>Producto nuevo de piso, precio de salida.</h2>
+      <p>Piezas únicas de showroom y fin de línea. Nuevas, con garantía, listas para entrega.</p>
+      <div class="steps figures"><span><b>−60%</b> salida</span><span><b>−50%</b> exhibición</span><span><b>−40%</b> última línea</span></div>
+    </aside>
+  </div>
+  <div class="doors">
+    <a class="door" href="https://homea.mx/outlet-gama-premium-c102x4397668" target="_blank" rel="noopener" data-track="offer_click" data-label="outlet_premium">
+      <img src="assets/photos/hero-subzero-wolf-cocina.webp" srcset="assets/photos/hero-subzero-wolf-cocina-960.webp 960w, assets/photos/hero-subzero-wolf-cocina-1600.webp 1600w" sizes="50vw" alt="Outlet gama premium — Sub-Zero y Wolf" loading="lazy" decoding="async">
+      <div class="shade"></div>
+      <div class="inner">
+        <div>
+          <div class="eyebrow">Gama · Premium</div>
+          <h3>Sub-Zero · Wolf · Gaggenau · Miele</h3>
+          <p class="cond">Piezas únicas de showroom.</p>
+        </div>
+        <span class="go"><span class="ln"></span>Ver inventario</span>
+      </div>
+    </a>
+    <a class="door" href="https://homea.mx/outlet-gama-escencial-c102x4397248" target="_blank" rel="noopener" data-track="offer_click" data-label="outlet_esencial">
+      <img src="assets/photos/cat-cuidado-ropa-bosch-lavadora-secadora.webp" srcset="assets/photos/cat-cuidado-ropa-bosch-lavadora-secadora-640.webp 640w, assets/photos/cat-cuidado-ropa-bosch-lavadora-secadora.webp 800w" sizes="50vw" alt="Outlet gama esencial — Bosch lavandería" loading="lazy" decoding="async">
+      <div class="shade"></div>
+      <div class="inner">
+        <div>
+          <div class="eyebrow">Gama · Esencial</div>
+          <h3>Bosch · Whirlpool · Mabe · Teka</h3>
+          <p class="cond">Producto nuevo, entrega inmediata.</p>
+        </div>
+        <span class="go"><span class="ln"></span>Ver inventario</span>
+      </div>
+    </a>
+  </div>
+</div></section>
+
+<!-- ============================================================
+     3 · PAQUETES DE PROVEEDOR — ¡Promociones 2026!
+     Contenido tomado de homea.oxatis.com (ONE·TWO·FREE): los paquetes
+     que las marcas dan directo para ofrecer a cliente final.
+     ============================================================ -->
+<div id="s3" class="nota"><span class="n">3 · Paquetes de proveedor — contenido de ¡Promociones 2026! (OXATIS)</span>
+  <p>Los folletos PDF de cada promo van en assets/ofertas/ cuando los tengamos; los botones quedan listos.</p></div>
+<section class="p3 sec" style="padding-top:70px"><div class="container">
+  <div class="sec-head" style="margin-bottom:22px">
+    <div class="eyebrow">Paquetes de proveedor · Promociones 2026</div>
+    <h2>La marca arma el paquete, <em>tú te llevas el descuento</em>.</h2>
+  </div>
+  <p class="lead">Promociones oficiales que los proveedores dan directo a cliente final al armar tu paquete de cocina: refrigerador, estufa o parrilla, campana, lavavajillas y cafetera.</p>
+  <div class="grid">
+    <article class="card" data-vence="2026-12-31">
+      <div class="foto">
+        <img src="assets/photos/brands/thermador.webp" srcset="assets/photos/brands/thermador-400.webp 400w, assets/photos/brands/thermador-640.webp 640w, assets/photos/brands/thermador.webp 700w" sizes="25vw" alt="Cocina Thermador" loading="lazy" decoding="async">
+        <span class="logo"><img src="assets/logos/thermador.webp" alt="Thermador" loading="lazy" decoding="async"></span>
+      </div>
+      <div class="body">
+        <p class="deal">50%</p>
+        <p class="mec">One·Two·Free: productos al 50% y además lavavajillas y/o campana <strong>gratis</strong> al armar tu paquete.</p>
+        <p class="eq">Refrigerador · Estufa · Parrilla · Cafetera · Campana</p>
+        <div class="acts"><a href="#" aria-disabled="true">Folleto PDF ↗</a><a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20el%20paquete%20Thermador%20de%20Promociones%202026." target="_blank" rel="noopener" data-track="offer_click" data-label="paquete_thermador">Cotizar →</a></div>
+      </div>
+    </article>
+    <article class="card" data-vence="2026-12-31">
+      <div class="foto">
+        <img src="assets/photos/brands/monogram.webp" srcset="assets/photos/brands/monogram-400.webp 400w, assets/photos/brands/monogram-640.webp 640w, assets/photos/brands/monogram.webp 700w" sizes="25vw" alt="Cocina Monogram" loading="lazy" decoding="async">
+        <span class="logo"><img src="assets/logos/monogram.png" alt="Monogram" loading="lazy" decoding="async"></span>
+      </div>
+      <div class="body">
+        <p class="deal txt">Acumulable</p>
+        <p class="mec">Save with Style: el porcentaje de descuento sube con cada equipo que agregas a tu pedido.</p>
+        <p class="eq">Refrigerador · Estufa · Parrilla · Cafetera · Campana</p>
+        <div class="acts"><a href="#" aria-disabled="true">Folleto PDF ↗</a><a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20el%20paquete%20Monogram%20de%20Promociones%202026." target="_blank" rel="noopener" data-track="offer_click" data-label="paquete_monogram">Cotizar →</a></div>
+      </div>
+    </article>
+    <article class="card" data-vence="2026-12-31">
+      <div class="foto">
+        <img src="assets/photos/brands/cafe.webp" srcset="assets/photos/brands/cafe-400.webp 400w, assets/photos/brands/cafe-640.webp 640w, assets/photos/brands/cafe.webp 700w" sizes="25vw" alt="Cocina Café" loading="lazy" decoding="async">
+        <span class="logo"><img src="assets/logos/cafe.png" alt="Café" loading="lazy" decoding="async"></span>
+      </div>
+      <div class="body">
+        <p class="deal txt">Acumulable</p>
+        <p class="mec">Buy More, Save More: acumula porcentaje de descuento al agregar equipos a tu pedido.</p>
+        <p class="eq">Refrigerador · Estufa · Parrilla · Cafetera · Campana</p>
+        <div class="acts"><a href="#" aria-disabled="true">Folleto PDF ↗</a><a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20el%20paquete%20Caf%C3%A9%20de%20Promociones%202026." target="_blank" rel="noopener" data-track="offer_click" data-label="paquete_cafe">Cotizar →</a></div>
+      </div>
+    </article>
+    <article class="card" data-vence="2026-12-31">
+      <div class="foto">
+        <img src="assets/photos/brands/bertazzoni.webp" srcset="assets/photos/brands/bertazzoni-400.webp 400w, assets/photos/brands/bertazzoni-640.webp 640w, assets/photos/brands/bertazzoni.webp 700w" sizes="25vw" alt="Cocina Bertazzoni" loading="lazy" decoding="async">
+        <span class="logo"><img src="assets/logos/bertazzoni.webp" alt="Bertazzoni" loading="lazy" decoding="async"></span>
+      </div>
+      <div class="body">
+        <p class="deal">50%</p>
+        <p class="mec">Productos al 50% en equipos seleccionados al armar tu paquete de cocina.</p>
+        <p class="eq">Refrigerador · Estufa · Parrilla · Cafetera · Campana</p>
+        <div class="acts"><a href="#" aria-disabled="true">Folleto PDF ↗</a><a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesa%20el%20paquete%20Bertazzoni%20de%20Promociones%202026." target="_blank" rel="noopener" data-track="offer_click" data-label="paquete_bertazzoni">Cotizar →</a></div>
+      </div>
+    </article>
+  </div>
+</div></section>
+
+<!-- ============================================================
+     4 · STOCK CON PRECIO ESPECIAL — dos bandas (4B)
+     Productos y descuentos de muestra (piloto Gaggenau + placeholders).
+     ============================================================ -->
+<div id="s4" class="nota"><span class="n">4 · Stock con precio especial — dos bandas (opción B)</span>
+  <p>Los productos y descuentos son muestra (piloto Gaggenau + placeholders); se conectan al inventario real en Fase 4.</p></div>
+<section class="s4b-dark sec"><div class="container">
+  <div class="s4b-head">
+    <div>
+      <div class="eyebrow" style="margin-bottom:14px">Stock · Precio especial · Premium</div>
+      <h2>Piezas únicas <em>en existencia</em>.</h2>
+    </div>
+    <a class="arrow-link light" href="#">Ver todo el stock premium</a>
+  </div>
+  <div class="s4b-rail">
+    <article class="s4b-card">
+      <div class="foto"><span class="off figures">−25%</span><span class="st">1 pieza</span><img src="assets/photos/gaggenau/gaggenau-rb282705.webp" srcset="assets/photos/gaggenau/gaggenau-rb282705-400.webp 400w, assets/photos/gaggenau/gaggenau-rb282705-640.webp 640w" sizes="25vw" alt="Refrigerador Gaggenau" loading="lazy" decoding="async"></div>
+      <div class="body"><span class="b">Gaggenau</span><h3>Refrigerador Empotrable 24"</h3>
+        <div class="pr"><span class="now figures">$7,054.97 USD</span><span class="was figures">$9,406.62</span></div></div>
+    </article>
+    <article class="s4b-card">
+      <div class="foto"><span class="off figures">−20%</span><span class="st">1 pieza</span><img src="assets/photos/gaggenau/gaggenau-vg295250ca.webp" srcset="assets/photos/gaggenau/gaggenau-vg295250ca-400.webp 400w, assets/photos/gaggenau/gaggenau-vg295250ca-640.webp 640w" sizes="25vw" alt="Parrilla Gaggenau" loading="lazy" decoding="async"></div>
+      <div class="body"><span class="b">Gaggenau</span><h3>Parrilla de Gas 36"</h3>
+        <div class="pr"><span class="now figures">$6,942.28 USD</span><span class="was figures">$8,677.85</span></div></div>
+    </article>
+    <article class="s4b-card">
+      <div class="foto"><span class="off figures">−25%</span><span class="st">1 pieza</span><img src="assets/photos/gaggenau/gaggenau-bop250612.webp" srcset="assets/photos/gaggenau/gaggenau-bop250612-400.webp 400w, assets/photos/gaggenau/gaggenau-bop250612-640.webp 640w" sizes="25vw" alt="Horno Gaggenau" loading="lazy" decoding="async"></div>
+      <div class="body"><span class="b">Gaggenau</span><h3>Horno Empotrable 24"</h3>
+        <div class="pr"><span class="now figures">$8,330.60 USD</span><span class="was figures">$11,107.47</span></div></div>
+    </article>
+    <article class="s4b-card">
+      <div class="foto"><span class="off figures">−30%</span><span class="st">1 pieza</span><img src="assets/photos/gaggenau/gaggenau-aw442720.webp" srcset="assets/photos/gaggenau/gaggenau-aw442720-400.webp 400w, assets/photos/gaggenau/gaggenau-aw442720-640.webp 640w" sizes="25vw" alt="Campana Gaggenau" loading="lazy" decoding="async"></div>
+      <div class="body"><span class="b">Gaggenau</span><h3>Campana Profesional 48"</h3>
+        <div class="pr"><span class="now figures">$4,660.69 USD</span><span class="was figures">$6,658.13</span></div></div>
+    </article>
+    <article class="s4b-card">
+      <div class="foto"><span class="off figures">−20%</span><span class="st">1 pieza</span><img src="assets/photos/gaggenau/gaggenau-df480701.webp" srcset="assets/photos/gaggenau/gaggenau-df480701-400.webp 400w, assets/photos/gaggenau/gaggenau-df480701-640.webp 640w" sizes="25vw" alt="Lavavajillas Gaggenau" loading="lazy" decoding="async"></div>
+      <div class="body"><span class="b">Gaggenau</span><h3>Lavavajillas Integrado 24"</h3>
+        <div class="pr"><span class="now figures">$4,930.82 USD</span><span class="was figures">$6,163.52</span></div></div>
+    </article>
+  </div>
+</div></section>
+<section class="sec" style="padding-top:70px;padding-bottom:70px"><div class="container">
+  <div class="s4b-head">
+    <div>
+      <div class="eyebrow" style="margin-bottom:14px">Stock · Precio especial · Económica</div>
+      <h2>Precio de oportunidad, <em>compra directa</em>.</h2>
+    </div>
+    <a class="arrow-link" href="#">Ver todo el stock económico</a>
+  </div>
+  <div class="s4b-rail">
+    <article class="s4b-card">
+      <div class="foto"><span class="off figures">−35%</span><span class="st">3 piezas</span><img src="assets/photos/cat-cuidado-ropa-bosch-lavadora-secadora.webp" srcset="assets/photos/cat-cuidado-ropa-bosch-lavadora-secadora-400.webp 400w, assets/photos/cat-cuidado-ropa-bosch-lavadora-secadora-640.webp 640w" sizes="25vw" alt="Lavadora Bosch — muestra" loading="lazy" decoding="async"></div>
+      <div class="body"><span class="b">Bosch</span><h3>Lavadora Carga Frontal 24" — muestra</h3>
+        <div class="pr"><span class="now figures">$18,849 MXN</span><span class="was figures">$28,999</span></div></div>
+    </article>
+    <article class="s4b-card">
+      <div class="foto"><span class="off figures">−30%</span><span class="st">2 piezas</span><img src="assets/photos/cat-refrigeracion.webp" srcset="assets/photos/cat-refrigeracion-400.webp 400w, assets/photos/cat-refrigeracion-640.webp 640w" sizes="25vw" alt="Refrigerador — muestra" loading="lazy" decoding="async"></div>
+      <div class="body"><span class="b">Whirlpool</span><h3>Refrigerador French Door 36" — muestra</h3>
+        <div class="pr"><span class="now figures">$24,150 MXN</span><span class="was figures">$34,500</span></div></div>
+    </article>
+    <article class="s4b-card">
+      <div class="foto"><span class="off figures">−25%</span><span class="st">5 piezas</span><img src="assets/photos/cat-electro-menores-kitchenaid-mixer.webp" alt="Batidora KitchenAid — muestra" loading="lazy" decoding="async"></div>
+      <div class="body"><span class="b">KitchenAid</span><h3>Batidora Artisan — muestra</h3>
+        <div class="pr"><span class="now figures">$9,749 MXN</span><span class="was figures">$12,999</span></div></div>
+    </article>
+    <article class="s4b-card">
+      <div class="foto"><span class="off figures">−40%</span><span class="st">1 pieza</span><img src="assets/photos/cat-cocina.webp" alt="Estufa — muestra" loading="lazy" decoding="async"></div>
+      <div class="body"><span class="b">Mabe</span><h3>Estufa de Piso 30" — muestra</h3>
+        <div class="pr"><span class="now figures">$9,599 MXN</span><span class="was figures">$15,999</span></div></div>
+    </article>
+  </div>
+</div></section>
+
+<!-- ============================================================
+     5 · BANNER PAQUETES POR PRESUPUESTO — diseño original, copy nuevo
+     ============================================================ -->
+<div id="s5" class="nota"><span class="n">5 · Banner de paquetes — diseño original (of-paq) con el copy nuevo</span></div>
+<section class="sec on-greige" style="padding-top:70px;padding-bottom:90px"><div class="container">
+  <div class="of-paq">
+    <div>
+      <h3>¿No sabes por dónde empezar? Mira los <em>paquetes por presupuesto</em>.</h3>
+      <p>Cocinas armadas por marca con precio público, de gama económica a ultra premium.</p>
+    </div>
+    <a class="btn btn-dark" href="herramientas.html#paquetes">Ver paquetes</a>
+  </div>
+</div></section>
+
+<script>
+/* Interacciones — autocontenidas, sin depender de v2.js */
+(function () {
+  "use strict";
+
+  /* 1 · Cuenta regresiva */
+  var cd = document.querySelector("[data-cdown]");
+  if (cd) {
+    var target = new Date(cd.getAttribute("data-cdown")).getTime();
+    var els = { d: cd.querySelector('[data-cd="d"]'), h: cd.querySelector('[data-cd="h"]'),
+                m: cd.querySelector('[data-cd="m"]'), s: cd.querySelector('[data-cd="s"]') };
+    var pad = function (n) { return n < 10 ? "0" + n : "" + n; };
+    var tick = function () {
+      var left = Math.max(0, target - Date.now());
+      els.d.textContent = Math.floor(left / 864e5);
+      els.h.textContent = pad(Math.floor(left / 36e5) % 24);
+      els.m.textContent = pad(Math.floor(left / 6e4) % 60);
+      els.s.textContent = pad(Math.floor(left / 1e3) % 60);
+    };
+    tick(); setInterval(tick, 1000);
+  }
+
+  /* 2 · Contador 40 → 60 al entrar en pantalla */
+  var cnt = document.querySelector("[data-count]");
+  if (cnt && "IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        var to = parseInt(cnt.getAttribute("data-count"), 10), from = 40, t0 = performance.now();
+        (function step(t) {
+          var p = Math.min(1, (t - t0) / 1400), ease = 1 - Math.pow(1 - p, 3);
+          cnt.textContent = Math.round(from + (to - from) * ease);
+          if (p < 1) requestAnimationFrame(step);
+        })(t0);
+      });
+    }, { threshold: 0.4 });
+    io.observe(cnt);
+  }
+})();
+</script>
+</body>
+</html>
