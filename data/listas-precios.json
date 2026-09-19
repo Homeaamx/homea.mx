@@ -1,0 +1,93 @@
+{
+  "_nota": "Listas de precios por marca que se muestran en /marcas#listas-de-precios. ESTADO: PENDIENTE. Los PDF se están re-hospedando en Shopify Files. Para publicar uno, pega su URL de Shopify (https://cdn.shopify.com/s/files/...) en 'url' y haz deploy: la fila pasa de 'Próximamente' a descarga, y las URLs viejas de OXATIS listadas en 'legacy' redirigen (301) a ese PDF. Mientras 'url' sea null, las URLs viejas van a /marcas#listas-de-precios. 'archivo' es el PDF listo para subir, relativo a ~/Documents/ALTURA/Homea-archivos-oxatis/ (fuera del repo; manifest.csv ahí tiene clics GSC y checksums). 'estado': listo = subir a Shopify Files y pegar la URL · revisar = Carla lo aprueba antes (ver 'nota') · sin-archivo = el PDF ya murió en OXATIS y no hay copia.",
+  "marcas": [
+    { "marca": "Sub-Zero", "documentos": [
+      { "titulo": "Lista de precios 2026", "url": null, "legacy": ["/Files/119914/LISTA_PRECIOS_SUBZERO_2026.pdf", "/Files/119914/Lista_Precios_SUBZERO_2025.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+    ] },
+    { "marca": "Viking", "documentos": [
+      { "titulo": "Lista de precios", "url": null, "legacy": ["/Files/119914/ListaPreciosVIKING2024feb.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+    ] },
+    { "marca": "Supra", "documentos": [
+      { "titulo": "Lista de precios 2025", "url": null, "legacy": ["/Files/119914/Lista_Precios_SUPRA_2025.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+    ] },
+    { "marca": "Elica", "documentos": [
+      { "titulo": "Campanas · lista de precios 2026", "url": null, "legacy": ["/Files/119914/LISTA_PRECIOS_ELICA_CAMPANAS_2026_03.pdf", "/Files/119914/Lista_Precios_Elica_2025_jun.pdf"], "archivo": "shopify/lista-precios-campanas-elica-2026.pdf", "estado": "listo" },
+      { "titulo": "Lista de precios 2023 (Artexa · USD)", "url": null, "legacy": ["/Files/119914/241542329910613.pdf"], "archivo": "shopify/lista-precios-artexa-elica-2023.pdf", "estado": "listo" }
+    ] },
+    { "marca": "IO Mabe", "documentos": [
+      { "titulo": "Lista de precios", "url": null, "legacy": ["/Files/119914/Lista_Precios_IOMABE_2024_07.pdf"], "archivo": "shopify/lista-precios-io-mabe-2024.pdf", "estado": "listo" },
+      { "titulo": "GE Profile · catálogo 2024-1", "url": null, "legacy": ["/Files/119914/241555440212509.pdf"], "archivo": "shopify/catalogo-ge-profile-2024.pdf", "estado": "listo" }
+    ] },
+    { "marca": "Pitt Cooking", "documentos": [
+      { "titulo": "Lista de precios 2025", "url": null, "legacy": ["/Files/119914/Lista_Precios_Pitt_Cooking_2025_08.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+    ] },
+    { "marca": "Summit", "documentos": [
+      { "titulo": "Lista de precios", "url": null, "legacy": ["/Files/119914/ListaPreciosSummit2024.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+    ] },
+    { "marca": "Coyote", "documentos": [
+      { "titulo": "Asadores · lista de precios 2026", "url": null, "legacy": ["/Files/119914/LISTA_PRECIOS_ASADORES_COYOTE_2026.pdf"], "archivo": "revisar/lista-precios-asadores-coyote-2026.pdf", "estado": "revisar", "nota": "El encabezado del proveedor dice \"2025 Distributor Price Schedule · Confidential\". Confirmar con Carla que los precios son públicos antes de publicar." }
+    ] },
+    { "marca": "Josper", "documentos": [
+      { "titulo": "Hornos de leña · lista de precios 2026", "url": null, "legacy": ["/Files/119914/LISTA_PRECIOS_JOSPER_HORNOS_LENA_2026.pdf"], "archivo": "shopify/lista-precios-josper-hornos-brasa-2026.pdf", "estado": "listo" }
+    ] },
+    { "marca": "Axcent", "documentos": [
+      { "titulo": "Baños · lista de precios 2025", "url": null, "legacy": ["/Files/119914/Lista_Precios_Axcent_2025_Banos.pdf"], "archivo": "shopify/lista-precios-axcent-banos-2025.pdf", "estado": "listo" },
+      { "titulo": "Tarjas y monomandos · lista de precios 2025", "url": null, "legacy": ["/Files/119914/Lista_Precios_Axcent_2025_Tarjas_Monomandos.pdf"], "archivo": "shopify/lista-precios-axcent-tarjas-monomandos-2025.pdf", "estado": "listo" }
+    ] },
+    { "marca": "Teka", "documentos": [
+      { "titulo": "Tarjas y monomandos · lista de precios 2025", "url": null, "legacy": ["/Files/119914/Lista_Precios_TEKA_tarjas_monomandos_2025_Abr.pdf", "/Files/119914/ListaPreciosTEKA2024Sep.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+    ] },
+    { "marca": "Tecnolam", "documentos": [
+      { "titulo": "Tarjas y monomandos · lista de precios 2025", "url": null, "legacy": ["/Files/119914/Lista_Precios_TECNOLAM_Tarjas_Monomandos_2025_09.pdf"], "archivo": "shopify/lista-precios-tecnolam-tarjas-monomandos-2025.pdf", "estado": "listo" }
+    ] },
+    { "marca": "Hansgrohe", "documentos": [
+      { "titulo": "Essentials · lista de precios 2025", "url": null, "legacy": ["/Files/119914/Lista_Precios_Hansgrohe_Essentials_2025.pdf"], "archivo": "shopify/lista-precios-hansgrohe-essentials-2025.pdf", "estado": "listo" }
+    ] },
+    { "marca": "Kele", "documentos": [
+      { "titulo": "Lista de precios 2025", "url": null, "legacy": ["/Files/119914/LISTA_PRECIOS_KELE_2025_JULIO.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+    ] },
+    { "marca": "Jacuzzi", "documentos": [
+      { "titulo": "Jacuzzi exterior · lista de precios 2025", "url": null, "legacy": ["/Files/119914/ListaPreciosJacuzziExterior2025.pdf"], "archivo": "shopify/lista-precios-jacuzzi-spas-exterior-2025.pdf", "estado": "listo" },
+      { "titulo": "Carril de nado · lista de precios 2025", "url": null, "legacy": ["/Files/119914/ListaPreciosCarrildeNadoJacuzzi2025.pdf"], "archivo": "shopify/lista-precios-jacuzzi-swim-spa-2025.pdf", "estado": "listo" },
+      { "titulo": "Tina de inmersión fría/caliente Kodiak · 2025", "url": null, "legacy": ["/Files/119914/ListaPreciosTinaInmersionFriaCalienteJacuzziKodiakColdPlunge2025.pdf"], "archivo": "shopify/lista-precios-jacuzzi-kodiak-cold-plunge-2025.pdf", "estado": "listo" },
+      { "titulo": "Sauna prefabricado interior · lista de precios", "url": null, "legacy": ["/Files/119914/ListaPreciosSaunaPrefabricadoInteriorJacuzzi2024.pdf"], "archivo": "shopify/lista-precios-saunas-infrarrojo-jacuzzi-2024.pdf", "estado": "listo" }
+    ] },
+    { "marca": "Clearlight", "documentos": [
+      { "titulo": "Sauna exterior · lista de precios", "url": null, "legacy": ["/Files/119914/ListaPreciosSaunaExteriorClearlight2024.pdf"], "archivo": "shopify/lista-precios-saunas-exterior-clearlight-2024.pdf", "estado": "listo" }
+    ] },
+    { "marca": "Onix", "documentos": [
+      { "titulo": "Catálogo mosaico veneciano", "url": null, "legacy": ["/Files/119914/CatalogoMosaicoVenecianoMarcaONIX2023.pdf"], "archivo": "shopify/catalogo-mosaico-veneciano-onix-2023.pdf", "estado": "listo" }
+    ] },
+    { "marca": "Mabe", "documentos": [
+      { "titulo": "Catálogo 2024", "url": null, "legacy": ["/Files/119914/241552046510338.pdf"], "archivo": "shopify/catalogo-mabe-2024.pdf", "estado": "listo" },
+      { "titulo": "Catálogo 2024 · edición completa", "url": null, "legacy": ["/Files/119914/241555530713149.pdf"], "archivo": "shopify/catalogo-mabe-2024-completo.pdf", "estado": "listo" }
+    ] },
+    { "marca": "Haier", "documentos": [
+      { "titulo": "Catálogo 2024-1", "url": null, "legacy": ["/Files/119914/241556349013041.pdf"], "archivo": "shopify/catalogo-haier-2024.pdf", "estado": "listo" }
+    ] },
+    { "marca": "Frigidaire · Electrolux", "documentos": [
+      { "titulo": "Lista de precios 2023", "url": null, "legacy": ["/Files/119914/232245308137700.pdf"], "archivo": "shopify/lista-precios-frigidaire-electrolux-2023.pdf", "estado": "listo" }
+    ] },
+    { "marca": "ASKO", "documentos": [
+      { "titulo": "Lista de precios 2023", "url": null, "legacy": ["/Files/119914/232245863241526.pdf"], "archivo": "revisar/lista-precios-asko-2023.pdf", "estado": "revisar", "nota": "Incluye condiciones para distribuidores (pedidos, fletes, reclamaciones). Confirmar con Carla que el precio es público." }
+    ] },
+    { "marca": "American Standard", "documentos": [
+      { "titulo": "Catálogo AS-151 · 2023", "url": null, "legacy": ["/Files/119914/231676722146639.pdf"], "archivo": "shopify/catalogo-american-standard-as151-2023.pdf", "estado": "listo" },
+      { "titulo": "Catálogo y lista de precios AS-150 · 2021", "url": null, "legacy": ["/Files/119914/213286832353404.pdf"], "archivo": "shopify/catalogo-american-standard-as150-2021.pdf", "estado": "listo" },
+      { "titulo": "Catálogo y lista de precios AS-150 · 2021 (parte 1)", "url": null, "legacy": ["/Files/119914/213284870436756.pdf"], "archivo": "shopify/catalogo-american-standard-as150-2021-parte-1.pdf", "estado": "listo" },
+      { "titulo": "Catálogo y lista de precios AS-150 · 2021 (parte 2)", "url": null, "legacy": ["/Files/119914/213288564668280.pdf"], "archivo": "shopify/catalogo-american-standard-as150-2021-parte-2.pdf", "estado": "listo" }
+    ] },
+    { "marca": "Moen", "documentos": [
+      { "titulo": "Lista de precios 2023", "url": null, "legacy": ["/Files/119914/241549745019083.pdf"], "archivo": "shopify/lista-precios-moen-2023.pdf", "estado": "listo" }
+    ] },
+    { "marca": "Fortum", "documentos": [
+      { "titulo": "Catálogo y precios 2023", "url": null, "legacy": ["/Files/119914/241544379612946.pdf"], "archivo": "shopify/catalogo-precios-fortum-2023.pdf", "estado": "listo" }
+    ] },
+    { "marca": "Steamist", "documentos": [
+      { "titulo": "Baños de vapor · catálogo y lista de precios 2021", "url": null, "legacy": ["/Files/119914/213291306470630.pdf"], "archivo": "shopify/lista-precios-steamist-banos-vapor-2021.pdf", "estado": "listo" }
+    ] },
+    { "marca": "Catalano", "documentos": [
+      { "titulo": "Export Price List 50 (EUR)", "url": null, "legacy": ["/Files/119914/213299772868141.pdf"], "archivo": "revisar/lista-precios-catalano-export-50.pdf", "estado": "revisar", "nota": "Lista de exportación en euros. Confirmar con Carla que no es precio de distribuidor." }
+    ] }
+  ]
+}
