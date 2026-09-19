@@ -16,7 +16,7 @@ const nextConfig = {
   },
   // Redirects 301 del mapa de migración OXATIS → Next.
   // Nota SEO (CLAUDE.md §3): Next emite 308 con permanent:true; Google trata 301≈308.
-  // El mapa real se cargará en la fase de migración; aquí queda el hook listo.
+  // El mapa OXATIS completo (fichas, categorías, PDFs) lo resuelve proxy.ts.
   // Caché de estáticos. Por defecto Vercel sirve lo de public/ con max-age=0, así
   // que cada visita revalida archivo por archivo: con latencia alta eso son
   // decenas de viajes de ida y vuelta antes de ver la página completa.

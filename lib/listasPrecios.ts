@@ -1,30 +1,42 @@
 // Listas de precios por marca (/marcas#listas-de-precios).
 //
-// Fuente: data/listas-precios.json. Cada documento se muestra como descarga
-// cuando tiene `url` (PDF re-hospedado en Shopify Files) y como "Próximamente"
-// con salida a WhatsApp mientras siga pendiente. El HTML se inserta en el slot
-// <!-- slot:listas-precios --> de preview/marcas.html (ver MarketingPage).
+// Fuente: data/listas-precios.json (una entrada por lista, no por año). Cada lista
+// con PDF enlaza a su URL permanente /listas-de-precios/<slug>.pdf, que sirve la
+// edición vigente (rewrite en next.config.js); sin PDF se muestra "Próximamente"
+// con salida a WhatsApp. El HTML se inserta en el slot <!-- slot:listas-precios -->
+// de preview/marcas.html (ver MarketingPage).
 
 import listas from "@/data/listas-precios.json";
 import { whatsappHref } from "@/lib/whatsapp";
 
-interface Documento {
+export interface ListaPrecios {
+  slug: string;
   titulo: string;
+  vigencia: string | null;
   url: string | null;
 }
 
 interface Marca {
   marca: string;
-  documentos: Documento[];
+  documentos: ListaPrecios[];
+}
+
+/** URL permanente de una lista en el sitio (no cambia entre ediciones). */
+export const rutaListaPrecios = (d: Pick<ListaPrecios, "slug">) => `/listas-de-precios/${d.slug}.pdf`;
+
+/** Listas que ya tienen PDF publicado (para el sitemap). */
+export function listasPublicadas(): ListaPrecios[] {
+  return (listas.marcas as Marca[]).flatMap((m) => m.documentos).filter((d) => d.url);
 }
 
 const escapar = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-function documentoHtml(marca: string, d: Documento): string {
+function documentoHtml(marca: string, d: ListaPrecios): string {
   const titulo = escapar(d.titulo);
   if (d.url) {
-    return `<a href="${escapar(d.url)}" target="_blank" rel="noopener">⬇ ${titulo}</a> <span class="dot-sep">·</span> <span class="caption">PDF</span>`;
+    const vigencia = d.vigencia ? ` <span class="dot-sep">·</span> <span class="caption">vigente ${escapar(d.vigencia)}</span>` : "";
+    return `<a href="${rutaListaPrecios(d)}" target="_blank" rel="noopener">⬇ ${titulo}</a>${vigencia} <span class="dot-sep">·</span> <span class="caption">PDF</span>`;
   }
   const wa = whatsappHref(`¡Hola! Me interesa la lista de precios de ${marca} (${d.titulo}).`);
   return `${titulo} <span class="dot-sep">·</span> <span class="caption">Próximamente ·</span> <a href="${escapar(wa)}" target="_blank" rel="noopener">solicítala por WhatsApp</a>`;

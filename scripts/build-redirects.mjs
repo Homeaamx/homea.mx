@@ -9,8 +9,10 @@
 //     se agregue la ficha, el siguiente deploy cambia el 301 solo.
 //   · Familia (macro/sub1/sub2): se recorta al nivel más profundo que ya tenga
 //     página (tipo → subcategoría → macro), así nunca apunta a un 404.
-//   · PDFs: van a la URL de Shopify Files cuando se captura en
-//     data/listas-precios.json o data/redirects/pdfs-legacy.json; si no, pendiente.
+//   · Listas de precios (data/listas-precios.json): a su URL permanente
+//     /listas-de-precios/<slug>.pdf, que sirve la edición vigente.
+//   · Otros PDFs (data/redirects/pdfs-legacy.json): a su URL de Shopify Files
+//     cuando se captura; si no, al listado de su familia.
 //
 // Entradas: data/redirects/{oxatis-auto,oxatis-manual,pdfs-legacy,palabras-clave}.json,
 // data/listas-precios.json, preview/*.html, lib/filtrosPlp.ts.
@@ -80,17 +82,36 @@ for (const [ruta, e] of Object.entries(auto)) {
 
 const norm = (p) => p.toLowerCase().replace(/\/+$/, "");
 
-for (const m of leer(join(ROOT, "data", "listas-precios.json")).marcas) {
-  for (const d of m.documentos) {
-    for (const p of d.legacy) {
-      mapa[norm(p)] = d.url || LISTAS;
-      d.url ? stats.pdf++ : stats.pdfPendiente++;
-    }
-  }
-}
 for (const [ruta, e] of Object.entries(leer(join(DIR, "pdfs-legacy.json")).pdfs)) {
   mapa[ruta] = e.url || resolverFamilia(e.t) || LISTAS;
   e.url ? stats.pdf++ : stats.pdfPendiente++;
+}
+
+// Listas de precios: toda URL vieja (de cualquier año) va a la URL permanente de
+// su lista, /listas-de-precios/<slug>.pdf, tenga o no PDF todavía. Esa ruta sirve
+// el PDF vigente (rewrite en next.config.js), así que una edición nueva solo cambia
+// 'url' y estos 301 no se tocan. Van después de pdfs-legacy: si un PDF viejo se
+// asignó a una lista, la lista gana.
+const listas = leer(join(ROOT, "data", "listas-precios.json")).marcas.flatMap((m) => m.documentos);
+const errores = [];
+const slugs = new Set();
+const legacyVisto = new Map();
+for (const d of listas) {
+  if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(d.slug ?? "")) errores.push(`slug inválido: "${d.slug}" (${d.titulo})`);
+  if (slugs.has(d.slug)) errores.push(`slug repetido: ${d.slug}`);
+  slugs.add(d.slug);
+  if (d.estado === "listo" && !d.url) errores.push(`${d.slug}: estado "listo" sin url`);
+  for (const p of d.legacy) {
+    const r = norm(p);
+    if (legacyVisto.has(r)) errores.push(`${p} está en dos listas: ${legacyVisto.get(r)} y ${d.slug}`);
+    legacyVisto.set(r, d.slug);
+    mapa[r] = `/listas-de-precios/${d.slug}.pdf`;
+    d.url ? stats.pdf++ : stats.pdfPendiente++;
+  }
+}
+if (errores.length) {
+  console.error(`[redirects] data/listas-precios.json tiene errores:\n  ${errores.join("\n  ")}`);
+  process.exit(1);
 }
 
 // Lo manual gana a todo lo demás.

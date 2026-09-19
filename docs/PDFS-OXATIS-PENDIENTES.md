@@ -1,23 +1,42 @@
 # PDFs de OXATIS — pendientes para Carla
 
 > Estado al 2026-09-19. Los PDFs de OXATIS (`www.homea.mx/Files/119914/…`) se re-hospedan en
-> **Shopify Files** y sus URLs viejas redirigen (301) al PDF nuevo. Ya están publicados 32
-> (26 listas/catálogos en `data/listas-precios.json` + 6 fichas/manuales en
-> `data/redirects/pdfs-legacy.json`). Este documento lista lo que **falta decidir**.
+> **Shopify Files**. Ya están publicadas 21 listas/catálogos (`data/listas-precios.json`, cada una
+> con su URL permanente `/listas-de-precios/<slug>.pdf`) + 6 fichas/manuales
+> (`data/redirects/pdfs-legacy.json`, 301 directo al PDF). Este documento explica cómo se
+> actualizan y lista lo que **falta decidir**.
 >
 > Archivo local de trabajo (fuera del repo): `~/Documents/ALTURA/Homea-archivos-oxatis/`
 > — `originales/` (copia íntegra de OXATIS), `shopify/` (lo ya subido), `revisar/`,
 > `wayback/` y `manifest.csv` (clics GSC, tamaños, checksums).
 
-## Cómo publicar un PDF cuando se apruebe o aparezca
+## Cómo funciona: una URL permanente por lista
 
-1. Subirlo a Shopify **Content → Files** con nombre SEO (ej. `lista-precios-coyote-2026.pdf`).
-2. Pegar la URL (`https://cdn.shopify.com/s/files/1/0688/0788/4860/files/<nombre>.pdf`) en
-   `url` de su entrada — en `data/listas-precios.json` si es lista/catálogo, o en
-   `data/redirects/pdfs-legacy.json` si es ficha/manual — y cambiar `estado` a `listo`.
-3. Deploy. `npm run build` regenera el mapa de redirects (`prebuild`) y la URL vieja de
-   OXATIS pasa a redirigir al PDF. En `/marcas#listas-de-precios` la fila pasa de
-   "Próximamente" a descarga.
+Cada lista de precios tiene **una** entrada en `data/listas-precios.json` (no una por año) y una
+URL permanente en el sitio: **`/listas-de-precios/<slug>.pdf`** (ej. `/listas-de-precios/sub-zero.pdf`).
+
+- Esa URL sirve el PDF vigente de Shopify Files (`app/listas-de-precios/[archivo]/route.ts`),
+  bajo homea.mx: el posicionamiento se queda en el dominio.
+- **Todas** las URLs viejas de OXATIS de esa lista, de cualquier año (campo `legacy`), redirigen
+  (301) a la URL permanente. Ese 301 ya no cambia nunca.
+- Mientras la lista no tenga PDF (`url: null`), la URL permanente manda (302) a
+  `/marcas#listas-de-precios`, donde se ofrece por WhatsApp.
+- `/marcas#listas-de-precios` y el `sitemap.xml` enlazan a la URL permanente, nunca a Shopify.
+
+## Nueva edición de una lista (ej. Sub-Zero 2027)
+
+1. Subir el PDF a Shopify **Content → Files** (el nombre puede llevar el año).
+2. En `data/listas-precios.json`, en la entrada de esa lista: pegar la URL de Shopify en `url`
+   (con su `?v=`), actualizar `vigencia` y poner `estado: "listo"`. **No cambiar `slug`.**
+3. Deploy. La URL permanente y todas las URLs viejas pasan a servir la edición nueva.
+
+Una lista **nueva** (marca o línea que no existía): agregar una entrada con su `slug` propio.
+Si una edición vieja apareciera con otra URL, se agrega esa ruta a `legacy` de su lista.
+El build falla si un `slug` se repite, si una ruta vieja está en dos listas o si una lista
+`listo` no tiene `url` (`scripts/build-redirects.mjs`).
+
+No usar el "Reemplazar archivo" de Shopify sin cambiar `url` y hacer deploy: el sitio no se
+enteraría hasta que caduque su caché (1 día).
 
 ⚠️ Todo lo que se sube a Shopify Files es **público** para quien tenga el enlace. No subir
 listas de distribuidor ni documentos marcados como confidenciales.
@@ -63,7 +82,7 @@ sirve para publicar) y 7 no tienen copia.
 | 9 | https://www.homea.mx/Files/119914/ListaPreciosSummit2024.pdf | Summit · lista 2024 | [incompleta](https://web.archive.org/web/20250123135950/https://www.homea.mx/Files/119914/ListaPreciosSummit2024.pdf) |
 | 9 | https://www.homea.mx/Files/119914/24965815411450.pdf | Coyote · lista feb-2024 | ✅ [completa](https://web.archive.org/web/20240814005943/https://www.homea.mx/Files/119914/24965815411450.pdf) — mismo encabezado "Distributor · Confidential" que la de 2026: pasa por la revisión de la §1 |
 
-**Decisión por tomar:** las 3 copias completas no sensibles (Kamado Joe, Pitt Cooking 2023,
-Tecnolam) son de 2023: ¿se publican como están o se sustituyen por la versión vigente? Para
-las listas de marca (Supra, Sub-Zero, Kele, Viking, Teka, Summit, Pitt Cooking) conviene subir
-la **vigente** con el mismo nombre SEO y agregar la URL vieja a su `legacy`.
+Las URLs viejas de Pitt Cooking 2023, Coyote 2024 y el catálogo Tecnolam ya están en `legacy`
+de su lista (redirigen a la lista vigente de su marca). Para las listas sin PDF (Supra, Sub-Zero,
+Kele, Viking, Teka, Summit, Pitt Cooking) basta con subir la **edición vigente** y pegar su `url`:
+todas sus URLs viejas quedan resueltas. Kamado Joe (catálogo 2023) no tiene lista propia todavía.

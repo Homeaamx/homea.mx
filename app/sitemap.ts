@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { allGuiasUrls } from "@/lib/guias";
+import { listasPublicadas, rutaListaPrecios } from "@/lib/listasPrecios";
 import { categoriaSlugs, subcategoriaParams } from "@/lib/preview";
 import { absUrl } from "@/lib/site";
 
@@ -45,5 +46,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "/guias" ? 0.8 : 0.6,
   }));
 
-  return [...marketing, ...categorias, ...subcategorias, ...guias];
+  // PDFs de listas de precios en su URL permanente (sirve la edición vigente).
+  const listas = listasPublicadas().map((d) => ({
+    url: absUrl(rutaListaPrecios(d)),
+    changeFrequency: "monthly" as const,
+    priority: 0.5,
+  }));
+
+  return [...marketing, ...categorias, ...subcategorias, ...guias, ...listas];
 }
