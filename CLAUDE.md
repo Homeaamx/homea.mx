@@ -77,6 +77,7 @@ Migramos de OXATIS → Next.js conservando el dominio `homea.mx`. El riesgo #1 e
 - `docs/PLAN-DE-FASES.md` — las 6 fases y su estado.
 - `docs/PLAYBOOK-MIGRACION-SEO.md` — checklist accionable de migración (la columna vertebral SEO).
 - `docs/PLAN-REDIRECTS-MIGRACION.md` — plan de redirects 301 (estructura Google, reglas de mapeo, Tier 1–2).
+- `docs/PDFS-OXATIS-PENDIENTES.md` — PDFs de OXATIS re-hospedados en Shopify Files: los que esperan aprobación de Carla y los que ya murieron en OXATIS (con enlaces Wayback).
 - `docs/ESTRATEGIA-IMAGENES.md` — dónde se almacenan las imágenes (producto→Shopify CDN, editoriales→Vercel/`next/image`), optimización de carga y **nomenclatura SEO de archivos** (descriptiva + trends de búsqueda).
 - `docs/PATRON-FICHAS-TIPO.md` — patrón "Planos de cocina": fichas de tipo de producto en Guías (diagrama de línea + hover puertas abiertas). Referencia: Refrigeradores. **Usar este patrón al definir los tipos de cada categoría nueva.**
 - `docs/FASE1-CONCEPTO-Y-SECCIONES.md` — concepto + arquitectura de secciones de la landing.
