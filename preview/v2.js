@@ -211,21 +211,268 @@
       on(document, "keydown", function (e) { if (e.key === "Escape") { closeAllMega(); } });
     }
 
-    /* ---------- Menú móvil (hamburguesa) ---------- */
-    var mnav = navEl;
-    var toggle = mnav && mnav.querySelector(".nav-toggle");
-    if (mnav && toggle) {
-      var close = function () { mnav.classList.remove("nav-open"); toggle.setAttribute("aria-expanded", "false"); };
+    /* ---------- Menú móvil y tablet: cajón de navegación ----------
+       El mega-menú de escritorio se oculta a ≤1080px, así que "Productos"
+       quedaba muerto y el catálogo era inalcanzable desde la barra. Aquí se
+       construye un cajón de dos niveles LEYENDO el propio mega-menú (riel de
+       macrocategorías + panes de subcategorías): no hay una segunda lista de
+       enlaces que mantener sincronizada, y en Next los href ya vienen
+       reescritos a las rutas reales.
+         nivel 0 — las 10 macrocategorías + las secciones del sitio,
+         nivel 1 — subcategorías y tipos de la categoría elegida.
+       Se arma la primera vez que se abre (así el flotante de WhatsApp y el
+       pie ya existen para copiar sus enlaces) y se destruye con el contexto
+       del cromo, para que un re-render de la SPA no deje dos cajones. */
+    var toggle = navEl && navEl.querySelector(".nav-toggle");
+    if (navEl && toggle) {
+      var mqCajon = window.matchMedia("(max-width: 1080px)");
+      var cajon = null;
+      var pila = [];
+      var CHEV = '<span class="mnav-chev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></span>';
+
+      var nuevoPanel = function (id) {
+        var p = document.createElement("div");
+        p.className = "mnav-panel";
+        p.setAttribute("data-panel", id);
+        return p;
+      };
+      var enlace = function (href, texto, clase) {
+        var a = document.createElement("a");
+        a.className = clase || "mnav-item";
+        a.setAttribute("href", href);
+        a.textContent = texto;
+        return a;
+      };
+      /* Fila de texto que abre otro panel (p. ej. "Productos"). */
+      var rama = function (texto, panelId) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "mnav-item";
+        b.setAttribute("data-abre", panelId);
+        var s = document.createElement("span");
+        s.textContent = texto;
+        b.appendChild(s);
+        b.insertAdjacentHTML("beforeend", CHEV);
+        return b;
+      };
+      var volver = function () {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "mnav-back";
+        b.setAttribute("data-vuelve", "1");
+        b.innerHTML = CHEV + "<span>Volver</span>";
+        return b;
+      };
+      var titulo = function (texto) {
+        var h = document.createElement("div");
+        h.className = "mnav-title";
+        h.textContent = texto;
+        return h;
+      };
+      /* Tile del mosaico: foto de la macrocategoría + rótulo al pie. */
+      var tile = function (texto, img, destino) {
+        var el = destino.href ? document.createElement("a") : document.createElement("button");
+        if (destino.href) { el.setAttribute("href", destino.href); }
+        else { el.type = "button"; el.setAttribute("data-abre", destino.abre); }
+        el.className = "mnav-tile";
+        if (img) {
+          /* La foto se pide al ENTRAR al panel, no al armarlo: con `src` puesto,
+             el navegador las descargaba todas al abrir el cajón aunque el mosaico
+             viviera un nivel más adentro (el panel está fuera de pantalla por
+             transform, y eso no cuenta como diferido). Ver avanzar(). */
+          var im = document.createElement("img");
+          im.setAttribute("data-src", img);
+          im.alt = ""; im.width = 660; im.height = 300;
+          im.loading = "lazy"; im.decoding = "async";
+          el.appendChild(im);
+        }
+        var s = document.createElement("span");
+        s.className = "mnav-tile-lbl";
+        s.textContent = texto;
+        el.appendChild(s);
+        el.insertAdjacentHTML("beforeend", CHEV);
+        return el;
+      };
+      var etiqueta = function (el) {
+        return (el.getAttribute("data-label") || el.textContent || "").trim();
+      };
+
+      /* Nivel 1: una macrocategoría, clonada del pane del mega-menú. */
+      var panelCategoria = function (cat, pane, id) {
+        var p = nuevoPanel(id);
+        var nombre = etiqueta(cat);
+        p.appendChild(volver());
+        p.appendChild(titulo(nombre));
+        var href = cat.getAttribute("data-href");
+        if (href) { p.appendChild(enlace(href, "Ver todo " + nombre, "mnav-all")); }
+        pane.querySelectorAll(".mega-subcol").forEach(function (col) {
+          var tit = col.querySelector("h5 a");
+          if (tit) { p.appendChild(enlace(tit.getAttribute("href"), tit.textContent.trim(), "mnav-sub")); }
+          var tipos = col.querySelectorAll(":scope > a");
+          if (!tipos.length) { return; }
+          var caja = document.createElement("div");
+          caja.className = "mnav-types";
+          tipos.forEach(function (t) {
+            caja.appendChild(enlace(t.getAttribute("href"), t.textContent.trim(), "mnav-type"));
+          });
+          p.appendChild(caja);
+        });
+        return p;
+      };
+
+      var construir = function () {
+        var raiz = document.createElement("div");
+        raiz.className = "mnav";
+        raiz.hidden = true;
+        raiz.innerHTML = '<div class="mnav-sheet" role="dialog" aria-modal="true" aria-label="Menú">' +
+                         '<div class="mnav-panels"></div></div>';
+        var panels = raiz.querySelector(".mnav-panels");
+        var root = nuevoPanel("root");
+        root.classList.add("is-current");
+        panels.appendChild(root);
+
+        /* Tres niveles (decisión de Carla, 2026-09-10):
+             0 · la barra en lista de texto, con "Productos" a la cabeza,
+             1 · el mosaico de fotos de las 10 macrocategorías,
+             2 · las subcategorías y tipos de una macro, otra vez en lista.
+           El mosaico vive un toque más adentro, así que sus fotos ni se piden
+           hasta que alguien entra a Productos. */
+        var cats = navEl.querySelectorAll(".mega-rail .mega-cat");
+        var barra = navEl.querySelector(".nav-links");
+        if (barra) {
+          [].forEach.call(barra.children, function (el) {
+            /* El título con riel de macrocategorías (Productos) abre el mosaico. */
+            if (cats.length && el.querySelector(".mega-rail")) {
+              var rotuloProd = el.querySelector(":scope > span") || el.querySelector(":scope > a");
+              root.appendChild(rama(rotuloProd ? rotuloProd.textContent.trim() : "Productos", "productos"));
+              return;
+            }
+            var a = el.tagName === "A" ? el : el.querySelector(":scope > a");
+            if (a) { root.appendChild(enlace(a.getAttribute("href"), a.textContent.trim())); }
+          });
+        }
+
+        /* Nivel 1 — mosaico del catálogo */
+        if (cats.length) {
+          var pProd = nuevoPanel("productos");
+          pProd.appendChild(volver());
+          pProd.appendChild(titulo("Productos"));
+          var mosaico = document.createElement("div");
+          mosaico.className = "mnav-mosaico";
+          cats.forEach(function (c, i) {
+            var pane = navEl.querySelector('.mega-pane[data-pane="' + c.getAttribute("data-pane") + '"]');
+            var href = c.getAttribute("data-href");
+            var img = c.getAttribute("data-menu-img") || c.getAttribute("data-img");
+            if (pane && pane.querySelector(".mega-subcol")) {
+              var id = "cat-" + i;
+              mosaico.appendChild(tile(etiqueta(c), img, { abre: id }));
+              panels.appendChild(panelCategoria(c, pane, id));
+            } else if (href) {
+              mosaico.appendChild(tile(etiqueta(c), img, { href: href }));
+            }
+          });
+          pProd.appendChild(mosaico);
+          panels.appendChild(pProd);
+        }
+
+        /* Pie: contacto directo (enlaces copiados del pie de página y del flotante) */
+        var pie = document.createElement("div");
+        pie.className = "mnav-foot";
+        var contacto = document.querySelector('.site-footer a[href*="contacto"]');
+        if (contacto) {
+          pie.appendChild(enlace(contacto.getAttribute("href"), "Contáctanos", "btn btn-primary btn-block"));
+        }
+        var wa = document.querySelector(".wa-float") || document.querySelector('a[href*="wa.me"]');
+        if (wa) {
+          pie.appendChild(enlace(wa.getAttribute("href"), "Escríbenos por WhatsApp", "btn btn-ghost btn-block"));
+        }
+        if (pie.children.length) { root.appendChild(pie); }
+
+        on(raiz, "click", function (e) {
+          if (e.target === raiz) { cerrar(); return; } /* velo (tablet) */
+          var abre = e.target.closest("[data-abre]");
+          if (abre) { avanzar(abre.getAttribute("data-abre")); return; }
+          if (e.target.closest("[data-vuelve]")) { retroceder(); return; }
+          if (e.target.closest("a")) { cerrar(); }
+        });
+        return raiz;
+      };
+
+      var panelDe = function (id) {
+        return cajon.querySelector('.mnav-panel[data-panel="' + id + '"]');
+      };
+      var avanzar = function (id) {
+        var destino = panelDe(id);
+        if (!destino) { return; }
+        var actual = cajon.querySelector(".mnav-panel.is-current");
+        if (actual === destino) { return; }
+        if (actual) { actual.classList.remove("is-current"); actual.classList.add("is-past"); }
+        destino.classList.remove("is-past");
+        destino.classList.add("is-current");
+        destino.scrollTop = 0;
+        /* Primera visita al panel: se sueltan sus fotos. */
+        destino.querySelectorAll("img[data-src]").forEach(function (im) {
+          im.src = im.getAttribute("data-src");
+          im.removeAttribute("data-src");
+        });
+        pila.push(id);
+      };
+      var retroceder = function () {
+        pila.pop();
+        var actual = cajon.querySelector(".mnav-panel.is-current");
+        var destino = panelDe(pila.length ? pila[pila.length - 1] : "root");
+        if (actual) { actual.classList.remove("is-current"); }
+        if (destino) { destino.classList.remove("is-past"); destino.classList.add("is-current"); }
+      };
+      var reiniciar = function () {
+        pila = [];
+        cajon.querySelectorAll(".mnav-panel").forEach(function (p) {
+          p.classList.remove("is-current", "is-past");
+        });
+        var root = panelDe("root");
+        if (root) { root.classList.add("is-current"); root.scrollTop = 0; }
+      };
+
+      var abrir = function () {
+        if (!cajon) { cajon = construir(); document.body.appendChild(cajon); }
+        /* La barra es sticky: arriba del todo mide una cosa y con el ubar otra. */
+        cajon.style.setProperty("--mnav-top", Math.max(0, Math.round(navEl.getBoundingClientRect().bottom)) + "px");
+        cajon.hidden = false;
+        void cajon.offsetWidth; /* reflow: la transición necesita un estado previo */
+        cajon.classList.add("is-open");
+        navEl.classList.add("nav-open");
+        toggle.setAttribute("aria-expanded", "true");
+        toggle.setAttribute("aria-label", "Cerrar menú");
+        document.documentElement.classList.add("mnav-lock");
+        /* Teclado y lectores: el foco entra al cajón y vuelve al botón al cerrar. */
+        var primero = cajon.querySelector(".mnav-panel.is-current .mnav-tile, .mnav-panel.is-current .mnav-item");
+        if (primero) { primero.focus({ preventScroll: true }); }
+      };
+      var cerrar = function () {
+        if (!cajon || !cajon.classList.contains("is-open")) { return; }
+        cajon.classList.remove("is-open");
+        navEl.classList.remove("nav-open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Abrir menú");
+        document.documentElement.classList.remove("mnav-lock");
+        if (cajon.contains(document.activeElement)) { toggle.focus({ preventScroll: true }); }
+        window.setTimeout(function () {
+          if (cajon && !cajon.classList.contains("is-open")) { cajon.hidden = true; reiniciar(); }
+        }, 280);
+      };
+
       on(toggle, "click", function () {
-        var open = mnav.classList.toggle("nav-open");
-        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        if (cajon && cajon.classList.contains("is-open")) { cerrar(); } else { abrir(); }
       });
-      mnav.querySelectorAll(".nav-links a, .nav-right a, .btn-ghost").forEach(function (a) {
-        on(a, "click", close);
+      /* "Productos" no navega (no hay índice /productos): en móvil y tablet
+         abre el cajón, que es donde vive el catálogo. */
+      var titulos = navEl.querySelectorAll(".nav-links .has-mega > span");
+      titulos.forEach(function (t) {
+        on(t, "click", function () { if (mqCajon.matches) { abrir(); } });
       });
-      /* "Productos" NO navega (no existe índice /productos): solo abre el desplegable.
-         La navegación ocurre al elegir una macrocategoría del riel. */
-      on(document, "keydown", function (e) { if (e.key === "Escape") close(); });
+      on(document, "keydown", function (e) { if (e.key === "Escape") { cerrar(); } });
+      on(window, "resize", function () { if (!mqCajon.matches) { cerrar(); } }, { passive: true });
+      ctx.onAbort(function () { if (cajon) { cajon.remove(); cajon = null; } });
     }
   }
 
@@ -237,6 +484,30 @@
     var ctx = makePageCtx();
     window.__homeaPage = ctx;
     var on = ctx.on;
+
+    /* ---------- PLP en móvil y tablet: los filtros, tras un "Filtrar" ----------
+       Apilada sobre la rejilla, la columna de filtros mide ~2000px: el primer
+       producto quedaba a ocho pantallas de scroll. Aquí se envuelve en un
+       <details> cerrado y se pliegan los acordeones de dentro. En escritorio,
+       donde los filtros tienen columna propia, el aside no se toca.
+       Se mueven los MISMOS nodos, así que PlpFiltro y tipos.js los siguen
+       encontrando por selector. */
+    var aside = document.querySelector(".plp > .filters");
+    var mqFiltros = window.matchMedia("(max-width: 1080px)");
+    if (aside && !aside.querySelector(".filters-sheet") && mqFiltros.matches) {
+      var caja = document.createElement("div");
+      caja.className = "filters-sheet-body";
+      while (aside.firstChild) { caja.appendChild(aside.firstChild); }
+      var det = document.createElement("details");
+      det.className = "filters-sheet";
+      det.innerHTML = "<summary>Filtrar</summary>";
+      det.appendChild(caja);
+      aside.appendChild(det);
+      caja.querySelectorAll("details[open]").forEach(function (d) { d.open = false; });
+      /* Si la ventana crece a escritorio el envoltorio se queda, así que se abre
+         para no esconder la columna de filtros. */
+      on(window, "resize", function () { if (!mqFiltros.matches) { det.open = true; } }, { passive: true });
+    }
 
     /* ---------- Reveals: una vez, al entrar al viewport ---------- */
     if ("IntersectionObserver" in window) {

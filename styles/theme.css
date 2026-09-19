@@ -2002,7 +2002,38 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
   .stats { gap: 32px; }
 }
 
-/* ---------- Menú móvil (hamburguesa) ------------------------------------ */
+/* ---------- PLP en móvil: los filtros, tras un "Filtrar" plegado ---------
+   En móvil y tablet la columna de filtros se apila SOBRE la rejilla y mide
+   ~2000px de alto: sin plegar, el primer producto quedaba a ocho pantallas de
+   scroll. v2.js envuelve el aside en este <details>; en escritorio el
+   envoltorio es transparente y la columna se ve como siempre. */
+.filters-sheet { border: 1px solid var(--border-strong); background: var(--surface); }
+.filters-sheet > summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: 56px; padding: 16px 20px;
+  font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg);
+}
+.filters-sheet > summary::-webkit-details-marker { display: none; }
+.filters-sheet > summary::after { content: "+"; font-size: 20px; line-height: 1; color: var(--homea-gold-deep); }
+.filters-sheet[open] > summary { border-bottom: 1px solid var(--border); }
+.filters-sheet[open] > summary::after { content: "−"; }
+.filters-sheet-body { padding: 6px 20px 22px; }
+@media (min-width: 1081px) {
+  .filters-sheet { border: 0; background: none; }
+  .filters-sheet > summary { display: none; }
+  .filters-sheet-body { padding: 0; }
+}
+
+/* ---------- Menú móvil (hamburguesa + cajón de navegación) ---------------
+   El mega-menú de escritorio no cabe en móvil ni en tablet: se oculta a
+   ≤1080px y, hasta ahora, "Productos" quedaba muerto — el catálogo entero
+   era inalcanzable desde la barra. En su lugar se abre un CAJÓN propio:
+     · nivel 0 — las 10 macrocategorías + secciones del sitio,
+     · nivel 1 — subcategorías y tipos de la categoría elegida.
+   El markup del cajón lo construye v2.js A PARTIR del propio mega-menú, así
+   que no hay una segunda lista de 180 enlaces que mantener sincronizada. */
 .nav-toggle {
   display: none; flex-direction: column; justify-content: center; gap: 5px;
   width: 44px; height: 44px; padding: 10px; margin-left: auto;
@@ -2018,36 +2049,179 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .site-nav.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
 .site-nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-@media (max-width: 720px) {
-  .nav-toggle { display: flex; }
-  /* La barra crece para alojar el menú desplegado */
-  .site-nav.nav-open { height: auto; }
-  .site-nav.nav-open .container {
-    flex-wrap: wrap; align-items: center; column-gap: 16px;
-    padding-top: 0; padding-bottom: 16px;
-  }
-  /* Menú desplegado: enlaces en columna, ancho completo */
-  .site-nav.nav-open .nav-links,
-  .site-nav.nav-open .nav-right {
-    display: flex; flex-direction: column; align-items: stretch;
-    flex-basis: 100%; width: 100%; height: auto; gap: 0; flex: none;
-  }
-  .site-nav.nav-open .nav-links { border-top: 1px solid var(--border); margin-top: 8px; }
-  .site-nav.nav-open .nav-links > a,
-  .site-nav.nav-open .nav-links .has-mega,
-  .site-nav.nav-open .nav-links .has-mega > span,
-  .site-nav.nav-open .nav-right > a {
-    width: 100%; height: auto; padding: 15px 0;
-    border-bottom: 1px solid var(--border);
-    display: block;
-  }
-  .site-nav.nav-open .nav-links .has-mega { align-items: stretch; }
-  .site-nav.nav-open .nav-links .has-mega > span { border-bottom: none; padding-bottom: 0; }
-  .site-nav.nav-open .nav-search { padding: 15px 0; }
-  /* Wishlist a ancho completo dentro del menú */
-  .site-nav.nav-open .btn-ghost {
-    flex-basis: 100%; width: 100%; margin-top: 16px; text-align: center;
-  }
+/* La hamburguesa vive donde se espera: al final de la barra, después de los
+   íconos. En tablet convive con los enlaces horizontales (que ahí ya no
+   caben completos: Herramientas, Garantías y Nosotros se ocultan) y es la
+   única puerta a esas secciones. */
+@media (max-width: 1080px) {
+  .nav-toggle { display: flex; order: 9; margin-left: 6px; }
+  .site-nav .nav-icons { margin-left: auto; }
+}
+/* Por debajo de 900px la fila de enlaces ya no cabe junto a los íconos y la
+   hamburguesa (empujaba el botón fuera del margen): el cajón es el menú. */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+}
+/* En pantallas de 360px (Android común) el aire de la barra sumaba más que el
+   ancho útil y la hamburguesa se salía 9px. Se recorta solo el aire. */
+@media (max-width: 640px) {
+  .site-nav .container { gap: 12px; }
+  .site-nav .nav-icons { gap: 2px; padding-left: 10px; margin-right: 0; }
+  .nav-toggle { margin-left: 2px; }
+}
+/* Pantallas muy angostas (iPhone SE 1.ª gen, 320px): el margen de 24px deja
+   272px útiles y ni la barra cabe. Solo ahí se recorta a 16px. */
+@media (max-width: 360px) {
+  .container { padding-left: 16px; padding-right: 16px; }
+}
+
+/* ---- El cajón ---- */
+.mnav[hidden] { display: none; }
+.mnav {
+  position: fixed; left: 0; right: 0; bottom: 0; top: var(--mnav-top, 60px);
+  z-index: 49;
+}
+/* Velo: solo donde el cajón no cubre toda la pantalla (tablet). Se toca
+   fuera del panel y se cierra. */
+.mnav::before {
+  content: ""; position: absolute; inset: 0; background: rgba(10, 10, 10, .38);
+  opacity: 0; transition: opacity var(--dur-med) var(--ease-standard);
+}
+.mnav.is-open::before { opacity: 1; }
+@media (max-width: 720px) { .mnav::before { content: none; } }
+.mnav-sheet {
+  position: absolute; inset: 0; overflow: hidden;
+  background: var(--bg); border-top: 1px solid var(--border);
+  opacity: 0; transform: translateY(-10px);
+  transition: opacity var(--dur-fast) var(--ease-standard),
+              transform var(--dur-med) var(--ease-standard);
+}
+.mnav.is-open .mnav-sheet { opacity: 1; transform: none; }
+/* En tablet el cajón no necesita toda la pantalla: panel anclado a la derecha. */
+@media (min-width: 721px) {
+  .mnav-sheet { left: auto; width: min(420px, 46vw); border-left: 1px solid var(--border);
+    box-shadow: var(--shadow-md); }
+}
+.mnav-panels { position: absolute; inset: 0; }
+.mnav-panel {
+  position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch; padding-bottom: 48px;
+  transform: translateX(100%); visibility: hidden;
+  transition: transform var(--dur-med) var(--ease-standard),
+              visibility var(--dur-med) var(--ease-standard);
+}
+.mnav-panel.is-current { transform: none; visibility: visible; }
+.mnav-panel.is-past { transform: translateX(-100%); visibility: hidden; }
+
+.mnav-eyebrow {
+  padding: 26px 24px 12px; margin: 0;
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.mnav-item {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  width: 100%; min-height: 56px; padding: 16px 24px; margin: 0;
+  background: none; border: 0; border-bottom: 1px solid var(--border);
+  text-align: left; cursor: pointer;
+  font-family: var(--font-sans); font-size: 12.5px; font-weight: 600;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--fg);
+}
+.mnav-item:hover, .mnav-item:focus-visible { color: var(--accent-text); background: var(--surface); }
+.mnav-item .mnav-chev { width: 15px; height: 15px; flex: none; color: var(--homea-gold-deep); }
+.mnav-item .mnav-chev svg { width: 100%; height: 100%; fill: none; stroke: currentColor;
+  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; display: block; }
+
+/* Mosaico del catálogo: las 10 macrocategorías con foto (decisión 2026-09-10).
+   El segundo nivel se queda en lista de texto: ahí lo que importa es leer
+   rápido 24 tipos, no la fotografía. Las imágenes son recortes propios del
+   menú (660×300, 97 KB las 10) y van `loading="lazy"`, así que solo se piden
+   las que el dedo alcanza. */
+.mnav-mosaico { display: flex; flex-direction: column; gap: 2px; background: var(--border); }
+.mnav-tile {
+  position: relative; display: block; width: 100%; height: 132px;
+  margin: 0; padding: 0; border: 0; border-bottom: none;
+  background: var(--homea-espresso); color: var(--homea-bone);
+  overflow: hidden; cursor: pointer; text-align: left;
+}
+.mnav-tile img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform var(--dur-med) var(--ease-standard);
+}
+.mnav-tile::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to top,
+    rgba(10, 10, 10, .74) 0%, rgba(10, 10, 10, .30) 46%, rgba(10, 10, 10, .06) 100%);
+}
+.mnav-tile-lbl {
+  position: absolute; left: 22px; right: 48px; bottom: 16px; z-index: 1;
+  font-family: var(--font-sans); font-size: 12.5px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--homea-bone);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, .55);
+}
+.mnav-tile .mnav-chev {
+  position: absolute; right: 20px; bottom: 17px; z-index: 1;
+  width: 16px; height: 16px; color: var(--homea-gold);
+}
+.mnav-tile:hover img { transform: scale(1.04); }
+.mnav-tile:focus-visible { outline: 2px solid var(--homea-gold); outline-offset: -2px; }
+/* Pantallas cortas: el mosaico completo son ~1 340px, así que en un teléfono
+   bajo conviene un tile más compacto para que quepan más de cinco. */
+@media (max-height: 700px), (max-width: 360px) {
+  .mnav-tile { height: 112px; }
+}
+@media (prefers-reduced-motion: reduce) { .mnav-tile img { transition: none; } }
+
+/* Cabecera del nivel 1: volver + nombre de la categoría */
+.mnav-back {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  min-height: 52px; padding: 14px 24px; background: var(--surface); border: 0;
+  border-bottom: 1px solid var(--border); cursor: pointer; text-align: left;
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-muted);
+}
+.mnav-back:hover { color: var(--accent-text); }
+.mnav-back .mnav-chev { width: 14px; height: 14px; transform: scaleX(-1); }
+.mnav-title {
+  margin: 0; padding: 24px 24px 4px;
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 30px; line-height: var(--lh-snug); letter-spacing: var(--tracking-display);
+  color: var(--fg);
+}
+.mnav-all {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin: 0 24px 8px; padding: 6px 0; border-bottom: 1px solid var(--homea-gold);
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase;
+  color: var(--accent-text);
+}
+.mnav-all:hover { color: var(--fg); border-bottom-color: var(--fg); }
+/* Subcategoría (título) y sus tipos */
+.mnav-sub {
+  display: block; padding: 22px 24px 6px; border-bottom: 0;
+  font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg);
+}
+.mnav-sub:hover { color: var(--accent-text); }
+.mnav-types { display: flex; flex-direction: column; border-top: 1px solid var(--border); margin-top: 8px; }
+.mnav-type {
+  display: block; min-height: 48px; padding: 14px 24px;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+  letter-spacing: 0; text-transform: none; color: var(--fg-muted);
+}
+.mnav-type:hover { color: var(--accent-text); background: var(--surface); }
+/* Pie del cajón: contacto directo */
+.mnav-foot { padding: 28px 24px 0; display: flex; flex-direction: column; gap: 12px; }
+.mnav-foot .btn { width: 100%; text-align: center; }
+
+/* Con el cajón abierto la página de atrás no se mueve y el flotante estorba */
+.mnav-lock, .mnav-lock body { overflow: hidden; }
+.mnav-lock .wa-float, .mnav-lock .cta-float { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mnav-sheet, .mnav-panel { transition: none; }
 }
 
 /* ---------- Reseñas Google — muro de prueba social (rotador) ------------- */
