@@ -5,10 +5,8 @@ const nextConfig = {
   // ejecución (lib/preview.ts). El file tracing de Next no sigue rutas dinámicas,
   // así que sin esto las funciones en Vercel no incluyen esos archivos y cualquier
   // render en vivo (PLP [tipo], revalidación ISR) truena con ENOENT → error 500.
-  experimental: {
-    outputFileTracingIncludes: {
-      "/**": ["./preview/*.html"],
-    },
+  outputFileTracingIncludes: {
+    "/**": ["./preview/*.html"],
   },
   // Imágenes de producto vendrán del CDN de Shopify (Fase PLP). Editoriales: locales.
   images: {

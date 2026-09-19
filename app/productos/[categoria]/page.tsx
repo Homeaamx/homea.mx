@@ -17,7 +17,8 @@ export function generateStaticParams(): Params[] {
   return categoriaSlugs().map((categoria) => ({ categoria }));
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
+export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
+  const params = await props.params;
   if (!categoriaSlugs().includes(params.categoria)) return {};
   const title = getTitle(categoriaFile(params.categoria));
   return {
@@ -26,7 +27,8 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   };
 }
 
-export default function CategoriaPage({ params }: { params: Params }) {
+export default async function CategoriaPage(props: { params: Promise<Params> }) {
+  const params = await props.params;
   if (!categoriaSlugs().includes(params.categoria)) notFound();
   return <MarketingPage file={categoriaFile(params.categoria)} />;
 }
