@@ -46,15 +46,15 @@ const nextConfig = {
     const legacyHtml = {
       "/home.html": "/",
       "/marcas.html": "/marcas",
-      "/coleccion.html": "/productos",
-      "/ofertas.html": "/productos",
-      "/producto.html": "/producto",
+      "/coleccion.html": "/",
+      "/ofertas.html": "/ofertas",
+      "/producto.html": "/",
       "/b2b.html": "/proyectos",
       "/nosotros.html": "/nosotros",
       "/contacto.html": "/contacto",
       "/herramientas.html": "/herramientas",
       "/garantias-instalacion.html": "/garantias-instalacion",
-      "/guias.html": "/guias/",
+      "/guias.html": "/guias",
     };
     // Familia "agua" (docs/PLAN-REDIRECTS-MIGRACION.md §5.b): la taxonomía separó
     // purificadores/filtros · monomandos de agua filtrada · despachadores de garrafón,

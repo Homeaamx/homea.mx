@@ -4,13 +4,24 @@
 // - CSS de página (<style> del <head>) → se inyecta como <style> (se perdía).
 // - JS inline de página → se ejecuta vía next/script (dangerouslySetInnerHTML no
 //   ejecuta scripts): spotlights del hero, filtros, sliders, etc.
+// - `slots`: HTML generado con datos que reemplaza marcadores <!-- slot:nombre -->
+//   del preview (p. ej. las listas de precios de /marcas).
 
 import Script from "next/script";
 
 import { getMain, getScripts, getStyles } from "@/lib/preview";
 
-export default function MarketingPage({ file }: { file: string }) {
-  const html = getMain(file);
+export default function MarketingPage({
+  file,
+  slots = {},
+}: {
+  file: string;
+  slots?: Record<string, string>;
+}) {
+  let html = getMain(file);
+  for (const [nombre, contenido] of Object.entries(slots)) {
+    html = html.replace(`<!-- slot:${nombre} -->`, contenido);
+  }
   const css = getStyles(file);
   const js = getScripts(file);
   const id = `mp-${file.replace(/[^a-z0-9]+/gi, "-")}`;

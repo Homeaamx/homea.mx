@@ -42,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const guias = allGuiasUrls().map((path) => ({
     url: absUrl(path),
     changeFrequency: "weekly" as const,
-    priority: path === "/guias/" ? 0.8 : 0.6,
+    priority: path === "/guias" ? 0.8 : 0.6,
   }));
 
   return [...marketing, ...categorias, ...subcategorias, ...guias];
