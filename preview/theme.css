@@ -1071,10 +1071,9 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
   background: radial-gradient(circle, color-mix(in srgb, #fff 92%, transparent), transparent 70%);
   filter: blur(44px); opacity: 0; pointer-events: none;
   transition: opacity .45s var(--ease-standard); }
-.bene-ico { width: 46px; height: 46px; display: grid; place-items: center; margin-bottom: 22px;
-  color: var(--homea-espresso); border: 1px solid color-mix(in srgb, var(--homea-espresso) 32%, transparent);
-  transition: transform .4s var(--ease-standard), border-color .4s var(--ease-standard); }
-.bene-ico svg { width: 22px; height: 22px; }
+.bene-ico { display: inline-flex; margin-bottom: 20px; color: var(--homea-espresso);
+  transform-origin: left center; transition: transform .4s var(--ease-standard); }
+.bene-ico svg { width: 30px; height: 30px; }
 .bene-card h3 { position: relative; color: var(--homea-black); font-size: 19px; margin: 0 0 10px; }
 .bene-card p { position: relative; color: color-mix(in srgb, var(--homea-espresso) 82%, transparent); font-size: var(--fs-sm);
   line-height: var(--lh-loose); margin: 0; }
@@ -1086,7 +1085,7 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
   box-shadow: 0 18px 40px -22px color-mix(in srgb, var(--homea-espresso) 55%, transparent); }
 .bene-card:hover { transition-delay: 0s; }
 .bene-card:hover .bene-glow { opacity: 1; }
-.bene-card:hover .bene-ico { transform: translateY(-2px) scale(1.07); border-color: var(--homea-espresso); }
+.bene-card:hover .bene-ico { transform: translateY(-2px) scale(1.07); }
 @media (prefers-reduced-motion: reduce) {
   .bene-card { opacity: 1; transform: none; transition: border-color .3s, background .3s; }
   .bene-orb { transition: none; }
@@ -2012,8 +2011,7 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
   /* "Por qué nosotros": texto e iconos de las tarjetas +20% */
   .bene-card h3 { font-size: calc(19px * 1.2); }            /* 19 → 22.8px */
   .bene-card p { font-size: calc(var(--fs-sm) * 1.2); }     /* +20% */
-  .bene-ico { width: calc(46px * 1.2); height: calc(46px * 1.2); }  /* 46 → 55.2px */
-  .bene-ico svg { width: calc(22px * 1.2); height: calc(22px * 1.2); }  /* 22 → 26.4px */
+  .bene-ico svg { width: calc(30px * 1.2); height: calc(30px * 1.2); }  /* 30 → 36px */
 }
 
 @media (min-width: 1900px) {
