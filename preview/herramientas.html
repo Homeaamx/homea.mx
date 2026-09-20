@@ -234,6 +234,15 @@
 .hrm-brandlinks a:hover { border-color: var(--homea-gold); color: var(--accent-text); }
 .hrm-finder .f-micro { margin: 22px 0 0; font-size: 13px; font-weight: 300; color: var(--fg-muted); }
 @media (max-width: 960px) { .hrm-fichas { grid-template-columns: 1fr; gap: 40px; } }
+/* En móvil la caja del buscador de fichas no cabe: el input (200px de ancho
+   mínimo) y el botón en la misma fila daban 404px de contenido mínimo dentro
+   de un contenedor de 342px. Se apilan y se recorta el acolchado. */
+@media (max-width: 640px) {
+  .hrm-finder { padding: 28px 22px; }
+  .hrm-finder form { flex-wrap: wrap; gap: 12px; }
+  .hrm-finder form > input { flex: 1 1 100%; }
+  .hrm-finder form > button { flex: 1 1 100%; justify-content: center; }
+}
 
 </style>
 </head>
@@ -261,16 +270,16 @@
       <div class="mega-panel mega-flyout" data-mega>
         <div class="mega-flyout-main">
           <div class="mega-rail" role="tablist" aria-label="Categorías de producto">
-            <button class="mega-cat" data-pane="cocina" data-href="categoria-cocina-y-bar.html" data-img="assets/photos/cat-cocina-bar.webp" data-pos="30% 50%" data-label="Cocina y Bar">Cocina y Bar</button>
-            <button class="mega-cat" data-pane="exterior" data-href="categoria-exterior.html" data-img="assets/photos/cat-exterior-asador.webp" data-label="Exterior">Exterior</button>
-            <button class="mega-cat" data-pane="electro" data-href="categoria-electrodomesticos-menores.html" data-img="assets/photos/cat-electro-menores-kitchenaid-mixer.webp" data-label="Electrodomésticos menores">Electrodomésticos menores</button>
-            <button class="mega-cat" data-pane="lavanderia" data-href="categoria-lavanderia.html" data-img="assets/photos/cat-cuidado-ropa.webp" data-label="Lavandería">Lavandería</button>
-            <button class="mega-cat" data-pane="banos" data-href="categoria-banos.html" data-img="assets/photos/cat-banos.webp" data-label="Baños">Baños</button>
-            <button class="mega-cat" data-pane="minisplits" data-href="categoria-minisplits.html" data-img="assets/photos/minisplit.webp" data-label="Minisplits">Minisplits</button>
-            <button class="mega-cat" data-pane="vapor" data-href="categoria-vapor-y-sauna.html" data-img="assets/photos/cat-vapor-sauna.webp" data-label="Vapor y Sauna">Vapor y Sauna</button>
-            <button class="mega-cat" data-pane="wellness" data-href="categoria-wellness.html" data-img="assets/photos/cat-wellness.webp" data-label="Wellness">Wellness</button>
-            <button class="mega-cat" data-pane="recubrimientos" data-href="categoria-recubrimientos-y-superficies.html" data-img="assets/photos/cat-recubrimientos.webp" data-label="Recubrimientos y Superficies">Recubrimientos y Superficies</button>
-            <button class="mega-cat" data-pane="chimeneas" data-href="categoria-chimeneas-y-calentadores.html" data-img="assets/photos/cat-chimeneas.webp" data-label="Chimeneas &amp; Calentadores">Chimeneas &amp; Calentadores</button>
+            <button class="mega-cat" data-pane="cocina" data-href="categoria-cocina-y-bar.html" data-img="assets/photos/cat-cocina-bar.webp" data-menu-img="assets/photos/menu/cat-cocina-bar.webp" data-pos="30% 50%" data-label="Cocina y Bar">Cocina y Bar</button>
+            <button class="mega-cat" data-pane="exterior" data-href="categoria-exterior.html" data-img="assets/photos/cat-exterior-asador.webp" data-menu-img="assets/photos/menu/cat-exterior-asador.webp" data-label="Exterior">Exterior</button>
+            <button class="mega-cat" data-pane="electro" data-href="categoria-electrodomesticos-menores.html" data-img="assets/photos/cat-electro-menores-kitchenaid-mixer.webp" data-menu-img="assets/photos/menu/cat-electro-menores-kitchenaid-mixer.webp" data-label="Electrodomésticos menores">Electrodomésticos menores</button>
+            <button class="mega-cat" data-pane="lavanderia" data-href="categoria-lavanderia.html" data-img="assets/photos/cat-cuidado-ropa.webp" data-menu-img="assets/photos/menu/cat-cuidado-ropa.webp" data-label="Lavandería">Lavandería</button>
+            <button class="mega-cat" data-pane="banos" data-href="categoria-banos.html" data-img="assets/photos/cat-banos.webp" data-menu-img="assets/photos/menu/cat-banos.webp" data-label="Baños">Baños</button>
+            <button class="mega-cat" data-pane="minisplits" data-href="categoria-minisplits.html" data-img="assets/photos/minisplit.webp" data-menu-img="assets/photos/menu/minisplit.webp" data-label="Minisplits">Minisplits</button>
+            <button class="mega-cat" data-pane="vapor" data-href="categoria-vapor-y-sauna.html" data-img="assets/photos/cat-vapor-sauna.webp" data-menu-img="assets/photos/menu/cat-vapor-sauna.webp" data-label="Vapor y Sauna">Vapor y Sauna</button>
+            <button class="mega-cat" data-pane="wellness" data-href="categoria-wellness.html" data-img="assets/photos/cat-wellness.webp" data-menu-img="assets/photos/menu/cat-wellness.webp" data-label="Wellness">Wellness</button>
+            <button class="mega-cat" data-pane="recubrimientos" data-href="categoria-recubrimientos-y-superficies.html" data-img="assets/photos/cat-recubrimientos.webp" data-menu-img="assets/photos/menu/cat-recubrimientos.webp" data-label="Recubrimientos y Superficies">Recubrimientos y Superficies</button>
+            <button class="mega-cat" data-pane="chimeneas" data-href="categoria-chimeneas-y-calentadores.html" data-img="assets/photos/cat-chimeneas.webp" data-menu-img="assets/photos/menu/cat-chimeneas.webp" data-label="Chimeneas &amp; Calentadores">Chimeneas &amp; Calentadores</button>
           </div>
           <div class="mega-detail">
             <div class="mega-pane" data-pane="cocina"><div class="mega-subcols is-fixed">
@@ -1744,7 +1753,7 @@
   initFromHash();
 })();
 </script>
-<script src="v2.js?v=30"></script>
+<script src="v2.js?v=33"></script>
 <script src="wishlist.js?v=5"></script>
 <script src="cart.js?v=3"></script>
 </body>
