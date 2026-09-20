@@ -2662,3 +2662,31 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
     padding: 13px 20px; font-size: 11.5px; letter-spacing: 0.1em; line-height: 1.35;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Carrito Storefront: avisos y estados
+   Bloque aditivo — no modifica ninguna regla .wl-* / .cart-* anterior.
+   --------------------------------------------------------------------------- */
+
+/* Aviso dentro del cajón: sin existencia, regla de moneda, Shopify caído. */
+.cart-aviso {
+  display: block; margin: 8px 0 0;
+  font-size: 11px; line-height: 1.45; color: var(--fg-muted);
+}
+.cart-aviso a { text-decoration: underline; }
+.cart-aviso.is-error { color: #8c2f24; }
+/* El bloqueo es la red de seguridad contra cobrar mal: se ve, no se disimula. */
+.cart-aviso.is-bloqueo {
+  border-left: 2px solid var(--accent);
+  padding-left: 10px; margin-bottom: 12px; color: var(--fg);
+}
+
+/* Cifra en vuelo: el valor anterior se atenúa hasta que Shopify confirma. En el
+   carrito NUNCA se pinta un total calculado en el navegador. */
+.is-pendiente { opacity: .45; transition: opacity var(--dur-fast) var(--ease-standard); }
+
+/* Checkout deshabilitado (tienda con contraseña o precio por confirmar): se
+   mantiene el sitio del botón para que el cajón no cambie de alto. */
+.wl-wa[aria-disabled="true"] {
+  opacity: .4; cursor: not-allowed; pointer-events: none;
+}

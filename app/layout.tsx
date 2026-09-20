@@ -6,6 +6,7 @@ import "@/styles/guias.css";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { getChrome } from "@/lib/preview";
 import BuscadorOverlay from "@/components/BuscadorOverlay";
+import CarritoProvider from "@/components/CarritoProvider";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import NavActive from "@/components/NavActive";
 import HomeNavSticky from "@/components/HomeNavSticky";
@@ -45,6 +46,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div dangerouslySetInnerHTML={{ __html: footer }} />
         {/* Buscador de catálogo: se engancha a la lupa del nav (a.nav-ic-search). */}
         <BuscadorOverlay />
+        {/* Carrito real: estado en Shopify (Storefront API), cookie httpOnly y
+            checkout hospedado. Sustituye al antiguo /cart.js de localStorage. */}
+        <CarritoProvider />
         <WhatsAppFloat />
         <NavActive />
         <HomeNavSticky />
@@ -53,8 +57,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script src="/v2.js?v=53" strategy="afterInteractive" />
         {/* Wishlist (localStorage): corazones, badge del nav y drawer de cotización. */}
         <Script src="/wishlist.js?v=5" strategy="afterInteractive" />
-        {/* Carrito piloto (localStorage → cart permalink de Shopify). */}
-        <Script src="/cart.js?v=3" strategy="afterInteractive" />
         {/* Filtro de tipo del riel de subcat.1 (?tipo=…) y su scroll lento. */}
         <Script src="/tipos.js?v=1" strategy="afterInteractive" />
       </body>
