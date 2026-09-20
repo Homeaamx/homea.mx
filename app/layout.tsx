@@ -59,7 +59,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <HomeNavSticky />
         <PreviewRouter />
         {/* Interacciones del preview (nav scroll, mega flyout, reveals, hero, marquee). */}
-        <Script src="/v2.js?v=53" strategy="afterInteractive" />
+        <Script src="/v2.js?v=61" strategy="afterInteractive" />
         {/* Wishlist (localStorage): corazones, badge del nav y drawer de cotización. */}
         <Script src="/wishlist.js?v=5" strategy="afterInteractive" />
         {/* Filtro de tipo del riel de subcat.1 (?tipo=…) y su scroll lento. */}

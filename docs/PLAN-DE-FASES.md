@@ -89,6 +89,24 @@ Estado: 🔵 pendiente · 🟡 en curso · ✅ hecho
 - [ ] Actualizar **destino de las campañas de Google Ads** a la nueva landing (`www.homea.mx` en Vercel) en el corte de migración (Fase 5).
 - [ ] Marcar como conversión la **compra directa** (checkout Shopify, bajo ticket) → alimenta la **campaña de Shopping (Fase 4.6)** con valor de conversión (ROAS).
 
+### 3.6 Adaptación a móvil y tablet ⭐ NUEVO (2026-09-09)
+*Subido desde Fase 5: el rendimiento y la usabilidad móvil son LA oportunidad frente a OXATIS (0 URLs "Good" en móvil), y hoy el catálogo era inalcanzable desde la barra en celular.*
+**Breakpoints canónicos** (se sustituyen los ~17 dispersos entre 560 y 1279 conforme se toca cada página): **640** móvil · **900** móvil grande / tablet vertical · **1024–1080** tablet. Todo dentro de `max-width`: el escritorio no cambia.
+- [x] **Presentación del catálogo en el cajón (decisión Carla, 2026-09-10) — tres niveles:**
+  0. La barra en **lista de texto** (Productos, Marcas, Proyectos, Ofertas, Guías, Herramientas, Garantías, Nosotros) más los botones de contacto. Cabe entera en una pantalla.
+  1. Al tocar **Productos**, el **mosaico de fotos** de las 10 macrocategorías.
+  2. Al tocar una macro, sus subcategorías y tipos otra vez en **lista de texto**.
+  Los recortes del menú viven en `assets/photos/menu/` (660×300, 97 KB las 10) y se referencian con `data-menu-img` en cada `.mega-cat`. **No se descargan hasta entrar a Productos:** van en `data-src` y `avanzar()` los suelta al revelar el panel — con `src` puesto, el navegador los pedía al abrir el cajón aunque el panel estuviera fuera de pantalla por `transform`.
+  **Pendiente de contenido:** las fotos de **Baños** y **Vapor y Sauna** no funcionan como banda horizontal (quedan casi vacías al recortar, y el recorte automático por contenido no lo salva); pedir dos tomas mejores del OneDrive.
+- [x] **Cajón de navegación (móvil y tablet)** — el mega-menú se ocultaba a ≤1080px y "Productos" quedaba muerto: las 10 macrocategorías y sus ~180 enlaces eran inalcanzables desde la barra. Ahora la hamburguesa (visible ≤1080px, al final de la barra) abre un cajón de dos niveles que `v2.js` **construye leyendo el propio mega-menú** (sin lista duplicada que mantener). Incluye velo en tablet, bloqueo de scroll, foco y Escape.
+- [x] **Scroll horizontal cerrado** — las 12 rutas miden 0px de desborde a 360, 390, 768, 1024 y 1440. Causas y arreglos: el PLP mantenía la rejilla de 2 columnas (filtros + productos) también en móvil porque el CSS de página se inyecta después de `theme.css` y ganaba sin media query; la fila de botones de garantías era `flex:none` y tomaba el ancho máximo de su contenido; en contacto y marcas un `display:flex` sin `flex-wrap` con dos botones `nowrap` fijaba 450px de contenido mínimo; el buscador de fichas de herramientas no cabía con input y botón en la misma fila; y a 360px el aire de la barra del nav empujaba la hamburguesa 9px fuera.
+- [x] **Filtros del PLP en móvil** — apilados sobre la rejilla medían ~2 000px y el primer producto quedaba a ocho pantallas de scroll (y=3036). Ahora `v2.js` los envuelve en un desplegable "Filtrar" y el primer producto aparece a y=935. En escritorio el aside no cambia.
+- [ ] **Pantallas de 320px** (iPhone SE 1.ª gen) — quedan desbordes en `/producto/[slug]` (26px), `/garantias-instalacion` (13px) y `/contacto` (8px). Decisión pendiente de Carla: se persiguen o se fija 360px como piso soportado.
+- [ ] **PDP y home** en móvil: altura del hero, carrusel, galería, barra de compra.
+- [ ] **Pasada de tablet** (768–1024) sobre todas las plantillas: densidad de rejillas, no solo ausencia de desborde.
+- [ ] **QA final:** 375 · 390 · 414 · 768 · 820 · 1024, áreas táctiles ≥44px, `prefers-reduced-motion`, y verificación de que el escritorio quedó idéntico.
+> **Cómo se audita:** con el dev server arriba, se cargan las rutas en iframes de ancho fijo y se mide `scrollWidth - clientWidth` por ruta, listando los elementos que sobresalen. Repetir tras cada bloque.
+
 **Entregable:** front-end en Vercel (dominio temporal), conectado a Shopify, con SEO técnico y **tracking de conversiones (incl. clicks de WhatsApp) verificado en GA4 + Google Ads**.
 
 > La cuenta de Google Ads y el tracking que se montan aquí son el **cimiento** de la **campaña de Google Shopping** descrita en la **Fase 4.6** (esa depende de tener catálogo con datos+imágenes, por eso vive en Fase 4).
@@ -207,10 +225,11 @@ sirvió de piloto del patrón (5 fichas + import en borrador).
 - [ ] **QA FUNCIONAL:** búsqueda, **filtros**, carrito, checkout, formularios→KOMMO, WhatsApp, enlaces. Todo debe funcionar de verdad.
 - [ ] **QA del buscador:** que el índice esté regenerado con el catálogo final (`node scripts/build-search-index.mjs`), que busque por SKU y por lenguaje natural, que el precio con IVA cuadre con la PDP y que **no aparezcan productos en borrador**.
 - [ ] **QA de la regla USD → solo ejecutivo:** verificar que **ningún producto en dólares** pueda llegar al checkout de Shopify; el intercepto a WhatsApp debe funcionar en PLP, PDP y carrito.
-- [ ] Responsive, accesibilidad (WCAG), **Core Web Vitals** móvil (la gran oportunidad vs OXATIS).
+- [ ] Accesibilidad (WCAG) y **Core Web Vitals** móvil (la gran oportunidad vs OXATIS). *El responsive en sí se adelantó a la **Fase 3.6**; aquí solo se verifica el resultado final.*
 - [ ] **Corte de migración:** apuntar **DNS de `homea.mx` (GoDaddy) a Vercel**, activar **todos los 301**, subir **sitemap propio** a GSC, validar indexación.
 - [ ] **Análisis de comportamiento con Microsoft Clarity** ⭐ NUEVO: instalar **Microsoft Clarity** (gratis) en el front-end **en el corte de lanzamiento** para que capture datos desde el día 1 — **heatmaps** (clics, scroll, áreas muertas) y **grabaciones de sesión**. Complementa GA4/Meta Pixel (que miden *qué* pasa) mostrando *cómo* navegan los usuarios. Durante el **monitoreo post-lanzamiento**, revisar: dónde abandonan, qué CTAs ("Cotizar"/WhatsApp/"Comprar") se ven y cuáles se ignoran, rage-clicks y fricción en filtros/PDP → alimenta iteración de conversión.
 - [ ] **No matar OXATIS de golpe**; **monitoreo post-lanzamiento** 2–6 semanas vs. línea base.
+- [ ] ⭐ **Cerrar la fuga de precios en `promociones.homea.mx`** (hallazgo 2026-09-04, marcado por Carla como punto a revisar cerca del lanzamiento): la raíz de la carpeta del proyecto (`~/Documents/Landing Pages Homea 2026/Homea Promociones`, repo `Homeaamx/promociones-homea`) contiene archivos de trabajo internos que Vercel sirve públicos — verificado con HTTP 200: `PRECIOS_CLAUDE_2026.xlsx`, `prices.json`, `*_rows.json` por marca, scripts `.py`. Cualquiera con la URL puede descargar las listas de precios. Fix: mover esos archivos a una carpeta fuera del deploy o excluirlos con `.vercelignore`, y redesplegar.
 
 **Entregable:** sitio en producción en `www.homea.mx` (servido por Vercel) sin pérdida de SEO, **con Microsoft Clarity capturando comportamiento desde el lanzamiento**.
 

@@ -83,11 +83,15 @@
 .pcard .imgw.cutout { display: grid; place-items: center; padding: 18px; }
 .pcard .imgw.cutout img { object-fit: contain; max-height: 100%; max-width: 100%; mix-blend-mode: multiply; transition: transform var(--dur-slow) var(--ease-reveal); }
 .plp { grid-template-columns: 220px minmax(0, 1fr); gap: 44px; }
+/* Móvil y tablet: los filtros no caben en columna junto a la rejilla. El CSS de
+   página se inyecta DESPUÉS de theme.css, así que sin este media query ganaba la
+   rejilla de 2 columnas incluso a 390px y las tarjetas se salían de la pantalla. */
+@media (max-width: 1080px) { .plp { grid-template-columns: 1fr; gap: 32px; } }
 .plp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .pcard .imgw { aspect-ratio: 1 / 1; max-height: 240px; width: 100%; }
 .pcard .body { padding: 16px 16px 20px; gap: 7px; }
 .pcard h3 { font-size: 14.5px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.pcard .dotlist { font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+.pcard .dotlist { font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; min-width: 0; }
 .pcard .row { margin-top: 4px; flex-wrap: wrap; row-gap: 2px; }
 .pcard .arrow-link { font-size: 11px; }
 .pcard .avail { font-family: var(--font-sans); font-size: 10.5px; font-weight: 600;
@@ -97,7 +101,9 @@
 .quote-card { padding: 24px; }
 .quote-card h3 { font-size: 18px; }
 @media (max-width: 1023px) { .plp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 640px) { .plp-grid { grid-template-columns: 1fr; } }
+/* minmax(0,1fr): con `1fr` la pista no podía ser más angosta que el contenido
+   mínimo de la tarjeta (~348px) y la rejilla se salía en pantallas de 360px. */
+@media (max-width: 640px) { .plp-grid { grid-template-columns: minmax(0, 1fr); } }
 .filters .flink { font-size: 12px; color: var(--accent-text); border-bottom: none; display: inline-block; margin-top: 6px; }
 .filters .fnote { font-size: 11.5px; color: var(--fg-muted); line-height: 1.5; margin-top: 4px; }
 .fgroup .swatches { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
@@ -158,16 +164,16 @@
       <div class="mega-panel mega-flyout" data-mega>
         <div class="mega-flyout-main">
           <div class="mega-rail" role="tablist" aria-label="Categorías de producto">
-            <button class="mega-cat" data-pane="cocina" data-href="categoria-cocina-y-bar.html" data-img="assets/photos/cat-cocina-bar.webp" data-pos="30% 50%" data-label="Cocina y Bar">Cocina y Bar</button>
-            <button class="mega-cat" data-pane="exterior" data-href="categoria-exterior.html" data-img="assets/photos/cat-exterior-asador.webp" data-label="Exterior">Exterior</button>
-            <button class="mega-cat" data-pane="electro" data-href="categoria-electrodomesticos-menores.html" data-img="assets/photos/cat-electro-menores-kitchenaid-mixer.webp" data-label="Electrodomésticos menores">Electrodomésticos menores</button>
-            <button class="mega-cat" data-pane="lavanderia" data-href="categoria-lavanderia.html" data-img="assets/photos/cat-cuidado-ropa.webp" data-label="Lavandería">Lavandería</button>
-            <button class="mega-cat" data-pane="banos" data-href="categoria-banos.html" data-img="assets/photos/cat-banos.webp" data-label="Baños">Baños</button>
-            <button class="mega-cat" data-pane="minisplits" data-href="categoria-minisplits.html" data-img="assets/photos/minisplit.webp" data-label="Minisplits">Minisplits</button>
-            <button class="mega-cat" data-pane="vapor" data-href="categoria-vapor-y-sauna.html" data-img="assets/photos/cat-vapor-sauna.webp" data-label="Vapor y Sauna">Vapor y Sauna</button>
-            <button class="mega-cat" data-pane="wellness" data-href="categoria-wellness.html" data-img="assets/photos/cat-wellness.webp" data-label="Wellness">Wellness</button>
-            <button class="mega-cat" data-pane="recubrimientos" data-href="categoria-recubrimientos-y-superficies.html" data-img="assets/photos/cat-recubrimientos.webp" data-label="Recubrimientos y Superficies">Recubrimientos y Superficies</button>
-            <button class="mega-cat" data-pane="chimeneas" data-href="categoria-chimeneas-y-calentadores.html" data-img="assets/photos/cat-chimeneas.webp" data-label="Chimeneas &amp; Calentadores">Chimeneas &amp; Calentadores</button>
+            <button class="mega-cat" data-pane="cocina" data-href="categoria-cocina-y-bar.html" data-img="assets/photos/cat-cocina-bar.webp" data-menu-img="assets/photos/menu/cat-cocina-bar.webp" data-pos="30% 50%" data-label="Cocina y Bar">Cocina y Bar</button>
+            <button class="mega-cat" data-pane="exterior" data-href="categoria-exterior.html" data-img="assets/photos/cat-exterior-asador.webp" data-menu-img="assets/photos/menu/cat-exterior-asador.webp" data-label="Exterior">Exterior</button>
+            <button class="mega-cat" data-pane="electro" data-href="categoria-electrodomesticos-menores.html" data-img="assets/photos/cat-electro-menores-kitchenaid-mixer.webp" data-menu-img="assets/photos/menu/cat-electro-menores-kitchenaid-mixer.webp" data-label="Electrodomésticos menores">Electrodomésticos menores</button>
+            <button class="mega-cat" data-pane="lavanderia" data-href="categoria-lavanderia.html" data-img="assets/photos/cat-cuidado-ropa.webp" data-menu-img="assets/photos/menu/cat-cuidado-ropa.webp" data-label="Lavandería">Lavandería</button>
+            <button class="mega-cat" data-pane="banos" data-href="categoria-banos.html" data-img="assets/photos/cat-banos.webp" data-menu-img="assets/photos/menu/cat-banos.webp" data-label="Baños">Baños</button>
+            <button class="mega-cat" data-pane="minisplits" data-href="categoria-minisplits.html" data-img="assets/photos/minisplit.webp" data-menu-img="assets/photos/menu/minisplit.webp" data-label="Minisplits">Minisplits</button>
+            <button class="mega-cat" data-pane="vapor" data-href="categoria-vapor-y-sauna.html" data-img="assets/photos/cat-vapor-sauna.webp" data-menu-img="assets/photos/menu/cat-vapor-sauna.webp" data-label="Vapor y Sauna">Vapor y Sauna</button>
+            <button class="mega-cat" data-pane="wellness" data-href="categoria-wellness.html" data-img="assets/photos/cat-wellness.webp" data-menu-img="assets/photos/menu/cat-wellness.webp" data-label="Wellness">Wellness</button>
+            <button class="mega-cat" data-pane="recubrimientos" data-href="categoria-recubrimientos-y-superficies.html" data-img="assets/photos/cat-recubrimientos.webp" data-menu-img="assets/photos/menu/cat-recubrimientos.webp" data-label="Recubrimientos y Superficies">Recubrimientos y Superficies</button>
+            <button class="mega-cat" data-pane="chimeneas" data-href="categoria-chimeneas-y-calentadores.html" data-img="assets/photos/cat-chimeneas.webp" data-menu-img="assets/photos/menu/cat-chimeneas.webp" data-label="Chimeneas &amp; Calentadores">Chimeneas &amp; Calentadores</button>
           </div>
           <div class="mega-detail">
             <div class="mega-pane" data-pane="cocina"><div class="mega-subcols is-fixed">
@@ -441,7 +447,7 @@
  {"@type":"ListItem","position":3,"name":"Lavavajillas","item":"https://www.homea.mx/productos/cocina-y-bar/lavavajillas"}
 ]}
 </script>
-<script src="v2.js?v=30"></script>
+<script src="v2.js?v=33"></script>
 <script src="wishlist.js?v=5"></script>
 <script src="cart.js?v=3"></script>
 <script src="tipos.js?v=1"></script>
