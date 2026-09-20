@@ -1,0 +1,1121 @@
+{
+  "_nota": "Registro de marcas de /marcas/<slug>. GENERADO por scripts/build-marcas.mjs (`npm run marcas`) desde preview/marcas.html, public/assets/ y data/listas-precios.json. No editar a mano, salvo 'descripcion', que el generador conserva. Marca nueva: agrega su tile en preview/marcas.html, su logo en public/assets/logos/, su foto en public/assets/photos/brands/ y su nombre en NOMBRES del script; luego corre `npm run marcas`.",
+  "categorias": {
+    "cocina": {
+      "nombre": "Cocina y Bar",
+      "ruta": "/productos/cocina-y-bar"
+    },
+    "tarjas": {
+      "nombre": "Tarjas y Monomandos",
+      "ruta": "/productos/cocina-y-bar/tarjas-y-griferia"
+    },
+    "trituradores": {
+      "nombre": "Trituradores",
+      "ruta": "/productos/cocina-y-bar/trituradores"
+    },
+    "asadores": {
+      "nombre": "Asadores y Hornos",
+      "ruta": "/productos/exterior/asadores-y-hornos"
+    },
+    "banos": {
+      "nombre": "Baños",
+      "ruta": "/productos/banos"
+    },
+    "menores": {
+      "nombre": "Electrodomésticos menores",
+      "ruta": "/productos/electrodomesticos-menores"
+    },
+    "vapor": {
+      "nombre": "Vapor y Sauna",
+      "ruta": "/productos/vapor-y-sauna"
+    }
+  },
+  "gamas": {
+    "premium": "Premium",
+    "residencial": "Residencial",
+    "media": "Media",
+    "economica": "Económica"
+  },
+  "marcas": [
+    {
+      "slug": "acros",
+      "nombre": "Acros",
+      "gama": [
+        "economica"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/acros.webp",
+      "foto": "/assets/photos/brands/acros.webp",
+      "listas": []
+    },
+    {
+      "slug": "alfa-forni",
+      "nombre": "Alfa Forni",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "asadores"
+      ],
+      "logo": "/assets/logos/alfa-forni.webp",
+      "foto": "/assets/photos/brands/alfa-forni.webp",
+      "listas": []
+    },
+    {
+      "slug": "alfresco",
+      "nombre": "Alfresco",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "asadores"
+      ],
+      "logo": "/assets/logos/alfresco.webp",
+      "foto": "/assets/photos/brands/alfresco.webp",
+      "listas": []
+    },
+    {
+      "slug": "american-standard",
+      "nombre": "American Standard",
+      "gama": [
+        "media"
+      ],
+      "categorias": [
+        "tarjas",
+        "banos"
+      ],
+      "logo": "/assets/logos/american-standard.webp",
+      "foto": "/assets/photos/brands/american-standard.webp",
+      "listas": [
+        "american-standard"
+      ]
+    },
+    {
+      "slug": "artisan",
+      "nombre": "Artisan",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "asadores"
+      ],
+      "logo": "/assets/logos/artisan.webp",
+      "foto": "/assets/photos/brands/artisan.webp",
+      "listas": []
+    },
+    {
+      "slug": "asko",
+      "nombre": "ASKO",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/asko.webp",
+      "foto": "/assets/photos/brands/asko.webp",
+      "listas": [
+        "asko"
+      ]
+    },
+    {
+      "slug": "axcent",
+      "nombre": "Axcent",
+      "gama": [
+        "economica"
+      ],
+      "categorias": [
+        "cocina",
+        "tarjas",
+        "banos"
+      ],
+      "logo": "/assets/logos/axcent.webp",
+      "foto": "/assets/photos/brands/axcent.webp",
+      "listas": [
+        "axcent-banos",
+        "axcent-tarjas-y-monomandos"
+      ]
+    },
+    {
+      "slug": "axor",
+      "nombre": "AXOR",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "banos"
+      ],
+      "logo": "/assets/logos/axor.webp",
+      "foto": "/assets/photos/brands/axor.webp",
+      "listas": []
+    },
+    {
+      "slug": "benessi",
+      "nombre": "Benessi",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/benessi.webp",
+      "foto": "/assets/photos/brands/benessi.webp",
+      "listas": []
+    },
+    {
+      "slug": "bertazzoni",
+      "nombre": "Bertazzoni",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/bertazzoni.webp",
+      "foto": "/assets/photos/brands/bertazzoni.webp",
+      "listas": []
+    },
+    {
+      "slug": "blanco",
+      "nombre": "Blanco",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "tarjas"
+      ],
+      "logo": "/assets/logos/blanco.webp",
+      "foto": "/assets/photos/brands/blanco.webp",
+      "listas": []
+    },
+    {
+      "slug": "blaze",
+      "nombre": "Blaze",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "asadores"
+      ],
+      "logo": "/assets/logos/blaze.webp",
+      "foto": "/assets/photos/brands/blaze.webp",
+      "listas": []
+    },
+    {
+      "slug": "bosch",
+      "nombre": "Bosch",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "cocina",
+        "menores"
+      ],
+      "logo": "/assets/logos/bosch.webp",
+      "foto": "/assets/photos/brands/bosch.webp",
+      "listas": []
+    },
+    {
+      "slug": "brizo",
+      "nombre": "Brizo",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "tarjas",
+        "banos"
+      ],
+      "logo": "/assets/logos/brizo.webp",
+      "foto": "/assets/photos/brands/brizo.webp",
+      "listas": []
+    },
+    {
+      "slug": "broil-king",
+      "nombre": "Broil King",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "asadores"
+      ],
+      "logo": "/assets/logos/broil-king.webp",
+      "foto": "/assets/photos/brands/broil-king.webp",
+      "listas": []
+    },
+    {
+      "slug": "cafe",
+      "nombre": "Café",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/cafe.png",
+      "foto": "/assets/photos/brands/cafe.webp",
+      "listas": []
+    },
+    {
+      "slug": "cove",
+      "nombre": "Cove",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/cove.png",
+      "foto": "/assets/photos/brands/cove.webp",
+      "listas": []
+    },
+    {
+      "slug": "coyote",
+      "nombre": "Coyote",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "asadores"
+      ],
+      "logo": "/assets/logos/coyote.webp",
+      "foto": "/assets/photos/brands/coyote.webp",
+      "listas": [
+        "coyote-asadores"
+      ]
+    },
+    {
+      "slug": "dawn",
+      "nombre": "Dawn",
+      "gama": [
+        "residencial",
+        "economica"
+      ],
+      "categorias": [
+        "tarjas"
+      ],
+      "logo": "/assets/logos/dawn.webp",
+      "foto": "/assets/photos/brands/dawn.webp",
+      "listas": []
+    },
+    {
+      "slug": "delta",
+      "nombre": "Delta",
+      "gama": [
+        "residencial",
+        "media"
+      ],
+      "categorias": [
+        "tarjas",
+        "banos"
+      ],
+      "logo": "/assets/logos/delta.png",
+      "foto": "/assets/photos/brands/delta.webp",
+      "listas": []
+    },
+    {
+      "slug": "dexa",
+      "nombre": "Dexa",
+      "gama": [
+        "residencial",
+        "media"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/dexa.webp",
+      "foto": "/assets/photos/brands/dexa.webp",
+      "listas": []
+    },
+    {
+      "slug": "eclipse",
+      "nombre": "Eclipse",
+      "gama": [
+        "residencial",
+        "economica"
+      ],
+      "categorias": [
+        "tarjas"
+      ],
+      "logo": "/assets/logos/eclipse.webp",
+      "foto": "/assets/photos/brands/eclipse.webp",
+      "listas": []
+    },
+    {
+      "slug": "electrolux",
+      "nombre": "Electrolux",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/electrolux.webp",
+      "foto": "/assets/photos/brands/electrolux.webp",
+      "listas": [
+        "frigidaire-electrolux"
+      ]
+    },
+    {
+      "slug": "elica",
+      "nombre": "Elica",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/elica.webp",
+      "foto": "/assets/photos/brands/elica.webp",
+      "listas": [
+        "elica-campanas"
+      ]
+    },
+    {
+      "slug": "elkay",
+      "nombre": "Elkay",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "tarjas"
+      ],
+      "logo": "/assets/logos/elkay.webp",
+      "foto": "/assets/photos/brands/elkay.webp",
+      "listas": []
+    },
+    {
+      "slug": "falmec",
+      "nombre": "Falmec",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/falmec.webp",
+      "foto": "/assets/photos/brands/falmec.webp",
+      "listas": []
+    },
+    {
+      "slug": "franke",
+      "nombre": "Franke",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "tarjas"
+      ],
+      "logo": "/assets/logos/franke.png",
+      "foto": "/assets/photos/brands/franke.avif",
+      "listas": []
+    },
+    {
+      "slug": "frigidaire",
+      "nombre": "Frigidaire",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/frigidaire.webp",
+      "foto": "/assets/photos/brands/frigidaire.webp",
+      "listas": [
+        "frigidaire-electrolux"
+      ]
+    },
+    {
+      "slug": "fulgor-milano",
+      "nombre": "Fulgor Milano",
+      "gama": [
+        "premium",
+        "residencial"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/fulgor-milano.webp",
+      "foto": "/assets/photos/brands/fulgor-milano.webp",
+      "listas": []
+    },
+    {
+      "slug": "gaggenau",
+      "nombre": "Gaggenau",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/gaggenau.webp",
+      "foto": "/assets/photos/brands/gaggenau.webp",
+      "listas": []
+    },
+    {
+      "slug": "ge-profile",
+      "nombre": "GE Profile",
+      "gama": [
+        "media",
+        "economica"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/ge-profile.webp",
+      "foto": "/assets/photos/brands/ge-profile.webp",
+      "listas": []
+    },
+    {
+      "slug": "gessi",
+      "nombre": "Gessi",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "tarjas"
+      ],
+      "logo": "/assets/logos/gessi.png",
+      "foto": "/assets/photos/brands/gessi.webp",
+      "listas": []
+    },
+    {
+      "slug": "haier",
+      "nombre": "Haier",
+      "gama": [
+        "media",
+        "economica"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/haier.png",
+      "foto": "/assets/photos/brands/haier.avif",
+      "listas": [
+        "haier"
+      ]
+    },
+    {
+      "slug": "hansgrohe",
+      "nombre": "Hansgrohe",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "banos"
+      ],
+      "logo": "/assets/logos/hansgrohe.webp",
+      "foto": "/assets/photos/brands/hansgrohe.webp",
+      "listas": [
+        "hansgrohe-essentials"
+      ]
+    },
+    {
+      "slug": "hoshizaki",
+      "nombre": "Hoshizaki",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/hoshizaki.png",
+      "foto": "/assets/photos/brands/hoshizaki.webp",
+      "listas": []
+    },
+    {
+      "slug": "i-drain",
+      "nombre": "I-Drain",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "banos"
+      ],
+      "logo": "/assets/logos/i-drain.webp",
+      "foto": "/assets/photos/brands/i-drain.webp",
+      "listas": []
+    },
+    {
+      "slug": "insinkerator",
+      "nombre": "InSinkErator",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "trituradores"
+      ],
+      "logo": "/assets/logos/insinkerator.png",
+      "foto": "/assets/photos/brands/insinkerator.webp",
+      "listas": []
+    },
+    {
+      "slug": "invisacook",
+      "nombre": "Invisacook",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/invisacook.webp",
+      "foto": "/assets/photos/brands/invisacook.webp",
+      "listas": []
+    },
+    {
+      "slug": "io-mabe",
+      "nombre": "IO Mabe",
+      "gama": [
+        "media",
+        "economica"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/io-mabe.png",
+      "foto": "/assets/photos/brands/io-mabe.webp",
+      "listas": [
+        "io-mabe",
+        "ge-profile"
+      ]
+    },
+    {
+      "slug": "kalt",
+      "nombre": "Kalt",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/kalt.webp",
+      "foto": "/assets/photos/brands/kalt.webp",
+      "listas": []
+    },
+    {
+      "slug": "kamado-joe",
+      "nombre": "Kamado Joe",
+      "gama": [
+        "premium",
+        "residencial"
+      ],
+      "categorias": [
+        "asadores"
+      ],
+      "logo": "/assets/logos/kamado-joe.webp",
+      "foto": "/assets/photos/brands/kamado-joe.webp",
+      "listas": []
+    },
+    {
+      "slug": "kele-master-sinks",
+      "nombre": "Kele Master Sinks",
+      "gama": [
+        "media",
+        "economica"
+      ],
+      "categorias": [
+        "tarjas"
+      ],
+      "logo": "/assets/logos/kele-master-sinks.webp",
+      "foto": "/assets/photos/brands/kele-master-sinks.webp",
+      "listas": [
+        "kele"
+      ]
+    },
+    {
+      "slug": "keuco",
+      "nombre": "Keuco",
+      "gama": [
+        "media"
+      ],
+      "categorias": [
+        "banos"
+      ],
+      "logo": "/assets/logos/keuco.webp",
+      "foto": "/assets/photos/brands/keuco.webp",
+      "listas": []
+    },
+    {
+      "slug": "kitchenaid",
+      "nombre": "KitchenAid",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "cocina",
+        "asadores"
+      ],
+      "logo": "/assets/logos/kitchenaid.webp",
+      "foto": "/assets/photos/brands/kitchenaid.webp",
+      "listas": []
+    },
+    {
+      "slug": "la-cornue",
+      "nombre": "La Cornue",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/la-cornue.webp",
+      "foto": "/assets/photos/brands/la-cornue.webp",
+      "listas": []
+    },
+    {
+      "slug": "lynx",
+      "nombre": "Lynx",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "asadores"
+      ],
+      "logo": "/assets/logos/lynx.png",
+      "foto": "/assets/photos/brands/lynx.webp",
+      "listas": []
+    },
+    {
+      "slug": "mabe",
+      "nombre": "Mabe",
+      "gama": [
+        "economica"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/mabe.webp",
+      "foto": "/assets/photos/brands/mabe.webp",
+      "listas": [
+        "mabe"
+      ]
+    },
+    {
+      "slug": "masterbuilt",
+      "nombre": "Masterbuilt",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "asadores"
+      ],
+      "logo": "/assets/logos/masterbuilt.png",
+      "foto": "/assets/photos/brands/masterbuilt.webp",
+      "listas": []
+    },
+    {
+      "slug": "maytag",
+      "nombre": "Maytag",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/maytag.webp",
+      "foto": "/assets/photos/brands/maytag.webp",
+      "listas": []
+    },
+    {
+      "slug": "miele",
+      "nombre": "Miele",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina",
+        "menores"
+      ],
+      "logo": "/assets/logos/miele.webp",
+      "foto": "/assets/photos/brands/miele.webp",
+      "listas": []
+    },
+    {
+      "slug": "moen",
+      "nombre": "Moen",
+      "gama": [
+        "media",
+        "economica"
+      ],
+      "categorias": [
+        "tarjas",
+        "trituradores",
+        "banos"
+      ],
+      "logo": "/assets/logos/moen.webp",
+      "foto": "/assets/photos/brands/moen.webp",
+      "listas": [
+        "moen"
+      ]
+    },
+    {
+      "slug": "monogram",
+      "nombre": "Monogram",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/monogram.png",
+      "foto": "/assets/photos/brands/monogram.webp",
+      "listas": []
+    },
+    {
+      "slug": "mont-alpi",
+      "nombre": "Mont Alpi",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "asadores"
+      ],
+      "logo": "/assets/logos/mont-alpi.webp",
+      "foto": "/assets/photos/brands/mont-alpi.webp",
+      "listas": []
+    },
+    {
+      "slug": "mr-steam",
+      "nombre": "Mr. Steam",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "vapor"
+      ],
+      "logo": "/assets/logos/mr-steam.webp",
+      "foto": "/assets/photos/brands/mr-steam.webp",
+      "listas": []
+    },
+    {
+      "slug": "nobili",
+      "nombre": "Nobili",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "tarjas",
+        "banos"
+      ],
+      "logo": "/assets/logos/nobili.webp",
+      "foto": "/assets/photos/brands/nobili.webp",
+      "listas": []
+    },
+    {
+      "slug": "peerless",
+      "nombre": "Peerless",
+      "gama": [
+        "residencial",
+        "media"
+      ],
+      "categorias": [
+        "tarjas"
+      ],
+      "logo": "/assets/logos/peerless.png",
+      "foto": "/assets/photos/brands/peerless.webp",
+      "listas": []
+    },
+    {
+      "slug": "pitt-cooking",
+      "nombre": "Pitt Cooking",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/pitt-cooking.png",
+      "foto": "/assets/photos/brands/pitt-cooking.webp",
+      "listas": [
+        "pitt-cooking"
+      ]
+    },
+    {
+      "slug": "poletti-sinks",
+      "nombre": "Poletti Sinks",
+      "gama": [
+        "residencial",
+        "media"
+      ],
+      "categorias": [
+        "tarjas"
+      ],
+      "logo": "/assets/logos/poletti-sinks.webp",
+      "foto": "/assets/photos/brands/poletti-sinks.webp",
+      "listas": []
+    },
+    {
+      "slug": "sapphire",
+      "nombre": "Sapphire",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/sapphire.webp",
+      "foto": "/assets/photos/brands/sapphire.webp",
+      "listas": []
+    },
+    {
+      "slug": "schock",
+      "nombre": "Schock",
+      "gama": [
+        "residencial",
+        "media"
+      ],
+      "categorias": [
+        "tarjas"
+      ],
+      "logo": "/assets/logos/schock.png",
+      "foto": "/assets/photos/brands/schock.webp",
+      "listas": []
+    },
+    {
+      "slug": "scotsman",
+      "nombre": "Scotsman",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/scotsman.png",
+      "foto": "/assets/photos/brands/scotsman.webp",
+      "listas": []
+    },
+    {
+      "slug": "sedona-by-lynx",
+      "nombre": "Sedona by Lynx",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "asadores"
+      ],
+      "logo": "/assets/logos/sedona-by-lynx.png",
+      "foto": "/assets/photos/brands/sedona-by-lynx.webp",
+      "listas": []
+    },
+    {
+      "slug": "smeg",
+      "nombre": "Smeg",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "cocina",
+        "menores",
+        "tarjas"
+      ],
+      "logo": "/assets/logos/smeg.webp",
+      "foto": "/assets/photos/brands/smeg.webp",
+      "listas": []
+    },
+    {
+      "slug": "sub-zero",
+      "nombre": "Sub-Zero",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/sub-zero.webp",
+      "foto": "/assets/photos/brands/sub-zero.webp",
+      "listas": [
+        "sub-zero"
+      ]
+    },
+    {
+      "slug": "summit",
+      "nombre": "Summit",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/summit.webp",
+      "foto": "/assets/photos/brands/summit.webp",
+      "listas": [
+        "summit"
+      ]
+    },
+    {
+      "slug": "supra",
+      "nombre": "Supra",
+      "gama": [
+        "economica"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/supra.webp",
+      "foto": "/assets/photos/brands/supra.webp",
+      "listas": [
+        "supra"
+      ]
+    },
+    {
+      "slug": "tecnolam",
+      "nombre": "Tecnolam",
+      "gama": [
+        "media",
+        "economica"
+      ],
+      "categorias": [
+        "cocina",
+        "tarjas"
+      ],
+      "logo": "/assets/logos/tecnolam.webp",
+      "foto": "/assets/photos/brands/tecnolam.webp",
+      "listas": [
+        "tecnolam-tarjas-y-monomandos"
+      ]
+    },
+    {
+      "slug": "teka",
+      "nombre": "Teka",
+      "gama": [
+        "media",
+        "economica"
+      ],
+      "categorias": [
+        "cocina",
+        "tarjas",
+        "trituradores"
+      ],
+      "logo": "/assets/logos/teka.webp",
+      "foto": "/assets/photos/brands/teka.webp",
+      "listas": [
+        "teka-tarjas-y-monomandos"
+      ]
+    },
+    {
+      "slug": "the-galley",
+      "nombre": "The Galley",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "tarjas"
+      ],
+      "logo": "/assets/logos/the-galley.png",
+      "foto": "/assets/photos/brands/the-galley.webp",
+      "listas": []
+    },
+    {
+      "slug": "thermador",
+      "nombre": "Thermador",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/thermador.webp",
+      "foto": "/assets/photos/brands/thermador.webp",
+      "listas": []
+    },
+    {
+      "slug": "thor",
+      "nombre": "Thor",
+      "gama": [
+        "premium",
+        "residencial"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/thor.webp",
+      "foto": "/assets/photos/brands/thor.webp",
+      "listas": []
+    },
+    {
+      "slug": "tradewind",
+      "nombre": "Trade-Wind",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/tradewind.png",
+      "foto": "/assets/photos/brands/tradewind.webp",
+      "listas": []
+    },
+    {
+      "slug": "u-line",
+      "nombre": "U-Line",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/u-line.webp",
+      "foto": "/assets/photos/brands/u-line.avif",
+      "listas": []
+    },
+    {
+      "slug": "viking",
+      "nombre": "Viking",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina",
+        "menores",
+        "asadores"
+      ],
+      "logo": "/assets/logos/viking.webp",
+      "foto": "/assets/photos/brands/viking.webp",
+      "listas": [
+        "viking"
+      ]
+    },
+    {
+      "slug": "whirlpool",
+      "nombre": "Whirlpool",
+      "gama": [
+        "media",
+        "economica"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "logo": "/assets/logos/whirlpool.webp",
+      "foto": "/assets/photos/brands/whirlpool.webp",
+      "listas": []
+    },
+    {
+      "slug": "wolf",
+      "nombre": "Wolf",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "cocina",
+        "asadores"
+      ],
+      "logo": "/assets/logos/wolf.webp",
+      "foto": "/assets/photos/brands/wolf.webp",
+      "listas": []
+    },
+    {
+      "slug": "wppo",
+      "nombre": "WPPO",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "asadores"
+      ],
+      "logo": "/assets/logos/wppo.webp",
+      "foto": "/assets/photos/brands/wppo.webp",
+      "listas": []
+    }
+  ]
+}

@@ -29,6 +29,11 @@ export function listasPublicadas(): ListaPrecios[] {
   return (listas.marcas as Marca[]).flatMap((m) => m.documentos).filter((d) => d.url);
 }
 
+/** Una lista por su slug — lo que guarda `listas[]` de cada marca en data/marcas.json. */
+export function listaPorSlug(slug: string): ListaPrecios | undefined {
+  return (listas.marcas as Marca[]).flatMap((m) => m.documentos).find((d) => d.slug === slug);
+}
+
 const escapar = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
