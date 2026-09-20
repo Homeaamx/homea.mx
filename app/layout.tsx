@@ -5,6 +5,7 @@ import "@/styles/theme.css";
 import "@/styles/guias.css";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { getChrome } from "@/lib/preview";
+import { inyectarTipoCambio, obtenerTipoCambio } from "@/lib/tipoCambio";
 import BuscadorOverlay from "@/components/BuscadorOverlay";
 import CarritoProvider from "@/components/CarritoProvider";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
@@ -23,9 +24,13 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.png" },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Nav + footer compartidos: markup exacto del preview v2 (reutilizado en todo el sitio).
   const { nav, footer } = getChrome();
+  // Tipo de cambio del día: se resuelve en el servidor (consulta cacheada un día
+  // y revalidada por el cron) y viaja ya escrito en la barra superior. Antes lo
+  // pedía el navegador con el token de Banxico incrustado en /v2.js.
+  const navConTipoCambio = inyectarTipoCambio(nav, await obtenerTipoCambio());
 
   return (
     <html lang="es">
@@ -41,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* Sin JS nadie añade .bg-ready: se pintan todos los fondos de una vez. */}
           <style>{`.mq-chip,.brandtile,.cat-media,.ss-bg{background-image:var(--lazy-bg)}`}</style>
         </noscript>
-        <div className="site-chrome" dangerouslySetInnerHTML={{ __html: nav }} />
+        <div className="site-chrome" dangerouslySetInnerHTML={{ __html: navConTipoCambio }} />
         <main>{children}</main>
         <div dangerouslySetInnerHTML={{ __html: footer }} />
         {/* Buscador de catálogo: se engancha a la lupa del nav (a.nav-ic-search). */}

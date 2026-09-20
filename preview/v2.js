@@ -51,18 +51,23 @@
     }
 
     /* ---------- Tipo de cambio del día (slot de temporada del ubar) ----------
-       Valor oficial = FIX que publica el DOF (= Banxico, serie SF43718).
-       En producción (Next.js) esto se resuelve en el servidor una vez al día. */
-    var BANXICO_TOKEN = "7e566ca526db6444d2bcb4cead157044034797369e5c0dd797be44027321ce00";
+       El valor lo resuelve el SERVIDOR una vez al día (lib/tipoCambio.ts, serie
+       SF43718 del SIE de Banxico) y llega ya renderizado con data-fx-servidor.
+       Aquí NO vive ningún token: el que había antes en este archivo se servía a
+       todo visitante. Este bloque solo cubre el preview standalone, que se abre
+       sin Next.js, y para eso basta una API pública sin credenciales. */
     var fxEl = document.getElementById("u-fx");
-    if (fxEl) {
+    if (fxEl && !fxEl.hasAttribute("data-fx-servidor")) {
       var fxNum = fxEl.querySelector("strong");
       var setFx = function (rate) {
         var n = parseFloat(rate);
         if (fxNum && n) { fxNum.textContent = n.toFixed(2); window.__homeaFxRate = n; }
       };
-      var fromMarket = function () {
-        return fetch("https://open.er-api.com/v6/latest/USD")
+      if (window.__homeaFxRate) {
+        /* Ya se obtuvo en esta sesión: re-aplicar al nav nuevo sin refetch. */
+        setFx(window.__homeaFxRate);
+      } else {
+        fetch("https://open.er-api.com/v6/latest/USD")
           .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
           .then(function (d) {
             if (d && d.rates && d.rates.MXN) { setFx(d.rates.MXN); }
@@ -72,24 +77,8 @@
             return fetch("https://api.frankfurter.app/latest?from=USD&to=MXN")
               .then(function (r) { return r.json(); })
               .then(function (d) { if (d && d.rates && d.rates.MXN) { setFx(d.rates.MXN); } });
-          });
-      };
-      if (window.__homeaFxRate) {
-        /* Ya se obtuvo en esta sesión: re-aplicar al nav nuevo sin refetch. */
-        setFx(window.__homeaFxRate);
-      } else if (BANXICO_TOKEN) {
-        fetch("https://www.banxico.org.mx/SieAPIRest/service/v1/series/SF43718/datos/oportuno?token=" + BANXICO_TOKEN + "&mediaType=json")
-          .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
-          .then(function (d) {
-            var s = d && d.bmx && d.bmx.series && d.bmx.series[0];
-            var dato = s && s.datos && s.datos[0];
-            if (dato && dato.dato) { setFx(dato.dato); }
-            else { return Promise.reject(); }
           })
-          .catch(fromMarket)
           .catch(function () { /* offline: se conserva el valor estático de respaldo */ });
-      } else {
-        fromMarket().catch(function () { /* offline: respaldo estático */ });
       }
     }
 
