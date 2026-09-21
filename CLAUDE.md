@@ -77,6 +77,7 @@ Migramos de OXATIS → Next.js conservando el dominio `homea.mx`. El riesgo #1 e
 - `docs/PLAN-DE-FASES.md` — las 6 fases y su estado.
 - `docs/PLAYBOOK-MIGRACION-SEO.md` — checklist accionable de migración (la columna vertebral SEO).
 - `docs/PLAN-REDIRECTS-MIGRACION.md` — plan de redirects 301 (estructura Google, reglas de mapeo, Tier 1–2).
+- `docs/PENDIENTES-CARRITO-SHOPIFY.md` — **qué falta para que el carrito hable de verdad con Shopify**: los 4 pendientes de configuración (token Headless, token Banxico, `CRON_SECRET`, quitar la contraseña de la tienda), el riesgo de moneda y cómo verificar cada uno. Leer ANTES de mergear o de dar por buena la integración.
 - `docs/PDFS-OXATIS-PENDIENTES.md` — PDFs de OXATIS re-hospedados en Shopify Files: los que esperan aprobación de Carla y los que ya murieron en OXATIS (con enlaces Wayback).
 - `docs/PAGINAS-DE-MARCA.md` — `/marcas/<slug>`: una página por marca (77) desde `data/marcas.json`. Cómo agregar una marca y qué cambiar cuando llegue el catálogo.
 - `docs/ESTRATEGIA-IMAGENES.md` — dónde se almacenan las imágenes (producto→Shopify CDN, editoriales→Vercel/`next/image`), optimización de carga y **nomenclatura SEO de archivos** (descriptiva + trends de búsqueda).

@@ -132,6 +132,31 @@ function indice(): Entrada[] {
   return cache;
 }
 
+/* ---------- Acceso por SKU -----------------------------------------------
+ * El SKU es la llave canónica del proyecto: la usan el maestro, el índice, las
+ * URLs de ficha (/producto/<sku en minúsculas>) y los mensajes de WhatsApp. El
+ * `handle` de Shopify, en cambio, es arbitrario ("200-series-24-oven-bop250612")
+ * y puede cambiar sin avisar, así que NUNCA se deriva: se consulta aquí.        */
+
+let porSkuCache: Map<string, ProductoIndexado> | null = null;
+
+function mapaPorSku(): Map<string, ProductoIndexado> {
+  if (porSkuCache) return porSkuCache;
+  const productos = (indice_ as { productos: ProductoIndexado[] }).productos;
+  porSkuCache = new Map(productos.map((p) => [p.sku.toUpperCase(), p]));
+  return porSkuCache;
+}
+
+/** Ficha del índice para un SKU, o null si el catálogo no lo conoce. */
+export function productoPorSku(sku: string): ProductoIndexado | null {
+  return mapaPorSku().get(sku.trim().toUpperCase()) ?? null;
+}
+
+/** Handle de Shopify de un SKU, según el índice. */
+export function handleDeSku(sku: string): string | null {
+  return productoPorSku(sku)?.handle ?? null;
+}
+
 /** Precio con IVA, formateado a la mexicana con dos decimales. */
 export function precioConIva(base: number): string {
   return new Intl.NumberFormat("es-MX", {
