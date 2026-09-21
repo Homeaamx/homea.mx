@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { allGuiasUrls } from "@/lib/guias";
 import { listasPublicadas, rutaListaPrecios } from "@/lib/listasPrecios";
+import { rutaMarca, todasLasMarcas } from "@/lib/marcas";
 import { categoriaSlugs, subcategoriaParams } from "@/lib/preview";
 import { absUrl } from "@/lib/site";
 
@@ -53,5 +54,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...marketing, ...categorias, ...subcategorias, ...guias, ...listas];
+  // Una página por marca (/marcas/<slug>): el 11% de los clics de búsqueda
+  // traen el nombre de una marca, así que son entradas propias del sitemap.
+  const marcas = todasLasMarcas().map((m) => ({
+    url: absUrl(rutaMarca(m)),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...marketing, ...categorias, ...subcategorias, ...guias, ...marcas, ...listas];
 }

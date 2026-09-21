@@ -18,6 +18,11 @@ const SUBCATEGORIA_PREFIX = "subcategoria-";
 const SUBCATEGORIA_SEP = "--";
 // Prefijo de las fichas de producto del preview (producto-<slug>.html).
 const PRODUCTO_PREFIX = "producto-";
+// Prefijo de las páginas de marca (marca-<slug>.html → /marcas/<slug>). No existe
+// tal archivo en preview/: la página la genera app/marcas/[marca]/page.tsx desde
+// data/marcas.json. El nombre solo sirve para enlazarla desde el HTML del preview
+// (los tiles de marcas.html y el mega-menú de home.html).
+const MARCA_PREFIX = "marca-";
 
 // Mapeo de páginas del preview → rutas del sitio.
 const LINK_MAP: Record<string, string> = {
@@ -54,6 +59,8 @@ function mapTarget(file: string): string {
     return `/productos/${file.slice(CATEGORIA_PREFIX.length)}`;
   if (file.startsWith(PRODUCTO_PREFIX))
     return `/producto/${file.slice(PRODUCTO_PREFIX.length)}`;
+  if (file.startsWith(MARCA_PREFIX))
+    return `/marcas/${file.slice(MARCA_PREFIX.length)}`;
   return LINK_MAP[`${file}.html`] ?? "#";
 }
 
