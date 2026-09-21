@@ -20,7 +20,7 @@ const SALIDAS = [
   {
     k: "interno",
     label: "Motor interno",
-    img: `${IMG}-3b.jpg`,
+    img: `${IMG}-3b.webp`,
     cap: "Motor interno · salida a pared o techo",
     txt: (
       <>
@@ -32,7 +32,7 @@ const SALIDAS = [
   {
     k: "inline",
     label: "Motor inline",
-    img: `${IMG}-3c.jpg`,
+    img: `${IMG}-3c.webp`,
     cap: "Motor inline · salida a pared o techo",
     txt: (
       <>
@@ -44,7 +44,7 @@ const SALIDAS = [
   {
     k: "ext-pared",
     label: "Externo · pared",
-    img: `${IMG}-3d.jpg`,
+    img: `${IMG}-3d.webp`,
     cap: "Motor externo · salida a la pared",
     txt: (
       <>
@@ -56,7 +56,7 @@ const SALIDAS = [
   {
     k: "ext-techo",
     label: "Externo · techo",
-    img: `${IMG}-3e.jpg`,
+    img: `${IMG}-3e.webp`,
     cap: "Motor externo · salida al techo",
     txt: (
       <>
@@ -71,12 +71,12 @@ const VIDEO_DOWNDRAFT = "https://youtu.be/NZ2AsChtmjc";
 
 /** Las 9 láminas del overlay, todas montadas a la vez (ver .apc-imgs). */
 const LAMINAS = [
-  { src: `${IMG}-1.jpg`, alt: "Campana extractora comparada con campana purificadora" },
-  { src: `${IMG}-2.jpg`, alt: "Tipos de motores de extracción: interno, inline y externo, con sus potencias" },
-  { src: `${IMG}-3a.jpg`, alt: "Rutas posibles de la ductería de extracción dentro de la casa" },
+  { src: `${IMG}-1.webp`, alt: "Campana extractora comparada con campana purificadora" },
+  { src: `${IMG}-2.webp`, alt: "Tipos de motores de extracción: interno, inline y externo, con sus potencias" },
+  { src: `${IMG}-3a.webp`, alt: "Rutas posibles de la ductería de extracción dentro de la casa" },
   ...SALIDAS.map((s) => ({ src: s.img, alt: s.cap })),
-  { src: `${IMG}-4.jpg`, alt: "Campana downdraft con ductos por debajo del piso, recirculante o extractora" },
-  { src: `${IMG}-5.jpg`, alt: "Tuberías, ductos, codos y salidas de extracción no incluidos" },
+  { src: `${IMG}-4.webp`, alt: "Campana downdraft con ductos por debajo del piso, recirculante o extractora" },
+  { src: `${IMG}-5.webp`, alt: "Tuberías, ductos, codos y salidas de extracción no incluidos" },
 ];
 
 export default function AprendeCampanas() {
@@ -126,16 +126,16 @@ export default function AprendeCampanas() {
   const ultimo = paso === 5;
   const laminaActiva =
     paso === 0
-      ? `${IMG}-1.jpg`
+      ? `${IMG}-1.webp`
       : paso === 1
-        ? `${IMG}-2.jpg`
+        ? `${IMG}-2.webp`
         : paso === 2
-          ? `${IMG}-3a.jpg`
+          ? `${IMG}-3a.webp`
           : paso === 3
             ? SALIDAS[salida].img
             : paso === 4
-              ? `${IMG}-4.jpg`
-              : `${IMG}-5.jpg`;
+              ? `${IMG}-4.webp`
+              : `${IMG}-5.webp`;
 
   return (
     <>

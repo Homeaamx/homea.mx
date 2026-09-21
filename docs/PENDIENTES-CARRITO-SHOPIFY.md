@@ -51,6 +51,10 @@ POST https://homeashop.mx/api/2026-07/graphql.json      (sin token)
 
 ## 2. `BANXICO_TOKEN` — tipo de cambio del día
 
+✅ **Resuelto el 2026-09-21.** Token nuevo en `.env.local` y en Vercel (Production,
+Preview, Development). Verificado en local: la ficha dice `TC 17.22 · 21/09/2026`.
+En Vercel aplica desde el siguiente deployment.
+
 | | |
 |---|---|
 | **Desbloquea** | El FIX del día (serie `SF43718` del SIE de Banxico) en barra superior y fichas |
@@ -75,6 +79,10 @@ de bajo impacto (dato público de solo lectura, el riesgo real es consumo de cuo
 ---
 
 ## 3. `CRON_SECRET` — cron diario del tipo de cambio
+
+✅ **Resuelto el 2026-09-21.** Secreto aleatorio (64 hex) en `.env.local` y en Vercel
+(Production, Preview, Development). Verificado en local: 401 sin cabecera o con clave
+falsa, 200 con `Authorization: Bearer $CRON_SECRET` (`"fuente":"banxico"`).
 
 | | |
 |---|---|
