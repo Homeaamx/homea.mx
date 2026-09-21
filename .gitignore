@@ -44,3 +44,4 @@ PROYECTOS/
 
 # Mapa de redirects resuelto en cada build (scripts/build-redirects.mjs)
 data/redirects/oxatis-map.json
+.vercel
