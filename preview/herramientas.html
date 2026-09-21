@@ -244,6 +244,33 @@
   .hrm-finder form > button { flex: 1 1 100%; justify-content: center; }
 }
 
+/* Secciones en construcción (02–04): el contenido queda desenfocado e inerte
+   y encima va una tarjeta de "Próximamente". Para publicar una sección basta con
+   quitarle la clase is-soon, el inert del container y su .soon-veil. */
+.sec.is-soon { position: relative; overflow: hidden; }
+.sec.is-soon > .container { filter: blur(7px); opacity: .55; pointer-events: none; user-select: none; }
+.soon-zone { position: relative; }
+.soon-veil { position: absolute; inset: 0; z-index: 2; padding: 0 16px; pointer-events: none; }
+/* Sin JS (o con movimiento reducido) la tarjeta queda sticky al centro de la pantalla. */
+.soon-card { position: sticky; top: calc(50vh - 150px); margin: 80px auto; pointer-events: auto; }
+/* Con JS la tarjeta se desliza con retraso (lerp) siguiendo el scroll. */
+.soon-zone.is-follow .soon-card { position: absolute; top: 0; left: 0; right: 0; margin: 0 auto; width: calc(100% - 32px); will-change: transform; }
+.soon-card { max-width: 520px; text-align: center; background: var(--surface); border-top: 2px solid var(--homea-gold);
+  box-shadow: var(--shadow-md); padding: 36px 40px 40px; }
+.soon-card .eyebrow { color: var(--accent-text); margin: 0 0 14px; }
+.soon-card { width: 100%; }
+.soon-card .btn { white-space: normal; line-height: 1.5; max-width: 100%; }
+.soon-ic { display: block; width: 64px; height: 64px; margin: 0 auto 20px; object-fit: contain; }
+.soon-card h2 { margin: 0 0 28px; font-family: var(--font-display); font-weight: 500; font-size: 32px; line-height: 1.15; }
+.soon-card h2 i { color: var(--accent-text); }
+.soon-card p { margin: 0 0 26px; font-size: 15px; font-weight: 300; color: var(--fg-muted); line-height: 1.6; }
+.hrm-ix .soon-tag { display: block; margin-top: 6px; font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--accent-text); }
+@media (max-width: 640px) {
+  .soon-card { padding: 28px 22px 30px; }
+  .soon-card h2 { font-size: 26px; }
+  .soon-card .btn { padding-left: 14px; padding-right: 14px; letter-spacing: .14em; }
+}
 </style>
 </head>
 <body>
@@ -362,7 +389,7 @@
           <span class="eyebrow">Marcas oficiales · A–Z</span>
           <a class="mega-all" href="marcas.html">Ver todas las marcas</a>
         </div>
-        <div class="mega-brands-cols" role="list"><a href="marcas.html">ACROS</a><a href="marcas.html">ALFA FORNI</a><a href="marcas.html">ALFRESCO</a><a href="marcas.html">AMERICAN STANDARD</a><a href="marcas.html">ARTISAN</a><a href="marcas.html">ASKO</a><a href="marcas.html">AXCENT</a><a href="marcas.html">AXOR</a><a href="marcas.html">BENESSI</a><a href="marcas.html">BERTAZZONI</a><a href="marcas.html">BLANCO</a><a href="marcas.html">BLAZE</a><a href="marcas.html">BOSCH</a><a href="marcas.html">BRIZO</a><a href="marcas.html">BROIL KING</a><a href="marcas.html">CAFE</a><a href="marcas.html">COVE</a><a href="marcas.html">COYOTE</a><a href="marcas.html">DAWN</a><a href="marcas.html">DELTA</a><a href="marcas.html">DEXA</a><a href="marcas.html">ECLIPSE</a><a href="marcas.html">ELECTROLUX</a><a href="marcas.html">ELICA</a><a href="marcas.html">ELKAY</a><a href="marcas.html">FALMEC</a><a href="marcas.html">FRANKE</a><a href="marcas.html">FRIGIDAIRE</a><a href="marcas.html">FULGOR MILANO</a><a href="marcas.html">GAGGENAU</a><a href="marcas.html">THE GALLEY</a><a href="marcas.html">GE PROFILE</a><a href="marcas.html">GESSI</a><a href="marcas.html">HAIER</a><a href="marcas.html">HANSGROHE</a><a href="marcas.html">HOSHIZAKI</a><a href="marcas.html">I-DRAIN</a><a href="marcas.html">INSINKERATOR</a><a href="marcas.html">INVISACOOK</a><a href="marcas.html">IO MABE</a><a href="marcas.html">KALT</a><a href="marcas.html">KAMADO JOE</a><a href="marcas.html">KELE MASTER SINKS</a><a href="marcas.html">KEUCO</a><a href="marcas.html">KITCHENAID</a><a href="marcas.html">LA CORNUE</a><a href="marcas.html">LYNX</a><a href="marcas.html">MABE</a><a href="marcas.html">MASTERBUILT</a><a href="marcas.html">MAYTAG</a><a href="marcas.html">MIELE</a><a href="marcas.html">MOEN</a><a href="marcas.html">MONOGRAM</a><a href="marcas.html">MONT ALPI</a><a href="marcas.html">MR STEAM</a><a href="marcas.html">NOBILI</a><a href="marcas.html">PEERLESS</a><a href="marcas.html">PITT COOKING</a><a href="marcas.html">POLETTI SINKS</a><a href="marcas.html">SAPPHIRE</a><a href="marcas.html">SCHOCK</a><a href="marcas.html">SCOTSMAN</a><a href="marcas.html">SEDONA BY LYNX</a><a href="marcas.html">SMEG</a><a href="marcas.html">SUBZERO</a><a href="marcas.html">SUMMIT</a><a href="marcas.html">SUPRA</a><a href="marcas.html">TECNOLAM</a><a href="marcas.html">TEKA</a><a href="marcas.html">THERMADOR</a><a href="marcas.html">THOR</a><a href="marcas.html">TRADEWIND</a><a href="marcas.html">U-LINE</a><a href="marcas.html">VIKING</a><a href="marcas.html">WHIRLPOOL</a><a href="marcas.html">WOLF</a><a href="marcas.html">WPPO</a></div>
+        <div class="mega-brands-cols" role="list"><a href="marcas.html">Acros</a><a href="marcas.html">Alfa Forni</a><a href="marcas.html">Alfresco</a><a href="marcas.html">American Standard</a><a href="marcas.html">Artisan</a><a href="marcas.html">Asko</a><a href="marcas.html">Axcent</a><a href="marcas.html">Axor</a><a href="marcas.html">Benessi</a><a href="marcas.html">Bertazzoni</a><a href="marcas.html">Blanco</a><a href="marcas.html">Blaze</a><a href="marcas.html">Bosch</a><a href="marcas.html">Brizo</a><a href="marcas.html">Broil King</a><a href="marcas.html">Café</a><a href="marcas.html">Cove</a><a href="marcas.html">Coyote</a><a href="marcas.html">Dawn</a><a href="marcas.html">Delta</a><a href="marcas.html">Dexa</a><a href="marcas.html">Eclipse</a><a href="marcas.html">Electrolux</a><a href="marcas.html">Elica</a><a href="marcas.html">Elkay</a><a href="marcas.html">Falmec</a><a href="marcas.html">Franke</a><a href="marcas.html">Frigidaire</a><a href="marcas.html">Fulgor Milano</a><a href="marcas.html">Gaggenau</a><a href="marcas.html">The Galley</a><a href="marcas.html">GE Profile</a><a href="marcas.html">Gessi</a><a href="marcas.html">Haier</a><a href="marcas.html">Hansgrohe</a><a href="marcas.html">Hoshizaki</a><a href="marcas.html">I-Drain</a><a href="marcas.html">InSinkErator</a><a href="marcas.html">InvisaCook</a><a href="marcas.html">IO Mabe</a><a href="marcas.html">Kalt</a><a href="marcas.html">Kamado Joe</a><a href="marcas.html">Kele Master Sinks</a><a href="marcas.html">Keuco</a><a href="marcas.html">KitchenAid</a><a href="marcas.html">La Cornue</a><a href="marcas.html">Lynx</a><a href="marcas.html">Mabe</a><a href="marcas.html">Masterbuilt</a><a href="marcas.html">Maytag</a><a href="marcas.html">Miele</a><a href="marcas.html">Moen</a><a href="marcas.html">Monogram</a><a href="marcas.html">Mont Alpi</a><a href="marcas.html">MrSteam</a><a href="marcas.html">Nobili</a><a href="marcas.html">Peerless</a><a href="marcas.html">Pitt Cooking</a><a href="marcas.html">Poletti Sinks</a><a href="marcas.html">Sapphire</a><a href="marcas.html">Schock</a><a href="marcas.html">Scotsman</a><a href="marcas.html">Sedona by Lynx</a><a href="marcas.html">Smeg</a><a href="marcas.html">Sub-Zero</a><a href="marcas.html">Summit</a><a href="marcas.html">Supra</a><a href="marcas.html">Tecnolam</a><a href="marcas.html">Teka</a><a href="marcas.html">Thermador</a><a href="marcas.html">Thor</a><a href="marcas.html">Tradewind</a><a href="marcas.html">U-Line</a><a href="marcas.html">Viking</a><a href="marcas.html">Whirlpool</a><a href="marcas.html">Wolf</a><a href="marcas.html">WPPO</a></div>
       </div>
     </div>
     <a href="b2b.html">Proyectos</a>
@@ -480,19 +507,19 @@
     </a>
     <a href="#comparativos">
       <span class="n figures">02</span>
-      <h3>Comparativos</h3>
+      <h3>Comparativos<span class="soon-tag">Próximamente</span></h3>
       <p>Compara electrodomésticos para ver cuál necesitas en tu espacio, ¿parrilla eléctrica o de gas?</p>
       <span class="ar" aria-hidden="true"></span>
     </a>
     <a href="#tips">
       <span class="n figures">03</span>
-      <h3>Tips y <i>videos</i></h3>
+      <h3>Tips y <i>videos</i><span class="soon-tag">Próximamente</span></h3>
       <p>Consejos de expertos para resolver tus dudas, ¿tu fábrica de hielo necesita bomba o no?</p>
       <span class="ar" aria-hidden="true"></span>
     </a>
     <a href="#fichas">
       <span class="n figures">04</span>
-      <h3>Fichas técnicas</h3>
+      <h3>Fichas técnicas<span class="soon-tag">Próximamente</span></h3>
       <p>Especificaciones, medidas y manuales por modelo, listos para tu proyecto.</p>
       <span class="ar" aria-hidden="true"></span>
     </a>
@@ -1018,8 +1045,10 @@
   <p class="band-note">Todos los precios con IVA incluido · Precios de lista en MXN o USD según la marca (las marcas en USD se ordenan por su equivalente aproximado en MXN) · Cada paquete puede ajustarse a un armado más económico · <a class="pqc-pdf" href="assets/paquetes-de-cocina-homea.pdf" target="_blank" rel="noopener" data-track="paquetes_pdf_all">Descargar los 20 paquetes (PDF)</a></p>
 </div></section>
 
+<!-- 02–04 en construcción: un solo anuncio que acompaña el scroll -->
+<div class="soon-zone">
 <!-- 02 · Comparativos — duelos tipográficos -->
-<section class="sec" id="comparativos"><div class="container">
+<section class="sec is-soon" id="comparativos"><div class="container" inert>
   <div class="sec-head reveal">
     <div class="eyebrow">Comparativos · 02</div>
     <h2>Frente a <i>frente</i>.</h2>
@@ -1047,10 +1076,11 @@
       <span class="arrow-link"><span class="ln"></span><span class="ar">→</span>Ver comparativo</span>
     </a>
   </div>
-</div></section>
+</div>
+</section>
 
 <!-- 03 · Tips y videos — mosaico -->
-<section class="sec on-greige" id="tips"><div class="container">
+<section class="sec is-soon on-greige" id="tips"><div class="container" inert>
   <div class="sec-head reveal">
     <div class="eyebrow">Tips y videos · 03</div>
     <h2>Consejos de <i>especialista</i>.</h2>
@@ -1077,10 +1107,11 @@
       <a class="arrow-link" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20gustar%C3%ADa%20un%20video%20sobre%3A%20" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_tips_sugerencia"><span class="ln"></span><span class="ar">→</span>Sugerir un tema</a>
     </div>
   </div>
-</div></section>
+</div>
+</section>
 
 <!-- 04 · Fichas técnicas — consola de búsqueda -->
-<section class="sec" id="fichas"><div class="container">
+<section class="sec is-soon" id="fichas"><div class="container" inert>
   <div class="hrm-fichas">
     <div class="sec-head reveal">
       <div class="eyebrow">Fichas técnicas · 04</div>
@@ -1100,7 +1131,16 @@
       <p class="f-micro">¿No encuentras un modelo? Escríbenos por WhatsApp y te enviamos la ficha el mismo día.</p>
     </div>
   </div>
-</div></section>
+</div>
+</section>
+
+<div class="soon-veil" role="note"><div class="soon-card">
+  <img class="soon-ic" src="assets/badge-herramientas.webp" alt="" width="64" height="64" loading="lazy" decoding="async">
+  <div class="eyebrow">Próximamente</div>
+  <h2>Estamos preparando <i>lo mejor</i> para ti.</h2>
+  <a class="btn btn-primary" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_herramientas_proximamente">Mientras tanto,<br>habla con un especialista</a>
+</div></div>
+</div>
 
 <!-- Cierre — asesoría personal -->
 <section class="sec on-dark cta-band">
@@ -1176,6 +1216,42 @@
     var msg = "¡Hola! Me interesa la ficha técnica de: " + (q || "(modelo)");
     window.open("https://api.whatsapp.com/send/?phone=524461446318&text=" + encodeURIComponent(msg), "_blank", "noopener");
   });
+})();
+</script>
+<script>
+/* Anuncio "Próximamente": sigue al usuario con un deslizamiento lento (lerp)
+   dentro de la zona 02–04. Guard global + consulta del DOM vivo en cada frame
+   para sobrevivir a la navegación SPA (los scripts inline no se re-ejecutan). */
+(function () {
+  "use strict";
+  if (window.__soonBound) return;
+  window.__soonBound = true;
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var y = null, zoneRef = null, raf = 0;
+  function target(zone, card) {
+    var nav = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 80;
+    var vh = window.innerHeight, zr = zone.getBoundingClientRect();
+    var t = nav + (vh - nav) / 2 - card.offsetHeight / 2 - zr.top;
+    return Math.max(24, Math.min(t, zone.offsetHeight - card.offsetHeight - 24));
+  }
+  function tick() {
+    raf = 0;
+    var zone = document.querySelector(".soon-zone");
+    if (!zone) { zoneRef = null; return; }
+    var card = zone.querySelector(".soon-card");
+    if (!card) return;
+    if (zone !== zoneRef) { zoneRef = zone; zone.classList.add("is-follow"); y = null; }
+    var t = target(zone, card);
+    y = (y === null) ? t : y + (t - y) * 0.08;
+    if (Math.abs(t - y) < 0.5) y = t;
+    card.style.transform = "translateY(" + y.toFixed(1) + "px)";
+    if (y !== t) raf = requestAnimationFrame(tick);
+  }
+  function kick() { if (!raf) raf = requestAnimationFrame(tick); }
+  window.addEventListener("scroll", kick, { passive: true });
+  window.addEventListener("resize", kick);
+  new MutationObserver(kick).observe(document.body, { childList: true, subtree: true });
+  kick();
 })();
 </script>
 <script type="application/ld+json">
