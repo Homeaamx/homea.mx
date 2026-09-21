@@ -154,8 +154,8 @@ html { scroll-behavior: smooth; }
   display: block; break-inside: avoid; border-bottom: none;
   border-left: 2px solid transparent;
   padding: 3px 8px; white-space: nowrap;
-  font-family: var(--font-sans); font-weight: 500; font-size: 15px;
-  letter-spacing: .06em; text-transform: uppercase; color: var(--fg);
+  font-family: var(--font-sans); font-weight: 400; font-size: 16px;
+  letter-spacing: 0; text-transform: none; color: var(--fg);
   transition: color var(--dur-fast) var(--ease-standard),
               background-color var(--dur-fast) var(--ease-standard),
               border-color var(--dur-fast) var(--ease-standard);
@@ -166,7 +166,7 @@ html { scroll-behavior: smooth; }
    Ahí se conserva la escala anterior, que entra en 5 columnas sin scroll. */
 @media (max-width: 1279px) {
   .mega-brands-cols { column-width: 160px; }
-  .mega-brands-cols a { padding: 3px 10px 3px 8px; font-size: 11.5px; }
+  .mega-brands-cols a { padding: 3px 10px 3px 8px; font-size: 13px; }
 }
 
 .mega-grid { display: grid; grid-template-columns: 1.5fr repeat(5, 1fr); gap: 28px; }
@@ -1726,6 +1726,10 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
    del grid (similar a dexa) para que no dominen su tile. */
 .brandtile[data-brand="benessi"] .bt-logo,
 .brandtile[data-brand="gessi"] .bt-logo { max-height: 55%; max-width: 66%; }
+/* Delta: único logo en SVG y su tamaño nativo es 33×9 px; con width:auto se
+   pintaba a ese tamaño diminuto. Se le da ancho explícito (proporción ~3.9:1)
+   para que lea a la escala de Franke o Peerless. */
+.brandtile[data-brand="delta"] .bt-logo { width: 74%; height: auto; }
 .brandtile.hide { display: none; }
 .gama-note.hide { display: none; }
 
