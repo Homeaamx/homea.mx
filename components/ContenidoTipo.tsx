@@ -41,7 +41,9 @@ function Cajon({ x, y, w, h = 9 }: { x: number; y: number; w: number; h?: number
   return <rect className="bandeja" x={x} y={y} width={w} height={h} rx="1.5" />;
 }
 
-const CONTENIDO: Record<string, JSX.Element> = {
+import type { ReactElement } from "react";
+
+const CONTENIDO: Record<string, ReactElement> = {
   // ——— Instalación ———
   "de-piso": (
     <>

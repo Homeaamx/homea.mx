@@ -1,0 +1,88 @@
+{
+  "_nota": "Listas de precios por marca (/marcas#listas-de-precios). UNA entrada por lista, no por año. Cada lista tiene una URL permanente en el sitio: /listas-de-precios/<slug>.pdf, que sirve (rewrite) el PDF de 'url' en Shopify Files. Todas las URLs viejas de OXATIS en 'legacy' redirigen (301) a esa URL permanente, sin importar el año. NUEVA EDICIÓN: sube el PDF a Shopify Files, pega su URL (con ?v=) en 'url', actualiza 'vigencia' y haz deploy; nada más cambia. No cambies 'slug' (rompería la URL permanente). Mientras 'url' sea null, la URL permanente manda (302) a /marcas#listas-de-precios. 'archivo' es el PDF de trabajo relativo a ~/Documents/ALTURA/Homea-archivos-oxatis/ (fuera del repo). 'estado': listo = publicado · revisar = Carla lo aprueba antes (ver 'nota') · sin-archivo = no hay PDF, pedir el vigente.",
+  "marcas": [
+    { "marca": "Sub-Zero", "documentos": [
+      { "slug": "sub-zero", "titulo": "Lista de precios", "vigencia": null, "url": null, "legacy": ["/Files/119914/LISTA_PRECIOS_SUBZERO_2026.pdf", "/Files/119914/Lista_Precios_SUBZERO_2025.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+    ] },
+    { "marca": "Viking", "documentos": [
+      { "slug": "viking", "titulo": "Lista de precios", "vigencia": null, "url": null, "legacy": ["/Files/119914/ListaPreciosVIKING2024feb.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+    ] },
+    { "marca": "Supra", "documentos": [
+      { "slug": "supra", "titulo": "Lista de precios", "vigencia": null, "url": null, "legacy": ["/Files/119914/Lista_Precios_SUPRA_2025.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+    ] },
+    { "marca": "Elica", "documentos": [
+      { "slug": "elica-campanas", "titulo": "Campanas · lista de precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-campanas-elica-2026.pdf", "legacy": ["/Files/119914/LISTA_PRECIOS_ELICA_CAMPANAS_2026_03.pdf", "/Files/119914/Lista_Precios_Elica_2025_jun.pdf", "/Files/119914/241542329910613.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-campanas-elica-2026.pdf" }
+    ] },
+    { "marca": "IO Mabe", "documentos": [
+      { "slug": "io-mabe", "titulo": "Lista de precios", "vigencia": "2024", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-io-mabe-2024.pdf", "legacy": ["/Files/119914/Lista_Precios_IOMABE_2024_07.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-io-mabe-2024.pdf" },
+      { "slug": "ge-profile", "titulo": "GE Profile · catálogo", "vigencia": "2024", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-ge-profile-2024.pdf", "legacy": ["/Files/119914/241555440212509.pdf"], "estado": "listo", "archivo": "shopify/catalogo-ge-profile-2024.pdf" }
+    ] },
+    { "marca": "Pitt Cooking", "documentos": [
+      { "slug": "pitt-cooking", "titulo": "Lista de precios", "vigencia": null, "url": null, "legacy": ["/Files/119914/Lista_Precios_Pitt_Cooking_2025_08.pdf", "/Files/119914/232206635850808.pdf"], "estado": "sin-archivo", "nota": "Ni la de 2025 ni la de 2023 existen ya en OXATIS. La de ene-2023 está recuperada del Wayback Machine (wayback/232206635850808.pdf); subir la vigente." }
+    ] },
+    { "marca": "Summit", "documentos": [
+      { "slug": "summit", "titulo": "Lista de precios", "vigencia": null, "url": null, "legacy": ["/Files/119914/ListaPreciosSummit2024.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+    ] },
+    { "marca": "Coyote", "documentos": [
+      { "slug": "coyote-asadores", "titulo": "Asadores · lista de precios", "vigencia": "2026", "url": null, "legacy": ["/Files/119914/LISTA_PRECIOS_ASADORES_COYOTE_2026.pdf", "/Files/119914/24965815411450.pdf"], "estado": "revisar", "archivo": "revisar/lista-precios-asadores-coyote-2026.pdf", "nota": "El encabezado del proveedor dice \"2025 Distributor Price Schedule · Confidential\". Confirmar con Carla que los precios son públicos antes de publicar." }
+    ] },
+    { "marca": "Josper", "documentos": [
+      { "slug": "josper-hornos-de-brasa", "titulo": "Hornos de brasa · lista de precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-josper-hornos-brasa-2026.pdf", "legacy": ["/Files/119914/LISTA_PRECIOS_JOSPER_HORNOS_LENA_2026.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-josper-hornos-brasa-2026.pdf" }
+    ] },
+    { "marca": "Axcent", "documentos": [
+      { "slug": "axcent-banos", "titulo": "Baños · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-axcent-banos-2025.pdf", "legacy": ["/Files/119914/Lista_Precios_Axcent_2025_Banos.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-axcent-banos-2025.pdf" },
+      { "slug": "axcent-tarjas-y-monomandos", "titulo": "Tarjas y monomandos · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-axcent-tarjas-monomandos-2025.pdf", "legacy": ["/Files/119914/Lista_Precios_Axcent_2025_Tarjas_Monomandos.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-axcent-tarjas-monomandos-2025.pdf" }
+    ] },
+    { "marca": "Teka", "documentos": [
+      { "slug": "teka-tarjas-y-monomandos", "titulo": "Tarjas y monomandos · lista de precios", "vigencia": null, "url": null, "legacy": ["/Files/119914/Lista_Precios_TEKA_tarjas_monomandos_2025_Abr.pdf", "/Files/119914/ListaPreciosTEKA2024Sep.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+    ] },
+    { "marca": "Tecnolam", "documentos": [
+      { "slug": "tecnolam-tarjas-y-monomandos", "titulo": "Tarjas y monomandos · lista de precios", "vigencia": "sep 2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-tecnolam-tarjas-monomandos-2025.pdf", "legacy": ["/Files/119914/Lista_Precios_TECNOLAM_Tarjas_Monomandos_2025_09.pdf", "/Files/119914/233185839511345.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-tecnolam-tarjas-monomandos-2025.pdf" }
+    ] },
+    { "marca": "Hansgrohe", "documentos": [
+      { "slug": "hansgrohe-essentials", "titulo": "Essentials · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-hansgrohe-essentials-2025.pdf", "legacy": ["/Files/119914/Lista_Precios_Hansgrohe_Essentials_2025.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-hansgrohe-essentials-2025.pdf" }
+    ] },
+    { "marca": "Kele", "documentos": [
+      { "slug": "kele", "titulo": "Lista de precios", "vigencia": null, "url": null, "legacy": ["/Files/119914/LISTA_PRECIOS_KELE_2025_JULIO.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+    ] },
+    { "marca": "Jacuzzi", "documentos": [
+      { "slug": "jacuzzi-spas-exterior", "titulo": "Spas de exterior · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-jacuzzi-spas-exterior-2025.pdf", "legacy": ["/Files/119914/ListaPreciosJacuzziExterior2025.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-jacuzzi-spas-exterior-2025.pdf" },
+      { "slug": "jacuzzi-carril-de-nado", "titulo": "Carril de nado · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-jacuzzi-swim-spa-2025.pdf", "legacy": ["/Files/119914/ListaPreciosCarrildeNadoJacuzzi2025.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-jacuzzi-swim-spa-2025.pdf" },
+      { "slug": "jacuzzi-kodiak-cold-plunge", "titulo": "Tina de inmersión fría/caliente Kodiak · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-jacuzzi-kodiak-cold-plunge-2025.pdf", "legacy": ["/Files/119914/ListaPreciosTinaInmersionFriaCalienteJacuzziKodiakColdPlunge2025.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-jacuzzi-kodiak-cold-plunge-2025.pdf" },
+      { "slug": "jacuzzi-saunas-infrarrojo", "titulo": "Saunas infrarrojo de interior · lista de precios", "vigencia": "2024", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-saunas-infrarrojo-jacuzzi-2024.pdf", "legacy": ["/Files/119914/ListaPreciosSaunaPrefabricadoInteriorJacuzzi2024.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-saunas-infrarrojo-jacuzzi-2024.pdf" }
+    ] },
+    { "marca": "Clearlight", "documentos": [
+      { "slug": "clearlight-saunas-exterior", "titulo": "Saunas de exterior · lista de precios", "vigencia": "2024", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-saunas-exterior-clearlight-2024.pdf", "legacy": ["/Files/119914/ListaPreciosSaunaExteriorClearlight2024.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-saunas-exterior-clearlight-2024.pdf" }
+    ] },
+    { "marca": "Onix", "documentos": [
+      { "slug": "onix-mosaico-veneciano", "titulo": "Mosaico veneciano · catálogo", "vigencia": "2023", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-mosaico-veneciano-onix-2023.pdf", "legacy": ["/Files/119914/CatalogoMosaicoVenecianoMarcaONIX2023.pdf"], "estado": "listo", "archivo": "shopify/catalogo-mosaico-veneciano-onix-2023.pdf" }
+    ] },
+    { "marca": "Mabe", "documentos": [
+      { "slug": "mabe", "titulo": "Catálogo", "vigencia": "2024", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-mabe-2024-completo.pdf", "legacy": ["/Files/119914/241555530713149.pdf", "/Files/119914/241552046510338.pdf"], "estado": "listo", "archivo": "shopify/catalogo-mabe-2024-completo.pdf" }
+    ] },
+    { "marca": "Haier", "documentos": [
+      { "slug": "haier", "titulo": "Catálogo", "vigencia": "2024", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-haier-2024.pdf", "legacy": ["/Files/119914/241556349013041.pdf"], "estado": "listo", "archivo": "shopify/catalogo-haier-2024.pdf" }
+    ] },
+    { "marca": "Frigidaire · Electrolux", "documentos": [
+      { "slug": "frigidaire-electrolux", "titulo": "Lista de precios", "vigencia": "jul 2023", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-frigidaire-electrolux-2023.pdf", "legacy": ["/Files/119914/232245308137700.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-frigidaire-electrolux-2023.pdf" }
+    ] },
+    { "marca": "ASKO", "documentos": [
+      { "slug": "asko", "titulo": "Lista de precios", "vigencia": "ago 2023", "url": null, "legacy": ["/Files/119914/232245863241526.pdf"], "estado": "revisar", "archivo": "revisar/lista-precios-asko-2023.pdf", "nota": "Incluye condiciones para distribuidores (pedidos, fletes, reclamaciones). Confirmar con Carla que el precio es público." }
+    ] },
+    { "marca": "American Standard", "documentos": [
+      { "slug": "american-standard", "titulo": "Catálogo y lista de precios", "vigencia": "2023", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-american-standard-as151-2023.pdf", "legacy": ["/Files/119914/231676722146639.pdf", "/Files/119914/213286832353404.pdf", "/Files/119914/213284870436756.pdf", "/Files/119914/213288564668280.pdf"], "estado": "listo", "archivo": "shopify/catalogo-american-standard-as151-2023.pdf" }
+    ] },
+    { "marca": "Moen", "documentos": [
+      { "slug": "moen", "titulo": "Lista de precios", "vigencia": "ago 2023", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-moen-2023.pdf", "legacy": ["/Files/119914/241549745019083.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-moen-2023.pdf" }
+    ] },
+    { "marca": "Fortum", "documentos": [
+      { "slug": "fortum", "titulo": "Catálogo y lista de precios", "vigencia": "ago 2023", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-precios-fortum-2023.pdf", "legacy": ["/Files/119914/241544379612946.pdf"], "estado": "listo", "archivo": "shopify/catalogo-precios-fortum-2023.pdf" }
+    ] },
+    { "marca": "Steamist", "documentos": [
+      { "slug": "steamist-banos-de-vapor", "titulo": "Baños de vapor · catálogo y lista de precios", "vigencia": "2021", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-steamist-banos-vapor-2021.pdf", "legacy": ["/Files/119914/213291306470630.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-steamist-banos-vapor-2021.pdf" }
+    ] },
+    { "marca": "Catalano", "documentos": [
+      { "slug": "catalano", "titulo": "Export Price List 50 (EUR)", "vigencia": null, "url": null, "legacy": ["/Files/119914/213299772868141.pdf"], "estado": "revisar", "archivo": "revisar/lista-precios-catalano-export-50.pdf", "nota": "Lista de exportación en euros. Confirmar con Carla que no es precio de distribuidor." }
+    ] }
+  ]
+}

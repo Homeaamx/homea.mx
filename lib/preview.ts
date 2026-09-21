@@ -29,7 +29,7 @@ const LINK_MAP: Record<string, string> = {
   "contacto.html": "/contacto",
   "herramientas.html": "/herramientas",
   "garantias-instalacion.html": "/garantias-instalacion",
-  "guias.html": "/guias/",
+  "guias.html": "/guias",
   "ofertas.html": "/ofertas",
   // No hay índice /productos todavía → cae a la home.
   "coleccion.html": "/",
@@ -91,8 +91,15 @@ function rewrite(html: string): string {
       `href="${mapTarget(file)}${query || ""}${frag || ""}"`
   );
   html = rewriteAssets(html);
+  // Los scripts de datos se conservan, pero con sus enlaces "*.html" reescritos:
+  // el JSON del hero (#hero-data) trae p. ej. "btnPUrl":"ofertas.html", que sin
+  // esto caía en /ofertas.html → redirect.
   html = html.replace(RE_SCRIPT, (m, attrs: string) =>
-    isExecutableJs(attrs) ? "" : m
+    isExecutableJs(attrs)
+      ? ""
+      : m.replace(/"([a-z0-9-]+)\.html(#[^"]*)?"/gi, (_m, file: string, frag = "") =>
+          `"${mapTarget(file)}${frag || ""}"`
+        )
   );
   return html;
 }

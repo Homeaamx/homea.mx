@@ -14,7 +14,7 @@ import type {
 
 export const taxonomia = taxonomiaData as unknown as TaxonomiaGuias;
 
-export const HUB_PATH = taxonomia.meta.rutaHub; // "/guias/"
+export const HUB_PATH = taxonomia.meta.rutaHub; // "/guias"
 
 export function getMacros(): Macrocategoria[] {
   return taxonomia.macrocategorias;
@@ -42,7 +42,7 @@ export type RouteNode =
   | { kind: "filtros"; macro: Macrocategoria; sub1: Subcategoria1; sub2: Subcategoria2 }
   | { kind: "guia"; macro: Macrocategoria; sub1?: Subcategoria1; guia: Guia };
 
-/** "/guias/cocina-y-bar/refrigeracion/" -> ["cocina-y-bar","refrigeracion"] */
+/** "/guias/cocina-y-bar/refrigeracion" -> ["cocina-y-bar","refrigeracion"] */
 export function segmentsFromRuta(ruta: string): string[] {
   return ruta
     .replace(/^\/guias\/?/, "")
@@ -97,7 +97,7 @@ export function allRouteSegments(): string[][] {
 /** Todas las rutas absolutas bajo /guias/ (hub incluido) — para sitemap. */
 export function allGuiasUrls(): string[] {
   const urls = [HUB_PATH];
-  for (const segs of routeIndex.keys()) urls.push(`/guias/${segs}/`);
+  for (const segs of routeIndex.keys()) urls.push(`/guias/${segs}`);
   return urls;
 }
 

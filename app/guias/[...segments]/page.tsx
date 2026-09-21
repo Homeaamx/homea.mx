@@ -44,7 +44,8 @@ export function generateStaticParams(): Params[] {
   return allRouteSegments().map((segments) => ({ segments }));
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
+export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
+  const params = await props.params;
   const node = getRoute(params.segments);
   if (!node) return {};
 
@@ -343,7 +344,8 @@ function ArticleView({ node }: { node: Extract<RouteNode, { kind: "guia" }> }) {
 // Dispatcher.
 // --------------------------------------------------------------------------
 
-export default function GuiasCatchAll({ params }: { params: Params }) {
+export default async function GuiasCatchAll(props: { params: Promise<Params> }) {
+  const params = await props.params;
   const node = getRoute(params.segments);
   if (!node) notFound();
 

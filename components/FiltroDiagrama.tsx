@@ -12,7 +12,9 @@
 // Reglas de dibujo: viewBox 140×130, piso en y=124, trazos 1.5, sin color fuera
 // de los tokens (los colores se asignan por clase en CSS, aquí solo estructura).
 
-const DIAGRAMAS: Record<string, JSX.Element> = {
+import type { ReactElement } from "react";
+
+const DIAGRAMAS: Record<string, ReactElement> = {
   // ——— Refrigeradores · por instalación ———————————————————————————
 
   "de-piso": (

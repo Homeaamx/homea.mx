@@ -1,0 +1,80 @@
+{
+  "_nota": "PDFs viejos de OXATIS que NO son listas de precios (esas viven en data/listas-precios.json). ESTADO: PENDIENTE — se re-hospedan en Shopify Files. Captura la URL de Shopify en 'url' y haz deploy: la URL vieja redirige (301) al PDF nuevo. Mientras 'url' sea null redirige al listado de su familia ('t') o a /marcas#listas-de-precios. 'descripcion' se puede editar a mano; el script la respeta.",
+  "pdfs": {
+    "/files/119914/202501894911283.pdf": {
+      "descripcion": "Ficha técnica cafetera Smeg CMSU4303X",
+      "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/ficha-tecnica-cafetera-automatica-smeg-cmsu4303x.pdf",
+      "t": "electrodomesticos-menores/cafeteras"
+    },
+    "/files/119914/203405969941191.pdf": {
+      "descripcion": "Ficha técnica refrigerador ASKO RFN2286SR",
+      "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/ficha-tecnica-refrigerador-asko-rfn2286sr.pdf",
+      "t": "cocina-y-bar/refrigeracion/refrigeradores"
+    },
+    "/files/119914/203406018643715.pdf": {
+      "descripcion": "Manual campana ASKO CI41236S",
+      "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/manual-campana-asko-ci41236s.pdf",
+      "t": "cocina-y-bar/coccion/campanas"
+    },
+    "/files/119914/203421560978470.pdf": {
+      "descripcion": "Ficha técnica lavavajillas ASKO DFI664",
+      "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/ficha-tecnica-lavavajillas-asko-dfi664.pdf",
+      "t": "cocina-y-bar/lavavajillas"
+    },
+    "/files/119914/212842689810471.pdf": {
+      "descripcion": "Carta Teka a distribuidores 2021 — NO republicar",
+      "url": null,
+      "t": null
+    },
+    "/files/119914/231657518915520.pdf": {
+      "descripcion": "Sin identificar — ya no existe en OXATIS, sin copia",
+      "url": null,
+      "t": null
+    },
+    "/files/119914/232206635850808.pdf": {
+      "descripcion": "Sin identificar — ya no existe en OXATIS, sin copia",
+      "url": null,
+      "t": null
+    },
+    "/files/119914/233185839511345.pdf": {
+      "descripcion": "Sin identificar — ya no existe en OXATIS, sin copia",
+      "url": null,
+      "t": null
+    },
+    "/files/119914/241447054855494.pdf": {
+      "descripcion": "Sin identificar — ya no existe en OXATIS, sin copia",
+      "url": null,
+      "t": null
+    },
+    "/files/119914/24152970321617.pdf": {
+      "descripcion": "Sin identificar — ya no existe en OXATIS, sin copia",
+      "url": null,
+      "t": null
+    },
+    "/files/119914/242011537389488.pdf": {
+      "descripcion": "Sin identificar — ya no existe en OXATIS, sin copia",
+      "url": null,
+      "t": null
+    },
+    "/files/119914/24965815411450.pdf": {
+      "descripcion": "Sin identificar — ya no existe en OXATIS, sin copia",
+      "url": null,
+      "t": null
+    },
+    "/files/119914/whc18t521stwc_ficha_tecnica2.pdf": {
+      "descripcion": "Ficha técnica Whirlpool WHC18T521STWC — dice 'Whirlpool Corporation Confidential': NO republicar",
+      "url": null,
+      "t": "cocina-y-bar/refrigeracion/refrigeradores"
+    },
+    "/files/119914/whc18t521stwc_ficha_tecnica_1.pdf": {
+      "descripcion": "Ficha técnica Whirlpool WHC18T521STWC",
+      "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/ficha-tecnica-refrigerador-whirlpool-whc18t521stwc.pdf",
+      "t": "cocina-y-bar/refrigeracion/refrigeradores"
+    },
+    "/files/119914/whc18t521stwc_manual_uso_cuidado.pdf": {
+      "descripcion": "Manual de uso y cuidado Whirlpool WHC18T521STWC",
+      "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/manual-refrigerador-whirlpool-whc18t521stwc.pdf",
+      "t": "cocina-y-bar/refrigeracion/refrigeradores"
+    }
+  }
+}

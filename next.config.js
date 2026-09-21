@@ -5,10 +5,8 @@ const nextConfig = {
   // ejecución (lib/preview.ts). El file tracing de Next no sigue rutas dinámicas,
   // así que sin esto las funciones en Vercel no incluyen esos archivos y cualquier
   // render en vivo (PLP [tipo], revalidación ISR) truena con ENOENT → error 500.
-  experimental: {
-    outputFileTracingIncludes: {
-      "/**": ["./preview/*.html"],
-    },
+  outputFileTracingIncludes: {
+    "/**": ["./preview/*.html"],
   },
   // Imágenes de producto vendrán del CDN de Shopify (Fase PLP). Editoriales: locales.
   images: {
@@ -18,7 +16,7 @@ const nextConfig = {
   },
   // Redirects 301 del mapa de migración OXATIS → Next.
   // Nota SEO (CLAUDE.md §3): Next emite 308 con permanent:true; Google trata 301≈308.
-  // El mapa real se cargará en la fase de migración; aquí queda el hook listo.
+  // El mapa OXATIS completo (fichas, categorías, PDFs) lo resuelve proxy.ts.
   // Caché de estáticos. Por defecto Vercel sirve lo de public/ con max-age=0, así
   // que cada visita revalida archivo por archivo: con latencia alta eso son
   // decenas de viajes de ida y vuelta antes de ver la página completa.
@@ -48,15 +46,15 @@ const nextConfig = {
     const legacyHtml = {
       "/home.html": "/",
       "/marcas.html": "/marcas",
-      "/coleccion.html": "/productos",
-      "/ofertas.html": "/productos",
-      "/producto.html": "/producto",
+      "/coleccion.html": "/",
+      "/ofertas.html": "/ofertas",
+      "/producto.html": "/",
       "/b2b.html": "/proyectos",
       "/nosotros.html": "/nosotros",
       "/contacto.html": "/contacto",
       "/herramientas.html": "/herramientas",
       "/garantias-instalacion.html": "/garantias-instalacion",
-      "/guias.html": "/guias/",
+      "/guias.html": "/guias",
     };
     // Familia "agua" (docs/PLAN-REDIRECTS-MIGRACION.md §5.b): la taxonomía separó
     // purificadores/filtros · monomandos de agua filtrada · despachadores de garrafón,

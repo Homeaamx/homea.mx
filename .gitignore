@@ -41,3 +41,6 @@ catalogo-shopify/.env.shopify
 
 # Fotos fuente de proyectos (491MB, material crudo — los exports viven en preview/public assets)
 PROYECTOS/
+
+# Mapa de redirects resuelto en cada build (scripts/build-redirects.mjs)
+data/redirects/oxatis-map.json

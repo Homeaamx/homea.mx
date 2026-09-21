@@ -49,18 +49,19 @@
 
 > OXATIS tiene **varios formatos**. Priorizamos redirigir los que **rankean** (los que aparecen en GSC).
 
-| Tipo | Patrón viejo (OXATIS) | Patrón nuevo (Shopify) |
+> ⚠️ **Actualizado 2026-09-19 (headless):** los destinos ya NO son `/collections/` ni `/products/` de Shopify. `homea.mx` apunta a Vercel, así que los redirects viven en Next (`proxy.ts` + `next.config.js`) y los destinos son rutas del front-end propio. Implementación real: **§6**.
+
+| Tipo | Patrón viejo (OXATIS) | Destino en el sitio nuevo |
 |---|---|---|
 | Home | `/` y `/?pgflngid=2` | `/` |
-| **Categoría** | `/{slug}-c102x{ID}?PGFLngID=2` | `/collections/{slug}` |
-| **Producto (rankea)** | `/{slug}-c2x{ID}?PGFLngID=2` | `/products/{handle}` |
-| **Producto (sitemap)** | `/es/product/{slug}` | `/products/{handle}` |
-| Contenido | `/{slug}.htm` · `.html` | `/pages/{slug}` |
-| Custom | `/PBCPPlayer.asp?ID={X}` | `/pages/...` (identificar 1 a 1) |
-| Móvil | `/Mobile/{...}` | redirigir al equivalente nuevo (ya responsive) |
-| PDF | `/Files/119914/{archivo}.pdf` | subir a Shopify Files → redirigir, o página equivalente |
+| **Categoría** | `/{slug}-c102x{ID}` · `-c106x{ID}` | listado de su familia: `/productos/{macro}[/{sub1}[/{tipo}]]` (+ `?f=` si aplica) |
+| **Producto (rankea)** | `/{slug}-c2x{ID}` (GSC) · `-c6x{ID}` (sitemap) | `/producto/{sku}` si la ficha existe; si no, listado de su familia |
+| **Producto (formato viejo)** | `/es/product/{slug}` | igual que producto |
+| Contenido | `/{slug}.htm` · `.html` · `PBCPPlayer.asp?ID={X}` | 1:1 a mano (`data/redirects/oxatis-manual.json`) |
+| Móvil | `/Mobile/{...}` | se quita `/Mobile` y se aplica la regla del resto |
+| PDF | `/Files/119914/{archivo}.pdf` | PDF en Shopify Files cuando tenga URL; mientras, `/marcas#listas-de-precios` o el listado de su familia |
 
-**Cómo se obtiene el handle nuevo:** al importar el catálogo (Fase 4) Shopify asigna `handle`. Emparejamos **viejo↔nuevo por slug/SKU/título**. Lo más limpio: **forzar que el handle = slug viejo** → match casi 1:1.
+**Slug de la ficha = SKU en minúsculas sin guiones** (`/producto/aw442720`), igual que las fichas actuales. El handle de Shopify debe seguir esa misma regla para que el mapa no cambie.
 
 ⚠️ **Gotcha de query strings:** la herramienta nativa de Shopify maneja mal URLs con parámetros (`?PGFLngID=2`, `PBCPPlayer.asp?id=`). → Validar; si falla, usar **app de redirects** (manejan query strings) para esos casos. Nota post-pivot headless: estos redirects viven en `next.config.js`/middleware de Vercel (con `has` para query params), no en Shopify.
 
@@ -142,12 +143,33 @@ apuntar a `/productos/electrodomesticos-menores` para no generar un 404.
 
 ---
 
-## 6. Implementación en Shopify
+## 6. Implementación (Next/Vercel) ✅ 2026-09-19
 
-1. Construir el **CSV de redirects** completo (columnas: `Redirect from`, `Redirect to`) a partir del sitemap + reglas del §3, una vez existan los handles (Fase 4).
-2. Importar: **Content → Menus → View URL redirects → Import** (soporta miles; tope 100,000).
-3. Casos con query string que falle el import nativo → **app de redirects**.
-4. Subir PDFs que rankean a **Shopify Files** y redirigir.
+La función de "URL redirects" de Shopify **no sirve aquí**: solo aplica a un dominio de tienda Shopify, y `homea.mx` apunta a Vercel. Todo vive en el front-end:
+
+| Pieza | Qué hace |
+|---|---|
+| `next.config.js → redirects()` | Reglas fijas: `.html` del preview (§9), Tier 1–2 y familia agua (§5). Se evalúan primero. |
+| `scripts/build-oxatis-map.py` | Empareja las **4,326 URLs viejas** (sitemap OXATIS + GSC) con su SKU del maestro y su familia de la taxonomía. Escribe `data/redirects/oxatis-auto.json` (versionado) y `sin-destino.csv`. **Se corre a mano cuando cambia el maestro:** `MAESTRO_XLSX=/ruta/local/06-MAESTRO-SHOPIFY.xlsx python3 scripts/build-oxatis-map.py` (el xlsx no debe vivir en el repo público). |
+| `data/redirects/palabras-clave.json` | Palabra del slug → familia (`refrigerador` → refrigeradores, `campana` → campanas…). Para lo que no empata por SKU y para URLs viejas fuera del inventario. |
+| `data/redirects/oxatis-manual.json` | 1:1 a mano: `.htm`, `PBCPPlayer.asp` (contenido identificado en el sitio vivo), PDFs especiales. Gana a todo. |
+| `scripts/build-redirects.mjs` | Corre en **cada build** (`prebuild`/`predev`). Resuelve el destino final según lo que exista HOY y escribe `data/redirects/oxatis-map.json` (no versionado). |
+| `proxy.ts` | Solo corre en URLs con forma de OXATIS. Normaliza (minúsculas, sin `/` final, sin `/Mobile`, sin `?PGFLngID`), busca en el mapa y responde **301** en un salto. |
+
+**Fichas pendientes (mismo andamiaje que las 5 actuales).** Mientras una marca no tenga fichas, sus URLs viejas de producto van al **listado de su familia**, recortado al nivel más profundo que ya exista (tipo → subcategoría → macro). En cuanto se agrega `preview/producto-{sku}.html` (o, después, la ficha desde Shopify), el **siguiente deploy** cambia el 301 a `/producto/{sku}` sin tocar el mapa. Cuando las fichas salgan de Shopify, cambiar la fuente de `fichas` en `build-redirects.mjs` a los handles publicados.
+
+**PDFs pendientes (re-hospedaje en Shopify Files).**
+- Listas de precios y catálogos por marca → `data/listas-precios.json` (se muestran en `/marcas#listas-de-precios`). Pegar la URL de Shopify en `url` y hacer deploy: la fila pasa a descarga y las URLs viejas de `legacy` redirigen al PDF.
+- Fichas, manuales y no identificados → `data/redirects/pdfs-legacy.json` (mismo campo `url`).
+- Mientras `url` sea `null`: `/marcas#listas-de-precios` o el listado de su familia. **No republicar** lo marcado así en `nota`/`descripcion` (cartas a distribuidores, "Confidential", precios de costo).
+
+**Cobertura verificada (build local, 2026-09-19):**
+- **GSC top 1,000 (≈49.5k clics): 1,000/1,000 → 200 en un salto**, 0 × 404.
+  - Destinos: listado 41.8k clics · guía 1.0k · otras páginas 2.9k · home 3.8k (la home misma + 3 páginas móviles de OXATIS).
+- **Sitemap OXATIS: 3,345/3,358 → 200.** Los 13 restantes tienen 0 clics y se dejan en 404.
+- Hoy van 0 a ficha, porque ninguna de las 5 fichas publicadas estaba en el inventario viejo. Se probó que agregar una ficha cambia su redirect al siguiente build.
+
+**Criterio de salida a producción (corte DNS):** 0 × 404 en el top 1,000 de GSC y, idealmente, fichas publicadas para los SKUs que concentran ~90% de los clics históricos de producto (≈ top 500).
 
 ---
 
@@ -179,19 +201,21 @@ espejo del `LINK_MAP` de `lib/preview.ts`:
 |---|---|
 | `/home.html` | `/` |
 | `/marcas.html` | `/marcas` |
-| `/coleccion.html`, `/ofertas.html` | `/productos` |
-| `/producto.html` | `/producto` |
+| `/coleccion.html` | `/` |
+| `/ofertas.html` | `/ofertas` |
+| `/producto.html` | `/` (`/producto` es la ficha demo) |
 | `/b2b.html` | `/proyectos` |
 | `/nosotros.html` | `/nosotros` |
 | `/contacto.html` | `/contacto` |
 | `/herramientas.html` | `/herramientas` |
 | `/garantias-instalacion.html` | `/garantias-instalacion` |
-| `/guias.html` | `/guias/` |
+| `/guias.html` | `/guias` |
 
 **Por qué:** marcadores viejos, enlaces indexados y CTAs cuyo destino se sirve desde JSON
 inline (`#hero-data`) sin reescritura — p. ej. el botón **"Agendar asesoría"** (→ `contacto.html`)
 y **"Ver catálogo"** (→ `guias.html`) de la home aterrizaban en 404.
 
-**Pendiente (raíz, opcional):** limpiar los `btnPUrl`/`btnSUrl` del `#hero-data` en
-`preview/home.html` a rutas limpias (o reescribirlos en `lib/preview.ts`) para que la
-navegación interna no dependa del salto 308. Mientras tanto la red de seguridad lo cubre.
+✅ **Resuelto (2026-09-19):** `lib/preview.ts` ahora reescribe los `*.html` dentro de los
+scripts de datos (`#hero-data`), así que los botones del hero ya enlazan a rutas limpias
+sin pasar por el 308. Las Guías usan rutas **sin `/` final** (`/guias`, `/guias/cocina-y-bar`),
+igual que el resto del sitio: canónicos, sitemap y breadcrumbs ya no apuntan a un redirect.

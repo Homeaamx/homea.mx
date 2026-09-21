@@ -17,7 +17,8 @@ export function generateStaticParams(): Params[] {
   return productoSlugs().map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
+export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
+  const params = await props.params;
   if (!productoSlugs().includes(params.slug)) return {};
   const title = getTitle(productoFile(params.slug));
   return {
@@ -26,7 +27,8 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   };
 }
 
-export default function ProductoFichaPage({ params }: { params: Params }) {
+export default async function ProductoFichaPage(props: { params: Promise<Params> }) {
+  const params = await props.params;
   if (!productoSlugs().includes(params.slug)) notFound();
   return <MarketingPage file={productoFile(params.slug)} />;
 }

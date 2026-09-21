@@ -57,6 +57,7 @@ Una landing page moderna con **dos objetivos simultáneos**:
 - **Analítica:** GA4 + Meta Pixel/CAPI, **inyectados desde el front-end** (tracking limpio, sin GTM heredado).
 - **SEO técnico (propio):** `sitemap.ts`, `robots.txt`, canónicos (Metadata API), JSON-LD, redirects 301 en `next.config.js`/`vercel.json`.
 - **Buscador del catálogo (lupa del nav):** capa propia (`components/BuscadorOverlay.tsx` → `/api/buscar` → `lib/catalogo.ts`) con autocompletado en línea. ⚠️ **No consulta Shopify en vivo**: lee `data/catalogo-index.json`, que genera `node scripts/build-search-index.mjs` desde los CSV de `catalogo-shopify/import/`. **Cada vez que cambie el catálogo hay que volver a correr ese comando** o el buscador se queda con el catálogo viejo. Migra a Storefront API (`predictiveSearch`) cuando exista el token — ver `docs/PLAN-DE-FASES.md` §4.4.
+- **Redirects OXATIS → sitio nuevo:** `proxy.ts` (301) lee `data/redirects/oxatis-map.json`, que se regenera en cada build (`prebuild`): ficha `/producto/{sku}` si ya existe, si no el listado de su familia; PDFs a Shopify Files cuando tengan `url` en `data/listas-precios.json` / `data/redirects/pdfs-legacy.json`. ⚠️ **Cuando cambie el maestro de catálogo hay que volver a correr** `MAESTRO_XLSX=… python3 scripts/build-oxatis-map.py`. Detalle: `docs/PLAN-REDIRECTS-MIGRACION.md` §6.
 - **Imágenes:** producto → **Shopify CDN** (vía `next/image` con loader); editoriales → **Vercel/`next/image`**. Optimización siempre (AVIF/WebP, `srcset`, lazy, hero `priority`) + **nombres de archivo SEO** (descriptivos, trends). Detalle: `docs/ESTRATEGIA-IMAGENES.md`.
 - **Dominio:** `www.homea.mx` (se conserva — activo de autoridad SEO).
 
@@ -76,6 +77,7 @@ Migramos de OXATIS → Next.js conservando el dominio `homea.mx`. El riesgo #1 e
 - `docs/PLAN-DE-FASES.md` — las 6 fases y su estado.
 - `docs/PLAYBOOK-MIGRACION-SEO.md` — checklist accionable de migración (la columna vertebral SEO).
 - `docs/PLAN-REDIRECTS-MIGRACION.md` — plan de redirects 301 (estructura Google, reglas de mapeo, Tier 1–2).
+- `docs/PDFS-OXATIS-PENDIENTES.md` — PDFs de OXATIS re-hospedados en Shopify Files: los que esperan aprobación de Carla y los que ya murieron en OXATIS (con enlaces Wayback).
 - `docs/ESTRATEGIA-IMAGENES.md` — dónde se almacenan las imágenes (producto→Shopify CDN, editoriales→Vercel/`next/image`), optimización de carga y **nomenclatura SEO de archivos** (descriptiva + trends de búsqueda).
 - `docs/PATRON-FICHAS-TIPO.md` — patrón "Planos de cocina": fichas de tipo de producto en Guías (diagrama de línea + hover puertas abiertas). Referencia: Refrigeradores. **Usar este patrón al definir los tipos de cada categoría nueva.**
 - `docs/FASE1-CONCEPTO-Y-SECCIONES.md` — concepto + arquitectura de secciones de la landing.

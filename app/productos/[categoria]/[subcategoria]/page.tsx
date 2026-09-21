@@ -24,7 +24,8 @@ export function generateStaticParams(): Params[] {
   return subcategoriaParams();
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
+export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
+  const params = await props.params;
   if (!exists(params)) return {};
   const title = getTitle(subcategoriaFile(params.categoria, params.subcategoria));
   return {
@@ -35,7 +36,8 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   };
 }
 
-export default function SubcategoriaPage({ params }: { params: Params }) {
+export default async function SubcategoriaPage(props: { params: Promise<Params> }) {
+  const params = await props.params;
   if (!exists(params)) notFound();
   return (
     <MarketingPage
