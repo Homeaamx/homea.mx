@@ -8,6 +8,8 @@
 import { readdirSync, readFileSync } from "fs";
 import { join } from "path";
 
+import { SITE_NAME } from "@/lib/site";
+
 const PREVIEW_DIR = join(process.cwd(), "preview");
 
 // Prefijo de las páginas de categoría del preview (categoria-<slug>.html).
@@ -167,10 +169,39 @@ export function getScripts(file: string): string {
   return js.replace(/\b([a-z0-9-]+)\.html/gi, (_m, f: string) => mapTarget(f));
 }
 
-/** Título del <title> de una página del preview (para metadata). */
+// El <title> del preview lleva la marca ("HOMEA — Cocina y Bar · Catálogo") porque
+// el HTML también se abre suelto; en el sitio la marca la pone la plantilla del
+// layout ("%s · HOMEA"). Se quita aquí para que no salga dos veces.
+const RE_MARCA_TITULO = new RegExp(
+  `^${SITE_NAME}\\s*[—–·|-]\\s*|\\s*[—–·|-]\\s*${SITE_NAME}$`,
+  "g"
+);
+
+const ENTIDADES: Record<string, string> = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  apos: "'",
+  nbsp: " ",
+};
+
+/** Texto HTML → texto plano. La metadata de Next vuelve a escapar lo que recibe:
+ *  sin esto "Asadores &amp; Hornos" salía como "&amp;amp;" en el <title>. */
+function decodeEntities(s: string): string {
+  return s.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (m, e: string) => {
+    if (e[0] !== "#") return ENTIDADES[e.toLowerCase()] ?? m;
+    const cp = e[1] === "x" || e[1] === "X" ? parseInt(e.slice(2), 16) : parseInt(e.slice(1), 10);
+    return Number.isFinite(cp) ? String.fromCodePoint(cp) : m;
+  });
+}
+
+/** Título del <title> de una página del preview (para metadata), sin la marca:
+ *  la añade la plantilla de título de app/layout.tsx. */
 export function getTitle(file: string): string | undefined {
   const m = readPreview(file).match(/<title>([^<]*)<\/title>/i);
-  return m?.[1]?.trim();
+  if (!m) return undefined;
+  return decodeEntities(m[1]).trim().replace(RE_MARCA_TITULO, "").trim() || undefined;
 }
 
 /** Slugs de las páginas de categoría del preview (categoria-<slug>.html → <slug>). */
