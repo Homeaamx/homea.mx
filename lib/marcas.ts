@@ -1,5 +1,8 @@
 // Marcas del sitio (/marcas/<slug>).
 //
+// Dos canales: las marcas "shopify" enseñan catálogo con filtros; las "pdf" solo
+// su PDF (catálogo o lista), sin listado de Shopify. Ver `Marca.canal`.
+//
 // Fuente: data/marcas.json, que GENERA scripts/build-marcas.mjs (`npm run marcas`)
 // desde preview/marcas.html, public/assets/ y data/listas-precios.json. Aquí solo
 // se lee: no repetir tablas que ya vivan en el JSON.
@@ -16,8 +19,14 @@ export interface Marca {
   gama: string[];
   /** Claves de `categorias`. */
   categorias: string[];
-  logo: string;
-  foto: string;
+  /**
+   * Canal web (decisión de Carla, 2026-09-21 · docs/MARCAS-CANAL-Y-DESCUENTOS.md):
+   * "shopify" → catálogo, filtros y carrito; "pdf" → solo su PDF, sin listado.
+   */
+  canal: "shopify" | "pdf";
+  /** null mientras no llega el arte: la página cae a hero oscuro + nombre. */
+  logo: string | null;
+  foto: string | null;
   /** Slugs de documento de data/listas-precios.json. */
   listas: string[];
   /** Texto de posicionamiento, escrito a mano. Opcional. */
@@ -96,7 +105,8 @@ export function filtrosDeMarca(m: Marca): FiltroPlp[] {
  * Productos de la marca.
  *
  * ⚠️ ES EL ÚNICO PUNTO QUE HAY QUE CAMBIAR cuando exista el catálogo: en cuanto
- * esta función devuelva productos, las 77 páginas de marca se llenan solas.
+ * esta función devuelva productos, las páginas de marca "shopify" se llenan solas
+ * (las "pdf" no enseñan catálogo).
  *
  * Hoy devuelve [] a propósito. El catálogo todavía no está migrado: la tienda de
  * Shopify sigue con contraseña (lib/flags.ts → PLP_READY) y data/catalogo-index.json

@@ -126,6 +126,11 @@ html { scroll-behavior: smooth; }
   opacity: 1; visibility: visible; translate: 0 0; transition-delay: 0s;
   pointer-events: auto;
 }
+/* El compilador de CSS de Next funde `translate: 0 8px` dentro de `transform`
+   (translateX(-50%) translate3d(0, 8px, 0)), así que el `translate: 0` de aquí
+   arriba ya no lo anula y el panel de marcas se quedaba 8px separado de la
+   barra. El flyout de productos no lo sufre porque trae su propio transform. */
+.has-mega.is-open .mega-panel.mega-brands { transform: translateX(-50%); }
 
 /* ---------- Mega menú · Marcas (3 columnas A–Z) -------------------------- */
 /* Cabe completo en el viewport: el ancho da más columnas (menos renglones) y el
@@ -133,7 +138,9 @@ html { scroll-behavior: smooth; }
 .mega-panel.mega-brands {
   width: min(1280px, 94vw);
   padding: 24px 40px 28px;
-  max-height: calc(100vh - 148px); overflow-y: auto;
+  /* Red de seguridad: con los escalones por altura de abajo solo aparece
+     scroll en ventanas de menos de ~580px de alto. */
+  max-height: calc(100vh - 128px); overflow-y: auto;
 }
 .mega-brands-head {
   display: flex; justify-content: space-between; align-items: baseline; gap: 24px;
@@ -142,14 +149,14 @@ html { scroll-behavior: smooth; }
 .mega-brands-head .eyebrow { color: var(--accent-text); margin: 0; }
 .mega-brands-head .mega-all { margin-top: 0; padding-top: 0; }
 /* column-width en vez de column-count: el navegador mete tantas columnas como
-   quepan sin cortar nunca un nombre largo tipo "AMERICAN STANDARD" (191px de
-   texto a 15px + 16px de padding = 207). Con este valor caben 5 columnas en
-   todo el rango en que el mega existe (>1080px) y el panel mide ~553px de alto:
-   entra sin scroll incluso en 1280x800, el viewport más apretado. Subir la
-   tipografía a 16px empuja el nombre largo a 222px, deja solo 4 columnas en
-   ventanas de 1280 y el panel se va a 697px > los 652px de max-height: por eso
-   se quedó en 15 (regla de Carla: 16 si cabe, si no 15). */
-.mega-brands-cols { column-count: auto; column-width: 207px; column-gap: 20px; }
+   quepan sin cortar el nombre más largo, "Kele Master Sinks" (140px de texto a
+   16px + 18px de padding y borde = 158). Con 158 caben 6 columnas en todo el
+   rango ≥1280px: las 91 marcas quedan en 16 renglones y, como el reparto es por
+   columna, la última sale más corta (11). El panel mide ~590px y entra completo
+   desde ~710px de alto de ventana; en ventanas más bajas los escalones por
+   altura compactan los renglones. (Sep-2026: con 5 columnas eran 19 renglones y
+   en laptops se perdían las dos últimas filas.) */
+.mega-brands-cols { column-count: auto; column-width: 158px; column-gap: 20px; }
 .mega-brands-cols a {
   display: block; break-inside: avoid; border-bottom: none;
   border-left: 2px solid transparent;
@@ -161,11 +168,21 @@ html { scroll-behavior: smooth; }
               border-color var(--dur-fast) var(--ease-standard);
 }
 .mega-brands-cols a:hover { background: var(--homea-greige); color: var(--fg); border-left-color: var(--homea-gold); border-bottom-color: transparent; }
-/* Ventanas angostas (el mega existe desde 1081px): a 15px solo caben 4 columnas
-   y el panel se va a 667px, más que el max-height disponible con 720px de alto.
-   Ahí se conserva la escala anterior, que entra en 5 columnas sin scroll. */
+/* Ventanas bajas (laptops con la barra del navegador ocupando alto): renglones
+   más compactos para que los 16 quepan sin scroll. 26px por renglón → entra
+   desde ~640px de alto; 23px → desde ~580px. */
+@media (max-height: 820px) {
+  .mega-brands-cols a { padding-top: 2px; padding-bottom: 2px; line-height: 22px; }
+}
+@media (max-height: 640px) {
+  .mega-panel.mega-brands { padding-top: 18px; padding-bottom: 20px; }
+  .mega-brands-cols a { font-size: 15px; line-height: 19px; }
+}
+/* Ventanas angostas (el mega existe desde 1081px): a 13px el nombre más largo
+   mide 114px → 132 con padding, y caben 6–7 columnas. Va después de los
+   escalones por altura para que su tipografía gane. */
 @media (max-width: 1279px) {
-  .mega-brands-cols { column-width: 160px; }
+  .mega-brands-cols { column-width: 132px; }
   .mega-brands-cols a { padding: 3px 10px 3px 8px; font-size: 13px; }
 }
 
@@ -1815,7 +1832,6 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile[data-brand="whirlpool"]{--lazy-bg: url('/assets/photos/brands/whirlpool.webp');}
 .brandtile[data-brand="acros"]{--lazy-bg: url('/assets/photos/brands/acros.webp');}
 .brandtile[data-brand="alfa-forni"]{--lazy-bg: url('/assets/photos/brands/alfa-forni.webp');}
-.brandtile[data-brand="american-standard"]{--lazy-bg: url('/assets/photos/brands/american-standard.webp');}
 .brandtile[data-brand="asko"]{--lazy-bg: url('/assets/photos/brands/asko.webp');}
 .brandtile[data-brand="axcent"]{--lazy-bg: url('/assets/photos/brands/axcent.webp');}
 .brandtile[data-brand="benessi"]{--lazy-bg: url('/assets/photos/brands/benessi.webp');}
@@ -1830,7 +1846,6 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile[data-brand="franke"]{--lazy-bg: url('/assets/photos/brands/franke.avif');}
 .brandtile[data-brand="fulgor-milano"]{--lazy-bg: url('/assets/photos/brands/fulgor-milano.webp');}
 .brandtile[data-brand="haier"]{--lazy-bg: url('/assets/photos/brands/haier.avif');}
-.brandtile[data-brand="hansgrohe"]{--lazy-bg: url('/assets/photos/brands/hansgrohe.webp');}
 .brandtile[data-brand="i-drain"]{--lazy-bg: url('/assets/photos/brands/i-drain.webp');}
 .brandtile[data-brand="kalt"]{--lazy-bg: url('/assets/photos/brands/kalt.webp');}
 .brandtile[data-brand="gessi"]{--lazy-bg: url('/assets/photos/brands/gessi.webp');}
@@ -1848,6 +1863,9 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile[data-brand="tradewind"]{--lazy-bg: url('/assets/photos/brands/tradewind.webp');}
 .brandtile[data-brand="u-line"]{--lazy-bg: url('/assets/photos/brands/u-line.avif');}
 .brandtile[data-brand="wppo"]{--lazy-bg: url('/assets/photos/brands/wppo.webp');}
+.brandtile[data-brand="hergom"]{--lazy-bg: url('/assets/photos/brands/hergom.webp');}
+.brandtile[data-brand="jacuzzi"]{--lazy-bg: url('/assets/photos/brands/jacuzzi.webp');}
+.brandtile[data-brand="clearlight"]{--lazy-bg: url('/assets/photos/brands/clearlight.webp');}
 .brandtile[data-brand="sedona-by-lynx"]{--lazy-bg: url('/assets/photos/brands/sedona-by-lynx.webp');}
 /* Fotos verticales: se sube el encuadre (baja la imagen dentro del tile) para
    ver mejor el asador y que no se corte el grifo de Blanco. */
@@ -1863,10 +1881,8 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile[data-brand="teka"]{ background-position: center 74%; }
 .brandtile[data-brand="pitt-cooking"]{ background-position: center 72%; }
 .brandtile[data-brand="supra"]{--lazy-bg: url('/assets/photos/brands/supra.webp');}
-.brandtile[data-brand="keuco"]{--lazy-bg: url('/assets/photos/brands/keuco.webp');}
 .brandtile[data-brand="masterbuilt"]{--lazy-bg: url('/assets/photos/brands/masterbuilt.webp');}
 .brandtile[data-brand="maytag"]{--lazy-bg: url('/assets/photos/brands/maytag.webp');}
-.brandtile[data-brand="moen"]{--lazy-bg: url('/assets/photos/brands/moen.webp');}
 .brandtile[data-brand="mont-alpi"]{--lazy-bg: url('/assets/photos/brands/mont-alpi.webp');}
 
 /* ---------- Tiles de ayuda / FAQ --------------------------------------------------- */

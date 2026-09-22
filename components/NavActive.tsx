@@ -54,7 +54,9 @@ export default function NavActive() {
     const matches = (a: HTMLAnchorElement) => {
       const href = sectionHref(a);
       if (!href) return false;
-      const base = href.replace(/\/$/, "");
+      // data-activo: sección más amplia que el href. "Productos" lleva a Cocina y
+      // Bar pero se enciende en cualquier página de /productos.
+      const base = (a.dataset.activo || href).replace(/\/$/, "");
       return base !== "" && pathname.startsWith(base);
     };
 

@@ -1,5 +1,5 @@
 {
-  "_nota": "Registro de marcas de /marcas/<slug>. GENERADO por scripts/build-marcas.mjs (`npm run marcas`) desde preview/marcas.html, public/assets/ y data/listas-precios.json. No editar a mano, salvo 'descripcion', que el generador conserva. Marca nueva: agrega su tile en preview/marcas.html, su logo en public/assets/logos/, su foto en public/assets/photos/brands/ y su nombre en NOMBRES del script; luego corre `npm run marcas`.",
+  "_nota": "Registro de marcas de /marcas/<slug>. GENERADO por scripts/build-marcas.mjs (`npm run marcas`) desde preview/marcas.html, public/assets/ y data/listas-precios.json. No editar a mano, salvo 'descripcion', que el generador conserva. Marca nueva: agrega su tile en preview/marcas.html (con data-canal), su logo en public/assets/logos/, su foto en public/assets/photos/brands/ y su nombre en NOMBRES del script; luego corre `npm run marcas`.",
   "categorias": {
     "cocina": {
       "nombre": "Cocina y Bar",
@@ -25,9 +25,25 @@
       "nombre": "Electrodomésticos menores",
       "ruta": "/productos/electrodomesticos-menores"
     },
+    "lavanderia": {
+      "nombre": "Lavandería",
+      "ruta": "/productos/lavanderia"
+    },
     "vapor": {
       "nombre": "Vapor y Sauna",
       "ruta": "/productos/vapor-y-sauna"
+    },
+    "wellness": {
+      "nombre": "Wellness",
+      "ruta": "/productos/wellness"
+    },
+    "chimeneas": {
+      "nombre": "Chimeneas & Calentadores",
+      "ruta": "/productos/chimeneas-y-calentadores"
+    },
+    "recubrimientos": {
+      "nombre": "Recubrimientos y Superficies",
+      "ruta": "/productos/recubrimientos-y-superficies"
     }
   },
   "gamas": {
@@ -46,6 +62,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/acros.webp",
       "foto": "/assets/photos/brands/acros.webp",
       "listas": []
@@ -59,6 +76,7 @@
       "categorias": [
         "asadores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/alfa-forni.webp",
       "foto": "/assets/photos/brands/alfa-forni.webp",
       "listas": []
@@ -72,25 +90,24 @@
       "categorias": [
         "asadores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/alfresco.webp",
       "foto": "/assets/photos/brands/alfresco.webp",
       "listas": []
     },
     {
-      "slug": "american-standard",
-      "nombre": "American Standard",
+      "slug": "artexa-bath",
+      "nombre": "Artexa Bath",
       "gama": [
-        "media"
+        "residencial"
       ],
       "categorias": [
-        "tarjas",
         "banos"
       ],
-      "logo": "/assets/logos/american-standard.webp",
-      "foto": "/assets/photos/brands/american-standard.webp",
-      "listas": [
-        "american-standard"
-      ]
+      "canal": "pdf",
+      "logo": null,
+      "foto": null,
+      "listas": []
     },
     {
       "slug": "artisan",
@@ -101,6 +118,7 @@
       "categorias": [
         "asadores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/artisan.webp",
       "foto": "/assets/photos/brands/artisan.webp",
       "listas": []
@@ -114,6 +132,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/asko.webp",
       "foto": "/assets/photos/brands/asko.webp",
       "listas": [
@@ -131,6 +150,7 @@
         "tarjas",
         "banos"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/axcent.webp",
       "foto": "/assets/photos/brands/axcent.webp",
       "listas": [
@@ -147,6 +167,7 @@
       "categorias": [
         "banos"
       ],
+      "canal": "pdf",
       "logo": "/assets/logos/axor.webp",
       "foto": "/assets/photos/brands/axor.webp",
       "listas": []
@@ -160,6 +181,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/benessi.webp",
       "foto": "/assets/photos/brands/benessi.webp",
       "listas": []
@@ -173,6 +195,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/bertazzoni.webp",
       "foto": "/assets/photos/brands/bertazzoni.webp",
       "listas": []
@@ -186,6 +209,7 @@
       "categorias": [
         "tarjas"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/blanco.webp",
       "foto": "/assets/photos/brands/blanco.webp",
       "listas": []
@@ -199,6 +223,7 @@
       "categorias": [
         "asadores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/blaze.webp",
       "foto": "/assets/photos/brands/blaze.webp",
       "listas": []
@@ -213,6 +238,7 @@
         "cocina",
         "menores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/bosch.webp",
       "foto": "/assets/photos/brands/bosch.webp",
       "listas": []
@@ -227,6 +253,7 @@
         "tarjas",
         "banos"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/brizo.webp",
       "foto": "/assets/photos/brands/brizo.webp",
       "listas": []
@@ -240,6 +267,7 @@
       "categorias": [
         "asadores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/broil-king.webp",
       "foto": "/assets/photos/brands/broil-king.webp",
       "listas": []
@@ -253,8 +281,39 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/cafe.png",
       "foto": "/assets/photos/brands/cafe.webp",
+      "listas": []
+    },
+    {
+      "slug": "clearlight",
+      "nombre": "Clearlight",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "vapor"
+      ],
+      "canal": "pdf",
+      "logo": null,
+      "foto": "/assets/photos/brands/clearlight.webp",
+      "listas": [
+        "clearlight-saunas-exterior"
+      ]
+    },
+    {
+      "slug": "commodore",
+      "nombre": "Commodore",
+      "gama": [
+        "economica"
+      ],
+      "categorias": [
+        "trituradores"
+      ],
+      "canal": "shopify",
+      "logo": null,
+      "foto": null,
       "listas": []
     },
     {
@@ -266,6 +325,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/cove.png",
       "foto": "/assets/photos/brands/cove.webp",
       "listas": []
@@ -279,6 +339,7 @@
       "categorias": [
         "asadores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/coyote.webp",
       "foto": "/assets/photos/brands/coyote.webp",
       "listas": [
@@ -295,6 +356,7 @@
       "categorias": [
         "tarjas"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/dawn.webp",
       "foto": "/assets/photos/brands/dawn.webp",
       "listas": []
@@ -310,6 +372,7 @@
         "tarjas",
         "banos"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/delta.png",
       "foto": "/assets/photos/brands/delta.webp",
       "listas": []
@@ -324,8 +387,24 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/dexa.webp",
       "foto": "/assets/photos/brands/dexa.webp",
+      "listas": []
+    },
+    {
+      "slug": "easy",
+      "nombre": "Easy",
+      "gama": [
+        "economica"
+      ],
+      "categorias": [
+        "lavanderia",
+        "cocina"
+      ],
+      "canal": "shopify",
+      "logo": null,
+      "foto": null,
       "listas": []
     },
     {
@@ -338,6 +417,7 @@
       "categorias": [
         "tarjas"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/eclipse.webp",
       "foto": "/assets/photos/brands/eclipse.webp",
       "listas": []
@@ -351,6 +431,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/electrolux.webp",
       "foto": "/assets/photos/brands/electrolux.webp",
       "listas": [
@@ -366,6 +447,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/elica.webp",
       "foto": "/assets/photos/brands/elica.webp",
       "listas": [
@@ -381,8 +463,23 @@
       "categorias": [
         "tarjas"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/elkay.webp",
       "foto": "/assets/photos/brands/elkay.webp",
+      "listas": []
+    },
+    {
+      "slug": "faber",
+      "nombre": "Faber",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "canal": "shopify",
+      "logo": "/assets/logos/faber.webp",
+      "foto": null,
       "listas": []
     },
     {
@@ -394,8 +491,51 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/falmec.webp",
       "foto": "/assets/photos/brands/falmec.webp",
+      "listas": []
+    },
+    {
+      "slug": "firplak",
+      "nombre": "Firplak",
+      "gama": [
+        "economica"
+      ],
+      "categorias": [
+        "banos"
+      ],
+      "canal": "pdf",
+      "logo": null,
+      "foto": null,
+      "listas": []
+    },
+    {
+      "slug": "fontana",
+      "nombre": "Fontana",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "asadores"
+      ],
+      "canal": "pdf",
+      "logo": null,
+      "foto": null,
+      "listas": []
+    },
+    {
+      "slug": "foster",
+      "nombre": "Foster",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "tarjas"
+      ],
+      "canal": "pdf",
+      "logo": null,
+      "foto": null,
       "listas": []
     },
     {
@@ -407,6 +547,7 @@
       "categorias": [
         "tarjas"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/franke.png",
       "foto": "/assets/photos/brands/franke.avif",
       "listas": []
@@ -420,6 +561,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/frigidaire.webp",
       "foto": "/assets/photos/brands/frigidaire.webp",
       "listas": [
@@ -436,6 +578,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/fulgor-milano.webp",
       "foto": "/assets/photos/brands/fulgor-milano.webp",
       "listas": []
@@ -449,6 +592,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/gaggenau.webp",
       "foto": "/assets/photos/brands/gaggenau.webp",
       "listas": []
@@ -463,6 +607,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/ge-profile.webp",
       "foto": "/assets/photos/brands/ge-profile.webp",
       "listas": []
@@ -476,6 +621,7 @@
       "categorias": [
         "tarjas"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/gessi.png",
       "foto": "/assets/photos/brands/gessi.webp",
       "listas": []
@@ -490,6 +636,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/haier.png",
       "foto": "/assets/photos/brands/haier.avif",
       "listas": [
@@ -497,19 +644,32 @@
       ]
     },
     {
-      "slug": "hansgrohe",
-      "nombre": "Hansgrohe",
+      "slug": "hergom",
+      "nombre": "Hergom",
       "gama": [
         "residencial"
       ],
       "categorias": [
-        "banos"
+        "chimeneas"
       ],
-      "logo": "/assets/logos/hansgrohe.webp",
-      "foto": "/assets/photos/brands/hansgrohe.webp",
-      "listas": [
-        "hansgrohe-essentials"
-      ]
+      "canal": "pdf",
+      "logo": null,
+      "foto": "/assets/photos/brands/hergom.webp",
+      "listas": []
+    },
+    {
+      "slug": "hergom-diseno",
+      "nombre": "Hergom Diseño",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "chimeneas"
+      ],
+      "canal": "pdf",
+      "logo": null,
+      "foto": null,
+      "listas": []
     },
     {
       "slug": "hoshizaki",
@@ -520,6 +680,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/hoshizaki.png",
       "foto": "/assets/photos/brands/hoshizaki.webp",
       "listas": []
@@ -533,8 +694,23 @@
       "categorias": [
         "banos"
       ],
+      "canal": "pdf",
       "logo": "/assets/logos/i-drain.webp",
       "foto": "/assets/photos/brands/i-drain.webp",
+      "listas": []
+    },
+    {
+      "slug": "iem",
+      "nombre": "IEM",
+      "gama": [
+        "economica"
+      ],
+      "categorias": [
+        "cocina"
+      ],
+      "canal": "shopify",
+      "logo": null,
+      "foto": null,
       "listas": []
     },
     {
@@ -546,6 +722,7 @@
       "categorias": [
         "trituradores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/insinkerator.png",
       "foto": "/assets/photos/brands/insinkerator.webp",
       "listas": []
@@ -559,6 +736,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/invisacook.webp",
       "foto": "/assets/photos/brands/invisacook.webp",
       "listas": []
@@ -573,11 +751,48 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/io-mabe.png",
       "foto": "/assets/photos/brands/io-mabe.webp",
       "listas": [
         "io-mabe",
         "ge-profile"
+      ]
+    },
+    {
+      "slug": "jacuzzi",
+      "nombre": "Jacuzzi",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "vapor",
+        "wellness"
+      ],
+      "canal": "pdf",
+      "logo": null,
+      "foto": "/assets/photos/brands/jacuzzi.webp",
+      "listas": [
+        "jacuzzi-spas-exterior",
+        "jacuzzi-carril-de-nado",
+        "jacuzzi-kodiak-cold-plunge",
+        "jacuzzi-saunas-infrarrojo"
+      ]
+    },
+    {
+      "slug": "josper",
+      "nombre": "Josper",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "asadores"
+      ],
+      "canal": "pdf",
+      "logo": null,
+      "foto": null,
+      "listas": [
+        "josper-hornos-de-brasa"
       ]
     },
     {
@@ -589,6 +804,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "pdf",
       "logo": "/assets/logos/kalt.webp",
       "foto": "/assets/photos/brands/kalt.webp",
       "listas": []
@@ -603,6 +819,7 @@
       "categorias": [
         "asadores"
       ],
+      "canal": "pdf",
       "logo": "/assets/logos/kamado-joe.webp",
       "foto": "/assets/photos/brands/kamado-joe.webp",
       "listas": []
@@ -617,24 +834,12 @@
       "categorias": [
         "tarjas"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/kele-master-sinks.webp",
       "foto": "/assets/photos/brands/kele-master-sinks.webp",
       "listas": [
         "kele"
       ]
-    },
-    {
-      "slug": "keuco",
-      "nombre": "Keuco",
-      "gama": [
-        "media"
-      ],
-      "categorias": [
-        "banos"
-      ],
-      "logo": "/assets/logos/keuco.webp",
-      "foto": "/assets/photos/brands/keuco.webp",
-      "listas": []
     },
     {
       "slug": "kitchenaid",
@@ -646,8 +851,23 @@
         "cocina",
         "asadores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/kitchenaid.webp",
       "foto": "/assets/photos/brands/kitchenaid.webp",
+      "listas": []
+    },
+    {
+      "slug": "kraus",
+      "nombre": "Kraus",
+      "gama": [
+        "media"
+      ],
+      "categorias": [
+        "tarjas"
+      ],
+      "canal": "shopify",
+      "logo": "/assets/logos/kraus.webp",
+      "foto": null,
       "listas": []
     },
     {
@@ -659,6 +879,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "pdf",
       "logo": "/assets/logos/la-cornue.webp",
       "foto": "/assets/photos/brands/la-cornue.webp",
       "listas": []
@@ -672,6 +893,7 @@
       "categorias": [
         "asadores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/lynx.png",
       "foto": "/assets/photos/brands/lynx.webp",
       "listas": []
@@ -685,6 +907,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/mabe.webp",
       "foto": "/assets/photos/brands/mabe.webp",
       "listas": [
@@ -700,6 +923,7 @@
       "categorias": [
         "asadores"
       ],
+      "canal": "pdf",
       "logo": "/assets/logos/masterbuilt.png",
       "foto": "/assets/photos/brands/masterbuilt.webp",
       "listas": []
@@ -713,6 +937,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/maytag.webp",
       "foto": "/assets/photos/brands/maytag.webp",
       "listas": []
@@ -727,27 +952,10 @@
         "cocina",
         "menores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/miele.webp",
       "foto": "/assets/photos/brands/miele.webp",
       "listas": []
-    },
-    {
-      "slug": "moen",
-      "nombre": "Moen",
-      "gama": [
-        "media",
-        "economica"
-      ],
-      "categorias": [
-        "tarjas",
-        "trituradores",
-        "banos"
-      ],
-      "logo": "/assets/logos/moen.webp",
-      "foto": "/assets/photos/brands/moen.webp",
-      "listas": [
-        "moen"
-      ]
     },
     {
       "slug": "monogram",
@@ -758,6 +966,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/monogram.png",
       "foto": "/assets/photos/brands/monogram.webp",
       "listas": []
@@ -771,6 +980,7 @@
       "categorias": [
         "asadores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/mont-alpi.webp",
       "foto": "/assets/photos/brands/mont-alpi.webp",
       "listas": []
@@ -784,8 +994,23 @@
       "categorias": [
         "vapor"
       ],
+      "canal": "pdf",
       "logo": "/assets/logos/mr-steam.webp",
       "foto": "/assets/photos/brands/mr-steam.webp",
+      "listas": []
+    },
+    {
+      "slug": "nantucket",
+      "nombre": "Nantucket",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "tarjas"
+      ],
+      "canal": "shopify",
+      "logo": null,
+      "foto": null,
       "listas": []
     },
     {
@@ -798,9 +1023,26 @@
         "tarjas",
         "banos"
       ],
+      "canal": "pdf",
       "logo": "/assets/logos/nobili.webp",
       "foto": "/assets/photos/brands/nobili.webp",
       "listas": []
+    },
+    {
+      "slug": "onix",
+      "nombre": "Onix",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "recubrimientos"
+      ],
+      "canal": "pdf",
+      "logo": null,
+      "foto": null,
+      "listas": [
+        "onix-mosaico-veneciano"
+      ]
     },
     {
       "slug": "peerless",
@@ -812,6 +1054,7 @@
       "categorias": [
         "tarjas"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/peerless.png",
       "foto": "/assets/photos/brands/peerless.webp",
       "listas": []
@@ -825,11 +1068,27 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/pitt-cooking.png",
       "foto": "/assets/photos/brands/pitt-cooking.webp",
       "listas": [
         "pitt-cooking"
       ]
+    },
+    {
+      "slug": "pizarro",
+      "nombre": "Pizarro",
+      "gama": [
+        "media",
+        "economica"
+      ],
+      "categorias": [
+        "banos"
+      ],
+      "canal": "pdf",
+      "logo": null,
+      "foto": null,
+      "listas": []
     },
     {
       "slug": "poletti-sinks",
@@ -841,6 +1100,7 @@
       "categorias": [
         "tarjas"
       ],
+      "canal": "pdf",
       "logo": "/assets/logos/poletti-sinks.webp",
       "foto": "/assets/photos/brands/poletti-sinks.webp",
       "listas": []
@@ -854,6 +1114,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "pdf",
       "logo": "/assets/logos/sapphire.webp",
       "foto": "/assets/photos/brands/sapphire.webp",
       "listas": []
@@ -868,6 +1129,7 @@
       "categorias": [
         "tarjas"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/schock.png",
       "foto": "/assets/photos/brands/schock.webp",
       "listas": []
@@ -881,6 +1143,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/scotsman.png",
       "foto": "/assets/photos/brands/scotsman.webp",
       "listas": []
@@ -894,6 +1157,7 @@
       "categorias": [
         "asadores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/sedona-by-lynx.png",
       "foto": "/assets/photos/brands/sedona-by-lynx.webp",
       "listas": []
@@ -909,6 +1173,7 @@
         "menores",
         "tarjas"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/smeg.webp",
       "foto": "/assets/photos/brands/smeg.webp",
       "listas": []
@@ -922,6 +1187,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/sub-zero.webp",
       "foto": "/assets/photos/brands/sub-zero.webp",
       "listas": [
@@ -937,6 +1203,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/summit.webp",
       "foto": "/assets/photos/brands/summit.webp",
       "listas": [
@@ -952,6 +1219,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/supra.webp",
       "foto": "/assets/photos/brands/supra.webp",
       "listas": [
@@ -969,6 +1237,7 @@
         "cocina",
         "tarjas"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/tecnolam.webp",
       "foto": "/assets/photos/brands/tecnolam.webp",
       "listas": [
@@ -987,6 +1256,7 @@
         "tarjas",
         "trituradores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/teka.webp",
       "foto": "/assets/photos/brands/teka.webp",
       "listas": [
@@ -1002,6 +1272,7 @@
       "categorias": [
         "tarjas"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/the-galley.png",
       "foto": "/assets/photos/brands/the-galley.webp",
       "listas": []
@@ -1015,6 +1286,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/thermador.webp",
       "foto": "/assets/photos/brands/thermador.webp",
       "listas": []
@@ -1029,6 +1301,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/thor.webp",
       "foto": "/assets/photos/brands/thor.webp",
       "listas": []
@@ -1042,8 +1315,23 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/tradewind.png",
       "foto": "/assets/photos/brands/tradewind.webp",
+      "listas": []
+    },
+    {
+      "slug": "tres",
+      "nombre": "TRES",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "banos"
+      ],
+      "canal": "pdf",
+      "logo": null,
+      "foto": null,
       "listas": []
     },
     {
@@ -1055,8 +1343,37 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/u-line.webp",
       "foto": "/assets/photos/brands/u-line.avif",
+      "listas": []
+    },
+    {
+      "slug": "valsir",
+      "nombre": "Valsir",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "banos"
+      ],
+      "canal": "pdf",
+      "logo": null,
+      "foto": null,
+      "listas": []
+    },
+    {
+      "slug": "vass",
+      "nombre": "Vass",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "chimeneas"
+      ],
+      "canal": "pdf",
+      "logo": null,
+      "foto": null,
       "listas": []
     },
     {
@@ -1070,6 +1387,7 @@
         "menores",
         "asadores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/viking.webp",
       "foto": "/assets/photos/brands/viking.webp",
       "listas": [
@@ -1086,6 +1404,7 @@
       "categorias": [
         "cocina"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/whirlpool.webp",
       "foto": "/assets/photos/brands/whirlpool.webp",
       "listas": []
@@ -1100,6 +1419,7 @@
         "cocina",
         "asadores"
       ],
+      "canal": "shopify",
       "logo": "/assets/logos/wolf.webp",
       "foto": "/assets/photos/brands/wolf.webp",
       "listas": []
@@ -1113,6 +1433,7 @@
       "categorias": [
         "asadores"
       ],
+      "canal": "pdf",
       "logo": "/assets/logos/wppo.webp",
       "foto": "/assets/photos/brands/wppo.webp",
       "listas": []

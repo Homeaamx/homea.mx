@@ -85,7 +85,7 @@ const HERO_FOTO_MACRO: Record<string, { src: string; pos?: string; flip?: boolea
   exterior: { src: "/assets/photos/hero-exterior-subzero-wolf-cocina.webp", pos: "center 55%" },
   "electrodomesticos-menores": { src: "/assets/photos/hero-electrodomesticos-menores-smeg.webp", pos: "center 50%", flip: true },
   lavanderia: { src: "/assets/photos/hero-lavanderia-bosch.webp", pos: "center 50%" },
-  banos: { src: "/assets/photos/hero-banos-hansgrohe.webp", pos: "center 35%" },
+  banos: { src: "/assets/photos/hero-banos-griferia-premium.webp", pos: "center 60%" },
   minisplits: { src: "/assets/photos/hero-minisplits.webp", pos: "center 12%" },
   "vapor-y-sauna": { src: "/assets/photos/hero-vapor-sauna-artexa.webp", pos: "center 50%" },
   wellness: { src: "/assets/photos/hero-wellness-artexa-sauna.webp", pos: "center 80%" },

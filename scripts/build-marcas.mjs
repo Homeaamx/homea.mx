@@ -2,6 +2,7 @@
 //
 // Fuentes (no se duplica nada a mano):
 //   preview/marcas.html       → slug (data-brand), gama (data-gama), categorías (data-sub)
+//   preview/marcas.html       → canal web (data-canal): "shopify" o "pdf"
 //   public/assets/logos/      → logo de la marca (la extensión varía: .webp o .png)
 //   public/assets/photos/brands/ → foto del hero (varía: .webp o .avif)
 //   data/listas-precios.json  → qué listas de precios enseña cada marca
@@ -10,7 +11,9 @@
 // A propósito NO está en `prebuild`: ese hook lo comparten otras sesiones.
 //
 // Idempotente: conserva los campos escritos a mano (`descripcion`) de la versión
-// anterior. Sale con 1 si una marca se queda sin logo o sin foto.
+// anterior. Sale con 1 si a una marca le falta nombre, canal o una categoría/gama
+// conocida. Sin logo o sin foto solo avisa: la página cae a un hero oscuro con el
+// nombre de la marca hasta que llegue el arte.
 
 import { readdirSync, readFileSync, writeFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
@@ -37,16 +40,29 @@ const NOMBRES = {
   mabe: "Mabe", axcent: "Axcent", supra: "Supra", "the-galley": "The Galley",
   brizo: "Brizo", nobili: "Nobili", blanco: "Blanco", franke: "Franke",
   peerless: "Peerless", dawn: "Dawn", schock: "Schock", gessi: "Gessi",
-  moen: "Moen", delta: "Delta", "poletti-sinks": "Poletti Sinks",
-  "american-standard": "American Standard", eclipse: "Eclipse",
+  delta: "Delta", "poletti-sinks": "Poletti Sinks", eclipse: "Eclipse",
   "kele-master-sinks": "Kele Master Sinks", insinkerator: "InSinkErator",
   lynx: "Lynx", "sedona-by-lynx": "Sedona by Lynx", alfresco: "Alfresco",
   coyote: "Coyote", artisan: "Artisan", "alfa-forni": "Alfa Forni", blaze: "Blaze",
   "kamado-joe": "Kamado Joe", masterbuilt: "Masterbuilt", wppo: "WPPO",
   "mont-alpi": "Mont Alpi", "broil-king": "Broil King", axor: "AXOR",
-  hansgrohe: "Hansgrohe", "i-drain": "I-Drain", "mr-steam": "Mr. Steam",
-  acros: "Acros", elkay: "Elkay", keuco: "Keuco",
+  "i-drain": "I-Drain", "mr-steam": "Mr. Steam", acros: "Acros", elkay: "Elkay",
+  // Altas del 2026-09-21 (MARCAS_HOMEA_SEP26_DESCUENTOS.xlsx).
+  kraus: "Kraus", faber: "Faber", easy: "Easy", iem: "IEM", commodore: "Commodore",
+  nantucket: "Nantucket", fontana: "Fontana", foster: "Foster", josper: "Josper",
+  pizarro: "Pizarro", vass: "Vass", hergom: "Hergom", "hergom-diseno": "Hergom Diseño",
+  tres: "TRES", valsir: "Valsir", "artexa-bath": "Artexa Bath",
+  // Saunas de Artexa (Carla, 2026-09-21): no venían en el Excel.
+  jacuzzi: "Jacuzzi", clearlight: "Clearlight",
+  // Solo PDF por decisión de Carla (2026-09-21): Onix se queda, Firplak se restaura.
+  onix: "Onix", firplak: "Firplak",
 };
+
+// Canal web de cada marca (data-canal del tile). Decisión de Carla, 2026-09-21:
+//   shopify → catálogo, filtros y carrito en Shopify; la página lleva listado.
+//   pdf     → sin catálogo en Shopify; la página enseña el PDF de la marca (SEO).
+// Ver docs/MARCAS-CANAL-Y-DESCUENTOS.md.
+const CANALES = ["shopify", "pdf"];
 
 // data-sub del tile → a dónde manda esa categoría en el sitio.
 const CATEGORIAS = {
@@ -56,7 +72,11 @@ const CATEGORIAS = {
   asadores: { nombre: "Asadores y Hornos", ruta: "/productos/exterior/asadores-y-hornos" },
   banos: { nombre: "Baños", ruta: "/productos/banos" },
   menores: { nombre: "Electrodomésticos menores", ruta: "/productos/electrodomesticos-menores" },
+  lavanderia: { nombre: "Lavandería", ruta: "/productos/lavanderia" },
   vapor: { nombre: "Vapor y Sauna", ruta: "/productos/vapor-y-sauna" },
+  wellness: { nombre: "Wellness", ruta: "/productos/wellness" },
+  chimeneas: { nombre: "Chimeneas & Calentadores", ruta: "/productos/chimeneas-y-calentadores" },
+  recubrimientos: { nombre: "Recubrimientos y Superficies", ruta: "/productos/recubrimientos-y-superficies" },
 };
 
 // data-gama del tile → cómo se escribe la gama en pantalla.
@@ -69,9 +89,8 @@ const GAMAS = {
 
 // La marca de la lista de precios no siempre se llama igual que el tile.
 // Izquierda: `marca` en data/listas-precios.json. Derecha: slug(s) de tile.
-// Las marcas con lista pero SIN tile (Josper, Jacuzzi, Clearlight, Onix, Fortum,
-// Steamist, Catalano) no aparecen aquí: no tienen logo ni foto, así que no tienen
-// página. Su lista se sigue viendo en /marcas#listas-de-precios.
+// Una lista cuya marca no tiene tile no tiene página; se sigue viendo en
+// /marcas#listas-de-precios (hoy no queda ninguna así: 2026-09-21).
 const LISTAS_A_TILE = {
   Kele: ["kele-master-sinks"],
   "Frigidaire · Electrolux": ["frigidaire", "electrolux"],
@@ -97,10 +116,12 @@ function archivo(dir, slug) {
 const html = readFileSync(join(ROOT, "preview", "marcas.html"), "utf8");
 // La etiqueta completa del tile; los atributos se leen aparte para no depender
 // del orden en que estén escritos.
-const RE_TILE = /<a\s[^>]*class="brandtile"[^>]*>/g;
+// Admite clases extra: los tiles sin logo llevan "brandtile no-logo".
+const RE_TILE = /<a\s[^>]*class="brandtile(?: [^"]*)?"[^>]*>/g;
 const atributo = (tag, nombre) => tag.match(new RegExp(`${nombre}="([^"]*)"`))?.[1] ?? "";
 
 const errores = [];
+const sinArte = [];
 const marcas = [];
 const vistos = new Set();
 
@@ -108,6 +129,7 @@ for (const [tag] of html.matchAll(RE_TILE)) {
   const slug = atributo(tag, "data-brand");
   const gama = atributo(tag, "data-gama");
   const sub = atributo(tag, "data-sub");
+  const canal = atributo(tag, "data-canal");
   if (!slug) {
     errores.push(`tile sin data-brand: ${tag.slice(0, 80)}`);
     continue;
@@ -121,10 +143,13 @@ for (const [tag] of html.matchAll(RE_TILE)) {
   const nombre = NOMBRES[slug];
   if (!nombre) errores.push(`${slug}: falta su nombre en NOMBRES (scripts/build-marcas.mjs)`);
 
+  if (!CANALES.includes(canal)) {
+    errores.push(`${slug}: data-canal "${canal}" no es ${CANALES.join(" ni ")} (preview/marcas.html)`);
+  }
+
   const logo = archivo("assets/logos", slug);
   const foto = archivo("assets/photos/brands", slug);
-  if (!logo) errores.push(`${slug}: no hay logo en public/assets/logos/`);
-  if (!foto) errores.push(`${slug}: no hay foto en public/assets/photos/brands/`);
+  if (!logo || !foto) sinArte.push(`${slug} (${[!logo && "logo", !foto && "foto"].filter(Boolean).join(" y ")})`);
 
   const categorias = sub.split(/\s+/).filter(Boolean);
   for (const c of categorias) {
@@ -141,6 +166,7 @@ for (const [tag] of html.matchAll(RE_TILE)) {
     nombre: nombre ?? slug,
     gama: gamas,
     categorias,
+    canal,
     logo,
     foto,
     listas: [],
@@ -161,11 +187,15 @@ for (const entrada of listas.marcas) {
     marca.listas.push(...docs);
     colocada = true;
   }
-  // Sin tile = sin página. Es lo esperado para las 7 marcas sin logo ni foto,
-  // pero se avisa por si alguna marca nueva se quedó sin conectar por un typo.
+  // Sin tile = sin página. Es lo esperado para las marcas de LISTAS_A_TILE de
+  // arriba, pero se avisa por si alguna marca nueva se quedó sin conectar por un typo.
   if (!colocada) {
     console.warn(`  · "${entrada.marca}" tiene lista pero no tiene página (sin tile en marcas.html)`);
   }
+}
+
+if (sinArte.length) {
+  console.warn(`  · ${sinArte.length} marcas sin arte (hero oscuro con el nombre): ${sinArte.join(", ")}`);
 }
 
 if (errores.length) {
@@ -193,7 +223,7 @@ const salida = {
     "Registro de marcas de /marcas/<slug>. GENERADO por scripts/build-marcas.mjs " +
     "(`npm run marcas`) desde preview/marcas.html, public/assets/ y data/listas-precios.json. " +
     "No editar a mano, salvo 'descripcion', que el generador conserva. " +
-    "Marca nueva: agrega su tile en preview/marcas.html, su logo en public/assets/logos/, " +
+    "Marca nueva: agrega su tile en preview/marcas.html (con data-canal), su logo en public/assets/logos/, " +
     "su foto en public/assets/photos/brands/ y su nombre en NOMBRES del script; luego corre `npm run marcas`.",
   // A dónde manda cada categoría (el `categorias` de cada marca son claves de aquí).
   // Va en el JSON para que lib/marcas.ts no tenga que repetir la tabla.
@@ -205,4 +235,7 @@ const salida = {
 writeFileSync(SALIDA, `${JSON.stringify(salida, null, 2)}\n`);
 
 const conLista = marcas.filter((m) => m.listas.length).length;
-console.log(`data/marcas.json · ${marcas.length} marcas · ${conLista} con lista de precios`);
+const enPdf = marcas.filter((m) => m.canal === "pdf").length;
+console.log(
+  `data/marcas.json · ${marcas.length} marcas (${marcas.length - enPdf} shopify · ${enPdf} pdf) · ${conLista} con lista de precios`
+);

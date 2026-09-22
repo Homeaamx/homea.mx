@@ -50,8 +50,12 @@ de su familia).
 |---|---|---|
 | Coyote asadores 2026 (`lista-precios-asadores-coyote-2026.pdf`) | `/Files/119914/LISTA_PRECIOS_ASADORES_COYOTE_2026.pdf` | El encabezado del proveedor dice **"2025 Distributor Price Schedule · Confidential"**. ¿Los precios son públicos? Si sí, quitar la leyenda antes de subir. |
 | ASKO 2023 (`lista-precios-asko-2023.pdf`) | `/Files/119914/232245863241526.pdf` | Trae condiciones **para dealers** (pedidos, fletes, reclamaciones). ¿El precio es público o de distribuidor? |
-| Catalano Export Price List 50 (`lista-precios-catalano-export-50.pdf`) | `/Files/119914/213299772868141.pdf` | Lista de **exportación en euros**. ¿Es precio público o de distribuidor? |
 | Whirlpool WHC18T521STWC (`ficha-tecnica-refrigerador-whirlpool-whc18t521stwc-2.pdf`) | `/Files/119914/WHC18T521STWC_Ficha_Tecnica2.pdf` | Cada página dice **"Whirlpool Corporation Confidential"**. ¿Whirlpool autoriza publicarla? |
+
+> **Retirado el 2026-09-21:** Catalano salió del catálogo (marca eliminada, ver
+> `docs/MARCAS-CANAL-Y-DESCUENTOS.md`). Su lista ya no se publica y la URL vieja redirige a
+> `/productos/banos` (`data/redirects/oxatis-manual.json`). Lo mismo con las listas de
+> Hansgrohe, American Standard, Moen, Fortum (→ Baños) y Steamist (→ Vapor y Sauna).
 
 ## 2. PDFs que ya no existen en OXATIS (`sin-archivo`)
 

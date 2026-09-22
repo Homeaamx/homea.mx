@@ -453,8 +453,9 @@
       on(toggle, "click", function () {
         if (cajon && cajon.classList.contains("is-open")) { cerrar(); } else { abrir(); }
       });
-      /* "Productos" no navega (no hay índice /productos): en móvil y tablet
-         abre el cajón, que es donde vive el catálogo. */
+      /* Un título de la barra SIN enlace (<span>) abre el cajón en tablet, que es
+         donde vive el catálogo. "Productos" ya es enlace (lleva a Cocina y Bar,
+         decisión de Carla 2026-09-21), así que hoy no queda ninguno así. */
       var titulos = navEl.querySelectorAll(".nav-links .has-mega > span");
       titulos.forEach(function (t) {
         on(t, "click", function () { if (mqCajon.matches) { abrir(); } });

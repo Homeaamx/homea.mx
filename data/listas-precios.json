@@ -39,9 +39,6 @@
     { "marca": "Tecnolam", "documentos": [
       { "slug": "tecnolam-tarjas-y-monomandos", "titulo": "Tarjas y monomandos · lista de precios", "vigencia": "sep 2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-tecnolam-tarjas-monomandos-2025.pdf", "legacy": ["/Files/119914/Lista_Precios_TECNOLAM_Tarjas_Monomandos_2025_09.pdf", "/Files/119914/233185839511345.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-tecnolam-tarjas-monomandos-2025.pdf" }
     ] },
-    { "marca": "Hansgrohe", "documentos": [
-      { "slug": "hansgrohe-essentials", "titulo": "Essentials · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-hansgrohe-essentials-2025.pdf", "legacy": ["/Files/119914/Lista_Precios_Hansgrohe_Essentials_2025.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-hansgrohe-essentials-2025.pdf" }
-    ] },
     { "marca": "Kele", "documentos": [
       { "slug": "kele", "titulo": "Lista de precios", "vigencia": null, "url": null, "legacy": ["/Files/119914/LISTA_PRECIOS_KELE_2025_JULIO.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
     ] },
@@ -68,21 +65,6 @@
     ] },
     { "marca": "ASKO", "documentos": [
       { "slug": "asko", "titulo": "Lista de precios", "vigencia": "ago 2023", "url": null, "legacy": ["/Files/119914/232245863241526.pdf"], "estado": "revisar", "archivo": "revisar/lista-precios-asko-2023.pdf", "nota": "Incluye condiciones para distribuidores (pedidos, fletes, reclamaciones). Confirmar con Carla que el precio es público." }
-    ] },
-    { "marca": "American Standard", "documentos": [
-      { "slug": "american-standard", "titulo": "Catálogo y lista de precios", "vigencia": "2023", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-american-standard-as151-2023.pdf", "legacy": ["/Files/119914/231676722146639.pdf", "/Files/119914/213286832353404.pdf", "/Files/119914/213284870436756.pdf", "/Files/119914/213288564668280.pdf"], "estado": "listo", "archivo": "shopify/catalogo-american-standard-as151-2023.pdf" }
-    ] },
-    { "marca": "Moen", "documentos": [
-      { "slug": "moen", "titulo": "Lista de precios", "vigencia": "ago 2023", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-moen-2023.pdf", "legacy": ["/Files/119914/241549745019083.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-moen-2023.pdf" }
-    ] },
-    { "marca": "Fortum", "documentos": [
-      { "slug": "fortum", "titulo": "Catálogo y lista de precios", "vigencia": "ago 2023", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-precios-fortum-2023.pdf", "legacy": ["/Files/119914/241544379612946.pdf"], "estado": "listo", "archivo": "shopify/catalogo-precios-fortum-2023.pdf" }
-    ] },
-    { "marca": "Steamist", "documentos": [
-      { "slug": "steamist-banos-de-vapor", "titulo": "Baños de vapor · catálogo y lista de precios", "vigencia": "2021", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-steamist-banos-vapor-2021.pdf", "legacy": ["/Files/119914/213291306470630.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-steamist-banos-vapor-2021.pdf" }
-    ] },
-    { "marca": "Catalano", "documentos": [
-      { "slug": "catalano", "titulo": "Export Price List 50 (EUR)", "vigencia": null, "url": null, "legacy": ["/Files/119914/213299772868141.pdf"], "estado": "revisar", "archivo": "revisar/lista-precios-catalano-export-50.pdf", "nota": "Lista de exportación en euros. Confirmar con Carla que no es precio de distribuidor." }
     ] }
   ]
 }

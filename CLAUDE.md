@@ -19,6 +19,10 @@ Una landing page moderna con **dos objetivos simultáneos**:
 
 **Escala del catálogo:** ~**25,000 productos** listos para exportar → es una **migración de catálogo seria**, no solo una landing. Implica: preparación/homologación de datos, **obtención de imágenes por producto**, import masivo a Shopify y **filtros precisos** (tipo, marca, características).
 
+**Alcance de Shopify (decisión Carla, 2026-09-21):** solo van a Shopify **Cocina y Bar, Exterior → Asadores & Hornos, Electrodomésticos menores, Lavandería y Minisplits**. **Alberca, Baños, Vapor y Sauna, Wellness, Recubrimientos y Superficies y Chimeneas & Calentadores** van **solo como PDF** desde la página de cada marca (por SEO). **La asignación por marca manda** (68 marcas SHOPIFY con ~16k productos, 25 SOLO PDF, 14 eliminadas, con el descuento asignado a cada una): `docs/MARCAS-CANAL-Y-DESCUENTOS.md`. Las 93 páginas `/marcas/<slug>` ya respetan el canal (`canal` en `data/marcas.json`): las `pdf` enseñan su PDF sin listado de Shopify. Detalle: `docs/PLAN-DE-FASES.md` Fase 4.
+
+🔒 **El repo es PÚBLICO.** Nunca subir costos, márgenes ni listas de distribuidor. Los Excel de `catalogo-shopify/` se borran al terminar la carga a Shopify (recordatorio en el plan, Fase 4).
+
 **Principio rector de producto:** la **funcionalidad es prioridad, no solo el diseño**. Búsqueda, filtros, carrito, formularios y velocidad deben funcionar impecablemente. "Bonito pero roto" no es aceptable.
 
 ## 3. Decisión de arquitectura — HEADLESS: FRONT-END PROPIO EN VERCEL + SHOPIFY SOLO ECOMMERCE (actualizado 2026-06-10)
@@ -79,6 +83,7 @@ Migramos de OXATIS → Next.js conservando el dominio `homea.mx`. El riesgo #1 e
 - `docs/PLAN-REDIRECTS-MIGRACION.md` — plan de redirects 301 (estructura Google, reglas de mapeo, Tier 1–2).
 - `docs/PENDIENTES-CARRITO-SHOPIFY.md` — **qué falta para que el carrito hable de verdad con Shopify**: los 4 pendientes de configuración (token Headless, token Banxico, `CRON_SECRET`, quitar la contraseña de la tienda), el riesgo de moneda y cómo verificar cada uno. Leer ANTES de mergear o de dar por buena la integración.
 - `docs/PDFS-OXATIS-PENDIENTES.md` — PDFs de OXATIS re-hospedados en Shopify Files: los que esperan aprobación de Carla y los que ya murieron en OXATIS (con enlaces Wayback).
+- `docs/MARCAS-CANAL-Y-DESCUENTOS.md` — qué marcas van a Shopify (catálogo y filtros) y cuáles solo como PDF en su página de marca, más el descuento Shopify (PLATA) de cada una. Sin costos ni márgenes, porque el repo es público.
 - `docs/PAGINAS-DE-MARCA.md` — `/marcas/<slug>`: una página por marca (77) desde `data/marcas.json`. Cómo agregar una marca y qué cambiar cuando llegue el catálogo.
 - `docs/ESTRATEGIA-IMAGENES.md` — dónde se almacenan las imágenes (producto→Shopify CDN, editoriales→Vercel/`next/image`), optimización de carga y **nomenclatura SEO de archivos** (descriptiva + trends de búsqueda).
 - `docs/PATRON-FICHAS-TIPO.md` — patrón "Planos de cocina": fichas de tipo de producto en Guías (diagrama de línea + hover puertas abiertas). Referencia: Refrigeradores. **Usar este patrón al definir los tipos de cada categoría nueva.**

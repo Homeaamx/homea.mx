@@ -114,8 +114,124 @@ Estado: 🔵 pendiente · 🟡 en curso · ✅ hecho
 ---
 
 ## 🔵 Fase 4 — Catálogo, ecommerce funcional y filtros
-*El ecommerce no es la venta principal, pero **DEBE funcionar bien**. Escala: **~25,000 productos**.*
+*El ecommerce no es la venta principal, pero **DEBE funcionar bien**. Escala: ~~25,000~~ → **~16,071 productos a Shopify** (68 marcas) + ~1,999 solo PDF, según la asignación por marca del 2026-09-21.*
 *4.1 y 4.2 (datos + imágenes) pueden correr **en paralelo** desde ya (skill `homea-operaciones`).*
+
+> ⭐ **DECISIÓN — Alcance de Shopify por macrocategoría (Carla, 2026-09-21).**
+> **No todo el catálogo se sube a Shopify.** Solo van a la venta las categorías que son nuestro
+> fuerte; el resto se presenta **únicamente como PDF**, por medio de botones en la página de cada
+> marca (`/marcas/<slug>`), y se queda en el sitio por SEO.
+>
+> | Macrocategoría | Shopify (a la venta) | Solo PDF desde la página de marca |
+> |---|---|---|
+> | Cocina y Bar | ✅ toda | |
+> | Exterior | ✅ solo **Asadores & Hornos** | **Alberca** |
+> | Electrodomésticos menores | ✅ toda | |
+> | Lavandería | ✅ toda | |
+> | Minisplits | ✅ toda | |
+> | Baños | | ✅ |
+> | Vapor y Sauna | | ✅ |
+> | Wellness | | ✅ |
+> | Recubrimientos y Superficies | | ✅ |
+> | Chimeneas & Calentadores | | ✅ |
+>
+> **Por ahora solo queda anotado; todavía no se cambia nada.** Se aplica en la limpia de marcas.
+>
+> - [ ] **Limpia de marcas + asignación**: a cada una de las 77 marcas de `data/marcas.json` se le
+>   asigna si aparece en Shopify o solo como PDF. Una misma marca puede caer en los dos lados si
+>   vende en categorías de ambos grupos (se resuelve marca por marca en la limpia).
+> - [ ] **Qué hay que revisar cuando se aplique** (no antes):
+>   - La depuración de 4.1 y el import de 4.3 se limitan a las macros de Shopify. El **~25k baja**:
+>     hay que recalcularlo.
+>   - Las macros que van solo como PDF no tendrán listado de productos ni carrito. Hay que decidir qué muestran su PLP y el
+>     mega-menú (¿enlazan a las marcas o a los PDFs?) sin romper las URLs que ya rankean
+>     (`docs/PLAYBOOK-MIGRACION-SEO.md`, `docs/PLAN-REDIRECTS-MIGRACION.md`: hoy el mapa de
+>     OXATIS manda esos productos a su listado de familia).
+>   - Botones de PDF en `/marcas/<slug>`: los PDFs se sirven desde Shopify Files
+>     (`data/listas-precios.json`), igual que las listas de precios actuales.
+>   - Buscador (lupa) e índice: decidir si los productos que solo van como PDF aparecen en el buscador y a dónde llevan.
+>   - Google Shopping (4.6): el feed solo incluye las macros de Shopify.
+
+> ⭐ **ASIGNACIÓN POR MARCA — canal web y descuentos (Carla, 2026-09-21, `MARCAS_HOMEA_SEP26_DESCUENTOS.xlsx`).**
+> Detalle marca por marca (proveedor, línea SAE, productos, descuento, página actual y notas):
+> **`docs/MARCAS-CANAL-Y-DESCUENTOS.md`**. **Esta lista manda sobre la tabla por macro de arriba.**
+> Hay marcas de cocina o asadores que van solo como PDF (Kamado Joe, Masterbuilt, WPPO, La Cornue…). De Brizo,
+> Delta y Axcent **solo se trabaja la línea de cocina** (Carla, 2026-09-21).
+>
+> - **SHOPIFY (68 marcas, ~16,071 productos tras la carga):** catálogo, filtros y carrito en Shopify; su
+>   página de marca lleva listado de productos.
+> - **SOLO PDF (25 marcas, ~1,999 productos + Jacuzzi, Clearlight, Onix y Firplak):** el botón de marca en `/marcas` abre `/marcas/<slug>` con
+>   **el PDF**, sin filtro de productos de Shopify. La página existe por SEO. Son Fontana, Foster, Kalt, Poletti, Sapphire,
+>   WPPO, Kamado Joe, La Cornue, Josper, Masterbuilt, Pizarro, Vass, Hergom, Hergom Diseño, Axor,
+>   iDrain / iDrain Proyectos, Mr Steam, Nobili, TRES, Valsir, Artexa Bath, **Jacuzzi y Clearlight** (las saunas de
+>   Artexa; no venían en el Excel y se agregaron el 2026-09-21), **Onix** (se queda) y **Firplak** (restaurada).
+> - **ELIMINADAS (14):** Catalano, Duplash, Hansgrohe, Inda, Kaldewei, Keuco, Laufen, Kindred,
+>   Ambiance, American Standard, Moen y **Saunas de Grupo 90** (descatalogadas el 2026-09-21: solo se
+>   presentan las saunas de Artexa), más **Fortum y Steamist** (no venían en el Excel; su lista se retiró el 2026-09-21).
+>
+> **Descuento Shopify (PLATA) asignado. ⚠️ Se queda así por ahora (decisión Carla, 2026-09-21) y se va a
+> modificar más adelante: revisarlo antes de cargar precios.** Las 5 marcas que el Excel marca debajo del
+> margen mínimo también se quedan en 10%.
+>
+> | Descuento | Marcas SHOPIFY |
+> |---|---|
+> | **5%** | Faber, Lynx, Miele, Sedona, Supra, Tradewind, U-Line, Viking |
+> | **10%** | Alfa Forni, Alfresco, Artisan, Asko, Bertazzoni, Blanco, Blaze, Bosch, Brizo, Broil King, Café, Cove, Coyote, Dawn, Delta, Dexa, Eclipse, Electrolux / Electrolux Icon, Elica, Elkay, Falmec, Franke, Frigidaire / Gallery / Pro, Fulgor Milano, Gaggenau, Gessi, Hoshizaki, InSinkErator, Invisacook, Kele, Kraus, Monogram, Mont Alpi, Nantucket, Pitt, Schock, Scotsman, Smeg, Sub-Zero, Summit, Tecnolam, Teka (estufas económicas 5%), Thermador, Thor, Wolf |
+> | **15%** | Axcent, Benessi |
+> | **30%** | Acros, Easy, GE Profile, Haier, IEM, IO Mabe, KitchenAid, Mabe, Maytag, Whirlpool (validar margen con lista PPS) |
+> | **PENDIENTE** | Commodore, Peerless, The Galley (no están en la política de descuentos) |
+>
+> Marcas SOLO PDF con descuento: 10% para Axor, iDrain, Mr Steam, Nobili, TRES y Valsir (iDrain Proyectos: no
+> aplica). Artexa Bath, Jacuzzi, Clearlight y Onix: pendiente. El resto: sin descuento asignado.
+>
+> 🔒 Los costos de proveedor, el flete y los márgenes están en el Excel y **no se copian al repo**, porque es público.
+>
+> - [ ] **Revisar los descuentos** con Carla antes de cargar precios a Shopify (por ahora se quedan como están,
+>   la mayoría en 10%). Definir los 3 pendientes de SHOPIFY y Artexa Bath, validar los grupos Mabe y Whirlpool con la lista
+>   PPS, y confirmar las excepciones (Teka estufas económicas, Viking Serie 3/6/Tuscany, Eclipse Value Line,
+>   Sub-Zero/Wolf fuera de línea, Frigidaire parejas Pro) y las 5 marcas bajo el margen mínimo.
+> - [x] **Marcas eliminadas fuera de todo el sitio** (2026-09-21): Hansgrohe, Keuco, American Standard y Moen perdieron
+>   página, tile, enlace del mega-menú, fotos, logos y listas de precios (también la de Catalano). Las URLs viejas de sus
+>   PDFs redirigen (301) a su categoría (`data/redirects/oxatis-manual.json`). La portada de la guía de Baños usaba una
+>   foto Hansgrohe y se cambió por la de la categoría.
+> - [x] **20 páginas de marca nuevas** (2026-09-21): 6 SHOPIFY (Kraus, Faber, Easy, IEM, Commodore, Nantucket) y
+>   14 SOLO PDF (Fontana, Foster, Josper, Pizarro, Vass, Hergom, Hergom Diseño, TRES, Valsir, Artexa Bath, Jacuzzi,
+>   Clearlight, Onix, Firplak). Hoy hay 93 páginas de marca.
+> - [x] **Plantilla SOLO PDF** (2026-09-21): `canal` en `data/marcas.json` (sale de `data-canal` del tile). Las marcas
+>   `pdf` enseñan su PDF y la cotización por WhatsApp, sin listado ni filtros. Sin logo o sin foto, la página cae a
+>   hero oscuro con el nombre.
+> - [ ] **Arte de las marcas nuevas:** logos para las 18 que no tienen y fotos para las 17 sin foto (detalle en
+>   `docs/MARCAS-CANAL-Y-DESCUENTOS.md`, columna *Arte*). Pedírselos a Carla (la carpeta de OneDrive ya no está
+>   sincronizada en esta Mac).
+> - [ ] **Confirmar categoría y gama de las marcas nuevas** (lista ❓ en `docs/MARCAS-CANAL-Y-DESCUENTOS.md`).
+>   Vass (chimeneas, residencial), Onix (residencial) y Firplak (económica) ya las confirmó Carla.
+> - [x] **Fortum y Steamist retiradas** (2026-09-21): sus listas salieron de `data/listas-precios.json` y las URLs viejas
+>   de sus PDFs redirigen (301) a Baños y a Vapor y Sauna. Onix se quedó como SOLO PDF.
+> - [ ] **Siguiente paso tras subir los catálogos — PDFs marca por marca** (decisión Carla, 2026-09-21): pedirle
+>   a Carla el PDF vigente de cada marca, subirlo a Shopify Files y darlo de alta en `data/listas-precios.json`
+>   (la página lo toma sola con `npm run marcas`). Orden: primero las marcas de **Cocina y Bar, Exterior,
+>   Electrodomésticos menores, Lavandería y Minisplits**; lo demás, después. Revisar cada PDF para que se
+>   presente sin error.
+> - [ ] **Brizo, Delta y Axcent: solo la línea de cocina.** Al cargar su catálogo, excluir baño. Hoy sus páginas
+>   todavía enlazan la categoría Baños: quitarla cuando se cargue el catálogo.
+> - [ ] Que el buscador y el sitemap respeten `canal` cuando se conecten al catálogo real.
+> - [ ] Recalcular la escala de la depuración (4.1) y del import (4.3) con las ~16k filas de las marcas SHOPIFY.
+>
+> 🔒 **RECORDATORIO — borrar del repo los documentos con información delicada** (Carla, 2026-09-21). El repo
+> `Homeaamx/homea.mx` es **público**: cualquier costo, margen o lista de distribuidor que viva en la carpeta
+> se puede descargar.
+>
+> - [ ] **Al terminar la carga de productos a Shopify, eliminar los Excel de trabajo del catálogo**:
+>   `catalogo-shopify/01-DIAGNOSTICO-CATALOGO.xlsx` … `08-ARTEXA-REFERENCIA.xlsx`,
+>   `catalogo-shopify/import/*.xlsx` y los CSV de import con precios. Traen precios de lista SAE, precios de
+>   proveedor y claves SAE.
+> - [ ] ⚠️ **Prioridad: `catalogo-shopify/05-CRUCE-COCINAS-RESTO.xlsx` trae la lista de Mabe que el propio
+>   archivo marca como COSTO.** Ya está publicada. Conviene sacarla antes, sin esperar a la carga.
+> - [ ] **Borrar el archivo no basta:** sigue en el historial de git, y en un repo público eso se puede leer.
+>   Opciones: volver el repo **privado** (Vercel sigue desplegando igual) o purgar el historial (`git filter-repo`,
+>   reescribe todos los commits). Lo decide Carla.
+> - [ ] Regla desde ya: **ningún Excel con costos, márgenes o listas de distribuidor entra al repo.** Trabajarlos en
+>   OneDrive. `MARCAS_HOMEA_SEP26_DESCUENTOS.xlsx` nunca entró.
 
 ### 4.1 Preparación / homologación de datos
 
@@ -229,6 +345,7 @@ sirvió de piloto del patrón (5 fichas + import en borrador).
 - [ ] **Corte de migración:** apuntar **DNS de `homea.mx` (GoDaddy) a Vercel**, activar **todos los 301**, subir **sitemap propio** a GSC, validar indexación.
 - [ ] **Análisis de comportamiento con Microsoft Clarity** ⭐ NUEVO: instalar **Microsoft Clarity** (gratis) en el front-end **en el corte de lanzamiento** para que capture datos desde el día 1 — **heatmaps** (clics, scroll, áreas muertas) y **grabaciones de sesión**. Complementa GA4/Meta Pixel (que miden *qué* pasa) mostrando *cómo* navegan los usuarios. Durante el **monitoreo post-lanzamiento**, revisar: dónde abandonan, qué CTAs ("Cotizar"/WhatsApp/"Comprar") se ven y cuáles se ignoran, rage-clicks y fricción en filtros/PDP → alimenta iteración de conversión.
 - [ ] **No matar OXATIS de golpe**; **monitoreo post-lanzamiento** 2–6 semanas vs. línea base.
+- [ ] 🔒 **Repo sin información delicada antes de lanzar:** confirmar que ya se borraron los Excel de catálogo con precios y costos, y que se decidió qué hacer con el historial de git (ver el recordatorio en la Fase 4).
 - [ ] ⭐ **Cerrar la fuga de precios en `promociones.homea.mx`** (hallazgo 2026-09-04, marcado por Carla como punto a revisar cerca del lanzamiento): la raíz de la carpeta del proyecto (`~/Documents/Landing Pages Homea 2026/Homea Promociones`, repo `Homeaamx/promociones-homea`) contiene archivos de trabajo internos que Vercel sirve públicos — verificado con HTTP 200: `PRECIOS_CLAUDE_2026.xlsx`, `prices.json`, `*_rows.json` por marca, scripts `.py`. Cualquiera con la URL puede descargar las listas de precios. Fix: mover esos archivos a una carpeta fuera del deploy o excluirlos con `.vercelignore`, y redesplegar.
 
 **Entregable:** sitio en producción en `www.homea.mx` (servido por Vercel) sin pérdida de SEO, **con Microsoft Clarity capturando comportamiento desde el lanzamiento**.
