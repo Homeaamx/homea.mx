@@ -20,6 +20,12 @@ export const SIZES_TILE = "(max-width: 700px) 45vw, 300px";
 /** Imágenes a sangre completa (heros de sección). */
 export const SIZES_SANGRE = "100vw";
 
+/** Ancho real (px) del archivo mayor de una imagen, o undefined si no está en el manifiesto. */
+export function anchoImagen(src: string): number | undefined {
+  const anchos = MAPA[src];
+  return anchos?.length ? Math.max(...anchos) : undefined;
+}
+
 /** srcset con los anchos disponibles, o undefined si no hay variantes. */
 export function srcSet(src: string): string | undefined {
   const anchos = MAPA[src];

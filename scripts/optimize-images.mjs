@@ -50,6 +50,8 @@ function maxWidthFor(rel) {
 
   // Fondos CSS: no admiten srcset, así que se capan al mayor uso real.
   // Chips del carrusel y tiles de /marcas ≈ 294–400 px de ancho pintado.
+  // brands/hero/ es la excepción: es el hero a sangre de /marcas/<slug> (lleva srcset).
+  if (/\/photos\/brands\/hero\//.test(p)) return 2000;
   if (/\/photos\/brands\//.test(p)) return 700;
   // Mosaicos de categoría y tiles de subcategoría ≈ 400 px.
   if (/\/photos\/cat-|\/photos\/subcat/.test(p)) return 800;

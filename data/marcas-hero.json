@@ -1,0 +1,956 @@
+{
+  "_nota": "Contenido del hero de /marcas/<slug>, una entrada por slug de data/marcas.json. Escrito a mano (o desde el Excel de contenido de marcas); scripts/build-marcas.mjs NO lo toca. Marca sin entrada → hero actual (gama · Distribución oficial + nombre + frase automática). 'eyebrow' se escribe normal: el CSS lo pasa a mayúsculas. 'cta.url' = PDF oficial en Shopify Files; mientras sea null, el botón pide el catálogo por WhatsApp. Cargado desde HOMEA_HERO_97_MARCAS_CODE.xlsx (2026-09-22). Opcionales: 'imagen.espejo' (false = foto al derecho; por defecto va en espejo), 'imagen.posicion' (object-position; por defecto 'center 75%', un % menor enseña más la parte de arriba) y 'logoEscala' (multiplica el alto del logo).",
+  "acros": {
+    "eyebrow": "Funcional · Práctica · Accesible",
+    "titulo": "Electrodomésticos Acros",
+    "descripcion": "Soluciones prácticas para el hogar, con estufas, refrigeradores, lavandería y otros electrodomésticos diseñados para hacer más simple el día a día.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "posicion": "center 25%"
+    }
+  },
+  "alfa-forni": {
+    "eyebrow": "Italiano · Artesanal · Potente",
+    "titulo": "Hornos Alfa Forni",
+    "descripcion": "Hornos y soluciones para exterior con enfoque italiano, alto desempeño térmico y diseño pensado para disfrutar una cocción auténtica al aire libre.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "alfresco": {
+    "eyebrow": "Profesional · Robusto · Exterior",
+    "titulo": "Asadores Alfresco",
+    "descripcion": "Equipamiento premium para cocina exterior, con asadores y soluciones robustas que llevan desempeño de nivel profesional a espacios residenciales.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "artisan": {
+    "eyebrow": "Potencia · Precisión · Exterior",
+    "titulo": "Asadores Artisan",
+    "descripcion": "Asadores y equipos para exterior con construcción sólida, controles precisos y desempeño confiable para crear una cocina al aire libre completa.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "posicion": "center 55%"
+    }
+  },
+  "asko": {
+    "eyebrow": "Escandinavo · Minimalista · Preciso",
+    "titulo": "Electrodomésticos ASKO",
+    "descripcion": "Electrodomésticos de inspiración escandinava que combinan diseño minimalista, precisión y soluciones funcionales para una cocina contemporánea.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "axcent": {
+    "eyebrow": "Funcional · Versátil · Accesible",
+    "titulo": "Cocina y baño Axcent",
+    "descripcion": "Soluciones accesibles para cocina y baño, con tarjas, monomandos y equipamiento funcional pensado para proyectos prácticos y bien resueltos.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "logoEscala": 0.6
+  },
+  "benessi": {
+    "eyebrow": "Elegante · Integrado · Refinado",
+    "titulo": "Cocina Benessi",
+    "descripcion": "Equipamiento de cocina con una propuesta elegante e integrada, pensado para proyectos que buscan funcionalidad, presencia visual y acabados refinados.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "bertazzoni": {
+    "eyebrow": "Italiano · Preciso · Distintivo",
+    "titulo": "Cocina Bertazzoni",
+    "descripcion": "Electrodomésticos de cocina con tradición italiana, diseño distintivo y desempeño preciso para crear espacios residenciales con fuerte personalidad.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "blanco": {
+    "eyebrow": "Alemán · Funcional · Refinado",
+    "titulo": "Tarjas y grifería Blanco",
+    "descripcion": "Tarjas y monomandos con enfoque funcional y diseño refinado, pensados para integrar la zona de agua con orden, durabilidad y estética contemporánea.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "posicion": "center 60%"
+    }
+  },
+  "blaze": {
+    "eyebrow": "Robusto · Versátil · Exterior",
+    "titulo": "Asadores Blaze",
+    "descripcion": "Asadores y equipos para exterior con construcción robusta, alto desempeño y soluciones versátiles para crear cocinas al aire libre bien equipadas.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "bosch": {
+    "eyebrow": "Ingeniería · Eficiencia · Confiabilidad",
+    "titulo": "Electrodomésticos Bosch",
+    "descripcion": "Electrodomésticos y equipos menores con enfoque en ingeniería, eficiencia y facilidad de uso para resolver la cocina cotidiana con diseño limpio.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "brizo": {
+    "eyebrow": "Expresivo · Arquitectónico · Sofisticado",
+    "titulo": "Grifería Brizo",
+    "descripcion": "Grifería para cocina y baño con lenguaje expresivo, detalles arquitectónicos y acabados sofisticados que convierten el agua en parte del diseño.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "broil-king": {
+    "eyebrow": "Potente · Robusto · Versátil",
+    "titulo": "Asadores Broil King",
+    "descripcion": "Asadores para exterior enfocados en potencia, control y construcción robusta, ideales para cocinar con versatilidad y aprovechar cada zona de calor.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false,
+      "posicion": "center 40%"
+    }
+  },
+  "cafe": {
+    "eyebrow": "Personalizable · Contemporáneo · Distintivo",
+    "titulo": "Electrodomésticos Café",
+    "descripcion": "Electrodomésticos de cocina con estética contemporánea y opciones de personalización, pensados para convertir cada espacio en una propuesta propia.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "posicion": "center 60%"
+    }
+  },
+  "catalano": {
+    "eyebrow": "Italiano · Minimalista · Refinado",
+    "titulo": "Baños Catalano",
+    "descripcion": "Soluciones para baño de diseño italiano, líneas depuradas y estética refinada, creadas para proyectos que buscan limpieza visual y alto nivel de detalle.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "clearlight": {
+    "eyebrow": "Bienestar · Tecnología · Confort",
+    "titulo": "Saunas Clearlight",
+    "descripcion": "Saunas orientados al bienestar que integran tecnología, confort y una experiencia envolvente para crear espacios privados de relajación y recuperación.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "commodore": {
+    "eyebrow": "Práctico · Compacto · Confiable",
+    "titulo": "Trituradores Commodore",
+    "descripcion": "Trituradores para cocina diseñados para facilitar el manejo de residuos, con una propuesta práctica, compacta y funcional para el uso cotidiano.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false,
+      "posicion": "center 30%"
+    }
+  },
+  "cove": {
+    "eyebrow": "Precisión · Silencio · Integración",
+    "titulo": "Lavavajillas Cove",
+    "descripcion": "Lavavajillas premium enfocados en limpieza precisa, operación silenciosa e integración con cocinas de alto nivel, cuidando rendimiento y organización.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "posicion": "center 60%"
+    }
+  },
+  "coyote": {
+    "eyebrow": "Robusto · Funcional · Exterior",
+    "titulo": "Asadores Coyote",
+    "descripcion": "Asadores y soluciones para exterior con construcción resistente, operación práctica y desempeño confiable para equipar cocinas al aire libre.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "dawn": {
+    "eyebrow": "Práctico · Versátil · Accesible",
+    "titulo": "Tarjas y grifería Dawn",
+    "descripcion": "Tarjas y monomandos de enfoque práctico y versátil, pensados para resolver la zona de agua con funcionalidad, buena integración y valor accesible.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "delta": {
+    "eyebrow": "Innovación · Confort · Versatilidad",
+    "titulo": "Grifería Delta",
+    "descripcion": "Grifería para cocina y baño con soluciones orientadas al confort, la facilidad de uso y la versatilidad para proyectos residenciales contemporáneos.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "posicion": "center 55%"
+    }
+  },
+  "dexa": {
+    "eyebrow": "Funcional · Contemporáneo · Accesible",
+    "titulo": "Electrodomésticos Dexa",
+    "descripcion": "Electrodomésticos de cocina con propuesta funcional y contemporánea, creados para resolver necesidades cotidianas con diseño limpio y valor equilibrado.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "easy": {
+    "eyebrow": "Práctica · Sencilla · Accesible",
+    "titulo": "Electrodomésticos Easy",
+    "descripcion": "Equipos de cocina pensados para el uso diario, con una propuesta sencilla, funcional y accesible que prioriza practicidad y facilidad de operación.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false,
+      "posicion": "center 22%"
+    }
+  },
+  "eclipse": {
+    "eyebrow": "Funcional · Limpio · Accesible",
+    "titulo": "Tarjas y grifería Eclipse",
+    "descripcion": "Tarjas y monomandos con diseño limpio y enfoque funcional, pensados para integrarse con facilidad en cocinas residenciales de distintos estilos.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "posicion": "center 35%"
+    }
+  },
+  "electrolux": {
+    "eyebrow": "Funcional · Eficiente · Contemporáneo",
+    "titulo": "Electrodomésticos Electrolux",
+    "descripcion": "Electrodomésticos de cocina con enfoque en eficiencia, funcionalidad y diseño contemporáneo para simplificar tareas y mejorar la experiencia diaria.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "elica": {
+    "eyebrow": "Diseño · Ventilación · Innovación",
+    "titulo": "Campanas Elica",
+    "descripcion": "Soluciones de ventilación para cocina donde diseño e innovación se integran con alto desempeño, creando ambientes más limpios y visualmente ligeros.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false,
+      "posicion": "center 30%"
+    }
+  },
+  "elkay": {
+    "eyebrow": "Funcional · Durable · Versátil",
+    "titulo": "Tarjas y grifería Elkay",
+    "descripcion": "Tarjas y monomandos diseñados para uso cotidiano, con enfoque en durabilidad, funcionalidad y versatilidad para cocinas residenciales bien resueltas.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "faber": {
+    "eyebrow": "Ventilación · Diseño · Eficiencia",
+    "titulo": "Campanas Faber",
+    "descripcion": "Campanas y soluciones de ventilación que combinan eficiencia, diseño y control de humos para mantener la cocina cómoda, limpia y bien integrada.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "falmec": {
+    "eyebrow": "Italiano · Silencioso · Innovador",
+    "titulo": "Campanas Falmec",
+    "descripcion": "Campanas de diseño italiano con enfoque en innovación, desempeño y confort acústico, creadas para integrarse con elegancia en cocinas contemporáneas.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "firplak": {
+    "eyebrow": "Funcional · Práctico · Accesible",
+    "titulo": "Baños Firplak",
+    "descripcion": "Soluciones para baño con enfoque práctico y funcional, pensadas para proyectos residenciales que buscan buena integración, facilidad de uso y valor.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "fontana": {
+    "eyebrow": "Artesanal · Italiano · Exterior",
+    "titulo": "Hornos Fontana",
+    "descripcion": "Hornos para exterior de inspiración italiana, pensados para una cocción auténtica y versátil con presencia artesanal y enfoque en reuniones al aire libre.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "foster": {
+    "eyebrow": "Italiano · Integrado · Funcional",
+    "titulo": "Cocina Foster",
+    "descripcion": "Soluciones para cocina de diseño italiano que priorizan integración, funcionalidad y detalle, con una estética limpia para proyectos contemporáneos.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "franke": {
+    "eyebrow": "Suizo · Funcional · Refinado",
+    "titulo": "Tarjas y grifería Franke",
+    "descripcion": "Tarjas y monomandos con enfoque en funcionalidad, precisión y diseño refinado, pensados para convertir la zona de agua en un espacio mejor integrado.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "frigidaire": {
+    "eyebrow": "Confiable · Práctico · Funcional",
+    "titulo": "Electrodomésticos Frigidaire",
+    "descripcion": "Electrodomésticos de cocina con una propuesta práctica y confiable, diseñados para facilitar las tareas diarias con funciones claras y uso sencillo.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "fulgor-milano": {
+    "eyebrow": "Italiano · Preciso · Sofisticado",
+    "titulo": "Cocina Fulgor Milano",
+    "descripcion": "Electrodomésticos de cocina con diseño italiano, líneas sofisticadas y desempeño preciso para proyectos residenciales que buscan presencia y control.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "gaggenau": {
+    "eyebrow": "Arquitectónico · Preciso · Vanguardista",
+    "titulo": "Cocina Gaggenau",
+    "descripcion": "Electrodomésticos de cocina con enfoque arquitectónico, precisión técnica y diseño vanguardista para espacios donde cada detalle forma parte del proyecto.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "ge-profile": {
+    "eyebrow": "Inteligente · Funcional · Accesible",
+    "titulo": "Electrodomésticos GE Profile",
+    "descripcion": "Electrodomésticos de cocina con funciones inteligentes y diseño funcional, pensados para simplificar rutinas y ofrecer una experiencia conectada y práctica.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "gessi": {
+    "eyebrow": "Italiano · Escultural · Sofisticado",
+    "titulo": "Grifería Gessi",
+    "descripcion": "Grifería de diseño italiano con formas escultóricas y acabados sofisticados, creada para convertir la zona de agua en un elemento protagonista.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "haier": {
+    "eyebrow": "Inteligente · Funcional · Accesible",
+    "titulo": "Electrodomésticos Haier",
+    "descripcion": "Electrodomésticos de cocina con enfoque en conectividad, funcionalidad y diseño actual, pensados para hogares que buscan soluciones prácticas y flexibles.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "hergom": {
+    "eyebrow": "Tradición · Calidez · Durabilidad",
+    "titulo": "Chimeneas Hergom",
+    "descripcion": "Chimeneas y calentadores con enfoque en calidez, construcción duradera y tradición, pensados para crear ambientes confortables y eficientes en el hogar.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "hoshizaki": {
+    "eyebrow": "Precisión · Hielo · Rendimiento",
+    "titulo": "Hielo Hoshizaki",
+    "descripcion": "Equipos para cocina y bar reconocidos por su enfoque en producción de hielo, precisión operativa y rendimiento constante para aplicaciones exigentes.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "i-drain": {
+    "eyebrow": "Minimalista · Funcional · Integrado",
+    "titulo": "Baños I-Drain",
+    "descripcion": "Soluciones de drenaje para baño con estética minimalista e integración discreta, pensadas para mantener continuidad visual y resolver el desagüe con precisión.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "iem": {
+    "eyebrow": "Práctica · Confiable · Accesible",
+    "titulo": "Electrodomésticos IEM",
+    "descripcion": "Equipos de cocina con una propuesta práctica y accesible, pensados para el uso diario con funciones claras, operación sencilla y desempeño confiable.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false,
+      "posicion": "center 25%"
+    }
+  },
+  "insinkerator": {
+    "eyebrow": "Potencia · Higiene · Conveniencia",
+    "titulo": "Trituradores InSinkErator",
+    "descripcion": "Trituradores para cocina que facilitan el manejo de residuos con operación práctica, potencia controlada y una solución integrada para el uso diario.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "invisacook": {
+    "eyebrow": "Invisible · Innovador · Integrado",
+    "titulo": "Cocina Invisacook",
+    "descripcion": "Sistema de cocción integrado bajo la superficie, pensado para lograr cocinas visualmente limpias y funcionales sin una parrilla visible sobre la cubierta.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "logoEscala": 1.44
+  },
+  "io-mabe": {
+    "eyebrow": "Funcional · Elegante · Accesible",
+    "titulo": "Electrodomésticos IO Mabe",
+    "descripcion": "Electrodomésticos de cocina que combinan funcionalidad, diseño cuidado y soluciones prácticas para crear espacios residenciales actuales y bien equipados.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "jacuzzi": {
+    "eyebrow": "Bienestar · Hidroterapia · Confort",
+    "titulo": "Wellness Jacuzzi",
+    "descripcion": "Soluciones de wellness, vapor y sauna enfocadas en confort y relajación, pensadas para transformar el baño o área privada en una experiencia de bienestar.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "josper": {
+    "eyebrow": "Brasa · Potencia · Profesional",
+    "titulo": "Hornos Josper",
+    "descripcion": "Hornos y equipos de cocción al carbón orientados a alto desempeño, con control intenso del calor y una experiencia de brasa pensada para resultados precisos.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "posicion": "center 15%"
+    }
+  },
+  "kaldewei": {
+    "eyebrow": "Acero · Diseño · Durabilidad",
+    "titulo": "Baños Kaldewei",
+    "descripcion": "Soluciones para baño con líneas depuradas, superficies resistentes y diseño preciso, creadas para proyectos que buscan durabilidad y una estética atemporal.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "kalt": {
+    "eyebrow": "Funcional · Contemporáneo · Versátil",
+    "titulo": "Cocina Kalt",
+    "descripcion": "Equipamiento de cocina con enfoque funcional y contemporáneo, pensado para integrarse con facilidad en proyectos residenciales y resolver el uso diario.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "kamado-joe": {
+    "eyebrow": "Carbón · Versátil · Innovador",
+    "titulo": "Asadores Kamado Joe",
+    "descripcion": "Asadores tipo kamado para exterior con cocción a carbón, gran versatilidad y control térmico para asar, ahumar y explorar distintas técnicas al aire libre.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "kele-master-sinks": {
+    "eyebrow": "Funcional · Durable · Accesible",
+    "titulo": "Tarjas Kele Master Sinks",
+    "descripcion": "Tarjas y soluciones para la zona de agua con enfoque funcional, construcción durable y diseño adaptable para cocinas residenciales de uso cotidiano.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "kitchenaid": {
+    "eyebrow": "Icónico · Versátil · Creativo",
+    "titulo": "Electrodomésticos KitchenAid",
+    "descripcion": "Electrodomésticos para cocina y exterior con una propuesta icónica y versátil, pensados para quienes disfrutan preparar, cocinar y crear con mayor control.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "kraus": {
+    "eyebrow": "Contemporáneo · Funcional · Versátil",
+    "titulo": "Tarjas y grifería Kraus",
+    "descripcion": "Tarjas y monomandos de estética contemporánea, con soluciones funcionales y versátiles para organizar mejor la zona de agua en cocinas residenciales.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "la-cornue": {
+    "eyebrow": "Francés · Artesanal · Icónico",
+    "titulo": "Cocina La Cornue",
+    "descripcion": "Cocinas de inspiración francesa con enfoque artesanal, gran presencia visual y una propuesta exclusiva para proyectos donde la cocción es protagonista.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "lynx": {
+    "eyebrow": "Profesional · Potente · Refinado",
+    "titulo": "Asadores Lynx",
+    "descripcion": "Asadores y equipos premium para exterior con potencia de nivel profesional, construcción refinada y soluciones pensadas para cocinas al aire libre completas.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "mabe": {
+    "eyebrow": "Funcional · Cercano · Accesible",
+    "titulo": "Electrodomésticos Mabe",
+    "descripcion": "Electrodomésticos de cocina pensados para el hogar diario, con soluciones funcionales, fáciles de usar y una propuesta accesible para distintos proyectos.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "masterbuilt": {
+    "eyebrow": "Carbón · Innovación · Exterior",
+    "titulo": "Asadores Masterbuilt",
+    "descripcion": "Asadores y equipos para exterior que combinan cocción con carbón, control práctico e innovación para ampliar técnicas y disfrutar más cada preparación.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "posicion": "center 55%"
+    }
+  },
+  "maytag": {
+    "eyebrow": "Robusto · Durable · Confiable",
+    "titulo": "Electrodomésticos Maytag",
+    "descripcion": "Electrodomésticos de cocina con enfoque en construcción robusta, desempeño confiable y facilidad de uso para responder al ritmo cotidiano del hogar.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "miele": {
+    "eyebrow": "Precisión · Durabilidad · Elegancia",
+    "titulo": "Electrodomésticos Miele",
+    "descripcion": "Electrodomésticos de cocina y equipos menores con enfoque en precisión, durabilidad y diseño discreto para proyectos que buscan desempeño a largo plazo.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false,
+      "posicion": "center 60%"
+    }
+  },
+  "monogram": {
+    "eyebrow": "Arquitectónico · Sofisticado · Preciso",
+    "titulo": "Cocina Monogram",
+    "descripcion": "Electrodomésticos de cocina premium con diseño arquitectónico, materiales cuidados y desempeño preciso para espacios integrados de alta especificación.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "mont-alpi": {
+    "eyebrow": "Modular · Completo · Exterior",
+    "titulo": "Asadores Mont Alpi",
+    "descripcion": "Cocinas y asadores para exterior con configuración modular y soluciones completas, pensadas para crear estaciones funcionales al aire libre con facilidad.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "mr-steam": {
+    "eyebrow": "Vapor · Bienestar · Tecnología",
+    "titulo": "Vapor Mr. Steam",
+    "descripcion": "Sistemas de vapor y sauna enfocados en bienestar, control y tecnología, diseñados para convertir el baño en un espacio privado de relajación y confort.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "nantucket": {
+    "eyebrow": "Artesanal · Funcional · Distintivo",
+    "titulo": "Tarjas Nantucket",
+    "descripcion": "Tarjas y soluciones para cocina con enfoque en detalle, funcionalidad y diseño distintivo, pensadas para aportar carácter sin sacrificar uso cotidiano.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "nobili": {
+    "eyebrow": "Italiano · Preciso · Contemporáneo",
+    "titulo": "Grifería Nobili",
+    "descripcion": "Grifería para cocina y baño con diseño italiano, líneas contemporáneas y operación precisa, pensada para integrar funcionalidad y estética en cada espacio.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "onix": {
+    "eyebrow": "Diseño · Textura · Versatilidad",
+    "titulo": "Superficies Onix",
+    "descripcion": "Recubrimientos y superficies orientados al diseño, con variedad de texturas y posibilidades de composición para dar carácter a espacios residenciales.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "peerless": {
+    "eyebrow": "Práctico · Confiable · Accesible",
+    "titulo": "Grifería Peerless",
+    "descripcion": "Monomandos y soluciones para cocina con enfoque práctico, operación confiable y diseño sencillo para resolver proyectos residenciales con buen valor.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "pitt-cooking": {
+    "eyebrow": "Integrado · Minimalista · Vanguardista",
+    "titulo": "Parrillas Pitt Cooking",
+    "descripcion": "Sistemas de cocción integrados directamente en la cubierta, pensados para crear cocinas abiertas, minimalistas y flexibles sin una parrilla convencional.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "poletti-sinks": {
+    "eyebrow": "Funcional · Versátil · Refinado",
+    "titulo": "Tarjas Poletti Sinks",
+    "descripcion": "Tarjas y soluciones para cocina con enfoque funcional, diseño versátil y acabados cuidados para integrarse con facilidad en proyectos residenciales.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "sapphire": {
+    "eyebrow": "Elegante · Integrado · Exclusivo",
+    "titulo": "Cocina Sapphire",
+    "descripcion": "Equipamiento de cocina con una propuesta elegante e integrada, pensado para proyectos que buscan funcionalidad, presencia discreta y acabados de alto nivel.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "sauna-estilo": {
+    "eyebrow": "Bienestar · Calidez · Confort",
+    "titulo": "Saunas Sauna Estilo",
+    "descripcion": "Soluciones de vapor y sauna enfocadas en bienestar y confort, pensadas para crear espacios privados de relajación con una integración residencial cuidada.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "schock": {
+    "eyebrow": "Alemán · Innovador · Resistente",
+    "titulo": "Tarjas Schock",
+    "descripcion": "Tarjas y soluciones para cocina con enfoque en materiales resistentes, diseño contemporáneo e innovación para una zona de agua práctica y duradera.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "scotsman": {
+    "eyebrow": "Hielo · Precisión · Rendimiento",
+    "titulo": "Hielo Scotsman",
+    "descripcion": "Equipos para cocina y bar especializados en producción de hielo, con enfoque en consistencia, rendimiento y formatos pensados para distintas necesidades.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "sedona-by-lynx": {
+    "eyebrow": "Refinado · Potente · Exterior",
+    "titulo": "Asadores Sedona by Lynx",
+    "descripcion": "Asadores para exterior con enfoque en desempeño, construcción cuidada y una experiencia de cocción refinada para cocinas residenciales al aire libre.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "smeg": {
+    "eyebrow": "Italiano · Icónico · Expresivo",
+    "titulo": "Electrodomésticos Smeg",
+    "descripcion": "Electrodomésticos, equipos menores y soluciones de cocina con diseño italiano, color y personalidad para espacios que buscan destacar sin perder función.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "sub-zero": {
+    "eyebrow": "Conservación · Precisión · Integración",
+    "titulo": "Refrigeración Sub-Zero",
+    "descripcion": "Refrigeración premium enfocada en conservación precisa, integración arquitectónica y organización interior para proteger alimentos y elevar la cocina.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "summit": {
+    "eyebrow": "Compacto · Flexible · Especializado",
+    "titulo": "Refrigeración Summit",
+    "descripcion": "Equipos de cocina con soluciones compactas y especializadas, pensados para aprovechar mejor el espacio e integrarse en proyectos con necesidades específicas.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "supra": {
+    "eyebrow": "Funcional · Práctica · Accesible",
+    "titulo": "Electrodomésticos Supra",
+    "descripcion": "Equipos de cocina con enfoque práctico y accesible, pensados para resolver necesidades cotidianas con operación sencilla, funcionalidad y buen aprovechamiento.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "tecnolam": {
+    "eyebrow": "Funcional · Versátil · Accesible",
+    "titulo": "Cocina Tecnolam",
+    "descripcion": "Equipamiento de cocina, tarjas y monomandos con enfoque funcional y versátil, pensado para integrar soluciones prácticas en proyectos residenciales actuales.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "teka": {
+    "eyebrow": "Europeo · Funcional · Versátil",
+    "titulo": "Cocina Teka",
+    "descripcion": "Equipamiento de cocina, tarjas, monomandos y trituradores con una propuesta versátil y funcional para resolver distintas zonas dentro de un mismo proyecto.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "the-galley": {
+    "eyebrow": "Integrado · Social · Funcional",
+    "titulo": "Tarjas The Galley",
+    "descripcion": "Sistemas de tarja y monomandos concebidos como estaciones de trabajo, pensados para preparar, servir y convivir alrededor de una misma zona de cocina.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "thermador": {
+    "eyebrow": "Potencia · Innovación · Integración",
+    "titulo": "Cocina Thermador",
+    "descripcion": "Electrodomésticos de cocina premium con potencia, funciones avanzadas e integración cuidada para proyectos que buscan desempeño y una estética contundente.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "thor": {
+    "eyebrow": "Potente · Profesional · Accesible",
+    "titulo": "Cocina Thor",
+    "descripcion": "Electrodomésticos de cocina con estética profesional, potencia y controles directos, pensados para llevar una experiencia robusta a proyectos residenciales.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "tradewind": {
+    "eyebrow": "Potencia · Ventilación · Integración",
+    "titulo": "Campanas Trade-Wind",
+    "descripcion": "Campanas y sistemas de ventilación con extracción potente e integración arquitectónica para mantener la cocina limpia sin dominar visualmente el espacio.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "posicion": "center 35%"
+    }
+  },
+  "treesse": {
+    "eyebrow": "Italiano · Bienestar · Escultural",
+    "titulo": "Wellness Treesse",
+    "descripcion": "Soluciones para baño, vapor y sauna con diseño italiano y formas escultóricas, pensadas para crear espacios de bienestar con fuerte presencia visual.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "u-line": {
+    "eyebrow": "Integrado · Compacto · Preciso",
+    "titulo": "Refrigeración U-Line",
+    "descripcion": "Refrigeración y equipos compactos para cocina y bar, pensados para integrarse bajo cubierta y resolver bebidas, hielo o conservación con precisión.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "posicion": "center 100%",
+      "espejo": false,
+      "zoom": 1.25,
+      "origen": "center bottom"
+    }
+  },
+  "valsir": {
+    "eyebrow": "Técnico · Funcional · Integrado",
+    "titulo": "Baños Valsir",
+    "descripcion": "Soluciones técnicas para baño orientadas a una instalación limpia, funcional e integrada, pensadas para resolver sistemas ocultos con precisión y orden.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "vass": {
+    "eyebrow": "Cálido · Contemporáneo · Funcional",
+    "titulo": "Chimeneas Vass",
+    "descripcion": "Chimeneas y calentadores de enfoque contemporáneo, pensados para aportar calidez, confort y presencia visual en espacios residenciales bien integrados.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "viking": {
+    "eyebrow": "Profesional · Potente · Icónico",
+    "titulo": "Cocina Viking",
+    "descripcion": "Electrodomésticos, equipos menores y soluciones para exterior con estética profesional, potencia y presencia icónica para cocinas residenciales exigentes.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    }
+  },
+  "whirlpool": {
+    "eyebrow": "Funcional · Confiable · Accesible",
+    "titulo": "Electrodomésticos Whirlpool",
+    "descripcion": "Electrodomésticos de cocina con enfoque en funcionalidad, confiabilidad y facilidad de uso para resolver las necesidades cotidianas de distintos hogares.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  },
+  "wolf": {
+    "eyebrow": "Precisión · Potencia · Control",
+    "titulo": "Cocina Wolf",
+    "descripcion": "Equipos de cocción para cocina y exterior enfocados en control preciso, potencia y respuesta consistente para quienes buscan dominar cada preparación.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "posicion": "center 85%"
+    }
+  },
+  "wppo": {
+    "eyebrow": "Artesanal · Potente · Exterior",
+    "titulo": "Hornos WPPO",
+    "descripcion": "Hornos para exterior pensados para cocinar con fuego y altas temperaturas, con una propuesta robusta y versátil para pizzas y preparaciones al aire libre.",
+    "cta": {
+      "texto": "Ver catálogo oficial",
+      "url": null
+    },
+    "imagen": {
+      "espejo": false
+    }
+  }
+}

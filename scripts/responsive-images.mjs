@@ -41,7 +41,7 @@ const SIN_SRCSET = /\/logos\/|\/reviews\/|\/clients\/|wordmark|black_logo_homea|
 // `projects/g/` queda FUERA: son las fotos del mini-carrusel de tarjetas, que
 // se pintan en una rejilla de 3 columnas, no a sangre. Con 100vw el navegador
 // se bajaba el archivo de 1600px para una caja de ~356px.
-const SANGRE = /\/hero-|\bhero-|\/projects\/(?!g\/)|marcas-/i;
+const SANGRE = /\/hero-|\bhero-|\/brands\/hero\/|\/projects\/(?!g\/)|marcas-/i;
 
 // Rejilla del sitio: una columna en móvil, dos en tableta, tres en escritorio.
 const SIZES_REJILLA = "(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 34vw";

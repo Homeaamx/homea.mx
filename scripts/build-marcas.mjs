@@ -4,7 +4,8 @@
 //   preview/marcas.html       → slug (data-brand), gama (data-gama), categorías (data-sub)
 //   preview/marcas.html       → canal web (data-canal): "shopify" o "pdf"
 //   public/assets/logos/      → logo de la marca (la extensión varía: .webp o .png)
-//   public/assets/photos/brands/ → foto del hero (varía: .webp o .avif)
+//   public/assets/photos/brands/ → foto de los tiles (varía: .webp o .avif; tope 700 px)
+//   public/assets/photos/brands/hero/ → foto grande del hero (tope 2000 px; si falta, usa la de tiles)
 //   data/listas-precios.json  → qué listas de precios enseña cada marca
 //
 // Se corre a mano (`npm run marcas`) cuando cambian las marcas o sus archivos.
@@ -18,6 +19,8 @@
 import { readdirSync, readFileSync, writeFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+
+import { nombreSeoMarca } from "./nombre-seo-marca.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SALIDA = join(ROOT, "data", "marcas.json");
@@ -45,17 +48,19 @@ const NOMBRES = {
   lynx: "Lynx", "sedona-by-lynx": "Sedona by Lynx", alfresco: "Alfresco",
   coyote: "Coyote", artisan: "Artisan", "alfa-forni": "Alfa Forni", blaze: "Blaze",
   "kamado-joe": "Kamado Joe", masterbuilt: "Masterbuilt", wppo: "WPPO",
-  "mont-alpi": "Mont Alpi", "broil-king": "Broil King", axor: "AXOR",
+  "mont-alpi": "Mont Alpi", "broil-king": "Broil King",
   "i-drain": "I-Drain", "mr-steam": "Mr. Steam", acros: "Acros", elkay: "Elkay",
   // Altas del 2026-09-21 (MARCAS_HOMEA_SEP26_DESCUENTOS.xlsx).
   kraus: "Kraus", faber: "Faber", easy: "Easy", iem: "IEM", commodore: "Commodore",
   nantucket: "Nantucket", fontana: "Fontana", foster: "Foster", josper: "Josper",
-  pizarro: "Pizarro", vass: "Vass", hergom: "Hergom", "hergom-diseno": "Hergom Diseño",
-  tres: "TRES", valsir: "Valsir", "artexa-bath": "Artexa Bath",
+  vass: "Vass", hergom: "Hergom",
+  valsir: "Valsir",
   // Saunas de Artexa (Carla, 2026-09-21): no venían en el Excel.
   jacuzzi: "Jacuzzi", clearlight: "Clearlight",
   // Solo PDF por decisión de Carla (2026-09-21): Onix se queda, Firplak se restaura.
   onix: "Onix", firplak: "Firplak",
+  // Grupo 90, solo PDF (Carla, 2026-09-22).
+  catalano: "Catalano", kaldewei: "Kaldewei", treesse: "Treesse", "sauna-estilo": "Sauna Estilo",
 };
 
 // Canal web de cada marca (data-canal del tile). Decisión de Carla, 2026-09-21:
@@ -104,13 +109,20 @@ const slugificar = (s) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
-/** Busca <dir>/<slug>.<ext> sin saber la extensión (varía marca por marca). */
-function archivo(dir, slug) {
+/** Busca <dir>/<nombre>.<ext> sin saber la extensión (varía marca por marca). */
+function archivo(dir, nombre) {
   const encontrado = readdirSync(join(ROOT, "public", dir)).find((f) =>
-    /\.(webp|avif|png|svg|jpg|jpeg)$/i.test(f) && f.replace(/\.[^.]+$/, "") === slug
+    /\.(webp|avif|png|svg|jpg|jpeg)$/i.test(f) && f.replace(/\.[^.]+$/, "") === nombre
   );
   return encontrado ? `/${dir}/${encontrado}` : null;
 }
+
+// Las fotos (tile y hero) llevan nombre SEO: <slug>-<tipo>.webp, con el tipo del
+// H1 de data/marcas-hero.json (scripts/nombre-seo-marca.mjs). Si no existe con
+// ese nombre, se acepta <slug>.<ext> (foto recién agregada, aún sin renombrar).
+const HEROS = JSON.parse(readFileSync(join(ROOT, "data", "marcas-hero.json"), "utf8"));
+const fotoMarca = (dir, slug, nombre) =>
+  archivo(dir, nombreSeoMarca(slug, nombre, HEROS[slug]?.titulo)) ?? archivo(dir, slug);
 
 // ── 1. Marcas desde los tiles de preview/marcas.html ────────────────────────
 const html = readFileSync(join(ROOT, "preview", "marcas.html"), "utf8");
@@ -148,7 +160,13 @@ for (const [tag] of html.matchAll(RE_TILE)) {
   }
 
   const logo = archivo("assets/logos", slug);
-  const foto = archivo("assets/photos/brands", slug);
+  const foto = fotoMarca("assets/photos/brands", slug, nombre ?? slug);
+  // Versión grande para el hero (hasta 2000 px). La de arriba se capa a 700 px
+  // porque solo pinta tiles; estirada a sangre completa se veía pixeleada.
+  const fotoHero = fotoMarca("assets/photos/brands/hero", slug, nombre ?? slug) ?? foto;
+  // Logo del hero recortado a su contenido: algunos logos traen mucho margen
+  // transparente y en el hero se veían chicos. Los tiles siguen con el original.
+  const logoHero = archivo("assets/logos/hero", slug) ?? logo;
   if (!logo || !foto) sinArte.push(`${slug} (${[!logo && "logo", !foto && "foto"].filter(Boolean).join(" y ")})`);
 
   const categorias = sub.split(/\s+/).filter(Boolean);
@@ -169,6 +187,8 @@ for (const [tag] of html.matchAll(RE_TILE)) {
     canal,
     logo,
     foto,
+    fotoHero,
+    logoHero,
     listas: [],
   });
 }

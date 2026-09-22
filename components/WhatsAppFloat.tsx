@@ -1,12 +1,21 @@
+"use client";
+
 // Botón flotante de WhatsApp (presente en todas las páginas, igual que el preview).
+//
+// `porRuta` cambia el mensaje según la página: en las marcas que solo se venden
+// por catálogo (canal "pdf") el flotante pide la misma asesoría que el botón de
+// la página. Lo arma app/layout.tsx; el resto de las rutas usa el mensaje general.
+
+import { usePathname } from "next/navigation";
 
 import { whatsappHref } from "@/lib/whatsapp";
 
-export default function WhatsAppFloat() {
+export default function WhatsAppFloat({ porRuta = {} }: { porRuta?: Record<string, string> }) {
+  const ruta = usePathname();
   return (
     <a
       className="wa-float"
-      href={whatsappHref()}
+      href={whatsappHref(porRuta[ruta])}
       target="_blank"
       rel="noopener"
       aria-label="Escríbenos por WhatsApp"

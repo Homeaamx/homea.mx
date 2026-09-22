@@ -15,3 +15,9 @@ export function whatsappHref(message: string = WHATSAPP_DEFAULT_MESSAGE): string
     message
   )}`;
 }
+
+/** Mensaje de WhatsApp para las marcas que solo se venden por catálogo (canal "pdf"):
+ *  lo usan el botón de su página y el flotante mientras se está en ella. */
+export function mensajeAsesoria(marca: string): string {
+  return `Hola, estaba viendo el catálogo de ${marca} y me interesa una asesoría.`;
+}

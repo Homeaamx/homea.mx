@@ -1038,25 +1038,25 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .mq-chip.no-logo .mq-logo { display: none; }
 .mq-chip.no-logo .mq-name { display: inline-block; }
 /* Foto de fondo por marca (data-brand) */
-.mq-chip[data-brand="sub-zero"]   { --lazy-bg: url('/assets/photos/brands/sub-zero.webp'); }
-.mq-chip[data-brand="wolf"]       { --lazy-bg: url('/assets/photos/brands/wolf.webp'); }
-.mq-chip[data-brand="cove"]       { --lazy-bg: url('/assets/photos/brands/cove.webp'); background-position: center 65%; }
-.mq-chip[data-brand="miele"]      { --lazy-bg: url('/assets/photos/brands/miele.webp'); }
-.mq-chip[data-brand="thermador"]  { --lazy-bg: url('/assets/photos/brands/thermador.webp'); }
-.mq-chip[data-brand="monogram"]   { --lazy-bg: url('/assets/photos/brands/monogram.webp'); background-position: center 85%; }
-.mq-chip[data-brand="viking"]     { --lazy-bg: url('/assets/photos/brands/viking.webp'); }
-.mq-chip[data-brand="gaggenau"]   { --lazy-bg: url('/assets/photos/brands/gaggenau.webp'); }
-.mq-chip[data-brand="la-cornue"]  { --lazy-bg: url('/assets/photos/brands/la-cornue.webp'); background-position: center 100%; }
-.mq-chip[data-brand="smeg"]       { --lazy-bg: url('/assets/photos/brands/smeg.webp'); }
-.mq-chip[data-brand="bertazzoni"] { --lazy-bg: url('/assets/photos/brands/bertazzoni.webp'); }
-.mq-chip[data-brand="kitchenaid"] { --lazy-bg: url('/assets/photos/brands/kitchenaid.webp'); }
-.mq-chip[data-brand="bosch"]      { --lazy-bg: url('/assets/photos/brands/bosch.webp'); }
-.mq-chip[data-brand="elica"]      { --lazy-bg: url('/assets/photos/brands/elica.webp'); }
-.mq-chip[data-brand="pitt-cooking"] { --lazy-bg: url('/assets/photos/brands/pitt-cooking.webp'); }
-.mq-chip[data-brand="hoshizaki"]  { --lazy-bg: url('/assets/photos/brands/hoshizaki.webp'); }
-.mq-chip[data-brand="alfresco"]   { --lazy-bg: url('/assets/photos/brands/alfresco.webp'); }
-.mq-chip[data-brand="lynx"]       { --lazy-bg: url('/assets/photos/brands/lynx.webp'); }
-.mq-chip[data-brand="kamado-joe"] { --lazy-bg: url('/assets/photos/brands/kamado-joe.webp'); }
+.mq-chip[data-brand="sub-zero"]   { --lazy-bg: url('/assets/photos/brands/sub-zero-refrigeracion.webp'); }
+.mq-chip[data-brand="wolf"]       { --lazy-bg: url('/assets/photos/brands/wolf-cocina.webp'); }
+.mq-chip[data-brand="cove"]       { --lazy-bg: url('/assets/photos/brands/cove-lavavajillas.webp'); background-position: center 65%; }
+.mq-chip[data-brand="miele"]      { --lazy-bg: url('/assets/photos/brands/miele-electrodomesticos.webp'); }
+.mq-chip[data-brand="thermador"]  { --lazy-bg: url('/assets/photos/brands/thermador-cocina.webp'); }
+.mq-chip[data-brand="monogram"]   { --lazy-bg: url('/assets/photos/brands/monogram-cocina.webp'); background-position: center 85%; }
+.mq-chip[data-brand="viking"]     { --lazy-bg: url('/assets/photos/brands/viking-cocina.webp'); }
+.mq-chip[data-brand="gaggenau"]   { --lazy-bg: url('/assets/photos/brands/gaggenau-cocina.webp'); }
+.mq-chip[data-brand="la-cornue"]  { --lazy-bg: url('/assets/photos/brands/la-cornue-cocina.webp'); background-position: center 100%; }
+.mq-chip[data-brand="smeg"]       { --lazy-bg: url('/assets/photos/brands/smeg-electrodomesticos.webp'); }
+.mq-chip[data-brand="bertazzoni"] { --lazy-bg: url('/assets/photos/brands/bertazzoni-cocina.webp'); }
+.mq-chip[data-brand="kitchenaid"] { --lazy-bg: url('/assets/photos/brands/kitchenaid-electrodomesticos.webp'); }
+.mq-chip[data-brand="bosch"]      { --lazy-bg: url('/assets/photos/brands/bosch-electrodomesticos.webp'); }
+.mq-chip[data-brand="elica"]      { --lazy-bg: url('/assets/photos/brands/elica-campanas.webp'); }
+.mq-chip[data-brand="pitt-cooking"] { --lazy-bg: url('/assets/photos/brands/pitt-cooking-parrillas.webp'); }
+.mq-chip[data-brand="hoshizaki"]  { --lazy-bg: url('/assets/photos/brands/hoshizaki-hielo.webp'); }
+.mq-chip[data-brand="alfresco"]   { --lazy-bg: url('/assets/photos/brands/alfresco-asadores.webp'); }
+.mq-chip[data-brand="lynx"]       { --lazy-bg: url('/assets/photos/brands/lynx-asadores.webp'); }
+.mq-chip[data-brand="kamado-joe"] { --lazy-bg: url('/assets/photos/brands/kamado-joe-asadores.webp'); }
 
 @keyframes mqMove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) {
@@ -1759,7 +1759,11 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .marcas-hero .marcas-hero-bg {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; object-position: center 75%; z-index: 0;
-  transform: scaleX(-1);
+  /* Espejo por defecto; una marca lo quita con --espejo: 1 (data/marcas-hero.json).
+     --zoom/--origen acercan la foto cuando ya llena el alto y no se puede subir
+     o bajar solo con object-position (fotos muy panorámicas, p. ej. U-Line). */
+  transform: scaleX(var(--espejo, -1)) scale(var(--zoom, 1));
+  transform-origin: var(--origen, center);
 }
 .marcas-hero::after {
   content: ""; position: absolute; inset: 0; z-index: 1;
@@ -1773,6 +1777,50 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .marcas-hero .eyebrow { color: var(--homea-gold-bright); }
 .marcas-hero h1 { color: var(--homea-bone); max-width: 620px; }
 .marcas-hero .sub { color: color-mix(in srgb, var(--homea-bone) 82%, transparent); }
+/* Hero de marca con contenido propio (data/marcas-hero.json). Solo cambia la
+   jerarquía del texto: fondo, overlay y logo son los mismos del hero de siempre.
+   Eyebrow 15px · H1 52–68px · descripción 19–22px · bloque de 600px máx.
+   Todo el bloque tiene que caber en la primera vista (debajo del nav y la barra
+   superior de 38px): cada medida es min(tamaño de diseño, fracción de la altura
+   de pantalla), así en pantallas bajas se reduce todo en proporción en vez de
+   cortarse. Con min-height, si aun así no cupiera, el hero crece: nunca recorta. */
+.marcas-hero--contenido {
+  min-height: min(calc(100svh - var(--nav-h) - 38px), 860px);
+  padding: min(96px, 6svh) 0;
+}
+.marcas-hero--contenido .crumbs { margin-bottom: max(16px, min(32px, 3.2svh)); }
+/* Logo 30% mayor que en el hero de siempre (84 → 109 px de alto). El <img> trae
+   height=84 como atributo, por eso se fija `height` y no solo max-height. */
+.marcas-hero--contenido .marca-logo { height: calc(min(109px, 12.2svh) * var(--logo-escala, 1)); max-height: none; width: auto;
+  max-width: min(calc(390px * var(--logo-escala, 1)), 80vw);
+  margin-bottom: max(18px, min(36px, 3.6svh)); }
+.marcas-hero--contenido .marca-hero-texto { max-width: 600px; }
+.marcas-hero--contenido .eyebrow {
+  font-size: max(11px, min(15px, 1.8svh)); letter-spacing: 0.22em; margin-bottom: max(12px, min(24px, 2.4svh)); }
+.marcas-hero--contenido h1 {
+  font-size: max(30px, min(clamp(40px, 4.6vw, 68px), 6.6svh)); line-height: 1.04; max-width: none; }
+@media (min-width: 900px) {
+  .marcas-hero--contenido h1 { font-size: max(30px, min(clamp(52px, 4.6vw, 68px), 6.6svh)); } }
+.marcas-hero--contenido .sub {
+  font-size: max(14px, min(clamp(18px, 1.45vw, 21px), 2.3svh)); line-height: 1.5; max-width: none;
+  margin-top: max(14px, min(28px, 2.8svh)); }
+.marcas-hero--contenido .marca-hero-cta { margin-top: max(20px, min(44px, 4.4svh)); }
+.marcas-hero--contenido .marca-hero-cta .btn { padding: max(10px, min(16px, 1.5svh)) 28px; }
+@media (prefers-reduced-motion: no-preference) {
+  .marcas-hero--contenido.run .marca-hero-cta { opacity: 0; animation: heroRise 640ms var(--ease-reveal) 360ms forwards; }
+}
+/* Foto de hero con poca resolución (< 1100 px, app/marcas/[marca]/page.tsx):
+   un desenfoque leve disimula los pixeles y una sombra más densa (velo + viñeta)
+   baja el contraste del fondo. El scale evita el borde claro que deja el blur. */
+.marcas-hero--suave .marcas-hero-bg {
+  filter: blur(1.6px) saturate(.92);
+  transform: scaleX(var(--espejo, -1)) scale(calc(var(--zoom, 1) * 1.04));
+}
+.marcas-hero--suave::after {
+  background:
+    radial-gradient(ellipse 85% 95% at 72% 50%, rgba(10,10,10,0) 35%, rgba(10,10,10,.55) 100%),
+    linear-gradient(90deg, rgba(10,10,10,.84) 0%, rgba(10,10,10,.7) 45%, rgba(10,10,10,.5) 100%);
+}
 /* Aparición lenta del hero (mismo heroRise escalonado que home.html) */
 @media (prefers-reduced-motion: no-preference) {
   .marcas-hero.run .crumbs,
@@ -1795,95 +1843,107 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile:hover .bn { opacity: .15; }
 /* Foto de fondo por marca (data-brand). Las marcas sin entrada quedan en fondo
    oscuro espresso + wordmark. */
-.brandtile[data-brand="la-cornue"]{--lazy-bg: url('/assets/photos/brands/la-cornue.webp');background-position:center 95%;}
-.brandtile[data-brand="gaggenau"]{--lazy-bg: url('/assets/photos/brands/gaggenau.webp');}
-.brandtile[data-brand="thermador"]{--lazy-bg: url('/assets/photos/brands/thermador.webp');}
-.brandtile[data-brand="monogram"]{--lazy-bg: url('/assets/photos/brands/monogram.webp');}
-.brandtile[data-brand="miele"]{--lazy-bg: url('/assets/photos/brands/miele.webp');}
-.brandtile[data-brand="viking"]{--lazy-bg: url('/assets/photos/brands/viking.webp');}
-.brandtile[data-brand="wolf"]{--lazy-bg: url('/assets/photos/brands/wolf.webp');}
-.brandtile[data-brand="sub-zero"]{--lazy-bg: url('/assets/photos/brands/sub-zero.webp');}
-.brandtile[data-brand="cove"]{--lazy-bg: url('/assets/photos/brands/cove.webp');}
-.brandtile[data-brand="pitt-cooking"]{--lazy-bg: url('/assets/photos/brands/pitt-cooking.webp');}
-.brandtile[data-brand="bosch"]{--lazy-bg: url('/assets/photos/brands/bosch.webp');}
-.brandtile[data-brand="elica"]{--lazy-bg: url('/assets/photos/brands/elica.webp');}
-.brandtile[data-brand="kitchenaid"]{--lazy-bg: url('/assets/photos/brands/kitchenaid.webp');}
-.brandtile[data-brand="hoshizaki"]{--lazy-bg: url('/assets/photos/brands/hoshizaki.webp');}
-.brandtile[data-brand="smeg"]{--lazy-bg: url('/assets/photos/brands/smeg.webp');}
-.brandtile[data-brand="bertazzoni"]{--lazy-bg: url('/assets/photos/brands/bertazzoni.webp');}
-.brandtile[data-brand="lynx"]{--lazy-bg: url('/assets/photos/brands/lynx.webp');}
-.brandtile[data-brand="alfresco"]{--lazy-bg: url('/assets/photos/brands/alfresco.webp');}
-.brandtile[data-brand="kamado-joe"]{--lazy-bg: url('/assets/photos/brands/kamado-joe.webp');}
-.brandtile[data-brand="axor"]{--lazy-bg: url('/assets/photos/brands/axor.webp');}
-.brandtile[data-brand="blaze"]{--lazy-bg: url('/assets/photos/brands/blaze.webp');}
-.brandtile[data-brand="broil-king"]{--lazy-bg: url('/assets/photos/brands/broil-king.webp');}
-.brandtile[data-brand="cafe"]{--lazy-bg: url('/assets/photos/brands/cafe.webp');}
-.brandtile[data-brand="coyote"]{--lazy-bg: url('/assets/photos/brands/coyote.webp');}
-.brandtile[data-brand="falmec"]{--lazy-bg: url('/assets/photos/brands/falmec.webp');}
-.brandtile[data-brand="frigidaire"]{--lazy-bg: url('/assets/photos/brands/frigidaire.webp');}
-.brandtile[data-brand="electrolux"]{--lazy-bg: url('/assets/photos/brands/electrolux.webp');}
-.brandtile[data-brand="ge-profile"]{--lazy-bg: url('/assets/photos/brands/ge-profile.webp');}
-.brandtile[data-brand="insinkerator"]{--lazy-bg: url('/assets/photos/brands/insinkerator.webp');}
-.brandtile[data-brand="invisacook"]{--lazy-bg: url('/assets/photos/brands/invisacook.webp');}
-.brandtile[data-brand="io-mabe"]{--lazy-bg: url('/assets/photos/brands/io-mabe.webp');}
-.brandtile[data-brand="mabe"]{--lazy-bg: url('/assets/photos/brands/mabe.webp');}
-.brandtile[data-brand="tecnolam"]{--lazy-bg: url('/assets/photos/brands/tecnolam.webp');}
-.brandtile[data-brand="thor"]{--lazy-bg: url('/assets/photos/brands/thor.webp');}
-.brandtile[data-brand="whirlpool"]{--lazy-bg: url('/assets/photos/brands/whirlpool.webp');}
-.brandtile[data-brand="acros"]{--lazy-bg: url('/assets/photos/brands/acros.webp');}
-.brandtile[data-brand="alfa-forni"]{--lazy-bg: url('/assets/photos/brands/alfa-forni.webp');}
-.brandtile[data-brand="asko"]{--lazy-bg: url('/assets/photos/brands/asko.webp');}
-.brandtile[data-brand="axcent"]{--lazy-bg: url('/assets/photos/brands/axcent.webp');}
-.brandtile[data-brand="benessi"]{--lazy-bg: url('/assets/photos/brands/benessi.webp');}
-.brandtile[data-brand="artisan"]{--lazy-bg: url('/assets/photos/brands/artisan.webp');}
-.brandtile[data-brand="dawn"]{--lazy-bg: url('/assets/photos/brands/dawn.webp');}
-.brandtile[data-brand="dexa"]{--lazy-bg: url('/assets/photos/brands/dexa.webp');}
-.brandtile[data-brand="delta"]{--lazy-bg: url('/assets/photos/brands/delta.webp');}
-.brandtile[data-brand="blanco"]{--lazy-bg: url('/assets/photos/brands/blanco.webp');}
-.brandtile[data-brand="brizo"]{--lazy-bg: url('/assets/photos/brands/brizo.webp');}
-.brandtile[data-brand="eclipse"]{--lazy-bg: url('/assets/photos/brands/eclipse.webp');}
-.brandtile[data-brand="elkay"]{--lazy-bg: url('/assets/photos/brands/elkay.webp');}
-.brandtile[data-brand="franke"]{--lazy-bg: url('/assets/photos/brands/franke.avif');}
-.brandtile[data-brand="fulgor-milano"]{--lazy-bg: url('/assets/photos/brands/fulgor-milano.webp');}
-.brandtile[data-brand="haier"]{--lazy-bg: url('/assets/photos/brands/haier.avif');}
-.brandtile[data-brand="i-drain"]{--lazy-bg: url('/assets/photos/brands/i-drain.webp');}
-.brandtile[data-brand="kalt"]{--lazy-bg: url('/assets/photos/brands/kalt.webp');}
-.brandtile[data-brand="gessi"]{--lazy-bg: url('/assets/photos/brands/gessi.webp');}
-.brandtile[data-brand="kele-master-sinks"]{--lazy-bg: url('/assets/photos/brands/kele-master-sinks.webp');}
-.brandtile[data-brand="mr-steam"]{--lazy-bg: url('/assets/photos/brands/mr-steam.webp');}
-.brandtile[data-brand="nobili"]{--lazy-bg: url('/assets/photos/brands/nobili.webp');}
-.brandtile[data-brand="peerless"]{--lazy-bg: url('/assets/photos/brands/peerless.webp');}
-.brandtile[data-brand="poletti-sinks"]{--lazy-bg: url('/assets/photos/brands/poletti-sinks.webp');}
-.brandtile[data-brand="sapphire"]{--lazy-bg: url('/assets/photos/brands/sapphire.webp');}
-.brandtile[data-brand="schock"]{--lazy-bg: url('/assets/photos/brands/schock.webp');}
-.brandtile[data-brand="scotsman"]{--lazy-bg: url('/assets/photos/brands/scotsman.webp');}
-.brandtile[data-brand="summit"]{--lazy-bg: url('/assets/photos/brands/summit.webp');}
-.brandtile[data-brand="teka"]{--lazy-bg: url('/assets/photos/brands/teka.webp');}
-.brandtile[data-brand="the-galley"]{--lazy-bg: url('/assets/photos/brands/the-galley.webp');}
-.brandtile[data-brand="tradewind"]{--lazy-bg: url('/assets/photos/brands/tradewind.webp');}
-.brandtile[data-brand="u-line"]{--lazy-bg: url('/assets/photos/brands/u-line.avif');}
-.brandtile[data-brand="wppo"]{--lazy-bg: url('/assets/photos/brands/wppo.webp');}
-.brandtile[data-brand="hergom"]{--lazy-bg: url('/assets/photos/brands/hergom.webp');}
-.brandtile[data-brand="jacuzzi"]{--lazy-bg: url('/assets/photos/brands/jacuzzi.webp');}
-.brandtile[data-brand="clearlight"]{--lazy-bg: url('/assets/photos/brands/clearlight.webp');}
-.brandtile[data-brand="sedona-by-lynx"]{--lazy-bg: url('/assets/photos/brands/sedona-by-lynx.webp');}
+.brandtile[data-brand="la-cornue"]{--lazy-bg: url('/assets/photos/brands/la-cornue-cocina.webp');}
+.brandtile[data-brand="gaggenau"]{--lazy-bg: url('/assets/photos/brands/gaggenau-cocina.webp');}
+.brandtile[data-brand="thermador"]{--lazy-bg: url('/assets/photos/brands/thermador-cocina.webp');}
+.brandtile[data-brand="monogram"]{--lazy-bg: url('/assets/photos/brands/monogram-cocina.webp');}
+.brandtile[data-brand="miele"]{--lazy-bg: url('/assets/photos/brands/miele-electrodomesticos.webp');}
+.brandtile[data-brand="viking"]{--lazy-bg: url('/assets/photos/brands/viking-cocina.webp');}
+.brandtile[data-brand="wolf"]{--lazy-bg: url('/assets/photos/brands/wolf-cocina.webp');}
+.brandtile[data-brand="sub-zero"]{--lazy-bg: url('/assets/photos/brands/sub-zero-refrigeracion.webp');}
+.brandtile[data-brand="cove"]{--lazy-bg: url('/assets/photos/brands/cove-lavavajillas.webp');}
+.brandtile[data-brand="pitt-cooking"]{--lazy-bg: url('/assets/photos/brands/pitt-cooking-parrillas.webp');}
+.brandtile[data-brand="bosch"]{--lazy-bg: url('/assets/photos/brands/bosch-electrodomesticos.webp');}
+.brandtile[data-brand="elica"]{--lazy-bg: url('/assets/photos/brands/elica-campanas.webp');}
+.brandtile[data-brand="kitchenaid"]{--lazy-bg: url('/assets/photos/brands/kitchenaid-electrodomesticos.webp');}
+.brandtile[data-brand="hoshizaki"]{--lazy-bg: url('/assets/photos/brands/hoshizaki-hielo.webp');}
+.brandtile[data-brand="smeg"]{--lazy-bg: url('/assets/photos/brands/smeg-electrodomesticos.webp');}
+.brandtile[data-brand="bertazzoni"]{--lazy-bg: url('/assets/photos/brands/bertazzoni-cocina.webp');}
+.brandtile[data-brand="lynx"]{--lazy-bg: url('/assets/photos/brands/lynx-asadores.webp');}
+.brandtile[data-brand="alfresco"]{--lazy-bg: url('/assets/photos/brands/alfresco-asadores.webp');}
+.brandtile[data-brand="kamado-joe"]{--lazy-bg: url('/assets/photos/brands/kamado-joe-asadores.webp');}
+.brandtile[data-brand="blaze"]{--lazy-bg: url('/assets/photos/brands/blaze-asadores.webp');}
+.brandtile[data-brand="broil-king"]{--lazy-bg: url('/assets/photos/brands/broil-king-asadores.webp');}
+.brandtile[data-brand="cafe"]{--lazy-bg: url('/assets/photos/brands/cafe-electrodomesticos.webp');}
+.brandtile[data-brand="coyote"]{--lazy-bg: url('/assets/photos/brands/coyote-asadores.webp');}
+.brandtile[data-brand="falmec"]{--lazy-bg: url('/assets/photos/brands/falmec-campanas.webp');}
+.brandtile[data-brand="frigidaire"]{--lazy-bg: url('/assets/photos/brands/frigidaire-electrodomesticos.webp');}
+.brandtile[data-brand="electrolux"]{--lazy-bg: url('/assets/photos/brands/electrolux-electrodomesticos.webp');}
+.brandtile[data-brand="ge-profile"]{--lazy-bg: url('/assets/photos/brands/ge-profile-electrodomesticos.webp');}
+.brandtile[data-brand="insinkerator"]{--lazy-bg: url('/assets/photos/brands/insinkerator-trituradores.webp');}
+.brandtile[data-brand="invisacook"]{--lazy-bg: url('/assets/photos/brands/invisacook-cocina.webp');}
+.brandtile[data-brand="io-mabe"]{--lazy-bg: url('/assets/photos/brands/io-mabe-electrodomesticos.webp');}
+.brandtile[data-brand="mabe"]{--lazy-bg: url('/assets/photos/brands/mabe-electrodomesticos.webp');}
+.brandtile[data-brand="tecnolam"]{--lazy-bg: url('/assets/photos/brands/tecnolam-cocina.webp');}
+.brandtile[data-brand="thor"]{--lazy-bg: url('/assets/photos/brands/thor-cocina.webp');}
+.brandtile[data-brand="whirlpool"]{--lazy-bg: url('/assets/photos/brands/whirlpool-electrodomesticos.webp');}
+.brandtile[data-brand="acros"]{--lazy-bg: url('/assets/photos/brands/acros-electrodomesticos.webp');}
+.brandtile[data-brand="alfa-forni"]{--lazy-bg: url('/assets/photos/brands/alfa-forni-hornos.webp');}
+.brandtile[data-brand="asko"]{--lazy-bg: url('/assets/photos/brands/asko-electrodomesticos.webp');}
+.brandtile[data-brand="axcent"]{--lazy-bg: url('/assets/photos/brands/axcent-cocina-y-bano.webp');}
+.brandtile[data-brand="benessi"]{--lazy-bg: url('/assets/photos/brands/benessi-cocina.webp');}
+.brandtile[data-brand="artisan"]{--lazy-bg: url('/assets/photos/brands/artisan-asadores.webp');}
+.brandtile[data-brand="dawn"]{--lazy-bg: url('/assets/photos/brands/dawn-tarjas-y-griferia.webp');}
+.brandtile[data-brand="dexa"]{--lazy-bg: url('/assets/photos/brands/dexa-electrodomesticos.webp');}
+.brandtile[data-brand="delta"]{--lazy-bg: url('/assets/photos/brands/delta-griferia.webp');}
+.brandtile[data-brand="blanco"]{--lazy-bg: url('/assets/photos/brands/blanco-tarjas-y-griferia.webp');}
+.brandtile[data-brand="brizo"]{--lazy-bg: url('/assets/photos/brands/brizo-griferia.webp');}
+.brandtile[data-brand="eclipse"]{--lazy-bg: url('/assets/photos/brands/eclipse-tarjas-y-griferia.webp');}
+.brandtile[data-brand="elkay"]{--lazy-bg: url('/assets/photos/brands/elkay-tarjas-y-griferia.webp');}
+.brandtile[data-brand="franke"]{--lazy-bg: url('/assets/photos/brands/franke-tarjas-y-griferia.webp');}
+.brandtile[data-brand="fulgor-milano"]{--lazy-bg: url('/assets/photos/brands/fulgor-milano-cocina.webp');}
+.brandtile[data-brand="haier"]{--lazy-bg: url('/assets/photos/brands/haier-electrodomesticos.webp');}
+.brandtile[data-brand="i-drain"]{--lazy-bg: url('/assets/photos/brands/i-drain-banos.webp');}
+.brandtile[data-brand="kalt"]{--lazy-bg: url('/assets/photos/brands/kalt-cocina.webp');}
+.brandtile[data-brand="gessi"]{--lazy-bg: url('/assets/photos/brands/gessi-griferia.webp');}
+.brandtile[data-brand="kele-master-sinks"]{--lazy-bg: url('/assets/photos/brands/kele-master-sinks-tarjas.webp');}
+.brandtile[data-brand="mr-steam"]{--lazy-bg: url('/assets/photos/brands/mr-steam-vapor.webp');}
+.brandtile[data-brand="nobili"]{--lazy-bg: url('/assets/photos/brands/nobili-griferia.webp');}
+.brandtile[data-brand="peerless"]{--lazy-bg: url('/assets/photos/brands/peerless-griferia.webp');}
+.brandtile[data-brand="poletti-sinks"]{--lazy-bg: url('/assets/photos/brands/poletti-sinks-tarjas.webp');}
+.brandtile[data-brand="sapphire"]{--lazy-bg: url('/assets/photos/brands/sapphire-cocina.webp');}
+.brandtile[data-brand="schock"]{--lazy-bg: url('/assets/photos/brands/schock-tarjas.webp');}
+.brandtile[data-brand="scotsman"]{--lazy-bg: url('/assets/photos/brands/scotsman-hielo.webp');}
+.brandtile[data-brand="summit"]{--lazy-bg: url('/assets/photos/brands/summit-refrigeracion.webp');}
+.brandtile[data-brand="teka"]{--lazy-bg: url('/assets/photos/brands/teka-cocina.webp');}
+.brandtile[data-brand="the-galley"]{--lazy-bg: url('/assets/photos/brands/the-galley-tarjas.webp');}
+.brandtile[data-brand="tradewind"]{--lazy-bg: url('/assets/photos/brands/tradewind-campanas.webp');}
+.brandtile[data-brand="u-line"]{--lazy-bg: url('/assets/photos/brands/u-line-refrigeracion.webp');}
+.brandtile[data-brand="wppo"]{--lazy-bg: url('/assets/photos/brands/wppo-hornos.webp');}
+.brandtile[data-brand="hergom"]{--lazy-bg: url('/assets/photos/brands/hergom-chimeneas.webp');}
+.brandtile[data-brand="jacuzzi"]{--lazy-bg: url('/assets/photos/brands/jacuzzi-wellness.webp');}
+.brandtile[data-brand="clearlight"]{--lazy-bg: url('/assets/photos/brands/clearlight-saunas.webp');}
+/* Arte recibido 2026-09-22 (ARTE MARCAS WEB). */
+.brandtile[data-brand="easy"]{--lazy-bg: url('/assets/photos/brands/easy-electrodomesticos.webp');}
+.brandtile[data-brand="iem"]{--lazy-bg: url('/assets/photos/brands/iem-electrodomesticos.webp');}
+.brandtile[data-brand="nantucket"]{--lazy-bg: url('/assets/photos/brands/nantucket-tarjas.webp');}
+.brandtile[data-brand="catalano"]{--lazy-bg: url('/assets/photos/brands/catalano-banos.webp');}
+.brandtile[data-brand="commodore"]{--lazy-bg: url('/assets/photos/brands/commodore-trituradores.webp');}
+.brandtile[data-brand="faber"]{--lazy-bg: url('/assets/photos/brands/faber-campanas.webp');}
+.brandtile[data-brand="firplak"]{--lazy-bg: url('/assets/photos/brands/firplak-banos.webp');}
+.brandtile[data-brand="fontana"]{--lazy-bg: url('/assets/photos/brands/fontana-hornos.webp');}
+.brandtile[data-brand="foster"]{--lazy-bg: url('/assets/photos/brands/foster-cocina.webp');}
+.brandtile[data-brand="josper"]{--lazy-bg: url('/assets/photos/brands/josper-hornos.webp');}
+.brandtile[data-brand="kaldewei"]{--lazy-bg: url('/assets/photos/brands/kaldewei-banos.webp');}
+.brandtile[data-brand="kraus"]{--lazy-bg: url('/assets/photos/brands/kraus-tarjas-y-griferia.webp');}
+.brandtile[data-brand="onix"]{--lazy-bg: url('/assets/photos/brands/onix-superficies.webp');}
+.brandtile[data-brand="sauna-estilo"]{--lazy-bg: url('/assets/photos/brands/sauna-estilo-saunas.webp');}
+.brandtile[data-brand="treesse"]{--lazy-bg: url('/assets/photos/brands/treesse-wellness.webp');}
+.brandtile[data-brand="valsir"]{--lazy-bg: url('/assets/photos/brands/valsir-banos.webp');}
+.brandtile[data-brand="vass"]{--lazy-bg: url('/assets/photos/brands/vass-chimeneas.webp');}
+.brandtile[data-brand="sedona-by-lynx"]{--lazy-bg: url('/assets/photos/brands/sedona-by-lynx-asadores.webp');}
 /* Fotos verticales: se sube el encuadre (baja la imagen dentro del tile) para
    ver mejor el asador y que no se corte el grifo de Blanco. */
-.brandtile[data-brand="alfresco"]{ background-position: center 35%; }
-.brandtile[data-brand="artisan"]{ background-position: center 35%; }
-.brandtile[data-brand="blanco"]{ background-position: center 38%; }
 /* Elevar el encuadre (subir la imagen) para que el electrodoméstico se vea
    completo dentro del tile, sin cortar la base (patas/ruedas/horno). */
-.brandtile[data-brand="cafe"]{ background-position: center 67%; }
 .brandtile[data-brand="cove"]{ background-position: center 68%; }
 .brandtile[data-brand="masterbuilt"]{ background-position: center 74%; }
 .brandtile[data-brand="monogram"]{ background-position: center 75%; }
 .brandtile[data-brand="teka"]{ background-position: center 74%; }
-.brandtile[data-brand="pitt-cooking"]{ background-position: center 72%; }
-.brandtile[data-brand="supra"]{--lazy-bg: url('/assets/photos/brands/supra.webp');}
-.brandtile[data-brand="masterbuilt"]{--lazy-bg: url('/assets/photos/brands/masterbuilt.webp');}
-.brandtile[data-brand="maytag"]{--lazy-bg: url('/assets/photos/brands/maytag.webp');}
-.brandtile[data-brand="mont-alpi"]{--lazy-bg: url('/assets/photos/brands/mont-alpi.webp');}
+.brandtile[data-brand="supra"]{--lazy-bg: url('/assets/photos/brands/supra-electrodomesticos.webp');}
+.brandtile[data-brand="masterbuilt"]{--lazy-bg: url('/assets/photos/brands/masterbuilt-asadores.webp');}
+.brandtile[data-brand="maytag"]{--lazy-bg: url('/assets/photos/brands/maytag-electrodomesticos.webp');}
+.brandtile[data-brand="mont-alpi"]{--lazy-bg: url('/assets/photos/brands/mont-alpi-asadores.webp');}
 
 /* ---------- Tiles de ayuda / FAQ --------------------------------------------------- */
 .help-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }

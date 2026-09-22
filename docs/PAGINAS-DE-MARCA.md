@@ -1,6 +1,6 @@
 # Páginas de marca — `/marcas/<slug>`
 
-> Una página por marca: **93** hoy (68 SHOPIFY · 25 PDF, desde el 2026-09-21). Todas salen de
+> Una página por marca: **92** hoy (68 SHOPIFY · 24 PDF, desde el 2026-09-22; se quitaron AXOR, TRES, Pizarro, Artexa Bath y Hergom Diseño). Todas salen de
 > la **misma ruta** (`app/marcas/[marca]/page.tsx`) y del **mismo registro** (`data/marcas.json`).
 > Cambia el logo, la foto, las categorías, las listas de precios y el **canal**; el armazón es idéntico.
 >
@@ -26,8 +26,8 @@ recuperación.
 
 | `canal` | Qué enseña la página |
 |---|---|
-| `shopify` | Todo lo de arriba: categorías, listas y catálogo con filtros |
-| `pdf` | Categorías, **"Catálogo y lista de precios (PDF)"** y cotización por WhatsApp. **Sin** catálogo ni filtros: la marca no se sube a Shopify, la página existe por SEO. Si todavía no tiene PDF, dice que está por publicarse y ofrece pedirlo por WhatsApp |
+| `shopify` | Hero y **directo al catálogo** con filtros. Sin bloque de categorías ni listas de precios (Carla, 2026-09-22): ahí van los productos de la marca desde Shopify |
+| `pdf` | Bloque **"Asesoría especializada"**: invitación a hablar con un asesor por WhatsApp, su PDF si ya está publicado y sus categorías. **Sin** catálogo ni filtros. El botón de la página, el del hero y el flotante mandan *"Hola, estaba viendo el catálogo de {marca} y me interesa una asesoría."* (`mensajeAsesoria()` en `lib/whatsapp.ts`) |
 
 ### Marcas sin arte
 
@@ -58,7 +58,8 @@ todavía no está migrado (la tienda de Shopify sigue con contraseña). Ver abaj
 | `categorias` | `data-sub` del tile |
 | `canal` | `data-canal` del tile: `shopify` o `pdf` (obligatorio) |
 | `logo` | `public/assets/logos/<slug>.*` — **la extensión varía** (.webp / .png). `null` si no hay |
-| `foto` | `public/assets/photos/brands/<slug>.*` — varía (.webp / .avif). `null` si no hay |
+| `foto` | `public/assets/photos/brands/<slug>.*` — foto de los **tiles**, tope 700 px. Varía (.webp / .avif). `null` si no hay |
+| `fotoHero` | `public/assets/photos/brands/hero/<slug>.webp` — foto del **hero**, hasta 2000 px, con variantes 400–1600 (`node scripts/responsive-images.mjs`). Si no hay, usa `foto` |
 | `listas` | slugs de documento de `data/listas-precios.json` |
 | `descripcion` | opcional, a mano. Si no está, la página arma una frase con gama + categorías |
 
@@ -75,6 +76,49 @@ Es idempotente y **sale con 1** si una marca se queda sin nombre en `NOMBRES`, s
 `data-canal` válido, o con un `data-gama`/`data-sub` que no conoce. Sin logo o sin foto solo
 **avisa** (lista las marcas sin arte): la página tiene respaldo. A propósito **no** está en
 `prebuild`: ese hook lo comparten otras sesiones de trabajo.
+
+## Texto del hero — `data/marcas-hero.json` (2026-09-22)
+
+Contenido del hero **por marca**, escrito a mano o desde el Excel de contenido. El generador no lo toca.
+Tiene las **92 marcas**, cargadas desde `HOMEA_HERO_97_MARCAS_CODE.xlsx` (2026-09-22). Para actualizarlas, edita el JSON o vuelve a convertir el Excel (columnas SLUG · MARCA · EYEBROW · H1 · DESCRIPCIÓN · BOTÓN). Marca sin entrada → hero de siempre (gama · Distribución oficial + nombre + frase automática).
+
+```json
+"acros": {
+  "eyebrow": "Funcional · Práctica · Accesible",
+  "titulo": "Electrodomésticos Acros",
+  "descripcion": "Soluciones prácticas para el hogar…",
+  "cta": { "texto": "Ver catálogo oficial", "url": null }
+}
+```
+
+- `eyebrow` en minúsculas normales: el CSS lo pasa a MAYÚSCULAS.
+- `cta.url` = URL del PDF oficial en Shopify Files. Mientras sea `null`, el mismo botón pide el catálogo por WhatsApp.
+- Ajustes opcionales por marca: `imagen.espejo: false` (la foto del hero va en espejo por defecto; se desactiva cuando
+  trae texto o logos, p. ej. Bosch, Kamado Joe, WPPO, Lynx, Alfa Forni), `imagen.posicion` (encuadre; por defecto
+  `center 75%`, un % menor enseña más la parte de arriba: Acros, Café, Josper…) y `logoEscala` (Axcent 0.6).
+- **Suavizado automático:** si la foto del hero mide menos de **1100 px** de ancho (según `data/variantes-imagenes.json`),
+  la página añade `.marcas-hero--suave`: blur leve + velo y viñeta más densos para que no se noten los pixeles.
+  Se quita solo al subir una foto más grande. Las fotos del hero se sustituyen en `brands/hero/` (la del tile no cambia).
+- Logo del hero: `public/assets/logos/hero/<slug>.webp` es una copia **recortada sin margen** (14 logos traían mucho
+  margen transparente y se veían chicos). Los tiles de `/marcas` siguen con el original.
+- La jerarquía la da la clase `.marcas-hero--contenido` (`styles/theme.css`): eyebrow 15px · H1 52–68px · descripción 19–22px · bloque 600px.
+  Fondo, overlay, logo y breadcrumb no cambian.
+
+## Nombres SEO de las fotos (2026-09-22)
+
+Tile y hero se llaman `<slug>-<tipo>.webp` (p. ej. `wolf-cocina.webp`, `blanco-tarjas-y-griferia.webp`,
+`sedona-by-lynx-asadores.webp`): el tipo sale del H1 de `data/marcas-hero.json` sin el nombre de la marca
+(`scripts/nombre-seo-marca.mjs`). El generador busca la foto con ese nombre y, si no existe, acepta `<slug>.webp`.
+Cambiar el H1 de una marca cambia el nombre esperado: renombrar su foto (tile y hero) o `npm run marcas` la dará por
+faltante. Cada variante del hero tiene tope de peso (≈24 KB a 400 px … ≈260 KB a 2000 px).
+
+## Foto del hero (2026-09-22)
+
+La foto de los tiles se capa a 700 px (`scripts/optimize-images.mjs`), y estirada a sangre completa se veía pixeleada.
+El hero usa su propia copia en `brands/hero/`, sacada del **original más grande** que hay (se recuperaron del historial de git).
+Se sirve desde **Vercel** (estático en `public/`), no desde Shopify: es imagen editorial, no de producto (`docs/ESTRATEGIA-IMAGENES.md`).
+Para cambiarla: deja `brands/hero/<slug>.webp` (horizontal, **≥ 2000 px de ancho**), corre `node scripts/responsive-images.mjs`
+y `npm run marcas`. Ojo: `responsive-images.mjs` genera variantes de **todo** el sitio que no las tenga; revisa `git status` antes de subir.
 
 ## Agregar una marca
 
@@ -100,7 +144,7 @@ nombre de `NOMBRES`, sus reglas `.brandtile[data-brand=…]` de `styles/theme.cs
 `data/listas-precios.json`. **Las URLs viejas de sus PDFs** (`legacy`) no se tiran: pásalas a
 `data/redirects/oxatis-manual.json` apuntando a su categoría, para que no den 404. Luego
 `npm run marcas`. Así se quitaron Hansgrohe, Keuco, American Standard y Moen el 2026-09-21
-(y las listas de Catalano, Fortum y Steamist).
+(y las listas de Catalano, Fortum y Steamist), y AXOR, TRES, Pizarro, Artexa Bath y Hergom Diseño el 2026-09-22.
 
 ⚠️ En `next dev`, la ruta `/listas-de-precios/<slug>.pdf` puede seguir sirviendo una lista ya
 borrada: Turbopack no vuelve a leer `data/listas-precios.json`. Reinicia el servidor para
@@ -112,8 +156,8 @@ comprobarlo; en producción no pasa.
 que `categoria-` y `producto-`). **No existe ningún archivo `preview/marca-*.html`**: el
 nombre solo sirve para enlazar desde el HTML del preview. Hoy apuntan ahí:
 
-- los 93 tiles de `preview/marcas.html`,
-- los 93 enlaces del mega-menú de marcas y los 38 chips de la marquesina, en
+- los 92 tiles de `preview/marcas.html`,
+- los 92 enlaces del mega-menú de marcas y los 38 chips de la marquesina, en
   `preview/home.html` (que es el nav compartido de todo el sitio).
 
 ## Cuando llegue el catálogo

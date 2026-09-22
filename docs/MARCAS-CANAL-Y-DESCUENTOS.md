@@ -13,7 +13,7 @@
 | Canal | En Shopify | En el sitio |
 |---|---|---|
 | **SHOPIFY** (68) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
-| **SOLO PDF** (25) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
+| **SOLO PDF** (24) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
 
 En el código, el canal vive en el tile de `preview/marcas.html` (`data-canal="shopify|pdf"`), pasa a
 `data/marcas.json` con `npm run marcas` y la plantilla `app/marcas/[marca]/page.tsx` lo respeta.
@@ -30,7 +30,7 @@ plan). Kamado Joe, Masterbuilt, WPPO y La Cornue son de cocina o asadores y van 
 2. **Eliminadas:** se quitan de todo el sitio porque ya no se venden. Hecho el 2026-09-21: Hansgrohe,
    Keuco, American Standard y Moen perdieron página, tile, enlace de menú, fotos, logos y listas de precios.
    Las URLs viejas de sus PDFs redirigen (301) a su categoría.
-3. **Saunas de Grupo 90: descatalogadas.** Solo se presentan las saunas que ofrece **Artexa**.
+3. **Saunas:** las de **Grupo 90** son **Mr. Steam, Sauna Estilo y Treesse** (corrección de Carla, 2026-09-22: se mantienen aunque estuvieron en *Eliminadas*); las de **Artexa** son Jacuzzi y Clearlight. Todas SOLO PDF.
    Se crearon las **16 páginas** que faltaban: 6 SHOPIFY y 10 SOLO PDF. Los PDFs vigentes de cada marca
    se le piden a Carla más adelante y se suben a Shopify Files.
    **Las saunas de Artexa son Jacuzzi y Clearlight**, que no venían en el Excel. Se agregaron como marcas
@@ -47,19 +47,19 @@ plan). Kamado Joe, Masterbuilt, WPPO y La Cornue son de cocina o asadores y van 
 La columna **Descuento Shopify (PLATA)** es el descuento asignado a cada marca. **Va a cambiar:**
 revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 
-- **PENDIENTE:** Commodore, Peerless y The Galley (Shopify), y Artexa Bath (PDF). No están en la política de descuentos.
+- **PENDIENTE:** Commodore, Peerless y The Galley (Shopify). No están en la política de descuentos.
 - **Validar con la lista PPS** (nota 4 de la política): los grupos Mabe (Easy, GE Profile, Haier, IEM, IO Mabe,
   Mabe) y Whirlpool (Acros, KitchenAid, Maytag, Whirlpool), todos al 30%.
-- Las marcas **SOLO PDF** de Grupo 90 llevan 10% aunque no se venden en Shopify. Aplica a la cotización.
+- Las marcas **SOLO PDF** de Grupo 90 llevan 10% aunque no se venden en Shopify. **No se asigna en Shopify** (no hay productos ahí): queda solo como referencia para la cotización.
 
 ## Por confirmar con Carla
 
 - **Categoría de las marcas nuevas.** Se asignaron así; confirmar las marcadas con ❓ (Vass ya lo confirmó Carla):
   Kraus → Tarjas (confirmado en el catálogo) · Commodore → Trituradores (confirmado) · IEM → Cocina
-  (estufas, confirmado) · Easy → Lavandería y Cocina (en el catálogo solo hay lavadoras) ❓ ·
-  Faber → Cocina (campanas) ❓ · Nantucket → Tarjas ❓ · Foster → Tarjas ❓ · Fontana → Asadores y
-  hornos ❓ · Josper → Asadores y hornos (hornos de brasa) · Pizarro → Baños (confirmado) · TRES y
-  Valsir → Baños ❓ · Artexa Bath → Baños ❓ · Hergom y Hergom Diseño → Chimeneas &
+  (estufas, confirmado) · Easy → Cocina, económica (confirmado 2026-09-22) ·
+  Faber → Cocina, residencial (confirmado) · Nantucket → Tarjas, residencial (confirmado) · Foster → Cocina (confirmado) · Fontana → Exterior: Asadores y
+  hornos (confirmado) · Josper → Asadores y hornos (hornos de brasa) · Pizarro → Baños (confirmado) · TRES y
+  Valsir → Baños ❓ · Artexa Bath → Baños ❓ · Hergom → Chimeneas &
   Calentadores (confirmado) · Vass → Chimeneas & Calentadores, residencial (confirmado por Carla) · Jacuzzi → Vapor y
   Sauna y Wellness · Clearlight → Vapor y Sauna.
 - **Gama** (premium/residencial/media/económica) de las marcas nuevas: se asignó por analogía con
@@ -86,18 +86,18 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | BRIZO | ARTEXA | BRIZO | 806 | 10% | `/marcas/brizo` | completo | Solo línea de cocina |
 | BROIL KING | MARESA | BROIL | 26 | 10% | `/marcas/broil-king` | completo |  |
 | CAFÉ | MABE | CAFE | 99 | 10% | `/marcas/cafe` | completo |  |
-| COMMODORE | ECLIPSE | COMMO | 9 | **PENDIENTE** | `/marcas/commodore` | falta logo y foto | No está en la política de descuentos |
+| COMMODORE | ECLIPSE | COMMO | 9 | **PENDIENTE** | `/marcas/commodore` | completo | No está en la política de descuentos |
 | COVE | IESA/LAVISH | COVE | 15 | 10% | `/marcas/cove` | completo |  |
 | COYOTE | LECROM | COYOT | 224 | 10% | `/marcas/coyote` | completo |  |
 | DAWN | LECROM / MARESA | DAWN | 25 | 10% | `/marcas/dawn` | completo |  |
 | DELTA | ARTEXA | DELTA | 2791 | 10% | `/marcas/delta` | completo | Solo línea de cocina |
 | DEXA | IESA/LAVISH | DEXA | 112 | 10% | `/marcas/dexa` | completo |  |
-| EASY | MABE | EASY | 13 | 30% | `/marcas/easy` | falta logo y foto | Validar margen con lista PPS (nota 4 de la política) |
+| EASY | MABE | EASY | 13 | 30% | `/marcas/easy` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | ECLIPSE | ECLIPSE | ECLIP | 98 | 10% | `/marcas/eclipse` | completo | Revisar Serie Value Line (condición distinta) |
 | ELECTROLUX / ELECTROLUX ICON | INTERMUEBLES | ELECT | 12 | 10% | `/marcas/electrolux` | completo |  |
 | ELICA (todas las series) | ARTEXA | ELICA | 166 | 10% | `/marcas/elica` | completo |  |
 | ELKAY | ARTEXA | ELKAY | 4 | 10% | `/marcas/elkay` | completo |  |
-| FABER | LECROM | FABER | 12 | 5% | `/marcas/faber` | falta foto |  |
+| FABER | LECROM | FABER | 12 | 5% | `/marcas/faber` | completo |  |
 | FALMEC | TECNOLAM | FALME | 53 | 10% | `/marcas/falmec` | completo |  |
 | FRANKE | LECROM | FRANK | 28 | 10% | `/marcas/franke` | completo | Se compra por Lecrom (no IESA) |
 | FRIGIDAIRE / GALLERY / PRO | INTERMUEBLES | FRIGI | 23 | 10% | `/marcas/frigidaire` | completo | Parejas Pro: checar precio Palacio |
@@ -107,20 +107,20 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | GESSI | ARTEXA | GESSI | 213 | 10% | `/marcas/gessi` | completo |  |
 | HAIER | MABE | HAIER | 21 | 30% | `/marcas/haier` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | HOSHIZAKI | ARTEXA | HOSHI | 20 | 10% | `/marcas/hoshizaki` | completo |  |
-| IEM | MABE | IEM | 9 | 30% | `/marcas/iem` | falta logo y foto | Validar margen con lista PPS (nota 4 de la política) |
+| IEM | MABE | IEM | 9 | 30% | `/marcas/iem` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | INSINKERATOR | ARTEXA | INSIN | 67 | 10% | `/marcas/insinkerator` | completo |  |
 | INVISACOOK | INVISACOOK | INVIS | 9 | 10% | `/marcas/invisacook` | completo |  |
 | IO MABE | MABE | IOMAB | 78 | 30% | `/marcas/io-mabe` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | KELE | INTERDEMEX | KELE | 206 | 10% | `/marcas/kele-master-sinks` | completo |  |
 | KITCHENAID (incl. portátiles) | WHIRLPOOL | KITCH | 223 | 30% | `/marcas/kitchenaid` | completo | Validar margen con lista PPS (nota 4 de la política) |
-| KRAUS | ARTEXA | KRAUS | 79 | 10% | `/marcas/kraus` | falta foto |  |
+| KRAUS | ARTEXA | KRAUS | 79 | 10% | `/marcas/kraus` | completo |  |
 | LYNX | MIDDLEBY | LYNX | 137 | 5% | `/marcas/lynx` | completo |  |
 | MABE (incl. cuadro básico) | MABE | MABE | 589 | 30% | `/marcas/mabe` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | MAYTAG | WHIRLPOOL | MAYTA | 46 | 30% | `/marcas/maytag` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | MIELE | MIELE | MIELE | 292 | 5% | `/marcas/miele` | completo |  |
 | MONOGRAM | MABE | MONOG | 87 | 10% | `/marcas/monogram` | completo |  |
 | MONT ALPI | MARESA | MONTA | 87 | 10% | `/marcas/mont-alpi` | completo |  |
-| NANTUCKET | LECROM | NANTU | 20 | 10% | `/marcas/nantucket` | falta logo y foto |  |
+| NANTUCKET | LECROM | NANTU | 20 | 10% | `/marcas/nantucket` | completo |  |
 | PEERLESS | ARTEXA | PEERL | 140 | **PENDIENTE** | `/marcas/peerless` | completo | No está en la política de descuentos |
 | PITT | ARTEXA | PITT | 108 | 10% | `/marcas/pitt-cooking` | completo |  |
 | SCHOCK | ECLIPSE | SCHOC | 33 | 10% | `/marcas/schock` | completo |  |
@@ -141,51 +141,53 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | WHIRLPOOL | WHIRLPOOL | WHIRL | 282 | 30% | `/marcas/whirlpool` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | WOLF | IESA/LAVISH | WOLF | 665 | 10% | `/marcas/wolf` | completo | Condición distinta para fuera de línea vs. de línea |
 
-## SOLO PDF — 25 marcas
+## SOLO PDF — 24 marcas
 
 | Marca | Proveedor | Línea SAE | Productos tras carga | Descuento Shopify (PLATA) | Página | Arte | Nota |
 |---|---|---|---:|---:|---|---|---|
-| ARTEXA BATH | ARTEXA | — | — | **PENDIENTE** | `/marcas/artexa-bath` | falta logo y foto | No está en la política de descuentos |
-| AXOR | GRUPO 90 | AXOR | 1403 | 10% | `/marcas/axor` | completo |  |
-| CLEARLIGHT | ARTEXA | — | — | **PENDIENTE** | `/marcas/clearlight` | falta logo | Saunas de Artexa; no venía en el Excel (Carla, 2026-09-21) |
-| FIRPLAK | ENVITEB | — | 0 | N/A | `/marcas/firplak` | falta logo y foto | Económica. Estaba en *Marcas eliminadas*; restaurada como SOLO PDF (Carla, 2026-09-21) |
-| FONTANA | LECROM | FONTA | 29 | N/A | `/marcas/fontana` | falta logo y foto |  |
-| FOSTER | LECROM | FOSTE | 9 | — | `/marcas/foster` | falta logo y foto |  |
-| HERGOM | BLOCK | HERGO | 0 | — | `/marcas/hergom` | falta logo |  |
-| HERGOM DISEÑO | BLOCK | HERGO | 0 | — | `/marcas/hergom-diseno` | falta logo y foto |  |
+| CATALANO | GRUPO 90 | CATAL | 14 | 10% | `/marcas/catalano` | completo | Baños. Estaba en *Eliminadas*; vuelve como SOLO PDF (Carla, 2026-09-22) |
+| CLEARLIGHT | ARTEXA | — | — | **PENDIENTE** | `/marcas/clearlight` | completo | Saunas de Artexa; no venía en el Excel (Carla, 2026-09-21) |
+| FIRPLAK | ENVITEB | — | 0 | N/A | `/marcas/firplak` | completo | Económica. Estaba en *Marcas eliminadas*; restaurada como SOLO PDF (Carla, 2026-09-21) |
+| FONTANA | LECROM | FONTA | 29 | N/A | `/marcas/fontana` | completo |  |
+| FOSTER | LECROM | FOSTE | 9 | — | `/marcas/foster` | completo |  |
+| HERGOM | BLOCK | HERGO | 0 | — | `/marcas/hergom` | completo |  |
 | IDRAIN / IDRAIN PROYECTOS | GRUPO 90 | IDRAI | 86 | 10% | `/marcas/i-drain` | completo | iDrain Proyectos: el descuento PLATA no aplica |
-| JACUZZI | ARTEXA | — | — | **PENDIENTE** | `/marcas/jacuzzi` | falta logo | Saunas de Artexa; no venía en el Excel (Carla, 2026-09-21) |
-| JOSPER | MIDDLEBY | JOSPE | 0 | — | `/marcas/josper` | falta logo y foto |  |
+| JACUZZI | ARTEXA | — | — | **PENDIENTE** | `/marcas/jacuzzi` | completo | Saunas de Artexa; no venía en el Excel (Carla, 2026-09-21) |
+| JOSPER | MIDDLEBY | JOSPE | 0 | — | `/marcas/josper` | completo |  |
+| KALDEWEI | GRUPO 90 | — | 0 | 10% | `/marcas/kaldewei` | completo | Baños. Estaba en *Eliminadas*; vuelve como SOLO PDF (Carla, 2026-09-22) |
 | KALT | LECROM | KALT | 15 | — | `/marcas/kalt` | completo |  |
 | KAMADO JOE | MIDDLEBY | KAMAD | 43 | — | `/marcas/kamado-joe` | completo |  |
 | LA CORNUE | MIDDLEBY | LACOR | 2 | — | `/marcas/la-cornue` | completo |  |
 | MASTERBUILT | MIDDLEBY | MASTB | 8 | — | `/marcas/masterbuilt` | completo |  |
 | MR STEAM | GRUPO 90 | MRSTE | 28 | 10% | `/marcas/mr-steam` | completo |  |
 | NOBILI | GRUPO 90 | NOBIL | 191 | 10% | `/marcas/nobili` | completo |  |
-| ONIX | — | — | — | **PENDIENTE** | `/marcas/onix` | falta logo y foto | Mosaico veneciano, residencial; no venía en el Excel, se queda (Carla, 2026-09-21) |
-| PIZARRO | PIZARRO | PIZAR | 129 | — | `/marcas/pizarro` | falta logo y foto |  |
+| ONIX | — | — | — | **PENDIENTE** | `/marcas/onix` | completo | Mosaico veneciano, residencial; no venía en el Excel, se queda (Carla, 2026-09-21) |
 | POLETTI | LECROM | POLET | 28 | — | `/marcas/poletti-sinks` | completo |  |
 | SAPPHIRE | LECROM | SAPPH | 19 | — | `/marcas/sapphire` | completo |  |
-| TRES | GRUPO 90 | — | 0 | 10% | `/marcas/tres` | falta logo y foto |  |
-| VALSIR | GRUPO 90 | — | 0 | 10% | `/marcas/valsir` | falta logo y foto |  |
-| VASS | VASS | VASS | 3 | — | `/marcas/vass` | falta logo y foto | Chimeneas, residencial (Carla, 2026-09-21) |
+| SAUNA ESTILO | GRUPO 90 | — | — | 10% | `/marcas/sauna-estilo` | completo | Vapor y Sauna. Alta como SOLO PDF (Carla, 2026-09-22) |
+| TREESSE | GRUPO 90 | — | — | 10% | `/marcas/treesse` | completo | Baños y saunas. Alta como SOLO PDF (Carla, 2026-09-22) |
+| VALSIR | GRUPO 90 | — | 0 | 10% | `/marcas/valsir` | completo |  |
+| VASS | VASS | VASS | 3 | — | `/marcas/vass` | completo | Chimeneas, residencial (Carla, 2026-09-21) |
 | WPPO | MARESA | WPPO | 6 | — | `/marcas/wppo` | completo |  |
 
-## ELIMINADAS — 14 marcas
+## ELIMINADAS — 17 marcas
 
 | Marca | Proveedor | Línea SAE | Productos hoy | Nota |
 |---|---|---|---:|---|
 | AMBIANCE | STUDIO & DISEÑO | AMBIA | 39 |  |
 | AMERICAN STANDARD | STUDIO & DISEÑO | AMSTA | 256 | Tenía página; se quitó de todo el sitio el 2026-09-21 |
-| CATALANO | GRUPO 90 | CATAL | 14 | Tenía lista de precios; se retiró |
+| ARTEXA BATH | ARTEXA | — | — | Tenía página; se quitó de todo el sitio el 2026-09-22 (Carla) |
+| AXOR | GRUPO 90 | AXOR | 1403 | Tenía página; se quitó de todo el sitio el 2026-09-22 (Carla) |
 | DUPLASH | GRUPO 90 | — | 0 |  |
 | FORTUM | — | — | — | No venía en el Excel; se retiró su lista de precios el 2026-09-21 (la URL vieja redirige a Baños) |
 | HANSGROHE | GRUPO 90 | HANSG, HAGNA | 335 | Tenía página; se quitó de todo el sitio el 2026-09-21 |
+| HERGOM DISEÑO | BLOCK | HERGO | 0 | Es la misma marca que Hergom; se quitó de todo el sitio el 2026-09-22 (Carla) |
 | INDA | GRUPO 90 | — | 0 |  |
-| KALDEWEI | GRUPO 90 | — | 0 |  |
 | KEUCO | GRUPO 90 | KEUCO | 30 | Tenía página; se quitó de todo el sitio el 2026-09-21 |
 | KINDRED | LECROM | — | 0 |  |
 | LAUFEN | GRUPO 90 | — | 0 |  |
 | MOEN | STUDIO & DISEÑO | MOEN | 357 | Tenía página; se quitó de todo el sitio el 2026-09-21 |
-| SAUNAS | GRUPO 90 | — | 0 | Descatalogada el 2026-09-21: solo se presentan las saunas de Artexa |
+| PIZARRO | PIZARRO | PIZAR | 129 | Tenía página; se quitó de todo el sitio el 2026-09-22 (Carla) |
+| SAUNAS | GRUPO 90 | — | 0 | Fila genérica del Excel; las saunas de Grupo 90 se presentan por marca: Mr. Steam, Sauna Estilo y Treesse (2026-09-22) |
 | STEAMIST | — | — | — | No venía en el Excel; se retiró su lista de precios el 2026-09-21 (la URL vieja redirige a Vapor y Sauna) |
+| TRES | GRUPO 90 | — | 0 | Tenía página; se quitó de todo el sitio el 2026-09-22 (Carla) |

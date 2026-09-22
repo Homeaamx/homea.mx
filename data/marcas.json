@@ -64,7 +64,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/acros.webp",
-      "foto": "/assets/photos/brands/acros.webp",
+      "foto": "/assets/photos/brands/acros-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/acros-electrodomesticos.webp",
+      "logoHero": "/assets/logos/acros.webp",
       "listas": []
     },
     {
@@ -78,7 +80,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/alfa-forni.webp",
-      "foto": "/assets/photos/brands/alfa-forni.webp",
+      "foto": "/assets/photos/brands/alfa-forni-hornos.webp",
+      "fotoHero": "/assets/photos/brands/hero/alfa-forni-hornos.webp",
+      "logoHero": "/assets/logos/alfa-forni.webp",
       "listas": []
     },
     {
@@ -92,21 +96,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/alfresco.webp",
-      "foto": "/assets/photos/brands/alfresco.webp",
-      "listas": []
-    },
-    {
-      "slug": "artexa-bath",
-      "nombre": "Artexa Bath",
-      "gama": [
-        "residencial"
-      ],
-      "categorias": [
-        "banos"
-      ],
-      "canal": "pdf",
-      "logo": null,
-      "foto": null,
+      "foto": "/assets/photos/brands/alfresco-asadores.webp",
+      "fotoHero": "/assets/photos/brands/hero/alfresco-asadores.webp",
+      "logoHero": "/assets/logos/alfresco.webp",
       "listas": []
     },
     {
@@ -120,7 +112,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/artisan.webp",
-      "foto": "/assets/photos/brands/artisan.webp",
+      "foto": "/assets/photos/brands/artisan-asadores.webp",
+      "fotoHero": "/assets/photos/brands/hero/artisan-asadores.webp",
+      "logoHero": "/assets/logos/artisan.webp",
       "listas": []
     },
     {
@@ -134,7 +128,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/asko.webp",
-      "foto": "/assets/photos/brands/asko.webp",
+      "foto": "/assets/photos/brands/asko-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/asko-electrodomesticos.webp",
+      "logoHero": "/assets/logos/asko.webp",
       "listas": [
         "asko"
       ]
@@ -152,25 +148,13 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/axcent.webp",
-      "foto": "/assets/photos/brands/axcent.webp",
+      "foto": "/assets/photos/brands/axcent-cocina-y-bano.webp",
+      "fotoHero": "/assets/photos/brands/hero/axcent-cocina-y-bano.webp",
+      "logoHero": "/assets/logos/hero/axcent.webp",
       "listas": [
         "axcent-banos",
         "axcent-tarjas-y-monomandos"
       ]
-    },
-    {
-      "slug": "axor",
-      "nombre": "AXOR",
-      "gama": [
-        "premium"
-      ],
-      "categorias": [
-        "banos"
-      ],
-      "canal": "pdf",
-      "logo": "/assets/logos/axor.webp",
-      "foto": "/assets/photos/brands/axor.webp",
-      "listas": []
     },
     {
       "slug": "benessi",
@@ -183,7 +167,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/benessi.webp",
-      "foto": "/assets/photos/brands/benessi.webp",
+      "foto": "/assets/photos/brands/benessi-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/benessi-cocina.webp",
+      "logoHero": "/assets/logos/benessi.webp",
       "listas": []
     },
     {
@@ -197,7 +183,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/bertazzoni.webp",
-      "foto": "/assets/photos/brands/bertazzoni.webp",
+      "foto": "/assets/photos/brands/bertazzoni-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/bertazzoni-cocina.webp",
+      "logoHero": "/assets/logos/hero/bertazzoni.webp",
       "listas": []
     },
     {
@@ -211,7 +199,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/blanco.webp",
-      "foto": "/assets/photos/brands/blanco.webp",
+      "foto": "/assets/photos/brands/blanco-tarjas-y-griferia.webp",
+      "fotoHero": "/assets/photos/brands/hero/blanco-tarjas-y-griferia.webp",
+      "logoHero": "/assets/logos/hero/blanco.webp",
       "listas": []
     },
     {
@@ -225,7 +215,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/blaze.webp",
-      "foto": "/assets/photos/brands/blaze.webp",
+      "foto": "/assets/photos/brands/blaze-asadores.webp",
+      "fotoHero": "/assets/photos/brands/hero/blaze-asadores.webp",
+      "logoHero": "/assets/logos/blaze.webp",
       "listas": []
     },
     {
@@ -240,7 +232,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/bosch.webp",
-      "foto": "/assets/photos/brands/bosch.webp",
+      "foto": "/assets/photos/brands/bosch-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/bosch-electrodomesticos.webp",
+      "logoHero": "/assets/logos/bosch.webp",
       "listas": []
     },
     {
@@ -255,7 +249,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/brizo.webp",
-      "foto": "/assets/photos/brands/brizo.webp",
+      "foto": "/assets/photos/brands/brizo-griferia.webp",
+      "fotoHero": "/assets/photos/brands/hero/brizo-griferia.webp",
+      "logoHero": "/assets/logos/brizo.webp",
       "listas": []
     },
     {
@@ -269,7 +265,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/broil-king.webp",
-      "foto": "/assets/photos/brands/broil-king.webp",
+      "foto": "/assets/photos/brands/broil-king-asadores.webp",
+      "fotoHero": "/assets/photos/brands/hero/broil-king-asadores.webp",
+      "logoHero": "/assets/logos/broil-king.webp",
       "listas": []
     },
     {
@@ -283,7 +281,25 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/cafe.png",
-      "foto": "/assets/photos/brands/cafe.webp",
+      "foto": "/assets/photos/brands/cafe-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/cafe-electrodomesticos.webp",
+      "logoHero": "/assets/logos/cafe.png",
+      "listas": []
+    },
+    {
+      "slug": "catalano",
+      "nombre": "Catalano",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "banos"
+      ],
+      "canal": "pdf",
+      "logo": "/assets/logos/catalano.webp",
+      "foto": "/assets/photos/brands/catalano-banos.webp",
+      "fotoHero": "/assets/photos/brands/hero/catalano-banos.webp",
+      "logoHero": "/assets/logos/catalano.webp",
       "listas": []
     },
     {
@@ -296,8 +312,10 @@
         "vapor"
       ],
       "canal": "pdf",
-      "logo": null,
-      "foto": "/assets/photos/brands/clearlight.webp",
+      "logo": "/assets/logos/clearlight.webp",
+      "foto": "/assets/photos/brands/clearlight-saunas.webp",
+      "fotoHero": "/assets/photos/brands/hero/clearlight-saunas.webp",
+      "logoHero": "/assets/logos/clearlight.webp",
       "listas": [
         "clearlight-saunas-exterior"
       ]
@@ -312,8 +330,10 @@
         "trituradores"
       ],
       "canal": "shopify",
-      "logo": null,
-      "foto": null,
+      "logo": "/assets/logos/commodore.webp",
+      "foto": "/assets/photos/brands/commodore-trituradores.webp",
+      "fotoHero": "/assets/photos/brands/hero/commodore-trituradores.webp",
+      "logoHero": "/assets/logos/commodore.webp",
       "listas": []
     },
     {
@@ -327,7 +347,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/cove.png",
-      "foto": "/assets/photos/brands/cove.webp",
+      "foto": "/assets/photos/brands/cove-lavavajillas.webp",
+      "fotoHero": "/assets/photos/brands/hero/cove-lavavajillas.webp",
+      "logoHero": "/assets/logos/cove.png",
       "listas": []
     },
     {
@@ -341,7 +363,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/coyote.webp",
-      "foto": "/assets/photos/brands/coyote.webp",
+      "foto": "/assets/photos/brands/coyote-asadores.webp",
+      "fotoHero": "/assets/photos/brands/hero/coyote-asadores.webp",
+      "logoHero": "/assets/logos/hero/coyote.webp",
       "listas": [
         "coyote-asadores"
       ]
@@ -358,7 +382,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/dawn.webp",
-      "foto": "/assets/photos/brands/dawn.webp",
+      "foto": "/assets/photos/brands/dawn-tarjas-y-griferia.webp",
+      "fotoHero": "/assets/photos/brands/hero/dawn-tarjas-y-griferia.webp",
+      "logoHero": "/assets/logos/hero/dawn.webp",
       "listas": []
     },
     {
@@ -374,7 +400,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/delta.png",
-      "foto": "/assets/photos/brands/delta.webp",
+      "foto": "/assets/photos/brands/delta-griferia.webp",
+      "fotoHero": "/assets/photos/brands/hero/delta-griferia.webp",
+      "logoHero": "/assets/logos/hero/delta.webp",
       "listas": []
     },
     {
@@ -389,7 +417,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/dexa.webp",
-      "foto": "/assets/photos/brands/dexa.webp",
+      "foto": "/assets/photos/brands/dexa-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/dexa-electrodomesticos.webp",
+      "logoHero": "/assets/logos/dexa.webp",
       "listas": []
     },
     {
@@ -399,12 +429,13 @@
         "economica"
       ],
       "categorias": [
-        "lavanderia",
         "cocina"
       ],
       "canal": "shopify",
-      "logo": null,
-      "foto": null,
+      "logo": "/assets/logos/easy.webp",
+      "foto": "/assets/photos/brands/easy-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/easy-electrodomesticos.webp",
+      "logoHero": "/assets/logos/easy.webp",
       "listas": []
     },
     {
@@ -419,7 +450,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/eclipse.webp",
-      "foto": "/assets/photos/brands/eclipse.webp",
+      "foto": "/assets/photos/brands/eclipse-tarjas-y-griferia.webp",
+      "fotoHero": "/assets/photos/brands/hero/eclipse-tarjas-y-griferia.webp",
+      "logoHero": "/assets/logos/eclipse.webp",
       "listas": []
     },
     {
@@ -433,7 +466,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/electrolux.webp",
-      "foto": "/assets/photos/brands/electrolux.webp",
+      "foto": "/assets/photos/brands/electrolux-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/electrolux-electrodomesticos.webp",
+      "logoHero": "/assets/logos/electrolux.webp",
       "listas": [
         "frigidaire-electrolux"
       ]
@@ -449,7 +484,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/elica.webp",
-      "foto": "/assets/photos/brands/elica.webp",
+      "foto": "/assets/photos/brands/elica-campanas.webp",
+      "fotoHero": "/assets/photos/brands/hero/elica-campanas.webp",
+      "logoHero": "/assets/logos/elica.webp",
       "listas": [
         "elica-campanas"
       ]
@@ -465,7 +502,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/elkay.webp",
-      "foto": "/assets/photos/brands/elkay.webp",
+      "foto": "/assets/photos/brands/elkay-tarjas-y-griferia.webp",
+      "fotoHero": "/assets/photos/brands/hero/elkay-tarjas-y-griferia.webp",
+      "logoHero": "/assets/logos/hero/elkay.webp",
       "listas": []
     },
     {
@@ -479,7 +518,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/faber.webp",
-      "foto": null,
+      "foto": "/assets/photos/brands/faber-campanas.webp",
+      "fotoHero": "/assets/photos/brands/hero/faber-campanas.webp",
+      "logoHero": "/assets/logos/faber.webp",
       "listas": []
     },
     {
@@ -493,7 +534,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/falmec.webp",
-      "foto": "/assets/photos/brands/falmec.webp",
+      "foto": "/assets/photos/brands/falmec-campanas.webp",
+      "fotoHero": "/assets/photos/brands/hero/falmec-campanas.webp",
+      "logoHero": "/assets/logos/falmec.webp",
       "listas": []
     },
     {
@@ -506,8 +549,10 @@
         "banos"
       ],
       "canal": "pdf",
-      "logo": null,
-      "foto": null,
+      "logo": "/assets/logos/firplak.webp",
+      "foto": "/assets/photos/brands/firplak-banos.webp",
+      "fotoHero": "/assets/photos/brands/hero/firplak-banos.webp",
+      "logoHero": "/assets/logos/firplak.webp",
       "listas": []
     },
     {
@@ -520,8 +565,10 @@
         "asadores"
       ],
       "canal": "pdf",
-      "logo": null,
-      "foto": null,
+      "logo": "/assets/logos/fontana.webp",
+      "foto": "/assets/photos/brands/fontana-hornos.webp",
+      "fotoHero": "/assets/photos/brands/hero/fontana-hornos.webp",
+      "logoHero": "/assets/logos/fontana.webp",
       "listas": []
     },
     {
@@ -531,11 +578,13 @@
         "residencial"
       ],
       "categorias": [
-        "tarjas"
+        "cocina"
       ],
       "canal": "pdf",
-      "logo": null,
-      "foto": null,
+      "logo": "/assets/logos/foster.webp",
+      "foto": "/assets/photos/brands/foster-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/foster-cocina.webp",
+      "logoHero": "/assets/logos/foster.webp",
       "listas": []
     },
     {
@@ -549,7 +598,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/franke.png",
-      "foto": "/assets/photos/brands/franke.avif",
+      "foto": "/assets/photos/brands/franke-tarjas-y-griferia.webp",
+      "fotoHero": "/assets/photos/brands/hero/franke-tarjas-y-griferia.webp",
+      "logoHero": "/assets/logos/hero/franke.webp",
       "listas": []
     },
     {
@@ -563,7 +614,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/frigidaire.webp",
-      "foto": "/assets/photos/brands/frigidaire.webp",
+      "foto": "/assets/photos/brands/frigidaire-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/frigidaire-electrodomesticos.webp",
+      "logoHero": "/assets/logos/frigidaire.webp",
       "listas": [
         "frigidaire-electrolux"
       ]
@@ -580,7 +633,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/fulgor-milano.webp",
-      "foto": "/assets/photos/brands/fulgor-milano.webp",
+      "foto": "/assets/photos/brands/fulgor-milano-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/fulgor-milano-cocina.webp",
+      "logoHero": "/assets/logos/fulgor-milano.webp",
       "listas": []
     },
     {
@@ -594,7 +649,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/gaggenau.webp",
-      "foto": "/assets/photos/brands/gaggenau.webp",
+      "foto": "/assets/photos/brands/gaggenau-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/gaggenau-cocina.webp",
+      "logoHero": "/assets/logos/gaggenau.webp",
       "listas": []
     },
     {
@@ -609,7 +666,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/ge-profile.webp",
-      "foto": "/assets/photos/brands/ge-profile.webp",
+      "foto": "/assets/photos/brands/ge-profile-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/ge-profile-electrodomesticos.webp",
+      "logoHero": "/assets/logos/hero/ge-profile.webp",
       "listas": []
     },
     {
@@ -623,7 +682,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/gessi.png",
-      "foto": "/assets/photos/brands/gessi.webp",
+      "foto": "/assets/photos/brands/gessi-griferia.webp",
+      "fotoHero": "/assets/photos/brands/hero/gessi-griferia.webp",
+      "logoHero": "/assets/logos/gessi.png",
       "listas": []
     },
     {
@@ -638,7 +699,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/haier.png",
-      "foto": "/assets/photos/brands/haier.avif",
+      "foto": "/assets/photos/brands/haier-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/haier-electrodomesticos.webp",
+      "logoHero": "/assets/logos/hero/haier.webp",
       "listas": [
         "haier"
       ]
@@ -653,22 +716,10 @@
         "chimeneas"
       ],
       "canal": "pdf",
-      "logo": null,
-      "foto": "/assets/photos/brands/hergom.webp",
-      "listas": []
-    },
-    {
-      "slug": "hergom-diseno",
-      "nombre": "Hergom Diseño",
-      "gama": [
-        "premium"
-      ],
-      "categorias": [
-        "chimeneas"
-      ],
-      "canal": "pdf",
-      "logo": null,
-      "foto": null,
+      "logo": "/assets/logos/hergom.webp",
+      "foto": "/assets/photos/brands/hergom-chimeneas.webp",
+      "fotoHero": "/assets/photos/brands/hero/hergom-chimeneas.webp",
+      "logoHero": "/assets/logos/hergom.webp",
       "listas": []
     },
     {
@@ -682,7 +733,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/hoshizaki.png",
-      "foto": "/assets/photos/brands/hoshizaki.webp",
+      "foto": "/assets/photos/brands/hoshizaki-hielo.webp",
+      "fotoHero": "/assets/photos/brands/hero/hoshizaki-hielo.webp",
+      "logoHero": "/assets/logos/hoshizaki.png",
       "listas": []
     },
     {
@@ -696,7 +749,9 @@
       ],
       "canal": "pdf",
       "logo": "/assets/logos/i-drain.webp",
-      "foto": "/assets/photos/brands/i-drain.webp",
+      "foto": "/assets/photos/brands/i-drain-banos.webp",
+      "fotoHero": "/assets/photos/brands/hero/i-drain-banos.webp",
+      "logoHero": "/assets/logos/i-drain.webp",
       "listas": []
     },
     {
@@ -709,8 +764,10 @@
         "cocina"
       ],
       "canal": "shopify",
-      "logo": null,
-      "foto": null,
+      "logo": "/assets/logos/iem.webp",
+      "foto": "/assets/photos/brands/iem-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/iem-electrodomesticos.webp",
+      "logoHero": "/assets/logos/iem.webp",
       "listas": []
     },
     {
@@ -724,7 +781,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/insinkerator.png",
-      "foto": "/assets/photos/brands/insinkerator.webp",
+      "foto": "/assets/photos/brands/insinkerator-trituradores.webp",
+      "fotoHero": "/assets/photos/brands/hero/insinkerator-trituradores.webp",
+      "logoHero": "/assets/logos/insinkerator.png",
       "listas": []
     },
     {
@@ -738,7 +797,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/invisacook.webp",
-      "foto": "/assets/photos/brands/invisacook.webp",
+      "foto": "/assets/photos/brands/invisacook-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/invisacook-cocina.webp",
+      "logoHero": "/assets/logos/invisacook.webp",
       "listas": []
     },
     {
@@ -753,7 +814,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/io-mabe.png",
-      "foto": "/assets/photos/brands/io-mabe.webp",
+      "foto": "/assets/photos/brands/io-mabe-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/io-mabe-electrodomesticos.webp",
+      "logoHero": "/assets/logos/io-mabe.png",
       "listas": [
         "io-mabe",
         "ge-profile"
@@ -770,8 +833,10 @@
         "wellness"
       ],
       "canal": "pdf",
-      "logo": null,
-      "foto": "/assets/photos/brands/jacuzzi.webp",
+      "logo": "/assets/logos/jacuzzi.webp",
+      "foto": "/assets/photos/brands/jacuzzi-wellness.webp",
+      "fotoHero": "/assets/photos/brands/hero/jacuzzi-wellness.webp",
+      "logoHero": "/assets/logos/jacuzzi.webp",
       "listas": [
         "jacuzzi-spas-exterior",
         "jacuzzi-carril-de-nado",
@@ -789,11 +854,29 @@
         "asadores"
       ],
       "canal": "pdf",
-      "logo": null,
-      "foto": null,
+      "logo": "/assets/logos/josper.webp",
+      "foto": "/assets/photos/brands/josper-hornos.webp",
+      "fotoHero": "/assets/photos/brands/hero/josper-hornos.webp",
+      "logoHero": "/assets/logos/josper.webp",
       "listas": [
         "josper-hornos-de-brasa"
       ]
+    },
+    {
+      "slug": "kaldewei",
+      "nombre": "Kaldewei",
+      "gama": [
+        "premium"
+      ],
+      "categorias": [
+        "banos"
+      ],
+      "canal": "pdf",
+      "logo": "/assets/logos/kaldewei.webp",
+      "foto": "/assets/photos/brands/kaldewei-banos.webp",
+      "fotoHero": "/assets/photos/brands/hero/kaldewei-banos.webp",
+      "logoHero": "/assets/logos/kaldewei.webp",
+      "listas": []
     },
     {
       "slug": "kalt",
@@ -806,7 +889,9 @@
       ],
       "canal": "pdf",
       "logo": "/assets/logos/kalt.webp",
-      "foto": "/assets/photos/brands/kalt.webp",
+      "foto": "/assets/photos/brands/kalt-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/kalt-cocina.webp",
+      "logoHero": "/assets/logos/hero/kalt.webp",
       "listas": []
     },
     {
@@ -821,7 +906,9 @@
       ],
       "canal": "pdf",
       "logo": "/assets/logos/kamado-joe.webp",
-      "foto": "/assets/photos/brands/kamado-joe.webp",
+      "foto": "/assets/photos/brands/kamado-joe-asadores.webp",
+      "fotoHero": "/assets/photos/brands/hero/kamado-joe-asadores.webp",
+      "logoHero": "/assets/logos/kamado-joe.webp",
       "listas": []
     },
     {
@@ -836,7 +923,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/kele-master-sinks.webp",
-      "foto": "/assets/photos/brands/kele-master-sinks.webp",
+      "foto": "/assets/photos/brands/kele-master-sinks-tarjas.webp",
+      "fotoHero": "/assets/photos/brands/hero/kele-master-sinks-tarjas.webp",
+      "logoHero": "/assets/logos/hero/kele-master-sinks.webp",
       "listas": [
         "kele"
       ]
@@ -853,7 +942,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/kitchenaid.webp",
-      "foto": "/assets/photos/brands/kitchenaid.webp",
+      "foto": "/assets/photos/brands/kitchenaid-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/kitchenaid-electrodomesticos.webp",
+      "logoHero": "/assets/logos/kitchenaid.webp",
       "listas": []
     },
     {
@@ -867,7 +958,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/kraus.webp",
-      "foto": null,
+      "foto": "/assets/photos/brands/kraus-tarjas-y-griferia.webp",
+      "fotoHero": "/assets/photos/brands/hero/kraus-tarjas-y-griferia.webp",
+      "logoHero": "/assets/logos/kraus.webp",
       "listas": []
     },
     {
@@ -881,7 +974,9 @@
       ],
       "canal": "pdf",
       "logo": "/assets/logos/la-cornue.webp",
-      "foto": "/assets/photos/brands/la-cornue.webp",
+      "foto": "/assets/photos/brands/la-cornue-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/la-cornue-cocina.webp",
+      "logoHero": "/assets/logos/la-cornue.webp",
       "listas": []
     },
     {
@@ -895,7 +990,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/lynx.png",
-      "foto": "/assets/photos/brands/lynx.webp",
+      "foto": "/assets/photos/brands/lynx-asadores.webp",
+      "fotoHero": "/assets/photos/brands/hero/lynx-asadores.webp",
+      "logoHero": "/assets/logos/lynx.png",
       "listas": []
     },
     {
@@ -909,7 +1006,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/mabe.webp",
-      "foto": "/assets/photos/brands/mabe.webp",
+      "foto": "/assets/photos/brands/mabe-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/mabe-electrodomesticos.webp",
+      "logoHero": "/assets/logos/mabe.webp",
       "listas": [
         "mabe"
       ]
@@ -925,7 +1024,9 @@
       ],
       "canal": "pdf",
       "logo": "/assets/logos/masterbuilt.png",
-      "foto": "/assets/photos/brands/masterbuilt.webp",
+      "foto": "/assets/photos/brands/masterbuilt-asadores.webp",
+      "fotoHero": "/assets/photos/brands/hero/masterbuilt-asadores.webp",
+      "logoHero": "/assets/logos/masterbuilt.png",
       "listas": []
     },
     {
@@ -939,7 +1040,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/maytag.webp",
-      "foto": "/assets/photos/brands/maytag.webp",
+      "foto": "/assets/photos/brands/maytag-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/maytag-electrodomesticos.webp",
+      "logoHero": "/assets/logos/maytag.webp",
       "listas": []
     },
     {
@@ -954,7 +1057,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/miele.webp",
-      "foto": "/assets/photos/brands/miele.webp",
+      "foto": "/assets/photos/brands/miele-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/miele-electrodomesticos.webp",
+      "logoHero": "/assets/logos/miele.webp",
       "listas": []
     },
     {
@@ -968,7 +1073,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/monogram.png",
-      "foto": "/assets/photos/brands/monogram.webp",
+      "foto": "/assets/photos/brands/monogram-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/monogram-cocina.webp",
+      "logoHero": "/assets/logos/monogram.png",
       "listas": []
     },
     {
@@ -982,7 +1089,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/mont-alpi.webp",
-      "foto": "/assets/photos/brands/mont-alpi.webp",
+      "foto": "/assets/photos/brands/mont-alpi-asadores.webp",
+      "fotoHero": "/assets/photos/brands/hero/mont-alpi-asadores.webp",
+      "logoHero": "/assets/logos/mont-alpi.webp",
       "listas": []
     },
     {
@@ -996,7 +1105,9 @@
       ],
       "canal": "pdf",
       "logo": "/assets/logos/mr-steam.webp",
-      "foto": "/assets/photos/brands/mr-steam.webp",
+      "foto": "/assets/photos/brands/mr-steam-vapor.webp",
+      "fotoHero": "/assets/photos/brands/hero/mr-steam-vapor.webp",
+      "logoHero": "/assets/logos/mr-steam.webp",
       "listas": []
     },
     {
@@ -1009,8 +1120,10 @@
         "tarjas"
       ],
       "canal": "shopify",
-      "logo": null,
-      "foto": null,
+      "logo": "/assets/logos/nantucket.webp",
+      "foto": "/assets/photos/brands/nantucket-tarjas.webp",
+      "fotoHero": "/assets/photos/brands/hero/nantucket-tarjas.webp",
+      "logoHero": "/assets/logos/nantucket.webp",
       "listas": []
     },
     {
@@ -1025,7 +1138,9 @@
       ],
       "canal": "pdf",
       "logo": "/assets/logos/nobili.webp",
-      "foto": "/assets/photos/brands/nobili.webp",
+      "foto": "/assets/photos/brands/nobili-griferia.webp",
+      "fotoHero": "/assets/photos/brands/hero/nobili-griferia.webp",
+      "logoHero": "/assets/logos/nobili.webp",
       "listas": []
     },
     {
@@ -1038,8 +1153,10 @@
         "recubrimientos"
       ],
       "canal": "pdf",
-      "logo": null,
-      "foto": null,
+      "logo": "/assets/logos/onix.webp",
+      "foto": "/assets/photos/brands/onix-superficies.webp",
+      "fotoHero": "/assets/photos/brands/hero/onix-superficies.webp",
+      "logoHero": "/assets/logos/onix.webp",
       "listas": [
         "onix-mosaico-veneciano"
       ]
@@ -1056,7 +1173,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/peerless.png",
-      "foto": "/assets/photos/brands/peerless.webp",
+      "foto": "/assets/photos/brands/peerless-griferia.webp",
+      "fotoHero": "/assets/photos/brands/hero/peerless-griferia.webp",
+      "logoHero": "/assets/logos/peerless.png",
       "listas": []
     },
     {
@@ -1070,25 +1189,12 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/pitt-cooking.png",
-      "foto": "/assets/photos/brands/pitt-cooking.webp",
+      "foto": "/assets/photos/brands/pitt-cooking-parrillas.webp",
+      "fotoHero": "/assets/photos/brands/hero/pitt-cooking-parrillas.webp",
+      "logoHero": "/assets/logos/pitt-cooking.png",
       "listas": [
         "pitt-cooking"
       ]
-    },
-    {
-      "slug": "pizarro",
-      "nombre": "Pizarro",
-      "gama": [
-        "media",
-        "economica"
-      ],
-      "categorias": [
-        "banos"
-      ],
-      "canal": "pdf",
-      "logo": null,
-      "foto": null,
-      "listas": []
     },
     {
       "slug": "poletti-sinks",
@@ -1102,7 +1208,9 @@
       ],
       "canal": "pdf",
       "logo": "/assets/logos/poletti-sinks.webp",
-      "foto": "/assets/photos/brands/poletti-sinks.webp",
+      "foto": "/assets/photos/brands/poletti-sinks-tarjas.webp",
+      "fotoHero": "/assets/photos/brands/hero/poletti-sinks-tarjas.webp",
+      "logoHero": "/assets/logos/poletti-sinks.webp",
       "listas": []
     },
     {
@@ -1116,7 +1224,25 @@
       ],
       "canal": "pdf",
       "logo": "/assets/logos/sapphire.webp",
-      "foto": "/assets/photos/brands/sapphire.webp",
+      "foto": "/assets/photos/brands/sapphire-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/sapphire-cocina.webp",
+      "logoHero": "/assets/logos/sapphire.webp",
+      "listas": []
+    },
+    {
+      "slug": "sauna-estilo",
+      "nombre": "Sauna Estilo",
+      "gama": [
+        "residencial"
+      ],
+      "categorias": [
+        "vapor"
+      ],
+      "canal": "pdf",
+      "logo": "/assets/logos/sauna-estilo.webp",
+      "foto": "/assets/photos/brands/sauna-estilo-saunas.webp",
+      "fotoHero": "/assets/photos/brands/hero/sauna-estilo-saunas.webp",
+      "logoHero": "/assets/logos/sauna-estilo.webp",
       "listas": []
     },
     {
@@ -1131,7 +1257,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/schock.png",
-      "foto": "/assets/photos/brands/schock.webp",
+      "foto": "/assets/photos/brands/schock-tarjas.webp",
+      "fotoHero": "/assets/photos/brands/hero/schock-tarjas.webp",
+      "logoHero": "/assets/logos/schock.png",
       "listas": []
     },
     {
@@ -1145,7 +1273,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/scotsman.png",
-      "foto": "/assets/photos/brands/scotsman.webp",
+      "foto": "/assets/photos/brands/scotsman-hielo.webp",
+      "fotoHero": "/assets/photos/brands/hero/scotsman-hielo.webp",
+      "logoHero": "/assets/logos/hero/scotsman.webp",
       "listas": []
     },
     {
@@ -1158,8 +1288,10 @@
         "asadores"
       ],
       "canal": "shopify",
-      "logo": "/assets/logos/sedona-by-lynx.png",
-      "foto": "/assets/photos/brands/sedona-by-lynx.webp",
+      "logo": "/assets/logos/sedona-by-lynx.webp",
+      "foto": "/assets/photos/brands/sedona-by-lynx-asadores.webp",
+      "fotoHero": "/assets/photos/brands/hero/sedona-by-lynx-asadores.webp",
+      "logoHero": "/assets/logos/sedona-by-lynx.webp",
       "listas": []
     },
     {
@@ -1175,7 +1307,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/smeg.webp",
-      "foto": "/assets/photos/brands/smeg.webp",
+      "foto": "/assets/photos/brands/smeg-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/smeg-electrodomesticos.webp",
+      "logoHero": "/assets/logos/smeg.webp",
       "listas": []
     },
     {
@@ -1189,7 +1323,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/sub-zero.webp",
-      "foto": "/assets/photos/brands/sub-zero.webp",
+      "foto": "/assets/photos/brands/sub-zero-refrigeracion.webp",
+      "fotoHero": "/assets/photos/brands/hero/sub-zero-refrigeracion.webp",
+      "logoHero": "/assets/logos/sub-zero.webp",
       "listas": [
         "sub-zero"
       ]
@@ -1205,7 +1341,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/summit.webp",
-      "foto": "/assets/photos/brands/summit.webp",
+      "foto": "/assets/photos/brands/summit-refrigeracion.webp",
+      "fotoHero": "/assets/photos/brands/hero/summit-refrigeracion.webp",
+      "logoHero": "/assets/logos/summit.webp",
       "listas": [
         "summit"
       ]
@@ -1221,7 +1359,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/supra.webp",
-      "foto": "/assets/photos/brands/supra.webp",
+      "foto": "/assets/photos/brands/supra-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/supra-electrodomesticos.webp",
+      "logoHero": "/assets/logos/hero/supra.webp",
       "listas": [
         "supra"
       ]
@@ -1239,7 +1379,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/tecnolam.webp",
-      "foto": "/assets/photos/brands/tecnolam.webp",
+      "foto": "/assets/photos/brands/tecnolam-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/tecnolam-cocina.webp",
+      "logoHero": "/assets/logos/tecnolam.webp",
       "listas": [
         "tecnolam-tarjas-y-monomandos"
       ]
@@ -1258,7 +1400,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/teka.webp",
-      "foto": "/assets/photos/brands/teka.webp",
+      "foto": "/assets/photos/brands/teka-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/teka-cocina.webp",
+      "logoHero": "/assets/logos/hero/teka.webp",
       "listas": [
         "teka-tarjas-y-monomandos"
       ]
@@ -1274,7 +1418,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/the-galley.png",
-      "foto": "/assets/photos/brands/the-galley.webp",
+      "foto": "/assets/photos/brands/the-galley-tarjas.webp",
+      "fotoHero": "/assets/photos/brands/hero/the-galley-tarjas.webp",
+      "logoHero": "/assets/logos/the-galley.png",
       "listas": []
     },
     {
@@ -1288,7 +1434,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/thermador.webp",
-      "foto": "/assets/photos/brands/thermador.webp",
+      "foto": "/assets/photos/brands/thermador-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/thermador-cocina.webp",
+      "logoHero": "/assets/logos/thermador.webp",
       "listas": []
     },
     {
@@ -1303,7 +1451,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/thor.webp",
-      "foto": "/assets/photos/brands/thor.webp",
+      "foto": "/assets/photos/brands/thor-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/thor-cocina.webp",
+      "logoHero": "/assets/logos/thor.webp",
       "listas": []
     },
     {
@@ -1317,21 +1467,26 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/tradewind.png",
-      "foto": "/assets/photos/brands/tradewind.webp",
+      "foto": "/assets/photos/brands/tradewind-campanas.webp",
+      "fotoHero": "/assets/photos/brands/hero/tradewind-campanas.webp",
+      "logoHero": "/assets/logos/tradewind.png",
       "listas": []
     },
     {
-      "slug": "tres",
-      "nombre": "TRES",
+      "slug": "treesse",
+      "nombre": "Treesse",
       "gama": [
-        "residencial"
+        "premium"
       ],
       "categorias": [
-        "banos"
+        "banos",
+        "vapor"
       ],
       "canal": "pdf",
-      "logo": null,
-      "foto": null,
+      "logo": "/assets/logos/treesse.webp",
+      "foto": "/assets/photos/brands/treesse-wellness.webp",
+      "fotoHero": "/assets/photos/brands/hero/treesse-wellness.webp",
+      "logoHero": "/assets/logos/treesse.webp",
       "listas": []
     },
     {
@@ -1345,7 +1500,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/u-line.webp",
-      "foto": "/assets/photos/brands/u-line.avif",
+      "foto": "/assets/photos/brands/u-line-refrigeracion.webp",
+      "fotoHero": "/assets/photos/brands/hero/u-line-refrigeracion.webp",
+      "logoHero": "/assets/logos/u-line.webp",
       "listas": []
     },
     {
@@ -1358,8 +1515,10 @@
         "banos"
       ],
       "canal": "pdf",
-      "logo": null,
-      "foto": null,
+      "logo": "/assets/logos/valsir.webp",
+      "foto": "/assets/photos/brands/valsir-banos.webp",
+      "fotoHero": "/assets/photos/brands/hero/valsir-banos.webp",
+      "logoHero": "/assets/logos/valsir.webp",
       "listas": []
     },
     {
@@ -1372,8 +1531,10 @@
         "chimeneas"
       ],
       "canal": "pdf",
-      "logo": null,
-      "foto": null,
+      "logo": "/assets/logos/vass.webp",
+      "foto": "/assets/photos/brands/vass-chimeneas.webp",
+      "fotoHero": "/assets/photos/brands/hero/vass-chimeneas.webp",
+      "logoHero": "/assets/logos/vass.webp",
       "listas": []
     },
     {
@@ -1389,7 +1550,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/viking.webp",
-      "foto": "/assets/photos/brands/viking.webp",
+      "foto": "/assets/photos/brands/viking-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/viking-cocina.webp",
+      "logoHero": "/assets/logos/hero/viking.webp",
       "listas": [
         "viking"
       ]
@@ -1406,7 +1569,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/whirlpool.webp",
-      "foto": "/assets/photos/brands/whirlpool.webp",
+      "foto": "/assets/photos/brands/whirlpool-electrodomesticos.webp",
+      "fotoHero": "/assets/photos/brands/hero/whirlpool-electrodomesticos.webp",
+      "logoHero": "/assets/logos/whirlpool.webp",
       "listas": []
     },
     {
@@ -1421,7 +1586,9 @@
       ],
       "canal": "shopify",
       "logo": "/assets/logos/wolf.webp",
-      "foto": "/assets/photos/brands/wolf.webp",
+      "foto": "/assets/photos/brands/wolf-cocina.webp",
+      "fotoHero": "/assets/photos/brands/hero/wolf-cocina.webp",
+      "logoHero": "/assets/logos/wolf.webp",
       "listas": []
     },
     {
@@ -1435,7 +1602,9 @@
       ],
       "canal": "pdf",
       "logo": "/assets/logos/wppo.webp",
-      "foto": "/assets/photos/brands/wppo.webp",
+      "foto": "/assets/photos/brands/wppo-hornos.webp",
+      "fotoHero": "/assets/photos/brands/hero/wppo-hornos.webp",
+      "logoHero": "/assets/logos/wppo.webp",
       "listas": []
     }
   ]

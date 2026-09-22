@@ -196,7 +196,7 @@ Estado: 🔵 pendiente · 🟡 en curso · ✅ hecho
 >   foto Hansgrohe y se cambió por la de la categoría.
 > - [x] **20 páginas de marca nuevas** (2026-09-21): 6 SHOPIFY (Kraus, Faber, Easy, IEM, Commodore, Nantucket) y
 >   14 SOLO PDF (Fontana, Foster, Josper, Pizarro, Vass, Hergom, Hergom Diseño, TRES, Valsir, Artexa Bath, Jacuzzi,
->   Clearlight, Onix, Firplak). Hoy hay 93 páginas de marca.
+>   Clearlight, Onix, Firplak). Hoy hay 92 páginas de marca (2026-09-22: + Catalano, Kaldewei, Treesse y Sauna Estilo de Grupo 90, SOLO PDF; − AXOR, TRES, Pizarro, Artexa Bath y Hergom Diseño, eliminadas). Las 92 llevan hero con texto propio (`data/marcas-hero.json`).
 > - [x] **Plantilla SOLO PDF** (2026-09-21): `canal` en `data/marcas.json` (sale de `data-canal` del tile). Las marcas
 >   `pdf` enseñan su PDF y la cotización por WhatsApp, sin listado ni filtros. Sin logo o sin foto, la página cae a
 >   hero oscuro con el nombre.

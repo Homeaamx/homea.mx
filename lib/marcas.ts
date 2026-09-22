@@ -8,6 +8,7 @@
 // se lee: no repetir tablas que ya vivan en el JSON.
 
 import datos from "@/data/marcas.json";
+import heros from "@/data/marcas-hero.json";
 import type { FiltroPlp } from "@/lib/filtrosPlp";
 import { listaPorSlug, type ListaPrecios } from "@/lib/listasPrecios";
 
@@ -27,6 +28,10 @@ export interface Marca {
   /** null mientras no llega el arte: la página cae a hero oscuro + nombre. */
   logo: string | null;
   foto: string | null;
+  /** Foto del hero: brands/hero/<slug>.webp (hasta 2000 px) o, si no hay, `foto`. */
+  fotoHero: string | null;
+  /** Logo del hero: logos/hero/<slug>.webp (recortado sin margen) o, si no hay, `logo`. */
+  logoHero: string | null;
   /** Slugs de documento de data/listas-precios.json. */
   listas: string[];
   /** Texto de posicionamiento, escrito a mano. Opcional. */
@@ -55,6 +60,41 @@ export function marcaPorSlug(slug: string): Marca | undefined {
 export const rutaMarca = (m: Pick<Marca, "slug">) => `/marcas/${m.slug}`;
 
 /** Las categorías de la marca, resueltas a nombre + ruta. */
+/** Contenido del hero de una marca (data/marcas-hero.json). */
+export interface HeroMarca {
+  /** Posicionamiento en 3 palabras con "·". Se pinta en mayúsculas por CSS. */
+  eyebrow: string;
+  /** H1 de la página. */
+  titulo: string;
+  descripcion: string;
+  /** Botón principal. `url` = PDF oficial en Shopify Files; null mientras no se sube. */
+  cta?: { texto: string; url: string | null };
+  /** Ajustes de la foto del hero, solo cuando la marca los necesita. */
+  imagen?: {
+    /** El hero va en espejo por defecto; false lo deja al derecho (p. ej. si la foto trae texto). */
+    espejo?: boolean;
+    /** object-position de la foto. Por defecto "center 75%"; bajar el % enseña más la parte de arriba. */
+    posicion?: string;
+    /** Acercamiento (1 = sin zoom). Para mover una foto que ya llena el alto del hero. */
+    zoom?: number;
+    /** Punto fijo del acercamiento (transform-origin), p. ej. "center bottom" para subir la foto. */
+    origen?: string;
+  };
+  /** Multiplicador del alto del logo (1 = normal). Para logos que se ven chicos por su forma. */
+  logoEscala?: number;
+}
+
+const HEROS = heros as unknown as Record<string, HeroMarca | string>;
+
+/**
+ * Hero escrito para la marca, o undefined si todavía no tiene: en ese caso la
+ * página enseña el hero de siempre (gama + nombre + frase automática).
+ */
+export function heroDeMarca(m: Marca): HeroMarca | undefined {
+  const h = HEROS[m.slug];
+  return typeof h === "object" ? h : undefined;
+}
+
 export function categoriasDeMarca(m: Marca): CategoriaMarca[] {
   return m.categorias.map((c) => CATEGORIAS[c]).filter(Boolean);
 }

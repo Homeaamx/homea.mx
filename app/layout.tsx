@@ -9,6 +9,8 @@ import { inyectarTipoCambio, obtenerTipoCambio } from "@/lib/tipoCambio";
 import BuscadorOverlay from "@/components/BuscadorOverlay";
 import CarritoProvider from "@/components/CarritoProvider";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import { rutaMarca, todasLasMarcas } from "@/lib/marcas";
+import { mensajeAsesoria } from "@/lib/whatsapp";
 import NavActive from "@/components/NavActive";
 import HomeNavSticky from "@/components/HomeNavSticky";
 import PreviewRouter from "@/components/PreviewRouter";
@@ -24,6 +26,14 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.png" },
 };
 
+// Flotante de WhatsApp: en las marcas de solo catálogo (canal "pdf") pide asesoría
+// sobre esa marca, igual que el botón de su página (components/WhatsAppFloat.tsx).
+const MENSAJES_WA = Object.fromEntries(
+  todasLasMarcas()
+    .filter((m) => m.canal === "pdf")
+    .map((m) => [rutaMarca(m), mensajeAsesoria(m.nombre)])
+);
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Nav + footer compartidos: markup exacto del preview v2 (reutilizado en todo el sitio).
   const { nav, footer } = getChrome();
@@ -32,8 +42,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // pedía el navegador con el token de Banxico incrustado en /v2.js.
   const navConTipoCambio = inyectarTipoCambio(nav, await obtenerTipoCambio());
 
+  // data-scroll-behavior="smooth": theme.css pone `html { scroll-behavior: smooth }`
+  // para las anclas de la misma página. Next 16 ya no lo desactiva al navegar, así
+  // que al abrir otra página (p. ej. una marca desde /marcas) subía despacio hasta
+  // arriba. Con este atributo Next salta directo al inicio al cambiar de ruta.
   return (
-    <html lang="es">
+    <html lang="es" data-scroll-behavior="smooth">
       <body>
         {/* Las dos fuentes del primer render. Sin preload el navegador solo las
             descubre al parsear el CSS y con internet lento el texto definitivo
@@ -54,7 +68,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* Carrito real: estado en Shopify (Storefront API), cookie httpOnly y
             checkout hospedado. Sustituye al antiguo /cart.js de localStorage. */}
         <CarritoProvider />
-        <WhatsAppFloat />
+        <WhatsAppFloat porRuta={MENSAJES_WA} />
         <NavActive />
         <HomeNavSticky />
         <PreviewRouter />
