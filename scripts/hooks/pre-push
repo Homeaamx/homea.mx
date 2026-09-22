@@ -37,7 +37,6 @@ respaldar() {
     --exclude='.vercel/' \
     --exclude='*.tsbuildinfo' \
     --exclude='.DS_Store' \
-    --exclude='.meta_uploads/' \
     --exclude='.next-check/' \
     --exclude='.env*.local' \
     "$SRC" "$DST" \
