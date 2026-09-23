@@ -2,29 +2,29 @@
   "_nota": "Listas de precios por marca (/marcas#listas-de-precios). UNA entrada por lista, no por año. Cada lista tiene una URL permanente en el sitio: /listas-de-precios/<slug>.pdf, que sirve (rewrite) el PDF de 'url' en Shopify Files. Todas las URLs viejas de OXATIS en 'legacy' redirigen (301) a esa URL permanente, sin importar el año. NUEVA EDICIÓN: sube el PDF a Shopify Files, pega su URL (con ?v=) en 'url', actualiza 'vigencia' y haz deploy; nada más cambia. No cambies 'slug' (rompería la URL permanente). Mientras 'url' sea null, la URL permanente manda (302) a /marcas#listas-de-precios. 'archivo' es el PDF de trabajo relativo a ~/Documents/ALTURA/Homea-archivos-oxatis/ (fuera del repo). 'estado': listo = publicado · revisar = Carla lo aprueba antes (ver 'nota') · sin-archivo = no hay PDF, pedir el vigente.",
   "marcas": [
     { "marca": "Sub-Zero", "documentos": [
-      { "slug": "sub-zero", "titulo": "Lista de precios", "vigencia": null, "url": null, "legacy": ["/Files/119914/LISTA_PRECIOS_SUBZERO_2026.pdf", "/Files/119914/Lista_Precios_SUBZERO_2025.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+      { "slug": "sub-zero", "titulo": "Lista de precios", "vigencia": "ene 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-sub-zero-ene-2026.pdf?v=1790123911", "legacy": ["/Files/119914/LISTA_PRECIOS_SUBZERO_2026.pdf", "/Files/119914/Lista_Precios_SUBZERO_2025.pdf"], "estado": "listo" }
     ] },
     { "marca": "Viking", "documentos": [
-      { "slug": "viking", "titulo": "Lista de precios", "vigencia": null, "url": null, "legacy": ["/Files/119914/ListaPreciosVIKING2024feb.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+      { "slug": "viking", "titulo": "Lista de precios", "vigencia": "abr 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-viking-abr-2026.pdf?v=1790123911", "legacy": ["/Files/119914/ListaPreciosVIKING2024feb.pdf"], "estado": "listo" }
     ] },
     { "marca": "Supra", "documentos": [
-      { "slug": "supra", "titulo": "Lista de precios", "vigencia": null, "url": null, "legacy": ["/Files/119914/Lista_Precios_SUPRA_2025.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+      { "slug": "supra", "titulo": "Lista de precios", "vigencia": "jul 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-supra-jul-2026.pdf?v=1790123875", "legacy": ["/Files/119914/Lista_Precios_SUPRA_2025.pdf"], "estado": "listo" },
+      { "slug": "supra-catalogo", "titulo": "Catálogo", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-supra-2026.pdf?v=1790123875", "legacy": [], "estado": "listo" }
     ] },
     { "marca": "Elica", "documentos": [
       { "slug": "elica-campanas", "titulo": "Campanas · lista de precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-campanas-elica-2026.pdf", "legacy": ["/Files/119914/LISTA_PRECIOS_ELICA_CAMPANAS_2026_03.pdf", "/Files/119914/Lista_Precios_Elica_2025_jun.pdf", "/Files/119914/241542329910613.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-campanas-elica-2026.pdf" }
     ] },
     { "marca": "IO Mabe", "documentos": [
-      { "slug": "io-mabe", "titulo": "Lista de precios", "vigencia": "2024", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-io-mabe-2024.pdf", "legacy": ["/Files/119914/Lista_Precios_IOMABE_2024_07.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-io-mabe-2024.pdf" },
-      { "slug": "ge-profile", "titulo": "GE Profile · catálogo", "vigencia": "2024", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-ge-profile-2024.pdf", "legacy": ["/Files/119914/241555440212509.pdf"], "estado": "listo", "archivo": "shopify/catalogo-ge-profile-2024.pdf" }
+      { "slug": "io-mabe", "titulo": "Lista de precios", "vigencia": "2024", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-io-mabe-2024.pdf", "legacy": ["/Files/119914/Lista_Precios_IOMABE_2024_07.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-io-mabe-2024.pdf" }
     ] },
     { "marca": "Pitt Cooking", "documentos": [
-      { "slug": "pitt-cooking", "titulo": "Lista de precios", "vigencia": null, "url": null, "legacy": ["/Files/119914/Lista_Precios_Pitt_Cooking_2025_08.pdf", "/Files/119914/232206635850808.pdf"], "estado": "sin-archivo", "nota": "Ni la de 2025 ni la de 2023 existen ya en OXATIS. La de ene-2023 está recuperada del Wayback Machine (wayback/232206635850808.pdf); subir la vigente." }
+      { "slug": "pitt-cooking", "titulo": "Lista de precios", "vigencia": "ago 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-pitt-cooking-ago-2026.pdf?v=1790123875", "legacy": ["/Files/119914/Lista_Precios_Pitt_Cooking_2025_08.pdf", "/Files/119914/232206635850808.pdf"], "estado": "listo" }
     ] },
     { "marca": "Summit", "documentos": [
-      { "slug": "summit", "titulo": "Lista de precios", "vigencia": null, "url": null, "legacy": ["/Files/119914/ListaPreciosSummit2024.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+      { "slug": "summit", "titulo": "Lista de precios", "vigencia": "jul 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-summit-jul-2026.pdf?v=1790123875", "legacy": ["/Files/119914/ListaPreciosSummit2024.pdf"], "estado": "listo" }
     ] },
     { "marca": "Coyote", "documentos": [
-      { "slug": "coyote-asadores", "titulo": "Asadores · lista de precios", "vigencia": "2026", "url": null, "legacy": ["/Files/119914/LISTA_PRECIOS_ASADORES_COYOTE_2026.pdf", "/Files/119914/24965815411450.pdf"], "estado": "revisar", "archivo": "revisar/lista-precios-asadores-coyote-2026.pdf", "nota": "El encabezado del proveedor dice \"2025 Distributor Price Schedule · Confidential\". Confirmar con Carla que los precios son públicos antes de publicar." }
+      { "slug": "coyote-asadores", "titulo": "Asadores · lista de precios", "vigencia": "feb 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-asadores-coyote-feb-2026.pdf?v=1790124851", "legacy": ["/Files/119914/LISTA_PRECIOS_ASADORES_COYOTE_2026.pdf", "/Files/119914/24965815411450.pdf"], "estado": "listo" }
     ] },
     { "marca": "Josper", "documentos": [
       { "slug": "josper-hornos-de-brasa", "titulo": "Hornos de brasa · lista de precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-josper-hornos-brasa-2026.pdf", "legacy": ["/Files/119914/LISTA_PRECIOS_JOSPER_HORNOS_LENA_2026.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-josper-hornos-brasa-2026.pdf" }
@@ -34,13 +34,13 @@
       { "slug": "axcent-tarjas-y-monomandos", "titulo": "Tarjas y monomandos · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-axcent-tarjas-monomandos-2025.pdf", "legacy": ["/Files/119914/Lista_Precios_Axcent_2025_Tarjas_Monomandos.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-axcent-tarjas-monomandos-2025.pdf" }
     ] },
     { "marca": "Teka", "documentos": [
-      { "slug": "teka-tarjas-y-monomandos", "titulo": "Tarjas y monomandos · lista de precios", "vigencia": null, "url": null, "legacy": ["/Files/119914/Lista_Precios_TEKA_tarjas_monomandos_2025_Abr.pdf", "/Files/119914/ListaPreciosTEKA2024Sep.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+      { "slug": "teka-tarjas-y-monomandos", "titulo": "Lista de precios", "vigencia": "abr 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-teka-abr-2026.pdf?v=1790123874", "legacy": ["/Files/119914/Lista_Precios_TEKA_tarjas_monomandos_2025_Abr.pdf", "/Files/119914/ListaPreciosTEKA2024Sep.pdf"], "estado": "listo" }
     ] },
     { "marca": "Tecnolam", "documentos": [
-      { "slug": "tecnolam-tarjas-y-monomandos", "titulo": "Tarjas y monomandos · lista de precios", "vigencia": "sep 2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-tecnolam-tarjas-monomandos-2025.pdf", "legacy": ["/Files/119914/Lista_Precios_TECNOLAM_Tarjas_Monomandos_2025_09.pdf", "/Files/119914/233185839511345.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-tecnolam-tarjas-monomandos-2025.pdf" }
+      { "slug": "tecnolam-tarjas-y-monomandos", "titulo": "Lista de precios", "vigencia": "ene 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-tecnolam-ene-2026.pdf?v=1790123911", "legacy": ["/Files/119914/Lista_Precios_TECNOLAM_Tarjas_Monomandos_2025_09.pdf", "/Files/119914/233185839511345.pdf"], "estado": "listo" }
     ] },
     { "marca": "Kele", "documentos": [
-      { "slug": "kele", "titulo": "Lista de precios", "vigencia": null, "url": null, "legacy": ["/Files/119914/LISTA_PRECIOS_KELE_2025_JULIO.pdf"], "estado": "sin-archivo", "nota": "Ya no existe en OXATIS (301 a /). Pedir el PDF original a Carla." }
+      { "slug": "kele", "titulo": "Lista de precios", "vigencia": "jul 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-kele-jul-2026.pdf?v=1790123875", "legacy": ["/Files/119914/LISTA_PRECIOS_KELE_2025_JULIO.pdf"], "estado": "listo" }
     ] },
     { "marca": "Jacuzzi", "documentos": [
       { "slug": "jacuzzi-spas-exterior", "titulo": "Spas de exterior · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-jacuzzi-spas-exterior-2025.pdf", "legacy": ["/Files/119914/ListaPreciosJacuzziExterior2025.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-jacuzzi-spas-exterior-2025.pdf" },
@@ -64,7 +64,137 @@
       { "slug": "frigidaire-electrolux", "titulo": "Lista de precios", "vigencia": "jul 2023", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-frigidaire-electrolux-2023.pdf", "legacy": ["/Files/119914/232245308137700.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-frigidaire-electrolux-2023.pdf" }
     ] },
     { "marca": "ASKO", "documentos": [
-      { "slug": "asko", "titulo": "Lista de precios", "vigencia": "ago 2023", "url": null, "legacy": ["/Files/119914/232245863241526.pdf"], "estado": "revisar", "archivo": "revisar/lista-precios-asko-2023.pdf", "nota": "Incluye condiciones para distribuidores (pedidos, fletes, reclamaciones). Confirmar con Carla que el precio es público." }
+      { "slug": "asko", "titulo": "Lista de precios", "vigencia": "jul 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-asko-jul-2026.pdf?v=1790123911", "legacy": ["/Files/119914/232245863241526.pdf"], "estado": "listo" }
+    ] },
+    { "marca": "Smeg", "documentos": [
+      { "slug": "smeg", "titulo": "Lista de precios", "vigencia": "sep 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-smeg-sep-2026.pdf?v=1790123875", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "The Galley", "documentos": [
+      { "slug": "the-galley", "titulo": "Lista de precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-the-galley-2026.pdf?v=1790123874", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Faber", "documentos": [
+      { "slug": "faber", "titulo": "Lista de precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-faber-2026.pdf?v=1790123875", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Franke", "documentos": [
+      { "slug": "franke", "titulo": "Lista de precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-franke-2026.pdf?v=1790123875", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Nantucket", "documentos": [
+      { "slug": "nantucket", "titulo": "Lista de precios", "vigencia": "2024", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-nantucket-2024.pdf?v=1790123875", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Kalt", "documentos": [
+      { "slug": "kalt", "titulo": "Lista de precios", "vigencia": "ene 2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-kalt-2025.pdf?v=1790123875", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Alfresco", "documentos": [
+      { "slug": "alfresco", "titulo": "Lista de precios", "vigencia": "jul 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-alfresco-jul-2026.pdf?v=1790123875", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Artisan", "documentos": [
+      { "slug": "artisan", "titulo": "Lista de precios", "vigencia": "feb 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-artisan-feb-2026.pdf?v=1790123874", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Benessi", "documentos": [
+      { "slug": "benessi", "titulo": "Lista de precios", "vigencia": "jul 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-benessi-jul-2026.pdf?v=1790123875", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Bertazzoni", "documentos": [
+      { "slug": "bertazzoni", "titulo": "Lista de precios", "vigencia": "sep 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-bertazzoni-sep-2026.pdf?v=1790123875", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Blanco", "documentos": [
+      { "slug": "blanco", "titulo": "Lista de precios", "vigencia": "jul 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-blanco-jul-2026.pdf?v=1790123875", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Brizo", "documentos": [
+      { "slug": "brizo", "titulo": "Lista de precios", "vigencia": "mar 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-brizo-mar-2026.pdf?v=1790123875", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Delta", "documentos": [
+      { "slug": "delta", "titulo": "Lista de precios", "vigencia": "jul 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-delta-jul-2026.pdf?v=1790123875", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Hoshizaki", "documentos": [
+      { "slug": "hoshizaki", "titulo": "Lista de precios", "vigencia": "feb 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-hoshizaki-feb-2026.pdf?v=1790123875", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Kraus", "documentos": [
+      { "slug": "kraus", "titulo": "Lista de precios", "vigencia": "jul 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-kraus-jul-2026.pdf?v=1790123875", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Thor", "documentos": [
+      { "slug": "thor", "titulo": "Lista de precios", "vigencia": "sep 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-thor-sep-2026.pdf?v=1790123875", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Dawn", "documentos": [
+      { "slug": "dawn", "titulo": "Tarjas · lista de precios", "vigencia": "ago 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-dawn-tarjas-ago-2026.pdf?v=1790123874", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Mont Alpi", "documentos": [
+      { "slug": "mont-alpi", "titulo": "Lista de precios", "vigencia": "ene 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-mont-alpi-ene-2026.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Broil King", "documentos": [
+      { "slug": "broil-king", "titulo": "Asadores · lista de precios", "vigencia": "mar 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-asadores-broil-king-mar-2026.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Blaze", "documentos": [
+      { "slug": "blaze", "titulo": "Asadores · lista de precios", "vigencia": "ene 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-asadores-blaze-ene-2026.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Miele", "documentos": [
+      { "slug": "miele", "titulo": "Lista de precios", "vigencia": "ene 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-miele-ene-2026.pdf?v=1790123912", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Café", "documentos": [
+      { "slug": "cafe", "titulo": "Catálogo con precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-cafe-2026.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Monogram", "documentos": [
+      { "slug": "monogram", "titulo": "Catálogo con precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-monogram-2026.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Fulgor Milano", "documentos": [
+      { "slug": "fulgor-milano", "titulo": "Lista de precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-fulgor-milano-2026.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Falmec", "documentos": [
+      { "slug": "falmec", "titulo": "Lista de precios", "vigencia": "sep 2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-falmec-sep-2025.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Commodore", "documentos": [
+      { "slug": "commodore", "titulo": "Trituradores · lista de precios", "vigencia": "ago 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-trituradores-commodore-ago-2026.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Eclipse", "documentos": [
+      { "slug": "eclipse", "titulo": "Lista de precios", "vigencia": "ago 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-eclipse-ago-2026.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Schock", "documentos": [
+      { "slug": "schock", "titulo": "Fregaderos · lista de precios", "vigencia": "ago 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-fregaderos-schock-ago-2026.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Kamado Joe", "documentos": [
+      { "slug": "kamado-joe", "titulo": "Catálogo con precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-kamado-joe-2025.pdf?v=1790123912", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Lynx", "documentos": [
+      { "slug": "lynx", "titulo": "Asadores · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-asadores-lynx-2025.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Sedona by Lynx", "documentos": [
+      { "slug": "sedona-by-lynx", "titulo": "Asadores · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-asadores-sedona-by-lynx-2025.pdf?v=1790123912", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Trade-Wind", "documentos": [
+      { "slug": "tradewind", "titulo": "Campanas · lista de precios", "vigencia": "abr 2024", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-campanas-trade-wind-2024.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "U-Line", "documentos": [
+      { "slug": "u-line", "titulo": "Lista de precios", "vigencia": "jun 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-u-line-jun-2026.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Invisacook", "documentos": [
+      { "slug": "invisacook", "titulo": "Lista de precios", "vigencia": "mar 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-invisacook-mar-2026.pdf?v=1790123610", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Wolf", "documentos": [
+      { "slug": "wolf", "titulo": "Lista de precios", "vigencia": "jun 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-wolf-jun-2026.pdf?v=1790123912", "legacy": [], "estado": "listo" },
+      { "slug": "wolf-asadores", "titulo": "Asadores · lista de precios", "vigencia": "jun 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-asadores-wolf-jun-2026.pdf?v=1790123912", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Cove", "documentos": [
+      { "slug": "cove", "titulo": "Lavavajillas · lista de precios", "vigencia": "ene 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-lavavajillas-cove-ene-2026.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Scotsman", "documentos": [
+      { "slug": "scotsman", "titulo": "Fábricas de hielo · lista de precios", "vigencia": "ene 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-fabricas-hielo-scotsman-ene-2026.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Alfa Forni", "documentos": [
+      { "slug": "alfa-forni", "titulo": "Hornos de pizza · lista de precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-hornos-pizza-alfa-forni-2026.pdf?v=1790123911", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "GE Profile", "documentos": [
+      { "slug": "ge-profile", "titulo": "GE Profile · catálogo", "vigencia": "2024", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-ge-profile-2024.pdf", "legacy": ["/Files/119914/241555440212509.pdf"], "estado": "listo", "archivo": "shopify/catalogo-ge-profile-2024.pdf" }
+    ] },
+    { "marca": "Bosch", "documentos": [
+      { "slug": "bosch", "titulo": "Lista de precios", "vigencia": "ago 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-bosch-ago-2026.pdf?v=1790124851", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Gaggenau", "documentos": [
+      { "slug": "gaggenau", "titulo": "Lista de precios", "vigencia": "ago 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-gaggenau-ago-2026.pdf?v=1790124851", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Thermador", "documentos": [
+      { "slug": "thermador", "titulo": "Lista de precios", "vigencia": "ago 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-thermador-ago-2026.pdf?v=1790124851", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "InSinkErator", "documentos": [
+      { "slug": "insinkerator", "titulo": "Trituradores comerciales · lista de precios", "vigencia": "jun 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-trituradores-comerciales-insinkerator-jun-2026.pdf?v=1790124851", "legacy": [], "estado": "listo" }
     ] }
   ]
 }

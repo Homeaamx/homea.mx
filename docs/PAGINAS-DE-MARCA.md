@@ -92,7 +92,7 @@ Tiene las **92 marcas**, cargadas desde `HOMEA_HERO_97_MARCAS_CODE.xlsx` (2026-0
 ```
 
 - `eyebrow` en minúsculas normales: el CSS lo pasa a MAYÚSCULAS.
-- `cta.url` = URL del PDF oficial en Shopify Files. Mientras sea `null`, el mismo botón pide el catálogo por WhatsApp.
+- `cta.url` = URL permanente del PDF oficial, `/listas-de-precios/<slug>.pdf` (sirve el archivo de Shopify Files y no cambia entre ediciones; la ruta vieja de OXATIS redirige ahí). Mientras sea `null`, el mismo botón pide el catálogo por WhatsApp. Desde el 2026-09-22 lo tienen 64 marcas (`docs/PDFS-OXATIS-PENDIENTES.md` §0).
 - Ajustes opcionales por marca: `imagen.espejo: false` (la foto del hero va en espejo por defecto; se desactiva cuando
   trae texto o logos, p. ej. Bosch, Kamado Joe, WPPO, Lynx, Alfa Forni), `imagen.posicion` (encuadre; por defecto
   `center 75%`, un % menor enseña más la parte de arriba: Acros, Café, Josper…) y `logoEscala` (Axcent 0.6).

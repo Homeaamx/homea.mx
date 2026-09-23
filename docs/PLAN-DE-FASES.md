@@ -212,6 +212,13 @@ Estado: 🔵 pendiente · 🟡 en curso · ✅ hecho
 >   (la página lo toma sola con `npm run marcas`). Orden: primero las marcas de **Cocina y Bar, Exterior,
 >   Electrodomésticos menores, Lavandería y Minisplits**; lo demás, después. Revisar cada PDF para que se
 >   presente sin error.
+>   - [x] **Catálogos vigentes cargados** (2026-09-22): 49 PDFs de `CATALOGOS VIGENTES` (OneDrive) limpios de
+>     distribuidor y subidos a Shopify Files; **64 de 92 marcas** ya enseñan su PDF (hero "Ver catálogo oficial" →
+>     `/listas-de-precios/<slug>.pdf`). Detalle, criterio y script: `docs/PDFS-OXATIS-PENDIENTES.md` §0.
+>   - [x] **Bosch, Gaggenau, Thermador, InSinkErator y Coyote** subidos por indicación de Carla (sin leyendas "Dealer"/
+>     "Confidential"; InSinkErator conserva "precios a distribuidor tipo A").
+>   - [ ] **Faltan 28 marcas sin ningún PDF** (lista en `docs/PDFS-OXATIS-PENDIENTES.md` §0). Buscar el catálogo vigente.
+>   - [ ] **Carla borra en Shopify Files 11 PDFs que ya no usa nadie** (lista en el mismo §0).
 > - [ ] **Brizo, Delta y Axcent: solo la línea de cocina.** Al cargar su catálogo, excluir baño. Hoy sus páginas
 >   todavía enlazan la categoría Baños: quitarla cuando se cargue el catálogo.
 > - [ ] Que el buscador y el sitemap respeten `canal` cuando se conecten al catálogo real.

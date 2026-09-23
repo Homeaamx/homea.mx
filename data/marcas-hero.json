@@ -1,5 +1,5 @@
 {
-  "_nota": "Contenido del hero de /marcas/<slug>, una entrada por slug de data/marcas.json. Escrito a mano (o desde el Excel de contenido de marcas); scripts/build-marcas.mjs NO lo toca. Marca sin entrada → hero actual (gama · Distribución oficial + nombre + frase automática). 'eyebrow' se escribe normal: el CSS lo pasa a mayúsculas. 'cta.url' = PDF oficial en Shopify Files; mientras sea null, el botón pide el catálogo por WhatsApp. Cargado desde HOMEA_HERO_97_MARCAS_CODE.xlsx (2026-09-22). Opcionales: 'imagen.espejo' (false = foto al derecho; por defecto va en espejo), 'imagen.posicion' (object-position; por defecto 'center 75%', un % menor enseña más la parte de arriba) y 'logoEscala' (multiplica el alto del logo).",
+  "_nota": "Contenido del hero de /marcas/<slug>, una entrada por slug de data/marcas.json. Escrito a mano (o desde el Excel de contenido de marcas); scripts/build-marcas.mjs NO lo toca. Marca sin entrada → hero actual (gama · Distribución oficial + nombre + frase automática). 'eyebrow' se escribe normal: el CSS lo pasa a mayúsculas. 'cta.url' = URL permanente del PDF oficial (/listas-de-precios/<slug>.pdf, que sirve el archivo de Shopify Files; ver data/listas-precios.json); mientras sea null, el botón pide el catálogo por WhatsApp. Cargado desde HOMEA_HERO_97_MARCAS_CODE.xlsx (2026-09-22). Opcionales: 'imagen.espejo' (false = foto al derecho; por defecto va en espejo), 'imagen.posicion' (object-position; por defecto 'center 75%', un % menor enseña más la parte de arriba) y 'logoEscala' (multiplica el alto del logo).",
   "acros": {
     "eyebrow": "Funcional · Práctica · Accesible",
     "titulo": "Electrodomésticos Acros",
@@ -18,7 +18,7 @@
     "descripcion": "Hornos y soluciones para exterior con enfoque italiano, alto desempeño térmico y diseño pensado para disfrutar una cocción auténtica al aire libre.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/alfa-forni.pdf"
     }
   },
   "alfresco": {
@@ -27,7 +27,7 @@
     "descripcion": "Equipamiento premium para cocina exterior, con asadores y soluciones robustas que llevan desempeño de nivel profesional a espacios residenciales.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/alfresco.pdf"
     }
   },
   "artisan": {
@@ -36,7 +36,7 @@
     "descripcion": "Asadores y equipos para exterior con construcción sólida, controles precisos y desempeño confiable para crear una cocina al aire libre completa.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/artisan.pdf"
     },
     "imagen": {
       "posicion": "center 55%"
@@ -48,7 +48,7 @@
     "descripcion": "Electrodomésticos de inspiración escandinava que combinan diseño minimalista, precisión y soluciones funcionales para una cocina contemporánea.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/asko.pdf"
     }
   },
   "axcent": {
@@ -57,7 +57,7 @@
     "descripcion": "Soluciones accesibles para cocina y baño, con tarjas, monomandos y equipamiento funcional pensado para proyectos prácticos y bien resueltos.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/axcent-banos.pdf"
     },
     "logoEscala": 0.6
   },
@@ -67,7 +67,7 @@
     "descripcion": "Equipamiento de cocina con una propuesta elegante e integrada, pensado para proyectos que buscan funcionalidad, presencia visual y acabados refinados.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/benessi.pdf"
     }
   },
   "bertazzoni": {
@@ -76,7 +76,7 @@
     "descripcion": "Electrodomésticos de cocina con tradición italiana, diseño distintivo y desempeño preciso para crear espacios residenciales con fuerte personalidad.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/bertazzoni.pdf"
     }
   },
   "blanco": {
@@ -85,7 +85,7 @@
     "descripcion": "Tarjas y monomandos con enfoque funcional y diseño refinado, pensados para integrar la zona de agua con orden, durabilidad y estética contemporánea.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/blanco.pdf"
     },
     "imagen": {
       "posicion": "center 60%"
@@ -97,7 +97,7 @@
     "descripcion": "Asadores y equipos para exterior con construcción robusta, alto desempeño y soluciones versátiles para crear cocinas al aire libre bien equipadas.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/blaze.pdf"
     }
   },
   "bosch": {
@@ -106,7 +106,7 @@
     "descripcion": "Electrodomésticos y equipos menores con enfoque en ingeniería, eficiencia y facilidad de uso para resolver la cocina cotidiana con diseño limpio.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/bosch.pdf"
     }
   },
   "brizo": {
@@ -115,7 +115,7 @@
     "descripcion": "Grifería para cocina y baño con lenguaje expresivo, detalles arquitectónicos y acabados sofisticados que convierten el agua en parte del diseño.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/brizo.pdf"
     }
   },
   "broil-king": {
@@ -124,7 +124,7 @@
     "descripcion": "Asadores para exterior enfocados en potencia, control y construcción robusta, ideales para cocinar con versatilidad y aprovechar cada zona de calor.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/broil-king.pdf"
     },
     "imagen": {
       "espejo": false,
@@ -137,7 +137,7 @@
     "descripcion": "Electrodomésticos de cocina con estética contemporánea y opciones de personalización, pensados para convertir cada espacio en una propuesta propia.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/cafe.pdf"
     },
     "imagen": {
       "posicion": "center 60%"
@@ -158,7 +158,7 @@
     "descripcion": "Saunas orientados al bienestar que integran tecnología, confort y una experiencia envolvente para crear espacios privados de relajación y recuperación.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/clearlight-saunas-exterior.pdf"
     }
   },
   "commodore": {
@@ -167,7 +167,7 @@
     "descripcion": "Trituradores para cocina diseñados para facilitar el manejo de residuos, con una propuesta práctica, compacta y funcional para el uso cotidiano.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/commodore.pdf"
     },
     "imagen": {
       "espejo": false,
@@ -180,7 +180,7 @@
     "descripcion": "Lavavajillas premium enfocados en limpieza precisa, operación silenciosa e integración con cocinas de alto nivel, cuidando rendimiento y organización.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/cove.pdf"
     },
     "imagen": {
       "posicion": "center 60%"
@@ -192,7 +192,7 @@
     "descripcion": "Asadores y soluciones para exterior con construcción resistente, operación práctica y desempeño confiable para equipar cocinas al aire libre.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/coyote-asadores.pdf"
     }
   },
   "dawn": {
@@ -201,7 +201,7 @@
     "descripcion": "Tarjas y monomandos de enfoque práctico y versátil, pensados para resolver la zona de agua con funcionalidad, buena integración y valor accesible.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/dawn.pdf"
     }
   },
   "delta": {
@@ -210,7 +210,7 @@
     "descripcion": "Grifería para cocina y baño con soluciones orientadas al confort, la facilidad de uso y la versatilidad para proyectos residenciales contemporáneos.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/delta.pdf"
     },
     "imagen": {
       "posicion": "center 55%"
@@ -244,7 +244,7 @@
     "descripcion": "Tarjas y monomandos con diseño limpio y enfoque funcional, pensados para integrarse con facilidad en cocinas residenciales de distintos estilos.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/eclipse.pdf"
     },
     "imagen": {
       "posicion": "center 35%"
@@ -256,7 +256,7 @@
     "descripcion": "Electrodomésticos de cocina con enfoque en eficiencia, funcionalidad y diseño contemporáneo para simplificar tareas y mejorar la experiencia diaria.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/frigidaire-electrolux.pdf"
     },
     "imagen": {
       "espejo": false
@@ -268,7 +268,7 @@
     "descripcion": "Soluciones de ventilación para cocina donde diseño e innovación se integran con alto desempeño, creando ambientes más limpios y visualmente ligeros.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/elica-campanas.pdf"
     },
     "imagen": {
       "espejo": false,
@@ -293,7 +293,7 @@
     "descripcion": "Campanas y soluciones de ventilación que combinan eficiencia, diseño y control de humos para mantener la cocina cómoda, limpia y bien integrada.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/faber.pdf"
     }
   },
   "falmec": {
@@ -302,7 +302,7 @@
     "descripcion": "Campanas de diseño italiano con enfoque en innovación, desempeño y confort acústico, creadas para integrarse con elegancia en cocinas contemporáneas.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/falmec.pdf"
     },
     "imagen": {
       "espejo": false
@@ -341,7 +341,7 @@
     "descripcion": "Tarjas y monomandos con enfoque en funcionalidad, precisión y diseño refinado, pensados para convertir la zona de agua en un espacio mejor integrado.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/franke.pdf"
     }
   },
   "frigidaire": {
@@ -350,7 +350,7 @@
     "descripcion": "Electrodomésticos de cocina con una propuesta práctica y confiable, diseñados para facilitar las tareas diarias con funciones claras y uso sencillo.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/frigidaire-electrolux.pdf"
     },
     "imagen": {
       "espejo": false
@@ -362,7 +362,7 @@
     "descripcion": "Electrodomésticos de cocina con diseño italiano, líneas sofisticadas y desempeño preciso para proyectos residenciales que buscan presencia y control.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/fulgor-milano.pdf"
     }
   },
   "gaggenau": {
@@ -371,7 +371,7 @@
     "descripcion": "Electrodomésticos de cocina con enfoque arquitectónico, precisión técnica y diseño vanguardista para espacios donde cada detalle forma parte del proyecto.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/gaggenau.pdf"
     }
   },
   "ge-profile": {
@@ -380,7 +380,7 @@
     "descripcion": "Electrodomésticos de cocina con funciones inteligentes y diseño funcional, pensados para simplificar rutinas y ofrecer una experiencia conectada y práctica.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/ge-profile.pdf"
     }
   },
   "gessi": {
@@ -398,7 +398,7 @@
     "descripcion": "Electrodomésticos de cocina con enfoque en conectividad, funcionalidad y diseño actual, pensados para hogares que buscan soluciones prácticas y flexibles.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/haier.pdf"
     }
   },
   "hergom": {
@@ -419,7 +419,7 @@
     "descripcion": "Equipos para cocina y bar reconocidos por su enfoque en producción de hielo, precisión operativa y rendimiento constante para aplicaciones exigentes.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/hoshizaki.pdf"
     }
   },
   "i-drain": {
@@ -450,7 +450,7 @@
     "descripcion": "Trituradores para cocina que facilitan el manejo de residuos con operación práctica, potencia controlada y una solución integrada para el uso diario.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/insinkerator.pdf"
     }
   },
   "invisacook": {
@@ -459,7 +459,7 @@
     "descripcion": "Sistema de cocción integrado bajo la superficie, pensado para lograr cocinas visualmente limpias y funcionales sin una parrilla visible sobre la cubierta.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/invisacook.pdf"
     },
     "logoEscala": 1.44
   },
@@ -469,7 +469,7 @@
     "descripcion": "Electrodomésticos de cocina que combinan funcionalidad, diseño cuidado y soluciones prácticas para crear espacios residenciales actuales y bien equipados.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/io-mabe.pdf"
     },
     "imagen": {
       "espejo": false
@@ -481,7 +481,7 @@
     "descripcion": "Soluciones de wellness, vapor y sauna enfocadas en confort y relajación, pensadas para transformar el baño o área privada en una experiencia de bienestar.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/jacuzzi-spas-exterior.pdf"
     }
   },
   "josper": {
@@ -490,7 +490,7 @@
     "descripcion": "Hornos y equipos de cocción al carbón orientados a alto desempeño, con control intenso del calor y una experiencia de brasa pensada para resultados precisos.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/josper-hornos-de-brasa.pdf"
     },
     "imagen": {
       "posicion": "center 15%"
@@ -511,7 +511,7 @@
     "descripcion": "Equipamiento de cocina con enfoque funcional y contemporáneo, pensado para integrarse con facilidad en proyectos residenciales y resolver el uso diario.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/kalt.pdf"
     }
   },
   "kamado-joe": {
@@ -520,7 +520,7 @@
     "descripcion": "Asadores tipo kamado para exterior con cocción a carbón, gran versatilidad y control térmico para asar, ahumar y explorar distintas técnicas al aire libre.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/kamado-joe.pdf"
     }
   },
   "kele-master-sinks": {
@@ -529,7 +529,7 @@
     "descripcion": "Tarjas y soluciones para la zona de agua con enfoque funcional, construcción durable y diseño adaptable para cocinas residenciales de uso cotidiano.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/kele.pdf"
     }
   },
   "kitchenaid": {
@@ -550,7 +550,7 @@
     "descripcion": "Tarjas y monomandos de estética contemporánea, con soluciones funcionales y versátiles para organizar mejor la zona de agua en cocinas residenciales.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/kraus.pdf"
     },
     "imagen": {
       "espejo": false
@@ -574,7 +574,7 @@
     "descripcion": "Asadores y equipos premium para exterior con potencia de nivel profesional, construcción refinada y soluciones pensadas para cocinas al aire libre completas.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/lynx.pdf"
     },
     "imagen": {
       "espejo": false
@@ -586,7 +586,7 @@
     "descripcion": "Electrodomésticos de cocina pensados para el hogar diario, con soluciones funcionales, fáciles de usar y una propuesta accesible para distintos proyectos.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/mabe.pdf"
     }
   },
   "masterbuilt": {
@@ -616,7 +616,7 @@
     "descripcion": "Electrodomésticos de cocina y equipos menores con enfoque en precisión, durabilidad y diseño discreto para proyectos que buscan desempeño a largo plazo.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/miele.pdf"
     },
     "imagen": {
       "espejo": false,
@@ -629,7 +629,7 @@
     "descripcion": "Electrodomésticos de cocina premium con diseño arquitectónico, materiales cuidados y desempeño preciso para espacios integrados de alta especificación.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/monogram.pdf"
     }
   },
   "mont-alpi": {
@@ -638,7 +638,7 @@
     "descripcion": "Cocinas y asadores para exterior con configuración modular y soluciones completas, pensadas para crear estaciones funcionales al aire libre con facilidad.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/mont-alpi.pdf"
     }
   },
   "mr-steam": {
@@ -659,7 +659,7 @@
     "descripcion": "Tarjas y soluciones para cocina con enfoque en detalle, funcionalidad y diseño distintivo, pensadas para aportar carácter sin sacrificar uso cotidiano.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/nantucket.pdf"
     }
   },
   "nobili": {
@@ -677,7 +677,7 @@
     "descripcion": "Recubrimientos y superficies orientados al diseño, con variedad de texturas y posibilidades de composición para dar carácter a espacios residenciales.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/onix-mosaico-veneciano.pdf"
     }
   },
   "peerless": {
@@ -695,7 +695,7 @@
     "descripcion": "Sistemas de cocción integrados directamente en la cubierta, pensados para crear cocinas abiertas, minimalistas y flexibles sin una parrilla convencional.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/pitt-cooking.pdf"
     }
   },
   "poletti-sinks": {
@@ -734,7 +734,7 @@
     "descripcion": "Tarjas y soluciones para cocina con enfoque en materiales resistentes, diseño contemporáneo e innovación para una zona de agua práctica y duradera.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/schock.pdf"
     }
   },
   "scotsman": {
@@ -743,7 +743,7 @@
     "descripcion": "Equipos para cocina y bar especializados en producción de hielo, con enfoque en consistencia, rendimiento y formatos pensados para distintas necesidades.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/scotsman.pdf"
     }
   },
   "sedona-by-lynx": {
@@ -752,7 +752,7 @@
     "descripcion": "Asadores para exterior con enfoque en desempeño, construcción cuidada y una experiencia de cocción refinada para cocinas residenciales al aire libre.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/sedona-by-lynx.pdf"
     },
     "imagen": {
       "espejo": false
@@ -764,7 +764,7 @@
     "descripcion": "Electrodomésticos, equipos menores y soluciones de cocina con diseño italiano, color y personalidad para espacios que buscan destacar sin perder función.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/smeg.pdf"
     },
     "imagen": {
       "espejo": false
@@ -776,7 +776,7 @@
     "descripcion": "Refrigeración premium enfocada en conservación precisa, integración arquitectónica y organización interior para proteger alimentos y elevar la cocina.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/sub-zero.pdf"
     },
     "imagen": {
       "espejo": false
@@ -788,7 +788,7 @@
     "descripcion": "Equipos de cocina con soluciones compactas y especializadas, pensados para aprovechar mejor el espacio e integrarse en proyectos con necesidades específicas.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/summit.pdf"
     }
   },
   "supra": {
@@ -797,7 +797,7 @@
     "descripcion": "Equipos de cocina con enfoque práctico y accesible, pensados para resolver necesidades cotidianas con operación sencilla, funcionalidad y buen aprovechamiento.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/supra.pdf"
     }
   },
   "tecnolam": {
@@ -806,7 +806,7 @@
     "descripcion": "Equipamiento de cocina, tarjas y monomandos con enfoque funcional y versátil, pensado para integrar soluciones prácticas en proyectos residenciales actuales.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/tecnolam-tarjas-y-monomandos.pdf"
     },
     "imagen": {
       "espejo": false
@@ -818,7 +818,7 @@
     "descripcion": "Equipamiento de cocina, tarjas, monomandos y trituradores con una propuesta versátil y funcional para resolver distintas zonas dentro de un mismo proyecto.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/teka-tarjas-y-monomandos.pdf"
     }
   },
   "the-galley": {
@@ -827,7 +827,7 @@
     "descripcion": "Sistemas de tarja y monomandos concebidos como estaciones de trabajo, pensados para preparar, servir y convivir alrededor de una misma zona de cocina.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/the-galley.pdf"
     }
   },
   "thermador": {
@@ -836,7 +836,7 @@
     "descripcion": "Electrodomésticos de cocina premium con potencia, funciones avanzadas e integración cuidada para proyectos que buscan desempeño y una estética contundente.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/thermador.pdf"
     },
     "imagen": {
       "espejo": false
@@ -848,7 +848,7 @@
     "descripcion": "Electrodomésticos de cocina con estética profesional, potencia y controles directos, pensados para llevar una experiencia robusta a proyectos residenciales.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/thor.pdf"
     },
     "imagen": {
       "espejo": false
@@ -860,7 +860,7 @@
     "descripcion": "Campanas y sistemas de ventilación con extracción potente e integración arquitectónica para mantener la cocina limpia sin dominar visualmente el espacio.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/tradewind.pdf"
     },
     "imagen": {
       "posicion": "center 35%"
@@ -881,7 +881,7 @@
     "descripcion": "Refrigeración y equipos compactos para cocina y bar, pensados para integrarse bajo cubierta y resolver bebidas, hielo o conservación con precisión.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/u-line.pdf"
     },
     "imagen": {
       "posicion": "center 100%",
@@ -914,7 +914,7 @@
     "descripcion": "Electrodomésticos, equipos menores y soluciones para exterior con estética profesional, potencia y presencia icónica para cocinas residenciales exigentes.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/viking.pdf"
     }
   },
   "whirlpool": {
@@ -935,7 +935,7 @@
     "descripcion": "Equipos de cocción para cocina y exterior enfocados en control preciso, potencia y respuesta consistente para quienes buscan dominar cada preparación.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/wolf.pdf"
     },
     "imagen": {
       "posicion": "center 85%"

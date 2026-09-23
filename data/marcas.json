@@ -83,7 +83,9 @@
       "foto": "/assets/photos/brands/alfa-forni-hornos.webp",
       "fotoHero": "/assets/photos/brands/hero/alfa-forni-hornos.webp",
       "logoHero": "/assets/logos/alfa-forni.webp",
-      "listas": []
+      "listas": [
+        "alfa-forni"
+      ]
     },
     {
       "slug": "alfresco",
@@ -99,7 +101,9 @@
       "foto": "/assets/photos/brands/alfresco-asadores.webp",
       "fotoHero": "/assets/photos/brands/hero/alfresco-asadores.webp",
       "logoHero": "/assets/logos/alfresco.webp",
-      "listas": []
+      "listas": [
+        "alfresco"
+      ]
     },
     {
       "slug": "artisan",
@@ -115,7 +119,9 @@
       "foto": "/assets/photos/brands/artisan-asadores.webp",
       "fotoHero": "/assets/photos/brands/hero/artisan-asadores.webp",
       "logoHero": "/assets/logos/artisan.webp",
-      "listas": []
+      "listas": [
+        "artisan"
+      ]
     },
     {
       "slug": "asko",
@@ -170,7 +176,9 @@
       "foto": "/assets/photos/brands/benessi-cocina.webp",
       "fotoHero": "/assets/photos/brands/hero/benessi-cocina.webp",
       "logoHero": "/assets/logos/benessi.webp",
-      "listas": []
+      "listas": [
+        "benessi"
+      ]
     },
     {
       "slug": "bertazzoni",
@@ -186,7 +194,9 @@
       "foto": "/assets/photos/brands/bertazzoni-cocina.webp",
       "fotoHero": "/assets/photos/brands/hero/bertazzoni-cocina.webp",
       "logoHero": "/assets/logos/hero/bertazzoni.webp",
-      "listas": []
+      "listas": [
+        "bertazzoni"
+      ]
     },
     {
       "slug": "blanco",
@@ -202,7 +212,9 @@
       "foto": "/assets/photos/brands/blanco-tarjas-y-griferia.webp",
       "fotoHero": "/assets/photos/brands/hero/blanco-tarjas-y-griferia.webp",
       "logoHero": "/assets/logos/hero/blanco.webp",
-      "listas": []
+      "listas": [
+        "blanco"
+      ]
     },
     {
       "slug": "blaze",
@@ -218,7 +230,9 @@
       "foto": "/assets/photos/brands/blaze-asadores.webp",
       "fotoHero": "/assets/photos/brands/hero/blaze-asadores.webp",
       "logoHero": "/assets/logos/blaze.webp",
-      "listas": []
+      "listas": [
+        "blaze"
+      ]
     },
     {
       "slug": "bosch",
@@ -235,7 +249,9 @@
       "foto": "/assets/photos/brands/bosch-electrodomesticos.webp",
       "fotoHero": "/assets/photos/brands/hero/bosch-electrodomesticos.webp",
       "logoHero": "/assets/logos/bosch.webp",
-      "listas": []
+      "listas": [
+        "bosch"
+      ]
     },
     {
       "slug": "brizo",
@@ -252,7 +268,9 @@
       "foto": "/assets/photos/brands/brizo-griferia.webp",
       "fotoHero": "/assets/photos/brands/hero/brizo-griferia.webp",
       "logoHero": "/assets/logos/brizo.webp",
-      "listas": []
+      "listas": [
+        "brizo"
+      ]
     },
     {
       "slug": "broil-king",
@@ -268,7 +286,9 @@
       "foto": "/assets/photos/brands/broil-king-asadores.webp",
       "fotoHero": "/assets/photos/brands/hero/broil-king-asadores.webp",
       "logoHero": "/assets/logos/broil-king.webp",
-      "listas": []
+      "listas": [
+        "broil-king"
+      ]
     },
     {
       "slug": "cafe",
@@ -284,7 +304,9 @@
       "foto": "/assets/photos/brands/cafe-electrodomesticos.webp",
       "fotoHero": "/assets/photos/brands/hero/cafe-electrodomesticos.webp",
       "logoHero": "/assets/logos/cafe.png",
-      "listas": []
+      "listas": [
+        "cafe"
+      ]
     },
     {
       "slug": "catalano",
@@ -334,7 +356,9 @@
       "foto": "/assets/photos/brands/commodore-trituradores.webp",
       "fotoHero": "/assets/photos/brands/hero/commodore-trituradores.webp",
       "logoHero": "/assets/logos/commodore.webp",
-      "listas": []
+      "listas": [
+        "commodore"
+      ]
     },
     {
       "slug": "cove",
@@ -350,7 +374,9 @@
       "foto": "/assets/photos/brands/cove-lavavajillas.webp",
       "fotoHero": "/assets/photos/brands/hero/cove-lavavajillas.webp",
       "logoHero": "/assets/logos/cove.png",
-      "listas": []
+      "listas": [
+        "cove"
+      ]
     },
     {
       "slug": "coyote",
@@ -385,7 +411,9 @@
       "foto": "/assets/photos/brands/dawn-tarjas-y-griferia.webp",
       "fotoHero": "/assets/photos/brands/hero/dawn-tarjas-y-griferia.webp",
       "logoHero": "/assets/logos/hero/dawn.webp",
-      "listas": []
+      "listas": [
+        "dawn"
+      ]
     },
     {
       "slug": "delta",
@@ -403,7 +431,9 @@
       "foto": "/assets/photos/brands/delta-griferia.webp",
       "fotoHero": "/assets/photos/brands/hero/delta-griferia.webp",
       "logoHero": "/assets/logos/hero/delta.webp",
-      "listas": []
+      "listas": [
+        "delta"
+      ]
     },
     {
       "slug": "dexa",
@@ -453,7 +483,9 @@
       "foto": "/assets/photos/brands/eclipse-tarjas-y-griferia.webp",
       "fotoHero": "/assets/photos/brands/hero/eclipse-tarjas-y-griferia.webp",
       "logoHero": "/assets/logos/eclipse.webp",
-      "listas": []
+      "listas": [
+        "eclipse"
+      ]
     },
     {
       "slug": "electrolux",
@@ -521,7 +553,9 @@
       "foto": "/assets/photos/brands/faber-campanas.webp",
       "fotoHero": "/assets/photos/brands/hero/faber-campanas.webp",
       "logoHero": "/assets/logos/faber.webp",
-      "listas": []
+      "listas": [
+        "faber"
+      ]
     },
     {
       "slug": "falmec",
@@ -537,7 +571,9 @@
       "foto": "/assets/photos/brands/falmec-campanas.webp",
       "fotoHero": "/assets/photos/brands/hero/falmec-campanas.webp",
       "logoHero": "/assets/logos/falmec.webp",
-      "listas": []
+      "listas": [
+        "falmec"
+      ]
     },
     {
       "slug": "firplak",
@@ -601,7 +637,9 @@
       "foto": "/assets/photos/brands/franke-tarjas-y-griferia.webp",
       "fotoHero": "/assets/photos/brands/hero/franke-tarjas-y-griferia.webp",
       "logoHero": "/assets/logos/hero/franke.webp",
-      "listas": []
+      "listas": [
+        "franke"
+      ]
     },
     {
       "slug": "frigidaire",
@@ -636,7 +674,9 @@
       "foto": "/assets/photos/brands/fulgor-milano-cocina.webp",
       "fotoHero": "/assets/photos/brands/hero/fulgor-milano-cocina.webp",
       "logoHero": "/assets/logos/fulgor-milano.webp",
-      "listas": []
+      "listas": [
+        "fulgor-milano"
+      ]
     },
     {
       "slug": "gaggenau",
@@ -652,7 +692,9 @@
       "foto": "/assets/photos/brands/gaggenau-cocina.webp",
       "fotoHero": "/assets/photos/brands/hero/gaggenau-cocina.webp",
       "logoHero": "/assets/logos/gaggenau.webp",
-      "listas": []
+      "listas": [
+        "gaggenau"
+      ]
     },
     {
       "slug": "ge-profile",
@@ -669,7 +711,9 @@
       "foto": "/assets/photos/brands/ge-profile-electrodomesticos.webp",
       "fotoHero": "/assets/photos/brands/hero/ge-profile-electrodomesticos.webp",
       "logoHero": "/assets/logos/hero/ge-profile.webp",
-      "listas": []
+      "listas": [
+        "ge-profile"
+      ]
     },
     {
       "slug": "gessi",
@@ -736,7 +780,9 @@
       "foto": "/assets/photos/brands/hoshizaki-hielo.webp",
       "fotoHero": "/assets/photos/brands/hero/hoshizaki-hielo.webp",
       "logoHero": "/assets/logos/hoshizaki.png",
-      "listas": []
+      "listas": [
+        "hoshizaki"
+      ]
     },
     {
       "slug": "i-drain",
@@ -784,7 +830,9 @@
       "foto": "/assets/photos/brands/insinkerator-trituradores.webp",
       "fotoHero": "/assets/photos/brands/hero/insinkerator-trituradores.webp",
       "logoHero": "/assets/logos/insinkerator.png",
-      "listas": []
+      "listas": [
+        "insinkerator"
+      ]
     },
     {
       "slug": "invisacook",
@@ -800,7 +848,9 @@
       "foto": "/assets/photos/brands/invisacook-cocina.webp",
       "fotoHero": "/assets/photos/brands/hero/invisacook-cocina.webp",
       "logoHero": "/assets/logos/invisacook.webp",
-      "listas": []
+      "listas": [
+        "invisacook"
+      ]
     },
     {
       "slug": "io-mabe",
@@ -818,8 +868,7 @@
       "fotoHero": "/assets/photos/brands/hero/io-mabe-electrodomesticos.webp",
       "logoHero": "/assets/logos/io-mabe.png",
       "listas": [
-        "io-mabe",
-        "ge-profile"
+        "io-mabe"
       ]
     },
     {
@@ -892,7 +941,9 @@
       "foto": "/assets/photos/brands/kalt-cocina.webp",
       "fotoHero": "/assets/photos/brands/hero/kalt-cocina.webp",
       "logoHero": "/assets/logos/hero/kalt.webp",
-      "listas": []
+      "listas": [
+        "kalt"
+      ]
     },
     {
       "slug": "kamado-joe",
@@ -909,7 +960,9 @@
       "foto": "/assets/photos/brands/kamado-joe-asadores.webp",
       "fotoHero": "/assets/photos/brands/hero/kamado-joe-asadores.webp",
       "logoHero": "/assets/logos/kamado-joe.webp",
-      "listas": []
+      "listas": [
+        "kamado-joe"
+      ]
     },
     {
       "slug": "kele-master-sinks",
@@ -961,7 +1014,9 @@
       "foto": "/assets/photos/brands/kraus-tarjas-y-griferia.webp",
       "fotoHero": "/assets/photos/brands/hero/kraus-tarjas-y-griferia.webp",
       "logoHero": "/assets/logos/kraus.webp",
-      "listas": []
+      "listas": [
+        "kraus"
+      ]
     },
     {
       "slug": "la-cornue",
@@ -993,7 +1048,9 @@
       "foto": "/assets/photos/brands/lynx-asadores.webp",
       "fotoHero": "/assets/photos/brands/hero/lynx-asadores.webp",
       "logoHero": "/assets/logos/lynx.png",
-      "listas": []
+      "listas": [
+        "lynx"
+      ]
     },
     {
       "slug": "mabe",
@@ -1060,7 +1117,9 @@
       "foto": "/assets/photos/brands/miele-electrodomesticos.webp",
       "fotoHero": "/assets/photos/brands/hero/miele-electrodomesticos.webp",
       "logoHero": "/assets/logos/miele.webp",
-      "listas": []
+      "listas": [
+        "miele"
+      ]
     },
     {
       "slug": "monogram",
@@ -1076,7 +1135,9 @@
       "foto": "/assets/photos/brands/monogram-cocina.webp",
       "fotoHero": "/assets/photos/brands/hero/monogram-cocina.webp",
       "logoHero": "/assets/logos/monogram.png",
-      "listas": []
+      "listas": [
+        "monogram"
+      ]
     },
     {
       "slug": "mont-alpi",
@@ -1092,7 +1153,9 @@
       "foto": "/assets/photos/brands/mont-alpi-asadores.webp",
       "fotoHero": "/assets/photos/brands/hero/mont-alpi-asadores.webp",
       "logoHero": "/assets/logos/mont-alpi.webp",
-      "listas": []
+      "listas": [
+        "mont-alpi"
+      ]
     },
     {
       "slug": "mr-steam",
@@ -1124,7 +1187,9 @@
       "foto": "/assets/photos/brands/nantucket-tarjas.webp",
       "fotoHero": "/assets/photos/brands/hero/nantucket-tarjas.webp",
       "logoHero": "/assets/logos/nantucket.webp",
-      "listas": []
+      "listas": [
+        "nantucket"
+      ]
     },
     {
       "slug": "nobili",
@@ -1260,7 +1325,9 @@
       "foto": "/assets/photos/brands/schock-tarjas.webp",
       "fotoHero": "/assets/photos/brands/hero/schock-tarjas.webp",
       "logoHero": "/assets/logos/schock.png",
-      "listas": []
+      "listas": [
+        "schock"
+      ]
     },
     {
       "slug": "scotsman",
@@ -1276,7 +1343,9 @@
       "foto": "/assets/photos/brands/scotsman-hielo.webp",
       "fotoHero": "/assets/photos/brands/hero/scotsman-hielo.webp",
       "logoHero": "/assets/logos/hero/scotsman.webp",
-      "listas": []
+      "listas": [
+        "scotsman"
+      ]
     },
     {
       "slug": "sedona-by-lynx",
@@ -1292,7 +1361,9 @@
       "foto": "/assets/photos/brands/sedona-by-lynx-asadores.webp",
       "fotoHero": "/assets/photos/brands/hero/sedona-by-lynx-asadores.webp",
       "logoHero": "/assets/logos/sedona-by-lynx.webp",
-      "listas": []
+      "listas": [
+        "sedona-by-lynx"
+      ]
     },
     {
       "slug": "smeg",
@@ -1310,7 +1381,9 @@
       "foto": "/assets/photos/brands/smeg-electrodomesticos.webp",
       "fotoHero": "/assets/photos/brands/hero/smeg-electrodomesticos.webp",
       "logoHero": "/assets/logos/smeg.webp",
-      "listas": []
+      "listas": [
+        "smeg"
+      ]
     },
     {
       "slug": "sub-zero",
@@ -1363,7 +1436,8 @@
       "fotoHero": "/assets/photos/brands/hero/supra-electrodomesticos.webp",
       "logoHero": "/assets/logos/hero/supra.webp",
       "listas": [
-        "supra"
+        "supra",
+        "supra-catalogo"
       ]
     },
     {
@@ -1421,7 +1495,9 @@
       "foto": "/assets/photos/brands/the-galley-tarjas.webp",
       "fotoHero": "/assets/photos/brands/hero/the-galley-tarjas.webp",
       "logoHero": "/assets/logos/the-galley.png",
-      "listas": []
+      "listas": [
+        "the-galley"
+      ]
     },
     {
       "slug": "thermador",
@@ -1437,7 +1513,9 @@
       "foto": "/assets/photos/brands/thermador-cocina.webp",
       "fotoHero": "/assets/photos/brands/hero/thermador-cocina.webp",
       "logoHero": "/assets/logos/thermador.webp",
-      "listas": []
+      "listas": [
+        "thermador"
+      ]
     },
     {
       "slug": "thor",
@@ -1454,7 +1532,9 @@
       "foto": "/assets/photos/brands/thor-cocina.webp",
       "fotoHero": "/assets/photos/brands/hero/thor-cocina.webp",
       "logoHero": "/assets/logos/thor.webp",
-      "listas": []
+      "listas": [
+        "thor"
+      ]
     },
     {
       "slug": "tradewind",
@@ -1470,7 +1550,9 @@
       "foto": "/assets/photos/brands/tradewind-campanas.webp",
       "fotoHero": "/assets/photos/brands/hero/tradewind-campanas.webp",
       "logoHero": "/assets/logos/tradewind.png",
-      "listas": []
+      "listas": [
+        "tradewind"
+      ]
     },
     {
       "slug": "treesse",
@@ -1503,7 +1585,9 @@
       "foto": "/assets/photos/brands/u-line-refrigeracion.webp",
       "fotoHero": "/assets/photos/brands/hero/u-line-refrigeracion.webp",
       "logoHero": "/assets/logos/u-line.webp",
-      "listas": []
+      "listas": [
+        "u-line"
+      ]
     },
     {
       "slug": "valsir",
@@ -1589,7 +1673,10 @@
       "foto": "/assets/photos/brands/wolf-cocina.webp",
       "fotoHero": "/assets/photos/brands/hero/wolf-cocina.webp",
       "logoHero": "/assets/logos/wolf.webp",
-      "listas": []
+      "listas": [
+        "wolf",
+        "wolf-asadores"
+      ]
     },
     {
       "slug": "wppo",

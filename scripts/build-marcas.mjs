@@ -98,6 +98,7 @@ const GAMAS = {
 // /marcas#listas-de-precios (hoy no queda ninguna así: 2026-09-21).
 const LISTAS_A_TILE = {
   Kele: ["kele-master-sinks"],
+  "Trade-Wind": ["tradewind"],
   "Frigidaire · Electrolux": ["frigidaire", "electrolux"],
 };
 

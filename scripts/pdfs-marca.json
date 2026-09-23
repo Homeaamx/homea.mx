@@ -1,0 +1,661 @@
+{
+  "_nota": "PDFs de marca que salen de CATALOGOS VIGENTES (OneDrive) y se suben a Shopify Files. 'src' es relativo a esa carpeta; 'archivo' es el nombre con el que vive en Shopify (y el que va en la 'url' de data/listas-precios.json). 'op' = limpieza de scripts/preparar-pdfs-marca.py. Los PDFs nunca entran al git.",
+  "documentos": [
+    {
+      "slug": "teka-tarjas-y-monomandos",
+      "marca": "teka",
+      "nombre": "Teka",
+      "titulo": "Lista de precios",
+      "vigencia": "abr 2026",
+      "src": "TEKA/LISTA_PRECIOS_TEKA_2026.pdf",
+      "archivo": "lista-precios-teka-abr-2026.pdf"
+    },
+    {
+      "slug": "kele",
+      "marca": "kele-master-sinks",
+      "nombre": "Kele Master Sinks",
+      "titulo": "Lista de precios",
+      "vigencia": "jul 2026",
+      "src": "KELE/JUL 26/LISTA_PRECIOS_KELE_2026_V_3.pdf",
+      "archivo": "lista-precios-kele-jul-2026.pdf"
+    },
+    {
+      "slug": "smeg",
+      "marca": "smeg",
+      "nombre": "Smeg",
+      "titulo": "Lista de precios",
+      "vigencia": "sep 2026",
+      "src": "SMEG/SEP 26/LISTA DE PRECIOS SEPTIEMBRE 2026.pdf",
+      "archivo": "lista-precios-smeg-sep-2026.pdf",
+      "op": {
+        "stamp": "tr",
+        "fraccion": 0.1
+      }
+    },
+    {
+      "slug": "supra",
+      "marca": "supra",
+      "nombre": "Supra",
+      "titulo": "Lista de precios",
+      "vigencia": "jul 2026",
+      "src": "SUPRA/LISTA_PRECIOS_SUPRA_SIGNATURE_2026_07_EXCELL.pdf",
+      "archivo": "lista-precios-supra-jul-2026.pdf"
+    },
+    {
+      "slug": "supra-catalogo",
+      "marca": "supra",
+      "nombre": "Supra",
+      "titulo": "Catálogo",
+      "vigencia": "2026",
+      "src": "SUPRA/CATALOGO SUPRA 2026.pdf",
+      "archivo": "catalogo-supra-2026.pdf",
+      "op": {
+        "stamp": "tr"
+      }
+    },
+    {
+      "slug": "the-galley",
+      "marca": "the-galley",
+      "nombre": "The Galley",
+      "titulo": "Lista de precios",
+      "vigencia": "2026",
+      "src": "LAVISH-IESA/AGO 26/LISTA_PRECIOS_THE_GALLEY_2026.pdf",
+      "archivo": "lista-precios-the-galley-2026.pdf"
+    },
+    {
+      "slug": "faber",
+      "marca": "faber",
+      "nombre": "Faber",
+      "titulo": "Lista de precios",
+      "vigencia": "2026",
+      "src": "LECROM LUXSA/Faber 2026.pdf",
+      "archivo": "lista-precios-faber-2026.pdf",
+      "op": {
+        "del": [
+          2
+        ],
+        "logo_dims": [
+          2005,
+          802
+        ],
+        "stamp": "at_img"
+      }
+    },
+    {
+      "slug": "franke",
+      "marca": "franke",
+      "nombre": "Franke",
+      "titulo": "Lista de precios",
+      "vigencia": "2026",
+      "src": "LECROM LUXSA/LISTA_PRECIOS_FRANKE_2026.pdf",
+      "archivo": "lista-precios-franke-2026.pdf"
+    },
+    {
+      "slug": "nantucket",
+      "marca": "nantucket",
+      "nombre": "Nantucket",
+      "titulo": "Lista de precios",
+      "vigencia": "2024",
+      "src": "LECROM LUXSA/LISTA DE PRECIOS NANTUCKET SINKS.pdf",
+      "archivo": "lista-precios-nantucket-2024.pdf",
+      "op": {
+        "del": [
+          2
+        ],
+        "logo_dims": [
+          2005,
+          802
+        ],
+        "stamp": "tl"
+      }
+    },
+    {
+      "slug": "kalt",
+      "marca": "kalt",
+      "nombre": "Kalt",
+      "titulo": "Lista de precios",
+      "vigencia": "ene 2025",
+      "src": "LECROM LUXSA/Lista_Precios_KALT_2025.pdf",
+      "archivo": "lista-precios-kalt-2025.pdf"
+    },
+    {
+      "slug": "summit",
+      "marca": "summit",
+      "nombre": "Summit",
+      "titulo": "Lista de precios",
+      "vigencia": "jul 2026",
+      "src": "LECROM LUXSA/Summit 2026.pdf",
+      "archivo": "lista-precios-summit-jul-2026.pdf",
+      "op": {
+        "del": [
+          2
+        ],
+        "logo_dims": [
+          2005,
+          802
+        ],
+        "stamp": "at_img"
+      }
+    },
+    {
+      "slug": "alfresco",
+      "marca": "alfresco",
+      "nombre": "Alfresco",
+      "titulo": "Lista de precios",
+      "vigencia": "jul 2026",
+      "src": "ARTEXA/AGO 2026/ALFRESCO_JUL_2026.pdf",
+      "archivo": "lista-precios-alfresco-jul-2026.pdf",
+      "op": {
+        "artexa": true,
+        "back": true,
+        "stamp": "at_img"
+      }
+    },
+    {
+      "slug": "artisan",
+      "marca": "artisan",
+      "nombre": "Artisan",
+      "titulo": "Lista de precios",
+      "vigencia": "feb 2026",
+      "src": "ARTEXA/AGO 2026/ARTISAN_FEB_2026.pdf",
+      "archivo": "lista-precios-artisan-feb-2026.pdf",
+      "op": {
+        "artexa": true,
+        "back": true,
+        "stamp": "at_img"
+      }
+    },
+    {
+      "slug": "benessi",
+      "marca": "benessi",
+      "nombre": "Benessi",
+      "titulo": "Lista de precios",
+      "vigencia": "jul 2026",
+      "src": "ARTEXA/AGO 2026/BENESSI_JUL_2026.pdf",
+      "archivo": "lista-precios-benessi-jul-2026.pdf",
+      "op": {
+        "stamp": "tr"
+      }
+    },
+    {
+      "slug": "bertazzoni",
+      "marca": "bertazzoni",
+      "nombre": "Bertazzoni",
+      "titulo": "Lista de precios",
+      "vigencia": "sep 2026",
+      "src": "ARTEXA/AGO 2026/BERTAZZONI_SEP_2026.pdf",
+      "archivo": "lista-precios-bertazzoni-sep-2026.pdf",
+      "op": {
+        "artexa": true,
+        "back": true,
+        "stamp": "tr"
+      }
+    },
+    {
+      "slug": "blanco",
+      "marca": "blanco",
+      "nombre": "Blanco",
+      "titulo": "Lista de precios",
+      "vigencia": "jul 2026",
+      "src": "ARTEXA/AGO 2026/BLANCO_JUL_2026.pdf",
+      "archivo": "lista-precios-blanco-jul-2026.pdf",
+      "op": {
+        "artexa": true,
+        "back": true,
+        "logo_1x1": true,
+        "stamp": "at_img"
+      }
+    },
+    {
+      "slug": "brizo",
+      "marca": "brizo",
+      "nombre": "Brizo",
+      "titulo": "Lista de precios",
+      "vigencia": "mar 2026",
+      "src": "ARTEXA/AGO 2026/BRIZO_MAR_2026.pdf",
+      "archivo": "lista-precios-brizo-mar-2026.pdf",
+      "op": {
+        "artexa": true,
+        "back": true,
+        "stamp": "at_img"
+      }
+    },
+    {
+      "slug": "delta",
+      "marca": "delta",
+      "nombre": "Delta",
+      "titulo": "Lista de precios",
+      "vigencia": "jul 2026",
+      "src": "ARTEXA/AGO 2026/DELTA_JUL_2026.pdf",
+      "archivo": "lista-precios-delta-jul-2026.pdf",
+      "op": {
+        "artexa": true,
+        "back": true,
+        "stamp": "at_img"
+      }
+    },
+    {
+      "slug": "hoshizaki",
+      "marca": "hoshizaki",
+      "nombre": "Hoshizaki",
+      "titulo": "Lista de precios",
+      "vigencia": "feb 2026",
+      "src": "ARTEXA/AGO 2026/HOSHIZAKI_FEB_2026.pdf",
+      "archivo": "lista-precios-hoshizaki-feb-2026.pdf",
+      "op": {
+        "artexa": true,
+        "back": true,
+        "stamp": "tr",
+        "fraccion": 0.19
+      }
+    },
+    {
+      "slug": "kraus",
+      "marca": "kraus",
+      "nombre": "Kraus",
+      "titulo": "Lista de precios",
+      "vigencia": "jul 2026",
+      "src": "ARTEXA/AGO 2026/KRAUS_JUL_2026.pdf",
+      "archivo": "lista-precios-kraus-jul-2026.pdf"
+    },
+    {
+      "slug": "pitt-cooking",
+      "marca": "pitt-cooking",
+      "nombre": "Pitt Cooking",
+      "titulo": "Lista de precios",
+      "vigencia": "ago 2026",
+      "src": "ARTEXA/AGO 2026/PITT_COOKING_AGO_2026.pdf",
+      "archivo": "lista-precios-pitt-cooking-ago-2026.pdf",
+      "op": {
+        "artexa": true,
+        "back": true,
+        "stamp": "tr"
+      }
+    },
+    {
+      "slug": "thor",
+      "marca": "thor",
+      "nombre": "Thor",
+      "titulo": "Lista de precios",
+      "vigencia": "sep 2026",
+      "src": "ARTEXA/AGO 2026/THOR_SEP_2026.pdf",
+      "archivo": "lista-precios-thor-sep-2026.pdf",
+      "op": {
+        "artexa": true,
+        "back": true,
+        "stamp": "at_img"
+      }
+    },
+    {
+      "slug": "dawn",
+      "marca": "dawn",
+      "nombre": "Dawn",
+      "titulo": "Tarjas · lista de precios",
+      "vigencia": "ago 2026",
+      "src": "MARESA/LISTA_PRECIOS_DAWN_TARJAS_2026_02.pdf",
+      "archivo": "lista-precios-dawn-tarjas-ago-2026.pdf"
+    },
+    {
+      "slug": "mont-alpi",
+      "marca": "mont-alpi",
+      "nombre": "Mont Alpi",
+      "titulo": "Lista de precios",
+      "vigencia": "ene 2026",
+      "src": "MARESA/LISTA DE PRECIOS MONT ALPI ENERO 2026.pdf",
+      "archivo": "lista-precios-mont-alpi-ene-2026.pdf",
+      "op": {
+        "banner_dims": [
+          568,
+          133
+        ]
+      }
+    },
+    {
+      "slug": "broil-king",
+      "marca": "broil-king",
+      "nombre": "Broil King",
+      "titulo": "Asadores · lista de precios",
+      "vigencia": "mar 2026",
+      "src": "MARESA/PRECIOS_ASADORES_BROIL_KING_2026_03.pdf",
+      "archivo": "lista-precios-asadores-broil-king-mar-2026.pdf"
+    },
+    {
+      "slug": "blaze",
+      "marca": "blaze",
+      "nombre": "Blaze",
+      "titulo": "Asadores · lista de precios",
+      "vigencia": "ene 2026",
+      "src": "MARESA/PRECIOS_ASADORES_BLAZE_2026_ENERO.pdf",
+      "archivo": "lista-precios-asadores-blaze-ene-2026.pdf"
+    },
+    {
+      "slug": "miele",
+      "marca": "miele",
+      "nombre": "Miele",
+      "titulo": "Lista de precios",
+      "vigencia": "ene 2026",
+      "src": "MIELE/MIELE_full_print_lista de precios_enero_2026.pdf",
+      "archivo": "lista-precios-miele-ene-2026.pdf",
+      "op": {
+        "texto": true
+      }
+    },
+    {
+      "slug": "cafe",
+      "marca": "cafe",
+      "nombre": "Café",
+      "titulo": "Catálogo con precios",
+      "vigencia": "2026",
+      "src": "MABE/Catálogo CAFÉ 2026 (1).pdf",
+      "archivo": "catalogo-cafe-2026.pdf",
+      "op": {
+        "stamp": "tr"
+      }
+    },
+    {
+      "slug": "monogram",
+      "marca": "monogram",
+      "nombre": "Monogram",
+      "titulo": "Catálogo con precios",
+      "vigencia": "2026",
+      "src": "MABE/Catálogo Monogram 2026 (1).pdf",
+      "archivo": "catalogo-monogram-2026.pdf",
+      "op": {
+        "stamp": "tr"
+      }
+    },
+    {
+      "slug": "fulgor-milano",
+      "marca": "fulgor-milano",
+      "nombre": "Fulgor Milano",
+      "titulo": "Lista de precios",
+      "vigencia": "2026",
+      "src": "TECNOLAM/LISTA_PRECIOS_FULGOR_MILANO_2026_2.pdf",
+      "archivo": "lista-precios-fulgor-milano-2026.pdf"
+    },
+    {
+      "slug": "tecnolam-tarjas-y-monomandos",
+      "marca": "tecnolam",
+      "nombre": "Tecnolam",
+      "titulo": "Lista de precios",
+      "vigencia": "ene 2026",
+      "src": "TECNOLAM/LISTA_PRECIOS_TECNOLAM_2026_01.pdf",
+      "archivo": "lista-precios-tecnolam-ene-2026.pdf"
+    },
+    {
+      "slug": "falmec",
+      "marca": "falmec",
+      "nombre": "Falmec",
+      "titulo": "Lista de precios",
+      "vigencia": "sep 2025",
+      "src": "TECNOLAM/Lista_Precios_FALMEC_2025_09.pdf",
+      "archivo": "lista-precios-falmec-sep-2025.pdf"
+    },
+    {
+      "slug": "commodore",
+      "marca": "commodore",
+      "nombre": "Commodore",
+      "titulo": "Trituradores · lista de precios",
+      "vigencia": "ago 2026",
+      "src": "ECLIPSE SCHOCK/AGO 26/LISTA_PRECIOS_COMMODORE_2026_08.pdf",
+      "archivo": "lista-precios-trituradores-commodore-ago-2026.pdf"
+    },
+    {
+      "slug": "eclipse",
+      "marca": "eclipse",
+      "nombre": "Eclipse",
+      "titulo": "Lista de precios",
+      "vigencia": "ago 2026",
+      "src": "ECLIPSE SCHOCK/AGO 26/LISTA_PRECIOS_ECLIPSE_2026_08.pdf",
+      "archivo": "lista-precios-eclipse-ago-2026.pdf",
+      "op": {
+        "tapar": {
+          "2": [
+            955,
+            600,
+            1245,
+            748
+          ]
+        }
+      }
+    },
+    {
+      "slug": "schock",
+      "marca": "schock",
+      "nombre": "Schock",
+      "titulo": "Fregaderos · lista de precios",
+      "vigencia": "ago 2026",
+      "src": "ECLIPSE SCHOCK/AGO 26/LISTA_PRECIOS_SCHOCK_2026_08.pdf",
+      "archivo": "lista-precios-fregaderos-schock-ago-2026.pdf"
+    },
+    {
+      "slug": "kamado-joe",
+      "marca": "kamado-joe",
+      "nombre": "Kamado Joe",
+      "titulo": "Catálogo con precios",
+      "vigencia": "2025",
+      "src": "MIDDLEBY/JUN 26/KAMADO JOE GM MX vig. 4Q-25.pdf",
+      "archivo": "catalogo-kamado-joe-2025.pdf",
+      "op": {
+        "stamp": "tr"
+      }
+    },
+    {
+      "slug": "lynx",
+      "marca": "lynx",
+      "nombre": "Lynx",
+      "titulo": "Asadores · lista de precios",
+      "vigencia": "2025",
+      "src": "MIDDLEBY/JUN 26/LYNX GM MX vig 4Q-25.pdf",
+      "archivo": "lista-precios-asadores-lynx-2025.pdf",
+      "op": {
+        "stamp": "tl"
+      }
+    },
+    {
+      "slug": "sedona-by-lynx",
+      "marca": "sedona-by-lynx",
+      "nombre": "Sedona by Lynx",
+      "titulo": "Asadores · lista de precios",
+      "vigencia": "2025",
+      "src": "MIDDLEBY/JUN 26/SEDONA by LYNX GM MX vig 4Q-25.pdf",
+      "archivo": "lista-precios-asadores-sedona-by-lynx-2025.pdf",
+      "op": {
+        "stamp": "tl"
+      }
+    },
+    {
+      "slug": "tradewind",
+      "marca": "tradewind",
+      "nombre": "Trade-Wind",
+      "titulo": "Campanas · lista de precios",
+      "vigencia": "abr 2024",
+      "src": "MIDDLEBY/JUN 26/TRADE-WIND GM MX vig 4Q-25.pdf",
+      "archivo": "lista-precios-campanas-trade-wind-2024.pdf"
+    },
+    {
+      "slug": "u-line",
+      "marca": "u-line",
+      "nombre": "U-Line",
+      "titulo": "Lista de precios",
+      "vigencia": "jun 2026",
+      "src": "MIDDLEBY/JUN 26/U-LINE MX vig 4Q-26_JUN.pdf",
+      "archivo": "lista-precios-u-line-jun-2026.pdf"
+    },
+    {
+      "slug": "viking",
+      "marca": "viking",
+      "nombre": "Viking",
+      "titulo": "Lista de precios",
+      "vigencia": "abr 2026",
+      "src": "MIDDLEBY/JUN 26/VIKING MEXICO - Abril 15, 2026.pdf",
+      "archivo": "lista-precios-viking-abr-2026.pdf"
+    },
+    {
+      "slug": "invisacook",
+      "marca": "invisacook",
+      "nombre": "Invisacook",
+      "titulo": "Lista de precios",
+      "vigencia": "mar 2026",
+      "src": "INVISACOOK/MAR 26/LISTA_PRECIOS_INVISACOOK_2026_03.pdf",
+      "archivo": "lista-precios-invisacook-mar-2026.pdf"
+    },
+    {
+      "slug": "sub-zero",
+      "marca": "sub-zero",
+      "nombre": "Sub-Zero",
+      "titulo": "Lista de precios",
+      "vigencia": "ene 2026",
+      "src": "LAVISH-IESA/AGO 26/LISTA_PRECIOS_SUBZERO_2026_1_3.pdf",
+      "archivo": "lista-precios-sub-zero-ene-2026.pdf"
+    },
+    {
+      "slug": "wolf",
+      "marca": "wolf",
+      "nombre": "Wolf",
+      "titulo": "Lista de precios",
+      "vigencia": "jun 2026",
+      "src": "LAVISH-IESA/AGO 26/LISTA_PRECIOS_WOLF_2026_1_6.pdf",
+      "archivo": "lista-precios-wolf-jun-2026.pdf"
+    },
+    {
+      "slug": "wolf-asadores",
+      "marca": "wolf",
+      "nombre": "Wolf",
+      "titulo": "Asadores · lista de precios",
+      "vigencia": "jun 2026",
+      "src": "LAVISH-IESA/AGO 26/LISTA_PRECIOS_WOLF_ASADORES_2026_1_6.pdf",
+      "archivo": "lista-precios-asadores-wolf-jun-2026.pdf"
+    },
+    {
+      "slug": "asko",
+      "marca": "asko",
+      "nombre": "ASKO",
+      "titulo": "Lista de precios",
+      "vigencia": "jul 2026",
+      "src": "LAVISH-IESA/AGO 26/LISTA_PRECIOS_ASKO_COCINAS_2026_07.pdf",
+      "archivo": "lista-precios-asko-jul-2026.pdf"
+    },
+    {
+      "slug": "cove",
+      "marca": "cove",
+      "nombre": "Cove",
+      "titulo": "Lavavajillas · lista de precios",
+      "vigencia": "ene 2026",
+      "src": "LAVISH-IESA/AGO 26/LISTA_PRECIOS_LAVAVAJILLAS_COVE_2026.pdf",
+      "archivo": "lista-precios-lavavajillas-cove-ene-2026.pdf"
+    },
+    {
+      "slug": "scotsman",
+      "marca": "scotsman",
+      "nombre": "Scotsman",
+      "titulo": "Fábricas de hielo · lista de precios",
+      "vigencia": "ene 2026",
+      "src": "LAVISH-IESA/AGO 26/LISTA_PRECIOS_FAB_HIELO_SCOTSMAN_2026.pdf",
+      "archivo": "lista-precios-fabricas-hielo-scotsman-ene-2026.pdf"
+    },
+    {
+      "slug": "alfa-forni",
+      "marca": "alfa-forni",
+      "nombre": "Alfa Forni",
+      "titulo": "Hornos de pizza · lista de precios",
+      "vigencia": "2026",
+      "src": "LAVISH-IESA/AGO 26/LISTA_PRECIOS_ALFA_FORNI_hornos_de_pizza_2026.pdf",
+      "archivo": "lista-precios-hornos-pizza-alfa-forni-2026.pdf"
+    },
+    {
+      "slug": "bosch",
+      "marca": "bosch",
+      "nombre": "Bosch",
+      "titulo": "Lista de precios",
+      "vigencia": "ago 2026",
+      "src": "ARTEXA/AGO 2026/BOSCH_AGO_2026.pdf",
+      "archivo": "lista-precios-bosch-ago-2026.pdf",
+      "op": {
+        "artexa": true,
+        "back": true,
+        "logo_1x1": true,
+        "stamp": "at_img",
+        "palabras": [
+          "Dealer"
+        ]
+      }
+    },
+    {
+      "slug": "gaggenau",
+      "marca": "gaggenau",
+      "nombre": "Gaggenau",
+      "titulo": "Lista de precios",
+      "vigencia": "ago 2026",
+      "src": "ARTEXA/AGO 2026/GAGGENAU_AGO_2026.pdf",
+      "archivo": "lista-precios-gaggenau-ago-2026.pdf",
+      "op": {
+        "artexa": true,
+        "back": true,
+        "stamp": "tr",
+        "palabras": [
+          "Dealer"
+        ],
+        "del": [
+          2
+        ]
+      }
+    },
+    {
+      "slug": "thermador",
+      "marca": "thermador",
+      "nombre": "Thermador",
+      "titulo": "Lista de precios",
+      "vigencia": "ago 2026",
+      "src": "ARTEXA/AGO 2026/THERMADOR_AGO_2026.pdf",
+      "archivo": "lista-precios-thermador-ago-2026.pdf",
+      "op": {
+        "artexa": true,
+        "back": true,
+        "palabras": [
+          "Dealer"
+        ],
+        "lineas": "proprietary and confiden|without the prior written consent|^\\s*Cost\\s*$",
+        "stamp": "br"
+      }
+    },
+    {
+      "slug": "insinkerator",
+      "marca": "insinkerator",
+      "nombre": "InSinkErator",
+      "titulo": "Trituradores comerciales · lista de precios",
+      "vigencia": "jun 2026",
+      "src": "ARTEXA/AGO 2026/INSINKERATOR_COMERCIAL_JUN_2026.pdf",
+      "archivo": "lista-precios-trituradores-comerciales-insinkerator-jun-2026.pdf",
+      "op": {
+        "artexa": true,
+        "back": true,
+        "del": [
+          2
+        ],
+        "stamp": "tr",
+        "logo_dims": [
+          159,
+          60
+        ]
+      }
+    },
+    {
+      "slug": "coyote-asadores",
+      "marca": "coyote",
+      "nombre": "Coyote",
+      "titulo": "Asadores · lista de precios",
+      "vigencia": "feb 2026",
+      "src": "LECROM LUXSA/Coyote 2026.pdf",
+      "archivo": "lista-precios-asadores-coyote-feb-2026.pdf",
+      "op": {
+        "del": [
+          2
+        ],
+        "lineas": "Distributor Price Schedule|^\\s*Confidential\\s*$",
+        "stamp": "tr",
+        "fraccion": 0.16
+      }
+    }
+  ]
+}
