@@ -49,7 +49,7 @@ html { scroll-behavior: smooth; }
 }
 /* Márgenes de aire de la banda: marca→enlaces y enlaces→íconos. Ceden un poco
    antes que el espacio entre botones (que se mantiene constante). */
-.site-nav .container { height: 100%; display: flex; align-items: center; gap: clamp(28px, 2.4vw, 34px); }
+.site-nav .container { height: 100%; display: flex; align-items: center; gap: clamp(24px, 2vw, 28px); }
 .site-nav .brand { border-bottom: none; display: flex; align-items: center; margin-right: 8px; flex-shrink: 0; }
 .site-nav .btn { flex-shrink: 0; }
 .site-nav .brand img {
@@ -61,7 +61,7 @@ html { scroll-behavior: smooth; }
    OJO: el .container tope 1240px con padding 4vw → a MÁS ancho de pantalla,
    MENOS ancho útil; por eso el tipo del nav es 11.5px/0.10em (no 12/0.14) —
    con 8 botones la fila no cabía y empujaba los íconos fuera del margen. */
-.nav-links { display: flex; justify-content: space-between; gap: 20px; flex: 1; align-items: center; height: 100%; }
+.nav-links { display: flex; justify-content: space-between; gap: 21px; flex: 1; align-items: center; height: 100%; }
 .nav-links > a, .nav-links .has-mega > span, .nav-links .has-mega > a {
   font-family: var(--font-sans); font-weight: 600; font-size: 11.5px;
   letter-spacing: 0.1em; text-transform: uppercase;
@@ -2046,14 +2046,16 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 @media (max-width: 600px) { .cta-float { padding: 11px 16px; right: 20px; bottom: 118px; font-size: 11.5px; } }
 
 /* ---------- Responsive ---------------------------------------------------------------- */
-@media (max-width: 1180px) {
-  .site-nav .container { gap: 22px; }
-  .nav-links { gap: 18px; }
+@media (max-width: 1300px) {
+  .site-nav .container { gap: 18px; }
+  .nav-links { gap: 15px; }
   .nav-right { gap: 16px; }
   .nav-right > a, .nav-links > a, .nav-links .has-mega > span { letter-spacing: 0.1em; white-space: nowrap; }
 }
-/* Tablet: Herramientas/Garantías/Nosotros se ocultan (antes vivían en .nav-right) */
-@media (min-width: 721px) and (max-width: 1080px) {
+/* Tablet: los secundarios (Herramientas, Garantías, Nosotros, Contacto) se ocultan
+   y viven en el cajón de la hamburguesa. Desde 1181px la fila de 9 enlaces ya cabe
+   junto a los íconos; por debajo, no. */
+@media (min-width: 721px) and (max-width: 1180px) {
   .nav-links .nav-sec { display: none; }
   /* Con sólo 5 botones sobra ancho: repartirlo estiraría los huecos a ~68px.
      Se empaquetan a la izquierda y el aire sobrante queda antes de los íconos. */
@@ -2130,9 +2132,9 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 
 /* La hamburguesa vive donde se espera: al final de la barra, después de los
    íconos. En tablet convive con los enlaces horizontales (que ahí ya no
-   caben completos: Herramientas, Garantías y Nosotros se ocultan) y es la
+   caben completos: Herramientas, Garantías, Nosotros y Contacto se ocultan) y
    única puerta a esas secciones. */
-@media (max-width: 1080px) {
+@media (max-width: 1180px) {
   .nav-toggle { display: flex; order: 9; margin-left: 6px; }
   .site-nav .nav-icons { margin-left: auto; }
 }
@@ -2517,7 +2519,7 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .nav-right:empty { display: none; }
 .nav-icons {
   display: flex; align-items: center; gap: 6px;
-  padding-left: 14px; margin-right: 10px;
+  padding-left: 12px; margin-right: 6px;
   border-left: 1px solid var(--border);
 }
 .nav-ic {

@@ -7,6 +7,119 @@
 <link rel="icon" type="image/png" href="assets/favicon-circle.webp">
 <link rel="stylesheet" href="tokens-v2.css">
 <link rel="stylesheet" href="theme.css?v=66">
+<style>
+/* ==========================================================================
+   Hero en espresso (.page-hero--dark)
+   Sólo en Contacto: la página abre en oscuro, respira en hueso con los datos y
+   el mapa, y cierra en oscuro con la cotización.
+   ========================================================================== */
+.page-hero--dark { background: var(--homea-espresso); color: var(--dark-fg); }
+.page-hero--dark h1 { color: var(--dark-fg); }
+.page-hero--dark .sub { color: var(--dark-fg-muted); }
+.page-hero--dark .crumbs, .page-hero--dark .crumbs a { color: var(--dark-fg-muted); }
+.page-hero--dark .crumbs a:hover { color: var(--homea-gold-bright); }
+
+/* Teléfono: marca directo desde el móvil. Se pinta como el resto del dato y sólo
+   se delata al pasar el cursor — la lista no debe verse salpicada de enlaces. */
+.meta-list a { color: inherit; border-bottom: 1px solid transparent; }
+.meta-list a:hover { color: var(--accent-text); border-bottom-color: currentColor; }
+
+/* ==========================================================================
+   Mapa del showroom (.mapa-link)
+   El recuadro abre Google Maps. Debajo del mapa hay una placa dorada: al pasar
+   el cursor la imagen se desplaza y la placa queda a la vista — el mismo gesto
+   contenido del sistema (esquinas vivas, 240ms), sin texto que lo explique.
+   ========================================================================== */
+.mapa-link { display: block; position: relative; background: var(--homea-gold);
+  border: 0; border-bottom: 0; }
+.mapa-link img { display: block; width: 100%; height: auto;
+  transition: transform var(--dur-med) var(--ease-standard),
+    box-shadow var(--dur-med) var(--ease-standard); }
+.mapa-link:hover img, .mapa-link:focus-visible img { transform: translate(-8px, -8px);
+  box-shadow: var(--shadow-md); }
+.mapa-link:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--focus-ring); }
+/* Sin movimiento: la placa dorada se ve igual, como veladura sobre el mapa. */
+@media (prefers-reduced-motion: reduce) {
+  .mapa-link:hover img, .mapa-link:focus-visible img { transform: none; opacity: .82; }
+}
+
+/* ==========================================================================
+   Cotización guiada → WhatsApp (#homea-lead)
+   El visitante arma su solicitud con chips (qué busca, gama, presupuesto,
+   perfil) y el botón abre WhatsApp con el mensaje ya redactado: el lead llega
+   al mismo hilo donde el asesor lo atiende, sin backend de por medio.
+   Sólo tokens v2 — nada de colores ni tipografías fuera del sistema.
+   ========================================================================== */
+#homea-lead { position: relative; background: var(--homea-espresso); }
+#homea-lead::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: var(--grad-gold-glow); }
+#homea-lead .container { position: relative; }
+#homea-lead .hl-wrap { display: grid; grid-template-columns: 1fr 1.25fr;
+  gap: clamp(32px, 6vw, 96px); align-items: start; }
+
+/* ---------- columna izquierda: la promesa ---------- */
+#homea-lead h2 { margin: 16px 0 0; color: var(--dark-fg); }
+#homea-lead h2 em { font-style: italic; }
+#homea-lead .hl-pts { list-style: none; margin: 34px 0 0; padding: 0; display: grid; gap: 18px; }
+#homea-lead .hl-pts li { display: grid; grid-template-columns: 30px 1fr; gap: 14px;
+  align-items: center; font-size: var(--fs-sm); color: var(--dark-fg-muted); }
+#homea-lead .hl-pts b { display: block; font-weight: 600; color: var(--dark-fg); }
+#homea-lead .hl-pts svg { width: 26px; height: 26px; color: var(--homea-gold); }
+#homea-lead .hl-alt { margin: 34px 0 0; padding-top: 22px; border-top: 1px solid var(--dark-border);
+  font-size: var(--fs-sm); color: var(--dark-fg-muted); }
+#homea-lead .hl-alt a { font-weight: 600; text-decoration: none; }
+#homea-lead .hl-alt a:hover { text-decoration: underline; }
+
+/* ---------- columna derecha: la ficha de cotización ---------- */
+#homea-lead .hl-form { margin: 0; padding: clamp(24px, 3vw, 40px);
+  background: var(--homea-bone); color: var(--fg);
+  border-top: var(--bw-rule) solid var(--homea-gold); box-shadow: var(--shadow-lg); }
+#homea-lead .hl-step { margin-bottom: 22px; }
+#homea-lead .hl-q { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px;
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-muted); }
+#homea-lead .hl-q .n { font-family: var(--font-display); font-style: italic; font-size: 18px;
+  letter-spacing: var(--tracking-normal); text-transform: none; color: var(--accent-text); }
+#homea-lead .hl-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+#homea-lead .hl-chip { font-family: var(--font-sans); font-size: 12.5px; font-weight: 500;
+  line-height: 1.3; text-align: left; padding: 10px 14px; border-radius: var(--r-sm);
+  border: var(--bw-hair) solid var(--border-strong); background: var(--surface); color: var(--fg);
+  cursor: pointer; transition: background var(--dur-fast) var(--ease-standard),
+    color var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard); }
+#homea-lead .hl-chip:hover { border-color: var(--fg); }
+#homea-lead .hl-chip.on { background: var(--fg); color: var(--homea-bone); border-color: var(--fg); }
+#homea-lead .hl-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+#homea-lead input { width: 100%; margin: 0; padding: 13px 14px;
+  font-family: var(--font-sans); font-size: 15px; color: var(--fg);
+  background: var(--surface); border: var(--bw-hair) solid var(--border-strong);
+  border-radius: var(--r-sm);
+  transition: border-color var(--dur-fast) var(--ease-standard),
+    box-shadow var(--dur-fast) var(--ease-standard); }
+#homea-lead input:focus { outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--focus-ring); }
+#homea-lead .hl-send { margin-top: 8px; display: flex; flex-direction: column; gap: 10px; }
+#homea-lead .hl-send .btn { width: 100%; justify-content: center; padding: 18px 24px; }
+#homea-lead .hl-send .btn svg { width: 17px; height: 17px; flex: none; }
+#homea-lead .hl-hint { margin: 0; text-align: center; font-size: 12px; color: var(--fg-muted); }
+/* Espejo del mensaje que va a salir: el visitante ve exactamente qué se envía. */
+#homea-lead .hl-preview { display: none; margin-top: 14px; padding: 12px 14px;
+  background: var(--surface); border: var(--bw-hair) dashed var(--border-strong);
+  font-size: 12.5px; line-height: 1.5; color: var(--fg-muted); white-space: pre-line; }
+#homea-lead .hl-preview.on { display: block; }
+
+#homea-lead .hl-alt a { white-space: nowrap; }
+
+/* La promesa acompaña al visitante mientras llena el formulario: con dos columnas
+   la izquierda queda fija bajo la barra hasta que la ficha termina. */
+@media (min-width: 1081px) {
+  /* La columna se estira toda la fila (es el recorrido del sticky) y la promesa
+     queda fija dentro de ella hasta que la ficha termina. */
+  #homea-lead .hl-intro-col { align-self: stretch; }
+  #homea-lead .hl-intro { position: sticky; top: calc(var(--nav-h) + 40px); }
+}
+@media (max-width: 1080px) { #homea-lead .hl-wrap { grid-template-columns: 1fr; } }
+@media (max-width: 640px)  { #homea-lead .hl-grid2 { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
 
@@ -133,6 +246,7 @@
     <a class="nav-sec" href="herramientas.html">Herramientas</a>
     <a class="nav-sec" href="garantias-instalacion.html">Garantías</a>
     <a class="nav-sec" href="nosotros.html">Nosotros</a>
+    <a class="nav-sec" href="contacto.html">Contacto</a>
   </div>
   <div class="nav-icons" role="group" aria-label="Buscar, wishlist y carrito">
     <a class="nav-ic nav-ic-search" href="home.html" aria-label="Buscar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg></a>
@@ -142,59 +256,210 @@
 </div></nav>
 
 <!-- Page hero -->
-<header class="page-hero"><div class="container">
+<header class="page-hero page-hero--dark"><div class="container">
   <div class="crumbs"><a href="home.html">Inicio</a><span class="sep">·</span><span>Contacto</span></div>
-  <div class="eyebrow" style="margin-bottom:18px">Empecemos por escucharte</div>
-  <h1>Cuéntanos tu proyecto. <i>Sin prisa</i>.</h1>
+  <h1>Cuéntanos tu proyecto.<br><i>Sin prisa</i>.</h1>
   <p class="sub">Un especialista te contacta con asesoría y cotización, sin costo. Atención personal, sin call centers.</p>
 </div></header>
 
-<!-- Form + contacto directo -->
-<section class="sec tight" style="padding-top:32px"><div class="container">
+<!-- Contacto directo — antes que el formulario: quien ya sabe qué quiere, llama -->
+<section class="sec tight" style="padding-top:40px"><div class="container">
   <div class="grid-2" style="gap:72px;align-items:start">
 
-    <!-- Formulario → KOMMO (construcción: API/webhook) -->
-    <form class="reveal" onsubmit="event.preventDefault();alert('Demo — se conecta a KOMMO en la construcción del front-end.')">
-      <div class="form-grid-2">
-        <div class="field"><label>Nombre</label><input required placeholder="Tu nombre"></div>
-        <div class="field"><label>Apellidos</label><input placeholder="Tus apellidos"></div>
-      </div>
-      <div class="form-grid-2">
-        <div class="field"><label>Teléfono</label><input required placeholder="(442) 000 0000"></div>
-        <div class="field"><label>Email</label><input type="email" required placeholder="tu@correo.mx"></div>
-      </div>
-      <div class="form-grid-2">
-        <div class="field"><label>Me interesa</label>
-          <select><option>Cocina</option><option>Refrigeración</option><option>Bar &amp; Vinos</option><option>Exterior</option><option>Lavandería</option><option>Climatización</option><option>Otro</option></select></div>
-        <div class="field"><label>Tipo de cliente</label>
-          <select><option>Para mi hogar</option><option>Arquitecto / Interiorista</option><option>Desarrollador</option><option>Cocina integral</option></select></div>
-      </div>
-      <div class="field"><label>Mensaje</label><textarea rows="4" placeholder="Cuéntanos qué espacio estás equipando, medidas si las tienes, y para cuándo."></textarea></div>
-      <button class="btn btn-primary btn-block" type="submit">Enviar a un especialista</button>
-      <p style="margin:14px 0 0;font-size:12px;color:var(--fg-muted)">Al enviar aceptas nuestro aviso de privacidad. Nunca compartimos tus datos.</p>
-    </form>
-
-    <!-- Contacto directo -->
     <div class="reveal" style="display:flex;flex-direction:column;gap:22px;align-items:flex-start">
-      <div class="eyebrow">Contacto directo</div>
-      <span class="rule-gold"></span>
       <ul class="meta-list">
-        <li><b>Teléfono</b> <span class="figures">01 800 000 0000</span></li>
+        <li><b>Teléfono</b> <a class="figures" href="tel:+524422163552">(442) 216 3552</a></li>
         <li><b>WhatsApp</b> <span class="figures">+52 446 144 6318</span></li>
-        <li><b>Email</b> contacto@homea.mx</li>
+        <li><b>Email</b> carteaga@homea.mx</li>
         <li><b>Showroom</b> Querétaro, Qro. · México</li>
-        <li><b>Horario</b> Lun–Sáb · 10:00–19:00</li>
-        <li><b>Respuesta</b> 2 h promedio · atención personal</li>
+        <li><b>Horario</b> <span class="figures">Lun–Vie · 9:00–19:00<br>Sáb · 10:00–14:00</span></li>
       </ul>
-      <div class="slot" style="width:100%;aspect-ratio:16/10"><span class="lbl">Mapa · Google Maps embebido — Showroom Querétaro</span></div>
       <div style="display:flex;gap:16px;flex-wrap:wrap">
-        <a class="btn btn-gold wa-track" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_contacto_directo">WhatsApp directo</a>
-        <a class="btn btn-ghost" href="nosotros.html">Agendar visita</a>
+        <a class="btn btn-gold wa-track" href="https://api.whatsapp.com/send/?phone=524461446318&amp;text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_contacto_directo">WhatsApp</a>
       </div>
     </div>
 
+    <a class="mapa-link reveal" href="https://maps.app.goo.gl/LS9rqfHgK3qjFV926" target="_blank" rel="noopener" aria-label="Abrir la ubicación del showroom HOMEA en Google Maps">
+      <img width="1260" height="880" srcset="assets/photos/mapa-showroom-homea-queretaro-400.webp 400w, assets/photos/mapa-showroom-homea-queretaro-640.webp 640w, assets/photos/mapa-showroom-homea-queretaro-960.webp 960w, assets/photos/mapa-showroom-homea-queretaro.webp 1260w" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 34vw" src="assets/photos/mapa-showroom-homea-queretaro.webp" alt="Mapa del showroom HOMEA en Querétaro" loading="lazy" decoding="async">
+    </a>
+
   </div>
 </div></section>
+
+<!-- Cotización guiada: el visitante arma su solicitud y sale por WhatsApp ya redactada -->
+<section class="sec on-dark" id="homea-lead"><div class="container">
+  <div class="hl-wrap">
+
+    <div class="hl-intro-col">
+     <div class="hl-intro reveal">
+      <div class="eyebrow eyebrow-bright">Dinos qué necesitas</div>
+      <h2>…y te diremos <em>qué te conviene</em>.</h2>
+      <ul class="hl-pts">
+        <li><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.4 2.3v16.4l4.1-3.9 2.4 6.1 2.9-1.2-2.4-6h5.6z"/></svg><span><b>Elige lo que estás buscando,</b> no importa si no estás segur@.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="3" width="15" height="18" rx="1.5"/><path d="M8.5 8.5h7M8.5 12.5h7M8.5 16.5h4"/></svg><span><b>Llena el formulario lo mejor que puedas.</b> Incluye tu nombre.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 2.1.55 4.14 1.6 5.95L2 22l4.25-1.69a9.82 9.82 0 0 0 5.79 1.86h.01c5.46 0 9.9-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02A9.84 9.84 0 0 0 12.04 2Zm5.72 14.15c-.24.68-1.39 1.29-1.96 1.37-.5.07-1.13.1-1.82-.11-.42-.13-.96-.3-1.65-.6-2.91-1.26-4.8-4.19-4.95-4.39-.15-.2-1.19-1.58-1.19-3.02 0-1.43.75-2.14 1.02-2.43.27-.29.59-.37.78-.37.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.29.5-.15.17-.31.38-.45.51-.15.15-.3.31-.13.6.17.29.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.33 1.45.29.14.46.12.63-.07.17-.2.73-.85.93-1.14.2-.29.4-.24.67-.15.27.1 1.72.81 2.02.96.29.15.49.22.56.34.07.12.07.71-.17 1.39Z"/></svg><span><b>Te responde un asesor.</b> Sin call centers.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.8 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8.2z"/><path d="M13.8 3v5.2H19"/><path d="M8.8 14.6l2 2 3.6-3.8"/></svg><span><b>Recibe una cotización.</b> O una asesoría.</span></li>
+      </ul>
+      <p class="hl-alt">¿Prefieres hablar? Marca a nuestro showroom<br><a href="tel:+524422163552" class="figures">(442) 216 3552</a> y te atenderemos.</p>
+     </div>
+    </div>
+
+    <form class="hl-form reveal" id="homea-lead-form" novalidate>
+      <div class="hl-step">
+        <div class="hl-q"><span class="n">1</span> ¿Qué buscas?</div>
+        <div class="hl-chips" data-k="categoria">
+          <button type="button" class="hl-chip">Estufa / parrilla</button>
+          <button type="button" class="hl-chip">Horno</button>
+          <button type="button" class="hl-chip">Campana</button>
+          <button type="button" class="hl-chip">Refrigerador</button>
+          <button type="button" class="hl-chip">Lavavajillas</button>
+          <button type="button" class="hl-chip">Lavadora / secadora</button>
+          <button type="button" class="hl-chip">Asador / exterior</button>
+          <button type="button" class="hl-chip">Bar / hielo / vinos</button>
+          <button type="button" class="hl-chip">Tarja / grifería</button>
+          <button type="button" class="hl-chip">Cocina completa</button>
+        </div>
+      </div>
+      <div class="hl-step">
+        <div class="hl-q"><span class="n">2</span> ¿Qué gama?</div>
+        <div class="hl-chips" data-k="gama">
+          <button type="button" class="hl-chip">Premium</button>
+          <button type="button" class="hl-chip">Residencial</button>
+          <button type="button" class="hl-chip">Media</button>
+          <button type="button" class="hl-chip">Económica</button>
+          <button type="button" class="hl-chip">Asesórenme</button>
+        </div>
+      </div>
+      <div class="hl-step">
+        <div class="hl-q"><span class="n">3</span> Presupuesto aproximado</div>
+        <div class="hl-chips" data-k="presupuesto">
+          <button type="button" class="hl-chip">Menos de $30 mil</button>
+          <button type="button" class="hl-chip">$30 – 80 mil</button>
+          <button type="button" class="hl-chip">$80 – 200 mil</button>
+          <button type="button" class="hl-chip">Más de $200 mil</button>
+          <button type="button" class="hl-chip">Aún no lo sé</button>
+        </div>
+      </div>
+      <div class="hl-step">
+        <div class="hl-q"><span class="n">4</span> Eres…</div>
+        <div class="hl-chips" data-k="perfil">
+          <button type="button" class="hl-chip">Cliente final</button>
+          <button type="button" class="hl-chip">Arquitecto / interiorista</button>
+          <button type="button" class="hl-chip">Desarrollador / constructora</button>
+        </div>
+      </div>
+      <div class="hl-step">
+        <div class="hl-q"><span class="n">5</span> Para dirigirnos a ti</div>
+        <div class="hl-grid2">
+          <input type="text" name="nombre" placeholder="Tu nombre completo" autocomplete="name">
+          <input type="text" name="ciudad" placeholder="Ciudad" autocomplete="address-level2">
+        </div>
+      </div>
+      <div class="hl-send">
+        <a class="btn btn-gold wa-track" id="homea-lead-send" href="https://api.whatsapp.com/send/?phone=524461446318&amp;text=%C2%A1Hola%20Homea!%20Quiero%20una%20cotizaci%C3%B3n." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_cotizacion_guiada">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 2.1.55 4.14 1.6 5.95L2 22l4.25-1.69a9.82 9.82 0 0 0 5.79 1.86h.01c5.46 0 9.9-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02A9.84 9.84 0 0 0 12.04 2Zm5.72 14.15c-.24.68-1.39 1.29-1.96 1.37-.5.07-1.13.1-1.82-.11-.42-.13-.96-.3-1.65-.6-2.91-1.26-4.8-4.19-4.95-4.39-.15-.2-1.19-1.58-1.19-3.02 0-1.43.75-2.14 1.02-2.43.27-.29.59-.37.78-.37.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.29.5-.15.17-.31.38-.45.51-.15.15-.3.31-.13.6.17.29.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.33 1.45.29.14.46.12.63-.07.17-.2.73-.85.93-1.14.2-.29.4-.24.67-.15.27.1 1.72.81 2.02.96.29.15.49.22.56.34.07.12.07.71-.17 1.39Z"/></svg>
+          Enviar por WhatsApp
+        </a>
+        <p class="hl-hint">Se abre WhatsApp con tu solicitud lista. Tus datos sólo se usan para atender esta cotización.</p>
+        <div class="hl-preview" id="homea-lead-preview"></div>
+      </div>
+    </form>
+
+  </div>
+</div></section>
+
+<script>
+/* Cotización guiada (#homea-lead): las respuestas se convierten en un mensaje de
+   WhatsApp que el visitante ve antes de enviarlo. Sin backend ni formulario que se
+   pierda: el lead entra por el mismo hilo que atiende el asesor.
+
+   Todo delegado en document y con guardia de una sola ejecución: al navegar por el
+   sitio (SPA) el markup se re-monta, pero este script no se vuelve a ejecutar. Por
+   eso el estado no vive en variables sino en el propio DOM (los chips con .on), y
+   un bloque recién montado arranca limpio y sigue respondiendo. */
+(function () {
+  var HOMEA_WA     = '524461446318';   /* WhatsApp de ventas, con lada de pais */
+  var HOMEA_ORIGEN = 'homea.mx';       /* de donde decimos que viene el lead */
+
+  if (window.__homeaLeadReady) { return; }
+  window.__homeaLeadReady = true;
+
+  var cerca = function (e, sel) {
+    var t = e.target;
+    return t && t.closest ? t.closest(sel) : null;
+  };
+
+  /* Lo elegido hasta ahora, leido del DOM: {categoria, gama, presupuesto, perfil}. */
+  var elegido = function (root) {
+    var sel = {};
+    Array.prototype.forEach.call(root.querySelectorAll('.hl-chips'), function (g) {
+      var c = g.querySelector('.hl-chip.on');
+      if (c) { sel[g.getAttribute('data-k')] = c.textContent.trim(); }
+    });
+    return sel;
+  };
+
+  /* Redacta el mensaje, lo pone en el boton y lo enseña en el espejo. */
+  var redactar = function (root) {
+    var form = root.querySelector('#homea-lead-form');
+    var send = root.querySelector('#homea-lead-send');
+    var prev = root.querySelector('#homea-lead-preview');
+    if (!form || !send || !prev) { return; }
+
+    var sel = elegido(root);
+    var nombre = form.nombre.value.trim(), ciudad = form.ciudad.value.trim();
+    var lines = ['¡Hola Homea! Quiero una cotización' + (nombre ? ', soy ' + nombre : '') + '.'];
+    if (sel.categoria)   { lines.push('• Busco: ' + sel.categoria); }
+    if (sel.gama)        { lines.push('• Gama: ' + sel.gama); }
+    if (sel.presupuesto) { lines.push('• Presupuesto: ' + sel.presupuesto); }
+    if (sel.perfil)      { lines.push('• Perfil: ' + sel.perfil); }
+    if (ciudad)          { lines.push('• Ciudad: ' + ciudad); }
+    lines.push('Escribo desde ' + HOMEA_ORIGEN + '.');
+
+    var msg = lines.join('\n');
+    send.href = 'https://api.whatsapp.com/send/?phone=' + HOMEA_WA + '&text=' + encodeURIComponent(msg);
+    prev.textContent = msg;
+    prev.classList.toggle('on', !!(Object.keys(sel).length || nombre || ciudad));
+  };
+
+  document.addEventListener('click', function (e) {
+    var chip = cerca(e, '#homea-lead .hl-chip');
+    if (chip) {
+      var grupo = chip.closest('.hl-chips');
+      var encendido = chip.classList.contains('on');
+      Array.prototype.forEach.call(grupo.querySelectorAll('.hl-chip'), function (x) {
+        x.classList.remove('on');
+      });
+      if (!encendido) { chip.classList.add('on'); }   /* volver a pulsar = deseleccionar */
+      redactar(chip.closest('#homea-lead'));
+      return;
+    }
+    /* El clic de WhatsApp ya lo rastrea v2.js (data-track); aqui va el detalle del lead. */
+    var send = cerca(e, '#homea-lead-send');
+    if (send && window.dataLayer) {
+      var sel = elegido(send.closest('#homea-lead'));
+      window.dataLayer.push({
+        event: 'generate_lead', lead_source: 'web_form',
+        lead_categoria: sel.categoria || '', lead_gama: sel.gama || '',
+        lead_presupuesto: sel.presupuesto || '', lead_perfil: sel.perfil || ''
+      });
+    }
+  });
+
+  document.addEventListener('input', function (e) {
+    var campo = cerca(e, '#homea-lead input');
+    if (campo) { redactar(campo.closest('#homea-lead')); }
+  });
+
+  /* Enter en un campo: enviar es abrir WhatsApp, no recargar la pagina. */
+  document.addEventListener('submit', function (e) {
+    if (!e.target || e.target.id !== 'homea-lead-form') { return; }
+    e.preventDefault();
+    var send = e.target.querySelector('#homea-lead-send');
+    if (send) { send.click(); }
+  });
+})();
+</script>
 
 <footer class="site-footer"><div class="container">
   <div class="cols">
