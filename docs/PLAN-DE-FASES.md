@@ -76,8 +76,105 @@ Estado: 🔵 pendiente · 🟡 en curso · ✅ hecho
 ### 3.4 Tracking + leads (limpio desde día 1)
 - [ ] **GA4** + **Meta Pixel/CAPI** inyectados desde el front-end (sin GTM heredado).
 - [ ] Preservar audiencias de remarketing.
-- [ ] **Formulario de leads → KOMMO** (API/webhook).
+- [~] ~~**Formulario de leads → KOMMO** (API/webhook).~~ **KOMMO descartado (decisión Carla, 2026-09-25): no le funciona.**
+- [x] ⭐ **Lista de correos en Shopify, sin costo extra (2026-09-25).** El campo de correo del formulario de Contacto (punto 6, con casilla de consentimiento) publica en `/api/lead` → `lib/shopify/admin.ts` → `customerCreate` con `emailMarketingConsent`. Los contactos quedan como **clientes de Shopify**, que es la lista que usa **Shopify Messaging** (antes Shopify Email): **10,000 correos gratis al mes** en el plan Basic de HOMEA, luego $1 USD por cada 1,000. Verificado en el Help Center, no de memoria. Se descartaron Neon/Supabase/Resend por no añadir proveedor ni factura.
+  - [x] ~~**PENDIENTE (Carla):** crear la app en el **Dev Dashboard** (ver 3.4 ter) con permisos `write_customers` y `read_customers`, instalarla en la tienda y poner `SHOPIFY_ADMIN_CLIENT_ID` y `SHOPIFY_ADMIN_CLIENT_SECRET` en `.env.local` y en Vercel (3 entornos). Sin eso, `/api/lead` no guarda nada: solo deja el correo en el log del servidor y avisa.~~ **Hecho 2026-09-25.**
+  - [ ] Cuando se migre al CRM definitivo **solo se toca `app/api/lead/route.ts`**: el formulario no cambia. La lista se saca del admin de Shopify en CSV.
 - [ ] Botón/flotante **WhatsApp** → `https://api.whatsapp.com/send/?phone=524461446318` (cel. 446 144 6318). **Ya implementado en el preview** en las 7 plantillas.
+
+### 3.4 bis Newsletter: recabar correos y mandarlos ⭐ NUEVO (2026-09-25)
+*Sustituye a KOMMO. La lista y el envío ya están pagados con el plan de Shopify.*
+
+**Dónde vive la lista.** Los contactos son **clientes de Shopify con consentimiento
+de marketing**, que es exactamente la lista que lee **Shopify Messaging** (antes
+Shopify Email): **10,000 correos gratis al mes** en el plan **Basic** de HOMEA,
+después $1 USD por cada 1,000 (verificado en el Help Center). Manda correo, SMS y
+WhatsApp desde el admin. Hoy la tienda tiene **0 clientes**: la lista arranca limpia.
+
+**Recabación — dónde se pide el correo:**
+- [x] **Contacto** — punto 6 del formulario de cotización: correo + casilla de
+  consentimiento. Publica en `/api/lead`.
+- [ ] **Guías / blog** — bloque de suscripción al final de cada artículo y en el
+  índice de `/guias`. Mismo endpoint, `origen: "guias"` (o el slug del artículo)
+  para saber **qué contenido trae lista**. Es el complemento natural de la cadencia
+  quincenal de la **Fase 6**: se publica un artículo, se capta, se remarca.
+- [ ] Evaluar un tercer punto: pie de página del sitio (alcance máximo, contexto mínimo).
+
+**Consentimiento y legal — no es opcional:**
+- [x] Casilla de consentimiento **marcada por defecto (decisión Carla, 2026-09-25)**:
+  "Quiero recibir novedades, catálogos y ofertas de HOMEA por correo. Puedo darme de
+  baja cuando quiera. *Aviso de privacidad*" (enlace). Se guarda como `SUBSCRIBED` /
+  `SINGLE_OPT_IN`; si la desmarca, el contacto se guarda **sin** consentimiento de
+  marketing y no entra a campañas. La nota bajo el botón dice que los datos se usan
+  para la cotización y, si la casilla queda marcada, para novedades.
+- [x] **Conexión probada (2026-09-25):** app "HOMEA Sitio Web" del Dev Dashboard
+  instalada; credenciales en `.env.local` y en Vercel (Production + Preview). Un
+  envío real desde `/contacto` creó el cliente en Shopify con etiquetas
+  `contacto` + `homea.mx` y estado `SUBSCRIBED`.
+- [x] **Aviso de privacidad** (2026-09-25): el texto vive en **Shopify** (Configuración →
+  Políticas; lo usa también el checkout) y el sitio lo pinta en `/aviso-de-privacidad`
+  por Storefront API (`lib/shopify/politicas.ts` + `components/PaginaPolitica.tsx`,
+  revalidación diaria). Igual con `/terminos`. Enlazado desde la casilla de Contacto
+  y el pie de página. **Para cambiarlo se edita en Shopify, no en el código.**
+  - [x] Correo de contacto del aviso: se queda `administracion@homea.mx` (Carla, 2026-09-25).
+  - [ ] Enlazarlo también en cada punto de captura nuevo (bloque de Guías).
+- [ ] Baja funcional: Shopify Messaging mete el enlace de baja, pero hay que
+  verificarlo en el primer envío real.
+- [ ] Decidir si se sube a **doble opt-in** (`CONFIRMED_OPT_IN`) cuando el volumen
+  crezca: mejora entregabilidad a costa de perder parte de las altas.
+
+**Envío — lo que falta para mandar la primera campaña:**
+- [ ] Instalar **Shopify Messaging** en el admin y verificar el dominio remitente
+  (SPF/DKIM de `homea.mx`) — sin eso, Gmail y Outlook mandan todo a spam.
+- [ ] Definir la primera automatización: bienvenida al suscribirse.
+- [ ] Segmentar por las etiquetas que ya manda `/api/lead` (`contacto`, `guias`, …).
+
+**Cambio futuro de herramienta:** la lista se exporta en CSV desde el admin de
+Shopify y **solo se toca `app/api/lead/route.ts`**. El formulario no se entera.
+
+### 3.4 ter App de Shopify: qué desbloquea y qué NO ⭐ NUEVO (2026-09-25)
+
+**Hay que crearla en el Dev Dashboard, no en el admin.** Desde el 1 de enero de 2026
+las apps personalizadas se crean y administran en el **Dev Dashboard**; las que se
+creaban dentro del admin ("Develop apps") quedaron como legacy. **Y la diferencia no
+es cosmética:** el acceso a datos personales de cliente **Nivel 2** (nombre, correo,
+teléfono, dirección) es *"siempre disponible"* para una **custom app del Dev
+Dashboard**, pero *"varía según el plan"* para una **admin created custom app** — y
+el plan **Basic no tiene Nivel 2**. Creada por el camino equivocado, **el guardado de
+correos no funcionaría**.
+
+**Lo que la app SÍ desbloquea:**
+- [ ] **Acceso a la Admin API** → guardar correos (`/api/lead`, ya construido) y, en
+  Fase 4, subir/actualizar catálogo y precios desde SAE por script. **Ojo con la
+  forma de autenticar:** desde 2026 ya no existen las apps del admin que entregaban
+  un token fijo `shpat_…`. Una app del Dev Dashboard que actúa sobre la propia
+  tienda usa **client credentials grant**: el servidor cambia `client_id` +
+  `client_secret` por un token que **caduca a las 24 h** y se renueva solo. Por eso
+  en el `.env` hay credenciales, no un token (`lib/shopify/admin.ts`).
+- [ ] **Webhooks** → `products/update` y `inventory_levels/update` a un endpoint del
+  sitio para **revalidar la ficha en Vercel** (ISR on-demand). Con ~16k productos
+  esto deja de ser un lujo: es la única forma de que un cambio de precio o de
+  existencia se vea sin reconstruir el sitio. Ya hay `SHOPIFY_REVALIDATION_SECRET`
+  reservado en `.env.example`.
+- [ ] **Shopify Flow** (triggers/acciones) para automatizar avisos internos.
+
+**Lo que la app NO puede dar, y conviene no perseguir:**
+- ❌ **"Productos más clickeados".** El sitio es **headless**: Shopify solo ve lo que
+  pasa por el **checkout**. Las visitas y los clics de `homea.mx` **nunca llegan a
+  Shopify** (el web pixel solo funciona en el Online Store de Shopify, que aquí no
+  se usa). Ese dato sale de **GA4** (Fase 3.5) o de nuestro propio registro de eventos.
+- ❌ **Dashboard de ventas dentro de una app.** El admin de Shopify ya trae Analytics;
+  rehacerlo en una app embebida es trabajo sin ganancia.
+- ⚠️ **`npm init @shopify/app@latest` arma un proyecto de app embebida completo**
+  (React Router + OAuth + hosting propio). Para lo que HOMEA necesita hoy —un token y
+  webhooks— es desproporcionado y mete una segunda aplicación a mantener. Solo vale
+  la pena si algún día se quiere **interfaz dentro del admin de Shopify**.
+
+**Propuesta para los tableros (pendiente de decisión):** un **panel interno en el
+propio sitio** (ruta protegida), no una app embebida, porque los números viven en dos
+lados y hay que juntarlos: ventas y stock por **Admin API**, comportamiento del sitio
+por **GA4**, y leads/suscriptores por la lista de Shopify. Es lo único que hoy no
+existe en ninguna herramienta.
 
 ### 3.5 Google Ads + rastreo de clicks (conversiones) ⭐ NUEVO
 *Cada clic relevante debe ser rastreable a la cuenta de Google de HOMEA.*
@@ -349,9 +446,11 @@ sirvió de piloto del patrón (5 fichas + import en borrador).
 - [ ] **QA del buscador:** que el índice esté regenerado con el catálogo final (`node scripts/build-search-index.mjs`), que busque por SKU y por lenguaje natural, que el precio con IVA cuadre con la PDP y que **no aparezcan productos en borrador**.
 - [ ] **QA de la regla USD → solo ejecutivo:** verificar que **ningún producto en dólares** pueda llegar al checkout de Shopify; el intercepto a WhatsApp debe funcionar en PLP, PDP y carrito.
 - [ ] Accesibilidad (WCAG) y **Core Web Vitals** móvil (la gran oportunidad vs OXATIS). *El responsive en sí se adelantó a la **Fase 3.6**; aquí solo se verifica el resultado final.*
+- [ ] ⭐ **Medir rendimiento en CAMPO, no en local (decisión Carla, 2026-09-25).** Línea base medida sobre el build de producción servido en localhost: home **719 KB** (fuentes 343 · imágenes 199 · JS 145 · CSS 31 · HTML 33), `/contacto` **555 KB**, LCP y FCP **188 ms**, CLS **0.003**. Son el mejor caso y ya están holgadas: **no seguir exprimiendo bytes con esas cifras**. Lo que decide es el dato de campo (CrUX / PageSpeed sobre el dominio en vivo y GSC → Core Web Vitals); volver a ajustar **después** del corte de migración, con usuarios reales, y solo si el campo lo pide.
 - [ ] **Corte de migración:** apuntar **DNS de `homea.mx` (GoDaddy) a Vercel**, activar **todos los 301**, subir **sitemap propio** a GSC, validar indexación.
 - [ ] **Análisis de comportamiento con Microsoft Clarity** ⭐ NUEVO: instalar **Microsoft Clarity** (gratis) en el front-end **en el corte de lanzamiento** para que capture datos desde el día 1 — **heatmaps** (clics, scroll, áreas muertas) y **grabaciones de sesión**. Complementa GA4/Meta Pixel (que miden *qué* pasa) mostrando *cómo* navegan los usuarios. Durante el **monitoreo post-lanzamiento**, revisar: dónde abandonan, qué CTAs ("Cotizar"/WhatsApp/"Comprar") se ven y cuáles se ignoran, rage-clicks y fricción en filtros/PDP → alimenta iteración de conversión.
 - [ ] **No matar OXATIS de golpe**; **monitoreo post-lanzamiento** 2–6 semanas vs. línea base.
+- [ ] ⭐ **No engordar `preview/assets` (nota 2026-09-25).** Son **53 MB de los cuales el 100 % son copias byte a byte** de `public/assets` (0 archivos exclusivos; `public/` tiene además 686 archivos propios, 27 MB). **El usuario nunca los descarga** — Next solo sirve `public/` — pero viajan en cada clon y en cada subida a Vercel. No duele hoy; la regla es **no hacerla crecer**: los heros de marca (26 MB) viven solo en `public/` a propósito. Si algún día molesta el peso del repo, se puede dejar de duplicar, a cambio de que el preview estático deje de verse completo al abrirlo suelto.
 - [ ] 🔒 **Repo sin información delicada antes de lanzar:** confirmar que ya se borraron los Excel de catálogo con precios y costos, y que se decidió qué hacer con el historial de git (ver el recordatorio en la Fase 4).
 - [ ] ⭐ **Cerrar la fuga de precios en `promociones.homea.mx`** (hallazgo 2026-09-04, marcado por Carla como punto a revisar cerca del lanzamiento): la raíz de la carpeta del proyecto (`~/Documents/Landing Pages Homea 2026/Homea Promociones`, repo `Homeaamx/promociones-homea`) contiene archivos de trabajo internos que Vercel sirve públicos — verificado con HTTP 200: `PRECIOS_CLAUDE_2026.xlsx`, `prices.json`, `*_rows.json` por marca, scripts `.py`. Cualquiera con la URL puede descargar las listas de precios. Fix: mover esos archivos a una carpeta fuera del deploy o excluirlos con `.vercelignore`, y redesplegar.
 
