@@ -126,7 +126,13 @@ WhatsApp desde el admin. Hoy la tienda tiene **0 clientes**: la lista arranca li
 **Envío — lo que falta para mandar la primera campaña:**
 - [ ] Instalar **Shopify Messaging** en el admin y verificar el dominio remitente
   (SPF/DKIM de `homea.mx`) — sin eso, Gmail y Outlook mandan todo a spam.
-- [ ] Definir la primera automatización: bienvenida al suscribirse.
+- [ ] ⭐ **PENDIENTE (Carla, 2026-09-25): correo de bienvenida automático** al suscribirse.
+  Se arma en Shopify Messaging → Automatizaciones, disparado por "cliente suscrito a
+  marketing por correo". Aplica a los contactos del sitio (`/api/lead`) y del checkout.
+- [ ] Activar la casilla de marketing **en el checkout de Shopify** (Configuración →
+  Pantalla de pago → Suscripción a marketing → Correo electrónico): hoy está en "No
+  mostrar", así que quien compra no entra a la lista. Es independiente del formulario
+  del sitio, que ya guarda el consentimiento por API.
 - [ ] Segmentar por las etiquetas que ya manda `/api/lead` (`contacto`, `guias`, …).
 
 **Cambio futuro de herramienta:** la lista se exporta en CSV desde el admin de
@@ -199,10 +205,28 @@ existe en ninguna herramienta.
 - [x] **Scroll horizontal cerrado** — las 12 rutas miden 0px de desborde a 360, 390, 768, 1024 y 1440. Causas y arreglos: el PLP mantenía la rejilla de 2 columnas (filtros + productos) también en móvil porque el CSS de página se inyecta después de `theme.css` y ganaba sin media query; la fila de botones de garantías era `flex:none` y tomaba el ancho máximo de su contenido; en contacto y marcas un `display:flex` sin `flex-wrap` con dos botones `nowrap` fijaba 450px de contenido mínimo; el buscador de fichas de herramientas no cabía con input y botón en la misma fila; y a 360px el aire de la barra del nav empujaba la hamburguesa 9px fuera.
 - [x] **Filtros del PLP en móvil** — apilados sobre la rejilla medían ~2 000px y el primer producto quedaba a ocho pantallas de scroll (y=3036). Ahora `v2.js` los envuelve en un desplegable "Filtrar" y el primer producto aparece a y=935. En escritorio el aside no cambia.
 - [ ] **Pantallas de 320px** (iPhone SE 1.ª gen) — quedan desbordes en `/producto/[slug]` (26px), `/garantias-instalacion` (13px) y `/contacto` (8px). Decisión pendiente de Carla: se persiguen o se fija 360px como piso soportado.
-- [ ] **PDP y home** en móvil: altura del hero, carrusel, galería, barra de compra.
-- [ ] **Pasada de tablet** (768–1024) sobre todas las plantillas: densidad de rejillas, no solo ausencia de desborde.
+- [x] **Pasada móvil de tamaños y densidad (2026-09-28)** — bloque "Fase 3.6 · Pasada móvil" al final de `styles/theme.css` y `preview/theme.css` (+ `styles/guias.css`, `preview/garantias-instalacion.html`, `preview/herramientas.html`). Todo dentro de `max-width`; el escritorio no cambia. Qué se corrigió:
+  - **/marcas:** 92 tiles en una sola columna = 25 800px de página. Ahora 2 columnas en móvil (tile 167×89) y 3 en tablet → 13 300px.
+  - **Reseñas Google (home):** el `<figure>` traía el margen UA de 40px por lado (tarjeta de 260px en 342, 650px de alto); ahora a todo el ancho (escenario 693 → 455px).
+  - **Showroom (home):** etiqueta y dato apilados en el panel de cristal; menos aire.
+  - **PDP a una columna (≤1080):** el CTA "Agregar al carrito / Cotizar" pasa **justo debajo del precio** (antes iba dos pantallas abajo, tras la tabla de specs). La equivalencia MXN se queda con el precio. Se agregó `class="pdp-cta"` a las 5 fichas.
+  - **Botones:** `.btn` ya puede saltar de línea en móvil (ofertas: "Enviar cotización por WhatsApp" medía 374px en 342).
+  - **PLP:** toolbar apilada; `<select>` de orden 17 → 44px; checkboxes 18px con label de 40px; paginador (`class="pager"` en 13 listados) ya no parte "01 / 01".
+  - **Cabeceras con enlace (`.sec-head-row`):** apiladas (PDP "Completa la cocina").
+  - **Herramientas:** las 3 secciones borrosas de "próximamente" medían ~4 000px; recortadas a 520px c/u con la tarjeta pegada (8 547 → 6 705px).
+  - **Garantías:** correos partidos a media palabra en 2 columnas → `overflow-wrap`, tipografía compacta.
+  - **Guías:** hero a `100svh` (sin salto por la barra del navegador) y buscador a todo el ancho.
+  - **Áreas táctiles:** flecha del hero 30 → 44px, puntos del carrusel de reseñas con 44px invisibles, cierre del wishlist 44px.
+  - Verificado: **0 px de desborde en 13 rutas a 390, 768 y 1024**; el cajón de navegación se abre bien.
+- [ ] **Decisiones de diseño pendientes de Carla (móvil):**
+  - Home "Todos tus espacios": 10 tiles a una columna de 293px = 2 900px de scroll. ¿Dos columnas (tile ≈ 170×200) o se deja el recorrido largo?
+  - Barra utilitaria (tipo de cambio · Cuenta): texto de 10px y 38px de alto; es cosmética, pero "Cuenta" tiene 15px de área táctil.
+  - PLP: la pista "Pasa el cursor por cada pieza · da clic para explorar" del hero interactivo se lee también en táctil.
+  - Riel de subcategorías (PLP): en 390 solo caben 2 tiles de ~280px de alto; se podría compactar.
+- [ ] **PDP y home** en móvil: altura del hero, carrusel, galería. *(El CTA de la ficha ya se movió; lo demás se ve bien en la pasada del 28/09.)*
+- [~] **Pasada de tablet** (768–1024): sin desbordes en las 13 rutas (2026-09-28); marcas a 3 columnas; PDP con CTA bajo el precio. Falta revisar densidad de rejillas plantilla por plantilla.
 - [ ] **QA final:** 375 · 390 · 414 · 768 · 820 · 1024, áreas táctiles ≥44px, `prefers-reduced-motion`, y verificación de que el escritorio quedó idéntico.
-> **Cómo se audita:** con el dev server arriba, se cargan las rutas en iframes de ancho fijo y se mide `scrollWidth - clientWidth` por ruta, listando los elementos que sobresalen. Repetir tras cada bloque.
+> **Cómo se audita:** con el dev server arriba, se cargan las rutas en iframes de ancho fijo y se mide `scrollWidth - clientWidth` por ruta, listando los elementos que sobresalen. Repetir tras cada bloque. Para **ver** una sección en móvil desde el panel del navegador: iframe de 390px de ancho desplazado por dentro (`contentWindow.scrollTo`) y captura; el scroll de la ventana principal sale en blanco.
 
 **Entregable:** front-end en Vercel (dominio temporal), conectado a Shopify, con SEO técnico y **tracking de conversiones (incl. clicks de WhatsApp) verificado en GA4 + Google Ads**.
 
@@ -225,7 +249,7 @@ existe en ninguna herramienta.
 > | Exterior | ✅ solo **Asadores & Hornos** | **Alberca** |
 > | Electrodomésticos menores | ✅ toda | |
 > | Lavandería | ✅ toda | |
-> | Minisplits | ✅ toda | |
+> | Aire acondicionado (antes Minisplits) | ✅ toda | |
 > | Baños | | ✅ |
 > | Vapor y Sauna | | ✅ |
 > | Wellness | | ✅ |
@@ -307,7 +331,7 @@ existe en ninguna herramienta.
 > - [ ] **Siguiente paso tras subir los catálogos — PDFs marca por marca** (decisión Carla, 2026-09-21): pedirle
 >   a Carla el PDF vigente de cada marca, subirlo a Shopify Files y darlo de alta en `data/listas-precios.json`
 >   (la página lo toma sola con `npm run marcas`). Orden: primero las marcas de **Cocina y Bar, Exterior,
->   Electrodomésticos menores, Lavandería y Minisplits**; lo demás, después. Revisar cada PDF para que se
+>   Electrodomésticos menores, Lavandería y Aire acondicionado**; lo demás, después. Revisar cada PDF para que se
 >   presente sin error.
 >   - [x] **Catálogos vigentes cargados** (2026-09-22): 49 PDFs de `CATALOGOS VIGENTES` (OneDrive) limpios de
 >     distribuidor y subidos a Shopify Files; **64 de 92 marcas** ya enseñan su PDF (hero "Ver catálogo oficial" →
@@ -375,6 +399,13 @@ sirvió de piloto del patrón (5 fichas + import en borrador).
 - [ ] **Carla decide el orden** antes de arrancar la depuración masiva.
 
 
+- [ ] **Outlet: subir los productos obsoletos que tenemos en oferta** ⭐ (pendiente Carla, 2026-10-06). Hay que revisar la sección **OUTLET de OXATIS** (https://www.homea.mx/PBCPPlayer.asp?ID=2397967), que está dividida por tipo de producto (p. ej. *Todos los productos › OFERTAS ESTUFAS*). Son modelos descontinuados de los que todavía hay piezas. Pasos:
+  1. **Inventariar el outlet de OXATIS** por sección: SKU, marca, tipo, precio de oferta y piezas. Cruzarlo con el maestro / SAE.
+  2. **Confirmar el precio final con descuento** de cada pieza. Se suben solo con el precio ya actualizado.
+  3. **No borrarlos en la depuración de obsoletos:** que estén descontinuados no los saca del catálogo si están en el outlet.
+  4. **Alta en Shopify:** `filtros.promocion = Outlet`, precio de comparación = precio de lista original, precio = precio final, `filtros.disponibilidad = En stock`. A diferencia del resto del catálogo, aquí **sí se controla inventario** (piezas reales, sin vender de más).
+  5. **Cada producto en oferta tiene su sección de outlet**: colección *Outlet* con una subsección por tipo, como en OXATIS (Outlet Estufas, Outlet Refrigeración…). En `/ofertas`, la puerta del Outlet deja de ligar a OXATIS y apunta a esta colección. El producto también aparece en su categoría normal con la etiqueta de oferta.
+  6. **Redirects 301** de las URLs del outlet de OXATIS a su ficha nueva (o a la sección Outlet si la pieza ya se vendió). Se agregan al mapa de `docs/PLAN-REDIRECTS-MIGRACION.md`.
 - [ ] **Marcar la moneda de cada producto (MXN vs USD)** durante la homologación → tag/metafield `moneda:USD` + metafield `precio_usd`. Shopify solo maneja una moneda de tienda (MXN), así que el precio en dólares vive en metafield y el producto USD queda **no comprable** en checkout. Alimenta la regla "USD = solo con ejecutivo" de 4.5.
 - [ ] Estructurar para Shopify (CSV/Matrixify): handle, título, tipo, vendor, tags, variantes, precio, **metafields**.
 - [ ] Definir la **plantilla de nomenclatura SEO de imágenes** (`marca-producto-categoria-atributo`) como parte de la homologación → alimenta 4.2.
@@ -400,6 +431,15 @@ sirvió de piloto del patrón (5 fichas + import en borrador).
 ### 4.4 Filtros / navegación facetada ⭐
 - [ ] Taxonomía: **tipo, marca, características** (medidas, color, panelable, combustible, etc.).
 - [ ] Implementar con metafields/tags de Shopify + lógica de filtros en el front-end. Filtros **precisos por categoría**.
+- [~] **Tabla de filtros v2 (2026-10-05)** ⭐ — definida y revisada; **nada subido a Shopify todavía** (decisión Carla: se sube solo con aprobación, subcategoría por subcategoría). La tabla vive **fuera del repo** (OneDrive `PAGINA WEB/PAGINA NUEVA 2026/FILTROS DE BUSQUEDA SHOPIFY 2026/FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx` —el original de Carla queda intacto sin sufijo—, con hojas `BITÁCORA DE CAMBIOS` y `METAFIELDS SHOPIFY`). Decisiones:
+  - **Subcat.3 = valores de filtro** que forman el mosaico de tipos (p. ej. Campanas = Tipo de instalación + Diseño).
+  - **Un metafield compartido por concepto** (namespace `filtros.*`, lista cerrada de valores); cada producto llena solo los suyos. Los ~19 compartidos van como filtro nativo de Search & Discovery (tope de filtros por tienda); los ~21 de una sola subcategoría los filtra la web leyendo el mismo metafield. **El orden y el nombre visible por subcategoría los pone la web** (Search & Discovery tiene un solo orden para toda la tienda). No usar `custom.ancho` (es el ancho del **embalaje**).
+  - **Lavavajillas y Asadores**: una sola subcat.2 en Shopify con filtro *Tipo de instalación*; los botones del dropdown se conservan y filtran (ya funciona vía `tipos.js`).
+  - **Disponibilidad**: todo se vende sin inventario; `filtros.disponibilidad` = En stock / Bajo pedido (nunca "agotado").
+  - **Promoción** con %, calculada por script desde el precio de comparación; alimenta `/ofertas`.
+  - **Precio USD** (pendiente de aprobar): `homea.precio_usd` es el dato maestro; el cron diario del FIX recalcula el precio MXN de la variante por Admin API y el pedido guarda USD + FIX.
+  - Web: *Cajones fríos* → **Cajones refrigerantes**; *Minisplits* → **Aire acondicionado** (`/productos/aire-acondicionado`, `/guias/aire-acondicionado`); Exterior suma **Quemador lateral, Plancha Teppanyaki, Ahumadores, Hieleras y Gabinetes** (tiles con foto oficial Blaze/Broil King/Lynx + dropdown, filtran en la página).
+  - Siguiente: ficha de Refrigeradores → crear sus metafield definitions + colección + filtro en Shopify (sin productos) → probar con una lista vigente de 10–20 refrigeradores en borrador.
 - [ ] **Filtros específicos por subcat.2** ⭐ (pendiente desde 2026-07-22): las páginas de subcat.1 de Cocina y Bar (`/productos/cocina-y-bar/<sub>`) ya existen con filtros a nivel subcat.1 y deep-link `?tipo=<subcat.2>`; falta definir e implementar el **set de filtros propio de cada subcat.2** (p. ej. Refrigeradores: estilo French Door/Duplex/Bottom Mount, panelable; Campanas: tipo de instalación y capacidad de extracción; Tarjas: nº de tazones). Se trabaja al conectar Shopify Search & Discovery / Storefront API, subcat.2 por subcat.2, partiendo de las fichas de tipo de `GUIAS/taxonomia-guias.json` (campo `filtros`) y de `docs/PATRON-FICHAS-TIPO.md`. Replicar después en las demás macrocategorías.
 
 #### Buscador del catálogo (lupa del nav) ⭐ — construido, pendiente de reconectar

@@ -82,11 +82,11 @@
     ],
     [
       "cajon-refrigera",
-      "cocina-y-bar/refrigeracion/cajones-frios"
+      "cocina-y-bar/refrigeracion/cajones-refrigerantes"
     ],
     [
       "cajones-refrigera",
-      "cocina-y-bar/refrigeracion/cajones-frios"
+      "cocina-y-bar/refrigeracion/cajones-refrigerantes"
     ],
     [
       "frigobar",
@@ -346,15 +346,15 @@
     ],
     [
       "minisplit",
-      "minisplits"
+      "aire-acondicionado"
     ],
     [
       "mini-split",
-      "minisplits"
+      "aire-acondicionado"
     ],
     [
       "aire-acondicionado",
-      "minisplits"
+      "aire-acondicionado"
     ],
     [
       "sauna",
@@ -530,11 +530,11 @@
     ],
     [
       "tonelada",
-      "minisplits"
+      "aire-acondicionado"
     ],
     [
       "btu",
-      "minisplits"
+      "aire-acondicionado"
     ],
     [
       "quemador",

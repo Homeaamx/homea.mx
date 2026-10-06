@@ -25,7 +25,7 @@ plan). Kamado Joe, Masterbuilt, WPPO y La Cornue son de cocina o asadores y van 
 
 1. **Orden de trabajo de los PDFs:** se trabajan **marca por marca**, para que el PDF de cada una se
    presente sin error. Es el paso siguiente a subir los catálogos. Primero las marcas de **Cocina y Bar,
-   Exterior, Electrodomésticos menores, Lavandería y Minisplits**; lo demás queda pendiente.
+   Exterior, Electrodomésticos menores, Lavandería y Aire acondicionado (antes Minisplits)**; lo demás queda pendiente.
    De **Brizo, Delta y Axcent solo se trabaja la línea de cocina**.
 2. **Eliminadas:** se quitan de todo el sitio porque ya no se venden. Hecho el 2026-09-21: Hansgrohe,
    Keuco, American Standard y Moen perdieron página, tile, enlace de menú, fotos, logos y listas de precios.

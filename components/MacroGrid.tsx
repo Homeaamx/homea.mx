@@ -16,7 +16,7 @@ const FOTO_MACRO: Record<string, { src: string; pos?: string }> = {
   "electrodomesticos-menores": { src: "cat-electro-menores-kitchenaid-mixer.webp", pos: "center 55%" },
   lavanderia: { src: "cat-cuidado-ropa-bosch-lavadora-secadora.webp" },
   banos: { src: "cat-banos.webp", pos: "center 80%" },
-  minisplits: { src: "minisplit.webp" },
+  "aire-acondicionado": { src: "minisplit.webp" },
   "vapor-y-sauna": { src: "cat-vapor-sauna.webp" },
   wellness: { src: "cat-wellness.webp" },
   "recubrimientos-y-superficies": { src: "cat-recubrimientos-laminam-noir-desir.webp", pos: "center 70%" },
@@ -34,7 +34,7 @@ const LAYOUT: Record<string, { area: string; size: "big" | "wide" | "sm"; order:
   wellness: { area: "wel", size: "wide", order: 5 },
   banos: { area: "ban", size: "big", order: 6 },
   "vapor-y-sauna": { area: "vap", size: "sm", order: 7 },
-  minisplits: { area: "min", size: "sm", order: 8 },
+  "aire-acondicionado": { area: "min", size: "sm", order: 8 },
   "recubrimientos-y-superficies": { area: "rec", size: "wide", order: 9 },
   "chimeneas-y-calentadores": { area: "chi", size: "wide", order: 10 },
 };

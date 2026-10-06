@@ -514,7 +514,7 @@ const DIAGRAMAS: Record<string, ReactElement> = {
     </>
   ),
 
-  // ——— Cajones fríos ———————————————————————————————————————————————
+  // ——— Cajones refrigerantes ———————————————————————————————————————————————
 
   "cajones-refrigerantes": (
     <>

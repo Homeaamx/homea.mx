@@ -43,7 +43,7 @@
 .guias-hero {
   position: relative;
   display: flex; flex-direction: column;
-  min-height: calc(100vh - var(--nav-h));
+  min-height: calc(100svh - var(--nav-h));
   background: var(--homea-espresso) center / cover no-repeat;
   background-image: url("/assets/photos/hero-guias-thermador.webp");
   color: var(--homea-bone);
@@ -840,3 +840,9 @@
 /* Doble CTA en la banda del PLP (Guía de… + Aprende sobre…). */
 .tpg-banner-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
 .tpg-banner-cta .btn { margin-top: 0; }
+
+/* Móvil (2026-09-28): el buscador del hero no cabía (placeholder cortado). */
+@media (max-width: 640px) {
+  .guia-search { width: 100%; }
+  .guia-search-input::placeholder { font-size: 15px; }
+}

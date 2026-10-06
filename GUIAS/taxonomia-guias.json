@@ -362,13 +362,13 @@
               "rutaFiltros": "/guias/cocina-y-bar/refrigeracion/cavas-de-vino"
             },
             {
-              "nombre": "Cajones fríos",
-              "slug": "cajones-frios",
-              "filtro": "/productos/cajones-frios/",
+              "nombre": "Cajones refrigerantes",
+              "slug": "cajones-refrigerantes",
+              "filtro": "/productos/cajones-refrigerantes/",
               "filtros": [
                 {
                   "nombre": "Cajones Refrigerantes",
-                  "filtro": "/productos/cajones-frios/?f=cajones-refrigerantes",
+                  "filtro": "/productos/cajones-refrigerantes/?f=cajones-refrigerantes",
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "cajones-refrigerantes",
@@ -378,7 +378,7 @@
                 },
                 {
                   "nombre": "Cajones Congeladores",
-                  "filtro": "/productos/cajones-frios/?f=cajones-congeladores",
+                  "filtro": "/productos/cajones-refrigerantes/?f=cajones-congeladores",
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "cajones-congeladores",
@@ -387,7 +387,7 @@
                   }
                 }
               ],
-              "rutaFiltros": "/guias/cocina-y-bar/refrigeracion/cajones-frios"
+              "rutaFiltros": "/guias/cocina-y-bar/refrigeracion/cajones-refrigerantes"
             },
             {
               "nombre": "Accesorios de refrigeración",
@@ -2069,58 +2069,58 @@
       ]
     },
     {
-      "slug": "minisplits",
-      "nombre": "Minisplits",
-      "ruta": "/guias/minisplits",
+      "slug": "aire-acondicionado",
+      "nombre": "Aire acondicionado",
+      "ruta": "/guias/aire-acondicionado",
       "nivelGuias": "macrocategoria",
       "subcategorias1": [
         {
           "nombre": "Minisplit Frío",
           "slug": "minisplit-frio",
           "esLeaf": true,
-          "filtro": "/productos/minisplits/?tipo=frio"
+          "filtro": "/productos/aire-acondicionado/?tipo=frio"
         },
         {
           "nombre": "Minisplit Frío & Calor",
           "slug": "minisplit-frio-calor",
           "esLeaf": true,
-          "filtro": "/productos/minisplits/?tipo=frio-calor"
+          "filtro": "/productos/aire-acondicionado/?tipo=frio-calor"
         }
       ],
       "guias": [
         {
           "titulo": "Guía de compra de minisplits",
           "tipo": "guia-de-compra",
-          "ruta": "/guias/minisplits/guia-de-compra/guia-de-compra-minisplits",
+          "ruta": "/guias/aire-acondicionado/guia-de-compra/guia-de-compra-minisplits",
           "resumen": "Capacidad (BTU/toneladas) según m², inverter y SEER.",
           "secciones": [
             {
               "titulo": "Minisplit solo frío",
-              "filtro": "/productos/minisplits/?tipo=frio"
+              "filtro": "/productos/aire-acondicionado/?tipo=frio"
             },
             {
               "titulo": "Minisplit frío & calor",
-              "filtro": "/productos/minisplits/?tipo=frio-calor"
+              "filtro": "/productos/aire-acondicionado/?tipo=frio-calor"
             },
             {
               "titulo": "Tecnología inverter",
-              "filtro": "/productos/minisplits/?caracteristica=inverter"
+              "filtro": "/productos/aire-acondicionado/?caracteristica=inverter"
             }
           ]
         },
         {
           "titulo": "¿Cuántos BTU necesito? Calculadora rápida",
           "tipo": "como-elegir",
-          "ruta": "/guias/minisplits/como-elegir/cuantos-btu-necesito",
+          "ruta": "/guias/aire-acondicionado/como-elegir/cuantos-btu-necesito",
           "resumen": "Tabla de capacidad recomendada por superficie y carga térmica.",
           "secciones": [
             {
               "titulo": "12,000 BTU (1 ton)",
-              "filtro": "/productos/minisplits/?capacidad=12000btu"
+              "filtro": "/productos/aire-acondicionado/?capacidad=12000btu"
             },
             {
               "titulo": "18,000 BTU (1.5 ton)",
-              "filtro": "/productos/minisplits/?capacidad=18000btu"
+              "filtro": "/productos/aire-acondicionado/?capacidad=18000btu"
             }
           ]
         }

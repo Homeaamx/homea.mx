@@ -20,7 +20,7 @@ MEGA = {
         ("refrigeradores", "Refrigeradores"), ("congeladores", "Congeladores"),
         ("centros-de-bebida", "Centros de bebida"), ("frigobares", "Frigobares"),
         ("maquinas-de-hielo", "Máquinas de hielo"), ("cavas-de-vino", "Cavas de vino"),
-        ("cajones-frios", "Cajones fríos"), ("accesorios-refrigeracion", "Accesorios de refrigeración"),
+        ("cajones-refrigerantes", "Cajones refrigerantes"), ("accesorios-refrigeracion", "Accesorios de refrigeración"),
     ]),
     "Cocción": ("coccion", [
         ("estufas", "Estufas"), ("parrillas", "Parrillas"), ("hornos", "Hornos"),
@@ -108,7 +108,7 @@ PAGES = [
                 ("frigobares", "Frigobares", None, ""),
                 ("maquinas-de-hielo", "Máquinas de hielo", "assets/photos/maquina-de-hielo.png", ""),
                 ("cavas-de-vino", "Cavas de vino", None, ""),
-                ("cajones-frios", "Cajones fríos", None, ""),
+                ("cajones-refrigerantes", "Cajones refrigerantes", None, ""),
                 ("accesorios-refrigeracion", "Accesorios de refrigeración", None, "")],
          marcas=["Sub-Zero", "Gaggenau", "Miele", "Thermador", "Monogram", "U-Line", "Scotsman", "Hoshizaki"],
          extras=[("Instalación", ["Empotrado / a ras", "Panelable", "Bajo cubierta", "De piso", "Columna"]),

@@ -20,7 +20,7 @@ MACROCATEGORÍA      →  SUBCATEGORÍA 1            →  SUBCATEGORÍA 2
 agrupación del hub     "categoría para guías"       tipo de producto / leaf de filtro
 ```
 
-- **Macrocategoría** (10): Cocina y Bar · Exterior · Electrodomésticos Menores · Lavandería · Baños · Minisplits · Vapor y Sauna · Wellness · Recubrimientos y Superficies · Chimeneas & Calentadores.
+- **Macrocategoría** (10): Cocina y Bar · Exterior · Electrodomésticos Menores · Lavandería · Baños · Aire acondicionado · Vapor y Sauna · Wellness · Recubrimientos y Superficies · Chimeneas & Calentadores.
 - **Subcategoría 1**: las categorías bajo cada macro (Refrigeración, Cocción, Lavavajillas…). **Aquí se anclan las guías** cuando la rama llega a Subcategoría 2.
 - **Subcategoría 2**: el tipo de producto (Refrigeradores, Estufas…). Es el **leaf de filtro**: a esto enlazan las secciones de cada guía.
 
@@ -36,7 +36,7 @@ agrupación del hub     "categoría para guías"       tipo de producto / leaf d
   tipo enlaza como filtro (`?f={slug}`) de su Subcategoría 2; la ruta reservada
   para cuando tengan página es `/productos/{macro}/{sub1}/{sub2}/{sub3}`.
 
-**Algunas ramas no llegan a Subcategoría 2.** En esos casos (Electrodomésticos Menores, Lavandería, Baños, Minisplits, Vapor y Sauna, Wellness, Recubrimientos y Superficies, Chimeneas & Calentadores), las **Subcategorías 1 son los leaves de filtro** y las **guías se anclan en la Macrocategoría**.
+**Algunas ramas no llegan a Subcategoría 2.** En esos casos (Electrodomésticos Menores, Lavandería, Baños, Aire acondicionado, Vapor y Sauna, Wellness, Recubrimientos y Superficies, Chimeneas & Calentadores), las **Subcategorías 1 son los leaves de filtro** y las **guías se anclan en la Macrocategoría**.
 
 > **Regla única de anclaje de guías:** *las guías viven en el nivel cuyos hijos directos son los leaves de producto.* → Sub1 en macros de 3 niveles; la Macro en macros de 2 niveles.
 
@@ -95,7 +95,7 @@ Vocabulario controlado adaptado de los *Article Types* de AJ Madison. Filtro en 
 ### A. Cocina y Bar — `/guias/cocina-y-bar/` · *(3 niveles · guías en Sub1)*
 
 **Refrigeración** → `/guias/cocina-y-bar/refrigeracion/`
-Sub2 (leaves): Refrigeradores · Congeladores · **Refrigeradores de piso** · Centros de bebida · Frigobares · Máquinas de hielo · Cavas de vino · Cajones fríos · Accesorios de refrigeración.
+Sub2 (leaves): Refrigeradores · Congeladores · **Refrigeradores de piso** · Centros de bebida · Frigobares · Máquinas de hielo · Cavas de vino · Cajones refrigerantes · Accesorios de refrigeración.
 Guías: Guía de Refrigeración de Lujo *(guía-de-compra)* · Guía de compra de refrigerador 2026 *(guía-de-compra)* · Mejores refrigeradores panelables *(top-picks)* · Cómo medir el espacio *(como-elegir)* · Características de una cava de vino *(guía-de-compra)*.
 
 **Cocción** → `/guias/cocina-y-bar/coccion/`
@@ -140,7 +140,7 @@ Guías: Guía de compra de lavadora y secadora *(guía-de-compra)* · Lavasecado
 Sub1 (leaves): Tarjas · Monomandos · Regaderas · Tinas · Accesorios de Baños.
 Guías: Diseñar un baño premium *(guía-de-compra)* · Cómo elegir tu regadera *(como-elegir)*.
 
-### F. Minisplits — `/guias/minisplits/` · *(2 niveles · guías en la Macro)*
+### F. Aire acondicionado — `/guias/aire-acondicionado/` · *(2 niveles · guías en la Macro)*
 Sub1 (leaves): Minisplit Frío · Minisplit Frío & Calor.
 Guías: Guía de compra de minisplits *(guía-de-compra)* · ¿Cuántos BTU necesito? *(como-elegir)*.
 

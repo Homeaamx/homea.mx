@@ -718,7 +718,7 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
               transform var(--dur-slow) var(--ease-reveal);
 }
 .catsec .cat { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; }
-/* Celda-guía: ocupa las 2 celdas libres de la última fila (junto a Minisplits) */
+/* Celda-guía: ocupa las 2 celdas libres de la última fila (junto a Aire acondicionado) */
 .catsec .cat-guide { grid-column: span 2; display: flex; flex-direction: row; align-items: stretch; gap: clamp(20px, 3vw, 48px);
   padding: clamp(32px, 3vw, 52px); background: var(--surface); border: 1px solid var(--border); }
 .catsec .cat-guide .cg-col { flex: 1; display: flex; flex-direction: column; align-items: flex-start; }
@@ -2945,4 +2945,81 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
    mantiene el sitio del botón para que el cajón no cambie de alto. */
 .wl-wa[aria-disabled="true"] {
   opacity: .4; cursor: not-allowed; pointer-events: none;
+}
+
+/* =====================================================================
+   Fase 3.6 · Pasada móvil (2026-09-28) — tamaños, densidad y áreas táctiles.
+   Todo dentro de max-width: el escritorio no cambia. Van al final del archivo
+   para ganar por orden a las reglas de arriba con la misma especificidad.
+   ===================================================================== */
+
+/* Muro de marcas: una sola columna eran 92 tiles × 180px = 16 000px de scroll.
+   Tablet 3 columnas, móvil 2 (tile ≈ 168×90, logo legible). */
+@media (max-width: 900px) {
+  .brandtiles { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 720px) {
+  .brandtiles { grid-template-columns: repeat(2, 1fr); }
+  .brandtile { padding-left: 12px; padding-right: 12px; }
+  .brandtile .bt-logo { max-width: 80%; }
+
+  /* Reseñas Google: <figure> traía el margen UA de 40px por lado → tarjeta de
+     260px dentro de un escenario de 342 y 650px de alto. */
+  .grev-card { margin: 0; padding: 28px 22px; gap: 18px; }
+  .grev-card blockquote { font-size: 19px; }
+  .grev-stage { min-height: 0; }
+  /* Puntos del carrusel: 9×9px de área táctil → 44px invisibles alrededor. */
+  .grev-dots { gap: 22px; }
+  .grev-dots button { position: relative; }
+  .grev-dots button::before { content: ""; position: absolute; inset: -17px; }
+
+  /* Tarjeta del showroom (home): etiqueta y dato en dos columnas de 130px no
+     cabían; apilados. Menos aire en el panel de cristal. */
+  .loc-full .split .text { padding: 26px 22px 28px; }
+  .loc-full .split .text .loc-map { top: 18px; right: 18px; }
+  .loc-full .meta-list li { grid-template-columns: 1fr; gap: 4px; padding: 10px 0; }
+
+  /* Cabeceras con enlace a la derecha (PDP "Completa la cocina" · "Ver Cocina y
+     Bar"): en 390px repartían el ancho en dos mitades. Apiladas. */
+  .sec-head-row { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .sec-head-row .sec-head { width: 100%; }
+}
+
+@media (max-width: 640px) {
+  /* Botones: el texto en una línea desbordaba el contenedor (ofertas: 374px en
+     342). Se permite el salto y se centra. */
+  .btn { white-space: normal; text-align: center; line-height: 1.4; max-width: 100%; }
+
+  /* Flecha del hero: 30px → 44px de área táctil sin mover el ícono. */
+  .hero-next { width: 44px; height: 44px; margin-right: -7px; }
+
+  /* Tarjeta de producto: precio y enlace se pisaban en las relacionadas. */
+  .pcard .row { flex-wrap: wrap; row-gap: 6px; }
+  .price-tag { white-space: nowrap; }
+
+  /* PLP: barra de resultados y orden. El <select> medía 17px de alto. */
+  .toolbar { flex-wrap: wrap; align-items: center; row-gap: 8px; }
+  .toolbar select { min-height: 44px; padding: 8px 0; }
+  .fgroup label { min-height: 40px; }
+  .fgroup input[type="checkbox"] { width: 18px; height: 18px; flex: none; }
+  .fgroup input[type="range"] { height: 32px; }
+  /* Paginador: "01 / 01" se partía en dos líneas. */
+  .pager { flex-wrap: wrap; row-gap: 10px; }
+  .pager .figures { white-space: nowrap; }
+
+  /* Cierre del cajón de wishlist: 27×30 → 44×44. */
+  .wl-x { padding: 9px 12px; margin: -9px -12px -9px 0; }
+}
+
+/* PDP a una columna (≤1080, mismo corte en que .pdp deja de ser 2 columnas):
+   la galería queda arriba y el CTA se iba dos pantallas abajo del precio. El
+   CTA pasa justo debajo del precio; la tabla de specs y las notas van después.
+   La equivalencia MXN (.note.figures) se queda pegada al precio. */
+@media (max-width: 1080px) {
+  .pdp .info .pdp-cta { order: 1; width: 100%; }
+  .pdp .info .spec { order: 2; }
+  .pdp .info .note:not(.figures) { order: 3; }
+}
+@media (max-width: 640px) {
+  .pdp .info .pdp-cta .btn { flex: 1 1 100%; }
 }
