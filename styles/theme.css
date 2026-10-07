@@ -3266,3 +3266,8 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .fhead { padding: 12px 0; }
 [data-cat-card] h3.pcard-name { font-size: 14px; line-height: 1.4; }
 .pcard-price .price-was { font-size: 13px; }
+/* 2026-10-07 (5): recuadro de foto ~30 % más alto (4:3 → 1:1), sin zoom; rejilla más
+   junta; el título FILTROS respira dentro de su banda. */
+[data-cat-card] .imgw { aspect-ratio: 1 / 1; }
+.plp-grid:has([data-cat-card]) { gap: 20px; }
+.fhead { padding: 12px 14px; }
