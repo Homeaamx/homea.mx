@@ -13,6 +13,7 @@
 import "server-only";
 
 import filtrosWeb from "@/data/filtros-web.json";
+import marcasJson from "@/data/marcas.json";
 import type { Decision } from "@/lib/reglas/reglaMarca";
 import type { TipoCambio } from "@/lib/tipoCambio";
 
@@ -54,6 +55,21 @@ function srcsetCdn(url: string, maximo: number): string {
 
 const CORAZON =
   '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.9 13a4.8 4.8 0 0 1 0-6.8 4.7 4.7 0 0 1 6.7 0l.4.4.4-.4a4.7 4.7 0 0 1 6.7 0 4.8 4.8 0 0 1 0 6.8Z"/></svg>';
+
+/* ---------- Logo de marca ------------------------------------------------- */
+
+const normMarca = (s: string) =>
+  s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, "");
+
+/** Logo original de la marca (data/marcas.json) para la cabecera de la ficha. */
+function logoDeMarca(vendor: string): string | null {
+  type MarcaMin = { slug: string; nombre: string; logo?: string | null };
+  const crudo = marcasJson as unknown as MarcaMin[] | { marcas: MarcaMin[] };
+  const lista: MarcaMin[] = Array.isArray(crudo) ? crudo : (crudo.marcas ?? []);
+  const n = normMarca(vendor);
+  const m = lista.find((x) => normMarca(x.nombre) === n || normMarca(x.slug) === n);
+  return m?.logo ?? null;
+}
 
 /* ---------- Definición de filtros por tipo -------------------------------- */
 
@@ -356,7 +372,13 @@ export function ctaHtml(p: ProductoVivo, decision: Decision, precio: PrecioPubli
       "Este producto se cotiza con un ejecutivo: agrégalo a tu proyecto y envíalo por WhatsApp; te confirmamos tipo de cambio, descuento aplicado y tiempo de entrega.";
   }
 
-  return `<div class="pdp-cta" style="display:flex;gap:16px;margin-top:16px;flex-wrap:wrap">
+  const unidades = `<div class="pdp-qty" role="group" aria-label="Unidades">
+          <button type="button" class="pdp-qty-btn" data-qty-menos aria-label="Una menos">−</button>
+          <input type="number" class="pdp-qty-num figures" data-cart-qty value="1" min="1" max="99" inputmode="numeric" aria-label="Unidades">
+          <button type="button" class="pdp-qty-btn" data-qty-mas aria-label="Una más">+</button>
+        </div>`;
+  return `<div class="pdp-cta" style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;align-items:stretch">
+        ${unidades}
         ${agregar}
       </div>
       <p class="note">${nota}</p>`;
@@ -389,6 +411,55 @@ function tituloH1(titulo: string): string {
     : `<b>${esc(nombre)}</b>`;
 }
 
+/** Pestañas bajo la galería: Características · Dimensiones · Fichas técnicas. */
+function pestanasHtml(p: ProductoVivo, spec: string): string {
+  const filas = (lista: { nombre: string; valor: string }[]) =>
+    lista
+      .map(
+        (d) =>
+          `<div class="spec-row"><span class="spec-label">${esc(d.nombre)}</span><span class="spec-value figures">${esc(d.valor)}</span></div>`,
+      )
+      .join("\n");
+  const dimProducto = p.dimensiones.length
+    ? `<h6 class="pdp-tab-sub">Dimensiones del producto</h6><div class="spec">${filas(p.dimensiones)}</div>`
+    : "";
+  const dimEmpaque = p.empaque.length
+    ? `<h6 class="pdp-tab-sub">Dimensiones del empaque</h6><div class="spec">${filas(p.empaque)}</div>`
+    : "";
+  const dimensiones =
+    dimProducto || dimEmpaque
+      ? `${dimProducto}${dimEmpaque}`
+      : `<p class="pdp-tab-aviso">Las dimensiones de este producto están por confirmarse. Pídelas a tu asesor de ventas.</p>`;
+  const fichas = p.fichas.length
+    ? `<ul class="pdp-fichas">${p.fichas
+        .map(
+          (f) =>
+            `<li><a class="arrow-link" href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.nombre)} <span class="ln"></span><span class="ar">→</span></a></li>`,
+        )
+        .join("")}</ul>`
+    : `<p class="pdp-tab-aviso">Para más información sobre las especificaciones técnicas de este producto, favor de contactar a tu asesor de ventas.</p>`;
+
+  const tabs: [string, string, string][] = [
+    ["caracteristicas", "Características", `<div class="spec">${spec}</div>`],
+    ["dimensiones", "Dimensiones", dimensiones],
+    ["fichas", "Fichas técnicas", fichas],
+  ];
+  return `<div class="pdp-tabs" data-pdp-tabs>
+        <div class="pdp-tablist" role="tablist">${tabs
+          .map(
+            ([id, nombre], i) =>
+              `<button type="button" role="tab" id="tab-${id}" aria-controls="panel-${id}" aria-selected="${i === 0}" class="pdp-tab${i === 0 ? " is-active" : ""}" data-tab="${id}">${nombre}</button>`,
+          )
+          .join("")}</div>
+        ${tabs
+          .map(
+            ([id, , html], i) =>
+              `<div role="tabpanel" id="panel-${id}" aria-labelledby="tab-${id}" class="pdp-panel${i === 0 ? " is-active" : ""}"${i === 0 ? "" : " hidden"}>${html}</div>`,
+          )
+          .join("\n")}
+      </div>`;
+}
+
 export function fichaHtml(
   p: ProductoVivo,
   tc: TipoCambio,
@@ -412,6 +483,10 @@ export function fichaHtml(
     `<span class="figures">${esc(p.marca)} ${esc(p.sku)}</span>`,
   ].join('<span class="sep" style="color:var(--homea-gold);padding:0 .6em">·</span>');
 
+  const logo = logoDeMarca(p.marca);
+  const cabecera = logo
+    ? `<img class="pdp-logo" src="${esc(logo)}" alt="${esc(p.marca)}" loading="eager" decoding="async">`
+    : `<div class="eyebrow">${esc(p.marca)}</div>`;
   const etiquetaStock = p.enStock
     ? `<span class="pcard-tag pdp-tag is-stock">EN STOCK</span>`
     : `<span class="pcard-tag pdp-tag is-pedido">Bajo pedido</span>`;
@@ -473,18 +548,15 @@ ${relacionados.map((r, i) => tarjetaHtml(r, tc, i)).join("\n")}
     <div class="gallery">
       <div class="main pdp-cutout" data-pdp-zoom role="button" tabindex="0" aria-label="Ampliar imagen"><button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(lineaSpec(p).join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${principal ? esc(cdn(principal.url, 400)) : ""}" data-wl-href="${href}" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button>${imagenPrincipal}</div>
       ${miniaturas}
+      ${pestanasHtml(p, spec)}
     </div>
     <div class="info">
-      <div class="pdp-top"><div class="eyebrow">${esc(p.marca)}${tw ? ` · ${esc(tw.sub1.nombre)}` : ""} · ${esc(p.tipo)}</div>${etiquetaStock}</div>
+      ${cabecera}
       <span class="rule-gold"></span>
-      <h1>${tituloH1(p.titulo)}</h1>
+      <div class="pdp-titulo"><h1>${tituloH1(p.titulo)}</h1>${etiquetaStock}</div>
       ${p.lead ? `<p class="lead-serif">${esc(p.lead)}</p>` : ""}
       ${precioFichaHtml(precio, tc)}
       ${descripcionLarga}
-
-      <div class="spec" style="width:100%;margin-top:8px">
-        ${spec}
-      </div>
 
       ${ctaHtml(p, decision, precio)}
     </div>

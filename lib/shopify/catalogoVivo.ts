@@ -39,6 +39,11 @@ const IDENTIFICADORES = [
   ...CLAVES_FILTRO.map((k) => `{namespace: "filtros", key: "${k}"}`),
   `{namespace: "homea", key: "precio_usd"}`,
   `{namespace: "homea", key: "lead"}`,
+  `{namespace: "homea", key: "dimensiones"}`,
+  // Embalaje (Carla, 2026-10-05: custom.ancho es el ancho del EMPAQUE, no del aparato).
+  `{namespace: "custom", key: "ancho"}`,
+  `{namespace: "custom", key: "alto"}`,
+  `{namespace: "custom", key: "profundidad"}`,
 ].join(", ");
 
 const CAMPOS_PRODUCTO = /* GraphQL */ `
@@ -62,6 +67,9 @@ const CAMPOS_PRODUCTO = /* GraphQL */ `
       }
     }
     metafields(identifiers: [${IDENTIFICADORES}]) { namespace key value }
+    fichas: metafield(namespace: "homea", key: "fichas_tecnicas") {
+      references(first: 10) { nodes { __typename ... on GenericFile { url mimeType } } }
+    }
   }
 `;
 
@@ -111,6 +119,7 @@ interface ProductoRaw {
     }[];
   };
   metafields: (MetafieldRaw | null)[];
+  fichas: { references: { nodes: { __typename: string; url?: string; mimeType?: string }[] } } | null;
 }
 
 export interface ImagenVivo {
@@ -142,6 +151,12 @@ export interface ProductoVivo {
   lead: string | null;
   /** Descripción larga de Shopify (texto plano), para la ficha. */
   descripcion: string;
+  /** Dimensiones del aparato (catálogo / ficha técnica): `homea.dimensiones`. */
+  dimensiones: { nombre: string; valor: string }[];
+  /** Dimensiones del empaque (`custom.ancho/alto/profundidad`, machote de proveedor). */
+  empaque: { nombre: string; valor: string }[];
+  /** Fichas técnicas / manuales (`homea.fichas_tecnicas`). */
+  fichas: { url: string; nombre: string }[];
   /** Bajo pedido (sigue vendiendo sin inventario) o En stock. */
   enStock: boolean;
 }
@@ -155,18 +170,66 @@ function lista(valor: string): string[] {
   }
 }
 
+/** Metafield tipo `dimension` de Shopify: {"value": 80.5, "unit": "CENTIMETERS"} → "80.5 cm". */
+function dimension(valor: string): string | null {
+  try {
+    const d = JSON.parse(valor) as { value?: number | string; unit?: string };
+    if (d.value === undefined || d.value === null) return null;
+    const unidad: Record<string, string> = {
+      CENTIMETERS: "cm", MILLIMETERS: "mm", METERS: "m", INCHES: "in", FEET: "ft",
+    };
+    return `${Number(d.value).toLocaleString("es-MX", { maximumFractionDigits: 1 })} ${unidad[d.unit ?? ""] ?? (d.unit ?? "").toLowerCase()}`.trim();
+  } catch {
+    return valor || null;
+  }
+}
+
+function dimensionesJson(valor: string): { nombre: string; valor: string }[] {
+  try {
+    const v = JSON.parse(valor);
+    if (Array.isArray(v)) {
+      return v
+        .map((x) => ({ nombre: String(x?.nombre ?? x?.name ?? ""), valor: String(x?.valor ?? x?.value ?? "") }))
+        .filter((x) => x.nombre && x.valor);
+    }
+    if (v && typeof v === "object") {
+      return Object.entries(v).map(([nombre, val]) => ({ nombre, valor: String(val) }));
+    }
+  } catch {
+    /* texto plano: una sola línea */
+  }
+  return valor ? [{ nombre: "Dimensiones", valor }] : [];
+}
+
+/** "…/files/gaggenau-rvc477790-ficha-tecnica.pdf?v=1" → "Gaggenau rvc477790 ficha tecnica". */
+function nombreDeArchivo(url: string): string {
+  const base = decodeURIComponent(url.split("?")[0].split("/").pop() ?? "").replace(/\.[a-z0-9]+$/i, "");
+  const limpio = base.replace(/[-_]+/g, " ").trim();
+  return limpio ? limpio.charAt(0).toUpperCase() + limpio.slice(1) : "Ficha técnica";
+}
+
 function normalizar(raw: ProductoRaw): ProductoVivo | null {
   const v = raw.variants.nodes[0];
   if (!v?.sku) return null;
   const filtros: Record<string, string[]> = {};
   let usdLista: number | null = null;
   let lead: string | null = null;
+  let dimensiones: { nombre: string; valor: string }[] = [];
+  const empaque: { nombre: string; valor: string }[] = [];
+  const NOMBRE_EMPAQUE: Record<string, string> = { ancho: "Ancho", alto: "Alto", profundidad: "Profundidad" };
   for (const m of raw.metafields) {
     if (!m) continue;
     if (m.namespace === "filtros") filtros[m.key] = lista(m.value);
-    else if (m.key === "precio_usd") usdLista = Number.parseFloat(m.value) || null;
+    else if (m.namespace === "custom" && NOMBRE_EMPAQUE[m.key]) {
+      const d = dimension(m.value);
+      if (d) empaque.push({ nombre: NOMBRE_EMPAQUE[m.key], valor: d });
+    } else if (m.key === "precio_usd") usdLista = Number.parseFloat(m.value) || null;
     else if (m.key === "lead") lead = m.value;
+    else if (m.key === "dimensiones") dimensiones = dimensionesJson(m.value);
   }
+  const fichas = (raw.fichas?.references?.nodes ?? [])
+    .filter((n) => n.url)
+    .map((n) => ({ url: n.url as string, nombre: nombreDeArchivo(n.url as string) }));
   const mxn = Number.parseFloat(v.price.amount);
   const comparar = v.compareAtPrice ? Number.parseFloat(v.compareAtPrice.amount) : null;
   return {
@@ -189,6 +252,9 @@ function normalizar(raw: ProductoRaw): ProductoVivo | null {
     filtros,
     lead,
     descripcion: (raw.description ?? "").trim(),
+    dimensiones,
+    empaque,
+    fichas,
     enStock: (filtros.disponibilidad ?? []).includes("En stock"),
   };
 }

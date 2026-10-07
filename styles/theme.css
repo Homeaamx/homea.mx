@@ -3316,3 +3316,42 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-desc { width: 100%; background: #E2DFD6; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; }
 .pdp-desc .eyebrow { margin: 0; }
 .pdp-desc p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--fg); }
+
+/* ---------- 2026-10-07 (7): ficha — logo, título 35px regular con etiqueta, unidades, pestañas ---------- */
+.pdp-logo { height: 30px; width: auto; max-width: 180px; object-fit: contain; object-position: left; mix-blend-mode: multiply; }
+.pdp-titulo { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; width: 100%; }
+.pdp-titulo h1 { font-size: 35px; max-width: none; flex: 1 1 auto; }
+.pdp .info h1 b { font-weight: 400; }
+.pdp-titulo .pdp-tag { flex: none; margin-top: 10px; }
+.pdp-precio .price-big b { font-weight: 500; }
+/* Selector de unidades a la izquierda de "Agregar a mi proyecto" */
+.pdp-qty { display: inline-flex; align-items: stretch; border: 1px solid var(--homea-black); background: var(--surface); }
+.pdp-qty-btn { width: 44px; min-height: 48px; display: grid; place-items: center; background: none; border: 0; cursor: pointer; font-size: 18px; line-height: 1; color: var(--fg); transition: background var(--dur-fast) var(--ease-standard); }
+.pdp-qty-btn:hover { background: var(--bg-greige); }
+.pdp-qty-num { width: 52px; border: 0; background: none; text-align: center; font-family: var(--font-sans); font-size: 14px; font-weight: 600; color: var(--fg); -moz-appearance: textfield; }
+.pdp-qty-num::-webkit-outer-spin-button, .pdp-qty-num::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.pdp-qty-num:focus-visible { outline: 1px solid var(--homea-gold); outline-offset: -1px; }
+.pdp-cta .btn-primary { flex: 1 1 auto; }
+/* Pestañas bajo la galería */
+.pdp-tabs { margin-top: 28px; }
+.pdp-tablist { display: flex; gap: 0; border-bottom: 1px solid var(--border-strong); }
+.pdp-tab { background: none; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; padding: 12px 18px; cursor: pointer;
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-muted);
+  transition: color var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard); }
+.pdp-tab:hover { color: var(--fg); }
+.pdp-tab.is-active { color: var(--fg); border-bottom-color: var(--homea-gold); }
+.pdp-tab:focus-visible { outline: 1px solid var(--homea-gold); outline-offset: 2px; }
+.pdp-panel { padding: 20px 0 0; }
+.pdp-panel[hidden] { display: none; }
+.pdp-tab-sub { font-size: 11px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-muted); margin: 18px 0 10px; }
+.pdp-tab-sub:first-child { margin-top: 0; }
+.pdp-tab-aviso { margin: 0; padding: 16px 18px; background: var(--bg-greige); font-size: 13px; line-height: 1.5; color: var(--fg); border-left: 2px solid var(--homea-gold); }
+.pdp-fichas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+@media (max-width: 1080px) {
+  .pdp .gallery { order: 0; }
+  .pdp-titulo { flex-direction: column; gap: 10px; }
+  .pdp-titulo .pdp-tag { margin-top: 0; }
+  .pdp-titulo h1 { font-size: 30px; }
+}
+.pdp .info .pdp-titulo h1 { font-size: 35px; line-height: 1.1; }
+@media (max-width: 1080px) { .pdp .info .pdp-titulo h1 { font-size: 30px; } }

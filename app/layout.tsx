@@ -79,7 +79,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* Filtro de tipo del riel de subcat.1 (?tipo=…) y su scroll lento. */}
         <Script src="/tipos.js?v=1" strategy="afterInteractive" />
         {/* Filtros, orden y galería del catálogo vivo de Shopify (lib/shopify/htmlCatalogo.ts). */}
-        <Script src="/catalogo.js?v=5" strategy="afterInteractive" />
+        <Script src="/catalogo.js?v=6" strategy="afterInteractive" />
       </body>
     </html>
   );

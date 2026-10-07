@@ -362,6 +362,31 @@
     /* tipos.js / PlpFiltro marcan casillas a mano: aplicar después de su clic. */
     if (t.closest("a.subcat[data-tipo], .tpg-card[data-f]")) aplicarLuego();
 
+    /* Ficha: selector de unidades y pestañas. */
+    var qb = t.closest("[data-qty-menos], [data-qty-mas]");
+    if (qb) {
+      var num = qb.parentNode.querySelector("[data-cart-qty]");
+      var n = parseInt(num.value, 10) || 1;
+      n += qb.hasAttribute("data-qty-mas") ? 1 : -1;
+      num.value = Math.min(99, Math.max(1, n));
+      return;
+    }
+    var tab = t.closest(".pdp-tab[data-tab]");
+    if (tab) {
+      var caja = tab.closest("[data-pdp-tabs]");
+      caja.querySelectorAll(".pdp-tab").forEach(function (b) {
+        var on = b === tab;
+        b.classList.toggle("is-active", on);
+        b.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      caja.querySelectorAll(".pdp-panel").forEach(function (pn) {
+        var on = pn.id === "panel-" + tab.getAttribute("data-tab");
+        pn.classList.toggle("is-active", on);
+        pn.hidden = !on;
+      });
+      return;
+    }
+
     /* Galería de la ficha: miniatura → imagen principal. */
     var mini = t.closest(".pdp-thumb");
     if (mini) {

@@ -80,11 +80,11 @@ export default function CarritoProvider() {
 
   /* ---------- Acciones ---------- */
   const agregar = useCallback(
-    (vid: string, sku: string) => {
+    (vid: string, sku: string, cantidad = 1) => {
       const turno = ++secuencia.current;
       setAviso(undefined);
       setAbierto(true);
-      iniciar(async () => aplicar(turno, await agregarAlCarrito(vid, sku, 1)));
+      iniciar(async () => aplicar(turno, await agregarAlCarrito(vid, sku, cantidad)));
     },
     [aplicar],
   );
@@ -122,7 +122,10 @@ export default function CarritoProvider() {
         ev.preventDefault();
         const vid = alta.getAttribute("data-cart-vid") ?? "";
         const sku = alta.getAttribute("data-cart-sku") ?? "";
-        if (vid || sku) agregar(vid, sku);
+        // Selector de unidades junto al botón (ficha): si no hay, una pieza.
+        const campo = alta.closest(".pdp-cta")?.querySelector<HTMLInputElement>("[data-cart-qty]");
+        const cantidad = Math.min(99, Math.max(1, Number.parseInt(campo?.value ?? "1", 10) || 1));
+        if (vid || sku) agregar(vid, sku, cantidad);
         return;
       }
 
