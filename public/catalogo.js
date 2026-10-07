@@ -110,13 +110,13 @@
 
   function chips(plp, activos) {
     var caja = plp.querySelector("[data-cat-chips]");
-    var toolbar = plp.querySelector(".toolbar");
     if (!caja) {
-      if (!toolbar) return;
+      var aside = plp.querySelector(".filters");
+      if (!aside) return;
       caja = document.createElement("div");
-      caja.className = "fchips";
+      caja.className = "fchips fchips--panel";
       caja.setAttribute("data-cat-chips", "");
-      toolbar.parentNode.insertBefore(caja, toolbar.nextSibling);
+      aside.insertBefore(caja, aside.firstChild);
     }
     var html = "";
     var total = 0;
@@ -132,8 +132,9 @@
           '<span class="sr-only"> · quitar</span></button>';
       });
     });
-    if (total > 1) {
-      html += '<button type="button" class="fchip fchip--all" data-cat-clear>Limpiar todo</button>';
+    if (total) {
+      html = '<h6 class="fchips-t">Filtros aplicados</h6>' + html +
+        '<button type="button" class="fchip fchip--all" data-cat-clear>Eliminar todo</button>';
     }
     caja.innerHTML = html;
     caja.hidden = total === 0;

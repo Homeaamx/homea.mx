@@ -3214,3 +3214,30 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .proy-drawer .wl-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 6px; }
 .proy-drawer .proy-was { flex: 0 0 100%; margin: 0; font-size: 11.5px; }
 .filters-sheet-body .fbar { background: var(--surface); }
+
+/* ---------- Ajustes 2026-10-07 (Carla): panel más oscuro, filtros aplicados arriba,
+   tarjeta con marca 13px bold, nombre 12px, sku 11px, precio → tachado → IVA ---------- */
+.fhead h6 { font-size: 11px; font-weight: 700; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg); margin: 0; padding: 0 0 10px; }
+.fgroup--acc > .fgroup-sum h6 { color: var(--fg); font-weight: 700; }
+.fgroup--acc .fopts label { color: var(--fg); }
+.fgroup--acc .fopts .count { color: var(--fg-muted); }
+.fgroup-caret { border-color: var(--fg); }
+.fgroup--acc > .fgroup-sum:focus-visible { outline: 1px solid var(--homea-gold); outline-offset: 2px; }
+.fgroup--acc > .fgroup-sum:focus:not(:focus-visible) { outline: none; }
+.fchips--panel { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin: 0 0 26px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+.fchips--panel[hidden] { display: none; }
+.fchips-t { font-size: 11px; font-weight: 700; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg); margin: 0 0 4px; }
+.fchips--panel .fchip { padding: 7px 8px 7px 10px; }
+.fchips--panel .fchip-g { color: var(--fg); }
+.fchips--panel .fchip--all { padding-left: 0; margin-top: 2px; }
+.pcard-head .brand { font-size: 13px; font-weight: 700; }
+.pcard-serie { font-size: 12px; }
+[data-cat-card] h3.pcard-name { font-size: 12px; line-height: 1.45; }
+.pcard-sku { font-size: 11px; color: var(--fg-muted); letter-spacing: .02em; text-align: left; }
+.pcard-price { flex-direction: column; align-items: flex-start; gap: 3px; }
+.pcard-price .price-tag { font-size: 21px; }
+.pcard-price .price-was { flex: none; font-size: 12px; }
+.pcard-price .price-note { margin-top: 2px; }
+.pcard-tag { color: var(--homea-espresso); font-weight: 700; }
+.pcard-tag.is-stock { background: var(--homea-espresso); border-color: var(--homea-espresso); color: #fff; }
+@media (min-width: 1081px) { .plp > .filters > .fchips--panel, .plp > .filters > .fhead { flex: none; } }

@@ -95,10 +95,12 @@ function textoPrecio(precio: PrecioPublico): string {
 }
 
 function precioTarjeta(precio: PrecioPublico): string {
+  // Orden pedido (Carla, 2026-10-07): precio final arriba, tachado debajo, "IVA
+  // incluido" al final.
   const tachado = precio.tachado
     ? `<s class="price-was figures">$${dinero(precio.tachado)} ${precio.moneda}</s>`
     : "";
-  return `<div class="pcard-price">${tachado}<span class="price-tag figures">$${dinero(precio.venta)}<span class="currency">${precio.moneda}</span></span><span class="price-note">IVA incluido</span></div>`;
+  return `<div class="pcard-price"><span class="price-tag figures">$${dinero(precio.venta)}<span class="currency">${precio.moneda}</span></span>${tachado}<span class="price-note">IVA incluido</span></div>`;
 }
 
 export function precioFichaHtml(precio: PrecioPublico, tc: TipoCambio): string {
@@ -140,7 +142,7 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
 
   const { nombre, serie } = nombreYSerie(p.titulo);
   const stock = p.enStock
-    ? `<span class="pcard-tag is-stock">En stock</span>`
+    ? `<span class="pcard-tag is-stock">EN STOCK</span>`
     : `<span class="pcard-tag is-pedido">Bajo pedido</span>`;
 
   // Solo lo que decide una compra, en este orden (Carla, 2026-10-06): marca y
@@ -151,7 +153,7 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
   <div class="body">
     <div class="pcard-head"><span class="brand">${esc(p.marca)}</span>${serie ? `<span class="pcard-serie">${esc(serie)}</span>` : ""}</div>
     <h3 class="pcard-name">${esc(nombre)}</h3>
-    <span class="pcard-sku figures"><span class="pcard-sku-lbl">Modelo</span> ${esc(p.sku)}</span>
+    <span class="pcard-sku figures">${esc(p.sku)}</span>
     ${precioTarjeta(precio)}
   </div>
 </a>`;
@@ -197,8 +199,8 @@ interface OpcionesPanel {
   valoresComoTipo?: boolean;
 }
 
-/** Cuántos grupos arrancan desplegados; el resto se abre al tocar su título. */
-const GRUPOS_ABIERTOS = 2;
+/** Todos los grupos arrancan plegados (Carla, 2026-10-07): se abren al tocar su título. */
+const GRUPOS_ABIERTOS = 0;
 
 /**
  * Un grupo del panel: <details> con el título como <summary>. Las casillas se
@@ -217,7 +219,12 @@ export function panelFiltrosHtml(
   productos: ProductoVivo[],
   { conTipo = false, tiposRiel = [], valoresComoTipo = false }: OpcionesPanel = {},
 ): string {
-  const grupos: string[] = [];
+  // Filtros aplicados, arriba del todo (como "Ahora comprando por" de Artexa):
+  // catalogo.js lo llena con un chip por valor y "Eliminar todo".
+  const grupos: string[] = [
+    `<div class="fchips fchips--panel" data-cat-chips hidden></div>
+<div class="fhead"><h6>Filtros</h6></div>`,
+  ];
 
   if (conTipo) {
     const cuenta = new Map<string, { nombre: string; n: number }>();
@@ -234,7 +241,7 @@ export function panelFiltrosHtml(
           `<label data-tipo="${esc(slug)}"><input type="checkbox" data-fk="tipo-web" value="${esc(slug)}"> <span class="flbl">${esc(c.nombre)}</span> <span class="count figures">${c.n}</span></label>`,
       )
       .join("");
-    grupos.push(grupoHtml("Tipo", "tipo-web", etiquetas, true));
+    grupos.push(grupoHtml("Tipo de producto", "tipo-web", etiquetas, false));
   }
 
   // Unión ordenada de los filtros de cada tipo presente (tabla de filtros v2).
@@ -263,7 +270,7 @@ export function panelFiltrosHtml(
           `<label${valoresComoTipo ? ` data-tipo="${esc(slugValor(v))}"` : ""}><input type="checkbox" data-fk="${esc(d.clave)}" value="${esc(slugValor(v))}"> <span class="flbl">${esc(v)}</span> <span class="count figures">${n}</span></label>`,
       )
       .join("");
-    grupos.push(grupoHtml(d.nombre, d.clave, etiquetas, grupos.length < GRUPOS_ABIERTOS));
+    grupos.push(grupoHtml(d.nombre, d.clave, etiquetas, grupos.length - 1 < GRUPOS_ABIERTOS));
   }
 
   grupos.push(
