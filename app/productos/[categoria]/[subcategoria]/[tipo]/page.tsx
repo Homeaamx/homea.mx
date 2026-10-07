@@ -8,7 +8,6 @@
 // usa el sistema de diseño v2. Shopify aporta los productos vía Storefront API.
 
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import Link from "next/link";
 import { srcSet, SIZES_SANGRE } from "@/lib/imagenResponsiva";
 import { notFound } from "next/navigation";
@@ -16,7 +15,6 @@ import { getRoute } from "@/lib/guias";
 import { FILTROS_PLP, getFiltrosPlp } from "@/lib/filtrosPlp";
 import { SITE_URL } from "@/lib/site";
 import TipoGrid from "@/components/TipoGrid";
-import ScrollAFiltros from "@/components/ScrollAFiltros";
 import PlpFiltro from "@/components/PlpFiltro";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppCta from "@/components/WhatsAppCta";
@@ -149,9 +147,6 @@ export default async function Page({ params }: Params) {
       />
 
       <PlpFiltro base={base} tipos={nombresPorSlug} />
-      <Suspense fallback={null}>
-        <ScrollAFiltros destino="catalogo" />
-      </Suspense>
 
       <section className="sec tight" id="catalogo" style={{ paddingTop: 8 }}>
         <div className="container">

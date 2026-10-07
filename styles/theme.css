@@ -3255,3 +3255,9 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .fprecio input:focus-visible { outline: 1px solid var(--homea-gold); outline-offset: 1px; }
 .fprecio-sep { color: var(--fg-subtle); padding-bottom: 10px; }
 .fnote--tight { margin: 0 0 12px; font-size: 11.5px; }
+
+/* 2026-10-07 (3): la línea va en su propio renglón bajo la marca; tachado 18px;
+   la foto vuelve al encuadre original (6 %) para que el aparato quepa completo. */
+.pcard-head { flex-direction: column; align-items: flex-start; gap: 2px; }
+.pcard-price .price-was { font-size: 18px; }
+[data-cat-card] .imgw img { padding: 6%; }

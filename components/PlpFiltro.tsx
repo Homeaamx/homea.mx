@@ -8,8 +8,8 @@
 // después de hidratar, con el mismo patrón de JS delegado que tipos.js usa en el
 // riel de subcat.1: los tiles son <a> planas, el clic hace pushState y aquí se
 // sincronizan las clases. El pushState nativo NO despierta a useSearchParams
-// (verificado en 14.2.5), así que el scroll al catálogo tras el clic también se
-// orquesta aquí; ScrollAFiltros queda solo para la carga directa con ?f=.
+// (verificado en 14.2.5). No hay scroll al catálogo: el usuario se queda donde
+// está (decisión Carla, 2026-10-07).
 //
 // Sin JS los enlaces navegan normal (página estática con el mosaico completo):
 // el filtro visual es mejora progresiva, nunca contenido.
@@ -83,23 +83,8 @@ export default function PlpFiltro({ base, tipos }: Props) {
       const f = card.dataset.f === leerF() ? null : card.dataset.f!;
       window.history.pushState(null, "", f ? `${base}?f=${f}` : base);
       sync(f);
-      // Al aplicar un filtro, bajar al catálogo (mismo respiro y recorrido que
-      // ScrollAFiltros: el usuario alcanza a ver la tarjeta marcada primero).
-      if (f) {
-        const el = document.getElementById("catalogo");
-        if (!el) return;
-        const reduce = window.matchMedia(
-          "(prefers-reduced-motion: reduce)",
-        ).matches;
-        setTimeout(() => {
-          if (window.__homeaScrollA && !reduce) window.__homeaScrollA(el, 8);
-          else
-            el.scrollIntoView({
-              behavior: reduce ? "auto" : "smooth",
-              block: "start",
-            });
-        }, 260);
-      }
+      // Sin desplazamiento (Carla, 2026-10-07): el filtro se aplica en el
+      // catálogo de abajo y el usuario se queda donde está.
     };
 
     const onPop = () => sync(leerF());
