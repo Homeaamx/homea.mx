@@ -417,10 +417,28 @@ const NOMBRES_FILTRO: Record<string, string> = {
 
 /** "Columna de Refrigeración Panelable 24\" — Serie Expressive" → título con la serie en negritas. */
 function tituloH1(titulo: string): string {
-  const { nombre, serie } = nombreYSerie(titulo);
-  return serie
-    ? `<b>${esc(nombre)}</b> <span class="pdp-h1-serie">${esc(serie)}</span>`
-    : `<b>${esc(nombre)}</b>`;
+  return `<b>${esc(nombreYSerie(titulo).nombre)}</b>`;
+}
+
+/** Renglón bajo el título: la línea a la izquierda y el modelo a la derecha. */
+function serieYModeloHtml(p: ProductoVivo): string {
+  const { serie } = nombreYSerie(p.titulo);
+  return `<div class="pdp-serie-row"><span class="pdp-h1-serie">${serie ? esc(serie) : ""}</span><span class="pdp-sku figures"><span class="pdp-sku-lbl">Modelo</span> ${esc(p.sku)}</span></div>`;
+}
+
+/**
+ * Descripción de Shopify con su marcado, pero solo etiquetas de texto: párrafos,
+ * listas, negritas y saltos. Todo lo demás (scripts, estilos, atributos) se quita.
+ */
+function htmlSeguro(html: string): string {
+  const PERMITIDAS = new Set(["p", "ul", "ol", "li", "strong", "b", "em", "i", "br"]);
+  return html
+    .replace(/<(script|style)[\s\S]*?<\/\1>/gi, "")
+    .replace(/<\/?([a-zA-Z0-9]+)[^>]*>/g, (tag, nombre: string) => {
+      const n = nombre.toLowerCase();
+      if (!PERMITIDAS.has(n)) return "";
+      return tag.startsWith("</") ? `</${n}>` : n === "br" ? "<br>" : `<${n}>`;
+    });
 }
 
 /** Pestañas bajo la galería: Características · Dimensiones · Fichas técnicas. */
@@ -502,8 +520,12 @@ export function fichaHtml(
   const etiquetaStock = p.enStock
     ? `<span class="pcard-tag pdp-tag is-stock">EN STOCK</span>`
     : `<span class="pcard-tag pdp-tag is-pedido">Bajo pedido</span>`;
-  const descripcionLarga = p.descripcion
-    ? `<div class="pdp-desc"><div class="eyebrow">Descripción</div><p>${esc(p.descripcion).replace(/\n+/g, "</p><p>")}</p></div>`
+  const descripcionLarga = p.descripcionHtml || p.descripcion
+    ? `<div class="pdp-desc"><div class="eyebrow">Descripción</div>${
+        p.descripcionHtml
+          ? htmlSeguro(p.descripcionHtml)
+          : `<p>${esc(p.descripcion).replace(/\n+/g, "</p><p>")}</p>`
+      }</div>`
     : "";
 
   const imagenPrincipal = principal
@@ -566,6 +588,7 @@ ${relacionados.map((r, i) => tarjetaHtml(r, tc, i)).join("\n")}
       ${cabecera}
       <span class="rule-gold"></span>
       <div class="pdp-titulo"><h1>${tituloH1(p.titulo)}</h1>${etiquetaStock}</div>
+      ${serieYModeloHtml(p)}
       ${p.lead ? `<p class="lead-serif">${esc(p.lead)}</p>` : ""}
       ${precioFichaHtml(precio, tc)}
       ${descripcionLarga}

@@ -3368,3 +3368,16 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-panel { background: var(--bg-greige); padding: 22px 24px 24px; }
 .pdp-panel .spec-row { border-bottom-color: rgba(30, 25, 20, .12); }
 .pdp-tab-aviso { background: var(--surface); }
+
+/* 2026-10-07 (9): logo 50 % más grande; línea + modelo en un renglón. */
+.pdp-logo { height: 51px; max-width: 280px; }
+.pdp-serie-row { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; width: 100%; margin-top: -8px; }
+.pdp-serie-row .pdp-h1-serie { display: inline; font-family: var(--font-display); font-size: 22px; margin: 0; }
+.pdp-sku { font-size: 13px; color: var(--fg-muted); letter-spacing: .02em; white-space: nowrap; }
+.pdp-sku-lbl { font-family: var(--font-sans); font-size: 10px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-subtle); margin-right: 6px; }
+
+/* Descripción larga con listas (Shopify descriptionHtml). */
+.pdp-desc ul, .pdp-desc ol { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 5px; }
+.pdp-desc li { font-size: 12px; line-height: 1.55; color: var(--fg); }
+.pdp-desc li::marker { color: var(--homea-gold); }
+.pdp-desc p + ul, .pdp-desc ul + p { margin-top: 4px; }

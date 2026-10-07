@@ -54,6 +54,7 @@ const CAMPOS_PRODUCTO = /* GraphQL */ `
     vendor
     productType
     description
+    descriptionHtml
     availableForSale
     images(first: 8) { nodes { url altText width height } }
     variants(first: 5) {
@@ -106,6 +107,7 @@ interface ProductoRaw {
   vendor: string;
   productType: string;
   description: string;
+  descriptionHtml: string;
   availableForSale: boolean;
   images: { nodes: { url: string; altText: string | null; width: number; height: number }[] };
   variants: {
@@ -149,8 +151,10 @@ export interface ProductoVivo {
   /** Valores de cada filtro (`filtros.<clave>`), ya como lista. */
   filtros: Record<string, string[]>;
   lead: string | null;
-  /** Descripción larga de Shopify (texto plano), para la ficha. */
+  /** Descripción larga de Shopify (texto plano), para metadatos y JSON-LD. */
   descripcion: string;
+  /** La misma descripción con su marcado (párrafos, listas, negritas) para la ficha. */
+  descripcionHtml: string;
   /** Dimensiones del aparato (catálogo / ficha técnica): `homea.dimensiones`. */
   dimensiones: { nombre: string; valor: string }[];
   /** Dimensiones del empaque (`custom.ancho/alto/profundidad`, machote de proveedor). */
@@ -252,6 +256,7 @@ function normalizar(raw: ProductoRaw): ProductoVivo | null {
     filtros,
     lead,
     descripcion: (raw.description ?? "").trim(),
+    descripcionHtml: (raw.descriptionHtml ?? "").trim(),
     dimensiones,
     empaque,
     fichas,
