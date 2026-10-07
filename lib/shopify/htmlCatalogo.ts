@@ -12,6 +12,9 @@
 
 import "server-only";
 
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+
 import filtrosWeb from "@/data/filtros-web.json";
 import marcasJson from "@/data/marcas.json";
 import type { Decision } from "@/lib/reglas/reglaMarca";
@@ -61,14 +64,23 @@ const CORAZON =
 const normMarca = (s: string) =>
   s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, "");
 
-/** Logo original de la marca (data/marcas.json) para la cabecera de la ficha. */
+/**
+ * Logo original (a color) de la marca para la cabecera de la ficha:
+ * public/assets/logos/color/<slug>.* — los mismos del directorio de garantías.
+ * Los de /assets/logos/<slug>.webp son blancos (van sobre foto) y no sirven aquí.
+ */
 function logoDeMarca(vendor: string): string | null {
-  type MarcaMin = { slug: string; nombre: string; logo?: string | null };
+  type MarcaMin = { slug: string; nombre: string };
   const crudo = marcasJson as unknown as MarcaMin[] | { marcas: MarcaMin[] };
   const lista: MarcaMin[] = Array.isArray(crudo) ? crudo : (crudo.marcas ?? []);
   const n = normMarca(vendor);
   const m = lista.find((x) => normMarca(x.nombre) === n || normMarca(x.slug) === n);
-  return m?.logo ?? null;
+  const slug = m?.slug ?? vendor.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  for (const ext of ["webp", "png", "jpg", "svg"]) {
+    const ruta = `/assets/logos/color/${slug}.${ext}`;
+    if (existsSync(join(process.cwd(), "public", ruta))) return ruta;
+  }
+  return null;
 }
 
 /* ---------- Definición de filtros por tipo -------------------------------- */
@@ -429,7 +441,7 @@ function pestanasHtml(p: ProductoVivo, spec: string): string {
   const dimensiones =
     dimProducto || dimEmpaque
       ? `${dimProducto}${dimEmpaque}`
-      : `<p class="pdp-tab-aviso">Las dimensiones de este producto están por confirmarse. Pídelas a tu asesor de ventas.</p>`;
+      : `<p class="pdp-tab-aviso">Para más información sobre las dimensiones de este producto, favor de contactar a tu asesor de ventas.</p>`;
   const fichas = p.fichas.length
     ? `<ul class="pdp-fichas">${p.fichas
         .map(
@@ -529,9 +541,9 @@ export function fichaHtml(
     ? `<section class="sec"><div class="container">
   <div class="sec-head-row">
     <div class="sec-head">
-      <div class="eyebrow">Curaduría · Relacionados</div>
+      <div class="eyebrow">Productos relacionados</div>
       <span class="rule-gold"></span>
-      <h2>Más de <b>${esc(p.tipo.toLowerCase())}</b>.</h2>
+      <h2>Más <b>${esc(p.tipo.toLowerCase())}</b> de ${esc(p.marca)}.</h2>
     </div>
     ${tw ? `<a class="arrow-link" href="${tw.ruta}">Ver ${esc(p.tipo)} <span class="ln"></span><span class="ar">→</span></a>` : ""}
   </div>
@@ -563,18 +575,8 @@ ${relacionados.map((r, i) => tarjetaHtml(r, tc, i)).join("\n")}
   </div>
 </div></section>
 
-<section class="sec tight on-greige"><div class="container">
-  <div class="split">
-    <div class="text">
-      <div class="eyebrow">Especificación · Sin costo</div>
-      <span class="rule-gold"></span>
-      <h2>Esta pieza se especifica <i>con un experto</i>.</h2>
-      <p style="margin:0;color:var(--fg-muted)">Medidas, cargas eléctricas, ventilación y paneles: un asesor revisa tu plano antes de confirmar el pedido, para que llegue bien a la primera.</p>
-      <a class="arrow-link" href="/contacto">Hablar con un asesor <span class="ln"></span><span class="ar">→</span></a>
-    </div>
-    <div class="imgw" style="aspect-ratio:16/10"><img width="1200" height="1600" srcset="/assets/photos/proyecto-1-400.webp 400w, /assets/photos/proyecto-1-640.webp 640w, /assets/photos/proyecto-1-960.webp 960w, /assets/photos/proyecto-1.webp 1200w" sizes="(max-width: 700px) 100vw, 50vw" loading="lazy" decoding="async" src="/assets/photos/proyecto-1.webp" alt="Integración panelable en encino, proyecto HOMEA"></div>
-  </div>
-</div></section>
+<!-- Aquí irá la conexión a Syndigo (contenido enriquecido del fabricante) para las
+     marcas que la tengan; mientras, se pasa directo a Productos relacionados. -->
 
 ${relacionadosHtml}`;
 }

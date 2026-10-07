@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Pestañas de la ficha · 3 opciones</title>
+<style>
+@font-face{font-family:Newsreader;src:url(/fonts/Newsreader-Roman-latin.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:Montserrat;src:url(/fonts/Montserrat-Roman-latin.woff2) format("woff2");font-weight:100 900;font-display:swap}
+:root{--bone:#F7F3EC;--greige:#ECEAE3;--greige2:#E2DFD6;--espresso:#1E1914;--black:#0A0A0A;--gold:#BD9B5E;--goldt:#76603B;--muted:#6B655C;--border:rgba(30,25,20,.14)}
+*{box-sizing:border-box}body{margin:0;background:var(--bone);color:var(--espresso);font-family:Montserrat,system-ui,sans-serif;padding:48px 32px}
+h1{font-family:Newsreader,serif;font-weight:400;font-size:38px;margin:0 0 6px}p.lead{color:var(--muted);margin:0 0 40px;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;align-items:start}@media(max-width:1100px){.grid{grid-template-columns:1fr}}
+.op{background:#fff;border:1px solid var(--border);padding:24px}
+.op h2{font-family:Newsreader,serif;font-weight:400;font-size:24px;margin:0 0 4px}.op .d{font-size:12.5px;color:var(--muted);margin:0 0 20px;line-height:1.5}
+.ey{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--goldt);margin-bottom:10px}
+.tab{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;background:none;border:0;cursor:default;color:var(--muted);font-family:inherit}
+.spec{display:flex;flex-direction:column}.row{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.row span:first-child{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+/* A · carpeta */
+.a .bar{display:flex;gap:4px;align-items:flex-end}.a .tab{padding:13px 16px}.a .tab.on{background:var(--greige);color:var(--espresso);position:relative}
+.a .tab.on::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--gold)}
+.a .panel{background:var(--greige);padding:20px 22px}
+/* B · acordeón */
+.b .sec{border:1px solid var(--border);margin-bottom:8px;background:var(--bone)}.b .sec.on{background:var(--greige);border-color:var(--greige)}
+.b .hd{display:flex;justify-content:space-between;align-items:center;padding:14px 18px}.b .hd .tab{color:var(--espresso)}
+.b .car{width:8px;height:8px;border-right:1px solid var(--espresso);border-bottom:1px solid var(--espresso);transform:rotate(45deg)}
+.b .sec.on .car{transform:rotate(-135deg)}.b .body{padding:0 18px 18px}
+/* C · píldoras + tarjeta */
+.c .pills{display:inline-flex;border:1px solid var(--espresso);margin-bottom:16px}.c .tab{padding:11px 16px}.c .tab.on{background:var(--espresso);color:#fff}
+.c .card{background:#fff;border:1px solid var(--border);box-shadow:0 10px 30px rgba(30,25,20,.08);padding:22px 24px}
+.c .card .ey{color:var(--espresso)}
+.aviso{background:#fff;border-left:2px solid var(--gold);padding:14px 16px;font-size:12.5px;line-height:1.5;margin-top:14px}
+.b .aviso,.c .aviso{background:var(--bone)}
+</style></head><body>
+<h1>Pestañas de la ficha · <i style="font-family:Newsreader">tres opciones</i></h1>
+<p class="lead">Mismo contenido (Características · Dimensiones · Fichas técnicas) con tres formas de separarlo. La opción A es la que está aplicada en la ficha ahora mismo.</p>
+<div class="grid">
+<section class="op a"><div class="ey">Opción A</div><h2>Carpeta</h2><p class="d">La pestaña activa se funde con el panel greige, como una carpeta: queda claro que el contenido pertenece a esa pestaña y no a la siguiente.</p>
+<div class="bar"><span class="tab on">Características</span><span class="tab">Dimensiones</span><span class="tab">Fichas técnicas</span></div>
+<div class="panel"><div class="spec"><div class="row"><span>Marca</span><span>Gaggenau</span></div><div class="row"><span>Instalación</span><span>Empotrado</span></div><div class="row"><span>Diseño</span><span>French Door</span></div><div class="row"><span>Ancho</span><span>36"</span></div><div class="row"><span>Garantía</span><span>5 años</span></div></div></div></section>
+
+<section class="op b"><div class="ey">Opción B</div><h2>Acordeón</h2><p class="d">Las tres secciones apiladas, cada una en su propia caja; la abierta se pinta en greige. Se pueden ver dos a la vez y en móvil es lo más natural.</p>
+<div class="sec on"><div class="hd"><span class="tab">Características</span><span class="car"></span></div><div class="body"><div class="spec"><div class="row"><span>Marca</span><span>Gaggenau</span></div><div class="row"><span>Instalación</span><span>Empotrado</span></div><div class="row"><span>Diseño</span><span>French Door</span></div></div></div></div>
+<div class="sec"><div class="hd"><span class="tab">Dimensiones</span><span class="car"></span></div></div>
+<div class="sec"><div class="hd"><span class="tab">Fichas técnicas</span><span class="car"></span></div></div></section>
+
+<section class="op c"><div class="ey">Opción C</div><h2>Píldoras + tarjeta</h2><p class="d">Un control segmentado (la activa en espresso) y el contenido en una tarjeta blanca con sombra que repite el título de la sección.</p>
+<div class="pills"><span class="tab on">Características</span><span class="tab">Dimensiones</span><span class="tab">Fichas técnicas</span></div>
+<div class="card"><div class="ey">Dimensiones</div><div class="spec"><div class="row"><span>Ancho</span><span>91.4 cm</span></div><div class="row"><span>Alto</span><span>213.4 cm</span></div><div class="row"><span>Fondo</span><span>61 cm</span></div></div><div class="aviso">Para más información sobre las dimensiones de este producto, favor de contactar a tu asesor de ventas.</div></div></section>
+</div></body></html>

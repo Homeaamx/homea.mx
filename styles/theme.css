@@ -3355,3 +3355,16 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 }
 .pdp .info .pdp-titulo h1 { font-size: 35px; line-height: 1.1; }
 @media (max-width: 1080px) { .pdp .info .pdp-titulo h1 { font-size: 30px; } }
+
+/* ---------- 2026-10-07 (8): etiquetas de disponibilidad, pestañas tipo carpeta ---------- */
+.pcard-tag.is-pedido { background: #4A3F36; border-color: #4A3F36; color: #fff; }
+.pcard-tag.is-stock { background: var(--homea-black); border-color: var(--homea-black); color: #fff; }
+.pdp-logo { mix-blend-mode: normal; height: 34px; max-width: 200px; }
+/* Opción A — carpeta: la pestaña activa se funde con el panel greige. */
+.pdp-tablist { border-bottom: 0; gap: 4px; align-items: flex-end; }
+.pdp-tab { border: 1px solid transparent; border-bottom: 0; margin-bottom: 0; padding: 13px 18px; background: transparent; }
+.pdp-tab.is-active { background: var(--bg-greige); border-color: var(--bg-greige); color: var(--fg); position: relative; z-index: 1; }
+.pdp-tab.is-active::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--homea-gold); }
+.pdp-panel { background: var(--bg-greige); padding: 22px 24px 24px; }
+.pdp-panel .spec-row { border-bottom-color: rgba(30, 25, 20, .12); }
+.pdp-tab-aviso { background: var(--surface); }
