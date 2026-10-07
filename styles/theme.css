@@ -3271,3 +3271,48 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 [data-cat-card] .imgw { aspect-ratio: 1 / 1; }
 .plp-grid:has([data-cat-card]) { gap: 20px; }
 .fhead { padding: 12px 14px; }
+
+/* ---------- 2026-10-07 (6): barra opaca, slider de precio, ficha ---------- */
+.fbar.has-cambios { opacity: 1; }
+.fprecio { flex-direction: column; align-items: stretch; gap: 10px; }
+.fprecio-campos { display: flex; align-items: flex-end; gap: 8px; }
+.fprecio-slider { position: relative; height: 28px; margin: 6px 2px 0; }
+.fprecio-track { position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: var(--border-strong); transform: translateY(-50%); }
+.fprecio-fill { position: absolute; top: 50%; height: 2px; background: var(--homea-gold); transform: translateY(-50%); left: 0; right: 0; }
+.fprecio-slider input[type="range"] {
+  position: absolute; inset: 0; width: 100%; margin: 0; background: none; pointer-events: none;
+  -webkit-appearance: none; appearance: none; height: 28px;
+}
+.fprecio-slider input[type="range"]::-webkit-slider-runnable-track { background: transparent; height: 28px; }
+.fprecio-slider input[type="range"]::-moz-range-track { background: transparent; height: 28px; }
+.fprecio-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; pointer-events: auto; cursor: grab;
+  width: 16px; height: 16px; margin-top: 6px; border-radius: 0;
+  background: var(--homea-black); border: 2px solid var(--homea-gold); box-shadow: 0 0 0 2px var(--bg);
+}
+.fprecio-slider input[type="range"]::-moz-range-thumb {
+  pointer-events: auto; cursor: grab; width: 12px; height: 12px; border-radius: 0;
+  background: var(--homea-black); border: 2px solid var(--homea-gold);
+}
+.fprecio-slider input[type="range"]:focus-visible { outline: none; }
+.fprecio-slider input[type="range"]:focus-visible::-webkit-slider-thumb { outline: 1px solid var(--homea-gold); outline-offset: 2px; }
+
+/* Ficha: galería que cabe en el viewport + zoom */
+.pdp .gallery .main { aspect-ratio: auto; height: min(62vh, 640px); cursor: zoom-in; }
+.pdp .gallery .main #pdp-img { width: 100%; height: 100%; }
+[data-pdp-zoom]:focus-visible { outline: 2px solid var(--homea-gold); outline-offset: 3px; }
+.pdp-lightbox .lb-img { background: var(--homea-bone); padding: 2%; max-height: 86vh; }
+.pdp-lightbox .lb-cap { color: var(--homea-bone); }
+@media (max-width: 1080px) { .pdp .gallery .main { height: auto; aspect-ratio: 1 / 1; } }
+/* Ficha: cabecera con etiqueta, título con línea regular, precio, descripción */
+.pdp-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.pdp-tag { position: static; }
+.pdp .info h1 b { font-weight: 600; }
+.pdp-h1-serie { display: block; font-weight: 400; font-size: .55em; color: var(--fg-muted); margin-top: 6px; letter-spacing: .01em; }
+.pdp-precio { display: flex; flex-direction: column; gap: 4px; }
+.pdp-precio .price-big b { font-weight: 700; }
+.pdp-was { font-size: 15px; color: var(--fg-subtle); }
+.pdp-precio .pdp-mxn { margin: 4px 0 0; }
+.pdp-desc { width: 100%; background: #E2DFD6; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; }
+.pdp-desc .eyebrow { margin: 0; }
+.pdp-desc p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--fg); }

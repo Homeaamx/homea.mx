@@ -15,7 +15,6 @@ import "server-only";
 import filtrosWeb from "@/data/filtros-web.json";
 import type { Decision } from "@/lib/reglas/reglaMarca";
 import type { TipoCambio } from "@/lib/tipoCambio";
-import { whatsappHref } from "@/lib/whatsapp";
 
 import { tipoWeb } from "./coleccionesWeb";
 import {
@@ -105,12 +104,17 @@ function precioTarjeta(precio: PrecioPublico): string {
 
 export function precioFichaHtml(precio: PrecioPublico, tc: TipoCambio): string {
   const tachado = precio.tachado
-    ? `<s class="price-was">$${dinero(precio.tachado)}</s>`
+    ? `<s class="pdp-was figures">$${dinero(precio.tachado)} ${precio.moneda}</s>`
     : "";
-  const principal = `<span class="price-big figures">${tachado}$${dinero(precio.venta)}<span class="currency">${precio.moneda}</span> <span class="price-note">IVA incluido</span></span>`;
-  if (precio.moneda !== "USD" || precio.mxnEquivalente === null) return principal;
-  return `${principal}
-      <p class="note figures" style="margin-top:-4px">≈ $${dinero(precio.mxnEquivalente)} MXN IVA incluido · TC ${tc.valor.toFixed(2)}${tc.fecha ? ` · ${esc(tc.fecha)}` : ""}</p>`;
+  const equivalencia =
+    precio.moneda === "USD" && precio.mxnEquivalente !== null
+      ? `<p class="note figures pdp-mxn">≈ $${dinero(precio.mxnEquivalente)} MXN IVA incluido · TC ${tc.valor.toFixed(2)}${tc.fecha ? ` · ${esc(tc.fecha)}` : ""}</p>`
+      : "";
+  return `<div class="pdp-precio">
+      <span class="price-big figures"><b>$${dinero(precio.venta)}</b><span class="currency">${precio.moneda}</span> <span class="price-note">IVA incluido</span></span>
+      ${tachado}
+      ${equivalencia}
+    </div>`;
 }
 
 /* ---------- Tarjeta ------------------------------------------------------- */
@@ -278,9 +282,16 @@ export function panelFiltrosHtml(
           d.nombre,
           "precio",
           `<div class="fprecio" data-cat-precio data-max="${max}">
-      <label class="fprecio-campo"><span class="flbl">Desde</span><input type="number" inputmode="numeric" min="0" step="1000" placeholder="0" data-fp="min" aria-label="Precio mínimo en pesos"></label>
-      <span class="fprecio-sep">—</span>
-      <label class="fprecio-campo"><span class="flbl">Hasta</span><input type="number" inputmode="numeric" min="0" step="1000" placeholder="${max.toLocaleString("es-MX")}" data-fp="max" aria-label="Precio máximo en pesos"></label>
+      <div class="fprecio-slider">
+        <span class="fprecio-track"></span><span class="fprecio-fill" data-fp-fill></span>
+        <input type="range" min="0" max="${max}" step="1000" value="0" data-fr="min" aria-label="Precio mínimo">
+        <input type="range" min="0" max="${max}" step="1000" value="${max}" data-fr="max" aria-label="Precio máximo">
+      </div>
+      <div class="fprecio-campos">
+        <label class="fprecio-campo"><span class="flbl">Desde</span><input type="number" inputmode="numeric" min="0" max="${max}" step="1000" placeholder="0" data-fp="min" aria-label="Precio mínimo en pesos"></label>
+        <span class="fprecio-sep">—</span>
+        <label class="fprecio-campo"><span class="flbl">Hasta</span><input type="number" inputmode="numeric" min="0" max="${max}" step="1000" placeholder="${max.toLocaleString("es-MX")}" data-fp="max" aria-label="Precio máximo en pesos"></label>
+      </div>
     </div>
     <p class="fnote fnote--tight">MXN con IVA · las piezas en dólares entran por su equivalente al tipo de cambio del día.</p>`,
           false,
@@ -328,9 +339,6 @@ export function conteoHtml(productos: ProductoVivo[]): string {
 /* ---------- Llamado a la acción ------------------------------------------ */
 
 export function ctaHtml(p: ProductoVivo, decision: Decision, precio: PrecioPublico): string {
-  const wa = whatsappHref(
-    `¡Hola! Me interesa el ${p.marca} ${p.titulo} (modelo ${p.sku}). ¿Me pueden cotizar?`,
-  );
   const numericId = p.variantId.split("/").pop() ?? "";
 
   // Modelo "Mi proyecto" (Carla, 2026-10-06): TODA pieza se agrega al proyecto.
@@ -338,8 +346,6 @@ export function ctaHtml(p: ProductoVivo, decision: Decision, precio: PrecioPubli
   // (marca + monto + stock); si alguna se cotiza, el proyecto completo se manda
   // como cotización por WhatsApp. La regla se vuelve a evaluar en el servidor.
   const agregar = `<button class="btn btn-primary cart-add" type="button" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(numericId)}" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${p.imagenes[0] ? esc(cdn(p.imagenes[0].url, 400)) : ""}" data-cart-href="/producto/${p.slug}">Agregar a mi proyecto</button>`;
-  const cotizar = `<a class="btn btn-ghost" href="${esc(wa)}" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="pdp_cotizar">Cotizar por WhatsApp</a>`;
-
   let nota: string;
   if (decision.accion === "comprar") {
     nota = p.enStock
@@ -347,14 +353,11 @@ export function ctaHtml(p: ProductoVivo, decision: Decision, precio: PrecioPubli
       : "Bajo pedido · se puede pagar en línea · IVA incluido · un especialista confirma el tiempo de entrega.";
   } else {
     nota =
-      decision.motivo === "marca"
-        ? `${esc(p.marca)} se cotiza con tu ejecutivo: agrégala a tu proyecto y envíalo por WhatsApp; te confirma tipo de cambio, descuento y tiempo de entrega.`
-        : "Por su monto, esta pieza se cotiza con un especialista: agrégala a tu proyecto y envíalo por WhatsApp; te confirma tipo de cambio, descuento y tiempo de entrega.";
+      "Este producto se cotiza con un ejecutivo: agrégalo a tu proyecto y envíalo por WhatsApp; te confirmamos tipo de cambio, descuento aplicado y tiempo de entrega.";
   }
 
   return `<div class="pdp-cta" style="display:flex;gap:16px;margin-top:16px;flex-wrap:wrap">
         ${agregar}
-        ${cotizar}
       </div>
       <p class="note">${nota}</p>`;
 }
@@ -380,8 +383,10 @@ const NOMBRES_FILTRO: Record<string, string> = {
 
 /** "Columna de Refrigeración Panelable 24\" — Serie Expressive" → título con la serie en negritas. */
 function tituloH1(titulo: string): string {
-  const [base, serie] = titulo.split(" — ");
-  return serie ? `${esc(base)} <b>${esc(serie)}</b>` : esc(titulo);
+  const { nombre, serie } = nombreYSerie(titulo);
+  return serie
+    ? `<b>${esc(nombre)}</b> <span class="pdp-h1-serie">${esc(serie)}</span>`
+    : `<b>${esc(nombre)}</b>`;
 }
 
 export function fichaHtml(
@@ -406,6 +411,13 @@ export function fichaHtml(
       : []),
     `<span class="figures">${esc(p.marca)} ${esc(p.sku)}</span>`,
   ].join('<span class="sep" style="color:var(--homea-gold);padding:0 .6em">·</span>');
+
+  const etiquetaStock = p.enStock
+    ? `<span class="pcard-tag pdp-tag is-stock">EN STOCK</span>`
+    : `<span class="pcard-tag pdp-tag is-pedido">Bajo pedido</span>`;
+  const descripcionLarga = p.descripcion
+    ? `<div class="pdp-desc"><div class="eyebrow">Descripción</div><p>${esc(p.descripcion).replace(/\n+/g, "</p><p>")}</p></div>`
+    : "";
 
   const imagenPrincipal = principal
     ? `<img id="pdp-img" width="${principal.ancho}" height="${principal.alto}" srcset="${srcsetCdn(principal.url, principal.ancho)}" sizes="(max-width: 700px) 100vw, 50vw" fetchpriority="high" decoding="async" src="${cdn(principal.url, 960)}" alt="${esc(principal.alt)}">`
@@ -459,15 +471,16 @@ ${relacionados.map((r, i) => tarjetaHtml(r, tc, i)).join("\n")}
 
   <div class="pdp">
     <div class="gallery">
-      <div class="main pdp-cutout"><button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(lineaSpec(p).join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${principal ? esc(cdn(principal.url, 400)) : ""}" data-wl-href="${href}" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button>${imagenPrincipal}</div>
+      <div class="main pdp-cutout" data-pdp-zoom role="button" tabindex="0" aria-label="Ampliar imagen"><button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(lineaSpec(p).join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${principal ? esc(cdn(principal.url, 400)) : ""}" data-wl-href="${href}" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button>${imagenPrincipal}</div>
       ${miniaturas}
     </div>
     <div class="info">
-      <div class="eyebrow">${esc(p.marca)}${tw ? ` · ${esc(tw.sub1.nombre)}` : ""} · ${esc(p.tipo)}</div>
+      <div class="pdp-top"><div class="eyebrow">${esc(p.marca)}${tw ? ` · ${esc(tw.sub1.nombre)}` : ""} · ${esc(p.tipo)}</div>${etiquetaStock}</div>
       <span class="rule-gold"></span>
       <h1>${tituloH1(p.titulo)}</h1>
       ${p.lead ? `<p class="lead-serif">${esc(p.lead)}</p>` : ""}
       ${precioFichaHtml(precio, tc)}
+      ${descripcionLarga}
 
       <div class="spec" style="width:100%;margin-top:8px">
         ${spec}

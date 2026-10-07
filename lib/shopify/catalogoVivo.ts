@@ -48,6 +48,7 @@ const CAMPOS_PRODUCTO = /* GraphQL */ `
     title
     vendor
     productType
+    description
     availableForSale
     images(first: 8) { nodes { url altText width height } }
     variants(first: 5) {
@@ -96,6 +97,7 @@ interface ProductoRaw {
   title: string;
   vendor: string;
   productType: string;
+  description: string;
   availableForSale: boolean;
   images: { nodes: { url: string; altText: string | null; width: number; height: number }[] };
   variants: {
@@ -138,6 +140,8 @@ export interface ProductoVivo {
   /** Valores de cada filtro (`filtros.<clave>`), ya como lista. */
   filtros: Record<string, string[]>;
   lead: string | null;
+  /** Descripción larga de Shopify (texto plano), para la ficha. */
+  descripcion: string;
   /** Bajo pedido (sigue vendiendo sin inventario) o En stock. */
   enStock: boolean;
 }
@@ -184,6 +188,7 @@ function normalizar(raw: ProductoRaw): ProductoVivo | null {
     usdLista,
     filtros,
     lead,
+    descripcion: (raw.description ?? "").trim(),
     enStock: (filtros.disponibilidad ?? []).includes("En stock"),
   };
 }
