@@ -2,8 +2,8 @@
 //
 // La llave es el Tipo de producto de Shopify (= Subcategoría 2). Cada tipo tiene
 // una colección automática con la regla "Tipo = <tipo>" (creadas el 2026-10-06).
-// Solo se listan los tipos que ya tienen productos publicados en el canal
-// Headless: el resto de las páginas siguen con su contenido estático.
+// Se listan los tipos con colección publicada en el canal Headless (tengan o no
+// piezas todavía); las páginas sin ningún producto siguen con su contenido estático.
 
 export interface TipoWeb {
   /** Nombre exacto del Tipo de producto en Shopify. */
@@ -27,6 +27,11 @@ export const TIPOS_WEB: TipoWeb[] = [
   { tipo: "Refrigeradores", coleccion: "refrigeradores", slugRiel: "refrigeradores", ruta: `${REFRI.ruta}/refrigeradores`, macro: COCINA, sub1: REFRI },
   { tipo: "Congeladores", coleccion: "congeladores", slugRiel: "congeladores", ruta: `${REFRI.ruta}?tipo=congeladores`, macro: COCINA, sub1: REFRI },
   { tipo: "Cavas de vino", coleccion: "cavas-de-vino", slugRiel: "cavas-de-vino", ruta: `${REFRI.ruta}?tipo=cavas-de-vino`, macro: COCINA, sub1: REFRI },
+  // Colecciones creadas y publicadas al canal Headless el 2026-10-07 (aún sin piezas).
+  { tipo: "Centros de bebida", coleccion: "centros-de-bebida", slugRiel: "centros-de-bebida", ruta: `${REFRI.ruta}?tipo=centros-de-bebida`, macro: COCINA, sub1: REFRI },
+  { tipo: "Frigobares", coleccion: "frigobares", slugRiel: "frigobares", ruta: `${REFRI.ruta}?tipo=frigobares`, macro: COCINA, sub1: REFRI },
+  { tipo: "Máquinas de hielo", coleccion: "maquinas-de-hielo", slugRiel: "maquinas-de-hielo", ruta: `${REFRI.ruta}?tipo=maquinas-de-hielo`, macro: COCINA, sub1: REFRI },
+  { tipo: "Cajones refrigerantes", coleccion: "cajones-refrigerantes", slugRiel: "cajones-refrigerantes", ruta: `${REFRI.ruta}?tipo=cajones-refrigerantes`, macro: COCINA, sub1: REFRI },
   { tipo: "Accesorios de refrigeración", coleccion: "accesorios-de-refrigeracion", slugRiel: "accesorios-refrigeracion", ruta: `${REFRI.ruta}?tipo=accesorios-refrigeracion`, macro: COCINA, sub1: REFRI },
   { tipo: "Parrillas", coleccion: "parrillas", slugRiel: "parrillas", ruta: `${COCCION.ruta}/parrillas`, macro: COCINA, sub1: COCCION },
   { tipo: "Hornos", coleccion: "hornos", slugRiel: "hornos", ruta: `${COCCION.ruta}?tipo=hornos`, macro: COCINA, sub1: COCCION },

@@ -162,7 +162,7 @@ export default async function Page({ params }: Params) {
                 // Filtros con los valores reales de Shopify (filtros.*) y su conteo;
                 // public/catalogo.js filtra las tarjetas en el cliente.
                 dangerouslySetInnerHTML={{
-                  __html: panelFiltrosHtml(productos, { valoresComoTipo: true }),
+                  __html: panelFiltrosHtml(productos, { tc, valoresComoTipo: true }),
                 }}
               />
             ) : (

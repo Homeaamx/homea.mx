@@ -59,7 +59,7 @@ async function slotsDeCatalogo(file: string, params: Params): Promise<Record<str
 
   const tc = await obtenerTipoCambio();
   return {
-    "catalogo-filtros": panelFiltrosHtml(productos, { conTipo: true, tiposRiel: riel }),
+    "catalogo-filtros": panelFiltrosHtml(productos, { tc, conTipo: true, tiposRiel: riel }),
     "catalogo-grid": rejillaHtml(productos, tc),
     "catalogo-conteo": conteoHtml(productos),
   };

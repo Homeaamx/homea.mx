@@ -3241,3 +3241,17 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pcard-tag { color: var(--homea-espresso); font-weight: 700; }
 .pcard-tag.is-stock { background: var(--homea-espresso); border-color: var(--homea-espresso); color: #fff; }
 @media (min-width: 1081px) { .plp > .filters > .fchips--panel, .plp > .filters > .fhead { flex: none; } }
+/* 2026-10-07 (2): foto 15 % más grande, línea sin punto, título FILTROS en banda greige. */
+[data-cat-card] .imgw img { padding: 1%; }
+.pcard-serie::before { display: none; }
+.fhead { background: var(--bg-greige); margin: 0 0 14px; padding: 12px 14px; }
+.fhead h6 { padding: 0; }
+/* Grupo Precio (rango en pesos) y grupos de la tabla sin valores todavía. */
+.fprecio { display: flex; align-items: flex-end; gap: 8px; padding: 2px 0 6px; }
+.fprecio-campo { display: flex; flex-direction: column; gap: 4px; flex: 1 1 0; min-width: 0; padding: 0; min-height: 0; }
+.fprecio-campo .flbl { font-family: var(--font-sans); font-size: 10px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-muted); }
+.fprecio input { width: 100%; min-width: 0; padding: 9px 10px; border: 1px solid var(--border-strong); background: var(--surface); font-family: var(--font-sans); font-size: 13px; color: var(--fg); border-radius: 0; -moz-appearance: textfield; }
+.fprecio input::-webkit-outer-spin-button, .fprecio input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.fprecio input:focus-visible { outline: 1px solid var(--homea-gold); outline-offset: 1px; }
+.fprecio-sep { color: var(--fg-subtle); padding-bottom: 10px; }
+.fnote--tight { margin: 0 0 12px; font-size: 11.5px; }

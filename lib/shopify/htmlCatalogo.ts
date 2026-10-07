@@ -188,9 +188,19 @@ export function rejillaHtml(productos: ProductoVivo[], tc: TipoCambio): string {
   return piezas.join("\n");
 }
 
+/** Precio con IVA en pesos (equivalente al FIX si la lista es en dólares): la cifra por la que se filtra. */
+let tcPanel: TipoCambio | null = null;
+function precioRefMxn(p: ProductoVivo): number {
+  if (!tcPanel) return 0;
+  const precio = precioPublico(p, tcPanel);
+  return precio.mxnEquivalente ?? precio.venta;
+}
+
 /* ---------- Panel de filtros --------------------------------------------- */
 
 interface OpcionesPanel {
+  /** Tipo de cambio del día, para el tope del grupo Precio. */
+  tc?: TipoCambio;
   /** Incluir el grupo "Tipo" (páginas de Subcategoría 1 con varios tipos). */
   conTipo?: boolean;
   /** Tipos del riel de la página, en su orden (también los que aún no tienen piezas). */
@@ -217,8 +227,9 @@ function grupoHtml(nombre: string, clave: string, etiquetas: string, abierto: bo
 
 export function panelFiltrosHtml(
   productos: ProductoVivo[],
-  { conTipo = false, tiposRiel = [], valoresComoTipo = false }: OpcionesPanel = {},
+  { tc, conTipo = false, tiposRiel = [], valoresComoTipo = false }: OpcionesPanel = {},
 ): string {
+  tcPanel = tc ?? null;
   // Filtros aplicados, arriba del todo (como "Ahora comprando por" de Artexa):
   // catalogo.js lo llena con un chip por valor y "Eliminar todo".
   const grupos: string[] = [
@@ -253,16 +264,41 @@ export function panelFiltrosHtml(
   }
   if (!defs.length) defs.push({ nombre: "Marca", clave: "marca" });
 
+  // Se muestran TODOS los filtros de la tabla de la subcategoría (Carla,
+  // 2026-10-07), aunque las piezas publicadas aún no traigan ese dato: el grupo
+  // sale plegado con la nota "Sin opciones por ahora" y se llena solo cuando
+  // Shopify tenga valores.
   for (const d of defs) {
-    if (d.clave === "precio" || d.clave === "compatible") continue;
+    if (d.clave === "compatible") continue;
+    if (d.clave === "precio") {
+      const precios = productos.map((p) => precioRefMxn(p)).filter((n) => n > 0);
+      const max = Math.ceil(Math.max(0, ...precios) / 1000) * 1000;
+      grupos.push(
+        grupoHtml(
+          d.nombre,
+          "precio",
+          `<div class="fprecio" data-cat-precio data-max="${max}">
+      <label class="fprecio-campo"><span class="flbl">Desde</span><input type="number" inputmode="numeric" min="0" step="1000" placeholder="0" data-fp="min" aria-label="Precio mínimo en pesos"></label>
+      <span class="fprecio-sep">—</span>
+      <label class="fprecio-campo"><span class="flbl">Hasta</span><input type="number" inputmode="numeric" min="0" step="1000" placeholder="${max.toLocaleString("es-MX")}" data-fp="max" aria-label="Precio máximo en pesos"></label>
+    </div>
+    <p class="fnote fnote--tight">MXN con IVA · las piezas en dólares entran por su equivalente al tipo de cambio del día.</p>`,
+          false,
+        ),
+      );
+      continue;
+    }
     const cuenta = new Map<string, number>();
     for (const p of productos) {
       const valores = d.clave === "marca" ? [p.marca] : p.filtros[d.clave] ?? [];
       for (const v of valores) cuenta.set(v, (cuenta.get(v) ?? 0) + 1);
     }
-    if (!cuenta.size) continue;
-    // Un filtro con un solo valor no filtra nada: no se muestra.
-    if (cuenta.size < 2 && d.clave !== "marca") continue;
+    if (!cuenta.size) {
+      grupos.push(
+        grupoHtml(d.nombre, d.clave, `<p class="fnote fnote--tight">Sin opciones por ahora.</p>`, false),
+      );
+      continue;
+    }
     const etiquetas = [...cuenta]
       .sort((a, b) => a[0].localeCompare(b[0], "es", { numeric: true }))
       .map(

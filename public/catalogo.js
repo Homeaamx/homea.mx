@@ -26,7 +26,8 @@
     return Array.prototype.slice.call(plp.querySelectorAll(".filters input[data-fk]"));
   }
 
-  /* Estado pendiente: lo que está marcado ahora mismo. */
+  /* Estado pendiente: lo que está marcado ahora mismo (más el rango de precio,
+     que viaja como grupo "precio" con ["min-max"] en pesos con IVA). */
   function pendientes(plp) {
     var activos = {};
     casillas(plp).forEach(function (cb) {
@@ -34,10 +35,27 @@
       var k = cb.getAttribute("data-fk");
       (activos[k] = activos[k] || []).push(cb.value);
     });
+    var rango = rangoPrecio(plp);
+    if (rango) activos.precio = [rango];
     return activos;
   }
 
+  function rangoPrecio(plp) {
+    var caja = plp.querySelector("[data-cat-precio]");
+    if (!caja) return null;
+    var min = parseFloat(caja.querySelector('[data-fp="min"]').value) || 0;
+    var max = parseFloat(caja.querySelector('[data-fp="max"]').value) || 0;
+    if (!min && !max) return null;
+    return min + "-" + max;
+  }
+
   function coincide(card, clave, valores) {
+    if (clave === "precio") {
+      var p = parseFloat(card.getAttribute("data-precio")) || 0;
+      var lim = valores[0].split("-");
+      var lo = parseFloat(lim[0]) || 0, hi = parseFloat(lim[1]) || 0;
+      return p >= lo && (!hi || p <= hi);
+    }
     var propios = clave === "tipo-web"
       ? [card.getAttribute("data-tipo") || ""]
       : (card.getAttribute("data-fv-" + clave) || "").split(" ");
@@ -101,6 +119,7 @@
   function badges(plp) {
     plp.querySelectorAll(".filters [data-fgroup]").forEach(function (g) {
       var n = g.querySelectorAll("input[data-fk]:checked").length;
+      if (g.getAttribute("data-fgroup") === "precio") n = rangoPrecio(g.closest(".plp")) ? 1 : 0;
       var b = g.querySelector("[data-fsel]");
       if (!b) return;
       if (b.textContent !== String(n)) b.textContent = String(n);
@@ -122,6 +141,16 @@
     var total = 0;
     Object.keys(activos).forEach(function (k) {
       activos[k].forEach(function (v) {
+        if (k === "precio") {
+          total++;
+          var lim = v.split("-");
+          var fmt = function (n) { return "$" + Number(n).toLocaleString("es-MX"); };
+          var txt = (lim[0] > 0 ? "desde " + fmt(lim[0]) : "") + (lim[1] > 0 ? (lim[0] > 0 ? " " : "") + "hasta " + fmt(lim[1]) : "");
+          html += '<button type="button" class="fchip" data-cat-chip data-fk="precio" data-v="' + v + '">' +
+            '<span class="fchip-g">Precio</span><span class="fchip-v">' + txt + '</span><span class="fchip-x" aria-hidden="true">×</span>' +
+            '<span class="sr-only"> · quitar</span></button>';
+          return;
+        }
         var cb = plp.querySelector('.filters input[data-fk="' + k + '"][value="' + v + '"]');
         if (!cb) return;
         total++;
@@ -219,6 +248,7 @@
 
   function limpiar(plp) {
     casillas(plp).forEach(function (cb) { cb.checked = false; });
+    plp.querySelectorAll("[data-cat-precio] input").forEach(function (i) { i.value = ""; });
     aplicar(plp, {});
     enfocarResultados(plp);
   }
@@ -248,10 +278,18 @@
   }
 
   /* ---------- Eventos ---------- */
+  document.addEventListener("input", function (e) {
+    var t = e.target;
+    if (t && t.matches && t.matches("[data-cat-precio] input")) {
+      var plp = t.closest(".plp");
+      if (plp) barra(plp, tarjetas(plp));
+    }
+  });
+
   document.addEventListener("change", function (e) {
     var t = e.target;
     if (!t || !t.matches) return;
-    if (t.matches(".filters input[data-fk]")) {
+    if (t.matches(".filters input[data-fk], [data-cat-precio] input")) {
       var plp = t.closest(".plp");
       if (plp) { badges(plp); barra(plp, tarjetas(plp)); }
     }
@@ -277,6 +315,11 @@
     var chip = t.closest("[data-cat-chip]");
     if (chip) {
       var plpX = chip.closest(".plp");
+      if (chip.getAttribute("data-fk") === "precio") {
+        plpX.querySelectorAll("[data-cat-precio] input").forEach(function (i) { i.value = ""; });
+        aplicarMarcado(plpX);
+        return;
+      }
       var cb = plpX && plpX.querySelector('.filters input[data-fk="' + chip.getAttribute("data-fk") + '"][value="' + chip.getAttribute("data-v") + '"]');
       if (cb) { cb.checked = false; aplicarMarcado(plpX); }
       return;
@@ -297,6 +340,15 @@
       mini.parentNode.querySelectorAll(".pdp-thumb").forEach(function (b) {
         b.classList.toggle("is-active", b === mini);
       });
+    }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    var t = e.target;
+    if (e.key === "Enter" && t && t.matches && t.matches("[data-cat-precio] input")) {
+      e.preventDefault();
+      var plp = t.closest(".plp");
+      if (plp) { aplicarMarcado(plp); enfocarResultados(plp); }
     }
   });
 
