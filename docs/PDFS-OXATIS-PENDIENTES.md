@@ -11,7 +11,7 @@
 > `wayback/` y `manifest.csv` (clics GSC, tamaños, checksums).
 >
 > **Actualización 2026-09-22:** se cargaron los catálogos vigentes de la carpeta `CATALOGOS VIGENTES`
-> (ver §0). Hoy hay **69 listas publicadas** y **64 de las 92 marcas** enseñan su PDF.
+> (ver §0). Hoy hay **69 listas publicadas** y **64 de las 91 marcas** enseñan su PDF.
 
 ## 0. Catálogos vigentes 2026 (carga del 2026-09-22)
 
@@ -44,7 +44,7 @@ comerciales) y Coyote. Se les quitó la palabra "Dealer" (BSH), el encabezado va
 la leyenda "Distributor Price Schedule · Confidential" de Coyote. ⚠️ InSinkErator sigue diciendo en cada página
 "Lista de precios a DISTRIBUIDOR TIPO A": sus precios son de distribuidor. Publicado así por decisión de Carla.
 
-**Faltan (28 marcas sin ningún PDF):** Acros, Catalano, Dexa, Easy, Elkay, Firplak, Fontana, Foster, Gessi,
+**Faltan (27 marcas sin ningún PDF):** Acros, Catalano, Dexa, Easy, Firplak, Fontana, Foster, Gessi,
 Hergom, I-Drain, IEM, Kaldewei, KitchenAid, La Cornue, Masterbuilt, Maytag, Mr. Steam, Nobili, Peerless,
 Poletti Sinks, Sapphire, Sauna Estilo, Treesse, Valsir, Vass, Whirlpool (solo hay Excel) y WPPO.
 

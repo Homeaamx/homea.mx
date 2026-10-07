@@ -147,7 +147,21 @@ const nextConfig = {
         "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos-de-agua-filtrada",
     };
 
+    // Marcas eliminadas (docs/MARCAS-CANAL-Y-DESCUENTOS.md, sección ELIMINADAS): su
+    // página /marcas/<slug> ya no existe (dynamicParams = false → 404), así que la
+    // URL vieja va con 301 a la categoría que vendía. Agregar aquí cada marca que se
+    // quite del sitio.
+    const marcasEliminadas = {
+      // Elkay: tarjas y grifería. Se quitó de todo el sitio el 2026-10-06 (Carla).
+      "/marcas/elkay": "/productos/cocina-y-bar/tarjas-y-griferia",
+    };
+
     return [
+      ...Object.entries(marcasEliminadas).map(([source, destination]) => ({
+        source,
+        destination,
+        statusCode: 301,
+      })),
       ...Object.entries(legacyHtml).map(([source, destination]) => ({
         source,
         destination,

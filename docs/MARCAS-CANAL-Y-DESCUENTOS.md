@@ -12,7 +12,7 @@
 
 | Canal | En Shopify | En el sitio |
 |---|---|---|
-| **SHOPIFY** (68) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
+| **SHOPIFY** (67) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
 | **SOLO PDF** (24) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
 
 En el código, el canal vive en el tile de `preview/marcas.html` (`data-canal="shopify|pdf"`), pasa a
@@ -29,7 +29,8 @@ plan). Kamado Joe, Masterbuilt, WPPO y La Cornue son de cocina o asadores y van 
    De **Brizo, Delta y Axcent solo se trabaja la línea de cocina**.
 2. **Eliminadas:** se quitan de todo el sitio porque ya no se venden. Hecho el 2026-09-21: Hansgrohe,
    Keuco, American Standard y Moen perdieron página, tile, enlace de menú, fotos, logos y listas de precios.
-   Las URLs viejas de sus PDFs redirigen (301) a su categoría.
+   Las URLs viejas de sus PDFs redirigen (301) a su categoría. **Elkay** se quitó igual el 2026-10-06 (Carla:
+   no se publicará); su página vieja `/marcas/elkay` redirige (301) a Tarjas y grifería (`next.config.js`).
 3. **Saunas:** las de **Grupo 90** son **Mr. Steam, Sauna Estilo y Treesse** (corrección de Carla, 2026-09-22: se mantienen aunque estuvieron en *Eliminadas*); las de **Artexa** son Jacuzzi y Clearlight. Todas SOLO PDF.
    Se crearon las **16 páginas** que faltaban: 6 SHOPIFY y 10 SOLO PDF. Los PDFs vigentes de cada marca
    se le piden a Carla más adelante y se suben a Shopify Files.
@@ -68,7 +69,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
   columna *Arte* de las tablas dice qué falta. La carpeta de OneDrive con logos y fotos ya no está
   sincronizada en esta Mac.
 
-## SHOPIFY — 68 marcas
+## SHOPIFY — 67 marcas
 
 | Marca | Proveedor | Línea SAE | Productos tras carga | Descuento Shopify (PLATA) | Página | Arte | Nota |
 |---|---|---|---:|---:|---|---|---|
@@ -96,7 +97,6 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | ECLIPSE | ECLIPSE | ECLIP | 98 | 10% | `/marcas/eclipse` | completo | Revisar Serie Value Line (condición distinta) |
 | ELECTROLUX / ELECTROLUX ICON | INTERMUEBLES | ELECT | 12 | 10% | `/marcas/electrolux` | completo |  |
 | ELICA (todas las series) | ARTEXA | ELICA | 166 | 10% | `/marcas/elica` | completo |  |
-| ELKAY | ARTEXA | ELKAY | 4 | 10% | `/marcas/elkay` | completo |  |
 | FABER | LECROM | FABER | 12 | 5% | `/marcas/faber` | completo |  |
 | FALMEC | TECNOLAM | FALME | 53 | 10% | `/marcas/falmec` | completo |  |
 | FRANKE | LECROM | FRANK | 28 | 10% | `/marcas/franke` | completo | Se compra por Lecrom (no IESA) |
@@ -170,7 +170,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | VASS | VASS | VASS | 3 | — | `/marcas/vass` | completo | Chimeneas, residencial (Carla, 2026-09-21) |
 | WPPO | MARESA | WPPO | 6 | — | `/marcas/wppo` | completo |  |
 
-## ELIMINADAS — 17 marcas
+## ELIMINADAS — 18 marcas
 
 | Marca | Proveedor | Línea SAE | Productos hoy | Nota |
 |---|---|---|---:|---|
@@ -179,6 +179,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | ARTEXA BATH | ARTEXA | — | — | Tenía página; se quitó de todo el sitio el 2026-09-22 (Carla) |
 | AXOR | GRUPO 90 | AXOR | 1403 | Tenía página; se quitó de todo el sitio el 2026-09-22 (Carla) |
 | DUPLASH | GRUPO 90 | — | 0 |  |
+| ELKAY | ARTEXA | ELKAY | 4 | Tenía página (SHOPIFY, 10%); se quitó de todo el sitio el 2026-10-06 (Carla): no se publicará. `/marcas/elkay` redirige (301) a `/productos/cocina-y-bar/tarjas-y-griferia` |
 | FORTUM | — | — | — | No venía en el Excel; se retiró su lista de precios el 2026-09-21 (la URL vieja redirige a Baños) |
 | HANSGROHE | GRUPO 90 | HANSG, HAGNA | 335 | Tenía página; se quitó de todo el sitio el 2026-09-21 |
 | HERGOM DISEÑO | BLOCK | HERGO | 0 | Es la misma marca que Hergom; se quitó de todo el sitio el 2026-09-22 (Carla) |

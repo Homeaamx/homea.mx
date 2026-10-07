@@ -524,22 +524,6 @@
       ]
     },
     {
-      "slug": "elkay",
-      "nombre": "Elkay",
-      "gama": [
-        "residencial"
-      ],
-      "categorias": [
-        "tarjas"
-      ],
-      "canal": "shopify",
-      "logo": "/assets/logos/elkay.webp",
-      "foto": "/assets/photos/brands/elkay-tarjas-y-griferia.webp",
-      "fotoHero": "/assets/photos/brands/hero/elkay-tarjas-y-griferia.webp",
-      "logoHero": "/assets/logos/hero/elkay.webp",
-      "listas": []
-    },
-    {
       "slug": "faber",
       "nombre": "Faber",
       "gama": [

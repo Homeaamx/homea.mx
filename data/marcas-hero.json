@@ -275,18 +275,6 @@
       "posicion": "center 30%"
     }
   },
-  "elkay": {
-    "eyebrow": "Funcional · Durable · Versátil",
-    "titulo": "Tarjas y grifería Elkay",
-    "descripcion": "Tarjas y monomandos diseñados para uso cotidiano, con enfoque en durabilidad, funcionalidad y versatilidad para cocinas residenciales bien resueltas.",
-    "cta": {
-      "texto": "Ver catálogo oficial",
-      "url": null
-    },
-    "imagen": {
-      "espejo": false
-    }
-  },
   "faber": {
     "eyebrow": "Ventilación · Diseño · Eficiencia",
     "titulo": "Campanas Faber",

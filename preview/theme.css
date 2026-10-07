@@ -1693,7 +1693,6 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile[data-brand="blanco"]{--lazy-bg: url('assets/photos/brands/blanco-tarjas-y-griferia.webp');}
 .brandtile[data-brand="brizo"]{--lazy-bg: url('assets/photos/brands/brizo-griferia.webp');}
 .brandtile[data-brand="eclipse"]{--lazy-bg: url('assets/photos/brands/eclipse-tarjas-y-griferia.webp');}
-.brandtile[data-brand="elkay"]{--lazy-bg: url('assets/photos/brands/elkay-tarjas-y-griferia.webp');}
 .brandtile[data-brand="franke"]{--lazy-bg: url('assets/photos/brands/franke-tarjas-y-griferia.webp');}
 .brandtile[data-brand="fulgor-milano"]{--lazy-bg: url('assets/photos/brands/fulgor-milano-cocina.webp');}
 .brandtile[data-brand="haier"]{--lazy-bg: url('assets/photos/brands/haier-electrodomesticos.webp');}

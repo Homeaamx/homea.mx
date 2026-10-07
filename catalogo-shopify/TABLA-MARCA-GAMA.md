@@ -13,10 +13,10 @@ Masterbuilt · Mont Alpi · AXOR · Mr. Steam
 ## Media (2)
 American Standard · Keuco
 
-## Residencial (23)
+## Residencial (22)
 Invisacook · Bosch · Elica · Trade-Wind · Falmec · Kalt · Café · KitchenAid · Hoshizaki ·
 Electrolux · Frigidaire · Smeg · Bertazzoni · Maytag · Nobili · InSinkErator · Coyote ·
-Blaze · WPPO · Broil King · Hansgrohe · I-Drain · Elkay
+Blaze · WPPO · Broil King · Hansgrohe · I-Drain
 
 ## Económica (4)
 Mabe · Axcent · Supra · Acros

@@ -49,7 +49,7 @@ const NOMBRES = {
   coyote: "Coyote", artisan: "Artisan", "alfa-forni": "Alfa Forni", blaze: "Blaze",
   "kamado-joe": "Kamado Joe", masterbuilt: "Masterbuilt", wppo: "WPPO",
   "mont-alpi": "Mont Alpi", "broil-king": "Broil King",
-  "i-drain": "I-Drain", "mr-steam": "Mr. Steam", acros: "Acros", elkay: "Elkay",
+  "i-drain": "I-Drain", "mr-steam": "Mr. Steam", acros: "Acros",
   // Altas del 2026-09-21 (MARCAS_HOMEA_SEP26_DESCUENTOS.xlsx).
   kraus: "Kraus", faber: "Faber", easy: "Easy", iem: "IEM", commodore: "Commodore",
   nantucket: "Nantucket", fontana: "Fontana", foster: "Foster", josper: "Josper",

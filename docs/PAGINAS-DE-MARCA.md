@@ -1,6 +1,6 @@
 # Páginas de marca — `/marcas/<slug>`
 
-> Una página por marca: **92** hoy (68 SHOPIFY · 24 PDF, desde el 2026-09-22; se quitaron AXOR, TRES, Pizarro, Artexa Bath y Hergom Diseño). Todas salen de
+> Una página por marca: **91** hoy (67 SHOPIFY · 24 PDF, desde el 2026-10-06; el 2026-09-22 se quitaron AXOR, TRES, Pizarro, Artexa Bath y Hergom Diseño, y el 2026-10-06 Elkay). Todas salen de
 > la **misma ruta** (`app/marcas/[marca]/page.tsx`) y del **mismo registro** (`data/marcas.json`).
 > Cambia el logo, la foto, las categorías, las listas de precios y el **canal**; el armazón es idéntico.
 >
@@ -80,7 +80,7 @@ Es idempotente y **sale con 1** si una marca se queda sin nombre en `NOMBRES`, s
 ## Texto del hero — `data/marcas-hero.json` (2026-09-22)
 
 Contenido del hero **por marca**, escrito a mano o desde el Excel de contenido. El generador no lo toca.
-Tiene las **92 marcas**, cargadas desde `HOMEA_HERO_97_MARCAS_CODE.xlsx` (2026-09-22). Para actualizarlas, edita el JSON o vuelve a convertir el Excel (columnas SLUG · MARCA · EYEBROW · H1 · DESCRIPCIÓN · BOTÓN). Marca sin entrada → hero de siempre (gama · Distribución oficial + nombre + frase automática).
+Tiene las **91 marcas**, cargadas desde `HOMEA_HERO_97_MARCAS_CODE.xlsx` (2026-09-22; Elkay salió el 2026-10-06). Para actualizarlas, edita el JSON o vuelve a convertir el Excel (columnas SLUG · MARCA · EYEBROW · H1 · DESCRIPCIÓN · BOTÓN). Marca sin entrada → hero de siempre (gama · Distribución oficial + nombre + frase automática).
 
 ```json
 "acros": {
@@ -140,11 +140,14 @@ pero no tiene página. Hoy no queda ninguna así (2026-09-21).
 
 Quitar su tile de `preview/marcas.html`, su enlace del mega-menú de `preview/home.html`, su
 nombre de `NOMBRES`, sus reglas `.brandtile[data-brand=…]` de `styles/theme.css` y
-`preview/theme.css`, sus archivos en `public/assets/` y `preview/assets/`, y su entrada de
-`data/listas-precios.json`. **Las URLs viejas de sus PDFs** (`legacy`) no se tiran: pásalas a
+`preview/theme.css`, sus archivos en `public/assets/` y `preview/assets/` (y sus entradas de
+`data/variantes-imagenes.json`), su texto de `data/marcas-hero.json` y su entrada de
+`data/listas-precios.json`. **Su página** `/marcas/<slug>` tampoco se deja en 404: agrégala a
+`marcasEliminadas` en `next.config.js` (301 a su categoría). **Las URLs viejas de sus PDFs** (`legacy`) no se tiran: pásalas a
 `data/redirects/oxatis-manual.json` apuntando a su categoría, para que no den 404. Luego
 `npm run marcas`. Así se quitaron Hansgrohe, Keuco, American Standard y Moen el 2026-09-21
-(y las listas de Catalano, Fortum y Steamist), y AXOR, TRES, Pizarro, Artexa Bath y Hergom Diseño el 2026-09-22.
+(y las listas de Catalano, Fortum y Steamist), y AXOR, TRES, Pizarro, Artexa Bath y Hergom Diseño el 2026-09-22. Elkay salió el 2026-10-06
+(`/marcas/elkay` → 301 a `/productos/cocina-y-bar/tarjas-y-griferia`; no tenía listas de precios).
 
 ⚠️ En `next dev`, la ruta `/listas-de-precios/<slug>.pdf` puede seguir sirviendo una lista ya
 borrada: Turbopack no vuelve a leer `data/listas-precios.json`. Reinicia el servidor para
@@ -156,8 +159,8 @@ comprobarlo; en producción no pasa.
 que `categoria-` y `producto-`). **No existe ningún archivo `preview/marca-*.html`**: el
 nombre solo sirve para enlazar desde el HTML del preview. Hoy apuntan ahí:
 
-- los 92 tiles de `preview/marcas.html`,
-- los 92 enlaces del mega-menú de marcas y los 38 chips de la marquesina, en
+- los 91 tiles de `preview/marcas.html`,
+- los 91 enlaces del mega-menú de marcas y los 38 chips de la marquesina, en
   `preview/home.html` (que es el nav compartido de todo el sitio).
 
 ## Cuando llegue el catálogo
