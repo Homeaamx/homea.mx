@@ -90,10 +90,14 @@ export default function PlpFiltro({ base, tipos }: Props) {
     const onPop = () => sync(leerF());
 
     sync(leerF());
-    document.addEventListener("click", onClick);
+    // Fase de captura: PreviewRouter también escucha clics en <a> internas (en
+    // burbuja) y, si llega primero, hace router.push → la página se vuelve a
+    // renderizar como si recargara. Aquí se gana el turno y se previene el
+    // default, que es la señal que PreviewRouter respeta para dejar pasar.
+    document.addEventListener("click", onClick, true);
     window.addEventListener("popstate", onPop);
     return () => {
-      document.removeEventListener("click", onClick);
+      document.removeEventListener("click", onClick, true);
       window.removeEventListener("popstate", onPop);
     };
   }, [base, tipos]);

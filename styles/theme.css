@@ -3261,3 +3261,8 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pcard-head { flex-direction: column; align-items: flex-start; gap: 2px; }
 .pcard-price .price-was { font-size: 18px; }
 [data-cat-card] .imgw img { padding: 6%; }
+
+/* 2026-10-07 (4): banda FILTROS alineada con los títulos; nombre 14px; tachado 13px. */
+.fhead { padding: 12px 0; }
+[data-cat-card] h3.pcard-name { font-size: 14px; line-height: 1.4; }
+.pcard-price .price-was { font-size: 13px; }
