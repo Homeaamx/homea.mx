@@ -1,59 +1,37 @@
-// compra.ts — la regla de negocio que decide si algo se COMPRA o se COTIZA.
+// compra.ts — cómo se cierra "Mi proyecto": pago en Shopify o cotización.
 //
-// PLAN-DE-FASES §4.5: en MXN y ticket bajo, compra directa; en USD, siempre con un
-// ejecutivo (él confirma tipo de cambio y descuento). Los 5 Gaggenau del piloto son
-// la excepción explícita y aprobada, para poder probar el checkout completo.
+// Regla vigente (Carla, 2026-10-06), en lib/reglas/reglaMarca.ts: por pieza,
+// (1) en stock → se compra; (2) marca "solo cotizar" → se cotiza; (3) más de
+// $100,000 MXN con IVA → se cotiza; (4) lo demás → se compra. TODA pieza entra
+// al proyecto; es al cerrar cuando se decide: si todas se compran, el proyecto
+// va al checkout de Shopify; si alguna se cotiza, el proyecto completo se manda
+// al vendedor por WhatsApp (PLAN-DE-FASES §4.5, "carrito mixto").
 //
-// IMPORTANTE: esta regla se evalúa en el SERVIDOR, dentro del server action, no solo
-// al pintar el botón. El HTML de las fichas es estático y puede quedarse con un
-// "Agregar al carrito" viejo; la única garantía de que un producto en dólares no
-// llegue al checkout es que el servidor se niegue a meterlo al carrito.
+// IMPORTANTE: la regla se evalúa en el SERVIDOR (lib/shopify/normalizar.ts, con
+// los datos de Shopify) y el checkout solo se entrega al navegador cuando el
+// proyecto es `checkout`. El HTML de las fichas es estático y puede quedarse con
+// un botón viejo; la garantía es que el servidor nunca suelta un `checkoutUrl`
+// para un proyecto que se cotiza.
+//
+// Lo que ya NO existe: la excepción de los 5 Gaggenau del piloto (Gaggenau es
+// "solo cotizar") y el tag `comprable-online`.
 
-import { COMPRA_DIRECTA_ACTIVA, SKUS_PILOTO_COMPRABLES, TAG_COMPRABLE } from "@/lib/flags";
+import { COMPRA_DIRECTA_ACTIVA } from "@/lib/flags";
 import { productoPorSku } from "@/lib/catalogo";
+import type { Carrito } from "@/lib/shopify/tipos";
 import { whatsappHref } from "@/lib/whatsapp";
 
-export interface Comprable {
-  /** Moneda declarada por el catálogo para este producto. */
-  moneda: string;
-  /** Tags de Shopify del producto (vacío si aún no vive en Shopify). */
-  tags?: string[];
-}
-
-export type Veredicto =
-  | { compra: true }
-  | { compra: false; motivo: "usd-con-ejecutivo" | "compra-apagada"; mensaje: string };
-
-const esPiloto = (sku: string) =>
-  (SKUS_PILOTO_COMPRABLES as readonly string[]).includes(sku.trim().toUpperCase());
-
-/** ¿Este SKU se puede agregar al carrito, o hay que mandarlo a cotizar? */
-export function veredictoDeCompra(sku: string, producto: Comprable): Veredicto {
-  if (!COMPRA_DIRECTA_ACTIVA) {
-    return {
-      compra: false,
-      motivo: "compra-apagada",
-      mensaje: "La compra en línea está en preparación. Te cotizamos por WhatsApp.",
-    };
-  }
-
-  // El tag de Shopify es la regla definitiva cuando el catálogo esté migrado;
-  // la lista de SKUs del piloto es el puente mientras tanto.
-  const marcadoComprable = producto.tags?.some(
-    (t) => t.trim().toLowerCase() === TAG_COMPRABLE,
-  );
-  if (marcadoComprable || esPiloto(sku)) return { compra: true };
-
-  if (producto.moneda === "USD") {
-    return {
-      compra: false,
-      motivo: "usd-con-ejecutivo",
-      mensaje:
-        "Este producto se cotiza en dólares (USD). El tipo de cambio y el descuento los confirma tu ejecutivo de ventas.",
-    };
-  }
-
-  return { compra: true };
+/**
+ * Última palabra del servidor sobre el proyecto: con la compra en línea apagada
+ * todo se cotiza, y un proyecto que se cotiza viaja SIN checkoutUrl.
+ */
+export function cerrarProyecto(carrito: Carrito): Carrito {
+  const modo = COMPRA_DIRECTA_ACTIVA ? carrito.modo : "cotizacion";
+  return {
+    ...carrito,
+    modo,
+    checkoutUrl: modo === "checkout" ? carrito.checkoutUrl : null,
+  };
 }
 
 /** Mensaje de WhatsApp con el modelo ya escrito, para la caída a cotización. */

@@ -19,8 +19,7 @@
 //    salir a la red. `cartCreate` ocurre en la primera alta exitosa.
 
 import { CHECKOUT_ABIERTO } from "@/lib/flags";
-import { productoPorSku } from "@/lib/catalogo";
-import { veredictoDeCompra, whatsappDeCotizacion } from "@/lib/reglas/compra";
+import { cerrarProyecto, whatsappDeCotizacion } from "@/lib/reglas/compra";
 import { ErrorShopify } from "@/lib/shopify/cliente";
 import {
   CarritoCaducado,
@@ -53,8 +52,11 @@ const SIN_SHOPIFY =
  */
 function aplicarEstadoCheckout(carrito: Carrito): Carrito {
   if (carrito.simulado || carrito.lineas.length === 0) return carrito;
-  if (CHECKOUT_ABIERTO) return carrito;
-  return { ...carrito, bloqueo: carrito.bloqueo ?? "tienda-con-password" };
+  // Regla de compra (marca + monto + stock): un proyecto que se cotiza nunca
+  // lleva checkoutUrl al navegador.
+  const cerrado = cerrarProyecto(carrito);
+  if (CHECKOUT_ABIERTO) return cerrado;
+  return { ...cerrado, bloqueo: cerrado.bloqueo ?? "tienda-con-password" };
 }
 
 /** Plan B único para todos los fallos de Shopify. */
@@ -108,8 +110,6 @@ export async function agregarAlCarrito(
   sku: string,
   cantidad = 1,
 ): Promise<ResultadoCarrito> {
-  const enIndice = productoPorSku(sku);
-
   try {
     const variante = await buscarVariante(idVariante, sku);
 
@@ -126,19 +126,8 @@ export async function agregarAlCarrito(
       };
     }
 
-    // La regla de moneda se evalúa con los datos de Shopify, no con los del HTML.
-    const veredicto = veredictoDeCompra(sku, {
-      moneda: variante.price.currencyCode,
-      tags: variante.product.tags,
-    });
-    if (!veredicto.compra) {
-      return {
-        carrito: (await obtenerCarrito()).carrito,
-        aviso: { tipo: "info", mensaje: veredicto.mensaje },
-        redireccion: whatsappDeCotizacion(sku),
-      };
-    }
-
+    // Modelo "Mi proyecto": toda pieza publicada entra. Si se cotiza, lo dice la
+    // línea (decision) y el proyecto sale por WhatsApp en vez de al checkout.
     if (!variante.availableForSale) {
       return {
         carrito: (await obtenerCarrito()).carrito,
@@ -168,17 +157,6 @@ export async function agregarAlCarrito(
     if (carrito.id) await guardarIdCarrito(carrito.id);
     return { carrito: aplicarEstadoCheckout(carrito) };
   } catch (error) {
-    // Antes de degradar, la regla de moneda se aplica igual con el índice local:
-    // que Shopify esté caído no puede convertir un producto en dólares en
-    // comprable.
-    const veredicto = veredictoDeCompra(sku, { moneda: enIndice?.moneda ?? "MXN" });
-    if (!veredicto.compra) {
-      return {
-        carrito: (await degradar(error)).carrito,
-        aviso: { tipo: "info", mensaje: veredicto.mensaje },
-        redireccion: whatsappDeCotizacion(sku),
-      };
-    }
     if (SIMULACION_PERMITIDA && (error instanceof ErrorShopify || error instanceof CarritoCaducado)) {
       const detalle = error instanceof ErrorShopify ? error.clase : "carrito-caducado";
       console.warn(`[carrito] alta simulada (${detalle}).`);

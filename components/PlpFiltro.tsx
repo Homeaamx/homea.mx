@@ -55,8 +55,9 @@ export default function PlpFiltro({ base, tipos }: Props) {
           if (input) input.checked = l.dataset.tipo === f;
         });
       // Etiqueta "· tipo: X" del toolbar.
+      // Con catálogo vivo los chips de catalogo.js ya dicen el tipo activo.
       const label = document.getElementById("plp-tipo-activo");
-      if (label)
+      if (label && !document.querySelector("[data-cat-card]"))
         label.textContent = f && tipos[f] ? ` · tipo: ${tipos[f]}` : "";
       // Catálogo vivo: las casillas se marcaron a mano (sin "change"), así que se
       // avisa a public/catalogo.js para que vuelva a filtrar las tarjetas.

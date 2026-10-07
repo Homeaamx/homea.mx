@@ -1,7 +1,7 @@
 "use client";
 
-// CarritoProvider — el puente entre el HTML estático del preview y el carrito de
-// Shopify. Sustituye por completo a `public/cart.js`.
+// CarritoProvider — el puente entre el HTML estático del preview y "Mi proyecto"
+// (el carrito de Shopify). Sustituye por completo a `public/cart.js`.
 //
 // El nav y las fichas de producto se inyectan como HTML crudo
 // (`dangerouslySetInnerHTML` en app/layout.tsx y components/MarketingPage.tsx),

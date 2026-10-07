@@ -11,6 +11,12 @@ export interface Dinero {
   moneda: string;
 }
 
+/** Qué pasa con una pieza al cerrar el proyecto (regla marca + monto + stock). */
+export interface DecisionLinea {
+  accion: "comprar" | "cotizar";
+  motivo: "stock" | "marca" | "monto" | "general";
+}
+
 export interface LineaCarrito {
   /** ID de la línea EN EL CARRITO (no de la variante): es lo que se actualiza/borra. */
   id: string;
@@ -26,6 +32,16 @@ export interface LineaCarrito {
   disponible: boolean;
   /** Existencias conocidas; `null` = el token no tiene permiso de inventario. */
   maximo: number | null;
+  /** En stock (inventario físico) o bajo pedido, según `filtros.disponibilidad`. */
+  enStock: boolean;
+  /** Línea / serie de la pieza ("Serie 400"), si el título la trae. */
+  serie: string | null;
+  /**
+   * Precio público unitario: CON IVA, en la moneda de lista (USD para las marcas
+   * en dólares, como la tarjeta y la ficha). Shopify sigue cobrando en pesos.
+   */
+  precioPublico: { venta: Dinero; tachado: Dinero | null };
+  decision: DecisionLinea;
 }
 
 export type MotivoBloqueo =
@@ -50,6 +66,16 @@ export interface Carrito {
   bloqueo: MotivoBloqueo | null;
   /** True cuando los datos vienen del carrito simulado de desarrollo. */
   simulado: boolean;
+  /**
+   * Cómo se cierra el proyecto: `checkout` si TODAS las piezas cumplen la regla
+   * de compra; `cotizacion` si alguna se cotiza (el proyecto completo va al
+   * vendedor por WhatsApp). Lo decide el servidor, nunca el navegador.
+   */
+  modo: "checkout" | "cotizacion";
+  /** IVA (16 %) estimado sobre el subtotal, mientras Shopify no lo calcule. */
+  ivaEstimado: Dinero;
+  /** Subtotal + IVA estimado: lo que el cliente ve como "Total estimado". */
+  totalEstimado: Dinero;
 }
 
 /** Aviso puntual de una operación (sin existencia, tope de stock, error de Shopify). */
@@ -77,6 +103,9 @@ export const CARRITO_VACIO: Carrito = {
   lineas: [],
   bloqueo: null,
   simulado: false,
+  modo: "checkout",
+  ivaEstimado: { monto: 0, moneda: "MXN" },
+  totalEstimado: { monto: 0, moneda: "MXN" },
 };
 
 /** "$193,603.20 MXN" — se conserva el formato exacto que ya usaba cart.js. */

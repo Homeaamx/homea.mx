@@ -21,11 +21,12 @@
 export const PLP_READY = false;
 
 /**
- * COMPRA_DIRECTA_ACTIVA — ¿el botón "Agregar al carrito" llega al checkout de Shopify?
+ * COMPRA_DIRECTA_ACTIVA — ¿"Mi proyecto" puede cerrarse en el checkout de Shopify?
  *
- * Hoy `true` solo para el piloto (ver `SKUS_PILOTO_COMPRABLES`). Ponerlo en `false`
- * apaga la compra directa en TODO el sitio: cada alta cae a cotización por WhatsApp,
- * que es el modelo de venta de la casa para ticket alto.
+ * La regla de qué se compra y qué se cotiza vive en `lib/reglas/reglaMarca.ts`
+ * (marca + monto + stock, data/reglas-compra.json). Ponerlo en `false` apaga la
+ * compra directa en TODO el sitio: cada proyecto sale como cotización por
+ * WhatsApp, que es el modelo de venta de la casa para ticket alto.
  */
 export const COMPRA_DIRECTA_ACTIVA = true;
 
@@ -43,12 +44,10 @@ export const COMPRA_DIRECTA_ACTIVA = true;
 export const CHECKOUT_ABIERTO = false;
 
 /**
- * Regla de moneda (PLAN-DE-FASES §4.5): **un producto en USD nunca llega al checkout**;
- * se cotiza con un ejecutivo, que confirma tipo de cambio y descuento.
- *
- * Excepción aprobada: los 5 Gaggenau del piloto, que existen justamente para probar
- * el checkout de punta a punta. Se listan por SKU — explícitos, no por regla — para
- * que nadie amplíe la excepción sin darse cuenta.
+ * Histórico: los 5 Gaggenau del piloto se podían comprar como excepción para
+ * probar el checkout. Con la regla por marca (2026-10-06) Gaggenau es "solo
+ * cotizar" y la excepción se retiró; la lista queda solo como referencia de qué
+ * fichas son las curadas del preview.
  */
 export const SKUS_PILOTO_COMPRABLES = [
   "AW442720",
@@ -57,9 +56,3 @@ export const SKUS_PILOTO_COMPRABLES = [
   "RB282705",
   "VG295250CA",
 ] as const;
-
-/**
- * Tag de Shopify que marca un producto como comprable en línea. Cuando el catálogo
- * real esté migrado, ESTE tag sustituye a la lista de SKUs de arriba.
- */
-export const TAG_COMPRABLE = "comprable-online";

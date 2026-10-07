@@ -1,5 +1,18 @@
 # Pendientes del carrito Shopify — qué falta para que esto sea real
 
+> **Actualización 2026-10-06 — el carrito ahora es "Mi proyecto"** (modelo Artexa, decisión
+> Carla). Toda pieza publicada entra al proyecto (= carrito de Shopify). Al cerrar, el
+> servidor decide con la regla **marca + monto + stock** (`lib/reglas/reglaMarca.ts`,
+> `data/reglas-compra.json`): si TODAS las piezas se compran → "Pagar en línea" (checkout de
+> Shopify); si alguna se cotiza → el proyecto completo sale como **cotización por WhatsApp**
+> (formato con modelo, cantidad, precio público y totales). El `checkoutUrl` solo viaja al
+> navegador cuando el proyecto es `checkout` (`cerrarProyecto` en `lib/reglas/compra.ts`).
+> La regla vieja "USD → ejecutivo" y la excepción de los 5 Gaggenau del piloto **ya no
+> existen** (Gaggenau es "solo cotizar"). El guardia de moneda (§5) cambió: ahora detecta
+> una pieza en dólares cuyo campo de pesos no pasó por el cron (precio MXN < USD × 5).
+> Probado contra Shopify real el 2026-10-06. Pendiente: formulario con datos del cliente
+> antes de enviar la cotización (PLAN §4.5).
+
 > **Para quien haga el merge (humano o agente).** El código de la rama
 > `feat/carrito-shopify-storefront` **funciona sin ninguna de estas piezas**: cuando
 > falta algo, degrada a datos locales y lo dice en pantalla. Eso es a propósito — así

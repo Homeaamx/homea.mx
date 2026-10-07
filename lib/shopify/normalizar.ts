@@ -1,21 +1,23 @@
 // normalizar.ts — de la respuesta cruda de Shopify al contrato de la UI.
 //
 // Aquí vive también el **guardia de moneda**, que es la pieza que impide cobrar
-// de menos. Contexto del riesgo (verificado en los CSV de import):
+// de menos. Modelo de precios vigente (Carla, 2026-10-06):
 //
-//   BOP250612 → `Variant Price = 11107.47` en Shopify, con el tag `Moneda USD`.
-//   La ficha del preview muestra "$193,603.20 MXN · FIX 17.43" (= 11107.47 × 17.43).
+//   · Shopify guarda SIEMPRE pesos sin IVA. Para las marcas en dólares, el cron
+//     (`/api/cron/tipo-cambio`) recalcula precio = USD × FIX del día, y el dólar
+//     de lista vive en el metafield `homea.precio_usd`.
+//   · El riesgo real: un producto USD cuyo campo de pesos todavía trae la cifra
+//     en dólares (p. ej. USD 11,107.47 → "$11,107.47 MXN"). Un checkout cobraría
+//     17 veces menos. Se detecta porque el precio en pesos es menor que el dólar
+//     de lista × 5: ningún tipo de cambio plausible da eso. Ese carrito se marca
+//     `bloqueo: "moneda-incoherente"`: se ve, pero no se puede pagar.
 //
-// Es decir: Shopify guarda **la cifra en dólares como precio crudo de la
-// variante**. Si la tienda liquida en MXN, un checkout real cobraría $11,107 MXN
-// en vez de $193,603 MXN — 17 veces menos, con dinero de verdad. Mientras la
-// moneda del carrito no coincida con la que declara el producto, el carrito se
-// marca `bloqueo: "moneda-incoherente"`: se ve, pero no se puede pagar.
-//
-// La solución de fondo es de catálogo, no de código: configurar un mercado MX en
-// MXN y dejar que Shopify convierta, retirando el FIX fijo (ver PLAN-DE-FASES §4.5).
+// Y la **regla de compra** (lib/reglas/reglaMarca.ts) se evalúa por línea con los
+// datos de Shopify: cada pieza sabe si se compra en línea o se cotiza, y el
+// proyecto completo es `checkout` solo si todas se compran.
 
-import { productoPorSku } from "@/lib/catalogo";
+import { IVA, productoPorSku } from "@/lib/catalogo";
+import { decidirCompra } from "@/lib/reglas/reglaMarca";
 
 import type { CarritoRaw, DineroRaw, VarianteRaw } from "./respuestas";
 import type { Carrito, Dinero, LineaCarrito, MotivoBloqueo } from "./tipos";
@@ -29,11 +31,33 @@ function aDinero(raw: DineroRaw): Dinero {
   return { monto: Number.parseFloat(raw.amount), moneda: raw.currencyCode };
 }
 
+const centavos = (n: number) => Math.round(n * 100) / 100;
+
+/** Dólar de lista (sin IVA) del metafield `homea.precio_usd`, si la marca cotiza en USD. */
+function usdLista(variante: VarianteRaw): number | null {
+  const m = variante.product?.metafields?.find((x) => x?.key === "precio_usd");
+  const n = m ? Number.parseFloat(m.value) : NaN;
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+
+/** `filtros.disponibilidad` = ["En stock"] → inventario físico (y por tanto comprable). */
+function enStock(variante: VarianteRaw): boolean {
+  const m = variante.product?.metafields?.find((x) => x?.key === "disponibilidad");
+  if (!m) return false;
+  try {
+    const v = JSON.parse(m.value);
+    return (Array.isArray(v) ? v : [v]).some((x) => String(x) === "En stock");
+  } catch {
+    return m.value === "En stock";
+  }
+}
+
 /**
- * Moneda que el catálogo declara para esta variante. Viene del tag de Shopify
- * (`Moneda USD`, que el import escribe así) y, como respaldo, del índice local.
+ * Moneda que el catálogo declara para esta variante: USD si tiene dólar de lista
+ * (metafield) o el tag `Moneda USD`; como respaldo, el índice local.
  */
 export function monedaDeclarada(variante: VarianteRaw): string {
+  if (usdLista(variante)) return "USD";
   const tags = variante.product?.tags ?? [];
   if (tags.some((t) => /^moneda[:\s-]*usd$/i.test(t.trim()))) return "USD";
   if (tags.some((t) => /^moneda[:\s-]*mxn$/i.test(t.trim()))) return "MXN";
@@ -42,11 +66,22 @@ export function monedaDeclarada(variante: VarianteRaw): string {
 }
 
 /**
- * ¿La moneda con la que Shopify cobraría coincide con la que declara el producto?
- * Si no, hay riesgo de cobrar la cifra correcta en la divisa equivocada.
+ * ¿Shopify cobraría una cifra que no puede ser correcta? Dos casos: la tienda no
+ * está cobrando en pesos, o el campo de pesos de una pieza en dólares todavía
+ * trae la cifra en dólares (no pasó por el cron del tipo de cambio).
  */
 export function monedaIncoherente(variante: VarianteRaw): boolean {
-  return variante.price.currencyCode !== monedaDeclarada(variante);
+  if (variante.price.currencyCode !== "MXN") return true;
+  const usd = usdLista(variante);
+  if (usd === null) return false;
+  return Number.parseFloat(variante.price.amount) < usd * 5;
+}
+
+/** "Horno … 24\" — Serie 200" → "Serie 200". */
+function serieDe(titulo: string): string | null {
+  const [, ...resto] = titulo.split(" — ");
+  const serie = resto.join(" — ").trim();
+  return serie || null;
 }
 
 function aLinea(raw: CarritoRaw["lines"]["nodes"][number]): LineaCarrito {
@@ -55,19 +90,53 @@ function aLinea(raw: CarritoRaw["lines"]["nodes"][number]): LineaCarrito {
   // La ruta de la PDP se resuelve por SKU contra el índice, NUNCA con el
   // `data-cart-href` del botón: ese atributo es HTML estático y puede mentir.
   const enIndice = sku ? productoPorSku(sku) : null;
+  // Toda pieza publicada en Shopify tiene ficha generada en /producto/<sku>.
+  const ficha = enIndice?.ficha ?? (sku ? `/producto/${sku.toLowerCase()}` : null);
+
+  const mxn = Number.parseFloat(v.price.amount);
+  const comparar = v.compareAtPrice ? Number.parseFloat(v.compareAtPrice.amount) : null;
+  const mxnLista = comparar && comparar > mxn ? comparar : null;
+  const usd = usdLista(v);
+  const stock = enStock(v);
+
+  // Mismo cálculo que precioPublico() en catalogoVivo.ts: la línea del proyecto
+  // dice el mismo número que la tarjeta y la ficha.
+  let precioPublico: LineaCarrito["precioPublico"];
+  if (usd) {
+    const factor = mxnLista ? mxn / mxnLista : 1;
+    precioPublico = {
+      venta: { monto: centavos(usd * factor * (1 + IVA)), moneda: "USD" },
+      tachado: mxnLista ? { monto: centavos(usd * (1 + IVA)), moneda: "USD" } : null,
+    };
+  } else {
+    precioPublico = {
+      venta: { monto: centavos(mxn * (1 + IVA)), moneda: "MXN" },
+      tachado: mxnLista ? { monto: centavos(mxnLista * (1 + IVA)), moneda: "MXN" } : null,
+    };
+  }
+
+  const decision = decidirCompra({
+    vendor: v.product.vendor || enIndice?.marca || "",
+    precioMxnConIva: centavos(mxn * (1 + IVA)),
+    enStock: stock,
+  });
 
   return {
     id: raw.id,
     sku,
-    nombre: enIndice?.nombre ?? v.product.title,
+    nombre: v.product.title || enIndice?.nombre || "",
     marca: v.product.vendor || enIndice?.marca || "",
-    imagen: v.image?.url ?? enIndice?.imagen ?? null,
-    ficha: enIndice?.ficha ?? null,
+    imagen: v.image?.url ?? v.product.featuredImage?.url ?? enIndice?.imagen ?? null,
+    ficha,
     cantidad: raw.quantity,
     precioUnitario: aDinero(raw.cost.amountPerQuantity),
     total: aDinero(raw.cost.totalAmount),
     disponible: v.availableForSale,
     maximo: v.quantityAvailable,
+    enStock: stock,
+    serie: serieDe(v.product.title || ""),
+    precioPublico,
+    decision,
   };
 }
 
@@ -79,15 +148,24 @@ export function aCarrito(raw: CarritoRaw, { simulado = false } = {}): Carrito {
     bloqueo = "moneda-incoherente";
   }
 
+  const subtotal = aDinero(raw.cost.subtotalAmount);
+  // Shopify solo calcula el impuesto con dirección; mientras, se estima el 16 %.
+  const iva = raw.cost.totalTaxAmount
+    ? aDinero(raw.cost.totalTaxAmount)
+    : { monto: centavos(subtotal.monto * IVA), moneda: subtotal.moneda };
+
   return {
     id: raw.id,
     cantidadTotal: raw.totalQuantity,
-    subtotal: aDinero(raw.cost.subtotalAmount),
+    subtotal,
     impuesto: raw.cost.totalTaxAmount ? aDinero(raw.cost.totalTaxAmount) : null,
     total: raw.cost.totalAmount ? aDinero(raw.cost.totalAmount) : null,
     checkoutUrl: raw.checkoutUrl,
     lineas,
     bloqueo,
     simulado,
+    modo: lineas.some((l) => l.decision.accion === "cotizar") ? "cotizacion" : "checkout",
+    ivaEstimado: iva,
+    totalEstimado: { monto: centavos(subtotal.monto + iva.monto), moneda: subtotal.moneda },
   };
 }

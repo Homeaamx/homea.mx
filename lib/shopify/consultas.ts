@@ -32,8 +32,16 @@ export const FRAGMENTO_CARRITO = /* GraphQL */ `
             availableForSale
             quantityAvailable
             price { amount currencyCode }
+            compareAtPrice { amount currencyCode }
             image { url altText width height }
-            product { id title handle vendor tags }
+            product {
+              id title handle vendor tags
+              featuredImage { url altText width height }
+              metafields(identifiers: [
+                { namespace: "homea", key: "precio_usd" },
+                { namespace: "filtros", key: "disponibilidad" }
+              ]) { key value }
+            }
           }
         }
       }

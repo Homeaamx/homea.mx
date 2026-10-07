@@ -18,9 +18,12 @@
 import "server-only";
 import { cookies } from "next/headers";
 
-import { productoPorSku } from "@/lib/catalogo";
+import { IVA, productoPorSku } from "@/lib/catalogo";
+import { decidirCompra } from "@/lib/reglas/reglaMarca";
 
 import type { Carrito, LineaCarrito } from "./tipos";
+
+const centavos = (n: number) => Math.round(n * 100) / 100;
 
 const NOMBRE = "homea_carrito_sim";
 
@@ -68,19 +71,27 @@ function aLinea({ sku, cantidad }: LineaSim): LineaCarrito | null {
     total: { monto: p.precio * cantidad, moneda: p.moneda },
     disponible: true,
     maximo: null,
+    enStock: false,
+    serie: p.serie,
+    precioPublico: { venta: { monto: centavos(p.precio * (1 + IVA)), moneda: p.moneda }, tachado: null },
+    // El índice no trae pesos para las piezas USD: se estima con un FIX de 18
+    // solo para la regla de monto; en producción decide Shopify.
+    decision: decidirCompra({
+      vendor: p.marca,
+      precioMxnConIva: centavos(p.precio * (p.moneda === "USD" ? 18 : 1) * (1 + IVA)),
+      enStock: false,
+    }),
   };
 }
 
 function armar(lineas: LineaSim[]): Carrito {
   const resueltas = lineas.map(aLinea).filter((l): l is LineaCarrito => l !== null);
   const moneda = resueltas[0]?.total.moneda ?? "MXN";
+  const subtotal = resueltas.reduce((s, l) => s + l.total.monto, 0);
   return {
     id: "simulado",
     cantidadTotal: resueltas.reduce((n, l) => n + l.cantidad, 0),
-    subtotal: {
-      monto: resueltas.reduce((s, l) => s + l.total.monto, 0),
-      moneda,
-    },
+    subtotal: { monto: subtotal, moneda },
     impuesto: null,
     total: null,
     // Sin checkout: no existe tal carrito en Shopify.
@@ -88,6 +99,9 @@ function armar(lineas: LineaSim[]): Carrito {
     lineas: resueltas,
     bloqueo: null,
     simulado: true,
+    modo: resueltas.some((l) => l.decision.accion === "cotizar") ? "cotizacion" : "checkout",
+    ivaEstimado: { monto: centavos(subtotal * IVA), moneda },
+    totalEstimado: { monto: centavos(subtotal * (1 + IVA)), moneda },
   };
 }
 
