@@ -64,6 +64,11 @@ export interface OpcionesFetch {
   tags?: string[];
   /** Segundos de vida en caché. `0` → sin caché (todo lo del carrito). */
   revalidate?: number;
+  /**
+   * Tope de espera. Por defecto 1.5 s (una consulta lenta no bloquea el render);
+   * los listados del catálogo piden más porque traen hasta 100 productos.
+   */
+  timeoutMs?: number;
 }
 
 /**
@@ -72,7 +77,7 @@ export interface OpcionesFetch {
  */
 export async function shopifyFetch<T>(
   query: string,
-  { variables, tags, revalidate = 3600 }: OpcionesFetch = {},
+  { variables, tags, revalidate = 3600, timeoutMs = TIMEOUT_MS }: OpcionesFetch = {},
 ): Promise<T> {
   if (!DOMINIO || !TOKEN) {
     throw new ErrorShopify(
@@ -91,7 +96,7 @@ export async function shopifyFetch<T>(
         "X-Shopify-Storefront-Access-Token": TOKEN,
       },
       body: JSON.stringify({ query, variables }),
-      signal: AbortSignal.timeout(TIMEOUT_MS),
+      signal: AbortSignal.timeout(timeoutMs),
       ...(revalidate > 0
         ? { cache: "force-cache" as const, next: { revalidate, tags } }
         : { cache: "no-store" as const }),

@@ -20,7 +20,16 @@ export default function MarketingPage({
 }) {
   let html = getMain(file);
   for (const [nombre, contenido] of Object.entries(slots)) {
-    html = html.replace(`<!-- slot:${nombre} -->`, contenido);
+    // Slot de rango: `<!-- slot:x -->…<!-- /slot:x -->` envuelve contenido
+    // estático de respaldo que se sustituye completo cuando hay datos vivos.
+    const inicio = `<!-- slot:${nombre} -->`;
+    const fin = `<!-- /slot:${nombre} -->`;
+    const i = html.indexOf(inicio);
+    const j = i >= 0 ? html.indexOf(fin, i) : -1;
+    html =
+      j >= 0
+        ? html.slice(0, i) + contenido + html.slice(j + fin.length)
+        : html.replace(inicio, contenido);
   }
   const css = getStyles(file);
   const js = getScripts(file);

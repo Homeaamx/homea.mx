@@ -5,25 +5,47 @@ import JsonLd from "@/components/JsonLd";
 import MarketingPage from "@/components/MarketingPage";
 import { productoPorSku } from "@/lib/catalogo";
 import { getMain, getTitle, productoFile, productoSlugs } from "@/lib/preview";
+import {
+  decisionDeCompra,
+  precioPublico,
+  productoVivoPorSku,
+  productosDeColeccion,
+  type PrecioPublico,
+  type ProductoVivo,
+} from "@/lib/shopify/catalogoVivo";
+import { TIPOS_WEB, tipoWeb } from "@/lib/shopify/coleccionesWeb";
+import { ctaHtml, fichaHtml, precioFichaHtml } from "@/lib/shopify/htmlCatalogo";
 import { contenidoDeFicha, jsonLdProducto } from "@/lib/shopify/pdpSlots";
 import { absUrl } from "@/lib/site";
+import { obtenerTipoCambio } from "@/lib/tipoCambio";
 
-// ISR — una hora. Antes era un día, cuando el precio estaba escrito a mano en el
-// HTML y no cambiaba nunca; ahora la ficha trae precio y tipo de cambio vivos.
+// ISR — una hora: la ficha trae precio y tipo de cambio vivos.
 export const revalidate = 3600;
-// Solo las fichas precomputadas (producto-<slug>.html) existen → resto 404.
-export const dynamicParams = false;
+// Dos orígenes de ficha:
+//   1. Las 5 del piloto, con su HTML curado del preview (producto-<slug>.html).
+//   2. Cualquier producto publicado en Shopify (canal Headless): la ficha se arma
+//      con sus datos (lib/shopify/htmlCatalogo.ts). Las que no se generaron en el
+//      build se crean al primer visitante y quedan en caché (ISR on-demand), que
+//      es como escala a ~16k productos sin construirlos todos de golpe.
+export const dynamicParams = true;
 
 interface Params {
   slug: string;
 }
 
-export function generateStaticParams(): Params[] {
-  return productoSlugs().map((slug) => ({ slug }));
+/** Prerender: las del piloto + las de las colecciones con catálogo vivo. */
+export async function generateStaticParams(): Promise<Params[]> {
+  const slugs = new Set(productoSlugs());
+  const listas = await Promise.all(TIPOS_WEB.map((t) => productosDeColeccion(t.coleccion)));
+  for (const p of listas.flat()) slugs.add(p.slug);
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 /** El slug de la ficha ES el SKU en minúsculas (scripts/build-search-index.mjs). */
 const skuDeSlug = (slug: string) => slug.toUpperCase();
+
+/** Un slug válido es un modelo: letras, números y guiones. Lo demás ni se consulta. */
+const slugValido = (slug: string) => /^[a-z0-9-]{3,40}$/.test(slug);
 
 /** El gancho de una línea de la ficha; sirve de descripción en metadatos y JSON-LD. */
 function ganchoDeFicha(file: string): string | null {
@@ -31,43 +53,117 @@ function ganchoDeFicha(file: string): string | null {
   return encontrado ? encontrado[1].replace(/<[^>]+>/g, "").trim() : null;
 }
 
+function descripcionVivo(p: ProductoVivo): string {
+  if (p.lead) return p.lead;
+  const tw = tipoWeb(p.tipo);
+  return `${p.titulo} de ${p.marca} (modelo ${p.sku}). ${p.tipo}${tw ? ` · ${tw.sub1.nombre}` : ""}. Asesoría de especificación, entrega e instalación coordinada en todo México.`;
+}
+
 export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
-  const params = await props.params;
-  if (!productoSlugs().includes(params.slug)) return {};
-  const file = productoFile(params.slug);
-  const gancho = ganchoDeFicha(file);
+  const { slug } = await props.params;
+  if (productoSlugs().includes(slug)) {
+    const file = productoFile(slug);
+    const gancho = ganchoDeFicha(file);
+    return {
+      title: getTitle(file),
+      ...(gancho ? { description: gancho } : {}),
+      alternates: { canonical: `/producto/${slug}` },
+    };
+  }
+  if (!slugValido(slug)) return {};
+  const p = await productoVivoPorSku(skuDeSlug(slug));
+  if (!p) return {};
+  const imagen = p.imagenes[0];
   return {
-    title: getTitle(file),
-    ...(gancho ? { description: gancho } : {}),
-    alternates: { canonical: `/producto/${params.slug}` },
+    title: `${p.titulo} · ${p.marca} ${p.sku}`,
+    description: descripcionVivo(p),
+    alternates: { canonical: `/producto/${slug}` },
+    ...(imagen ? { openGraph: { images: [{ url: imagen.url, alt: imagen.alt }] } } : {}),
   };
 }
 
+/** JSON-LD con el mismo precio y disponibilidad que ve el visitante. */
+function jsonLdVivo(p: ProductoVivo, precio: PrecioPublico, url: string): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: p.titulo,
+    sku: p.sku,
+    mpn: p.sku,
+    brand: { "@type": "Brand", name: p.marca },
+    ...(p.imagenes.length ? { image: p.imagenes.slice(0, 4).map((i) => i.url) } : {}),
+    description: descripcionVivo(p),
+    category: p.tipo,
+    offers: {
+      "@type": "Offer",
+      priceCurrency: precio.moneda,
+      // Con IVA: es el precio que se publica. "Bajo pedido" es PreOrder, no
+      // OutOfStock (marcarlo agotado apaga los resultados enriquecidos).
+      price: precio.venta.toFixed(2),
+      availability: p.enStock ? "https://schema.org/InStock" : "https://schema.org/PreOrder",
+      url,
+      seller: { "@type": "Organization", name: "HOMEA" },
+    },
+  };
+}
+
+/** Tres piezas de la misma colección (equipos antes que accesorios, con foto). */
+async function relacionadosDe(p: ProductoVivo): Promise<ProductoVivo[]> {
+  const tw = tipoWeb(p.tipo);
+  if (!tw) return [];
+  const todos = await productosDeColeccion(tw.coleccion);
+  return todos
+    .filter((r) => r.sku !== p.sku && r.imagenes.length)
+    .slice(0, 3);
+}
+
 export default async function ProductoFichaPage(props: { params: Promise<Params> }) {
-  const params = await props.params;
-  if (!productoSlugs().includes(params.slug)) notFound();
+  const { slug } = await props.params;
+  const sku = skuDeSlug(slug);
+  const esPiloto = productoSlugs().includes(slug);
+  if (!esPiloto && !slugValido(slug)) notFound();
 
-  const file = productoFile(params.slug);
-  const sku = skuDeSlug(params.slug);
-  const indexado = productoPorSku(sku);
-  const { slots, datos } = await contenidoDeFicha(sku);
+  const vivo = await productoVivoPorSku(sku);
+  const url = absUrl(`/producto/${slug}`);
 
+  // 1. Ficha curada del piloto: diseño y textos del preview; precio y botón vivos.
+  if (esPiloto) {
+    const file = productoFile(slug);
+    if (vivo) {
+      const tc = await obtenerTipoCambio();
+      const precio = precioPublico(vivo, tc);
+      const slots = {
+        precio: precioFichaHtml(precio, tc),
+        cta: ctaHtml(vivo, decisionDeCompra(vivo, precio), precio),
+      };
+      return (
+        <>
+          <MarketingPage file={file} slots={slots} />
+          <JsonLd data={{ ...jsonLdVivo(vivo, precio, url), description: ganchoDeFicha(file) ?? descripcionVivo(vivo) }} />
+        </>
+      );
+    }
+    // Shopify no contestó: precio del índice local, como antes.
+    const indexado = productoPorSku(sku);
+    const { slots, datos } = await contenidoDeFicha(sku);
+    return (
+      <>
+        <MarketingPage file={file} slots={slots} />
+        {datos && indexado ? (
+          <JsonLd data={jsonLdProducto(datos, indexado, url, ganchoDeFicha(file) ?? indexado.titulo)} />
+        ) : null}
+      </>
+    );
+  }
+
+  // 2. Ficha generada con los datos de Shopify.
+  if (!vivo) notFound();
+  const [tc, relacionados] = await Promise.all([obtenerTipoCambio(), relacionadosDe(vivo)]);
+  const precio = precioPublico(vivo, tc);
   return (
     <>
-      <MarketingPage file={file} slots={slots} />
-      {/* El JSON-LD se emite aquí y no en el HTML del preview para que el precio
-          y la disponibilidad del marcado sean LOS MISMOS que ve el visitante.
-          Dos bloques Product en conflicto valen menos que ninguno. */}
-      {datos && indexado ? (
-        <JsonLd
-          data={jsonLdProducto(
-            datos,
-            indexado,
-            absUrl(`/producto/${params.slug}`),
-            ganchoDeFicha(file) ?? indexado.titulo,
-          )}
-        />
-      ) : null}
+      <div dangerouslySetInnerHTML={{ __html: fichaHtml(vivo, tc, relacionados) }} />
+      <JsonLd data={jsonLdVivo(vivo, precio, url)} />
     </>
   );
 }

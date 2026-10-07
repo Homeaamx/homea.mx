@@ -20,6 +20,13 @@ import ScrollAFiltros from "@/components/ScrollAFiltros";
 import PlpFiltro from "@/components/PlpFiltro";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppCta from "@/components/WhatsAppCta";
+import { productosDeColeccion } from "@/lib/shopify/catalogoVivo";
+import { tipoDePlp } from "@/lib/shopify/coleccionesWeb";
+import { conteoHtml, panelFiltrosHtml, rejillaHtml } from "@/lib/shopify/htmlCatalogo";
+import { obtenerTipoCambio } from "@/lib/tipoCambio";
+
+// ISR — una hora: el catálogo trae precios y productos vivos de Shopify.
+export const revalidate = 3600;
 
 // ⚠️ La página NO lee searchParams en el servidor: hacerlo la vuelve dinámica
 // (desaparece del prerender-manifest y Vercel la sirve con no-store, render por
@@ -80,6 +87,11 @@ export default async function Page({ params }: Params) {
   if (filtros.length === 0) notFound();
 
   const base = `/productos/${categoria}/${subcategoria}/${tipo}`;
+  // Catálogo vivo de Shopify (colección automática del tipo). Vacío → plantilla
+  // con placeholders, como antes de la carga.
+  const tw = tipoDePlp(categoria, subcategoria, tipo);
+  const productos = tw ? await productosDeColeccion(tw.coleccion) : [];
+  const tc = productos.length ? await obtenerTipoCambio() : null;
   const hero = HERO_PLP[`${categoria}/${subcategoria}/${tipo}`];
   const tipos = sub2.filtros ?? [];
   const conFicha = tipos.filter((f) => f.ficha).length;
@@ -144,31 +156,42 @@ export default async function Page({ params }: Params) {
       <section className="sec tight" id="catalogo" style={{ paddingTop: 8 }}>
         <div className="container">
           <div className="plp">
+            {productos.length && tc ? (
+              <aside
+                className="filters"
+                // Filtros con los valores reales de Shopify (filtros.*) y su conteo;
+                // public/catalogo.js filtra las tarjetas en el cliente.
+                dangerouslySetInnerHTML={{
+                  __html: panelFiltrosHtml(productos, { valoresComoTipo: true }),
+                }}
+              />
+            ) : (
             <aside className="filters">
-              {filtros.map((f) => (
-                <div className="fgroup" key={f.nombre}>
-                  <h6>{f.nombre}</h6>
-                  {f.control === "slider" ? (
-                    <div className="fnote">Rango en MXN — se activa con el catálogo cargado.</div>
-                  ) : f.valores ? (
-                    f.valores.map((v) => (
-                      <label key={v} data-tipo={slug(v)}>
-                        {/* El check del tipo activo (?f=) lo pone PlpFiltro en
-                            el cliente: el HTML estático es igual para todos. */}
-                        <input type="checkbox" /> {v}
-                      </label>
-                    ))
-                  ) : (
-                    <div className="fnote">{f.nota}</div>
-                  )}
-                </div>
-              ))}
-            </aside>
+                {filtros.map((f) => (
+                  <div className="fgroup" key={f.nombre}>
+                    <h6>{f.nombre}</h6>
+                    {f.control === "slider" ? (
+                      <div className="fnote">Rango en MXN — se activa con el catálogo cargado.</div>
+                    ) : f.valores ? (
+                      f.valores.map((v) => (
+                        <label key={v} data-tipo={slug(v)}>
+                          {/* El check del tipo activo (?f=) lo pone PlpFiltro en
+                              el cliente: el HTML estático es igual para todos. */}
+                          <input type="checkbox" /> {v}
+                        </label>
+                      ))
+                    ) : (
+                      <div className="fnote">{f.nota}</div>
+                    )}
+                  </div>
+                ))}
+              </aside>
+            )}
 
             <div>
               <div className="toolbar">
                 <span className="results figures">
-                  0 piezas en línea · {conFicha} tipos
+                  {productos.length ? conteoHtml(productos) : `0 piezas en línea · ${conFicha} tipos`}
                   {/* "· tipo: X" lo pinta PlpFiltro según el ?f= de la URL. */}
                   <span id="plp-tipo-activo" />
                 </span>
@@ -179,6 +202,10 @@ export default async function Page({ params }: Params) {
                   <option>Novedades</option>
                 </select>
               </div>
+              {productos.length && tc ? (
+                <div className="plp-grid" dangerouslySetInnerHTML={{ __html: rejillaHtml(productos, tc) }} />
+              ) : (
+                <>
               <div className="plp-grid">
                 {/* Placeholders: la plantilla del catálogo ya está armada; se
                     sustituyen por productos reales de Shopify cuando el catálogo
@@ -215,7 +242,10 @@ export default async function Page({ params }: Params) {
                   </Link>
                 </div>
               </div>
+                </>
+              )}
 
+              {productos.length ? null : (
               <p className="plp-aviso">
                 Catálogo en migración: las piezas de {sub2.nombre.toLowerCase()} están
                 por publicarse.{" "}
@@ -228,6 +258,7 @@ export default async function Page({ params }: Params) {
                   <span className="ar">→</span>
                 </WhatsAppCta>
               </p>
+              )}
             </div>
           </div>
         </div>

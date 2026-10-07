@@ -1,0 +1,1459 @@
+{
+ "_nota": "Orden y nombre visible de los filtros por Subcategoría 2 (= Tipo de producto en Shopify). Clave = metafield filtros.<clave>; \"marca\" = vendor, \"precio\" = precio. GENERADO desde FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx (OneDrive, columna E = orden propuesto) el 2026-10-06. Si cambia la tabla, se regenera.",
+ "subcategorias": {
+  "Refrigeradores": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Diseño",
+    "clave": "diseno"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Fábrica de hielos",
+    "clave": "fabrica_hielos"
+   },
+   {
+    "nombre": "Despachador de agua",
+    "clave": "despachador_agua"
+   },
+   {
+    "nombre": "Voltaje",
+    "clave": "voltaje"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Congeladores": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Diseño",
+    "clave": "diseno"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Fábrica de hielos",
+    "clave": "fabrica_hielos"
+   },
+   {
+    "nombre": "Voltaje",
+    "clave": "voltaje"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Centros de bebida": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Diseño",
+    "clave": "diseno"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Uso",
+    "clave": "uso"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Frigobares": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Diseño",
+    "clave": "diseno"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Máquinas de hielo": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Tipo de hielo",
+    "clave": "tipo_hielo"
+   },
+   {
+    "nombre": "Capacidad (almacenamiento)",
+    "clave": "capacidad"
+   },
+   {
+    "nombre": "Producción diaria",
+    "clave": "produccion"
+   },
+   {
+    "nombre": "Tipo de drenaje",
+    "clave": "drenaje"
+   },
+   {
+    "nombre": "Uso",
+    "clave": "uso"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Cavas de vino": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Puerta",
+    "clave": "puerta"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Diseño",
+    "clave": "diseno"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Zonas de temperatura",
+    "clave": "zonas"
+   },
+   {
+    "nombre": "Capacidad (botellas)",
+    "clave": "capacidad"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Uso",
+    "clave": "uso"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Cajones refrigerantes": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de funcionamiento",
+    "clave": "funcionamiento"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Uso",
+    "clave": "uso"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Accesorios de refrigeración": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo",
+    "clave": "tipo"
+   },
+   {
+    "nombre": "Compatible con",
+    "clave": "compatible"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Estufas": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Tipo de funcionamiento",
+    "clave": "funcionamiento"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Configuración de cubierta",
+    "clave": "cubierta"
+   },
+   {
+    "nombre": "Número de hornos",
+    "clave": "hornos"
+   },
+   {
+    "nombre": "Tipo de horneado",
+    "clave": "horneado"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Tipo de gas",
+    "clave": "tipo_gas"
+   },
+   {
+    "nombre": "Voltaje",
+    "clave": "voltaje"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Parrillas": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Tipo de funcionamiento",
+    "clave": "funcionamiento"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Tipo de gas",
+    "clave": "tipo_gas"
+   },
+   {
+    "nombre": "Voltaje",
+    "clave": "voltaje"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Hornos": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de funcionamiento",
+    "clave": "funcionamiento"
+   },
+   {
+    "nombre": "Diseño",
+    "clave": "diseno"
+   },
+   {
+    "nombre": "Tipo de horneado",
+    "clave": "horneado"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Altura",
+    "clave": "altura"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Tipo de gas",
+    "clave": "tipo_gas"
+   },
+   {
+    "nombre": "Voltaje",
+    "clave": "voltaje"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Microondas": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Diseño",
+    "clave": "diseno"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Voltaje",
+    "clave": "voltaje"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Campanas": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Diseño",
+    "clave": "diseno"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Tipo de extracción",
+    "clave": "extraccion"
+   },
+   {
+    "nombre": "Potencia del motor (CFM)",
+    "clave": "potencia"
+   },
+   {
+    "nombre": "Tipo de motor",
+    "clave": "motor"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Uso",
+    "clave": "uso"
+   },
+   {
+    "nombre": "Voltaje",
+    "clave": "voltaje"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Cafeteras": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Tipo de funcionamiento",
+    "clave": "funcionamiento"
+   },
+   {
+    "nombre": "Llenado de agua",
+    "clave": "llenado_agua"
+   },
+   {
+    "nombre": "Variedades de café en grano",
+    "clave": "variedades_cafe"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Voltaje",
+    "clave": "voltaje"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Cajones": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo",
+    "clave": "tipo"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Uso",
+    "clave": "uso"
+   },
+   {
+    "nombre": "Voltaje",
+    "clave": "voltaje"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Accesorios de cocción": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo",
+    "clave": "tipo"
+   },
+   {
+    "nombre": "Compatible con",
+    "clave": "compatible"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Lavavajillas": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Diseño",
+    "clave": "diseno"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Nivel de ruido",
+    "clave": "ruido"
+   },
+   {
+    "nombre": "Servicios",
+    "clave": "capacidad"
+   },
+   {
+    "nombre": "Número de racks",
+    "clave": "racks"
+   },
+   {
+    "nombre": "Interior de tina",
+    "clave": "tina"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Voltaje",
+    "clave": "voltaje"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Tarjas": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Diseño",
+    "clave": "diseno"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Profundidad",
+    "clave": "profundidad"
+   },
+   {
+    "nombre": "Material",
+    "clave": "material"
+   },
+   {
+    "nombre": "Color",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Accesorios",
+    "clave": "accesorios_incluidos"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Monomandos": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Diseño",
+    "clave": "diseno"
+   },
+   {
+    "nombre": "Uso",
+    "clave": "uso"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Accesorios de Tarjas y Monomandos": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo",
+    "clave": "tipo"
+   },
+   {
+    "nombre": "Compatible con",
+    "clave": "compatible"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Trituradores": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Potencia",
+    "clave": "potencia"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Purificadores de agua": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de funcionamiento",
+    "clave": "funcionamiento"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Despachadores de agua": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de funcionamiento",
+    "clave": "funcionamiento"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Asadores": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Tipo de funcionamiento",
+    "clave": "funcionamiento"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Tipo de gas",
+    "clave": "tipo_gas"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Hornos de pizza": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de funcionamiento",
+    "clave": "funcionamiento"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Tipo de gas",
+    "clave": "tipo_gas"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Accesorios Asadores & Hornos": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo",
+    "clave": "tipo"
+   },
+   {
+    "nombre": "Compatible con",
+    "clave": "compatible"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Quemador lateral": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo",
+    "clave": "tipo"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Tipo de gas",
+    "clave": "tipo_gas"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Plancha Teppanyaki": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Tipo de gas",
+    "clave": "tipo_gas"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Ahumadores": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de funcionamiento",
+    "clave": "funcionamiento"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Hieleras": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Diseño",
+    "clave": "diseno"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Gabinetes": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Diseño",
+    "clave": "diseno"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Campanas — Uso: Exterior": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de instalación",
+    "clave": "instalacion"
+   },
+   {
+    "nombre": "Diseño",
+    "clave": "diseno"
+   },
+   {
+    "nombre": "Ancho",
+    "clave": "ancho"
+   },
+   {
+    "nombre": "Tipo de extracción",
+    "clave": "extraccion"
+   },
+   {
+    "nombre": "Potencia del motor (CFM)",
+    "clave": "potencia"
+   },
+   {
+    "nombre": "Tipo de motor",
+    "clave": "motor"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Voltaje",
+    "clave": "voltaje"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Electrodomésticos menores": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo",
+    "clave": "tipo"
+   },
+   {
+    "nombre": "Color",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Lavandería": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo",
+    "clave": "tipo"
+   },
+   {
+    "nombre": "Tipo de carga",
+    "clave": "carga"
+   },
+   {
+    "nombre": "Capacidad de carga",
+    "clave": "capacidad"
+   },
+   {
+    "nombre": "Tipo de funcionamiento",
+    "clave": "funcionamiento"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ],
+  "Aire acondicionado": [
+   {
+    "nombre": "Marca",
+    "clave": "marca"
+   },
+   {
+    "nombre": "Precio",
+    "clave": "precio"
+   },
+   {
+    "nombre": "Tipo de funcionamiento",
+    "clave": "funcionamiento"
+   },
+   {
+    "nombre": "Tipo de equipo",
+    "clave": "tipo"
+   },
+   {
+    "nombre": "Capacidad",
+    "clave": "capacidad"
+   },
+   {
+    "nombre": "Tecnología",
+    "clave": "tecnologia"
+   },
+   {
+    "nombre": "Acabado",
+    "clave": "acabado"
+   },
+   {
+    "nombre": "Voltaje",
+    "clave": "voltaje"
+   },
+   {
+    "nombre": "Disponibilidad",
+    "clave": "disponibilidad"
+   },
+   {
+    "nombre": "Garantía",
+    "clave": "garantia"
+   },
+   {
+    "nombre": "Promoción",
+    "clave": "promocion"
+   }
+  ]
+ }
+}

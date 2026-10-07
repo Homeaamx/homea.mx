@@ -1,0 +1,9 @@
+{
+  "_nota": "Regla de compra en línea (Carla, 2026-10-06; Excel REGLAS DE COMPRA POR MARCA_CLAUDE.xlsx en OneDrive). Orden: (1) lo que está en stock / oferta siempre se compra; (2) las marcas de soloCotizar se cotizan; (3) precio de venta con IVA mayor a limiteMxnConIva se cotiza; (4) lo demás se compra. Carrito con algo que se cotiza → todo a cotización. Las marcas van por slug de data/marcas.json; el vendor de Shopify se compara normalizado contra slug y nombre.",
+  "limiteMxnConIva": 100000,
+  "soloCotizar": [
+    "asko", "benessi", "bertazzoni", "bosch", "brizo", "cove", "delta", "dexa", "franke",
+    "gaggenau", "gessi", "hoshizaki", "miele", "pitt-cooking", "scotsman", "sub-zero",
+    "the-galley", "thermador", "u-line", "viking", "wolf"
+  ]
+}

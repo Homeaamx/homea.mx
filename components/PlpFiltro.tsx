@@ -58,6 +58,9 @@ export default function PlpFiltro({ base, tipos }: Props) {
       const label = document.getElementById("plp-tipo-activo");
       if (label)
         label.textContent = f && tipos[f] ? ` · tipo: ${tipos[f]}` : "";
+      // Catálogo vivo: las casillas se marcaron a mano (sin "change"), así que se
+      // avisa a public/catalogo.js para que vuelva a filtrar las tarjetas.
+      document.dispatchEvent(new Event("catalogo:aplicar"));
     };
 
     const onClick = (e: MouseEvent) => {

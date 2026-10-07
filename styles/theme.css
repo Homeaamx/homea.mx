@@ -1889,7 +1889,6 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile[data-brand="blanco"]{--lazy-bg: url('/assets/photos/brands/blanco-tarjas-y-griferia.webp');}
 .brandtile[data-brand="brizo"]{--lazy-bg: url('/assets/photos/brands/brizo-griferia.webp');}
 .brandtile[data-brand="eclipse"]{--lazy-bg: url('/assets/photos/brands/eclipse-tarjas-y-griferia.webp');}
-.brandtile[data-brand="elkay"]{--lazy-bg: url('/assets/photos/brands/elkay-tarjas-y-griferia.webp');}
 .brandtile[data-brand="franke"]{--lazy-bg: url('/assets/photos/brands/franke-tarjas-y-griferia.webp');}
 .brandtile[data-brand="fulgor-milano"]{--lazy-bg: url('/assets/photos/brands/fulgor-milano-cocina.webp');}
 .brandtile[data-brand="haier"]{--lazy-bg: url('/assets/photos/brands/haier-electrodomesticos.webp');}
@@ -3023,3 +3022,19 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 @media (max-width: 640px) {
   .pdp .info .pdp-cta .btn { flex: 1 1 100%; }
 }
+
+/* ---------- Catálogo vivo (Shopify) — 2026-10-06 --------------------------------
+   Tarjetas y fichas que genera lib/shopify/htmlCatalogo.ts con datos de Shopify.
+   Las fotos oficiales de fabricante vienen sobre blanco: `multiply` las funde con
+   el greige del contenedor, igual que los recortes del preview. */
+.pcard[hidden] { display: none; }
+[data-cat-card] .imgw img { object-fit: contain; padding: 6%; mix-blend-mode: multiply; }
+.price-was { font-size: .62em; font-weight: 400; color: var(--fg-subtle); margin-right: .4em; }
+.pdp .gallery .main #pdp-img { object-fit: contain; padding: 4%; mix-blend-mode: multiply; }
+.pdp-thumbs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.pdp-thumb { width: 72px; height: 72px; padding: 4px; border: 1px solid var(--border); background: var(--bg-greige); cursor: pointer; }
+.pdp-thumb img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.pdp-thumb.is-active, .pdp-thumb:hover { border-color: var(--homea-gold); }
+[data-cat-vacio][hidden] { display: none; }
+/* "IVA incluido / IVA incl." junto al precio: mismo trato que el código de moneda. */
+.price-big .price-note, .price-tag .price-note { font-size: .5em; font-weight: 600; letter-spacing: var(--tracking-wider); color: var(--fg-muted); white-space: nowrap; }
