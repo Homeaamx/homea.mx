@@ -373,6 +373,7 @@
     }
     var tab = t.closest(".pdp-tab[data-tab]");
     if (tab) {
+      e.preventDefault();
       var caja = tab.closest("[data-pdp-tabs]");
       caja.querySelectorAll(".pdp-tab").forEach(function (b) {
         var on = b === tab;

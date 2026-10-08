@@ -1,5 +1,5 @@
 {
- "_nota": "Orden y nombre visible de los filtros por Subcategoría 2 (= Tipo de producto en Shopify). Clave = metafield filtros.<clave>; \"marca\" = vendor, \"precio\" = precio. GENERADO desde FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx (OneDrive, columna E = orden propuesto) el 2026-10-06. Si cambia la tabla, se regenera.",
+ "_nota": "Orden y nombre visible de los filtros por Subcategoría 2 (= Tipo de producto en Shopify). Clave = metafield filtros.<clave>; \"marca\" = vendor, \"precio\" = precio. GENERADO desde FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx (OneDrive, columna E = orden propuesto) el 2026-10-06. Si cambia la tabla, se regenera. 2026-10-07: se añade filtros.bisagra (Bisagra / apertura) a refrigeración por indicación de Carla (prioritario en refrigeración y hornos).",
  "subcategorias": {
   "Refrigeradores": [
    {
@@ -17,6 +17,10 @@
    {
     "nombre": "Diseño",
     "clave": "diseno"
+   },
+   {
+    "nombre": "Bisagra / apertura",
+    "clave": "bisagra"
    },
    {
     "nombre": "Ancho",
@@ -69,6 +73,10 @@
     "clave": "diseno"
    },
    {
+    "nombre": "Bisagra / apertura",
+    "clave": "bisagra"
+   },
+   {
     "nombre": "Ancho",
     "clave": "ancho"
    },
@@ -115,6 +123,10 @@
     "clave": "diseno"
    },
    {
+    "nombre": "Bisagra / apertura",
+    "clave": "bisagra"
+   },
+   {
     "nombre": "Ancho",
     "clave": "ancho"
    },
@@ -155,6 +167,10 @@
    {
     "nombre": "Diseño",
     "clave": "diseno"
+   },
+   {
+    "nombre": "Bisagra / apertura",
+    "clave": "bisagra"
    },
    {
     "nombre": "Ancho",
@@ -251,6 +267,10 @@
    {
     "nombre": "Diseño",
     "clave": "diseno"
+   },
+   {
+    "nombre": "Bisagra / apertura",
+    "clave": "bisagra"
    },
    {
     "nombre": "Ancho",

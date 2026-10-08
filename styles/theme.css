@@ -3381,3 +3381,19 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-desc li { font-size: 12px; line-height: 1.55; color: var(--fg); }
 .pdp-desc li::marker { color: var(--homea-gold); }
 .pdp-desc p + ul, .pdp-desc ul + p { margin-top: 4px; }
+
+/* Especificaciones técnicas: botones de documento. */
+.pdp-docs { display: flex; flex-wrap: wrap; gap: 10px; }
+.pdp-doc { display: inline-flex; align-items: center; gap: 10px; padding: 13px 18px; background: var(--surface); border: 1px solid var(--homea-black); color: var(--fg); text-decoration: none;
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; transition: background var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard); }
+.pdp-doc:hover { background: var(--homea-black); color: var(--homea-bone); }
+.pdp-doc .ar { font-size: 14px; }
+.pdp-doc-ic { width: 12px; height: 15px; border: 1.5px solid currentColor; border-radius: 1px; position: relative; flex: none; }
+.pdp-doc-ic::after { content: ""; position: absolute; left: 2px; right: 2px; top: 4px; height: 1.5px; background: currentColor; box-shadow: 0 3px 0 currentColor, 0 6px 0 currentColor; }
+
+/* Las pestañas no forman parte del bloque pegajoso de la galería; y el panel
+   tiene alto mínimo para que cambiar de pestaña no acorte la página de golpe. */
+.pdp .gallery:has(.gallery-sticky) { position: static; }
+.pdp .gallery-sticky { position: sticky; top: calc(var(--nav-h) + 32px); }
+.pdp-panel { min-height: 360px; }
+@media (max-width: 1080px) { .pdp .gallery-sticky { position: static; } .pdp-panel { min-height: 0; } }

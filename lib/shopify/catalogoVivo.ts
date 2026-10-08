@@ -32,7 +32,7 @@ export const CLAVES_FILTRO = [
   "potencia", "horneado", "material", "extraccion", "fabrica_hielos", "motor",
   "accesorios_incluidos", "altura", "carga", "cubierta", "despachador_agua", "drenaje",
   "hornos", "llenado_agua", "produccion", "profundidad", "puerta", "racks", "ruido",
-  "tecnologia", "tina", "tipo_hielo", "variedades_cafe", "zonas",
+  "tecnologia", "tina", "tipo_hielo", "variedades_cafe", "zonas", "bisagra",
 ] as const;
 
 const IDENTIFICADORES = [
@@ -69,6 +69,9 @@ const CAMPOS_PRODUCTO = /* GraphQL */ `
     }
     metafields(identifiers: [${IDENTIFICADORES}]) { namespace key value }
     fichas: metafield(namespace: "homea", key: "fichas_tecnicas") {
+      references(first: 10) { nodes { __typename ... on GenericFile { url mimeType } } }
+    }
+    instalacion: metafield(namespace: "homea", key: "instrucciones_instalacion") {
       references(first: 10) { nodes { __typename ... on GenericFile { url mimeType } } }
     }
   }
@@ -122,6 +125,7 @@ interface ProductoRaw {
   };
   metafields: (MetafieldRaw | null)[];
   fichas: { references: { nodes: { __typename: string; url?: string; mimeType?: string }[] } } | null;
+  instalacion: { references: { nodes: { __typename: string; url?: string; mimeType?: string }[] } } | null;
 }
 
 export interface ImagenVivo {
@@ -159,8 +163,10 @@ export interface ProductoVivo {
   dimensiones: { nombre: string; valor: string }[];
   /** Dimensiones del empaque (`custom.ancho/alto/profundidad`, machote de proveedor). */
   empaque: { nombre: string; valor: string }[];
-  /** Fichas técnicas / manuales (`homea.fichas_tecnicas`). */
+  /** Ficha técnica de producto (`homea.fichas_tecnicas`). */
   fichas: { url: string; nombre: string }[];
+  /** Instrucciones de instalación (`homea.instrucciones_instalacion`). */
+  instalacion: { url: string; nombre: string }[];
   /** Bajo pedido (sigue vendiendo sin inventario) o En stock. */
   enStock: boolean;
 }
@@ -231,9 +237,12 @@ function normalizar(raw: ProductoRaw): ProductoVivo | null {
     else if (m.key === "lead") lead = m.value;
     else if (m.key === "dimensiones") dimensiones = dimensionesJson(m.value);
   }
-  const fichas = (raw.fichas?.references?.nodes ?? [])
-    .filter((n) => n.url)
-    .map((n) => ({ url: n.url as string, nombre: nombreDeArchivo(n.url as string) }));
+  const archivos = (campo: { references: { nodes: { url?: string }[] } } | null) =>
+    (campo?.references?.nodes ?? [])
+      .filter((n) => n.url)
+      .map((n) => ({ url: n.url as string, nombre: nombreDeArchivo(n.url as string) }));
+  const fichas = archivos(raw.fichas);
+  const instalacion = archivos(raw.instalacion);
   const mxn = Number.parseFloat(v.price.amount);
   const comparar = v.compareAtPrice ? Number.parseFloat(v.compareAtPrice.amount) : null;
   return {
@@ -260,6 +269,7 @@ function normalizar(raw: ProductoRaw): ProductoVivo | null {
     dimensiones,
     empaque,
     fichas,
+    instalacion,
     enStock: (filtros.disponibilidad ?? []).includes("En stock"),
   };
 }

@@ -398,21 +398,50 @@ export function ctaHtml(p: ProductoVivo, decision: Decision, precio: PrecioPubli
 
 /* ---------- Ficha completa ----------------------------------------------- */
 
+/**
+ * Nombre visible de cada filtro en la tabla de Características, en el orden en
+ * que se listan. La bisagra / apertura va arriba a propósito (Carla, 2026-10-07):
+ * en refrigeración y hornos es lo primero que se revisa.
+ */
 const NOMBRES_FILTRO: Record<string, string> = {
   instalacion: "Instalación",
   diseno: "Diseño",
   funcionamiento: "Funcionamiento",
+  bisagra: "Bisagra / apertura",
   ancho: "Ancho",
+  altura: "Altura",
+  profundidad: "Profundidad",
   acabado: "Acabado",
+  material: "Material",
+  puerta: "Puerta",
+  capacidad: "Capacidad",
+  zonas: "Zonas de temperatura",
+  fabrica_hielos: "Fábrica de hielos",
+  tipo_hielo: "Tipo de hielo",
+  produccion: "Producción diaria",
+  despachador_agua: "Despachador de agua",
+  llenado_agua: "Llenado de agua",
+  drenaje: "Drenaje",
   tipo: "Tipo",
   compatible: "Compatible con",
   tipo_gas: "Tipo de gas",
+  cubierta: "Configuración de cubierta",
+  hornos: "Número de hornos",
+  horneado: "Tipo de horneado",
   potencia: "Potencia",
-  fabrica_hielos: "Fábrica de hielos",
-  llenado_agua: "Llenado de agua",
-  capacidad: "Capacidad",
+  extraccion: "Tipo de extracción",
+  motor: "Motor",
+  accesorios_incluidos: "Accesorios",
+  racks: "Racks",
+  tina: "Interior de tina",
+  carga: "Tipo de carga",
+  tecnologia: "Tecnología",
+  variedades_cafe: "Variedades de café",
+  uso: "Uso",
   voltaje: "Voltaje",
+  ruido: "Nivel de ruido",
   garantia: "Garantía",
+  promocion: "Promoción",
 };
 
 /** "Columna de Refrigeración Panelable 24\" — Serie Expressive" → título con la serie en negritas. */
@@ -460,19 +489,22 @@ function pestanasHtml(p: ProductoVivo, spec: string): string {
     dimProducto || dimEmpaque
       ? `${dimProducto}${dimEmpaque}`
       : `<p class="pdp-tab-aviso">Para más información sobre las dimensiones de este producto, favor de contactar a tu asesor de ventas.</p>`;
-  const fichas = p.fichas.length
-    ? `<ul class="pdp-fichas">${p.fichas
-        .map(
-          (f) =>
-            `<li><a class="arrow-link" href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.nombre)} <span class="ln"></span><span class="ar">→</span></a></li>`,
-        )
-        .join("")}</ul>`
+  // Especificaciones técnicas: un botón por documento oficial. Si de una marca
+  // solo se consigue uno de los dos, se muestra solo ese.
+  const boton = (f: { url: string }, texto: string, n: number) =>
+    `<a class="pdp-doc" href="${esc(f.url)}" target="_blank" rel="noopener"><span class="pdp-doc-ic" aria-hidden="true"></span>${texto}${n > 1 ? ` ${n}` : ""}<span class="ar">→</span></a>`;
+  const docs = [
+    ...p.fichas.map((f, i) => boton(f, "Ficha técnica de producto", i + 1)),
+    ...p.instalacion.map((f, i) => boton(f, "Instrucciones de instalación", i + 1)),
+  ];
+  const fichas = docs.length
+    ? `<div class="pdp-docs">${docs.join("")}</div>`
     : `<p class="pdp-tab-aviso">Para más información sobre las especificaciones técnicas de este producto, favor de contactar a tu asesor de ventas.</p>`;
 
   const tabs: [string, string, string][] = [
     ["caracteristicas", "Características", `<div class="spec">${spec}</div>`],
     ["dimensiones", "Dimensiones", dimensiones],
-    ["fichas", "Fichas técnicas", fichas],
+    ["fichas", "Especificaciones técnicas", fichas],
   ];
   return `<div class="pdp-tabs" data-pdp-tabs>
         <div class="pdp-tablist" role="tablist">${tabs
@@ -580,8 +612,10 @@ ${relacionados.map((r, i) => tarjetaHtml(r, tc, i)).join("\n")}
 
   <div class="pdp">
     <div class="gallery">
+      <div class="gallery-sticky">
       <div class="main pdp-cutout" data-pdp-zoom role="button" tabindex="0" aria-label="Ampliar imagen"><button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(lineaSpec(p).join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${principal ? esc(cdn(principal.url, 400)) : ""}" data-wl-href="${href}" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button>${imagenPrincipal}</div>
       ${miniaturas}
+      </div>
       ${pestanasHtml(p, spec)}
     </div>
     <div class="info">

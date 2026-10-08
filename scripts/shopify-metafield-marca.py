@@ -7,7 +7,7 @@ Uso:
       valores.json = { "RVY497790": { "acabado": ["Panelable"], "fabrica_hielos": ["Sin despachador"] }, ... }
   python3 scripts/shopify-metafield-marca.py --contenido ficha.json [--aplicar]
       ficha.json = { "RVY497790": { "descripcion_html": "<p>…</p>", "dimensiones": [{"nombre":"Ancho de nicho","valor":"90 cm"}],
-                                    "fichas": ["https://…/spec.pdf"] }, ... }
+                                    "fichas_gids": ["gid://shopify/GenericFile/…"], "instalacion_gids": ["gid://…"] }, ... }
       → descripción larga del producto, metafield homea.dimensiones (json) y homea.fichas_tecnicas
         (los PDF se suben a Shopify Files desde su URL y se ligan como file_reference).
 
@@ -127,6 +127,9 @@ def contenido(ruta, aplicar):
                 nombre = f"{sku.lower()}-ficha-tecnica{'-' + str(i+1) if i else ''}.pdf"
                 g = subir_archivo(url, nombre)
                 if g: gids.append(g)
+        inst = list(c.get("instalacion_gids", []))
+        if inst:
+            mfs.append({"ownerId": prod["id"], "namespace": "homea", "key": "instrucciones_instalacion", "type": "list.file_reference", "value": json.dumps(inst)})
         if gids:
             if True:
                 mfs.append({"ownerId": prod["id"], "namespace": "homea", "key": "fichas_tecnicas", "type": "list.file_reference", "value": json.dumps(gids)})
