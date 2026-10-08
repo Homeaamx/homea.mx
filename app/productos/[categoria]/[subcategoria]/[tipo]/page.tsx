@@ -191,10 +191,10 @@ export default async function Page({ params }: Params) {
                   <span id="plp-tipo-activo" />
                 </span>
                 <select aria-label="Ordenar">
-                  <option>Relevancia</option>
-                  <option>Precio ↑</option>
-                  <option>Precio ↓</option>
-                  <option>Novedades</option>
+                  <option value="precio-desc">Precio: mayor a menor ↓</option>
+                  <option value="precio-asc">Precio: menor a mayor ↓</option>
+                  <option value="stock-primero">Inventario: de stock a bajo pedido</option>
+                  <option value="pedido-primero">Inventario: de bajo pedido a stock</option>
                 </select>
               </div>
               {productos.length && tc ? (

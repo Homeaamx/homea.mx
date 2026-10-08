@@ -11,7 +11,7 @@
 > `wayback/` y `manifest.csv` (clics GSC, tamaños, checksums).
 >
 > **Actualización 2026-09-22:** se cargaron los catálogos vigentes de la carpeta `CATALOGOS VIGENTES`
-> (ver §0). Hoy hay **69 listas publicadas** y **64 de las 91 marcas** enseñan su PDF.
+> (ver §0). Hoy hay **68 listas publicadas** y **63 de las 89 marcas** enseñan su PDF (2026-10-08: salieron La Cornue y U-Line).
 
 ## 0. Catálogos vigentes 2026 (carga del 2026-09-22)
 
@@ -44,8 +44,8 @@ comerciales) y Coyote. Se les quitó la palabra "Dealer" (BSH), el encabezado va
 la leyenda "Distributor Price Schedule · Confidential" de Coyote. ⚠️ InSinkErator sigue diciendo en cada página
 "Lista de precios a DISTRIBUIDOR TIPO A": sus precios son de distribuidor. Publicado así por decisión de Carla.
 
-**Faltan (27 marcas sin ningún PDF):** Acros, Catalano, Dexa, Easy, Firplak, Fontana, Foster, Gessi,
-Hergom, I-Drain, IEM, Kaldewei, KitchenAid, La Cornue, Masterbuilt, Maytag, Mr. Steam, Nobili, Peerless,
+**Faltan (26 marcas sin ningún PDF):** Acros, Catalano, Dexa, Easy, Firplak, Fontana, Foster, Gessi,
+Hergom, I-Drain, IEM, Kaldewei, KitchenAid, Masterbuilt, Maytag, Mr. Steam, Nobili, Peerless,
 Poletti Sinks, Sapphire, Sauna Estilo, Treesse, Valsir, Vass, Whirlpool (solo hay Excel) y WPPO.
 
 **Publicadas pero viejas** (conviene buscar la edición nueva): Frigidaire·Electrolux (jul 2023), Onix (2023),
@@ -58,7 +58,8 @@ saunas (2024). Mabe tiene lista 2026 en Excel, pero no en PDF.
 `lista-precios-hansgrohe-essentials-2025.pdf`, `lista-precios-steamist-banos-vapor-2021.pdf`,
 `catalogo-precios-fortum-2023.pdf` (marcas retiradas), `catalogo-mabe-2024.pdf` (duplicado de
 `catalogo-mabe-2024-completo.pdf`), `lista-precios-tecnolam-tarjas-monomandos-2025.pdf` (la sustituye la de
-ene 2026) y `lista-precios-artexa-elica-2023.pdf` (la sustituye la de 2026 y trae marca Artexa).
+ene 2026), `lista-precios-artexa-elica-2023.pdf` (la sustituye la de 2026 y trae marca Artexa) y
+`lista-precios-u-line-jun-2026.pdf` (U-Line se quitó del sitio el 2026-10-08; su URL permanente redirige con 301 a Refrigeración).
 
 **Nuevo PDF de una marca que no tenía:** agrégalo a `scripts/pdfs-marca.json`, prepáralo con el script,
 revisa a ojo portada, una página interior y contraportada, súbelo a Shopify Files, dalo de alta en

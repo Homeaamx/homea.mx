@@ -29,10 +29,10 @@ const SALIDA = join(ROOT, "data", "marcas.json");
 // (<span class="bn">SUBZERO</span>), que no sirve para un <h1> ni para un <title>.
 // Se escribe aquí con la grafía oficial de cada marca.
 const NOMBRES = {
-  "la-cornue": "La Cornue", gaggenau: "Gaggenau", thermador: "Thermador",
+  gaggenau: "Gaggenau", thermador: "Thermador",
   monogram: "Monogram", miele: "Miele", viking: "Viking", wolf: "Wolf",
   "sub-zero": "Sub-Zero", cove: "Cove", "pitt-cooking": "Pitt Cooking",
-  invisacook: "Invisacook", benessi: "Benessi", "u-line": "U-Line", bosch: "Bosch",
+  invisacook: "Invisacook", benessi: "Benessi", bosch: "Bosch",
   thor: "Thor", asko: "ASKO", scotsman: "Scotsman", elica: "Elica",
   tradewind: "Trade-Wind", falmec: "Falmec", "fulgor-milano": "Fulgor Milano",
   summit: "Summit", kalt: "Kalt", sapphire: "Sapphire", cafe: "Café",

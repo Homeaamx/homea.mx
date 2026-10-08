@@ -1,7 +1,7 @@
 # Páginas de marca — `/marcas/<slug>`
 
-> Una página por marca: **91** hoy (67 SHOPIFY · 24 PDF, desde el 2026-10-06; el 2026-09-22 se quitaron AXOR, TRES, Pizarro, Artexa Bath y Hergom Diseño, y el 2026-10-06 Elkay). Todas salen de
-> la **misma ruta** (`app/marcas/[marca]/page.tsx`) y del **mismo registro** (`data/marcas.json`).
+> Una página por marca: **89** hoy (66 SHOPIFY · 23 PDF, desde el 2026-10-08; el 2026-09-22 se quitaron AXOR, TRES, Pizarro, Artexa Bath y Hergom Diseño, el 2026-10-06 Elkay y el 2026-10-08 La Cornue y U-Line). Todas salen de
+> la **misma ruta** (`app/(es)/marcas/[marca]/page.tsx`) y del **mismo registro** (`data/marcas.json`).
 > Cambia el logo, la foto, las categorías, las listas de precios y el **canal**; el armazón es idéntico.
 >
 > Qué marca va a Shopify y cuál solo como PDF, y su descuento: `docs/MARCAS-CANAL-Y-DESCUENTOS.md`.
@@ -80,7 +80,7 @@ Es idempotente y **sale con 1** si una marca se queda sin nombre en `NOMBRES`, s
 ## Texto del hero — `data/marcas-hero.json` (2026-09-22)
 
 Contenido del hero **por marca**, escrito a mano o desde el Excel de contenido. El generador no lo toca.
-Tiene las **91 marcas**, cargadas desde `HOMEA_HERO_97_MARCAS_CODE.xlsx` (2026-09-22; Elkay salió el 2026-10-06). Para actualizarlas, edita el JSON o vuelve a convertir el Excel (columnas SLUG · MARCA · EYEBROW · H1 · DESCRIPCIÓN · BOTÓN). Marca sin entrada → hero de siempre (gama · Distribución oficial + nombre + frase automática).
+Tiene las **89 marcas**, cargadas desde `HOMEA_HERO_97_MARCAS_CODE.xlsx` (2026-09-22; Elkay salió el 2026-10-06, La Cornue y U-Line el 2026-10-08). Para actualizarlas, edita el JSON o vuelve a convertir el Excel (columnas SLUG · MARCA · EYEBROW · H1 · DESCRIPCIÓN · BOTÓN). Marca sin entrada → hero de siempre (gama · Distribución oficial + nombre + frase automática).
 
 ```json
 "acros": {
@@ -148,6 +148,9 @@ nombre de `NOMBRES`, sus reglas `.brandtile[data-brand=…]` de `styles/theme.cs
 `npm run marcas`. Así se quitaron Hansgrohe, Keuco, American Standard y Moen el 2026-09-21
 (y las listas de Catalano, Fortum y Steamist), y AXOR, TRES, Pizarro, Artexa Bath y Hergom Diseño el 2026-09-22. Elkay salió el 2026-10-06
 (`/marcas/elkay` → 301 a `/productos/cocina-y-bar/tarjas-y-griferia`; no tenía listas de precios).
+La Cornue y U-Line salieron el 2026-10-08 (`/marcas/la-cornue` → Cocción; `/marcas/u-line` → Refrigeración).
+U-Line sí tenía lista: su URL permanente `/listas-de-precios/u-line.pdf` (sin `legacy` de OXATIS) también
+va en `marcasEliminadas` con 301 a Refrigeración, porque la ruta de listas da 404 a un slug que ya no existe.
 
 ⚠️ En `next dev`, la ruta `/listas-de-precios/<slug>.pdf` puede seguir sirviendo una lista ya
 borrada: Turbopack no vuelve a leer `data/listas-precios.json`. Reinicia el servidor para
@@ -159,15 +162,15 @@ comprobarlo; en producción no pasa.
 que `categoria-` y `producto-`). **No existe ningún archivo `preview/marca-*.html`**: el
 nombre solo sirve para enlazar desde el HTML del preview. Hoy apuntan ahí:
 
-- los 91 tiles de `preview/marcas.html`,
-- los 91 enlaces del mega-menú de marcas y los 38 chips de la marquesina, en
+- los 89 tiles de `preview/marcas.html`,
+- los 89 enlaces del mega-menú de marcas y los 36 chips de la marquesina, en
   `preview/home.html` (que es el nav compartido de todo el sitio).
 
 ## Cuando llegue el catálogo
 
 **Solo hay que cambiar una función**: `productosDeMarca()` en `lib/marcas.ts`. Hoy
 devuelve `[]` y la página enseña la maqueta con salida a WhatsApp. En cuanto devuelva
-productos, las páginas `shopify` se llenan solas — no hay que tocar `app/marcas/[marca]/page.tsx`.
+productos, las páginas `shopify` se llenan solas — no hay que tocar `app/(es)/marcas/[marca]/page.tsx`.
 Las `pdf` no enseñan catálogo aunque la función devuelva algo.
 
 Los filtros (`filtrosDeMarca()`) están puestos pero **no filtran nada todavía**, igual

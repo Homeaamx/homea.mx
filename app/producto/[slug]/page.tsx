@@ -14,7 +14,8 @@ import {
   type ProductoVivo,
 } from "@/lib/shopify/catalogoVivo";
 import { TIPOS_WEB, tipoWeb } from "@/lib/shopify/coleccionesWeb";
-import { ctaHtml, fichaHtml, precioFichaHtml } from "@/lib/shopify/htmlCatalogo";
+import { ctaHtml, fichaHtml, precioFichaHtml, type Relacionados } from "@/lib/shopify/htmlCatalogo";
+import { coleccionesCandidatas, sugerenciasDeCompra } from "@/lib/shopify/sugerencias";
 import { contenidoDeFicha, jsonLdProducto } from "@/lib/shopify/pdpSlots";
 import { absUrl } from "@/lib/site";
 import { obtenerTipoCambio } from "@/lib/tipoCambio";
@@ -107,14 +108,25 @@ function jsonLdVivo(p: ProductoVivo, precio: PrecioPublico, url: string): Record
   };
 }
 
-/** Tres piezas de la misma colección (equipos antes que accesorios, con foto). */
-async function relacionadosDe(p: ProductoVivo): Promise<ProductoVivo[]> {
+/**
+ * Productos relacionados de la ficha (regla de Carla, 2026-10-08): primero las
+ * sugerencias de compra del catálogo (accesorios, kits, campanas…, ver
+ * lib/shopify/sugerencias.ts); si no hay ninguna, tres similares del mismo tipo.
+ */
+async function relacionadosDe(p: ProductoVivo): Promise<Relacionados> {
   const tw = tipoWeb(p.tipo);
-  if (!tw) return [];
-  const todos = await productosDeColeccion(tw.coleccion);
-  return todos
-    .filter((r) => r.sku !== p.sku && r.imagenes.length)
-    .slice(0, 3);
+  if (!tw) return { modo: "similares", productos: [] };
+  const handles = coleccionesCandidatas(tw.sub1.ruta, p.tipo);
+  const [mismoTipo, ...otras] = await Promise.all([
+    productosDeColeccion(tw.coleccion),
+    ...handles.map((h) => productosDeColeccion(h)),
+  ]);
+  const sugeridos = sugerenciasDeCompra(p, otras.flat());
+  if (sugeridos.length) return { modo: "sugerencias", productos: sugeridos };
+  return {
+    modo: "similares",
+    productos: mismoTipo.filter((r) => r.sku !== p.sku && r.imagenes.length).slice(0, 3),
+  };
 }
 
 export default async function ProductoFichaPage(props: { params: Promise<Params> }) {

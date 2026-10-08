@@ -15,6 +15,6 @@ logo reemplaza al texto automáticamente (no hay que tocar el HTML).
 
 ## Archivos esperados
 sub-zero.png · wolf.png · cove.png · miele.png · thermador.png · monogram.png ·
-viking.png · gaggenau.png · la-cornue.png · smeg.png · bertazzoni.png ·
+viking.png · gaggenau.png · smeg.png · bertazzoni.png ·
 kitchenaid.png · bosch.png · elica.png · pitt-cooking.png · hoshizaki.png ·
 alfresco.png · lynx.png · kamado-joe.png

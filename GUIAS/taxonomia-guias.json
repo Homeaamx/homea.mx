@@ -1097,10 +1097,6 @@
                   "filtro": "/productos/estufas/?marca=wolf&tipo=rango"
                 },
                 {
-                  "titulo": "La Cornue",
-                  "filtro": "/productos/estufas/?marca=la-cornue"
-                },
-                {
                   "titulo": "Viking",
                   "filtro": "/productos/estufas/?marca=viking&tipo=rango"
                 }

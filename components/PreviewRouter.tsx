@@ -13,7 +13,7 @@
 //      reemplaza y sus listeners/animaciones deben volver a ligarse.
 
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 
 declare global {
   interface Window {
@@ -35,10 +35,79 @@ function internalHref(a: HTMLAnchorElement): string | null {
   return href;
 }
 
+// Posición de scroll por página (pathname + query). Al volver con "atrás" o al
+// recargar, la página aparece donde la dejó el usuario, al instante y sin
+// animación (Carla, 2026-10-08: nada de bajar despacio hasta el producto).
+const CLAVE_SCROLL = "homea:scroll:";
+function claveScroll(): string {
+  return CLAVE_SCROLL + window.location.pathname + window.location.search;
+}
+function guardarScroll() {
+  try { sessionStorage.setItem(claveScroll(), String(Math.round(window.scrollY))); } catch {}
+}
+function restaurarScroll(): boolean {
+  let y: number | null = null;
+  try {
+    const v = sessionStorage.getItem(claveScroll());
+    y = v === null ? null : Number(v);
+  } catch {}
+  if (y === null || !Number.isFinite(y)) return false;
+  const ir = () => window.scrollTo({ top: y!, behavior: "instant" });
+  ir();
+  // Segundo intento por si algo terminó de crecer tras el primer pintado.
+  window.setTimeout(ir, 80);
+  return true;
+}
+
 export default function PreviewRouter() {
   const router = useRouter();
   const pathname = usePathname();
   const mounted = useRef(false);
+  const porHistorial = useRef(false);
+
+  // Restauración propia: el navegador restauraba antes de que Next pintara la
+  // página de regreso (y con scroll-behavior: smooth, animado).
+  useEffect(() => {
+    window.history.scrollRestoration = "manual";
+    const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
+    if (nav && (nav.type === "reload" || nav.type === "back_forward")) restaurarScroll();
+    let t = 0;
+    const onPop = () => {
+      porHistorial.current = true;
+      window.clearTimeout(t);
+      t = window.setTimeout(() => { porHistorial.current = false; }, 1500);
+    };
+    // También se guarda al desplazarse: cubre navegaciones que no pasan por el
+    // clic de aquí (buscador, carrito, <Link> de React). La llave se toma en el
+    // momento del scroll, no al escribir, para no mezclar páginas.
+    let pendiente: [string, number] | null = null;
+    let tg = 0;
+    const onScroll = () => {
+      pendiente = [claveScroll(), Math.round(window.scrollY)];
+      if (tg) return;
+      tg = window.setTimeout(() => {
+        tg = 0;
+        if (!pendiente) return;
+        try { sessionStorage.setItem(pendiente[0], String(pendiente[1])); } catch {}
+      }, 120);
+    };
+    window.addEventListener("popstate", onPop);
+    window.addEventListener("pagehide", guardarScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("popstate", onPop);
+      window.removeEventListener("pagehide", guardarScroll);
+      window.removeEventListener("scroll", onScroll);
+      window.clearTimeout(t);
+      window.clearTimeout(tg);
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!porHistorial.current) return;
+    porHistorial.current = false;
+    restaurarScroll();
+  }, [pathname]);
 
   // Interceptar clics y prefetch en hover sobre enlaces internos.
   useEffect(() => {
@@ -56,6 +125,7 @@ export default function PreviewRouter() {
       // Cierre garantizado del mega-menú al navegar: no depende de los listeners
       // de v2.js (pueden morir si React reemplaza el nav inyectado).
       document.querySelectorAll(".has-mega.is-open").forEach((w) => w.classList.remove("is-open"));
+      guardarScroll();
       router.push(href);
     };
 

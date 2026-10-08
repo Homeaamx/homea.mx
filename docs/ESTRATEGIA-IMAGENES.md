@@ -59,6 +59,27 @@ Los nombres se **generan automáticamente** desde los datos ya homologados (marc
 
 ---
 
+## 3 bis. Mínimo 2 fotos del aparato por producto ⭐ (regla de Carla, 2026-10-08)
+
+La tarjeta de producto muestra la **1.ª foto**; la galería de la ficha muestra las demás (el cambio a la 2.ª foto al pasar el cursor se probó y se quitó el 2026-10-08). **Toda pieza publicada necesita al menos 2 fotos del aparato**: planos de medidas y fichas técnicas **no cuentan** y van **después** de las fotos (solo los usa la ficha).
+
+| Tipo | 1.ª foto | 2.ª foto |
+|---|---|---|
+| Refrigeradores, congeladores, cavas, columnas | puerta abierta (con producto dentro) | puerta cerrada / panelado |
+| Hornos, cajones calientes, lavavajillas | cerrado | abierto |
+| Parrillas, estufas, rangetops | vista completa | acercamiento a quemadores / perillas |
+| Campanas | vista completa | instalada (ambiente) o detalle de filtros/luz |
+| Tarjas, grifería | vista completa | detalle de acabado o instalada |
+| Accesorios (manijas, kits, rejillas) | la pieza sola | la pieza instalada o detalle |
+
+**Orden en Shopify:** foto 1 → foto 2 → (más fotos) → planos/fichas. El sitio distingue los planos por el `alt` ("Plano de medidas: …") o por el nombre de archivo (`-plano-medidas-`, `-ficha-tecnica-`, `-line-drawing-`, `-diagrama-`); respetar esa nomenclatura al subir.
+
+**Hover de la tarjeta:** toda la tarjeta (foto + texto) toma el marco claro del diseño original (greige con filete fino); el filete nunca toca al aparato. Al subir fotos nuevas, preferir PNG/WebP **con transparencia**.
+
+**Auditoría:** `node --env-file=.env.local scripts/auditar-fotos-tarjetas.mjs [--csv salida.csv]` resume por tipo cuántas piezas tienen 0, 1 o ≥2 fotos y si algún plano quedó antes de una foto. Correrla tras cada carga de catálogo.
+
+Estado 2026-10-08 (110 piezas Gaggenau publicadas): **6 con ≥2 fotos**, 96 con 1, 8 sin foto. La página de Gaggenau US (`/us/en/mkt-product/<SKU>`) solo publica **una** foto de producto por modelo (el resto son planos): la 2.ª foto hay que conseguirla de otra fuente (portal de medios de BSH/Gaggenau, el representante o foto propia del showroom).
+
 ## 4. Mapeo a fases
 
 - **Fase 3 (front-end):** `next/image` + loader Shopify; hero con `priority`; lazy en el resto; JSON-LD con `image`.

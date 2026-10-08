@@ -85,6 +85,14 @@
       var lo = parseFloat(lim[0]) || 0, hi = parseFloat(lim[1]) || 0;
       return p >= lo && (!hi || p <= hi);
     }
+    if (clave === "precio-rango") {
+      /* Rangos proporcionales del grupo Precio ("lo-hi", hi 0 = sin tope). */
+      var pr = parseFloat(card.getAttribute("data-precio")) || 0;
+      return valores.some(function (v) {
+        var r = v.split("-"), a = parseFloat(r[0]) || 0, b = parseFloat(r[1]) || 0;
+        return pr >= a && (!b || pr < b);
+      });
+    }
     var propios = clave === "tipo-web"
       ? [card.getAttribute("data-tipo") || ""]
       : (card.getAttribute("data-fv-" + clave) || "").split(" ");
@@ -122,7 +130,9 @@
   }
 
   function nombreGrupo(plp, clave) {
-    var g = plp.querySelector('.filters [data-fgroup="' + clave + '"] h6');
+    var cb = plp.querySelector('.filters input[data-fk="' + clave + '"]');
+    var grupo = cb && cb.closest("[data-fgroup]");
+    var g = grupo ? grupo.querySelector("h6") : plp.querySelector('.filters [data-fgroup="' + clave + '"] h6');
     return g ? g.firstChild.textContent.trim() : "";
   }
 
@@ -140,7 +150,12 @@
       var span = cb.closest("label") && cb.closest("label").querySelector(".count");
       if (span && span.textContent !== String(n)) span.textContent = String(n);
       var l = cb.closest("label");
-      if (l) l.classList.toggle("is-cero", n === 0 && !cb.checked);
+      if (l) {
+        l.classList.toggle("is-cero", n === 0 && !cb.checked);
+        /* Grupos con data-ocultar-cero (Marca): solo se listan las que aplican. */
+        var g = l.closest("[data-ocultar-cero]");
+        if (g) l.classList.toggle("is-oculta", n === 0 && !cb.checked);
+      }
     });
   }
 
@@ -148,7 +163,7 @@
   function badges(plp) {
     plp.querySelectorAll(".filters [data-fgroup]").forEach(function (g) {
       var n = g.querySelectorAll("input[data-fk]:checked").length;
-      if (g.getAttribute("data-fgroup") === "precio") n = rangoPrecio(g.closest(".plp")) ? 1 : 0;
+      if (g.getAttribute("data-fgroup") === "precio") n += rangoPrecio(g.closest(".plp")) ? 1 : 0;
       var b = g.querySelector("[data-fsel]");
       if (!b) return;
       if (b.textContent !== String(n)) b.textContent = String(n);
@@ -268,7 +283,8 @@
     var toolbar = plp.querySelector(".toolbar");
     if (!toolbar) return;
     var top = toolbar.getBoundingClientRect().top;
-    var nav = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h"), 10) || 80;
+    var banda = document.querySelector(".site-nav .nav-main");
+    var nav = banda ? Math.round(banda.getBoundingClientRect().height) : 80;
     if (top >= nav && top < window.innerHeight * 0.6) return;
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (window.__homeaScrollA && !reduce) window.__homeaScrollA(toolbar, 24);
@@ -290,12 +306,18 @@
     var grid = plp.querySelector(".plp-grid");
     var cards = tarjetas(grid);
     if (!cards.length) return;
-    var modo = select.value || select.options[select.selectedIndex].text;
+    /* Opciones (Carla, 2026-10-08): precio mayor→menor (orden inicial del
+       servidor), precio menor→mayor, en stock primero, bajo pedido primero.
+       Dentro de cada grupo de inventario se conserva el orden por precio. */
+    var modo = select.value;
     var precio = function (c) { return parseFloat(c.getAttribute("data-precio")) || 0; };
     var orden = function (c) { return parseInt(c.getAttribute("data-orden"), 10) || 0; };
+    var stock = function (c) { return c.getAttribute("data-stock") === "1" ? 1 : 0; };
     cards.sort(function (a, b) {
-      if (/↑/.test(modo)) return precio(a) - precio(b);
-      if (/↓/.test(modo)) return precio(b) - precio(a);
+      if (modo === "precio-asc") return precio(a) - precio(b) || orden(a) - orden(b);
+      if (modo === "precio-desc") return precio(b) - precio(a) || orden(a) - orden(b);
+      if (modo === "stock-primero") return stock(b) - stock(a) || orden(a) - orden(b);
+      if (modo === "pedido-primero") return stock(a) - stock(b) || orden(a) - orden(b);
       return orden(a) - orden(b);
     });
     var quote = grid.querySelector("[data-cat-quote]");
@@ -307,8 +329,22 @@
     }
   }
 
+  /* Buscador dentro de un grupo ("Busca por marca"): oculta las casillas cuyo
+     nombre no contiene lo escrito (sin acentos ni mayúsculas). */
+  function sinAcentos(t) { return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
+  function buscarEnGrupo(input) {
+    var q = sinAcentos(input.value.trim());
+    var grupo = input.closest("[data-fgroup]");
+    if (!grupo) return;
+    grupo.querySelectorAll(".fopts label:not(.fbuscar)").forEach(function (l) {
+      var t = l.querySelector(".flbl");
+      l.classList.toggle("no-coincide", !!q && sinAcentos(t ? t.textContent : "").indexOf(q) === -1);
+    });
+  }
+
   /* ---------- Eventos ---------- */
   document.addEventListener("input", function (e) {
+    if (e.target && e.target.matches && e.target.matches("[data-fbuscar]")) { buscarEnGrupo(e.target); return; }
     var t = e.target;
     if (!t || !t.matches) return;
     if (t.matches("[data-cat-precio] input[data-fr]")) desdeSlider(t);

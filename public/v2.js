@@ -45,9 +45,39 @@
     /* ---------- Nav: claro → oscuro al hacer scroll ---------- */
     var nav = navEl;
     if (nav) {
-      var onScroll = function () { nav.classList.toggle("scrolled", window.scrollY > 24); };
+      /* .is-compact: la fila del logo ya salió de pantalla (el nav es sticky con
+         top negativo) → el nav vuelve a su acomodo original con el logo a la
+         izquierda (theme.css, "Header 2026-10-08 (2)"). */
+      var filaLogo = nav.querySelector(".nav-brandrow");
+      var onScroll = function () {
+        nav.classList.toggle("scrolled", window.scrollY > 24);
+        var compacto = !filaLogo || !filaLogo.offsetHeight || filaLogo.getBoundingClientRect().bottom <= 1;
+        nav.classList.toggle("is-compact", compacto);
+      };
       onScroll();
       on(window, "scroll", onScroll, { passive: true });
+    }
+
+    /* ---------- Barra superior: desplegable "Contáctanos" ----------
+       En escritorio abre con el cursor (CSS :hover). Aquí el clic/tap lo fija
+       abierto (.is-open) para pantallas táctiles; se cierra fuera o con Esc. */
+    var contacto = document.querySelector(".ubar .u-contact");
+    var contactoBtn = contacto && contacto.querySelector(".u-contact-btn");
+    if (contacto && contactoBtn) {
+      var fijar = function (abierto) {
+        contacto.classList.toggle("is-open", abierto);
+        contactoBtn.setAttribute("aria-expanded", abierto ? "true" : "false");
+      };
+      on(contactoBtn, "click", function (ev) {
+        ev.preventDefault();
+        fijar(!contacto.classList.contains("is-open"));
+      });
+      on(document, "click", function (ev) {
+        if (!contacto.contains(ev.target)) { fijar(false); }
+      });
+      on(document, "keydown", function (ev) {
+        if (ev.key === "Escape" && contacto.classList.contains("is-open")) { fijar(false); contactoBtn.focus(); }
+      });
     }
 
     /* ---------- Tipo de cambio del día (slot de temporada del ubar) ----------

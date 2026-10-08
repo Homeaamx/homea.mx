@@ -40,13 +40,6 @@
   640,
   853
  ],
- "/assets/projects/hero-qro.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1536
- ],
  "/assets/projects/hero-serra.webp": [
   400,
   640,
@@ -59,10 +52,6 @@
   640,
   960,
   999
- ],
- "/assets/projects/cut-cornufe90.webp": [
-  400,
-  536
  ],
  "/assets/projects/cut-wolf-og36.webp": [
   400,
@@ -167,12 +156,6 @@
   640,
   960,
   1100
- ],
- "/assets/projects/g/queretaro-1.webp": [
-  400,
-  640,
-  960,
-  1200
  ],
  "/assets/projects/g/campestre-1-1.webp": [
   400,
@@ -1867,11 +1850,6 @@
   1600,
   2000
  ],
- "/assets/photos/brands/la-cornue-cocina.webp": [
-  400,
-  640,
-  700
- ],
  "/assets/photos/brands/lynx-asadores.webp": [
   400,
   640,
@@ -1883,14 +1861,6 @@
   700
  ],
  "/assets/photos/brands/hero/kraus-tarjas-y-griferia.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1600,
-  2000
- ],
- "/assets/photos/brands/hero/la-cornue-cocina.webp": [
   400,
   640,
   960,
@@ -2230,19 +2200,6 @@
   700
  ],
  "/assets/photos/brands/hero/treesse-wellness.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1600,
-  2000
- ],
- "/assets/photos/brands/u-line-refrigeracion.webp": [
-  400,
-  640,
-  700
- ],
- "/assets/photos/brands/hero/u-line-refrigeracion.webp": [
   400,
   640,
   960,

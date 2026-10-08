@@ -56,6 +56,21 @@
     };
   }
 
+  /* ---------- ¿Se llegó por "atrás/adelante" o recarga? ----------
+     Regla de Carla (2026-10-08): al regresar de una ficha la página NO se
+     desplaza hacia el catálogo ni al producto; se queda donde estaba el usuario
+     (el navegador / Next restauran la posición). Lo consultan este archivo y
+     components/ScrollAFiltros.tsx vía window.__homeaPorHistorial(). */
+  var historialHasta = 0;
+  (function () {
+    var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+    if (nav && (nav.type === "back_forward" || nav.type === "reload")) { historialHasta = Date.now() + 2500; }
+  })();
+  window.addEventListener("popstate", function () { historialHasta = Date.now() + 2500; });
+  window.addEventListener("pageshow", function (e) { if (e.persisted) { historialHasta = Date.now() + 2500; } });
+  function porHistorial() { return Date.now() < historialHasta; }
+  window.__homeaPorHistorial = porHistorial;
+
   var vAnim = makeAnim(); // scroll de página
   var hAnim = makeAnim(); // scroll del riel
 
@@ -78,7 +93,9 @@
 
   /* El nav es sticky: sin descontarlo, la sección queda debajo de la barra. */
   function navH() {
-    var n = document.querySelector(".site-nav");
+    /* Alto que queda visible con la barra fija: solo la banda del nav (la fila
+       del logo se va con la página al bajar). */
+    var n = document.querySelector(".site-nav .nav-main") || document.querySelector(".site-nav");
     return n ? Math.round(n.getBoundingClientRect().height) : 0;
   }
 
@@ -254,14 +271,14 @@
   /* ---------- Cambios de URL y de DOM ---------- */
   window.addEventListener("homea:url", function () {
     if (tipoUrl() === ultimoTipo && strip() === ultimoStrip) return;
-    agendar("deep");
+    agendar(porHistorial() ? "quieto" : "deep");
   });
   window.addEventListener("popstate", function () { agendar("quieto"); });
 
   /* Navegación SPA: React reemplaza los hijos de <main> y con ellos el riel. */
   var mo = new MutationObserver(function () {
     if (strip() === ultimoStrip) return; // el riel no cambió: nada que resincronizar
-    agendar(tipoUrl() ? "deep" : "quieto");
+    agendar(tipoUrl() && !porHistorial() ? "deep" : "quieto");
   });
 
   /* Compartido con ScrollAFiltros (mosaico de subcat.3): las dos superficies
@@ -272,7 +289,7 @@
 
   function init() {
     mo.observe(document.querySelector("main") || document.body, { childList: true });
-    sincronizar(tipoUrl() ? "deep" : "quieto");
+    sincronizar(tipoUrl() && !porHistorial() ? "deep" : "quieto");
   }
 
   if (document.readyState === "loading") {

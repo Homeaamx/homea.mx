@@ -4,9 +4,9 @@
 > vigente del sitio (regla Carla 2026-07-05). Cuatro niveles: **Premium · Media · Residencial · Económica**.
 > Esta faceta alimenta el filtro global "Gama" en Shopify (metafield).
 
-## Premium (30)
-La Cornue · Gaggenau · Thermador · Monogram · Miele · Viking · Wolf · Sub-Zero · Cove ·
-Pitt Cooking · Benessi · U-Line · ASKO · Scotsman · Summit · Sapphire · The Galley ·
+## Premium (28)
+Gaggenau · Thermador · Monogram · Miele · Viking · Wolf · Sub-Zero · Cove ·
+Pitt Cooking · Benessi · ASKO · Scotsman · Summit · Sapphire · The Galley ·
 Brizo · Blanco · Franke · Gessi · Lynx · Sedona by Lynx · Alfresco · Artisan · Alfa Forni ·
 Masterbuilt · Mont Alpi · AXOR · Mr. Steam
 

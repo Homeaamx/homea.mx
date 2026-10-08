@@ -1003,22 +1003,6 @@
       ]
     },
     {
-      "slug": "la-cornue",
-      "nombre": "La Cornue",
-      "gama": [
-        "premium"
-      ],
-      "categorias": [
-        "cocina"
-      ],
-      "canal": "pdf",
-      "logo": "/assets/logos/la-cornue.webp",
-      "foto": "/assets/photos/brands/la-cornue-cocina.webp",
-      "fotoHero": "/assets/photos/brands/hero/la-cornue-cocina.webp",
-      "logoHero": "/assets/logos/la-cornue.webp",
-      "listas": []
-    },
-    {
       "slug": "lynx",
       "nombre": "Lynx",
       "gama": [
@@ -1554,24 +1538,6 @@
       "fotoHero": "/assets/photos/brands/hero/treesse-wellness.webp",
       "logoHero": "/assets/logos/treesse.webp",
       "listas": []
-    },
-    {
-      "slug": "u-line",
-      "nombre": "U-Line",
-      "gama": [
-        "premium"
-      ],
-      "categorias": [
-        "cocina"
-      ],
-      "canal": "shopify",
-      "logo": "/assets/logos/u-line.webp",
-      "foto": "/assets/photos/brands/u-line-refrigeracion.webp",
-      "fotoHero": "/assets/photos/brands/hero/u-line-refrigeracion.webp",
-      "logoHero": "/assets/logos/u-line.webp",
-      "listas": [
-        "u-line"
-      ]
     },
     {
       "slug": "valsir",

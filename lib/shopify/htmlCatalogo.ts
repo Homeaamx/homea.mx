@@ -147,11 +147,25 @@ export function precioFichaHtml(precio: PrecioPublico, tc: TipoCambio): string {
 
 /* ---------- Tarjeta ------------------------------------------------------- */
 
+/**
+ * ¿La imagen es un plano o ficha técnica y no una foto del aparato? Las de
+ * Gaggenau se suben con "Plano de medidas: …" en el alt y "-plano-medidas-" en
+ * el nombre de archivo (Line_Drawings de BSH). La tarjeta nunca muestra planos.
+ */
+/** Lo que va en "Productos relacionados" de la ficha. */
+export type Relacionados = { modo: "sugerencias" | "similares"; productos: ProductoVivo[] };
+
+export function esImagenTecnica(im: { url: string; alt: string }): boolean {
+  const archivo = im.url.split("?")[0].split("/").pop() ?? "";
+  return /^plano|^ficha|^diagrama/i.test(im.alt) || /(^|-)(plano|ficha-tecnica|line-drawing|diagrama)(-|\.)/i.test(archivo);
+}
+
 export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string {
   const precio = precioPublico(p, tc);
   const decision = decisionDeCompra(p, precio);
   const href = `/producto/${p.slug}`;
-  const img = p.imagenes[0];
+  // Foto del aparato primero; los planos solo si no hay ninguna foto.
+  const img = p.imagenes.find((im) => !esImagenTecnica(im)) ?? p.imagenes[0];
   const spec = lineaSpec(p);
   const tw = tipoWeb(p.tipo);
 
@@ -160,6 +174,8 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
     `data-cat-card`,
     `data-orden="${orden}"`,
     `data-precio="${precio.mxnEquivalente ?? precio.venta}"`,
+    // Para ordenar por inventario (public/catalogo.js): 1 = en stock, 0 = bajo pedido.
+    `data-stock="${p.enStock ? 1 : 0}"`,
     `data-tipo="${esc(tw?.slugRiel ?? slugValor(p.tipo))}"`,
     `data-fv-marca="${slugValor(p.marca)}"`,
   ];
@@ -179,10 +195,12 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
 
   // Solo lo que decide una compra, en este orden (Carla, 2026-10-06): marca y
   // línea · disponibilidad · nombre · modelo · precio tachado y precio final.
+  // La foto ocupa todo el recuadro (2026-10-08): disponibilidad y corazón van
+  // en el renglón superior del cuerpo, nunca encima del aparato.
   return `<a class="pcard" href="${href}" ${atributos.join(" ")} data-accion="${decision.accion}">
-  <button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(spec.join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${img ? esc(cdn(img.url, 400)) : ""}" data-wl-href="${href}" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button>
-  <div class="imgw cutout">${stock}${imagen}</div>
+  <div class="imgw cutout">${imagen}</div>
   <div class="body">
+    <div class="pcard-top">${stock}<button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(spec.join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${img ? esc(cdn(img.url, 400)) : ""}" data-wl-href="${href}" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button></div>
     <div class="pcard-head"><span class="brand">${esc(p.marca)}</span>${serie ? `<span class="pcard-serie">${esc(serie)}</span>` : ""}</div>
     <h3 class="pcard-name">${esc(nombre)}</h3>
     <span class="pcard-sku figures">${esc(p.sku)}</span>
@@ -230,6 +248,40 @@ function precioRefMxn(p: ProductoVivo): number {
 
 /* ---------- Panel de filtros --------------------------------------------- */
 
+const fmtPesos = (n: number) => `$${n.toLocaleString("es-MX")}`;
+
+/** Cifra "redonda" para el corte de un rango (48,300 → 50,000; 437,000 → 450,000). */
+function redondo(v: number): number {
+  if (v <= 0) return 0;
+  const paso = 10 ** Math.floor(Math.log10(v)) / 2;
+  return Math.round(v / paso) * paso;
+}
+
+/**
+ * Rangos de precio PROPORCIONALES (Carla, 2026-10-08): los cortes salen de los
+ * cuantiles de los precios de la página, así cada rango junta más o menos el
+ * mismo número de piezas, y se redondean a cifras legibles. Hasta 5 rangos; el
+ * último llega hasta el producto más caro (redondeado hacia arriba al millar,
+ * el mismo tope del slider). Se calculan aquí con los precios de Shopify
+ * (en pesos con IVA, los de dólares a su equivalente del día): no hace falta
+ * ningún dato extra en Shopify.
+ */
+export function rangosPrecio(precios: number[], maxRangos = 5): { lo: number; hi: number }[] {
+  const v = precios.filter((n) => n > 0).sort((a, b) => a - b);
+  if (v.length < 2) return [];
+  const k = Math.min(maxRangos, v.length);
+  const cortes: number[] = [];
+  for (let i = 1; i < k; i++) {
+    const c = redondo(v[Math.floor((i * v.length) / k)]);
+    if (c > (cortes[cortes.length - 1] ?? 0) && c < v[v.length - 1]) cortes.push(c);
+  }
+  if (!cortes.length) return [];
+  // Tope = precio más caro redondeado hacia arriba al millar (+1 000 si cae
+  // justo en millar, para que esa pieza quede dentro: los rangos son [lo, hi)).
+  const tope = Math.floor(v[v.length - 1] / 1000) * 1000 + 1000;
+  return [0, ...cortes].map((lo, i) => ({ lo, hi: cortes[i] ?? tope }));
+}
+
 interface OpcionesPanel {
   /** Tipo de cambio del día, para el tope del grupo Precio. */
   tc?: TipoCambio;
@@ -250,8 +302,8 @@ const GRUPOS_ABIERTOS = 0;
  * instante cuando el riel / mosaico marcan un tipo). `data-fsel` muestra cuántas
  * casillas del grupo están activas aunque el grupo esté plegado.
  */
-function grupoHtml(nombre: string, clave: string, etiquetas: string, abierto: boolean): string {
-  return `<details class="fgroup fgroup--acc" data-fgroup="${esc(clave)}"${abierto ? " open" : ""}>
+function grupoHtml(nombre: string, clave: string, etiquetas: string, abierto: boolean, ocultarCero = false): string {
+  return `<details class="fgroup fgroup--acc" data-fgroup="${esc(clave)}"${abierto ? " open" : ""}${ocultarCero ? " data-ocultar-cero" : ""}>
   <summary class="fgroup-sum"><h6>${esc(nombre)} <span class="fsel figures" data-fsel hidden>0</span></h6><span class="fgroup-caret" aria-hidden="true"></span></summary>
   <div class="fopts">${etiquetas}</div>
 </details>`;
@@ -305,11 +357,19 @@ export function panelFiltrosHtml(
     if (d.clave === "precio") {
       const precios = productos.map((p) => precioRefMxn(p)).filter((n) => n > 0);
       const max = Math.ceil(Math.max(0, ...precios) / 1000) * 1000;
+      // Rangos proporcionales como casillas (suman entre sí) + el slider de siempre.
+      const rangosHtml = rangosPrecio(precios)
+        .map(({ lo, hi }) => {
+          const n = precios.filter((x) => x >= lo && x < hi).length;
+          const txt = lo === 0 ? `Hasta ${fmtPesos(hi)}` : `${fmtPesos(lo)} – ${fmtPesos(hi)}`;
+          return `<label><input type="checkbox" data-fk="precio-rango" value="${lo}-${hi}"> <span class="flbl figures">${txt}</span> <span class="count figures">${n}</span></label>`;
+        })
+        .join("");
       grupos.push(
         grupoHtml(
           d.nombre,
           "precio",
-          `<div class="fprecio" data-cat-precio data-max="${max}">
+          `${rangosHtml}<div class="fprecio" data-cat-precio data-max="${max}">
       <div class="fprecio-slider">
         <span class="fprecio-track"></span><span class="fprecio-fill" data-fp-fill></span>
         <input type="range" min="0" max="${max}" step="1000" value="0" data-fr="min" aria-label="Precio mínimo">
@@ -321,7 +381,7 @@ export function panelFiltrosHtml(
         <label class="fprecio-campo"><span class="flbl">Hasta</span><input type="number" inputmode="numeric" min="0" max="${max}" step="1000" placeholder="${max.toLocaleString("es-MX")}" data-fp="max" aria-label="Precio máximo en pesos"></label>
       </div>
     </div>
-    <p class="fnote fnote--tight">MXN con IVA · las piezas en dólares entran por su equivalente al tipo de cambio del día.</p>`,
+    <p class="fnote fnote--tight">Precios en MXN con IVA, los productos en dólares se calculan con su tipo de cambio al día.</p>`,
           false,
         ),
       );
@@ -345,7 +405,13 @@ export function panelFiltrosHtml(
           `<label${valoresComoTipo ? ` data-tipo="${esc(slugValor(v))}"` : ""}><input type="checkbox" data-fk="${esc(d.clave)}" value="${esc(slugValor(v))}"> <span class="flbl">${esc(v)}</span> <span class="count figures">${n}</span></label>`,
       )
       .join("");
-    grupos.push(grupoHtml(d.nombre, d.clave, etiquetas, grupos.length - 1 < GRUPOS_ABIERTOS));
+    // Marca (Carla, 2026-10-08): caja "Busca por marca" y solo las marcas que
+    // aplican con los demás filtros (catalogo.js oculta las que darían 0).
+    const buscador =
+      d.clave === "marca"
+        ? `<label class="fbuscar"><span class="sr-only">Busca por marca</span><input type="search" placeholder="Busca por marca" autocomplete="off" data-fbuscar></label>`
+        : "";
+    grupos.push(grupoHtml(d.nombre, d.clave, buscador + etiquetas, grupos.length - 1 < GRUPOS_ABIERTOS, d.clave === "marca"));
   }
 
   grupos.push(
@@ -525,7 +591,7 @@ function pestanasHtml(p: ProductoVivo, spec: string): string {
 export function fichaHtml(
   p: ProductoVivo,
   tc: TipoCambio,
-  relacionados: ProductoVivo[],
+  relacionados: Relacionados,
 ): string {
   const precio = precioPublico(p, tc);
   const decision = decisionDeCompra(p, precio);
@@ -591,18 +657,20 @@ export function fichaHtml(
     )
     .join("\n        ");
 
-  const relacionadosHtml = relacionados.length
+  // Sugerencias de compra del catálogo; si no hay, similares del mismo tipo.
+  const sugerencias = relacionados.modo === "sugerencias";
+  const relacionadosHtml = relacionados.productos.length
     ? `<section class="sec"><div class="container">
   <div class="sec-head-row">
     <div class="sec-head">
       <div class="eyebrow">Productos relacionados</div>
       <span class="rule-gold"></span>
-      <h2>Más <b>${esc(p.tipo.toLowerCase())}</b> de ${esc(p.marca)}.</h2>
+      <h2>${sugerencias ? "Sugerencias de <b>compra</b>." : `Más <b>${esc(p.tipo.toLowerCase())}</b>.`}</h2>
     </div>
-    ${tw ? `<a class="arrow-link" href="${tw.ruta}">Ver ${esc(p.tipo)} <span class="ln"></span><span class="ar">→</span></a>` : ""}
+    ${!sugerencias && tw ? `<a class="arrow-link" href="${tw.ruta}">Ver ${esc(p.tipo)} <span class="ln"></span><span class="ar">→</span></a>` : ""}
   </div>
   <div class="grid-3" style="margin-top:64px">
-${relacionados.map((r, i) => tarjetaHtml(r, tc, i)).join("\n")}
+${relacionados.productos.map((r, i) => tarjetaHtml(r, tc, i)).join("\n")}
   </div>
 </div></section>`
     : "";

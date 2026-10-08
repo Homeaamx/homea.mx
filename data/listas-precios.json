@@ -162,9 +162,6 @@
     { "marca": "Trade-Wind", "documentos": [
       { "slug": "tradewind", "titulo": "Campanas · lista de precios", "vigencia": "abr 2024", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-campanas-trade-wind-2024.pdf?v=1790123911", "legacy": [], "estado": "listo" }
     ] },
-    { "marca": "U-Line", "documentos": [
-      { "slug": "u-line", "titulo": "Lista de precios", "vigencia": "jun 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-u-line-jun-2026.pdf?v=1790123911", "legacy": [], "estado": "listo" }
-    ] },
     { "marca": "Invisacook", "documentos": [
       { "slug": "invisacook", "titulo": "Lista de precios", "vigencia": "mar 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-invisacook-mar-2026.pdf?v=1790123610", "legacy": [], "estado": "listo" }
     ] },

@@ -35,7 +35,7 @@ en lugar de precio. El filtro Disponibilidad los agrupa en "Bajo cotización" �
 
 ### Cocina y Bar
 - **Refrigeración**: Instalación (Empotrado / Bajo cubierta / De piso / Columna), Panelable (132 SKUs),
-  Bisagra (Izq / Der / Reversible — clave en Sub-Zero y U-Line), Zonas de temperatura (1/2/3),
+  Bisagra (Izq / Der / Reversible — clave en Sub-Zero), Zonas de temperatura (1/2/3),
   Capacidad (botellas para cavas / pies³), Ancho.
 - **Cocción**: Combustible (Gas 1,481 · Eléctrico 743 · Dual 507 · Inducción 213 · LP como variante),
   Nº de quemadores, Tipo de campana (Pared 601 · Isla 172 · Liner/Inserto · Bajo gabinete),
@@ -125,7 +125,7 @@ todas en PNG sin fondo, producto icónico de marca premium (se extraen de los ca
 ## 5. De dónde sale cada dato (pipeline)
 
 - **Classification/Function/Series/Finish** → xlsx Artexa (19 marcas, ya extraído en 02-CRUCE).
-- **Secciones Viking (29)** y **categorías U-Line/Sub-Zero/Wolf** → PDFs Middleby/Lavish (03 y 04-CRUCE).
+- **Secciones Viking (29)** y **categorías Sub-Zero/Wolf** → PDFs Middleby/Lavish (03 y 04-CRUCE).
 - **Ancho, color, combustible, instalación** → regex sobre descripción SAE + descripción proveedor (ya validado arriba).
 - **Gama** → asignación por marca/serie (definir tabla marca→gama con Carla).
 - Lo que no se pueda derivar queda como columna vacía en el maestro para captura manual asistida.

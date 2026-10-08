@@ -15,6 +15,8 @@ declare global {
   interface Window {
     /** Scroll lento compartido (public/tipos.js): mismo recorrido que el riel de subcat.1. */
     __homeaScrollA?: (el: Element, aire?: number) => void;
+    /** true si se llegó con atrás/adelante o recarga (public/tipos.js). */
+    __homeaPorHistorial?: () => boolean;
   }
 }
 
@@ -26,6 +28,9 @@ export default function ScrollAFiltros({ destino }: { destino: string }) {
     // Cada clic en el mosaico navega a ?f=… y REMONTA este componente, así que
     // no sirve una guarda de "primer montaje": se desplaza siempre que llegue
     // con filtro, venga de un clic o de un enlace compartido.
+    // Al volver con "atrás" (p. ej. desde una ficha) o al recargar, la página se
+    // queda donde estaba el usuario: no se baja al catálogo (Carla, 2026-10-08).
+    if (window.__homeaPorHistorial?.()) return;
     const el = document.getElementById(destino);
     if (!el) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

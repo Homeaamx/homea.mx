@@ -1024,7 +1024,6 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .mq-chip[data-brand="monogram"]   { --lazy-bg: url('assets/photos/brands/monogram-cocina.webp'); background-position: center 85%; }
 .mq-chip[data-brand="viking"]     { --lazy-bg: url('assets/photos/brands/viking-cocina.webp'); }
 .mq-chip[data-brand="gaggenau"]   { --lazy-bg: url('assets/photos/brands/gaggenau-cocina.webp'); }
-.mq-chip[data-brand="la-cornue"]  { --lazy-bg: url('assets/photos/brands/la-cornue-cocina.webp'); background-position: center 100%; }
 .mq-chip[data-brand="smeg"]       { --lazy-bg: url('assets/photos/brands/smeg-electrodomesticos.webp'); }
 .mq-chip[data-brand="bertazzoni"] { --lazy-bg: url('assets/photos/brands/bertazzoni-cocina.webp'); }
 .mq-chip[data-brand="kitchenaid"] { --lazy-bg: url('assets/photos/brands/kitchenaid-electrodomesticos.webp'); }
@@ -1647,7 +1646,6 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile:hover .bn { opacity: .15; }
 /* Foto de fondo por marca (data-brand). Las marcas sin entrada quedan en fondo
    oscuro espresso + wordmark. */
-.brandtile[data-brand="la-cornue"]{--lazy-bg: url('assets/photos/brands/la-cornue-cocina.webp');}
 .brandtile[data-brand="gaggenau"]{--lazy-bg: url('assets/photos/brands/gaggenau-cocina.webp');}
 .brandtile[data-brand="thermador"]{--lazy-bg: url('assets/photos/brands/thermador-cocina.webp');}
 .brandtile[data-brand="monogram"]{--lazy-bg: url('assets/photos/brands/monogram-cocina.webp');}
@@ -1711,7 +1709,6 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile[data-brand="teka"]{--lazy-bg: url('assets/photos/brands/teka-cocina.webp');}
 .brandtile[data-brand="the-galley"]{--lazy-bg: url('assets/photos/brands/the-galley-tarjas.webp');}
 .brandtile[data-brand="tradewind"]{--lazy-bg: url('assets/photos/brands/tradewind-campanas.webp');}
-.brandtile[data-brand="u-line"]{--lazy-bg: url('assets/photos/brands/u-line-refrigeracion.webp');}
 .brandtile[data-brand="wppo"]{--lazy-bg: url('assets/photos/brands/wppo-hornos.webp');}
 .brandtile[data-brand="hergom"]{--lazy-bg: url('assets/photos/brands/hergom-chimeneas.webp');}
 .brandtile[data-brand="jacuzzi"]{--lazy-bg: url('assets/photos/brands/jacuzzi-wellness.webp');}

@@ -544,18 +544,6 @@
       "espejo": false
     }
   },
-  "la-cornue": {
-    "eyebrow": "Francés · Artesanal · Icónico",
-    "titulo": "Cocina La Cornue",
-    "descripcion": "Cocinas de inspiración francesa con enfoque artesanal, gran presencia visual y una propuesta exclusiva para proyectos donde la cocción es protagonista.",
-    "cta": {
-      "texto": "Ver catálogo oficial",
-      "url": null
-    },
-    "imagen": {
-      "espejo": false
-    }
-  },
   "lynx": {
     "eyebrow": "Profesional · Potente · Refinado",
     "titulo": "Asadores Lynx",
@@ -861,21 +849,6 @@
     "cta": {
       "texto": "Ver catálogo oficial",
       "url": null
-    }
-  },
-  "u-line": {
-    "eyebrow": "Integrado · Compacto · Preciso",
-    "titulo": "Refrigeración U-Line",
-    "descripcion": "Refrigeración y equipos compactos para cocina y bar, pensados para integrarse bajo cubierta y resolver bebidas, hielo o conservación con precisión.",
-    "cta": {
-      "texto": "Ver catálogo oficial",
-      "url": "/listas-de-precios/u-line.pdf"
-    },
-    "imagen": {
-      "posicion": "center 100%",
-      "espejo": false,
-      "zoom": 1.25,
-      "origen": "center bottom"
     }
   },
   "valsir": {

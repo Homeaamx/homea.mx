@@ -228,6 +228,10 @@ existe en ninguna herramienta.
 - [ ] **QA final:** 375 · 390 · 414 · 768 · 820 · 1024, áreas táctiles ≥44px, `prefers-reduced-motion`, y verificación de que el escritorio quedó idéntico.
 > **Cómo se audita:** con el dev server arriba, se cargan las rutas en iframes de ancho fijo y se mide `scrollWidth - clientWidth` por ruta, listando los elementos que sobresalen. Repetir tras cada bloque. Para **ver** una sección en móvil desde el panel del navegador: iframe de 390px de ancho desplazado por dentro (`contentWindow.scrollTo`) y captura; el scroll de la ventana principal sale en blanco.
 
+### 3.7 Header nuevo ⭐ NUEVO (2026-10-08)
+- [x] **Header de tres pisos** (`preview/home.html` + bloques "Header 2026-10-08" al final de `styles/theme.css`): barra negra no fija (Contáctanos ▾ · tipo de cambio | Ofertas exclusivas | redes), fila del logo centrado 44px y banda del nav (enlaces 11.5px repartidos, íconos a la derecha). Al hacer scroll la fila del logo se va con la página (nav sticky con top negativo, sin saltos) y aparece el logo pequeño a la izquierda; los botones no se mueven. Se quitó "Cuenta" (era `#`).
+- [x] **Sin versión en inglés** (decisión Carla 2026-10-08): se evaluó `/en` y se descartó — las búsquedas en inglés son 0.3 % de los clics (GSC) y traducir ~16k productos en Shopify cuesta más de lo que aporta. No hay rutas `/en` ni botón de idioma.
+
 **Entregable:** front-end en Vercel (dominio temporal), conectado a Shopify, con SEO técnico y **tracking de conversiones (incl. clicks de WhatsApp) verificado en GA4 + Google Ads**.
 
 > La cuenta de Google Ads y el tracking que se montan aquí son el **cimiento** de la **campaña de Google Shopping** descrita en la **Fase 4.6** (esa depende de tener catálogo con datos+imágenes, por eso vive en Fase 4).
@@ -276,7 +280,7 @@ existe en ninguna herramienta.
 > ⭐ **ASIGNACIÓN POR MARCA — canal web y descuentos (Carla, 2026-09-21, `MARCAS_HOMEA_SEP26_DESCUENTOS.xlsx`).**
 > Detalle marca por marca (proveedor, línea SAE, productos, descuento, página actual y notas):
 > **`docs/MARCAS-CANAL-Y-DESCUENTOS.md`**. **Esta lista manda sobre la tabla por macro de arriba.**
-> Hay marcas de cocina o asadores que van solo como PDF (Kamado Joe, Masterbuilt, WPPO, La Cornue…). De Brizo,
+> Hay marcas de cocina o asadores que van solo como PDF (Kamado Joe, Masterbuilt, WPPO…). De Brizo,
 > Delta y Axcent **solo se trabaja la línea de cocina** (Carla, 2026-09-21).
 >
 > - **SHOPIFY (68 marcas, ~16,071 productos tras la carga):** catálogo, filtros y carrito en Shopify; su
@@ -289,6 +293,10 @@ existe en ninguna herramienta.
 > - **ELIMINADAS (14):** Catalano, Duplash, Hansgrohe, Inda, Kaldewei, Keuco, Laufen, Kindred,
 >   Ambiance, American Standard, Moen y **Saunas de Grupo 90** (descatalogadas el 2026-09-21: solo se
 >   presentan las saunas de Artexa), más **Fortum y Steamist** (no venían en el Excel; su lista se retiró el 2026-09-21).
+> - **Bajas posteriores:** Elkay (2026-10-06) y **La Cornue y U-Line (2026-10-08, Carla: "todo rastro e imagen")**,
+>   con 301 en `marcasEliminadas` de `next.config.js`. Conteo vigente: **66 SHOPIFY · 23 SOLO PDF · 20 eliminadas ·
+>   89 páginas de marca** (`docs/MARCAS-CANAL-Y-DESCUENTOS.md`). Pendiente en Shopify (a mano): borrar de Files
+>   `lista-precios-u-line-jun-2026.pdf` y no cargar productos U-Line / La Cornue.
 >
 > **Descuento Shopify (PLATA) asignado. ⚠️ Se queda así por ahora (decisión Carla, 2026-09-21) y se va a
 > modificar más adelante: revisarlo antes de cargar precios.** Las 5 marcas que el Excel marca debajo del
@@ -296,7 +304,7 @@ existe en ninguna herramienta.
 >
 > | Descuento | Marcas SHOPIFY |
 > |---|---|
-> | **5%** | Faber, Lynx, Miele, Sedona, Supra, Tradewind, U-Line, Viking |
+> | **5%** | Faber, Lynx, Miele, Sedona, Supra, Tradewind, Viking |
 > | **10%** | Alfa Forni, Alfresco, Artisan, Asko, Bertazzoni, Blanco, Blaze, Bosch, Brizo, Broil King, Café, Cove, Coyote, Dawn, Delta, Dexa, Eclipse, Electrolux / Electrolux Icon, Elica, Falmec, Franke, Frigidaire / Gallery / Pro, Fulgor Milano, Gaggenau, Gessi, Hoshizaki, InSinkErator, Invisacook, Kele, Kraus, Monogram, Mont Alpi, Nantucket, Pitt, Schock, Scotsman, Smeg, Sub-Zero, Summit, Tecnolam, Teka (estufas económicas 5%), Thermador, Thor, Wolf |
 > | **15%** | Axcent, Benessi |
 > | **30%** | Acros, Easy, GE Profile, Haier, IEM, IO Mabe, KitchenAid, Mabe, Maytag, Whirlpool (validar margen con lista PPS) |
@@ -420,6 +428,13 @@ sirvió de piloto del patrón (5 fichas + import en borrador).
 - [ ] **Optimización de carga:** comprimir/redimensionar antes de subir (lado mayor ~2000px, calidad ~80); servir vía **Shopify CDN** (no por optimización de Vercel) con **WebP/AVIF**, `srcset`, lazy-load. Producto → Shopify CDN; editoriales → `next/image`.
 - [ ] **Nomenclatura SEO de archivos** ⭐: nombres **descriptivos** (`marca-producto-categoria-atributo.webp`), en minúsculas con guiones, sin acentos, alineados a **trends de búsqueda** (validar vocabulario con Google Trends/keyword research) para aparecer en Google Images y búsquedas por tema. Generados **programáticamente** desde los datos homologados (4.1). Acompañar con `alt` descriptivo.
 - [ ] Carga y asignación en Shopify.
+- [ ] **Mínimo 2 fotos del aparato por pieza** (regla Carla 2026-10-08; la 2.ª va a la galería de la ficha — el cambio de foto al hover se quitó). Planos al final. Auditoría: `scripts/auditar-fotos-tarjetas.mjs`. Hoy 6 de 110 cumplen; Gaggenau US solo publica una foto por modelo → definir fuente de la 2.ª (portal BSH, representante, foto propia). Detalle: `docs/ESTRATEGIA-IMAGENES.md` §3 bis.
+
+### 4.2 bis Sugerencias de compra en la ficha ⭐ NUEVO (2026-10-08)
+- [x] **Regla (Carla):** "Productos relacionados" muestra primero **Sugerencias de compra** (paneles y manijas para refrigeración, campanas para cocción, filtros de carbón para campanas, kits de conversión de gas, kits de limpieza…); si no hay ninguna publicada, **"Más <tipo>."** con similares del mismo tipo (sin nombre de marca).
+- [x] Motor: `lib/shopify/sugerencias.ts` — 1) listas oficiales del fabricante (`data/sugerencias-compra.json`, generado por `node --env-file=.env.local scripts/sugerencias-compra.mjs` desde gaggenau.com: accesorios, limpieza, combinables); 2) reglas por familia de modelo ("para RVY 497"), medida, línea (Expressive = accesorios oscuros RVA) y tipo. Hoy los 15 equipos de refrigeración con ficha generada (refrigeradores, congeladores y cavas) tienen sugerencias.
+- [ ] **Re-ejecutar el script** cada vez que cambie el catálogo de Gaggenau; al cargar cocción, campanas y cafeteras, crear sus colecciones de accesorios y sumarlas a `ACCESORIOS_POR_SUB1` (kits de espreas, filtros de carbón, kits de limpieza).
+- [x] **Filtro Diseño:** los 9 congeladores Gaggenau decían "Vertical (1 puerta)" y son columnas → corregido a "Columna" en Shopify (metafield `filtros.diseno`). ⚠️ Actualizar también la tabla de filtros v2 en OneDrive para que una recarga no lo revierta.
 
 ### 4.3 Import a Shopify + consumo headless
 - [ ] Carga masiva (Shopify MCP / Matrixify); validación de integridad.
@@ -485,7 +500,7 @@ sirvió de piloto del patrón (5 fichas + import en borrador).
 - [x] ⭐ **DECISIÓN (Carla, 2026-10-06): precios USD — modelo Artexa + regla de compra por marca.**
   - **En la web** las marcas USD se publican en dólares, como Artexa ("USD $X + IVA" + tipo de cambio). **Shopify guarda el monto en pesos, oculto al público**, solo para que funcionen el filtro de precio y el carrito: precio MXN = USD × FIX del día, recalculado solo por el cron (`/api/cron/tipo-cambio`) con la Admin API. Nadie toca precios a mano. Hoy los borradores USD tienen la cifra en dólares en el campo de pesos (p. ej. USD 8,813.98 → $8,813.98 MXN): se corrige con este proceso.
   - **Regla de compra por marca:** cada una de las 68 marcas SHOPIFY es *Comprar en línea* (checkout al TC del día) o *Solo cotizar* (entra al carrito, pero al pagar se manda como cotización al vendedor: borrador de pedido en Shopify + WhatsApp con folio). **Carrito mixto:** si trae al menos una marca *Solo cotizar*, va a cotización; si todas son *Comprar en línea*, va al checkout.
-  - [x] ⭐ **`REGLAS DE COMPRA POR MARCA_CLAUDE.xlsx` llenado por Carla (2026-10-06).** 67 marcas (Elkay eliminada). **Solo cotizar (21):** Asko, Benessi, Bertazzoni, Bosch, Brizo, Cove, Delta, Dexa, Franke, Gaggenau, Gessi, Hoshizaki, Miele, Pitt, Scotsman, Sub-Zero, The Galley, Thermador, U-Line, Viking, Wolf. Las demás: regla general ($100,000 MXN con IVA); stock/oferta comprable en todas. Monedas confirmadas: Dawn, Faber, Fulgor Milano, Mont Alpi, Nantucket y Summit = USD; Supra = MXN.
+  - [x] ⭐ **`REGLAS DE COMPRA POR MARCA_CLAUDE.xlsx` llenado por Carla (2026-10-06).** 67 marcas (Elkay eliminada). **Solo cotizar (21; 20 desde el 2026-10-08, sin U-Line):** Asko, Benessi, Bertazzoni, Bosch, Brizo, Cove, Delta, Dexa, Franke, Gaggenau, Gessi, Hoshizaki, Miele, Pitt, Scotsman, Sub-Zero, The Galley, Thermador, ~~U-Line~~, Viking, Wolf. Las demás: regla general ($100,000 MXN con IVA); stock/oferta comprable en todas. Monedas confirmadas: Dawn, Faber, Fulgor Milano, Mont Alpi, Nantucket y Summit = USD; Supra = MXN.
     - [x] **Regla aplicada en el carrito (2026-10-06):** `lib/shopify/normalizar.ts` evalúa `decidirCompra` por línea con los datos de Shopify y el proyecto queda `checkout` o `cotizacion`; la excepción de los 5 Gaggenau se retiró (`lib/reglas/compra.ts`).
     - **Marcas con "Validar margen con lista PPS"** (grupos Mabe y Whirlpool: Acros, Easy, GE Profile, Haier, IEM, IO Mabe, KitchenAid, Mabe, Maytag, Whirlpool): el proveedor da **costos** y HOMEA calcula el precio; **los precios cambian por temporada, constantemente**. La carga de precios a Shopify de estas marcas tiene que poder repetirse seguido y sin esfuerzo (mismo proceso, re-ejecutable).
   - [ ] Pasar la regla a `data/marcas.json` (campo `compra`), que lee `lib/reglas/compra.ts` por la marca (vendor). Cambiar la regla de una marca = un cambio en ese archivo, sin re-etiquetar productos en Shopify.

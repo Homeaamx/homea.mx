@@ -97,5 +97,5 @@ Sirve como modelo del **volumen y mezcla** de contenido que una macrocategoría 
 **Cambiamos (alineado a CLAUDE.md):**
 - **Taxonomía propia de HOMEA** de 3 niveles (10 macrocategorías → Subcategoría 1 → Subcategoría 2), no la de AJ Madison. Las guías se anclan en el nivel cuyos hijos son leaves de producto (Sub1 en ramas de 3 niveles; Macro en ramas de 2 niveles).
 - **Doble CTA HOMEA:** además de "Ver productos" (filtro PLP), cada guía premium incluye **"Cotizar / WhatsApp"** (la venta de ticket alto cierra fuera del sitio).
-- **Marcas premium** (Sub-Zero, Viking, Thermador, Wolf, Miele, Monogram, Gaggenau, La Cornue) en lugar del catálogo masivo gringo.
+- **Marcas premium** (Sub-Zero, Viking, Thermador, Wolf, Miele, Monogram, Gaggenau) en lugar del catálogo masivo gringo.
 - **SEO propio** (Next.js): rutas limpias `/guias/...`, canónicos, JSON-LD `Article` + `BreadcrumbList`, sin Liquid/tema.

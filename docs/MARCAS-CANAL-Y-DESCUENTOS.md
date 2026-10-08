@@ -12,14 +12,14 @@
 
 | Canal | En Shopify | En el sitio |
 |---|---|---|
-| **SHOPIFY** (67) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
-| **SOLO PDF** (24) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
+| **SHOPIFY** (66) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
+| **SOLO PDF** (23) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
 
 En el código, el canal vive en el tile de `preview/marcas.html` (`data-canal="shopify|pdf"`), pasa a
-`data/marcas.json` con `npm run marcas` y la plantilla `app/marcas/[marca]/page.tsx` lo respeta.
+`data/marcas.json` con `npm run marcas` y la plantilla `app/(es)/marcas/[marca]/page.tsx` lo respeta.
 
 **La asignación por marca manda sobre la regla por macrocategoría** (decisión del 2026-09-21 en el
-plan). Kamado Joe, Masterbuilt, WPPO y La Cornue son de cocina o asadores y van **solo como PDF**.
+plan). Kamado Joe, Masterbuilt y WPPO son de cocina o asadores y van **solo como PDF**.
 
 ## Decisiones de Carla (2026-09-21)
 
@@ -31,6 +31,8 @@ plan). Kamado Joe, Masterbuilt, WPPO y La Cornue son de cocina o asadores y van 
    Keuco, American Standard y Moen perdieron página, tile, enlace de menú, fotos, logos y listas de precios.
    Las URLs viejas de sus PDFs redirigen (301) a su categoría. **Elkay** se quitó igual el 2026-10-06 (Carla:
    no se publicará); su página vieja `/marcas/elkay` redirige (301) a Tarjas y grifería (`next.config.js`).
+   **La Cornue** y **U-Line** se quitaron igual el 2026-10-08 (Carla: todo rastro e imagen): `/marcas/la-cornue`
+   → Cocción, `/marcas/u-line` y su lista `/listas-de-precios/u-line.pdf` → Refrigeración (301, `next.config.js`).
 3. **Saunas:** las de **Grupo 90** son **Mr. Steam, Sauna Estilo y Treesse** (corrección de Carla, 2026-09-22: se mantienen aunque estuvieron en *Eliminadas*); las de **Artexa** son Jacuzzi y Clearlight. Todas SOLO PDF.
    Se crearon las **16 páginas** que faltaban: 6 SHOPIFY y 10 SOLO PDF. Los PDFs vigentes de cada marca
    se le piden a Carla más adelante y se suben a Shopify Files.
@@ -69,7 +71,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
   columna *Arte* de las tablas dice qué falta. La carpeta de OneDrive con logos y fotos ya no está
   sincronizada en esta Mac.
 
-## SHOPIFY — 67 marcas
+## SHOPIFY — 66 marcas
 
 | Marca | Proveedor | Línea SAE | Productos tras carga | Descuento Shopify (PLATA) | Página | Arte | Nota |
 |---|---|---|---:|---:|---|---|---|
@@ -136,12 +138,11 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | THERMADOR | ARTEXA | THERM | 243 | 10% | `/marcas/thermador` | completo |  |
 | THOR | ARTEXA | THOR | 34 | 10% | `/marcas/thor` | completo |  |
 | TRADEWIND | MIDDLEBY | TRADE | 154 | 5% | `/marcas/tradewind` | completo |  |
-| U-LINE | MIDDLEBY | ULINE | 293 | 5% | `/marcas/u-line` | completo |  |
 | VIKING (todas las series) | MIDDLEBY | VIKIN | 3401 | 5% | `/marcas/viking` | completo | Revisar Serie 3/6/Tuscany (condición distinta) |
 | WHIRLPOOL | WHIRLPOOL | WHIRL | 282 | 30% | `/marcas/whirlpool` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | WOLF | IESA/LAVISH | WOLF | 665 | 10% | `/marcas/wolf` | completo | Condición distinta para fuera de línea vs. de línea |
 
-## SOLO PDF — 24 marcas
+## SOLO PDF — 23 marcas
 
 | Marca | Proveedor | Línea SAE | Productos tras carga | Descuento Shopify (PLATA) | Página | Arte | Nota |
 |---|---|---|---:|---:|---|---|---|
@@ -157,7 +158,6 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | KALDEWEI | GRUPO 90 | — | 0 | 10% | `/marcas/kaldewei` | completo | Baños. Estaba en *Eliminadas*; vuelve como SOLO PDF (Carla, 2026-09-22) |
 | KALT | LECROM | KALT | 15 | — | `/marcas/kalt` | completo |  |
 | KAMADO JOE | MIDDLEBY | KAMAD | 43 | — | `/marcas/kamado-joe` | completo |  |
-| LA CORNUE | MIDDLEBY | LACOR | 2 | — | `/marcas/la-cornue` | completo |  |
 | MASTERBUILT | MIDDLEBY | MASTB | 8 | — | `/marcas/masterbuilt` | completo |  |
 | MR STEAM | GRUPO 90 | MRSTE | 28 | 10% | `/marcas/mr-steam` | completo |  |
 | NOBILI | GRUPO 90 | NOBIL | 191 | 10% | `/marcas/nobili` | completo |  |
@@ -170,7 +170,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | VASS | VASS | VASS | 3 | — | `/marcas/vass` | completo | Chimeneas, residencial (Carla, 2026-09-21) |
 | WPPO | MARESA | WPPO | 6 | — | `/marcas/wppo` | completo |  |
 
-## ELIMINADAS — 18 marcas
+## ELIMINADAS — 20 marcas
 
 | Marca | Proveedor | Línea SAE | Productos hoy | Nota |
 |---|---|---|---:|---|
@@ -186,9 +186,11 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | INDA | GRUPO 90 | — | 0 |  |
 | KEUCO | GRUPO 90 | KEUCO | 30 | Tenía página; se quitó de todo el sitio el 2026-09-21 |
 | KINDRED | LECROM | — | 0 |  |
+| LA CORNUE | MIDDLEBY | LACOR | 2 | Tenía página (SOLO PDF, sin lista); se quitó de todo el sitio el 2026-10-08 (Carla). `/marcas/la-cornue` redirige (301) a `/productos/cocina-y-bar/coccion` |
 | LAUFEN | GRUPO 90 | — | 0 |  |
 | MOEN | STUDIO & DISEÑO | MOEN | 357 | Tenía página; se quitó de todo el sitio el 2026-09-21 |
 | PIZARRO | PIZARRO | PIZAR | 129 | Tenía página; se quitó de todo el sitio el 2026-09-22 (Carla) |
 | SAUNAS | GRUPO 90 | — | 0 | Fila genérica del Excel; las saunas de Grupo 90 se presentan por marca: Mr. Steam, Sauna Estilo y Treesse (2026-09-22) |
 | STEAMIST | — | — | — | No venía en el Excel; se retiró su lista de precios el 2026-09-21 (la URL vieja redirige a Vapor y Sauna) |
 | TRES | GRUPO 90 | — | 0 | Tenía página; se quitó de todo el sitio el 2026-09-22 (Carla) |
+| U-LINE | MIDDLEBY | ULINE | 293 | Tenía página (SHOPIFY, 5%, *Solo cotizar*) y lista de precios; se quitó de todo el sitio el 2026-10-08 (Carla). `/marcas/u-line` y `/listas-de-precios/u-line.pdf` redirigen (301) a `/productos/cocina-y-bar/refrigeracion` |

@@ -133,9 +133,10 @@ export function inyectarTipoCambio(html: string, tc: TipoCambio): string {
     tc.fuente === "banxico" && tc.fecha
       ? ` title="FIX de Banxico del ${tc.fecha}"`
       : "";
+  // La etiqueta va en su propio <span>: en móvil se oculta y queda solo la cifra.
   return html.replace(
-    /<span class="u-fx" id="u-fx"[^>]*>[\s\S]*?<\/span>/,
-    `<span class="u-fx" id="u-fx" data-fx-servidor="1"${titulo}>Tipo de cambio · 1 USD = <strong>${factor}</strong> MXN</span>`,
+    /<span class="u-fx" id="u-fx"[^>]*>[\s\S]*?<\/strong>[\s\S]*?<\/span>/,
+    `<span class="u-fx" id="u-fx" data-fx-servidor="1"${titulo}><span class="u-fx-lbl">Tipo de cambio · </span>1 USD = <strong>${factor}</strong> MXN</span>`,
   );
 }
 

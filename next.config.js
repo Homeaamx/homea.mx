@@ -154,6 +154,13 @@ const nextConfig = {
     const marcasEliminadas = {
       // Elkay: tarjas y grifería. Se quitó de todo el sitio el 2026-10-06 (Carla).
       "/marcas/elkay": "/productos/cocina-y-bar/tarjas-y-griferia",
+      // La Cornue (estufas, SOLO PDF) y U-Line (refrigeración, SHOPIFY): se quitaron
+      // de todo el sitio el 2026-10-08 (Carla). La lista de precios de U-Line salió de
+      // data/listas-precios.json, así que su URL permanente también va con 301 (la
+      // ruta /listas-de-precios/[archivo] daría 404). La Cornue no tenía lista.
+      "/marcas/la-cornue": "/productos/cocina-y-bar/coccion",
+      "/marcas/u-line": "/productos/cocina-y-bar/refrigeracion",
+      "/listas-de-precios/u-line.pdf": "/productos/cocina-y-bar/refrigeracion",
     };
 
     return [

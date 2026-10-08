@@ -6,8 +6,8 @@ Suelta aquí los catálogos y listas de precios reales, **una subcarpeta por mar
 listas-proveedor/
   VIKING/
     viking-lista-precios-2026.pdf
-  U-LINE/
-    uline-price-list-jul-2026.xlsx
+  WOLF/
+    wolf-msrp-2026-q3.pdf
   COYOTE/
     ...
 ```
@@ -26,6 +26,6 @@ listas-proveedor/
 
 ## Prioridad de marcas (sin precio en listas SAE)
 
-U-Line (240), Coyote (203), Benessi (75), Mont Alpi (69), Tradewind (47),
+Coyote (203), Benessi (75), Mont Alpi (69), Tradewind (47),
 Lynx (35), Fulgor (29), Mr. Steam (22), Poletti, Kalt, Sedona, Sapphire,
 Kamado, Dawn, Schock, y parciales: Teka, Kele, Mabe, Falmec.

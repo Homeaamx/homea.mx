@@ -77,5 +77,5 @@ cuando la nomenclatura sea clara.
 - [ ] InSinkErator / Alfresco / Artisan / Hoshizaki / Benessi / Gessi / Kraus / Pitt / Thor
 
 ## Marcas NO-Artexa (revisa Carla en 07-VARIANTES-VALIDACION.xlsx)
-Viking · Sub-Zero · Wolf · Cove · U-Line · Miele · ASKO · AXOR · Hansgrohe · Smeg · Teka ·
+Viking · Sub-Zero · Wolf · Cove · Miele · ASKO · AXOR · Hansgrohe · Smeg · Teka ·
 Kele · Mabe/GE Profile · Coyote · The Galley · Scotsman · Alfa Forni · Firplak · Eclipse/Schock

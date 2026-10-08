@@ -47,7 +47,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // que al abrir otra página (p. ej. una marca desde /marcas) subía despacio hasta
   // arriba. Con este atributo Next salta directo al inicio al cambiar de ruta.
   return (
-    <html lang="es" data-scroll-behavior="smooth">
+    <html lang="es-MX" data-scroll-behavior="smooth">
       <body>
         {/* Las dos fuentes del primer render. Sin preload el navegador solo las
             descubre al parsear el CSS y con internet lento el texto definitivo
@@ -73,13 +73,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <HomeNavSticky />
         <PreviewRouter />
         {/* Interacciones del preview (nav scroll, mega flyout, reveals, hero, marquee). */}
-        <Script src="/v2.js?v=61" strategy="afterInteractive" />
+        <Script src="/v2.js?v=64" strategy="afterInteractive" />
         {/* Wishlist (localStorage): corazones, badge del nav y drawer de cotización. */}
         <Script src="/wishlist.js?v=5" strategy="afterInteractive" />
         {/* Filtro de tipo del riel de subcat.1 (?tipo=…) y su scroll lento. */}
-        <Script src="/tipos.js?v=1" strategy="afterInteractive" />
+        <Script src="/tipos.js?v=3" strategy="afterInteractive" />
         {/* Filtros, orden y galería del catálogo vivo de Shopify (lib/shopify/htmlCatalogo.ts). */}
-        <Script src="/catalogo.js?v=7" strategy="afterInteractive" />
+        <Script src="/catalogo.js?v=12" strategy="afterInteractive" />
       </body>
     </html>
   );

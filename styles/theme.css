@@ -1046,7 +1046,6 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .mq-chip[data-brand="monogram"]   { --lazy-bg: url('/assets/photos/brands/monogram-cocina.webp'); background-position: center 85%; }
 .mq-chip[data-brand="viking"]     { --lazy-bg: url('/assets/photos/brands/viking-cocina.webp'); }
 .mq-chip[data-brand="gaggenau"]   { --lazy-bg: url('/assets/photos/brands/gaggenau-cocina.webp'); }
-.mq-chip[data-brand="la-cornue"]  { --lazy-bg: url('/assets/photos/brands/la-cornue-cocina.webp'); background-position: center 100%; }
 .mq-chip[data-brand="smeg"]       { --lazy-bg: url('/assets/photos/brands/smeg-electrodomesticos.webp'); }
 .mq-chip[data-brand="bertazzoni"] { --lazy-bg: url('/assets/photos/brands/bertazzoni-cocina.webp'); }
 .mq-chip[data-brand="kitchenaid"] { --lazy-bg: url('/assets/photos/brands/kitchenaid-electrodomesticos.webp'); }
@@ -1761,7 +1760,7 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
   object-fit: cover; object-position: center 75%; z-index: 0;
   /* Espejo por defecto; una marca lo quita con --espejo: 1 (data/marcas-hero.json).
      --zoom/--origen acercan la foto cuando ya llena el alto y no se puede subir
-     o bajar solo con object-position (fotos muy panorámicas, p. ej. U-Line). */
+     o bajar solo con object-position (fotos muy panorámicas). */
   transform: scaleX(var(--espejo, -1)) scale(var(--zoom, 1));
   transform-origin: var(--origen, center);
 }
@@ -1843,7 +1842,6 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile:hover .bn { opacity: .15; }
 /* Foto de fondo por marca (data-brand). Las marcas sin entrada quedan en fondo
    oscuro espresso + wordmark. */
-.brandtile[data-brand="la-cornue"]{--lazy-bg: url('/assets/photos/brands/la-cornue-cocina.webp');}
 .brandtile[data-brand="gaggenau"]{--lazy-bg: url('/assets/photos/brands/gaggenau-cocina.webp');}
 .brandtile[data-brand="thermador"]{--lazy-bg: url('/assets/photos/brands/thermador-cocina.webp');}
 .brandtile[data-brand="monogram"]{--lazy-bg: url('/assets/photos/brands/monogram-cocina.webp');}
@@ -1907,7 +1905,6 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile[data-brand="teka"]{--lazy-bg: url('/assets/photos/brands/teka-cocina.webp');}
 .brandtile[data-brand="the-galley"]{--lazy-bg: url('/assets/photos/brands/the-galley-tarjas.webp');}
 .brandtile[data-brand="tradewind"]{--lazy-bg: url('/assets/photos/brands/tradewind-campanas.webp');}
-.brandtile[data-brand="u-line"]{--lazy-bg: url('/assets/photos/brands/u-line-refrigeracion.webp');}
 .brandtile[data-brand="wppo"]{--lazy-bg: url('/assets/photos/brands/wppo-hornos.webp');}
 .brandtile[data-brand="hergom"]{--lazy-bg: url('/assets/photos/brands/hergom-chimeneas.webp');}
 .brandtile[data-brand="jacuzzi"]{--lazy-bg: url('/assets/photos/brands/jacuzzi-wellness.webp');}
@@ -3408,3 +3405,290 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
   .pdp-tabs { display: block; }
   .pdp-panel[hidden] { display: none; }
 }
+
+/* ---------- 2026-10-08: tarjeta sin marco — el aparato manda ----------
+   El <style> de los preview/subcategoria-*.html (inyectado por MarketingPage)
+   topaba el recuadro a 240px y lo volvía grid; aquí se anula. La tarjeta no
+   tiene borde, sombra ni fondo: la foto (multiply) se funde con el bone de la
+   página y ocupa casi todo el recuadro vertical. Disponibilidad y corazón viven
+   en el renglón superior del cuerpo (htmlCatalogo.ts), así nada pisa al aparato.
+   Al pasar el cursor no hay elevación ni zoom: la tarjeta toma el marco claro
+   (ver la regla de abajo). El cambio a una 2.ª foto se probó y se quitó
+   (Carla, 2026-10-08). */
+.pcard[data-cat-card],
+.pcard[data-cat-card]:hover { background: transparent; border: 0; box-shadow: none; transform: none; }
+.pcard[data-cat-card]:hover::after { display: none; }
+.pcard[data-cat-card] .imgw.cutout {
+  display: block; padding: 0; max-height: none; aspect-ratio: 4 / 5; background: transparent;
+}
+.pcard[data-cat-card] .imgw.cutout img,
+.pcard[data-cat-card]:hover .imgw.cutout img {
+  position: absolute; inset: 5% 4% 4%; width: 92%; height: 91%;
+  max-width: none; max-height: none; padding: 0; transform: none;
+  object-fit: contain; object-position: center bottom; mix-blend-mode: multiply;
+  transition: opacity .45s var(--ease-standard);
+}
+/* Hover de la tarjeta (Carla, 2026-10-08): TODA la tarjeta (foto + texto) toma
+   el marco claro del diseño original: un solo tono greige con filete fino, en
+   el mismo rectángulo y márgenes. El filete va por dentro (inset) y el aparato
+   tiene su margen (5 % / 4 %), así que el borde nunca lo toca. La foto sigue en
+   multiply: su fondo blanco se funde con el greige. */
+.pcard[data-cat-card] { transition: background-color .3s var(--ease-standard), box-shadow .3s var(--ease-standard); }
+.pcard[data-cat-card]:hover {
+  transform: none;
+  background: var(--bg-greige);
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+}
+.pcard[data-cat-card] .pcard-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+.pcard[data-cat-card] .pcard-tag { position: static; }
+.pcard[data-cat-card] .wl-heart,
+.pcard[data-cat-card]:hover .wl-heart { position: static; flex: none; width: 34px; height: 34px; background: transparent; }
+
+/* =====================================================================
+   Header 2026-10-08 — tres pisos:
+   1) Barra superior negra (no fija): Contáctanos ▾ · tipo de cambio |
+      Ofertas exclusivas | redes.
+   2) Fila del logo, centrado y 30 % más grande (34 → 44px).
+   3) Nav: hueco del logo a la izquierda (visible al bajar), enlaces 11.5px.
+   2 + 3 son el <nav class="site-nav"> sticky: al hacer scroll se quedan
+   juntos y conservan el cambio de tono claro → oscuro (.scrolled, v2.js).
+   ≤900px vuelve a una sola banda con el logo a la izquierda (.brand-bar).
+   ===================================================================== */
+:root { --nav-brand-h: 76px; --nav-main-h: 56px; --nav-h: calc(var(--nav-brand-h) + var(--nav-main-h)); }
+
+/* ---------- 1) Barra superior ---------- */
+.ubar { position: relative; z-index: 60; }
+.ubar .container { grid-template-columns: 1fr auto 1fr; }
+.ubar .u-left { justify-self: start; display: flex; align-items: center; gap: 16px; min-width: 0; }
+.ubar .u-fx { justify-self: auto; }
+.ubar .u-sep { width: 1px; height: 14px; background: rgba(247, 243, 236, .22); flex: none; }
+.ubar .u-contact { position: relative; }
+.ubar .u-contact-btn {
+  display: inline-flex; align-items: center; gap: 7px; padding: 0; background: none; border: 0; cursor: pointer;
+  font-family: var(--font-sans); font-size: 10px; font-weight: 600; letter-spacing: var(--tracking-wider);
+  text-transform: uppercase; color: var(--dark-fg-muted); white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+.ubar .u-contact-btn svg { transition: transform var(--dur-fast) var(--ease-standard); }
+.ubar .u-contact:hover .u-contact-btn, .ubar .u-contact.is-open .u-contact-btn { color: var(--homea-bone); }
+.ubar .u-contact:hover .u-contact-btn svg, .ubar .u-contact.is-open .u-contact-btn svg { transform: rotate(180deg); }
+.ubar .u-contact-btn:focus-visible { outline: 1px solid var(--homea-gold); outline-offset: 4px; }
+.ubar .u-contact-panel {
+  position: absolute; top: calc(100% + 12px); left: -18px; min-width: 240px;
+  padding: 18px 20px 6px; background: var(--surface); box-shadow: var(--shadow-lg);
+  border-top: 2px solid var(--homea-gold);
+  opacity: 0; visibility: hidden; transform: translateY(-4px);
+  transition: opacity var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard), visibility 0s linear var(--dur-fast);
+}
+/* Puente invisible: el cursor cruza los 12px hasta el panel sin cerrarlo. */
+.ubar .u-contact-panel::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 14px; }
+.ubar .u-contact:hover .u-contact-panel,
+.ubar .u-contact:focus-within .u-contact-panel,
+.ubar .u-contact.is-open .u-contact-panel {
+  opacity: 1; visibility: visible; transform: none; transition-delay: 0s;
+}
+.ubar .u-contact-panel p { margin: 0 0 14px; display: flex; flex-direction: column; gap: 4px; }
+.ubar .u-contact-panel b {
+  font-family: var(--font-sans); font-size: 10px; font-weight: 600; letter-spacing: var(--tracking-wider);
+  text-transform: uppercase; color: var(--fg-muted);
+}
+.ubar .u-contact-panel a {
+  font-size: 13px; font-weight: 500; letter-spacing: .01em; text-transform: none; color: var(--fg);
+  align-self: flex-start; border-bottom: 1px solid var(--border-strong);
+}
+.ubar .u-contact-panel a:hover { color: var(--accent-text); border-bottom-color: var(--homea-gold); }
+.ubar a.u-ofertas { justify-self: center; color: var(--homea-gold-bright); border-bottom: 1px solid currentColor; padding-bottom: 1px; white-space: nowrap; }
+.ubar a.u-ofertas:hover { color: var(--homea-bone); }
+.ubar .u-right { align-items: center; gap: 16px; }
+/* Redes: íconos de 19px en áreas de 34px, con 10px entre uno y otro. */
+.ubar .u-social { display: flex; align-items: center; gap: 10px; }
+.ubar a.u-soc { width: 34px; height: 34px; display: grid; place-items: center; color: var(--dark-fg-muted); }
+.ubar a.u-soc:hover { color: var(--homea-gold-bright); }
+.ubar .u-soc svg { width: 19px; height: 19px; display: block; }
+
+/* ---------- 2 + 3) Bloque fijo: logo + nav ---------- */
+.site-nav { height: auto; }
+.site-nav .nav-brandrow { border-bottom: 1px solid var(--border); transition: border-color var(--dur-med) var(--ease-standard); }
+.site-nav .nav-brandrow .container { height: var(--nav-brand-h); display: flex; align-items: center; justify-content: center; }
+.site-nav .brand-top { margin: 0; }
+.site-nav .brand-top img { height: 44px; }
+.site-nav .nav-main { height: var(--nav-main-h); }
+.site-nav.scrolled .nav-brandrow { border-bottom-color: var(--dark-border); }
+/* A 13px los 9 enlaces + íconos no caben en el contenedor de 1240px: el header
+   usa todo el ancho (con el mismo margen lateral) para que la fila respire. */
+.ubar .container, .site-nav .container { max-width: none; }
+
+/* ---------- Tablet y móvil ---------- */
+@media (max-width: 1120px) {
+  .ubar a.u-ofertas { display: none; }
+}
+@media (max-width: 1080px) {
+  .ubar .u-social { display: none; }
+}
+@media (max-width: 900px) {
+  :root { --nav-brand-h: 0px; --nav-main-h: 80px; }
+  .site-nav .nav-brandrow { display: none; }
+  .site-nav .brand-bar { display: flex; }
+  .site-nav .brand-bar img { height: 34px; }
+}
+@media (max-width: 720px) {
+  .ubar .container { grid-template-columns: auto 1fr auto; gap: 12px; }
+  .ubar a.u-ofertas { display: none; }
+  .ubar .u-left { grid-column: 1 / 3; gap: 12px; }
+  .ubar .u-fx { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .ubar .u-fx-lbl { display: none; }
+}
+@media (max-width: 360px) {
+  .ubar .u-left > .u-sep { display: none; }
+}
+
+/* ---------- Header 2026-10-08 (2): al hacer scroll solo queda la banda del nav ----------
+   Arriba (sin scroll) se ve el header de tres pisos. El <nav> es sticky con
+   top negativo = alto de la fila del logo: esa fila se va con la página y solo
+   la banda del nav queda fija, SIN cambiar el alto del documento (no hay salto).
+   Cuando la fila del logo salió de pantalla, v2.js pone .is-compact y aparece
+   el logo pequeño a la izquierda (ver bloque (3)). Se conserva el cambio de
+   tono claro → oscuro (.scrolled). */
+:root { --nav-stuck-h: var(--nav-main-h); }
+.site-nav { top: calc(-1 * var(--nav-brand-h)); }
+/* Lo que se acomoda bajo la barra fija usa el alto que queda visible al bajar. */
+:where([id]) { scroll-margin-top: calc(var(--nav-stuck-h) - 1px); }
+.filters { top: calc(var(--nav-stuck-h) + 32px); }
+.pdp .gallery { top: calc(var(--nav-stuck-h) + 32px); }
+.cat-rail, .guide-cta-card { top: calc(var(--nav-stuck-h) + 24px); }
+@media (min-width: 1081px) { .plp > .filters { max-height: calc(100vh - var(--nav-stuck-h) - 48px); } }
+
+/* 2026-10-08 (3): UNA sola banda para los dos estados, para que al hacer scroll
+   ningún botón se mueva. El hueco del logo (.brand-bar) siempre ocupa su lugar
+   a la izquierda: arriba es invisible (el logo grande va en su fila) y con
+   .is-compact aparece con un fundido. Enlaces a 11.5px repartidos entre el logo
+   y los íconos (Carla: "mueve los botones más a la derecha"). */
+.site-nav .brand-bar {
+  display: flex; margin-right: 8px; flex-shrink: 0;
+  opacity: 0; visibility: hidden;
+  transition: opacity .35s var(--ease-standard), visibility 0s linear .35s;
+}
+.site-nav .brand-bar img { height: 34px; }
+.site-nav.is-compact .brand-bar { opacity: 1; visibility: visible; transition-delay: 0s; }
+.nav-links { flex: 1; justify-content: space-between; gap: 21px; }
+.nav-links > a, .nav-links .has-mega > span, .nav-links .has-mega > a { font-size: 11.5px; letter-spacing: .1em; }
+@media (max-width: 1300px) { .nav-links { gap: 15px; } }
+/* Tablet: con solo 5 enlaces (los secundarios viven en el cajón) no se reparten. */
+@media (min-width: 721px) and (max-width: 1180px) { .nav-links { justify-content: flex-start; gap: 24px; } }
+@media (min-width: 1600px) {
+  .nav-links { justify-content: space-between; }
+  .nav-links > a, .nav-links .has-mega > span, .nav-links .has-mega > a { font-size: 11.5px; }
+}
+@media (max-width: 900px) { .site-nav .brand-bar { opacity: 1; visibility: visible; } }
+@media (prefers-reduced-motion: reduce) { .site-nav .brand-bar { transition: none; } }
+
+/* ---------- Ficha 2026-10-08: logo +30 %, pestañas sin desborde, documentos iguales ---------- */
+.pdp-logo { height: 66px; max-width: 364px; }
+/* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
+   técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
+   una línea, baja a dos dentro de su pestaña. */
+.pdp-tablist { align-items: stretch; }
+.pdp-tab {
+  flex: 1 1 auto; min-width: 0; white-space: normal; text-align: center;
+  display: flex; align-items: center; justify-content: center; padding: 13px 12px;
+}
+/* Botones de documentos: todos del ancho del más largo; flecha al final. */
+.pdp-docs { display: inline-grid; grid-template-columns: minmax(0, 1fr); max-width: 100%; }
+.pdp-doc { display: flex; width: 100%; box-sizing: border-box; }
+.pdp-doc .ar { margin-left: auto; padding-left: 12px; }
+
+/* ---------- Nav 2026-10-08: botón "Mi proyecto" ----------
+   Barra oscura (al hacer scroll): filete dorado y texto blanco; al pasar el
+   cursor se invierte a fondo blanco con texto negro. Barra clara (arriba): los
+   tonos al revés — filete dorado y texto negro; al pasar el cursor, fondo negro
+   con texto blanco. El contador conserva su placa dorada. */
+.nav-ic.nav-proyecto,
+.nav-ic.nav-proyecto.has-items { border-color: var(--homea-gold); color: var(--homea-black); background: transparent; }
+.nav-ic.nav-proyecto svg,
+.nav-ic.nav-proyecto.has-items svg { fill: none; stroke: currentColor; }
+.nav-ic.nav-proyecto:hover, .nav-ic.nav-proyecto:focus-visible { background: var(--homea-black); border-color: var(--homea-black); color: var(--homea-bone); }
+.site-nav.scrolled .nav-ic.nav-proyecto,
+.site-nav.scrolled .nav-ic.nav-proyecto.has-items { border-color: var(--homea-gold); color: #fff; background: transparent; }
+.site-nav.scrolled .nav-ic.nav-proyecto.has-items svg { stroke: currentColor; }
+.site-nav.scrolled .nav-ic.nav-proyecto:hover,
+.site-nav.scrolled .nav-ic.nav-proyecto:focus-visible { background: #fff; border-color: #fff; color: var(--homea-black); }
+.nav-ic.nav-proyecto { transition: border-color var(--dur-fast) var(--ease-standard), background var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard); }
+
+/* ---------- 2026-10-08: etiqueta "En stock" y corazón de wishlist ---------- */
+/* En stock: dorado oscuro con texto blanco (#76603B, el oro para texto: 5.6:1
+   con blanco, legible aun a 10px). "Bajo pedido" sigue en espresso. */
+.pcard-tag.is-stock { background: var(--homea-gold-text); border-color: var(--homea-gold-text); color: #fff; }
+/* Corazón: al pasar el cursor la caja se llena de oro y el corazón queda igual;
+   guardado, el corazón se llena de oro sin contorno. Sin anillo de foco al
+   hacer clic con el ratón (con teclado sí se ve). */
+.wl-heart:hover,
+.pcard[data-cat-card] .wl-heart:hover { background: var(--homea-gold); border-color: var(--homea-gold); color: var(--homea-black); transform: none; }
+.wl-heart.on { border-color: var(--border); }
+.wl-heart.on svg { fill: var(--homea-gold); stroke: none; }
+.wl-heart.on:hover svg { fill: #fff; }
+.wl-heart:focus:not(:focus-visible) { outline: none; }
+.wl-heart:focus-visible { outline: 1px solid var(--homea-gold); outline-offset: 2px; }
+
+/* ---------- Filtros 2026-10-08 (Carla) ---------- */
+/* Orden: texto pegado a la derecha y sin la flecha nativa del desplegable. */
+.toolbar select {
+  -webkit-appearance: none; appearance: none; background-image: none;
+  text-align: right; text-align-last: right; padding-right: 0;
+}
+.toolbar select::-ms-expand { display: none; }
+
+/* Catálogo a todo el ancho (Carla, 2026-10-08): filtros y rejilla salen del
+   contenedor de 1240px y usan el mismo margen lateral que el header (4vw,
+   mín. 48px) a izquierda y derecha. Filtros de 260px; las tarjetas crecen. */
+@media (min-width: 1081px) {
+  :root { --plp-pad: max(48px, 4vw); }
+  .plp:has([data-cat-card]) {
+    width: calc(100vw - 2 * var(--plp-pad));
+    margin-left: calc((100% - 100vw) / 2 + var(--plp-pad));
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 48px;
+  }
+}
+
+/* Precio: rangos proporcionales arriba del slider. */
+[data-fgroup="precio"] .fopts > label { margin-bottom: 2px; }
+[data-fgroup="precio"] .fprecio { margin-top: 14px; }
+/* Slider: perillas en círculo dorado. */
+.fprecio-slider input[type="range"]::-webkit-slider-thumb {
+  width: 16px; height: 16px; margin-top: 6px; border-radius: 50%;
+  background: var(--homea-gold); border: 0; box-shadow: 0 0 0 3px var(--bg), 0 1px 3px rgba(10, 10, 10, .25);
+}
+.fprecio-slider input[type="range"]::-moz-range-thumb {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--homea-gold); border: 0; box-shadow: 0 0 0 3px var(--bg), 0 1px 3px rgba(10, 10, 10, .25);
+}
+
+/* Marca: buscador y solo las marcas que aplican. */
+.fopts .fbuscar { display: block; margin: 0 0 10px; padding: 0; }
+.fopts .fbuscar input {
+  width: 100%; box-sizing: border-box; padding: 9px 12px 9px 34px; border: 1px solid var(--border-strong); border-radius: 0;
+  background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23807761' stroke-width='1.8' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='16.5' y1='16.5' x2='21' y2='21'/%3E%3C/svg%3E") no-repeat 11px center / 15px;
+  font-family: var(--font-sans); font-size: 13px; color: var(--fg);
+}
+/* Foco con el borde del propio campo (el contorno exterior se cortaba a la
+   izquierda por el scroll de la columna de filtros). */
+.fopts .fbuscar input:focus, .fopts .fbuscar input:focus-visible { outline: none; border-color: var(--homea-gold); box-shadow: inset 0 0 0 1px var(--homea-gold); }
+.fgroup--acc .fopts label.is-oculta,
+.fgroup--acc .fopts label.no-coincide { display: none; }
+
+/* Una sola línea al final del listado: si aparece la barra "Ver N piezas"
+   (con su filete superior), el último grupo pierde el suyo. */
+.filters details.fgroup--acc:has(+ .fbar:not([hidden])) { border-bottom: 0; }
+
+/* Filtros aplicados: todas las tarjetas del ancho del panel, sin salirse;
+   texto a la izquierda y la × al extremo derecho. */
+.fchips--panel { align-items: stretch; }
+.fchips--panel .fchip { width: 100%; max-width: 100%; box-sizing: border-box; justify-content: flex-start; text-align: left; flex-wrap: wrap; row-gap: 4px; }
+.fchips--panel .fchip-v { min-width: 0; overflow-wrap: anywhere; }
+.fchips--panel .fchip-x { margin-left: auto; }
+.fchips--panel .fchip--all { width: auto; align-self: flex-start; }
+
+/* Barra superior: "Contáctanos" a la misma altura que "Tipo de cambio" (el
+   botón se asentaba en la línea base de su contenedor, 2.4px más abajo). */
+.ubar .u-contact { display: flex; align-items: center; }
+.ubar .u-contact-btn { line-height: 15px; }
