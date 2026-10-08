@@ -3398,3 +3398,13 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-panel { min-height: 360px; }
 .pdp-tab { white-space: nowrap; }
 @media (max-width: 1080px) { .pdp-panel { min-height: 0; } .pdp-tab { white-space: normal; } }
+/* Los tres paneles ocupan la misma celda: la columna mide siempre lo del panel
+   más alto y cambiar de pestaña no acorta la página (era lo que movía el scroll). */
+.pdp-tabs { display: grid; grid-template-rows: auto 1fr; grid-template-columns: minmax(0, 1fr); }
+.pdp-tablist { grid-row: 1; grid-column: 1; }
+.pdp-panel { grid-row: 2; grid-column: 1; min-height: 0; }
+.pdp-panel[hidden] { display: block; visibility: hidden; pointer-events: none; }
+@media (max-width: 1080px) {
+  .pdp-tabs { display: block; }
+  .pdp-panel[hidden] { display: none; }
+}
