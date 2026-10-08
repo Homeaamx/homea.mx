@@ -3391,9 +3391,10 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-doc-ic { width: 12px; height: 15px; border: 1.5px solid currentColor; border-radius: 1px; position: relative; flex: none; }
 .pdp-doc-ic::after { content: ""; position: absolute; left: 2px; right: 2px; top: 4px; height: 1.5px; background: currentColor; box-shadow: 0 3px 0 currentColor, 0 6px 0 currentColor; }
 
-/* Las pestañas no forman parte del bloque pegajoso de la galería; y el panel
+/* La columna completa de la galería (fotos + pestañas) es la que se pega: si
+   solo se pegaran las fotos, las pestañas se deslizarían por debajo. El panel
    tiene alto mínimo para que cambiar de pestaña no acorte la página de golpe. */
-.pdp .gallery:has(.gallery-sticky) { position: static; }
-.pdp .gallery-sticky { position: sticky; top: calc(var(--nav-h) + 32px); }
+.pdp .gallery-sticky { position: static; }
 .pdp-panel { min-height: 360px; }
-@media (max-width: 1080px) { .pdp .gallery-sticky { position: static; } .pdp-panel { min-height: 0; } }
+.pdp-tab { white-space: nowrap; }
+@media (max-width: 1080px) { .pdp-panel { min-height: 0; } .pdp-tab { white-space: normal; } }
