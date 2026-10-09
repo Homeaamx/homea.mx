@@ -148,6 +148,7 @@ function aLinea(raw: CarritoRaw["lines"]["nodes"][number]): LineaCarrito {
     decision,
     cotizacion,
     montoAlto: montoAlto(centavos(mxn * (1 + IVA))),
+    tipoCambio: usd ? Math.round((mxn / (usd * (mxnLista ? mxn / mxnLista : 1))) * 100) / 100 : null,
   };
 }
 
@@ -177,6 +178,11 @@ export function aCarrito(raw: CarritoRaw, { simulado = false } = {}): Carrito {
     ? aDinero(raw.cost.totalTaxAmount)
     : { monto: centavos(subtotal.monto * IVA), moneda: subtotal.moneda };
 
+  const ahorro = ahorroDe(raw);
+  const subtotalLista = { monto: centavos(subtotal.monto + ahorro.monto), moneda: subtotal.moneda };
+  const totalEstimado = { monto: centavos(subtotal.monto + iva.monto), moneda: subtotal.moneda };
+  const subtotalConIva = { monto: centavos(subtotalLista.monto * (1 + IVA)), moneda: subtotal.moneda };
+
   return {
     id: raw.id,
     cantidadTotal: raw.totalQuantity,
@@ -189,8 +195,13 @@ export function aCarrito(raw: CarritoRaw, { simulado = false } = {}): Carrito {
     simulado,
     modo: lineas.some((l) => l.decision.accion === "cotizar") ? "cotizacion" : "checkout",
     ivaEstimado: iva,
-    totalEstimado: { monto: centavos(subtotal.monto + iva.monto), moneda: subtotal.moneda },
-    ahorro: ahorroDe(raw),
-    subtotalLista: { monto: centavos(subtotal.monto + ahorroDe(raw).monto), moneda: subtotal.moneda },
+    totalEstimado,
+    ahorro,
+    subtotalLista,
+    subtotalConIva,
+    ahorroConIva: { monto: centavos(subtotalConIva.monto - totalEstimado.monto), moneda: subtotal.moneda },
+    // El FIX con el que el cron escribió los pesos: todas las piezas en dólares
+    // deberían traer el mismo; se toma el de la primera.
+    tipoCambio: lineas.find((l) => l.tipoCambio !== null)?.tipoCambio ?? null,
   };
 }

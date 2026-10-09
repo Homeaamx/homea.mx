@@ -245,9 +245,10 @@
     var r = plp.querySelector(".toolbar .results");
     if (r) {
       var filtrado = Object.keys(activos).length > 0;
+      var unidad = r.getAttribute("data-unidad") || "en línea";
       var base = filtrado
         ? visibles + " de " + cards.length + " piezas"
-        : visibles + (visibles === 1 ? " pieza en línea" : " piezas en línea");
+        : visibles + (visibles === 1 ? " pieza " : " piezas ") + unidad;
       r.setAttribute("data-base", base);
       r.textContent = base;
     }

@@ -86,6 +86,7 @@ function aLinea({ sku, cantidad }: LineaSim, tc: TipoCambio): LineaCarrito | nul
     }),
     cotizacion: { moneda: p.moneda, lista: p.precio, unitario: p.precio, descuento: 0 },
     montoAlto: montoAlto(centavos(mxn * (1 + IVA))),
+    tipoCambio: p.moneda === "USD" ? tc.valor : null,
   };
 }
 
@@ -112,6 +113,9 @@ async function armar(lineas: LineaSim[]): Promise<Carrito> {
     // El índice no trae precio de lista: en simulación no hay ahorro que mostrar.
     ahorro: { monto: 0, moneda },
     subtotalLista: { monto: subtotal, moneda },
+    subtotalConIva: { monto: centavos(subtotal * (1 + IVA)), moneda },
+    ahorroConIva: { monto: 0, moneda },
+    tipoCambio: resueltas.some((l) => l.tipoCambio !== null) ? tc.valor : null,
   };
 }
 

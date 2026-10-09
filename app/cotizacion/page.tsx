@@ -5,11 +5,9 @@ import { productoPorSku } from "@/lib/catalogo";
 import {
   datosDeQuery,
   folioDe,
-  importeDe,
+  mensajeCotizacion,
   parsearPartidas,
   serializarPartidas,
-  totalesPorMoneda,
-  type DatosCliente,
   type PartidaCotizacion,
 } from "@/lib/cotizacion";
 import { productoVivoPorSku } from "@/lib/shopify/catalogoVivo";
@@ -75,19 +73,6 @@ async function armarPartida(sku: string, cantidad: number): Promise<PartidaCotiz
   };
 }
 
-function mensajeWhatsApp(folio: string, url: string, datos: DatosCliente, partidas: PartidaCotizacion[]): string {
-  const n2 = (x: number) => new Intl.NumberFormat("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(x);
-  const lineas = partidas.map(
-    (p, i) =>
-      `${i + 1}. ${p.marca} · ${p.nombre} · Modelo ${p.sku} · ${p.cantidad} pza${p.cantidad > 1 ? "s" : ""} · importe ${n2(importeDe(p))} ${p.moneda} + IVA`,
-  );
-  const totales = totalesPorMoneda(partidas).map(
-    (t) => `Total en ${t.moneda === "MXN" ? "pesos" : "dólares"}: ${n2(t.total)} ${t.moneda} (IVA incl.)`,
-  );
-  const quien = [datos.nombre, datos.telefono, datos.ciudad, datos.proyecto ? `Proyecto: ${datos.proyecto}` : ""].filter(Boolean);
-  return [`Hola, les comparto mi pre-cotización HOMEA ${folio}:`, url, ...(quien.length ? ["", quien.join(" · ")] : []), "", ...lineas, "", ...totales].join("\n");
-}
-
 export default async function CotizacionPage(props: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const sp = await props.searchParams;
   const uno = (clave: string) => {
@@ -106,7 +91,8 @@ export default async function CotizacionPage(props: { searchParams: Promise<Reco
   const partidas = (await Promise.all(refs.map((r) => armarPartida(r.sku, r.cantidad)))).filter(
     (x): x is PartidaCotizacion => x !== null,
   );
-  const wa = whatsappHref(mensajeWhatsApp(folio, url, datos, partidas));
+  // Mismo texto que manda el modal de "Mi proyecto" (lib/cotizacion.ts).
+  const wa = whatsappHref(mensajeCotizacion(folio, url, datos, partidas, hoy));
 
   return (
     <div className="cot-page">

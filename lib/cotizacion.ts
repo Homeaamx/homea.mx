@@ -167,6 +167,51 @@ export function fechaVigencia(desde = new Date()): Date {
   return hasta;
 }
 
+/**
+ * Texto del WhatsApp al vendedor. Es UNO solo para el modal del carrito y para la
+ * página /cotizacion (2026-10-09): folio, link al documento, datos del cliente,
+ * una partida por línea en la moneda de la pieza y sin IVA (como la tabla) y
+ * los totales por moneda (como el documento). Sin tipo de cambio: ese lo pone
+ * el ejecutivo.
+ */
+export function mensajeCotizacion(
+  folio: string,
+  url: string,
+  datos: DatosCliente,
+  partidas: PartidaCotizacion[],
+  fecha = new Date(),
+): string {
+  const n2 = (x: number) =>
+    new Intl.NumberFormat("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(x);
+  const quien = [
+    datos.nombre,
+    datos.telefono ? `Tel. ${datos.telefono}` : "",
+    [datos.ciudad, datos.cp].filter(Boolean).join(" "),
+    datos.correo,
+    datos.proyecto ? `Proyecto: ${datos.proyecto}` : "",
+  ].filter(Boolean);
+  const lineas = partidas.map((p, i) => {
+    const serie = p.serie ? ` (${p.serie})` : "";
+    const estado = p.enStock ? "En stock" : "Bajo pedido";
+    const confirmar = p.preliminar ? " · precio por confirmar" : "";
+    return `${i + 1}. ${p.marca} · ${p.nombre}${serie}\n   Modelo ${p.sku} · ${p.cantidad} pza${p.cantidad > 1 ? "s" : ""} · ${n2(c2(p.lista - p.descuento))} ${p.moneda} c/u sin IVA · importe ${n2(importeDe(p))} ${p.moneda} · ${estado}${confirmar}`;
+  });
+  const totales = totalesPorMoneda(partidas).map(
+    (t) =>
+      `Totales en ${t.moneda === "MXN" ? "pesos" : "dólares"} (${t.moneda}): subtotal sin IVA ${n2(t.subtotal)} · ahorro −${n2(t.ahorro)} · IVA 16 % ${n2(t.iva)} · total IVA incl. ${n2(t.total)}`,
+  );
+  return [
+    `Hola, les envío mi pre-cotización HOMEA ${folio} (${formatearFecha(fecha)}):`,
+    url,
+    ...(quien.length ? ["", quien.join(" · ")] : []),
+    "",
+    ...(lineas.length ? lineas : ["(sin partidas)"]),
+    "",
+    ...totales,
+    "Se me proporcionará un tipo de cambio vigente y tiempos de entrega estimados.",
+  ].join("\n");
+}
+
 /** Query string de la cotización: partidas + datos del cliente (solo los que vienen). */
 export function queryCotizacion(partidas: PartidaRef[], datos?: Partial<DatosCliente>): string {
   const q = new URLSearchParams();

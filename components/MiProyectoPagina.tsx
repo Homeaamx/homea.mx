@@ -1,31 +1,37 @@
 "use client";
 
-// MiProyectoPagina — /mi-proyecto: la página de "Mi proyecto" con el mismo
-// diseño que /wishlist (hero, rejilla de tarjetas, cuadro de cierre). Lee el
-// carrito de Shopify por contexto (CarritoProvider envuelve <main>) y usa
-// <ProyectoCierre> para los totales y la salida, así dice exactamente lo mismo
-// que el cajón: sin peros → "Pagar"; si algo se cotiza → notas y WhatsApp.
+// MiProyectoPagina — /mi-proyecto, la página de "Mi proyecto" (rediseño
+// 2026-10-09, mismo lenguaje que /wishlist): cabecera sobria, lista de piezas
+// en filas con regla fina (foto · datos · precio unitario · cantidad · importe)
+// y un panel de resumen pegajoso a la derecha con los totales y la salida.
+//
+// Lee el carrito de Shopify por contexto (CarritoProvider envuelve <main>) y usa
+// <ProyectoCierre> para totales, tipo de cambio aplicado, notas y botón, así
+// dice exactamente lo mismo que el cajón: sin peros → "Pagar"; si algo se
+// cotiza → "Enviar listado por WhatsApp" (abre la pre-cotización).
 
 import { useCarrito } from "./CarritoContexto";
 import { topeAlcanzado } from "./CarritoDrawer";
 import ProyectoCierre from "./ProyectoCierre";
-import { formatearDinero } from "@/lib/shopify/tipos";
+import { formatearDinero, type LineaCarrito } from "@/lib/shopify/tipos";
 
-const ICONO = (
-  <svg viewBox="0 0 24 24" aria-hidden="true" className="ic-stroke">
-    <rect x="4.5" y="5" width="15" height="15.5" />
-    <path d="M9 5V3.5h6V5" />
-    <path d="M8.5 10.5h7M8.5 14h7M8.5 17.5h4" />
-  </svg>
-);
+/** Importe de la línea: precio público con IVA × cantidad, en la moneda de lista. */
+function importeDe(l: LineaCarrito) {
+  return {
+    monto: Math.round(l.precioPublico.venta.monto * l.cantidad * 100) / 100,
+    moneda: l.precioPublico.venta.moneda,
+  };
+}
 
 export default function MiProyectoPagina() {
   const ctx = useCarrito();
   const carrito = ctx?.carrito;
   const cargado = ctx?.cargado ?? false;
+  const ocupado = ctx?.ocupado ?? false;
   const lineas = carrito?.lineas ?? [];
   const n = carrito?.cantidadTotal ?? 0;
   const vacio = cargado && lineas.length === 0;
+  const seCotiza = carrito?.modo === "cotizacion";
 
   return (
     <div data-mi-proyecto>
@@ -37,12 +43,14 @@ export default function MiProyectoPagina() {
             <span>Mi proyecto</span>
           </div>
           <div className="eyebrow">
-            Tu proyecto · <span className="figures">{cargado ? `${n} ${n === 1 ? "pieza" : "piezas"}` : "…"}</span>
+            Mi proyecto · <span className="figures">{cargado ? `${n} ${n === 1 ? "pieza" : "piezas"}` : "…"}</span>
           </div>
-          <h1 className="wlp-title">Mi proyecto {ICONO}</h1>
+          <h1 className="wlp-title">
+            Tu <i>proyecto</i>.
+          </h1>
           <p className="sub">
-            Todas las piezas que vas armando. Si cada una cumple la regla de compra, pagas en línea; si alguna se
-            cotiza, el proyecto completo va a un ejecutivo con tu cotización preliminar.
+            Reúne aquí todas las piezas de tu proyecto. Las disponibles para compra en línea se pagan directo; si
+            alguna se cotiza, el proyecto completo se envía a un ejecutivo con tu pre-cotización.
           </p>
         </div>
       </header>
@@ -65,37 +73,27 @@ export default function MiProyectoPagina() {
               </a>
             </div>
           ) : (
-            <>
-              <div className="wlp-count">
-                <span>Piezas en tu proyecto</span>
-              </div>
-              <div className="wlp-grid" aria-busy={ctx?.ocupado}>
+            <div className="sel-layout">
+              <div className="sel-lista is-proyecto" aria-busy={ocupado}>
                 {lineas.map((l) => (
-                  <div className="pcard wlp-card" key={l.id}>
-                    <a className="imgw cutout" href={l.ficha ?? "#"} aria-label={l.nombre}>
+                  <article className="sel-row" key={l.id}>
+                    <a className="sel-thumb cutout" href={l.ficha ?? "#"} aria-label={l.nombre}>
                       {l.imagen ? (
-                        /* eslint-disable-next-line @next/next/no-img-element -- foto del CDN de Shopify, tarjeta fija. */
-                        <img src={l.imagen} alt={l.nombre} loading="lazy" decoding="async" />
+                        /* eslint-disable-next-line @next/next/no-img-element -- foto del CDN de Shopify, miniatura fija. */
+                        <img src={l.imagen} alt="" loading="lazy" decoding="async" />
                       ) : null}
                     </a>
-                    <button
-                      type="button"
-                      className="wl-remove wlp-x"
-                      onClick={() => ctx?.quitar(l)}
-                      aria-label={`Quitar ${l.nombre}`}
-                    >
-                      ×
-                    </button>
-                    <div className="body">
-                      <div className="pcard-head">
-                        <span className="brand">{l.marca}</span>
-                        {l.serie ? <span className="pcard-serie">{l.serie}</span> : null}
-                      </div>
-                      <h3 className="pcard-name">
+
+                    <div className="sel-info">
+                      <span className="sel-brand">
+                        {l.marca}
+                        {l.serie ? <span className="sel-serie"> · {l.serie}</span> : null}
+                      </span>
+                      <h3 className="sel-name">
                         <a href={l.ficha ?? "#"}>{l.nombre.split(" — ")[0]}</a>
                       </h3>
-                      <span className="pcard-sku figures">
-                        <span className="pcard-sku-lbl">Modelo</span>
+                      <span className="sel-sku figures">
+                        <b>Modelo</b>
                         {l.sku}
                       </span>
                       <span className="proy-tags">
@@ -103,20 +101,27 @@ export default function MiProyectoPagina() {
                           {l.enStock ? "En stock" : "Bajo pedido"}
                         </span>
                       </span>
-                      <div className={`pcard-price${ctx?.ocupado ? " is-pendiente" : ""}`}>
-                        <span className="price-tag figures">
-                          {formatearDinero(l.precioPublico.venta)}
-                          <span className="proy-iva">IVA incl.</span>
-                        </span>
-                        {l.precioPublico.tachado ? (
-                          <s className="price-was figures">{formatearDinero(l.precioPublico.tachado)}</s>
-                        ) : null}
-                      </div>
-                      <div className="cart-qty">
+                    </div>
+
+                    {/* Columna de datos (Carla, 2026-10-09): precio con IVA y tachado,
+                        regla, cantidad en control segmentado e importe. */}
+                    <div className="mp-datos">
+                    <div className={`mp-precio${ocupado ? " is-pendiente" : ""}`}>
+                      <strong className="figures">{formatearDinero(l.precioPublico.venta)}</strong>
+                      <span className="mp-iva">IVA incl.</span>
+                      {l.precioPublico.tachado ? (
+                        <s className="figures">{formatearDinero(l.precioPublico.tachado)}</s>
+                      ) : null}
+                    </div>
+
+                    <div className="mp-fila">
+                      <span className="mp-lbl">Cantidad</span>
+                      <div className="cart-qty mp-qty">
                         <button
                           type="button"
                           className="cart-q"
                           onClick={() => ctx?.cambiar(l, l.cantidad - 1)}
+                          // Mínimo una: para sacar la pieza está la ×.
                           disabled={l.cantidad <= 1}
                           aria-label="Quitar una"
                         >
@@ -127,45 +132,68 @@ export default function MiProyectoPagina() {
                           type="button"
                           className="cart-q"
                           onClick={() => ctx?.cambiar(l, l.cantidad + 1)}
+                          // El tope lo dicta Shopify, solo para lo que está en stock.
                           disabled={topeAlcanzado(l)}
                           aria-label="Agregar una"
                         >
                           +
                         </button>
-                        {l.cantidad > 1 ? (
-                          <span className="proy-linea-total figures">
-                            ={" "}
-                            {formatearDinero({
-                              monto: Math.round(l.precioPublico.venta.monto * l.cantidad * 100) / 100,
-                              moneda: l.precioPublico.venta.moneda,
-                            })}
-                          </span>
-                        ) : null}
                       </div>
                     </div>
-                  </div>
+
+                    <div className={`mp-fila${ocupado ? " is-pendiente" : ""}`}>
+                      <span className="mp-lbl">Importe</span>
+                      <span className="mp-val">
+                        <strong className="figures">{formatearDinero(importeDe(l))}</strong>
+                        <span className="mp-iva">IVA incl.</span>
+                      </span>
+                    </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      className="sel-x"
+                      onClick={() => ctx?.quitar(l)}
+                      aria-label={`Quitar ${l.nombre}`}
+                    >
+                      ×
+                    </button>
+                  </article>
                 ))}
+
+                <div className="sel-pie">
+                  <a className="arrow-link" href="/productos/cocina-y-bar">
+                    Seguir explorando <span className="ln" />
+                    <span className="ar">→</span>
+                  </a>
+                </div>
               </div>
 
               {carrito ? (
-                <div className="mp-cierre">
-                  <div className="mp-cierre-t">
-                    <h3>
-                      {carrito.modo === "checkout" ? (
-                        <>
-                          Todo listo para <i>pagar</i>.
-                        </>
-                      ) : (
-                        <>
-                          Tu proyecto se cierra <i>con un ejecutivo</i>.
-                        </>
-                      )}
-                    </h3>
-                  </div>
-                  <ProyectoCierre carrito={carrito} aviso={ctx?.aviso} ocupado={ctx?.ocupado ?? false} />
-                </div>
+                <aside className="sel-aside" aria-label="Resumen de tu proyecto">
+                  <h3>
+                    {seCotiza ? (
+                      <>
+                        Se cierra <i>con un ejecutivo</i>.
+                      </>
+                    ) : (
+                      <>
+                        Todo listo para <i>pagar</i>.
+                      </>
+                    )}
+                  </h3>
+                  <p className="sel-aside-sub">
+                    {seCotiza
+                      ? "Una o más piezas deben revisarse detenidamente, así que el proyecto completo se envía a un ejecutivo de ventas con tu pre-cotización."
+                      : "Todas las piezas se pueden pagar en línea. Envío y facturación se confirman al pagar."}
+                  </p>
+                  <h4 className="sel-aside-h">
+                    Resumen del <i>pedido</i>.
+                  </h4>
+                  <ProyectoCierre carrito={carrito} aviso={ctx?.aviso} ocupado={ocupado} />
+                </aside>
               ) : null}
-            </>
+            </div>
           )}
         </div>
       </section>

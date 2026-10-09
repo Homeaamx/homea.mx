@@ -1,9 +1,16 @@
 /* HOMEA v2 — wishlist.js
    Wishlist en localStorage (sin cuenta): corazones en tarjetas de producto y
    ficha, badge en el corazón del nav y la PÁGINA /wishlist (wishlist.html en el
-   preview), que lista las piezas guardadas con filtros por marca y tipo, orden,
-   "Agregar a mi proyecto" y cotización por WhatsApp. Ya no hay cajón lateral
-   (Carla, 2026-10-08): el corazón del nav navega a la página.
+   preview). Ya no hay cajón lateral (Carla, 2026-10-08): el corazón del nav
+   navega a la página.
+
+   La página (Carla, 2026-10-09) se ve IGUAL que una página de producto: es un
+   `.plp` con las mismas tarjetas que genera lib/shopify/htmlCatalogo.ts y los
+   filtros los aplica public/catalogo.js (casillas data-fk, "Ver N piezas",
+   chips, conteos, orden). Aquí solo se PINTA el markup compatible:
+     · barra lateral: Disponibilidad y Promoción;
+     · arriba, desplegables: Tipo de producto, Marca y Precio (con "Listo");
+     · a la derecha, el orden de las páginas de producto.
 
    Todo con listeners DELEGADOS en document (capture) para sobrevivir la
    navegación SPA de Next (PreviewRouter reemplaza <main> y el nav); un
@@ -37,7 +44,8 @@
   /* Los datos del producto se leen del botón (data-wl-*), que en el catálogo
      vivo declara todos los campos; en las tarjetas estáticas del preview se
      leen de la tarjeta (.pcard) que contiene el corazón. `vid` es la variante
-     de Shopify, para que "Agregar a mi proyecto" funcione desde la página. */
+     de Shopify, para que "Agregar a mi proyecto" funcione desde la página;
+     `stock`, `was` y `mxn` alimentan los filtros de la página (2026-10-09). */
   function harvest(btn) {
     var item;
     if (btn.hasAttribute("data-wl-name")) {
@@ -50,7 +58,10 @@
         img: btn.getAttribute("data-wl-img") || "",
         href: btn.getAttribute("data-wl-href") || location.pathname,
         tipo: btn.getAttribute("data-wl-tipo") || "",
-        vid: btn.getAttribute("data-wl-vid") || ""
+        vid: btn.getAttribute("data-wl-vid") || "",
+        stock: btn.getAttribute("data-wl-stock") === "1",
+        was: btn.getAttribute("data-wl-was") || "",
+        mxn: parseFloat(btn.getAttribute("data-wl-mxn")) || 0
       };
     } else {
       var card = btn.closest(".pcard");
@@ -65,7 +76,10 @@
         img: img ? img.getAttribute("src") : "",
         href: card.getAttribute("href") || "#",
         tipo: "",
-        vid: ""
+        vid: "",
+        stock: /en stock/i.test(text(card, ".pcard-tag")),
+        was: text(card, ".price-was"),
+        mxn: parseFloat(card.getAttribute("data-precio")) || 0
       };
     }
     /* Respaldo: el botón "Agregar a mi proyecto" de la misma página conoce la variante. */
@@ -111,19 +125,36 @@
       moneda: m && m[2] ? m[2] : ""
     };
   }
+  /* Precio en pesos para el filtro de precio y el orden: el que anotó el
+     corazón; si la pieza se guardó antes, dólares × tipo de cambio de la barra. */
+  function tipoCambioBarra() {
+    var el = document.querySelector("#u-fx strong");
+    var v = el ? parseFloat(el.textContent.replace(/,/g, "")) : NaN;
+    return isNaN(v) ? parseFloat((document.querySelector("#u-fx") || {}).getAttribute ? document.querySelector("#u-fx").getAttribute("data-fx-fallback") : "") || 17.43 : v;
+  }
+  function pesosDe(it) {
+    if (it.mxn) return it.mxn;
+    var p = precioDe(it);
+    if (isNaN(p.monto)) return 0;
+    return p.moneda === "USD" ? p.monto * tipoCambioBarra() : p.monto;
+  }
   function fmt(n) {
     return "$" + n.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
-
-  /* ---------- Página /wishlist ---------- */
-  var filtros = { marca: "", tipo: "" };
-  var orden = "reciente";
-
+  function fmtPesos(n) { return "$" + Math.round(n).toLocaleString("es-MX"); }
+  /* Mismo slug que lib/shopify/htmlCatalogo.ts (slugValor). */
+  function slug(v) {
+    return String(v).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  }
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
+
+  /* ---------- Página /wishlist ---------- */
+  var CORAZON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.9 13a4.8 4.8 0 0 1 0-6.8 4.7 4.7 0 0 1 6.7 0l.4.4.4-.4a4.7 4.7 0 0 1 6.7 0 4.8 4.8 0 0 1 0 6.8Z"/></svg>';
 
   function waHref(items) {
     var lines = items.map(function (it) {
@@ -147,69 +178,94 @@
       .map(function (k) { return { v: k, n: m[k] }; });
   }
 
-  function grupoChips(titulo, clave, valores) {
-    if (valores.length < 2) return "";
-    return '<div class="wlp-fgroup" role="group" aria-label="' + esc(titulo) + '">' +
-      '<span class="wlp-flbl">' + esc(titulo) + '</span>' +
-      valores.map(function (x) {
-        var on = filtros[clave] === x.v;
-        return '<button type="button" class="wlp-chip' + (on ? " is-on" : "") +
-          '" data-wl-f="' + esc(clave) + '" data-wl-v="' + esc(x.v) + '" aria-pressed="' + on + '">' +
-          esc(x.v) + ' <span class="n figures">' + x.n + '</span></button>';
-      }).join("") + '</div>';
+  /* "Gaggenau" / "Gaggenau y Miele" / "Gaggenau, Miele y 2 más". */
+  function enumerar(valores) {
+    if (!valores.length) return "—";
+    if (valores.length === 1) return valores[0];
+    if (valores.length === 2) return valores[0] + " y " + valores[1];
+    return valores[0] + ", " + valores[1] + " y " + (valores.length - 2) + " más";
   }
 
-  function aplicar(items) {
-    var lista = items.filter(function (it) {
-      if (filtros.marca && it.brand !== filtros.marca) return false;
-      if (filtros.tipo && tipoDe(it) !== filtros.tipo) return false;
-      return true;
-    });
-    var dir = orden === "precio-desc" ? -1 : 1;
-    if (orden === "precio-asc" || orden === "precio-desc") {
-      lista.sort(function (a, b) {
-        var pa = precioDe(a).monto, pb = precioDe(b).monto;
-        if (isNaN(pa)) return 1;
-        if (isNaN(pb)) return -1;
-        return (pa - pb) * dir;
-      });
-    } else if (orden === "marca") {
-      lista.sort(function (a, b) {
-        return a.brand.localeCompare(b.brand, "es") || nombreCorto(a).localeCompare(nombreCorto(b), "es");
-      });
-    } else {
-      /* Recientes primero (las piezas sin marca de tiempo se quedan al final, en su orden). */
-      lista.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+  /* Rangos de precio proporcionales, como rangosPrecio() del servidor. */
+  function redondo(v) {
+    var mag = Math.pow(10, Math.max(3, Math.floor(Math.log10(Math.max(v, 1))) - 1));
+    return Math.round(v / mag) * mag;
+  }
+  function rangosPrecio(precios) {
+    var v = precios.filter(function (n) { return n > 0; }).sort(function (a, b) { return a - b; });
+    if (v.length < 2) return [];
+    var k = Math.min(4, v.length), cortes = [];
+    for (var i = 1; i < k; i++) {
+      var c = redondo(v[Math.floor((i * v.length) / k)]);
+      if (c > (cortes[cortes.length - 1] || 0) && c < v[v.length - 1]) cortes.push(c);
     }
-    return lista;
+    if (!cortes.length) return [];
+    var tope = Math.floor(v[v.length - 1] / 1000) * 1000 + 1000;
+    return [0].concat(cortes).map(function (lo, j) { return { lo: lo, hi: cortes[j] || tope }; });
   }
 
-  function tarjeta(it) {
+  /* Una casilla del panel (misma estructura que lib/shopify/htmlCatalogo.ts). */
+  function casilla(clave, valor, etiqueta, n, figuras) {
+    return '<label><input type="checkbox" data-fk="' + esc(clave) + '" value="' + esc(valor) + '"> ' +
+      '<span class="flbl' + (figuras ? " figures" : "") + '">' + esc(etiqueta) + '</span> ' +
+      '<span class="count figures">' + n + '</span></label>';
+  }
+  function grupoLateral(nombre, clave, etiquetas) {
+    return '<details class="fgroup fgroup--acc" data-fgroup="' + esc(clave) + '" open>' +
+      '<summary class="fgroup-sum"><h6>' + esc(nombre) + ' <span class="fsel figures" data-fsel hidden>0</span></h6><span class="fgroup-caret" aria-hidden="true"></span></summary>' +
+      '<div class="fopts">' + etiquetas + '</div></details>';
+  }
+  function desplegable(nombre, clave, etiquetas, ocultarCero) {
+    return '<details class="fgroup fdrop" data-fgroup="' + esc(clave) + '"' + (ocultarCero ? " data-ocultar-cero" : "") + '>' +
+      '<summary class="fdrop-sum"><h6>' + esc(nombre) + ' <span class="fsel figures" data-fsel hidden>0</span></h6><span class="fdrop-caret" aria-hidden="true"></span></summary>' +
+      '<div class="fdrop-panel"><div class="fopts">' + etiquetas + '</div>' +
+      '<button type="button" class="fdrop-done" data-cat-apply data-wl-done>Listo</button></div></details>';
+  }
+
+  /* Tarjeta IGUAL a la del catálogo (tarjetaHtml en htmlCatalogo.ts), con los
+     data-* que lee catalogo.js: precio en pesos, stock, tipo y valores de filtro. */
+  function tarjeta(it, orden) {
     var serie = serieDe(it);
     var precio = precioDe(it);
+    var tipo = tipoDe(it);
     var precioHtml = isNaN(precio.monto)
-      ? '<span class="price-note">Precio a consultar</span>'
-      : '<span class="price-tag figures">' + fmt(precio.monto) +
-        (precio.moneda ? '<span class="currency">' + esc(precio.moneda) + '</span>' : "") +
-        '</span><span class="price-note">IVA incluido</span>';
-    var agregar = it.id
-      ? '<button type="button" class="btn btn-primary btn-sm cart-add" data-cart-sku="' + esc(it.id) +
-        '" data-cart-vid="' + esc(it.vid || "") + '">Agregar a mi proyecto</button>'
-      : "";
-    return '<div class="pcard wlp-card" data-wl-card="' + esc(it.id) + '">' +
-      '<a class="imgw cutout" href="' + esc(it.href) + '" aria-label="' + esc(nombreCorto(it)) + '">' +
+      ? '<div class="pcard-price"><span class="price-note">Precio a consultar</span></div>'
+      : '<div class="pcard-price"><span class="price-tag figures">' + fmt(precio.monto) +
+        (precio.moneda ? '<span class="currency">' + esc(precio.moneda) + '</span>' : "") + '</span>' +
+        (it.was ? '<s class="price-was figures">' + esc(it.was) + '</s>' : "") +
+        '<span class="price-note">IVA incluido</span></div>';
+    var stock = it.stock
+      ? '<span class="pcard-tag is-stock">EN STOCK</span>'
+      : '<span class="pcard-tag is-pedido">Bajo pedido</span>';
+    return '<a class="pcard" href="' + esc(it.href) + '" data-cat-card data-orden="' + orden + '"' +
+      ' data-precio="' + pesosDe(it) + '" data-stock="' + (it.stock ? 1 : 0) + '"' +
+      ' data-tipo="' + esc(slug(tipo)) + '" data-fv-marca="' + esc(slug(it.brand)) + '"' +
+      ' data-fv-stock="' + (it.stock ? "en-stock" : "bajo-pedido") + '"' +
+      ' data-fv-promo="' + (it.was ? "en-promocion" : "precio-regular") + '">' +
+      '<div class="imgw cutout">' +
       (it.img ? '<img src="' + esc(it.img) + '" alt="' + esc(nombreCorto(it)) + '" loading="lazy" decoding="async">' : "") +
-      '</a>' +
-      '<button type="button" class="wl-remove wlp-x" data-id="' + esc(it.id) + '" aria-label="Quitar ' + esc(nombreCorto(it)) + '">&times;</button>' +
+      '</div>' +
       '<div class="body">' +
+      '<div class="pcard-top">' + stock +
+      '<button class="wl-heart on" type="button" data-wl-id="' + esc(it.id) + '" aria-label="Quitar de la wishlist" aria-pressed="true">' + CORAZON + '</button></div>' +
       '<div class="pcard-head"><span class="brand">' + esc(it.brand) + '</span>' +
       (serie ? '<span class="pcard-serie">' + esc(serie) + '</span>' : "") + '</div>' +
-      '<h3 class="pcard-name"><a href="' + esc(it.href) + '">' + esc(nombreCorto(it)) + '</a></h3>' +
-      (it.id ? '<span class="pcard-sku figures"><span class="pcard-sku-lbl">Modelo</span>' + esc(it.id) + '</span>' : "") +
-      '<div class="pcard-price">' + precioHtml + '</div>' +
-      '<div class="wlp-actions">' + agregar + '</div>' +
-      '</div></div>';
+      '<h3 class="pcard-name">' + esc(nombreCorto(it)) + '</h3>' +
+      (it.id ? '<span class="pcard-sku figures">' + esc(it.id) + '</span>' : "") +
+      precioHtml +
+      '</div></a>';
   }
+
+  /* Qué casillas están marcadas (para conservarlas al repintar). */
+  function marcadas(root) {
+    var m = {};
+    root.querySelectorAll(".filters input[data-fk]:checked").forEach(function (cb) {
+      m[cb.getAttribute("data-fk") + "|" + cb.value] = true;
+    });
+    return m;
+  }
+
+  var firma = null;
 
   function renderPage() {
     var root = document.querySelector("[data-wl-page]");
@@ -218,65 +274,91 @@
     var vacio = root.querySelector("[data-wl-vacio]");
     var lleno = root.querySelector("[data-wl-lleno]");
     var total = root.querySelector("[data-wl-total]");
-    var fbar = root.querySelector("[data-wl-filtros]");
-    var grid = root.querySelector("[data-wl-grid]");
-    var cta = root.querySelector("[data-wl-cta]");
-    var vis = root.querySelector("[data-wl-visibles]");
-    var sinRes = root.querySelector("[data-wl-sin-resultados]");
-
-    /* Filtros que ya no aplican (se quitó la última pieza de esa marca) se sueltan. */
-    if (filtros.marca && !items.some(function (it) { return it.brand === filtros.marca; })) filtros.marca = "";
-    if (filtros.tipo && !items.some(function (it) { return tipoDe(it) === filtros.tipo; })) filtros.tipo = "";
 
     if (total) total.textContent = items.length + (items.length === 1 ? " pieza" : " piezas");
     if (vacio) vacio.hidden = items.length > 0;
     if (lleno) lleno.hidden = items.length === 0;
-    if (!items.length) return;
+    if (!items.length) { firma = null; return; }
 
-    var lista = aplicar(items);
+    /* Se repinta solo si cambió la lista: así catalogo.js conserva lo filtrado y
+       el orden elegido entre re-renders del nav. */
+    var f = items.map(function (it) { return it.id + ":" + (it.stock ? 1 : 0) + ":" + (it.was ? 1 : 0); }).join(",");
+    if (f === firma && root.querySelector("[data-cat-card]")) return;
+    firma = f;
+    var previas = marcadas(root);
 
-    if (fbar) {
-      var marcas = conteo(items, function (it) { return it.brand; });
-      var tipos = conteo(items, function (it) { return tipoDe(it); });
-      var hayFiltros = marcas.length > 1 || tipos.length > 1;
-      var activos = (filtros.marca ? 1 : 0) + (filtros.tipo ? 1 : 0);
-      fbar.innerHTML =
-        '<div class="wlp-fgroups">' +
-        grupoChips("Marca", "marca", marcas) +
-        grupoChips("Tipo", "tipo", tipos) +
-        (activos ? '<button type="button" class="wlp-clear" data-wl-clear>Ver todas</button>' : "") +
-        '</div>' +
-        (items.length > 1
-          ? '<label class="wlp-sort"><span>Ordenar</span><select data-wl-sort>' +
-            [["reciente", "Agregadas recientemente"], ["precio-asc", "Precio: menor a mayor"],
-             ["precio-desc", "Precio: mayor a menor"], ["marca", "Marca A–Z"]].map(function (o) {
-              return '<option value="' + o[0] + '"' + (orden === o[0] ? " selected" : "") + ">" + o[1] + "</option>";
-            }).join("") + '</select></label>'
-          : "");
-      fbar.hidden = !hayFiltros && items.length < 2;
+    /* Recientes primero: data-orden es el orden por defecto de catalogo.js. */
+    var lista = items.slice().sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+
+    var lateral = root.querySelector("[data-wl-filtros]");
+    if (lateral) {
+      var nStock = items.filter(function (it) { return it.stock; }).length;
+      var nPromo = items.filter(function (it) { return !!it.was; }).length;
+      lateral.innerHTML =
+        '<div class="fchips fchips--panel" data-cat-chips hidden></div>' +
+        '<div class="fhead"><h6>Filtros</h6></div>' +
+        grupoLateral("Disponibilidad", "stock",
+          casilla("stock", "en-stock", "En stock", nStock) +
+          casilla("stock", "bajo-pedido", "Bajo pedido", items.length - nStock)) +
+        grupoLateral("Promoción", "promo",
+          casilla("promo", "en-promocion", "En promoción", nPromo) +
+          casilla("promo", "precio-regular", "Precio regular", items.length - nPromo)) +
+        '<div class="fbar" data-cat-bar hidden>' +
+        '<button type="button" class="fbar-apply" data-cat-apply hidden>Ver <span data-cat-n>0</span> piezas</button>' +
+        '<button type="button" class="fbar-clear" data-cat-clear>Limpiar filtros</button></div>' +
+        '<p class="fnote">Precios con IVA. Las piezas en dólares muestran su equivalente en pesos al tipo de cambio del día.</p>';
     }
 
-    if (vis) vis.textContent = lista.length === items.length
-      ? ""
-      : lista.length + " de " + items.length;
-    if (grid) grid.innerHTML = lista.map(tarjeta).join("");
-    if (sinRes) sinRes.hidden = lista.length > 0;
+    var arriba = root.querySelector("[data-wl-top]");
+    if (arriba) {
+      var tipos = conteo(items, tipoDe);
+      var marcas = conteo(items, function (it) { return it.brand; });
+      var pesos = items.map(pesosDe);
+      var rangos = rangosPrecio(pesos).map(function (r) {
+        var n = pesos.filter(function (x) { return x >= r.lo && x < r.hi; }).length;
+        var txt = r.lo === 0 ? "Hasta " + fmtPesos(r.hi) : fmtPesos(r.lo) + " – " + fmtPesos(r.hi);
+        return casilla("precio-rango", r.lo + "-" + r.hi, txt, n, true);
+      }).join("");
+      arriba.innerHTML =
+        desplegable("Tipo de producto", "tipo-web", tipos.map(function (t) { return casilla("tipo-web", slug(t.v), t.v, t.n); }).join("") || '<p class="fnote fnote--tight">Sin opciones por ahora.</p>') +
+        desplegable("Marca", "marca", marcas.map(function (m) { return casilla("marca", slug(m.v), m.v, m.n); }).join(""), true) +
+        desplegable("Precio", "precio", rangos || '<p class="fnote fnote--tight">Agrega más piezas para filtrar por precio.</p>');
+    }
+
+    var grid = root.querySelector("[data-wl-grid]");
+    if (grid) {
+      grid.innerHTML = lista.map(tarjeta).join("") +
+        '<p class="plp-aviso" data-cat-vacio hidden style="grid-column:1/-1">Ninguna pieza de tu wishlist coincide con esos filtros.</p>';
+    }
+
+    /* Casillas que estaban marcadas antes del repintado. */
+    Object.keys(previas).forEach(function (k) {
+      var p = k.split("|");
+      var cb = root.querySelector('.filters input[data-fk="' + p[0] + '"][value="' + p[1] + '"]');
+      if (cb) cb.checked = true;
+    });
+
+    var cta = root.querySelector("[data-wl-cta]");
     if (cta) {
-      cta.hidden = lista.length === 0;
       var a = cta.querySelector("[data-wl-wa]");
       if (a) a.href = waHref(lista);
-      /* "Agregar" manda al proyecto las piezas visibles (respeta el filtro);
-         CarritoProvider lee data-cart-items y las agrega una por una. */
+      /* "Agregar a mi proyecto" manda todas las piezas; CarritoProvider lee
+         data-cart-items y las agrega una por una. */
       var add = cta.querySelector("[data-wl-add-all]");
       if (add) {
         add.setAttribute("data-cart-items", JSON.stringify(lista.filter(function (it) { return it.id; })
           .map(function (it) { return { vid: it.vid || "", sku: it.id }; })));
       }
       var lbl = cta.querySelector("[data-wl-cta-n]");
-      if (lbl) lbl.textContent = lista.length === items.length
-        ? "las " + lista.length + (lista.length === 1 ? " pieza" : " piezas")
-        : "estas " + lista.length + (lista.length === 1 ? " pieza" : " piezas");
+      if (lbl) lbl.textContent = "las " + lista.length + (lista.length === 1 ? " pieza" : " piezas");
+      var mEl = cta.querySelector("[data-wl-marcas]");
+      if (mEl) mEl.textContent = enumerar(marcas ? marcas.map(function (x) { return x.v; }) : []);
+      var tEl = cta.querySelector("[data-wl-tipos]");
+      if (tEl) tEl.textContent = enumerar(tipos ? tipos.map(function (x) { return x.v; }) : []);
     }
+
+    /* catalogo.js aplica lo marcado y recuenta (misma señal que tipos.js). */
+    document.dispatchEvent(new CustomEvent("catalogo:aplicar"));
   }
 
   /* ---------- Sync: badges del nav + estado de corazones + página ---------- */
@@ -301,6 +383,14 @@
     renderPage();
   }
 
+  /* Desplegables de arriba: uno abierto a la vez; se cierran con "Listo" o al
+     hacer clic fuera. */
+  function cerrarDesplegables(salvo) {
+    document.querySelectorAll("details.fdrop[open]").forEach(function (d) {
+      if (d !== salvo) d.open = false;
+    });
+  }
+
   /* ---------- Eventos delegados (capture: gana al interceptor SPA) ---------- */
   document.addEventListener("click", function (ev) {
     if (!ev.target || !ev.target.closest) return;
@@ -313,24 +403,20 @@
     }
     var rm = ev.target.closest(".wl-remove");
     if (rm) { remove(rm.getAttribute("data-id")); return; }
-    var chip = ev.target.closest(".wlp-chip");
-    if (chip) {
-      var f = chip.getAttribute("data-wl-f"), v = chip.getAttribute("data-wl-v");
-      filtros[f] = filtros[f] === v ? "" : v;
-      renderPage();
+    var done = ev.target.closest("[data-wl-done]");
+    if (done) {
+      var det = done.closest("details.fdrop");
+      /* catalogo.js aplica (data-cat-apply); aquí solo se pliega el panel. */
+      setTimeout(function () { if (det) det.open = false; }, 0);
       return;
     }
-    if (ev.target.closest("[data-wl-clear]")) {
-      filtros.marca = ""; filtros.tipo = "";
-      renderPage();
-    }
+    var sum = ev.target.closest("details.fdrop > summary");
+    if (sum) { cerrarDesplegables(sum.parentNode); return; }
+    if (!ev.target.closest("details.fdrop")) cerrarDesplegables(null);
   }, true);
 
-  document.addEventListener("change", function (ev) {
-    var sel = ev.target && ev.target.closest ? ev.target.closest("[data-wl-sort]") : null;
-    if (!sel) return;
-    orden = sel.value;
-    renderPage();
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "Escape") cerrarDesplegables(null);
   });
 
   /* Re-render SPA (nav o <main> reemplazados por React) → re-sincronizar.

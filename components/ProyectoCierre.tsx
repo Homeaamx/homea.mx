@@ -15,7 +15,7 @@
 // Comentarios al pie: cuatro casos exactos de Carla (2026-10-08), documentados
 // en docs/REGLAS-CARRITO-Y-COMENTARIOS.md.
 
-import { DATOS_VACIOS, folioDe, queryCotizacion, serializarPartidas, totalesPorMoneda, type DatosCliente } from "@/lib/cotizacion";
+import { DATOS_VACIOS, folioDe, mensajeCotizacion, queryCotizacion, serializarPartidas, type DatosCliente } from "@/lib/cotizacion";
 import type { Aviso, Carrito, Dinero } from "@/lib/shopify/tipos";
 import { formatearDinero } from "@/lib/shopify/tipos";
 import { SITE_URL } from "@/lib/site";
@@ -29,9 +29,6 @@ interface Props {
   aviso?: Aviso;
   ocupado: boolean;
 }
-
-const fecha = () =>
-  new Intl.DateTimeFormat("es-MX", { day: "2-digit", month: "long", year: "numeric" }).format(new Date());
 
 /** ¿Alguna pieza se vende en dólares? Decide el título del total y las notas. */
 export function hayDolares(carrito: Carrito): boolean {
@@ -52,10 +49,10 @@ export function partidasDe(carrito: Carrito): string {
 }
 
 /**
- * Listado que recibe el vendedor: folio y link a la cotización preliminar, los
- * datos del cliente y una partida por línea con modelo, cantidad y precio
- * público, más los totales. Se arma con lo que el servidor devolvió: en el
- * navegador no se calcula ni un peso.
+ * Listado que recibe el vendedor: el MISMO texto que manda la página /cotizacion
+ * (`mensajeCotizacion`): folio y link a la pre-cotización, datos del cliente,
+ * una partida por línea en su moneda y sin IVA, y los totales por moneda tal
+ * como salen en el documento. Se arma con lo que el servidor devolvió.
  */
 export function mensajeListado(carrito: Carrito, datos: DatosCliente): string {
   if (!carrito.lineas.length) return whatsappHref();
@@ -65,39 +62,7 @@ export function mensajeListado(carrito: Carrito, datos: DatosCliente): string {
     carrito.lineas.map((l) => ({ sku: l.sku, cantidad: l.cantidad })),
     datos,
   )}`;
-  const partidas = carrito.lineas.map((l, i) => {
-    const serie = l.serie ? ` (${l.serie})` : "";
-    const estado = l.enStock ? "En stock" : "Bajo pedido";
-    return `${i + 1}. ${l.marca} · ${l.nombre.split(" — ")[0]}${serie}\n   Modelo ${l.sku} · ${l.cantidad} pza${l.cantidad > 1 ? "s" : ""} · ${formatearDinero(l.precioPublico.venta)} c/u IVA incl. · ${estado}`;
-  });
-  const quien = [
-    datos.nombre,
-    datos.telefono ? `Tel. ${datos.telefono}` : "",
-    [datos.ciudad, datos.cp].filter(Boolean).join(" "),
-    datos.correo,
-    datos.proyecto ? `Proyecto: ${datos.proyecto}` : "",
-  ].filter(Boolean);
-  const n2 = (x: number) => new Intl.NumberFormat("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(x);
-  const totales = [
-    `Subtotal (precio de venta, sin IVA): ${formatearDinero(carrito.subtotalLista)}`,
-    `Ahorro: −${formatearDinero(carrito.ahorro)}`,
-    `IVA (16 %): ${formatearDinero(carrito.ivaEstimado)}`,
-    `${hayDolares(carrito) ? "Total estimado" : "Total en pesos"}: ${formatearDinero(carrito.totalEstimado)}`,
-    ...totalesPorMoneda(partidasDelCarrito(carrito)).flatMap((t) => [
-    `Totales en ${t.moneda === "MXN" ? "pesos" : "dólares"} (${t.moneda}): ahorro ${n2(t.ahorro)} · subtotal ${n2(t.subtotal)} · IVA ${n2(t.iva)} · total ${n2(t.total)}`,
-  ]),
-  ];
-  const texto = [
-    `Hola, les envío mi pre-cotización HOMEA ${folio} (${fecha()}):`,
-    link,
-    ...(quien.length ? ["", quien.join(" · ")] : []),
-    "",
-    ...partidas,
-    "",
-    ...totales,
-    "Se me proporcionará un tipo de cambio vigente y tiempos de entrega estimados.",
-  ];
-  return whatsappHref(texto.join("\n"));
+  return whatsappHref(mensajeCotizacion(folio, link, datos, partidasDelCarrito(carrito)));
 }
 
 /** Explicación del bloqueo. Nunca se falla en silencio: se dice qué pasa. */
@@ -157,19 +122,16 @@ export default function ProyectoCierre({ carrito, aviso, ocupado }: Props) {
 
   return (
     <div className="proy-cierre">
-      {/* Totales (Carla, 2026-10-08): subtotal a precio de venta − ahorro + IVA = total. */}
+      {/* Totales (Carla, 2026-10-09): TODO con IVA. Subtotal a precio de lista con
+          IVA − ahorro con IVA = total; el IVA se informa aparte, sin sumarse. */}
       <div className="proy-totales">
         <div className="cart-subtotal">
-          <span>Subtotal</span>
-          <Precio d={carrito.subtotalLista} pendiente={ocupado} />
+          <span>Subtotal en pesos</span>
+          <Precio d={carrito.subtotalConIva} pendiente={ocupado} />
         </div>
         <div className="cart-subtotal proy-ahorro">
-          <span>Ahorro</span>
-          <span className={`figures${ocupado ? " is-pendiente" : ""}`}>−{formatearDinero(carrito.ahorro)}</span>
-        </div>
-        <div className="cart-subtotal">
-          <span>IVA (16 %)</span>
-          <Precio d={carrito.ivaEstimado} pendiente={ocupado} />
+          <span>Ahorro en pesos</span>
+          <span className={`figures${ocupado ? " is-pendiente" : ""}`}>−{formatearDinero(carrito.ahorroConIva)}</span>
         </div>
         <div className="cart-subtotal proy-total">
           <span>{dolares ? "Total estimado" : "Total en pesos"}</span>
@@ -177,6 +139,21 @@ export default function ProyectoCierre({ carrito, aviso, ocupado }: Props) {
             {formatearDinero(carrito.totalEstimado)}
           </span>
         </div>
+        <div className="cart-subtotal proy-tc">
+          <span>Incluye IVA 16 %</span>
+          <Precio d={carrito.ivaEstimado} pendiente={ocupado} />
+        </div>
+        {/* Las piezas en dólares se suman en pesos: aquí se dice con qué tipo de
+            cambio (el FIX con el que Shopify tiene escritos los pesos), para que
+            el salto USD → MXN sea trazable (2026-10-09). */}
+        {dolares && carrito.tipoCambio ? (
+          <div className="cart-subtotal proy-tc">
+            <span>Tipo de cambio aplicado</span>
+            <span className="figures">
+              1 USD = {new Intl.NumberFormat("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(carrito.tipoCambio)} MXN
+            </span>
+          </div>
+        ) : null}
       </div>
 
       {notas.length ? (

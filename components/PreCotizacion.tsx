@@ -35,6 +35,10 @@ interface Props {
 const num = (n: number) =>
   new Intl.NumberFormat("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
 
+/** Miniatura del CDN de Shopify: evita incrustar la foto completa en el PDF. */
+const miniatura = (url: string) =>
+  /cdn\.shopify\.com/.test(url) ? `${url}${url.includes("?") ? "&" : "?"}width=240` : url;
+
 const NOMBRE_MONEDA = { MXN: "Pesos mexicanos (MXN)", USD: "Dólares (USD)", MIXTA: "Mixta (MXN y USD)", "—": "—" } as const;
 
 export default function PreCotizacion({ folio, fechaIso, partidas, datos, editable = false, onDatos }: Props) {
@@ -52,6 +56,7 @@ export default function PreCotizacion({ folio, fechaIso, partidas, datos, editab
           onChange={(ev) => onDatos?.({ ...datos, [clave]: ev.target.value })}
           maxLength={80}
           placeholder={extra.required ? "Llenar campo" : "Opcional"}
+          aria-required={extra.required ? true : undefined}
           {...extra}
         />
       ) : (
@@ -99,14 +104,14 @@ export default function PreCotizacion({ folio, fechaIso, partidas, datos, editab
           {campo("nombre", "Nombre", { autoComplete: "name", required: true })}
           <div className="pc-fila">
             {campo("telefono", "Teléfono", { type: "tel", autoComplete: "tel", required: true })}
-            {campo("ciudad", "Ciudad", { autoComplete: "address-level2", required: true })}
-            {campo("cp", "CP", { inputMode: "numeric", maxLength: 10, autoComplete: "postal-code", required: true })}
+            {campo("ciudad", "Ciudad", { autoComplete: "address-level2" })}
+            {campo("cp", "CP", { inputMode: "numeric", maxLength: 10, autoComplete: "postal-code" })}
           </div>
           {campo("correo", "Correo", { type: "email", autoComplete: "email" })}
         </div>
         <div className="pc-bloque">
           <h2 className="pc-h">Proyecto</h2>
-          {campo("proyecto", "Nombre del proyecto", { required: true })}
+          {campo("proyecto", "Nombre del proyecto")}
           <div className="pc-campo">
             <span className="pc-lbl">Cotización hecha en moneda</span>
             <span className="pc-val">{NOMBRE_MONEDA[moneda]}</span>
@@ -125,17 +130,17 @@ export default function PreCotizacion({ folio, fechaIso, partidas, datos, editab
             <th className="num">Cantidad</th>
             <th>Modelo</th>
             <th className="pc-th-desc">Descripción de producto</th>
-            <th className="num">P/U</th>
+            <th className="num">P/U sin IVA</th>
             <th className="num">Desc.</th>
-            <th className="num">Importe</th>
+            <th className="num">Importe sin IVA</th>
             <th className="pc-th-img" aria-label="Imagen" />
           </tr>
         </thead>
         <tbody>
           {partidas.map((p) => (
             <tr key={p.sku}>
-              <td className="num figures">{p.cantidad}</td>
-              <td className="figures pc-sku">{p.sku}</td>
+              <td className="num figures" data-l="Cantidad">{p.cantidad}</td>
+              <td className="figures pc-sku" data-l="Modelo">{p.sku}</td>
               <td className="pc-desc">
                 <div className="pc-desc-in">
                 <strong>
@@ -149,19 +154,19 @@ export default function PreCotizacion({ folio, fechaIso, partidas, datos, editab
                 </span>
                 </div>
               </td>
-              <td className="num figures">
+              <td className="num figures" data-l="P/U sin IVA">
                 {num(p.lista)}
                 {mixta ? <em className="pc-mon">{p.moneda}</em> : null}
               </td>
-              <td className="num figures">{p.descuento > 0 ? num(p.descuento) : "—"}</td>
-              <td className="num figures">
+              <td className="num figures" data-l="Desc.">{p.descuento > 0 ? num(p.descuento) : "—"}</td>
+              <td className="num figures" data-l="Importe sin IVA">
                 {num(importeDe(p))}
                 {mixta ? <em className="pc-mon">{p.moneda}</em> : null}
               </td>
               <td className="pc-img">
                 {p.imagen ? (
                   /* eslint-disable-next-line @next/next/no-img-element -- miniatura del CDN de Shopify. */
-                  <img src={p.imagen} alt="" loading="lazy" />
+                  <img src={miniatura(p.imagen)} alt="" loading="lazy" />
                 ) : null}
               </td>
             </tr>
@@ -184,7 +189,7 @@ export default function PreCotizacion({ folio, fechaIso, partidas, datos, editab
                 <span className="pc-tot-t">{t.moneda === "MXN" ? "Totales en pesos (MXN)" : "Totales en dólares (USD)"}</span>
               ) : null}
               <div className="cart-subtotal">
-                <span>Subtotal</span>
+                <span>Subtotal sin IVA</span>
                 <span className="figures">{num(t.subtotal)} {t.moneda}</span>
               </div>
               <div className="cart-subtotal proy-ahorro">
@@ -196,7 +201,7 @@ export default function PreCotizacion({ folio, fechaIso, partidas, datos, editab
                 <span className="figures">{num(t.iva)} {t.moneda}</span>
               </div>
               <div className="cart-subtotal proy-total">
-                <span>{t.moneda === "USD" ? "Total estimado" : "Total en pesos"}</span>
+                <span>{t.moneda === "USD" ? "Total estimado · IVA incl." : "Total en pesos · IVA incl."}</span>
                 <span className="cart-subtotal-num figures">
                   {num(t.total)} {t.moneda}
                 </span>

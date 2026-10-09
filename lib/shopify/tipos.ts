@@ -54,6 +54,8 @@ export interface LineaCarrito {
    * (Carla, 2026-10-08), aunque esté en stock y se pueda pagar en línea.
    */
   montoAlto: boolean;
+  /** Pesos por dólar implícitos en el precio de Shopify (solo piezas en dólares). */
+  tipoCambio: number | null;
 }
 
 export type MotivoBloqueo =
@@ -99,6 +101,20 @@ export interface Carrito {
    * subtotal − ahorro + IVA = total.
    */
   subtotalLista: Dinero;
+  /**
+   * Totales CON IVA para la vista (Carla, 2026-10-09: el cliente nunca ve una
+   * cifra sin impuesto): subtotal a precio de lista con IVA y ahorro con IVA.
+   * El ahorro se deriva (subtotalConIva − totalEstimado) para que la resta cierre
+   * al centavo con el total que viene de Shopify.
+   */
+  subtotalConIva: Dinero;
+  ahorroConIva: Dinero;
+  /**
+   * Pesos por dólar con los que Shopify convirtió las piezas en dólares (el FIX
+   * con el que corrió el cron). `null` si no hay piezas en dólares. Se muestra
+   * bajo los totales para que el salto USD → MXN sea trazable (2026-10-09).
+   */
+  tipoCambio: number | null;
 }
 
 /** Aviso puntual de una operación (sin existencia, tope de stock, error de Shopify). */
@@ -131,6 +147,9 @@ export const CARRITO_VACIO: Carrito = {
   totalEstimado: { monto: 0, moneda: "MXN" },
   ahorro: { monto: 0, moneda: "MXN" },
   subtotalLista: { monto: 0, moneda: "MXN" },
+  subtotalConIva: { monto: 0, moneda: "MXN" },
+  ahorroConIva: { monto: 0, moneda: "MXN" },
+  tipoCambio: null,
 };
 
 /** "$193,603.20 MXN" — se conserva el formato exacto que ya usaba cart.js. */

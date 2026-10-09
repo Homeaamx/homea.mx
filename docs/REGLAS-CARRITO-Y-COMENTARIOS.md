@@ -42,7 +42,9 @@ Notas de implementación:
 
 Título del total: **"Total en pesos"** si todo es MXN; **"Total estimado"** si hay piezas en dólares.
 
-Orden de los totales (Carla, 2026-10-08 noche): **Subtotal** a precio de venta público, antes del descuento (pesos sin IVA) → **Ahorro** (descuento × cantidad) → **IVA 16 %** (sobre subtotal − ahorro) → línea → **Total** = subtotal − ahorro + IVA.
+Orden de los totales (Carla, 2026-10-09, sustituye al del 2026-10-08): **todo con IVA**. **Subtotal** a precio de lista con IVA (`subtotalConIva`) → **Ahorro** con IVA (`ahorroConIva`, derivado como subtotal − total para que cierre al centavo) → línea → **Total** (IVA incluido) → debajo, en gris y sin sumarse, "Incluye IVA 16 %: $X" y el tipo de cambio aplicado. Razón: el cliente final (Profeco) debe ver siempre el precio que paga; mezclar líneas con IVA y un subtotal sin IVA confundía. La pre-cotización conserva el formato SAE sin IVA, pero sus encabezados lo dicen ("P/U sin IVA", "Importe sin IVA", "Subtotal sin IVA", "Total · IVA incl.").
+
+**Tipo de cambio aplicado (2026-10-09):** cuando hay piezas en dólares, bajo el total va la línea "Tipo de cambio aplicado · 1 USD = 17.97 MXN". Es el FIX con el que el cron escribió los pesos en Shopify (`Carrito.tipoCambio`, derivado en `lib/shopify/normalizar.ts` como pesos de venta ÷ dólares de venta), que puede NO coincidir con el de la barra superior (ese se consulta al momento; los precios de Shopify se actualizan con el cron de las 19:00 UTC, lunes a viernes). Sin esta línea el cliente veía líneas en dólares y totales en pesos sin saber cómo se pasaba de uno a otro.
 
 ## 3. Casos sin texto propio (por si Carla quiere uno)
 
@@ -55,4 +57,6 @@ Orden de los totales (Carla, 2026-10-08 noche): **Subtotal** a precio de venta p
 - Comentarios y botón: `components/ProyectoCierre.tsx` → `notasDelProyecto()`. El botón de WhatsApp abre la pre-cotización (`components/PreCotizacionModal.tsx`), donde el cliente llena sus datos y envía.
 - Explicaciones de bloqueo: misma función `textoBloqueo()`.
 - Nota de la ficha de producto ("se cotiza con un ejecutivo…"): `lib/shopify/htmlCatalogo.ts` → `ctaHtml()`.
-- Pre-cotización (modal y `/cotizacion`): `components/PreCotizacion.tsx`; nota fija al pie "Se le proporcionará un tipo de cambio vigente y tiempos de entrega estimados."
+- Pre-cotización (modal y `/cotizacion`): `components/PreCotizacion.tsx`; nota fija al pie "Se le proporcionará un tipo de cambio vigente y tiempos de entrega estimados." Solo nombre y teléfono son obligatorios (ciudad, CP, correo y nombre del proyecto son opcionales y así se marcan).
+- Mensaje de WhatsApp al vendedor: `lib/cotizacion.ts` → `mensajeCotizacion()`. Es UNO solo para el modal y para `/cotizacion` (2026-10-09): folio, link, datos del cliente, partidas en su moneda sin IVA y totales por moneda, igual que el documento. Ya no se mandan los totales en pesos del carrito dentro del mensaje.
+- Páginas `/wishlist` y `/mi-proyecto` (2026-10-09): lista de filas (`.sel-row`) + panel de resumen pegajoso (`.sel-aside`), CSS compartido en el bloque "Listas personales" de `styles/theme.css` (espejo en `preview/theme.css`).

@@ -64,8 +64,13 @@ export default function PreCotizacionModal({ carrito, onCerrar }: Props) {
 
         <footer className="pc-acciones">
           <p className="pc-acciones-t">
-            ¡Llena los campos correspondientes, descarga tu cotización y envíala por WhatsApp. ¡Así de fácil!
+            Llena tus datos, descarga tu pre-cotización y envíala por WhatsApp. ¡Así de fácil!
           </p>
+          {!listo ? (
+            <p className="pc-hint" role="status">
+              Escribe tu nombre y teléfono para poder descargar o enviar.
+            </p>
+          ) : null}
           <div className="pc-botones">
             <button type="button" className="wl-wa pc-descargar" onClick={descargarPdf} disabled={!listo}>
               Descargar PDF <span className="ar">↓</span>

@@ -604,13 +604,6 @@
   400,
   640
  ],
- "/assets/photos/showroom.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1400
- ],
  "/assets/photos/hero-subzero-wolf-cocina.webp": [
   400,
   640,
@@ -627,25 +620,12 @@
   1600,
   2000
  ],
- "/assets/photos/hero-nosotros-showroom-cocina-equipada.webp": [
-  400,
-  640,
-  960,
-  1280
- ],
  "/assets/photos/marcas-band.webp": [
   400,
   640,
   960,
   1280,
   1600
- ],
- "/assets/photos/nuestra-historia-equipo-homea-torneo-campanario.webp": [
-  400,
-  640,
-  960,
-  1280,
-  1400
  ],
  "/assets/photos/cat-cuidado-ropa-bosch-lavadora-secadora.webp": [
   400,
@@ -2299,5 +2279,34 @@
   1280,
   1600,
   2000
+ ],
+ "/assets/photos/showroom-homea-queretaro-cocina-isla.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1600,
+  2000
+ ],
+ "/assets/photos/hero-nosotros-showroom-homea-estufa-profesional.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1600
+ ],
+ "/assets/photos/nuestra-historia-equipo-homea-showroom.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1400
+ ],
+ "/assets/photos/showroom.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1400
  ]
 }
