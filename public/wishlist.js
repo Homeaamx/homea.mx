@@ -1,10 +1,14 @@
 /* HOMEA v2 — wishlist.js
-   Wishlist en localStorage (sin cuenta): corazones en tarjetas de producto,
-   badge en el botón WISHLIST del nav y drawer lateral con CTA de cotización
-   por WhatsApp. Todo con listeners DELEGADOS en document (capture) para
-   sobrevivir la navegación SPA de Next (PreviewRouter reemplaza <main> y el
-   nav); un MutationObserver re-sincroniza corazones y badges tras cada
-   re-render. El drawer se inyecta una sola vez en <body>, fuera de React. */
+   Wishlist en localStorage (sin cuenta): corazones en tarjetas de producto y
+   ficha, badge en el corazón del nav y la PÁGINA /wishlist (wishlist.html en el
+   preview), que lista las piezas guardadas con filtros por marca y tipo, orden,
+   "Agregar a mi proyecto" y cotización por WhatsApp. Ya no hay cajón lateral
+   (Carla, 2026-10-08): el corazón del nav navega a la página.
+
+   Todo con listeners DELEGADOS en document (capture) para sobrevivir la
+   navegación SPA de Next (PreviewRouter reemplaza <main> y el nav); un
+   MutationObserver re-sincroniza corazones, badges y la página tras cada
+   re-render. */
 (function () {
   "use strict";
 
@@ -30,33 +34,47 @@
     return el ? el.textContent.replace(/\s+/g, " ").trim() : "";
   }
 
-  /* Los datos del producto se leen de la tarjeta (.pcard) que contiene el
-     corazón; el botón sólo declara data-wl-id (el modelo). En la ficha (PDP)
-     no hay .pcard: el botón declara todos los campos como data-wl-*. */
+  /* Los datos del producto se leen del botón (data-wl-*), que en el catálogo
+     vivo declara todos los campos; en las tarjetas estáticas del preview se
+     leen de la tarjeta (.pcard) que contiene el corazón. `vid` es la variante
+     de Shopify, para que "Agregar a mi proyecto" funcione desde la página. */
   function harvest(btn) {
+    var item;
     if (btn.hasAttribute("data-wl-name")) {
-      return {
+      item = {
         id: btn.getAttribute("data-wl-id"),
         brand: btn.getAttribute("data-wl-brand") || "",
         name: btn.getAttribute("data-wl-name") || "",
         spec: btn.getAttribute("data-wl-spec") || "",
         price: btn.getAttribute("data-wl-price") || "",
         img: btn.getAttribute("data-wl-img") || "",
-        href: btn.getAttribute("data-wl-href") || location.pathname
+        href: btn.getAttribute("data-wl-href") || location.pathname,
+        tipo: btn.getAttribute("data-wl-tipo") || "",
+        vid: btn.getAttribute("data-wl-vid") || ""
+      };
+    } else {
+      var card = btn.closest(".pcard");
+      if (!card) return null;
+      var img = card.querySelector(".imgw img");
+      item = {
+        id: btn.getAttribute("data-wl-id"),
+        brand: text(card, ".brand"),
+        name: text(card, "h3"),
+        spec: text(card, ".dotlist"),
+        price: text(card, ".price-tag").replace("USD", " USD"),
+        img: img ? img.getAttribute("src") : "",
+        href: card.getAttribute("href") || "#",
+        tipo: "",
+        vid: ""
       };
     }
-    var card = btn.closest(".pcard");
-    if (!card) return null;
-    var img = card.querySelector(".imgw img");
-    return {
-      id: btn.getAttribute("data-wl-id"),
-      brand: text(card, ".brand"),
-      name: text(card, "h3"),
-      spec: text(card, ".dotlist"),
-      price: text(card, ".price-tag").replace("USD", " USD"),
-      img: img ? img.getAttribute("src") : "",
-      href: card.getAttribute("href") || "#"
-    };
+    /* Respaldo: el botón "Agregar a mi proyecto" de la misma página conoce la variante. */
+    if (!item.vid && item.id) {
+      var add = document.querySelector('.cart-add[data-cart-sku="' + item.id + '"]');
+      if (add) item.vid = add.getAttribute("data-cart-vid") || "";
+    }
+    item.ts = Date.now();
+    return item;
   }
 
   function toggle(btn) {
@@ -72,50 +90,44 @@
     setTimeout(function () { btn.classList.remove("pop"); }, 450);
   }
 
-  /* ---------- Drawer (una sola vez, fuera de React) ---------- */
-  var overlay, drawer;
-  function ensureDrawer() {
-    if (drawer) return;
-    overlay = document.createElement("div");
-    overlay.className = "wl-overlay";
-    overlay.setAttribute("data-wl-close", "");
-    overlay.hidden = true;
-
-    drawer = document.createElement("aside");
-    drawer.className = "wl-drawer";
-    drawer.setAttribute("role", "dialog");
-    drawer.setAttribute("aria-modal", "true");
-    drawer.setAttribute("aria-label", "Wishlist");
-    drawer.hidden = true;
-    drawer.innerHTML =
-      '<div class="wl-head">' +
-      '  <div>' +
-      '    <div class="eyebrow">Wishlist · <span class="wl-headcount figures">0</span></div>' +
-      '    <h3 class="wl-title">Tu <i>selección</i>.</h3>' +
-      '  </div>' +
-      '  <button class="wl-x" type="button" data-wl-close aria-label="Cerrar">&times;</button>' +
-      '</div>' +
-      '<div class="wl-list" role="list"></div>' +
-      '<div class="wl-foot">' +
-      '  <a class="wl-wa" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_wishlist">Cotizar esta lista por WhatsApp <span class="ar">→</span></a>' +
-      '  <p class="wl-note">Showroom en Querétaro.</p>' +
-      '</div>';
-    document.body.appendChild(overlay);
-    document.body.appendChild(drawer);
+  /* ---------- Derivados de cada pieza ---------- */
+  function serieDe(it) {
+    var partes = (it.name || "").split(" — ");
+    return partes.length > 1 ? partes.slice(1).join(" — ").trim() : "";
+  }
+  function nombreCorto(it) { return (it.name || "").split(" — ")[0].trim(); }
+  /* Tipo: lo anota el corazón del catálogo vivo; si no, el primer dato de la
+     línea corta ("Columna · 24" · Panelable" → "Columna"). */
+  function tipoDe(it) {
+    if (it.tipo) return it.tipo;
+    var primero = (it.spec || "").split(" · ")[0].trim();
+    return primero && primero !== it.id ? primero : "";
+  }
+  /* "$27,044.35 USD IVA incluido" → { monto: 27044.35, moneda: "USD" } */
+  function precioDe(it) {
+    var m = /\$?\s*([\d,]+(?:\.\d+)?)\s*([A-Z]{3})?/.exec(it.price || "");
+    return {
+      monto: m ? parseFloat(m[1].replace(/,/g, "")) : NaN,
+      moneda: m && m[2] ? m[2] : ""
+    };
+  }
+  function fmt(n) {
+    return "$" + n.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
-  /* Link al catálogo para el estado vacío: se toma del propio DOM (mega-menú),
-     así apunta a categoria-*.html en el preview estático y a /productos/* en Next. */
-  function catalogHref() {
-    var a = document.querySelector(
-      'a[href$="categoria-cocina-y-bar.html"], a[href="/productos/cocina-y-bar"]'
-    );
-    return a ? a.getAttribute("href") : "#";
+  /* ---------- Página /wishlist ---------- */
+  var filtros = { marca: "", tipo: "" };
+  var orden = "reciente";
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
   }
 
   function waHref(items) {
     var lines = items.map(function (it) {
-      return "• " + it.brand + " " + it.name +
+      return "• " + it.brand + " " + nombreCorto(it) +
         (it.id ? " (mod. " + it.id + ")" : "") +
         (it.price ? " — " + it.price : "");
     });
@@ -125,106 +137,149 @@
       "&text=" + encodeURIComponent(msg);
   }
 
-  function renderList() {
-    if (!drawer) return;
-    var items = read();
-    var list = drawer.querySelector(".wl-list");
-    var foot = drawer.querySelector(".wl-foot");
-    var head = drawer.querySelector(".wl-headcount");
-    head.textContent = items.length;
-    list.textContent = "";
+  function conteo(items, fn) {
+    var m = {};
+    items.forEach(function (it) {
+      var v = fn(it);
+      if (v) m[v] = (m[v] || 0) + 1;
+    });
+    return Object.keys(m).sort(function (a, b) { return a.localeCompare(b, "es"); })
+      .map(function (k) { return { v: k, n: m[k] }; });
+  }
 
-    if (!items.length) {
-      var empty = document.createElement("div");
-      empty.className = "wl-empty";
-      empty.innerHTML =
-        '<p>Aún no guardas piezas.</p>' +
-        '<p class="wl-empty-sub">Toca el corazón de un producto para armar tu lista y cotizarla en un solo paso.</p>';
-      var go = document.createElement("a");
-      go.className = "arrow-link";
-      go.href = catalogHref();
-      go.innerHTML = 'Explorar Cocina y Bar <span class="ln"></span><span class="ar">→</span>';
-      empty.appendChild(go);
-      list.appendChild(empty);
-      foot.hidden = true;
-      return;
+  function grupoChips(titulo, clave, valores) {
+    if (valores.length < 2) return "";
+    return '<div class="wlp-fgroup" role="group" aria-label="' + esc(titulo) + '">' +
+      '<span class="wlp-flbl">' + esc(titulo) + '</span>' +
+      valores.map(function (x) {
+        var on = filtros[clave] === x.v;
+        return '<button type="button" class="wlp-chip' + (on ? " is-on" : "") +
+          '" data-wl-f="' + esc(clave) + '" data-wl-v="' + esc(x.v) + '" aria-pressed="' + on + '">' +
+          esc(x.v) + ' <span class="n figures">' + x.n + '</span></button>';
+      }).join("") + '</div>';
+  }
+
+  function aplicar(items) {
+    var lista = items.filter(function (it) {
+      if (filtros.marca && it.brand !== filtros.marca) return false;
+      if (filtros.tipo && tipoDe(it) !== filtros.tipo) return false;
+      return true;
+    });
+    var dir = orden === "precio-desc" ? -1 : 1;
+    if (orden === "precio-asc" || orden === "precio-desc") {
+      lista.sort(function (a, b) {
+        var pa = precioDe(a).monto, pb = precioDe(b).monto;
+        if (isNaN(pa)) return 1;
+        if (isNaN(pb)) return -1;
+        return (pa - pb) * dir;
+      });
+    } else if (orden === "marca") {
+      lista.sort(function (a, b) {
+        return a.brand.localeCompare(b.brand, "es") || nombreCorto(a).localeCompare(nombreCorto(b), "es");
+      });
+    } else {
+      /* Recientes primero (las piezas sin marca de tiempo se quedan al final, en su orden). */
+      lista.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+    }
+    return lista;
+  }
+
+  function tarjeta(it) {
+    var serie = serieDe(it);
+    var precio = precioDe(it);
+    var precioHtml = isNaN(precio.monto)
+      ? '<span class="price-note">Precio a consultar</span>'
+      : '<span class="price-tag figures">' + fmt(precio.monto) +
+        (precio.moneda ? '<span class="currency">' + esc(precio.moneda) + '</span>' : "") +
+        '</span><span class="price-note">IVA incluido</span>';
+    var agregar = it.id
+      ? '<button type="button" class="btn btn-primary btn-sm cart-add" data-cart-sku="' + esc(it.id) +
+        '" data-cart-vid="' + esc(it.vid || "") + '">Agregar a mi proyecto</button>'
+      : "";
+    return '<div class="pcard wlp-card" data-wl-card="' + esc(it.id) + '">' +
+      '<a class="imgw cutout" href="' + esc(it.href) + '" aria-label="' + esc(nombreCorto(it)) + '">' +
+      (it.img ? '<img src="' + esc(it.img) + '" alt="' + esc(nombreCorto(it)) + '" loading="lazy" decoding="async">' : "") +
+      '</a>' +
+      '<button type="button" class="wl-remove wlp-x" data-id="' + esc(it.id) + '" aria-label="Quitar ' + esc(nombreCorto(it)) + '">&times;</button>' +
+      '<div class="body">' +
+      '<div class="pcard-head"><span class="brand">' + esc(it.brand) + '</span>' +
+      (serie ? '<span class="pcard-serie">' + esc(serie) + '</span>' : "") + '</div>' +
+      '<h3 class="pcard-name"><a href="' + esc(it.href) + '">' + esc(nombreCorto(it)) + '</a></h3>' +
+      (it.id ? '<span class="pcard-sku figures"><span class="pcard-sku-lbl">Modelo</span>' + esc(it.id) + '</span>' : "") +
+      '<div class="pcard-price">' + precioHtml + '</div>' +
+      '<div class="wlp-actions">' + agregar + '</div>' +
+      '</div></div>';
+  }
+
+  function renderPage() {
+    var root = document.querySelector("[data-wl-page]");
+    if (!root) return;
+    var items = read();
+    var vacio = root.querySelector("[data-wl-vacio]");
+    var lleno = root.querySelector("[data-wl-lleno]");
+    var total = root.querySelector("[data-wl-total]");
+    var fbar = root.querySelector("[data-wl-filtros]");
+    var grid = root.querySelector("[data-wl-grid]");
+    var cta = root.querySelector("[data-wl-cta]");
+    var vis = root.querySelector("[data-wl-visibles]");
+    var sinRes = root.querySelector("[data-wl-sin-resultados]");
+
+    /* Filtros que ya no aplican (se quitó la última pieza de esa marca) se sueltan. */
+    if (filtros.marca && !items.some(function (it) { return it.brand === filtros.marca; })) filtros.marca = "";
+    if (filtros.tipo && !items.some(function (it) { return tipoDe(it) === filtros.tipo; })) filtros.tipo = "";
+
+    if (total) total.textContent = items.length + (items.length === 1 ? " pieza" : " piezas");
+    if (vacio) vacio.hidden = items.length > 0;
+    if (lleno) lleno.hidden = items.length === 0;
+    if (!items.length) return;
+
+    var lista = aplicar(items);
+
+    if (fbar) {
+      var marcas = conteo(items, function (it) { return it.brand; });
+      var tipos = conteo(items, function (it) { return tipoDe(it); });
+      var hayFiltros = marcas.length > 1 || tipos.length > 1;
+      var activos = (filtros.marca ? 1 : 0) + (filtros.tipo ? 1 : 0);
+      fbar.innerHTML =
+        '<div class="wlp-fgroups">' +
+        grupoChips("Marca", "marca", marcas) +
+        grupoChips("Tipo", "tipo", tipos) +
+        (activos ? '<button type="button" class="wlp-clear" data-wl-clear>Ver todas</button>' : "") +
+        '</div>' +
+        (items.length > 1
+          ? '<label class="wlp-sort"><span>Ordenar</span><select data-wl-sort>' +
+            [["reciente", "Agregadas recientemente"], ["precio-asc", "Precio: menor a mayor"],
+             ["precio-desc", "Precio: mayor a menor"], ["marca", "Marca A–Z"]].map(function (o) {
+              return '<option value="' + o[0] + '"' + (orden === o[0] ? " selected" : "") + ">" + o[1] + "</option>";
+            }).join("") + '</select></label>'
+          : "");
+      fbar.hidden = !hayFiltros && items.length < 2;
     }
 
-    items.forEach(function (it) {
-      var row = document.createElement("div");
-      row.className = "wl-item";
-      row.setAttribute("role", "listitem");
-
-      var thumb = document.createElement("a");
-      thumb.className = "wl-thumb";
-      thumb.href = it.href;
-      if (it.img) {
-        var img = document.createElement("img");
-        img.src = it.img;
-        img.alt = it.name;
-        img.loading = "lazy";
-        thumb.appendChild(img);
+    if (vis) vis.textContent = lista.length === items.length
+      ? ""
+      : lista.length + " de " + items.length;
+    if (grid) grid.innerHTML = lista.map(tarjeta).join("");
+    if (sinRes) sinRes.hidden = lista.length > 0;
+    if (cta) {
+      cta.hidden = lista.length === 0;
+      var a = cta.querySelector("[data-wl-wa]");
+      if (a) a.href = waHref(lista);
+      /* "Agregar" manda al proyecto las piezas visibles (respeta el filtro);
+         CarritoProvider lee data-cart-items y las agrega una por una. */
+      var add = cta.querySelector("[data-wl-add-all]");
+      if (add) {
+        add.setAttribute("data-cart-items", JSON.stringify(lista.filter(function (it) { return it.id; })
+          .map(function (it) { return { vid: it.vid || "", sku: it.id }; })));
       }
-
-      var info = document.createElement("div");
-      info.className = "wl-info";
-      var brand = document.createElement("span");
-      brand.className = "wl-brand";
-      brand.textContent = it.brand;
-      var name = document.createElement("a");
-      name.className = "wl-name";
-      name.href = it.href;
-      name.textContent = it.name;
-      var spec = document.createElement("span");
-      spec.className = "wl-spec";
-      spec.textContent = it.spec;
-      var price = document.createElement("span");
-      price.className = "wl-price figures";
-      price.textContent = it.price;
-      info.appendChild(brand);
-      info.appendChild(name);
-      info.appendChild(spec);
-      info.appendChild(price);
-
-      var rm = document.createElement("button");
-      rm.className = "wl-remove";
-      rm.type = "button";
-      rm.setAttribute("data-id", it.id);
-      rm.setAttribute("aria-label", "Quitar " + it.name);
-      rm.innerHTML = "&times;";
-
-      row.appendChild(thumb);
-      row.appendChild(info);
-      row.appendChild(rm);
-      list.appendChild(row);
-    });
-
-    foot.hidden = false;
-    foot.querySelector(".wl-wa").href = waHref(items);
+      var lbl = cta.querySelector("[data-wl-cta-n]");
+      if (lbl) lbl.textContent = lista.length === items.length
+        ? "las " + lista.length + (lista.length === 1 ? " pieza" : " piezas")
+        : "estas " + lista.length + (lista.length === 1 ? " pieza" : " piezas");
+    }
   }
 
-  function openDrawer() {
-    ensureDrawer();
-    renderList();
-    overlay.hidden = false;
-    drawer.hidden = false;
-    /* setTimeout y no rAF: en pestañas sin foco rAF queda suspendido
-       y el drawer se quedaría fuera de pantalla. */
-    setTimeout(function () {
-      overlay.classList.add("open");
-      drawer.classList.add("open");
-    }, 20);
-    document.documentElement.classList.add("wl-lock");
-  }
-  function closeDrawer() {
-    if (!drawer || drawer.hidden) return;
-    overlay.classList.remove("open");
-    drawer.classList.remove("open");
-    document.documentElement.classList.remove("wl-lock");
-    setTimeout(function () { overlay.hidden = true; drawer.hidden = true; }, 260);
-  }
-
-  /* ---------- Sync: badges del nav + estado de corazones ---------- */
+  /* ---------- Sync: badges del nav + estado de corazones + página ---------- */
   function sync() {
     var n = read().length;
     document.querySelectorAll(".wl-count").forEach(function (b) {
@@ -243,7 +298,7 @@
       var pressed = on ? "true" : "false";
       if (h.getAttribute("aria-pressed") !== pressed) h.setAttribute("aria-pressed", pressed);
     });
-    if (drawer && !drawer.hidden) renderList();
+    renderPage();
   }
 
   /* ---------- Eventos delegados (capture: gana al interceptor SPA) ---------- */
@@ -256,38 +311,42 @@
       toggle(heart);
       return;
     }
-    if (ev.target.closest(".wl-open")) {
-      ev.preventDefault();
-      ev.stopPropagation();
-      openDrawer();
-      return;
-    }
     var rm = ev.target.closest(".wl-remove");
     if (rm) { remove(rm.getAttribute("data-id")); return; }
-    if (ev.target.closest("[data-wl-close]")) { closeDrawer(); return; }
-    /* Navegar desde un link del drawer: cerrarlo para no taparlo en SPA. */
-    if (ev.target.closest(".wl-drawer a")) closeDrawer();
+    var chip = ev.target.closest(".wlp-chip");
+    if (chip) {
+      var f = chip.getAttribute("data-wl-f"), v = chip.getAttribute("data-wl-v");
+      filtros[f] = filtros[f] === v ? "" : v;
+      renderPage();
+      return;
+    }
+    if (ev.target.closest("[data-wl-clear]")) {
+      filtros.marca = ""; filtros.tipo = "";
+      renderPage();
+    }
   }, true);
 
-  document.addEventListener("keydown", function (ev) {
-    if (ev.key === "Escape") closeDrawer();
+  document.addEventListener("change", function (ev) {
+    var sel = ev.target && ev.target.closest ? ev.target.closest("[data-wl-sort]") : null;
+    if (!sel) return;
+    orden = sel.value;
+    renderPage();
   });
 
-  /* Re-render SPA (nav o <main> reemplazados por React) → re-sincronizar. */
+  /* Re-render SPA (nav o <main> reemplazados por React) → re-sincronizar.
+     Se ignoran las mutaciones que provoca la propia página de wishlist al
+     pintarse (su raíz [data-wl-page]) para no entrar en bucle. */
   var pending = null;
-  /* Ignora mutaciones del propio drawer/overlay: re-renderizarse a sí mismo
-     dispararía el observer en bucle y los botones internos morirían al instante. */
   var mo = new MutationObserver(function (muts) {
     var external = muts.some(function (m) {
-      return !(drawer && drawer.contains(m.target)) &&
-             !(overlay && overlay.contains(m.target));
+      var page = document.querySelector("[data-wl-page]");
+      return !(page && page.contains(m.target) && m.target !== page);
     });
     if (!external || pending) return;
     pending = setTimeout(function () { pending = null; sync(); }, 80);
   });
 
   function init() {
-    ensureDrawer();
     sync();
     mo.observe(document.body, { childList: true, subtree: true });
   }

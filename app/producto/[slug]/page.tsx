@@ -6,7 +6,6 @@ import MarketingPage from "@/components/MarketingPage";
 import { productoPorSku } from "@/lib/catalogo";
 import { getMain, getTitle, productoFile, productoSlugs } from "@/lib/preview";
 import {
-  decisionDeCompra,
   precioPublico,
   productoVivoPorSku,
   productosDeColeccion,
@@ -14,7 +13,7 @@ import {
   type ProductoVivo,
 } from "@/lib/shopify/catalogoVivo";
 import { TIPOS_WEB, tipoWeb } from "@/lib/shopify/coleccionesWeb";
-import { ctaHtml, fichaHtml, precioFichaHtml, type Relacionados } from "@/lib/shopify/htmlCatalogo";
+import { fichaHtml, type Relacionados } from "@/lib/shopify/htmlCatalogo";
 import { coleccionesCandidatas, sugerenciasDeCompra } from "@/lib/shopify/sugerencias";
 import { contenidoDeFicha, jsonLdProducto } from "@/lib/shopify/pdpSlots";
 import { absUrl } from "@/lib/site";
@@ -138,24 +137,12 @@ export default async function ProductoFichaPage(props: { params: Promise<Params>
   const vivo = await productoVivoPorSku(sku);
   const url = absUrl(`/producto/${slug}`);
 
-  // 1. Ficha curada del piloto: diseño y textos del preview; precio y botón vivos.
-  if (esPiloto) {
+  // 1. Las 5 del piloto: MISMO formato que el resto del catálogo vivo (Carla,
+  //    2026-10-08: galería, pestañas, fichas técnicas, sugerencias). Del HTML
+  //    curado del preview solo sobrevive el gancho, por si Shopify no trae lead.
+  //    El preview completo queda como respaldo cuando Shopify no contesta.
+  if (esPiloto && !vivo) {
     const file = productoFile(slug);
-    if (vivo) {
-      const tc = await obtenerTipoCambio();
-      const precio = precioPublico(vivo, tc);
-      const slots = {
-        precio: precioFichaHtml(precio, tc),
-        cta: ctaHtml(vivo, decisionDeCompra(vivo, precio), precio),
-      };
-      return (
-        <>
-          <MarketingPage file={file} slots={slots} />
-          <JsonLd data={{ ...jsonLdVivo(vivo, precio, url), description: ganchoDeFicha(file) ?? descripcionVivo(vivo) }} />
-        </>
-      );
-    }
-    // Shopify no contestó: precio del índice local, como antes.
     const indexado = productoPorSku(sku);
     const { slots, datos } = await contenidoDeFicha(sku);
     return (
@@ -167,6 +154,7 @@ export default async function ProductoFichaPage(props: { params: Promise<Params>
       </>
     );
   }
+  if (vivo && esPiloto && !vivo.lead) vivo.lead = ganchoDeFicha(productoFile(slug));
 
   // 2. Ficha generada con los datos de Shopify.
   if (!vivo) notFound();

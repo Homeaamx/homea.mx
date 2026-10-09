@@ -103,7 +103,7 @@ export function nombreYSerie(titulo: string): { nombre: string; serie: string | 
 }
 
 /** Línea corta (wishlist y resumen del proyecto): lo que distingue a la pieza de un vistazo. */
-function lineaSpec(p: ProductoVivo): string[] {
+export function lineaSpec(p: ProductoVivo): string[] {
   const f = p.filtros;
   const partes = [
     ...(f.diseno ?? []),
@@ -200,7 +200,7 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
   return `<a class="pcard" href="${href}" ${atributos.join(" ")} data-accion="${decision.accion}">
   <div class="imgw cutout">${imagen}</div>
   <div class="body">
-    <div class="pcard-top">${stock}<button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(spec.join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${img ? esc(cdn(img.url, 400)) : ""}" data-wl-href="${href}" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button></div>
+    <div class="pcard-top">${stock}<button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(spec.join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${img ? esc(cdn(img.url, 400)) : ""}" data-wl-href="${href}" data-wl-tipo="${esc(p.tipo)}" data-wl-vid="${esc(p.variantId.split("/").pop() ?? "")}" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button></div>
     <div class="pcard-head"><span class="brand">${esc(p.marca)}</span>${serie ? `<span class="pcard-serie">${esc(serie)}</span>` : ""}</div>
     <h3 class="pcard-name">${esc(nombre)}</h3>
     <span class="pcard-sku figures">${esc(p.sku)}</span>
@@ -681,7 +681,7 @@ ${relacionados.productos.map((r, i) => tarjetaHtml(r, tc, i)).join("\n")}
   <div class="pdp">
     <div class="gallery">
       <div class="gallery-sticky">
-      <div class="main pdp-cutout" data-pdp-zoom role="button" tabindex="0" aria-label="Ampliar imagen"><button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(lineaSpec(p).join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${principal ? esc(cdn(principal.url, 400)) : ""}" data-wl-href="${href}" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button>${imagenPrincipal}</div>
+      <div class="main pdp-cutout" data-pdp-zoom role="button" tabindex="0" aria-label="Ampliar imagen"><button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(lineaSpec(p).join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${principal ? esc(cdn(principal.url, 400)) : ""}" data-wl-href="${href}" data-wl-tipo="${esc(p.tipo)}" data-wl-vid="${esc(p.variantId.split("/").pop() ?? "")}" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button>${imagenPrincipal}</div>
       ${miniaturas}
       </div>
       ${pestanasHtml(p, spec)}

@@ -13,7 +13,16 @@
 // un par de datos cosméticos para la fila optimista. **El precio jamás sale del
 // HTML**: lo dice Shopify. Ese era el defecto de fondo del carrito anterior.
 
-import { useCallback, useEffect, useOptimistic, useRef, useState, useTransition } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useOptimistic,
+  useRef,
+  useState,
+  useTransition,
+  type ReactNode,
+} from "react";
 import { createPortal } from "react-dom";
 
 import {
@@ -24,16 +33,24 @@ import {
 } from "@/app/acciones/carrito";
 import { CARRITO_VACIO, type Aviso, type Carrito, type LineaCarrito } from "@/lib/shopify/tipos";
 
+import { Contexto, type CarritoContexto } from "./CarritoContexto";
 import CarritoDrawer from "./CarritoDrawer";
+import PreCotizacionModal from "./PreCotizacionModal";
+
+/** Cuánto hay que sostener el cursor sobre "Mi proyecto" para que se abra el cajón (Carla: 0,5 s). */
+const HOVER_ABRIR_MS = 500;
 
 /** Llave del carrito viejo en localStorage; se limpia una vez tras la migración. */
 const LLAVE_LEGADA = "homea:cart:v1";
 
-export default function CarritoProvider() {
+export default function CarritoProvider({ children }: { children?: ReactNode }) {
   const [montado, setMontado] = useState(false);
+  const [cargado, setCargado] = useState(false);
   const [carrito, setCarrito] = useState<Carrito>(CARRITO_VACIO);
   const [aviso, setAviso] = useState<Aviso | undefined>();
   const [abierto, setAbierto] = useState(false);
+  // Pre-cotización abierta al centro (cierra el cajón): Carla, 2026-10-08.
+  const [cotizando, setCotizando] = useState(false);
   const [pendiente, iniciar] = useTransition();
 
   // El optimismo cubre SOLO la cantidad y el badge: son datos sin dinero de por
@@ -55,11 +72,16 @@ export default function CarritoProvider() {
 
   /** Descarta respuestas de acciones que ya quedaron obsoletas (clic repetido en +). */
   const secuencia = useRef(0);
+  /** Hasta cuándo se ignora el hover del botón del nav (tras un clic que navega). */
+  const silencioHover = useRef(0);
+  /** Temporizador del hover pendiente: el clic lo cancela (si no, abriría el cajón ya navegado). */
+  const esperaHover = useRef(0);
 
   const aplicar = useCallback((turno: number, resultado: Awaited<ReturnType<typeof obtenerCarrito>>) => {
     if (turno !== secuencia.current) return;
     setCarrito(resultado.carrito);
     setAviso(resultado.aviso);
+    setCargado(true);
     if (resultado.redireccion) window.open(resultado.redireccion, "_blank", "noopener");
   }, []);
 
@@ -85,6 +107,25 @@ export default function CarritoProvider() {
       setAviso(undefined);
       setAbierto(true);
       iniciar(async () => aplicar(turno, await agregarAlCarrito(vid, sku, cantidad)));
+    },
+    [aplicar],
+  );
+
+  /** Varias piezas de golpe (la wishlist completa): una tras otra, en orden. */
+  const agregarVarias = useCallback(
+    (items: { vid: string; sku: string }[]) => {
+      if (!items.length) return;
+      const turno = ++secuencia.current;
+      setAviso(undefined);
+      setAbierto(true);
+      iniciar(async () => {
+        let resultado: Awaited<ReturnType<typeof agregarAlCarrito>> | null = null;
+        for (const it of items) {
+          if (!it.vid && !it.sku) continue;
+          resultado = await agregarAlCarrito(it.vid, it.sku, 1);
+        }
+        if (resultado) aplicar(turno, resultado);
+      });
     },
     [aplicar],
   );
@@ -129,9 +170,27 @@ export default function CarritoProvider() {
         return;
       }
 
-      if (destino.closest(".cart-open")) {
+      const todas = destino.closest<HTMLElement>(".cart-add-all");
+      if (todas) {
         ev.preventDefault();
-        setAbierto(true);
+        try {
+          const items = JSON.parse(todas.getAttribute("data-cart-items") ?? "[]") as { vid?: string; sku?: string }[];
+          agregarVarias(items.map((it) => ({ vid: String(it.vid ?? ""), sku: String(it.sku ?? "") })));
+        } catch {
+          /* atributo malformado: no hay nada que agregar. */
+        }
+        return;
+      }
+
+      // El botón del nav lleva a /mi-proyecto (navega PreviewRouter): se cierra
+      // el cajón por si el hover ya lo había abierto, y se calla el hover un
+      // momento: al re-inyectarse el nav bajo el cursor quieto, el navegador
+      // dispara mouseover sin que el usuario se haya movido.
+      if (destino.closest(".cart-open")) {
+        window.clearTimeout(esperaHover.current);
+        esperaHover.current = 0;
+        setAbierto(false);
+        silencioHover.current = Date.now() + 2000;
       }
     }
 
@@ -140,23 +199,57 @@ export default function CarritoProvider() {
     // `preventDefault()` basta, y así siguen vivos los listeners de analítica.
     document.addEventListener("click", alHacerClic, true);
     return () => document.removeEventListener("click", alHacerClic, true);
-  }, [agregar]);
+  }, [agregar, agregarVarias]);
+
+  /* ---------- Sostener el cursor 0,5 s sobre "Mi proyecto" abre el cajón ---------- */
+  useEffect(() => {
+    // Solo con cursor fino: en táctil no existe el hover y el botón navega.
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+    function alEntrar(ev: MouseEvent) {
+      const destino = ev.target;
+      if (!(destino instanceof Element) || !destino.closest(".cart-open") || esperaHover.current) return;
+      // Ni recién navegado, ni en la propia página del proyecto.
+      if (Date.now() < silencioHover.current || window.location.pathname === "/mi-proyecto") return;
+      esperaHover.current = window.setTimeout(() => {
+        esperaHover.current = 0;
+        setAbierto(true);
+      }, HOVER_ABRIR_MS);
+    }
+    function alSalir(ev: MouseEvent) {
+      const destino = ev.target;
+      if (!(destino instanceof Element) || !destino.closest(".cart-open")) return;
+      const hacia = ev.relatedTarget;
+      if (hacia instanceof Element && hacia.closest(".cart-open")) return;
+      window.clearTimeout(esperaHover.current);
+      esperaHover.current = 0;
+    }
+    document.addEventListener("mouseover", alEntrar);
+    document.addEventListener("mouseout", alSalir);
+    return () => {
+      window.clearTimeout(esperaHover.current);
+      document.removeEventListener("mouseover", alEntrar);
+      document.removeEventListener("mouseout", alSalir);
+    };
+  }, []);
 
   /* ---------- Esc cierra ---------- */
   useEffect(() => {
-    if (!abierto) return;
+    if (!abierto && !cotizando) return;
     function alTeclear(ev: KeyboardEvent) {
-      if (ev.key === "Escape") setAbierto(false);
+      if (ev.key !== "Escape") return;
+      setAbierto(false);
+      setCotizando(false);
     }
     document.addEventListener("keydown", alTeclear);
     return () => document.removeEventListener("keydown", alTeclear);
-  }, [abierto]);
+  }, [abierto, cotizando]);
 
   /* ---------- Bloqueo del scroll ---------- */
   useEffect(() => {
-    document.documentElement.classList.toggle("wl-lock", abierto);
+    document.documentElement.classList.toggle("wl-lock", abierto || cotizando);
     return () => document.documentElement.classList.remove("wl-lock");
-  }, [abierto]);
+  }, [abierto, cotizando]);
 
   /* ---------- Badge del nav (vive fuera de React) ---------- */
   useEffect(() => {
@@ -187,18 +280,46 @@ export default function CarritoProvider() {
     return () => observador.disconnect();
   }, [carritoVista.cantidadTotal]);
 
-  if (!montado) return null;
+  const valor = useMemo<CarritoContexto>(
+    () => ({
+      carrito: carritoVista,
+      aviso,
+      ocupado: pendiente,
+      cargado,
+      abrir: () => setAbierto(true),
+      cerrar: () => setAbierto(false),
+      abrirCotizacion: () => {
+        setAbierto(false);
+        setCotizando(true);
+      },
+      cambiar,
+      quitar,
+    }),
+    [carritoVista, aviso, pendiente, cargado, cambiar, quitar],
+  );
 
-  return createPortal(
-    <CarritoDrawer
-      carrito={carritoVista}
-      aviso={aviso}
-      abierto={abierto}
-      ocupado={pendiente}
-      onCerrar={() => setAbierto(false)}
-      onCantidad={cambiar}
-      onQuitar={quitar}
-    />,
-    document.body,
+  return (
+    <Contexto.Provider value={valor}>
+      {children}
+      {montado
+        ? createPortal(
+            <>
+              <CarritoDrawer
+                carrito={carritoVista}
+                aviso={aviso}
+                abierto={abierto}
+                ocupado={pendiente}
+                onCerrar={() => setAbierto(false)}
+                onCantidad={cambiar}
+                onQuitar={quitar}
+              />
+              {cotizando ? (
+                <PreCotizacionModal carrito={carritoVista} onCerrar={() => setCotizando(false)} />
+              ) : null}
+            </>,
+            document.body,
+          )
+        : null}
+    </Contexto.Provider>
   );
 }

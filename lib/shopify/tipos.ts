@@ -42,6 +42,18 @@ export interface LineaCarrito {
    */
   precioPublico: { venta: Dinero; tachado: Dinero | null };
   decision: DecisionLinea;
+  /**
+   * Precios para la pre-cotización, SIN IVA y en la moneda original de la pieza
+   * (USD se queda en USD: Carla, 2026-10-08). `lista` es el precio antes del
+   * descuento, `unitario` el de venta y `descuento` la diferencia por unidad.
+   */
+  cotizacion: { moneda: "USD" | "MXN"; lista: number; unitario: number; descuento: number };
+  /**
+   * Pieza de monto alto: precio unitario en pesos CON IVA mayor al límite de
+   * data/reglas-compra.json. El cajón recomienda cotizarla con un ejecutivo
+   * (Carla, 2026-10-08), aunque esté en stock y se pueda pagar en línea.
+   */
+  montoAlto: boolean;
 }
 
 export type MotivoBloqueo =
@@ -76,6 +88,17 @@ export interface Carrito {
   ivaEstimado: Dinero;
   /** Subtotal + IVA estimado: lo que el cliente ve como "Total estimado". */
   totalEstimado: Dinero;
+  /**
+   * Ahorro por descuento (precio de lista − precio de venta, por cantidad), en
+   * pesos SIN IVA. Cero cuando ninguna pieza trae precio tachado.
+   */
+  ahorro: Dinero;
+  /**
+   * Subtotal a precio de venta público (lista, antes del descuento) × cantidad,
+   * en pesos SIN IVA. Es la primera línea de los totales (Carla, 2026-10-08):
+   * subtotal − ahorro + IVA = total.
+   */
+  subtotalLista: Dinero;
 }
 
 /** Aviso puntual de una operación (sin existencia, tope de stock, error de Shopify). */
@@ -106,6 +129,8 @@ export const CARRITO_VACIO: Carrito = {
   modo: "checkout",
   ivaEstimado: { monto: 0, moneda: "MXN" },
   totalEstimado: { monto: 0, moneda: "MXN" },
+  ahorro: { monto: 0, moneda: "MXN" },
+  subtotalLista: { monto: 0, moneda: "MXN" },
 };
 
 /** "$193,603.20 MXN" — se conserva el formato exacto que ya usaba cart.js. */

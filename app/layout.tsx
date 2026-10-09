@@ -61,21 +61,21 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <style>{`.mq-chip,.brandtile,.cat-media,.ss-bg{background-image:var(--lazy-bg)}`}</style>
         </noscript>
         <div className="site-chrome" dangerouslySetInnerHTML={{ __html: navConTipoCambio }} />
-        <main>{children}</main>
+        {/* El proveedor del carrito envuelve <main>: /mi-proyecto lee "Mi proyecto" por contexto. */}
+        <CarritoProvider>
+          <main>{children}</main>
+        </CarritoProvider>
         <div dangerouslySetInnerHTML={{ __html: footer }} />
         {/* Buscador de catálogo: se engancha a la lupa del nav (a.nav-ic-search). */}
         <BuscadorOverlay />
-        {/* Carrito real: estado en Shopify (Storefront API), cookie httpOnly y
-            checkout hospedado. Sustituye al antiguo /cart.js de localStorage. */}
-        <CarritoProvider />
         <WhatsAppFloat porRuta={MENSAJES_WA} />
         <NavActive />
         <HomeNavSticky />
         <PreviewRouter />
         {/* Interacciones del preview (nav scroll, mega flyout, reveals, hero, marquee). */}
         <Script src="/v2.js?v=64" strategy="afterInteractive" />
-        {/* Wishlist (localStorage): corazones, badge del nav y drawer de cotización. */}
-        <Script src="/wishlist.js?v=5" strategy="afterInteractive" />
+        {/* Wishlist (localStorage): corazones, badge del nav y la página /wishlist. */}
+        <Script src="/wishlist.js?v=6" strategy="afterInteractive" />
         {/* Filtro de tipo del riel de subcat.1 (?tipo=…) y su scroll lento. */}
         <Script src="/tipos.js?v=3" strategy="afterInteractive" />
         {/* Filtros, orden y galería del catálogo vivo de Shopify (lib/shopify/htmlCatalogo.ts). */}

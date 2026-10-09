@@ -32,6 +32,16 @@ const SOLO_COTIZAR = new Set(reglas.soloCotizar.map(norm));
 
 export const LIMITE_MXN_CON_IVA = reglas.limiteMxnConIva;
 
+/**
+ * ¿Es una pieza de monto alto? Precio unitario en pesos CON IVA mayor al límite
+ * de data/reglas-compra.json: el mismo criterio que `decidirCompra` (Carla,
+ * 2026-10-08: "$100,000 con IVA"). El cajón de "Mi proyecto" lo usa para
+ * recomendar cotizarla con un ejecutivo aunque esté en stock y se pueda pagar.
+ */
+export function montoAlto(precioMxnConIva: number): boolean {
+  return precioMxnConIva > LIMITE_MXN_CON_IVA;
+}
+
 export function marcaSoloCotiza(vendor: string): boolean {
   return SOLO_COTIZAR.has(norm(vendor));
 }

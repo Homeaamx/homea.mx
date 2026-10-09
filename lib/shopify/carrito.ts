@@ -47,11 +47,15 @@ export async function buscarVariante(
   idVariante: string,
   sku?: string,
 ): Promise<VarianteRaw | null> {
-  const porId = await shopifyFetch<{ node: VarianteRaw | null }>(CONSULTA_VARIANTE, {
-    variables: { id: gidVariante(idVariante) },
-    revalidate: 60,
-  });
-  if (porId.node) return porId.node;
+  // Desde la wishlist puede llegar solo el SKU (piezas guardadas antes de que
+  // el corazón anotara la variante): sin id no se consulta un gid vacío.
+  if (idVariante) {
+    const porId = await shopifyFetch<{ node: VarianteRaw | null }>(CONSULTA_VARIANTE, {
+      variables: { id: gidVariante(idVariante) },
+      revalidate: 60,
+    });
+    if (porId.node) return porId.node;
+  }
 
   if (!sku) return null;
   const porSku = await shopifyFetch<{

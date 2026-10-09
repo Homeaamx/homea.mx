@@ -38,6 +38,8 @@ const LINK_MAP: Record<string, string> = {
   "garantias-instalacion.html": "/garantias-instalacion",
   "guias.html": "/guias",
   "ofertas.html": "/ofertas",
+  "wishlist.html": "/wishlist",
+  "mi-proyecto.html": "/mi-proyecto",
   // No hay índice /productos todavía → cae a la home.
   "coleccion.html": "/",
 };

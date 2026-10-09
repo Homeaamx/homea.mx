@@ -17,7 +17,7 @@
 // proyecto completo es `checkout` solo si todas se compran.
 
 import { IVA, productoPorSku } from "@/lib/catalogo";
-import { decidirCompra } from "@/lib/reglas/reglaMarca";
+import { decidirCompra, montoAlto } from "@/lib/reglas/reglaMarca";
 
 import type { CarritoRaw, DineroRaw, VarianteRaw } from "./respuestas";
 import type { Carrito, Dinero, LineaCarrito, MotivoBloqueo } from "./tipos";
@@ -115,6 +115,15 @@ function aLinea(raw: CarritoRaw["lines"]["nodes"][number]): LineaCarrito {
     };
   }
 
+  // Pre-cotización: lista, venta y descuento por unidad SIN IVA, en la moneda de lista.
+  const cotizacion: LineaCarrito["cotizacion"] = usd
+    ? (() => {
+        const factor = mxnLista ? mxn / mxnLista : 1;
+        const unitario = centavos(usd * factor);
+        return { moneda: "USD", lista: usd, unitario, descuento: centavos(usd - unitario) };
+      })()
+    : { moneda: "MXN", lista: mxnLista ?? mxn, unitario: mxn, descuento: centavos((mxnLista ?? mxn) - mxn) };
+
   const decision = decidirCompra({
     vendor: v.product.vendor || enIndice?.marca || "",
     precioMxnConIva: centavos(mxn * (1 + IVA)),
@@ -137,7 +146,21 @@ function aLinea(raw: CarritoRaw["lines"]["nodes"][number]): LineaCarrito {
     serie: serieDe(v.product.title || ""),
     precioPublico,
     decision,
+    cotizacion,
+    montoAlto: montoAlto(centavos(mxn * (1 + IVA))),
   };
+}
+
+/** Lista − venta, por cantidad, en la moneda del carrito (pesos sin IVA). */
+function ahorroDe(raw: CarritoRaw): Dinero {
+  const moneda = raw.cost.subtotalAmount.currencyCode;
+  const monto = raw.lines.nodes.reduce((suma, l) => {
+    const v = l.merchandise;
+    const venta = Number.parseFloat(v.price.amount);
+    const lista = v.compareAtPrice ? Number.parseFloat(v.compareAtPrice.amount) : null;
+    return lista && lista > venta ? suma + (lista - venta) * l.quantity : suma;
+  }, 0);
+  return { monto: centavos(monto), moneda };
 }
 
 export function aCarrito(raw: CarritoRaw, { simulado = false } = {}): Carrito {
@@ -167,5 +190,7 @@ export function aCarrito(raw: CarritoRaw, { simulado = false } = {}): Carrito {
     modo: lineas.some((l) => l.decision.accion === "cotizar") ? "cotizacion" : "checkout",
     ivaEstimado: iva,
     totalEstimado: { monto: centavos(subtotal.monto + iva.monto), moneda: subtotal.moneda },
+    ahorro: ahorroDe(raw),
+    subtotalLista: { monto: centavos(subtotal.monto + ahorroDe(raw).monto), moneda: subtotal.moneda },
   };
 }

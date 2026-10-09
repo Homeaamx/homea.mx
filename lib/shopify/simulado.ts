@@ -19,7 +19,8 @@ import "server-only";
 import { cookies } from "next/headers";
 
 import { IVA, productoPorSku } from "@/lib/catalogo";
-import { decidirCompra } from "@/lib/reglas/reglaMarca";
+import { decidirCompra, montoAlto } from "@/lib/reglas/reglaMarca";
+import { obtenerTipoCambio, type TipoCambio } from "@/lib/tipoCambio";
 
 import type { Carrito, LineaCarrito } from "./tipos";
 
@@ -56,9 +57,11 @@ async function guardarLineas(lineas: LineaSim[]): Promise<void> {
 }
 
 /** El id de línea simulado es el propio SKU: estable y suficiente para la UI. */
-function aLinea({ sku, cantidad }: LineaSim): LineaCarrito | null {
+function aLinea({ sku, cantidad }: LineaSim, tc: TipoCambio): LineaCarrito | null {
   const p = productoPorSku(sku);
   if (!p) return null;
+  // Pesos sin IVA, como los guardaría Shopify tras el cron del tipo de cambio.
+  const mxn = centavos(p.precio * (p.moneda === "USD" ? tc.valor : 1));
   return {
     id: sku,
     sku,
@@ -67,27 +70,31 @@ function aLinea({ sku, cantidad }: LineaSim): LineaCarrito | null {
     imagen: p.imagen,
     ficha: p.ficha,
     cantidad,
-    precioUnitario: { monto: p.precio, moneda: p.moneda },
-    total: { monto: p.precio * cantidad, moneda: p.moneda },
+    precioUnitario: { monto: mxn, moneda: "MXN" },
+    total: { monto: centavos(mxn * cantidad), moneda: "MXN" },
     disponible: true,
     maximo: null,
     enStock: false,
     serie: p.serie,
     precioPublico: { venta: { monto: centavos(p.precio * (1 + IVA)), moneda: p.moneda }, tachado: null },
-    // El índice no trae pesos para las piezas USD: se estima con un FIX de 18
-    // solo para la regla de monto; en producción decide Shopify.
+    // El índice no trae pesos para las piezas USD: se convierten con el tipo de
+    // cambio del sitio solo para la regla de monto; en producción decide Shopify.
     decision: decidirCompra({
       vendor: p.marca,
-      precioMxnConIva: centavos(p.precio * (p.moneda === "USD" ? 18 : 1) * (1 + IVA)),
+      precioMxnConIva: centavos(mxn * (1 + IVA)),
       enStock: false,
     }),
+    cotizacion: { moneda: p.moneda, lista: p.precio, unitario: p.precio, descuento: 0 },
+    montoAlto: montoAlto(centavos(mxn * (1 + IVA))),
   };
 }
 
-function armar(lineas: LineaSim[]): Carrito {
-  const resueltas = lineas.map(aLinea).filter((l): l is LineaCarrito => l !== null);
-  const moneda = resueltas[0]?.total.moneda ?? "MXN";
-  const subtotal = resueltas.reduce((s, l) => s + l.total.monto, 0);
+async function armar(lineas: LineaSim[]): Promise<Carrito> {
+  const tc = await obtenerTipoCambio();
+  const resueltas = lineas.map((l) => aLinea(l, tc)).filter((l): l is LineaCarrito => l !== null);
+  // Totales siempre en pesos, como en el carrito real de Shopify.
+  const moneda = "MXN";
+  const subtotal = centavos(resueltas.reduce((s, l) => s + l.total.monto, 0));
   return {
     id: "simulado",
     cantidadTotal: resueltas.reduce((n, l) => n + l.cantidad, 0),
@@ -102,6 +109,9 @@ function armar(lineas: LineaSim[]): Carrito {
     modo: resueltas.some((l) => l.decision.accion === "cotizar") ? "cotizacion" : "checkout",
     ivaEstimado: { monto: centavos(subtotal * IVA), moneda },
     totalEstimado: { monto: centavos(subtotal * (1 + IVA)), moneda },
+    // El índice no trae precio de lista: en simulación no hay ahorro que mostrar.
+    ahorro: { monto: 0, moneda },
+    subtotalLista: { monto: subtotal, moneda },
   };
 }
 
