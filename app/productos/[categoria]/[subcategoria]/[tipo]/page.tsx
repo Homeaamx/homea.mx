@@ -220,22 +220,6 @@ export default async function Page({ params }: Params) {
                     </div>
                   </div>
                 ))}
-
-                {/* Lead embebido: alto ticket → especialista. */}
-                <div className="quote-card">
-                  <div className="eyebrow eyebrow-bright">Proyecto de cocina</div>
-                  <h3>
-                    ¿Especificando una cocina <i>completa</i>?
-                  </h3>
-                  <p>
-                    Un especialista arma contigo el paquete por marca: medidas, cargas
-                    eléctricas, ventilación y paneles. Sin costo.
-                  </p>
-                  <Link className="arrow-link light" href="/contacto">
-                    Cotizar con especialista <span className="ln" />
-                    <span className="ar">→</span>
-                  </Link>
-                </div>
               </div>
                 </>
               )}

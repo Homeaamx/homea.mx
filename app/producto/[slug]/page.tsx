@@ -12,7 +12,7 @@ import {
   type PrecioPublico,
   type ProductoVivo,
 } from "@/lib/shopify/catalogoVivo";
-import { TIPOS_WEB, tipoWeb } from "@/lib/shopify/coleccionesWeb";
+import { TIPOS_WEB, esAccesorio, tipoWeb } from "@/lib/shopify/coleccionesWeb";
 import { fichaHtml, type Relacionados } from "@/lib/shopify/htmlCatalogo";
 import { coleccionesCandidatas, sugerenciasDeCompra } from "@/lib/shopify/sugerencias";
 import { contenidoDeFicha, jsonLdProducto } from "@/lib/shopify/pdpSlots";
@@ -120,11 +120,15 @@ async function relacionadosDe(p: ProductoVivo): Promise<Relacionados> {
     productosDeColeccion(tw.coleccion),
     ...handles.map((h) => productosDeColeccion(h)),
   ]);
-  const sugeridos = sugerenciasDeCompra(p, otras.flat());
+  // Los accesorios que viven en la colección del equipo (Lavavajillas) también son candidatos.
+  const sugeridos = sugerenciasDeCompra(p, [...otras.flat(), ...mismoTipo.filter(esAccesorio)]);
   if (sugeridos.length) return { modo: "sugerencias", productos: sugeridos };
   return {
     modo: "similares",
-    productos: mismoTipo.filter((r) => r.sku !== p.sku && r.imagenes.length).slice(0, 3),
+    // Similares = de la misma clase: equipos con equipos, accesorios con accesorios.
+    productos: mismoTipo
+      .filter((r) => r.sku !== p.sku && r.imagenes.length && esAccesorio(r) === esAccesorio(p))
+      .slice(0, 3),
   };
 }
 

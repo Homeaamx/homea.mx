@@ -1,5 +1,5 @@
 {
- "_nota": "Orden y nombre visible de los filtros por Subcategoría 2 (= Tipo de producto en Shopify). Clave = metafield filtros.<clave>; \"marca\" = vendor, \"precio\" = precio. GENERADO desde FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx (OneDrive, columna E = orden propuesto) el 2026-10-06. Si cambia la tabla, se regenera. 2026-10-07: se añade filtros.bisagra (Bisagra / apertura) a refrigeración por indicación de Carla (prioritario en refrigeración y hornos).",
+ "_nota": "Orden y nombre visible de los filtros por Subcategoría 2 (= Tipo de producto en Shopify). Clave = metafield filtros.<clave>; \"marca\" = vendor, \"precio\" = precio. GENERADO desde FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx (OneDrive, columna E = orden propuesto) el 2026-10-06. Si cambia la tabla, se regenera. 2026-10-07: se añade filtros.bisagra (Bisagra / apertura) a refrigeración por indicación de Carla (prioritario en refrigeración y hornos). 2026-10-09: Bisagra / apertura también en Hornos y Microondas (hornos de velocidad), después de Diseño.",
  "subcategorias": {
   "Refrigeradores": [
    {
@@ -499,6 +499,10 @@
     "clave": "diseno"
    },
    {
+    "nombre": "Bisagra / apertura",
+    "clave": "bisagra"
+   },
+   {
     "nombre": "Tipo de horneado",
     "clave": "horneado"
    },
@@ -547,6 +551,10 @@
    {
     "nombre": "Diseño",
     "clave": "diseno"
+   },
+   {
+    "nombre": "Bisagra / apertura",
+    "clave": "bisagra"
    },
    {
     "nombre": "Ancho",

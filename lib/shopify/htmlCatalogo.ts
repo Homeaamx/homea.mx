@@ -20,7 +20,7 @@ import marcasJson from "@/data/marcas.json";
 import type { Decision } from "@/lib/reglas/reglaMarca";
 import type { TipoCambio } from "@/lib/tipoCambio";
 
-import { tipoWeb } from "./coleccionesWeb";
+import { esAccesorio, tipoDePieza, tipoWeb } from "./coleccionesWeb";
 import {
   decisionDeCompra,
   precioPublico,
@@ -167,7 +167,6 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
   // Foto del aparato primero; los planos solo si no hay ninguna foto.
   const img = p.imagenes.find((im) => !esImagenTecnica(im)) ?? p.imagenes[0];
   const spec = lineaSpec(p);
-  const tw = tipoWeb(p.tipo);
 
   // Valores de filtro para public/catalogo.js (slugs separados por espacio).
   const atributos: string[] = [
@@ -176,7 +175,7 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
     `data-precio="${precio.mxnEquivalente ?? precio.venta}"`,
     // Para ordenar por inventario (public/catalogo.js): 1 = en stock, 0 = bajo pedido.
     `data-stock="${p.enStock ? 1 : 0}"`,
-    `data-tipo="${esc(tw?.slugRiel ?? slugValor(p.tipo))}"`,
+    `data-tipo="${esc(tipoDePieza(p).slug ?? slugValor(p.tipo))}"`,
     `data-fv-marca="${slugValor(p.marca)}"`,
   ];
   for (const [clave, valores] of Object.entries(p.filtros)) {
@@ -209,16 +208,9 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
 </a>`;
 }
 
-const QUOTE_CARD = `<div class="quote-card" data-cat-quote>
-  <div class="eyebrow eyebrow-bright">Proyecto de cocina</div>
-  <h3>¿Especificando una cocina <i>completa</i>?</h3>
-  <p>Un especialista arma contigo el paquete por marca: medidas, cargas eléctricas, ventilación y paneles. Sin costo.</p>
-  <a class="arrow-link light" href="/contacto">Cotizar con especialista <span class="ln"></span><span class="ar">→</span></a>
-</div>`;
-
 /** Orden por defecto: equipos antes que accesorios; dentro, de mayor a menor precio. */
 function ordenar(productos: ProductoVivo[], tc: TipoCambio): ProductoVivo[] {
-  const peso = (p: ProductoVivo) => (/^Accesorios/.test(p.tipo) ? 1 : 0);
+  const peso = (p: ProductoVivo) => (esAccesorio(p) ? 1 : 0);
   return [...productos].sort((a, b) => {
     const d = peso(a) - peso(b);
     if (d) return d;
@@ -228,10 +220,9 @@ function ordenar(productos: ProductoVivo[], tc: TipoCambio): ProductoVivo[] {
   });
 }
 
-/** Rejilla de tarjetas con la tarjeta de lead después de la quinta pieza. */
+/** Rejilla de tarjetas (sin tarjeta de lead: Carla la quitó el 2026-10-09). */
 export function rejillaHtml(productos: ProductoVivo[], tc: TipoCambio): string {
   const piezas = ordenar(productos, tc).map((p, i) => tarjetaHtml(p, tc, i));
-  piezas.splice(Math.min(5, piezas.length), 0, QUOTE_CARD);
   piezas.push(
     `<p class="plp-aviso" data-cat-vacio hidden style="grid-column:1/-1">Aún no hay piezas publicadas con esa combinación. <a class="arrow-link" href="/contacto">Pregúntanos por ellas <span class="ln"></span><span class="ar">→</span></a></p>`,
   );
@@ -325,8 +316,9 @@ export function panelFiltrosHtml(
     const cuenta = new Map<string, { nombre: string; n: number }>();
     for (const t of tiposRiel) cuenta.set(t.slug, { nombre: t.nombre, n: 0 });
     for (const p of productos) {
-      const slug = tipoWeb(p.tipo)?.slugRiel ?? slugValor(p.tipo);
-      const c = cuenta.get(slug) ?? { nombre: p.tipo, n: 0 };
+      const pieza = tipoDePieza(p);
+      const slug = pieza.slug ?? slugValor(p.tipo);
+      const c = cuenta.get(slug) ?? { nombre: pieza.nombre ?? p.tipo, n: 0 };
       c.n++;
       cuenta.set(slug, c);
     }
@@ -598,14 +590,20 @@ export function fichaHtml(
   const tw = tipoWeb(p.tipo);
   const href = `/producto/${p.slug}`;
   const [principal, ...resto] = p.imagenes;
+  // Accesorios dentro de la colección del equipo: la miga lleva a su opción del riel.
+  const pieza = tipoDePieza(p);
+  const accDeTipo = tw?.accesorios && pieza.slug === tw.accesorios.slug ? tw.accesorios : null;
+  const migaTipo = accDeTipo
+    ? { ruta: `${tw!.sub1.ruta}?tipo=${accDeTipo.slug}`, nombre: accDeTipo.nombre }
+    : tw ? { ruta: tw.ruta, nombre: p.tipo } : null;
 
   const migas = [
     `<a href="/" style="color:var(--fg-muted);border-bottom:none">Inicio</a>`,
-    ...(tw
+    ...(tw && migaTipo
       ? [
           `<a href="${tw.macro.ruta}" style="color:var(--fg-muted);border-bottom:none">${esc(tw.macro.nombre)}</a>`,
           `<a href="${tw.sub1.ruta}" style="color:var(--fg-muted);border-bottom:none">${esc(tw.sub1.nombre)}</a>`,
-          `<a href="${tw.ruta}" style="color:var(--fg-muted);border-bottom:none">${esc(p.tipo)}</a>`,
+          `<a href="${migaTipo.ruta}" style="color:var(--fg-muted);border-bottom:none">${esc(migaTipo.nombre)}</a>`,
         ]
       : []),
     `<span class="figures">${esc(p.marca)} ${esc(p.sku)}</span>`,

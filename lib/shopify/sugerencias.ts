@@ -19,6 +19,7 @@
 import sugerenciasFabricante from "@/data/sugerencias-compra.json";
 
 import type { ProductoVivo } from "./catalogoVivo";
+import { esAccesorio } from "./coleccionesWeb";
 
 type ListasFabricante = { accesorios: string[]; limpieza: string[]; combinables: string[] };
 const FABRICANTE = sugerenciasFabricante as Record<string, ListasFabricante>;
@@ -29,6 +30,7 @@ export const MAX_SUGERENCIAS = 6;
 /** Colecciones de accesorios por subcategoría 1 (las que existen hoy en Shopify). */
 const ACCESORIOS_POR_SUB1: Record<string, string[]> = {
   "/productos/cocina-y-bar/refrigeracion": ["accesorios-de-refrigeracion"],
+  "/productos/cocina-y-bar/coccion": ["accesorios-de-coccion"],
 };
 
 /** Equipos que se sugieren entre tipos distintos (cocción → campana, etc.). */
@@ -72,8 +74,74 @@ function familia(sku: string): { letras: string; num: string } | null {
 
 const esExpressive = (p: ProductoVivo) => /expressive/i.test(p.titulo) || /^RV[A-Z]/.test(p.sku);
 
+/** Tipo de accesorio de cocción (filtros.tipo) → tipos de equipo que lo usan. */
+const DESTINO_COCCION: Record<string, string[]> = {
+  "Accesorio de horno": ["Hornos", "Microondas"],
+  "Accesorio de parrilla": ["Parrillas"],
+  "Ducto o conexión de campana": ["Campanas"],
+  "Motor de campana": ["Campanas"],
+  "Montaje de campana": ["Campanas"],
+};
+
+/** Familias de equipo de cocción que puede mencionar un accesorio ("para AL 400 y VL 414", "AI/AW 442", "Hornos GO"). */
+const FAMILIAS_COCCION = "AL|VL|AI|AW|AF|GO|GS|GM|BO|BX|BS|BM|EB|VI|VG|VR|VP|CX|CI|CG|CM|GC|WS|GW|DV|GV";
+
+/**
+ * Puntaje de un accesorio de cocción (Carla, 2026-10-09): solo para el tipo de
+ * equipo que lo usa; si menciona familias de modelo, solo para esas; la medida
+ * debe coincidir. Los ductos genéricos (sin familia) no se sugieren: dependen de
+ * la instalación.
+ */
+function puntajeCoccion(equipo: ProductoVivo, acc: ProductoVivo): number {
+  const tipoAcc = acc.filtros.tipo?.[0] ?? "";
+  const texto = norm(acc.titulo);
+  let destinos = DESTINO_COCCION[tipoAcc];
+  if (!destinos) {
+    // Filtros, cartuchos y kits: el destino lo dice el título.
+    if (/campana|recirculacion|extractor/.test(texto)) destinos = ["Campanas"];
+    else if (/cafetera/.test(texto)) destinos = ["Cafeteras"];
+    else if (/horno|combi-vapor/.test(texto)) destinos = ["Hornos", "Microondas"];
+    else if (/vario|parrilla|conexion/.test(texto)) destinos = ["Parrillas"];
+    else return 0;
+  }
+  if (!destinos.includes(equipo.tipo)) return 0;
+  if (/retractil/.test(texto) && !(equipo.filtros.diseno ?? []).includes("Retráctiles")) return 0;
+
+  const fam = familia(equipo.sku);
+  const menciones = [...acc.titulo.toUpperCase().replace(/\//g, " ").matchAll(new RegExp(`\\b(${FAMILIAS_COCCION})(?:\\s?(\\d{2,3}))?\\b`, "g"))];
+  let pts = 10;
+  if (menciones.length) {
+    const propia = fam && menciones.some(([, l, n]) => l === fam.letras && (!n || fam.num.startsWith(n)));
+    if (!propia) return 0;
+    pts = menciones.some(([, , n]) => n) ? 100 : 60;
+  } else if (tipoAcc === "Ducto o conexión de campana") {
+    return 0;
+  }
+  const aAcc = ancho(acc.titulo);
+  const aEq = ancho(equipo.titulo);
+  if (aAcc && aEq) {
+    if (aAcc !== aEq) return 0;
+    pts += 30;
+  }
+  return pts;
+}
+
+/**
+ * Accesorio que vive en la colección del propio equipo (Lavavajillas, Carla
+ * 2026-10-09): si menciona modelos ("DF 211", "DF 481 / DF 481 F"), solo para
+ * esos; si no, sirve a todos los de su tipo.
+ */
+function puntajeMismaColeccion(equipo: ProductoVivo, acc: ProductoVivo): number {
+  const fam = familia(equipo.sku);
+  const menciones = [...acc.titulo.toUpperCase().matchAll(/\b([A-Z]{2})\s?(\d{3})\b/g)];
+  if (!menciones.length) return 20;
+  return fam && menciones.some(([, l, n]) => l === fam.letras && n === fam.num) ? 100 : 0;
+}
+
 /** Puntaje de un accesorio para un equipo (0 = no aplica). */
 function puntaje(equipo: ProductoVivo, acc: ProductoVivo): number {
+  if (acc.tipo === "Accesorios de cocción") return puntajeCoccion(equipo, acc);
+  if (acc.tipo === equipo.tipo) return puntajeMismaColeccion(equipo, acc);
   const texto = `${acc.titulo} ${(acc.filtros.compatible ?? []).join(" ")}`;
   const t = norm(texto).toUpperCase();
   const fam = familia(equipo.sku);
@@ -141,7 +209,7 @@ function puntaje(equipo: ProductoVivo, acc: ProductoVivo): number {
  * de colecciones relacionadas). Devuelve [] si no hay ninguna.
  */
 export function sugerenciasDeCompra(equipo: ProductoVivo, candidatos: ProductoVivo[]): ProductoVivo[] {
-  if (/^Accesorios/i.test(equipo.tipo)) return []; // a un accesorio se le muestran similares
+  if (esAccesorio(equipo)) return []; // a un accesorio se le muestran similares
   const porSku = new Map(candidatos.map((c) => [c.sku, c]));
   const elegidos = new Map<string, number>();
 
@@ -157,7 +225,7 @@ export function sugerenciasDeCompra(equipo: ProductoVivo, candidatos: ProductoVi
   for (const c of candidatos) {
     if (c.sku === equipo.sku || c.marca !== equipo.marca) continue;
     let pts: number;
-    if (/^Accesorios/i.test(c.tipo)) {
+    if (esAccesorio(c)) {
       pts = puntaje(equipo, c);
     } else {
       // Equipo cruzado (campana para una parrilla): que cubra el ancho del equipo.

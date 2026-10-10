@@ -163,8 +163,18 @@ const nextConfig = {
       "/listas-de-precios/u-line.pdf": "/productos/cocina-y-bar/refrigeracion",
     };
 
+    // Productos obsoletos (fuera de la lista vigente del proveedor): la ficha va con
+    // 301 a su reemplazo o, si no lo hay, a su listado (Carla, 2026-10-09). Se edita
+    // en data/redirects/productos-obsoletos.json al archivar productos en Shopify.
+    const productosObsoletos = require("./data/redirects/productos-obsoletos.json").redirects;
+
     return [
       ...Object.entries(marcasEliminadas).map(([source, destination]) => ({
+        source,
+        destination,
+        statusCode: 301,
+      })),
+      ...Object.entries(productosObsoletos).map(([source, destination]) => ({
         source,
         destination,
         statusCode: 301,

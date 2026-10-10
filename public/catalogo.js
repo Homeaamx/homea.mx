@@ -321,13 +321,7 @@
       if (modo === "pedido-primero") return stock(a) - stock(b) || orden(a) - orden(b);
       return orden(a) - orden(b);
     });
-    var quote = grid.querySelector("[data-cat-quote]");
     cards.forEach(function (c) { grid.appendChild(c); });
-    /* La tarjeta de lead vuelve a quedar después de la quinta pieza VISIBLE. */
-    if (quote) {
-      var vis = cards.filter(function (c) { return !c.hidden; });
-      grid.insertBefore(quote, vis[Math.min(5, vis.length)] || null);
-    }
   }
 
   /* Buscador dentro de un grupo ("Busca por marca"): oculta las casillas cuyo
