@@ -280,8 +280,16 @@ interface OpcionesPanel {
   conTipo?: boolean;
   /** Tipos del riel de la página, en su orden (también los que aún no tienen piezas). */
   tiposRiel?: { slug: string; nombre: string }[];
-  /** Etiquetas con `data-tipo` = slug del valor, para el mosaico `?f=` de la PLP de tipo. */
-  valoresComoTipo?: boolean;
+  /**
+   * Tipos del mosaico de la PLP (subcat.3), con el nombre de su eje tal como
+   * aparece en la tabla de filtros ("Tipo de instalación", "Diseño", "Tipo de
+   * funcionamiento"). Cada uno se vuelve una casilla de SU grupo con
+   * `data-tipo` = slug — aunque aún no haya piezas con ese valor —, para que
+   * elegir un tipo vacío dé "0 piezas" y nunca deje el catálogo sin filtrar.
+   * Solo esas casillas llevan `data-tipo`: un mismo slug en otro grupo
+   * ("Profesional" en Instalación y en Diseño) no se marca por error.
+   */
+  mosaico?: { eje: string; slug: string; nombre: string }[];
 }
 
 /** Todos los grupos arrancan plegados (Carla, 2026-10-07): se abren al tocar su título. */
@@ -302,7 +310,7 @@ function grupoHtml(nombre: string, clave: string, etiquetas: string, abierto: bo
 
 export function panelFiltrosHtml(
   productos: ProductoVivo[],
-  { tc, conTipo = false, tiposRiel = [], valoresComoTipo = false }: OpcionesPanel = {},
+  { tc, conTipo = false, tiposRiel = [], mosaico = [] }: OpcionesPanel = {},
 ): string {
   tcPanel = tc ?? null;
   // Filtros aplicados, arriba del todo (como "Ahora comprando por" de Artexa):
@@ -379,10 +387,23 @@ export function panelFiltrosHtml(
       );
       continue;
     }
-    const cuenta = new Map<string, number>();
+    // Conteo por slug (es lo que compara catalogo.js), con el texto de Shopify.
+    const cuenta = new Map<string, { texto: string; n: number; tipo: boolean }>();
+    const delMosaico = mosaico.filter((m) => m.eje === d.nombre);
+    // Los tipos del mosaico van primero y en su orden, con o sin piezas.
+    for (const m of delMosaico) cuenta.set(m.slug, { texto: m.nombre, n: 0, tipo: true });
+    const conDatos = new Set<string>();
     for (const p of productos) {
       const valores = d.clave === "marca" ? [p.marca] : p.filtros[d.clave] ?? [];
-      for (const v of valores) cuenta.set(v, (cuenta.get(v) ?? 0) + 1);
+      for (const v of valores) {
+        const k = slugValor(v);
+        const c = cuenta.get(k) ?? { texto: v, n: 0, tipo: false };
+        // El texto de Shopify manda cuando la pieza trae el valor.
+        if (!conDatos.has(k)) c.texto = v;
+        conDatos.add(k);
+        c.n++;
+        cuenta.set(k, c);
+      }
     }
     if (!cuenta.size) {
       grupos.push(
@@ -391,10 +412,14 @@ export function panelFiltrosHtml(
       continue;
     }
     const etiquetas = [...cuenta]
-      .sort((a, b) => a[0].localeCompare(b[0], "es", { numeric: true }))
+      .sort((a, b) =>
+        delMosaico.length
+          ? Number(b[1].tipo) - Number(a[1].tipo) // mosaico (ya en orden) y luego el resto
+          : a[1].texto.localeCompare(b[1].texto, "es", { numeric: true }),
+      )
       .map(
-        ([v, n]) =>
-          `<label${valoresComoTipo ? ` data-tipo="${esc(slugValor(v))}"` : ""}><input type="checkbox" data-fk="${esc(d.clave)}" value="${esc(slugValor(v))}"> <span class="flbl">${esc(v)}</span> <span class="count figures">${n}</span></label>`,
+        ([k, c]) =>
+          `<label${c.tipo ? ` data-tipo="${esc(k)}"` : ""}><input type="checkbox" data-fk="${esc(d.clave)}" value="${esc(k)}"> <span class="flbl">${esc(c.texto)}</span> <span class="count figures">${c.n}</span></label>`,
       )
       .join("");
     // Marca (Carla, 2026-10-08): caja "Busca por marca" y solo las marcas que
@@ -404,6 +429,23 @@ export function panelFiltrosHtml(
         ? `<label class="fbuscar"><span class="sr-only">Busca por marca</span><input type="search" placeholder="Busca por marca" autocomplete="off" data-fbuscar></label>`
         : "";
     grupos.push(grupoHtml(d.nombre, d.clave, buscador + etiquetas, grupos.length - 1 < GRUPOS_ABIERTOS, d.clave === "marca"));
+  }
+
+  // Red de seguridad: un eje del mosaico que no casa con ningún filtro de la
+  // tabla dejaría sus tipos sin casilla y, al elegirlos, el catálogo completo a
+  // la vista. Se les da un grupo propio sin datos en las tarjetas (→ 0 piezas)
+  // y se avisa en el log para corregir el nombre del eje.
+  const huerfanos = mosaico.filter((m) => !defs.some((d) => d.nombre === m.eje));
+  for (const eje of new Set(huerfanos.map((m) => m.eje))) {
+    console.warn(`[catalogo] El eje "${eje}" del mosaico no existe en data/filtros-web.json`);
+    const etiquetas = huerfanos
+      .filter((m) => m.eje === eje)
+      .map(
+        (m) =>
+          `<label data-tipo="${esc(m.slug)}"><input type="checkbox" data-fk="mosaico-${esc(slugValor(eje))}" value="${esc(m.slug)}"> <span class="flbl">${esc(m.nombre)}</span> <span class="count figures">0</span></label>`,
+      )
+      .join("");
+    grupos.push(grupoHtml(eje, `mosaico-${slugValor(eje)}`, etiquetas, false));
   }
 
   grupos.push(

@@ -8,13 +8,20 @@
 // después de hidratar, con el mismo patrón de JS delegado que tipos.js usa en el
 // riel de subcat.1: los tiles son <a> planas, el clic hace pushState y aquí se
 // sincronizan las clases. El pushState nativo NO despierta a useSearchParams
-// (verificado en 14.2.5). No hay scroll al catálogo: el usuario se queda donde
-// está (decisión Carla, 2026-10-07).
+// (verificado en 14.2.5). Al APLICAR un tipo la página baja sola al catálogo
+// filtrado; al QUITARLO se queda donde está (Carla, 2026-10-09).
 //
 // Sin JS los enlaces navegan normal (página estática con el mosaico completo):
 // el filtro visual es mejora progresiva, nunca contenido.
 
 import { useEffect } from "react";
+
+declare global {
+  interface Window {
+    /** Scroll lento compartido (public/tipos.js): mismo recorrido que el riel de subcat.1. */
+    __homeaScrollA?: (el: Element, aire?: number) => void;
+  }
+}
 
 interface Props {
   /** Ruta del PLP (los tiles enlazan a `<base>?f=<slug>`). */
@@ -64,6 +71,23 @@ export default function PlpFiltro({ base, tipos }: Props) {
       document.dispatchEvent(new Event("catalogo:aplicar"));
     };
 
+    // Al aplicar un tipo, el catálogo filtrado queda fuera de pantalla: la
+    // página baja sola, lenta (no un salto) para que se vea que la tarjeta quedó
+    // marcada arriba. Mismo recorrido que el riel de subcat.1 (tipos.js, nav
+    // sticky descontado); si tipos.js aún no cargó, el scroll nativo sirve de red.
+    let t: ReturnType<typeof setTimeout> | undefined;
+    const bajarAlCatalogo = () => {
+      const el = document.getElementById("catalogo");
+      if (!el) return;
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      clearTimeout(t);
+      // Respiro breve para alcanzar a ver la tarjeta marcada antes de bajar.
+      t = setTimeout(() => {
+        if (window.__homeaScrollA && !reduce) window.__homeaScrollA(el, 8);
+        else el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      }, 260);
+    };
+
     const onClick = (e: MouseEvent) => {
       // Respetar aperturas en pestaña nueva / clics modificados.
       if (
@@ -83,8 +107,8 @@ export default function PlpFiltro({ base, tipos }: Props) {
       const f = card.dataset.f === leerF() ? null : card.dataset.f!;
       window.history.pushState(null, "", f ? `${base}?f=${f}` : base);
       sync(f);
-      // Sin desplazamiento (Carla, 2026-10-07): el filtro se aplica en el
-      // catálogo de abajo y el usuario se queda donde está.
+      // Quitar el filtro no mueve la página: el usuario se queda donde está.
+      if (f) bajarAlCatalogo();
     };
 
     const onPop = () => sync(leerF());
@@ -97,6 +121,7 @@ export default function PlpFiltro({ base, tipos }: Props) {
     document.addEventListener("click", onClick, true);
     window.addEventListener("popstate", onPop);
     return () => {
+      clearTimeout(t);
       document.removeEventListener("click", onClick, true);
       window.removeEventListener("popstate", onPop);
     };

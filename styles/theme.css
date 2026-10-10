@@ -2483,6 +2483,10 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 }
 .wl-name { font-size: 13px; line-height: 1.35; color: var(--fg); text-decoration: none; }
 .wl-name:hover { color: var(--accent-text); }
+/* Sin la línea inferior que pinta la regla global `a:hover` (tokens-v2): en el
+   cajón y la lista, el hover del producto es solo el cambio de tono
+   (Carla, 2026-10-10). */
+.wl-name, .wl-name:hover, .wl-thumb, .wl-thumb:hover { border-bottom: 0; }
 .wl-spec {
   font-size: 11px; color: var(--fg-muted);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -3680,13 +3684,26 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
    (con su filete superior), el último grupo pierde el suyo. */
 .filters details.fgroup--acc:has(+ .fbar:not([hidden])) { border-bottom: 0; }
 
-/* Filtros aplicados: todas las tarjetas del ancho del panel, sin salirse;
-   texto a la izquierda y la × al extremo derecho. */
+/* Filtros aplicados: TODAS las tarjetas del mismo tamaño (Carla, 2026-10-10).
+   Molde fijo de dos renglones —grupo arriba, valor abajo— con la × centrada al
+   extremo derecho. Antes el texto largo ("Tipo de funcionamiento: Inducción")
+   mandaba la × a otro renglón y esa tarjeta crecía. Un valor que no cabe se
+   corta con "…" en vez de estirar la tarjeta. */
 .fchips--panel { align-items: stretch; }
-.fchips--panel .fchip { width: 100%; max-width: 100%; box-sizing: border-box; justify-content: flex-start; text-align: left; flex-wrap: wrap; row-gap: 4px; }
-.fchips--panel .fchip-v { min-width: 0; overflow-wrap: anywhere; }
-.fchips--panel .fchip-x { margin-left: auto; }
-.fchips--panel .fchip--all { width: auto; align-self: flex-start; }
+.fchips--panel .fchip {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto;
+  column-gap: 12px; row-gap: 5px; align-items: center;
+  width: 100%; max-width: 100%; box-sizing: border-box; min-height: 52px;
+  padding: 9px 12px; text-align: left;
+}
+.fchips--panel .fchip-g { grid-column: 1; grid-row: 1; line-height: 1.1; }
+.fchips--panel .fchip-g::after { content: none; }
+.fchips--panel .fchip-v {
+  grid-column: 1; grid-row: 2; min-width: 0; line-height: 1.2;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.fchips--panel .fchip-x { grid-column: 2; grid-row: 1 / 3; margin-left: 0; align-self: center; }
+.fchips--panel .fchip--all { display: inline-flex; width: auto; min-height: 0; padding: 0; align-self: flex-start; }
 
 /* Barra superior: "Contáctanos" a la misma altura que "Tipo de cambio" (el
    botón se asentaba en la línea base de su contenedor, 2.4px más abajo). */

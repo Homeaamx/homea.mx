@@ -1,4 +1,5 @@
-// admin.ts — Admin API de Shopify, y solo para una cosa: dar de alta contactos.
+// admin.ts — Admin API de Shopify: alta de contactos y, desde 2026-10-10, el
+// recálculo diario de los precios en dólares (lib/shopify/repreciar.ts).
 //
 // Por qué aquí y no en un servicio aparte: la "base de datos de correos" que
 // pidió Carla ya está pagada. Los contactos viven como clientes de Shopify, y
@@ -105,7 +106,16 @@ async function obtenerToken(): Promise<string | null> {
   }
 }
 
-async function adminFetch<T>(query: string, variables: Record<string, unknown>): Promise<T | null> {
+/**
+ * Consulta a la Admin API. Exportada también para el recálculo diario de precios
+ * en dólares (lib/shopify/repreciar.ts), que necesita un tiempo de espera mayor
+ * que el alta de un contacto.
+ */
+export async function adminFetch<T>(
+  query: string,
+  variables: Record<string, unknown>,
+  timeoutMs = TIMEOUT_MS,
+): Promise<T | null> {
   if (!HAY_ADMIN) {
     avisar(
       "sin-credenciales",
@@ -118,7 +128,7 @@ async function adminFetch<T>(query: string, variables: Record<string, unknown>):
   if (!acceso) return null;
 
   const control = new AbortController();
-  const reloj = setTimeout(() => control.abort(), TIMEOUT_MS);
+  const reloj = setTimeout(() => control.abort(), timeoutMs);
   try {
     const respuesta = await fetch(`https://${DOMINIO}/admin/api/${VERSION}/graphql.json`, {
       method: "POST",

@@ -99,13 +99,19 @@ falsa, 200 con `Authorization: Bearer $CRON_SECRET` (`"fuente":"banxico"`).
 
 | | |
 |---|---|
-| **Desbloquea** | Que el tipo de cambio se refresque a una hora conocida |
+| **Desbloquea** | Que el tipo de cambio se refresque a una hora conocida **y que los pesos de las piezas en dólares se reescriban en Shopify con ese TC** (desde 2026-10-10, `lib/shopify/repreciar.ts`): así el carrito de cada cliente queda al tipo de cambio del día |
 | **Lo lee** | `app/api/cron/tipo-cambio/route.ts`; el horario vive en `vercel.json` |
 | **Sin él** | El endpoint responde **401** cada día hábil; el sitio igual se actualiza, pero a la hora que caiga la primera visita |
 | **Cómo verificar** | `curl -s -o /dev/null -w "%{http_code}" https://<dominio>/api/cron/tipo-cambio` → **401** sin cabecera, **200** con `Authorization: Bearer $CRON_SECRET` |
 
 Vercel lo genera al configurar el cron. El 401 es deliberado: es preferible un cron que
 falle ruidosamente a un endpoint abierto.
+
+**Recálculo de precios en dólares (2026-10-10).** La respuesta del cron trae un bloque
+`precios` (`revisados`, `porCambiar`, `tcAnterior`, `operacion.status`). Si Banxico no
+respondió (`fuente: "respaldo"`) no se reescribe nada. Para ver qué cambiaría sin tocar
+Shopify: `…/api/cron/tipo-cambio?simular=1`. Necesita las credenciales de la Admin API
+(`SHOPIFY_ADMIN_*`) en Vercel, las mismas de `/api/lead`.
 
 ---
 

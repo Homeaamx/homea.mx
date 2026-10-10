@@ -1,31 +1,37 @@
 // TipoGrid — rejilla visual de tipos en el PLP (patrón AJ Madison /refrigerators/,
 // traducido al sistema v2): un mosaico por eje de la taxonomía donde cada tipo se
-// reconoce de un vistazo por su diagrama, no por el nombre.
+// reconoce de un vistazo por su foto, no por el nombre.
 //
-// Deliberadamente COMPACTA en copy: solo diagrama + nombre. La descripción y las
+// Deliberadamente COMPACTA en copy: solo foto + nombre. La descripción y las
 // specs viven en la guía (/guias/…/refrigeradores/) — repetirlas aquí crearía dos
 // páginas compitiendo por la misma consulta. Por eso el bloque cierra con un
 // enlace a la guía en vez de duplicar su copy.
 //
-// Capa que SOLO existe aquí (en Guías el diagrama se queda limpio): el contenido
-// que explica el tipo (ContenidoTipo), revelado junto con el interior.
-//
-// La barra de ancho comparado y la vista de planta se probaron y se quitaron
-// (Carla, 2026-07-29): ensuciaban la tarjeta. El código sigue en el historial.
+// Sin gráficos (Carla, 2026-10-09): ni diagrama de línea ni corte animado de
+// instalación. La foto real es la protagonista en todos los estados (reposo,
+// hover y tipo elegido); los dibujos se quedan en Guías. El código anterior
+// (CorteInstalacion, ContenidoTipo) sigue en el historial.
 
 import Link from "next/link";
 import { srcSet, SIZES_TILE } from "@/lib/imagenResponsiva";
 import type { FiltroProducto, GrupoFicha } from "@/types/guias";
-import FiltroDiagrama from "./FiltroDiagrama";
-import DiagramaDefs from "./DiagramaDefs";
-import { ContenidoTipo } from "./ContenidoTipo";
-import { getFotoTipo, usaFotos } from "@/lib/fotosTipos";
-import CorteInstalacion, { esTipoInstalacion } from "./CorteInstalacion";
+import { getFotoTipo } from "@/lib/fotosTipos";
 
 const GRUPOS: { key: GrupoFicha; label: string }[] = [
   { key: "tipo", label: "Tipo de instalación" },
   { key: "estilo", label: "Diseño" },
 ];
+
+/**
+ * Nombre del eje de un grupo del mosaico. Es el MISMO nombre del filtro en la
+ * tabla (data/filtros-web.json), y así el panel sabe en qué grupo vive cada tipo.
+ */
+export function ejeDeGrupo(
+  grupo: GrupoFicha,
+  etiquetas?: Partial<Record<GrupoFicha, string>>,
+): string {
+  return etiquetas?.[grupo] ?? GRUPOS.find((g) => g.key === grupo)?.label ?? grupo;
+}
 
 interface Props {
   filtros: FiltroProducto[];
@@ -52,9 +58,8 @@ export default function TipoGrid({ filtros, base, guia, aprendeHref, contexto, e
   return (
     <section className="sec tight tpg-sec">
       <div className="container">
-        <DiagramaDefs />
-        {GRUPOS.map(({ key, label: labelDefault }) => {
-          const label = etiquetas?.[key] ?? labelDefault;
+        {GRUPOS.map(({ key }) => {
+          const label = ejeDeGrupo(key, etiquetas);
           const grupo = conFicha.filter((f) => f.ficha!.grupo === key);
           if (grupo.length === 0) return null;
           return (
@@ -67,17 +72,11 @@ export default function TipoGrid({ filtros, base, guia, aprendeHref, contexto, e
                   se reparten el ancho completo de la sección, en grande. */}
               <div className={`tpg-grid${key === "tipo" ? " tpg-grid--full" : ""}`}>
                 {grupo.map((f) => {
-                  const dgm = f.ficha!.diagrama;
                   const slug = slugDeFiltro(f.filtro);
-                  // Foto real del tipo (packshot) cuando existe. Si la categoría
-                  // ya es de foto pero ese tipo aún no la tiene, se deja el HUECO
-                  // reservado (misma caja) en vez de caer al diagrama: así el
-                  // layout ya es el definitivo y los packshots entran sin mover
-                  // nada. El diagrama de línea vive en Guías, no aquí.
-                  const plpKey = base.replace("/productos/", "");
-                  const foto = getFotoTipo(plpKey, slug);
-                  const conFoto = Boolean(foto) || usaFotos(plpKey);
-                  const conCorte = key === "tipo" && esTipoInstalacion(slug);
+                  // Foto real del tipo (packshot). Si ese tipo aún no la tiene se
+                  // deja el HUECO reservado (misma caja), nunca un dibujo: así el
+                  // layout ya es el definitivo y las fotos entran sin mover nada.
+                  const foto = getFotoTipo(base.replace("/productos/", ""), slug);
                   return (
                     // <a> plana, no next/Link: la página es estática y el estado
                     // activo (?f=) lo resuelve PlpFiltro en el cliente — clic →
@@ -90,37 +89,13 @@ export default function TipoGrid({ filtros, base, guia, aprendeHref, contexto, e
                       data-f={slug}
                       className="tpg-card"
                     >
-                      {conFoto ? (
-                        <span
-                          className={`tpg-photo${conCorte ? " has-corte" : ""}${
-                            foto ? "" : " es-pendiente"
-                          }`}
-                        >
-                          {/* Sin loading=lazy: el mosaico es el contenido primario
-                              de la página, justo bajo el hero. */}
-                          {foto ? (
-                            <img src={foto.src} srcSet={srcSet(foto.src)} sizes={SIZES_TILE} alt={foto.alt} loading="lazy" decoding="async" />
-                          ) : (
-                            <span className="tpg-ph">Foto pendiente</span>
-                          )}
-                          {/* Hover: la foto cede al corte lateral animado que
-                              explica la instalación (sobresale / al ras / tras
-                              panel; en campanas, la altura libre sobre la placa). */}
-                          {conCorte && (
-                            <span className="tpg-corte" aria-hidden="true">
-                              <CorteInstalacion tipo={slug} />
-                            </span>
-                          )}
-                        </span>
-                      ) : (
-                        <span
-                          className={`tpg-diagram${dgm === "glass-door" ? " es-cristal" : ""}`}
-                        >
-                          <FiltroDiagrama tipo={dgm}>
-                            <ContenidoTipo tipo={dgm} />
-                          </FiltroDiagrama>
-                        </span>
-                      )}
+                      <span className={`tpg-photo${foto ? "" : " es-pendiente"}`}>
+                        {foto ? (
+                          <img src={foto.src} srcSet={srcSet(foto.src)} sizes={SIZES_TILE} alt={foto.alt} loading="lazy" decoding="async" />
+                        ) : (
+                          <span className="tpg-ph">Foto pendiente</span>
+                        )}
+                      </span>
                       <span className="tpg-name">{f.nombre}</span>
                       {/* Siempre en el DOM (oculta si no está activa) para que la
                           tarjeta no cambie de alto al poner/quitar el filtro. */}

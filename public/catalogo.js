@@ -199,9 +199,12 @@
         if (!cb) return;
         total++;
         var grupo = nombreGrupo(plp, k);
-        html += '<button type="button" class="fchip" data-cat-chip data-fk="' + k + '" data-v="' + v + '">' +
+        var valor = etiquetaDe(cb);
+        /* title: el valor completo, por si la tarjeta lo corta con "…". */
+        var titulo = ((grupo ? grupo + ": " : "") + valor).replace(/"/g, "&quot;");
+        html += '<button type="button" class="fchip" data-cat-chip data-fk="' + k + '" data-v="' + v + '" title="' + titulo + '">' +
           (grupo ? '<span class="fchip-g">' + grupo + '</span>' : "") +
-          '<span class="fchip-v">' + etiquetaDe(cb) + '</span><span class="fchip-x" aria-hidden="true">×</span>' +
+          '<span class="fchip-v">' + valor + '</span><span class="fchip-x" aria-hidden="true">×</span>' +
           '<span class="sr-only"> · quitar</span></button>';
       });
     });

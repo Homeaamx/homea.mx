@@ -1277,6 +1277,27 @@ const DIAGRAMAS: Record<string, ReactElement> = {
     </>
   ),
 
+  "camp-superficie": (
+    // Extracción de superficie POR MÓDULOS: tres piezas separadas en la cubierta
+    // (placa · rejilla de extracción · placa). A diferencia de la inducción con
+    // extracción integrada, el extractor es un módulo propio con su rejilla.
+    <>
+      <line x1="24" y1="106" x2="116" y2="106" className="ln" />
+      <rect x="30" y="100" width="30" height="6" className="fb" />
+      <rect x="63" y="100" width="14" height="6" className="fb" />
+      <line x1="66" y1="100" x2="66" y2="106" className="glass-shelf" />
+      <line x1="70" y1="100" x2="70" y2="106" className="glass-shelf" />
+      <line x1="74" y1="100" x2="74" y2="106" className="glass-shelf" />
+      <rect x="80" y="100" width="30" height="6" className="fb" />
+      <rect x="34" y="106" width="72" height="18" className="cab" />
+      <g className="in">
+        <line x1="45" y1="92" x2="64" y2="99" strokeDasharray="3 4" />
+        <line x1="95" y1="92" x2="76" y2="99" strokeDasharray="3 4" />
+        <line x1="70" y1="106" x2="70" y2="122" strokeDasharray="3 4" />
+      </g>
+    </>
+  ),
+
   // ——— Campanas · por diseño ————————————————————————————————————————
   // Eje "Diseño": lo que cambia es la FORMA de la campana, no dónde se instala.
   // Base común (cubierta en y=106 + dos quemadores) para que las 16 tarjetas se
@@ -2034,7 +2055,7 @@ export default function FiltroDiagrama({
   children,
 }: {
   tipo: string;
-  /** Capas extra dentro del mismo <svg> (contenido del PLP, ver ContenidoTipo). */
+  /** Capas extra dentro del mismo <svg> (hoy sin uso: el PLP ya no lleva diagramas). */
   children?: React.ReactNode;
 }) {
   return (

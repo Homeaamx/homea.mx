@@ -12,14 +12,15 @@ cada producto, así que **las páginas ya filtran sin este paso**. Search & Disc
 se necesita al escalar a ~16,000 productos, cuando la página ya no pueda traer todas las piezas
 de golpe y tenga que pedirle a Shopify "solo las de 36" de gas".
 
-## Estado (revisado por Storefront API, 2026-10-09)
+## Estado (revisado por Storefront API, 2026-10-09) ✔
 
-Carla ya configuró la app. Shopify devuelve: **Precio, Marca, Tipo de instalación, Diseño, Ancho,
-Acabado, Tipo y Disponibilidad** (la Disponibilidad nativa de inventario ya no sale ✔).
-
-**Faltan** (tienen datos en productos publicados y no aparecen): Tipo de funcionamiento, Bisagra /
-apertura, Tipo de horneado, Tipo de gas, Potencia (CFM), Uso, Voltaje, Garantía y Compatible con.
-Sin datos todavía para comprobar: Capacidad, Material y Promoción.
+Configurado por Carla. Shopify entrega **17 filtros**: Precio, Marca, Tipo de instalación, Diseño,
+Ancho, Acabado, Tipo, Disponibilidad (la nuestra; la nativa de inventario quedó fuera), Tipo de
+funcionamiento, Bisagra / apertura, Tipo de horneado, Tipo de gas, Potencia del motor (CFM), Uso,
+Voltaje, Garantía y Compatible con. Cada colección solo muestra los que tienen datos.
+Sin datos todavía para comprobar: Capacidad, Material y Promoción. Al llegar productos con esos
+valores, verificar que salgan; si no, agregarlos en la app (todos los valores marcados).
+Los valores nuevos de una lista cerrada (p. ej. "Cristal", 12") los toma Shopify solo.
 
 ## Antes de empezar (una sola vez)
 

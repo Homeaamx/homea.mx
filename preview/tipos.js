@@ -59,8 +59,8 @@
   /* ---------- ¿Se llegó por "atrás/adelante" o recarga? ----------
      Regla de Carla (2026-10-08): al regresar de una ficha la página NO se
      desplaza hacia el catálogo ni al producto; se queda donde estaba el usuario
-     (el navegador / Next restauran la posición). Lo consultan este archivo y
-     components/ScrollAFiltros.tsx vía window.__homeaPorHistorial(). */
+     (el navegador / Next restauran la posición). Expuesto como
+     window.__homeaPorHistorial(). */
   var historialHasta = 0;
   (function () {
     var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
@@ -281,7 +281,7 @@
     agendar(tipoUrl() && !porHistorial() ? "deep" : "quieto");
   });
 
-  /* Compartido con ScrollAFiltros (mosaico de subcat.3): las dos superficies
+  /* Compartido con PlpFiltro (mosaico de subcat.3): las dos superficies
      bajan al catálogo con el mismo recorrido, la misma duración y el mismo
      descuento del nav sticky. Sin esto, elegir un tipo en el riel y elegirlo en
      el mosaico se sienten como dos interacciones distintas. */

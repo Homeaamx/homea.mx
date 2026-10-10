@@ -55,7 +55,7 @@ export default function PreCotizacion({ folio, fechaIso, partidas, datos, editab
           value={datos[clave]}
           onChange={(ev) => onDatos?.({ ...datos, [clave]: ev.target.value })}
           maxLength={80}
-          placeholder={extra.required ? "Llenar campo" : "Opcional"}
+          placeholder={extra.required ? "Obligatorio" : "Opcional"}
           aria-required={extra.required ? true : undefined}
           {...extra}
         />

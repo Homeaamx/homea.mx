@@ -8,7 +8,8 @@
 // (empotrado, counter depth, invisible) la foto debe ser en contexto.
 //
 // Clave exterior: `<macro>/<sub1>/<tipo>` (la misma de FILTROS_PLP);
-// clave interior: slug del filtro (?f=…). Tipo sin foto → cae al diagrama.
+// clave interior: slug del filtro (?f=…). Tipo sin foto → hueco "Foto pendiente"
+// del mismo tamaño (nunca un dibujo: el PLP no lleva gráficos, Carla 2026-10-09).
 
 export interface FotoTipo {
   src: string;
@@ -197,6 +198,10 @@ export const FOTOS_TIPOS: Record<string, Record<string, FotoTipo>> = {
       src: "/assets/photos/tipos/campana-airwall-panel-mural-blanco-falmec.webp",
       alt: "Campana Airwall: panel vertical al muro con barra de extracción frontal sobre la placa",
     },
+    "de-superficie": {
+      src: "/assets/photos/tipos/campana-de-superficie-extractor-modular-vario-gaggenau.webp",
+      alt: "Extractor de superficie modular entre dos placas de inducción, jalando el vapor hacia la cubierta",
+    },
     "induccion-con-sistema-de-extraccion": {
       src: "/assets/photos/tipos/parrilla-induccion-extraccion-integrada-negra.webp",
       alt: "Placa de inducción con extractor integrado en la cubierta, sin campana",
@@ -206,18 +211,4 @@ export const FOTOS_TIPOS: Record<string, Record<string, FotoTipo>> = {
 
 export function getFotoTipo(plpKey: string, slug: string): FotoTipo | undefined {
   return FOTOS_TIPOS[plpKey]?.[slug];
-}
-
-/** PLPs cuyo mosaico YA es de foto. Un tipo sin packshot no cae al diagrama:
- *  deja el hueco reservado del mismo tamaño (ver TipoGrid → .es-pendiente),
- *  para que el layout sea el definitivo desde ahora y las fotos entren sin
- *  mover nada. El diagrama de línea se queda en Guías. */
-const PLP_CON_FOTO = new Set<string>([
-  "cocina-y-bar/refrigeracion/refrigeradores",
-  "cocina-y-bar/coccion/parrillas",
-  "cocina-y-bar/coccion/campanas",
-]);
-
-export function usaFotos(plpKey: string): boolean {
-  return PLP_CON_FOTO.has(plpKey);
 }

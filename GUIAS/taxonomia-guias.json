@@ -971,6 +971,16 @@
                   }
                 },
                 {
+                  "nombre": "De superficie",
+                  "filtro": "/productos/campanas/?f=de-superficie",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "camp-superficie",
+                    "descripcion": "Módulo de extracción que va en la cubierta, entre las parrillas modulares: jala el vapor hacia abajo justo donde se genera y no deja nada sobre la isla.",
+                    "specs": "Módulo en cubierta · Por módulos"
+                  }
+                },
+                {
                   "nombre": "Inducción con sistema de Extracción",
                   "filtro": "/productos/campanas/?f=induccion-con-sistema-de-extraccion",
                   "ficha": {

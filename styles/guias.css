@@ -417,17 +417,17 @@
 }
 /* Variante del eje de instalación: pocas opciones → las tarjetas se estiran
    a repartirse todo el ancho de la sección (auto-fit) y la foto crece en
-   proporción. El corte animado escala solo (svg a height 100%). */
+   proporción. */
 .tpg-grid--full { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
 .tpg-grid--full .tpg-card { padding: 21px 14px 18px; gap: 12px; }
-.tpg-grid--full .tpg-photo, .tpg-grid--full .tpg-diagram { height: 240px; }
+.tpg-grid--full .tpg-photo { height: 240px; }
 /* Fotos de instalación uniformes: mismo ALTO para todas y la proporción la
    da la fuente — las curamos iguales por categoría (refrigeradores 3:4,
    parrillas 1:1) para que la imagen entre completa, sin recorte forzado. */
 .tpg-grid--full .tpg-photo img { height: 100%; width: auto; }
 .tpg-grid--full .tpg-name { font-size: 13px; }
 @media (max-width: 640px) {
-  .tpg-grid--full .tpg-photo, .tpg-grid--full .tpg-diagram { height: 176px; }
+  .tpg-grid--full .tpg-photo { height: 176px; }
 }
 .tpg-card {
   display: flex; flex-direction: column; align-items: center; gap: 10px;
@@ -441,18 +441,14 @@
   transform: translateY(-4px); border-color: var(--homea-gold);
   box-shadow: var(--shadow-md);
 }
-.tpg-diagram { display: flex; align-items: center; justify-content: center; height: 150px; }
-.tpg-diagram svg { height: 115px; width: auto; display: block; }
-/* Foto real del tipo (packshot sobre blanco): misma caja que el diagrama para
-   que el grid mixto alinee. La imagen NUNCA se anima — el hover vive en la
-   tarjeta (borde oro + lift), no en la foto. Excepción: los tiles de
-   instalación (.has-corte), donde la foto cede al corte lateral. */
+/* Foto real del tipo (packshot sobre blanco). Sin gráficos (Carla, 2026-10-09):
+   la foto es la protagonista en reposo, hover y tipo elegido. La imagen NUNCA
+   se anima — el hover vive en la tarjeta (borde oro + lift), no en la foto. */
 .tpg-photo { position: relative; display: flex; align-items: center; justify-content: center; height: 150px; width: 100%; }
 .tpg-photo img { max-height: 100%; max-width: 100%; object-fit: contain; display: block; }
 /* Foto pendiente: MISMA caja que la foto real (150px, o 240px en el eje de
    instalación), para que el mosaico ya esté maquetado a su tamaño final y los
-   packshots entren sin recorrer nada. En los tiles de instalación el hover
-   sigue revelando el corte, así que el hueco nunca se siente vacío. */
+   packshots entren sin recorrer nada. */
 .tpg-photo.es-pendiente { background: var(--homea-greige); outline: 1px dashed var(--border-strong); outline-offset: -1px; }
 .tpg-ph {
   display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;
@@ -460,73 +456,6 @@
   letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-muted);
 }
 
-/* Corte de instalación — hover de "Tipo de instalación" (refrigeración).
-   Coreografía en 3 tiempos sobre components/CorteInstalacion.tsx:
-     1. el plano se dibuja (muro, piso, mueble — trazo .cin-line)
-     2. el refrigerador se desliza a su posición (.cin-fridge)
-     3. el remate oro aterriza al final (.cin-gold; en empotrado antes cae el
-        panel .cin-panel que lo cubre)
-   La salida (mouse fuera) es corta y sin delays para que el tile se sienta
-   vivo, no lento. Teclado: :focus-visible reproduce el hover completo. */
-.tpg-photo.has-corte img { transition: opacity var(--dur-med) var(--ease-standard); }
-.tpg-corte {
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  background: var(--surface); opacity: 0; pointer-events: none;
-  transition: opacity var(--dur-med) var(--ease-standard);
-}
-.tpg-corte svg { height: 100%; max-width: 100%; display: block; }
-.tpg-card:hover .has-corte img,
-.tpg-card:focus-visible .has-corte img { opacity: 0; }
-.tpg-card:hover .tpg-corte,
-.tpg-card:focus-visible .tpg-corte { opacity: 1; }
-
-.cin-line {
-  stroke-dasharray: 340; stroke-dashoffset: 340;
-  transition: stroke-dashoffset .18s var(--ease-standard);
-}
-.cin-fridge { transform: translateX(54px); transition: transform .22s var(--ease-standard); }
-/* Parrillas: el aparato CAE a la cubierta en vez de deslizarse de lado. */
-.cin-drop { transform: translateY(-48px); transition: transform .22s var(--ease-standard); }
-.cin-panel {
-  opacity: 0; transform: translateX(10px);
-  transition: opacity .18s var(--ease-standard), transform .18s var(--ease-standard);
-}
-.cin-gold { opacity: 0; transition: opacity .18s var(--ease-standard); }
-
-.tpg-card:hover .cin-line,
-.tpg-card:focus-visible .cin-line {
-  stroke-dashoffset: 0;
-  transition: stroke-dashoffset .55s var(--ease-standard) .08s;
-}
-.tpg-card:hover .cin-fridge,
-.tpg-card:focus-visible .cin-fridge {
-  transform: translateX(0);
-  transition: transform .7s var(--ease-standard) .3s;
-}
-.tpg-card:hover .cin-drop,
-.tpg-card:focus-visible .cin-drop {
-  transform: translateY(0);
-  transition: transform .7s var(--ease-standard) .3s;
-}
-.tpg-card:hover .cin-panel,
-.tpg-card:focus-visible .cin-panel {
-  opacity: 1; transform: translateX(0);
-  transition: opacity .35s var(--ease-standard) .95s, transform .35s var(--ease-standard) .95s;
-}
-.tpg-card:hover .cin-gold,
-.tpg-card:focus-visible .cin-gold {
-  opacity: 1;
-  transition: opacity .4s var(--ease-standard) 1.05s;
-}
-@media (prefers-reduced-motion: reduce) {
-  .tpg-photo.has-corte img, .tpg-corte, .cin-line, .cin-fridge, .cin-drop, .cin-panel, .cin-gold {
-    transition: none;
-  }
-  .cin-line { stroke-dashoffset: 0; }
-  .cin-fridge, .cin-drop { transform: none; }
-  .cin-panel { opacity: 1; transform: none; }
-  .cin-gold { opacity: 1; }
-}
 .tpg-name {
   font-family: var(--font-sans); font-size: 12px; font-weight: 600;
   letter-spacing: .1em; text-transform: uppercase; color: var(--fg);
@@ -558,9 +487,6 @@
 .tpg-banner-icon { flex: 0 0 auto; display: flex; align-items: center; color: #EAD8A0; }
 .tpg-banner-icon svg { width: clamp(72px, 8vw, 112px); height: auto; display: block; }
 @media (max-width: 760px) { .tpg-banner-icon { display: none; } }
-/* La anatomía y la animación del diagrama se comparten con las fichas de Guías
-   (bloque .tfk-diagram / .tfk-card, arriba): el mosaico del PLP hereda las
-   mismas puertas que se abren, sin duplicar una sola regla. */
 /* Nota de filtro sin valores fijos (Precio, Marca) en la barra de filtros. */
 .fnote { font-size: 12.5px; line-height: 1.5; color: var(--fg-muted); }
 
@@ -629,39 +555,6 @@
 :is(.tfk-diagram, .tpg-diagram) .in .ring.warm { stroke: var(--dgm-calor); }
 :is(.tfk-diagram, .tpg-diagram) .in .ln-cool { stroke: var(--dgm-repisa); stroke-width: 2.5; stroke-linecap: round; }
 
-/* ---------------------------------------------------------------------------
-   PLP · capas exclusivas del mosaico de PRODUCTOS (Carla, 2026-07-28).
-   NO aplican en Guías: todo va scoped a .tpg-.
-   .cnt = contenido que explica el tipo, revelado junto con el interior.
-   (La barra de ancho y la vista de planta se probaron y se retiraron 2026-07-29.)
-   --------------------------------------------------------------------------- */
-.tpg-diagram { position: relative; }
-/* 1 · Contenido interior --------------------------------------------------- */
-.tpg-diagram .cnt { opacity: 0; transition: opacity var(--dur-slow) var(--ease-standard) 140ms; }
-.tpg-card:hover .cnt { opacity: 1; }
-.tpg-diagram .cnt .pieza { fill: var(--dgm-luz); stroke: var(--dgm-repisa); stroke-width: 0.7; }
-.tpg-diagram .cnt .canto { stroke: var(--dgm-repisa); stroke-width: 1.4; }
-.tpg-diagram .cnt .bandeja { fill: var(--dgm-frio); stroke: var(--dgm-repisa); stroke-width: 0.7; opacity: 0.9; }
-/* La zona flex es el rasgo que define a 4 y 5 puertas → única nota de oro. */
-.tpg-diagram .cnt .flex { fill: var(--homea-gold); fill-opacity: 0.22; stroke: var(--accent-text); stroke-width: 0.8; }
-@media (hover: none) {
-  /* Táctil: sin hover → el contenido del interior va siempre visible. */
-  .tpg-diagram .cnt { opacity: 1; transition: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .tpg-diagram .cnt { transition: none; }
-}
-
-/* Glass Door: SOLO el vidrio cambia de tono. El cuerpo y el marco de la puerta
-   siguen en acero como todos los demás (regla Carla, 2026-07-29); lo que
-   distingue al tipo es el paño de cristal: se ve a través de él el interior
-   iluminado con tinte frío, y las repisas se leen detrás. */
-.tpg-diagram.es-cristal .dr rect.glass {
-  fill: url(#dgm-vitrina); fill-opacity: 1;
-  stroke: var(--dgm-cristal-canto); stroke-width: 1;
-}
-.tpg-diagram.es-cristal .glass-shelf { stroke: var(--dgm-cristal-canto); opacity: 0.75; }
-
 /* Tipo seleccionado en el mosaico del PLP: tiene que quedar EVIDENTE cuál se
    eligió, porque el catálogo filtrado queda más abajo, fuera de pantalla. */
 .tpg-card.is-active {
@@ -669,6 +562,11 @@
   box-shadow: inset 0 0 0 1px var(--homea-gold);
 }
 .tpg-card.is-active .tpg-name { color: var(--accent-text); }
+/* La foto del tipo elegido llena su placeholder completo: la caja va en blanco
+   (el fondo del packshot) para que no quede un recuadro blanco flotando sobre el
+   greige, y el producto queda centrado como foco de la tarjeta. No aplica al eje
+   de instalación: ahí son fotos en contexto, que ya se leen solas sobre greige. */
+.tpg-grid:not(.tpg-grid--full) .tpg-card.is-active .tpg-photo:not(.es-pendiente) { background: var(--surface); }
 .tpg-quitar {
   font-family: var(--font-sans); font-size: 10px; font-weight: 600;
   letter-spacing: .12em; text-transform: uppercase; color: var(--accent-text);

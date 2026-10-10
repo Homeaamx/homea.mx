@@ -42,7 +42,11 @@ export default function PreCotizacionModal({ carrito, onCerrar }: Props) {
   const partidas = useMemo(() => partidasDelCarrito(carrito), [carrito]);
   const folio = folioDe(partidasDe(carrito));
   const fechaIso = useMemo(() => new Date().toISOString(), []);
-  const listo = datos.nombre.trim().length >= 2 && datos.telefono.trim().length >= 7;
+  // Solo los campos obligatorios (nombre y teléfono) habilitan descargar y
+  // enviar; los opcionales pueden quedar vacíos (Carla, 2026-10-10). Sin
+  // validar formato: el cliente nos comparte el PDF por WhatsApp, así que el
+  // contacto llega de todos modos.
+  const listo = datos.nombre.trim() !== "" && datos.telefono.trim() !== "";
   const wa = mensajeListado(carrito, datos);
 
   /** El navegador hace el PDF (Imprimir → Guardar como PDF) con el folio como nombre de archivo. */
@@ -68,7 +72,7 @@ export default function PreCotizacionModal({ carrito, onCerrar }: Props) {
           </p>
           {!listo ? (
             <p className="pc-hint" role="status">
-              Escribe tu nombre y teléfono para poder descargar o enviar.
+              Llena los campos obligatorios (nombre y teléfono) para descargar o enviar.
             </p>
           ) : null}
           <div className="pc-botones">

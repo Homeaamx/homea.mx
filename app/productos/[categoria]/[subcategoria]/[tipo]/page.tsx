@@ -14,7 +14,7 @@ import { notFound } from "next/navigation";
 import { getRoute } from "@/lib/guias";
 import { FILTROS_PLP, getFiltrosPlp } from "@/lib/filtrosPlp";
 import { SITE_URL } from "@/lib/site";
-import TipoGrid from "@/components/TipoGrid";
+import TipoGrid, { ejeDeGrupo } from "@/components/TipoGrid";
 import PlpFiltro from "@/components/PlpFiltro";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppCta from "@/components/WhatsAppCta";
@@ -93,6 +93,16 @@ export default async function Page({ params }: Params) {
   const hero = HERO_PLP[`${categoria}/${subcategoria}/${tipo}`];
   const tipos = sub2.filtros ?? [];
   const conFicha = tipos.filter((f) => f.ficha).length;
+  // Tipos del mosaico con su eje: el panel les da casilla en SU grupo aunque aún
+  // no haya piezas, para que elegir un tipo vacío muestre 0 y no todo el catálogo.
+  const mosaico = tipos
+    .filter((f) => f.ficha)
+    .map((f) => ({
+      eje: ejeDeGrupo(f.ficha!.grupo, sub2.etiquetasGrupos),
+      slug: f.filtro.split("?f=")[1] ?? "",
+      nombre: f.nombre,
+    }))
+    .filter((m) => Boolean(m.slug));
   // slug → nombre visible, para la etiqueta "tipo: X" que pinta PlpFiltro.
   const nombresPorSlug = Object.fromEntries(
     tipos
@@ -157,7 +167,7 @@ export default async function Page({ params }: Params) {
                 // Filtros con los valores reales de Shopify (filtros.*) y su conteo;
                 // public/catalogo.js filtra las tarjetas en el cliente.
                 dangerouslySetInnerHTML={{
-                  __html: panelFiltrosHtml(productos, { tc, valoresComoTipo: true }),
+                  __html: panelFiltrosHtml(productos, { tc, mosaico }),
                 }}
               />
             ) : (
