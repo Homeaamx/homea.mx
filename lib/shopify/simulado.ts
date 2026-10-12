@@ -76,6 +76,7 @@ function aLinea({ sku, cantidad }: LineaSim, tc: TipoCambio): LineaCarrito | nul
     maximo: null,
     enStock: false,
     serie: p.serie,
+    spec: "",
     precioPublico: { venta: { monto: centavos(p.precio * (1 + IVA)), moneda: p.moneda }, tachado: null },
     // El índice no trae pesos para las piezas USD: se convierten con el tipo de
     // cambio del sitio solo para la regla de monto; en producción decide Shopify.

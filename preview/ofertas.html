@@ -163,6 +163,10 @@
 @media (max-width: 1080px) { .of-paqs { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 900px) { .of-doors { grid-template-columns: 1fr; } }
 @media (max-width: 640px) { .of-paqs { grid-template-columns: 1fr; } .of-cdown { flex-wrap: wrap; } .of-shead { flex-wrap: wrap; } }
+
+/* Avísame (newsletter): banda clara con filete dorado arriba y abajo. */
+.of-news { padding-top: 64px; padding-bottom: 64px; background: var(--homea-bone);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 </style>
 </head>
 <body>
@@ -204,7 +208,7 @@
             <div class="mega-pane" data-pane="cocina"><div class="mega-subcols is-fixed">
               <div class="mega-col">
                 <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--refrigeracion.html">Refrigeración</a></h5> <a href="subcategoria-cocina-y-bar--refrigeracion--refrigeradores.html">Refrigeradores</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=congeladores">Congeladores</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=centros-de-bebida">Centros de bebida</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=frigobares">Frigobares</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=maquinas-de-hielo">Máquinas de hielo</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=cavas-de-vino">Cavas de vino</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=cajones-refrigerantes">Cajones refrigerantes</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=accesorios-refrigeracion">Accesorios de refrigeración</a></div>
-                <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--lavavajillas.html">Lavavajillas</a></h5> <a href="subcategoria-cocina-y-bar--lavavajillas.html?tipo=lavavajillas-empotrable">Lavavajillas empotrable</a><a href="subcategoria-cocina-y-bar--lavavajillas.html?tipo=lavavajillas-de-piso">Lavavajillas de piso</a></div>
+                <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--lavavajillas.html">Lavavajillas</a></h5> <a href="subcategoria-cocina-y-bar--lavavajillas.html?tipo=lavavajillas-empotrable">Lavavajillas empotrable</a><a href="subcategoria-cocina-y-bar--lavavajillas.html?tipo=lavavajillas-de-piso">Lavavajillas de piso</a><a href="subcategoria-cocina-y-bar--lavavajillas.html?tipo=accesorios-lavavajillas">Accesorios de lavavajillas</a></div>
               </div>
               <div class="mega-col">
                 <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--coccion.html">Cocción</a></h5> <a href="subcategoria-cocina-y-bar--coccion.html?tipo=estufas">Estufas</a><a href="subcategoria-cocina-y-bar--coccion--parrillas.html">Parrillas</a><a href="subcategoria-cocina-y-bar--coccion.html?tipo=hornos">Hornos</a><a href="subcategoria-cocina-y-bar--coccion.html?tipo=microondas">Microondas</a><a href="subcategoria-cocina-y-bar--coccion--campanas.html">Campanas</a><a href="subcategoria-cocina-y-bar--coccion.html?tipo=cajones">Cajones</a><a href="subcategoria-cocina-y-bar--coccion.html?tipo=cafeteras-empotrables">Cafeteras</a><a href="subcategoria-cocina-y-bar--coccion.html?tipo=accesorios-coccion">Accesorios de cocción</a></div>
@@ -216,16 +220,17 @@
               </div>
             </div><a class="mega-all" href="categoria-cocina-y-bar.html">Ver todo Cocina y Bar</a></div>
 
-            <div class="mega-pane" data-pane="exterior"><div class="mega-subcols">
+            <div class="mega-pane" data-pane="exterior"><div class="mega-subcols is-grid3" data-cols="3">
               <div class="mega-subcol"><h5><a href="subcategoria-exterior--asadores-y-hornos.html">Asadores &amp; Hornos</a></h5>
                 <a href="subcategoria-exterior--asadores-y-hornos.html?tipo=asadores-empotrables">Asadores empotrables</a><a href="subcategoria-exterior--asadores-y-hornos.html?tipo=asadores-con-carrito">Asadores con carrito</a><a href="subcategoria-exterior--asadores-y-hornos.html?tipo=hornos-de-pizza">Hornos de pizza</a><a href="subcategoria-exterior--asadores-y-hornos.html?tipo=accesorios-asadores-hornos">Accesorios Asadores &amp; Hornos</a></div>
-              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=quemador-lateral">Quemador lateral</a></h5> <a href="categoria-exterior.html?tipo=quemador-lateral">Quemador lateral</a></div>
-              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=plancha-teppanyaki">Plancha Teppanyaki</a></h5> <a href="categoria-exterior.html?tipo=plancha-teppanyaki">Plancha Teppanyaki</a></div>
-              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=ahumadores">Ahumadores</a></h5> <a href="categoria-exterior.html?tipo=ahumadores">Ahumadores</a></div>
-              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=hieleras">Hieleras</a></h5> <a href="categoria-exterior.html?tipo=hieleras">Hieleras</a></div>
-              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=gabinetes">Gabinetes</a></h5> <a href="categoria-exterior.html?tipo=gabinetes">Gabinetes</a></div>
-              <div class="mega-subcol"><h5><a href="categoria-exterior.html" data-filtro="alberca">Alberca</a></h5>
-                <a href="categoria-exterior.html" data-filtro="alberca">Mosaicos</a></div>
+              <div class="mega-col">
+                <div class="mega-subcol solo-titulo"><h5><a href="categoria-exterior.html?tipo=quemador-lateral">Quemador lateral</a></h5></div>
+                <div class="mega-subcol solo-titulo"><h5><a href="categoria-exterior.html?tipo=plancha-teppanyaki">Plancha Teppanyaki</a></h5></div>
+                <div class="mega-subcol solo-titulo"><h5><a href="categoria-exterior.html?tipo=ahumadores">Ahumadores</a></h5></div>
+              </div>
+              <div class="mega-subcol solo-titulo"><h5><a href="categoria-exterior.html?tipo=hieleras">Hieleras</a></h5></div>
+              <div class="mega-subcol solo-titulo"><h5><a href="categoria-exterior.html?tipo=gabinetes">Gabinetes</a></h5></div>
+              <div class="mega-subcol solo-titulo"><h5><a href="categoria-exterior.html" data-filtro="alberca">Alberca</a></h5></div>
             </div><a class="mega-all" href="categoria-exterior.html">Ver todo Exterior</a></div>
 
             <div class="mega-pane" data-pane="electro"><div class="mega-subcols">
@@ -527,6 +532,26 @@
   </div>
 </div></section>
 
+<!-- ============ 5b · AVÍSAME (newsletter, Carla 2026-10-12) ============ -->
+<!-- Mismo formulario que el pie (v2.js · [data-newsletter]); en esta página el
+     pie no lo repite (CSS: body:has([data-newsletter="ofertas"])). -->
+<section class="sec of-news" id="avisame"><div class="container">
+  <div class="f-news-in reveal">
+    <svg class="f-news-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+    <div class="f-news-txt">
+      <h2 class="f-news-t">Avísame de las <i>próximas ofertas</i>.</h2>
+      <p>Outlet, piezas en existencia y promociones de marca: te escribimos antes de que se agoten.</p>
+    </div>
+    <form class="f-news-form" data-newsletter="ofertas" novalidate>
+      <label class="sr-only" for="nl-ofertas">Tu correo electrónico</label>
+      <input id="nl-ofertas" type="email" name="correo" placeholder="Tu correo electrónico" autocomplete="email" required>
+      <button type="submit">Avísame</button>
+      <p class="f-news-msg" role="status" aria-live="polite"></p>
+      <p class="f-news-legal">Al suscribirte aceptas el <a href="/aviso-de-privacidad">Aviso de privacidad</a>. Te das de baja cuando quieras.</p>
+    </form>
+  </div>
+</div></section>
+
 <!-- ============ 6 · CIERRE CONSULTIVO ============ -->
 <!-- cta-band: aporta el orbe de oro que sigue al cursor (v2.js busca .cta-band
      y el <div class="glow"> es donde vive el orbe). Sin esas dos piezas la
@@ -585,7 +610,22 @@
 })();
 </script>
 
-<footer class="site-footer"><div class="container">
+<footer class="site-footer"><div class="f-news" id="newsletter">
+  <div class="container f-news-in">
+    <svg class="f-news-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="1"/><path d="m3 6 9 7 9-7"/></svg>
+    <div class="f-news-txt">
+      <h2 class="f-news-t">Conéctate, <i>inspírate</i>.</h2>
+      <p>Únete a nuestra lista y recibe inspiración, lanzamientos y promociones exclusivas.</p>
+    </div>
+    <form class="f-news-form" data-newsletter="footer" novalidate>
+      <label class="sr-only" for="nl-footer">Tu correo electrónico</label>
+      <input id="nl-footer" type="email" name="correo" placeholder="Tu correo electrónico" autocomplete="email" required>
+      <button type="submit">Suscribirme</button>
+      <p class="f-news-msg" role="status" aria-live="polite"></p>
+      <p class="f-news-legal">Al suscribirte aceptas el <a href="/aviso-de-privacidad">Aviso de privacidad</a>. Te das de baja cuando quieras.</p>
+    </form>
+  </div>
+</div><div class="container">
   <div class="cols">
     <div class="brandcol">
       <img width="1400" height="1400" srcset="assets/homea-premium-19-400.webp 400w, assets/homea-premium-19-640.webp 640w, assets/homea-premium-19-960.webp 960w, assets/homea-premium-19-1280.webp 1280w, assets/homea-premium-19.webp 1400w" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 34vw" loading="lazy" decoding="async" class="mark" src="assets/homea-premium-19.webp" alt="HOMEA">
@@ -613,7 +653,7 @@
       <a href="herramientas.html">Herramientas</a></div>
     <div class="lnk"><div class="f-eyebrow">HOMEA</div>
       <a href="nosotros.html">Nosotros</a>
-      <a href="b2b.html">Proyectos</a><a href="#">Blog &amp; Newsletter</a>
+      <a href="b2b.html">Proyectos</a><a href="#newsletter">Blog &amp; Newsletter</a>
       <a href="contacto.html">Contacto</a></div>
     <div class="lnk"><div class="f-eyebrow">Atención al cliente</div>
       <a href="garantias-instalacion.html">Garantías e instalación</a><a href="#">Fichas técnicas</a>

@@ -255,6 +255,8 @@
       r.setAttribute("data-base", base);
       r.textContent = base;
     }
+    /* Botón "Borrar filtros" fuera del panel (wishlist): solo con algo aplicado. */
+    plp.querySelectorAll("[data-cat-reset]").forEach(function (b) { b.hidden = Object.keys(activos).length === 0; });
     var vacio = plp.querySelector("[data-cat-vacio]");
     if (vacio) vacio.hidden = visibles > 0;
 
@@ -301,6 +303,31 @@
     plp.querySelectorAll("[data-cat-precio]").forEach(pintarSlider);
     aplicar(plp, {});
     enfocarResultados(plp);
+  }
+
+  /* Volver a entrar a ESTA página desde fuera del catálogo (mega-menú, cajón
+     móvil, migas…) es empezar de cero: solo queda el tipo que trae el enlace.
+     Next no vuelve a pintar <main> cuando solo cambia ?tipo=, así que sin esto
+     se quedaban marcados los filtros de la búsqueda anterior. */
+  function reiniciar(plp, tipo) {
+    casillas(plp).forEach(function (cb) {
+      var l = cb.closest("label[data-tipo]");
+      cb.checked = !!tipo && !!l && l.getAttribute("data-tipo") === tipo;
+    });
+    plp.querySelectorAll("[data-cat-precio] input[data-fp]").forEach(function (i) { i.value = ""; });
+    plp.querySelectorAll("[data-cat-precio]").forEach(pintarSlider);
+    plp.querySelectorAll("[data-fgroup] [data-fbuscar]").forEach(function (i) { i.value = ""; buscarEnGrupo(i); });
+    aplicarMarcado(plp);
+  }
+
+  function reiniciarSiEsEstaPagina(e, a) {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (a.closest(".plp, .subcat-strip, a.subcat[data-tipo], .tpg-card")) return;
+    if (a.target && a.target !== "_self") return;
+    var u;
+    try { u = new URL(a.getAttribute("href"), location.href); } catch (err) { return; }
+    if (u.origin !== location.origin || u.pathname !== location.pathname) return;
+    document.querySelectorAll(".plp").forEach(function (plp) { reiniciar(plp, u.searchParams.get("tipo")); });
   }
 
   /* ---------- Orden ---------- */
@@ -392,6 +419,9 @@
       if (cb) { cb.checked = false; aplicarMarcado(plpX); }
       return;
     }
+
+    var ir = t.closest("a[href]");
+    if (ir) reiniciarSiEsEstaPagina(e, ir);
 
     /* tipos.js / PlpFiltro marcan casillas a mano: aplicar después de su clic. */
     if (t.closest("a.subcat[data-tipo], .tpg-card[data-f]")) aplicarLuego();

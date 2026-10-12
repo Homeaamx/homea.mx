@@ -126,16 +126,20 @@
         var ap = mega.querySelector('.mega-pane[data-pane="' + key + '"]');
         if (ap) {
           var subs = ap.querySelector(".mega-subcols");
+          var cols = 1;
           if (subs) {
             var COLW = 190, GAP = 26;
             var n = ap.querySelectorAll(".mega-subcol").length;
-            var cols = Math.min(3, Math.max(1, n));
+            /* Columnas armadas a mano (.mega-col: Cocina y Bar, Exterior) mandan sobre el conteo. */
+            var nCols = +subs.getAttribute("data-cols") || subs.querySelectorAll(":scope > .mega-col").length;
+            cols = nCols || Math.min(3, Math.max(1, n));
             subs.style.columnCount = cols;
             subs.style.width = (cols * COLW + (cols - 1) * GAP) + "px";
           }
-          /* Foto de tamaño ESTABLE entre categorías: solo el pane de columnas
-             fijas (Cocina y Bar) ensancha el detalle y encoge la foto. */
-          mega.classList.toggle("detail-wide", !!(subs && subs.classList.contains("is-fixed")));
+          /* Foto de tamaño ESTABLE entre categorías: solo los panes de tres
+             columnas (Cocina y Bar, Exterior) ensanchan el detalle y la foto se
+             queda con lo que sobra; si no, el texto se cortaba (Carla, 2026-10-12). */
+          mega.classList.toggle("detail-wide", !!(subs && (subs.classList.contains("is-fixed") || cols >= 3)));
         }
         if (featImg && img) { featImg.src = img; featImg.style.objectPosition = pos || "50% 50%"; }
         if (featLab && label) { featLab.innerHTML = label; }
@@ -1077,14 +1081,21 @@
         bi.style.setProperty("--k", "1"); bi.style.setProperty("--kh", "1"); bi.style.setProperty("--kt", "1");
       } else {
         var ctaPill = document.querySelector("#distribucion-oficial .cta-pill");
+        var biGlyph = bi.querySelector(".bi-glyph");
         var biTick = false;
         var updBi = function () {
           var vh = window.innerHeight || document.documentElement.clientHeight;
           var r = bi.getBoundingClientRect();
           var p = (vh - r.top) / vh;
           bi.style.setProperty("--kt", clamp01((p - 0.05) / 0.35).toFixed(3));
-          bi.style.setProperty("--k",  clamp01((p - 0.25) / 0.60).toFixed(3));
-          bi.style.setProperty("--kh", clamp01((p - 0.38) / 0.60).toFixed(3));
+          /* La orbe se mide por SU centro, no por el borde de la sección (Carla,
+             2026-10-12): antes se llenaba hasta que la sección ya se iba. Ahora
+             está completa en cuanto el glifo llega a la mitad de la pantalla
+             (la orbe a 55 %, la H blanca a 50 %) y se queda llena mientras se lee. */
+          var gr = biGlyph ? biGlyph.getBoundingClientRect() : null;
+          var gp = gr && gr.height ? (vh - (gr.top + gr.height / 2)) / vh : 1;
+          bi.style.setProperty("--k",  clamp01(gp / 0.45).toFixed(3));
+          bi.style.setProperty("--kh", clamp01((gp - 0.12) / 0.38).toFixed(3));
           for (var i = 0; i < biFlow.length; i++) {
             var f = parseFloat(biFlow[i].getAttribute("data-speed")) || 0.15;
             biFlow[i].style.transform = "translate3d(0," + ((vh - r.top) * f).toFixed(1) + "px,0)";
@@ -1094,8 +1105,12 @@
             var cc = cr.top + cr.height / 2;
             var d = clamp01((vh - cc) / (vh * 0.45));
             ctaPill.style.setProperty("--fill", d.toFixed(3));
-            bi.style.setProperty("--kx", (1 - d).toFixed(3));
           }
+          /* La orbe se "vacía" solo cuando ya va saliendo por arriba (centro del
+             glifo del 25 % al −10 % de la pantalla); antes se apagaba en cuanto
+             asomaba el botón de la sección siguiente, con la orbe aún a la vista. */
+          var gc = gr && gr.height ? (gr.top + gr.height / 2) / vh : 1;
+          bi.style.setProperty("--kx", clamp01((gc + 0.10) / 0.35).toFixed(3));
           biTick = false;
         };
         on(window, "scroll", function () { if (!biTick) { biTick = true; requestAnimationFrame(updBi); } }, { passive: true });
@@ -1214,12 +1229,17 @@
           downX = lastX = e.clientX; lastT = e.timeStamp || Date.now();
           startPos = pos; velocity = 0;
           row.classList.add("dragging");
-          if (row.setPointerCapture) { try { row.setPointerCapture(e.pointerId); } catch (err) {} }
         });
         row.addEventListener("pointermove", function (e) {
           if (!dragging) return;
           var dx = e.clientX - downX;
-          if (Math.abs(dx) > 4) moved = true;
+          /* La captura del puntero solo al arrastrar de verdad: si se toma en el
+             pointerdown, Chrome entrega el clic a la fila y no a la tarjeta, y la
+             marca nunca abría su página (Carla, 2026-10-12). */
+          if (!moved && Math.abs(dx) > 4) {
+            moved = true;
+            if (row.setPointerCapture) { try { row.setPointerCapture(e.pointerId); } catch (err) {} }
+          }
           pos = wrapPos(startPos + dx); apply();
           var now = e.timeStamp || Date.now();
           var ddt = (now - lastT) / 1000;
@@ -1448,4 +1468,56 @@
     });
     mo.observe(document.body, { childList: true, subtree: true });
   }
+})();
+
+/* ---------- Newsletter (Carla, 2026-10-12) ----------
+   Formularios [data-newsletter] (pie de página, /ofertas): el correo entra a la
+   lista de HOMEA en Shopify vía /api/lead, ya con consentimiento de marketing
+   (suscribirse ES el consentimiento). Delegado en document porque el pie y
+   <main> se vuelven a pintar en cada navegación SPA. */
+(function () {
+  "use strict";
+  var CORREO = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+  document.addEventListener("submit", function (e) {
+    var form = e.target && e.target.closest && e.target.closest("form[data-newsletter]");
+    if (!form) { return; }
+    e.preventDefault();
+    var input = form.querySelector('input[name="correo"]');
+    var msg = form.querySelector(".f-news-msg");
+    var boton = form.querySelector('button[type="submit"]');
+    var correo = (input.value || "").trim();
+    var decir = function (texto, error) {
+      if (!msg) { return; }
+      msg.textContent = texto;
+      msg.classList.toggle("is-error", !!error);
+    };
+    if (!CORREO.test(correo)) { decir("Revisa tu correo: parece incompleto.", true); input.focus(); return; }
+    boton.disabled = true;
+    decir("Enviando…");
+    var origen = "newsletter-" + form.getAttribute("data-newsletter");
+    fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ correo: correo, consiente: true, origen: origen })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j && j.ok) {
+          form.classList.add("is-ok");
+          decir("¡Listo! Ya estás en la lista de HOMEA. Revisa tu correo en las próximas campañas.");
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "newsletter_signup", newsletter_location: origen });
+          if (typeof window.gtag === "function") {
+            window.gtag("event", "sign_up", { method: "newsletter", event_label: origen });
+          }
+        } else {
+          boton.disabled = false;
+          decir("No pudimos registrarte ahora. Intenta de nuevo en un momento.", true);
+        }
+      })
+      ["catch"](function () {
+        boton.disabled = false;
+        decir("No pudimos registrarte ahora. Intenta de nuevo en un momento.", true);
+      });
+  });
 })();

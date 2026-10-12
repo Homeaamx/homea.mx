@@ -192,9 +192,10 @@ html { scroll-behavior: smooth; }
   grid-template-rows: minmax(0, 1fr);
   height: min(588px, calc(100vh - 128px)); }
 /* Foto ESTABLE entre categorías: 430px (~⅓ del panel, retrato ~3:4) para todas.
-   Excepción: Cocina y Bar (.detail-wide, columnas fijas) necesita el ancho para
-   sus 3 columnas → el detalle manda y la foto se queda con el resto (~300px). */
-.mega-panel.detail-wide .mega-flyout-main { grid-template-columns: 248px auto minmax(300px, 1fr); }
+   Excepción: los panes de 3 columnas (.detail-wide: Cocina y Bar, Exterior)
+   necesitan el ancho → el detalle manda y la foto se queda con el resto
+   (~300px; menos en pantallas angostas, nunca se corta el texto). */
+.mega-panel.detail-wide .mega-flyout-main { grid-template-columns: 248px auto minmax(0, 1fr); }
 /* Colocación explícita: la intro (H de marca) se superpone sobre detalle+imagen
    y se ve al abrir; al pasar el cursor por una categoría se oculta (.cat-active). */
 .mega-flyout-main > .mega-rail    { grid-area: 1 / 1; }
@@ -237,6 +238,18 @@ html { scroll-behavior: smooth; }
   grid-template-columns: repeat(3, 190px); grid-template-rows: auto auto;
   grid-auto-flow: column; column-gap: 26px; row-gap: 0; align-items: start; }
 .mega-subcols.is-fixed .mega-col { display: contents; }
+/* Exterior en rejilla de 3 (Carla, 2026-10-12): fila 1 = Asadores & Hornos y la
+   columna de títulos sueltos; fila 2 = Hieleras · Gabinetes · Alberca. */
+.mega-subcols.is-grid3 { display: grid; grid-template-columns: repeat(3, 190px); column-gap: 26px; column-count: auto; align-items: start; }
+.mega-subcols.is-grid3 > :nth-child(3) { grid-column: 1; }
+.mega-subcols.is-grid3 .mega-col > .mega-subcol:last-child { margin-bottom: 18px; }
+.mega-subcol.solo-titulo h5 { margin-bottom: 0; }
+/* Pantallas bajas: el panel no debe tener scroll (Cocina y Bar es el más alto). */
+@media (max-height: 760px) {
+  .mega-flyout .mega-detail { padding-top: 18px; padding-bottom: 18px; }
+  .mega-detail .mega-subcol a { padding-top: 4px; padding-bottom: 4px; }
+  .mega-detail .mega-subcol { margin-bottom: 14px; }
+}
 .mega-subcols.is-fixed .mega-col > .mega-subcol { margin-top: 0; }
 .mega-subcols.is-fixed .mega-col > .mega-subcol:last-child { margin-bottom: 0; }
 /* Encabezados a la misma altura entre columnas: se reserva el alto del título más
@@ -246,7 +259,10 @@ html { scroll-behavior: smooth; }
    Un renglón mide 19.5px (12.5px · 1.56) + 7px de padding-bottom.
    Si cambian los nombres del menú, revisar estos dos valores. */
 .mega-subcols.is-fixed .mega-col > .mega-subcol:first-child h5 { min-height: 46px; }
-.mega-subcols.is-fixed .mega-col > .mega-subcol:last-child h5 { min-height: 66px; }
+/* Fila 2 (Carla, 2026-10-12): sin alto reservado y con el texto arriba —
+   Lavavajillas y Trituradores arrancan a la altura de "Purificadores y
+   Despachadores de Agua"; así el panel cabe sin scroll y "Ver todo" no se pierde. */
+.mega-subcols.is-fixed .mega-col > .mega-subcol:last-child h5 { min-height: 0; align-items: flex-start; }
 /* El texto se centra en el alto reservado: así un título de un renglón queda a la
    misma altura que el renglón central del título largo de su fila, en vez de
    pegarse arriba y dejar el hueco antes de la línea dorada. */
@@ -1101,7 +1117,28 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
   .bene-card { opacity: 1; transform: none; transition: border-color .3s, background .3s; }
   .bene-orb { transition: none; }
 }
+/* Tarjeta larga "Inventario para entrega inmediata" (Carla, 2026-10-12): a todo
+   el ancho, en un renglón (icono · título · texto). Las seis de arriba se
+   compactan un poco para que la sección no crezca de más. */
+.bene-grid .bene-card { padding: clamp(22px, 2vw, 32px); }
+.bene-grid .bene-ico { margin-bottom: 16px; }
+.bene-grid .bene-card--wide { grid-column: 1 / -1; display: grid; grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center; column-gap: clamp(20px, 2.6vw, 44px); padding-top: clamp(20px, 1.8vw, 28px); padding-bottom: clamp(20px, 1.8vw, 28px); }
+.bene-grid .bene-card--wide .bene-ico { margin: 0; }
+.bene-card--wide h3 { margin: 0; }
+/* Hairline dorada entre título y texto, como el sistema "·" de la marca. */
+.bene-card--wide p { padding-left: clamp(20px, 2.6vw, 44px); border-left: 1px solid color-mix(in srgb, var(--homea-gold) 55%, transparent); }
 @media (max-width: 900px) { .bene-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 900px) {
+  .bene-grid .bene-card--wide { grid-template-columns: auto minmax(0, 1fr); row-gap: 8px; }
+  .bene-card--wide p { grid-column: 2; padding-left: 0; border-left: 0; }
+}
+@media (max-width: 600px) {
+  .bene-grid .bene-card--wide { display: block; }
+  .bene-grid .bene-card--wide .bene-ico { margin-bottom: 16px; }
+  .bene-card--wide h3 { margin-bottom: 10px; }
+  .bene-card--wide p { padding-left: 0; border-left: 0; }
+}
 @media (max-width: 600px) { .bene-grid { grid-template-columns: 1fr; } }
 
 .stats { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--dark-border);
@@ -3087,6 +3124,16 @@ a.pc-enviar[aria-disabled="true"] { opacity: .4; pointer-events: none; }
 .wl-toolbar { flex-wrap: wrap; align-items: center; row-gap: 14px; padding-bottom: 18px; }
 .wl-toolbar .results { flex-basis: 100%; order: 3; font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg); }
 .wl-toolbar select { order: 2; }
+/* Flecha del orden en la wishlist (Carla, 2026-10-12): el mismo chevron fino de
+   los desplegables "Tipo de producto · Marca · Precio", a la derecha del texto. */
+.wl-toolbar select { padding-right: 22px; background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.25 6 7.75l3.5-3.5' fill='none' stroke='%230A0A0A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right center / 12px 12px; }
+/* "Borrar filtros" tras el último desplegable: solo aparece con filtros aplicados (Carla, 2026-10-12). */
+.wl-reset { background: none; border: 0; border-bottom: 1px solid var(--homea-gold); cursor: pointer; padding: 4px 0; font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg); white-space: nowrap; transition: color var(--dur-fast) var(--ease-standard); }
+.wl-reset:hover { color: var(--accent-text); }
+.wl-reset[hidden] { display: none; }
+/* Con "Borrar filtros" visible, el orden no se baja de renglón: la fila de
+   desplegables se encoge (y el botón pasa abajo de ellos en pantallas angostas). */
+.wl-toolbar .filters.filters--top { flex: 1 1 0; min-width: min(100%, 460px); }
 .filters.filters--top { order: 1; position: static; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 6px 32px; max-height: none; overflow: visible; flex: 1 1 auto; }
 .fdrop { position: relative; border: 0; }
 .fdrop > .fdrop-sum { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; padding: 6px 0; }
@@ -3119,4 +3166,64 @@ a.pc-enviar[aria-disabled="true"] { opacity: .4; pointer-events: none; }
   .wl-cta { grid-template-columns: 1fr; padding: 22px 20px; }
   .wl-cta .acts { align-items: stretch; }
   .wl-cta .wl-wa { min-width: 0; width: 100%; }
+}
+
+/* ===== Newsletter (Carla, 2026-10-12) =====
+   Franja clara al inicio del pie de página en todo el sitio (.f-news), el mismo
+   formulario en /ofertas (.of-news) y la casilla de la pre-cotización. Los tres
+   mandan el correo a /api/lead → clientes de Shopify con consentimiento
+   (Shopify Messaging). El envío lo hace v2.js ([data-newsletter]). */
+.site-footer:has(> .f-news) { padding-top: 0; }
+.site-footer .f-news { background: transparent; color: var(--dark-fg);
+  margin-bottom: 72px; padding: 72px 0 56px; border-bottom: 1px solid var(--dark-border); }
+/* Pie oscuro (Carla, 2026-10-12): la franja clara cortaba el negro entre el
+   cierre "Empecemos por escucharte" y el pie. Ahora vive dentro del negro, con
+   el oro como único acento; /ofertas conserva su versión clara (.of-news). */
+.site-footer .f-news-ico { color: var(--homea-gold); }
+.site-footer .f-news-t { color: var(--homea-bone); }
+.site-footer .f-news-t i { color: var(--homea-gold); }
+.site-footer .f-news-txt p { color: var(--dark-fg-muted); }
+.site-footer .f-news-form input { background: color-mix(in srgb, #fff 4%, transparent); color: var(--homea-bone);
+  border-color: color-mix(in srgb, var(--homea-gold) 45%, transparent); }
+.site-footer .f-news-form input::placeholder { color: var(--dark-fg-muted); }
+.site-footer .f-news-form input:focus { border-color: var(--homea-gold); }
+.site-footer .f-news-form button { background: var(--homea-gold); color: var(--homea-black); }
+.site-footer .f-news-form button:hover { background: color-mix(in srgb, var(--homea-gold) 82%, #fff); }
+.site-footer .f-news-msg { color: var(--homea-gold); }
+.site-footer .f-news-msg.is-error { color: #E8A598; }
+.site-footer .f-news-legal { color: color-mix(in srgb, var(--dark-fg-muted) 80%, transparent); }
+.f-news-in { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.15fr); align-items: center; column-gap: clamp(20px, 3vw, 44px); }
+.f-news-ico { width: 40px; height: 40px; color: var(--homea-black); }
+.f-news-txt { padding-left: clamp(20px, 3vw, 44px); border-left: 1px solid color-mix(in srgb, var(--homea-gold) 60%, transparent); }
+.f-news-t { font-family: var(--font-display); font-weight: 400; font-size: clamp(24px, 2.2vw, 30px); line-height: 1.1; margin: 0 0 6px; color: var(--homea-black); }
+.f-news-t i { font-style: italic; }
+.f-news-txt p { margin: 0; font-size: var(--fs-sm); line-height: 1.5; color: var(--fg-muted); max-width: 46ch; }
+.f-news-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 10px; align-items: stretch; }
+.f-news-form input { font-family: var(--font-sans); font-size: 14px; color: var(--fg); background: #fff; border: 1px solid color-mix(in srgb, var(--homea-gold) 55%, var(--border));
+  border-radius: 0; padding: 14px 16px; min-width: 0; transition: border-color var(--dur-fast) var(--ease-standard); }
+.f-news-form input:focus { outline: none; border-color: var(--homea-black); }
+.f-news-form button { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase;
+  background: var(--homea-black); color: var(--homea-bone); border: 0; border-radius: 0; padding: 0 26px; cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-standard); }
+.f-news-form button:hover { background: var(--homea-espresso); }
+.f-news-form button:disabled { opacity: .55; cursor: default; }
+.f-news-msg { grid-column: 1 / -1; margin: 0; font-size: 12.5px; min-height: 0; color: var(--accent-text); }
+.f-news-msg:empty { display: none; }
+.f-news-msg.is-error { color: #9B2C1F; }
+.f-news-legal { grid-column: 1 / -1; margin: 0; font-size: 11px; color: var(--fg-subtle); }
+.f-news-legal a { color: inherit; border-bottom: 1px solid currentColor; }
+.f-news-form.is-ok input, .f-news-form.is-ok button { display: none; }
+/* En /ofertas el formulario va en la propia página: no se repite en el pie. */
+body:has([data-newsletter="ofertas"]) .site-footer .f-news { display: none; }
+body:has([data-newsletter="ofertas"]) .site-footer:has(> .f-news) { padding-top: 96px; }
+@media (max-width: 900px) {
+  .f-news-in { grid-template-columns: auto minmax(0, 1fr); row-gap: 20px; }
+  .f-news-form { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .f-news-in { grid-template-columns: 1fr; }
+  .f-news-ico { display: none; }
+  .f-news-txt { padding-left: 0; border-left: 0; }
+  .f-news-form { grid-template-columns: 1fr; }
+  .f-news-form button { padding: 14px 20px; }
 }

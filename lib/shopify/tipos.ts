@@ -36,6 +36,8 @@ export interface LineaCarrito {
   enStock: boolean;
   /** Línea / serie de la pieza ("Serie 400"), si el título la trae. */
   serie: string | null;
+  /** Línea de specs de la tarjeta ("30\" · Inducción · Modulares"), sin el SKU. */
+  spec: string;
   /**
    * Precio público unitario: CON IVA, en la moneda de lista (USD para las marcas
    * en dólares, como la tarjeta y la ficha). Shopify sigue cobrando en pesos.

@@ -120,10 +120,14 @@ export default function PlpFiltro({ base, tipos }: Props) {
     // default, que es la señal que PreviewRouter respeta para dejar pasar.
     document.addEventListener("click", onClick, true);
     window.addEventListener("popstate", onPop);
+    // Navegación de Next a esta misma ruta (p. ej. el mega-menú sin ?f=): el
+    // componente no se vuelve a montar; tipos.js avisa con "homea:url".
+    window.addEventListener("homea:url", onPop);
     return () => {
       clearTimeout(t);
       document.removeEventListener("click", onClick, true);
       window.removeEventListener("popstate", onPop);
+      window.removeEventListener("homea:url", onPop);
     };
   }, [base, tipos]);
 

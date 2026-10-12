@@ -15,14 +15,13 @@
 // Comentarios al pie: cuatro casos exactos de Carla (2026-10-08), documentados
 // en docs/REGLAS-CARRITO-Y-COMENTARIOS.md.
 
-import { DATOS_VACIOS, folioDe, mensajeCotizacion, queryCotizacion, serializarPartidas, type DatosCliente } from "@/lib/cotizacion";
+import { mensajeCotizacion, queryCotizacion, serializarPartidas, type DatosCliente } from "@/lib/cotizacion";
 import type { Aviso, Carrito, Dinero } from "@/lib/shopify/tipos";
 import { formatearDinero } from "@/lib/shopify/tipos";
 import { SITE_URL } from "@/lib/site";
 import { whatsappHref } from "@/lib/whatsapp";
 
 import { useCarrito } from "./CarritoContexto";
-import { partidasDelCarrito } from "./PreCotizacionModal";
 
 interface Props {
   carrito: Carrito;
@@ -49,20 +48,17 @@ export function partidasDe(carrito: Carrito): string {
 }
 
 /**
- * Listado que recibe el vendedor: el MISMO texto que manda la página /cotizacion
- * (`mensajeCotizacion`): folio y link a la pre-cotización, datos del cliente,
- * una partida por línea en su moneda y sin IVA, y los totales por moneda tal
- * como salen en el documento. Se arma con lo que el servidor devolvió.
+ * Mensaje que recibe el vendedor: el MISMO texto que manda la página /cotizacion
+ * (`mensajeCotizacion`): saludo y link a la pre-cotización con las piezas y los
+ * datos del cliente.
  */
 export function mensajeListado(carrito: Carrito, datos: DatosCliente): string {
   if (!carrito.lineas.length) return whatsappHref();
-  const p = partidasDe(carrito);
-  const folio = folioDe(p);
   const link = `${origen()}/cotizacion?${queryCotizacion(
     carrito.lineas.map((l) => ({ sku: l.sku, cantidad: l.cantidad })),
     datos,
   )}`;
-  return whatsappHref(mensajeCotizacion(folio, link, datos, partidasDelCarrito(carrito)));
+  return whatsappHref(mensajeCotizacion(link));
 }
 
 /** Explicación del bloqueo. Nunca se falla en silencio: se dice qué pasa. */
@@ -115,7 +111,6 @@ export default function ProyectoCierre({ carrito, aviso, ocupado }: Props) {
   const dolares = hayDolares(carrito);
   const seCotiza = carrito.modo === "cotizacion";
   const puedePagar = !seCotiza && Boolean(carrito.checkoutUrl) && !carrito.bloqueo && !vacio;
-  const wa = mensajeListado(carrito, DATOS_VACIOS);
   const notas = vacio ? [] : notasDelProyecto(carrito);
 
   if (vacio) return null;
@@ -197,9 +192,10 @@ export default function ProyectoCierre({ carrito, aviso, ocupado }: Props) {
           {bloqueo ? (
             <p className="cart-aviso" role="status">
               {bloqueo}{" "}
-              <a href={wa} target="_blank" rel="noopener" data-track="whatsapp_click" data-label="proyecto_whatsapp">
+              {/* Pasa por la pre-cotización: así también queda como borrador en Shopify. */}
+              <button type="button" className="cart-aviso-link" onClick={() => ctx?.abrirCotizacion()}>
                 Enviar listado por WhatsApp
-              </a>
+              </button>
             </p>
           ) : null}
         </>

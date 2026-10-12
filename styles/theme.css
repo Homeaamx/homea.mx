@@ -213,9 +213,10 @@ html { scroll-behavior: smooth; }
   grid-template-rows: minmax(0, 1fr);
   height: min(588px, calc(100vh - 128px)); }
 /* Foto ESTABLE entre categorías: 430px (~⅓ del panel, retrato ~3:4) para todas.
-   Excepción: Cocina y Bar (.detail-wide, columnas fijas) necesita el ancho para
-   sus 3 columnas → el detalle manda y la foto se queda con el resto (~300px). */
-.mega-panel.detail-wide .mega-flyout-main { grid-template-columns: 248px auto minmax(300px, 1fr); }
+   Excepción: los panes de 3 columnas (.detail-wide: Cocina y Bar, Exterior)
+   necesitan el ancho → el detalle manda y la foto se queda con el resto
+   (~300px; menos en pantallas angostas, nunca se corta el texto). */
+.mega-panel.detail-wide .mega-flyout-main { grid-template-columns: 248px auto minmax(0, 1fr); }
 /* Colocación explícita: la intro (H de marca) se superpone sobre detalle+imagen
    y se ve al abrir; al pasar el cursor por una categoría se oculta (.cat-active). */
 .mega-flyout-main > .mega-rail    { grid-area: 1 / 1; }
@@ -258,6 +259,18 @@ html { scroll-behavior: smooth; }
   grid-template-columns: repeat(3, 190px); grid-template-rows: auto auto;
   grid-auto-flow: column; column-gap: 26px; row-gap: 0; align-items: start; }
 .mega-subcols.is-fixed .mega-col { display: contents; }
+/* Exterior en rejilla de 3 (Carla, 2026-10-12): fila 1 = Asadores & Hornos y la
+   columna de títulos sueltos; fila 2 = Hieleras · Gabinetes · Alberca. */
+.mega-subcols.is-grid3 { display: grid; grid-template-columns: repeat(3, 190px); column-gap: 26px; column-count: auto; align-items: start; }
+.mega-subcols.is-grid3 > :nth-child(3) { grid-column: 1; }
+.mega-subcols.is-grid3 .mega-col > .mega-subcol:last-child { margin-bottom: 18px; }
+.mega-subcol.solo-titulo h5 { margin-bottom: 0; }
+/* Pantallas bajas: el panel no debe tener scroll (Cocina y Bar es el más alto). */
+@media (max-height: 760px) {
+  .mega-flyout .mega-detail { padding-top: 18px; padding-bottom: 18px; }
+  .mega-detail .mega-subcol a { padding-top: 4px; padding-bottom: 4px; }
+  .mega-detail .mega-subcol { margin-bottom: 14px; }
+}
 .mega-subcols.is-fixed .mega-col > .mega-subcol { margin-top: 0; }
 .mega-subcols.is-fixed .mega-col > .mega-subcol:last-child { margin-bottom: 0; }
 /* Encabezados a la misma altura entre columnas: se reserva el alto del título más
@@ -267,7 +280,10 @@ html { scroll-behavior: smooth; }
    Un renglón mide 19.5px (12.5px · 1.56) + 7px de padding-bottom.
    Si cambian los nombres del menú, revisar estos dos valores. */
 .mega-subcols.is-fixed .mega-col > .mega-subcol:first-child h5 { min-height: 46px; }
-.mega-subcols.is-fixed .mega-col > .mega-subcol:last-child h5 { min-height: 66px; }
+/* Fila 2 (Carla, 2026-10-12): sin alto reservado y con el texto arriba —
+   Lavavajillas y Trituradores arrancan a la altura de "Purificadores y
+   Despachadores de Agua"; así el panel cabe sin scroll y "Ver todo" no se pierde. */
+.mega-subcols.is-fixed .mega-col > .mega-subcol:last-child h5 { min-height: 0; align-items: flex-start; }
 /* El texto se centra en el alto reservado: así un título de un renglón queda a la
    misma altura que el renglón central del título largo de su fila, en vez de
    pegarse arriba y dejar el hueco antes de la línea dorada. */
@@ -1123,7 +1139,28 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
   .bene-card { opacity: 1; transform: none; transition: border-color .3s, background .3s; }
   .bene-orb { transition: none; }
 }
+/* Tarjeta larga "Inventario para entrega inmediata" (Carla, 2026-10-12): a todo
+   el ancho, en un renglón (icono · título · texto). Las seis de arriba se
+   compactan un poco para que la sección no crezca de más. */
+.bene-grid .bene-card { padding: clamp(22px, 2vw, 32px); }
+.bene-grid .bene-ico { margin-bottom: 16px; }
+.bene-grid .bene-card--wide { grid-column: 1 / -1; display: grid; grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center; column-gap: clamp(20px, 2.6vw, 44px); padding-top: clamp(20px, 1.8vw, 28px); padding-bottom: clamp(20px, 1.8vw, 28px); }
+.bene-grid .bene-card--wide .bene-ico { margin: 0; }
+.bene-card--wide h3 { margin: 0; }
+/* Hairline dorada entre título y texto, como el sistema "·" de la marca. */
+.bene-card--wide p { padding-left: clamp(20px, 2.6vw, 44px); border-left: 1px solid color-mix(in srgb, var(--homea-gold) 55%, transparent); }
 @media (max-width: 900px) { .bene-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 900px) {
+  .bene-grid .bene-card--wide { grid-template-columns: auto minmax(0, 1fr); row-gap: 8px; }
+  .bene-card--wide p { grid-column: 2; padding-left: 0; border-left: 0; }
+}
+@media (max-width: 600px) {
+  .bene-grid .bene-card--wide { display: block; }
+  .bene-grid .bene-card--wide .bene-ico { margin-bottom: 16px; }
+  .bene-card--wide h3 { margin-bottom: 10px; }
+  .bene-card--wide p { padding-left: 0; border-left: 0; }
+}
 @media (max-width: 600px) { .bene-grid { grid-template-columns: 1fr; } }
 
 .stats { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--dark-border);
@@ -2930,6 +2967,7 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
   font-size: 11px; line-height: 1.45; color: var(--fg-muted);
 }
 .cart-aviso a { text-decoration: underline; }
+.cart-aviso-link { background: none; border: 0; padding: 0; font: inherit; color: inherit; text-decoration: underline; cursor: pointer; }
 .cart-aviso.is-error { color: #8c2f24; }
 /* El bloqueo es la red de seguridad contra cobrar mal: se ve, no se disimula. */
 .cart-aviso.is-bloqueo {
@@ -3816,7 +3854,7 @@ button.wl-wa { border: 0; cursor: pointer; }
 .cot-clausulas li { font-size: 11.5px; line-height: 1.5; color: var(--fg-muted); }
 .cot-clausulas b { color: var(--fg); font-weight: 600; }
 .cot-acciones { display: flex; flex-wrap: wrap; gap: 12px; margin: 32px 0 0; padding-top: 24px; border-top: 1px solid var(--border); }
-@media (max-width: 720px) {
+@media screen and (max-width: 720px) {
   .cot-head { flex-direction: column; }
   .cot-folio { align-items: flex-start; text-align: left; }
   .cot-datos { grid-template-columns: 1fr; gap: 20px; }
@@ -4052,7 +4090,7 @@ button.wl-wa { border: 0; cursor: pointer; }
 .pc-volver { background: none; border: 0; cursor: pointer; font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-muted); text-decoration: underline; text-underline-offset: 4px; }
 .pc-volver:hover { color: var(--fg); }
 
-@media (max-width: 760px) {
+@media screen and (max-width: 760px) {
   .pc-overlay { padding: 12px 8px; }
   .pc-head { grid-template-columns: 1fr; gap: 14px; }
   .pc-folio { flex-direction: row; }
@@ -4114,10 +4152,12 @@ button.wl-wa { border: 0; cursor: pointer; }
 .pc-botones { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
 .pc-descargar { width: auto; padding-left: 28px; padding-right: 28px; }
 .pc-descargar:disabled { opacity: .4; cursor: not-allowed; }
-a.pc-enviar { width: auto; }
-a.pc-enviar[aria-disabled="true"] { opacity: .4; pointer-events: none; }
+.pc-enviar { width: auto; cursor: pointer; }
+.pc-enviar:disabled { opacity: .4; cursor: not-allowed; }
 @media print {
-  body > :not(.pc-overlay) { display: none !important; }
+  /* Solo cuando el modal está abierto: en /cotizacion no hay .pc-overlay y esta
+     regla dejaba la hoja en blanco. */
+  body:has(> .pc-overlay) > :not(.pc-overlay) { display: none !important; }
   .pc-overlay { display: block; position: static; background: #fff; padding: 0; overflow: visible; animation: none; }
   .pc-modal { border: 0; box-shadow: none; padding: 0; width: auto; }
 }
@@ -4140,7 +4180,7 @@ a.pc-enviar[aria-disabled="true"] { opacity: .4; pointer-events: none; }
 
 /* Pre-cotización · móvil (2026-10-09): cabecera apilada y filas-tarjeta con
    etiquetas (data-l). Va al final para ganar a los ajustes de escritorio. */
-@media (max-width: 760px) {
+@media screen and (max-width: 760px) {
   .pc-head { grid-template-columns: 1fr; gap: 16px; padding-bottom: 16px; }
   .pc-marca { flex-direction: column; align-items: flex-start; gap: 12px; }
   .pc-logo img { width: 120px; }
@@ -4220,9 +4260,14 @@ a.pc-enviar[aria-disabled="true"] { opacity: .4; pointer-events: none; }
 }
 
 /* Pre-cotización · impresión (2026-10-09): A4 vertical, márgenes de 12 mm y
-   contenido ajustado para que la hoja quepa en una o dos páginas. */
+   contenido ajustado para que la hoja quepa en una o dos páginas.
+   2026-10-12: los márgenes laterales van como padding de la hoja (página con
+   nombre "cot"), así nada se corta aunque el diálogo de impresión esté en
+   "Márgenes: ninguno" (Chrome recuerda la última opción). */
 @page { size: A4 portrait; margin: 12mm; }
+@page cot { size: A4 portrait; margin: 12mm 0; }
 @media print {
+  .pc-modal, .cot-hoja { page: cot; padding: 0 12mm !important; box-sizing: border-box; }
   html, body { background: #fff !important; width: auto; }
   .pc-modal, .cot-hoja { max-width: none; width: 100%; font-size: 11px; }
   .pc { font-size: 11px; }
@@ -4233,9 +4278,12 @@ a.pc-enviar[aria-disabled="true"] { opacity: .4; pointer-events: none; }
   .pc-campo { padding: 2px 0; }
   .pc-campo input, .pc-val { font-size: 11.5px; }
   .pc-tabla { margin-top: 10px; }
-  .pc-tabla th { padding: 6px 6px; font-size: 9px; }
+  .pc-tabla th { padding: 6px 6px; font-size: 8.5px; letter-spacing: .04em; white-space: normal; vertical-align: bottom; }
+  .pc-tabla th.num { white-space: normal; }
+  .pc-emp-contacto { gap: 2px 12px; font-size: 10.5px; }
+  .pc-emp-dir { font-size: 10.5px; }
   .pc-tabla td { padding: 8px 6px; font-size: 11px; }
-  .pc-tabla th:first-child { width: 52px; }
+  .pc-tabla th:first-child { width: 58px; }
   .pc-tabla th:nth-child(2) { width: 92px; }
   .pc-tabla th:nth-child(4), .pc-tabla th:nth-child(5), .pc-tabla th:nth-child(6) { width: 74px; }
   .pc-th-img { width: 64px; }
@@ -4243,6 +4291,9 @@ a.pc-enviar[aria-disabled="true"] { opacity: .4; pointer-events: none; }
   .pc-totales { margin-top: 14px; break-inside: avoid; }
   .pc-nota { margin-top: 16px; }
   .pc-hint, .pc-acciones, .pc-x, .cot-acciones { display: none !important; }
+  /* Los campos del modal se imprimen como texto, igual que en /cotizacion. */
+  .pc-campo input { border: 0 !important; background: none !important; padding: 0 !important; height: auto; color: var(--fg); }
+  .pc-campo input::placeholder { color: transparent; }
 }
 
 /* Panel de resumen de /mi-proyecto (Carla, 2026-10-09): mismo tono que las
@@ -4276,6 +4327,16 @@ a.pc-enviar[aria-disabled="true"] { opacity: .4; pointer-events: none; }
 .wl-toolbar { flex-wrap: wrap; align-items: center; row-gap: 14px; padding-bottom: 18px; }
 .wl-toolbar .results { flex-basis: 100%; order: 3; font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg); }
 .wl-toolbar select { order: 2; }
+/* Flecha del orden en la wishlist (Carla, 2026-10-12): el mismo chevron fino de
+   los desplegables "Tipo de producto · Marca · Precio", a la derecha del texto. */
+.wl-toolbar select { padding-right: 22px; background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.25 6 7.75l3.5-3.5' fill='none' stroke='%230A0A0A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right center / 12px 12px; }
+/* "Borrar filtros" tras el último desplegable: solo aparece con filtros aplicados (Carla, 2026-10-12). */
+.wl-reset { background: none; border: 0; border-bottom: 1px solid var(--homea-gold); cursor: pointer; padding: 4px 0; font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg); white-space: nowrap; transition: color var(--dur-fast) var(--ease-standard); }
+.wl-reset:hover { color: var(--accent-text); }
+.wl-reset[hidden] { display: none; }
+/* Con "Borrar filtros" visible, el orden no se baja de renglón: la fila de
+   desplegables se encoge (y el botón pasa abajo de ellos en pantallas angostas). */
+.wl-toolbar .filters.filters--top { flex: 1 1 0; min-width: min(100%, 460px); }
 .filters.filters--top { order: 1; position: static; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 6px 32px; max-height: none; overflow: visible; flex: 1 1 auto; }
 .fdrop { position: relative; border: 0; }
 .fdrop > .fdrop-sum { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; padding: 6px 0; }
@@ -4309,3 +4370,67 @@ a.pc-enviar[aria-disabled="true"] { opacity: .4; pointer-events: none; }
   .wl-cta .acts { align-items: stretch; }
   .wl-cta .wl-wa { min-width: 0; width: 100%; }
 }
+
+/* ===== Newsletter (Carla, 2026-10-12) =====
+   Franja clara al inicio del pie de página en todo el sitio (.f-news), el mismo
+   formulario en /ofertas (.of-news) y la casilla de la pre-cotización. Los tres
+   mandan el correo a /api/lead → clientes de Shopify con consentimiento
+   (Shopify Messaging). El envío lo hace v2.js ([data-newsletter]). */
+.site-footer:has(> .f-news) { padding-top: 0; }
+.site-footer .f-news { background: transparent; color: var(--dark-fg);
+  margin-bottom: 72px; padding: 72px 0 56px; border-bottom: 1px solid var(--dark-border); }
+/* Pie oscuro (Carla, 2026-10-12): la franja clara cortaba el negro entre el
+   cierre "Empecemos por escucharte" y el pie. Ahora vive dentro del negro, con
+   el oro como único acento; /ofertas conserva su versión clara (.of-news). */
+.site-footer .f-news-ico { color: var(--homea-gold); }
+.site-footer .f-news-t { color: var(--homea-bone); }
+.site-footer .f-news-t i { color: var(--homea-gold); }
+.site-footer .f-news-txt p { color: var(--dark-fg-muted); }
+.site-footer .f-news-form input { background: color-mix(in srgb, #fff 4%, transparent); color: var(--homea-bone);
+  border-color: color-mix(in srgb, var(--homea-gold) 45%, transparent); }
+.site-footer .f-news-form input::placeholder { color: var(--dark-fg-muted); }
+.site-footer .f-news-form input:focus { border-color: var(--homea-gold); }
+.site-footer .f-news-form button { background: var(--homea-gold); color: var(--homea-black); }
+.site-footer .f-news-form button:hover { background: color-mix(in srgb, var(--homea-gold) 82%, #fff); }
+.site-footer .f-news-msg { color: var(--homea-gold); }
+.site-footer .f-news-msg.is-error { color: #E8A598; }
+.site-footer .f-news-legal { color: color-mix(in srgb, var(--dark-fg-muted) 80%, transparent); }
+.f-news-in { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.15fr); align-items: center; column-gap: clamp(20px, 3vw, 44px); }
+.f-news-ico { width: 40px; height: 40px; color: var(--homea-black); }
+.f-news-txt { padding-left: clamp(20px, 3vw, 44px); border-left: 1px solid color-mix(in srgb, var(--homea-gold) 60%, transparent); }
+.f-news-t { font-family: var(--font-display); font-weight: 400; font-size: clamp(24px, 2.2vw, 30px); line-height: 1.1; margin: 0 0 6px; color: var(--homea-black); }
+.f-news-t i { font-style: italic; }
+.f-news-txt p { margin: 0; font-size: var(--fs-sm); line-height: 1.5; color: var(--fg-muted); max-width: 46ch; }
+.f-news-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 10px; align-items: stretch; }
+.f-news-form input { font-family: var(--font-sans); font-size: 14px; color: var(--fg); background: #fff; border: 1px solid color-mix(in srgb, var(--homea-gold) 55%, var(--border));
+  border-radius: 0; padding: 14px 16px; min-width: 0; transition: border-color var(--dur-fast) var(--ease-standard); }
+.f-news-form input:focus { outline: none; border-color: var(--homea-black); }
+.f-news-form button { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase;
+  background: var(--homea-black); color: var(--homea-bone); border: 0; border-radius: 0; padding: 0 26px; cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-standard); }
+.f-news-form button:hover { background: var(--homea-espresso); }
+.f-news-form button:disabled { opacity: .55; cursor: default; }
+.f-news-msg { grid-column: 1 / -1; margin: 0; font-size: 12.5px; min-height: 0; color: var(--accent-text); }
+.f-news-msg:empty { display: none; }
+.f-news-msg.is-error { color: #9B2C1F; }
+.f-news-legal { grid-column: 1 / -1; margin: 0; font-size: 11px; color: var(--fg-subtle); }
+.f-news-legal a { color: inherit; border-bottom: 1px solid currentColor; }
+.f-news-form.is-ok input, .f-news-form.is-ok button { display: none; }
+/* En /ofertas el formulario va en la propia página: no se repite en el pie. */
+body:has([data-newsletter="ofertas"]) .site-footer .f-news { display: none; }
+body:has([data-newsletter="ofertas"]) .site-footer:has(> .f-news) { padding-top: 96px; }
+@media (max-width: 900px) {
+  .f-news-in { grid-template-columns: auto minmax(0, 1fr); row-gap: 20px; }
+  .f-news-form { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .f-news-in { grid-template-columns: 1fr; }
+  .f-news-ico { display: none; }
+  .f-news-txt { padding-left: 0; border-left: 0; }
+  .f-news-form { grid-template-columns: 1fr; }
+  .f-news-form button { padding: 14px 20px; }
+}
+/* Casilla de newsletter en la pre-cotización (no se imprime: vive en .pc-acciones). */
+.pc-boletin { display: inline-flex; align-items: flex-start; gap: 10px; font-size: 12.5px; line-height: 1.5; color: var(--fg-muted); cursor: pointer; text-align: left; max-width: 520px; }
+.pc-boletin input { margin: 3px 0 0; accent-color: var(--homea-gold); width: 15px; height: 15px; flex: none; }
+.pc-boletin a { color: inherit; border-bottom: 1px solid currentColor; }

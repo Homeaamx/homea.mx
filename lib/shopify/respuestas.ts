@@ -35,7 +35,7 @@ export interface VarianteRaw {
     availableForSale?: boolean;
     /** Solo en el carrito: foto del producto cuando la variante no trae la suya. */
     featuredImage?: ImagenRaw | null;
-    /** Solo en el carrito: `homea.precio_usd` y `filtros.disponibilidad`. */
+    /** Solo en el carrito: `homea.precio_usd`, `filtros.disponibilidad` y los filtros de la línea de specs. */
     metafields?: ({ key: string; value: string } | null)[];
   };
 }

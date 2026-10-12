@@ -39,7 +39,12 @@ export const FRAGMENTO_CARRITO = /* GraphQL */ `
               featuredImage { url altText width height }
               metafields(identifiers: [
                 { namespace: "homea", key: "precio_usd" },
-                { namespace: "filtros", key: "disponibilidad" }
+                { namespace: "filtros", key: "disponibilidad" },
+                { namespace: "filtros", key: "diseno" },
+                { namespace: "filtros", key: "ancho" },
+                { namespace: "filtros", key: "acabado" },
+                { namespace: "filtros", key: "tipo" },
+                { namespace: "filtros", key: "funcionamiento" }
               ]) { key value }
             }
           }

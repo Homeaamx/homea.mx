@@ -116,6 +116,11 @@
       var cb = l.querySelector('input[type="checkbox"]');
       if (cb) { cb.checked = l.getAttribute("data-tipo") === slug; }
     });
+    /* Las casillas se marcaron a mano (sin "change"): catalogo.js filtra las
+       tarjetas y pinta el conteo del grupo y los chips. Sin este aviso, al
+       llegar desde el mega-menú la casilla quedaba marcada pero la rejilla
+       seguía mostrando todo. */
+    document.dispatchEvent(new Event("catalogo:aplicar"));
     var r = document.getElementById("plpResults");
     if (!r) return;
     /* El conteo base se guarda una vez en el nodo: así al cambiar de tipo no se

@@ -322,7 +322,9 @@
       arriba.innerHTML =
         desplegable("Tipo de producto", "tipo-web", tipos.map(function (t) { return casilla("tipo-web", slug(t.v), t.v, t.n); }).join("") || '<p class="fnote fnote--tight">Sin opciones por ahora.</p>') +
         desplegable("Marca", "marca", marcas.map(function (m) { return casilla("marca", slug(m.v), m.v, m.n); }).join(""), true) +
-        desplegable("Precio", "precio", rangos || '<p class="fnote fnote--tight">Agrega más piezas para filtrar por precio.</p>');
+        desplegable("Precio", "precio", rangos || '<p class="fnote fnote--tight">Agrega más piezas para filtrar por precio.</p>') +
+        /* Junto a los desplegables; catalogo.js lo muestra solo con filtros aplicados. */
+        '<button type="button" class="wl-reset" data-cat-clear data-cat-reset hidden>Borrar filtros</button>';
     }
 
     var grid = root.querySelector("[data-wl-grid]");

@@ -52,6 +52,30 @@ function enStock(variante: VarianteRaw): boolean {
   }
 }
 
+/** Valores de un metafield `filtros.*` de la variante (lista JSON o texto suelto). */
+function valoresFiltro(variante: VarianteRaw, clave: string): string[] {
+  const m = variante.product?.metafields?.find((x) => x?.key === clave);
+  if (!m) return [];
+  try {
+    const v = JSON.parse(m.value);
+    return (Array.isArray(v) ? v : [v]).map(String);
+  } catch {
+    return [m.value];
+  }
+}
+
+/** Misma línea de specs que la tarjeta (lineaSpec en htmlCatalogo.ts), sin el SKU. */
+function specDe(variante: VarianteRaw): string {
+  const partes = [
+    ...valoresFiltro(variante, "diseno"),
+    ...valoresFiltro(variante, "ancho"),
+    ...valoresFiltro(variante, "acabado"),
+    ...valoresFiltro(variante, "tipo"),
+    ...valoresFiltro(variante, "funcionamiento").filter((v) => !/^Todo /.test(v)),
+  ];
+  return [...new Set(partes)].slice(0, 3).join(" · ");
+}
+
 /**
  * Moneda que el catálogo declara para esta variante: USD si tiene dólar de lista
  * (metafield) o el tag `Moneda USD`; como respaldo, el índice local.
@@ -144,6 +168,7 @@ function aLinea(raw: CarritoRaw["lines"]["nodes"][number]): LineaCarrito {
     maximo: v.quantityAvailable,
     enStock: stock,
     serie: serieDe(v.product.title || ""),
+    spec: specDe(v),
     precioPublico,
     decision,
     cotizacion,
