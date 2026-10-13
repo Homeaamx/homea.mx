@@ -31,6 +31,8 @@ export const MAX_SUGERENCIAS = 6;
 const ACCESORIOS_POR_SUB1: Record<string, string[]> = {
   "/productos/cocina-y-bar/refrigeracion": ["accesorios-de-refrigeracion"],
   "/productos/cocina-y-bar/coccion": ["accesorios-de-coccion"],
+  "/productos/cocina-y-bar/tarjas-y-griferia": ["accesorios-de-tarjas-y-monomandos"],
+  "/productos/exterior/asadores-y-hornos": ["accesorios-asadores-y-hornos"],
 };
 
 /** Equipos que se sugieren entre tipos distintos (cocción → campana, etc.). */

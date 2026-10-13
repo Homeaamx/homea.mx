@@ -166,15 +166,24 @@ nombre solo sirve para enlazar desde el HTML del preview. Hoy apuntan ahí:
 - los 89 enlaces del mega-menú de marcas y los 36 chips de la marquesina, en
   `preview/home.html` (que es el nav compartido de todo el sitio).
 
-## Cuando llegue el catálogo
+## Catálogo vivo (desde 2026-10-13)
 
-**Solo hay que cambiar una función**: `productosDeMarca()` en `lib/marcas.ts`. Hoy
-devuelve `[]` y la página enseña la maqueta con salida a WhatsApp. En cuanto devuelva
-productos, las páginas `shopify` se llenan solas — no hay que tocar `app/(es)/marcas/[marca]/page.tsx`.
-Las `pdf` no enseñan catálogo aunque la función devuelva algo.
+Las marcas `shopify` ya **no llevan maqueta**: `productosDeMarca(marca.nombre)` en
+`lib/shopify/catalogoVivo.ts` trae por Storefront API todo lo publicado en el canal
+Headless con `Vendor` = nombre oficial de la marca (la grafía de `data/marcas.json`:
+"Sub-Zero", "Fisher & Paykel"). El panel de filtros, las tarjetas y el orden son los
+mismos de `/productos` (`panelFiltrosHtml` / `rejillaHtml`, `lib/shopify/htmlCatalogo.ts`),
+con dos grupos extra: **Subcategoría** (Refrigeración · Cocción · Lavavajillas) y
+**Tipo de producto**; el grupo Marca se omite porque todas las piezas son de ella.
 
-Los filtros (`filtrosDeMarca()`) están puestos pero **no filtran nada todavía**, igual
-que los de `/productos`. Se conectan en el mismo momento.
+- Para que una marca nueva aparezca basta con **publicar sus productos al canal
+  Headless con ese Vendor**: la página se llena sola (ISR, 1 h; el webhook de
+  catálogo la revalida al instante).
+- Si el Vendor de Shopify no coincide letra por letra con `nombre` en
+  `data/marcas.json`, la página sale vacía. Revisar primero eso.
+- Mientras una marca `shopify` no tenga piezas publicadas, enseña la maqueta de
+  siempre con salida a WhatsApp (`filtrosDeMarca()` en `lib/marcas.ts`).
+- Las `pdf` no consultan Shopify aunque tengan productos cargados.
 
 Ver `lib/flags.ts` → `PLP_READY` y `CLAUDE.md` §3.
 

@@ -4439,3 +4439,70 @@ body:has([data-newsletter="ofertas"]) .site-footer:has(> .f-news) { padding-top:
 .pc-boletin { display: inline-flex; align-items: flex-start; gap: 10px; font-size: 12.5px; line-height: 1.5; color: var(--fg-muted); cursor: pointer; text-align: left; max-width: 520px; }
 .pc-boletin input { margin: 3px 0 0; accent-color: var(--homea-gold); width: 15px; height: 15px; flex: none; }
 .pc-boletin a { color: inherit; border-bottom: 1px solid currentColor; }
+
+/* ---------- 2026-10-13: precios de tarjeta y ficha; tabla de Dimensiones ----------
+   Carla: tachado de la tarjeta más oscuro y a 15px; precio final 18px con la moneda
+   del mismo tamaño y tono; en la ficha la moneda igual que el precio; las medidas no
+   se orillan a la derecha (dos columnas iguales, como la ficha de refrigeración). */
+.pcard-price .price-was { font-size: 15px; color: var(--fg-muted); }
+.pcard-price .price-tag { font-size: 18px; }
+.pcard-price .price-tag .currency { font-size: 1em; font-weight: inherit; letter-spacing: normal; color: inherit; margin-left: .3em; }
+.pdp .price-big .currency { font-size: 1em; font-weight: inherit; letter-spacing: normal; color: inherit; margin-left: .3em; }
+.pdp-panel .spec { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: var(--s-5); }
+.pdp-panel .spec-label { overflow-wrap: anywhere; }
+@media (max-width: 720px) { .pcard-price .price-tag { font-size: 18px; } }
+
+/* 2026-10-13 (2): nombre de tarjeta 16px semibold (solo el precio final pesa más);
+   en la ficha la moneda en bold y "IVA incluido" bajo el tachado, como en la tarjeta. */
+[data-cat-card] h3.pcard-name { font-size: 16px; font-weight: 600; line-height: 1.35; }
+.pcard-price .price-tag { font-weight: 700; }
+.pcard-price .price-tag .currency { font-weight: 700; }
+.pdp .price-big .currency { font-weight: 700; }
+.pdp-iva { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-muted); }
+
+/* 2026-10-13 (3): el cuadro de pestañas ya no mide lo del panel más alto. Cada
+   panel mide lo suyo y public/catalogo.js le pone un alto mínimo hasta donde
+   termina "Agregar a mi proyecto" (ajustarPanelFicha). */
+.pdp-tabs { display: block; }
+.pdp-panel { min-height: 0; }
+.pdp-panel[hidden] { display: none; }
+
+/* 2026-10-13 (4): ficha — tachado e IVA a 20px, equivalencia en pesos a 14px;
+   flechas sutiles en la foto grande; la foto se atenúa mientras carga la siguiente. */
+.pdp-was { font-size: 20px; }
+.pdp-iva { font-size: 20px; }
+.pdp-precio .pdp-mxn { font-size: 14px; }
+.pdp .gallery .main { position: relative; }
+.pdp-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 40px; height: 40px; padding: 0 0 3px;
+  display: grid; place-items: center; border: 1px solid var(--border-strong); background: rgba(247, 243, 236, .82);
+  color: var(--fg); font-family: var(--font-display); font-size: 26px; line-height: 1; cursor: pointer;
+  opacity: .55; transition: opacity var(--dur-fast) var(--ease-standard), background var(--dur-fast) var(--ease-standard); }
+.pdp-nav:hover, .pdp-nav:focus-visible { opacity: 1; background: var(--homea-bone); outline: none; }
+.pdp-prev { left: 14px; }
+.pdp-next { right: 14px; }
+@media (max-width: 720px) { .pdp-nav { width: 34px; height: 34px; font-size: 22px; } .pdp-prev { left: 8px; } .pdp-next { right: 8px; } }
+#pdp-img { transition: opacity .18s ease; }
+#pdp-img.is-loading { opacity: .4; }
+
+/* 2026-10-13 (5): precio final semibold (ficha y tarjeta), "IVA incluido" 15px,
+   tachado en negro en ambas. */
+.pdp-precio .price-big b { font-weight: 600; }
+.pdp .price-big .currency { font-weight: 600; }
+.pdp-iva { font-size: 15px; }
+.pdp-was { color: var(--fg); }
+.pcard-price .price-tag { font-weight: 600; }
+.pcard-price .price-tag .currency { font-weight: 600; }
+.pcard-price .price-was { color: var(--fg); }
+
+/* 2026-10-13 (6): flechas fuera de la foto y lineales; modelo 14px; títulos de
+   los cuadros en bold; sin bloque de instalación y nicho. */
+.pdp-stage { position: relative; }
+.pdp-nav { width: 44px; height: 44px; padding: 0; border: 0; background: transparent; opacity: .5; }
+.pdp-nav:hover, .pdp-nav:focus-visible { background: transparent; opacity: 1; }
+.pdp-nav svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: butt; stroke-linejoin: miter; }
+.pdp-prev { left: -48px; }
+.pdp-next { right: -48px; }
+@media (max-width: 1180px) { .pdp-prev { left: -40px; } .pdp-next { right: -40px; } }
+@media (max-width: 1080px) { .pdp-prev { left: 4px; } .pdp-next { right: 4px; } .pdp-nav { background: rgba(247, 243, 236, .75); } }
+.pdp-sku { font-size: 14px; }
+.pdp-tab-sub { font-weight: 700; }

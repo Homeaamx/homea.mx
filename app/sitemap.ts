@@ -1,8 +1,11 @@
 import type { MetadataRoute } from "next";
+import { FILTROS_PLP } from "@/lib/filtrosPlp";
 import { allGuiasUrls } from "@/lib/guias";
 import { listasPublicadas, rutaListaPrecios } from "@/lib/listasPrecios";
 import { rutaMarca, todasLasMarcas } from "@/lib/marcas";
 import { categoriaSlugs, subcategoriaParams } from "@/lib/preview";
+import { productosDeColeccion } from "@/lib/shopify/catalogoVivo";
+import { TIPOS_WEB } from "@/lib/shopify/coleccionesWeb";
 import { absUrl } from "@/lib/site";
 
 // Páginas de marketing (front-end propio). Las de Guías y las de categoría se agregan
@@ -19,8 +22,9 @@ const MARKETING_PATHS = [
   "/garantias-instalacion",
 ];
 
-// Sitemap propio (regla de oro SEO). Incluye marketing + categorías + todas las Guías.
-export default function sitemap(): MetadataRoute.Sitemap {
+// Sitemap propio (regla de oro SEO). Incluye marketing + categorías + todas las Guías
+// + las fichas publicadas en Shopify (se regenera con la caché del catálogo).
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const marketing = MARKETING_PATHS.map((path) => ({
     url: absUrl(path),
     changeFrequency: "weekly" as const,
@@ -40,6 +44,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     })
   );
+
+  // PLP de tipo (Refrigeradores, Parrillas, Campanas…): las que tienen tabla de filtros.
+  const tipos = Object.keys(FILTROS_PLP).map((clave) => ({
+    url: absUrl(`/productos/${clave}`),
+    changeFrequency: "weekly" as const,
+    priority: 0.6,
+  }));
 
   const guias = allGuiasUrls().map((path) => ({
     url: absUrl(path),
@@ -62,5 +73,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...marketing, ...categorias, ...subcategorias, ...guias, ...marcas, ...listas];
+  // Fichas de producto publicadas en Shopify (/producto/<sku>), una por SKU.
+  // Si Shopify no contesta, el sitemap sale sin fichas en vez de romperse.
+  const listasVivas = await Promise.all(TIPOS_WEB.map((t) => productosDeColeccion(t.coleccion)));
+  const slugs = new Set(listasVivas.flat().map((p) => p.slug));
+  const fichas = [...slugs].map((slug) => ({
+    url: absUrl(`/producto/${slug}`),
+    changeFrequency: "weekly" as const,
+    priority: 0.5,
+  }));
+
+  return [...marketing, ...categorias, ...subcategorias, ...tipos, ...guias, ...marcas, ...listas, ...fichas];
 }

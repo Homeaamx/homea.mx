@@ -49,7 +49,6 @@ async function slotsDeCatalogo(file: string, params: Params): Promise<Record<str
   const tipos = tiposDeSub1(params.categoria, params.subcategoria);
   if (!tipos.length) return {};
   const productos = (await Promise.all(tipos.map((t) => productosDeColeccion(t.coleccion)))).flat();
-  if (!productos.length) return {};
 
   // Los tipos del riel (aunque aún no tengan piezas) entran al grupo "Tipo":
   // elegir uno vacío muestra el aviso en vez de dejar todo el catálogo visible.
@@ -58,9 +57,16 @@ async function slotsDeCatalogo(file: string, params: Params): Promise<Record<str
   ].map((m) => ({ slug: m[1], nombre: m[2].replace(/&amp;/g, "&") }));
 
   const tc = await obtenerTipoCambio();
+  // Sin piezas todavía, el panel enseña igual la tabla de filtros de sus tipos
+  // (Carla, 2026-10-13) y el aviso de migración del preview se queda en la rejilla.
   return {
-    "catalogo-filtros": panelFiltrosHtml(productos, { tc, conTipo: true, tiposRiel: riel }),
-    "catalogo-grid": rejillaHtml(productos, tc),
+    "catalogo-filtros": panelFiltrosHtml(productos, {
+      tc,
+      conTipo: true,
+      tiposRiel: riel,
+      tipos: tipos.map((t) => t.tipo),
+    }),
+    ...(productos.length ? { "catalogo-grid": rejillaHtml(productos, tc) } : {}),
     "catalogo-conteo": conteoHtml(productos),
   };
 }

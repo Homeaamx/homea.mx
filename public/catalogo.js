@@ -367,6 +367,29 @@
     });
   }
 
+  /* ---------- Ficha: alto del panel de pestañas ----------
+     Regla de Carla (2026-10-13): el cuadro greige no se estira hasta donde
+     llegan las Características; si la pestaña activa trae poco (dimensiones,
+     fichas técnicas), el cuadro termina donde termina "Agregar a mi proyecto"
+     de la columna derecha. Se calcula con la geometría real de la página. */
+  function ajustarPanelFicha(panel) {
+    panel = panel || document.querySelector(".pdp-panel.is-active");
+    if (!panel) return;
+    var cta = document.querySelector(".pdp .info .pdp-cta");
+    panel.style.minHeight = "";
+    if (!cta || window.innerWidth <= 1080) return;
+    var objetivo = cta.getBoundingClientRect().bottom - panel.getBoundingClientRect().top;
+    if (objetivo <= 0) return;
+    panel.style.minHeight = Math.round(objetivo) + "px";
+    /* min-height es de la caja de contenido: se descuenta el relleno que sobró. */
+    var sobra = panel.getBoundingClientRect().bottom - cta.getBoundingClientRect().bottom;
+    if (sobra > 0 && objetivo - sobra > 0) panel.style.minHeight = Math.round(objetivo - sobra) + "px";
+  }
+  window.addEventListener("load", function () { ajustarPanelFicha(); });
+  window.addEventListener("resize", function () { ajustarPanelFicha(); });
+  window.addEventListener("homea:url", function () { setTimeout(function () { ajustarPanelFicha(); }, 0); });
+  if (document.readyState === "complete") setTimeout(function () { ajustarPanelFicha(); }, 0);
+
   /* ---------- Eventos ---------- */
   document.addEventListener("input", function (e) {
     if (e.target && e.target.matches && e.target.matches("[data-fbuscar]")) { buscarEnGrupo(e.target); return; }
@@ -439,6 +462,14 @@
     if (tab) {
       e.preventDefault();
       var caja = tab.closest("[data-pdp-tabs]");
+      /* La página no se mueve al cambiar de pestaña (Carla, 2026-10-13): el
+         contenedor reserva el alto más grande visto hasta ahora, así el
+         documento no se acorta y el scroll no salta; el cuadro greige sí mide
+         solo lo de la pestaña activa. */
+      if (window.innerWidth > 1080) {
+        var reservado = parseFloat(caja.style.minHeight) || 0;
+        if (caja.offsetHeight > reservado) caja.style.minHeight = caja.offsetHeight + "px";
+      }
       caja.querySelectorAll(".pdp-tab").forEach(function (b) {
         var on = b === tab;
         b.classList.toggle("is-active", on);
@@ -448,6 +479,7 @@
         var on = pn.id === "panel-" + tab.getAttribute("data-tab");
         pn.classList.toggle("is-active", on);
         pn.hidden = !on;
+        if (on) ajustarPanelFicha(pn);
       });
       return;
     }
@@ -456,10 +488,16 @@
     var mini = t.closest(".pdp-thumb");
     if (mini) {
       var img = document.getElementById("pdp-img");
-      if (img) {
+      if (img && img.getAttribute("src") !== mini.getAttribute("data-src")) {
+        /* Mientras llega la foto nueva, la actual se atenúa; sin esto parecía
+           que el clic no hacía nada hasta que el CDN respondía. */
+        img.classList.add("is-loading");
+        img.onload = function () { img.classList.remove("is-loading"); };
+        img.onerror = img.onload;
         img.src = mini.getAttribute("data-src");
         img.srcset = mini.getAttribute("data-srcset") || "";
         img.alt = mini.getAttribute("data-alt") || img.alt;
+        if (img.complete) img.classList.remove("is-loading");
       }
       mini.parentNode.querySelectorAll(".pdp-thumb").forEach(function (b) {
         b.classList.toggle("is-active", b === mini);
@@ -475,6 +513,35 @@
       if (plp) { aplicarMarcado(plp); enfocarResultados(plp); }
     }
   });
+
+  /* ---------- Galería de la ficha: flechas y precarga ----------
+     Las flechas recorren las miniaturas (clic programático → mismo camino que
+     el usuario). Todas las fotos grandes se precargan en cuanto la página
+     respira, para que cambiar de foto sea instantáneo (Carla, 2026-10-13). */
+  function cambiarFoto(dir) {
+    var thumbs = Array.prototype.slice.call(document.querySelectorAll(".pdp-thumb"));
+    if (thumbs.length < 2) return;
+    var i = thumbs.findIndex(function (b) { return b.classList.contains("is-active"); });
+    thumbs[(Math.max(0, i) + dir + thumbs.length) % thumbs.length].click();
+  }
+  var precargadas = false;
+  function precargarGaleria() {
+    var thumbs = document.querySelectorAll(".pdp-thumb");
+    if (!thumbs.length || precargadas) return;
+    precargadas = true;
+    var ir = function () {
+      thumbs.forEach(function (b) {
+        var im = new Image();
+        im.sizes = "(max-width: 700px) 100vw, 50vw";
+        if (b.getAttribute("data-srcset")) im.srcset = b.getAttribute("data-srcset");
+        im.src = b.getAttribute("data-src");
+      });
+    };
+    if (window.requestIdleCallback) requestIdleCallback(ir, { timeout: 1500 }); else setTimeout(ir, 300);
+  }
+  window.addEventListener("load", precargarGaleria);
+  window.addEventListener("homea:url", function () { precargadas = false; setTimeout(precargarGaleria, 0); });
+  if (document.readyState === "complete") setTimeout(precargarGaleria, 0);
 
   /* ---------- Zoom de la ficha: la foto principal abre un lightbox con las miniaturas ---------- */
   var lb = null, lbIdx = 0, lbFotos = [];
@@ -527,6 +594,8 @@
     var t = e.target;
     if (!t || !t.closest) return;
     if (t.closest(".wl-heart")) return;
+    var flecha = t.closest("[data-pdp-prev], [data-pdp-next]");
+    if (flecha) { e.preventDefault(); cambiarFoto(flecha.hasAttribute("data-pdp-prev") ? -1 : 1); return; }
     if (t.closest("[data-pdp-zoom]")) { e.preventDefault(); lbAbrir(); return; }
     if (!lb || lb.hidden) return;
     if (t.closest("[data-lb-prev]")) { lbIdx = (lbIdx - 1 + lbFotos.length) % lbFotos.length; lbPintar(); return; }

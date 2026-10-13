@@ -393,6 +393,7 @@
   <div class="plp">
     <!-- Filtros (Shopify Search & Discovery: vendor / type / metafields / opciones de variante) -->
     <aside class="filters">
+      <!-- slot:catalogo-filtros -->
       <div class="fgroup"><h6>Subcategoría</h6>
         <details class="fsub" open>
           <summary>Refrigeración</summary>
@@ -511,15 +512,17 @@
         </div>
         <p class="fnote">Filtra por el equivalente aproximado en pesos (metafield <em>filtros.precio_ref_mxn</em>). Cada pieza muestra su precio en su moneda de lista, sin IVA; las piezas "Bajo cotización" se encuentran vía Disponibilidad.</p>
       </div>
+    <!-- /slot:catalogo-filtros -->
     </aside>
 
     <!-- Grid: los 5 Gaggenau reales ya enriquecidos en homeashop.mx -->
     <div>
       <div class="toolbar">
-        <span class="results figures">5 piezas · filtros: Gaggenau · Premium</span>
+        <span class="results figures" id="plpResults"><!-- slot:catalogo-conteo -->5 piezas · filtros: Gaggenau · Premium<!-- /slot:catalogo-conteo --></span>
         <select aria-label="Ordenar"><option value="precio-desc">Precio: mayor a menor ↓</option><option value="precio-asc">Precio: menor a mayor ↓</option><option value="stock-primero">Inventario: de stock a bajo pedido</option><option value="pedido-primero">Inventario: de bajo pedido a stock</option></select>
       </div>
       <div class="plp-grid">
+<!-- slot:catalogo-grid -->
 
         <a class="pcard" href="producto-vg295250ca.html">
           <button class="wl-heart" type="button" data-wl-id="VG295250CA" aria-label="Guardar en wishlist" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.9 13a4.8 4.8 0 0 1 0-6.8 4.7 4.7 0 0 1 6.7 0l.4.4.4-.4a4.7 4.7 0 0 1 6.7 0 4.8 4.8 0 0 1 0 6.8Z"/></svg></button>
@@ -586,6 +589,7 @@
           </div>
         </a>
 
+      <!-- /slot:catalogo-grid -->
       </div>
     </div>
   </div>
@@ -808,6 +812,7 @@
     [27,18],[31,16],[17,14],[45,13],[22,12],[39,12],[25,12],[23,11],[56,10],[19,9],[40,9],[69,9],[54,9],
     [50,8],[47,6],[29,6],[70,3],[84,3],[46,3],[72,2],[44,2],[38,1],[95,1],[71,1],[57,1]];
   var list = document.getElementById('anchoList');
+  if (!list) return;
   list.innerHTML = ANCHOS.map(function(a){
     return '<label><input type="checkbox"> ' + a[0] + '&quot; <span class="count figures">' + a[1].toLocaleString('en-US') + '</span></label>';
   }).join('');
@@ -822,6 +827,7 @@
 // Slider de precio (doble handle)
 (function(){
   var lo = document.getElementById('psLo'), hi = document.getElementById('psHi');
+  if (!lo || !hi) return;
   var fill = document.getElementById('psFill'), vMin = document.getElementById('psMin'), vMax = document.getElementById('psMax');
   var MAX = parseInt(hi.max, 10);
   function fmt(n){ return '$' + n.toLocaleString('en-US'); }

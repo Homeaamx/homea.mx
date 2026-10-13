@@ -2,12 +2,13 @@
 // (HTML estático del design system v2) dentro de una ruta Next, en SSG.
 // - HTML del <body> → dangerouslySetInnerHTML.
 // - CSS de página (<style> del <head>) → se inyecta como <style> (se perdía).
-// - JS inline de página → se ejecuta vía next/script (dangerouslySetInnerHTML no
-//   ejecuta scripts): spotlights del hero, filtros, sliders, etc.
+// - JS inline de página → va como <script type="text/x-homea-page"> (el navegador
+//   no lo ejecuta) y components/PreviewRouter lo ejecuta en cada montaje de la
+//   página, también al navegar en cliente. Antes iba por next/script, que solo
+//   corre una vez por id: al volver a una página los spotlights del hero no
+//   aparecían (Carla, 2026-10-13).
 // - `slots`: HTML generado con datos que reemplaza marcadores <!-- slot:nombre -->
 //   del preview (p. ej. las listas de precios de /marcas).
-
-import Script from "next/script";
 
 import { getMain, getScripts, getStyles } from "@/lib/preview";
 
@@ -40,7 +41,11 @@ export default function MarketingPage({
       {css ? <style dangerouslySetInnerHTML={{ __html: css }} /> : null}
       <div dangerouslySetInnerHTML={{ __html: html }} />
       {js ? (
-        <Script id={id} strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: js }} />
+        <script
+          type="text/x-homea-page"
+          data-mp-script={id}
+          dangerouslySetInnerHTML={{ __html: js }}
+        />
       ) : null}
     </>
   );

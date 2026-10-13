@@ -320,6 +320,7 @@
   <div class="plp">
     <!-- Filtros (Shopify Search & Discovery: vendor / type / metafields / opciones de variante) -->
     <aside class="filters">
+      <!-- slot:catalogo-filtros -->
       <div class="fgroup"><h6>Tipo</h6>
           <label data-tipo="asadores-empotrables"><input type="checkbox"> Asadores empotrables</label>
           <label data-tipo="asadores-con-carrito"><input type="checkbox"> Asadores con carrito</label>
@@ -376,13 +377,16 @@
         </div>
         <p class="fnote">Filtra por el equivalente aproximado en pesos (metafield <em>filtros.precio_ref_mxn</em>). Cada pieza muestra su precio en su moneda de lista, sin IVA.</p>
       </div>
+    <!-- /slot:catalogo-filtros -->
     </aside>
     <div>
       <div class="toolbar">
-        <span class="results figures" id="plpResults">0 piezas en línea · 4 tipos</span>
+        <span class="results figures" id="plpResults"><!-- slot:catalogo-conteo -->0 piezas en línea · 4 tipos<!-- /slot:catalogo-conteo --></span>
         <select aria-label="Ordenar"><option value="precio-desc">Precio: mayor a menor ↓</option><option value="precio-asc">Precio: menor a mayor ↓</option><option value="stock-primero">Inventario: de stock a bajo pedido</option><option value="pedido-primero">Inventario: de bajo pedido a stock</option></select>
       </div>
-      <div class="mig-note">
+      <div class="plp-grid">
+<!-- slot:catalogo-grid -->
+      <div class="mig-note" style="grid-column:1/-1">
         <div class="eyebrow">Catálogo en migración</div>
         <h3>Las piezas de Asadores &amp; Hornos <i>están por publicarse</i>.</h3>
         <p>Estamos migrando el catálogo completo (~25,000 piezas) a la nueva plataforma. Mientras tanto, un especialista te comparte hoy mismo modelos, precios y existencias de esta categoría.</p>
@@ -390,6 +394,8 @@
           <a class="btn btn-gold" href="contacto.html">Hablar con un especialista</a>
           <a class="arrow-link" href="https://api.whatsapp.com/send/?phone=524461446318&amp;text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="plp_asadores-y-hornos">Cotizar por WhatsApp <span class="ln"></span><span class="ar">→</span></a>
         </div>
+      </div>
+      <!-- /slot:catalogo-grid -->
       </div>
     </div>
   </div>

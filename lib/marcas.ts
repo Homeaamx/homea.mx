@@ -110,11 +110,10 @@ export function listasDeMarca(m: Marca): ListaPrecios[] {
 }
 
 /**
- * Filtros de la marca, con la misma forma que los del PLP (lib/filtrosPlp.ts).
- *
- * Igual que allá, hoy son maqueta: el catálogo todavía no está cargado, así que
- * ninguna casilla filtra nada. Se dejan puestos para que la página quede armada
- * y solo haya que conectarlos cuando exista el catálogo.
+ * Filtros de respaldo de la marca, con la misma forma que los del PLP
+ * (lib/filtrosPlp.ts). Solo se pintan cuando la marca aún NO tiene piezas
+ * publicadas en Shopify: con catálogo vivo, el panel real lo genera
+ * `panelFiltrosHtml` (lib/shopify/htmlCatalogo.ts) con los valores de `filtros.*`.
  */
 export function filtrosDeMarca(m: Marca): FiltroPlp[] {
   const categorias = categoriasDeMarca(m).map((c) => c.nombre);
@@ -141,18 +140,6 @@ export function filtrosDeMarca(m: Marca): FiltroPlp[] {
   ];
 }
 
-/**
- * Productos de la marca.
- *
- * ⚠️ ES EL ÚNICO PUNTO QUE HAY QUE CAMBIAR cuando exista el catálogo: en cuanto
- * esta función devuelva productos, las páginas de marca "shopify" se llenan solas
- * (las "pdf" no enseñan catálogo).
- *
- * Hoy devuelve [] a propósito. El catálogo todavía no está migrado: la tienda de
- * Shopify sigue con contraseña (lib/flags.ts → PLP_READY) y data/catalogo-index.json
- * solo trae el piloto. Mientras tanto la página enseña la misma maqueta que el
- * PLP de /productos, con salida a WhatsApp.
- */
-export function productosDeMarca(_slug: string): never[] {
-  return [];
-}
+// Los productos de la marca viven en Shopify: `productosDeMarca(vendor)` en
+// lib/shopify/catalogoVivo.ts (Storefront API, canal Headless). Aquí solo datos
+// editoriales de data/marcas.json.

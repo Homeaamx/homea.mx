@@ -20,7 +20,8 @@ import marcasJson from "@/data/marcas.json";
 import type { Decision } from "@/lib/reglas/reglaMarca";
 import type { TipoCambio } from "@/lib/tipoCambio";
 
-import { esAccesorio, tileDePieza, tipoDePieza, tipoWeb } from "./coleccionesWeb";
+import { TIPOS_WEB, esAccesorio, tileDePieza, tipoDePieza, tipoWeb } from "./coleccionesWeb";
+import { clasificarDimensiones } from "./dimensiones";
 import {
   decisionDeCompra,
   precioPublico,
@@ -88,6 +89,8 @@ function logoDeMarca(vendor: string): string | null {
 interface DefFiltro {
   nombre: string;
   clave: string;
+  /** Lista cerrada de la tabla de filtros (scripts/filtros-web-valores.py), en su orden. */
+  valores?: string[];
 }
 
 const DEFS = (filtrosWeb as { subcategorias: Record<string, DefFiltro[]> }).subcategorias;
@@ -138,9 +141,12 @@ export function precioFichaHtml(precio: PrecioPublico, tc: TipoCambio): string {
     precio.moneda === "USD" && precio.mxnEquivalente !== null
       ? `<p class="note figures pdp-mxn">≈ $${dinero(precio.mxnEquivalente)} MXN IVA incluido · TC ${tc.valor.toFixed(2)}${tc.fecha ? ` · ${esc(tc.fecha)}` : ""}</p>`
       : "";
+  // Orden (Carla, 2026-10-13): precio final con moneda · tachado · IVA INCLUIDO ·
+  // equivalencia en pesos. Igual que la tarjeta.
   return `<div class="pdp-precio">
-      <span class="price-big figures"><b>$${dinero(precio.venta)}</b><span class="currency">${precio.moneda}</span> <span class="price-note">IVA incluido</span></span>
+      <span class="price-big figures"><b>$${dinero(precio.venta)}</b><span class="currency">${precio.moneda}</span></span>
       ${tachado}
+      <span class="pdp-iva">IVA incluido</span>
       ${equivalencia}
     </div>`;
 }
@@ -160,6 +166,11 @@ export function esImagenTecnica(im: { url: string; alt: string }): boolean {
   return /^plano|^ficha|^diagrama/i.test(im.alt) || /(^|-)(plano|ficha-tecnica|line-drawing|diagrama)(-|\.)/i.test(archivo);
 }
 
+/** Nombre de la Subcategoría 1 de una pieza ("Refrigeración"); su Tipo si no está en TIPOS_WEB. */
+function subcategoriaDe(p: ProductoVivo): string {
+  return tipoWeb(p.tipo)?.sub1.nombre ?? p.tipo;
+}
+
 export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string {
   const precio = precioPublico(p, tc);
   const decision = decisionDeCompra(p, precio);
@@ -177,6 +188,9 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
     `data-stock="${p.enStock ? 1 : 0}"`,
     `data-tipo="${esc(tipoDePieza(p).slug ?? slugValor(p.tipo))}"`,
     `data-fv-marca="${slugValor(p.marca)}"`,
+    // Subcategoría 1 (Refrigeración, Cocción…): grupo "Subcategoría" de los
+    // paneles que cruzan varias (página de marca, macrocategoría).
+    `data-fv-categoria="${slugValor(subcategoriaDe(p))}"`,
   ];
   for (const [clave, valores] of Object.entries(p.filtros)) {
     if (clave === "compatible") continue;
@@ -290,6 +304,16 @@ interface OpcionesPanel {
    * ("Profesional" en Instalación y en Diseño) no se marca por error.
    */
   mosaico?: { eje: string; slug: string; nombre: string }[];
+  /** Grupo "Subcategoría" (Refrigeración / Cocción…): paneles que cruzan varias (marca, macro). */
+  conCategoria?: boolean;
+  /** Omitir el grupo "Marca": en la página de una marca todas las piezas son de ella. */
+  sinMarca?: boolean;
+  /**
+   * Tipos de producto cuya tabla de filtros se pinta AUNQUE no haya piezas
+   * (Carla, 2026-10-13: la especificación se ve antes de cargar el catálogo).
+   * Se suman a los tipos presentes en `productos`.
+   */
+  tipos?: string[];
 }
 
 /** Todos los grupos arrancan plegados (Carla, 2026-10-07): se abren al tocar su título. */
@@ -310,7 +334,7 @@ function grupoHtml(nombre: string, clave: string, etiquetas: string, abierto: bo
 
 export function panelFiltrosHtml(
   productos: ProductoVivo[],
-  { tc, conTipo = false, tiposRiel = [], mosaico = [] }: OpcionesPanel = {},
+  { tc, conTipo = false, tiposRiel = [], mosaico = [], conCategoria = false, sinMarca = false, tipos = [] }: OpcionesPanel = {},
 ): string {
   tcPanel = tc ?? null;
   // Filtros aplicados, arriba del todo (como "Ahora comprando por" de Artexa):
@@ -319,6 +343,38 @@ export function panelFiltrosHtml(
     `<div class="fchips fchips--panel" data-cat-chips hidden></div>
 <div class="fhead"><h6>Filtros</h6></div>`,
   ];
+
+  if (conCategoria) {
+    // Una casilla por Subcategoría 1 presente, en el orden de TIPOS_WEB.
+    const cuenta = new Map<string, { nombre: string; n: number; orden: number }>();
+    const sumar = (nombre: string, n: number) => {
+      const k = slugValor(nombre);
+      const c = cuenta.get(k) ?? {
+        nombre,
+        n: 0,
+        orden: Math.max(0, TIPOS_WEB.findIndex((t) => t.sub1.nombre === nombre)),
+      };
+      c.n += n;
+      cuenta.set(k, c);
+    };
+    // Subcategorías de los tipos pedidos (con 0 si aún no hay piezas); los
+    // tipos que cuelgan directo de la macro (Exterior → Hieleras) no son una.
+    for (const tipo of tipos) {
+      const tw = tipoWeb(tipo);
+      if (tw && tw.sub1.ruta !== tw.macro.ruta) sumar(tw.sub1.nombre, 0);
+    }
+    for (const p of productos) sumar(subcategoriaDe(p), 1);
+    if (cuenta.size > 1) {
+      const etiquetas = [...cuenta]
+        .sort((a, b) => a[1].orden - b[1].orden)
+        .map(
+          ([k, c]) =>
+            `<label><input type="checkbox" data-fk="categoria" value="${esc(k)}"> <span class="flbl">${esc(c.nombre)}</span> <span class="count figures">${c.n}</span></label>`,
+        )
+        .join("");
+      grupos.push(grupoHtml("Subcategoría", "categoria", etiquetas, false));
+    }
+  }
 
   if (conTipo) {
     const cuenta = new Map<string, { nombre: string; n: number }>();
@@ -341,9 +397,12 @@ export function panelFiltrosHtml(
 
   // Unión ordenada de los filtros de cada tipo presente (tabla de filtros v2).
   const defs: DefFiltro[] = [];
-  for (const tipo of new Set(productos.map((p) => p.tipo))) {
+  for (const tipo of new Set([...tipos, ...productos.map((p) => p.tipo)])) {
     for (const d of DEFS[tipo] ?? []) {
-      if (!defs.some((x) => x.clave === d.clave)) defs.push(d);
+      const previo = defs.find((x) => x.clave === d.clave);
+      if (!previo) defs.push({ ...d, valores: [...(d.valores ?? [])] });
+      // Mismo filtro en varios tipos (Acabado en tarjas y monomandos): unión de valores.
+      else for (const v of d.valores ?? []) if (!previo.valores!.includes(v)) previo.valores!.push(v);
     }
   }
   if (!defs.length) defs.push({ nombre: "Marca", clave: "marca" });
@@ -354,9 +413,12 @@ export function panelFiltrosHtml(
   // Shopify tenga valores.
   for (const d of defs) {
     if (d.clave === "compatible") continue;
+    if (d.clave === "marca" && sinMarca) continue;
     if (d.clave === "precio") {
       const precios = productos.map((p) => precioRefMxn(p)).filter((n) => n > 0);
-      const max = Math.ceil(Math.max(0, ...precios) / 1000) * 1000;
+      // Sin piezas aún, el slider se enseña con un tope de referencia (la
+      // especificación se ve completa); se recalcula solo al llegar el catálogo.
+      const max = precios.length ? Math.ceil(Math.max(0, ...precios) / 1000) * 1000 : 250000;
       // Rangos proporcionales como casillas (suman entre sí) + el slider de siempre.
       const rangosHtml = rangosPrecio(precios)
         .map(({ lo, hi }) => {
@@ -392,6 +454,10 @@ export function panelFiltrosHtml(
     const delMosaico = mosaico.filter((m) => m.eje === d.nombre);
     // Los tipos del mosaico van primero y en su orden, con o sin piezas.
     for (const m of delMosaico) cuenta.set(m.slug, { texto: m.nombre, n: 0, tipo: true });
+    // Después, la lista cerrada de la tabla de filtros en su orden (con 0 si
+    // ninguna pieza la trae): el panel enseña la especificación completa.
+    const cerrados = d.valores ?? [];
+    for (const v of cerrados) if (!cuenta.has(slugValor(v))) cuenta.set(slugValor(v), { texto: v, n: 0, tipo: false });
     const conDatos = new Set<string>();
     for (const p of productos) {
       const valores = d.clave === "marca" ? [p.marca] : p.filtros[d.clave] ?? [];
@@ -411,12 +477,18 @@ export function panelFiltrosHtml(
       );
       continue;
     }
+    // Orden: mosaico → lista cerrada de la tabla → valores extra de Shopify (alfabético).
+    const fijos = new Map<string, number>();
+    [...delMosaico.map((m) => m.slug), ...cerrados.map(slugValor)].forEach((k, i) => {
+      if (!fijos.has(k)) fijos.set(k, i);
+    });
     const etiquetas = [...cuenta]
-      .sort((a, b) =>
-        delMosaico.length
-          ? Number(b[1].tipo) - Number(a[1].tipo) // mosaico (ya en orden) y luego el resto
-          : a[1].texto.localeCompare(b[1].texto, "es", { numeric: true }),
-      )
+      .sort((a, b) => {
+        const fa = fijos.get(a[0]) ?? Infinity;
+        const fb = fijos.get(b[0]) ?? Infinity;
+        if (fa !== fb) return fa - fb;
+        return a[1].texto.localeCompare(b[1].texto, "es", { numeric: true });
+      })
       .map(
         ([k, c]) =>
           `<label${c.tipo ? ` data-tipo="${esc(k)}"` : ""}><input type="checkbox" data-fk="${esc(d.clave)}" value="${esc(k)}"> <span class="flbl">${esc(c.texto)}</span> <span class="count figures">${c.n}</span></label>`,
@@ -580,8 +652,11 @@ function pestanasHtml(p: ProductoVivo, spec: string): string {
           `<div class="spec-row"><span class="spec-label">${esc(d.nombre)}</span><span class="spec-value figures">${esc(d.valor)}</span></div>`,
       )
       .join("\n");
-  const dimProducto = p.dimensiones.length
-    ? `<h6 class="pdp-tab-sub">Dimensiones del producto</h6><div class="spec">${filas(p.dimensiones)}</div>`
+  // Solo las medidas DEL PRODUCTO (alto, ancho, profundidad, peso; Carla,
+  // 2026-10-13). Nicho, corte, cable… pasan a Características.
+  const { producto: medidas } = clasificarDimensiones(p.dimensiones);
+  const dimProducto = medidas.length
+    ? `<h6 class="pdp-tab-sub">Dimensiones del producto</h6><div class="spec">${filas(medidas)}</div>`
     : "";
   const dimEmpaque = p.empaque.length
     ? `<h6 class="pdp-tab-sub">Dimensiones del empaque</h6><div class="spec">${filas(p.empaque)}</div>`
@@ -603,7 +678,13 @@ function pestanasHtml(p: ProductoVivo, spec: string): string {
     : `<p class="pdp-tab-aviso">Para más información sobre las especificaciones técnicas de este producto, favor de contactar a tu asesor de ventas.</p>`;
 
   const tabs: [string, string, string][] = [
-    ["caracteristicas", "Características", `<div class="spec">${spec}</div>`],
+    [
+      "caracteristicas",
+      "Características",
+      // Las medidas de nicho / instalación NO se pintan en texto (Carla,
+      // 2026-10-13): para eso están las fichas técnicas.
+      `<div class="spec">${spec}</div>`,
+    ],
     ["dimensiones", "Dimensiones", dimensiones],
     ["fichas", "Especificaciones técnicas", fichas],
   ];
@@ -646,8 +727,15 @@ export function fichaHtml(
     ...(tw && migaTipo
       ? [
           `<a href="${tw.macro.ruta}" style="color:var(--fg-muted);border-bottom:none">${esc(tw.macro.nombre)}</a>`,
-          `<a href="${tw.sub1.ruta}" style="color:var(--fg-muted);border-bottom:none">${esc(tw.sub1.nombre)}</a>`,
-          `<a href="${migaTipo.ruta}" style="color:var(--fg-muted);border-bottom:none">${esc(migaTipo.nombre)}</a>`,
+          // Tipos que cuelgan directo de la macro (Exterior → Hieleras): sin sub1.
+          ...(tw.sub1.ruta === tw.macro.ruta
+            ? []
+            : [`<a href="${tw.sub1.ruta}" style="color:var(--fg-muted);border-bottom:none">${esc(tw.sub1.nombre)}</a>`]),
+          // Subcategorías de un solo tipo (Trituradores): el tile es la misma
+          // página, así que no se repite (Carla, 2026-10-12: la miga no repite).
+          ...(migaTipo.ruta === tw.sub1.ruta && migaTipo.nombre === tw.sub1.nombre
+            ? []
+            : [`<a href="${migaTipo.ruta}" style="color:var(--fg-muted);border-bottom:none">${esc(migaTipo.nombre)}</a>`]),
         ]
       : []),
     `<span class="figures">${esc(p.marca)} ${esc(p.sku)}</span>`,
@@ -671,6 +759,17 @@ export function fichaHtml(
   const imagenPrincipal = principal
     ? `<img id="pdp-img" width="${principal.ancho}" height="${principal.alto}" srcset="${srcsetCdn(principal.url, principal.ancho)}" sizes="(max-width: 700px) 100vw, 50vw" fetchpriority="high" decoding="async" src="${cdn(principal.url, 960)}" alt="${esc(principal.alt)}">`
     : `<span class="ph" style="height:100%"><span class="ph-inner">${esc(p.tipo)}</span></span>`;
+
+  // Flechas sutiles a los costados de la foto grande (Carla, 2026-10-13):
+  // recorren las miniaturas; public/catalogo.js las maneja.
+  // Van FUERA de la foto (hermanas de .main dentro de .pdp-stage) y son
+  // chevrones lineales, sin curva.
+  const chevron = (dir: "prev" | "next") =>
+    `<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="${dir === "prev" ? "15 4 7 12 15 20" : "9 4 17 12 9 20"}"/></svg>`;
+  const flechasGaleria =
+    principal && resto.length
+      ? `<button type="button" class="pdp-nav pdp-prev" data-pdp-prev aria-label="Imagen anterior">${chevron("prev")}</button><button type="button" class="pdp-nav pdp-next" data-pdp-next aria-label="Imagen siguiente">${chevron("next")}</button>`
+      : "";
 
   const miniaturas = principal && resto.length
     ? `<div class="pdp-thumbs" role="list">${[principal, ...resto]
@@ -723,7 +822,7 @@ ${relacionados.productos.map((r, i) => tarjetaHtml(r, tc, i)).join("\n")}
   <div class="pdp">
     <div class="gallery">
       <div class="gallery-sticky">
-      <div class="main pdp-cutout" data-pdp-zoom role="button" tabindex="0" aria-label="Ampliar imagen"><button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(lineaSpec(p).join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${principal ? esc(cdn(principal.url, 400)) : ""}" data-wl-href="${href}" data-wl-tipo="${esc(p.tipo)}" data-wl-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-wl-stock="${p.enStock ? 1 : 0}" data-wl-was="${precio.tachado ? esc(`$${dinero(precio.tachado)} ${precio.moneda}`) : ""}" data-wl-mxn="${precio.mxnEquivalente ?? precio.venta}" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button>${imagenPrincipal}</div>
+      <div class="pdp-stage"><div class="main pdp-cutout" data-pdp-zoom role="button" tabindex="0" aria-label="Ampliar imagen"><button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(lineaSpec(p).join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${principal ? esc(cdn(principal.url, 400)) : ""}" data-wl-href="${href}" data-wl-tipo="${esc(p.tipo)}" data-wl-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-wl-stock="${p.enStock ? 1 : 0}" data-wl-was="${precio.tachado ? esc(`$${dinero(precio.tachado)} ${precio.moneda}`) : ""}" data-wl-mxn="${precio.mxnEquivalente ?? precio.venta}" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button>${imagenPrincipal}</div>${flechasGaleria}</div>
       ${miniaturas}
       </div>
       ${pestanasHtml(p, spec)}

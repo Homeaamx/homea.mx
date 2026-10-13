@@ -99,6 +99,33 @@ const CONSULTA_POR_SKU = /* GraphQL */ `
   }
 `;
 
+/** Todo lo publicado de una marca (Vendor de Shopify), paginado de 100 en 100. */
+const CONSULTA_POR_MARCA = /* GraphQL */ `
+  ${CAMPOS_PRODUCTO}
+  query PorMarca($consulta: String!, $despues: String) @inContext(country: MX, language: ES) {
+    products(first: 100, after: $despues, query: $consulta, sortKey: BEST_SELLING) {
+      pageInfo { hasNextPage endCursor }
+      nodes { ...ProductoVivo }
+    }
+  }
+`;
+
+/**
+ * Buscador de la lupa. `search` de la Storefront API (verificado 2026-10-13 en
+ * el canal Headless: empata título, marca, tipo, etiquetas y SKU; `prefix: LAST`
+ * completa la última palabra, así "refri" ya trae refrigeradores).
+ * `predictiveSearch` NO devuelve nada en este canal, por eso no se usa.
+ */
+const CONSULTA_BUSQUEDA = /* GraphQL */ `
+  ${CAMPOS_PRODUCTO}
+  query Buscar($consulta: String!, $primeros: Int!) @inContext(country: MX, language: ES) {
+    search(query: $consulta, first: $primeros, types: PRODUCT, prefix: LAST, unavailableProducts: SHOW) {
+      totalCount
+      nodes { ... on Product { ...ProductoVivo } }
+    }
+  }
+`;
+
 interface MetafieldRaw {
   namespace: string;
   key: string;
@@ -336,6 +363,63 @@ export async function productoVivoPorSku(sku: string): Promise<ProductoVivo | nu
     if (p) return p;
   }
   return null;
+}
+
+/**
+ * Productos publicados de una marca, por su Vendor exacto de Shopify (la grafía
+ * oficial de data/marcas.json: "Sub-Zero", "Gaggenau"). Es lo que llena
+ * /marcas/<slug>: en cuanto una marca sube a Shopify, su página se llena sola.
+ * Devuelve [] si Shopify no contesta o la marca aún no tiene piezas.
+ */
+export async function productosDeMarca(vendor: string): Promise<ProductoVivo[]> {
+  const productos: ProductoVivo[] = [];
+  // El nombre va entre comillas: "Sub-Zero" o "Fisher & Paykel" no se parten.
+  const consulta = `vendor:"${vendor.replace(/"/g, "")}"`;
+  let despues: string | null = null;
+  try {
+    for (let pagina = 0; pagina < 30; pagina++) {
+      const data: {
+        products: { pageInfo: { hasNextPage: boolean; endCursor: string }; nodes: ProductoRaw[] };
+      } = await shopifyFetch(CONSULTA_POR_MARCA, {
+        variables: { consulta, despues },
+        tags: [TAG_CATALOGO],
+        timeoutMs: 8000,
+      });
+      for (const raw of data.products.nodes) {
+        const p = normalizar(raw);
+        // `vendor:` de Shopify empata por texto: se exige la marca exacta.
+        if (p && p.marca.toLowerCase() === vendor.toLowerCase()) productos.push(p);
+      }
+      if (!data.products.pageInfo.hasNextPage) break;
+      despues = data.products.pageInfo.endCursor;
+    }
+  } catch (error) {
+    console.warn(`[catalogo] Sin productos de la marca "${vendor}":`, (error as Error).message);
+    return [];
+  }
+  return productos;
+}
+
+/**
+ * Búsqueda libre en el catálogo publicado (lupa del nav). Lanza `ErrorShopify`
+ * si Shopify no contesta: quien llama decide el plan B (lib/shopify/buscar.ts).
+ */
+export async function buscarVivo(
+  consulta: string,
+  primeros: number,
+): Promise<{ total: number; productos: ProductoVivo[] }> {
+  const data: { search: { totalCount: number; nodes: ProductoRaw[] } } = await shopifyFetch(
+    CONSULTA_BUSQUEDA,
+    {
+      variables: { consulta, primeros },
+      tags: [TAG_CATALOGO],
+      // Cinco minutos: una tecla repetida por muchos visitantes no vuelve a Shopify.
+      revalidate: 300,
+      timeoutMs: 4000,
+    },
+  );
+  const productos = data.search.nodes.map(normalizar).filter((p): p is ProductoVivo => p !== null);
+  return { total: data.search.totalCount, productos };
 }
 
 /* ---------- Precio público (con IVA) -------------------------------------- */

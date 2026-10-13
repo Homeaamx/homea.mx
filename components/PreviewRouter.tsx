@@ -59,6 +59,23 @@ function restaurarScroll(): boolean {
   return true;
 }
 
+/**
+ * Ejecuta el JS inline de la página del preview (MarketingPage lo deja como
+ * <script type="text/x-homea-page">): un <script> real por cada placeholder que
+ * aún no corrió. Idempotente por nodo: tras navegar, el <main> nuevo trae
+ * placeholders nuevos y se ejecutan; los viejos ya se fueron con su DOM.
+ */
+function ejecutarScriptsDePagina() {
+  document
+    .querySelectorAll<HTMLScriptElement>('script[type="text/x-homea-page"]:not([data-ran])')
+    .forEach((ph) => {
+      ph.setAttribute("data-ran", "1");
+      const s = document.createElement("script");
+      s.textContent = ph.textContent;
+      ph.parentNode?.insertBefore(s, ph.nextSibling);
+    });
+}
+
 export default function PreviewRouter() {
   const router = useRouter();
   const pathname = usePathname();
@@ -148,6 +165,9 @@ export default function PreviewRouter() {
   // Re-inicializar interacciones del preview tras cada navegación cliente.
   // En el montaje inicial NO se re-ejecuta: v2.js ya corrió bindPage al cargar.
   useEffect(() => {
+    // El JS propio de la página (spotlights del hero, sliders…) corre en cada
+    // montaje, incluido el primero.
+    ejecutarScriptsDePagina();
     if (!mounted.current) {
       mounted.current = true;
       return;
@@ -168,7 +188,10 @@ export default function PreviewRouter() {
     let raf = 0;
     const obs = new MutationObserver(() => {
       cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => window.__homeaInitPage?.());
+      raf = requestAnimationFrame(() => {
+        ejecutarScriptsDePagina();
+        window.__homeaInitPage?.();
+      });
     });
     if (main) obs.observe(main, { childList: true });
     if (chrome) obs.observe(chrome, { childList: true });

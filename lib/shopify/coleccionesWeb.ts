@@ -36,6 +36,11 @@ const COCINA = { nombre: "Cocina y Bar", ruta: "/productos/cocina-y-bar" };
 const REFRI = { nombre: "Refrigeración", ruta: "/productos/cocina-y-bar/refrigeracion" };
 const COCCION = { nombre: "Cocción", ruta: "/productos/cocina-y-bar/coccion" };
 const LAVA = { nombre: "Lavavajillas", ruta: "/productos/cocina-y-bar/lavavajillas" };
+const TARJAS = { nombre: "Tarjas y Monomandos", ruta: "/productos/cocina-y-bar/tarjas-y-griferia" };
+const TRITURADORES = { nombre: "Trituradores", ruta: "/productos/cocina-y-bar/trituradores" };
+const AGUA = { nombre: "Purificadores y Despachadores de Agua", ruta: "/productos/cocina-y-bar/filtros-y-purificadores-de-agua" };
+const EXTERIOR = { nombre: "Exterior", ruta: "/productos/exterior" };
+const ASADORES = { nombre: "Asadores & Hornos", ruta: "/productos/exterior/asadores-y-hornos" };
 
 export const TIPOS_WEB: TipoWeb[] = [
   { tipo: "Refrigeradores", coleccion: "refrigeradores", slugRiel: "refrigeradores", ruta: `${REFRI.ruta}/refrigeradores`, macro: COCINA, sub1: REFRI },
@@ -62,7 +67,45 @@ export const TIPOS_WEB: TipoWeb[] = [
     porInstalacion: { "De piso": { slug: "lavavajillas-de-piso", nombre: "Lavavajillas de piso" } },
     accesorios: { slug: "accesorios-lavavajillas", nombre: "Accesorios" },
   },
+  // Resto de Cocina y Bar: colecciones creadas y publicadas al canal Headless el
+  // 2026-10-13 (aún sin piezas). Al publicar productos con ese Tipo, aparecen solos.
+  { tipo: "Tarjas", coleccion: "tarjas", slugRiel: "tarjas", ruta: `${TARJAS.ruta}?tipo=tarjas`, macro: COCINA, sub1: TARJAS },
+  { tipo: "Monomandos", coleccion: "monomandos", slugRiel: "monomandos", ruta: `${TARJAS.ruta}?tipo=monomandos`, macro: COCINA, sub1: TARJAS },
+  { tipo: "Accesorios de Tarjas y Monomandos", coleccion: "accesorios-de-tarjas-y-monomandos", slugRiel: "accesorios-tarjas-monomandos", ruta: `${TARJAS.ruta}?tipo=accesorios-tarjas-monomandos`, macro: COCINA, sub1: TARJAS },
+  // Trituradores no tiene riel (un solo tipo): la página entera es su listado.
+  { tipo: "Trituradores", coleccion: "trituradores", slugRiel: "trituradores", ruta: TRITURADORES.ruta, macro: COCINA, sub1: TRITURADORES },
+  { tipo: "Purificadores de agua", coleccion: "purificadores-de-agua", slugRiel: "purificadores-de-agua", ruta: `${AGUA.ruta}?tipo=purificadores-de-agua`, macro: COCINA, sub1: AGUA },
+  { tipo: "Despachadores de agua", coleccion: "despachadores-de-agua", slugRiel: "despachadores-de-agua", ruta: `${AGUA.ruta}?tipo=despachadores-de-agua`, macro: COCINA, sub1: AGUA },
+  // Exterior: colecciones creadas y publicadas al canal Headless el 2026-10-13 (sin piezas).
+  // Asadores tiene dos tiles en el riel según `filtros.instalacion` (Empotrable / Carrito).
+  {
+    tipo: "Asadores", coleccion: "asadores", slugRiel: "asadores-empotrables", ruta: `${ASADORES.ruta}?tipo=asadores-empotrables`, macro: EXTERIOR, sub1: ASADORES,
+    nombreRiel: "Asadores empotrables",
+    porInstalacion: { Carrito: { slug: "asadores-con-carrito", nombre: "Asadores con carrito" } },
+  },
+  { tipo: "Hornos de pizza", coleccion: "hornos-de-pizza", slugRiel: "hornos-de-pizza", ruta: `${ASADORES.ruta}?tipo=hornos-de-pizza`, macro: EXTERIOR, sub1: ASADORES },
+  { tipo: "Accesorios Asadores & Hornos", coleccion: "accesorios-asadores-y-hornos", slugRiel: "accesorios-asadores-hornos", ruta: `${ASADORES.ruta}?tipo=accesorios-asadores-hornos`, macro: EXTERIOR, sub1: ASADORES },
+  // Tipos que cuelgan directo de la macro (Carla, 2026-10-05): su riel vive en /productos/exterior.
+  { tipo: "Quemador lateral", coleccion: "quemador-lateral", slugRiel: "quemador-lateral", ruta: `${EXTERIOR.ruta}?tipo=quemador-lateral`, macro: EXTERIOR, sub1: EXTERIOR },
+  { tipo: "Plancha Teppanyaki", coleccion: "plancha-teppanyaki", slugRiel: "plancha-teppanyaki", ruta: `${EXTERIOR.ruta}?tipo=plancha-teppanyaki`, macro: EXTERIOR, sub1: EXTERIOR },
+  { tipo: "Ahumadores", coleccion: "ahumadores", slugRiel: "ahumadores", ruta: `${EXTERIOR.ruta}?tipo=ahumadores`, macro: EXTERIOR, sub1: EXTERIOR },
+  { tipo: "Hieleras", coleccion: "hieleras", slugRiel: "hieleras", ruta: `${EXTERIOR.ruta}?tipo=hieleras`, macro: EXTERIOR, sub1: EXTERIOR },
+  { tipo: "Gabinetes", coleccion: "gabinetes", slugRiel: "gabinetes", ruta: `${EXTERIOR.ruta}?tipo=gabinetes`, macro: EXTERIOR, sub1: EXTERIOR },
 ];
+
+/**
+ * Piezas de OTRA colección que también se listan en una macro, acotadas por un
+ * filtro: las campanas de uso Exterior (Tipo "Campanas", Cocción) salen también
+ * en /productos/exterior con la tabla "Campanas — Uso: Exterior".
+ */
+export const EXTRAS_DE_MACRO: Record<
+  string,
+  { coleccion: string; filtro: { clave: string; valor: string }; tablaFiltros: string }[]
+> = {
+  "/productos/exterior": [
+    { coleccion: "campanas", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Campanas — Uso: Exterior" },
+  ],
+};
 
 export const tipoWeb = (tipo: string) => TIPOS_WEB.find((t) => t.tipo === tipo) ?? null;
 
@@ -102,6 +145,58 @@ export function tileDePieza(p: Pieza): { ruta: string; nombre: string } | null {
     if (tile) return { ruta: `${tw.sub1.ruta}?tipo=${tile.slug}`, nombre: tile.nombre };
   }
   return { ruta: tw.ruta, nombre: tw.nombreRiel ?? p.tipo };
+}
+
+/** Macrocategoría (`/productos/<macro>`) → todos sus tipos con catálogo vivo. */
+export function tiposDeMacro(categoria: string): TipoWeb[] {
+  const ruta = `/productos/${categoria}`;
+  return TIPOS_WEB.filter((t) => t.macro.ruta === ruta);
+}
+
+/**
+ * Tiles de "Tipo de producto" que SÍ tienen piezas entre `productos`, en el
+ * orden de TIPOS_WEB (equipos antes que accesorios, variantes por instalación
+ * después del tile base). Para los paneles sin riel propio (página de marca,
+ * macrocategoría): el grupo enseña solo lo que existe, no los 17 tipos.
+ */
+export function tilesPresentes(productos: Pieza[]): { slug: string; nombre: string }[] {
+  const vistos = new Map<string, string>();
+  for (const p of productos) {
+    const slug = tipoDePieza(p).slug ?? slugDeTipo(p.tipo);
+    if (vistos.has(slug)) continue;
+    const tw = tipoWeb(p.tipo);
+    let nombre = tileDePieza(p)?.nombre ?? p.tipo;
+    // Fuera de su subcategoría, "Accesorios" a secas no dice de qué: se completa
+    // ("Accesorios de lavavajillas") para distinguirlo de los de refrigeración y cocción.
+    if (tw && tw.accesorios && slug === tw.accesorios.slug && !/ de /i.test(nombre)) {
+      nombre = `${nombre} de ${tw.sub1.nombre.toLowerCase()}`;
+    }
+    vistos.set(slug, nombre);
+  }
+  // Orden de TIPOS_WEB; dentro de un tipo, el tile base, luego sus variantes por
+  // instalación y al final sus accesorios.
+  const orden = (slug: string) => {
+    for (let i = 0; i < TIPOS_WEB.length; i++) {
+      const t = TIPOS_WEB[i];
+      if (t.slugRiel === slug) return i * 10;
+      if (Object.values(t.porInstalacion ?? {}).some((v) => v.slug === slug)) return i * 10 + 1;
+      if (t.accesorios?.slug === slug) return i * 10 + 2;
+    }
+    return TIPOS_WEB.length * 10;
+  };
+  return [...vistos]
+    .map(([slug, nombre]) => ({ slug, nombre }))
+    .sort((a, b) => orden(a.slug) - orden(b.slug) || a.nombre.localeCompare(b.nombre, "es"));
+}
+
+/** "Cavas de vino" → "cavas-de-vino" (mismo criterio que slugValor de htmlCatalogo). */
+function slugDeTipo(v: string): string {
+  return v
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 }
 
 /** Subcategoría 1 (`<macro>/<sub1>`) → sus tipos con catálogo vivo. */
