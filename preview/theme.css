@@ -192,7 +192,7 @@ html { scroll-behavior: smooth; }
   grid-template-rows: minmax(0, 1fr);
   height: min(588px, calc(100vh - 128px)); }
 /* Foto ESTABLE entre categorías: 430px (~⅓ del panel, retrato ~3:4) para todas.
-   Excepción: los panes de 3 columnas (.detail-wide: Cocina y Bar, Exterior)
+   Excepción: Cocina y Bar (.detail-wide; Exterior ya no, Carla 2026-10-12)
    necesitan el ancho → el detalle manda y la foto se queda con el resto
    (~300px; menos en pantallas angostas, nunca se corta el texto). */
 .mega-panel.detail-wide .mega-flyout-main { grid-template-columns: 248px auto minmax(0, 1fr); }
@@ -238,11 +238,16 @@ html { scroll-behavior: smooth; }
   grid-template-columns: repeat(3, 190px); grid-template-rows: auto auto;
   grid-auto-flow: column; column-gap: 26px; row-gap: 0; align-items: start; }
 .mega-subcols.is-fixed .mega-col { display: contents; }
-/* Exterior en rejilla de 3 (Carla, 2026-10-12): fila 1 = Asadores & Hornos y la
-   columna de títulos sueltos; fila 2 = Hieleras · Gabinetes · Alberca. */
-.mega-subcols.is-grid3 { display: grid; grid-template-columns: repeat(3, 190px); column-gap: 26px; column-count: auto; align-items: start; }
-.mega-subcols.is-grid3 > :nth-child(3) { grid-column: 1; }
-.mega-subcols.is-grid3 .mega-col > .mega-subcol:last-child { margin-bottom: 18px; }
+/* Exterior en rejilla de 2 (Carla, 2026-10-12, v3): con la foto a 430px como las
+   demás macros, 3 columnas partían los títulos. En 2 columnas de ~220px todos
+   van en un renglón: Asadores & Hornos · Quemador lateral / Plancha Teppanyaki ·
+   Hieleras / Gabinetes · Alberca / Ahumadores. Los grupos sin tipos cierran con
+   "Ver más" como item normal. */
+.mega-subcols.is-grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 40px; row-gap: 26px; column-count: auto; align-items: start; }
+.mega-subcols.is-grid2 > .mega-subcol { margin: 0; }
+/* Más aire entre el nav y el primer título en todas las macros menos Cocina y
+   Bar: el primer título arranca a la misma altura que "Refrigeración" (~41px). */
+.mega-pane:not([data-pane="cocina"]) > .mega-subcols { padding-top: 10px; }
 .mega-subcol.solo-titulo h5 { margin-bottom: 0; }
 /* Pantallas bajas: el panel no debe tener scroll (Cocina y Bar es el más alto). */
 @media (max-height: 760px) {

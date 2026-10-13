@@ -20,7 +20,7 @@ import marcasJson from "@/data/marcas.json";
 import type { Decision } from "@/lib/reglas/reglaMarca";
 import type { TipoCambio } from "@/lib/tipoCambio";
 
-import { esAccesorio, tipoDePieza, tipoWeb } from "./coleccionesWeb";
+import { esAccesorio, tileDePieza, tipoDePieza, tipoWeb } from "./coleccionesWeb";
 import {
   decisionDeCompra,
   precioPublico,
@@ -509,6 +509,7 @@ const NOMBRES_FILTRO: Record<string, string> = {
   funcionamiento: "Funcionamiento",
   bisagra: "Bisagra / apertura",
   ancho: "Ancho",
+  altura_ada: "Altura",
   altura: "Altura",
   profundidad: "Profundidad",
   acabado: "Acabado",
@@ -622,6 +623,11 @@ function pestanasHtml(p: ProductoVivo, spec: string): string {
       </div>`;
 }
 
+/**
+ * Ficha de producto con el formato único del catálogo vivo. En Newsreader solo
+ * van el título y la línea/serie: el gancho (`homea.lead`) ya no se pinta en la
+ * ficha (Carla, 2026-10-12) y queda solo como descripción para buscadores.
+ */
 export function fichaHtml(
   p: ProductoVivo,
   tc: TipoCambio,
@@ -632,12 +638,8 @@ export function fichaHtml(
   const tw = tipoWeb(p.tipo);
   const href = `/producto/${p.slug}`;
   const [principal, ...resto] = p.imagenes;
-  // Accesorios dentro de la colección del equipo: la miga lleva a su opción del riel.
-  const pieza = tipoDePieza(p);
-  const accDeTipo = tw?.accesorios && pieza.slug === tw.accesorios.slug ? tw.accesorios : null;
-  const migaTipo = accDeTipo
-    ? { ruta: `${tw!.sub1.ruta}?tipo=${accDeTipo.slug}`, nombre: accDeTipo.nombre }
-    : tw ? { ruta: tw.ruta, nombre: p.tipo } : null;
+  // La miga lleva al tile del riel de la pieza (accesorios, empotrable / de piso…).
+  const migaTipo = tileDePieza(p);
 
   const migas = [
     `<a href="/" style="color:var(--fg-muted);border-bottom:none">Inicio</a>`,
@@ -731,7 +733,6 @@ ${relacionados.productos.map((r, i) => tarjetaHtml(r, tc, i)).join("\n")}
       <span class="rule-gold"></span>
       <div class="pdp-titulo"><h1>${tituloH1(p.titulo)}</h1>${etiquetaStock}</div>
       ${serieYModeloHtml(p)}
-      ${p.lead ? `<p class="lead-serif">${esc(p.lead)}</p>` : ""}
       ${precioFichaHtml(precio, tc)}
       ${descripcionLarga}
 

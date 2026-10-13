@@ -26,19 +26,28 @@
 
 /* ==========================================================================
    Mapa del showroom (.mapa-link)
-   El recuadro abre Google Maps. Al pasar el cursor aparece detrás un halo
-   dorado difuso, sin mover la imagen (Carla, 2026-10-12: antes la imagen se
-   desplazaba sobre una placa dorada sólida, demasiado acentuado). Debajo, la
-   nota en itálica "Abrir en Google Maps".
+   El recuadro abre Google Maps. Sin placa ni halo dorado detrás (Carla,
+   2026-10-12). Al pasar el cursor el mapa se acerca despacio hacia el pin de
+   HOMEA (transform-origin = punta del pin, así el pin no se mueve), late un
+   anillo dorado sobre el pin. Debajo, la nota en itálica "Abrir en Google
+   Maps" (sin etiqueta "Cómo llegar" sobre el mapa, Carla 2026-10-12).
    ========================================================================== */
-.mapa { position: relative; }
-.mapa-link { display: block; position: relative; border: 0; border-bottom: 0; }
-.mapa-link::before { content: ""; position: absolute; inset: -28px; z-index: 0; pointer-events: none;
-  background: color-mix(in srgb, var(--homea-gold) 38%, transparent);
-  filter: blur(26px); opacity: 0; transition: opacity var(--dur-med) var(--ease-standard); }
-.mapa-link img { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
-.mapa-link:hover::before, .mapa-link:focus-visible::before { opacity: 1; }
+.mapa { position: relative; --pin-x: 48.9%; --pin-y: 49.7%; }
+.mapa-link { display: block; position: relative; overflow: hidden; border: 0; border-bottom: 0; }
+.mapa-link img { display: block; width: 100%; height: auto; transform-origin: var(--pin-x) var(--pin-y);
+  transition: transform 1.4s var(--ease-standard), filter var(--dur-med) var(--ease-standard); }
+.mapa-link:hover img, .mapa-link:focus-visible img { transform: scale(1.12); filter: saturate(1.15); }
+.mapa-link::before { content: ""; position: absolute; left: var(--pin-x); top: var(--pin-y); z-index: 1;
+  width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; pointer-events: none;
+  border: 2px solid var(--homea-gold); opacity: 0; }
+.mapa-link:hover::before, .mapa-link:focus-visible::before { animation: mapa-pulso 1.8s var(--ease-standard) .3s infinite; }
+@keyframes mapa-pulso { 0% { transform: scale(.4); opacity: .95; } 100% { transform: scale(4.2); opacity: 0; } }
 .mapa-link:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--focus-ring); }
+@media (prefers-reduced-motion: reduce) {
+  .mapa-link img { transition: none; }
+  .mapa-link:hover img, .mapa-link:focus-visible img { transform: none; }
+  .mapa-link:hover::before, .mapa-link:focus-visible::before { animation: none; opacity: 1; }
+}
 .mapa-nota { margin: 14px 0 0; font-size: var(--fs-sm); font-style: italic; color: var(--fg-muted); }
 .mapa-nota a { color: inherit; border-bottom: 1px solid transparent;
   transition: color var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard); }
@@ -179,17 +188,15 @@
               </div>
             </div><a class="mega-all" href="categoria-cocina-y-bar.html">Ver todo Cocina y Bar</a></div>
 
-            <div class="mega-pane" data-pane="exterior"><div class="mega-subcols is-grid3" data-cols="3">
+            <div class="mega-pane" data-pane="exterior"><div class="mega-subcols is-grid2" data-cols="2">
               <div class="mega-subcol"><h5><a href="subcategoria-exterior--asadores-y-hornos.html">Asadores &amp; Hornos</a></h5>
                 <a href="subcategoria-exterior--asadores-y-hornos.html?tipo=asadores-empotrables">Asadores empotrables</a><a href="subcategoria-exterior--asadores-y-hornos.html?tipo=asadores-con-carrito">Asadores con carrito</a><a href="subcategoria-exterior--asadores-y-hornos.html?tipo=hornos-de-pizza">Hornos de pizza</a><a href="subcategoria-exterior--asadores-y-hornos.html?tipo=accesorios-asadores-hornos">Accesorios Asadores &amp; Hornos</a></div>
-              <div class="mega-col">
-                <div class="mega-subcol solo-titulo"><h5><a href="categoria-exterior.html?tipo=quemador-lateral">Quemador lateral</a></h5></div>
-                <div class="mega-subcol solo-titulo"><h5><a href="categoria-exterior.html?tipo=plancha-teppanyaki">Plancha Teppanyaki</a></h5></div>
-                <div class="mega-subcol solo-titulo"><h5><a href="categoria-exterior.html?tipo=ahumadores">Ahumadores</a></h5></div>
-              </div>
-              <div class="mega-subcol solo-titulo"><h5><a href="categoria-exterior.html?tipo=hieleras">Hieleras</a></h5></div>
-              <div class="mega-subcol solo-titulo"><h5><a href="categoria-exterior.html?tipo=gabinetes">Gabinetes</a></h5></div>
-              <div class="mega-subcol solo-titulo"><h5><a href="categoria-exterior.html" data-filtro="alberca">Alberca</a></h5></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=quemador-lateral">Quemador lateral</a></h5><a href="categoria-exterior.html?tipo=quemador-lateral">Ver más</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=plancha-teppanyaki">Plancha Teppanyaki</a></h5><a href="categoria-exterior.html?tipo=plancha-teppanyaki">Ver más</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=hieleras">Hieleras</a></h5><a href="categoria-exterior.html?tipo=hieleras">Ver más</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=gabinetes">Gabinetes</a></h5><a href="categoria-exterior.html?tipo=gabinetes">Ver más</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html" data-filtro="alberca">Alberca</a></h5><a href="categoria-exterior.html" data-filtro="alberca">Ver más</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=ahumadores">Ahumadores</a></h5><a href="categoria-exterior.html?tipo=ahumadores">Ver más</a></div>
             </div><a class="mega-all" href="categoria-exterior.html">Ver todo Exterior</a></div>
 
             <div class="mega-pane" data-pane="electro"><div class="mega-subcols">

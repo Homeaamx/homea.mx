@@ -134,12 +134,15 @@
             var nCols = +subs.getAttribute("data-cols") || subs.querySelectorAll(":scope > .mega-col").length;
             cols = nCols || Math.min(3, Math.max(1, n));
             subs.style.columnCount = cols;
-            subs.style.width = (cols * COLW + (cols - 1) * GAP) + "px";
+            /* Exterior (.is-grid2) se ajusta al ancho del detalle: la foto queda del
+               mismo tamaño que en las demás macros (Carla, 2026-10-12). */
+            subs.style.width = subs.classList.contains("is-grid2") ? "100%" : (cols * COLW + (cols - 1) * GAP) + "px";
           }
-          /* Foto de tamaño ESTABLE entre categorías: solo los panes de tres
-             columnas (Cocina y Bar, Exterior) ensanchan el detalle y la foto se
-             queda con lo que sobra; si no, el texto se cortaba (Carla, 2026-10-12). */
-          mega.classList.toggle("detail-wide", !!(subs && (subs.classList.contains("is-fixed") || cols >= 3)));
+          /* Foto de tamaño ESTABLE entre categorías: solo Cocina y Bar (.is-fixed)
+             ensancha el detalle y la foto se queda con lo que sobra; si no, el
+             texto se cortaba (Carla, 2026-10-12). */
+          var grid2 = !!(subs && subs.classList.contains("is-grid2"));
+          mega.classList.toggle("detail-wide", !!(subs && (subs.classList.contains("is-fixed") || (cols >= 3 && !grid2))));
         }
         if (featImg && img) { featImg.src = img; featImg.style.objectPosition = pos || "50% 50%"; }
         if (featLab && label) { featLab.innerHTML = label; }

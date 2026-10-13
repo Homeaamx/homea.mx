@@ -76,6 +76,9 @@ Son 20: los 19 de la tabla más **Bisagra / apertura**, que se agregó después 
 refrigeración y hornos). Los demás `filtros.*` (extracción, motor, llenado de agua, etc.) son de una
 sola subcategoría y los sigue filtrando la web, para no gastar el tope de filtros de la tienda.
 
+**Altura** (`filtros.altura_ada`: Estándar / ADA, 2026-10-12) va en Lavavajillas y refrigeración, después de
+Ancho. ADA = cabe bajo cubierta de 34" (lavavajillas tina Euro ADA, refrigeración y cavas bajo cubierta). También lo filtra solo la web (`data/filtros-web.json`); no hace falta agregarlo aquí.
+
 ## Cómo comprobarlo
 
 Avísale a Claude cuando termines: se consulta la colección con la Storefront API

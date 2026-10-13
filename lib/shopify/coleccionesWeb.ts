@@ -16,8 +16,14 @@ export interface TipoWeb {
   ruta: string;
   macro: { nombre: string; ruta: string };
   sub1: { nombre: string; ruta: string };
+  /**
+   * Nombre del tile del riel cuando NO es el nombre del Tipo (Lavavajillas →
+   * "Lavavajillas empotrable"); lo usa la miga de la ficha para no repetir la
+   * Subcategoría 1 (Carla, 2026-10-12).
+   */
+  nombreRiel?: string;
   /** Tipo de instalación (`filtros.instalacion`) → otro tile del riel (Lavavajillas: empotrable / de piso). */
-  porInstalacion?: Record<string, string>;
+  porInstalacion?: Record<string, { slug: string; nombre: string }>;
   /**
    * Accesorios que viven en la MISMA colección que el equipo (sin subcategoría
    * propia, Carla 2026-10-09): se marcan con `filtros.tipo` = "Accesorio de …" y
@@ -52,7 +58,8 @@ export const TIPOS_WEB: TipoWeb[] = [
   { tipo: "Accesorios de cocción", coleccion: "accesorios-de-coccion", slugRiel: "accesorios-coccion", ruta: `${COCCION.ruta}?tipo=accesorios-coccion`, macro: COCINA, sub1: COCCION },
   {
     tipo: "Lavavajillas", coleccion: "lavavajillas", slugRiel: "lavavajillas-empotrable", ruta: `${LAVA.ruta}?tipo=lavavajillas-empotrable`, macro: COCINA, sub1: LAVA,
-    porInstalacion: { "De piso": "lavavajillas-de-piso" },
+    nombreRiel: "Lavavajillas empotrable",
+    porInstalacion: { "De piso": { slug: "lavavajillas-de-piso", nombre: "Lavavajillas de piso" } },
     accesorios: { slug: "accesorios-lavavajillas", nombre: "Accesorios" },
   },
 ];
@@ -75,10 +82,26 @@ export function tipoDePieza(p: Pieza): { slug: string | null; nombre: string | n
   if (!tw) return { slug: null, nombre: null };
   if (tw.accesorios && esAccesorio(p)) return { slug: tw.accesorios.slug, nombre: tw.accesorios.nombre };
   for (const v of p.filtros.instalacion ?? []) {
-    const slug = tw.porInstalacion?.[v];
-    if (slug) return { slug, nombre: null };
+    const tile = tw.porInstalacion?.[v];
+    if (tile) return { slug: tile.slug, nombre: null };
   }
   return { slug: tw.slugRiel, nombre: null };
+}
+
+/**
+ * Tile del riel de una pieza con su nombre visible y su página, para la miga de
+ * la ficha: Lavavajillas · Lavavajillas empotrable (o de piso, según
+ * `filtros.instalacion`), nunca "Lavavajillas · Lavavajillas".
+ */
+export function tileDePieza(p: Pieza): { ruta: string; nombre: string } | null {
+  const tw = tipoWeb(p.tipo);
+  if (!tw) return null;
+  if (tw.accesorios && esAccesorio(p)) return { ruta: `${tw.sub1.ruta}?tipo=${tw.accesorios.slug}`, nombre: tw.accesorios.nombre };
+  for (const v of p.filtros.instalacion ?? []) {
+    const tile = tw.porInstalacion?.[v];
+    if (tile) return { ruta: `${tw.sub1.ruta}?tipo=${tile.slug}`, nombre: tile.nombre };
+  }
+  return { ruta: tw.ruta, nombre: tw.nombreRiel ?? p.tipo };
 }
 
 /** Subcategoría 1 (`<macro>/<sub1>`) → sus tipos con catálogo vivo. */

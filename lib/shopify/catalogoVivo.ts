@@ -25,7 +25,8 @@ import { shopifyFetch } from "./cliente";
 
 export const TAG_CATALOGO = "catalogo";
 
-/** Claves de `filtros.*` que existen en Shopify (las 38 definiciones de 2026-10-06). */
+/** Claves de `filtros.*` que existen en Shopify (las 38 definiciones de 2026-10-06,
+ *  + bisagra el 2026-10-07 y altura_ada el 2026-10-12). */
 export const CLAVES_FILTRO = [
   "disponibilidad", "garantia", "promocion", "acabado", "ancho", "instalacion", "diseno",
   "funcionamiento", "voltaje", "tipo", "tipo_gas", "uso", "capacidad", "compatible",
@@ -33,6 +34,7 @@ export const CLAVES_FILTRO = [
   "accesorios_incluidos", "altura", "carga", "cubierta", "despachador_agua", "drenaje",
   "hornos", "llenado_agua", "produccion", "profundidad", "puerta", "racks", "ruido",
   "tecnologia", "tina", "tipo_hielo", "variedades_cafe", "zonas", "bisagra",
+  "altura_ada",
 ] as const;
 
 const IDENTIFICADORES = [
