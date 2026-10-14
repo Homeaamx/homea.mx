@@ -189,11 +189,30 @@
 #conviene-saber .help-tiles a{color:var(--fg);cursor:default}
 #conviene-saber .help-tiles h4{color:var(--fg)}
 #conviene-saber .help-tiles a:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 0 56px 6px rgba(189,155,94,.42)}
+/* Llegada desde el footer (#formas-de-pago, #envios, #fichas-tecnicas): la
+   tarjeta del tema queda marcada con filo y halo dorados. */
+#conviene-saber .help-tiles a:target,#conviene-saber .help-tiles a.is-target{outline:2px solid var(--homea-gold);outline-offset:0;box-shadow:0 0 56px 6px rgba(189,155,94,.42)}
+/* Cinco temas en una fila en escritorio (devoluciones se sumó el 2026-10-13). */
+@media (min-width:1081px){#conviene-saber .help-tiles{grid-template-columns:repeat(5,minmax(0,1fr))}}
+#conviene-saber .help-tiles a.is-link{cursor:pointer}
+#conviene-saber .help-tiles .ver{display:block;margin-top:10px;font-family:var(--font-sans);font-size:11px;font-weight:600;letter-spacing:var(--tracking-wider);text-transform:uppercase;color:var(--accent-text)}
+/* Que al llegar se vea también el título de la sección, no solo la tarjeta. */
+#conviene-saber .help-tiles a[id]{scroll-margin-top:calc(var(--nav-stuck-h, 72px) + 150px)}
 /* Texto más grande en toda la página (legibilidad para todo el público). */
 #conviene-saber .help-tiles h4{font-size:17px}
 #conviene-saber .help-tiles p{font-size:15.5px;line-height:1.6}
-#preguntas-frecuentes .faq summary{font-size:var(--fs-lg)}
-#preguntas-frecuentes .faq details p{font-size:var(--fs-base)}
+/* Banner hacia /preguntas-frecuentes: caja greige a todo el ancho, toda clicable;
+   la flecha crece de 28 a 44px al pasar el cursor (doctrina de motion v2). */
+.faq-banner{display:flex;align-items:center;justify-content:space-between;gap:24px 40px;flex-wrap:wrap;padding:44px clamp(28px,4vw,64px);
+  background:var(--homea-greige);border:1px solid var(--border);color:var(--fg);transition:border-color var(--dur-fast) var(--ease-standard)}
+.faq-banner:hover{border-color:var(--homea-gold)}
+.faq-banner-txt{display:flex;flex-direction:column;gap:8px}
+.faq-banner-t{font-family:var(--font-display);font-size:clamp(30px,3vw,42px);line-height:1.05}
+.faq-banner-t i{font-style:italic}
+.faq-banner-cta{display:inline-flex;align-items:center;gap:14px;font-family:var(--font-sans);font-size:12px;font-weight:600;letter-spacing:var(--tracking-label);text-transform:uppercase}
+.faq-banner-arrow{position:relative;display:inline-block;width:28px;height:1px;background:currentColor;transition:width .3s var(--ease-standard)}
+.faq-banner-arrow::after{content:"";position:absolute;right:0;top:-4px;width:8px;height:8px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg)}
+.faq-banner:hover .faq-banner-arrow{width:44px}
 /* Aviso "técnicos independientes" (movido del formulario; mismo lenguaje que .svc-note) */
 .gw-alerta{display:flex;gap:16px;align-items:flex-start;padding:18px 22px;margin:36px 0 52px;background:color-mix(in srgb,var(--accent) 9%,transparent);border-left:2px solid var(--accent);font-size:15.5px;line-height:var(--lh-loose);color:var(--fg-muted)}
 .gw-alerta b{color:var(--fg)}
@@ -430,8 +449,9 @@
   </div>
 </div></section>
 
-<!-- Banda CTA post-venta en oro (contraste tras la franja espresso) -->
-<section class="sec tight" style="padding-top:56px;padding-bottom:0"><div class="container">
+<!-- Banda CTA post-venta en oro (contraste tras la franja espresso). El id es el
+     destino de "Contacto Post-Venta" del footer. -->
+<section class="sec tight" id="post-venta" style="padding-top:56px;padding-bottom:0"><div class="container">
   <div class="svc-cta svc-cta--gold reveal" style="border:0">
     <div class="svc-cta-txt">
       <div class="eyebrow eyebrow-bright">Instalación de equipos</div>
@@ -659,27 +679,48 @@
     <h2 style="color:#F4EFE6">Lo que conviene <i>saber</i>.</h2>
   </div>
   <div class="help-tiles reveal" style="margin-top:48px">
-    <a><h4>Formas de pago</h4><p>Transferencia, cheque o efectivo. Tarjetas de crédito o débito, aplican restricciones.</p></a>
-    <a><h4>Garantías e instalación</h4><p>Garantía de fábrica + extensión disponible. Apoyo post-venta del equipo HOMEA.</p></a>
-    <a><h4>Envíos</h4><p>Cobertura nacional hasta tu puerta. Costo de envío puede aplicar.</p></a>
-    <a><h4>Fichas técnicas</h4><p>Proporcionadas previo a la compra para decidir cuál es el mejor equipo para tu proyecto.</p></a>
+    <a id="formas-de-pago"><h4>Formas de pago</h4><p>Transferencia, cheque o efectivo. Tarjetas de crédito o débito, aplican restricciones.</p></a>
+    <a id="garantias"><h4>Garantías e instalación</h4><p>Garantía de fábrica + extensión disponible. Apoyo post-venta del equipo HOMEA.</p></a>
+    <a id="envios"><h4>Envíos</h4><p>Cobertura nacional hasta tu puerta. Costo de envío puede aplicar.</p></a>
+    <a id="fichas-tecnicas"><h4>Fichas técnicas</h4><p>Proporcionadas previo a la compra para decidir cuál es el mejor equipo para tu proyecto.</p></a>
+    <a id="devoluciones" class="is-link" href="/politica-de-devoluciones"><h4>Cambios, devoluciones y cancelaciones</h4><p>Revisa tu equipo antes de firmar de recibido. Las condiciones varían según marca y modelo. <span class="ver">Ver política completa →</span></p></a>
   </div>
 </div></section>
+<script>
+/* Marca la tarjeta del tema al llegar desde el footer (#formas-de-pago, #envios,
+   #fichas-tecnicas). :target no se actualiza con la navegación sin recarga del
+   sitio (pushState), así que se replica con .is-target. Un solo listener global. */
+(function(){
+  function marcar(){
+    var id = decodeURIComponent(location.hash.slice(1));
+    document.querySelectorAll('#conviene-saber .help-tiles a').forEach(function(t){
+      t.classList.toggle('is-target', !!id && t.id === id);
+    });
+    var t = id && document.getElementById(id);
+    if (t && t.closest('#conviene-saber')) t.scrollIntoView({block:'start'});
+  }
+  marcar(); setTimeout(marcar, 120);
+  if (window.__homeaTemaGarantias) return;
+  window.__homeaTemaGarantias = true;
+  window.addEventListener('popstate', marcar);
+  window.addEventListener('hashchange', marcar);
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href*="garantias-instalacion#"]');
+    if (a) setTimeout(marcar, 250);
+  });
+})();
+</script>
 
-<!-- Preguntas frecuentes post-venta (bone: alterna con el espresso anterior).
-     El id es el destino del enlace "Preguntas frecuentes" del footer. -->
-<section class="sec tight" id="preguntas-frecuentes"><div class="container">
-  <div class="sec-head">
-    <div class="eyebrow">Preguntas frecuentes</div>
-    <span class="rule-gold"></span>
-    <h2>Garantías y servicio, <i>claras</i>.</h2>
-  </div>
-  <div class="faq reveal" style="margin-top:40px">
-    <details><summary>¿Los técnicos son de HOMEA?</summary><p>No. Son especialistas independientes, contratados y autorizados por cada marca. HOMEA coordina y da seguimiento a tu caso de principio a fin.</p></details>
-    <details><summary>¿Qué cubre la garantía?</summary><p>La garantía de fábrica de cada marca, más la extensión HOMEA cuando aplica. Te confirmamos cobertura y vigencia al abrir tu folio.</p></details>
-    <details><summary>¿Cuánto tarda una visita?</summary><p>Tras registrar tu solicitud recibes folio y fecha estimada por correo. Los tiempos dependen de la marca y la disponibilidad del técnico en tu zona.</p></details>
-    <details><summary>¿Atienden fuera de Querétaro?</summary><p>Sí. Coordinamos servicio e instalación con cobertura nacional. <i>*Aplican restricciones según zona y marca.</i></p></details>
-  </div>
+<!-- Preguntas frecuentes: viven en su propia página (Carla, 2026-10-13); aquí
+     solo el banner. Conserva el id para los enlaces viejos a #preguntas-frecuentes. -->
+<section class="sec tight" id="preguntas-frecuentes" style="padding-top:72px;padding-bottom:96px"><div class="container">
+  <a class="faq-banner reveal" href="preguntas-frecuentes.html">
+    <span class="faq-banner-txt">
+      <span class="eyebrow">Ayuda</span>
+      <span class="faq-banner-t">Preguntas <i>frecuentes</i>.</span>
+    </span>
+    <span class="faq-banner-cta">Resuelve tus dudas <span class="faq-banner-arrow" aria-hidden="true"></span></span>
+  </a>
 </div></section>
 
 <footer class="site-footer"><div class="f-news" id="newsletter">

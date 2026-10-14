@@ -95,8 +95,8 @@ export function monedaDeCotizacion(partidas: PartidaCotizacion[]): "MXN" | "USD"
   return set.has("USD") ? "USD" : "MXN";
 }
 
-/** Días que la cotización preliminar se considera vigente (como el formato SAE: 15). */
-export const VIGENCIA_DIAS = 15;
+/** Días que la cotización preliminar se considera vigente: 2 semanas desde su emisión (Carla, 2026-10-13). */
+export const VIGENCIA_DIAS = 14;
 
 const SKU_VALIDO = /^[A-Z0-9-]{3,40}$/;
 

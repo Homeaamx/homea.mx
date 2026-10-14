@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOMEA — Preguntas frecuentes</title>
+<link rel="icon" type="image/png" href="assets/favicon-circle.webp">
+<link rel="stylesheet" href="tokens-v2.css">
+<link rel="stylesheet" href="theme.css?v=66">
+<style>
+/* ══ Preguntas frecuentes (Carla, 2026-10-13) ══
+   Hero partido (texto + buscador | foto a sangre), pestañas por tema, acordeón
+   por tema y cierre oscuro. Todas las respuestas van en el HTML (SEO + JSON-LD
+   que arma app/preguntas-frecuentes/page.tsx); el JS solo muestra un tema. */
+.page-hero.fq-hero{padding:0;background:var(--homea-bone);overflow:hidden}
+.fq-hero-in{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:stretch;min-height:380px}
+.fq-hero-txt{padding:48px clamp(32px,4vw,72px) 56px max(clamp(48px,4vw,96px),calc((100vw - var(--container)) / 2 + clamp(48px,4vw,96px)));display:flex;flex-direction:column;justify-content:center}
+.fq-hero h1{margin:0 0 14px}
+.fq-hero h1 i{font-style:italic}
+.fq-hero .sub{margin:0 0 30px;max-width:46ch}
+.fq-hero-img{position:relative;min-height:300px}
+.fq-hero-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 60%}
+/* Desenfoque del lado izquierdo de la foto (Carla, 2026-10-13): una capa con
+   backdrop-filter que se desvanece hacia la derecha, más un velo bone suave
+   para que la foto se funda con el bloque de texto. */
+.fq-hero-img::before{content:"";position:absolute;inset:0;z-index:1;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  -webkit-mask-image:linear-gradient(to right,#000 0%,rgba(0,0,0,.6) 22%,transparent 48%);mask-image:linear-gradient(to right,#000 0%,rgba(0,0,0,.6) 22%,transparent 48%)}
+.fq-hero-img::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to right,var(--homea-bone) 0%,color-mix(in srgb,var(--homea-bone) 35%,transparent) 18%,transparent 40%)}
+.fq-search{display:grid;grid-template-columns:minmax(0,1fr) auto;max-width:520px;border:1px solid var(--border-strong);background:#fff}
+.fq-search label{display:flex;align-items:center;gap:12px;padding:0 16px}
+.fq-search svg{width:17px;height:17px;flex:none;color:var(--fg-muted)}
+.fq-search input{border:0;outline:0;background:transparent;font:inherit;font-size:15px;color:var(--fg);padding:15px 0;width:100%;min-width:0}
+.fq-search input::placeholder{color:var(--fg-subtle)}
+.fq-search:focus-within{border-color:var(--homea-black)}
+.fq-search button{border:0;background:var(--homea-black);color:var(--homea-bone);font-family:var(--font-sans);font-size:11px;font-weight:600;letter-spacing:var(--tracking-wider);text-transform:uppercase;padding:0 28px;cursor:pointer;transition:background var(--dur-fast) var(--ease-standard)}
+.fq-search button:hover{background:var(--homea-espresso)}
+
+.fq-body{padding:40px 0 88px}
+.fq-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.fq-tab{display:grid;grid-template-columns:28px minmax(0,1fr) 14px;align-items:center;gap:14px;padding:18px 18px;min-height:76px;
+  background:#fff;border:1px solid var(--border);color:var(--fg);font-family:var(--font-sans);font-size:13px;font-weight:600;line-height:1.35;
+  transition:background var(--dur-fast) var(--ease-standard),color var(--dur-fast) var(--ease-standard),border-color var(--dur-fast) var(--ease-standard)}
+.fq-tab > svg:first-child{width:28px;height:28px;color:var(--accent-text)}
+.fq-tab-arrow{width:14px;height:14px;color:var(--accent-text);transition:transform var(--dur-fast) var(--ease-standard)}
+.fq-tab:hover{border-color:var(--homea-gold)}
+.fq-tab:hover .fq-tab-arrow{transform:translateX(3px)}
+.fq-tab.on{background:var(--homea-black);border-color:var(--homea-black);color:var(--homea-bone)}
+.fq-tab.on > svg:first-child,.fq-tab.on .fq-tab-arrow{color:var(--homea-gold-bright)}
+
+.fq-panels{margin-top:48px}
+.fq-panel + .fq-panel{margin-top:56px}
+.js-fq .fq-panel{display:none}
+.js-fq .fq-panel.on{display:block}
+.js-fq.fq-buscando .fq-panel{display:block}
+.js-fq.fq-buscando .fq-panel.sin-res{display:none}
+.fq-panel-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:22px}
+.fq-panel-head h2{margin:0 0 6px;font-size:clamp(26px,2.4vw,34px)}
+.fq-panel-sub{margin:0;font-size:var(--fs-sm);color:var(--fg-muted)}
+.fq-expand{flex:none;display:inline-flex;align-items:center;gap:8px;border:0;background:none;padding:4px 0;cursor:pointer;
+  font-family:var(--font-sans);font-size:11px;font-weight:600;letter-spacing:var(--tracking-wider);text-transform:uppercase;color:var(--fg)}
+.fq-expand b{font-weight:400;font-size:18px;line-height:1;color:var(--accent-text)}
+.fq-expand span{border-bottom:1px solid var(--homea-gold)}
+.fq-buscando .fq-expand{display:none}
+.fq-list{display:flex;flex-direction:column;gap:8px}
+.fq-list details{background:color-mix(in srgb,var(--homea-greige) 45%,#fff);border:1px solid var(--border)}
+.fq-list details[hidden]{display:none}
+.fq-list summary{list-style:none;cursor:pointer;position:relative;padding:18px 56px 18px 22px;font-size:16px;font-weight:500;color:var(--fg)}
+.fq-list summary::-webkit-details-marker{display:none}
+.fq-list summary::after{content:"+";position:absolute;right:22px;top:50%;transform:translateY(-50%);font-size:22px;font-weight:300;color:var(--fg)}
+.fq-list details[open]{background:#fff;border-color:color-mix(in srgb,var(--homea-gold) 55%,var(--border))}
+.fq-list details[open] summary{color:var(--accent-text)}
+.fq-list details[open] summary::after{content:"−"}
+.fq-list summary:hover{color:var(--accent-text)}
+.fq-list details p a{color:var(--accent-text);border-bottom:1px solid currentColor}
+.fq-list details p{margin:0;padding:0 56px 20px 22px;max-width:780px;font-size:var(--fs-sm);line-height:var(--lh-loose);color:var(--fg-muted)}
+.fq-empty{margin:8px 0 0;font-size:var(--fs-sm);color:var(--fg-muted)}
+.fq-empty[hidden]{display:none}
+.fq-empty a{color:var(--accent-text);border-bottom:1px solid currentColor}
+
+.fq-cta{margin-top:72px;background:var(--homea-black);color:var(--homea-bone);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:28px 40px;padding:34px clamp(24px,3vw,40px)}
+.fq-cta-txt{display:grid;grid-template-columns:32px minmax(0,1fr);gap:0 18px;align-items:start}
+.fq-cta-txt .rule-gold{margin-top:16px;width:32px}
+.fq-cta h2{margin:0 0 6px;color:var(--homea-bone);font-size:24px}
+.fq-cta p{margin:0;font-size:var(--fs-sm);color:var(--dark-fg-muted)}
+.fq-cta-acts{display:flex;flex-wrap:wrap;gap:12px;padding-left:36px;border-left:1px solid var(--dark-border)}
+.fq-cta .btn{padding:15px 24px}
+.fq-cta .btn svg{width:18px;height:18px}
+.fq-cta .btn-wa{background:transparent;color:var(--homea-gold-bright);border-color:var(--homea-gold)}
+.fq-cta .btn-wa:hover{background:var(--homea-gold);color:var(--homea-black)}
+.fq-cta .btn-light{background:var(--homea-bone);color:var(--homea-black);border-color:var(--homea-bone)}
+.fq-cta .btn-light:hover{background:var(--homea-gold);border-color:var(--homea-gold)}
+
+@media (max-width:1180px){.fq-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:900px){
+  .fq-hero-in{grid-template-columns:1fr}
+  .fq-hero-txt{padding:40px 24px 36px}
+  .fq-hero-img{min-height:220px;order:-1}
+  .fq-hero-img::before{-webkit-mask-image:linear-gradient(to top,#000 0%,transparent 40%);mask-image:linear-gradient(to top,#000 0%,transparent 40%)}
+  .fq-hero-img::after{background:linear-gradient(to top,var(--homea-bone) 0%,transparent 35%)}
+  .fq-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fq-cta{grid-template-columns:1fr}
+  .fq-cta-acts{padding-left:0;border-left:0}
+}
+@media (max-width:560px){
+  .fq-tabs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 24px;margin:0 -24px;padding:0 24px 4px}
+  .fq-tab{flex:0 0 72%;scroll-snap-align:start}
+  .fq-panel-head{flex-direction:column;align-items:flex-start}
+  .fq-list summary{padding:16px 48px 16px 16px;font-size:15px}
+  .fq-list summary::after{right:16px}
+  .fq-list details p{padding:0 16px 18px}
+  .fq-cta .btn{width:100%;justify-content:center}
+  .fq-search button{padding:0 18px}
+}
+@media (max-width:360px){.fq-tabs{margin:0 -16px;padding:0 16px 4px;scroll-padding:0 16px}}
+</style>
+</head>
+<body>
+<!-- Utility bar -->
+<div class="ubar"><div class="container">
+  <div class="u-left">
+    <!-- Contáctanos: se abre al pasar el cursor o con clic/tap (v2.js alterna .is-open). -->
+    <div class="u-contact">
+      <button class="u-contact-btn" type="button" aria-expanded="false" aria-controls="u-contact-panel">Contáctanos <svg viewBox="0 0 12 12" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
+      <div class="u-contact-panel" id="u-contact-panel">
+        <p><b>Teléfono de oficina</b><a href="tel:+524422163552">(442) 216 3552</a></p>
+        <p><b>WhatsApp</b><a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_ubar">+52 446 144 6318</a></p>
+        <p><b>Showroom</b><a class="u-addr" href="https://maps.app.goo.gl/LS9rqfHgK3qjFV926" target="_blank" rel="noopener"><span>Del Ahuehuete 7, Álamos 1a Sección, 76160 Santiago de Querétaro, Qro.</span></a></p>
+        <p><b>Correo electrónico</b><a href="mailto:carteaga@homea.mx">carteaga@homea.mx</a></p>
+      </div>
+    </div>
+    <span class="u-sep" aria-hidden="true"></span>
+    <!-- Slot de temporada: por ahora muestra el tipo de cambio del día (FIX de Banxico, resuelto en el servidor por lib/tipoCambio.ts). En temporadas, reemplazar por el mensaje de campaña. -->
+    <span class="u-fx" id="u-fx" data-fx-fallback="17.21"><span class="u-fx-lbl">Tipo de cambio · </span>1 USD = <strong>17.21</strong> MXN</span>
+  </div>
+  <a class="u-ofertas" href="ofertas.html">Ofertas exclusivas</a>
+  <div class="u-right">
+    <div class="u-social" aria-label="Síguenos en redes sociales">
+      <a class="u-soc" href="https://www.instagram.com/homea_mx/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a class="u-soc" href="https://www.facebook.com/homea.mx/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 9V7.2c0-.8.2-1.2 1.3-1.2H17V3h-2.6C11.5 3 11 4.7 11 6.9V9H9v3h2v9h3v-9h2.3l.4-3H14z"/></svg></a>
+      <a class="u-soc" href="https://www.tiktok.com/@homea_mx" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3c.3 2 1.6 3.5 3.5 3.8v2.5c-1.3 0-2.5-.4-3.5-1.1v5.7a5.4 5.4 0 1 1-5.4-5.4c.3 0 .6 0 .9.1v2.7a2.7 2.7 0 1 0 1.9 2.6V3h2.6z"/></svg></a>
+      <a class="u-soc" href="https://www.youtube.com/channel/UC5SHtEFZdDk5UuGfkfIWl1w" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 8.2a2.6 2.6 0 0 0-1.8-1.8C18.6 6 12 6 12 6s-6.6 0-8.2.4A2.6 2.6 0 0 0 2 8.2 27 27 0 0 0 1.7 12 27 27 0 0 0 2 15.8a2.6 2.6 0 0 0 1.8 1.8C5.4 18 12 18 12 18s6.6 0 8.2-.4a2.6 2.6 0 0 0 1.8-1.8c.3-1.2.3-3.8.3-3.8s0-2.6-.3-3.8zM10 15V9l5 3-5 3z"/></svg></a>
+    </div>
+  </div>
+</div></div>
+
+<!-- Nav -->
+<nav class="site-nav">
+<!-- Fila del logo (escritorio): centrado y grande. Con el nav forma el bloque fijo al hacer scroll. -->
+<div class="nav-brandrow"><div class="container">
+  <a class="brand brand-top" href="home.html" aria-label="Inicio">
+    <img width="400" height="157" decoding="async" src="assets/wordmark-black.webp" alt="HOMEA Premium">
+  </a>
+</div></div>
+<div class="container nav-main">
+  <a class="brand brand-bar" href="home.html" aria-label="Inicio">
+    <img width="400" height="157" decoding="async" src="assets/wordmark-black.webp" alt="HOMEA Premium">
+  </a>
+  <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <div class="has-mega"><a href="categoria-cocina-y-bar.html" data-activo="/productos">Productos</a>
+      <div class="mega-panel mega-flyout" data-mega>
+        <div class="mega-flyout-main">
+          <div class="mega-rail" role="tablist" aria-label="Categorías de producto">
+            <button class="mega-cat" data-pane="cocina" data-href="categoria-cocina-y-bar.html" data-img="assets/photos/cat-cocina-bar.webp" data-menu-img="assets/photos/menu/cat-cocina-bar.webp" data-pos="30% 50%" data-label="Cocina y Bar">Cocina y Bar</button>
+            <button class="mega-cat" data-pane="exterior" data-href="categoria-exterior.html" data-img="assets/photos/cat-exterior-asador.webp" data-menu-img="assets/photos/menu/cat-exterior-asador.webp" data-label="Exterior">Exterior</button>
+            <button class="mega-cat" data-pane="electro" data-href="categoria-electrodomesticos-menores.html" data-img="assets/photos/cat-electro-menores-kitchenaid-mixer.webp" data-menu-img="assets/photos/menu/cat-electro-menores-kitchenaid-mixer.webp" data-label="Electrodomésticos menores">Electrodomésticos menores</button>
+            <button class="mega-cat" data-pane="lavanderia" data-href="categoria-lavanderia.html" data-img="assets/photos/cat-cuidado-ropa.webp" data-menu-img="assets/photos/menu/cat-cuidado-ropa.webp" data-label="Lavandería">Lavandería</button>
+            <button class="mega-cat" data-pane="banos" data-href="categoria-banos.html" data-img="assets/photos/cat-banos.webp" data-menu-img="assets/photos/menu/cat-banos.webp" data-label="Baños">Baños</button>
+            <button class="mega-cat" data-pane="aire-acondicionado" data-href="categoria-aire-acondicionado.html" data-img="assets/photos/minisplit.webp" data-menu-img="assets/photos/menu/minisplit.webp" data-label="Aire acondicionado">Aire acondicionado</button>
+            <button class="mega-cat" data-pane="vapor" data-href="categoria-vapor-y-sauna.html" data-img="assets/photos/cat-vapor-sauna.webp" data-menu-img="assets/photos/menu/cat-vapor-sauna.webp" data-label="Vapor y Sauna">Vapor y Sauna</button>
+            <button class="mega-cat" data-pane="wellness" data-href="categoria-wellness.html" data-img="assets/photos/cat-wellness.webp" data-menu-img="assets/photos/menu/cat-wellness.webp" data-label="Wellness">Wellness</button>
+            <button class="mega-cat" data-pane="recubrimientos" data-href="categoria-recubrimientos-y-superficies.html" data-img="assets/photos/cat-recubrimientos.webp" data-menu-img="assets/photos/menu/cat-recubrimientos.webp" data-label="Recubrimientos y Superficies">Recubrimientos y Superficies</button>
+            <button class="mega-cat" data-pane="chimeneas" data-href="categoria-chimeneas-y-calentadores.html" data-img="assets/photos/cat-chimeneas.webp" data-menu-img="assets/photos/menu/cat-chimeneas.webp" data-label="Chimeneas &amp; Calentadores">Chimeneas &amp; Calentadores</button>
+          </div>
+          <div class="mega-detail">
+            <div class="mega-pane" data-pane="cocina"><div class="mega-subcols is-fixed">
+              <div class="mega-col">
+                <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--refrigeracion.html">Refrigeración</a></h5> <a href="subcategoria-cocina-y-bar--refrigeracion--refrigeradores.html">Refrigeradores</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=congeladores">Congeladores</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=centros-de-bebida">Centros de bebida</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=frigobares">Frigobares</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=maquinas-de-hielo">Máquinas de hielo</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=cavas-de-vino">Cavas de vino</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=cajones-refrigerantes">Cajones refrigerantes</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=accesorios-refrigeracion">Accesorios de refrigeración</a></div>
+                <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--lavavajillas.html">Lavavajillas</a></h5> <a href="subcategoria-cocina-y-bar--lavavajillas.html?tipo=lavavajillas-empotrable">Lavavajillas empotrable</a><a href="subcategoria-cocina-y-bar--lavavajillas.html?tipo=lavavajillas-de-piso">Lavavajillas de piso</a><a href="subcategoria-cocina-y-bar--lavavajillas.html?tipo=accesorios-lavavajillas">Accesorios de lavavajillas</a></div>
+              </div>
+              <div class="mega-col">
+                <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--coccion.html">Cocción</a></h5> <a href="subcategoria-cocina-y-bar--coccion.html?tipo=estufas">Estufas</a><a href="subcategoria-cocina-y-bar--coccion--parrillas.html">Parrillas</a><a href="subcategoria-cocina-y-bar--coccion.html?tipo=hornos">Hornos</a><a href="subcategoria-cocina-y-bar--coccion.html?tipo=microondas">Microondas</a><a href="subcategoria-cocina-y-bar--coccion--campanas.html">Campanas</a><a href="subcategoria-cocina-y-bar--coccion.html?tipo=cajones">Cajones</a><a href="subcategoria-cocina-y-bar--coccion.html?tipo=cafeteras-empotrables">Cafeteras</a><a href="subcategoria-cocina-y-bar--coccion.html?tipo=accesorios-coccion">Accesorios de cocción</a></div>
+                <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--trituradores.html">Trituradores</a></h5> <a href="subcategoria-cocina-y-bar--trituradores.html?tipo=trituradores">Trituradores</a></div>
+              </div>
+              <div class="mega-col">
+                <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--tarjas-y-griferia.html">Tarjas y Monomandos</a></h5> <a href="subcategoria-cocina-y-bar--tarjas-y-griferia.html?tipo=tarjas">Tarjas</a><a href="subcategoria-cocina-y-bar--tarjas-y-griferia.html?tipo=monomandos">Monomandos</a><a href="subcategoria-cocina-y-bar--tarjas-y-griferia.html?tipo=accesorios-tarjas-monomandos">Accesorios de Tarjas y Monomandos</a></div>
+                <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--filtros-y-purificadores-de-agua.html">Purificadores y Despachadores de Agua</a></h5> <a href="subcategoria-cocina-y-bar--filtros-y-purificadores-de-agua.html?tipo=purificadores-de-agua">Purificadores de agua</a><a href="subcategoria-cocina-y-bar--filtros-y-purificadores-de-agua.html?tipo=despachadores-de-agua">Despachadores de agua</a></div>
+              </div>
+            </div><a class="mega-all" href="categoria-cocina-y-bar.html">Ver todo Cocina y Bar</a></div>
+
+            <div class="mega-pane" data-pane="exterior"><div class="mega-subcols is-grid2" data-cols="2">
+              <div class="mega-subcol"><h5><a href="subcategoria-exterior--asadores-y-hornos.html">Asadores &amp; Hornos</a></h5>
+                <a href="subcategoria-exterior--asadores-y-hornos.html?tipo=asadores-empotrables">Asadores empotrables</a><a href="subcategoria-exterior--asadores-y-hornos.html?tipo=asadores-con-carrito">Asadores con carrito</a><a href="subcategoria-exterior--asadores-y-hornos.html?tipo=hornos-de-pizza">Hornos de pizza</a><a href="subcategoria-exterior--asadores-y-hornos.html?tipo=accesorios-asadores-hornos">Accesorios Asadores &amp; Hornos</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=quemador-lateral">Quemador lateral</a></h5><a href="categoria-exterior.html?tipo=quemador-lateral">Ver más</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=plancha-teppanyaki">Plancha Teppanyaki</a></h5><a href="categoria-exterior.html?tipo=plancha-teppanyaki">Ver más</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=hieleras">Hieleras</a></h5><a href="categoria-exterior.html?tipo=hieleras">Ver más</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=gabinetes">Gabinetes</a></h5><a href="categoria-exterior.html?tipo=gabinetes">Ver más</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html" data-filtro="alberca">Alberca</a></h5><a href="categoria-exterior.html" data-filtro="alberca">Ver más</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=ahumadores">Ahumadores</a></h5><a href="categoria-exterior.html?tipo=ahumadores">Ver más</a></div>
+            </div><a class="mega-all" href="categoria-exterior.html">Ver todo Exterior</a></div>
+
+            <div class="mega-pane" data-pane="electro"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-electrodomesticos-menores.html">Electrodomésticos menores</a></h5>
+                <a href="categoria-electrodomesticos-menores.html?tipo=licuadoras">Licuadoras</a><a href="categoria-electrodomesticos-menores.html?tipo=batidoras">Batidoras</a><a href="categoria-electrodomesticos-menores.html?tipo=tostadoras">Tostadoras</a><a href="categoria-electrodomesticos-menores.html?tipo=exprimidor-de-citricos">Exprimidor de cítricos</a><a href="categoria-electrodomesticos-menores.html?tipo=cafeteras">Cafeteras</a><a href="categoria-electrodomesticos-menores.html?tipo=accesorios-de-cocina-pequenos">Accesorios de cocina pequeños</a></div>
+            </div><a class="mega-all" href="categoria-electrodomesticos-menores.html">Ver todo Electrodomésticos menores</a></div>
+
+            <div class="mega-pane" data-pane="lavanderia"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-lavanderia.html">Lavandería</a></h5>
+                <a href="categoria-lavanderia.html?tipo=lavadoras">Lavadoras</a><a href="categoria-lavanderia.html?tipo=secadoras">Secadoras</a><a href="categoria-lavanderia.html?tipo=lavasecadoras-2-en-1">Lavasecadoras (2 en 1)</a><a href="categoria-lavanderia.html?tipo=centros-de-lavado">Centros de Lavado</a></div>
+            </div><a class="mega-all" href="categoria-lavanderia.html">Ver todo Lavandería</a></div>
+
+            <div class="mega-pane" data-pane="banos"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-banos.html">Baños</a></h5>
+                <a href="categoria-banos.html">Tarjas</a><a href="categoria-banos.html?tipo=monomandos">Monomandos</a><a href="categoria-banos.html?tipo=regaderas">Regaderas</a><a href="categoria-banos.html?tipo=tinas">Tinas</a><a href="categoria-banos.html?tipo=accesorios-de-banos">Accesorios de Baños</a></div>
+            </div><a class="mega-all" href="categoria-banos.html">Ver todo Baños</a></div>
+
+            <div class="mega-pane" data-pane="aire-acondicionado"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-aire-acondicionado.html">Aire acondicionado</a></h5>
+                <a href="categoria-aire-acondicionado.html?tipo=minisplit-frio">Minisplit Frío</a><a href="categoria-aire-acondicionado.html?tipo=minisplit-frio-y-calor">Minisplit Frío &amp; Calor</a></div>
+            </div><a class="mega-all" href="categoria-aire-acondicionado.html">Ver todo Aire acondicionado</a></div>
+
+            <div class="mega-pane" data-pane="vapor"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-vapor-y-sauna.html">Vapor y Sauna</a></h5>
+                <a href="categoria-vapor-y-sauna.html?tipo=vapor">Vapor</a><a href="categoria-vapor-y-sauna.html?tipo=sauna-interior">Sauna interior</a><a href="categoria-vapor-y-sauna.html?tipo=sauna-exterior">Sauna exterior</a></div>
+            </div><a class="mega-all" href="categoria-vapor-y-sauna.html">Ver todo Vapor y Sauna</a></div>
+
+            <div class="mega-pane" data-pane="wellness"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-wellness.html">Wellness</a></h5>
+                <a href="categoria-wellness.html?tipo=tinas-de-inmersion">Tinas de Inmersión</a><a href="categoria-wellness.html?tipo=carril-de-nado">Carril de Nado</a><a href="categoria-wellness.html?tipo=sillon-para-masajes">Sillón para masajes</a><a href="categoria-wellness.html?tipo=jacuzzi">Jacuzzi</a></div>
+            </div><a class="mega-all" href="categoria-wellness.html">Ver todo Wellness</a></div>
+
+            <div class="mega-pane" data-pane="recubrimientos"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-recubrimientos-y-superficies.html">Recubrimientos y Superficies</a></h5>
+                <a href="categoria-recubrimientos-y-superficies.html?tipo=pisos">Pisos</a><a href="categoria-recubrimientos-y-superficies.html?tipo=muros">Muros</a><a href="categoria-recubrimientos-y-superficies.html?tipo=piedras-sinterizadas">Piedras Sinterizadas</a></div>
+            </div><a class="mega-all" href="categoria-recubrimientos-y-superficies.html">Ver todo Recubrimientos y Superficies</a></div>
+
+            <div class="mega-pane" data-pane="chimeneas"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-chimeneas-y-calentadores.html">Chimeneas &amp; Calentadores</a></h5>
+                <a href="categoria-chimeneas-y-calentadores.html?tipo=chimeneas">Chimeneas</a><a href="categoria-chimeneas-y-calentadores.html?tipo=calentadores">Calentadores</a></div>
+            </div><a class="mega-all" href="categoria-chimeneas-y-calentadores.html">Ver todo Chimeneas &amp; Calentadores</a></div>
+          </div>
+          <a class="mega-feature" data-mega-feature href="categoria-cocina-y-bar.html">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="lazy" decoding="async" alt="" data-mega-img>
+            <span class="mega-feature-cap"><span>Categoría</span><strong data-mega-label>Cocina y Bar</strong></span>
+          </a>
+          <div class="mega-intro" data-mega-intro aria-hidden="true">
+            <svg class="mega-intro-h" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M23,19 H35.5 V84 H23 Z M65,19 H77.5 V84 H65 Z M65,44.8 L42,47.4 L42,53.8 L65,56.4 Z M70.5,50.6 A4.5,4.5 0 1,0 61.5,50.6 A4.5,4.5 0 1,0 70.5,50.6 Z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="has-mega has-mega--brands"><a href="marcas.html">Marcas</a>
+      <div class="mega-panel mega-brands">
+        <div class="mega-brands-head">
+          <span class="eyebrow">Marcas oficiales · A–Z</span>
+          <a class="mega-all" href="marcas.html">Ver todas las marcas</a>
+        </div>
+        <div class="mega-brands-cols" role="list"><a href="marca-acros.html">Acros</a><a href="marca-alfa-forni.html">Alfa Forni</a><a href="marca-alfresco.html">Alfresco</a><a href="marca-artisan.html">Artisan</a><a href="marca-asko.html">Asko</a><a href="marca-axcent.html">Axcent</a><a href="marca-benessi.html">Benessi</a><a href="marca-bertazzoni.html">Bertazzoni</a><a href="marca-blanco.html">Blanco</a><a href="marca-blaze.html">Blaze</a><a href="marca-bosch.html">Bosch</a><a href="marca-brizo.html">Brizo</a><a href="marca-broil-king.html">Broil King</a><a href="marca-cafe.html">Café</a><a href="marca-catalano.html">Catalano</a><a href="marca-clearlight.html">Clearlight</a><a href="marca-commodore.html">Commodore</a><a href="marca-cove.html">Cove</a><a href="marca-coyote.html">Coyote</a><a href="marca-dawn.html">Dawn</a><a href="marca-delta.html">Delta</a><a href="marca-dexa.html">Dexa</a><a href="marca-easy.html">Easy</a><a href="marca-eclipse.html">Eclipse</a><a href="marca-electrolux.html">Electrolux</a><a href="marca-elica.html">Elica</a><a href="marca-faber.html">Faber</a><a href="marca-falmec.html">Falmec</a><a href="marca-firplak.html">Firplak</a><a href="marca-fontana.html">Fontana</a><a href="marca-foster.html">Foster</a><a href="marca-franke.html">Franke</a><a href="marca-frigidaire.html">Frigidaire</a><a href="marca-fulgor-milano.html">Fulgor Milano</a><a href="marca-gaggenau.html">Gaggenau</a><a href="marca-ge-profile.html">GE Profile</a><a href="marca-gessi.html">Gessi</a><a href="marca-haier.html">Haier</a><a href="marca-hergom.html">Hergom</a><a href="marca-hoshizaki.html">Hoshizaki</a><a href="marca-i-drain.html">I-Drain</a><a href="marca-iem.html">IEM</a><a href="marca-insinkerator.html">InSinkErator</a><a href="marca-invisacook.html">InvisaCook</a><a href="marca-io-mabe.html">IO Mabe</a><a href="marca-jacuzzi.html">Jacuzzi</a><a href="marca-josper.html">Josper</a><a href="marca-kaldewei.html">Kaldewei</a><a href="marca-kalt.html">Kalt</a><a href="marca-kamado-joe.html">Kamado Joe</a><a href="marca-kele-master-sinks.html">Kele Master Sinks</a><a href="marca-kitchenaid.html">KitchenAid</a><a href="marca-kraus.html">Kraus</a><a href="marca-lynx.html">Lynx</a><a href="marca-mabe.html">Mabe</a><a href="marca-masterbuilt.html">Masterbuilt</a><a href="marca-maytag.html">Maytag</a><a href="marca-miele.html">Miele</a><a href="marca-monogram.html">Monogram</a><a href="marca-mont-alpi.html">Mont Alpi</a><a href="marca-mr-steam.html">MrSteam</a><a href="marca-nantucket.html">Nantucket</a><a href="marca-nobili.html">Nobili</a><a href="marca-onix.html">Onix</a><a href="marca-peerless.html">Peerless</a><a href="marca-pitt-cooking.html">Pitt Cooking</a><a href="marca-poletti-sinks.html">Poletti Sinks</a><a href="marca-sapphire.html">Sapphire</a><a href="marca-sauna-estilo.html">Sauna Estilo</a><a href="marca-schock.html">Schock</a><a href="marca-scotsman.html">Scotsman</a><a href="marca-sedona-by-lynx.html">Sedona by Lynx</a><a href="marca-smeg.html">Smeg</a><a href="marca-sub-zero.html">Sub-Zero</a><a href="marca-summit.html">Summit</a><a href="marca-supra.html">Supra</a><a href="marca-tecnolam.html">Tecnolam</a><a href="marca-teka.html">Teka</a><a href="marca-the-galley.html">The Galley</a><a href="marca-thermador.html">Thermador</a><a href="marca-thor.html">Thor</a><a href="marca-tradewind.html">Tradewind</a><a href="marca-treesse.html">Treesse</a><a href="marca-valsir.html">Valsir</a><a href="marca-vass.html">Vass</a><a href="marca-viking.html">Viking</a><a href="marca-whirlpool.html">Whirlpool</a><a href="marca-wolf.html">Wolf</a><a href="marca-wppo.html">WPPO</a></div>
+      </div>
+    </div>
+    <a href="b2b.html">Proyectos</a>
+    <a href="ofertas.html">Ofertas</a>
+    <a href="guias.html">Guías</a>
+    <a class="nav-sec" href="herramientas.html">Herramientas</a>
+    <a class="nav-sec" href="garantias-instalacion.html">Garantías</a>
+    <a class="nav-sec" href="nosotros.html">Nosotros</a>
+    <a class="nav-sec" href="contacto.html">Contacto</a>
+  </div>
+  <div class="nav-icons" role="group" aria-label="Buscar, wishlist y mi proyecto">
+    <a class="nav-ic nav-ic-search" href="home.html" aria-label="Buscar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg></a>
+    <a class="nav-ic wl-open" href="wishlist.html" aria-label="Wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.9 13a4.8 4.8 0 0 1 0-6.8 4.7 4.7 0 0 1 6.7 0l.4.4.4-.4a4.7 4.7 0 0 1 6.7 0 4.8 4.8 0 0 1 0 6.8Z"/></svg><span class="wl-count figures" hidden>0</span></a>
+    <a class="nav-ic nav-proyecto cart-open" href="mi-proyecto.html" aria-label="Mi proyecto"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="5" width="15" height="15.5"/><path d="M9 5V3.5h6V5"/><path d="M8.5 10.5h7M8.5 14h7M8.5 17.5h4"/></svg><span class="nav-proyecto-lbl">Mi proyecto</span><span class="cart-count figures" hidden>0</span></a>
+  </div>
+</div></nav>
+
+<!-- Hero: texto + buscador | foto a sangre -->
+<header class="page-hero fq-hero">
+  <div class="fq-hero-in">
+    <div class="fq-hero-txt">
+      <div class="crumbs"><a href="home.html">Inicio</a><span class="sep">·</span><span>Preguntas frecuentes</span></div>
+      <h1>Preguntas <i>frecuentes</i>.</h1>
+      <p class="sub">Todo lo que necesitas saber para comprar con confianza en HOMEA.</p>
+      <form class="fq-search" role="search" data-fq-search>
+        <label><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg>
+          <span class="sr-only">Busca tu pregunta</span><input type="search" name="q" placeholder="Busca tu pregunta…" autocomplete="off"></label>
+        <button type="submit">Buscar</button>
+      </form>
+    </div>
+    <div class="fq-hero-img">
+      <img width="2000" height="1414" srcset="assets/photos/smeg-estufa-profesional-cocina-640.webp 640w, assets/photos/smeg-estufa-profesional-cocina-960.webp 960w, assets/photos/smeg-estufa-profesional-cocina-1280.webp 1280w, assets/photos/smeg-estufa-profesional-cocina-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" src="assets/photos/smeg-estufa-profesional-cocina-1280.webp" alt="Cocina con estufa profesional Smeg de acero inoxidable" fetchpriority="high" decoding="async">
+    </div>
+  </div>
+</header>
+
+<section class="fq-body" id="fq"><div class="container">
+  <!-- Temas: sin JS son anclas a cada bloque; con JS muestran uno a la vez. -->
+  <nav class="fq-tabs" role="tablist" aria-label="Temas de preguntas frecuentes">
+    <a class="fq-tab on" href="#compras" data-fq-tab="compras" role="tab" aria-selected="true" aria-controls="compras"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4h2.6l2.3 10.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1L21 7.5H6"/><circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/></svg><span>Compras y productos</span><svg class="fq-tab-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    <a class="fq-tab" href="#envios" data-fq-tab="envios" role="tab" aria-selected="false" aria-controls="envios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v9.5h-11z"/><path d="M13.5 9.5h4l3 3.3V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span>Envíos y entregas</span><svg class="fq-tab-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    <a class="fq-tab" href="#instalacion" data-fq-tab="instalacion" role="tab" aria-selected="false" aria-controls="instalacion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L3.5 17.2a1.6 1.6 0 0 0 2.3 2.3l5.8-5.8a4 4 0 0 0 5.1-5.4l-2.4 2.4-2.1-.4-.4-2.1z"/></svg><span>Instalación y garantía</span><svg class="fq-tab-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    <a class="fq-tab" href="#cambios" data-fq-tab="cambios" role="tab" aria-selected="false" aria-controls="cambios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5z"/><path d="M3.5 7.5 12 12l8.5-4.5M12 12v9"/><path d="m7.8 5.3 8.4 4.5"/></svg><span>Cambios, devoluciones y cancelaciones</span><svg class="fq-tab-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    <a class="fq-tab" href="#proyectos" data-fq-tab="proyectos" role="tab" aria-selected="false" aria-controls="proyectos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V5.5L12 3v18M12 8.5l8 2.5v10M2.5 21h19"/><path d="M7 8h2M7 11.5h2M7 15h2M15 13.5h2M15 17h2"/></svg><span>Proyectos y atención personalizada</span><svg class="fq-tab-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+  </nav>
+
+  <div class="fq-panels">
+  <section class="fq-panel" id="compras" data-fq-panel role="tabpanel" aria-label="Compras y productos">
+    <div class="fq-panel-head">
+      <div><h2>Compras y productos</h2><p class="fq-panel-sub">Resolvemos las dudas más comunes sobre tus compras en HOMEA.</p></div>
+      <button type="button" class="fq-expand" data-fq-expand aria-expanded="false"><span>Expandir todas</span> <b aria-hidden="true">+</b></button>
+    </div>
+    <div class="fq-list">
+      <details><summary>¿Los productos que vende HOMEA son originales?</summary><p>Sí. HOMEA comercializa electrodomésticos de marcas oficiales y trabaja como distribuidor autorizado de las marcas correspondientes.</p></details>
+      <details><summary>¿Los precios publicados incluyen IVA?</summary><p>Sí. Los precios mostrados en nuestra tienda en línea incluyen IVA, salvo que se indique expresamente lo contrario.</p></details>
+      <details><summary>¿El precio de la página es el mejor precio disponible?</summary><p>Contamos con precios y promociones especiales que pueden variar según la marca, modelo, volumen de compra o características del proyecto. Si realizarás una compra de varios equipos, contáctanos para solicitar una cotización.</p></details>
+      <details><summary>¿Puedo solicitar una cotización antes de comprar?</summary><p>Sí. Nuestro equipo puede preparar una cotización personalizada, especialmente para cocinas completas, remodelaciones, desarrollos inmobiliarios y proyectos con varios electrodomésticos.</p></details>
+      <details><summary>¿Cómo sé si un producto está disponible para entrega inmediata?</summary><p>Algunos productos cuentan con inventario disponible y otros se manejan sobre pedido. Te recomendamos confirmar disponibilidad antes de realizar tu compra si necesitas recibir el equipo en una fecha específica.</p></details>
+    </div>
+  </section>
+  <section class="fq-panel" id="envios" data-fq-panel role="tabpanel" aria-label="Envíos y entregas">
+    <div class="fq-panel-head">
+      <div><h2>Envíos y entregas</h2><p class="fq-panel-sub">Tiempos, costos y todo sobre la entrega de tus equipos.</p></div>
+      <button type="button" class="fq-expand" data-fq-expand aria-expanded="false"><span>Expandir todas</span> <b aria-hidden="true">+</b></button>
+    </div>
+    <div class="fq-list">
+      <details><summary>¿HOMEA realiza envíos a todo México?</summary><p>Sí. Realizamos entregas a diferentes destinos de México. El costo y tiempo dependen del destino, dimensiones y características de los equipos.</p></details>
+      <details><summary>¿Cuánto tarda en llegar mi pedido?</summary><p>Una vez autorizado el envío, la preparación de los equipos puede tomar de 1 a 3 días hábiles. Posteriormente, la entrega tarda aproximadamente 1 a 5 días hábiles, dependiendo del destino.</p></details>
+      <details><summary>¿Cómo puedo programar mi envío?</summary><p>Deberás completar nuestro <a href="garantias-instalacion.html#post-venta">formulario de envío</a> con los datos de la persona que recibirá la mercancía. Post Venta HOMEA revisará la información y cotizará el envío con la paquetería correspondiente.</p></details>
+      <details><summary>¿Recibiré información para rastrear mi pedido?</summary><p>Sí. Una vez enviado recibirás la carta porte o número de rastreo correspondiente.</p></details>
+      <details><summary>¿Qué debo hacer cuando llegue mi pedido?</summary><p>Antes de aceptar la mercancía, revisa cuidadosamente las cajas y verifica que el modelo corresponda con tu compra. Si observas daños, toma fotografías y video 360° del empaque y comunícate inmediatamente con HOMEA.</p></details>
+      <details><summary>¿Qué pasa si no estoy disponible cuando llegue la mercancía?</summary><p>Es indispensable que alguien esté disponible en el domicilio y atento a las llamadas. Si no hay respuesta, la entrega puede ser reprogramada y podrían generarse cargos adicionales.</p></details>
+    </div>
+  </section>
+  <section class="fq-panel" id="instalacion" data-fq-panel role="tabpanel" aria-label="Instalación y garantía">
+    <div class="fq-panel-head">
+      <div><h2>Instalación y garantía</h2><p class="fq-panel-sub">Instalación, cobertura y servicio técnico de cada marca.</p></div>
+      <button type="button" class="fq-expand" data-fq-expand aria-expanded="false"><span>Expandir todas</span> <b aria-hidden="true">+</b></button>
+    </div>
+    <div class="fq-list">
+      <details><summary>¿HOMEA instala los electrodomésticos?</summary><p>La instalación depende de la marca y del tipo de producto. Algunos equipos requieren instalación o puesta en marcha por un técnico autorizado. Nuestro equipo puede orientarte sobre el procedimiento correspondiente.</p></details>
+      <details><summary>¿Los productos tienen garantía?</summary><p>Las condiciones y vigencia de garantía dependen de cada fabricante y producto. HOMEA puede orientarte para identificar el procedimiento de garantía correspondiente a tu equipo.</p></details>
+      <details><summary>¿Qué hago si mi electrodoméstico presenta una falla?</summary><p>Contacta a HOMEA para orientarte sobre el servicio correspondiente de la marca. No recomendamos intervenir o reparar el equipo por cuenta propia antes de conocer las condiciones de garantía.</p></details>
+    </div>
+  </section>
+  <section class="fq-panel" id="cambios" data-fq-panel role="tabpanel" aria-label="Cambios, devoluciones y cancelaciones">
+    <div class="fq-panel-head">
+      <div><h2>Cambios, devoluciones y cancelaciones</h2><p class="fq-panel-sub">Conoce en qué casos aplican y cómo solicitarlos.</p></div>
+      <button type="button" class="fq-expand" data-fq-expand aria-expanded="false"><span>Expandir todas</span> <b aria-hidden="true">+</b></button>
+    </div>
+    <div class="fq-list">
+      <details><summary>¿Puedo cancelar un producto que todavía no recibo?</summary><p>Depende del estado del pedido, la marca y el modelo. Si la fecha de entrega acordada todavía no ha transcurrido, el documento de HOMEA contempla una penalización de 20% en determinados pedidos pagados, que puede variar según marca y modelo.</p></details>
+      <details><summary>¿Todos los productos pueden devolverse?</summary><p>No. Algunos modelos fuera de cuadro básico, fuera de línea o importados específicamente para el cliente pueden no admitir devolución.</p></details>
+      <details><summary>¿Qué pasa si recibo un producto golpeado o un modelo diferente al que compré?</summary><p>Debes reportarlo al momento de recibir la mercancía. Antes de firmar, revisa el empaque y el modelo. Si existe alguna incidencia, contacta a HOMEA y conserva evidencia fotográfica y video del producto y su empaque.</p></details>
+      <details><summary>¿Cómo recibo mi reembolso si procede una devolución?</summary><p>Dependerá de la forma de pago original. Las transferencias se devuelven a la cuenta correspondiente y los pagos realizados con tarjeta se devuelven a la misma tarjeta utilizada en la compra, de acuerdo con la política de HOMEA.</p></details>
+    </div>
+  </section>
+  <section class="fq-panel" id="proyectos" data-fq-panel role="tabpanel" aria-label="Proyectos y atención personalizada">
+    <div class="fq-panel-head">
+      <div><h2>Proyectos y atención personalizada</h2><p class="fq-panel-sub">Precios especiales, cotizaciones y asesoría para tu proyecto.</p></div>
+      <button type="button" class="fq-expand" data-fq-expand aria-expanded="false"><span>Expandir todas</span> <b aria-hidden="true">+</b></button>
+    </div>
+    <div class="fq-list">
+      <details><summary>Soy arquitecto, desarrollador o fabricante de cocinas. ¿HOMEA maneja precios especiales?</summary><p>Sí. HOMEA atiende proyectos y compras de volumen. Puedes solicitar una cotización indicando los equipos, cantidades y necesidades de tu proyecto.</p></details>
+      <details><summary>¿Puedo comprar todos los electrodomésticos de mi cocina con HOMEA?</summary><p>Sí. Podemos ayudarte a integrar equipos de distintas categorías y marcas en una misma propuesta, de acuerdo con las necesidades de tu proyecto.</p></details>
+      <details><summary>¿Tienen showroom?</summary><p>Sí. HOMEA cuenta con showroom en Querétaro. Recomendamos contactar al equipo antes de tu visita si deseas conocer un modelo o marca específica.</p></details>
+      <details><summary>¿Puedo recibir asesoría antes de elegir mis electrodomésticos?</summary><p>Sí. Podemos orientarte sobre dimensiones, características, compatibilidad entre equipos y alternativas de diferentes marcas antes de realizar tu compra.</p></details>
+    </div>
+  </section>
+    <p class="fq-empty" data-fq-empty hidden>No encontramos preguntas con ese texto. <a href="https://api.whatsapp.com/send/?phone=524461446318&amp;text=%C2%A1Hola%21%20Tengo%20una%20pregunta%20sobre%20mi%20compra%20en%20HOMEA." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_faq_vacio">Pregúntanos por WhatsApp</a>.</p>
+  </div>
+
+  <!-- Cierre -->
+  <div class="fq-cta">
+    <div class="fq-cta-txt">
+      <span class="rule-gold" aria-hidden="true"></span>
+      <div><h2>¿No encontraste lo que buscas?</h2><p>Nuestro equipo está listo para ayudarte.</p></div>
+    </div>
+    <div class="fq-cta-acts">
+      <a class="btn btn-wa" href="https://api.whatsapp.com/send/?phone=524461446318&amp;text=%C2%A1Hola%21%20Tengo%20una%20pregunta%20sobre%20mi%20compra%20en%20HOMEA." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_faq"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>Escribir por WhatsApp</a>
+      <a class="btn btn-light" href="contacto.html">Contactar a HOMEA</a>
+    </div>
+  </div>
+</div></section>
+
+<script>
+/* Preguntas frecuentes: pestañas, "Expandir todas" y buscador (sin acentos ni
+   mayúsculas). #compras, #envios, #instalacion, #cambios y #proyectos abren su
+   tema (enlaces del footer). La navegación sin recarga no dispara hashchange,
+   así que también se escucha el clic en esos enlaces. */
+(function(){
+  var raiz = document.getElementById('fq');
+  if (!raiz) return;
+  document.documentElement.classList.add('js-fq');
+  var cuerpo = document.documentElement;
+  cuerpo.classList.remove('fq-buscando');
+  var tabs = raiz.querySelectorAll('[data-fq-tab]');
+  var panels = raiz.querySelectorAll('[data-fq-panel]');
+  var vacio = raiz.querySelector('[data-fq-empty]');
+  var form = document.querySelector('[data-fq-search]');
+  var input = form && form.querySelector('input');
+  var norm = function(s){ return (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); };
+
+  function activar(id, desplazar){
+    var hay = false;
+    panels.forEach(function(p){ var on = p.id === id; p.classList.toggle('on', on); if (on) hay = true; });
+    if (!hay) return false;
+    tabs.forEach(function(t){ var on = t.getAttribute('data-fq-tab') === id; t.classList.toggle('on', on); t.setAttribute('aria-selected', on ? 'true' : 'false'); });
+    // Al llegar con #tema se baja al título del tema (igual que el salto nativo
+    // del navegador; el id tiene scroll-margin por el nav fijo).
+    if (desplazar) document.getElementById(id).scrollIntoView({block: 'start'});
+    return true;
+  }
+  function desdeHash(){
+    var id = decodeURIComponent(location.hash.slice(1));
+    if (id && activar(id, true)) limpiarBusqueda();
+  }
+  function limpiarBusqueda(){ if (input && input.value) { input.value = ''; buscar(); } }
+
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(ev){
+      ev.preventDefault();
+      limpiarBusqueda();
+      var id = t.getAttribute('data-fq-tab');
+      activar(id, false);
+      try { history.replaceState(history.state, '', '#' + id); } catch (e) {}
+    });
+  });
+
+  raiz.querySelectorAll('[data-fq-expand]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var abrir = b.getAttribute('aria-expanded') !== 'true';
+      b.closest('[data-fq-panel]').querySelectorAll('details').forEach(function(d){ d.open = abrir; });
+      b.setAttribute('aria-expanded', abrir ? 'true' : 'false');
+      b.querySelector('span').textContent = abrir ? 'Contraer todas' : 'Expandir todas';
+      b.querySelector('b').textContent = abrir ? '−' : '+';
+    });
+  });
+
+  function buscar(){
+    var q = norm(input ? input.value.trim() : '');
+    cuerpo.classList.toggle('fq-buscando', !!q);
+    if (q) raiz.querySelectorAll('[data-fq-expand]').forEach(function(b){ b.setAttribute('aria-expanded', 'false'); b.querySelector('span').textContent = 'Expandir todas'; b.querySelector('b').textContent = '+'; });
+    var total = 0;
+    panels.forEach(function(p){
+      var n = 0;
+      p.querySelectorAll('details').forEach(function(d){
+        var ok = !q || norm(d.textContent).indexOf(q) !== -1;
+        d.hidden = !ok;
+        if (q) d.open = ok && q.length > 2;
+        if (ok) n++;
+      });
+      p.classList.toggle('sin-res', !!q && !n);
+      total += n;
+    });
+    if (vacio) vacio.hidden = !q || total > 0;
+  }
+  if (form) {
+    form.addEventListener('submit', function(ev){ ev.preventDefault(); buscar(); raiz.scrollIntoView({block: 'start'}); });
+    input.addEventListener('input', buscar);
+  }
+
+  if (!activar(decodeURIComponent(location.hash.slice(1)), false)) activar('compras', false);
+  if (location.hash) setTimeout(desdeHash, 120);
+  if (!window.__homeaFaq) {
+    window.__homeaFaq = true;
+    window.addEventListener('hashchange', function(){ window.__homeaFaqHash && window.__homeaFaqHash(); });
+    window.addEventListener('popstate', function(){ window.__homeaFaqHash && window.__homeaFaqHash(); });
+    document.addEventListener('click', function(ev){
+      var a = ev.target.closest && ev.target.closest('a[href*="preguntas-frecuentes#"]');
+      if (a) setTimeout(function(){ window.__homeaFaqHash && window.__homeaFaqHash(); }, 250);
+    });
+  }
+  window.__homeaFaqHash = function(){ if (document.getElementById('fq')) desdeHash(); };
+})();
+</script>
+
+<footer class="site-footer"><div class="f-news" id="newsletter">
+  <div class="container f-news-in">
+    <svg class="f-news-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="1"/><path d="m3 6 9 7 9-7"/></svg>
+    <div class="f-news-txt">
+      <h2 class="f-news-t">Conéctate, <i>inspírate</i>.</h2>
+      <p>Únete a nuestra lista y recibe inspiración, lanzamientos y promociones exclusivas.</p>
+    </div>
+    <form class="f-news-form" data-newsletter="footer" novalidate>
+      <label class="sr-only" for="nl-footer">Tu correo electrónico</label>
+      <input id="nl-footer" type="email" name="correo" placeholder="Tu correo electrónico" autocomplete="email" required>
+      <button type="submit">Suscribirme</button>
+      <p class="f-news-msg" role="status" aria-live="polite"></p>
+      <p class="f-news-legal">Al suscribirte aceptas el <a href="/aviso-de-privacidad">Aviso de privacidad</a>. Te das de baja cuando quieras.</p>
+    </form>
+  </div>
+</div><div class="container">
+  <div class="cols f-cols">
+    <div class="brandcol">
+      <img width="1400" height="1400" srcset="assets/homea-premium-19-400.webp 400w, assets/homea-premium-19-640.webp 640w, assets/homea-premium-19-960.webp 960w, assets/homea-premium-19-1280.webp 1280w, assets/homea-premium-19.webp 1400w" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 34vw" loading="lazy" decoding="async" class="mark" src="assets/homea-premium-19.webp" alt="HOMEA">
+      <span class="rule-gold"></span>
+      <p>Distribuidor autorizado de electrodomésticos para todo tipo de proyectos. Asesoría experta y servicio <span class="nw">post-venta</span> de calidad.</p>
+      <ul class="f-contact">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>
+          <a href="https://maps.app.goo.gl/LS9rqfHgK3qjFV926" target="_blank" rel="noopener">Del Ahuehuete 7, Álamos 1a Sección, 76160 Santiago de Querétaro, Qro.</a></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.3-2.1 1.3a11 11 0 0 0 5.2 5.2l1.3-2.1 4.3 1.6V17a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 5.7 2 2 0 0 1 5 3.5z"/></svg>
+          <a href="tel:+524422163552">Oficina (442) 216 3552</a></li>
+        <li><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+          <a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_footer">WhatsApp (446) 144 6318</a></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3.5 6 8.5 7 8.5-7"/></svg>
+          <a href="mailto:carteaga@homea.mx">carteaga@homea.mx</a></li>
+      </ul>
+    </div>
+    <!-- Enlaces: mismo espacio entre columnas (space-between), no columnas iguales. -->
+    <div class="f-links">
+      <div class="lnk"><div class="f-eyebrow">Comprar</div>
+        <a href="categoria-cocina-y-bar.html">Productos</a>
+        <a href="marcas.html">Marcas</a>
+        <a href="marcas.html">Listas de precio</a>
+        <a href="ofertas.html">Ofertas</a>
+        <a href="guias.html">Guías</a>
+        <a href="herramientas.html">Herramientas</a></div>
+      <div class="lnk"><div class="f-eyebrow">HOMEA</div>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="b2b.html">Proyectos</a>
+        <a href="#newsletter">Blog &amp; Newsletter</a>
+        <a href="contacto.html">Contacto</a></div>
+      <div class="lnk"><div class="f-eyebrow">Atención al cliente</div>
+        <a href="preguntas-frecuentes.html#envios">Envíos y entregas</a>
+        <a href="garantias-instalacion.html">Garantías e instalación</a>
+        <a href="garantias-instalacion.html#fichas-tecnicas">Fichas técnicas</a>
+        <a class="f-wrap" href="preguntas-frecuentes.html#cambios">Cambios, devoluciones y cancelaciones</a>
+        <a href="preguntas-frecuentes.html">Preguntas frecuentes</a></div>
+      <div class="lnk"><div class="f-eyebrow">Legal</div>
+        <a href="/terminos">Términos y condiciones</a>
+        <a href="/aviso-de-privacidad">Aviso de privacidad</a>
+        <a href="/politica-de-devoluciones">Política de devoluciones</a>
+        <!-- Aún no hay política de cookies en Shopify: el aviso de privacidad
+             explica el uso de cookies mientras tanto. -->
+        <a href="/aviso-de-privacidad">Política de cookies</a></div>
+    </div>
+    <!-- Beneficios (Carla, 2026-10-13): bajo las columnas, en versión compacta;
+         cada uno lleva a la página que lo explica. -->
+    <ul class="f-perks" aria-label="Beneficios de comprar en HOMEA">
+      <li><a href="garantias-instalacion.html#formas-de-pago">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+        <span><b>Compra segura</b>Tus datos siempre protegidos</span></a></li>
+      <li><a href="garantias-instalacion.html#envios">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v9.5h-11z"/><path d="M13.5 9.5h4l3 3.3V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+        <span><b>Envíos a todo México</b>Cobertura nacional</span></a></li>
+      <li><a href="marcas.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="m9.8 9 1.6 1.6 3-3.2"/><path d="m8.6 13.4-1.6 7.1 5-2.5 5 2.5-1.6-7.1"/></svg>
+        <span><b>Distribuidor autorizado</b>Marcas oficiales</span></a></li>
+      <li><a href="ofertas.html#stock">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5z"/><path d="M3.5 7.5 12 12l8.5-4.5M12 12v9"/><path d="m7.8 5.3 8.4 4.5"/></svg>
+        <span><b>Inventario para entrega inmediata</b>Tu proyecto no se detiene</span></a></li>
+    </ul>
+  </div>
+  <div class="foot-bottom">
+    <span class="f-legal">© 2026 HOMEA · Todos los derechos reservados</span>
+    <div class="f-end">
+      <div class="f-pay">
+        <div class="f-eyebrow">Formas de pago</div>
+        <!-- Métodos conectados en Shopify (Storefront paymentSettings, 2026-10-13) +
+             PayPal (Carla lo activará; ya se anuncia). Shop Pay sigue activo en el
+             checkout pero no se anuncia aquí: en México casi no se reconoce:
+             íconos oficiales de Shopify (activemerchant/payment_icons). SPEI no pasa
+             por Shopify: es la transferencia que se acuerda con el vendedor. -->
+        <ul aria-label="Formas de pago aceptadas">
+          <li class="pay-ic"><img src="assets/pagos/pago-visa.svg" width="38" height="24" alt="Visa" loading="lazy" decoding="async"></li>
+          <li class="pay-ic"><img src="assets/pagos/pago-mastercard.svg" width="38" height="24" alt="Mastercard" loading="lazy" decoding="async"></li>
+          <li class="pay-ic"><img src="assets/pagos/pago-american-express.svg" width="38" height="24" alt="American Express" loading="lazy" decoding="async"></li>
+          <li class="pay-ic"><img src="assets/pagos/pago-apple-pay.svg" width="38" height="24" alt="Apple Pay" loading="lazy" decoding="async"></li>
+          <li class="pay-ic"><img src="assets/pagos/pago-google-pay.svg" width="38" height="24" alt="Google Pay" loading="lazy" decoding="async"></li>
+          <li class="pay-ic"><img src="assets/pagos/pago-paypal.svg" width="38" height="24" alt="PayPal" loading="lazy" decoding="async"></li>
+          <li class="pay-txt">Transferencia SPEI</li>
+        </ul>
+      </div>
+      <div class="f-social" aria-label="Síguenos en redes sociales">
+        <a href="https://www.instagram.com/homea_mx/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.facebook.com/homea.mx/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 9V7.2c0-.8.2-1.2 1.3-1.2H17V3h-2.6C11.5 3 11 4.7 11 6.9V9H9v3h2v9h3v-9h2.3l.4-3H14z"/></svg></a>
+        <a href="https://www.tiktok.com/@homea_mx" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3c.3 2 1.6 3.5 3.5 3.8v2.5c-1.3 0-2.5-.4-3.5-1.1v5.7a5.4 5.4 0 1 1-5.4-5.4c.3 0 .6 0 .9.1v2.7a2.7 2.7 0 1 0 1.9 2.6V3h2.6z"/></svg></a>
+        <a href="https://www.youtube.com/channel/UC5SHtEFZdDk5UuGfkfIWl1w" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 8.2a2.6 2.6 0 0 0-1.8-1.8C18.6 6 12 6 12 6s-6.6 0-8.2.4A2.6 2.6 0 0 0 2 8.2 27 27 0 0 0 1.7 12 27 27 0 0 0 2 15.8a2.6 2.6 0 0 0 1.8 1.8C5.4 18 12 18 12 18s6.6 0 8.2-.4a2.6 2.6 0 0 0 1.8-1.8c.3-1.2.3-3.8.3-3.8s0-2.6-.3-3.8zM10 15V9l5 3-5 3z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Volver arriba: flota sobre el botón de WhatsApp; v2.js la muestra al bajar. -->
+  <button type="button" class="back-to-top" title="Volver arriba" aria-label="Volver al inicio de la página" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 37V5"/><path d="M5 12l7-7 7 7"/></svg>
+  </button>
+</footer>
+
+<a class="wa-float" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-track="whatsapp_click" data-label="wa_float"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg></a>
+<script src="v2.js?v=35"></script>
+<script src="wishlist.js?v=8"></script>
+<script src="cart.js?v=3"></script>
+</body>
+</html>

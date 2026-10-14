@@ -1,4 +1,4 @@
-// PaginaPolitica — página legal (aviso de privacidad, términos) con el texto que
+// PaginaPolitica — página legal (aviso de privacidad, términos, devoluciones) con el texto que
 // vive en Shopify (lib/shopify/politicas.ts) y el diseño del sitio.
 
 import Link from "next/link";
@@ -54,8 +54,8 @@ export default async function PaginaPolitica({ tipo, titulo }: Props) {
             // Shopify no respondió: nunca una página vacía en un texto obligatorio.
             <div className="politica">
               <p>
-                No pudimos cargar el documento en este momento. Para cualquier duda sobre el tratamiento
-                de tus datos personales escríbenos a{" "}
+                No pudimos cargar el documento en este momento. Para cualquier duda sobre este documento
+                escríbenos a{" "}
                 <a href="mailto:administracion@homea.mx">administracion@homea.mx</a> o llama al (442) 216
                 3552.
               </p>

@@ -58,6 +58,43 @@
       on(window, "scroll", onScroll, { passive: true });
     }
 
+    /* ---------- Flecha "volver arriba": flota sobre el WhatsApp ----------
+       Vive al final del footer (preview/home.html); aparece tras bajar una
+       pantalla y se oculta arriba, donde no hace falta. Cambia de tono según
+       el fondo que tenga detrás (.sobre-oscuro, theme.css). */
+    var arriba = document.querySelector(".back-to-top");
+    if (arriba) {
+      /* ¿Qué hay detrás de la flecha? El primer elemento bajo su centro con
+         fondo propio decide: foto o color con luminancia baja = oscuro. */
+      var fondoOscuro = function () {
+        var r = arriba.getBoundingClientRect();
+        var els = document.elementsFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+        for (var i = 0; i < els.length; i++) {
+          var el = els[i];
+          if (el === arriba || arriba.contains(el) || (el.closest && el.closest(".wa-float"))) continue;
+          if (/^(IMG|VIDEO|PICTURE|CANVAS)$/.test(el.tagName)) return true;
+          var cs = getComputedStyle(el);
+          var m = cs.backgroundColor.match(/[\d.]+/g);
+          if (m && (m.length < 4 || +m[3] > 0.5)) return 0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2] < 128;
+          if (cs.backgroundImage && cs.backgroundImage !== "none" && !/gradient/.test(cs.backgroundImage)) return true;
+        }
+        return false;
+      };
+      var pendiente = false;
+      var onScrollArriba = function () {
+        arriba.classList.toggle("is-visible", window.scrollY > window.innerHeight * 0.8);
+        if (pendiente) return;
+        pendiente = true;
+        requestAnimationFrame(function () {
+          pendiente = false;
+          arriba.classList.toggle("sobre-oscuro", fondoOscuro());
+        });
+      };
+      onScrollArriba();
+      on(window, "scroll", onScrollArriba, { passive: true });
+      on(window, "resize", onScrollArriba, { passive: true });
+    }
+
     /* ---------- Barra superior: desplegable "Contáctanos" ----------
        En escritorio abre con el cursor (CSS :hover). Aquí el clic/tap lo fija
        abierto (.is-open) para pantallas táctiles; se cierra fuera o con Esc. */

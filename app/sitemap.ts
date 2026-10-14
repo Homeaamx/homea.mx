@@ -20,6 +20,7 @@ const MARKETING_PATHS = [
   "/herramientas",
   "/ofertas",
   "/garantias-instalacion",
+  "/preguntas-frecuentes",
 ];
 
 // Sitemap propio (regla de oro SEO). Incluye marketing + categorías + todas las Guías

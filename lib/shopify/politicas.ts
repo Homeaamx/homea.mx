@@ -1,15 +1,16 @@
-// politicas.ts — Aviso de privacidad y Términos: el texto legal vive en Shopify.
+// politicas.ts — Aviso de privacidad, Términos y Devoluciones: el texto legal vive en Shopify.
 //
 // Una sola fuente: Carla los redacta en el admin (Configuración → Políticas) y el
 // checkout de Shopify ya los enseña desde ahí. El sitio los lee por Storefront API
 // y los pinta con el diseño de HOMEA, así que un cambio en el admin llega solo a
-// /aviso-de-privacidad y /terminos (revalidación diaria) sin tocar código.
+// /aviso-de-privacidad, /terminos y /politica-de-devoluciones (revalidación
+// diaria) sin tocar código.
 
 import "server-only";
 
 import { shopifyFetchOpcional } from "./cliente";
 
-export type TipoPolitica = "privacyPolicy" | "termsOfService";
+export type TipoPolitica = "privacyPolicy" | "termsOfService" | "refundPolicy";
 
 export type Politica = {
   titulo: string;
@@ -24,6 +25,7 @@ const CONSULTA = /* GraphQL */ `
     shop {
       privacyPolicy { title body }
       termsOfService { title body }
+      refundPolicy { title body }
     }
   }
 `;
