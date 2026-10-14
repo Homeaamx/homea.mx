@@ -9,6 +9,7 @@ import { inyectarTipoCambio, obtenerTipoCambio } from "@/lib/tipoCambio";
 import BuscadorOverlay from "@/components/BuscadorOverlay";
 import CarritoProvider from "@/components/CarritoProvider";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import AvisoCookies from "@/components/AvisoCookies";
 import { rutaMarca, todasLasMarcas } from "@/lib/marcas";
 import { mensajeAsesoria } from "@/lib/whatsapp";
 import NavActive from "@/components/NavActive";
@@ -69,6 +70,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* Buscador de catálogo: se engancha a la lupa del nav (a.nav-ic-search). */}
         <BuscadorOverlay />
         <WhatsAppFloat porRuta={MENSAJES_WA} />
+        {/* Aviso de cookies propio (México no tiene banner de Shopify). El token es
+            el PÚBLICO de Storefront: Shopify lo pide en el navegador para
+            registrar el consentimiento. */}
+        <AvisoCookies
+          tienda={process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN ?? ""}
+          token={process.env.SHOPIFY_STOREFRONT_API_TOKEN ?? ""}
+        />
         <NavActive />
         <HomeNavSticky />
         <PreviewRouter />

@@ -8,9 +8,13 @@
 
 import "server-only";
 
+import { unstable_cache } from "next/cache";
+
+import { adminFetch } from "./admin";
 import { shopifyFetchOpcional } from "./cliente";
 
-export type TipoPolitica = "privacyPolicy" | "termsOfService" | "refundPolicy";
+/** Las de la Storefront API + el Aviso legal, que solo existe en la Admin API. */
+export type TipoPolitica = "privacyPolicy" | "termsOfService" | "refundPolicy" | "legalNotice";
 
 export type Politica = {
   titulo: string;
@@ -21,7 +25,7 @@ export type Politica = {
 };
 
 const CONSULTA = /* GraphQL */ `
-  query politica {
+  query politica @inContext(country: MX, language: ES) {
     shop {
       privacyPolicy { title body }
       termsOfService { title body }
@@ -31,8 +35,43 @@ const CONSULTA = /* GraphQL */ `
 `;
 
 type Respuesta = {
-  shop: Record<TipoPolitica, { title: string; body: string } | null>;
+  shop: Record<Exclude<TipoPolitica, "legalNotice">, { title: string; body: string } | null>;
 };
+
+// El Aviso legal (LEGAL_NOTICE) no se expone en la Storefront API: se lee con la
+// app de Admin (permiso read/write_legal_policies) y se guarda un día, como las demás.
+const CONSULTA_ADMIN = /* GraphQL */ `
+  query avisoLegal {
+    shop {
+      shopPolicies { type title body }
+    }
+  }
+`;
+
+type RespuestaAdmin = {
+  shop: { shopPolicies: { type: string; title: string; body: string }[] };
+};
+
+// Si Shopify no responde (o falta el permiso) se lanza para que el caché NO
+// guarde el vacío un día entero: el siguiente visitante vuelve a intentarlo.
+const avisoLegalCacheado = unstable_cache(
+  async () => {
+    const datos = await adminFetch<RespuestaAdmin>(CONSULTA_ADMIN, {});
+    const aviso = datos?.shop.shopPolicies.find((p) => p.type === "LEGAL_NOTICE");
+    if (!aviso?.body) throw new Error("aviso-legal-no-disponible");
+    return aviso;
+  },
+  ["politica-aviso-legal"],
+  { revalidate: 86400, tags: ["politicas"] },
+);
+
+async function avisoLegal() {
+  try {
+    return await avisoLegalCacheado();
+  } catch {
+    return null;
+  }
+}
 
 /**
  * El editor de Shopify pega clases y <span> de Word/Pages (`class="s1"`, `p2`…).
@@ -61,16 +100,40 @@ function limpiar(body: string): { html: string; titulo: string | null; actualiza
     return "";
   });
 
+  // Cada sección con id para enlazarla directo. La de cookies lleva siempre
+  // #cookies (el footer enlaza /aviso-de-privacidad#cookies), aunque Carla
+  // cambie el título en Shopify.
+  const usados = new Set<string>();
+  html = html.replace(/<h2>([\s\S]*?)<\/h2>/gi, (_m, interior: string) => {
+    const plano = interior.replace(/<[^>]+>/g, "").trim();
+    let id = /cookie/i.test(plano)
+      ? "cookies"
+      : plano
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "")
+          .slice(0, 60);
+    if (!id || usados.has(id)) id = `${id || "seccion"}-${usados.size + 1}`;
+    usados.add(id);
+    return `<h2 id="${id}">${interior}</h2>`;
+  });
+
   return { html: html.trim(), titulo, actualizacion };
 }
 
 /** `null` si Shopify no responde o la política no existe: la página tiene plan B. */
 export async function obtenerPolitica(tipo: TipoPolitica): Promise<Politica | null> {
-  const datos = await shopifyFetchOpcional<Respuesta>(CONSULTA, {
-    revalidate: 86400,
-    tags: ["politicas"],
-  });
-  const politica = datos?.shop[tipo];
+  const politica =
+    tipo === "legalNotice"
+      ? await avisoLegal()
+      : (
+          await shopifyFetchOpcional<Respuesta>(CONSULTA, {
+            revalidate: 86400,
+            tags: ["politicas"],
+          })
+        )?.shop[tipo];
   if (!politica?.body) return null;
 
   const { html, titulo, actualizacion } = limpiar(politica.body);

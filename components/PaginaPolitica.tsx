@@ -60,8 +60,8 @@ export default async function PaginaPolitica({ tipo, titulo }: Props) {
                 3552.
               </p>
               <p>
-                New Products Connection, S.A. de C.V. · Calle Ahuehuetes No. 7, Col. Álamos 1a Sección,
-                C.P. 76160, Querétaro, Qro.
+                New Products Connection, S.A. de C.V. · Calle del Ahuehuete 7, Col. Álamos 1a Sección,
+                C.P. 76160, Santiago de Querétaro, Qro.
               </p>
             </div>
           )}
