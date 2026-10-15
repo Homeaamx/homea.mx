@@ -37,6 +37,8 @@ const LINK_MAP: Record<string, string> = {
   "herramientas.html": "/herramientas",
   "garantias-instalacion.html": "/garantias-instalacion",
   "preguntas-frecuentes.html": "/preguntas-frecuentes",
+  "envios-y-entregas.html": "/envios-y-entregas",
+  "cambios-devoluciones-y-cancelaciones.html": "/cambios-devoluciones-y-cancelaciones",
   "guias.html": "/guias",
   "ofertas.html": "/ofertas",
   "wishlist.html": "/wishlist",

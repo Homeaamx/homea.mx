@@ -23,6 +23,8 @@ interface Props {
   }[];
   /** Encabezado del rail (default "Categorías"). */
   railHead?: string;
+  /** Guías publicadas por slug de Subcategoría 1 (vienen de Shopify). */
+  conteos?: Record<string, number>;
 }
 
 export default function CategoryList({
@@ -31,6 +33,7 @@ export default function CategoryList({
   currentSlug,
   leaves = [],
   railHead = "Categorías",
+  conteos = {},
 }: Props) {
   if (variant === "leaves") {
     return (
@@ -74,7 +77,7 @@ export default function CategoryList({
             aria-current={c.slug === currentSlug ? "page" : undefined}
           >
             {c.nombre}
-            <span className="cat-rail-n">{c.guias?.length ?? 0}</span>
+            <span className="cat-rail-n">{conteos[c.slug] ?? 0}</span>
           </Link>
         ))}
       </nav>
@@ -85,11 +88,12 @@ export default function CategoryList({
     <div className="category-cards">
       {categorias.map((c) => {
         const leafNames = (c.subcategorias2 ?? []).map((s) => s.nombre).slice(0, 5).join(" · ");
+        const n = conteos[c.slug] ?? 0;
         return (
           <Link key={c.slug} href={c.rutaGuias ?? "#"} className="category-card">
             <div className="category-card-top">
               <h3>{c.nombre}</h3>
-              <span className="category-card-n">{c.guias?.length ?? 0} guías</span>
+              <span className="category-card-n">{n} {n === 1 ? "guía" : "guías"}</span>
             </div>
             {leafNames && <p className="category-card-leaves">{leafNames}</p>}
             <span className="category-card-more">

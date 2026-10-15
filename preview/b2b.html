@@ -209,6 +209,16 @@
   #clientes .cl-tile { height: 72px; padding: 10px 18px; }
   #clientes .cl-tile img { max-height: 44px; max-width: 140px; }
 }
+/* Tira "Sectores que atendemos" (Carla, 2026-10-14): banda oro estática,
+   Montserrat itálica en mayúsculas, texto bone (≥4.5:1 sobre gold-deep). */
+.sectores-strip{background:linear-gradient(90deg,var(--homea-gold-deep),color-mix(in srgb,var(--homea-gold-deep) 82%,var(--homea-gold)) 50%,var(--homea-gold-deep));color:var(--homea-bone)}
+.sectores-strip p{margin:0;padding:16px 0;color:var(--homea-bone);text-align:center;font-family:var(--font-sans);font-style:italic;font-size:15px;font-weight:400;letter-spacing:.03em;line-height:1.6;text-transform:uppercase}
+.sectores-strip b{font-weight:700;letter-spacing:.05em;color:inherit}
+.sectores-strip .it{white-space:nowrap}
+/* A 15 px la frase no cabe en el contenedor de 1240: la tira usa todo el ancho. */
+.sectores-strip .container{max-width:none}
+.sectores-strip .sep{padding:0 .3em;opacity:.85}
+@media (max-width:640px){.sectores-strip p{font-size:12.5px;padding:14px 0}.sectores-strip b{display:block}}
 </style>
 </head>
 <body>
@@ -808,6 +818,12 @@
   }
 })();
 </script>
+
+<!-- Sectores que atendemos: tira estática en oro entre proyectos y clientes
+     (Carla, 2026-10-14). -->
+<div class="sectores-strip"><div class="container">
+  <p><b>Sectores que atendemos:</b> <span class="it">Arquitectura&nbsp;<span class="sep" aria-hidden="true">·</span></span> <span class="it">Interiorismo&nbsp;<span class="sep" aria-hidden="true">·</span></span> <span class="it">Construcción&nbsp;<span class="sep" aria-hidden="true">·</span></span> <span class="it">Cocinas integrales&nbsp;<span class="sep" aria-hidden="true">·</span></span> <span class="it">Desarrollo inmobiliario&nbsp;<span class="sep" aria-hidden="true">·</span></span> <span class="it">Hotelería</span></p>
+</div></div>
 
 <!-- Clientes — muro de logos (de homea.mx, sin enlaces) -->
 <section class="sec on-espresso" id="clientes"><div class="container">

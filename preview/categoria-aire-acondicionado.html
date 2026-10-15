@@ -391,6 +391,7 @@ siempre queda en cuadro y el recorte (si lo hay) se va a la parte baja del sofá
   <div class="plp">
     <!-- Filtros (Shopify Search & Discovery: vendor / type / metafields / opciones de variante) -->
     <aside class="filters">
+      <!-- slot:catalogo-filtros -->
       <div class="fgroup"><h6>Subcategoría</h6>
 
         <label data-tipo="minisplit-frio"><input type="checkbox"> Minisplit Frío</label>
@@ -447,15 +448,17 @@ siempre queda en cuadro y el recorte (si lo hay) se va a la parte baja del sofá
         </div>
         <p class="fnote">Filtra por el equivalente aproximado en pesos (metafield <em>filtros.precio_ref_mxn</em>). Cada pieza muestra su precio en su moneda de lista, sin IVA.</p>
       </div>
+    <!-- /slot:catalogo-filtros -->
     </aside>
 
     <!-- Grid: los 5 Gaggenau reales ya enriquecidos en homeashop.mx -->
     <div>
       <div class="toolbar">
-        <span class="results figures" id="plpResults">Catálogo en preparación · las piezas de Aire acondicionado aparecerán aquí</span>
+        <span class="results figures" id="plpResults"><!-- slot:catalogo-conteo -->Catálogo en preparación · las piezas de Aire acondicionado aparecerán aquí<!-- /slot:catalogo-conteo --></span>
         <select aria-label="Ordenar"><option value="precio-desc">Precio: mayor a menor ↓</option><option value="precio-asc">Precio: menor a mayor ↓</option><option value="stock-primero">Inventario: de stock a bajo pedido</option><option value="pedido-primero">Inventario: de bajo pedido a stock</option></select>
       </div>
       <div class="plp-grid">
+<!-- slot:catalogo-grid -->
         <div class="pcard pcard--ph" aria-hidden="true">
           <div class="imgw"><span class="ph"><span class="ph-inner">Producto</span></span></div>
           <div class="body">
@@ -506,6 +509,7 @@ siempre queda en cuadro y el recorte (si lo hay) se va a la parte baja del sofá
             <div class="row"><span class="skl" style="width:38%"></span></div>
           </div>
         </div>
+      <!-- /slot:catalogo-grid -->
       </div>
     </div>
   </div>
@@ -589,6 +593,7 @@ siempre queda en cuadro y el recorte (si lo hay) se va a la parte baja del sofá
 // Slider de precio (doble handle)
 (function(){
   var lo = document.getElementById('psLo'), hi = document.getElementById('psHi');
+  if (!lo || !hi) return;
   var fill = document.getElementById('psFill'), vMin = document.getElementById('psMin'), vMax = document.getElementById('psMax');
   var MAX = parseInt(hi.max, 10);
   function fmt(n){ return '$' + n.toLocaleString('en-US'); }

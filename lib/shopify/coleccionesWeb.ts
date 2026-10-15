@@ -30,6 +30,14 @@ export interface TipoWeb {
    * en la web salen como esta opción de "Tipo de producto".
    */
   accesorios?: { slug: string; nombre: string };
+  /**
+   * Macros con UNA sola colección cuyo riel sale de un filtro de la tabla
+   * (Electrodomésticos menores y Lavandería → "Tipo" = `filtros.tipo`; Aire
+   * acondicionado → "Tipo de funcionamiento"). Cada tile del riel es un valor de
+   * ese grupo; `valores` traduce el slug del tile al valor de la tabla cuando no
+   * coinciden (minisplit-frio → "Solo frío").
+   */
+  ejeRiel?: { nombre: string; clave: string; valores?: Record<string, string> };
 }
 
 const COCINA = { nombre: "Cocina y Bar", ruta: "/productos/cocina-y-bar" };
@@ -41,6 +49,9 @@ const TRITURADORES = { nombre: "Trituradores", ruta: "/productos/cocina-y-bar/tr
 const AGUA = { nombre: "Purificadores y Despachadores de Agua", ruta: "/productos/cocina-y-bar/filtros-y-purificadores-de-agua" };
 const EXTERIOR = { nombre: "Exterior", ruta: "/productos/exterior" };
 const ASADORES = { nombre: "Asadores & Hornos", ruta: "/productos/exterior/asadores-y-hornos" };
+const MENORES = { nombre: "Electrodomésticos Menores", ruta: "/productos/electrodomesticos-menores" };
+const LAVANDERIA = { nombre: "Lavandería", ruta: "/productos/lavanderia" };
+const AIRE = { nombre: "Aire acondicionado", ruta: "/productos/aire-acondicionado" };
 
 export const TIPOS_WEB: TipoWeb[] = [
   { tipo: "Refrigeradores", coleccion: "refrigeradores", slugRiel: "refrigeradores", ruta: `${REFRI.ruta}/refrigeradores`, macro: COCINA, sub1: REFRI },
@@ -91,7 +102,37 @@ export const TIPOS_WEB: TipoWeb[] = [
   { tipo: "Ahumadores", coleccion: "ahumadores", slugRiel: "ahumadores", ruta: `${EXTERIOR.ruta}?tipo=ahumadores`, macro: EXTERIOR, sub1: EXTERIOR },
   { tipo: "Hieleras", coleccion: "hieleras", slugRiel: "hieleras", ruta: `${EXTERIOR.ruta}?tipo=hieleras`, macro: EXTERIOR, sub1: EXTERIOR },
   { tipo: "Gabinetes", coleccion: "gabinetes", slugRiel: "gabinetes", ruta: `${EXTERIOR.ruta}?tipo=gabinetes`, macro: EXTERIOR, sub1: EXTERIOR },
+  // Una colección por macro (tabla de filtros: Subcategoría 2 = la macro) y el
+  // riel por valor de filtro. Colecciones creadas y publicadas al canal Headless
+  // el 2026-10-14 (aún sin piezas).
+  {
+    tipo: "Electrodomésticos menores", coleccion: "electrodomesticos-menores", slugRiel: "electrodomesticos-menores", ruta: MENORES.ruta, macro: MENORES, sub1: MENORES,
+    ejeRiel: { nombre: "Tipo", clave: "tipo" },
+  },
+  {
+    tipo: "Lavandería", coleccion: "lavanderia", slugRiel: "lavanderia", ruta: LAVANDERIA.ruta, macro: LAVANDERIA, sub1: LAVANDERIA,
+    ejeRiel: { nombre: "Tipo", clave: "tipo" },
+  },
+  {
+    tipo: "Aire acondicionado", coleccion: "aire-acondicionado", slugRiel: "aire-acondicionado", ruta: AIRE.ruta, macro: AIRE, sub1: AIRE,
+    ejeRiel: {
+      nombre: "Tipo de funcionamiento",
+      clave: "funcionamiento",
+      valores: { "minisplit-frio": "Solo frío", "minisplit-frio-y-calor": "Frío y calor" },
+    },
+  },
 ];
+
+/** Tile del riel de una pieza en las macros con `ejeRiel` (por el valor de su filtro). */
+function tileDeEje(tw: TipoWeb, p: Pieza): { slug: string; valor: string } | null {
+  if (!tw.ejeRiel) return null;
+  const valor = (p.filtros[tw.ejeRiel.clave] ?? [])[0];
+  if (!valor) return null;
+  const k = slugDeTipo(valor);
+  const slug =
+    Object.entries(tw.ejeRiel.valores ?? {}).find(([, v]) => slugDeTipo(v) === k)?.[0] ?? k;
+  return { slug, valor };
+}
 
 /**
  * Piezas de OTRA colección que también se listan en una macro, acotadas por un
@@ -124,6 +165,8 @@ export function tipoDePieza(p: Pieza): { slug: string | null; nombre: string | n
   const tw = tipoWeb(p.tipo);
   if (!tw) return { slug: null, nombre: null };
   if (tw.accesorios && esAccesorio(p)) return { slug: tw.accesorios.slug, nombre: tw.accesorios.nombre };
+  const eje = tileDeEje(tw, p);
+  if (eje) return { slug: eje.slug, nombre: eje.valor };
   for (const v of p.filtros.instalacion ?? []) {
     const tile = tw.porInstalacion?.[v];
     if (tile) return { slug: tile.slug, nombre: null };
@@ -140,6 +183,8 @@ export function tileDePieza(p: Pieza): { ruta: string; nombre: string } | null {
   const tw = tipoWeb(p.tipo);
   if (!tw) return null;
   if (tw.accesorios && esAccesorio(p)) return { ruta: `${tw.sub1.ruta}?tipo=${tw.accesorios.slug}`, nombre: tw.accesorios.nombre };
+  const eje = tileDeEje(tw, p);
+  if (eje) return { ruta: `${tw.sub1.ruta}?tipo=${eje.slug}`, nombre: eje.valor };
   for (const v of p.filtros.instalacion ?? []) {
     const tile = tw.porInstalacion?.[v];
     if (tile) return { ruta: `${tw.sub1.ruta}?tipo=${tile.slug}`, nombre: tile.nombre };

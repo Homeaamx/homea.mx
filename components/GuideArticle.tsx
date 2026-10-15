@@ -1,12 +1,14 @@
-// GuideArticle — cuerpo editorial de una guía + secciones (cada una con su link a filtro)
-// + doble CTA (Cotizar por WhatsApp / Ver todos los productos) + JSON-LD Article.
+// GuideArticle — cuerpo de una guía del blog "Guías" de Shopify + tarjeta lateral
+// con doble CTA (Cotizar por WhatsApp / Ver productos) + JSON-LD Article.
 //
-// El contenido editorial es placeholder por ahora (resumen + secciones del JSON);
-// la redacción real se suma después sin cambiar la estructura.
+// El texto lo escribe Carla en Shopify (Contenido → Entradas de blog → Guías);
+// llega ya limpio desde lib/shopify/guias.ts y aquí se le pone la tipografía del
+// sitio (.guide-prose en styles/guias.css).
 
-import { filtroPrincipal, nombreTipo, taxonomia, type RouteNode } from "@/lib/guias";
+import Link from "next/link";
+
+import { nombreTipo, rutaProductos, type RouteNode } from "@/lib/guias";
 import { absUrl, SITE_NAME } from "@/lib/site";
-import CtaProducto from "./CtaProducto";
 import WhatsAppCta from "./WhatsAppCta";
 import JsonLd from "./JsonLd";
 
@@ -16,21 +18,22 @@ export default function GuideArticle({ node }: { node: GuiaNode }) {
   const { guia, macro, sub1 } = node;
   const categoria = sub1?.nombre ?? macro.nombre;
   const waMessage = `¡Hola! Vi la guía "${guia.titulo}" en su sitio y me interesa una cotización.`;
-  const principal = filtroPrincipal(node);
+  const productos = rutaProductos(macro, sub1);
   const canonical = absUrl(guia.ruta);
 
   const articleLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: guia.titulo,
-    description: guia.resumen,
+    description: guia.seo.descripcion,
     articleSection: nombreTipo(guia.tipo),
     about: categoria,
     inLanguage: "es-MX",
-    datePublished: taxonomia.fecha,
-    dateModified: taxonomia.fecha,
+    datePublished: guia.publicada,
+    dateModified: guia.publicada,
+    ...(guia.imagen ? { image: guia.imagen.url } : {}),
     mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
-    author: { "@type": "Organization", name: SITE_NAME, url: absUrl("/") },
+    author: { "@type": "Organization", name: guia.autor ?? SITE_NAME, url: absUrl("/") },
     publisher: {
       "@type": "Organization",
       name: SITE_NAME,
@@ -39,29 +42,21 @@ export default function GuideArticle({ node }: { node: GuiaNode }) {
     },
   };
 
+  const fecha = new Date(guia.publicada).toLocaleDateString("es-MX", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
   return (
     <article className="sec guide-article">
       <div className="container guide-article-wrap">
         <div className="guide-article-body">
-          <p className="lead">{guia.resumen}</p>
-          <p className="guide-article-note">
-            Estamos preparando el contenido completo de esta guía. Mientras tanto, explora las
-            opciones por categoría o habla con un especialista para una recomendación a tu medida.
+          <p className="guide-article-meta">
+            {categoria} · {nombreTipo(guia.tipo)}
+            {guia.borrador ? " · Borrador (solo en desarrollo)" : ` · ${fecha}`}
           </p>
-
-          {guia.secciones.map((s, i) => (
-            <section className="guide-section" key={`${s.titulo}-${i}`}>
-              <h2 className="guide-section-title">{s.titulo}</h2>
-              <CtaProducto
-                filtro={s.filtro}
-                className="btn btn-ghost btn-sm"
-                fallback="soon"
-                waMessage={`¡Hola! Me interesa "${s.titulo}" (guía: ${guia.titulo}).`}
-              >
-                Ver productos
-              </CtaProducto>
-            </section>
-          ))}
+          <div className="guide-prose" dangerouslySetInnerHTML={{ __html: guia.html }} />
         </div>
 
         <aside className="guide-cta-card">
@@ -74,14 +69,9 @@ export default function GuideArticle({ node }: { node: GuiaNode }) {
             <WhatsAppCta className="btn btn-gold btn-block" message={waMessage} label="wa_guia">
               Cotizar por WhatsApp
             </WhatsAppCta>
-            <CtaProducto
-              filtro={principal}
-              className="btn btn-ghost btn-block"
-              fallback="soon"
-              waMessage={waMessage}
-            >
-              Ver todos los productos
-            </CtaProducto>
+            <Link href={productos} className="btn btn-ghost btn-block" data-cta="ver-productos">
+              Ver {categoria}
+            </Link>
           </div>
         </aside>
       </div>

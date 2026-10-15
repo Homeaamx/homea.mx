@@ -25,6 +25,17 @@ export default function GuideTypeFilter({ cards, tipos }: Props) {
 
   const visibles = activo === TODOS ? cards : cards.filter((c) => c.tipo === activo);
 
+  // Las guías salen del blog "Guías" de Shopify: una categoría puede no tener
+  // ninguna publicada todavía.
+  if (cards.length === 0) {
+    return (
+      <p className="guide-empty">
+        Estamos preparando las guías de esta categoría. Mientras tanto, un asesor de HOMEA
+        te orienta: <a href="/contacto">contáctanos</a>.
+      </p>
+    );
+  }
+
   return (
     <div className="guide-filter">
       <div className="guide-chips" role="tablist" aria-label="Filtrar por tipo de guía">

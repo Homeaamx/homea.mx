@@ -5,15 +5,17 @@ import {
   allRouteSegments,
   buildBreadcrumb,
   categoriasDeGuias,
-  getRoute,
   getTiposDeGuia,
   guiasDeMacro,
+  guiasDeSub1,
   leafFiltros,
   nombreTipo,
+  resolverRuta,
+  type GuiaPublicada,
   type RouteNode,
 } from "@/lib/guias";
 import { absUrl } from "@/lib/site";
-import type { Guia, Macrocategoria, Subcategoria1, Subcategoria2 } from "@/types/guias";
+import type { Macrocategoria, Subcategoria1, Subcategoria2 } from "@/types/guias";
 
 import AprendeCampanas from "@/components/AprendeCampanas";
 import FiltroDiagrama from "@/components/FiltroDiagrama";
@@ -27,10 +29,12 @@ import GuideArticle from "@/components/GuideArticle";
 import JsonLd from "@/components/JsonLd";
 import { type GuideCardData } from "@/components/GuideCard";
 
-// ISR — revalidar 1 vez al día.
-export const revalidate = 86400;
-// Cualquier ruta no precomputada que no exista en el JSON → 404 (no se inventa).
-export const dynamicParams = false;
+// ISR — revalidar cada hora: los artículos se publican en Shopify (o al momento
+// con /api/revalidar-guias).
+export const revalidate = 3600;
+// Una guía recién publicada en Shopify se sirve sin esperar al siguiente build;
+// lo que no exista ni en el JSON ni en el blog → 404 (resolverRuta).
+export const dynamicParams = true;
 
 interface Params {
   segments: string[];
@@ -40,13 +44,13 @@ interface Params {
 // Next.js NO permite dos slugs distintos en el mismo nivel ([sub1] vs [tipo] bajo [macro]).
 // Como la jerarquía es de profundidad mixta (índices de 2 y 3 niveles), un único catch-all
 // resuelve todas las rutas del JSON sin colisión. El render se delega a vistas dedicadas.
-export function generateStaticParams(): Params[] {
-  return allRouteSegments().map((segments) => ({ segments }));
+export async function generateStaticParams(): Promise<Params[]> {
+  return (await allRouteSegments()).map((segments) => ({ segments }));
 }
 
 export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
   const params = await props.params;
-  const node = getRoute(params.segments);
+  const node = await resolverRuta(params.segments);
   if (!node) return {};
 
   if (node.kind === "macro") {
@@ -71,11 +75,21 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
       alternates: { canonical: node.sub2.rutaFiltros },
     };
   }
-  // guía
+  // guía (artículo del blog "Guías" de Shopify)
+  const { guia } = node;
   return {
-    title: node.guia.titulo,
-    description: node.guia.resumen,
-    alternates: { canonical: node.guia.ruta },
+    title: guia.seo.titulo,
+    description: guia.seo.descripcion,
+    alternates: { canonical: guia.ruta },
+    openGraph: {
+      type: "article",
+      title: guia.seo.titulo,
+      description: guia.seo.descripcion,
+      publishedTime: guia.publicada,
+      ...(guia.imagen ? { images: [{ url: guia.imagen.url, alt: guia.imagen.alt }] } : {}),
+    },
+    // La semilla local (solo en desarrollo) nunca se indexa.
+    ...(guia.borrador ? { robots: { index: false, follow: false } } : {}),
   };
 }
 
@@ -107,7 +121,7 @@ const HERO_FOTO_SUB1: Record<string, { src: string; pos?: string; flip?: boolean
 // Helpers de presentación.
 // --------------------------------------------------------------------------
 
-function guiasToCards(guias: Guia[], categoria: string): GuideCardData[] {
+function guiasToCards(guias: GuiaPublicada[], categoria: string): GuideCardData[] {
   return guias.map((g) => ({
     titulo: g.titulo,
     resumen: g.resumen,
@@ -136,13 +150,13 @@ function itemListLd(name: string, items: { name: string; url: string }[]) {
 // Vistas.
 // --------------------------------------------------------------------------
 
-function MacroIndex({ macro, node }: { macro: Macrocategoria; node: RouteNode }) {
+async function MacroIndex({ macro, node }: { macro: Macrocategoria; node: RouteNode }) {
   const crumbs = buildBreadcrumb(node);
   const heroFoto = HERO_FOTO_MACRO[macro.slug];
 
   // Rama de 2 niveles: la macro ES la categoría de guías → índice con filtro por tipo.
   if (macro.nivelGuias === "macrocategoria") {
-    const guias = guiasDeMacro(macro);
+    const guias = await guiasDeMacro(macro);
     const cards = guiasToCards(guias, macro.nombre);
     return (
       <>
@@ -175,6 +189,10 @@ function MacroIndex({ macro, node }: { macro: Macrocategoria; node: RouteNode })
 
   // Rama de 3 niveles: lista las Subcategorías 1 como categorías de guías.
   const categorias = categoriasDeGuias(macro);
+  const conteos: Record<string, number> = {};
+  for (const g of await guiasDeMacro(macro)) {
+    if (g.sub1) conteos[g.sub1.slug] = (conteos[g.sub1.slug] ?? 0) + 1;
+  }
   return (
     <>
       <PageHero
@@ -188,7 +206,7 @@ function MacroIndex({ macro, node }: { macro: Macrocategoria; node: RouteNode })
       />
       <section className="sec">
         <div className="container">
-          <CategoryList categorias={categorias} variant="cards" />
+          <CategoryList categorias={categorias} variant="cards" conteos={conteos} />
         </div>
       </section>
       <JsonLd
@@ -201,7 +219,7 @@ function MacroIndex({ macro, node }: { macro: Macrocategoria; node: RouteNode })
   );
 }
 
-function CategoryIndex({
+async function CategoryIndex({
   macro,
   sub1,
   node,
@@ -211,7 +229,8 @@ function CategoryIndex({
   node: RouteNode;
 }) {
   const crumbs = buildBreadcrumb(node);
-  const cards = guiasToCards(sub1.guias ?? [], sub1.nombre);
+  const guias = await guiasDeSub1(macro, sub1);
+  const cards = guiasToCards(guias, sub1.nombre);
   const heroFoto = HERO_FOTO_SUB1[sub1.slug];
 
   return (
@@ -247,7 +266,7 @@ function CategoryIndex({
       <JsonLd
         data={itemListLd(
           `Guías de ${sub1.nombre}`,
-          (sub1.guias ?? []).map((g) => ({ name: g.titulo, url: absUrl(g.ruta) }))
+          guias.map((g) => ({ name: g.titulo, url: absUrl(g.ruta) }))
         )}
       />
     </>
@@ -327,6 +346,11 @@ function FilterIndex({
 
 function ArticleView({ node }: { node: Extract<RouteNode, { kind: "guia" }> }) {
   const crumbs = buildBreadcrumb(node);
+  // Fondo del encabezado: la imagen de la entrada en Shopify; si no tiene, la
+  // foto de su subcategoría o de su macro.
+  const foto = node.guia.imagen
+    ? { src: `${node.guia.imagen.url}${node.guia.imagen.url.includes("?") ? "&" : "?"}width=1800` }
+    : (node.sub1 && HERO_FOTO_SUB1[node.sub1.slug]) || HERO_FOTO_MACRO[node.macro.slug];
   return (
     <>
       <PageHero
@@ -334,6 +358,9 @@ function ArticleView({ node }: { node: Extract<RouteNode, { kind: "guia" }> }) {
         eyebrow={nombreTipo(node.guia.tipo)}
         title={node.guia.titulo}
         sub={node.guia.resumen}
+        bgImage={foto?.src}
+        bgPosition={foto && "pos" in foto ? foto.pos : undefined}
+        bgFlip={foto && "flip" in foto ? foto.flip : undefined}
       />
       <GuideArticle node={node} />
     </>
@@ -346,7 +373,7 @@ function ArticleView({ node }: { node: Extract<RouteNode, { kind: "guia" }> }) {
 
 export default async function GuiasCatchAll(props: { params: Promise<Params> }) {
   const params = await props.params;
-  const node = getRoute(params.segments);
+  const node = await resolverRuta(params.segments);
   if (!node) notFound();
 
   switch (node.kind) {

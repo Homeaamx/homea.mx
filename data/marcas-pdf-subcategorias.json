@@ -1,0 +1,31 @@
+{
+  "_nota": "Macrocategorías que solo se publican con PDF (sin catálogo en Shopify): qué marca maneja cada subcategoría. Alimenta las tarjetas de marca de /productos/<macro> (app/productos/[categoria]/page.tsx): al marcar una subcategoría solo quedan las marcas que la manejan, y cada tarjeta lleva a /marcas/<slug>. Las subcategorías son los slugs del riel de cada página (preview/categoria-<macro>.html). PROPUESTA del 2026-10-14 por confirmar con Carla; Brizo, Delta y Axcent no van en Baños (de ellas solo se trabaja la línea de cocina, decisión 2026-09-21).",
+  "macros": {
+    "banos": {
+      "catalano": ["lavabos", "wc-y-sanitarios"],
+      "firplak": ["lavabos"],
+      "i-drain": ["accesorios-de-banos"],
+      "kaldewei": ["tinas", "regaderas", "lavabos"],
+      "nobili": ["monomandos", "regaderas"],
+      "treesse": ["tinas", "lavabos", "wc-y-sanitarios"],
+      "valsir": ["wc-y-sanitarios", "accesorios-de-banos"]
+    },
+    "vapor-y-sauna": {
+      "mr-steam": ["vapor"],
+      "treesse": ["vapor", "sauna-interior"],
+      "clearlight": ["sauna-interior", "sauna-exterior"],
+      "sauna-estilo": ["sauna-interior", "sauna-exterior"],
+      "jacuzzi": ["sauna-interior", "sauna-exterior"]
+    },
+    "wellness": {
+      "jacuzzi": ["tinas-de-inmersion", "carril-de-nado", "jacuzzi"]
+    },
+    "recubrimientos-y-superficies": {
+      "onix": ["muros", "pisos"]
+    },
+    "chimeneas-y-calentadores": {
+      "hergom": ["chimeneas"],
+      "vass": ["chimeneas", "calentadores"]
+    }
+  }
+}

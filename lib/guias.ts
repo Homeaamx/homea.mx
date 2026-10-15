@@ -1,10 +1,15 @@
 // Loader + helpers de la taxonomía de GUÍAS.
-// Lee la ÚNICA fuente de verdad: GUIAS/taxonomia-guias.json.
-// No se hardcodea ninguna categoría/ruta aquí: todo se deriva del JSON.
+// La ESTRUCTURA (macros, subcategorías, filtros, tipos de guía) sale de
+// GUIAS/taxonomia-guias.json. Los ARTÍCULOS salen del blog "Guías" de Shopify
+// (lib/shopify/guias.ts): se ubican por etiquetas y por eso las funciones que
+// listan guías son async.
+
+import { existsSync } from "fs";
+import { join } from "path";
 
 import taxonomiaData from "@/GUIAS/taxonomia-guias.json";
+import { guiaPorRuta, guiasPublicadas, type GuiaPublicada } from "@/lib/shopify/guias";
 import type {
-  Guia,
   Macrocategoria,
   Subcategoria1,
   Subcategoria2,
@@ -40,7 +45,9 @@ export type RouteNode =
   | { kind: "macro"; macro: Macrocategoria }
   | { kind: "categoria"; macro: Macrocategoria; sub1: Subcategoria1 }
   | { kind: "filtros"; macro: Macrocategoria; sub1: Subcategoria1; sub2: Subcategoria2 }
-  | { kind: "guia"; macro: Macrocategoria; sub1?: Subcategoria1; guia: Guia };
+  | { kind: "guia"; macro: Macrocategoria; sub1?: Subcategoria1; guia: GuiaPublicada };
+
+export type { GuiaPublicada };
 
 /** "/guias/cocina-y-bar/refrigeracion" -> ["cocina-y-bar","refrigeracion"] */
 export function segmentsFromRuta(ruta: string): string[] {
@@ -60,11 +67,6 @@ function register(node: RouteNode, ruta: string) {
 for (const macro of taxonomia.macrocategorias) {
   register({ kind: "macro", macro }, macro.ruta);
 
-  // Guías ancladas en la macro (ramas de 2 niveles).
-  for (const guia of macro.guias ?? []) {
-    register({ kind: "guia", macro, guia }, guia.ruta);
-  }
-
   for (const sub1 of macro.subcategorias1 ?? []) {
     if (sub1.esLeaf) continue; // leaf de filtro de producto: no es página de guías
 
@@ -77,27 +79,37 @@ for (const macro of taxonomia.macrocategorias) {
         register({ kind: "filtros", macro, sub1, sub2 }, sub2.rutaFiltros);
       }
     }
-
-    for (const guia of sub1.guias ?? []) {
-      register({ kind: "guia", macro, sub1, guia }, guia.ruta);
-    }
   }
 }
 
-/** Resuelve los segmentos de URL (después de /guias/) a un nodo de ruta. */
+/**
+ * Resuelve los segmentos de URL (después de /guias/) a un índice o a una página
+ * de filtros. Síncrono: no conoce los artículos (ver `resolverRuta`).
+ */
 export function getRoute(segments: string[]): RouteNode | undefined {
   return routeIndex.get(segments.join("/"));
 }
 
-/** Todos los segmentos de ruta bajo /guias/ (para generateStaticParams del catch-all). */
-export function allRouteSegments(): string[][] {
-  return Array.from(routeIndex.keys()).map((k) => k.split("/"));
+/** Como `getRoute`, pero también encuentra los artículos publicados en Shopify. */
+export async function resolverRuta(segments: string[]): Promise<RouteNode | undefined> {
+  const fijo = getRoute(segments);
+  if (fijo) return fijo;
+  const guia = await guiaPorRuta(`/guias/${segments.join("/")}`);
+  return guia ? { kind: "guia", macro: guia.macro, sub1: guia.sub1, guia } : undefined;
+}
+
+/** Segmentos de todas las rutas bajo /guias/, artículos incluidos (generateStaticParams). */
+export async function allRouteSegments(): Promise<string[][]> {
+  const fijas = Array.from(routeIndex.keys()).map((k) => k.split("/"));
+  const articulos = (await guiasPublicadas()).map((g) => segmentsFromRuta(g.ruta));
+  return [...fijas, ...articulos];
 }
 
 /** Todas las rutas absolutas bajo /guias/ (hub incluido) — para sitemap. */
-export function allGuiasUrls(): string[] {
+export async function allGuiasUrls(): Promise<string[]> {
   const urls = [HUB_PATH];
   for (const segs of routeIndex.keys()) urls.push(`/guias/${segs}`);
+  for (const g of await guiasPublicadas()) if (!g.borrador) urls.push(g.ruta);
   return urls;
 }
 
@@ -105,10 +117,16 @@ export function allGuiasUrls(): string[] {
 // Helpers de contenido.
 // ---------------------------------------------------------------------------
 
-/** Las guías que viven directamente bajo una macro o bajo una de sus Sub1. */
-export function guiasDeMacro(macro: Macrocategoria): Guia[] {
-  if (macro.nivelGuias === "macrocategoria") return macro.guias ?? [];
-  return (macro.subcategorias1 ?? []).flatMap((s) => s.guias ?? []);
+/** Las guías que viven bajo una macro (directo o en cualquiera de sus Sub1). */
+export async function guiasDeMacro(macro: Macrocategoria): Promise<GuiaPublicada[]> {
+  return (await guiasPublicadas()).filter((g) => g.macro.slug === macro.slug);
+}
+
+/** Las guías de una Subcategoría 1 de guías (Refrigeración, Cocción…). */
+export async function guiasDeSub1(macro: Macrocategoria, sub1: Subcategoria1): Promise<GuiaPublicada[]> {
+  return (await guiasPublicadas()).filter(
+    (g) => g.macro.slug === macro.slug && g.sub1?.slug === sub1.slug,
+  );
 }
 
 /** Subcategorías 1 que son categorías de guías (ramas de 3 niveles). */
@@ -137,37 +155,30 @@ export function leafFiltros(macro: Macrocategoria): { nombre: string; filtro: st
   );
 }
 
-/** Todas las guías del sitio (planas, con su macro/sub1) — para búsqueda en el hub. */
-export function todasLasGuias(): { macro: Macrocategoria; sub1?: Subcategoria1; guia: Guia }[] {
-  const all: { macro: Macrocategoria; sub1?: Subcategoria1; guia: Guia }[] = [];
-  for (const node of routeIndex.values()) {
-    if (node.kind === "guia") all.push({ macro: node.macro, sub1: node.sub1, guia: node.guia });
-  }
-  return all;
+/** Todas las guías publicadas (planas, con su macro/sub1) — para búsqueda en el hub. */
+export async function todasLasGuias(): Promise<GuiaPublicada[]> {
+  return guiasPublicadas();
 }
 
 /** Guías destacadas / más leídas para el hub. Prioriza guías de compra y top-picks. */
-export function guiasDestacadas(limit = 6): { macro: Macrocategoria; sub1?: Subcategoria1; guia: Guia }[] {
-  const all: { macro: Macrocategoria; sub1?: Subcategoria1; guia: Guia }[] = [];
-  for (const node of routeIndex.values()) {
-    if (node.kind === "guia") all.push({ macro: node.macro, sub1: node.sub1, guia: node.guia });
-  }
+export async function guiasDestacadas(limit = 6): Promise<GuiaPublicada[]> {
   const prioridad = (t: string) => (t === "guia-de-compra" ? 0 : t === "top-picks" ? 1 : 2);
-  all.sort((a, b) => prioridad(a.guia.tipo) - prioridad(b.guia.tipo));
-  return all.slice(0, limit);
+  // sort es estable: dentro de cada tipo se conserva el orden de publicación.
+  return [...(await guiasPublicadas())]
+    .sort((a, b) => prioridad(a.tipo) - prioridad(b.tipo))
+    .slice(0, limit);
 }
 
 /**
- * Filtro de producto "principal" de una guía — destino del CTA "Ver todos los productos".
- * Es el leaf base del dominio de la guía (sin faceta).
+ * Catálogo vivo de la guía — destino de "Ver productos". La Subcategoría 1 si
+ * tiene página propia en /productos (preview/subcategoria-<macro>--<sub1>.html);
+ * si no, la macro.
  */
-export function filtroPrincipal(node: Extract<RouteNode, { kind: "guia" }>): string {
-  if (node.sub1?.subcategorias2?.length) return node.sub1.subcategorias2[0].filtro;
-  const leaf = leavesDeMacro(node.macro)[0];
-  if (leaf?.filtro) return leaf.filtro;
-  // Fallback: base del primer filtro de sección (sin query).
-  const first = node.guia.secciones[0]?.filtro;
-  return first ? first.split("?")[0] : "/productos/";
+export function rutaProductos(macro: Macrocategoria, sub1?: Subcategoria1): string {
+  if (sub1 && existsSync(join(process.cwd(), "preview", `subcategoria-${macro.slug}--${sub1.slug}.html`))) {
+    return `/productos/${macro.slug}/${sub1.slug}`;
+  }
+  return `/productos/${macro.slug}`;
 }
 
 // ---------------------------------------------------------------------------

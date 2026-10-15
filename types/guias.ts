@@ -4,23 +4,8 @@
 /** Nivel donde se anclan las guías de una macrocategoría. */
 export type NivelGuias = "subcategoria1" | "macrocategoria";
 
-/** Una sección dentro del cuerpo de una guía: enlaza a un filtro de producto (PLP). */
-export interface SeccionGuia {
-  titulo: string;
-  /** Ruta de filtro PLP, p.ej. "/productos/refrigeradores/?caracteristica=panelable". Aún no existe (ver lib/flags.ts). */
-  filtro: string;
-}
-
-/** Un artículo de guía. */
-export interface Guia {
-  titulo: string;
-  /** slug de tipo de guía (debe existir en tiposDeGuia): "guia-de-compra", "top-picks", … */
-  tipo: string;
-  /** Ruta canónica completa de la guía, tal cual viene del JSON. */
-  ruta: string;
-  resumen: string;
-  secciones: SeccionGuia[];
-}
+// Los ARTÍCULOS de guía ya no viven en el JSON: salen del blog "Guías" de
+// Shopify (tipo GuiaPublicada en lib/shopify/guias.ts).
 
 /**
  * Subcategoría 2 = tipo de producto / leaf de filtro (en ramas de 3 niveles).
@@ -76,7 +61,7 @@ export interface Subcategoria2 {
 
 /**
  * Subcategoría 1. En ramas de 3 niveles es una "categoría de guías" (esLeaf:false,
- * tiene rutaGuias, subcategorias2 y guias). En ramas de 2 niveles es un leaf de
+ * tiene rutaGuias y subcategorias2; sus guías vienen de Shopify). En ramas de 2 niveles es un leaf de
  * filtro (esLeaf:true, tiene filtro).
  */
 export interface Subcategoria1 {
@@ -86,7 +71,6 @@ export interface Subcategoria1 {
   // — rama de 3 niveles (esLeaf:false) —
   rutaGuias?: string;
   subcategorias2?: Subcategoria2[];
-  guias?: Guia[];
   // — rama de 2 niveles (esLeaf:true) —
   filtro?: string;
 }
@@ -95,9 +79,8 @@ export interface Macrocategoria {
   slug: string;
   nombre: string;
   ruta: string;
+  /** Dónde se anclan sus guías de Shopify: en la macro o en cada Subcategoría 1. */
   nivelGuias: NivelGuias;
-  /** Guías ancladas en la macro (solo cuando nivelGuias === "macrocategoria"). */
-  guias: Guia[];
   subcategorias1: Subcategoria1[];
 }
 

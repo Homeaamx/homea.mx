@@ -4,11 +4,11 @@ import GuideCard, { type GuideCardData } from "@/components/GuideCard";
 import GuiaSearch from "@/components/GuiaSearch";
 import Breadcrumb from "@/components/Breadcrumb";
 import JsonLd from "@/components/JsonLd";
-import { getMacros, guiasDestacadas, todasLasGuias, nombreTipo, HUB_PATH } from "@/lib/guias";
+import { getMacros, guiasDestacadas, todasLasGuias, nombreTipo, HUB_PATH, type GuiaPublicada } from "@/lib/guias";
 import { absUrl } from "@/lib/site";
 
-// ISR — el contenido cambia poco; revalidar 1 vez al día.
-export const revalidate = 86400;
+// ISR — las guías se publican en Shopify; revalidar cada hora (o al momento con /api/revalidar-guias).
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Guías de compra y asesoría",
@@ -17,26 +17,23 @@ export const metadata: Metadata = {
   alternates: { canonical: HUB_PATH },
 };
 
-export default function GuiasHubPage() {
-  const macros = getMacros();
-  const destacadas: GuideCardData[] = guiasDestacadas(6).map(({ macro, sub1, guia }) => ({
+function aTarjeta(guia: GuiaPublicada): GuideCardData {
+  return {
     titulo: guia.titulo,
     resumen: guia.resumen,
     tipo: guia.tipo,
     tipoNombre: nombreTipo(guia.tipo),
     href: guia.ruta,
-    etiqueta: `${sub1?.nombre ?? macro.nombre} · ${nombreTipo(guia.tipo)}`,
-  }));
+    etiqueta: `${guia.sub1?.nombre ?? guia.macro.nombre} · ${nombreTipo(guia.tipo)}`,
+  };
+}
 
+export default async function GuiasHubPage() {
+  const macros = getMacros();
+  // Artículos del blog "Guías" de Shopify (lib/shopify/guias.ts).
+  const destacadas = (await guiasDestacadas(6)).map(aTarjeta);
   // Índice de búsqueda: todas las guías (solo guías, no productos).
-  const todas: GuideCardData[] = todasLasGuias().map(({ macro, sub1, guia }) => ({
-    titulo: guia.titulo,
-    resumen: guia.resumen,
-    tipo: guia.tipo,
-    tipoNombre: nombreTipo(guia.tipo),
-    href: guia.ruta,
-    etiqueta: `${sub1?.nombre ?? macro.nombre} · ${nombreTipo(guia.tipo)}`,
-  }));
+  const todas = (await todasLasGuias()).map(aTarjeta);
 
   const itemListLd = {
     "@context": "https://schema.org",
@@ -86,6 +83,8 @@ export default function GuiasHubPage() {
         </div>
       </section>
 
+      {/* Sin guías publicadas en Shopify, la sección no se pinta vacía. */}
+      {destacadas.length > 0 && (
       <section className="sec tight" id="destacadas">
         <div className="container">
           <div className="sec-head reveal">
@@ -102,6 +101,7 @@ export default function GuiasHubPage() {
           </div>
         </div>
       </section>
+      )}
 
       <JsonLd data={itemListLd} />
     </>

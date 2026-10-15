@@ -596,6 +596,8 @@ sirvió de piloto del patrón (5 fichas + import en borrador).
 ## 🔵 Fase 6 — Contenido editorial: blogs en Guías (cadencia quincenal) ⭐ NUEVO
 *Trabajo continuo: alimentar la sección **Guías** con artículos/blogs publicados de forma **quincenal** (cada 2 semanas). Refuerza la función de "guía de compra" del sitio y construye autoridad SEO orgánica sostenida.*
 
+- [x] **Dónde se publica (2026-10-14):** blog **Guías** de Shopify; el sitio lo lee por Storefront API y ubica cada entrada por etiquetas (`docs/GUIAS-BLOG-SHOPIFY.md`). Se borraron las 39 guías de ejemplo del JSON y se subieron **16 guías reales, ocultas** (una por subcategoría/macro).
+- [x] **16 guías publicadas** en Shopify (2026-10-14). Pendiente: imagen de encabezado propia y marcas en Lavandería, Aire acondicionado y Filtros.
 - [ ] **Cadencia:** publicar **un blog/guía nuevo cada 2 semanas** (quincenal) en la sección Guías (`/guias`).
 - [ ] **Calendario editorial:** definir temas por quincena alineados a las macrocategorías (Cocina y Bar, Exterior, Baños, etc.) y a búsquedas reales (GSC / keywords).
 - [ ] **SEO por artículo:** title/description, canónico, JSON-LD (Article/FAQ), enlazado interno a productos y otras guías, imágenes con nombres SEO.

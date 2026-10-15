@@ -21,6 +21,8 @@ const MARKETING_PATHS = [
   "/ofertas",
   "/garantias-instalacion",
   "/preguntas-frecuentes",
+  "/envios-y-entregas",
+  "/cambios-devoluciones-y-cancelaciones",
 ];
 
 // Sitemap propio (regla de oro SEO). Incluye marketing + categorías + todas las Guías
@@ -53,7 +55,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  const guias = allGuiasUrls().map((path) => ({
+  const guias = (await allGuiasUrls()).map((path) => ({
     url: absUrl(path),
     changeFrequency: "weekly" as const,
     priority: path === "/guias" ? 0.8 : 0.6,

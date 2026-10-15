@@ -1,0 +1,229 @@
+{
+  "_nota": "Semilla de las 16 guías del blog \"Guías\" de Shopify (2026-10-14). Ya se subieron a Shopify como entradas OCULTAS; desde ahí se editan y publican. Estos archivos solo sirven para verlas en `next dev` antes de publicarlas (lib/shopify/guias.ts) y como respaldo.",
+  "guias": [
+    {
+      "handle": "guia-refrigeracion-premium",
+      "titulo": "Guía de compra de refrigeración premium",
+      "resumen": "Integrado, empotrable o de columnas: cómo elegir refrigerador, cava, máquina de hielo y cajones según tu cocina y las medidas de tu proyecto.",
+      "etiquetas": [
+        "Refrigeración",
+        "Guía de compra"
+      ],
+      "seo": {
+        "titulo": "Guía de compra de refrigeración premium",
+        "descripcion": "Cómo elegir refrigerador integrado, empotrable o de columnas, cava de vino y máquina de hielo. Medidas, configuración y marcas en HOMEA."
+      },
+      "archivo": "refrigeracion.html"
+    },
+    {
+      "handle": "guia-coccion-estufa-parrilla-horno",
+      "titulo": "Guía de compra de cocción: estufa, parrilla u horno",
+      "resumen": "Gas, inducción o eléctrica; estufa o parrilla con horno de pared; y cómo elegir la campana correcta para tu zona de cocción.",
+      "etiquetas": [
+        "Cocción",
+        "Guía de compra"
+      ],
+      "seo": {
+        "titulo": "Estufa, parrilla u horno: guía de compra",
+        "descripcion": "Gas, inducción o eléctrica, estufa profesional o parrilla con horno de pared y cómo elegir la campana. Guía de compra de cocción HOMEA."
+      },
+      "archivo": "coccion.html"
+    },
+    {
+      "handle": "guia-compra-lavavajillas",
+      "titulo": "Guía de compra de lavavajillas",
+      "resumen": "Empotrable o de piso, 60 o 45 cm, nivel de ruido y organización interior: lo que debes revisar antes de elegir tu lavavajillas.",
+      "etiquetas": [
+        "Lavavajillas",
+        "Guía de compra"
+      ],
+      "seo": {
+        "titulo": "Guía de compra de lavavajillas",
+        "descripcion": "Cómo elegir lavavajillas: empotrable o de piso, panelable, 60 o 45 cm, nivel de ruido, charolas y secado. Asesoría de HOMEA."
+      },
+      "archivo": "lavavajillas.html"
+    },
+    {
+      "handle": "guia-tarjas-y-griferia",
+      "titulo": "Guía de compra de tarjas y grifería para cocina",
+      "resumen": "Bajo cubierta, sobre cubierta o farmhouse; acero, granito o cerámica; y la grifería ideal para tu zona de agua.",
+      "etiquetas": [
+        "Tarjas y Grifería",
+        "Guía de compra"
+      ],
+      "seo": {
+        "titulo": "Tarjas y grifería de cocina: guía de compra",
+        "descripcion": "Cómo elegir tarja (bajo cubierta, sobreponer, farmhouse), material y grifería extraíble, touch o de agua filtrada. Guía HOMEA."
+      },
+      "archivo": "tarjas-y-griferia.html"
+    },
+    {
+      "handle": "guia-triturador-de-alimentos",
+      "titulo": "Guía de compra de triturador de alimentos",
+      "resumen": "Cómo funciona un triturador, qué potencia necesitas, qué se puede triturar y qué requiere la instalación bajo tu tarja.",
+      "etiquetas": [
+        "Trituradores",
+        "Guía de compra"
+      ],
+      "seo": {
+        "titulo": "Triturador de alimentos: guía de compra",
+        "descripcion": "Cómo elegir triturador de alimentos: alimentación continua o por lotes, potencia de 1/3 a 1 HP, uso correcto e instalación."
+      },
+      "archivo": "trituradores.html"
+    },
+    {
+      "handle": "guia-filtracion-agua-cocina",
+      "titulo": "Guía de filtración de agua para tu cocina",
+      "resumen": "Sedimentos, carbón activado, ósmosis inversa o UV: qué hace cada tecnología y cómo elegir el sistema de agua para tu casa.",
+      "etiquetas": [
+        "Filtros y Purificadores de Agua",
+        "Guía de compra"
+      ],
+      "seo": {
+        "titulo": "Filtros y purificadores de agua: guía",
+        "descripcion": "Qué hace cada tecnología de filtración (carbón, ósmosis inversa, UV, suavizador) y cómo elegir el sistema para tu cocina."
+      },
+      "archivo": "filtros-y-purificadores.html"
+    },
+    {
+      "handle": "guia-asadores-y-hornos-exterior",
+      "titulo": "Guía de compra de asadores y hornos para exterior",
+      "resumen": "Empotrable o con carrito, gas, carbón, kamado o leña, y los complementos para armar una cocina exterior completa.",
+      "etiquetas": [
+        "Asadores & Hornos",
+        "Guía de compra"
+      ],
+      "seo": {
+        "titulo": "Asadores y hornos para exterior: guía",
+        "descripcion": "Cómo elegir asador empotrable o con carrito, gas, carbón, kamado u horno de pizza, y planear tu cocina exterior. Guía HOMEA."
+      },
+      "archivo": "asadores-y-hornos.html"
+    },
+    {
+      "handle": "elegir-mosaico-para-alberca",
+      "titulo": "Cómo elegir el mosaico para tu alberca",
+      "resumen": "Vidrio o cerámico, el color que tendrá el agua, zonas antiderrapantes e instalación: cómo elegir el recubrimiento de tu alberca.",
+      "etiquetas": [
+        "Alberca",
+        "Cómo elegir"
+      ],
+      "seo": {
+        "titulo": "Cómo elegir mosaico para alberca",
+        "descripcion": "Mosaico de vidrio o cerámico, cómo cambia el color del agua, seguridad en escalones e instalación. Guía para elegir el mosaico de tu alberca."
+      },
+      "archivo": "alberca.html"
+    },
+    {
+      "handle": "guia-electrodomesticos-menores",
+      "titulo": "Guía de electrodomésticos menores premium",
+      "resumen": "Licuadora, batidora, tostadora, exprimidor y cafetera: qué revisar en cada uno y cómo armar una línea que combine con tu cocina.",
+      "etiquetas": [
+        "Electrodomésticos Menores",
+        "Guía de compra"
+      ],
+      "seo": {
+        "titulo": "Electrodomésticos menores premium: guía",
+        "descripcion": "Cómo elegir licuadora, batidora de pedestal, tostadora, exprimidor y cafetera premium. Potencia, materiales, funciones y marcas."
+      },
+      "archivo": "electrodomesticos-menores.html"
+    },
+    {
+      "handle": "guia-lavadora-y-secadora",
+      "titulo": "Guía de compra de lavadora y secadora",
+      "resumen": "Carga frontal o superior, secadora a gas, eléctrica o con bomba de calor, lavasecadora o par por separado, capacidad e instalación.",
+      "etiquetas": [
+        "Lavandería",
+        "Guía de compra"
+      ],
+      "seo": {
+        "titulo": "Lavadora y secadora: guía de compra",
+        "descripcion": "Carga frontal o superior, secadora a gas, eléctrica o bomba de calor, lavasecadora, capacidad e instalación. Guía de lavandería HOMEA."
+      },
+      "archivo": "lavanderia.html"
+    },
+    {
+      "handle": "guia-bano-premium",
+      "titulo": "Guía para planear un baño premium",
+      "resumen": "Lavabo, grifería, regadera, tina, sanitario y drenajes: cómo planear un baño completo, en el orden correcto y con un solo lenguaje de diseño.",
+      "etiquetas": [
+        "Baños",
+        "Guía de compra"
+      ],
+      "seo": {
+        "titulo": "Cómo planear un baño premium",
+        "descripcion": "Lavabos, monomandos, regaderas termostáticas, tinas, sanitarios suspendidos y drenajes lineales: guía para planear tu baño premium."
+      },
+      "archivo": "banos.html"
+    },
+    {
+      "handle": "guia-compra-minisplits",
+      "titulo": "Guía de compra de minisplits: tipo, capacidad e instalación",
+      "resumen": "Solo frío o frío y calor, tecnología inverter, cuántos BTU necesitas por espacio, eficiencia e instalación de tu minisplit.",
+      "etiquetas": [
+        "Aire acondicionado",
+        "Guía de compra"
+      ],
+      "seo": {
+        "titulo": "Minisplits: guía de compra y BTU",
+        "descripcion": "Minisplit solo frío o frío y calor, inverter, cuántos BTU necesitas por m², eficiencia SEER e instalación. Guía HOMEA."
+      },
+      "archivo": "aire-acondicionado.html"
+    },
+    {
+      "handle": "guia-vapor-y-sauna",
+      "titulo": "Guía de vapor y sauna en casa",
+      "resumen": "Vapor, sauna tradicional o infrarrojo: cómo se siente cada uno, qué requiere la construcción y qué preparar antes de instalar.",
+      "etiquetas": [
+        "Vapor y Sauna",
+        "Guía de compra"
+      ],
+      "seo": {
+        "titulo": "Vapor y sauna en casa: guía de compra",
+        "descripcion": "Diferencias entre vapor, sauna tradicional e infrarrojo, requisitos del cuarto de vapor, sauna interior o exterior e instalación."
+      },
+      "archivo": "vapor-y-sauna.html"
+    },
+    {
+      "handle": "guia-wellness-en-casa",
+      "titulo": "Guía de wellness en casa: spa, carril de nado e inmersión fría",
+      "resumen": "Spa, carril de nado, tina de inmersión fría y sillón de masajes: cómo armar tu circuito de bienestar y qué preparar para instalarlo.",
+      "etiquetas": [
+        "Wellness",
+        "Guía de compra"
+      ],
+      "seo": {
+        "titulo": "Wellness en casa: spa y carril de nado",
+        "descripcion": "Cómo elegir spa, carril de nado (swim spa), tina de inmersión fría y sillón de masajes, y qué preparar para la instalación."
+      },
+      "archivo": "wellness.html"
+    },
+    {
+      "handle": "elegir-recubrimiento-por-espacio",
+      "titulo": "Cómo elegir recubrimientos para cada espacio",
+      "resumen": "Porcelanato, mosaico de vidrio o piedra sinterizada: qué material conviene en cocina, baño, interiores, exterior y alberca.",
+      "etiquetas": [
+        "Recubrimientos y Superficies",
+        "Cómo elegir"
+      ],
+      "seo": {
+        "titulo": "Cómo elegir recubrimientos por espacio",
+        "descripcion": "Porcelanato, mosaico de vidrio y piedra sinterizada: qué recubrimiento usar en cocina, baño, interiores, terraza y alberca."
+      },
+      "archivo": "recubrimientos.html"
+    },
+    {
+      "handle": "guia-chimeneas-y-calentadores",
+      "titulo": "Guía de compra de chimeneas y calentadores de patio",
+      "resumen": "Leña, gas, eléctrica o bioetanol; hogar abierto, insert o estufa; y cómo elegir un calentador para tu terraza.",
+      "etiquetas": [
+        "Chimeneas & Calentadores",
+        "Guía de compra"
+      ],
+      "seo": {
+        "titulo": "Chimeneas y calentadores: guía de compra",
+        "descripcion": "Chimenea de leña, gas, eléctrica o bioetanol, insert o estufa de hierro fundido, calentadores de patio y seguridad. Guía HOMEA."
+      },
+      "archivo": "chimeneas-y-calentadores.html"
+    }
+  ]
+}

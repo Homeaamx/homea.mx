@@ -303,7 +303,7 @@ interface OpcionesPanel {
    * Solo esas casillas llevan `data-tipo`: un mismo slug en otro grupo
    * ("Profesional" en Instalación y en Diseño) no se marca por error.
    */
-  mosaico?: { eje: string; slug: string; nombre: string }[];
+  mosaico?: { eje: string; slug: string; nombre: string; valor?: string }[];
   /** Grupo "Subcategoría" (Refrigeración / Cocción…): paneles que cruzan varias (marca, macro). */
   conCategoria?: boolean;
   /** Omitir el grupo "Marca": en la página de una marca todas las piezas son de ella. */
@@ -450,20 +450,23 @@ export function panelFiltrosHtml(
       continue;
     }
     // Conteo por slug (es lo que compara catalogo.js), con el texto de Shopify.
-    const cuenta = new Map<string, { texto: string; n: number; tipo: boolean }>();
+    const cuenta = new Map<string, { texto: string; n: number; tipo: string | null }>();
     const delMosaico = mosaico.filter((m) => m.eje === d.nombre);
-    // Los tipos del mosaico van primero y en su orden, con o sin piezas.
-    for (const m of delMosaico) cuenta.set(m.slug, { texto: m.nombre, n: 0, tipo: true });
+    // Los tipos del mosaico van primero y en su orden, con o sin piezas. La
+    // casilla vale el slug del VALOR de la tabla (lo que trae la tarjeta) y lleva
+    // `data-tipo` = slug del tile, por si no coinciden (minisplit-frio → "Solo frío").
+    const claveMosaico = (m: { slug: string; valor?: string }) => (m.valor ? slugValor(m.valor) : m.slug);
+    for (const m of delMosaico) cuenta.set(claveMosaico(m), { texto: m.nombre, n: 0, tipo: m.slug });
     // Después, la lista cerrada de la tabla de filtros en su orden (con 0 si
     // ninguna pieza la trae): el panel enseña la especificación completa.
     const cerrados = d.valores ?? [];
-    for (const v of cerrados) if (!cuenta.has(slugValor(v))) cuenta.set(slugValor(v), { texto: v, n: 0, tipo: false });
+    for (const v of cerrados) if (!cuenta.has(slugValor(v))) cuenta.set(slugValor(v), { texto: v, n: 0, tipo: null });
     const conDatos = new Set<string>();
     for (const p of productos) {
       const valores = d.clave === "marca" ? [p.marca] : p.filtros[d.clave] ?? [];
       for (const v of valores) {
         const k = slugValor(v);
-        const c = cuenta.get(k) ?? { texto: v, n: 0, tipo: false };
+        const c = cuenta.get(k) ?? { texto: v, n: 0, tipo: null };
         // El texto de Shopify manda cuando la pieza trae el valor.
         if (!conDatos.has(k)) c.texto = v;
         conDatos.add(k);
@@ -479,7 +482,7 @@ export function panelFiltrosHtml(
     }
     // Orden: mosaico → lista cerrada de la tabla → valores extra de Shopify (alfabético).
     const fijos = new Map<string, number>();
-    [...delMosaico.map((m) => m.slug), ...cerrados.map(slugValor)].forEach((k, i) => {
+    [...delMosaico.map(claveMosaico), ...cerrados.map(slugValor)].forEach((k, i) => {
       if (!fijos.has(k)) fijos.set(k, i);
     });
     const etiquetas = [...cuenta]
@@ -491,7 +494,7 @@ export function panelFiltrosHtml(
       })
       .map(
         ([k, c]) =>
-          `<label${c.tipo ? ` data-tipo="${esc(k)}"` : ""}><input type="checkbox" data-fk="${esc(d.clave)}" value="${esc(k)}"> <span class="flbl">${esc(c.texto)}</span> <span class="count figures">${c.n}</span></label>`,
+          `<label${c.tipo ? ` data-tipo="${esc(c.tipo)}"` : ""}><input type="checkbox" data-fk="${esc(d.clave)}" value="${esc(k)}"> <span class="flbl">${esc(c.texto)}</span> <span class="count figures">${c.n}</span></label>`,
       )
       .join("");
     // Marca (Carla, 2026-10-08): caja "Busca por marca" y solo las marcas que

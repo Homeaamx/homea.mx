@@ -211,6 +211,17 @@
 .skl { display: block; height: 12px; background: var(--homea-n100); }
 .skl-title { height: 16px; }
 .filters .skl { height: 11px; margin: 4px 0; }
+
+/* ══ Macro solo PDF (Carla, 2026-10-14): solo el filtro de Subcategoría y, en
+   lugar de productos, las marcas que manejan esa subcategoría. Cada tarjeta lleva
+   a su página de marca; las arma app/productos/[categoria]/page.tsx desde
+   data/marcas-pdf-subcategorias.json. */
+.pdf-marcas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; }
+.pdf-marcas .brandtile[hidden] { display: none; }
+.pdf-marcas-vacio { margin: 8px 0 0; font-size: 15px; color: var(--homea-black); }
+.pdf-marcas-vacio a { color: inherit; text-decoration: underline; text-decoration-color: var(--homea-gold); text-underline-offset: 3px; }
+@media (max-width: 1023px) { .pdf-marcas { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .pdf-marcas { grid-template-columns: minmax(0, 1fr); } }
 </style>
 </head>
 <body>
@@ -387,111 +398,18 @@
     <!-- Filtros (Shopify Search & Discovery: vendor / type / metafields / opciones de variante) -->
     <aside class="filters">
       <div class="fgroup"><h6>Subcategoría</h6>
-
-        <label data-tipo="chimeneas"><input type="checkbox"> Chimeneas</label>
-        <label data-tipo="calentadores"><input type="checkbox"> Calentadores</label>
-      </div>
-      <div class="fgroup"><h6>Marca</h6>
-        <span class="skl" style="width:72%"></span><span class="skl" style="width:58%"></span><span class="skl" style="width:66%"></span><span class="skl" style="width:49%"></span>
-        <p class="fnote">Marcas y conteos se poblarán al cargar el catálogo de esta macrocategoría.</p>
-      </div>
-      <div class="fgroup"><h6>Gama</h6>
-        <label><input type="checkbox"> Premium</label>
-        <label><input type="checkbox"> Residencial</label>
-        <label><input type="checkbox"> Media</label>
-        <label><input type="checkbox"> Económica</label>
-      </div>
-      <div class="fgroup"><h6>Combustible</h6>
-        <label><input type="checkbox"> Leña</label>
-        <label><input type="checkbox"> Gas</label>
-        <label><input type="checkbox"> Eléctrica</label>
-        <label><input type="checkbox"> Bioetanol</label>
-      </div>
-      <div class="fgroup"><h6>Color / Acabado</h6>
-        <div class="swatches">
-          <span class="sw" title="Acero inoxidable" style="background:linear-gradient(135deg,#d8d8d6,#aeb0b2)"></span>
-          <span class="sw" title="Negro" style="background:#1c1c1c"></span>
-          <span class="sw" title="Blanco" style="background:#f4f2ee"></span>
-          <span class="sw" title="Bronce / Latón" style="background:linear-gradient(135deg,#c9a26a,#8e6f3a)"></span>
-          <span class="sw" title="Cromo" style="background:linear-gradient(135deg,#e8eaec,#b9bec4)"></span>
-        </div>
-        <p class="fnote">Filtra por variantes disponibles (opción Color/Acabado del producto).</p>
-      </div>
-      <div class="fgroup"><h6>Colección · Serie</h6>
-        <span class="skl" style="width:72%"></span><span class="skl" style="width:58%"></span><span class="skl" style="width:66%"></span><span class="skl" style="width:49%"></span>
-        <p class="fnote">Se puebla según la marca activa (metafield <em>specs.serie</em>).</p>
-      </div>
-      <div class="fgroup"><h6>Precio <span style="font-weight:400;color:var(--fg-muted);letter-spacing:.08em">· MXN aprox.</span></h6>
-        <div class="price-slider" id="priceSlider">
-          <div class="ps-values figures"><span id="psMin">$0</span><span class="ps-sep">—</span><span id="psMax">$250,000+</span><span class="ps-cur">MXN</span></div>
-          <div class="ps-track-wrap">
-            <div class="ps-track"></div>
-            <div class="ps-fill" id="psFill"></div>
-            <input type="range" min="0" max="250000" step="5000" value="0" id="psLo" aria-label="Precio mínimo">
-            <input type="range" min="0" max="250000" step="5000" value="250000" id="psHi" aria-label="Precio máximo">
-          </div>
-        </div>
-        <p class="fnote">Filtra por el equivalente aproximado en pesos (metafield <em>filtros.precio_ref_mxn</em>). Cada pieza muestra su precio en su moneda de lista, sin IVA.</p>
+        <label data-tipo="chimeneas"><input type="checkbox" data-fk="subcategoria" value="chimeneas"> Chimeneas</label>
+        <label data-tipo="calentadores"><input type="checkbox" data-fk="subcategoria" value="calentadores"> Calentadores</label>
       </div>
     </aside>
 
     <!-- Grid: los 5 Gaggenau reales ya enriquecidos en homeashop.mx -->
     <div>
       <div class="toolbar">
-        <span class="results figures" id="plpResults">Catálogo en preparación · las piezas de Chimeneas & Calentadores aparecerán aquí</span>
-        <select aria-label="Ordenar"><option value="precio-desc">Precio: mayor a menor ↓</option><option value="precio-asc">Precio: menor a mayor ↓</option><option value="stock-primero">Inventario: de stock a bajo pedido</option><option value="pedido-primero">Inventario: de bajo pedido a stock</option></select>
+        <span class="results figures">Dale click a la marca que te interesa conocer.</span>
       </div>
-      <div class="plp-grid">
-        <div class="pcard pcard--ph" aria-hidden="true">
-          <div class="imgw"><span class="ph"><span class="ph-inner">Producto</span></span></div>
-          <div class="body">
-            <span class="skl" style="width:34%"></span>
-            <span class="skl skl-title" style="width:92%"></span>
-            <span class="skl skl-title" style="width:64%"></span>
-            <span class="skl" style="width:56%"></span>
-            <div class="row"><span class="skl" style="width:38%"></span></div>
-          </div>
-        </div>
-        <div class="pcard pcard--ph" aria-hidden="true">
-          <div class="imgw"><span class="ph"><span class="ph-inner">Producto</span></span></div>
-          <div class="body">
-            <span class="skl" style="width:34%"></span>
-            <span class="skl skl-title" style="width:92%"></span>
-            <span class="skl skl-title" style="width:64%"></span>
-            <span class="skl" style="width:56%"></span>
-            <div class="row"><span class="skl" style="width:38%"></span></div>
-          </div>
-        </div>
-        <div class="pcard pcard--ph" aria-hidden="true">
-          <div class="imgw"><span class="ph"><span class="ph-inner">Producto</span></span></div>
-          <div class="body">
-            <span class="skl" style="width:34%"></span>
-            <span class="skl skl-title" style="width:92%"></span>
-            <span class="skl skl-title" style="width:64%"></span>
-            <span class="skl" style="width:56%"></span>
-            <div class="row"><span class="skl" style="width:38%"></span></div>
-          </div>
-        </div>
-        <div class="pcard pcard--ph" aria-hidden="true">
-          <div class="imgw"><span class="ph"><span class="ph-inner">Producto</span></span></div>
-          <div class="body">
-            <span class="skl" style="width:34%"></span>
-            <span class="skl skl-title" style="width:92%"></span>
-            <span class="skl skl-title" style="width:64%"></span>
-            <span class="skl" style="width:56%"></span>
-            <div class="row"><span class="skl" style="width:38%"></span></div>
-          </div>
-        </div>
-        <div class="pcard pcard--ph" aria-hidden="true">
-          <div class="imgw"><span class="ph"><span class="ph-inner">Producto</span></span></div>
-          <div class="body">
-            <span class="skl" style="width:34%"></span>
-            <span class="skl skl-title" style="width:92%"></span>
-            <span class="skl skl-title" style="width:64%"></span>
-            <span class="skl" style="width:56%"></span>
-            <div class="row"><span class="skl" style="width:38%"></span></div>
-          </div>
-        </div>
+      <div class="pdf-marcas-wrap"><div class="pdf-marcas" data-pdf-marcas><!-- slot:marcas-pdf --><!-- /slot:marcas-pdf --></div>
+      <p class="pdf-marcas-vacio" data-pdf-vacio hidden>Aún no tenemos marcas en esta subcategoría. <a href="contacto.html">Escríbenos</a> y te ayudamos a encontrarla.</p>
       </div>
     </div>
   </div>
@@ -575,6 +493,7 @@
 // Slider de precio (doble handle)
 (function(){
   var lo = document.getElementById('psLo'), hi = document.getElementById('psHi');
+  if (!lo || !hi) return;
   var fill = document.getElementById('psFill'), vMin = document.getElementById('psMin'), vMax = document.getElementById('psMax');
   var MAX = parseInt(hi.max, 10);
   function fmt(n){ return '$' + n.toLocaleString('en-US'); }
@@ -587,6 +506,32 @@
   }
   lo.value = 0; hi.value = MAX; // estado demo (evita la restauración de formulario del navegador)
   lo.addEventListener('input', paint); hi.addEventListener('input', paint); paint();
+})();
+
+// Macro solo PDF: la Subcategoría (casillas y riel) filtra las tarjetas de marca.
+(function(){
+  function aplicar(){
+    var grid = document.querySelector('[data-pdf-marcas]');
+    if (!grid) return;
+    var sel = [].map.call(document.querySelectorAll('aside.filters input[data-fk="subcategoria"]:checked'), function(i){ return i.value; });
+    var n = 0;
+    grid.querySelectorAll('[data-subs]').forEach(function(t){
+      var subs = t.getAttribute('data-subs').split(' ');
+      var ok = !sel.length || sel.some(function(s){ return subs.indexOf(s) > -1; });
+      t.hidden = !ok;
+      if (ok) n++;
+    });
+    var vacio = document.querySelector('[data-pdf-vacio]');
+    if (vacio) vacio.hidden = n > 0;
+  }
+  // El script se vuelve a ejecutar en cada visita (navegación sin recarga):
+  // los avisos a nivel documento se registran una sola vez.
+  if (!window.__pdfMarcas) {
+    window.__pdfMarcas = true;
+    document.addEventListener('change', function(e){ if (e.target.closest && e.target.closest('aside.filters')) aplicar(); });
+    document.addEventListener('catalogo:aplicar', aplicar);
+  }
+  aplicar();
 })();
 </script>
 </body>

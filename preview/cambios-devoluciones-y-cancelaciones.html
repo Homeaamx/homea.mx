@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOMEA — Cambios, devoluciones y cancelaciones</title>
+<link rel="icon" type="image/png" href="assets/favicon-circle.webp">
+<link rel="stylesheet" href="tokens-v2.css">
+<link rel="stylesheet" href="theme.css?v=66">
+<style>
+/* ══ Cambios, devoluciones y cancelaciones (Carla, 2026-10-14) ══
+   Mismo sistema que envios-y-entregas.html (clases ev-*): hero partido, secciones
+   numeradas 01–05 con tarjetas claras, pasos espresso, banda de condiciones y
+   barra oscura de Post Venta. Texto tal cual de la plantilla aprobada. */
+.page-hero.ev-hero{padding:0;background:var(--homea-bone);overflow:hidden}
+.ev-hero-in{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:stretch;min-height:340px}
+.ev-hero-txt{padding:40px clamp(32px,4vw,72px) 48px max(clamp(48px,4vw,96px),calc((100vw - var(--container)) / 2 + clamp(48px,4vw,96px)));display:flex;flex-direction:column;justify-content:center}
+.ev-hero h1{margin:0 0 14px}
+.ev-hero h1 i{font-style:italic}
+.ev-hero .sub{margin:0 0 30px;max-width:44ch;font-weight:400;color:var(--homea-black)}
+.ev-hero .btn{align-self:flex-start}
+/* Ilustración sin fondo (PNG recortado, sombras suaves en alfa): va completa,
+   sin desenfoque ni velo, flotando sobre el bone (Carla, 2026-10-14). */
+.ev-hero-img{display:flex;align-items:center;justify-content:center;padding:28px max(24px,calc((100vw - var(--container)) / 2)) 28px 0}
+.ev-hero-img img{display:block;width:100%;max-width:640px;height:auto}
+
+.ev-body{padding:56px 0 96px}
+/* Encabezado de sección: eyebrow + H2 serif + bajada legible. */
+.ev-head{margin-bottom:32px;max-width:640px}
+.ev-head .eyebrow{margin-bottom:14px}
+.ev-head h2{margin:0 0 10px;font-size:clamp(30px,2.8vw,40px)}
+.ev-head p{margin:0;font-size:var(--fs-md);font-weight:400;line-height:1.5;color:var(--homea-black)}
+/* Texto de tarjetas: 15–16px y tono n600 (más contraste que fg-muted). */
+.ev-card h3{margin:0 0 10px;font-family:var(--font-display);font-size:23px;font-weight:400;line-height:1.2;letter-spacing:-.005em;color:var(--fg)}
+.ev-card p{margin:0;font-size:15px;line-height:1.65;color:var(--homea-black)}
+.ev-card b{color:var(--fg);font-weight:600}
+/* Tarjeta: lift −4px, borde oro y subrayado 28→44px (motion del sistema). */
+.ev-card{position:relative;background:var(--homea-n050);border:1px solid var(--border);padding:32px 30px 34px;
+  transition:transform var(--dur-slow) var(--ease-reveal),box-shadow var(--dur-slow) var(--ease-reveal),border-color var(--dur-med) var(--ease-standard),background var(--dur-med) var(--ease-standard)}
+.ev-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--homea-gold-soft);background:#fff}
+.ev-rule{display:block;width:28px;height:1px;background:var(--homea-gold);margin:22px 0 20px;transition:width var(--dur-slow) var(--ease-reveal)}
+.ev-card:hover .ev-rule{width:44px}
+
+/* Pasos: tarjetas negras con tonos contrastados (Carla, 2026-10-14). */
+.ev-paso{background:var(--homea-espresso);border-color:var(--homea-espresso)}
+.ev-paso h3{color:var(--homea-bone)}
+.ev-paso p{color:var(--homea-n200)}
+.ev-paso b{color:var(--homea-gold-bright)}
+.ev-paso:hover{background:color-mix(in srgb,var(--homea-espresso) 84%,var(--homea-bone));border-color:var(--homea-gold);box-shadow:var(--shadow-lg)}
+.ev-pasos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;counter-reset:none}
+.ev-paso-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.ev-paso-top svg{width:52px;height:52px;flex:none;color:var(--homea-gold);transition:color var(--dur-med) var(--ease-standard),transform var(--dur-slow) var(--ease-reveal)}
+.ev-card:hover .ev-paso-top svg{color:var(--homea-gold-bright);transform:scale(1.06)}
+.ev-num{font-family:var(--font-display);font-size:48px;line-height:.9;color:var(--homea-gold-deep);font-variant-numeric:tabular-nums lining-nums;transition:color var(--dur-med) var(--ease-standard)}
+.ev-card:hover .ev-num{color:var(--homea-gold-bright)}
+
+/* Franja de tiempos */
+.ev-tiempos{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--homea-n100);border:1px solid var(--border)}
+.ev-tiempos li{display:flex;align-items:center;gap:22px;padding:30px clamp(24px,3vw,44px);transition:background var(--dur-med) var(--ease-standard)}
+.ev-tiempos li:hover{background:var(--homea-greige)}
+.ev-tiempos li+li{border-left:1px solid var(--border-strong)}
+.ev-tiempos svg{width:46px;height:46px;flex:none;color:var(--homea-gold-deep);transition:transform var(--dur-slow) var(--ease-reveal)}
+.ev-tiempos li:hover svg{transform:translateY(-2px)}
+.ev-t-lbl{display:block;margin-bottom:6px;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-text)}
+.ev-t-val{display:block;font-family:var(--font-display);font-size:26px;font-weight:400;line-height:1.15;color:var(--fg);font-variant-numeric:tabular-nums lining-nums}
+.ev-t-nota{display:block;margin-top:4px;font-size:14px;color:var(--homea-black)}
+
+/* Prepárate para recibir */
+.ev-recibir{margin-top:88px}
+.ev-tips{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+/* Ícono suelto (sin marco); al hover el trazo pasa a oro y la figura se rellena de oro. */
+.ev-tip-ic{display:block;color:var(--homea-black)}
+.ev-tip-ic svg{display:block;width:56px;height:56px;fill:transparent;
+  transition:fill var(--dur-slow) var(--ease-standard),color var(--dur-med) var(--ease-standard),transform var(--dur-slow) var(--ease-reveal)}
+.ev-card:hover .ev-tip-ic{color:var(--homea-gold-deep)}
+.ev-card:hover .ev-tip-ic svg{fill:var(--homea-gold-soft);transform:scale(1.06)}
+
+/* Barra de ayuda Post Venta */
+.ev-ayuda{margin-top:40px;background:var(--homea-black);color:var(--homea-bone);display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:24px 48px;padding:36px clamp(28px,3.5vw,52px)}
+.ev-ayuda-txt{display:flex;align-items:center;gap:26px}
+.ev-ayuda-txt svg{width:54px;height:54px;flex:none;color:var(--homea-gold)}
+.ev-ayuda h2{margin:0 0 6px;color:var(--homea-bone);font-size:clamp(24px,2.2vw,30px)}
+.ev-ayuda p{margin:0;font-size:15px;line-height:1.55;color:var(--dark-fg-muted)}
+.ev-ayuda-linea{padding-left:40px;border-left:1px solid var(--dark-border)}
+.ev-ayuda-linea .ev-t-lbl{color:var(--homea-gold)}
+.ev-ayuda-num{display:block;white-space:nowrap;font-family:var(--font-display);font-size:22px;line-height:1.2;color:var(--homea-bone);font-variant-numeric:tabular-nums lining-nums}
+.ev-ayuda .btn{padding:16px 26px;background:transparent;color:var(--homea-gold-bright);border-color:var(--homea-gold)}
+.ev-ayuda .btn:hover{background:var(--homea-gold);color:var(--homea-black)}
+.ev-ayuda .btn svg,.ev-hero .btn svg{width:16px;height:16px;transition:transform var(--dur-med) var(--ease-standard)}
+.ev-ayuda .btn:hover svg,.ev-hero .btn:hover svg{transform:translateX(4px)}
+
+
+@media (prefers-reduced-motion:reduce){
+  .ev-card,.ev-card *,.ev-tiempos *,.ev-ayuda *{transition:none!important}
+  .ev-card:hover{transform:none}
+}
+@media (max-width:1180px){
+  .ev-pasos{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ev-ayuda{grid-template-columns:minmax(0,1fr) auto}
+  .ev-ayuda-txt{grid-column:1/-1}
+  .ev-ayuda-linea{padding-left:0;border-left:0}
+}
+@media (max-width:900px){
+  .ev-hero-in{grid-template-columns:1fr;min-height:0}
+  .ev-hero-txt{padding:32px 24px 36px}
+  .ev-hero-img{order:-1;padding:24px 24px 0}
+  .ev-body{padding:48px 0 72px}
+  .ev-tiempos{grid-template-columns:1fr}
+  .ev-tiempos li{padding:24px}
+  .ev-tiempos li+li{border-left:0;border-top:1px solid var(--border-strong)}
+  .ev-tips{grid-template-columns:1fr}
+  .ev-recibir{margin-top:64px}
+}
+@media (max-width:560px){
+  .ev-pasos{grid-template-columns:1fr}
+  .ev-card{padding:26px 22px 28px}
+  .ev-hero-txt{padding:28px 16px 32px}
+  .ev-ayuda{grid-template-columns:1fr;padding:30px 22px}
+  .ev-ayuda-txt{align-items:flex-start;gap:18px}
+  .ev-ayuda-txt svg{width:42px;height:42px}
+  .ev-hero .btn,.ev-ayuda .btn{width:100%;justify-content:center}
+}
+
+/* ── Propio de esta página ── */
+/* Título largo: un punto menos para que quede en dos líneas, como la plantilla. */
+.ev-hero h1{font-size:clamp(38px,3.4vw,52px)}
+.ev-ayuda h2{font-size:clamp(22px,1.9vw,26px)}
+/* Título largo: el texto toma el ancho y número + botón se apilan a la derecha. */
+.ev-ayuda{grid-template-columns:minmax(0,1fr) auto;gap:18px 48px}
+.ev-ayuda-txt{grid-row:1/3}
+.ev-ayuda-linea{grid-column:2}
+.ev-ayuda .btn{grid-column:2;justify-content:center}
+.cd-hero-img{position:relative;display:block;padding:0;min-height:420px}
+/* Fondo de la foto igualado al bone; el borde izquierdo se disuelve sin desenfoque. */
+.cd-hero-img img{position:absolute;inset:0;width:100%;max-width:none;height:100%;object-fit:cover;object-position:55% 45%;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 16%);mask-image:linear-gradient(to right,transparent 0,#000 16%)}
+.cd-head{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:0 28px;max-width:860px}
+.cd-n{font-family:var(--font-display);font-size:clamp(56px,5vw,76px);line-height:.85;color:var(--homea-gold);font-variant-numeric:tabular-nums lining-nums;padding-right:28px;border-right:1px solid var(--homea-gold-soft)}
+.cd-head h2{margin-bottom:8px}
+.cd-sec{margin-top:96px}
+.ev-tips.cd-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ev-tips.cd-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cd-4 .ev-card{padding:30px 26px 32px}
+/* Plazos y condiciones: banda greige con divisiones */
+.cd-cond{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--homea-n100);border:1px solid var(--border)}
+.cd-cond>li{padding:34px clamp(24px,2.6vw,40px) 38px;transition:background var(--dur-med) var(--ease-standard)}
+.cd-cond>li+li{border-left:1px solid var(--border-strong)}
+.cd-cond>li:hover{background:var(--homea-greige)}
+.cd-cond svg{display:block;width:48px;height:48px;margin-bottom:22px;color:var(--homea-gold-deep);fill:transparent;transition:fill var(--dur-slow) var(--ease-standard),transform var(--dur-slow) var(--ease-reveal)}
+.cd-cond>li:hover svg{fill:var(--homea-gold-soft);transform:translateY(-2px)}
+.cd-cond h3{margin:0 0 10px;font-family:var(--font-display);font-size:23px;font-weight:400;line-height:1.2;color:var(--fg)}
+.cd-cond p{margin:0;font-size:15px;line-height:1.65;color:var(--homea-black)}
+.cd-cond a{color:inherit;text-decoration:underline;text-decoration-color:var(--homea-gold);text-underline-offset:3px;overflow-wrap:anywhere}
+.cd-cond a:hover{color:var(--accent-text)}
+.cd-lista{margin:12px 0 0;padding:0 0 0 18px;font-size:15px;line-height:1.6;color:var(--homea-black)}
+.cd-lista li+li{margin-top:6px}
+.cd-lista li::marker{color:var(--homea-gold)}
+.cd-lista b{font-weight:600}
+@media (max-width:1180px){
+  .ev-tips.cd-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ev-ayuda-txt{grid-row:auto;grid-column:1/-1}
+  .ev-ayuda-linea{grid-column:1}
+}
+@media (max-width:900px){
+  .cd-hero-img{min-height:240px}
+  .cd-hero-img img{-webkit-mask-image:none;mask-image:none}
+  .cd-sec{margin-top:72px}
+  .cd-cond{grid-template-columns:1fr}
+  .cd-cond>li+li{border-left:0;border-top:1px solid var(--border-strong)}
+  .ev-tips.cd-2{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .ev-tips.cd-4{grid-template-columns:1fr}
+  .ev-ayuda{grid-template-columns:1fr}
+  .ev-ayuda-linea,.ev-ayuda .btn{grid-column:auto}
+  .cd-head{gap:0 18px;align-items:start}
+  .cd-n{font-size:44px;padding-right:18px}
+}
+</style>
+</head>
+<body>
+<!-- Utility bar -->
+<div class="ubar"><div class="container">
+  <div class="u-left">
+    <!-- Contáctanos: se abre al pasar el cursor o con clic/tap (v2.js alterna .is-open). -->
+    <div class="u-contact">
+      <button class="u-contact-btn" type="button" aria-expanded="false" aria-controls="u-contact-panel">Contáctanos <svg viewBox="0 0 12 12" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
+      <div class="u-contact-panel" id="u-contact-panel">
+        <p><b>Teléfono de oficina</b><a href="tel:+524422163552">(442) 216 3552</a></p>
+        <p><b>WhatsApp</b><a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_ubar">+52 446 144 6318</a></p>
+        <p><b>Showroom</b><a class="u-addr" href="https://maps.app.goo.gl/LS9rqfHgK3qjFV926" target="_blank" rel="noopener"><span>Del Ahuehuete 7, Álamos 1a Sección, 76160 Santiago de Querétaro, Qro.</span></a></p>
+        <p><b>Correo electrónico</b><a href="mailto:carteaga@homea.mx">carteaga@homea.mx</a></p>
+      </div>
+    </div>
+    <span class="u-sep" aria-hidden="true"></span>
+    <!-- Slot de temporada: por ahora muestra el tipo de cambio del día (FIX de Banxico, resuelto en el servidor por lib/tipoCambio.ts). En temporadas, reemplazar por el mensaje de campaña. -->
+    <span class="u-fx" id="u-fx" data-fx-fallback="17.21"><span class="u-fx-lbl">Tipo de cambio · </span>1 USD = <strong>17.21</strong> MXN</span>
+  </div>
+  <a class="u-ofertas" href="ofertas.html">Ofertas exclusivas</a>
+  <div class="u-right">
+    <div class="u-social" aria-label="Síguenos en redes sociales">
+      <a class="u-soc" href="https://www.instagram.com/homea_mx/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a class="u-soc" href="https://www.facebook.com/homea.mx/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 9V7.2c0-.8.2-1.2 1.3-1.2H17V3h-2.6C11.5 3 11 4.7 11 6.9V9H9v3h2v9h3v-9h2.3l.4-3H14z"/></svg></a>
+      <a class="u-soc" href="https://www.tiktok.com/@homea_mx" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3c.3 2 1.6 3.5 3.5 3.8v2.5c-1.3 0-2.5-.4-3.5-1.1v5.7a5.4 5.4 0 1 1-5.4-5.4c.3 0 .6 0 .9.1v2.7a2.7 2.7 0 1 0 1.9 2.6V3h2.6z"/></svg></a>
+      <a class="u-soc" href="https://www.youtube.com/channel/UC5SHtEFZdDk5UuGfkfIWl1w" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 8.2a2.6 2.6 0 0 0-1.8-1.8C18.6 6 12 6 12 6s-6.6 0-8.2.4A2.6 2.6 0 0 0 2 8.2 27 27 0 0 0 1.7 12 27 27 0 0 0 2 15.8a2.6 2.6 0 0 0 1.8 1.8C5.4 18 12 18 12 18s6.6 0 8.2-.4a2.6 2.6 0 0 0 1.8-1.8c.3-1.2.3-3.8.3-3.8s0-2.6-.3-3.8zM10 15V9l5 3-5 3z"/></svg></a>
+    </div>
+  </div>
+</div></div>
+
+<!-- Nav -->
+<nav class="site-nav">
+<!-- Fila del logo (escritorio): centrado y grande. Con el nav forma el bloque fijo al hacer scroll. -->
+<div class="nav-brandrow"><div class="container">
+  <a class="brand brand-top" href="home.html" aria-label="Inicio">
+    <img width="400" height="157" decoding="async" src="assets/wordmark-black.webp" alt="HOMEA Premium">
+  </a>
+</div></div>
+<div class="container nav-main">
+  <a class="brand brand-bar" href="home.html" aria-label="Inicio">
+    <img width="400" height="157" decoding="async" src="assets/wordmark-black.webp" alt="HOMEA Premium">
+  </a>
+  <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <div class="has-mega"><a href="categoria-cocina-y-bar.html" data-activo="/productos">Productos</a>
+      <div class="mega-panel mega-flyout" data-mega>
+        <div class="mega-flyout-main">
+          <div class="mega-rail" role="tablist" aria-label="Categorías de producto">
+            <button class="mega-cat" data-pane="cocina" data-href="categoria-cocina-y-bar.html" data-img="assets/photos/cat-cocina-bar.webp" data-menu-img="assets/photos/menu/cat-cocina-bar.webp" data-pos="30% 50%" data-label="Cocina y Bar">Cocina y Bar</button>
+            <button class="mega-cat" data-pane="exterior" data-href="categoria-exterior.html" data-img="assets/photos/cat-exterior-asador.webp" data-menu-img="assets/photos/menu/cat-exterior-asador.webp" data-label="Exterior">Exterior</button>
+            <button class="mega-cat" data-pane="electro" data-href="categoria-electrodomesticos-menores.html" data-img="assets/photos/cat-electro-menores-kitchenaid-mixer.webp" data-menu-img="assets/photos/menu/cat-electro-menores-kitchenaid-mixer.webp" data-label="Electrodomésticos menores">Electrodomésticos menores</button>
+            <button class="mega-cat" data-pane="lavanderia" data-href="categoria-lavanderia.html" data-img="assets/photos/cat-cuidado-ropa.webp" data-menu-img="assets/photos/menu/cat-cuidado-ropa.webp" data-label="Lavandería">Lavandería</button>
+            <button class="mega-cat" data-pane="banos" data-href="categoria-banos.html" data-img="assets/photos/cat-banos.webp" data-menu-img="assets/photos/menu/cat-banos.webp" data-label="Baños">Baños</button>
+            <button class="mega-cat" data-pane="aire-acondicionado" data-href="categoria-aire-acondicionado.html" data-img="assets/photos/minisplit.webp" data-menu-img="assets/photos/menu/minisplit.webp" data-label="Aire acondicionado">Aire acondicionado</button>
+            <button class="mega-cat" data-pane="vapor" data-href="categoria-vapor-y-sauna.html" data-img="assets/photos/cat-vapor-sauna.webp" data-menu-img="assets/photos/menu/cat-vapor-sauna.webp" data-label="Vapor y Sauna">Vapor y Sauna</button>
+            <button class="mega-cat" data-pane="wellness" data-href="categoria-wellness.html" data-img="assets/photos/cat-wellness.webp" data-menu-img="assets/photos/menu/cat-wellness.webp" data-label="Wellness">Wellness</button>
+            <button class="mega-cat" data-pane="recubrimientos" data-href="categoria-recubrimientos-y-superficies.html" data-img="assets/photos/cat-recubrimientos.webp" data-menu-img="assets/photos/menu/cat-recubrimientos.webp" data-label="Recubrimientos y Superficies">Recubrimientos y Superficies</button>
+            <button class="mega-cat" data-pane="chimeneas" data-href="categoria-chimeneas-y-calentadores.html" data-img="assets/photos/cat-chimeneas.webp" data-menu-img="assets/photos/menu/cat-chimeneas.webp" data-label="Chimeneas &amp; Calentadores">Chimeneas &amp; Calentadores</button>
+          </div>
+          <div class="mega-detail">
+            <div class="mega-pane" data-pane="cocina"><div class="mega-subcols is-fixed">
+              <div class="mega-col">
+                <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--refrigeracion.html">Refrigeración</a></h5> <a href="subcategoria-cocina-y-bar--refrigeracion--refrigeradores.html">Refrigeradores</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=congeladores">Congeladores</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=centros-de-bebida">Centros de bebida</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=frigobares">Frigobares</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=maquinas-de-hielo">Máquinas de hielo</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=cavas-de-vino">Cavas de vino</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=cajones-refrigerantes">Cajones refrigerantes</a><a href="subcategoria-cocina-y-bar--refrigeracion.html?tipo=accesorios-refrigeracion">Accesorios de refrigeración</a></div>
+                <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--lavavajillas.html">Lavavajillas</a></h5> <a href="subcategoria-cocina-y-bar--lavavajillas.html?tipo=lavavajillas-empotrable">Lavavajillas empotrable</a><a href="subcategoria-cocina-y-bar--lavavajillas.html?tipo=lavavajillas-de-piso">Lavavajillas de piso</a><a href="subcategoria-cocina-y-bar--lavavajillas.html?tipo=accesorios-lavavajillas">Accesorios de lavavajillas</a></div>
+              </div>
+              <div class="mega-col">
+                <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--coccion.html">Cocción</a></h5> <a href="subcategoria-cocina-y-bar--coccion.html?tipo=estufas">Estufas</a><a href="subcategoria-cocina-y-bar--coccion--parrillas.html">Parrillas</a><a href="subcategoria-cocina-y-bar--coccion.html?tipo=hornos">Hornos</a><a href="subcategoria-cocina-y-bar--coccion.html?tipo=microondas">Microondas</a><a href="subcategoria-cocina-y-bar--coccion--campanas.html">Campanas</a><a href="subcategoria-cocina-y-bar--coccion.html?tipo=cajones">Cajones</a><a href="subcategoria-cocina-y-bar--coccion.html?tipo=cafeteras-empotrables">Cafeteras</a><a href="subcategoria-cocina-y-bar--coccion.html?tipo=accesorios-coccion">Accesorios de cocción</a></div>
+                <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--trituradores.html">Trituradores</a></h5> <a href="subcategoria-cocina-y-bar--trituradores.html?tipo=trituradores">Trituradores</a></div>
+              </div>
+              <div class="mega-col">
+                <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--tarjas-y-griferia.html">Tarjas y Monomandos</a></h5> <a href="subcategoria-cocina-y-bar--tarjas-y-griferia.html?tipo=tarjas">Tarjas</a><a href="subcategoria-cocina-y-bar--tarjas-y-griferia.html?tipo=monomandos">Monomandos</a><a href="subcategoria-cocina-y-bar--tarjas-y-griferia.html?tipo=accesorios-tarjas-monomandos">Accesorios de Tarjas y Monomandos</a></div>
+                <div class="mega-subcol"><h5><a href="subcategoria-cocina-y-bar--filtros-y-purificadores-de-agua.html">Purificadores y Despachadores de Agua</a></h5> <a href="subcategoria-cocina-y-bar--filtros-y-purificadores-de-agua.html?tipo=purificadores-de-agua">Purificadores de agua</a><a href="subcategoria-cocina-y-bar--filtros-y-purificadores-de-agua.html?tipo=despachadores-de-agua">Despachadores de agua</a></div>
+              </div>
+            </div><a class="mega-all" href="categoria-cocina-y-bar.html">Ver todo Cocina y Bar</a></div>
+
+            <div class="mega-pane" data-pane="exterior"><div class="mega-subcols is-grid2" data-cols="2">
+              <div class="mega-subcol"><h5><a href="subcategoria-exterior--asadores-y-hornos.html">Asadores &amp; Hornos</a></h5>
+                <a href="subcategoria-exterior--asadores-y-hornos.html?tipo=asadores-empotrables">Asadores empotrables</a><a href="subcategoria-exterior--asadores-y-hornos.html?tipo=asadores-con-carrito">Asadores con carrito</a><a href="subcategoria-exterior--asadores-y-hornos.html?tipo=hornos-de-pizza">Hornos de pizza</a><a href="subcategoria-exterior--asadores-y-hornos.html?tipo=accesorios-asadores-hornos">Accesorios Asadores &amp; Hornos</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=quemador-lateral">Quemador lateral</a></h5><a href="categoria-exterior.html?tipo=quemador-lateral">Ver más</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=plancha-teppanyaki">Plancha Teppanyaki</a></h5><a href="categoria-exterior.html?tipo=plancha-teppanyaki">Ver más</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=hieleras">Hieleras</a></h5><a href="categoria-exterior.html?tipo=hieleras">Ver más</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=gabinetes">Gabinetes</a></h5><a href="categoria-exterior.html?tipo=gabinetes">Ver más</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html" data-filtro="alberca">Alberca</a></h5><a href="categoria-exterior.html" data-filtro="alberca">Ver más</a></div>
+              <div class="mega-subcol"><h5><a href="categoria-exterior.html?tipo=ahumadores">Ahumadores</a></h5><a href="categoria-exterior.html?tipo=ahumadores">Ver más</a></div>
+            </div><a class="mega-all" href="categoria-exterior.html">Ver todo Exterior</a></div>
+
+            <div class="mega-pane" data-pane="electro"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-electrodomesticos-menores.html">Electrodomésticos menores</a></h5>
+                <a href="categoria-electrodomesticos-menores.html?tipo=licuadoras">Licuadoras</a><a href="categoria-electrodomesticos-menores.html?tipo=batidoras">Batidoras</a><a href="categoria-electrodomesticos-menores.html?tipo=tostadoras">Tostadoras</a><a href="categoria-electrodomesticos-menores.html?tipo=exprimidor-de-citricos">Exprimidor de cítricos</a><a href="categoria-electrodomesticos-menores.html?tipo=cafeteras">Cafeteras</a><a href="categoria-electrodomesticos-menores.html?tipo=accesorios-de-cocina-pequenos">Accesorios de cocina pequeños</a></div>
+            </div><a class="mega-all" href="categoria-electrodomesticos-menores.html">Ver todo Electrodomésticos menores</a></div>
+
+            <div class="mega-pane" data-pane="lavanderia"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-lavanderia.html">Lavandería</a></h5>
+                <a href="categoria-lavanderia.html?tipo=lavadoras">Lavadoras</a><a href="categoria-lavanderia.html?tipo=secadoras">Secadoras</a><a href="categoria-lavanderia.html?tipo=lavasecadoras-2-en-1">Lavasecadoras (2 en 1)</a><a href="categoria-lavanderia.html?tipo=centros-de-lavado">Centros de Lavado</a></div>
+            </div><a class="mega-all" href="categoria-lavanderia.html">Ver todo Lavandería</a></div>
+
+            <div class="mega-pane" data-pane="banos"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-banos.html">Baños</a></h5>
+                <a href="categoria-banos.html">Tarjas</a><a href="categoria-banos.html?tipo=monomandos">Monomandos</a><a href="categoria-banos.html?tipo=regaderas">Regaderas</a><a href="categoria-banos.html?tipo=tinas">Tinas</a><a href="categoria-banos.html?tipo=accesorios-de-banos">Accesorios de Baños</a></div>
+            </div><a class="mega-all" href="categoria-banos.html">Ver todo Baños</a></div>
+
+            <div class="mega-pane" data-pane="aire-acondicionado"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-aire-acondicionado.html">Aire acondicionado</a></h5>
+                <a href="categoria-aire-acondicionado.html?tipo=minisplit-frio">Minisplit Frío</a><a href="categoria-aire-acondicionado.html?tipo=minisplit-frio-y-calor">Minisplit Frío &amp; Calor</a></div>
+            </div><a class="mega-all" href="categoria-aire-acondicionado.html">Ver todo Aire acondicionado</a></div>
+
+            <div class="mega-pane" data-pane="vapor"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-vapor-y-sauna.html">Vapor y Sauna</a></h5>
+                <a href="categoria-vapor-y-sauna.html?tipo=vapor">Vapor</a><a href="categoria-vapor-y-sauna.html?tipo=sauna-interior">Sauna interior</a><a href="categoria-vapor-y-sauna.html?tipo=sauna-exterior">Sauna exterior</a></div>
+            </div><a class="mega-all" href="categoria-vapor-y-sauna.html">Ver todo Vapor y Sauna</a></div>
+
+            <div class="mega-pane" data-pane="wellness"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-wellness.html">Wellness</a></h5>
+                <a href="categoria-wellness.html?tipo=tinas-de-inmersion">Tinas de Inmersión</a><a href="categoria-wellness.html?tipo=carril-de-nado">Carril de Nado</a><a href="categoria-wellness.html?tipo=sillon-para-masajes">Sillón para masajes</a><a href="categoria-wellness.html?tipo=jacuzzi">Jacuzzi</a></div>
+            </div><a class="mega-all" href="categoria-wellness.html">Ver todo Wellness</a></div>
+
+            <div class="mega-pane" data-pane="recubrimientos"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-recubrimientos-y-superficies.html">Recubrimientos y Superficies</a></h5>
+                <a href="categoria-recubrimientos-y-superficies.html?tipo=pisos">Pisos</a><a href="categoria-recubrimientos-y-superficies.html?tipo=muros">Muros</a><a href="categoria-recubrimientos-y-superficies.html?tipo=piedras-sinterizadas">Piedras Sinterizadas</a></div>
+            </div><a class="mega-all" href="categoria-recubrimientos-y-superficies.html">Ver todo Recubrimientos y Superficies</a></div>
+
+            <div class="mega-pane" data-pane="chimeneas"><div class="mega-subcols">
+              <div class="mega-subcol"><h5><a href="categoria-chimeneas-y-calentadores.html">Chimeneas &amp; Calentadores</a></h5>
+                <a href="categoria-chimeneas-y-calentadores.html?tipo=chimeneas">Chimeneas</a><a href="categoria-chimeneas-y-calentadores.html?tipo=calentadores">Calentadores</a></div>
+            </div><a class="mega-all" href="categoria-chimeneas-y-calentadores.html">Ver todo Chimeneas &amp; Calentadores</a></div>
+          </div>
+          <a class="mega-feature" data-mega-feature href="categoria-cocina-y-bar.html">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="lazy" decoding="async" alt="" data-mega-img>
+            <span class="mega-feature-cap"><span>Categoría</span><strong data-mega-label>Cocina y Bar</strong></span>
+          </a>
+          <div class="mega-intro" data-mega-intro aria-hidden="true">
+            <svg class="mega-intro-h" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M23,19 H35.5 V84 H23 Z M65,19 H77.5 V84 H65 Z M65,44.8 L42,47.4 L42,53.8 L65,56.4 Z M70.5,50.6 A4.5,4.5 0 1,0 61.5,50.6 A4.5,4.5 0 1,0 70.5,50.6 Z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="has-mega has-mega--brands"><a href="marcas.html">Marcas</a>
+      <div class="mega-panel mega-brands">
+        <div class="mega-brands-head">
+          <span class="eyebrow">Marcas oficiales · A–Z</span>
+          <a class="mega-all" href="marcas.html">Ver todas las marcas</a>
+        </div>
+        <div class="mega-brands-cols" role="list"><a href="marca-acros.html">Acros</a><a href="marca-alfa-forni.html">Alfa Forni</a><a href="marca-alfresco.html">Alfresco</a><a href="marca-artisan.html">Artisan</a><a href="marca-asko.html">Asko</a><a href="marca-axcent.html">Axcent</a><a href="marca-benessi.html">Benessi</a><a href="marca-bertazzoni.html">Bertazzoni</a><a href="marca-blanco.html">Blanco</a><a href="marca-blaze.html">Blaze</a><a href="marca-bosch.html">Bosch</a><a href="marca-brizo.html">Brizo</a><a href="marca-broil-king.html">Broil King</a><a href="marca-cafe.html">Café</a><a href="marca-catalano.html">Catalano</a><a href="marca-clearlight.html">Clearlight</a><a href="marca-commodore.html">Commodore</a><a href="marca-cove.html">Cove</a><a href="marca-coyote.html">Coyote</a><a href="marca-dawn.html">Dawn</a><a href="marca-delta.html">Delta</a><a href="marca-dexa.html">Dexa</a><a href="marca-easy.html">Easy</a><a href="marca-eclipse.html">Eclipse</a><a href="marca-electrolux.html">Electrolux</a><a href="marca-elica.html">Elica</a><a href="marca-faber.html">Faber</a><a href="marca-falmec.html">Falmec</a><a href="marca-firplak.html">Firplak</a><a href="marca-fontana.html">Fontana</a><a href="marca-foster.html">Foster</a><a href="marca-franke.html">Franke</a><a href="marca-frigidaire.html">Frigidaire</a><a href="marca-fulgor-milano.html">Fulgor Milano</a><a href="marca-gaggenau.html">Gaggenau</a><a href="marca-ge-profile.html">GE Profile</a><a href="marca-gessi.html">Gessi</a><a href="marca-haier.html">Haier</a><a href="marca-hergom.html">Hergom</a><a href="marca-hoshizaki.html">Hoshizaki</a><a href="marca-i-drain.html">I-Drain</a><a href="marca-iem.html">IEM</a><a href="marca-insinkerator.html">InSinkErator</a><a href="marca-invisacook.html">InvisaCook</a><a href="marca-io-mabe.html">IO Mabe</a><a href="marca-jacuzzi.html">Jacuzzi</a><a href="marca-josper.html">Josper</a><a href="marca-kaldewei.html">Kaldewei</a><a href="marca-kalt.html">Kalt</a><a href="marca-kamado-joe.html">Kamado Joe</a><a href="marca-kele-master-sinks.html">Kele Master Sinks</a><a href="marca-kitchenaid.html">KitchenAid</a><a href="marca-kraus.html">Kraus</a><a href="marca-lynx.html">Lynx</a><a href="marca-mabe.html">Mabe</a><a href="marca-masterbuilt.html">Masterbuilt</a><a href="marca-maytag.html">Maytag</a><a href="marca-miele.html">Miele</a><a href="marca-monogram.html">Monogram</a><a href="marca-mont-alpi.html">Mont Alpi</a><a href="marca-mr-steam.html">MrSteam</a><a href="marca-nantucket.html">Nantucket</a><a href="marca-nobili.html">Nobili</a><a href="marca-onix.html">Onix</a><a href="marca-peerless.html">Peerless</a><a href="marca-pitt-cooking.html">Pitt Cooking</a><a href="marca-poletti-sinks.html">Poletti Sinks</a><a href="marca-sapphire.html">Sapphire</a><a href="marca-sauna-estilo.html">Sauna Estilo</a><a href="marca-schock.html">Schock</a><a href="marca-scotsman.html">Scotsman</a><a href="marca-sedona-by-lynx.html">Sedona by Lynx</a><a href="marca-smeg.html">Smeg</a><a href="marca-sub-zero.html">Sub-Zero</a><a href="marca-summit.html">Summit</a><a href="marca-supra.html">Supra</a><a href="marca-tecnolam.html">Tecnolam</a><a href="marca-teka.html">Teka</a><a href="marca-the-galley.html">The Galley</a><a href="marca-thermador.html">Thermador</a><a href="marca-thor.html">Thor</a><a href="marca-tradewind.html">Tradewind</a><a href="marca-treesse.html">Treesse</a><a href="marca-valsir.html">Valsir</a><a href="marca-vass.html">Vass</a><a href="marca-viking.html">Viking</a><a href="marca-whirlpool.html">Whirlpool</a><a href="marca-wolf.html">Wolf</a><a href="marca-wppo.html">WPPO</a></div>
+      </div>
+    </div>
+    <a href="b2b.html">Proyectos</a>
+    <a href="ofertas.html">Ofertas</a>
+    <a href="guias.html">Guías</a>
+    <a class="nav-sec" href="herramientas.html">Herramientas</a>
+    <a class="nav-sec" href="garantias-instalacion.html">Garantías</a>
+    <a class="nav-sec" href="nosotros.html">Nosotros</a>
+    <a class="nav-sec" href="contacto.html">Contacto</a>
+  </div>
+  <div class="nav-icons" role="group" aria-label="Buscar, wishlist y mi proyecto">
+    <a class="nav-ic nav-ic-search" href="home.html" aria-label="Buscar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg></a>
+    <a class="nav-ic wl-open" href="wishlist.html" aria-label="Wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.9 13a4.8 4.8 0 0 1 0-6.8 4.7 4.7 0 0 1 6.7 0l.4.4.4-.4a4.7 4.7 0 0 1 6.7 0 4.8 4.8 0 0 1 0 6.8Z"/></svg><span class="wl-count figures" hidden>0</span></a>
+    <a class="nav-ic nav-proyecto cart-open" href="mi-proyecto.html" aria-label="Mi proyecto"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="5" width="15" height="15.5"/><path d="M9 5V3.5h6V5"/><path d="M8.5 10.5h7M8.5 14h7M8.5 17.5h4"/></svg><span class="nav-proyecto-lbl">Mi proyecto</span><span class="cart-count figures" hidden>0</span></a>
+  </div>
+</div></nav>
+
+
+<!-- Hero: texto | foto a sangre (fondo de la foto igualado al bone) -->
+<header class="page-hero ev-hero">
+  <div class="ev-hero-in">
+    <div class="ev-hero-txt">
+      <div class="crumbs"><a href="home.html">Inicio</a><span class="sep">·</span><span>Cambios, devoluciones y cancelaciones</span></div>
+      <h1>Cambios, devoluciones y <i>cancelaciones</i>.</h1>
+      <p class="sub">Queremos que tu compra sea una gran experiencia. Aquí te explicamos, de forma clara y sencilla, en qué casos aplican los cambios, devoluciones y cancelaciones.</p>
+    </div>
+    <div class="ev-hero-img cd-hero-img">
+      <img width="1536" height="1024" srcset="assets/photos/cambios-devoluciones-homea-cliente-paquete-640.webp 640w, assets/photos/cambios-devoluciones-homea-cliente-paquete-960.webp 960w, assets/photos/cambios-devoluciones-homea-cliente-paquete-1280.webp 1280w, assets/photos/cambios-devoluciones-homea-cliente-paquete.webp 1536w" sizes="(max-width: 900px) 100vw, 50vw" src="assets/photos/cambios-devoluciones-homea-cliente-paquete-1280.webp" alt="Cliente firma la devolución de dos cajas HOMEA Premium con una flecha dorada de regreso" fetchpriority="high" decoding="async">
+    </div>
+  </div>
+</header>
+
+<section class="ev-body"><div class="container">
+
+  <!-- 01 · Productos no entregados -->
+  <div class="ev-head cd-head" id="no-entregados">
+    <span class="cd-n" aria-hidden="true">01</span>
+    <div><h2>Cancelaciones y devoluciones de productos no entregados</h2>
+    <p>Aplica cuando el producto ya fue pagado pero aún no se ha entregado.</p></div>
+  </div>
+  <ul class="ev-tips cd-4 reveal">
+    <li class="ev-card ev-tip">
+      <span class="ev-tip-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5z"/><path d="M3.5 7.5 12 12l8.5-4.5M12 12v9"/></svg></span>
+      <span class="ev-rule" aria-hidden="true"></span>
+      <h3>Sin inventario</h3><p>El producto fue pagado y no tenemos inventario, o la fecha de entrega ya no es adecuada para ti.</p></li>
+    <li class="ev-card ev-tip">
+      <span class="ev-tip-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="1"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 16.5h.01M12 16.5h.01"/></svg></span>
+      <span class="ev-rule" aria-hidden="true"></span>
+      <h3>Retraso en la entrega</h3><p>Si el tiempo de entrega ha superado la fecha estipulada.</p></li>
+    <li class="ev-card ev-tip">
+      <span class="ev-tip-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h5"/><path d="M13.5 3v4.5H18V10"/><path d="M8 11h6M8 14h4"/><path d="m19.3 12.7 1.4 1.4-6 6-2.2.8.8-2.2z"/></svg></span>
+      <span class="ev-rule" aria-hidden="true"></span>
+      <h3>Solicitud anticipada</h3><p>Puedes solicitar la devolución aunque la fecha de entrega aún no haya transcurrido, aplicando una penalización del 20% del monto pagado, por gastos administrativos, importación, fletes, aranceles y almacenaje.</p></li>
+    <li class="ev-card ev-tip">
+      <span class="ev-tip-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 2.5 20h19z"/><path d="M12 10v4.5"/><path d="M12 17.3h.01"/></svg></span>
+      <span class="ev-rule" aria-hidden="true"></span>
+      <h3>Modelos especiales</h3><p>En algunos modelos “Fuera de Cuadro Básico” o “Fuera de Línea” (no de stock) que se importan de forma exclusiva, no aplica devolución.</p></li>
+  </ul>
+
+  <!-- 02 · Productos entregados -->
+  <div class="ev-head cd-head cd-sec" id="entregados">
+    <span class="cd-n" aria-hidden="true">02</span>
+    <div><h2>Devoluciones de productos entregados</h2>
+    <p>Aplica solo en los siguientes casos:</p></div>
+  </div>
+  <ul class="ev-tips reveal">
+    <li class="ev-card ev-tip">
+      <span class="ev-tip-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5z"/><path d="M3.5 7.5 12 12l8.5-4.5M12 12v9"/><path d="m15.5 12.5 1 2-1.5 1.2 1 2"/></svg></span>
+      <span class="ev-rule" aria-hidden="true"></span>
+      <h3>Producto con daño</h3><p>Si el producto llega con algún daño (golpeado, rayado, cristal roto).</p></li>
+    <li class="ev-card ev-tip">
+      <span class="ev-tip-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="2.5" width="13" height="19" rx="1"/><path d="M5.5 7.5h13"/><path d="m10 12 4 4m0-4-4 4"/></svg></span>
+      <span class="ev-rule" aria-hidden="true"></span>
+      <h3>Modelo incorrecto</h3><p>Si el producto recibido no corresponde al modelo que solicitaste.</p></li>
+    <li class="ev-card ev-tip">
+      <span class="ev-tip-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+      <span class="ev-rule" aria-hidden="true"></span>
+      <h3>Falla que no se puede solucionar</h3><p>Si presenta una falla que el servicio técnico de la marca no pueda solucionar después de varias visitas. Aplica solo si fue instalado por el técnico de la marca.</p></li>
+  </ul>
+
+  <!-- 03 · Cómo iniciar una devolución (tarjetas espresso numeradas, como "Antes del envío") -->
+  <div class="ev-head cd-head cd-sec" id="como-iniciar">
+    <span class="cd-n" aria-hidden="true">03</span>
+    <div><h2>¿Cómo iniciar una devolución?</h2>
+    <p>Es importante revisar el producto al momento de recibirlo.</p></div>
+  </div>
+  <ol class="ev-pasos reveal">
+    <li class="ev-card ev-paso">
+      <div class="ev-paso-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5z"/><path d="M3.5 7.5 12 12l8.5-4.5M12 12v9"/><path d="m7.8 5.3 8.4 4.5"/></svg><span class="ev-num" aria-hidden="true">01</span></div>
+      <span class="ev-rule" aria-hidden="true"></span>
+      <h3>Revisa el empaque</h3><p>Antes de firmar, verifica que no presente daños y que el modelo corresponda con tu cotización y factura.</p></li>
+    <li class="ev-card ev-paso">
+      <div class="ev-paso-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/><path d="m9.5 12.5 5 5m0-5-5 5"/></svg><span class="ev-num" aria-hidden="true">02</span></div>
+      <span class="ev-rule" aria-hidden="true"></span>
+      <h3>Si hay daño o modelo incorrecto</h3><p>No firmes de recibido e indícale al transportista que contactarás a HOMEA.</p></li>
+    <li class="ev-card ev-paso">
+      <div class="ev-paso-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.8l1.5-2.5h6.4L16.7 7h2.8A1.5 1.5 0 0 1 21 8.5v10a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5z"/><circle cx="12" cy="13.2" r="3.8"/></svg><span class="ev-num" aria-hidden="true">03</span></div>
+      <span class="ev-rule" aria-hidden="true"></span>
+      <h3>Toma evidencia</h3><p>Toma fotografías y video 360° de todas las caras del empaque, incluyendo etiquetas de modelo y número de serie.</p></li>
+    <li class="ev-card ev-paso">
+      <div class="ev-paso-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.3-2.1 1.3a11 11 0 0 0 5.2 5.2l1.3-2.1 4.3 1.6V17a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 5.7 2 2 0 0 1 5 3.5z"/></svg><span class="ev-num" aria-hidden="true">04</span></div>
+      <span class="ev-rule" aria-hidden="true"></span>
+      <h3>Comunícate con tu ejecutivo</h3><p>Llama al (442) 216 3552 y sigue las instrucciones de tu ejecutivo de ventas.</p></li>
+  </ol>
+
+  <!-- 04 · Plazos y condiciones (banda greige con divisiones, como la franja de tiempos) -->
+  <div class="ev-head cd-head cd-sec" id="plazos">
+    <span class="cd-n" aria-hidden="true">04</span>
+    <div><h2>Plazos y condiciones importantes</h2></div>
+  </div>
+  <ul class="cd-cond reveal">
+    <li>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="1"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 16.5h.01M12 16.5h.01"/></svg>
+      <h3>Solicitud al momento de recibir</h3><p>Las devoluciones por daño o modelo incorrecto deben solicitarse al momento de la entrega. No se aceptan devoluciones una vez firmado de recibido.</p></li>
+    <li>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3.5 6 8.5 7 8.5-7"/></svg>
+      <h3>Enviar solicitud por correo</h3><p>Las solicitudes de devolución o cancelación deben realizarse por correo electrónico, copiando a tu ejecutivo y a <a href="mailto:administracion@homea.mx">administracion@homea.mx</a>.</p></li>
+    <li>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="1.5"/><path d="M2.5 9.5h19"/><path d="M6 15h4"/></svg>
+      <h3>Método de devolución</h3><p>El reembolso se realizará por el mismo medio de pago utilizado:</p>
+      <ul class="cd-lista">
+        <li><b>Efectivo:</b> solo a la misma persona que realizó el pago</li>
+        <li><b>Transferencia o cheque:</b> a la misma cuenta</li>
+        <li><b>Tarjeta de crédito o débito:</b> al mismo plástico</li>
+      </ul></li>
+  </ul>
+
+  <!-- 05 · Cargos y penalizaciones -->
+  <div class="ev-head cd-head cd-sec" id="cargos">
+    <span class="cd-n" aria-hidden="true">05</span>
+    <div><h2>Cargos y penalizaciones</h2></div>
+  </div>
+  <ul class="ev-tips cd-2 reveal">
+    <li class="ev-card ev-tip">
+      <span class="ev-tip-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="9.5" cy="6" rx="6" ry="2.5"/><path d="M3.5 6v4c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V6"/><path d="M3.5 10v4c0 1.4 2.7 2.5 6 2.5"/><ellipse cx="15.5" cy="15" rx="5" ry="2.2"/><path d="M10.5 15v3.5c0 1.2 2.2 2.2 5 2.2s5-1 5-2.2V15"/></svg></span>
+      <span class="ev-rule" aria-hidden="true"></span>
+      <h3>Penalización del 20%</h3><p>En cancelaciones de pedidos pagados (no entregados) puede aplicar un 20% de penalización, dependiendo de la marca y modelo.</p></li>
+    <li class="ev-card ev-tip">
+      <span class="ev-tip-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5h11v17l-5.5-4-5.5 4z"/><path d="m12 7.6 1.1 2.2 2.4.3-1.8 1.7.5 2.4-2.2-1.2-2.2 1.2.5-2.4-1.8-1.7 2.4-.3z"/></svg></span>
+      <span class="ev-rule" aria-hidden="true"></span>
+      <h3>Modelos especiales</h3><p>En modelos fuera de cuadro básico, fuera de línea o importados exclusivamente para el cliente, no aplica devolución.</p></li>
+  </ul>
+
+  <!-- Ayuda: línea directa de Post Venta (distinta del flotante de ventas) -->
+  <div class="ev-ayuda">
+    <div class="ev-ayuda-txt">
+      <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+      <div><h2>¿Tienes dudas o necesitas iniciar una devolución?</h2><p>Nuestro equipo de Post Venta te acompaña en todo el proceso.</p></div>
+    </div>
+    <div class="ev-ayuda-linea"><span class="ev-t-lbl">Post Venta HOMEA</span><span class="ev-ayuda-num">WhatsApp +52 446 142 3051</span></div>
+    <a class="btn wa-track" href="https://wa.me/5214461423051?text=%C2%A1Hola%21%20Necesito%20informaci%C3%B3n%20sobre%20un%20cambio%2C%20devoluci%C3%B3n%20o%20cancelaci%C3%B3n." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_postventa_devoluciones">Escribir por WhatsApp<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+  </div>
+</div></section>
+
+<footer class="site-footer"><div class="f-news" id="newsletter">
+  <div class="container f-news-in">
+    <svg class="f-news-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="1"/><path d="m3 6 9 7 9-7"/></svg>
+    <div class="f-news-txt">
+      <h2 class="f-news-t">Conéctate, <i>inspírate</i>.</h2>
+      <p>Únete a nuestra lista y recibe inspiración, lanzamientos y promociones exclusivas.</p>
+    </div>
+    <form class="f-news-form" data-newsletter="footer" novalidate>
+      <label class="sr-only" for="nl-footer">Tu correo electrónico</label>
+      <input id="nl-footer" type="email" name="correo" placeholder="Tu correo electrónico" autocomplete="email" required>
+      <button type="submit">Suscribirme</button>
+      <p class="f-news-msg" role="status" aria-live="polite"></p>
+      <p class="f-news-legal">Al suscribirte aceptas el <a href="/aviso-de-privacidad">Aviso de privacidad</a>. Te das de baja cuando quieras.</p>
+    </form>
+  </div>
+</div><div class="container">
+  <div class="cols f-cols">
+    <div class="brandcol">
+      <img width="1400" height="1400" srcset="assets/homea-premium-19-400.webp 400w, assets/homea-premium-19-640.webp 640w, assets/homea-premium-19-960.webp 960w, assets/homea-premium-19-1280.webp 1280w, assets/homea-premium-19.webp 1400w" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 34vw" loading="lazy" decoding="async" class="mark" src="assets/homea-premium-19.webp" alt="HOMEA">
+      <span class="rule-gold"></span>
+      <p>Distribuidor autorizado de electrodomésticos para todo tipo de proyectos. Asesoría experta y servicio <span class="nw">post-venta</span> de calidad.</p>
+      <ul class="f-contact">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>
+          <a href="https://maps.app.goo.gl/LS9rqfHgK3qjFV926" target="_blank" rel="noopener">Del Ahuehuete 7, Álamos 1a Sección, 76160 Santiago de Querétaro, Qro.</a></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.3-2.1 1.3a11 11 0 0 0 5.2 5.2l1.3-2.1 4.3 1.6V17a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 5.7 2 2 0 0 1 5 3.5z"/></svg>
+          <a href="tel:+524422163552">Oficina (442) 216 3552</a></li>
+        <li><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+          <a href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_footer">WhatsApp (446) 144 6318</a></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3.5 6 8.5 7 8.5-7"/></svg>
+          <a href="mailto:carteaga@homea.mx">carteaga@homea.mx</a></li>
+      </ul>
+    </div>
+    <!-- Enlaces: mismo espacio entre columnas (space-between), no columnas iguales. -->
+    <div class="f-links">
+      <div class="lnk"><div class="f-eyebrow">Comprar</div>
+        <a href="categoria-cocina-y-bar.html">Productos</a>
+        <a href="marcas.html">Marcas</a>
+        <a href="marcas.html">Listas de precio</a>
+        <a href="ofertas.html">Ofertas</a>
+        <a href="guias.html">Guías</a>
+        <a href="herramientas.html">Herramientas</a></div>
+      <div class="lnk"><div class="f-eyebrow">HOMEA</div>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="b2b.html">Proyectos</a>
+        <a href="#newsletter">Blog &amp; Newsletter</a>
+        <a href="contacto.html">Contacto</a></div>
+      <div class="lnk"><div class="f-eyebrow">Atención al cliente</div>
+        <a href="garantias-instalacion.html">Garantías</a>
+        <!-- Instalación tendrá página propia (Carla, 2026-10-14).
+             Mientras no existan, cada enlace lleva a lo que hoy responde el tema. -->
+        <a href="envios-y-entregas.html">Envíos y entregas</a>
+        <a href="garantias-instalacion.html#post-venta">Servicio de instalación</a>
+        <a class="f-wrap" href="cambios-devoluciones-y-cancelaciones.html">Cambios, devoluciones y cancelaciones</a>
+        <a href="preguntas-frecuentes.html">Preguntas frecuentes</a></div>
+      <div class="lnk"><div class="f-eyebrow">Legal</div>
+        <a href="/terminos">Términos y condiciones</a>
+        <a href="/aviso-de-privacidad">Aviso de privacidad</a>
+        <a href="/aviso-legal">Aviso legal</a>
+        <a href="/politica-de-devoluciones">Política de devoluciones</a>
+        <!-- La política de cookies vive dentro del aviso de privacidad (Shopify) y
+             en el banner de cookies; #cookies lo pone lib/shopify/politicas.ts. -->
+        <a href="/aviso-de-privacidad#cookies">Política de cookies</a>
+        <!-- Abre el panel del aviso de cookies (components/AvisoCookies.tsx). -->
+        <a href="#preferencias-de-cookies" data-cookies-preferencias role="button">Preferencias de cookies</a></div>
+    </div>
+    <!-- Beneficios (Carla, 2026-10-13): bajo las columnas, en versión compacta;
+         cada uno lleva a la página que lo explica. -->
+    <ul class="f-perks" aria-label="Beneficios de comprar en HOMEA">
+      <li><a href="garantias-instalacion.html#formas-de-pago">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+        <span><b>Compra segura</b>Tus datos siempre protegidos</span></a></li>
+      <li><a href="envios-y-entregas.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v9.5h-11z"/><path d="M13.5 9.5h4l3 3.3V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+        <span><b>Envíos a todo México</b>Cobertura nacional</span></a></li>
+      <li><a href="marcas.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="m9.8 9 1.6 1.6 3-3.2"/><path d="m8.6 13.4-1.6 7.1 5-2.5 5 2.5-1.6-7.1"/></svg>
+        <span><b>Distribuidor autorizado</b>Marcas oficiales</span></a></li>
+      <li><a href="ofertas.html#stock">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5z"/><path d="M3.5 7.5 12 12l8.5-4.5M12 12v9"/><path d="m7.8 5.3 8.4 4.5"/></svg>
+        <span><b>Inventario para entrega inmediata</b>Tu proyecto no se detiene</span></a></li>
+    </ul>
+  </div>
+  <div class="foot-bottom">
+    <span class="f-legal">© 2026 HOMEA · Todos los derechos reservados</span>
+    <div class="f-end">
+      <div class="f-pay">
+        <div class="f-eyebrow">Formas de pago</div>
+        <!-- Métodos conectados en Shopify (Storefront paymentSettings, 2026-10-13) +
+             PayPal (Carla lo activará; ya se anuncia). Shop Pay sigue activo en el
+             checkout pero no se anuncia aquí: en México casi no se reconoce:
+             íconos oficiales de Shopify (activemerchant/payment_icons). SPEI no pasa
+             por Shopify: es la transferencia que se acuerda con el vendedor. -->
+        <ul aria-label="Formas de pago aceptadas">
+          <li class="pay-ic"><img src="assets/pagos/pago-visa.svg" width="38" height="24" alt="Visa" loading="lazy" decoding="async"></li>
+          <li class="pay-ic"><img src="assets/pagos/pago-mastercard.svg" width="38" height="24" alt="Mastercard" loading="lazy" decoding="async"></li>
+          <li class="pay-ic"><img src="assets/pagos/pago-american-express.svg" width="38" height="24" alt="American Express" loading="lazy" decoding="async"></li>
+          <li class="pay-ic"><img src="assets/pagos/pago-apple-pay.svg" width="38" height="24" alt="Apple Pay" loading="lazy" decoding="async"></li>
+          <li class="pay-ic"><img src="assets/pagos/pago-google-pay.svg" width="38" height="24" alt="Google Pay" loading="lazy" decoding="async"></li>
+          <li class="pay-ic"><img src="assets/pagos/pago-paypal.svg" width="38" height="24" alt="PayPal" loading="lazy" decoding="async"></li>
+          <li class="pay-txt">Transferencia SPEI</li>
+        </ul>
+      </div>
+      <div class="f-social" aria-label="Síguenos en redes sociales">
+        <a href="https://www.instagram.com/homea_mx/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.facebook.com/homea.mx/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 9V7.2c0-.8.2-1.2 1.3-1.2H17V3h-2.6C11.5 3 11 4.7 11 6.9V9H9v3h2v9h3v-9h2.3l.4-3H14z"/></svg></a>
+        <a href="https://www.tiktok.com/@homea_mx" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3c.3 2 1.6 3.5 3.5 3.8v2.5c-1.3 0-2.5-.4-3.5-1.1v5.7a5.4 5.4 0 1 1-5.4-5.4c.3 0 .6 0 .9.1v2.7a2.7 2.7 0 1 0 1.9 2.6V3h2.6z"/></svg></a>
+        <a href="https://www.youtube.com/channel/UC5SHtEFZdDk5UuGfkfIWl1w" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 8.2a2.6 2.6 0 0 0-1.8-1.8C18.6 6 12 6 12 6s-6.6 0-8.2.4A2.6 2.6 0 0 0 2 8.2 27 27 0 0 0 1.7 12 27 27 0 0 0 2 15.8a2.6 2.6 0 0 0 1.8 1.8C5.4 18 12 18 12 18s6.6 0 8.2-.4a2.6 2.6 0 0 0 1.8-1.8c.3-1.2.3-3.8.3-3.8s0-2.6-.3-3.8zM10 15V9l5 3-5 3z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Volver arriba: flota sobre el botón de WhatsApp; v2.js la muestra al bajar. -->
+  <button type="button" class="back-to-top" title="Volver arriba" aria-label="Volver al inicio de la página" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 37V5"/><path d="M5 12l7-7 7 7"/></svg>
+  </button>
+</footer>
+
+<a class="wa-float" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-track="whatsapp_click" data-label="wa_float"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg></a>
+<script src="v2.js?v=35"></script>
+<script src="wishlist.js?v=8"></script>
+<script src="cart.js?v=3"></script>
+</body>
