@@ -196,11 +196,11 @@ const nextConfig = {
       })),
       // Página OXATIS "Solicita la instalación" (PBCPPlayer con query string →
       // regla con `has`; ver gotcha en docs/PLAN-REDIRECTS-MIGRACION.md §3).
-      // Su contenido vive resumido en /garantias-instalacion#requisitos-instalacion.
+      // Su contenido vive resumido en /servicio-post-venta#requisitos-instalacion.
       {
         source: "/PBCPPlayer.asp",
         has: [{ type: "query", key: "ID", value: "2437566" }],
-        destination: "/garantias-instalacion",
+        destination: "/servicio-post-venta",
         statusCode: 301,
       },
       // El resto del mapa OXATIS 1:1 (docs/PLAN-REDIRECTS-MIGRACION.md) se añade en Fase 4.

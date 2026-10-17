@@ -38,6 +38,7 @@ const LINK_MAP: Record<string, string> = {
   "garantias-instalacion.html": "/garantias-instalacion",
   "preguntas-frecuentes.html": "/preguntas-frecuentes",
   "envios-y-entregas.html": "/envios-y-entregas",
+  "servicio-post-venta.html": "/servicio-post-venta",
   "cambios-devoluciones-y-cancelaciones.html": "/cambios-devoluciones-y-cancelaciones",
   "guias.html": "/guias",
   "ofertas.html": "/ofertas",

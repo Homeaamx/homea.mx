@@ -22,6 +22,7 @@ const MARKETING_PATHS = [
   "/garantias-instalacion",
   "/preguntas-frecuentes",
   "/envios-y-entregas",
+  "/servicio-post-venta",
   "/cambios-devoluciones-y-cancelaciones",
 ];
 
