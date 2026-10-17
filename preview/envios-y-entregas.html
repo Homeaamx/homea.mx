@@ -20,10 +20,15 @@
 .ev-hero h1 i{font-style:italic}
 .ev-hero .sub{margin:0 0 30px;max-width:44ch;font-weight:400;color:var(--homea-black)}
 .ev-hero .btn{align-self:flex-start}
-/* Ilustración sin fondo (PNG recortado, sombras suaves en alfa): va completa,
-   sin desenfoque ni velo, flotando sobre el bone (Carla, 2026-10-14). */
+/* Ilustración sin fondo (PNG recortado): va completa, flotando sobre el bone.
+   Hoy el hero usa foto a sangre (.ev-hero-foto). */
 .ev-hero-img{display:flex;align-items:center;justify-content:center;padding:28px max(24px,calc((100vw - var(--container)) / 2)) 28px 0}
 .ev-hero-img img{display:block;width:100%;max-width:640px;height:auto}
+/* Foto a sangre (GE Profile, Carla 2026-10-16): cubre la mitad derecha y el borde
+   izquierdo se disuelve en el bone, igual que en Cambios y devoluciones. */
+.ev-hero-foto{position:relative;display:block;padding:0;min-height:420px}
+.ev-hero-foto img{position:absolute;inset:0;width:100%;max-width:none;height:100%;object-fit:cover;object-position:50% 60%;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 16%);mask-image:linear-gradient(to right,transparent 0,#000 16%)}
 
 .ev-body{padding:56px 0 96px}
 /* Encabezado de sección: eyebrow + H2 serif + bajada legible. */
@@ -111,6 +116,8 @@
   .ev-hero-in{grid-template-columns:1fr;min-height:0}
   .ev-hero-txt{padding:32px 24px 36px}
   .ev-hero-img{order:-1;padding:24px 24px 0}
+  .ev-hero-foto{padding:0;min-height:240px}
+  .ev-hero-foto img{-webkit-mask-image:none;mask-image:none}
   .ev-body{padding:48px 0 72px}
   .ev-tiempos{grid-template-columns:1fr}
   .ev-tiempos li{padding:24px}
@@ -304,8 +311,8 @@
       <!-- Formulario de envío de Post Venta (Microsoft Forms). -->
       <a class="btn btn-primary" href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=ljXuESduVECjC42CrvrMDckk9TSpvkVJuwRmR8Mz6_JUMDRPQVNDRzJTOVlOVFY2VUg3QThKQUZSNC4u&amp;origin=lprLink&amp;route=shorturl" target="_blank" rel="noopener">Programar mi envío<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
-    <div class="ev-hero-img">
-      <img width="1431" height="657" srcset="assets/photos/envios-homea-camion-entrega-paqueteria-sin-fondo-640.webp 640w, assets/photos/envios-homea-camion-entrega-paqueteria-sin-fondo-960.webp 960w, assets/photos/envios-homea-camion-entrega-paqueteria-sin-fondo-1280.webp 1280w, assets/photos/envios-homea-camion-entrega-paqueteria-sin-fondo.webp 1431w" sizes="(max-width: 900px) 100vw, 46vw" src="assets/photos/envios-homea-camion-entrega-paqueteria-sin-fondo-1280.webp" alt="Camión de entregas HOMEA Premium con cajas de electrodomésticos listas para envío" fetchpriority="high" decoding="async">
+    <div class="ev-hero-img ev-hero-foto">
+      <img width="1600" height="900" srcset="assets/photos/envios-entregas-cocina-ge-profile-acero-inoxidable-640.webp 640w, assets/photos/envios-entregas-cocina-ge-profile-acero-inoxidable-960.webp 960w, assets/photos/envios-entregas-cocina-ge-profile-acero-inoxidable-1280.webp 1280w, assets/photos/envios-entregas-cocina-ge-profile-acero-inoxidable.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" src="assets/photos/envios-entregas-cocina-ge-profile-acero-inoxidable-1280.webp" alt="Cocina GE Profile de acero inoxidable: refrigerador dúplex, horno, parrilla, campana y lavavajillas" fetchpriority="high" decoding="async">
     </div>
   </div>
 </header>

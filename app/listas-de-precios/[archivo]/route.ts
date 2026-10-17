@@ -25,7 +25,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ arch
   if (!doc) return new Response("No encontrado", { status: 404 });
 
   // Lista sin PDF todavía: temporal (302), el PDF llegará.
-  if (!doc.url) return Response.redirect(new URL("/marcas#listas-de-precios", request.url), 302);
+  if (!doc.url) return Response.redirect(new URL("/marcas", request.url), 302);
 
   const upstream = await fetch(doc.url, { cache: "no-store" });
   // Si Shopify falla, mejor mandar al archivo que dar error.

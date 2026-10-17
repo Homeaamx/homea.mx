@@ -1,13 +1,11 @@
-// Listas de precios por marca (/marcas#listas-de-precios).
+// Listas de precios por marca. Se muestran en la página de cada marca
+// (/marcas/<slug>); el listado general de /marcas se quitó (Carla, 2026-10-16).
 //
 // Fuente: data/listas-precios.json (una entrada por lista, no por año). Cada lista
 // con PDF enlaza a su URL permanente /listas-de-precios/<slug>.pdf, que sirve la
-// edición vigente (rewrite en next.config.js); sin PDF se muestra "Próximamente"
-// con salida a WhatsApp. El HTML se inserta en el slot <!-- slot:listas-precios -->
-// de preview/marcas.html (ver MarketingPage).
+// edición vigente (rewrite en next.config.js).
 
 import listas from "@/data/listas-precios.json";
-import { whatsappHref } from "@/lib/whatsapp";
 
 export interface ListaPrecios {
   slug: string;
@@ -32,33 +30,4 @@ export function listasPublicadas(): ListaPrecios[] {
 /** Una lista por su slug — lo que guarda `listas[]` de cada marca en data/marcas.json. */
 export function listaPorSlug(slug: string): ListaPrecios | undefined {
   return (listas.marcas as Marca[]).flatMap((m) => m.documentos).find((d) => d.slug === slug);
-}
-
-const escapar = (s: string) =>
-  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-
-function documentoHtml(marca: string, d: ListaPrecios): string {
-  const titulo = escapar(d.titulo);
-  if (d.url) {
-    const vigencia = d.vigencia ? ` <span class="dot-sep">·</span> <span class="caption">vigente ${escapar(d.vigencia)}</span>` : "";
-    return `<a href="${rutaListaPrecios(d)}" target="_blank" rel="noopener">⬇ ${titulo}</a>${vigencia} <span class="dot-sep">·</span> <span class="caption">PDF</span>`;
-  }
-  const wa = whatsappHref(`¡Hola! Me interesa la lista de precios de ${marca} (${d.titulo}).`);
-  return `${titulo} <span class="dot-sep">·</span> <span class="caption">Próximamente ·</span> <a href="${escapar(wa)}" target="_blank" rel="noopener">solicítala por WhatsApp</a>`;
-}
-
-/** Bloque HTML con una fila por marca (etiqueta) y sus documentos. */
-export function listasPreciosHtml(): string {
-  const marcas = [...(listas.marcas as Marca[])].sort((a, b) => a.marca.localeCompare(b.marca, "es"));
-  const filas = marcas
-    .map(
-      (m) =>
-        `<div class="spec-row"><span class="spec-label">${escapar(m.marca)}</span><span class="spec-value">${m.documentos
-          .map((d) => documentoHtml(m.marca, d))
-          .join("<br>")}</span></div>`
-    )
-    .join("");
-  // En móvil la etiqueta de marca va encima de sus documentos (una sola columna).
-  const css = `<style>@media (max-width:640px){#listas-por-marca{grid-template-columns:1fr}#listas-por-marca .spec-label{border-bottom:0;padding-bottom:0}}</style>`;
-  return `${css}<div id="listas-por-marca" class="spec" style="margin-top:48px">${filas}</div>`;
 }

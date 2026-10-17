@@ -18,7 +18,8 @@
    servicios completos; con JS se muestra uno a la vez (#instalacion,
    #mantenimiento, #garantias abren el suyo). */
 
-/* Hero partido: texto | foto a sangre con el lado izquierdo desenfocado. */
+/* Hero partido: texto | foto del equipo a sangre; el borde izquierdo se disuelve
+   en el bone sin desenfoque (no tapa a nadie del equipo). */
 .page-hero.pv-hero{padding:0;background:var(--homea-bone);overflow:hidden}
 .pv-hero-in{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:stretch;min-height:360px}
 .pv-hero-txt{padding:44px clamp(32px,4vw,72px) 52px max(clamp(48px,4vw,96px),calc((100vw - var(--container)) / 2 + clamp(48px,4vw,96px)));display:flex;flex-direction:column;justify-content:center}
@@ -26,10 +27,8 @@
 .pv-hero h1 i{font-style:italic}
 .pv-hero .sub{margin:0;max-width:46ch;font-weight:400;color:var(--homea-black)}
 .pv-hero-img{position:relative;min-height:300px}
-.pv-hero-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 55%}
-.pv-hero-img::before{content:"";position:absolute;inset:0;z-index:1;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
-  -webkit-mask-image:linear-gradient(to right,#000 0%,rgba(0,0,0,.6) 22%,transparent 48%);mask-image:linear-gradient(to right,#000 0%,rgba(0,0,0,.6) 22%,transparent 48%)}
-.pv-hero-img::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to right,var(--homea-bone) 0%,color-mix(in srgb,var(--homea-bone) 35%,transparent) 18%,transparent 40%)}
+.pv-hero-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 16%);mask-image:linear-gradient(to right,transparent 0,#000 16%)}
 
 .pv-body{padding:48px 0 96px}
 /* Encabezado de cada paso: "Paso N" con filete oro + H2 serif + bajada. */
@@ -57,14 +56,18 @@
 
 /* Paso 1 · tarjetas de servicio (funcionan como pestañas). */
 .pv-tipos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.pv-tipo{display:grid;grid-template-columns:44px minmax(0,1fr) 16px;align-items:center;gap:18px;padding:24px 24px;min-height:112px;
+.pv-tipo{display:grid;grid-template-columns:44px minmax(0,1fr) 16px;align-items:center;gap:18px;padding:26px 26px;min-height:124px;
   background:var(--pv-bg);border:1px solid var(--pv-card-line);color:var(--pv-fg);outline:2px solid transparent;outline-offset:4px;
-  transition:outline-color var(--dur-fast) var(--ease-standard),box-shadow var(--dur-med) var(--ease-standard),transform var(--dur-slow) var(--ease-reveal)}
+  transition:outline-color var(--dur-fast) var(--ease-standard),background var(--dur-med) var(--ease-standard),box-shadow var(--dur-med) var(--ease-standard),transform var(--dur-med) var(--ease-reveal)}
 .pv-tipo > svg:first-child{width:40px;height:40px;color:var(--pv-acc)}
-.pv-tipo b{display:block;margin-bottom:6px;font-family:var(--font-display);font-size:22px;font-weight:400;line-height:1.15;color:var(--pv-fg)}
-.pv-tipo span span{display:block;font-size:14px;line-height:1.5;color:var(--pv-muted)}
+.pv-tipo b{display:block;margin-bottom:8px;font-family:var(--font-display);font-size:24px;font-weight:400;line-height:1.15;color:var(--pv-fg)}
+.pv-tipo span span{display:block;font-size:16px;line-height:1.5;color:var(--pv-fg)}
 .pv-tipo-arrow{width:16px;height:16px;color:var(--pv-acc);transition:transform var(--dur-fast) var(--ease-standard)}
-.pv-tipo:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+/* Hover notorio (Carla, 2026-10-16): la tarjeta crece, sube y cambia de fondo. */
+.pv-tipo:hover{transform:translateY(-6px) scale(1.03);box-shadow:var(--shadow-lg);background:var(--pv-bg-hover)}
+.pv-t-blanco{--pv-bg-hover:color-mix(in srgb,var(--homea-gold) 16%,#fff)}
+.pv-t-oro{--pv-bg-hover:color-mix(in srgb,var(--homea-gold) 80%,#fff)}
+.pv-t-espresso{--pv-bg-hover:color-mix(in srgb,var(--homea-espresso) 82%,var(--homea-gold))}
 .pv-tipo:hover .pv-tipo-arrow{transform:translateX(3px)}
 /* Seleccionada: anillo exterior en el tono de contraste + flecha hacia abajo. */
 .pv-tipo.on{outline-color:var(--pv-ring);box-shadow:var(--shadow-md)}
@@ -76,63 +79,53 @@
 .pv-panel{background:var(--pv-bg);color:var(--pv-txt);border:1px solid var(--pv-card-line);padding:32px clamp(20px,3vw,40px) 36px}
 .pv-panel + .pv-panel{margin-top:32px}
 .js-pv .pv-panel + .pv-panel{margin-top:0}
-.pv-panel-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:22px;padding-bottom:20px;border-bottom:1px solid var(--pv-line)}
+.pv-panel-head{display:flex;align-items:flex-end;justify-content:flex-start;gap:24px;margin-bottom:22px;padding-bottom:20px;border-bottom:1px solid var(--pv-line)}
 .pv-panel-head h3{display:flex;align-items:center;gap:14px;margin:0 0 6px;font-family:var(--font-display);font-size:clamp(24px,2.2vw,30px);font-weight:400;line-height:1.15;color:var(--pv-fg)}
 .pv-panel-head h3 svg{width:30px;height:30px;flex:none;color:var(--pv-acc)}
-.pv-panel-sub{margin:0;font-size:15px;color:var(--pv-txt)}
-.pv-expand{flex:none;display:inline-flex;align-items:center;gap:8px;border:0;background:none;padding:4px 0;cursor:pointer;
-  font-family:var(--font-sans);font-size:11px;font-weight:600;letter-spacing:var(--tracking-wider);text-transform:uppercase;color:var(--pv-fg)}
-.pv-expand b{font-weight:400;font-size:18px;line-height:1;color:var(--pv-acc)}
-.pv-expand span{border-bottom:1px solid var(--pv-acc)}
-
-.pv-acc{display:flex;flex-direction:column;gap:8px}
-.pv-acc details{background:var(--pv-card);border:1px solid var(--pv-card-line)}
-.pv-acc summary{list-style:none;cursor:pointer;position:relative;display:flex;align-items:baseline;gap:16px;padding:20px 56px 20px 22px;font-size:17px;font-weight:500;color:var(--pv-fg)}
-.pv-acc summary::-webkit-details-marker{display:none}
-.pv-acc summary::after{content:"+";position:absolute;right:22px;top:50%;transform:translateY(-50%);font-size:22px;font-weight:300;color:var(--pv-fg)}
-.pv-acc summary small{font-size:13px;font-weight:400;color:var(--pv-muted)}
-.pv-acc details[open]{background:var(--pv-card-open);border-color:var(--pv-card-line-open)}
-.pv-acc details[open] summary{color:var(--pv-acc)}
-.pv-acc details[open] summary::after{content:"−"}
-.pv-acc summary:hover{color:var(--pv-acc)}
-.pv-acc-in{padding:0 22px 24px}
-/* Contenido de cada sección abierta en dorado y espresso: caja clara con texto
-   oscuro para leer cómodo (Carla, 2026-10-16); el marco conserva el tono. Se
-   redefinen las variables, así listas, avisos y tarjetas internas las heredan. */
-.pv-t-oro .pv-acc-in,.pv-t-espresso .pv-acc-in{margin:0 14px 14px;padding:6px 22px 22px;
-  --pv-txt:var(--homea-black);--pv-fg:var(--fg);--pv-muted:var(--fg-muted);--pv-acc:var(--accent-text);
-  --pv-nota:color-mix(in srgb,var(--accent) 10%,transparent);--pv-card:#fff}
-.pv-t-oro .pv-acc-in{background:color-mix(in srgb,var(--homea-gold) 14%,#fff);
+.pv-panel-sub{margin:0;font-size:17px;color:var(--pv-fg)}
+/* Secciones del servicio: bloques fijos, siempre visibles (sin desplegables),
+   en caja clara con texto negro para que se lea cómodo en los tres tonos. */
+.pv-acc{display:flex;flex-direction:column;gap:16px}
+.pv-blk{padding:28px 30px 30px;background:var(--homea-n050);border:1px solid var(--border);
+  --pv-txt:var(--homea-black);--pv-fg:var(--homea-black);--pv-muted:var(--homea-black);--pv-acc:var(--accent-text);
+  --pv-nota:color-mix(in srgb,var(--accent) 10%,transparent);--pv-card:#fff;--pv-line:var(--border);--pv-card-line:var(--border)}
+.pv-t-oro .pv-blk{background:color-mix(in srgb,var(--homea-gold) 14%,#fff);border-color:transparent;
   --pv-line:color-mix(in srgb,var(--homea-gold) 40%,transparent);--pv-card-line:color-mix(in srgb,var(--homea-gold) 40%,transparent)}
-.pv-t-espresso .pv-acc-in{background:var(--homea-bone);--pv-line:var(--border);--pv-card-line:var(--border)}
+.pv-t-espresso .pv-blk{background:var(--homea-bone);border-color:transparent}
+.pv-blk-t{margin:0 0 8px;font-family:var(--font-display);font-size:clamp(24px,2vw,28px);font-weight:400;line-height:1.2;color:var(--homea-black)}
 
 /* Lista numerada a dos columnas (números tabulares, sistema de precisión). */
-.pv-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px}
+/* Orden por columnas (Carla, 2026-10-16): con 3+ puntos la numeración baja por
+   la columna izquierda y sigue en la derecha; las filas salen del total. */
+.pv-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:column;grid-template-rows:auto;gap:0 48px}
+.pv-list:has(> li:nth-child(3)){grid-template-rows:repeat(2,auto)}
+.pv-list:has(> li:nth-child(5)){grid-template-rows:repeat(3,auto)}
+.pv-list:has(> li:nth-child(7)){grid-template-rows:repeat(4,auto)}
 .pv-list li{display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--pv-line)}
-.pv-list .n{flex:none;padding-top:2px;font-family:var(--font-sans);font-weight:600;font-size:13.5px;letter-spacing:.08em;color:var(--pv-acc);font-variant-numeric:tabular-nums}
-.pv-list p{margin:0;font-size:15.5px;line-height:1.6;color:var(--pv-txt)}
+.pv-list .n{flex:none;padding-top:3px;font-family:var(--font-sans);font-weight:600;font-size:15px;letter-spacing:.08em;color:var(--pv-acc);font-variant-numeric:tabular-nums}
+.pv-list p{margin:0;font-size:17px;line-height:1.6;color:var(--pv-txt)}
 .pv-list p b{color:var(--pv-fg);font-weight:600}
-.pv-list ul{margin:8px 0 0;padding:0 0 0 18px;font-size:14.5px;line-height:1.6;color:var(--pv-muted)}
+.pv-list ul{margin:8px 0 0;padding:0 0 0 20px;font-size:16px;line-height:1.6;color:var(--pv-txt)}
 .pv-list ul li{display:list-item;padding:2px 0;border:0}
 .pv-list ul li::marker{color:var(--pv-acc)}
 .pv-alerta-txt{display:block;margin-top:6px;font-weight:600;color:var(--pv-fg)}
 
 /* Aviso "Importante" dentro de una sección. */
-.pv-nota{display:flex;gap:14px;align-items:flex-start;margin:0 0 14px;padding:16px 20px;background:var(--pv-nota);border-left:2px solid var(--pv-acc);font-size:15px;line-height:1.55;color:var(--pv-txt)}
+.pv-nota{display:flex;gap:14px;align-items:flex-start;margin:0 0 14px;padding:16px 20px;background:var(--pv-nota);border-left:2px solid var(--pv-acc);font-size:16.5px;line-height:1.55;color:var(--pv-txt)}
 .pv-nota.al-final{margin:16px 0 0}
 .pv-nota b{color:var(--pv-fg)}
 .pv-nota .bang{flex:none;width:22px;height:22px;margin-top:1px;border:1.5px solid var(--pv-acc);color:var(--pv-acc);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
-.pv-mas{display:inline-block;margin-top:16px;font-size:14px;font-weight:600;color:var(--pv-acc);border-bottom:1px solid currentColor}
+.pv-mas{display:inline-block;margin-top:18px;font-size:16px;font-weight:600;color:var(--pv-acc);border-bottom:1px solid currentColor}
 
 /* Tipos de servicio (Mantenimiento): tres columnas con ícono. */
 .pv-srv{list-style:none;margin:0 0 16px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .pv-srv li{padding:22px 22px 24px;background:var(--pv-card);border:1px solid var(--pv-card-line)}
 .pv-srv svg{display:block;width:32px;height:32px;margin-bottom:14px;color:var(--pv-acc)}
-.pv-srv h4{margin:0 0 8px;font-family:var(--font-display);font-size:20px;font-weight:400;line-height:1.2;color:var(--pv-fg)}
-.pv-srv p{margin:0;font-size:14.5px;line-height:1.6;color:var(--pv-txt)}
+.pv-srv h4{margin:0 0 8px;font-family:var(--font-display);font-size:22px;font-weight:400;line-height:1.2;color:var(--pv-fg)}
+.pv-srv p{margin:0;font-size:16px;line-height:1.6;color:var(--pv-txt)}
 
 /* Aceptación de condiciones (aplica a los tres servicios). */
-.pv-acepta{display:flex;align-items:center;gap:16px;margin:24px 0 0;padding:16px 22px;border:1px solid var(--homea-gold);background:color-mix(in srgb,var(--homea-gold) 12%,#fff);font-size:15px;font-weight:600;line-height:1.5;color:var(--homea-black)}
+.pv-acepta{display:flex;align-items:center;gap:16px;margin:24px 0 0;padding:16px 22px;border:1px solid var(--homea-gold);background:color-mix(in srgb,var(--homea-gold) 12%,#fff);font-size:16.5px;font-weight:600;line-height:1.5;color:var(--homea-black)}
 .pv-acepta svg{width:26px;height:26px;flex:none;color:var(--homea-gold-deep)}
 
 /* Paso 3 · pasos en espresso (mismo sistema que Envíos y entregas). */
@@ -144,16 +137,17 @@
 .ev-aviso svg{width:30px;height:30px;flex:none;color:var(--homea-black)}
 .ev-aviso-lbl{display:block;margin-bottom:4px;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--homea-black)}
 .ev-aviso p{margin:0;font-size:16px;font-weight:600;line-height:1.45;color:var(--homea-black)}
+.pv-aviso-top{margin-bottom:56px}
 .ev-card h3{margin:0 0 10px;font-family:var(--font-display);font-size:23px;font-weight:400;line-height:1.2;letter-spacing:-.005em;color:var(--fg)}
-.ev-card p{margin:0;font-size:15px;line-height:1.65;color:var(--homea-black)}
+.ev-card p{margin:0;font-size:16.5px;line-height:1.6;color:var(--homea-black)}
 .ev-card{position:relative;background:var(--homea-n050);border:1px solid var(--border);padding:30px 28px 32px;
   transition:transform var(--dur-slow) var(--ease-reveal),box-shadow var(--dur-slow) var(--ease-reveal),border-color var(--dur-med) var(--ease-standard),background var(--dur-med) var(--ease-standard)}
-.ev-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.ev-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:var(--shadow-lg)}
 .ev-rule{display:block;width:28px;height:1px;background:var(--homea-gold);margin:20px 0 18px;transition:width var(--dur-slow) var(--ease-reveal)}
 .ev-card:hover .ev-rule{width:44px}
 .ev-paso{background:var(--homea-espresso);border-color:var(--homea-espresso)}
 .ev-paso h3{color:var(--homea-bone)}
-.ev-paso p{color:var(--homea-n200)}
+.ev-paso p{color:var(--homea-bone)}
 .ev-paso b{color:var(--homea-gold-bright);font-weight:600}
 .ev-paso a{color:var(--homea-gold-bright);border-bottom:1px solid currentColor}
 .ev-paso:hover{background:color-mix(in srgb,var(--homea-espresso) 84%,var(--homea-bone));border-color:var(--homea-gold);box-shadow:var(--shadow-lg)}
@@ -169,7 +163,7 @@
 .ev-ayuda-txt{display:flex;align-items:center;gap:26px}
 .ev-ayuda-txt svg{width:54px;height:54px;flex:none;color:var(--homea-gold)}
 .ev-ayuda h2{margin:0 0 6px;color:var(--homea-bone);font-size:clamp(24px,2.2vw,30px)}
-.ev-ayuda p{margin:0;font-size:15px;line-height:1.55;color:var(--dark-fg-muted)}
+.ev-ayuda p{margin:0;font-size:16.5px;line-height:1.55;color:var(--homea-bone)}
 .ev-ayuda-linea{padding-left:40px;border-left:1px solid var(--dark-border)}
 .ev-t-lbl{display:block;margin-bottom:6px;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--homea-gold)}
 .ev-ayuda-num{display:block;white-space:nowrap;font-family:var(--font-display);font-size:22px;line-height:1.2;color:var(--homea-bone);font-variant-numeric:tabular-nums lining-nums}
@@ -194,12 +188,11 @@
   .pv-hero-in{grid-template-columns:1fr;min-height:0}
   .pv-hero-txt{padding:32px 24px 36px}
   .pv-hero-img{min-height:220px;order:-1}
-  .pv-hero-img::before{-webkit-mask-image:linear-gradient(to top,#000 0%,transparent 40%);mask-image:linear-gradient(to top,#000 0%,transparent 40%)}
-  .pv-hero-img::after{background:linear-gradient(to top,var(--homea-bone) 0%,transparent 35%)}
+  .pv-hero-img img{-webkit-mask-image:none;mask-image:none}
   .pv-body{padding:40px 0 72px}
   .pv-tipos{grid-template-columns:1fr;gap:10px}
   .pv-tipo{min-height:0}
-  .pv-list{grid-template-columns:1fr}
+  .pv-list{grid-template-columns:1fr;grid-auto-flow:row;grid-template-rows:none!important}
   .pv-srv{grid-template-columns:1fr}
   .pv-sol-head{flex-direction:column;align-items:flex-start}
   .pv-sec + .pv-sec{margin-top:64px}
@@ -210,10 +203,7 @@
   .pv-hero-txt{padding:28px 16px 32px}
   .pv-panel{padding:24px 16px 28px}
   .pv-panel-head{flex-direction:column;align-items:flex-start}
-  .pv-acc summary{flex-direction:column;gap:2px;padding:16px 48px 16px 16px;font-size:16px}
-  .pv-acc summary::after{right:16px}
-  .pv-acc-in{padding:0 16px 20px}
-  .pv-t-oro .pv-acc-in,.pv-t-espresso .pv-acc-in{margin:0 8px 8px;padding:4px 14px 18px}
+  .pv-blk{padding:22px 18px 24px}
   .pv-sol-head .btn,.ev-ayuda .btn{width:100%;justify-content:center}
   .ev-ayuda{grid-template-columns:1fr;padding:30px 22px}
   .ev-ayuda-txt{align-items:flex-start;gap:18px}
@@ -395,12 +385,19 @@
       <p class="sub">Te acompañamos durante toda la vida de tus equipos. Consulta la información, requisitos y condiciones antes de solicitar tu servicio.</p>
     </div>
     <div class="pv-hero-img">
-      <img width="1400" height="1053" srcset="assets/photos/hero-miele-cocina-640.webp 640w, assets/photos/hero-miele-cocina-960.webp 960w, assets/photos/hero-miele-cocina-1280.webp 1280w, assets/photos/hero-miele-cocina.webp 1400w" sizes="(max-width: 900px) 100vw, 50vw" src="assets/photos/hero-miele-cocina-1280.webp" alt="Cocina con columnas de refrigeración Miele abiertas y vinoteca integrada" fetchpriority="high" decoding="async">
+      <img width="1400" height="739" srcset="assets/photos/nuestra-historia-equipo-homea-showroom-640.webp 640w, assets/photos/nuestra-historia-equipo-homea-showroom-960.webp 960w, assets/photos/nuestra-historia-equipo-homea-showroom-1280.webp 1280w, assets/photos/nuestra-historia-equipo-homea-showroom.webp 1400w" sizes="(max-width: 900px) 100vw, 50vw" src="assets/photos/nuestra-historia-equipo-homea-showroom-1280.webp" alt="Equipo HOMEA en el showroom de Querétaro" fetchpriority="high" decoding="async">
     </div>
   </div>
 </header>
 
 <section class="pv-body" id="pv"><div class="container">
+
+  <!-- Advertencia antes de elegir el servicio (Carla, 2026-10-16). -->
+  <div class="ev-aviso pv-aviso-top" role="note">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 1.5 21h21L12 2.5zm-.9 6.5h1.8l-.3 6.5h-1.2L11.1 9zm.9 10a1.15 1.15 0 1 1 0-2.3 1.15 1.15 0 0 1 0 2.3z"/></svg>
+    <div><span class="ev-aviso-lbl">Importante · Léelo antes de solicitar tu servicio</span>
+    <p>Es indispensable leer y aceptar estas condiciones antes de solicitar tu servicio.</p></div>
+  </div>
 
   <!-- ══ Paso 1 · Elegir el servicio ══ -->
   <div class="pv-sec">
@@ -422,23 +419,21 @@
     <div class="pv-head">
       <div class="eyebrow pv-paso-lbl">Paso 2</div>
       <h2>Revisa la información del <i>servicio</i>.</h2>
-      <p>Es indispensable leer y aceptar estas condiciones antes de solicitar tu servicio.</p>
     </div>
 
     <!-- Instalación de equipos (PDF "INSTALACIONES HOMEA") -->
     <section class="pv-panel pv-t-blanco on" id="instalacion" data-pv-panel role="tabpanel" aria-label="Instalación de equipos">
       <div class="pv-panel-head">
         <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L3.5 17.2a1.6 1.6 0 0 0 2.3 2.3l5.8-5.8a4 4 0 0 0 5.1-5.4l-2.4 2.4-2.1-.4-.4-2.1z"/></svg> Instalación de equipos</h3><p class="pv-panel-sub">Lo que necesitas saber para una instalación exitosa.</p></div>
-        <button type="button" class="pv-expand" data-pv-expand aria-expanded="false"><span>Expandir todas</span> <b aria-hidden="true">+</b></button>
       </div>
       <div class="pv-acc">
-        <details open><summary>Coordinación técnica previa <small>Antes de preparar la obra</small></summary><div class="pv-acc-in">
+        <section class="pv-blk"><h4 class="pv-blk-t">Coordinación técnica previa</h4>
           <ol class="pv-list">
             <li><span class="n">01</span><p>Tu <b>ejecutivo de ventas HOMEA</b> debe compartirte las guías técnicas de instalación de cada equipo adquirido.</p></li>
             <li><span class="n">02</span><p><b>Es responsabilidad del cliente</b> compartir estas guías con los responsables de obra (arquitecto, carpintero, contratista, etc.) para asegurar que las preparaciones eléctricas, de plomería y ventilación se realicen conforme a las guías técnicas de cada equipo.</p></li>
           </ol>
-        </div></details>
-        <details><summary>Requisitos obligatorios <small>El día de la visita</small></summary><div class="pv-acc-in">
+        </section>
+        <section class="pv-blk"><h4 class="pv-blk-t">Requisitos obligatorios</h4>
           <p class="pv-nota"><span class="bang" aria-hidden="true">!</span><span><b>Importante:</b> solo se podrá realizar la instalación si estos requisitos se cumplen en su totalidad; de lo contrario, el servicio no podrá llevarse a cabo y el cliente cubrirá el costo de la nueva visita con sus respectivos viáticos.</span></p>
           <ol class="pv-list">
             <li><span class="n">01</span><div><p><b>Envía fotografías actualizadas</b> de:</p>
@@ -451,8 +446,8 @@
               <ul><li>Verifica el tipo de gas que tienes: Gas LP o Gas Natural.</li><li>El regulador de gas debe estar correctamente calibrado. Un regulador defectuoso puede provocar accidentes o daños graves.</li></ul></div></li>
             <li><span class="n">05</span><p><b>La carpintería debe estar concluida.</b></p></li>
           </ol>
-        </div></details>
-        <details><summary>Instalación incluida <small>Qué cubre y qué no</small></summary><div class="pv-acc-in">
+        </section>
+        <section class="pv-blk"><h4 class="pv-blk-t">Instalación incluida</h4>
           <ol class="pv-list">
             <li><span class="n">01</span><div><p>Solo algunas <b>marcas premium o residenciales</b> incluyen instalación y puesta en marcha sin costo.</p>
               <ul><li>No aplica para campanas.</li><li>No aplica para marcas de gama media o económica; éstas generan un costo adicional.</li></ul></div></li>
@@ -461,15 +456,15 @@
           </ol>
           <p class="pv-nota al-final"><span class="bang" aria-hidden="true">!</span><span><b>Importante:</b> si el domicilio se encuentra en una ciudad sin centro de servicio autorizado, el técnico podrá generar un cobro de viáticos, los cuales deberán ser cubiertos por el cliente.</span></p>
           <a class="pv-mas" href="garantias-instalacion.html#tipos-instalacion">Consulta qué marcas incluyen instalación →</a>
-        </div></details>
-        <details><summary>Consideraciones importantes <small>Regulador, clavija y empaque</small></summary><div class="pv-acc-in">
+        </section>
+        <section class="pv-blk"><h4 class="pv-blk-t">Consideraciones importantes</h4>
           <ol class="pv-list">
             <li><span class="n">01</span><div><p>Debe instalarse un <b>regulador de voltaje independiente para cada equipo de refrigeración</b>, de manera obligatoria.<span class="pv-alerta-txt">De lo contrario, la garantía puede invalidarse.</span></p>
               <ul><li>Algunas marcas, como Sub-Zero, incluyen regulador en refrigeradores y congeladores de gran formato.</li><li>Prevé el espacio necesario para colocar el regulador.</li></ul></div></li>
             <li><span class="n">02</span><p>Algunos equipos pueden <b>entregarse sin clavija</b>.</p></li>
             <li><span class="n">03</span><p>Puedes abrir las cajas para inspección visual, pero <b>no se recomienda desempacar completamente</b>. Espera al técnico autorizado para la instalación.</p></li>
           </ol>
-        </div></details>
+        </section>
       </div>
     </section>
 
@@ -477,33 +472,32 @@
     <section class="pv-panel pv-t-oro" id="mantenimiento" data-pv-panel role="tabpanel" aria-label="Mantenimiento y visita técnica">
       <div class="pv-panel-head">
         <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg> Mantenimiento y visita técnica</h3><p class="pv-panel-sub">Lo que necesitas saber para coordinar tu servicio.</p></div>
-        <button type="button" class="pv-expand" data-pv-expand aria-expanded="false"><span>Expandir todas</span> <b aria-hidden="true">+</b></button>
       </div>
       <div class="pv-acc">
-        <details open><summary>Tipos de servicio <small>Elige el que necesitas</small></summary><div class="pv-acc-in">
+        <section class="pv-blk"><h4 class="pv-blk-t">Tipos de servicio</h4>
           <ul class="pv-srv">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L3.5 17.2a1.6 1.6 0 0 0 2.3 2.3l5.8-5.8a4 4 0 0 0 5.1-5.4l-2.4 2.4-2.1-.4-.4-2.1z"/></svg><h4>Mantenimiento preventivo</h4><p>Revisión general del equipo para verificar su funcionamiento y realizar el mantenimiento correspondiente, de acuerdo con las recomendaciones del fabricante.</p></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><h4>Visita técnica por falla o problema</h4><p>Revisión y diagnóstico de equipos que presenten fallas, funcionamiento irregular o cualquier situación que requiera la evaluación de un técnico autorizado.</p></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5h16v10H9.5L5.5 19v-3.5H4z"/><path d="M8 9.5h8M8 12.5h5"/></svg><h4>Asesoría técnica</h4><p>Visita para resolver dudas relacionadas con el funcionamiento, operación o uso adecuado de los equipos.</p></li>
           </ul>
           <p class="pv-nota"><span class="bang" aria-hidden="true">!</span><span><b>Importante:</b> la visita técnica no garantiza que el problema pueda solucionarse durante la primera visita. Dependiendo del diagnóstico, podrían requerirse refacciones, materiales o servicios adicionales.</span></p>
-        </div></details>
-        <details><summary>Costos y condiciones del servicio <small>Qué se cobra y quién lo define</small></summary><div class="pv-acc-in">
+        </section>
+        <section class="pv-blk"><h4 class="pv-blk-t">Costos y condiciones del servicio</h4>
           <ol class="pv-list">
             <li><span class="n">01</span><p>Los servicios de mantenimiento y visitas técnicas <b>pueden generar un costo</b>, dependiendo de la marca, tipo de equipo y servicio solicitado.</p></li>
             <li><span class="n">02</span><p>El costo de la visita corresponde a la revisión, diagnóstico o mantenimiento solicitado, <b>según lo establecido por el centro de servicio autorizado</b>.</p></li>
             <li><span class="n">03</span><p>En caso de requerirse refacciones, materiales o reparaciones adicionales, éstos podrán generar <b>un costo independiente</b>, el cual deberá ser informado al cliente para su autorización.</p></li>
             <li><span class="n">04</span><p><b>Importante:</b> si el domicilio se encuentra en una ciudad sin centro de servicio autorizado, el técnico podrá generar un cobro de viáticos, los cuales deberán ser cubiertos por el cliente.</p></li>
           </ol>
-        </div></details>
-        <details><summary>Consideraciones importantes <small>Para agilizar tu visita</small></summary><div class="pv-acc-in">
+        </section>
+        <section class="pv-blk"><h4 class="pv-blk-t">Consideraciones importantes</h4>
           <ol class="pv-list">
             <li><span class="n">01</span><p>Proporciona <b>la marca, modelo y una descripción clara</b> del problema o servicio requerido.</p></li>
             <li><span class="n">02</span><p>En caso de presentar una falla, se recomienda compartir <b>fotografías o videos</b> que permitan identificar el problema antes de programar la visita.</p></li>
             <li><span class="n">03</span><p>El diagnóstico y las recomendaciones técnicas serán determinados por el <b>personal autorizado de cada marca</b>.</p></li>
             <li><span class="n">04</span><p>La disponibilidad de técnicos y los tiempos de atención <b>dependerán de la marca y de la ubicación del domicilio</b>.</p></li>
           </ol>
-        </div></details>
+        </section>
       </div>
     </section>
 
@@ -511,10 +505,9 @@
     <section class="pv-panel pv-t-espresso" id="garantias" data-pv-panel role="tabpanel" aria-label="Garantías">
       <div class="pv-panel-head">
         <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg> Garantías</h3><p class="pv-panel-sub">Lo que necesitas saber para una visita rápida y sin contratiempos.</p></div>
-        <button type="button" class="pv-expand" data-pv-expand aria-expanded="false"><span>Expandir todas</span> <b aria-hidden="true">+</b></button>
       </div>
       <div class="pv-acc">
-        <details open><summary>Prepárate para la visita del técnico <small>Antes, durante y después</small></summary><div class="pv-acc-in">
+        <section class="pv-blk"><h4 class="pv-blk-t">Prepárate para la visita del técnico</h4>
           <ol class="pv-list">
             <li><span class="n">01</span><p>Puedes abrir las cajas para inspección visual, pero <b>no se recomienda desempacar completamente</b>. Espera al técnico autorizado para la instalación.</p></li>
             <li><span class="n">02</span><div><p>El día de la visita es indispensable <b>estar en el domicilio y atento a llamadas</b>.</p>
@@ -522,8 +515,8 @@
             <li><span class="n">03</span><div><p>Al finalizar la visita, <b>notifica a Post Venta</b>.</p>
               <ul><li>Envía evidencia fotográfica del servicio realizado.</li></ul></div></li>
           </ol>
-        </div></details>
-        <details><summary>Consideraciones importantes <small>Qué cubre la garantía</small></summary><div class="pv-acc-in">
+        </section>
+        <section class="pv-blk"><h4 class="pv-blk-t">Consideraciones importantes</h4>
           <p class="pv-nota"><span class="bang" aria-hidden="true">!</span><span><b>Importante:</b> la vigencia de la garantía inicia a partir de la fecha de instalación.</span></p>
           <ol class="pv-list">
             <li><span class="n">01</span><p>Los <b>daños estéticos y/o golpes</b> en los productos no se consideran garantía, salvo que sean reportados el mismo día de la entrega del equipo.</p></li>
@@ -532,7 +525,7 @@
               <ul><li>Suministro eléctrico fuera de especificación.</li><li>Daños por fauna o condiciones climáticas.</li><li>Agua con minerales o arenas que generan sarro o taponamientos (se recomienda filtración).</li><li>Limpieza con productos o herramientas no autorizadas.</li><li>Uso incorrecto de los equipos o insumos inadecuados.</li><li>Falta o falla de reguladores de presión de gas LP.</li><li>No contar con reguladores de voltaje.</li></ul></div></li>
           </ol>
           <a class="pv-mas" href="garantias-instalacion.html#marcas">Consulta los años de garantía y el centro de servicio de tu marca →</a>
-        </div></details>
+        </section>
       </div>
     </section>
 
@@ -548,7 +541,7 @@
         <p>Los mismos pasos aplican para instalación, mantenimiento y garantías.</p>
       </div>
       <!-- Formulario de contacto de Post Venta (Microsoft Forms, liga de los PDFs). -->
-      <a class="btn btn-primary" href="https://forms.office.com/r/AD8bhcMGGH?origin=lprLink" target="_blank" rel="noopener">Solicitar servicio<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <a class="btn btn-primary" href="https://forms.office.com/r/AD8bhcMGGH?origin=lprLink" target="_blank" rel="noopener">Abrir formulario<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
     <div class="ev-aviso" role="note">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 1.5 21h21L12 2.5zm-.9 6.5h1.8l-.3 6.5h-1.2L11.1 9zm.9 10a1.15 1.15 0 1 1 0-2.3 1.15 1.15 0 0 1 0 2.3z"/></svg>
@@ -589,9 +582,8 @@
 </div></section>
 
 <script>
-/* Servicio Post-Venta: las tarjetas del paso 1 muestran un servicio a la vez,
-   "Expandir todas" abre sus secciones y el WhatsApp del paso 3 toma el servicio
-   elegido. #instalacion, #mantenimiento y #garantias abren el suyo (botón del
+/* Servicio Post-Venta: las tarjetas del paso 1 muestran un servicio a la vez y
+   el WhatsApp del paso 3 toma el servicio elegido. #instalacion, #mantenimiento y #garantias abren el suyo (botón del
    banner de Garantías). Sin recarga no hay hashchange: se escuchan los clics. */
 (function(){
   var raiz = document.getElementById('pv');
@@ -626,16 +618,6 @@
       var id = t.getAttribute('data-pv-tab');
       activar(id, false);
       try { history.replaceState(history.state, '', '#' + id); } catch (e) {}
-    });
-  });
-
-  raiz.querySelectorAll('[data-pv-expand]').forEach(function(b){
-    b.addEventListener('click', function(){
-      var abrir = b.getAttribute('aria-expanded') !== 'true';
-      b.closest('[data-pv-panel]').querySelectorAll('details').forEach(function(d){ d.open = abrir; });
-      b.setAttribute('aria-expanded', abrir ? 'true' : 'false');
-      b.querySelector('span').textContent = abrir ? 'Contraer todas' : 'Expandir todas';
-      b.querySelector('b').textContent = abrir ? '−' : '+';
     });
   });
 
