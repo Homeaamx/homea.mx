@@ -18,8 +18,8 @@
    servicios completos; con JS se muestra uno a la vez (#instalacion,
    #mantenimiento, #garantias abren el suyo). */
 
-/* Hero partido: texto | foto del equipo a sangre; el borde izquierdo se disuelve
-   en el bone sin desenfoque (no tapa a nadie del equipo). */
+/* Hero partido: texto | foto a sangre (Bertazzoni); el borde izquierdo se
+   disuelve en el bone sin desenfoque. */
 .page-hero.pv-hero{padding:0;background:var(--homea-bone);overflow:hidden}
 .pv-hero-in{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:stretch;min-height:360px}
 .pv-hero-txt{padding:44px clamp(32px,4vw,72px) 52px max(clamp(48px,4vw,96px),calc((100vw - var(--container)) / 2 + clamp(48px,4vw,96px)));display:flex;flex-direction:column;justify-content:center}
@@ -27,7 +27,7 @@
 .pv-hero h1 i{font-style:italic}
 .pv-hero .sub{margin:0;max-width:46ch;font-weight:400;color:var(--homea-black)}
 .pv-hero-img{position:relative;min-height:300px}
-.pv-hero-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;
+.pv-hero-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 40%;
   -webkit-mask-image:linear-gradient(to right,transparent 0,#000 16%);mask-image:linear-gradient(to right,transparent 0,#000 16%)}
 
 .pv-body{padding:48px 0 96px}
@@ -138,6 +138,9 @@
 .ev-aviso-lbl{display:block;margin-bottom:4px;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--homea-black)}
 .ev-aviso p{margin:0;font-size:16px;font-weight:600;line-height:1.45;color:var(--homea-black)}
 .pv-aviso-top{margin-bottom:56px}
+.pv-aviso-top p{font-weight:500;font-size:16.5px}
+.ev-aviso p b{font-weight:700}
+.ev-aviso .pv-aviso-2{margin-top:4px;font-weight:500}
 .ev-card h3{margin:0 0 10px;font-family:var(--font-display);font-size:23px;font-weight:400;line-height:1.2;letter-spacing:-.005em;color:var(--fg)}
 .ev-card p{margin:0;font-size:16.5px;line-height:1.6;color:var(--homea-black)}
 .ev-card{position:relative;background:var(--homea-n050);border:1px solid var(--border);padding:30px 28px 32px;
@@ -385,18 +388,20 @@
       <p class="sub">Te acompañamos durante toda la vida de tus equipos. Consulta la información, requisitos y condiciones antes de solicitar tu servicio.</p>
     </div>
     <div class="pv-hero-img">
-      <img width="1400" height="739" srcset="assets/photos/nuestra-historia-equipo-homea-showroom-640.webp 640w, assets/photos/nuestra-historia-equipo-homea-showroom-960.webp 960w, assets/photos/nuestra-historia-equipo-homea-showroom-1280.webp 1280w, assets/photos/nuestra-historia-equipo-homea-showroom.webp 1400w" sizes="(max-width: 900px) 100vw, 50vw" src="assets/photos/nuestra-historia-equipo-homea-showroom-1280.webp" alt="Equipo HOMEA en el showroom de Querétaro" fetchpriority="high" decoding="async">
+      <img width="1600" height="1083" srcset="assets/photos/servicio-post-venta-refrigerador-bertazzoni-integrado-abierto-640.webp 640w, assets/photos/servicio-post-venta-refrigerador-bertazzoni-integrado-abierto-960.webp 960w, assets/photos/servicio-post-venta-refrigerador-bertazzoni-integrado-abierto-1280.webp 1280w, assets/photos/servicio-post-venta-refrigerador-bertazzoni-integrado-abierto.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" src="assets/photos/servicio-post-venta-refrigerador-bertazzoni-integrado-abierto-1280.webp" alt="Refrigerador Bertazzoni integrado y abierto en una cocina blanca con estufa de acero" fetchpriority="high" decoding="async">
     </div>
   </div>
 </header>
 
 <section class="pv-body" id="pv"><div class="container">
 
-  <!-- Advertencia antes de elegir el servicio (Carla, 2026-10-16). -->
+  <!-- Advertencia antes de elegir el servicio (Carla, 2026-10-16): técnicos externos
+       + aceptación de condiciones, en un solo aviso (antes había otro en el paso 3). -->
   <div class="ev-aviso pv-aviso-top" role="note">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 1.5 21h21L12 2.5zm-.9 6.5h1.8l-.3 6.5h-1.2L11.1 9zm.9 10a1.15 1.15 0 1 1 0-2.3 1.15 1.15 0 0 1 0 2.3z"/></svg>
     <div><span class="ev-aviso-lbl">Importante · Léelo antes de solicitar tu servicio</span>
-    <p>Es indispensable leer y aceptar estas condiciones antes de solicitar tu servicio.</p></div>
+    <p><b>Los técnicos no pertenecen a HOMEA.</b> Son técnicos autorizados directamente por cada marca.</p>
+    <p class="pv-aviso-2">Es indispensable leer y aceptar estas condiciones antes de solicitar tu servicio.</p></div>
   </div>
 
   <!-- ══ Paso 1 · Elegir el servicio ══ -->
@@ -542,11 +547,6 @@
       </div>
       <!-- Formulario de contacto de Post Venta (Microsoft Forms, liga de los PDFs). -->
       <a class="btn btn-primary" href="https://forms.office.com/r/AD8bhcMGGH?origin=lprLink" target="_blank" rel="noopener">Abrir formulario<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-    </div>
-    <div class="ev-aviso" role="note">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 1.5 21h21L12 2.5zm-.9 6.5h1.8l-.3 6.5h-1.2L11.1 9zm.9 10a1.15 1.15 0 1 1 0-2.3 1.15 1.15 0 0 1 0 2.3z"/></svg>
-      <div><span class="ev-aviso-lbl">Importante</span>
-      <p>Los técnicos no pertenecen a HOMEA. Son técnicos autorizados directamente por cada marca.</p></div>
     </div>
     <ol class="ev-pasos reveal">
       <li class="ev-card ev-paso">

@@ -14,8 +14,12 @@ Cada tipo de producto se presenta como una **ficha con diagrama técnico de lín
 - **Reposo:** diagrama (trazo espresso sobre greige) + nombre (serif) + UNA oración
   concreta de qué es y para quién.
 - **Hover:** las puertas del diagrama **se abren** revelando el interior en oro
-  champagne; aparece la línea de specs (anchos típicos + tag de posicionamiento);
+  champagne; aparecen los **puntos clave** (`specs`: "Gas o inducción · 220 V");
   la flecha del CTA crece 28→44px; la tarjeta hace lift −4px con borde oro.
+- **Clic (2026-10-19):** se abre `components/FichaModal.tsx` sobre el fondo
+  oscurecido (velo de "Aprende sobre campanas", tarjeta más chica): el mismo
+  diagrama con su hover, la explicación técnica (`detalle`), los puntos clave y
+  el botón **Ver en el catálogo** → `catalogo` (catálogo con el filtro ya puesto).
 
 **Por qué diagramas y no fotos:** las fotos de producto de un mismo tipo son casi
 indistinguibles entre sí; el trabajo de la guía es explicar *diferencias*, y el
@@ -31,6 +35,7 @@ oro solo como acento de revelación).
 | Tipos (`FichaFiltro`, `GrupoFicha`) | `types/guias.ts` |
 | Tarjetas + agrupación + fallback | `components/FilterShowcase.tsx` |
 | Biblioteca de diagramas SVG | `components/FiltroDiagrama.tsx` |
+| Ilustraciones en escena (grupo Diseño, §9) | `components/IlustracionTipo.tsx` |
 | Estilos (prefijo `.tfk-`) | `styles/guias.css` |
 | Dispatcher (fichas vs chips) | `app/guias/[...segments]/page.tsx` → `FilterIndex` |
 
@@ -48,8 +53,10 @@ categoría a medio definir nunca se rompe.
   "ficha": {
     "grupo": "estilo",
     "diagrama": "french-door",
-    "descripcion": "Dos puertas arriba y congelador abajo: lo fresco queda a la altura de la vista, con baldas anchas donde cabe una charola completa.",
-    "specs": "Anchos 36–48″ · El más buscado"
+    "descripcion": "Dos puertas superiores para el compartimento fresco y congelador en cajón inferior: lo fresco queda a la altura de los ojos.",
+    "specs": "Anchos 30–48″ · Congelador abajo · Puertas angostas",
+    "detalle": "La zona fresca ocupa toda la parte superior… (2–3 oraciones técnicas)",
+    "catalogo": "/productos/cocina-y-bar/refrigeracion/refrigeradores?f=french-door"
   }
 }
 ```
@@ -66,7 +73,17 @@ categoría a medio definir nunca se rompe.
 - **`diagrama`** — key en `FiltroDiagrama.tsx`. Si no existe, cae al diagrama
   `generic` (nunca rompe).
 - **`descripcion`** — ver reglas de copy (§5).
-- **`specs`** — línea de precisión: medida típica + tag, separados por `·`.
+- **`specs`** — puntos clave a considerar, separados por `·` (2–3, cortos): se
+  revelan al hover y salen como etiquetas en el modal.
+- **`detalle`** — explicación técnica del modal (2–3 oraciones).
+- **`catalogo`** — página de catálogo con el filtro de la ficha:
+  - PLP de tipo (Refrigeradores, Parrillas, Campanas): `<ruta>?f=<slug>` (el mismo
+    slug de `filtro`, que alimenta el mosaico del PLP — **no cambiar `filtro`**).
+  - Resto: `<Subcategoría 1>?tipo=<tile>&filtro=<clave>:<valor>` (repetible);
+    `public/catalogo.js` marca esa casilla al cargar. La clave y el valor son los
+    de la tabla de filtros (`data/filtros-web.json` / `filtros.*` de Shopify).
+- **`grupo`** también admite `instalacion` (Grifería, Purificadores); la etiqueta
+  visible de cada grupo se ajusta con `etiquetasGrupos` de la Subcategoría 2.
 
 ## 4. Reglas de los diagramas (FiltroDiagrama)
 
@@ -99,8 +116,8 @@ categoría a medio definir nunca se rompe.
 
 ## 5. Reglas de copy
 
-- **`descripcion`**: UNA oración (máx ~2 líneas), concreta y útil — qué es + para
-  quién / qué problema resuelve. Prohibido lo genérico ("gran calidad y diseño").
+- **`descripcion`** (Carla, 2026-10-19): UNA oración breve y **técnica** (máx ~2
+  líneas) — qué es estructuralmente y qué implica (fondo, ventilación, conexión). Prohibido lo genérico ("gran calidad y diseño").
   Patrón: *rasgo estructural* + *beneficio en la vida real* ("Lo de todos los días
   queda arriba, a la mano y sin agacharse").
 - **`specs`**: `Anchos X–Y″ · Tag` — cifras reales del mercado (verificar con el
@@ -147,3 +164,77 @@ no se duplica ninguna regla.
 **Nomenclatura (Carla, 2026-07-28):** estos tipos son la **Subcategoría 3** de la
 taxonomía — son filtro y, cuando la Subcategoría 2 lo amerite, página propia. Ver
 `GUIAS/ARQUITECTURA-GUIAS.md` §2.
+
+## 9. Ilustración en escena — grupo "Diseño" (Carla, 2026-10-19)
+
+Evolución del diagrama de línea para las fichas del grupo **Diseño** (`grupo:
+"estilo"`) y, solo en Refrigeradores, **Tipo de instalación** (De Piso, Empotrado,
+Counter Depth; en otras categorías esas claves siguen con el diagrama de línea).
+Implementado en los 14 tipos de Refrigeradores; referencia visual: French Door.
+
+- **Instalación:** `escena: "baja"` con aparato alto = de pie entre dos tramos de
+  cubierta, con `holgura` a los lados (sombra de ventilación). `planta` dibuja una
+  **vista superior** en la esquina inferior derecha (gabinetes de 24″, línea
+  dorada del frente): De Piso sobresale, Counter Depth queda al ras, Empotrado
+  dentro del mueble. La planta no sale en el modal.
+- **Diseño (Carla, 2026-10-19):** muro de **listones verticales de madera clara**
+  de piso a techo, limpio, como las fotos Gaggenau (`EscenaListones`; patrón
+  `#ilus-madera-clara`, ranuras cada 15 unidades, tono distinto por listón). El
+  refrigerador no cambia; el panel de Columna toma la misma madera y ranuras.
+  **Bajo cubierta** (referencia Gaggenau): vista cercana con cubierta gruesa de
+  piedra, charola con copas, frentes lisos de la misma madera y cava de vidrio
+  (`zona: "cava"`, estilo Thermador: interior negro, seis bandejas con frente de
+  acero y separadores de madera, fondos de botella con aro y cápsula plata/oro,
+  franja de control con dígitos azules; `manija: "tubo"` y `zocloAcero` en el
+  cuerpo). Queda disponible `antracita: true` (marco/jaladera/zoclo antracita).
+  **Parejas:** congelador siempre a la izquierda y refrigerador a la derecha.
+  **Columna** (referencia Sub-Zero): tres torres combinadas — congelador, cava
+  (`zona: "vinoteca"`, vidrio, al centro para no tapar a la vecina al abrir) y
+  refrigerador — con rejilla y jaladera larga cada una; todas panelables; modal
+  apilado. El texto de la ficha habla de combinarlas y panelarlas. Panelable: el marco
+  de acero de la puerta de vidrio pasa a madera y el cristal se conserva.
+- **Escena realista (`real: true`, solo Tipo de instalación):** nogal con veta
+  (filtro `feTurbulence` → patrón `#ilus-madera`, una sola chapa continua),
+  salpicadero de mármol, cubierta de piedra, jaladeras de latón, luminarias
+  empotradas con haz cálido, LED bajo alacena y zoclo, piso pulido con reflejo y
+  decoración (olivo, tablas, platos). Las clases son las mismas; `.ilus--real`
+  cambia los materiales en `styles/guias.css`. Al panelar, el panel (nogal) cubre
+  también la rejilla superior.
+- **Bisagras (Carla, 2026-10-19):** Bottom Mount, Top Mount, Glass Door y Columna
+  abren a la derecha; sus etiquetas van a la izquierda.
+
+- **Tarjeta grande** (dos por fila, `.tfk-grid--ilus`): el aparato cerrado dentro
+  de una cocina espresso. **Hover:** las puertas giran en 3D sobre su bisagra
+  (CSS `rotateY`, con reverso: forro y anaqueles de puerta), los cajones salen al
+  frente escalonados, se enciende la luz interior y aparecen etiquetas con leader
+  line. Lupa dorada arriba a la derecha = "se abre".
+- **Modal:** las dos vistas juntas, **Cerrado | Abierto**, recortadas al aparato
+  (la abierta se anima sola). **Sin botón de WhatsApp** (en ningún modal de ficha).
+- **Todo es código** (`components/IlustracionTipo.tsx`), sin fotos: cada tipo es
+  DATOS en `APARATOS` — `cuerpos` (gabinetes), `huecos` (interior con `zona`:
+  fresca, congelador, flex, bebidas, vino; `crisper` para cajones de verdura),
+  `piezas` (`puerta(x,y,w,h,bisagra,{cristal,despachador})` o
+  `cajon(x,y,w,h,zona)`) y `etiquetas`. El generador dibuja escena, cavidad en
+  perspectiva, repisas, contenido, frentes de acero y reversos.
+- Escena 560×400 unidades; aparatos de piso en y 56–376 (zoclo 366–376);
+  `escena: "baja"` = cubierta + alacenas (bajo cubierta).
+- **Etiquetas:** máx. ~20 caracteres por línea (dos líneas). Del lado izquierdo el
+  texto termina en x 150 (`hasta: 150`); del derecho empieza en x 404–410. Evitar
+  y 104–136 y 160–202 (jaladeras de las alacenas). Con puertas anchas de bisagra
+  izquierda, poner las etiquetas a la derecha.
+- Opciones de forma: `rejilla` en el cuerpo (lamas arriba, estilo Sub-Zero:
+  Parejas, Glass Door), `manija: "media" | "larga" | "superior"`, `cristal` con
+  marco ancho (interior iluminado aun cerrado). Proporciones según foto real de
+  referencia (Parejas = dos columnas de 36″, casi cuadradas).
+- **Panelar** (`panelable` en el aparato y en la puerta; hoy Columna y Empotrado):
+  botón sobre la hoja derecha de la alacena derecha que cambia el frente de acero por panel del mismo material de los
+  gabinetes con jaladera larga dorada; también en el modal.
+- El encuadre del modal crece con la puerta más ancha (sobresale ~66 % al abrir).
+  Mientras el modal está abierto, la tarjeta de origen no anima (`.tfk-quieta`):
+  el velo es translúcido y se veía cerrarse detrás (doble animación).
+- La ficha usa la ilustración si su `diagrama` está en `APARATOS` y el grupo es
+  `estilo` (o `tipo` en Refrigeradores); si no, cae al diagrama de línea.
+
+**Para una categoría nueva:** añadir su entrada a `APARATOS` con la misma
+`diagrama` key de la taxonomía; si necesita otra mecánica (quemadores, tapas,
+flujo de aire), sumar un tipo de pieza al generador en vez de dibujar a mano.

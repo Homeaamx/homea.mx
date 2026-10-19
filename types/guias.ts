@@ -10,8 +10,12 @@ export type NivelGuias = "subcategoria1" | "macrocategoria";
 /**
  * Subcategoría 2 = tipo de producto / leaf de filtro (en ramas de 3 niveles).
  */
-/** Grupo de una ficha: "tipo" (cómo se instala) vs "estilo" (formato/configuración). */
-export type GrupoFicha = "tipo" | "estilo";
+/**
+ * Grupo de una ficha: "tipo" (primer eje de la subcategoría), "instalacion" (cómo
+ * se instala, cuando el primer eje es otro: Grifería, Purificadores) y "estilo"
+ * (formato/configuración). La etiqueta visible sale de `etiquetasGrupos`.
+ */
+export type GrupoFicha = "tipo" | "instalacion" | "estilo";
 
 /**
  * Ficha de tipo de producto — alimenta el patrón "Planos de cocina" (FilterShowcase):
@@ -25,8 +29,16 @@ export interface FichaFiltro {
   diagrama: string;
   /** UNA oración concreta y útil: qué es + para quién (siempre visible). */
   descripcion: string;
-  /** Línea de precisión revelada al hover: "Anchos 36–48″ · El más buscado". */
+  /** Puntos clave revelados al hover, separados por "·": "Gas o inducción · 220 V". */
   specs: string;
+  /** Explicación técnica ampliada del modal (2–3 oraciones). */
+  detalle?: string;
+  /**
+   * Página de catálogo con el filtro de esta ficha ya aplicado: `?f=` en las PLP de
+   * tipo (Refrigeradores, Parrillas, Campanas) o `?tipo=…&filtro=<clave>:<valor>`
+   * en la Subcategoría 1 (public/catalogo.js marca la casilla).
+   */
+  catalogo?: string;
 }
 
 /** Un filtro que subdivide una Subcategoría 2 (p.ej. "French Door" dentro de Refrigeradores). */

@@ -160,7 +160,7 @@
               opacity var(--dur-slow) var(--ease-standard),
               margin var(--dur-slow) var(--ease-standard);
 }
-.tfk-card:hover .tfk-meta { max-height: 40px; opacity: 1; margin-top: 10px; }
+.tfk-card:hover .tfk-meta { max-height: 64px; opacity: 1; margin-top: 10px; }
 .tfk-cta {
   display: inline-flex; align-items: center; gap: 10px; margin-top: 14px;
   font-family: var(--font-sans); font-size: 12px; font-weight: 600;
@@ -182,6 +182,48 @@
 .tfk-card:hover .tfk-arrow { width: 44px; background: var(--accent-text); }
 .tfk-card:hover .tfk-arrow::after { color: var(--accent-text); }
 
+/* — Modal de ficha (FichaModal, Carla 2026-10-19): velo de .apc-veil, tarjeta
+   más compacta que el overlay de "Aprende". Diagrama a la izquierda con el mismo
+   hover que la tarjeta; explicación técnica y botón al catálogo filtrado. — */
+.tfk-modal {
+  position: relative; display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  width: min(800px, 100%); max-height: 90vh; overflow: auto;
+  background: var(--bg); animation: apcUp .4s var(--ease-standard);
+}
+.tfk-modal-x { top: 8px; right: 14px; }
+.tfk-modal-fig {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  background: var(--homea-greige); padding: 36px 20px 22px; cursor: default;
+}
+.tfk-modal-fig .tfk-diagram { background: none; border: 0; padding: 0; }
+.tfk-modal-fig .tfk-diagram svg { height: 210px; }
+.tfk-modal-hint {
+  font-size: 11px; font-weight: 600; letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+.tfk-modal-body { padding: 34px 36px 30px; color: var(--homea-black); }
+.tfk-modal-body h3 {
+  margin: 10px 0 12px; font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(26px, 2.6vw, 32px); line-height: 1.12; color: var(--homea-black);
+}
+.tfk-modal-desc { margin: 0 0 12px; font-size: 17px; font-weight: 500; line-height: 1.5; }
+.tfk-modal-detalle { margin: 0; font-size: 16px; line-height: 1.65; }
+.tfk-modal-puntos { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; }
+.tfk-modal-puntos li {
+  padding: 7px 12px; border: 1px solid var(--homea-gold); background: color-mix(in srgb, var(--homea-gold) 10%, #fff);
+  font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--homea-black);
+  font-variant-numeric: tabular-nums;
+}
+.tfk-modal-acts { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 26px; margin-top: 24px; }
+@media (max-width: 720px) {
+  .tfk-modal { grid-template-columns: 1fr; max-height: 92vh; }
+  .tfk-modal-fig { padding: 34px 16px 16px; }
+  .tfk-modal-fig .tfk-diagram svg { height: 150px; }
+  .tfk-modal-hint { display: none; }
+  .tfk-modal-body { padding: 24px 20px 24px; }
+  .tfk-modal-acts .btn { width: 100%; justify-content: center; }
+}
+
 /* — Diagrama: anatomía y animación de puertas — */
 :is(.tfk-diagram, .tpg-diagram) .fb { fill: url(#dgm-acero); stroke: var(--dgm-canto); stroke-width: 1.5; }
 :is(.tfk-diagram, .tpg-diagram) .dr rect, :is(.tfk-diagram, .tpg-diagram) .dw rect { fill: url(#dgm-acero); stroke: var(--dgm-canto); stroke-width: 1.5; }
@@ -192,10 +234,10 @@
 }
 :is(.tfk-diagram, .tpg-diagram) .hl { transform-origin: left center; }
 :is(.tfk-diagram, .tpg-diagram) .hr { transform-origin: right center; }
-:is(.tfk-card, .tpg-card):hover .hl, :is(.tfk-card, .tpg-card):hover .hr { transform: scaleX(0.13); }
-:is(.tfk-card, .tpg-card):hover .dw { transform: translateY(7px); }
+:is(.tfk-card, .tpg-card, .tfk-modal-fig):hover .hl, :is(.tfk-card, .tpg-card, .tfk-modal-fig):hover .hr { transform: scaleX(0.13); }
+:is(.tfk-card, .tpg-card, .tfk-modal-fig):hover .dw { transform: translateY(7px); }
 :is(.tfk-diagram, .tpg-diagram) .in { opacity: 0; transition: opacity var(--dur-slow) var(--ease-standard) 80ms; }
-:is(.tfk-card, .tpg-card):hover .in { opacity: 1; }
+:is(.tfk-card, .tpg-card, .tfk-modal-fig):hover .in { opacity: 1; }
 :is(.tfk-diagram, .tpg-diagram) .in .zone {
   fill: url(#dgm-cavidad); opacity: 1;
   stroke: var(--dgm-repisa); stroke-width: 0.6; stroke-opacity: 0.45;
@@ -213,7 +255,7 @@
 :is(.tfk-diagram, .tpg-diagram) .ln { fill: none; stroke: var(--homea-espresso); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 /* Tapa que se levanta al hover (arcones, asadores, campana retráctil). */
 :is(.tfk-diagram, .tpg-diagram) .lid { transform-box: fill-box; transition: transform 550ms var(--ease-reveal); }
-:is(.tfk-card, .tpg-card):hover .lid { transform: translateY(-8px); }
+:is(.tfk-card, .tpg-card, .tfk-modal-fig):hover .lid { transform: translateY(-8px); }
 /* Revelados oro adicionales: trazos (agua/vapor/flamas) y aros (quemadores/hielo). */
 :is(.tfk-diagram, .tpg-diagram) .in path { stroke: var(--accent-text); fill: none; stroke-width: 1.2; opacity: 0.7; }
 :is(.tfk-diagram, .tpg-diagram) .in .ring { fill: none; stroke: var(--accent-text); stroke-width: 1.5; opacity: 0.8; }
@@ -221,15 +263,15 @@
 
 /* Táctil (sin hover): specs siempre visibles; el diagrama descansa cerrado. */
 @media (hover: none) {
-  .tfk-meta { max-height: 40px; opacity: 1; margin-top: 10px; }
+  .tfk-meta { max-height: 64px; opacity: 1; margin-top: 10px; }
 }
 /* Movimiento reducido: sin animación de puertas ni lift; specs visibles. */
 @media (prefers-reduced-motion: reduce) {
   :is(.tfk-card, .tpg-card), :is(.tfk-diagram, .tpg-diagram) .dr, :is(.tfk-diagram, .tpg-diagram) .dw, :is(.tfk-diagram, .tpg-diagram) .lid, :is(.tfk-diagram, .tpg-diagram) .in,
   .tfk-meta, .tfk-arrow { transition: none; }
   :is(.tfk-card, .tpg-card):hover { transform: none; }
-  :is(.tfk-card, .tpg-card):hover .hl, :is(.tfk-card, .tpg-card):hover .hr, :is(.tfk-card, .tpg-card):hover .dw,
-  :is(.tfk-card, .tpg-card):hover .lid { transform: none; }
+  :is(.tfk-card, .tpg-card, .tfk-modal-fig):hover .hl, :is(.tfk-card, .tpg-card, .tfk-modal-fig):hover .hr, :is(.tfk-card, .tpg-card, .tfk-modal-fig):hover .dw,
+  :is(.tfk-card, .tpg-card, .tfk-modal-fig):hover .lid { transform: none; }
 }
 
 /* Migas de pan sobre fondo claro, encima de "Explora por categoría". */
@@ -775,4 +817,279 @@
 @media (max-width: 640px) {
   .guia-search { width: 100%; }
   .guia-search-input::placeholder { font-size: 15px; }
+}
+
+/* ---------------------------------------------------------------------------
+   Ilustración en escena (IlustracionTipo) — prueba French Door, Carla 2026-10-19
+   Tarjeta grande: aparato cerrado en una cocina espresso; al hover las puertas
+   giran en 3D, el cajón sale, se enciende la luz y aparecen etiquetas. El modal
+   pone juntas las dos vistas (cerrado | abierto) recortadas al aparato.
+   --------------------------------------------------------------------------- */
+:root {
+  --ilus-pared-1: #120E0B;   /* muro, abajo */
+  --ilus-pared-2: #2A221B;   /* muro, arriba (luz cálida) */
+  --ilus-mueble:  #2E261F;   /* carpintería espresso */
+  --ilus-junta:   #17120E;   /* separación entre frentes */
+  --ilus-piso:    #0E0B09;
+  --ilus-lado:    #B9C4CB;   /* pared lateral de la cavidad (sombra) */
+  --ilus-forro-1: #DDE3E7;   /* forro interior de puerta */
+  --ilus-forro-2: #F1F4F6;
+  --ilus-ceramica:#F4F1EB;   /* recipientes blancos */
+  --ilus-vidrio:  #C9D6DC;
+  --ilus-botella: #1F2A26;
+  --ilus-verde:   #7B8A63;   /* verduras: verde olivo apagado */
+  --ilus-durazno: #D9A27A;
+  --ilus-hielo:   #D6E2EA;
+  --ilus-cubierta:#B8AE9F;   /* cubierta de piedra (escena baja) */
+}
+
+/* Grupo con fichas ilustradas: dos tarjetas grandes por fila. */
+.tfk-grid--ilus { grid-template-columns: repeat(auto-fill, minmax(min(100%, 440px), 1fr)); gap: 20px; margin-bottom: 16px; }
+.tfk-card--ilus .tfk-body { padding: 22px 26px 26px; }
+.tfk-card--ilus .tfk-name { font-size: clamp(26px, 2.4vw, 32px); margin-bottom: 10px; }
+.tfk-card--ilus .tfk-desc { font-size: 15.5px; color: var(--fg); }
+.tfk-card--ilus .tfk-meta { font-size: 12px; }
+.tfk-card--ilus .tfk-cta { font-size: 13px; margin-top: 18px; }
+.tfk-ilus { position: relative; display: block; overflow: hidden; background: var(--ilus-pared-1); container-type: inline-size; }
+.tfk-zoom {
+  position: absolute; top: 16px; right: 16px; z-index: 6; width: 46px; height: 46px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; background: var(--homea-gold); color: var(--homea-black);
+  opacity: 0; transform: scale(.8); transition: opacity var(--dur-med) var(--ease-standard), transform var(--dur-med) var(--ease-standard);
+}
+.tfk-zoom svg { width: 20px; height: 20px; }
+.tfk-card--ilus:hover .tfk-zoom, .tfk-card--ilus:focus-visible .tfk-zoom { opacity: 1; transform: scale(1); }
+/* Botón "Panelar": sobre el aparato, encima de la alacena. */
+.tfk-panelar {
+  position: absolute; z-index: 14; transform: translate(-50%, -50%); cursor: pointer;
+  padding: 8px 16px; border: 1px solid var(--homea-gold); background: rgba(18,14,11,.78);
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--homea-bone); white-space: nowrap;
+  transition: background var(--dur-med) var(--ease-standard), color var(--dur-med) var(--ease-standard);
+}
+.tfk-panelar:hover, .tfk-panelar[aria-pressed="true"] { background: var(--homea-gold); color: var(--homea-black); }
+.tfk-panelar:focus-visible { outline: 2px solid var(--homea-bone); outline-offset: 2px; }
+.tfk-panelar--modal { position: static; transform: none; margin-bottom: 4px; }
+/* Tarjeta que abrió el modal: sin animación mientras el velo la cubre. */
+.tfk-quieta .ilus, .tfk-quieta .ilus *, .tfk-quieta .tfk-zoom { transition: none !important; }
+
+.ilus { position: relative; display: block; aspect-ratio: 560 / 400; perspective: 1400px;
+  transition: transform 1400ms var(--ease-reveal); }
+.ilus > * { position: absolute; }
+.ilus-escena { inset: 0; width: 100%; height: 100%; }
+.ilus-capa { display: block; }
+.ilus-capa > svg, svg.ilus-capa { display: block; width: 100%; height: 100%; }
+
+/* Materiales */
+.ilus .i-mueble { fill: var(--ilus-mueble); }
+.ilus .i-junta { stroke: var(--ilus-junta); stroke-width: 1.5; }
+.ilus .i-jaladera { fill: #8A7454; }
+.ilus .i-zoclo { fill: #0B0907; }
+.ilus .i-piso { fill: var(--ilus-piso); }
+.ilus .i-nicho { fill: #0A0806; }
+.ilus .i-filo { stroke: var(--homea-gold); stroke-width: 1; opacity: .35; }
+.ilus .i-marco { fill: #8E959B; }
+.ilus .i-techo { fill: #FAFCFD; }
+.ilus .i-suelo { fill: #C6D0D6; }
+.ilus .i-led { fill: #fff; }
+.ilus .i-ceramica { fill: var(--ilus-ceramica); stroke: #B9BDBF; stroke-width: .6; }
+.ilus .i-vidrio { fill: var(--ilus-vidrio); fill-opacity: .75; stroke: #8FA1AA; stroke-width: .6; }
+.ilus .i-tapa { fill: #8E959B; }
+.ilus .i-agua { fill: #A9C6D8; opacity: .6; }
+.ilus .i-botella { fill: var(--ilus-botella); }
+.ilus .i-etiqueta { fill: var(--homea-gold); }
+.ilus .i-limon { fill: var(--homea-gold-bright, #D4B77E); }
+.ilus .i-verde { fill: var(--ilus-verde); }
+.ilus .i-durazno { fill: var(--ilus-durazno); }
+.ilus .i-linea { stroke: #B9BDBF; stroke-width: .6; }
+.ilus .i-repisa { fill: #DCE7EE; fill-opacity: .55; }
+.ilus .i-canto { stroke: var(--dgm-repisa); stroke-width: 1.6; }
+.ilus .i-crisper { fill: #fff; fill-opacity: .45; stroke: #A8B6BF; stroke-width: 1; }
+.ilus .i-hueco { fill: #1A1D20; }
+.ilus .i-zoclo-ap { fill: #2A2E32; }
+.ilus .i-rejilla { stroke: #5A6066; stroke-width: 1.4; }
+.ilus .i-canasta { fill: #E3EAEF; stroke: #A8B6BF; stroke-width: .8; }
+.ilus .i-hielo { fill: var(--ilus-hielo); stroke: #A8B6BF; stroke-width: .6; }
+.ilus .i-panel { stroke: var(--dgm-canto); stroke-width: 1.5; }
+.ilus .i-manija { fill: var(--dgm-manija); }
+.ilus .i-empaque { fill: none; stroke: #9AA3A9; stroke-width: 2; }
+.ilus .i-cristal { fill: #1C2A31; fill-opacity: .28; stroke: #6E7479; stroke-width: 1; }
+.ilus .i-reflejo { fill: #fff; opacity: .1; }
+.ilus .i-lata { fill: #B9BFC4; stroke: #8E959B; stroke-width: .5; }
+.ilus .i-brillo { fill: #fff; opacity: .35; }
+.ilus .i-riel { stroke: #8E959B; stroke-width: 1.2; }
+.ilus .i-despachador { fill: #2A2E32; stroke: #5A6066; stroke-width: 1; }
+.ilus .i-pantalla { fill: var(--homea-gold); opacity: .7; }
+.ilus .i-muro { fill: #3A3129; }
+.ilus .i-cubierta { fill: var(--ilus-cubierta); }
+.ilus .i-cubierta-canto { stroke: #fff; stroke-width: 1; opacity: .35; }
+.ilus .i-lama { stroke: #6E7479; stroke-width: 1; opacity: .8; }
+.ilus .i-panel-canto { fill: none; stroke: var(--ilus-junta); stroke-width: 1.5; }
+.ilus .i-jaladera-oro { fill: var(--homea-gold); }
+/* Panelar (Columna): el frente de acero se cubre con panel de carpintería. */
+.ilus .i-panelado { opacity: 0; transition: opacity 600ms var(--ease-standard); }
+.is-panel .ilus .i-panelado { opacity: 1; }
+.ilus .i-planta-caja { fill: rgba(18,14,11,.82); stroke: var(--homea-gold); stroke-width: .6; stroke-opacity: .6; }
+.ilus .i-planta-tit { font-family: var(--font-sans); font-size: 6.5px; font-weight: 600; letter-spacing: .18em; fill: rgba(247,243,236,.75); }
+.ilus .i-planta-muro { stroke: var(--homea-bone); stroke-width: 2; opacity: .7; }
+.ilus .i-planta-gab { fill: #4A3F34; stroke: rgba(247,243,236,.35); stroke-width: .6; }
+.ilus .i-planta-ref { fill: #C2C7CC; stroke: var(--dgm-canto); stroke-width: .8; }
+.ilus .i-planta-frente { stroke: var(--homea-gold); stroke-width: 1; stroke-dasharray: 3 2; }
+.tfk-duo-crop .i-planta { display: none; }
+
+/* ——— Escena realista (Tipo de instalación, Carla 2026-10-19): nogal con veta,
+   mármol, latón, luces empotradas y piso pulido. Texturas en DiagramaDefs. ——— */
+.ilus .i-modelado { fill: none; }
+/* Diseño: muro de listones de madera clara (Carla, 2026-10-19). El panel de
+   Columna toma la misma madera y sus ranuras. */
+.ilus .i-liston { fill: url(#ilus-madera-clara) #7A5638; }
+.ilus .i-ranura { stroke: #1F150D; stroke-width: 1.3; opacity: .75; }
+.ilus .i-ranura-panel { display: none; }
+.ilus--listones .i-ranura-panel { display: inline; }
+.ilus--listones .i-mueble { fill: url(#ilus-madera-clara) #7A5638; }
+.ilus--listones .i-modelado { fill: url(#ilus-modelado); }
+.ilus--listones .i-zoclo { fill: #120C08; }
+.ilus--listones .i-nicho { fill: #0B0806; }
+.ilus--listones .i-cubierta { fill: url(#ilus-piedra) #3A332D; }
+.ilus--listones .i-cubierta-canto { stroke: #D9CFC2; opacity: .35; }
+.ilus--listones .i-panel-canto { stroke: #1F150D; stroke-width: 1.2; fill: none; }
+/* Cava (bajo cubierta): botellas de perfil sobre repisas de madera. */
+.ilus .i-botella-clara { fill: #C9B27A; opacity: .9; }
+.ilus .i-capsula { fill: #B0283E; }
+.ilus .i-capsula-oro { fill: #D8B57C; }
+.ilus .i-etiqueta-blanca { fill: #EFE9DC; }
+.ilus .i-repisa-madera { fill: url(#ilus-madera-clara) #8A6A4A; }
+.ilus .i-control { fill: #15181B; }
+.ilus .i-control-luz { fill: #E8EEF2; opacity: .85; }
+.ilus .i-copa { fill: #fff; fill-opacity: .08; stroke: #EDE7DC; stroke-width: .9; stroke-opacity: .7; }
+.ilus .i-copa-tallo { fill: none; stroke: #EDE7DC; stroke-width: .9; opacity: .7; }
+.ilus .i-aceituna { fill: #5B6234; }
+/* Cava: fondos de botella de frente (referencia Gaggenau). */
+.ilus .i-vidrio-tinto { fill: #1E2322; }
+.ilus .i-vidrio-verde { fill: #1F3A2A; }
+.ilus .i-vidrio-ambar { fill: #5A4220; }
+.ilus .i-fondo-sombra { fill: #000; opacity: .35; }
+.ilus .i-fondo-brillo { fill: none; stroke: #fff; stroke-width: 1.1; opacity: .35; stroke-linecap: round; }
+.ilus .i-capsula-verde { fill: #5FBF7A; }
+.ilus .i-repisa-clara { fill: #EEF1F2; stroke: #B7C0C6; stroke-width: .6; }
+.ilus .i-ranura-ventila { fill: #8E979D; opacity: .55; }
+.ilus .i-pantalla-cava { fill: #0A0C0D; stroke: #3A4046; stroke-width: .5; }
+.ilus .i-cava-fondo { fill: #0B0C0D; }
+.ilus .i-fondo { fill: #1A1D1F; }
+.ilus .i-fondo-aro { fill: none; stroke: #7E878D; stroke-width: 1.1; opacity: .8; }
+.ilus .i-capsula-plata { fill: #B9C0C5; }
+.ilus .i-separador { fill: #6B4A2E; }
+.ilus .i-bandeja-acero { stroke: #5E656B; stroke-width: .6; }
+.ilus .i-control-azul { font-family: var(--font-sans); font-size: 7px; font-weight: 600; fill: #3E8BFF; }
+.ilus .i-lama-zoclo { fill: #2A2E32; }
+.ilus .i-manija-tubo { stroke: #4A5056; stroke-width: .6; }
+.ilus .i-cava-panel { fill: #36373A; }
+.ilus .i-perforado { fill: #141516; }
+.ilus .i-bandeja { fill: #55575A; }
+.ilus .i-bandeja-filo { stroke: #7C7F83; stroke-width: 1; }
+.ilus .i-varilla { fill: #CDAE80; }
+.ilus .i-ola { fill: none; stroke: #4A4C4F; stroke-width: 3; }
+.ilus .i-vidrio-rosado { fill: #6E2C33; opacity: .92; }
+.ilus .i-corcho-rosa { fill: #E7A9A1; }
+.ilus .i-capsula-oro-claro { fill: #E6CB94; }
+.ilus .i-capsula-negra { fill: #1A1A1A; }
+.ilus .i-collar { fill: none; stroke: #EDEAE3; stroke-width: 2.4; }
+.ilus .i-tapon-crema { fill: #E9E3C6; }
+.ilus .i-control-num { font-family: var(--font-sans); font-size: 5.5px; fill: #EEF1F2; }
+/* Acabado antracita (Bajo cubierta). */
+.ilus--antracita .i-marco { fill: #2A2B2D; }
+.ilus--antracita .i-marco-cristal { fill: #2C2D2F; stroke: #1A1B1C; }
+.ilus--antracita .i-zoclo-ap { fill: #1E1F21; }
+.ilus--antracita .i-rejilla { stroke: #44474A; }
+.ilus--antracita .i-manija { fill: #3A3C3F; }
+.ilus--antracita .i-cristal { fill: #101214; fill-opacity: .3; }
+.ilus .i-acero-luz { display: none; }
+.ilus--real .i-mueble { fill: url(#ilus-madera) #4A3020; }
+.ilus--real .i-modelado { fill: url(#ilus-modelado); }
+:is(.ilus--real, .ilus--listones) .i-acero-luz { display: inline; }
+/* Acabado del aparato (instalación y, desde 2026-10-19, también Diseño): acero
+   modelado y jaladeras de cromo con canto oscuro y sombra sobre la puerta. */
+.ilus .i-manija-sombra { display: none; }
+:is(.ilus--real, .ilus--listones) .i-manija-sombra { display: inline; fill: #000; opacity: .28; }
+:is(.ilus--real, .ilus--listones) .i-manija { fill: url(#ilus-cromo) #C9CED2; stroke: #2E3236; stroke-width: .7; }
+:is(.ilus--real, .ilus--listones) .i-manija-h { fill: url(#ilus-cromo-h) #C9CED2; }
+.ilus--real .i-junta { stroke: #160E08; stroke-width: 1.8; }
+.ilus--real .i-jaladera, .ilus--real .i-jaladera-oro { fill: url(#ilus-laton) #B08A55; }
+.ilus--real .i-muro { fill: url(#ilus-marmol) #2A2420; }
+.ilus--real .i-cubierta { fill: url(#ilus-piedra) #3A332D; }
+.ilus--real .i-cubierta-canto { stroke: #D9CFC2; opacity: .45; }
+.ilus--real .i-piso { fill: url(#ilus-piso-real) #2A241F; }
+.ilus--real .i-zoclo { fill: #120C08; }
+.ilus--real .i-nicho { fill: #0B0806; }
+.ilus--real .i-panel-canto { stroke: #160E08; }
+.ilus .i-plafon { fill: #000; opacity: .35; }
+.ilus .i-foco { fill: #FFF3DC; }
+.ilus .i-led-linea { stroke: #FFE2B8; stroke-width: 1; opacity: .9; }
+.ilus .i-tallo { fill: none; stroke: #5B5A3A; stroke-width: 1; }
+.ilus .i-hoja { fill: #7E8455; }
+.ilus .i-jarron { fill: #1E1A17; stroke: #3A332D; stroke-width: .6; }
+.ilus .i-tabla { fill: url(#ilus-madera) #6B4A33; stroke: #2A1B10; stroke-width: .8; }
+.ilus .i-tabla-2 { opacity: .85; }
+.ilus .i-tazon { fill: #3A332D; }
+.ilus .i-plato { fill: #2B2622; stroke: #4A423A; stroke-width: .4; }
+.ilus .i-anaquel { fill: #fff; fill-opacity: .6; stroke: #A8B6BF; stroke-width: 1; }
+
+/* Estado: cerrado por defecto; abierto al hover de la tarjeta o en el modal. */
+.ilus-puerta { transform-style: preserve-3d; transition: transform 1100ms var(--ease-reveal); z-index: 10; }
+.ilus-puerta--l { transform-origin: left center; }
+.ilus-puerta--r { transform-origin: right center; }
+.ilus-cara { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.ilus-reverso { transform: rotateY(180deg); }
+/* z-index y --k (orden de abajo hacia arriba) vienen inline: los cajones salen escalonados. */
+.ilus-cajon { transform-origin: center top; transition: transform 900ms var(--ease-reveal) calc(120ms + var(--k, 0) * 110ms); }
+.ilus-canasta { z-index: 1; opacity: 0; transform: translateY(40%); transition: opacity 500ms var(--ease-standard) 200ms, transform 900ms var(--ease-reveal) 120ms; }
+.ilus-apagado { fill: #0A0B0C; opacity: .88; transition: opacity 600ms var(--ease-standard) 350ms; }
+/* Puerta de cristal: el interior se alcanza a ver cerrado, en penumbra. */
+.ilus-apagado--cristal { opacity: .16; }
+.ilus-tags { inset: 0; z-index: 12; pointer-events: none; }
+.ilus-tag { position: absolute; height: 0; border-top: 1px solid rgba(247,243,236,.75);
+  opacity: 0; transition: opacity 500ms var(--ease-standard); transition-delay: calc(500ms + var(--i) * 110ms); }
+.ilus-tag::before { content: ""; position: absolute; top: -4px; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--homea-gold-bright, #D4B77E); box-shadow: 0 0 0 3px rgba(189,155,94,.3); }
+.ilus-tag--der::before { left: -4px; }
+.ilus-tag--izq::before { right: -4px; }
+.ilus-tag-tx { position: absolute; top: 0; transform: translateY(-50%); white-space: pre-line; padding: 3px 8px;
+  box-sizing: border-box; width: max-content;
+  /* Cabe dentro de la imagen aun con el zoom del hover (×1.035): cqi = ancho de
+     .tfk-ilus (container-type). */
+  max-width: calc(var(--esp, 30) * 0.93cqi - 2px);
+  background: rgba(18,14,11,.62);
+  font-family: var(--font-sans); font-size: clamp(9px, 2.05cqi, 12.5px); font-weight: 500; line-height: 1.35; color: var(--homea-bone);
+  text-shadow: 0 1px 3px rgba(0,0,0,.9), 0 0 10px rgba(10,8,6,.85); }
+.ilus-tag--der .ilus-tag-tx { left: 100%; }
+.ilus-tag--izq .ilus-tag-tx { right: 100%; text-align: right; }
+
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus-puerta--l { transform: rotateY(-118deg); }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus-puerta--r { transform: rotateY(118deg); }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus-cajon { transform: translateY(9%) scale(1.06); }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus-canasta { opacity: 1; transform: translateY(18%); }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus-apagado { opacity: 0; }
+:is(.tfk-card:hover, .tfk-card:focus-visible) .ilus-tag { opacity: 1; }
+:is(.tfk-card:hover, .tfk-card:focus-visible) .ilus { transform: scale(1.035); }
+
+/* Modal: las dos vistas juntas, recortadas al aparato (sin etiquetas). */
+.tfk-modal--ilus { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); width: min(1080px, 100%); }
+.tfk-modal--ilus .tfk-modal-fig { padding: 40px 22px 24px; background: var(--ilus-pared-1); }
+.tfk-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; }
+.tfk-duo-item { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+/* Parejas (Carla, 2026-10-19): las dos vistas, una encima de la otra; cada una
+   cabe en media altura del modal para no obligar a desplazarse. */
+.tfk-duo--apilado { grid-template-columns: 1fr; justify-items: center; gap: 16px; }
+.tfk-duo--apilado .tfk-duo-item { width: min(100%, calc((90vh - 170px) / 2 * 490 / 370)); }
+.tfk-duo-crop { position: relative; display: block; overflow: hidden; }
+.tfk-duo-crop .ilus { width: calc(var(--rw) * 100%); transform: translate(calc(var(--rx) * -1), calc(var(--ry) * -1)); }
+.tfk-duo-crop .ilus-tags { display: none; }
+.tfk-duo-item figcaption { font-size: 11px; font-weight: 600; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: rgba(247,243,236,.7); text-align: center; }
+
+@media (max-width: 720px) {
+  .tfk-modal--ilus { grid-template-columns: 1fr; }
+  .tfk-modal--ilus .tfk-modal-fig { padding: 44px 14px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ilus, .ilus-puerta, .ilus-cajon, .ilus-canasta, .ilus-apagado, .ilus-tag { transition: none; }
+  :is(.tfk-card:hover, .tfk-card:focus-visible) .ilus { transform: none; }
 }

@@ -19,6 +19,7 @@ import { getFotoTipo } from "@/lib/fotosTipos";
 
 const GRUPOS: { key: GrupoFicha; label: string }[] = [
   { key: "tipo", label: "Tipo de instalación" },
+  { key: "instalacion", label: "Tipo de instalación" },
   { key: "estilo", label: "Diseño" },
 ];
 

@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import MarketingPage from "@/components/MarketingPage";
 import { categoriaFile, categoriaSlugs, getMain, getTitle } from "@/lib/preview";
 import { productosDeColeccion, type ProductoVivo } from "@/lib/shopify/catalogoVivo";
-import { EXTRAS_DE_MACRO, tilesPresentes, tiposDeMacro } from "@/lib/shopify/coleccionesWeb";
+import { EXTRAS_DE_MACRO, tiposDeMacro } from "@/lib/shopify/coleccionesWeb";
+import { opcionesPanelMacro } from "@/lib/shopify/panelMacro";
 import filtrosWeb from "@/data/filtros-web.json";
 import marcasPdf from "@/data/marcas-pdf-subcategorias.json";
 import { marcaPorSlug, rutaMarca } from "@/lib/marcas";
@@ -54,17 +55,16 @@ async function slotsDeCatalogo(file: string, categoria: string): Promise<Record<
     ),
   ]);
   const productos = [...propios, ...ajenos.flat()];
-  // Tiles del riel que filtran en esta misma página (?tipo=), aunque no tengan
-  // piezas: así cada uno tiene su casilla en "Tipo de producto".
-  const riel = [
-    ...getMain(file).matchAll(/<a class="subcat" data-tipo="([^"]+)"[\s\S]*?<span class="lbl">([^<]+)<\/span>/g),
-  ].map((m) => ({ slug: m[1], nombre: m[2].replace(/&amp;/g, "&") }));
   // Macros de una sola colección con el riel por filtro (Electrodomésticos
   // menores, Lavandería, Aire acondicionado): los tiles son casillas del grupo
   // de la tabla ("Tipo" / "Tipo de funcionamiento"), no un grupo aparte.
   const conEje = tipos.find((t) => t.ejeRiel);
   if (conEje?.ejeRiel) {
     const eje = conEje.ejeRiel;
+    // Tiles del riel que filtran en esta misma página (?tipo=).
+    const riel = [
+      ...getMain(file).matchAll(/<a class="subcat" data-tipo="([^"]+)"[\s\S]*?<span class="lbl">([^<]+)<\/span>/g),
+    ].map((m) => ({ slug: m[1], nombre: m[2].replace(/&amp;/g, "&") }));
     // Texto exacto de la tabla de filtros para cada casilla ("Centros de lavado",
     // "Solo frío"), aunque el tile del riel lo escriba distinto.
     const tabla = (filtrosWeb.subcategorias as Record<string, { nombre: string; valores?: string[] }[]>)[conEje.tipo] ?? [];
@@ -84,25 +84,10 @@ async function slotsDeCatalogo(file: string, categoria: string): Promise<Record<
       "catalogo-conteo": conteoHtml(productos),
     };
   }
-  for (const t of tilesPresentes(productos)) if (!riel.some((r) => r.slug === t.slug)) riel.push(t);
-  // Y los tipos de sus subcategorías (Asadores & Hornos…), con 0 mientras no haya piezas.
-  for (const t of tipos) {
-    const tiles = [
-      { slug: t.slugRiel, nombre: t.nombreRiel ?? t.tipo },
-      ...Object.values(t.porInstalacion ?? {}),
-      ...(t.accesorios ? [{ slug: t.accesorios.slug, nombre: `${t.accesorios.nombre} de ${t.sub1.nombre.toLowerCase()}` }] : []),
-    ];
-    for (const tile of tiles) if (!riel.some((r) => r.slug === tile.slug)) riel.push(tile);
-  }
+  // Riel + tipos de las subcategorías: lib/shopify/panelMacro.ts (lo comparte /ofertas).
   const tc = await obtenerTipoCambio();
   return {
-    "catalogo-filtros": panelFiltrosHtml(productos, {
-      tc,
-      conCategoria: true,
-      conTipo: true,
-      tiposRiel: riel,
-      tipos: [...tipos.map((t) => t.tipo), ...extras.map((e) => e.tablaFiltros)],
-    }),
+    "catalogo-filtros": panelFiltrosHtml(productos, { tc, ...opcionesPanelMacro(categoria, productos) }),
     ...(productos.length ? { "catalogo-grid": rejillaHtml(productos, tc) } : {}),
     "catalogo-conteo": conteoHtml(productos),
   };

@@ -614,9 +614,28 @@
   document.addEventListener("catalogo:aplicar", aplicarLuego);
   window.addEventListener("popstate", aplicarLuego);
 
+  /* Filtros desde la URL: ?filtro=<clave>:<valor> (repetible). Es el destino del
+     botón de las fichas de Guías ("Ver … en catálogo"): la página llega con la
+     casilla de ese filtro ya marcada (Carla, 2026-10-19). Una vez por URL. */
+  var urlFiltrada = null;
+  function filtrosDeUrl() {
+    if (location.search.indexOf("filtro=") < 0) return;
+    var clave = location.pathname + location.search;
+    if (urlFiltrada === clave) return;
+    var marcado = false;
+    new URLSearchParams(location.search).getAll("filtro").forEach(function (par) {
+      var i = par.indexOf(":");
+      if (i < 1) return;
+      var sel = '.plp .filters input[data-fk="' + par.slice(0, i) + '"][value="' + par.slice(i + 1) + '"]';
+      document.querySelectorAll(sel).forEach(function (cb) { cb.checked = true; marcado = true; });
+    });
+    if (marcado) { urlFiltrada = clave; aplicarLuego(); }
+  }
+
   /* Carga directa y navegaciones SPA: aplicar cuando aparezca un catálogo nuevo. */
   var visto = null;
   function revisar() {
+    filtrosDeUrl();
     var grid = document.querySelector("[data-cat-card]");
     if (grid && grid !== visto) {
       visto = grid;

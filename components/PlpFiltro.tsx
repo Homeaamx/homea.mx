@@ -9,7 +9,10 @@
 // riel de subcat.1: los tiles son <a> planas, el clic hace pushState y aquí se
 // sincronizan las clases. El pushState nativo NO despierta a useSearchParams
 // (verificado en 14.2.5). Al APLICAR un tipo la página baja sola al catálogo
-// filtrado; al QUITARLO se queda donde está (Carla, 2026-10-09).
+// filtrado; al QUITARLO se queda donde está (Carla, 2026-10-09). LLEGAR con ?f=
+// (botón "Ver en el catálogo" de las fichas de Guías, mega-menú, enlace
+// compartido) también baja lento al catálogo, salvo al volver con atrás/adelante
+// (Carla, 2026-10-19).
 //
 // Sin JS los enlaces navegan normal (página estática con el mosaico completo):
 // el filtro visual es mejora progresiva, nunca contenido.
@@ -20,6 +23,8 @@ declare global {
   interface Window {
     /** Scroll lento compartido (public/tipos.js): mismo recorrido que el riel de subcat.1. */
     __homeaScrollA?: (el: Element, aire?: number) => void;
+    /** true mientras dura una navegación atrás/adelante (public/tipos.js). */
+    __homeaPorHistorial?: () => boolean;
   }
 }
 
@@ -76,7 +81,7 @@ export default function PlpFiltro({ base, tipos }: Props) {
     // marcada arriba. Mismo recorrido que el riel de subcat.1 (tipos.js, nav
     // sticky descontado); si tipos.js aún no cargó, el scroll nativo sirve de red.
     let t: ReturnType<typeof setTimeout> | undefined;
-    const bajarAlCatalogo = () => {
+    const bajarAlCatalogo = (respiro = 260) => {
       const el = document.getElementById("catalogo");
       if (!el) return;
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -85,7 +90,12 @@ export default function PlpFiltro({ base, tipos }: Props) {
       t = setTimeout(() => {
         if (window.__homeaScrollA && !reduce) window.__homeaScrollA(el, 8);
         else el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-      }, 260);
+      }, respiro);
+    };
+    // Llegada con el filtro puesto: un respiro más largo para que la página
+    // termine de pintar y se alcance a ver la tarjeta marcada antes de bajar.
+    const alLlegar = () => {
+      if (leerF() && !window.__homeaPorHistorial?.()) bajarAlCatalogo(700);
     };
 
     const onClick = (e: MouseEvent) => {
@@ -111,9 +121,22 @@ export default function PlpFiltro({ base, tipos }: Props) {
       if (f) bajarAlCatalogo();
     };
 
-    const onPop = () => sync(leerF());
+    let ultima = window.location.href;
+    const onPop = () => {
+      ultima = window.location.href;
+      sync(leerF());
+    };
+    // "homea:url" también salta con los replaceState internos del router de
+    // Next: solo se baja si la URL cambió de verdad.
+    const onUrl = () => {
+      if (window.location.href === ultima) return;
+      ultima = window.location.href;
+      onPop();
+      alLlegar();
+    };
 
     sync(leerF());
+    alLlegar();
     // Fase de captura: PreviewRouter también escucha clics en <a> internas (en
     // burbuja) y, si llega primero, hace router.push → la página se vuelve a
     // renderizar como si recargara. Aquí se gana el turno y se previene el
@@ -122,12 +145,12 @@ export default function PlpFiltro({ base, tipos }: Props) {
     window.addEventListener("popstate", onPop);
     // Navegación de Next a esta misma ruta (p. ej. el mega-menú sin ?f=): el
     // componente no se vuelve a montar; tipos.js avisa con "homea:url".
-    window.addEventListener("homea:url", onPop);
+    window.addEventListener("homea:url", onUrl);
     return () => {
       clearTimeout(t);
       document.removeEventListener("click", onClick, true);
       window.removeEventListener("popstate", onPop);
-      window.removeEventListener("homea:url", onPop);
+      window.removeEventListener("homea:url", onUrl);
     };
   }, [base, tipos]);
 

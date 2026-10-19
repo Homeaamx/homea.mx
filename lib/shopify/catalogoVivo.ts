@@ -126,6 +126,24 @@ const CONSULTA_BUSQUEDA = /* GraphQL */ `
   }
 `;
 
+/**
+ * Piezas en existencia (/ofertas). `search` con el filtro de Search & Discovery
+ * `filtros.disponibilidad = "En stock"` (verificado 2026-10-16: el filtro existe
+ * en el canal Headless; "*" empata todo el catálogo publicado).
+ */
+const CONSULTA_EN_STOCK = /* GraphQL */ `
+  ${CAMPOS_PRODUCTO}
+  query EnStock($despues: String) @inContext(country: MX, language: ES) {
+    search(
+      query: "*", first: 250, after: $despues, types: PRODUCT, unavailableProducts: SHOW,
+      productFilters: [{ productMetafield: { namespace: "filtros", key: "disponibilidad", value: "En stock" } }]
+    ) {
+      pageInfo { hasNextPage endCursor }
+      nodes { ... on Product { ...ProductoVivo } }
+    }
+  }
+`;
+
 interface MetafieldRaw {
   namespace: string;
   key: string;
@@ -398,6 +416,37 @@ export async function productosDeMarca(vendor: string): Promise<ProductoVivo[]> 
     return [];
   }
   return productos;
+}
+
+/**
+ * Piezas publicadas en existencia (`filtros.disponibilidad` = "En stock"), con su
+ * precio final ya en Shopify. Hasta `maximo` (500 por omisión). Devuelve [] si
+ * Shopify no contesta: /ofertas cae a su aviso estático.
+ */
+export async function productosEnStock(maximo = 500): Promise<ProductoVivo[]> {
+  const productos: ProductoVivo[] = [];
+  let despues: string | null = null;
+  try {
+    for (let pagina = 0; pagina < 10 && productos.length < maximo; pagina++) {
+      const data: {
+        search: { pageInfo: { hasNextPage: boolean; endCursor: string }; nodes: ProductoRaw[] };
+      } = await shopifyFetch(CONSULTA_EN_STOCK, {
+        variables: { despues },
+        tags: [TAG_CATALOGO],
+        timeoutMs: 8000,
+      });
+      for (const raw of data.search.nodes) {
+        const p = normalizar(raw);
+        if (p?.enStock) productos.push(p);
+      }
+      if (!data.search.pageInfo.hasNextPage) break;
+      despues = data.search.pageInfo.endCursor;
+    }
+  } catch (error) {
+    console.warn("[catalogo] Sin piezas en stock:", (error as Error).message);
+    return [];
+  }
+  return productos.slice(0, maximo);
 }
 
 /**

@@ -13,23 +13,26 @@
    - Hero "próxima temporada" con cuenta regresiva (data-cdown) — default.
    - Hero de temporada activa (data-inicio/fin) que lo sustituye en vigencia.
    - Paquetes de proveedor con data-vence: al vencer, la tarjeta se remueve.
-   Secciones: 1 hero countdown · 2 outlet en greige · 3 paquetes de proveedor
-   (¡Promociones 2026! de OXATIS) · 4 stock en dos bandas · 5 banner paquetes
-   por presupuesto · cierre consultivo. */
+   Secciones (2026-10-19): 1 hero countdown (cabe en la primera vista) · 2 stock
+   de Shopify con precio final · 3 paquetes de ahorro (como promociones.homea.mx)
+   · 5 banner paquetes por presupuesto · cierre consultivo. */
 
 /* 1 · Hero próxima temporada — cuenta regresiva cinemática */
 .of-hero[hidden], .of-nexthero[hidden] { display: none !important; }
-.of-nexthero { position: relative; overflow: hidden; background: var(--homea-black); min-height: clamp(560px, 72vh, 780px); display: flex; align-items: center; }
+/* Cabe en la primera vista (Carla, 2026-10-16): alto = viewport − nav − ubar,
+   igual que el hero de la home; la marquesina ocupa ~46px abajo. */
+.of-nexthero { position: relative; overflow: hidden; background: var(--homea-black); display: flex; align-items: center;
+  height: calc(100svh - var(--nav-h) - 40px); min-height: 500px; max-height: 820px; }
 .of-nexthero img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; }
 .of-nexthero .veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,10,10,.86) 0%, rgba(10,10,10,.6) 48%, rgba(10,10,10,.18) 100%); }
-.of-nexthero .container { position: relative; z-index: 2; padding-top: 84px; padding-bottom: 116px; }
+.of-nexthero .container { position: relative; z-index: 2; padding-top: 24px; padding-bottom: 70px; }
 .of-nexthero .crumbs a, .of-nexthero .crumbs span { color: #cfc8bb; }
-.of-nexthero h1 { color: var(--homea-bone); font-size: clamp(42px, 5vw, 72px); max-width: 700px; margin: 0; }
-.of-nexthero .sub { color: rgba(247,243,236,.78); font-weight: 300; max-width: 520px; margin: 18px 0 0; }
-.of-nexthero .ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
-.of-cdown { display: flex; gap: clamp(18px, 3vw, 42px); margin: 34px 0 6px; }
+.of-nexthero h1 { color: var(--homea-bone); font-size: clamp(38px, min(4.4vw, 7svh), 64px); max-width: 700px; margin: 0; }
+.of-nexthero .sub { color: rgba(247,243,236,.86); font-weight: 400; max-width: 520px; margin: 14px 0 0; }
+.of-nexthero .ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 22px; }
+.of-cdown { display: flex; gap: clamp(18px, 3vw, 42px); margin: clamp(16px, 3svh, 30px) 0 4px; }
 .of-cdown .cell { text-align: left; }
-.of-cdown .num { font-family: var(--font-display); font-weight: 400; font-size: clamp(44px, 5.4vw, 78px); line-height: 1;
+.of-cdown .num { font-family: var(--font-display); font-weight: 400; font-size: clamp(40px, min(4.8vw, 7.5svh), 70px); line-height: 1;
   color: var(--homea-gold-bright); font-variant-numeric: tabular-nums; }
 .of-cdown .lbl { margin-top: 8px; font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: rgba(247,243,236,.6); }
 .of-cdown .sep { font-family: var(--font-display); font-size: clamp(34px, 4vw, 58px); color: rgba(189,155,94,.45); line-height: 1.2; }
@@ -57,97 +60,65 @@
 .of-hero .marcas a { color: var(--homea-gold-bright); }
 .of-hero .ctas { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
 
-/* 2 · Outlet permanente — título gigante sobre greige */
-.of-outlet { background: var(--homea-greige); }
-.of-outlet .top { margin-bottom: 54px; }
-.of-outlet .big { margin: 0; font-family: var(--font-sans); font-weight: 700; line-height: .95; letter-spacing: .01em;
-  font-size: clamp(56px, 7vw, 100px); color: var(--homea-black); }
-.of-outlet .bigsub { margin: 20px 0 0; font-family: var(--font-display); font-weight: 400; line-height: 1.2;
-  font-size: clamp(24px, 3.2vw, 45px); color: var(--homea-black); max-width: 1040px; }
-.of-doors { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.of-door { position: relative; overflow: hidden; aspect-ratio: 16 / 10; display: flex; align-items: flex-end;
-  color: var(--homea-bone); border-top: 2px solid transparent;
-  transition: transform var(--dur-med) var(--ease-standard), border-color var(--dur-med) var(--ease-standard), box-shadow var(--dur-med) var(--ease-standard); }
-.of-door:hover { transform: translateY(-4px); border-top-color: var(--homea-gold); box-shadow: var(--shadow-md); }
-.of-door img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1200ms var(--ease-reveal); }
-.of-door:hover img { transform: scale(1.04); }
-.of-door .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,.04) 45%, rgba(10,10,10,.72) 100%); }
-.of-door .inner { position: relative; padding: 26px 30px; width: 100%; }
-.of-door .eyebrow { color: var(--homea-gold-bright); margin: 0; font-size: clamp(16px, 1.5vw, 21px); }
+/* 2 · Stock con precio final — tarjetas del catálogo (theme.css .pcard). */
+.of-stock { padding-bottom: 72px; }
+.of-tools { display: flex; align-items: center; gap: 14px 28px; flex-wrap: wrap; }
+.of-stock-ver { display: inline-flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 600; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--homea-black); }
+.of-stock-ver select { font: inherit; font-size: 15px; letter-spacing: 0; text-transform: none; font-weight: 500; color: var(--homea-black);
+  border: 1px solid var(--border-strong); padding: 8px 38px 8px 12px; border-radius: 0; cursor: pointer;
+  /* Flecha ↓ como la de "Ordenar" (trazo fino, negro), a la derecha del cuadro. */
+  -webkit-appearance: none; appearance: none;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 16' fill='none' stroke='%230A0A0A' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 2v11M2.5 9.5 6 13l3.5-3.5'/%3E%3C/svg%3E") no-repeat right 14px center / 10px 14px; }
+.of-stock-ver select:focus { outline: 2px solid var(--homea-gold); outline-offset: 2px; }
+/* Límite de piezas a la vista: aparte del `hidden` con que filtra catalogo.js. */
+.of-stock-grid .pcard.of-fuera { display: none; }
 
-/* 3 · Paquetes de proveedor — ¡Promociones 2026! (OXATIS, ONE·TWO·FREE).
-   Los paquetes que las marcas dan directo a cliente final. data-vence (ISO):
-   al vencer, la tarjeta desaparece sola. Folletos PDF → assets/ofertas/. */
-.of-lead { margin: 0 0 40px; max-width: 620px; font-size: var(--fs-md); font-weight: 300; color: var(--fg-muted); }
-.of-paqs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-.of-pcard { background: var(--surface); border: 1px solid var(--border); border-top: 2px solid transparent; display: flex; flex-direction: column;
+/* 3 · Paquetes de ahorro — mismo diseño que promociones.homea.mx (.bcard), con
+   los tamaños de texto de esta página (Carla, 2026-10-19). */
+.of-lead { margin: 0 0 40px; max-width: 620px; font-size: var(--fs-md); font-weight: 400; color: var(--homea-black); }
+/* Fondo espresso (Carla, 2026-10-19): textos en bone, acento en oro claro; las
+   tarjetas siguen blancas. */
+.of-promos { background: var(--homea-espresso); }
+.of-promos .eyebrow { color: var(--homea-gold-bright); }
+.of-promos .sec-head h2 { color: var(--homea-bone); }
+.of-promos .sec-head h2 em { color: var(--homea-gold-bright); }
+.of-promos .of-lead { color: var(--homea-bone); }
+.of-promos .of-bcard { border-color: transparent; }
+.of-promos .of-bcard:hover { border-top-color: var(--homea-gold); box-shadow: var(--shadow-lg); }
+.of-bgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.of-bcard { background: var(--homea-white); border: 1px solid var(--border); border-top: 2px solid transparent; display: flex; flex-direction: column;
   transition: transform var(--dur-med) var(--ease-standard), border-color var(--dur-med) var(--ease-standard), box-shadow var(--dur-med) var(--ease-standard); }
-.of-pcard:hover { transform: translateY(-4px); border-top-color: var(--homea-gold); box-shadow: var(--shadow-md); }
-.of-pcard .foto { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--bg-greige); }
-.of-pcard .foto > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1200ms var(--ease-reveal); }
-.of-pcard:hover .foto > img { transform: scale(1.04); }
-/* Degradado inferior para que el logo en blanco lea sobre cualquier foto. */
-.of-pcard .foto .shade { position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(180deg, rgba(10,10,10,0) 45%, rgba(10,10,10,.68) 100%); }
-/* Logo sin fondo, normalizado a blanco (mismo filtro que los tiles de Marcas). */
-.of-pcard .foto .logo { position: absolute; left: 22px; right: 22px; bottom: 22px; z-index: 2; }
-.of-pcard .foto .logo img { display: block; height: 34px; width: auto; max-width: 70%; object-fit: contain; object-position: left center;
-  filter: brightness(0) invert(1) drop-shadow(0 2px 10px rgba(0,0,0,.35)); }
-/* Monogram es un emblema casi cuadrado: se le da más alto para que lea a la par. */
-.of-pcard .foto .logo img[alt="Monogram"] { height: 54px; }
-/* Bertazzoni: el emblema tiene detalle fino que se pierde en blanco; va en su color (igual que en Marcas). */
-.of-pcard .foto .logo img[alt="Bertazzoni"] { filter: drop-shadow(0 2px 10px rgba(0,0,0,.45)); }
-.of-pcard .body { padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-.of-pcard .deal { margin: 0; font-family: var(--font-display); font-weight: 400;
-  font-size: clamp(38px, 3.4vw, 48px); line-height: .98; letter-spacing: -.02em;
-  color: var(--accent-text); font-variant-numeric: tabular-nums; }
-.of-pcard .deal.txt { font-style: italic; letter-spacing: -.01em; }
-.of-pcard .mec { margin: 0; font-size: 14px; line-height: 1.5; color: var(--fg-muted); flex: 1; }
-.of-pcard .folleto { justify-content: center; margin-top: 8px; }
-.of-pcard .folleto[aria-disabled="true"] { cursor: default; }
-
-/* 4 · Stock con precio especial — dos bandas (premium espresso · económica bone).
-   TODO Fase 4: conectar al inventario real; hoy los productos y descuentos
-   son muestra (piloto Gaggenau + placeholders). */
-.of-stock-dark { background: var(--homea-espresso); }
-.of-stock-dark h2, .of-stock-dark .arrow-link { color: var(--homea-bone); }
-.of-stock-dark .eyebrow { color: var(--homea-gold-bright); }
-.of-shead { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 30px; }
-.of-shead h2 { margin: 0; }
-/* Marquesina de stock — mismo patrón que la de marcas del home: a todo el ancho,
-   bordes desvanecidos, avance continuo lento, pausa al hover y arrastre con inercia
-   (JS al final de la página). Sin JS: se desplaza a mano. */
-.of-smq { overflow: hidden; margin-top: 6px; padding: 6px 0 10px;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  cursor: grab; touch-action: pan-y; -webkit-user-select: none; user-select: none; }
-.of-smq.dragging { cursor: grabbing; }
-.of-smq:not(.is-live) { overflow-x: auto; scrollbar-width: none; }
-.of-smq-track { display: flex; width: max-content; will-change: transform; }
-.of-smq-seq { display: flex; flex: 0 0 auto; }
-.of-smq .of-scard { flex: 0 0 clamp(250px, 23vw, 330px); margin-right: clamp(12px, 1.3vw, 20px); }
-.of-smq.dragging .of-scard { transition: none; }
-.of-smq img, .of-smq a { -webkit-user-drag: none; }
-.of-scard { background: var(--homea-white); border: 1px solid var(--border); display: flex; flex-direction: column;
-  color: var(--fg); border-bottom: none;
-  transition: transform var(--dur-med) var(--ease-standard), box-shadow var(--dur-med) var(--ease-standard); }
-.of-scard:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-.of-scard .foto { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
-.of-scard .foto { background: var(--homea-white); }
-.of-scard .foto img { width: 100%; height: 100%; object-fit: cover; }
-/* Stock Premium: packshots de producto — se muestran completos, sin recorte. */
-.of-stock-dark .of-scard .foto img { object-fit: contain; padding: 34px 18px 14px; }
-.of-scard .off { position: absolute; top: 0; left: 0; background: var(--homea-gold); color: var(--homea-black);
-  font-size: 12px; font-weight: 600; letter-spacing: .08em; padding: 6px 11px; font-variant-numeric: tabular-nums; }
-.of-scard .st { position: absolute; right: 10px; top: 10px; font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--fg-muted); background: rgba(247,243,236,.92); padding: 5px 9px; }
-.of-scard .body { padding: 14px 16px 16px; }
-.of-scard .b { font-size: 10.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--fg-subtle); }
-.of-scard h3 { margin: 3px 0 0; font-size: 13.5px; font-weight: 600; line-height: 1.35; }
-.of-scard .pr { margin-top: 10px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
-.of-scard .now { white-space: nowrap; }
-.of-scard .now { font-family: var(--font-display); font-size: 21px; color: var(--accent-text); font-variant-numeric: tabular-nums; }
-.of-scard .was { font-size: 12px; color: var(--fg-subtle); text-decoration: line-through; font-variant-numeric: tabular-nums; }
+.of-bcard:hover { transform: translateY(-4px); border-top-color: var(--homea-gold); box-shadow: var(--shadow-md); }
+.of-bcard .foto { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--homea-espresso); }
+.of-bcard .foto > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1200ms var(--ease-reveal); }
+.of-bcard:hover .foto > img { transform: scale(1.04); }
+.of-bcard .foto .shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(10,10,10,.05) 40%, rgba(10,10,10,.72) 100%); }
+.of-bcard .foto .logo { position: absolute; left: 20px; right: 20px; bottom: 18px; z-index: 2; }
+.of-bcard .foto .logo img { display: block; height: 44px; width: auto; max-width: 57.5%; object-fit: contain; object-position: left center; filter: drop-shadow(0 2px 10px rgba(0,0,0,.4)); }
+.of-bcard .foto .logo img.tall { height: 69px; }
+.of-bcard .body { padding: 24px 26px 26px; display: grid; grid-template-columns: auto 1fr; gap: 10px 26px; align-items: center; flex: 1; }
+.of-bcard .deal { grid-row: 1 / 3; margin: 0; font-family: var(--font-display); font-weight: 400; font-style: italic;
+  font-size: clamp(30px, 2.8vw, 40px); line-height: 1; letter-spacing: -.01em; color: var(--accent-text); }
+.of-bcard .mec { margin: 0; font-size: 16px; line-height: 1.5; color: var(--homea-black); }
+.of-bcard .mec .prog { font-family: var(--font-display); font-size: 1.12em; }
+.of-bcard .mec strong { font-weight: 600; }
+.of-bcard .btn { grid-column: 2; justify-self: start; margin-top: 4px; }
+@media (prefers-reduced-motion: reduce) { .of-bcard:hover, .of-bcard:hover .foto > img { transform: none; } }
+/* Banner del paquete (Conocer más): flyer del fabricante sobre velo oscuro; se
+   desplaza dentro del velo para leer los términos. */
+.of-plb { position: fixed; inset: 0; z-index: 300; overflow-y: auto; overscroll-behavior: contain;
+  background: rgba(10,10,10,.92); padding: clamp(56px, 6vw, 72px) 16px 40px;
+  opacity: 0; transition: opacity .26s var(--ease-standard); }
+.of-plb.on { opacity: 1; }
+.of-plb[hidden] { display: none; }
+.of-plb-in { margin: 0 auto; width: min(720px, 100%); display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.of-plb-in img { display: block; width: 100%; height: auto; box-shadow: var(--shadow-lg); }
+.of-plb-x { position: fixed; top: 14px; right: 18px; z-index: 1; background: none; border: 0; cursor: pointer;
+  color: var(--homea-bone); font-size: 38px; line-height: 1; width: 44px; height: 44px; }
+.of-plb-x:focus-visible { outline: 2px solid var(--homea-gold); outline-offset: 3px; }
+html.of-plb-abierto { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) { .of-plb { transition: none; } }
 
 /* 5 · Puente a paquetes (Herramientas) */
 .of-paq { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
@@ -160,9 +131,19 @@
 .of-close h2 { color: var(--homea-bone); font-size: clamp(32px, 3.6vw, 56px); max-width: 720px; margin: 0 auto; }
 .of-close p { color: var(--dark-fg-muted); margin: 18px auto 30px; max-width: 520px; font-weight: 300; }
 
-@media (max-width: 1080px) { .of-paqs { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 900px) { .of-doors { grid-template-columns: 1fr; } }
-@media (max-width: 640px) { .of-paqs { grid-template-columns: 1fr; } .of-cdown { flex-wrap: wrap; } .of-shead { flex-wrap: wrap; } }
+@media (max-width: 900px) { .of-bgrid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 640px) { .of-cdown { flex-wrap: wrap; }
+  .of-bgrid { gap: 16px; }
+  .of-bcard .foto .logo { left: 16px; bottom: 14px; }
+  .of-bcard .foto .logo img { height: 38px; }
+  .of-bcard .foto .logo img.tall { height: 58px; }
+  .of-bcard .body { grid-template-columns: 1fr; gap: 8px; padding: 20px 18px 18px; }
+  .of-bcard .deal { grid-row: auto; font-size: 32px; }
+  .of-bcard .btn { grid-column: 1; justify-self: stretch; justify-content: center; }
+  /* En móvil el contenido se apila: el hero crece lo necesario en vez de recortarse. */
+  .of-nexthero { height: auto; min-height: calc(100svh - var(--nav-h) - 38px); max-height: none; }
+  .of-nexthero .container { padding-top: 28px; padding-bottom: 84px; }
+}
 
 /* Avísame (newsletter): banda clara con filete dorado arriba y abajo. */
 .of-news { padding-top: 64px; padding-bottom: 64px; background: var(--homea-bone);
@@ -329,10 +310,10 @@
       <div class="sep" aria-hidden="true">·</div>
       <div class="cell"><div class="num" data-cd="s">—</div><div class="lbl">Seg</div></div>
     </div>
-    <p class="sub">Mientras llega, el outlet nunca descansa: hasta 60% en producto nuevo de piso.</p>
+    <p class="sub">Mientras llega, aprovecha las piezas en stock con precio final.</p>
     <div class="ctas">
-      <a class="btn btn-bone" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Av%C3%ADsenme%20cuando%20empiecen%20las%20ofertas%20del%20Buen%20Fin." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_ofertas_avisame">Avísame por WhatsApp</a>
-      <a class="btn btn-ghost-light" href="#outlet">Ver outlet</a>
+      <a class="btn btn-bone" href="https://api.whatsapp.com/send/?phone=524461446318&amp;text=%C2%A1Hola%21%20Me%20interesan%20las%20ofertas%20y%20las%20piezas%20en%20stock." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_ofertas_ejecutivo">Contactar a un ejecutivo</a>
+      <a class="btn btn-ghost-light" href="#promos">Paquetes</a>
     </div>
   </div>
   <div class="of-mq" aria-hidden="true"><div class="track">
@@ -352,172 +333,97 @@
     <h1>Hasta 60% en <em>marcas seleccionadas</em>.</h1>
     <p class="marcas">Gaggenau · Monogram · Miele · Thermador · Café · Smeg</p>
     <div class="ctas">
-      <a class="btn btn-bone" href="#outlet">Ver ofertas</a>
-      <a class="btn btn-ghost-light" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%21%20Me%20interesan%20las%20ofertas%20de%20temporada." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_ofertas_temporada">Cotizar por WhatsApp</a>
+      <a class="btn btn-bone" href="https://api.whatsapp.com/send/?phone=524461446318&amp;text=%C2%A1Hola%21%20Me%20interesan%20las%20ofertas%20y%20las%20piezas%20en%20stock." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_ofertas_ejecutivo">Contactar a un ejecutivo</a>
+      <a class="btn btn-ghost-light" href="#promos">Paquetes</a>
     </div>
   </div>
 </header>
 
-<!-- ============ 2 · OUTLET PERMANENTE ============
-     La cifra que respira, sobre greige. Siempre visible. TODO Fase 4:
-     cambiar los href al filtro de la colección outlet en Shopify (homeashop)
-     cuando exista; hoy ligan al outlet vivo. -->
-<section class="of-outlet sec" id="outlet"><div class="container">
-  <div class="top reveal">
-    <h2 class="big">OUTLET</h2>
-    <p class="bigsub">Todo el año. Disfruta de 40% a 60% de descuento en producto seleccionado.</p>
+<!-- ============ 2 · STOCK CON PRECIO FINAL (Carla, 2026-10-16) ============
+     Lo primero tras el hero: piezas de Shopify con filtros.disponibilidad =
+     "En stock" (ya con su precio final), con los filtros de Cocina y Bar. 50 a la
+     vista y el selector "Mostrar" deja ver 100, 200 o 500. Sustituye al Outlet y
+     a las marquesinas de Stock Premium / Esencial. -->
+<section class="sec of-stock" id="stock"><div class="container">
+  <div class="sec-head reveal">
+    <div class="eyebrow">En stock · Precio final</div>
+    <h2>Piezas en existencia, <em>listas para entrega</em>.</h2>
   </div>
-  <div class="of-doors reveal">
-    <a class="of-door" href="https://homea.mx/outlet-gama-premium-c102x4397668" target="_blank" rel="noopener" data-track="offer_click" data-label="outlet_premium">
-      <img width="1365" height="894" srcset="assets/photos/outlet-premium-pitt-cocina-campana-400.webp 400w, assets/photos/outlet-premium-pitt-cocina-campana-640.webp 640w, assets/photos/outlet-premium-pitt-cocina-campana-960.webp 960w, assets/photos/outlet-premium-pitt-cocina-campana-1280.webp 1280w, assets/photos/outlet-premium-pitt-cocina-campana.webp 1365w" sizes="(max-width: 900px) 100vw, 50vw" loading="lazy" decoding="async" src="assets/photos/outlet-premium-pitt-cocina-campana.webp" alt="Cocina con campana Pitt Cooking — outlet gama premium">
-      <div class="shade"></div>
-      <div class="inner">
-        <div class="eyebrow">Gama · Premium</div>
+  <p class="of-lead reveal">Precio final con IVA incluido. Agrégalas a tu proyecto o pregúntale a un ejecutivo por ellas.</p>
+  <!-- Catálogo de stock: mismo PLP que /productos/cocina-y-bar (panel de filtros de
+       esa macro + public/catalogo.js). app/ofertas/page.tsx llena los tres slots;
+       sin piezas en stock quedan listos y vacíos (Carla, 2026-10-19). -->
+  <div class="plp">
+    <aside class="filters">
+      <!-- slot:stock-filtros --><!-- /slot:stock-filtros -->
+    </aside>
+    <div>
+      <div class="toolbar">
+        <span class="results figures" id="plpResults" data-unidad="en stock"><!-- slot:stock-conteo -->0 piezas en stock<!-- /slot:stock-conteo --></span>
+        <div class="of-tools">
+          <label class="of-stock-ver">Mostrar <select data-of-limite aria-label="Cuántas piezas mostrar"><option value="50" selected>50 piezas</option><option value="100">100 piezas</option><option value="200">200 piezas</option><option value="500">500 piezas</option></select></label>
+          <select aria-label="Ordenar"><option value="precio-desc">Precio: mayor a menor ↓</option><option value="precio-asc">Precio: menor a mayor ↓</option></select>
+        </div>
       </div>
-    </a>
-    <a class="of-door" href="https://homea.mx/outlet-gama-escencial-c102x4397248" target="_blank" rel="noopener" data-track="offer_click" data-label="outlet_esencial">
-      <img width="2000" height="1333" srcset="assets/photos/outlet-esencial-whirlpool-refrigerador-cocina-400.webp 400w, assets/photos/outlet-esencial-whirlpool-refrigerador-cocina-640.webp 640w, assets/photos/outlet-esencial-whirlpool-refrigerador-cocina-960.webp 960w, assets/photos/outlet-esencial-whirlpool-refrigerador-cocina-1280.webp 1280w, assets/photos/outlet-esencial-whirlpool-refrigerador-cocina.webp 2000w" sizes="(max-width: 900px) 100vw, 50vw" loading="lazy" decoding="async" src="assets/photos/outlet-esencial-whirlpool-refrigerador-cocina.webp" alt="Cocina con refrigerador Whirlpool — outlet gama esencial">
-      <div class="shade"></div>
-      <div class="inner">
-        <div class="eyebrow">Gama · Esencial</div>
+      <div class="plp-grid of-stock-grid" data-of-grid>
+        <!-- slot:stock-grid --><!-- /slot:stock-grid -->
       </div>
-    </a>
+    </div>
   </div>
 </div></section>
 
-<!-- ============ 3 · PAQUETES DE PROVEEDOR ============
-     Contenido de ¡Promociones 2026! (OXATIS, ONE·TWO·FREE): los paquetes que
-     las marcas dan directo a cliente final. data-vence (ISO): al vencer, la
-     tarjeta desaparece sola. Los PDF de proveedor van en assets/ofertas/. -->
-<section class="sec" id="promos"><div class="container">
+<!-- ============ 3 · PAQUETES DE AHORRO (Carla, 2026-10-19) ============
+     Igual que promociones.homea.mx (#paquetes): tarjetas anchas con foto + logo,
+     el beneficio en itálica y el programa del fabricante. data-vence (ISO): al
+     vencer, la tarjeta desaparece sola. Al cambiar una promo en promociones.homea.mx,
+     actualizarla también aquí. -->
+<section class="sec of-promos" id="promos"><div class="container">
   <div class="sec-head reveal">
-    <div class="eyebrow">Paquetes de proveedor · Promociones 2026</div>
-    <h2>La marca arma el paquete, <em>tú te llevas el descuento</em>.</h2>
+    <div class="eyebrow">Paquetes de ahorro · Promociones oficiales de fábrica</div>
+    <h2>¡Arma tu paquete <em>al mejor precio</em>!</h2>
   </div>
-  <p class="of-lead reveal">Promociones oficiales que los proveedores dan directo a cliente final al armar tu paquete de cocina: refrigerador, estufa o parrilla, campana, lavavajillas y cafetera.</p>
-  <div class="of-paqs reveal">
-    <article class="of-pcard" data-vence="2026-12-31">
+  <p class="of-lead reveal">Escoge tu cocina completa de la misma marca y recibe beneficios otorgados directos del fabricante.</p>
+  <div class="of-bgrid reveal">
+    <article class="of-bcard" data-vence="2026-12-31">
       <div class="foto"><span class="shade" aria-hidden="true"></span>
-        <img width="700" height="457" srcset="assets/photos/ofertas/thermador-400.webp 400w, assets/photos/ofertas/thermador-640.webp 640w, assets/photos/ofertas/thermador.webp 700w" sizes="(max-width: 640px) 100vw, (max-width: 1080px) 50vw, 25vw" loading="lazy" decoding="async" src="assets/photos/ofertas/thermador.webp" alt="Cocina Thermador">
-        <span class="logo"><img width="400" height="112" loading="lazy" decoding="async" src="assets/logos/thermador.webp" alt="Thermador"></span>
+        <img width="1280" height="720" srcset="assets/photos/ofertas/paquete-monogram-cocina-parrilla-gas-400.webp 400w, assets/photos/ofertas/paquete-monogram-cocina-parrilla-gas-640.webp 640w, assets/photos/ofertas/paquete-monogram-cocina-parrilla-gas.webp 1280w" sizes="(max-width: 900px) 100vw, 50vw" loading="lazy" decoding="async" src="assets/photos/ofertas/paquete-monogram-cocina-parrilla-gas-640.webp" alt="Cocina Monogram con parrilla de gas y campana de acero">
+        <span class="logo"><img width="224" height="160" loading="lazy" decoding="async" src="assets/logos/monogram.png" alt="Monogram" class="tall"></span>
       </div>
       <div class="body">
-        <p class="deal">50%</p>
-        <p class="mec">One·Two·Free: productos al 50% y además lavavajillas y/o campana <strong>gratis</strong> al armar tu paquete.</p>
-        <a class="btn btn-ghost folleto" href="#" aria-disabled="true" data-track="offer_click" data-label="paquete_thermador_folleto">Folleto</a>
+        <p class="deal">Bono</p>
+        <p class="mec"><span class="prog">Save on Style &amp; Luxury:</span> obtén un <strong>bono de hasta 2,000 USD</strong> en una suite completa.</p>
+        <button type="button" class="btn btn-primary" data-of-promo="monogram" aria-haspopup="dialog">Conocer más</button>
       </div>
     </article>
-    <article class="of-pcard" data-vence="2026-12-31">
+    <article class="of-bcard" data-vence="2026-12-31">
       <div class="foto"><span class="shade" aria-hidden="true"></span>
-        <img width="700" height="449" srcset="assets/photos/ofertas/monogram-400.webp 400w, assets/photos/ofertas/monogram-640.webp 640w, assets/photos/ofertas/monogram.webp 700w" sizes="(max-width: 640px) 100vw, (max-width: 1080px) 50vw, 25vw" loading="lazy" decoding="async" src="assets/photos/ofertas/monogram.webp" alt="Cocina Monogram">
-        <span class="logo"><img width="224" height="160" loading="lazy" decoding="async" src="assets/logos/monogram.png" alt="Monogram"></span>
-      </div>
-      <div class="body">
-        <p class="deal txt">Acumulable</p>
-        <p class="mec">Save with Style: el porcentaje de descuento sube con cada equipo que agregas a tu pedido.</p>
-        <a class="btn btn-ghost folleto" href="#" aria-disabled="true" data-track="offer_click" data-label="paquete_monogram_folleto">Folleto</a>
-      </div>
-    </article>
-    <article class="of-pcard" data-vence="2026-12-31">
-      <div class="foto"><span class="shade" aria-hidden="true"></span>
-        <img width="700" height="1244" srcset="assets/photos/ofertas/cafe-400.webp 400w, assets/photos/ofertas/cafe-640.webp 640w, assets/photos/ofertas/cafe.webp 700w" sizes="(max-width: 640px) 100vw, (max-width: 1080px) 50vw, 25vw" loading="lazy" decoding="async" src="assets/photos/ofertas/cafe.webp" alt="Cocina Café">
+        <img width="1280" height="720" srcset="assets/photos/ofertas/paquete-cafe-estufa-lavavajillas-400.webp 400w, assets/photos/ofertas/paquete-cafe-estufa-lavavajillas-640.webp 640w, assets/photos/ofertas/paquete-cafe-estufa-lavavajillas.webp 1280w" sizes="(max-width: 900px) 100vw, 50vw" loading="lazy" decoding="async" src="assets/photos/ofertas/paquete-cafe-estufa-lavavajillas-640.webp" alt="Cocina Café con estufa y lavavajillas blancos con herrajes de bronce">
         <span class="logo"><img width="352" height="103" loading="lazy" decoding="async" src="assets/logos/cafe.png" alt="Café"></span>
       </div>
       <div class="body">
-        <p class="deal txt">Acumulable</p>
-        <p class="mec">Buy More, Save More: acumula porcentaje de descuento al agregar equipos a tu pedido.</p>
-        <a class="btn btn-ghost folleto" href="#" aria-disabled="true" data-track="offer_click" data-label="paquete_cafe_folleto">Folleto</a>
+        <p class="deal">Regalo</p>
+        <p class="mec"><span class="prog">Save on Style &amp; Luxury:</span> en la compra de equipos seleccionados recibe un <strong>micro + trim de regalo</strong>.</p>
+        <button type="button" class="btn btn-primary" data-of-promo="cafe" aria-haspopup="dialog">Conocer más</button>
       </div>
     </article>
-    <article class="of-pcard" data-vence="2026-12-31">
-      <div class="foto"><span class="shade" aria-hidden="true"></span>
-        <img width="700" height="280" srcset="assets/photos/ofertas/bertazzoni-400.webp 400w, assets/photos/ofertas/bertazzoni-640.webp 640w, assets/photos/ofertas/bertazzoni.webp 700w" sizes="(max-width: 640px) 100vw, (max-width: 1080px) 50vw, 25vw" loading="lazy" decoding="async" src="assets/photos/ofertas/bertazzoni.webp" alt="Cocina Bertazzoni">
-        <span class="logo"><img width="400" height="88" loading="lazy" decoding="async" src="assets/logos/bertazzoni.webp" alt="Bertazzoni"></span>
-      </div>
-      <div class="body">
-        <p class="deal">50%</p>
-        <p class="mec">Productos al 50% en equipos seleccionados al armar tu paquete de cocina.</p>
-        <a class="btn btn-ghost folleto" href="#" aria-disabled="true" data-track="offer_click" data-label="paquete_bertazzoni_folleto">Folleto</a>
-      </div>
-    </article>
+  </div>
+  <!-- Banner del fabricante al pulsar "Conocer más" (Carla, 2026-10-19): el flyer
+       completo con términos sobre fondo oscuro y, debajo, el WhatsApp del paquete. -->
+  <div class="of-plb" id="of-promo-monogram" role="dialog" aria-modal="true" aria-label="Promoción Monogram · Save on Style &amp; Luxury" hidden>
+    <button type="button" class="of-plb-x" data-of-plb-cerrar aria-label="Cerrar">&times;</button>
+    <figure class="of-plb-in">
+      <img width="1200" height="1600" srcset="assets/photos/ofertas/promocion-monogram-save-on-style-luxury-bono-800.webp 800w, assets/photos/ofertas/promocion-monogram-save-on-style-luxury-bono.webp 1200w" sizes="(max-width: 760px) 100vw, 720px" loading="lazy" decoding="async" src="assets/photos/ofertas/promocion-monogram-save-on-style-luxury-bono-800.webp" alt="Monogram Save on Style &amp; Luxury: compra estufa o parrilla más horno y obtén un bono de hasta 2,000 USD al agregar refrigeración, campana, lavavajillas o complementos. Vigencia 1 de enero al 31 de diciembre de 2026.">
+      <figcaption><a class="btn btn-gold" href="https://api.whatsapp.com/send/?phone=524461446318&amp;text=%C2%A1Hola%20Homea%21%20Quiero%20conocer%20m%C3%A1s%20del%20paquete%20Monogram%20%28Bono%29." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_monogram">Cotizar paquete por WhatsApp</a></figcaption>
+    </figure>
+  </div>
+  <div class="of-plb" id="of-promo-cafe" role="dialog" aria-modal="true" aria-label="Promoción Café · Save on Style &amp; Luxury" hidden>
+    <button type="button" class="of-plb-x" data-of-plb-cerrar aria-label="Cerrar">&times;</button>
+    <figure class="of-plb-in">
+      <img width="1200" height="1600" srcset="assets/photos/ofertas/promocion-cafe-save-on-style-luxury-regalo-microondas-800.webp 800w, assets/photos/ofertas/promocion-cafe-save-on-style-luxury-regalo-microondas.webp 1200w" sizes="(max-width: 760px) 100vw, 720px" loading="lazy" decoding="async" src="assets/photos/ofertas/promocion-cafe-save-on-style-luxury-regalo-microondas-800.webp" alt="Café Save on Style &amp; Luxury: compra estufa o parrilla más horno empotre, agrega refrigerador o lavavajillas y obtén de regalo un horno de microondas con trim. Vigencia 1 de enero al 31 de diciembre de 2026.">
+      <figcaption><a class="btn btn-gold" href="https://api.whatsapp.com/send/?phone=524461446318&amp;text=%C2%A1Hola%20Homea%21%20Quiero%20conocer%20m%C3%A1s%20del%20paquete%20Caf%C3%A9%20%28Regalo%29." target="_blank" rel="noopener" data-track="whatsapp_click" data-label="wa_paquete_cafe">Cotizar paquete por WhatsApp</a></figcaption>
+    </figure>
   </div>
 </div></section>
-
-<!-- ============ 4 · STOCK CON PRECIO ESPECIAL ============
-     Dos bandas: premium (espresso) y económica (bone). TODO Fase 4: conectar
-     al inventario real; hoy los productos y descuentos son MUESTRA
-     (piloto Gaggenau + placeholders). -->
-<section class="of-stock-dark sec" id="stock"><div class="container">
-  <div class="of-shead reveal">
-    <div>
-      <div class="eyebrow" style="margin-bottom:14px">Stock Premium</div>
-      <h2>Piezas únicas <em>en existencia</em>.</h2>
-    </div>
-  </div>
-</div>
-<div class="of-smq reveal" aria-label="Productos en stock">
-  <div class="of-smq-track"><div class="of-smq-seq">
-    <a class="of-scard" href="producto-rb282705.html">
-      <div class="foto"><span class="off figures">−25%</span><span class="st">1 pieza</span><img width="700" height="525" srcset="assets/photos/gaggenau/gaggenau-rb282705-400.webp 400w, assets/photos/gaggenau/gaggenau-rb282705-640.webp 640w" sizes="(max-width: 640px) 80vw, 25vw" loading="lazy" decoding="async" src="assets/photos/gaggenau/gaggenau-rb282705-640.webp" alt="Refrigerador Gaggenau RB282705"></div>
-      <div class="body"><span class="b">Gaggenau</span><h3>Refrigerador Empotrable 24"</h3>
-        <div class="pr"><span class="now figures">$7,054.97 USD</span><span class="was figures">$9,406.62</span></div></div>
-    </a>
-    <a class="of-scard" href="producto-vg295250ca.html">
-      <div class="foto"><span class="off figures">−20%</span><span class="st">1 pieza</span><img width="700" height="525" srcset="assets/photos/gaggenau/gaggenau-vg295250ca-400.webp 400w, assets/photos/gaggenau/gaggenau-vg295250ca-640.webp 640w" sizes="(max-width: 640px) 80vw, 25vw" loading="lazy" decoding="async" src="assets/photos/gaggenau/gaggenau-vg295250ca-640.webp" alt="Parrilla Gaggenau VG295250CA"></div>
-      <div class="body"><span class="b">Gaggenau</span><h3>Parrilla de Gas 36"</h3>
-        <div class="pr"><span class="now figures">$6,942.28 USD</span><span class="was figures">$8,677.85</span></div></div>
-    </a>
-    <a class="of-scard" href="producto-bop250612.html">
-      <div class="foto"><span class="off figures">−25%</span><span class="st">1 pieza</span><img width="700" height="525" srcset="assets/photos/gaggenau/gaggenau-bop250612-400.webp 400w, assets/photos/gaggenau/gaggenau-bop250612-640.webp 640w" sizes="(max-width: 640px) 80vw, 25vw" loading="lazy" decoding="async" src="assets/photos/gaggenau/gaggenau-bop250612-640.webp" alt="Horno Gaggenau BOP250612"></div>
-      <div class="body"><span class="b">Gaggenau</span><h3>Horno Empotrable 24"</h3>
-        <div class="pr"><span class="now figures">$8,330.60 USD</span><span class="was figures">$11,107.47</span></div></div>
-    </a>
-    <a class="of-scard" href="producto-aw442720.html">
-      <div class="foto"><span class="off figures">−30%</span><span class="st">1 pieza</span><img width="700" height="350" srcset="assets/photos/gaggenau/gaggenau-aw442720-400.webp 400w, assets/photos/gaggenau/gaggenau-aw442720-640.webp 640w" sizes="(max-width: 640px) 80vw, 25vw" loading="lazy" decoding="async" src="assets/photos/gaggenau/gaggenau-aw442720-640.webp" alt="Campana Gaggenau AW442720"></div>
-      <div class="body"><span class="b">Gaggenau</span><h3>Campana Profesional 48"</h3>
-        <div class="pr"><span class="now figures">$4,660.69 USD</span><span class="was figures">$6,658.13</span></div></div>
-    </a>
-    <a class="of-scard" href="producto-df480701.html">
-      <div class="foto"><span class="off figures">−20%</span><span class="st">1 pieza</span><img width="700" height="525" srcset="assets/photos/gaggenau/gaggenau-df480701-400.webp 400w, assets/photos/gaggenau/gaggenau-df480701-640.webp 640w" sizes="(max-width: 640px) 80vw, 25vw" loading="lazy" decoding="async" src="assets/photos/gaggenau/gaggenau-df480701-640.webp" alt="Lavavajillas Gaggenau DF480701"></div>
-      <div class="body"><span class="b">Gaggenau</span><h3>Lavavajillas Integrado 24"</h3>
-        <div class="pr"><span class="now figures">$4,930.82 USD</span><span class="was figures">$6,163.52</span></div></div>
-    </a>
-  </div></div>
-</div>
-</section>
-<section class="sec" style="padding-top:70px;padding-bottom:70px"><div class="container">
-  <div class="of-shead reveal">
-    <div>
-      <div class="eyebrow" style="margin-bottom:14px">Stock Esencial</div>
-      <h2>Precio de oportunidad, <em>compra directa</em>.</h2>
-    </div>
-  </div>
-</div>
-<div class="of-smq reveal" aria-label="Productos en stock">
-  <div class="of-smq-track"><div class="of-smq-seq">
-    <article class="of-scard">
-      <div class="foto"><span class="off figures">−35%</span><span class="st">3 piezas</span><img width="800" height="600" srcset="assets/photos/cat-cuidado-ropa-bosch-lavadora-secadora-400.webp 400w, assets/photos/cat-cuidado-ropa-bosch-lavadora-secadora-640.webp 640w" sizes="(max-width: 640px) 80vw, 25vw" loading="lazy" decoding="async" src="assets/photos/cat-cuidado-ropa-bosch-lavadora-secadora-640.webp" alt="Lavadora Bosch — muestra"></div>
-      <div class="body"><span class="b">Bosch</span><h3>Lavadora Carga Frontal 24" — muestra</h3>
-        <div class="pr"><span class="now figures">$18,849 MXN</span><span class="was figures">$28,999</span></div></div>
-    </article>
-    <article class="of-scard">
-      <div class="foto"><span class="off figures">−30%</span><span class="st">2 piezas</span><img width="700" height="525" srcset="assets/photos/cat-refrigeracion-400.webp 400w, assets/photos/cat-refrigeracion-640.webp 640w" sizes="(max-width: 640px) 80vw, 25vw" loading="lazy" decoding="async" src="assets/photos/cat-refrigeracion-640.webp" alt="Refrigerador — muestra"></div>
-      <div class="body"><span class="b">Whirlpool</span><h3>Refrigerador French Door 36" — muestra</h3>
-        <div class="pr"><span class="now figures">$24,150 MXN</span><span class="was figures">$34,500</span></div></div>
-    </article>
-    <article class="of-scard">
-      <div class="foto"><span class="off figures">−25%</span><span class="st">5 piezas</span><img srcset="assets/photos/cat-electro-menores-kitchenaid-mixer-400.webp 400w, assets/photos/cat-electro-menores-kitchenaid-mixer-640.webp 640w, assets/photos/cat-electro-menores-kitchenaid-mixer.webp 800w" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 34vw" width="700" height="525" loading="lazy" decoding="async" src="assets/photos/cat-electro-menores-kitchenaid-mixer.webp" alt="Batidora KitchenAid — muestra"></div>
-      <div class="body"><span class="b">KitchenAid</span><h3>Batidora Artisan — muestra</h3>
-        <div class="pr"><span class="now figures">$9,749 MXN</span><span class="was figures">$12,999</span></div></div>
-    </article>
-    <article class="of-scard">
-      <div class="foto"><span class="off figures">−40%</span><span class="st">1 pieza</span><img srcset="assets/photos/cat-cocina-400.webp 400w, assets/photos/cat-cocina-640.webp 640w, assets/photos/cat-cocina.webp 800w" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 34vw" width="700" height="525" loading="lazy" decoding="async" src="assets/photos/cat-cocina.webp" alt="Estufa — muestra"></div>
-      <div class="body"><span class="b">Mabe</span><h3>Estufa de Piso 30" — muestra</h3>
-        <div class="pr"><span class="now figures">$9,599 MXN</span><span class="was figures">$15,999</span></div></div>
-    </article>
-  </div></div>
-</div>
-</section>
 
 <!-- ============ 5 · PUENTE A PAQUETES (Herramientas) ============ -->
 <section class="sec on-greige" style="padding-top:70px;padding-bottom:90px"><div class="container">
@@ -526,7 +432,7 @@
       <h3>¿No sabes por dónde empezar? Mira los <em>paquetes por presupuesto</em>.</h3>
       <p>Cocinas armadas por marca con precio público, de gama económica a ultra premium.</p>
     </div>
-    <a class="btn btn-dark" href="herramientas.html#paquetes">Ver paquetes</a>
+    <a class="btn btn-primary" href="herramientas.html#paquetes">Ver paquetes</a>
   </div>
 </div></section>
 
@@ -538,7 +444,7 @@
     <svg class="f-news-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
     <div class="f-news-txt">
       <h2 class="f-news-t">Avísame de las <i>próximas ofertas</i>.</h2>
-      <p>Outlet, piezas en existencia y promociones de marca: te escribimos antes de que se agoten.</p>
+      <p>Piezas en stock, paquetes y promociones de marca: te escribimos antes de que se agoten.</p>
     </div>
     <form class="f-news-form" data-newsletter="ofertas" novalidate>
       <label class="sr-only" for="nl-ofertas">Tu correo electrónico</label>
@@ -567,7 +473,8 @@
 /* Ofertas — interacciones de página.
    1) Vigencias: enciende el hero de temporada solo dentro de su rango y
       remueve tarjetas con data-vence vencido. Sin JS: hero próxima temporada.
-   2) Cuenta regresiva del hero (data-cdown). */
+   2) Selector "Mostrar" del stock.
+   3) Cuenta regresiva del hero (data-cdown). */
 (function () {
   "use strict";
   var hoy = new Date(); hoy.setHours(0, 0, 0, 0);
@@ -587,6 +494,58 @@
   document.querySelectorAll("[data-vence]").forEach(function (c) {
     if (new Date(c.getAttribute("data-vence") + "T23:59:59") < hoy) c.remove();
   });
+
+  /* Stock: el selector "Mostrar" enseña las primeras 50, 100, 200 o 500 piezas
+     de las que dejan pasar los filtros (catalogo.js filtra con `hidden` y ordena
+     moviendo las tarjetas: un observador recalcula el límite tras cada cambio). */
+  var grid = document.querySelector("[data-of-grid]");
+  var sel = document.querySelector("[data-of-limite]");
+  if (grid && sel) {
+    var limitar = function () {
+      var lim = parseInt(sel.value, 10) || 50, i = 0;
+      grid.querySelectorAll("[data-cat-card]").forEach(function (c) {
+        if (c.hidden) { c.classList.remove("of-fuera"); return; }
+        c.classList.toggle("of-fuera", i >= lim);
+        i++;
+      });
+    };
+    var cola = 0;
+    new MutationObserver(function () {
+      if (!cola) cola = setTimeout(function () { cola = 0; limitar(); }, 0);
+    }).observe(grid, { childList: true, subtree: true, attributes: true, attributeFilter: ["hidden"] });
+    sel.addEventListener("change", limitar);
+    limitar();
+  }
+
+  /* Paquetes: "Conocer más" abre el banner del fabricante. Delegado en document
+     (una sola vez) para que siga vivo al navegar sin recargar. */
+  if (!window.__ofPromoLb) {
+    window.__ofPromoLb = true;
+    var abierto = null, origen = null;
+    var cerrar = function () {
+      if (!abierto) return;
+      var lb = abierto; abierto = null;
+      lb.classList.remove("on");
+      document.documentElement.classList.remove("of-plb-abierto");
+      setTimeout(function () { lb.hidden = true; }, 260);
+      if (origen) origen.focus();
+    };
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest("[data-of-promo]");
+      if (b) {
+        var lb = document.getElementById("of-promo-" + b.getAttribute("data-of-promo"));
+        if (!lb) return;
+        origen = b; abierto = lb;
+        lb.hidden = false; lb.scrollTop = 0;
+        document.documentElement.classList.add("of-plb-abierto");
+        requestAnimationFrame(function () { lb.classList.add("on"); });
+        lb.querySelector("[data-of-plb-cerrar]").focus();
+        return;
+      }
+      if (abierto && (e.target === abierto || e.target.closest("[data-of-plb-cerrar]") || e.target.classList.contains("of-plb-in"))) cerrar();
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") cerrar(); });
+  }
 
   /* Cuenta regresiva */
   if (n && !n.hidden && n.getAttribute("data-cdown")) {
@@ -666,70 +625,6 @@
 </div></footer>
 
 <a class="wa-float" href="https://api.whatsapp.com/send/?phone=524461446318&text=%C2%A1Hola%2C%20visit%C3%A9%20su%20sitio%20web%20y%20me%20interesa%20una%20cotizaci%C3%B3n%21" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-track="whatsapp_click" data-label="wa_float"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.5 4 4.2 9.3 4.2 15.84c0 2.08.54 4.06 1.58 5.84L4 28l6.5-1.7a11.8 11.8 0 0 0 5.54 1.4h.01c6.54 0 11.84-5.3 11.84-11.84C27.89 9.3 22.58 4 16.04 4zm0 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.86 1.01 1.03-3.76-.23-.39a9.78 9.78 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg></a>
-<script>
-/* Stock — marquesina (mismo comportamiento que la de marcas del home).
-   Clona la secuencia una vez, avanza con transform a velocidad constante,
-   se pausa con hover, se arrastra con inercia y no navega si hubo arrastre.
-   Guard global + DOM vivo en cada frame para sobrevivir a la navegación SPA. */
-(function () {
-  "use strict";
-  if (window.__ofSmqBound) return;
-  window.__ofSmqBound = true;
-  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var SPEED = 26, prev = null;
-  function prep(m) {
-    if (m.__smq) return m.__smq;
-    var track = m.querySelector(".of-smq-track"), seq = m.querySelector(".of-smq-seq");
-    if (!track || !seq) return null;
-    var k = seq.cloneNode(true);
-    k.setAttribute("aria-hidden", "true");
-    k.querySelectorAll("a, button").forEach(function (x) { x.tabIndex = -1; });
-    track.appendChild(k);
-    m.querySelectorAll("img, a").forEach(function (x) { x.setAttribute("draggable", "false"); });
-    m.classList.add("is-live");
-    var st = m.__smq = { track: track, seq: seq, pos: 0, vel: 0, hover: false, drag: false, moved: false, x0: 0, p0: 0, lx: 0, lt: 0 };
-    m.addEventListener("dragstart", function (e) { e.preventDefault(); });
-    m.addEventListener("pointerenter", function () { st.hover = true; });
-    m.addEventListener("pointerleave", function () { st.hover = false; });
-    m.addEventListener("pointerdown", function (e) {
-      if (e.button != null && e.button !== 0) return;
-      st.drag = true; st.moved = false; st.x0 = st.lx = e.clientX; st.lt = e.timeStamp; st.p0 = st.pos; st.vel = 0;
-      m.classList.add("dragging");
-      try { m.setPointerCapture(e.pointerId); } catch (err) {}
-    });
-    m.addEventListener("pointermove", function (e) {
-      if (!st.drag) return;
-      var dx = e.clientX - st.x0; if (Math.abs(dx) > 4) st.moved = true;
-      st.pos = st.p0 + dx;
-      var ddt = (e.timeStamp - st.lt) / 1000; if (ddt > 0) st.vel = (e.clientX - st.lx) / ddt;
-      st.lx = e.clientX; st.lt = e.timeStamp;
-    });
-    var end = function () { if (!st.drag) return; st.drag = false; m.classList.remove("dragging"); st.vel = Math.max(-2600, Math.min(2600, st.vel)); };
-    m.addEventListener("pointerup", end);
-    m.addEventListener("pointercancel", end);
-    m.addEventListener("click", function (e) { if (st.moved) { e.preventDefault(); e.stopPropagation(); st.moved = false; } }, true);
-    return st;
-  }
-  function frame(t) {
-    var dt = prev === null ? 0 : Math.min(0.05, (t - prev) / 1000); prev = t;
-    document.querySelectorAll(".of-smq").forEach(function (m) {
-      var st = prep(m); if (!st) return;
-      var b = m.getBoundingClientRect();
-      if (b.bottom < 0 || b.top > innerHeight) return;
-      var w = st.seq.getBoundingClientRect().width || 1;
-      if (!st.drag) {
-        var auto = (st.hover || reduce) ? 0 : -SPEED;
-        st.pos += (auto + st.vel) * dt;
-        st.vel *= Math.pow(0.94, dt * 60); if (Math.abs(st.vel) < 1) st.vel = 0;
-      }
-      st.pos = st.pos % w; if (st.pos > 0) st.pos -= w;
-      st.track.style.transform = "translate3d(" + st.pos.toFixed(2) + "px,0,0)";
-    });
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-})();
-</script>
 <script src="v2.js?v=33"></script>
 <script src="wishlist.js?v=8"></script>
 <script src="cart.js?v=3"></script>
