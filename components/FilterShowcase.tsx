@@ -17,7 +17,10 @@ import FiltroDiagrama from "./FiltroDiagrama";
 import DiagramaDefs from "./DiagramaDefs";
 import FilterList from "./FilterList";
 import FichaModal from "./FichaModal";
+import DestinoBusqueda from "./DestinoBusqueda";
+import { slugFicha } from "@/lib/guiasBusqueda";
 import IlustracionTipo, { panelar, tieneIlustracion } from "./IlustracionTipo";
+import IlustracionCoccion, { tieneCoccion } from "./IlustracionCoccion";
 
 // Las etiquetas son EXACTAMENTE los nombres de los filtros del PLP (tabla de
 // filtros de Carla, 2026-07-28): la guía y el filtro deben nombrar igual el
@@ -44,6 +47,7 @@ export default function FilterShowcase({ filtros, contexto, etiquetas }: Props) 
     <div className="tfk">
       <DiagramaDefs />
       <FichaModal contexto={contexto} />
+      <DestinoBusqueda />
       {GRUPOS.map(({ key, label: labelDefault }) => {
         const label = etiquetas?.[key] ?? labelDefault;
         const grupo = conFicha.filter((f) => f.ficha!.grupo === key);
@@ -52,30 +56,35 @@ export default function FilterShowcase({ filtros, contexto, etiquetas }: Props) 
         // rejilla, en el grupo "Diseño".
         // También "Tipo de instalación", solo en Refrigeradores: De Piso y
         // Empotrado se repiten en otras categorías con su diagrama de línea.
+        // Resto de Refrigeración (2026-10-19): la ficha pide su escena con
+        // `ilustracion` y se dibuja en cualquier grupo.
+        const escena = (f: FiltroProducto) => f.ficha!.ilustracion ?? f.ficha!.diagrama;
         const conEscena = (f: FiltroProducto) =>
-          (key === "estilo" || (key === "tipo" && contexto === "Refrigeradores")) && tieneIlustracion(f.ficha!.diagrama);
+          f.ficha!.ilustracion
+            ? tieneIlustracion(f.ficha!.ilustracion) || tieneCoccion(f.ficha!.ilustracion)
+            : (key === "estilo" || (key === "tipo" && contexto === "Refrigeradores")) && tieneIlustracion(f.ficha!.diagrama);
         const ilus = grupo.filter(conEscena);
         const linea = grupo.filter((f) => !conEscena(f));
         const tarjeta = (f: FiltroProducto) => {
           const conIlus = conEscena(f);
-          const panel = conIlus ? panelar(f.ficha!.diagrama) : null;
+          const panel = conIlus ? panelar(escena(f)) : null;
           const cuerpo = (
             <>
               {conIlus ? (
-                <span className="tfk-ilus">
-                  <IlustracionTipo tipo={f.ficha!.diagrama} />
-                  {panel && (
+                <span className={panel?.inicial ? "tfk-ilus is-panel" : "tfk-ilus"}>
+                  {tieneCoccion(escena(f)) ? <IlustracionCoccion tipo={escena(f)} /> : <IlustracionTipo tipo={escena(f)} />}
+                  {panel?.boton && (
                     // <span> y no <button>: la tarjeta entera es un <a>. FichaModal
                     // atiende el clic/Enter y alterna el panel de carpintería.
                     <span
                       className="tfk-panelar"
                       role="button"
                       tabIndex={0}
-                      aria-pressed="false"
+                      aria-pressed={panel.inicial ? "true" : "false"}
                       data-panelar=""
-                      style={{ left: panel.x, top: panel.y }}
+                      style={{ right: panel.right, top: panel.y }}
                     >
-                      Panelar
+                      {panel.inicial ? "Ver en acero" : "Panelar"}
                     </span>
                   )}
                   <span className="tfk-zoom" aria-hidden="true">
@@ -104,6 +113,7 @@ export default function FilterShowcase({ filtros, contexto, etiquetas }: Props) 
           return f.ficha!.catalogo ? (
             <a
               key={f.filtro}
+              id={`ficha-${slugFicha(f.nombre)}`}
               href={f.ficha!.catalogo}
               className={conIlus ? "tfk-card tfk-card--ilus" : "tfk-card"}
               data-ficha=""
@@ -112,13 +122,14 @@ export default function FilterShowcase({ filtros, contexto, etiquetas }: Props) 
               data-desc={f.ficha!.descripcion}
               data-specs={f.ficha!.specs}
               data-detalle={f.ficha!.detalle ?? ""}
-              data-panelable={panel ? "" : undefined}
+              data-panelable={panel?.boton ? "" : undefined}
             >
               {cuerpo}
             </a>
           ) : (
             <CtaProducto
               key={f.filtro}
+              id={`ficha-${slugFicha(f.nombre)}`}
               filtro={f.filtro}
               className="tfk-card"
               fallback="whatsapp"

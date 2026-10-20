@@ -143,6 +143,39 @@ export default function DiagramaDefs() {
           </g>
           <path d="M-10 172 C 70 156, 96 212, 162 200 S 262 164, 334 218" fill="none" stroke="#fff" strokeOpacity="0.12" strokeWidth="0.5" />
         </pattern>
+        {/* Columnas antracita (cava de pared) y su halo gris al centro. */}
+        <linearGradient id="ilus-antracita" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#2C2D2F" />
+          <stop offset="100%" stopColor="#18191B" />
+        </linearGradient>
+        <radialGradient id="ilus-halo-gris">
+          <stop offset="0%" stopColor="#5A5C60" stopOpacity="0.45" />
+          <stop offset="100%" stopColor="#5A5C60" stopOpacity="0" />
+        </radialGradient>
+        {/* Sombra difusa de un aparato de pie contra el muro (escenas libres). */}
+        <filter id="ilus-desenfoque" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="7" />
+        </filter>
+        {/* Mármol negro con veta clara (Centros de bebida, Carla 2026-10-19):
+            fondo casi negro, vetas marfil largas y un hilo dorado. */}
+        <pattern id="ilus-marmol-negro" patternUnits="userSpaceOnUse" width="560" height="400">
+          <rect width="560" height="400" fill="#151311" />
+          <rect width="560" height="400" fill="url(#ilus-marmol-luz)" />
+          <g fill="none" stroke="#E6DFD3" strokeLinecap="round">
+            <path d="M-20 40 C 60 30, 110 90, 190 70 S 300 20, 380 72 S 500 110, 580 60" strokeOpacity="0.55" strokeWidth="1.1" />
+            <path d="M-20 96 C 40 80, 120 120, 200 100 S 320 60, 420 104 S 520 130, 580 112" strokeOpacity="0.35" strokeWidth="0.8" />
+            <path d="M60 -10 C 90 40, 70 80, 120 130" strokeOpacity="0.3" strokeWidth="0.6" />
+            <path d="M300 -10 C 330 30, 300 70, 350 130" strokeOpacity="0.28" strokeWidth="0.6" />
+            <path d="M190 70 C 210 90, 240 92, 262 120" strokeOpacity="0.3" strokeWidth="0.5" />
+            <path d="M380 72 C 400 52, 440 50, 470 20" strokeOpacity="0.3" strokeWidth="0.5" />
+          </g>
+          <path d="M-20 44 C 60 34, 112 94, 192 74 S 302 24, 382 76" fill="none" stroke="#C8B48C" strokeOpacity="0.55" strokeWidth="0.7" />
+        </pattern>
+        <linearGradient id="ilus-marmol-luz" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#fff" stopOpacity="0.07" />
+          <stop offset="60%" stopColor="#fff" stopOpacity="0" />
+          <stop offset="100%" stopColor="#000" stopOpacity="0.25" />
+        </linearGradient>
         {/* Latón cepillado de las jaladeras. */}
         <linearGradient id="ilus-laton" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stopColor="#6E5230" />
@@ -211,6 +244,44 @@ export default function DiagramaDefs() {
         <linearGradient id="ilus-forro" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" style={{ stopColor: "var(--ilus-forro-1)" }} />
           <stop offset="100%" style={{ stopColor: "var(--ilus-forro-2)" }} />
+        </linearGradient>
+        {/* ——— Cocción (IlustracionCoccion, 2026-10-20) ——— */}
+        {/* Fondo de la cavidad del horno: esmalte con la luz cálida arriba. */}
+        <linearGradient id="c-horno-fondo" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#5A4636" />
+          <stop offset="55%" stopColor="#2A221C" />
+          <stop offset="100%" stopColor="#151210" />
+        </linearGradient>
+        <radialGradient id="c-horno-luz" cx="50%" cy="10%" r="70%">
+          <stop offset="0%" stopColor="#FFD9A0" stopOpacity="0.85" />
+          <stop offset="100%" stopColor="#FFB867" stopOpacity="0" />
+        </radialGradient>
+        {/* Zona de inducción encendida: azul claro. */}
+        <radialGradient id="c-ind" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#D9F3FF" stopOpacity="0.85" />
+          <stop offset="65%" stopColor="#7CC8F2" stopOpacity="0.5" />
+          <stop offset="100%" stopColor="#4FA8DE" stopOpacity="0" />
+        </radialGradient>
+        {/* Vitrocerámica encendida: resistencia al rojo. */}
+        <radialGradient id="c-vitro" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#FF7A3D" stopOpacity="0.85" />
+          <stop offset="60%" stopColor="#E0381E" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#8E1A10" stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id="c-teppan-calor" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#FF9A4D" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#E0521E" stopOpacity="0.15" />
+        </linearGradient>
+        {/* Luz LED de la campana sobre la cocción. */}
+        <linearGradient id="c-cono-led" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#FFF4DE" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#FFE9C2" stopOpacity="0" />
+        </linearGradient>
+        {/* Flama azul: base azul intenso, punta clara. */}
+        <linearGradient id="c-llama" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stopColor="#1D4FE0" />
+          <stop offset="55%" stopColor="#3D8CFF" />
+          <stop offset="100%" stopColor="#BFE3FF" stopOpacity="0.6" />
         </linearGradient>
       </defs>
     </svg>

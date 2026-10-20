@@ -14,6 +14,8 @@ export interface GuideCardData {
   href: string;
   /** etiqueta "Categoría / Tipo". */
   etiqueta: string;
+  /** Categoría(s) de producto de la guía (GuiasPorTema / BlogTemas). */
+  temas?: string[];
 }
 
 export default function GuideCard({ card }: { card: GuideCardData }) {

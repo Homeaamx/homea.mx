@@ -60,6 +60,9 @@ export interface GuiaPublicada {
   autor: string | null;
   macro: Macrocategoria;
   sub1?: Subcategoria1;
+  /** Etiquetas de Shopify tal cual: además del lugar y el tipo pueden nombrar
+   *  la categoría de producto ("Jacuzzi", "Lavadoras") para ligarla a ella. */
+  etiquetas: string[];
   /** true = viene de la semilla local (solo en desarrollo). */
   borrador?: boolean;
 }
@@ -216,6 +219,7 @@ function aGuia(a: ArticuloShopify, borrador = false): GuiaPublicada | null {
     autor: a.authorV2?.name ?? null,
     macro: ubicacion.macro,
     sub1: ubicacion.sub1,
+    etiquetas: a.tags,
     borrador,
   };
 }

@@ -8,7 +8,8 @@ import {
   getTiposDeGuia,
   guiasDeMacro,
   guiasDeSub1,
-  leafFiltros,
+  leavesDeMacro,
+  temasDeGuia,
   nombreTipo,
   resolverRuta,
   type GuiaPublicada,
@@ -24,8 +25,10 @@ import CategoryList from "@/components/CategoryList";
 import FilterList from "@/components/FilterList";
 import FilterShowcase from "@/components/FilterShowcase";
 import GuiaSearch from "@/components/GuiaSearch";
-import GuideTypeFilter from "@/components/GuideTypeFilter";
+import { indiceCategoria } from "@/lib/guiasBusqueda";
 import GuideArticle from "@/components/GuideArticle";
+import GuiasPortada from "@/components/GuiasPortada";
+import GuiasPorTema, { BlogTemas, type TemaGuia } from "@/components/GuiasPorTema";
 import JsonLd from "@/components/JsonLd";
 import { type GuideCardData } from "@/components/GuideCard";
 
@@ -115,14 +118,41 @@ const HERO_FOTO_SUB1: Record<string, { src: string; pos?: string; flip?: boolean
   "tarjas-y-griferia": { src: "/assets/photos/hero-sub1-tarjas-griferia-blanco.webp", pos: "center 50%" },
   trituradores: { src: "/assets/photos/hero-sub1-trituradores-insinkerator.webp", pos: "center 100%" },
   "filtros-y-purificadores-de-agua": { src: "/assets/photos/hero-sub1-filtros-purificadores-agua.webp", pos: "center 50%" },
+  // Alberca: mosaico Onix (Carla, 2026-10-20); su página se queda con el formato de lista.
+  alberca: { src: "/assets/photos/brands/hero/onix-superficies.webp", pos: "center 62%" },
+};
+
+// Foto de la portada de guías por Subcategoría 1 (GuiasPortada: hero partido).
+// Resto de Cocina y Bar (Carla, 2026-10-20): por ahora la misma foto del hero
+// de su página de Productos, encuadrada para que el aparato quede a la derecha.
+const PORTADA_FOTO_SUB1: Record<string, { src: string; pos?: string; flip?: boolean }> = {
+  refrigeracion: { src: "/assets/photos/stats-refrigeracion-gaggenau-columnas-cavas.webp", pos: "center 45%" },
+  coccion: { src: "/assets/photos/hero-sub1-coccion-gaggenau.webp", pos: "60% 60%" },
+  lavavajillas: { src: "/assets/photos/hero-sub1-lavavajillas-bosch.webp", pos: "20% 50%" },
+  "tarjas-y-griferia": { src: "/assets/photos/hero-sub1-tarjas-griferia-blanco.webp", pos: "40% 50%" },
+  trituradores: { src: "/assets/photos/hero-sub1-trituradores-insinkerator.webp", pos: "center 70%" },
+  "filtros-y-purificadores-de-agua": { src: "/assets/photos/purificador-agua-monomando-delta-cocina.webp", pos: "center 45%", flip: true },
+  // Exterior: solo Asadores & Hornos (Alberca se queda como está; Carla, 2026-10-20).
+  "asadores-y-hornos": { src: "/assets/photos/brands/hero/lynx-asadores.webp", pos: "center 55%" },
+};
+
+// Portada por macrocategoría de 2 niveles (sus leaves son las tarjetas): por
+// ahora Electrodomésticos menores (Carla, 2026-10-20).
+const PORTADA_FOTO_MACRO: Record<string, { src: string; pos?: string; flip?: boolean }> = {
+  "electrodomesticos-menores": { src: "/assets/photos/hero-electrodomesticos-menores.webp", pos: "8% 55%" },
 };
 
 // --------------------------------------------------------------------------
 // Helpers de presentación.
 // --------------------------------------------------------------------------
 
-function guiasToCards(guias: GuiaPublicada[], categoria: string): GuideCardData[] {
+function guiasToCards(
+  guias: GuiaPublicada[],
+  categoria: string,
+  leaves: { nombre: string; slug: string }[] = [],
+): GuideCardData[] {
   return guias.map((g) => ({
+    ...temasDeGuia(g, leaves),
     titulo: g.titulo,
     resumen: g.resumen,
     tipo: g.tipo,
@@ -150,6 +180,41 @@ function itemListLd(name: string, items: { name: string; url: string }[]) {
 // Vistas.
 // --------------------------------------------------------------------------
 
+/** Blog de la portada de guías: newsletter + las guías publicadas. */
+function BlogGuias({ cards, temas }: { cards: GuideCardData[]; temas: TemaGuia[] }) {
+  return (
+    <section className="sec gx-blog" id="blog">
+      <div className="container">
+        <div className="gx-blog-head">
+          <div className="gx-blog-txt">
+            <h2>Blog</h2>
+            <p>
+              Suscríbete para recibir guías de compra, tips de uso y todo lo que necesitas para aprender a usar tus
+              electrodomésticos.
+            </p>
+          </div>
+          {/* Mismo formulario que el pie (v2.js · [data-newsletter]); aquí el
+              pie no lo repite (styles/theme.css). */}
+          <form className="f-news-form" data-newsletter="guias" noValidate>
+            <label className="sr-only" htmlFor="nl-guias">
+              Tu correo electrónico
+            </label>
+            <input id="nl-guias" type="email" name="correo" placeholder="Tu correo electrónico" autoComplete="email" required />
+            <button type="submit">Suscribirme</button>
+            <p className="f-news-msg" role="status" aria-live="polite" />
+            <p className="f-news-legal">
+              Al suscribirte aceptas el <a href="/aviso-de-privacidad">Aviso de privacidad</a>. Te das de baja cuando quieras.
+            </p>
+          </form>
+        </div>
+        {/* Chips de tipo fijos; las tarjetas de arriba sin fichas filtran por
+            categoría y aparece "Ver productos en tienda" (BlogTemas). */}
+        <BlogTemas temas={temas} cards={cards} tipos={getTiposDeGuia()} />
+      </div>
+    </section>
+  );
+}
+
 async function MacroIndex({ macro, node }: { macro: Macrocategoria; node: RouteNode }) {
   const crumbs = buildBreadcrumb(node);
   const heroFoto = HERO_FOTO_MACRO[macro.slug];
@@ -157,7 +222,41 @@ async function MacroIndex({ macro, node }: { macro: Macrocategoria; node: RouteN
   // Rama de 2 niveles: la macro ES la categoría de guías → índice con filtro por tipo.
   if (macro.nivelGuias === "macrocategoria") {
     const guias = await guiasDeMacro(macro);
-    const cards = guiasToCards(guias, macro.nombre);
+    const leaves = leavesDeMacro(macro);
+    const cards = guiasToCards(guias, macro.nombre, leaves);
+    const jsonLd = (
+      <JsonLd
+        data={itemListLd(
+          `Guías de ${macro.nombre}`,
+          guias.map((g) => ({ name: g.titulo, url: absUrl(g.ruta) }))
+        )}
+      />
+    );
+    const portada = PORTADA_FOTO_MACRO[macro.slug];
+    if (portada && leaves.length > 0 && leaves.every((l) => l.tarjeta)) {
+      return (
+        <>
+          <GuiasPortada
+            crumbs={crumbs}
+            nombre={macro.nombre}
+            tipos={leaves}
+            foto={portada}
+            filtraBlog
+            buscador={
+              <GuiaSearch
+                guias={cards}
+                fichas={indiceCategoria(leaves, true)}
+                placeholder={`Busca en ${macro.nombre}`}
+                ariaLabel={`Buscar en ${macro.nombre}`}
+                scopeLabel={macro.nombre}
+              />
+            }
+          />
+          <BlogGuias cards={cards} temas={leaves} />
+          {jsonLd}
+        </>
+      );
+    }
     return (
       <>
         <PageHero
@@ -170,19 +269,10 @@ async function MacroIndex({ macro, node }: { macro: Macrocategoria; node: RouteN
           bgFlip={heroFoto?.flip}
         />
         <section className="sec">
-          <div className="container category-layout">
-            <CategoryList variant="leaves" leaves={leafFiltros(macro)} railHead="Explora por categoría" />
-            <div className="category-main">
-              <GuideTypeFilter cards={cards} tipos={getTiposDeGuia()} />
-            </div>
-          </div>
+          {/* Cada categoría filtra sus guías; sin guías, "Ver productos". */}
+          <GuiasPorTema temas={leaves} cards={cards} tipos={getTiposDeGuia()} />
         </section>
-        <JsonLd
-          data={itemListLd(
-            `Guías de ${macro.nombre}`,
-            guias.map((g) => ({ name: g.titulo, url: absUrl(g.ruta) }))
-          )}
-        />
+        {jsonLd}
       </>
     );
   }
@@ -230,8 +320,41 @@ async function CategoryIndex({
 }) {
   const crumbs = buildBreadcrumb(node);
   const guias = await guiasDeSub1(macro, sub1);
-  const cards = guiasToCards(guias, sub1.nombre);
+  const cards = guiasToCards(guias, sub1.nombre, sub1.subcategorias2 ?? []);
   const heroFoto = HERO_FOTO_SUB1[sub1.slug];
+  const tipos = sub1.subcategorias2 ?? [];
+  // Portada nueva (Carla, 2026-10-19): cuando todos los tipos traen tarjeta.
+  const portada = PORTADA_FOTO_SUB1[sub1.slug];
+  const conPortada = Boolean(portada) && tipos.length > 0 && tipos.every((t) => t.tarjeta);
+  const buscador = (
+    <GuiaSearch
+      guias={cards}
+      // En la portada los tipos son tarjetas de la página (van en `fichas`).
+      topics={conPortada ? [] : tipos}
+      fichas={indiceCategoria(tipos, conPortada)}
+      placeholder={`Busca en ${sub1.nombre}`}
+      ariaLabel={`Buscar en ${sub1.nombre}`}
+      scopeLabel={sub1.nombre}
+    />
+  );
+  const jsonLd = (
+    <JsonLd
+      data={itemListLd(
+        `Guías de ${sub1.nombre}`,
+        guias.map((g) => ({ name: g.titulo, url: absUrl(g.ruta) }))
+      )}
+    />
+  );
+
+  if (portada && conPortada) {
+    return (
+      <>
+        <GuiasPortada crumbs={crumbs} nombre={sub1.nombre} tipos={tipos} foto={portada} buscador={buscador} filtraBlog />
+        <BlogGuias cards={cards} temas={tipos} />
+        {jsonLd}
+      </>
+    );
+  }
 
   return (
     <>
@@ -245,30 +368,12 @@ async function CategoryIndex({
         bgFlip={heroFoto?.flip}
       >
         {/* Buscador ACOTADO a esta subcategoría: temas (Subcategoría 2) + sus guías. */}
-        <div style={{ marginTop: 26 }}>
-          <GuiaSearch
-            guias={cards}
-            topics={sub1.subcategorias2 ?? []}
-            placeholder={`Busca en ${sub1.nombre}`}
-            ariaLabel={`Buscar en ${sub1.nombre}`}
-            scopeLabel={sub1.nombre}
-          />
-        </div>
+        <div style={{ marginTop: 26 }}>{buscador}</div>
       </PageHero>
       <section className="sec">
-        <div className="container category-layout">
-          <CategoryList variant="leaves" leaves={sub1.subcategorias2 ?? []} railHead="Explora por categoría" />
-          <div className="category-main">
-            <GuideTypeFilter cards={cards} tipos={getTiposDeGuia()} />
-          </div>
-        </div>
+        <GuiasPorTema temas={tipos} cards={cards} tipos={getTiposDeGuia()} />
       </section>
-      <JsonLd
-        data={itemListLd(
-          `Guías de ${sub1.nombre}`,
-          guias.map((g) => ({ name: g.titulo, url: absUrl(g.ruta) }))
-        )}
-      />
+      {jsonLd}
     </>
   );
 }

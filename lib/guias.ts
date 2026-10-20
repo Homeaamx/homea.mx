@@ -221,3 +221,55 @@ export function buildBreadcrumb(node: RouteNode): Crumb[] {
   crumbs.push({ nombre: node.guia.titulo });
   return crumbs;
 }
+
+// ---------------------------------------------------------------------------
+// Guía ↔ categoría de producto (Carla, 2026-10-20): al elegir una categoría en
+// el riel de las páginas de guías solo quedan sus guías. Una guía pertenece a
+// una categoría si la nombra en sus etiquetas de Shopify ("Jacuzzi") o si su
+// título, resumen o cuerpo mencionan todas las palabras clave del nombre
+// ("Sillón para masajes" → sillón + masaje), en singular y sin acentos.
+// ---------------------------------------------------------------------------
+
+const VACIAS = new Set(["de", "del", "la", "el", "los", "las", "y", "e", "o", "para", "con", "en", "a", "al"]);
+
+const plano = (s: string) =>
+  s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+
+/** Singular aproximado: "calentadores" → "calentador", "tinas" → "tina". */
+function singular(p: string): string {
+  if (p.length > 4 && /[rlnd]es$/.test(p)) return p.slice(0, -2);
+  if (p.length > 3 && p.endsWith("s")) return p.slice(0, -1);
+  return p;
+}
+
+function palabrasClave(nombre: string): string[] {
+  return plano(nombre.replace(/\([^)]*\)/g, " ").replace(/&/g, " "))
+    .split(/[^a-z0-9]+/)
+    .filter((p) => p.length > 1 && !VACIAS.has(p) && !/^\d+$/.test(p))
+    .map(singular);
+}
+
+/**
+ * Categoría (`leaves`) de una guía, para el número del riel y el filtro (Carla,
+ * 2026-10-20: cada guía queda catalogada en una categoría). Manda la etiqueta
+ * de Shopify con el nombre de la categoría (puede haber varias); sin etiqueta,
+ * la primera categoría que la guía nombra completa (título, luego resumen, luego
+ * cuerpo). Sin ninguna mención, no se cataloga.
+ */
+export function temasDeGuia(guia: GuiaPublicada, leaves: { nombre: string; slug: string }[]): { temas: string[] } {
+  const etiquetas = new Set(guia.etiquetas.map((e) => plano(e).trim()));
+  const etiquetados = leaves.filter((l) => etiquetas.has(plano(l.nombre).trim()) || etiquetas.has(l.slug));
+  if (etiquetados.length) return { temas: etiquetados.map((l) => l.slug) };
+  const texto = plano(`${guia.titulo} · ${guia.resumen} · ${guia.html.replace(/<[^>]+>/g, " ")}`);
+  let mejor: { slug: string; pos: number } | null = null;
+  for (const l of leaves) {
+    const claves = palabrasClave(l.nombre);
+    if (!claves.length) continue;
+    const pos = claves.map((c) => texto.indexOf(c));
+    if (pos.some((p) => p < 0)) continue;
+    // Dónde queda nombrada completa: en la última de sus palabras clave.
+    const p = Math.max(...pos);
+    if (!mejor || p < mejor.pos) mejor = { slug: l.slug, pos: p };
+  }
+  return { temas: mejor ? [mejor.slug] : [] };
+}

@@ -28,6 +28,8 @@ interface Props {
   fallback?: "soon" | "whatsapp";
   /** Mensaje contextual para el fallback de WhatsApp. */
   waMessage?: string;
+  /** id del enlace (destino del buscador de Guías). */
+  id?: string;
 }
 
 export default function CtaProducto({
@@ -36,13 +38,14 @@ export default function CtaProducto({
   className,
   fallback = "soon",
   waMessage,
+  id,
 }: Props) {
   const [soonOpen, setSoonOpen] = useState(false);
 
   // PLP listo: navegación real al filtro.
   if (PLP_READY) {
     return (
-      <Link href={filtro} className={className} data-cta="ver-productos" data-href={filtro}>
+      <Link id={id} href={filtro} className={className} data-cta="ver-productos" data-href={filtro}>
         {children}
       </Link>
     );
@@ -52,6 +55,7 @@ export default function CtaProducto({
   if (fallback === "whatsapp") {
     return (
       <a
+        id={id}
         href={whatsappHref(waMessage)}
         target="_blank"
         rel="noopener"

@@ -200,6 +200,23 @@ Implementado en los 14 tipos de Refrigeradores; referencia visual: French Door.
   decoración (olivo, tablas, platos). Las clases son las mismas; `.ilus--real`
   cambia los materiales en `styles/guias.css`. Al panelar, el panel (nogal) cubre
   también la rejilla superior.
+  Gabinetes simplificados (Carla, 2026-10-19): una jaladera por puerta o cajón;
+  alacenas de 2 puertas, puente liso sobre el aparato, base de cajón + 2 puertas
+  o de 3 cajones (`TramoCubierta base`) y despensa de 2 puertas de piso a techo.
+  Empotrado = tramo · aparato · despensa; Counter Depth = tramo de 3 cajones ·
+  aparato entre costados con puente · despensa.
+- **Resto de Refrigeración (2026-10-19):** Congeladores, Máquinas de hielo, Cavas de
+  vino y Cajones refrigerantes también usan escenas. Como comparten `diagrama` con
+  otras categorías, la ficha pide su escena con `ilustracion` (p.ej. `cong-de-piso`)
+  y así se dibuja en cualquier grupo. Piezas nuevas en `IlustracionTipo.tsx`: zona
+  `hielo` (evaporador, cubos y depósito), pieza `tapa` (arcón: la tapa se levanta),
+  `libre` (aparato de pie en un hueco, sin cubierta encima), `EscenaBajoCubiertaReal`
+  (aparato bajo la cubierta en la cocina realista) y `panelInicial` (Panelable abre
+  ya panelada). En aparatos solo de cajones sale únicamente el de arriba.
+  Centros de bebida (página nueva, 2026-10-19): De piso (de pie frente a listones,
+  `libre` + escena alta) y Empotrado (bajo cubierta), ambos con Panelar; Diseño:
+  Puerta de cristal (listones) y Puerta sólida en `exterior` (ladrillo, granito,
+  gabinetes de acero y asador). Arcón de Congeladores: `blanco` + `libre`.
 - **Bisagras (Carla, 2026-10-19):** Bottom Mount, Top Mount, Glass Door y Columna
   abren a la derecha; sus etiquetas van a la izquierda.
 
@@ -226,9 +243,11 @@ Implementado en los 14 tipos de Refrigeradores; referencia visual: French Door.
   Parejas, Glass Door), `manija: "media" | "larga" | "superior"`, `cristal` con
   marco ancho (interior iluminado aun cerrado). Proporciones según foto real de
   referencia (Parejas = dos columnas de 36″, casi cuadradas).
-- **Panelar** (`panelable` en el aparato y en la puerta; hoy Columna y Empotrado):
-  botón sobre la hoja derecha de la alacena derecha que cambia el frente de acero por panel del mismo material de los
-  gabinetes con jaladera larga dorada; también en el modal.
+- **Panelar** (`panelable` en el aparato y en cada puerta/cajón; hoy Columna, Empotrado,
+  French Door, Bottom Mount, Glass Door y Bajo cubierta): botón sobre la alacena derecha,
+  anclado por su borde derecho para que "Ver en acero" no se corte, que cambia el frente
+  de acero por panel del mismo material de los gabinetes con jaladera dorada (vertical
+  en puertas, horizontal en cajones); también en el modal.
 - El encuadre del modal crece con la puerta más ancha (sobresale ~66 % al abrir).
   Mientras el modal está abierto, la tarjeta de origen no anima (`.tfk-quieta`):
   el velo es translúcido y se veía cerrarse detrás (doble animación).
@@ -238,3 +257,23 @@ Implementado en los 14 tipos de Refrigeradores; referencia visual: French Door.
 **Para una categoría nueva:** añadir su entrada a `APARATOS` con la misma
 `diagrama` key de la taxonomía; si necesita otra mecánica (quemadores, tapas,
 flujo de aire), sumar un tipo de pieza al generador en vez de dibujar a mano.
+
+### Cocción (2026-10-20) — `components/IlustracionCoccion.tsx`
+
+Las 49 fichas de Cocción (Estufas, Parrillas, Hornos, Microondas, Campanas, Cajones y
+Cafeteras) usan escenas propias con los mismos acabados de Refrigeración (reutiliza
+`TramoCubierta`, `Despensa`, `Luces`, `Puertas`… exportados de `IlustracionTipo`). La
+ficha las pide con `ilustracion` en la taxonomía (misma key que `diagrama`).
+
+| Familia | Escena | Animación (hover / vista derecha del modal) | Estados del modal |
+|---|---|---|---|
+| Estufas | cocina en alzado con campana | flama azul en los quemadores + el horno se abre | Apagado · Encendido |
+| Parrillas | cubierta en perspectiva (cerca) | gas: corona de flama azul · inducción: zonas azul claro · vitro: rojo · teppanyaki: calor · extracción: aire que baja | Apagado · Encendido |
+| Hornos | columna de carpintería | la puerta se abate (interior iluminado); convección: ventilador girando; vapor: vapor; multifunción: grill al rojo; French Door: dos puertas laterales | Cerrado · Abierto |
+| Microondas | barra, columna, sobre la estufa o cajón en isla | puerta lateral, puerta abatible (speed oven) o cajón que sale | Cerrado · Abierto |
+| Cajones | columna bajo el horno | el cajón sale con platos calientes o la bolsa al vacío | Cerrado · Abierto |
+| Campanas | pared (sobre estufa) o isla | luz LED encendida + aire subiendo a la campana; slider se extiende; retráctil sube desde la isla | Apagado · Encendido |
+| Cafeteras | barra o columna | pantalla encendida + café que cae y llena la taza | Apagado · Encendido |
+
+Los estados viajan en `data-estados` del `.ilus` y FichaModal los usa como pies de foto.
+Las animaciones (flama, vapor, aire) quedan en pausa en reposo y corren solo encendidas.

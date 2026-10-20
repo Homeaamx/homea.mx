@@ -27,6 +27,10 @@ export interface FichaFiltro {
   grupo: GrupoFicha;
   /** Key del diagrama SVG en components/FiltroDiagrama.tsx (fallback: "generic"). */
   diagrama: string;
+  /** Escena ilustrada de components/IlustracionTipo.tsx cuando no coincide con
+   *  `diagrama` (p.ej. Congeladores "de-piso" → "cong-de-piso"). Con este campo la
+   *  tarjeta usa la ilustración en cualquier grupo (Refrigeración, 2026-10-19). */
+  ilustracion?: string;
   /** UNA oración concreta y útil: qué es + para quién (siempre visible). */
   descripcion: string;
   /** Puntos clave revelados al hover, separados por "·": "Gas o inducción · 220 V". */
@@ -67,8 +71,22 @@ export interface Subcategoria2 {
   etiquetasGrupos?: Partial<Record<GrupoFicha, string>>;
   /** Página de filtros de este tipo de producto (cuando `filtros` tiene varios). */
   rutaFiltros?: string;
+  /** Dónde se ven sus productos en la tienda (/productos/…?tipo=… o /marcas/<slug>
+   *  si solo va en PDF): botón "Ver productos" y tarjeta de la portada. */
+  tienda?: string;
   /** Filtros que subdividen este tipo de producto. */
   filtros?: FiltroProducto[];
+  /** Tarjeta del índice de la Subcategoría 1 (portada de guías, Carla 2026-10-19):
+   *  foto del tipo (la misma del slider de Productos) y una línea de resumen.
+   *  Con todas las Subcategorías 2 con tarjeta, la página usa la portada nueva. */
+  tarjeta?: {
+    imagen: string;
+    resumen: string;
+    /** Foto de producto en ambiente (llena el cuadro); sin esto, packshot sobre greige. */
+    ambiente?: boolean;
+    /** object-position del recorte en ambiente (p.ej. "center 70%"). */
+    pos?: string;
+  };
 }
 
 /**
@@ -85,6 +103,10 @@ export interface Subcategoria1 {
   subcategorias2?: Subcategoria2[];
   // — rama de 2 niveles (esLeaf:true) —
   filtro?: string;
+  /** Igual que en Subcategoría 2 (leaves de las macros de 2 niveles). */
+  tienda?: string;
+  /** Tarjeta de la portada de guías de su macro (Electrodomésticos menores). */
+  tarjeta?: Subcategoria2["tarjeta"];
 }
 
 export interface Macrocategoria {

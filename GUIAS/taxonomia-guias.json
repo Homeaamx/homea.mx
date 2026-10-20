@@ -223,9 +223,9 @@
                   "ficha": {
                     "grupo": "estilo",
                     "diagrama": "cuatro-puertas",
-                    "descripcion": "French door con un cajón intermedio de temperatura ajustable (zona flex) además del congelador inferior.",
-                    "specs": "Ancho 36″ · Cajón flex · Congelador abajo",
-                    "detalle": "Entre el compartimento fresco y el congelador agrega un cajón con control propio que trabaja como zona de bebidas, de carnes o como congelador, según el modelo. Permite tomar lo de uso frecuente sin abrir el compartimento principal.",
+                    "descripcion": "Dos puertas arriba para lo fresco y dos abajo para el congelador, cada par con su propio control de temperatura.",
+                    "specs": "Ancho 33–36″ · Puertas cruzadas · Congelador abajo",
+                    "detalle": "Las cuatro medias puertas abren en poco espacio y solo dejan salir el frío de la zona que usas. Arriba van repisas y cajones de humedad controlada; abajo, el congelador dividido en dos. Según el modelo, una de las puertas inferiores se convierte en refrigerador y la izquierda lleva despachador de agua.",
                     "catalogo": "/productos/cocina-y-bar/refrigeracion/refrigeradores?f=4-puertas"
                   }
                 },
@@ -253,7 +253,14 @@
                     "catalogo": "/productos/cocina-y-bar/refrigeracion/refrigeradores?f=bajo-cubierta"
                   }
                 }
-              ]
+              ],
+              "tarjeta": {
+                "imagen": "/assets/photos/refrigeradores-thermador-columnas-acero-cava-cocina.webp",
+                "ambiente": true,
+                "pos": "center 50%",
+                "resumen": "Integrado, empotrable o de columnas: cómo elegir el ideal para tu cocina."
+              },
+              "tienda": "/productos/cocina-y-bar/refrigeracion/refrigeradores"
             },
             {
               "nombre": "Congeladores",
@@ -267,6 +274,7 @@
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "de-piso",
+                    "ilustracion": "cong-de-piso",
                     "descripcion": "Congelador vertical de instalación libre con repisas y cajones: acceso frontal ordenado sin agacharse a un arcón.",
                     "specs": "Instalación libre · Acceso frontal · Holgura de ventilación",
                     "detalle": "El formato vertical organiza el congelado en repisas y cajones con acceso frontal, como un refrigerador. Necesita holgura lateral y trasera para ventilar y un contacto de 127 V. Pierde algo más de frío al abrir que un arcón, a cambio de ver y alcanzar todo sin mover el contenido.",
@@ -279,6 +287,7 @@
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "empotrado",
+                    "ilustracion": "cong-empotrado",
                     "descripcion": "Columna o equipo built-in de congelación que queda a ras del mueble y ventila por el zoclo frontal.",
                     "specs": "Anchos 18–36″ · Panelable · Combinable",
                     "detalle": "Se instala en un nicho a medida, solo o junto a una columna de refrigeración con el kit de unión del fabricante. Ventila por el frente, admite panel o frente de acero y muchos modelos integran fábrica de hielos, por lo que suelen requerir toma de agua.",
@@ -291,6 +300,7 @@
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "cong-horizontal",
+                    "ilustracion": "cong-horizontal",
                     "descripcion": "Arcón con apertura superior: el aire frío no escapa al abrir, lo que da temperatura estable y bajo consumo.",
                     "specs": "Apertura superior · Máximo volumen · Bajo consumo",
                     "detalle": "El aire frío es más pesado y en un arcón permanece dentro al abrir la tapa: la temperatura es más estable y el consumo menor que en un vertical de la misma capacidad. Es ideal para almacenar volumen y piezas grandes; su contra es el acceso desde arriba, que pide canastas para ordenar.",
@@ -298,28 +308,105 @@
                   }
                 },
                 {
-                  "nombre": "Bajo cubierta",
+                  "nombre": "Bajo cubierta / Cajones congelantes",
                   "filtro": "/productos/congeladores/?f=bajo-cubierta",
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "bajo-cubierta",
-                    "descripcion": "Congelador de 34″ de alto con ventilación frontal para instalarse bajo la cubierta del bar o la isla.",
-                    "specs": "Alto 34″ · Ventilación frontal · Barra o exterior",
+                    "ilustracion": "cong-bajo-cubierta",
+                    "descripcion": "Cajones fríos o congelador de 34″ de alto con ventilación frontal para instalarse bajo la cubierta del bar o la isla.",
+                    "specs": "Alto 34″ · Cajones de extracción total · Panelable",
                     "detalle": "Igual que los refrigeradores undercounter, ventila por el frente y se empotra sin holgura lateral. Funciona como congelador de apoyo junto al área de preparación o el bar; para cocinas exteriores debe ser un modelo certificado para intemperie.",
                     "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=congeladores&filtro=instalacion:bajo-cubierta"
                   }
                 }
-              ]
+              ],
+              "tarjeta": {
+                "imagen": "/assets/photos/congelador-thermador-despachador-hielo-agua.webp",
+                "ambiente": true,
+                "pos": "center 50%",
+                "resumen": "Verticales, horizontales, empotrados y bajo cubierta para cada necesidad."
+              },
+              "tienda": "/productos/cocina-y-bar/refrigeracion?tipo=congeladores"
             },
             {
               "nombre": "Centros de bebida",
               "slug": "centros-de-bebida",
-              "filtro": "/productos/centros-de-bebida/"
+              "filtro": "/productos/centros-de-bebida/",
+              "rutaFiltros": "/guias/cocina-y-bar/refrigeracion/centros-de-bebida",
+              "filtros": [
+                {
+                  "nombre": "De piso",
+                  "filtro": "/productos/centros-de-bebida/?f=de-piso",
+                  "ficha": {
+                    "grupo": "tipo",
+                    "diagrama": "de-piso",
+                    "ilustracion": "cb-de-piso",
+                    "descripcion": "Centro de bebidas de instalación libre con gabinete terminado: va donde haga falta, sin nicho ni obra.",
+                    "specs": "Instalación libre · Acero o panel · Sin obra",
+                    "detalle": "Los modelos de piso traen gabinete terminado en sus costados, por eso pueden ir al final de un mueble, en una oficina o en una terraza techada. Respeta la holgura de ventilación que indique el fabricante y ubícalo cerca de un contacto de 127 V. Algunos admiten panel de carpintería para integrarse al mobiliario.",
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=centros-de-bebida&filtro=instalacion:de-piso"
+                  }
+                },
+                {
+                  "nombre": "Empotrado",
+                  "filtro": "/productos/centros-de-bebida/?f=empotrado",
+                  "ficha": {
+                    "grupo": "tipo",
+                    "diagrama": "bajo-cubierta",
+                    "ilustracion": "cb-empotrado",
+                    "descripcion": "Se empotra bajo la cubierta a ras del mueble y ventila por el zoclo frontal: bebidas a la mano en barra, isla o cocina.",
+                    "specs": "Bajo cubierta · Ventilación frontal · Panelable",
+                    "detalle": "Los centros de bebidas empotrables (undercounter) miden 34″ de alto y de 15″ a 24″ de ancho para entrar bajo una cubierta estándar. Ventilan por el frente, así que no necesitan holgura lateral, y la mayoría admite un panel de carpintería alrededor del vidrio para quedar integrados al mueble.",
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=centros-de-bebida&filtro=instalacion:empotrado"
+                  }
+                },
+                {
+                  "nombre": "Puerta de cristal",
+                  "filtro": "/productos/centros-de-bebida/?f=puerta-de-cristal",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "glass-door",
+                    "ilustracion": "cb-cristal",
+                    "descripcion": "Vidrio aislante con iluminación LED: las bebidas quedan a la vista y se sabe qué hay sin abrir.",
+                    "specs": "Vidrio aislante · Luz LED · Exhibición",
+                    "detalle": "El vidrio de doble panel con filtro UV deja ver el contenido sin abrir la puerta, lo que conserva el frío y luce en barras y áreas de entretenimiento. Las repisas suelen ser ajustables o deslizables para combinar botellas y latas.",
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=centros-de-bebida&filtro=diseno:puerta-de-cristal"
+                  }
+                },
+                {
+                  "nombre": "Puerta sólida",
+                  "filtro": "/productos/centros-de-bebida/?f=puerta-solida",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "una-puerta",
+                    "ilustracion": "cb-solida",
+                    "descripcion": "Puerta de acero sin vidrio que aísla mejor del sol y el calor: la opción para cocinas exteriores.",
+                    "specs": "Acero inoxidable · Exterior · Mayor aislamiento",
+                    "detalle": "Una puerta sólida conserva mejor la temperatura y no deja pasar la luz, por eso es la indicada para terrazas y cocinas al aire libre. Para exterior, el equipo debe estar certificado para intemperie y, de preferencia, contar con cerradura.",
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=centros-de-bebida&filtro=diseno:puerta-solida"
+                  }
+                }
+              ],
+              "tarjeta": {
+                "imagen": "/assets/photos/prod-hoshizaki.webp",
+                "ambiente": true,
+                "pos": "center 78%",
+                "resumen": "Enfriadores y soluciones para bebidas, bar y entretenimiento."
+              },
+              "tienda": "/productos/cocina-y-bar/refrigeracion?tipo=centros-de-bebida"
             },
             {
               "nombre": "Frigobares",
               "slug": "frigobares",
-              "filtro": "/productos/frigobares/"
+              "filtro": "/productos/frigobares/",
+              "tarjeta": {
+                "imagen": "/assets/photos/frigobar-mabe-compacto-cocina-pequena.webp",
+                "ambiente": true,
+                "pos": "100% 50%",
+                "resumen": "Opciones compactas para hogar, oficina o proyectos de hospitalidad."
+              },
+              "tienda": "/productos/cocina-y-bar/refrigeracion?tipo=frigobares"
             },
             {
               "nombre": "Máquinas de hielo",
@@ -332,6 +419,7 @@
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "hielo-empotrable",
+                    "ilustracion": "hielo-empotrable",
                     "descripcion": "Máquina bajo cubierta de 15–18″ que produce y almacena hielo continuo; requiere toma de agua y drenaje o bomba.",
                     "specs": "Toma de agua · Drenaje o bomba · Ventilación frontal",
                     "detalle": "Produce hielo de forma continua y lo guarda en su depósito; el agua de deshielo y de purga sale por un drenaje por gravedad o, si no hay desagüe abajo, con bomba de drenaje. Se instala bajo la cubierta con ventilación frontal, y un filtro de agua mejora la claridad y el sabor del hielo.",
@@ -344,6 +432,7 @@
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "hielo-de-piso",
+                    "ilustracion": "hielo-de-piso",
                     "descripcion": "Unidad independiente de mayor producción y almacenamiento, para servicio constante o eventos.",
                     "specs": "Alta producción · Toma de agua · Drenaje",
                     "detalle": "Las máquinas de piso producen y almacenan más hielo al día que las de empotre, por eso se usan en bares, terrazas o casas con mucho servicio. Requieren toma de agua, salida a drenaje y el espacio de ventilación que indique el fabricante.",
@@ -356,6 +445,7 @@
                   "ficha": {
                     "grupo": "estilo",
                     "diagrama": "hielo-acero",
+                    "ilustracion": "hielo-acero",
                     "descripcion": "Frente de acero inoxidable de grado profesional, resistente a la humedad del bar y fácil de limpiar.",
                     "specs": "Acero inoxidable · Interior o exterior",
                     "detalle": "El frente de acero combina con el equipamiento profesional y resiste mejor la humedad. Para exterior, además del acero, el modelo debe estar certificado para intemperie.",
@@ -368,6 +458,7 @@
                   "ficha": {
                     "grupo": "estilo",
                     "diagrama": "hielo-panelable",
+                    "ilustracion": "hielo-panelable",
                     "descripcion": "Frente preparado para recibir el panel de carpintería y quedar oculta dentro del mueble.",
                     "specs": "Panel de carpintería · Integración total",
                     "detalle": "El equipo llega sin frente decorativo y se le monta un panel del mismo material de los muebles, con las medidas y el peso máximo que indica el fabricante. El carpintero lo fabrica con la plantilla de la ficha técnica.",
@@ -378,7 +469,14 @@
               "rutaFiltros": "/guias/cocina-y-bar/refrigeracion/maquinas-de-hielo",
               "etiquetasGrupos": {
                 "estilo": "Acabado"
-              }
+              },
+              "tarjeta": {
+                "imagen": "/assets/photos/maquina-de-hielo-scotsman-cubos-gourmet.webp",
+                "ambiente": true,
+                "pos": "center 50%",
+                "resumen": "Producción, capacidad y consideraciones de instalación."
+              },
+              "tienda": "/productos/cocina-y-bar/refrigeracion?tipo=maquinas-de-hielo"
             },
             {
               "nombre": "Cavas de vino",
@@ -391,6 +489,7 @@
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "cava-acero",
+                    "ilustracion": "cava-acero",
                     "descripcion": "Puerta sólida sin vidrio: bloquea por completo la luz y aísla mejor, ideal para guarda prolongada.",
                     "specs": "Sin luz · Mayor aislamiento · Guarda larga",
                     "detalle": "La luz —sobre todo la UV— y las variaciones de temperatura son lo que más afecta al vino en guarda. Una puerta sólida elimina la exposición a la luz y aísla mejor que el vidrio; a cambio, la colección no queda a la vista.",
@@ -403,17 +502,64 @@
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "cava-vidrio",
+                    "ilustracion": "cava-vidrio",
                     "descripcion": "Vidrio de doble o triple panel con filtro UV: deja ver la colección sin abrir y limita el daño por luz.",
                     "specs": "Vidrio con filtro UV · Exhibición · 1 a 3 zonas",
                     "detalle": "El vidrio aislante con tratamiento UV permite exhibir las botellas sin abrir la puerta. Para guarda larga conviene mantener la iluminación apagada. Revisa también las zonas: una para guarda, dos o tres para servir tintos y blancos a su temperatura.",
                     "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=cavas-de-vino&filtro=puerta:vidrio"
+                  }
+                },
+                {
+                  "nombre": "Bajo cubierta",
+                  "filtro": "/productos/cavas-de-vino/?f=bajo-cubierta",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "bajo-cubierta",
+                    "ilustracion": "bajo-cubierta",
+                    "descripcion": "Cava de 34″ de alto que se empotra bajo la cubierta y ventila por el frente: el vino a la mano en barra o isla.",
+                    "specs": "Alto 34″ · Ventilación frontal · Panelable",
+                    "detalle": "Las cavas undercounter miden de 15″ a 24″ de ancho para entrar bajo una cubierta estándar. Ventilan por el zoclo frontal, así que no necesitan holgura lateral, y muchas admiten panel de carpintería alrededor del vidrio. Revisa las zonas: una para guarda o dos para servir tintos y blancos a su temperatura.",
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=cavas-de-vino&filtro=diseno:bajo-cubierta"
+                  }
+                },
+                {
+                  "nombre": "De pared",
+                  "filtro": "/productos/cavas-de-vino/?f=de-pared",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "cava-vidrio",
+                    "ilustracion": "cava-pared",
+                    "descripcion": "Cava compacta que se empotra en columna, a la altura de la vista, en el mismo hueco que un horno.",
+                    "specs": "Empotre en columna · A la altura de la vista · Control táctil",
+                    "detalle": "Las cavas de pared se instalan en un nicho de columna de 45 o 60 cm de alto, junto a hornos o cafeteras, para alinear frentes y tener las botellas a la vista sin agacharse. Ventilan por el frente y guardan de 18 a 30 botellas en repisas de madera deslizables.",
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=cavas-de-vino&filtro=diseno:de-pared"
+                  }
+                },
+                {
+                  "nombre": "Columna (Piso-techo)",
+                  "filtro": "/productos/cavas-de-vino/?f=columna",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "cava-vidrio",
+                    "ilustracion": "cava-columna",
+                    "descripcion": "Torre de piso a techo para la colección completa: hasta tres zonas de temperatura y panel de carpintería.",
+                    "specs": "Piso a techo · Hasta 3 zonas · Panelable",
+                    "detalle": "Las columnas de vino de 18″ a 30″ de ancho se empotran a ras del mueble, solas o junto a una columna de refrigeración con el kit de unión. Guardan de 80 a más de 140 botellas y separan la guarda del servicio en zonas independientes; la puerta de vidrio con filtro UV puede recibir marco de carpintería.",
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=cavas-de-vino&filtro=diseno:columna&filtro=diseno:piso-techo"
                   }
                 }
               ],
               "rutaFiltros": "/guias/cocina-y-bar/refrigeracion/cavas-de-vino",
               "etiquetasGrupos": {
                 "tipo": "Puerta"
-              }
+              },
+              "tarjeta": {
+                "imagen": "/assets/photos/cava-de-vino-sub-zero-bajo-cubierta-abierta.webp",
+                "ambiente": true,
+                "pos": "center 72%",
+                "resumen": "Temperatura, capacidad y estilos de instalación."
+              },
+              "tienda": "/productos/cocina-y-bar/refrigeracion?tipo=cavas-de-vino"
             },
             {
               "nombre": "Cajones refrigerantes",
@@ -426,6 +572,7 @@
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "cajones-refrigerantes",
+                    "ilustracion": "cajones-refrigerantes",
                     "descripcion": "Uno o dos cajones bajo cubierta que refrigeran con control propio: ingredientes a la mano en la zona de preparación.",
                     "specs": "Bajo cubierta · Extracción total · Panelable",
                     "detalle": "Se empotran bajo la cubierta como un mueble más, con correderas de extracción total y control de temperatura por cajón. Se colocan donde se prepara o se sirve para no cruzar la cocina, y suelen admitir panel de carpintería.",
@@ -438,22 +585,63 @@
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "cajones-congeladores",
+                    "ilustracion": "cajones-congeladores",
                     "descripcion": "Cajones bajo cubierta que congelan: porciones, hielo y básicos junto al área de trabajo.",
                     "specs": "Bajo cubierta · Congelación · Panelable",
                     "detalle": "Funcionan como un congelador compacto en formato cajón, a la altura de la cubierta. Algunos modelos combinan un cajón refrigerante con uno congelador o incluyen fábrica de hielos, lo que requiere toma de agua.",
                     "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=cajones-refrigerantes&filtro=funcionamiento:todo-congelador"
+                  }
+                },
+                {
+                  "nombre": "Congeladores con Fábrica de Hielos",
+                  "filtro": "/productos/cajones-refrigerantes/?f=cajones-congeladores-con-fabrica-de-hielos",
+                  "ficha": {
+                    "grupo": "tipo",
+                    "diagrama": "cajones-congeladores",
+                    "ilustracion": "cajones-congelador-hielos",
+                    "descripcion": "Cajones bajo cubierta que congelan y además producen hielo: el cajón superior lo fabrica y lo guarda listo para servir.",
+                    "specs": "Bajo cubierta · Congelación · Fábrica de hielos",
+                    "detalle": "Los dos cajones trabajan como congelador y uno de ellos integra la fábrica de hielos, que se llena sola y mantiene el depósito con cubos. Es ideal junto al bar o la isla. Requiere toma de agua y, según el modelo, admite panel de carpintería.",
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=cajones-refrigerantes&filtro=funcionamiento:todo-congelador-con-fabrica-de-hielos"
+                  }
+                },
+                {
+                  "nombre": "Combinados con Fábrica de Hielos",
+                  "filtro": "/productos/cajones-refrigerantes/?f=cajones-combinados-con-fabrica-de-hielos",
+                  "ficha": {
+                    "grupo": "tipo",
+                    "diagrama": "cajones-congeladores",
+                    "ilustracion": "cajones-combinados",
+                    "descripcion": "Un cajón refrigerante y uno congelador con fábrica de hielos en el mismo módulo bajo cubierta.",
+                    "specs": "Bajo cubierta · Refrigera y congela · Fábrica de hielos",
+                    "detalle": "Arriba refrigera bebidas e ingredientes y abajo congela y produce hielo, cada cajón con su propio control de temperatura. Resuelve una barra o una cocina secundaria en un solo hueco. Requiere toma de agua y, según el modelo, admite panel de carpintería.",
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=cajones-refrigerantes&filtro=funcionamiento:combinado-con-fabrica-de-hielos"
                   }
                 }
               ],
               "rutaFiltros": "/guias/cocina-y-bar/refrigeracion/cajones-refrigerantes",
               "etiquetasGrupos": {
                 "tipo": "Tipo de funcionamiento"
-              }
+              },
+              "tarjeta": {
+                "imagen": "/assets/photos/cajones-refrigerantes-sub-zero-cajon-abierto-verduras.webp",
+                "ambiente": true,
+                "pos": "center 50%",
+                "resumen": "Cajones refrigerantes y congeladores para más comodidad y orden."
+              },
+              "tienda": "/productos/cocina-y-bar/refrigeracion?tipo=cajones-refrigerantes"
             },
             {
               "nombre": "Accesorios de refrigeración",
               "slug": "accesorios-refrigeracion",
-              "filtro": "/productos/accesorios-refrigeracion/"
+              "filtro": "/productos/accesorios-refrigeracion/",
+              "tarjeta": {
+                "imagen": "/assets/photos/accesorios-refrigeracion-cava-bajo-cubierta-cocina-madera.webp",
+                "ambiente": true,
+                "pos": "center 62%",
+                "resumen": "Manijas, kits de unión y complementos para un mejor desempeño."
+              },
+              "tienda": "/productos/cocina-y-bar/refrigeracion?tipo=accesorios-refrigeracion"
             }
           ]
         },
@@ -477,7 +665,8 @@
                     "descripcion": "Estufa estilo profesional: quemadores sellados de alto BTU, parrillas continuas de hierro y horno de gran capacidad.",
                     "specs": "Anchos 30–60″ · Alto BTU · Campana proporcional",
                     "detalle": "Combinan quemadores de 15,000 a 25,000 BTU, parrillas continuas de hierro fundido y hornos amplios, a gas, eléctricos o duales. Por su potencia piden una campana con CFM proporcional, gas con regulador calibrado y, en modelos duales o con horno eléctrico, contacto de 220 V.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=estufas&filtro=instalacion:profesional"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=estufas&filtro=instalacion:profesional",
+                    "ilustracion": "estufa-profesional"
                   }
                 },
                 {
@@ -489,7 +678,8 @@
                     "descripcion": "Estufa slide-in sin respaldo que se desliza entre muebles y queda a ras de la cubierta, con controles al frente.",
                     "specs": "Anchos 30–36″ · Sin respaldo · Controles al frente",
                     "detalle": "Al no tener panel trasero, el muro o la cubierta quedan a la vista detrás de la estufa y los controles van al frente. Se coloca entre dos muebles con cubierta a la misma altura y requiere su soporte antivuelco. Puede ser de gas, eléctrica o de inducción; las eléctricas y de inducción piden 220 V.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=estufas&filtro=instalacion:empotre"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=estufas&filtro=instalacion:empotre",
+                    "ilustracion": "estufa-empotre"
                   }
                 },
                 {
@@ -501,11 +691,19 @@
                     "descripcion": "Estufa freestanding con respaldo y controles atrás: terminada por los costados para quedar sola, sin obra.",
                     "specs": "Anchos 20–36″ · Con respaldo · Sin obra",
                     "detalle": "Es la estufa de instalación libre: panel de control trasero y costados terminados, así que puede ir sola o entre muebles. Solo necesita la toma de gas con regulador o el contacto que indique el modelo, y su soporte antivuelco.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=estufas&filtro=instalacion:de-piso"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=estufas&filtro=instalacion:de-piso",
+                    "ilustracion": "estufa-de-piso"
                   }
                 }
               ],
-              "rutaFiltros": "/guias/cocina-y-bar/coccion/estufas"
+              "rutaFiltros": "/guias/cocina-y-bar/coccion/estufas",
+              "tarjeta": {
+                "imagen": "/assets/photos/estufa-wolf-perillas-rojas-cocina-roja.webp",
+                "ambiente": true,
+                "pos": "center 60%",
+                "resumen": "Profesionales, de empotre o de piso: anchos, quemadores y hornos."
+              },
+              "tienda": "/productos/cocina-y-bar/coccion?tipo=estufas"
             },
             {
               "nombre": "Parrillas",
@@ -524,7 +722,8 @@
                     "descripcion": "Parrilla de empotre con quemadores de alto BTU y rejillas continuas de hierro, con frente de controles.",
                     "specs": "Anchos 36–48″ · Alto BTU · Campana proporcional",
                     "detalle": "Las parrillas profesionales (rangetops) concentran quemadores de alto poder, a veces con plancha o grill integrados, y se empotran en la cubierta con frente de perillas. Requieren campana con CFM acorde a su potencia total, gas con regulador calibrado y, si llevan funciones eléctricas, el contacto de la ficha técnica.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=profesional"
+                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=profesional",
+                    "ilustracion": "parrilla-profesional"
                   }
                 },
                 {
@@ -536,7 +735,8 @@
                     "descripcion": "Placa de sobreponer que se asienta en el corte de la cubierta con marco perimetral visible.",
                     "specs": "Anchos 24–36″ · Corte en cubierta · Gas, vitro o inducción",
                     "detalle": "Es la parrilla de empotre estándar: se coloca en un corte de la cubierta hecho con la plantilla del fabricante y el marco cubre el borde. Puede ser de gas, vitrocerámica o inducción; bajo la cubierta necesita espacio libre para conexiones y ventilación.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=tradicional"
+                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=tradicional",
+                    "ilustracion": "parrilla-tradicional"
                   }
                 },
                 {
@@ -548,7 +748,8 @@
                     "descripcion": "Quemadores sellados de gas sobre rejillas de hierro: respuesta inmediata de la flama y cualquier recipiente.",
                     "specs": "Gas natural o LP · Regulador calibrado · Cualquier olla",
                     "detalle": "La potencia se mide en BTU por quemador; los modelos de gama alta combinan quemadores de alto poder con uno de fuego lento (simmer). Hay que confirmar el tipo de gas —natural o LP— porque cambia los inyectores, y contar con regulador calibrado y llave de paso.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=gas"
+                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=gas",
+                    "ilustracion": "parrilla-gas"
                   }
                 },
                 {
@@ -560,7 +761,8 @@
                     "descripcion": "Resistencias radiantes bajo una placa de vitrocerámica lisa: superficie continua para recipientes de fondo plano.",
                     "specs": "220 V · Fondo plano · Calor residual",
                     "detalle": "Las zonas calientan por radiación a través del cristal, así que la placa se calienta y conserva calor después de apagar. Admite cualquier recipiente de fondo plano. Requiere circuito dedicado de 220 V y corte de cubierta según plantilla.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=vitroceramica"
+                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=vitroceramica",
+                    "ilustracion": "parrilla-vitroceramica"
                   }
                 },
                 {
@@ -572,7 +774,8 @@
                     "descripcion": "Campo electromagnético que calienta directo el recipiente: respuesta inmediata y control fino, con la placa casi fría.",
                     "specs": "220 V · Ollas ferromagnéticas · Máxima eficiencia",
                     "detalle": "La bobina bajo el cristal induce corriente en la base del recipiente, que es el que se calienta: es la tecnología más rápida y eficiente y la superficie solo se entibia por contacto. Requiere ollas ferromagnéticas (si un imán se pega a la base, funcionan) y un circuito dedicado de 220 V del calibre que indique la ficha.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=induccion"
+                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=induccion",
+                    "ilustracion": "parrilla-induccion"
                   }
                 },
                 {
@@ -584,7 +787,8 @@
                     "descripcion": "Placa de inducción con extractor descendente integrado: capta el vapor en la superficie y elimina la campana.",
                     "specs": "220 V · Sin campana · Ducto o recirculación",
                     "detalle": "El extractor central jala el vapor hacia abajo, a través del mueble, hacia un ducto de salida o un filtro de recirculación. El gabinete inferior cede espacio al motor y a la ductería, y el proyecto debe prever esa ruta. Requiere 220 V y ollas para inducción.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=induccion-con-sistema-de-extraccion"
+                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=induccion-con-sistema-de-extraccion",
+                    "ilustracion": "parrilla-induccion-extraccion"
                   }
                 },
                 {
@@ -596,7 +800,8 @@
                     "descripcion": "Quemadores de gas y zonas de inducción en una misma placa: flama directa y control eléctrico en una sola cubierta.",
                     "specs": "Gas + 220 V · Dos tecnologías · Ollas de inducción",
                     "detalle": "Integra en un solo cristal o marco quemadores de gas y zonas de inducción, por lo que necesita ambas conexiones: gas con regulador y circuito de 220 V. Las zonas de inducción piden recipientes ferromagnéticos; los quemadores aceptan cualquiera.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=hibrida-gas-induccion"
+                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=hibrida-gas-induccion",
+                    "ilustracion": "parrilla-hibrida"
                   }
                 },
                 {
@@ -608,7 +813,8 @@
                     "descripcion": "Quemadores individuales instalados directo en la cubierta de piedra o acero, sin placa ni marco (sistema tipo Pitt Cooking).",
                     "specs": "Gas · Cubierta perforada · Distribución libre",
                     "detalle": "Cada quemador se monta en una perforación de la cubierta y la propia superficie se vuelve el área de cocción. La distribución se diseña a la medida, pero la cubierta debe resistir calor (piedra natural, porcelánico o acero) y el corte lo hace el marmolista con la plantilla del fabricante.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=submontar"
+                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=submontar",
+                    "ilustracion": "parrilla-submontar"
                   }
                 },
                 {
@@ -620,7 +826,8 @@
                     "descripcion": "Inducción instalada debajo de una cubierta porcelánica compatible: se cocina sobre la piedra, sin aparato a la vista.",
                     "specs": "Inducción oculta · Cubierta compatible · 220 V",
                     "detalle": "La unidad de inducción se fija bajo la cubierta y calienta el recipiente a través del material, que debe ser un porcelánico o piedra sinterizada del espesor que indica el fabricante (tipo Invisacook). Las zonas se marcan en la superficie y se requiere 220 V. No funciona con cualquier cubierta: se valida antes del proyecto.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=invisible"
+                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=invisible",
+                    "ilustracion": "parrilla-invisible"
                   }
                 },
                 {
@@ -632,11 +839,19 @@
                     "descripcion": "Módulos independientes de 12–15″ —gas, inducción, teppanyaki, grill o extracción— que se combinan en línea.",
                     "specs": "Módulos 12–15″ · Combinables · Gas y/o 220 V",
                     "detalle": "Cada módulo (tipo dominó) es un aparato con su propia conexión y se instalan uno junto a otro para armar la superficie de cocción a la medida. Permiten mezclar tecnologías e incluir un módulo de extracción de superficie; las conexiones de gas y eléctricas se suman por módulo.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=modulares"
+                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=modulares",
+                    "ilustracion": "parrilla-modular"
                   }
                 }
               ],
-              "rutaFiltros": "/guias/cocina-y-bar/coccion/parrillas"
+              "rutaFiltros": "/guias/cocina-y-bar/coccion/parrillas",
+              "tarjeta": {
+                "imagen": "/assets/photos/parrilla-gas-thermador-quemadores-cocina.webp",
+                "ambiente": true,
+                "pos": "45% 50%",
+                "resumen": "Gas, inducción, híbridas y modulares: la superficie ideal para cocinar."
+              },
+              "tienda": "/productos/cocina-y-bar/coccion/parrillas"
             },
             {
               "nombre": "Hornos",
@@ -652,7 +867,8 @@
                     "descripcion": "Ventilador con resistencia propia que recircula el aire caliente: temperatura uniforme en varios niveles a la vez.",
                     "specs": "Ventilador + resistencia · Multinivel · 220 V",
                     "detalle": "En convección verdadera (tercer elemento) un ventilador con resistencia propia mueve el aire caliente por toda la cavidad: reduce los puntos fríos y permite hornear en varias charolas a la vez, a menor temperatura o en menos tiempo. Los hornos eléctricos empotrables suelen requerir 220 V.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=hornos&filtro=horneado:conveccion"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=hornos&filtro=horneado:conveccion",
+                    "ilustracion": "horno-conveccion"
                   }
                 },
                 {
@@ -664,7 +880,8 @@
                     "descripcion": "Generador de vapor que cocina con humedad controlada: conserva textura, jugos y nutrientes.",
                     "specs": "Depósito o toma de agua · Humedad controlada · 220 V",
                     "detalle": "Inyecta vapor a la cavidad para cocinar sin resecar: verduras, pescados, regenerar platillos o fermentar masa. Los combi-vapor suman convección para dorar. Según el modelo, el agua sale de un depósito que se rellena o de una toma fija con drenaje.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=hornos&filtro=funcionamiento:vapor"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=hornos&filtro=funcionamiento:vapor",
+                    "ilustracion": "horno-vapor"
                   }
                 },
                 {
@@ -676,7 +893,8 @@
                     "descripcion": "Una cavidad con varias fuentes de calor —convencional, convección y grill, y según modelo vapor o microondas— combinables.",
                     "specs": "Varias funciones · 1 cavidad · 220 V",
                     "detalle": "Integra resistencias superior e inferior, ventilador y grill, y en algunos modelos vapor o microondas, para combinar modos en un mismo programa. Es la manera de reunir varias tecnologías en el espacio de un solo horno.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=hornos&filtro=funcionamiento:multifuncion"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=hornos&filtro=funcionamiento:multifuncion",
+                    "ilustracion": "horno-multifuncion"
                   }
                 },
                 {
@@ -688,7 +906,8 @@
                     "descripcion": "Una cavidad empotrada a la altura de trabajo, en mueble columna o bajo la cubierta.",
                     "specs": "1 cavidad · Anchos 24–30″ · Empotre",
                     "detalle": "Se instala en columna a la altura de los ojos o bajo la parrilla, y se combina con otro horno, microondas, cajón calentador o cafetera para formar un muro de hornos. Revisa el hueco exacto y la alimentación, normalmente 220 V.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=hornos&filtro=diseno:sencillo"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=hornos&filtro=diseno:sencillo",
+                    "ilustracion": "horno-sencillo"
                   }
                 },
                 {
@@ -700,7 +919,8 @@
                     "descripcion": "Dos cavidades independientes en un mismo equipo, cada una con su temperatura y su función.",
                     "specs": "2 cavidades · Anchos 27–30″ · Circuito 220 V",
                     "detalle": "Permite hornear a dos temperaturas o con dos modos a la vez sin mezclar olores. Ocupa el alto de una columna completa y pide un circuito de 220 V de mayor capacidad que un horno sencillo, según la ficha técnica.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=hornos&filtro=diseno:doble"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=hornos&filtro=diseno:doble",
+                    "ilustracion": "horno-doble"
                   }
                 },
                 {
@@ -712,14 +932,22 @@
                     "descripcion": "Horno con dos puertas de abatimiento lateral que abren a la vez: menos alcance sobre la puerta y mejor acceso.",
                     "specs": "Puertas laterales · Ancho 30″ · Apertura simultánea",
                     "detalle": "Al jalar una manija se abren ambas hojas, que ocupan menos espacio al frente que una puerta abatible hacia abajo. Facilita meter y sacar charolas pesadas, sobre todo en hornos bajo la cubierta o en pasillos angostos.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=hornos&filtro=diseno:french-door"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=hornos&filtro=diseno:french-door",
+                    "ilustracion": "horno-french"
                   }
                 }
               ],
               "rutaFiltros": "/guias/cocina-y-bar/coccion/hornos",
               "etiquetasGrupos": {
                 "tipo": "Tipo de funcionamiento"
-              }
+              },
+              "tarjeta": {
+                "imagen": "/assets/photos/brands/hero/miele-electrodomesticos.webp",
+                "ambiente": true,
+                "pos": "35% 50%",
+                "resumen": "Convección, vapor y multifunción, sencillos, dobles o French Door."
+              },
+              "tienda": "/productos/cocina-y-bar/coccion?tipo=hornos"
             },
             {
               "nombre": "Microondas",
@@ -735,7 +963,8 @@
                     "descripcion": "Microondas sobre la cubierta, conectado a 127 V, sin instalación ni mueble a medida.",
                     "specs": "127 V · Sin instalación · Sobre cubierta",
                     "detalle": "Es la opción más simple: se coloca sobre la cubierta o en una repisa, respetando la ventilación que indica el fabricante. Algunos modelos pueden empotrarse después con un kit de trim compatible.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=microondas&filtro=diseno:de-mesa"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=microondas&filtro=diseno:de-mesa",
+                    "ilustracion": "micro-mesa"
                   }
                 },
                 {
@@ -747,7 +976,8 @@
                     "descripcion": "Microondas built-in que se integra en el mueble columna con frente a ras de los hornos.",
                     "specs": "Empotre en columna · Frente a ras · Hueco exacto",
                     "detalle": "Se diseña para un nicho específico, normalmente en el muro de hornos, con ventilación frontal. Hay que respetar las medidas del hueco y la posición del contacto que marca la ficha técnica.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=microondas&filtro=diseno:empotrado"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=microondas&filtro=diseno:empotrado",
+                    "ilustracion": "micro-empotrable"
                   }
                 },
                 {
@@ -759,7 +989,8 @@
                     "descripcion": "Microondas con convección y grill: calienta, hornea y dora, y funciona como segundo horno.",
                     "specs": "Micro + convección + grill · 2.º horno",
                     "detalle": "Además del magnetrón tiene resistencia y ventilador, así que hornea, gratina o combina modos para cocinar más rápido. En empotre se instala a la altura de los ojos, a menudo sobre o junto al horno principal.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=microondas&filtro=diseno:multifuncion"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=microondas&filtro=diseno:multifuncion",
+                    "ilustracion": "micro-multifuncion"
                   }
                 },
                 {
@@ -771,7 +1002,8 @@
                     "descripcion": "Microondas sobre la estufa con extractor integrado, que trabaja con salida a ducto o recirculación.",
                     "specs": "Sobre estufa · Extracción moderada · Ducto o recirculación",
                     "detalle": "Se instala bajo la alacena, encima de la estufa, y combina microondas y campana. Su caudal es menor que el de una campana dedicada, por eso conviene con estufas de potencia estándar, no profesionales. Saca el aire por ducto o lo recircula con filtro de carbón.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=microondas&filtro=diseno:micro-campana"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=microondas&filtro=diseno:micro-campana",
+                    "ilustracion": "micro-campana"
                   }
                 },
                 {
@@ -783,7 +1015,8 @@
                     "descripcion": "Microondas en formato cajón bajo la cubierta: abre deslizando y se carga desde arriba.",
                     "specs": "Bajo cubierta · Apertura asistida · Hueco exacto",
                     "detalle": "Se empotra bajo la cubierta o en una isla, con apertura motorizada o asistida; se opera desde arriba, sin levantar recipientes calientes a la altura de la cara. Requiere un hueco de medidas exactas y el contacto que indica la ficha.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=microondas&filtro=diseno:de-cajon"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=microondas&filtro=diseno:de-cajon",
+                    "ilustracion": "micro-cajon"
                   }
                 },
                 {
@@ -795,14 +1028,22 @@
                     "descripcion": "Microondas con marco de empotre (trim) que cubre el hueco del mueble y conduce la ventilación al frente.",
                     "specs": "Kit de trim · Empotre en mueble · Ventilación frontal",
                     "detalle": "El trim es un marco de acero que llena el espacio entre el equipo y el nicho y dirige el aire por el frente. Permite empotrar un modelo compatible con acabado de built-in; el kit debe corresponder al modelo y al ancho del hueco.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=microondas&filtro=diseno:con-trim"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=microondas&filtro=diseno:con-trim",
+                    "ilustracion": "micro-trim"
                   }
                 }
               ],
               "rutaFiltros": "/guias/cocina-y-bar/coccion/microondas",
               "etiquetasGrupos": {
                 "tipo": "Diseño"
-              }
+              },
+              "tarjeta": {
+                "imagen": "/assets/photos/microondas-de-cajon-thermador-abierto-detalle.webp",
+                "ambiente": true,
+                "pos": "center 50%",
+                "resumen": "De mesa, empotrables, de cajón o micro-campana: dónde va cada uno."
+              },
+              "tienda": "/productos/cocina-y-bar/coccion?tipo=microondas"
             },
             {
               "nombre": "Campanas",
@@ -818,7 +1059,8 @@
                     "descripcion": "Campana anclada al muro sobre la estufa: el muro guía el humo, por eso capta mejor con menos CFM que una de isla.",
                     "specs": "Al muro · Ancho ≥ estufa · Ducto o recirculación",
                     "detalle": "El muro funciona como barrera y dirige el humo hacia la captación. Debe ser al menos tan ancha como la estufa (idealmente unos 3″ más) e instalarse a la altura que indica el fabricante, normalmente 65–80 cm sobre la cubierta. Puede ser extractora con ducto al exterior o recirculante con filtro de carbón.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=de-pared"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=de-pared",
+                    "ilustracion": "camp-pared"
                   }
                 },
                 {
@@ -830,7 +1072,8 @@
                     "descripcion": "Campana suspendida del techo sobre la isla: sin muro de respaldo, pide más CFM y más ancho que una de pared.",
                     "specs": "Al techo · Más CFM · Ancho ≥ estufa + 6″",
                     "detalle": "Expuesta a corrientes por los cuatro lados, necesita mayor caudal y un ancho mayor que la parrilla para captar igual que una de pared. Se ancla a una estructura en el techo y el ducto sale por el plafón; también hay versiones recirculantes cuando no existe salida.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=de-isla"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=de-isla",
+                    "ilustracion": "camp-isla"
                   }
                 },
                 {
@@ -842,7 +1085,8 @@
                     "descripcion": "Chimenea y cuerpo de campana en un solo prisma de líneas rectas, de pared o de isla.",
                     "specs": "Perfil recto · Pared o isla · Ducto oculto",
                     "detalle": "El cuerpo y el cubreductos forman un volumen rectangular continuo: silueta sobria que se alinea con gabinetes y cubiertas rectas. Existen en pared e isla, con extracción o recirculación.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=rectas"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=rectas",
+                    "ilustracion": "camp-recta"
                   }
                 },
                 {
@@ -854,7 +1098,8 @@
                     "descripcion": "Cubreductos angosto sobre una visera ancha y plana: capta a todo lo ancho de la estufa con un perfil bajo.",
                     "specs": "Visera ancha · Perfil bajo · Pared o isla",
                     "detalle": "La visera plana amplía la superficie de captación sin un cuerpo voluminoso, y el ducto angosto deja más vista libre del muro o la isla. Es la forma más común en campanas contemporáneas de acero.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=t-invertida"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=t-invertida",
+                    "ilustracion": "camp-t-invertida"
                   }
                 },
                 {
@@ -866,7 +1111,8 @@
                     "descripcion": "Visera de vidrio templado alrededor del cuerpo de extracción: retiene el humo y deja la vista despejada.",
                     "specs": "Vidrio templado · Visual ligero · Pared o isla",
                     "detalle": "El cristal templado forma la campana de captación alrededor del motor y los filtros: retiene el humo sin un volumen opaco. Pide limpieza frecuente del vidrio y se elige por diseño en cocinas abiertas.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=de-cristal"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=de-cristal",
+                    "ilustracion": "camp-cristal"
                   }
                 },
                 {
@@ -878,7 +1124,8 @@
                     "descripcion": "Cuerpo inclinado que se estrecha hacia el ducto: la forma tradicional, con buena cámara de contención del humo.",
                     "specs": "Cuerpo inclinado · Alta contención · Estilo clásico",
                     "detalle": "Las paredes inclinadas forman una cámara que contiene el humo mientras el motor lo extrae, lo que mejora la captación en cocinas de uso intenso. Es la forma clásica, frecuente sobre estufas profesionales.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=piramidal"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=piramidal",
+                    "ilustracion": "camp-piramidal"
                   }
                 },
                 {
@@ -890,7 +1137,8 @@
                     "descripcion": "Cuerpo exento —redondo o prismático— suspendido del techo sobre la isla, con iluminación integrada.",
                     "specs": "Campana decorativa · Isla · Suele ser recirculante",
                     "detalle": "Es una campana de isla de volumen compacto que cuelga del techo por cable o tubo; la mayoría trabaja como recirculante con filtro de carbón, aunque hay versiones con ducto. Su superficie de captación es menor que la de una campana tradicional, por eso se elige por diseño y para parrillas de potencia moderada; su iluminación la vuelve también luminaria.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=cilindrica-o-cuadrada"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=cilindrica-o-cuadrada",
+                    "ilustracion": "camp-cilindrica"
                   }
                 },
                 {
@@ -902,7 +1150,8 @@
                     "descripcion": "Solo el grupo de extracción —motor, filtros e iluminación— para montarse dentro de una campana de obra o un mueble.",
                     "specs": "Dentro de mueble · Campana de obra · Ducto o recirculación",
                     "detalle": "El inserto (power pack) se instala dentro de una estructura hecha por el carpintero o el constructor, que es lo que queda a la vista. El hueco debe respetar las medidas del inserto y dejar paso al ducto; su ancho se elige según la superficie de cocción.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=tipo-inserto"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=tipo-inserto",
+                    "ilustracion": "camp-inserto"
                   }
                 },
                 {
@@ -914,7 +1163,8 @@
                     "descripcion": "Campana compacta que se monta bajo la alacena superior, con salida al muro o recirculación.",
                     "specs": "Bajo alacena · Perfil bajo · Potencia estándar",
                     "detalle": "Se atornilla en la base de la alacena y conserva el gabinete sobre la estufa. Su caudal es menor que el de una campana de pared, por eso es adecuada para estufas de potencia estándar.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=bajo-mueble"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=bajo-mueble",
+                    "ilustracion": "camp-bajo-mueble"
                   }
                 },
                 {
@@ -926,7 +1176,8 @@
                     "descripcion": "Campana telescópica integrada bajo la alacena: la visera se extiende al cocinar y se recoge al terminar.",
                     "specs": "Visera extraíble · Bajo alacena · Enciende al abrir",
                     "detalle": "El cuerpo queda oculto dentro del mueble y solo se ve la visera, que al extenderse aumenta la superficie de captación y, en la mayoría de los modelos, enciende el motor. Se instala en una alacena con las medidas que pide el fabricante.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=slider"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=slider",
+                    "ilustracion": "camp-slider"
                   }
                 },
                 {
@@ -938,7 +1189,8 @@
                     "descripcion": "Estructura de extracción sin acabado exterior, diseñada para forrarse con el mismo material de la cocina.",
                     "specs": "Se forra en obra · Acabado a medida · Acceso a filtros",
                     "detalle": "Incluye motor, filtros y armazón; el acabado —madera, yeso o piedra— lo aplica el carpintero o el constructor. Permite que la campana desaparezca en el diseño, respetando las distancias y el acceso a filtros que indica el fabricante.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=para-revestir"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=para-revestir",
+                    "ilustracion": "camp-revestir"
                   }
                 },
                 {
@@ -950,7 +1202,8 @@
                     "descripcion": "Campana empotrada en el plafón, al ras del techo: sin volumen colgante sobre la isla.",
                     "specs": "Al ras del plafón · Alto CFM · Plafón preparado",
                     "detalle": "Se empotra en un hueco del plafón, normalmente sobre una isla. Al quedar más lejos de la superficie de cocción necesita mayor caudal y suele usar motor externo o inline. El plafón debe tener estructura, altura libre y ruta de ducto según el modelo.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=a-techo"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=a-techo",
+                    "ilustracion": "camp-techo"
                   }
                 },
                 {
@@ -962,7 +1215,8 @@
                     "descripcion": "Campana de diseño escultórico, donde la forma y el material pesan tanto como el desempeño de extracción.",
                     "specs": "Campana decorativa · Pared o isla · Revisar CFM",
                     "detalle": "Formas, materiales y acabados especiales —cristal, cobre, colores o piezas tipo lámpara— para que la campana sea el punto focal de la cocina. Conviene verificar su caudal y su ancho de captación frente a la parrilla, porque algunas priorizan la forma sobre la captura.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=decorativas"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=decorativas",
+                    "ilustracion": "camp-decorativa"
                   }
                 },
                 {
@@ -974,7 +1228,8 @@
                     "descripcion": "Extractor descendente (downdraft) que sube desde la cubierta detrás de la parrilla al encenderse y se oculta al terminar.",
                     "specs": "Downdraft · Detrás de la parrilla · Motor bajo cubierta",
                     "detalle": "Capta el vapor a la altura de las ollas y lo baja por el mueble hacia un ducto o un filtro de recirculación. Ocupa espacio del gabinete inferior para la torre y el motor. Rinde mejor con ollas bajas y potencias moderadas que con quemadores profesionales.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=retractiles"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=retractiles",
+                    "ilustracion": "camp-retractil"
                   }
                 },
                 {
@@ -986,7 +1241,8 @@
                     "descripcion": "Campanas de 55″ o más para estufas profesionales o dobles, con motores de alto caudal.",
                     "specs": "Anchos 55–82″ · Alto CFM · Aire de reposición",
                     "detalle": "Una superficie de cocción grande y de alto BTU exige una campana más ancha que la estufa y un caudal elevado. Con caudales altos conviene prever entrada de aire de reposición para que la casa no quede en presión negativa y la campana rinda.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=gran-formato"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=gran-formato",
+                    "ilustracion": "camp-gran-formato"
                   }
                 },
                 {
@@ -998,7 +1254,8 @@
                     "descripcion": "Campana de perfil delgado con repisa superior: extrae y a la vez sirve de superficie de apoyo en el muro.",
                     "specs": "Al muro · Repisa integrada · Perfil bajo",
                     "detalle": "El cuerpo de extracción va bajo una repisa que funciona como apoyo o exhibición. Se instala al muro como una campana de pared, con ducto o recirculación, y su profundidad es menor que la de una campana convencional.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=tipo-repisa"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=tipo-repisa",
+                    "ilustracion": "camp-repisa"
                   }
                 },
                 {
@@ -1010,7 +1267,8 @@
                     "descripcion": "Un solo volumen continuo del techo hasta la altura de captación, sin separación visible entre ducto y campana.",
                     "specs": "Bloque continuo · Isla · Anclaje a techo",
                     "detalle": "El cubreductos y el cuerpo forman una sola pieza, así que la campana se lee como volumen arquitectónico sobre la isla. Por su peso requiere anclaje firme al techo y ruta de ducto por el plafón, o versión recirculante.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=monolith"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=monolith",
+                    "ilustracion": "camp-monolith"
                   }
                 },
                 {
@@ -1022,7 +1280,8 @@
                     "descripcion": "Panel vertical montado al muro detrás de la parrilla que extrae el vapor de frente, a la altura de las ollas.",
                     "specs": "Panel al muro · Extracción frontal · Sin volumen arriba",
                     "detalle": "Sustituye a la campana superior por una superficie vertical con la captación al frente, justo donde sube el vapor, y deja libre el espacio sobre la cubierta. Va en el muro detrás de la parrilla, con la ruta de ducto o el filtro de recirculación que indique el fabricante.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=airwall"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=airwall",
+                    "ilustracion": "camp-airwall"
                   }
                 },
                 {
@@ -1034,7 +1293,8 @@
                     "descripcion": "Módulo de extracción en la cubierta, entre las parrillas modulares, que jala el vapor hacia abajo donde se genera.",
                     "specs": "En la cubierta · Con parrillas modulares · Motor bajo cubierta",
                     "detalle": "Es un módulo del mismo sistema que las parrillas modulares (dominó): se instala entre ellas y extrae hacia abajo a través del mueble, hacia un ducto o un filtro de recirculación. No deja volumen sobre la isla, pero ocupa espacio del gabinete inferior.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=de-superficie"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=de-superficie",
+                    "ilustracion": "camp-superficie"
                   }
                 },
                 {
@@ -1046,11 +1306,19 @@
                     "descripcion": "La extracción va integrada en la placa de inducción: el vapor baja por la cubierta y no hay campana superior.",
                     "specs": "Sin campana · 220 V · Ducto o recirculación",
                     "detalle": "Es la placa de inducción con extractor central: jala el vapor hacia el gabinete inferior y lo saca por ducto o lo recircula con filtro. Requiere 220 V, ollas para inducción y prever el espacio del motor bajo la cubierta.",
-                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=induccion-con-sistema-de-extraccion"
+                    "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=induccion-con-sistema-de-extraccion",
+                    "ilustracion": "camp-induccion-extraccion"
                   }
                 }
               ],
-              "rutaFiltros": "/guias/cocina-y-bar/coccion/campanas"
+              "rutaFiltros": "/guias/cocina-y-bar/coccion/campanas",
+              "tarjeta": {
+                "imagen": "/assets/photos/brands/hero/faber-campanas.webp",
+                "ambiente": true,
+                "pos": "center 40%",
+                "resumen": "De pared, de isla, empotradas o de superficie: extracción para cada cocina."
+              },
+              "tienda": "/productos/cocina-y-bar/coccion/campanas"
             },
             {
               "nombre": "Cajones",
@@ -1066,7 +1334,8 @@
                     "descripcion": "Cajón con resistencia y termostato que mantiene platos y alimentos a temperatura de servicio o leuda masa.",
                     "specs": "Rango 30–80 °C · Bajo horno · Leudar masa",
                     "detalle": "Mantiene alimentos a temperatura de servicio sin seguir cocinándolos, calienta vajilla y, en temperatura baja, sirve para leudar masa o cocciones lentas. Se empotra normalmente bajo un horno de pared o un combi, del mismo ancho, para un frente continuo.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=cajones&filtro=tipo:calientes"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=cajones&filtro=tipo:calientes",
+                    "ilustracion": "cajon-caliente"
                   }
                 },
                 {
@@ -1078,14 +1347,22 @@
                     "descripcion": "Cajón con bomba de vacío que sella alimentos en bolsa para sous-vide, conservación y marinados.",
                     "specs": "Bomba de vacío · Sous-vide · Bajo horno de vapor",
                     "detalle": "Extrae el aire de la bolsa o el recipiente y lo sella: prolonga la conservación y prepara el alimento para cocción al vacío (sous-vide) en horno de vapor. Se empotra bajo un horno combi o de vapor del mismo ancho.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=cajones&filtro=tipo:alto-vacio"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=cajones&filtro=tipo:alto-vacio",
+                    "ilustracion": "cajon-vacio"
                   }
                 }
               ],
               "rutaFiltros": "/guias/cocina-y-bar/coccion/cajones",
               "etiquetasGrupos": {
                 "tipo": "Tipo"
-              }
+              },
+              "tarjeta": {
+                "imagen": "/assets/photos/cajon-calentador-wolf-abierto-cocina.webp",
+                "ambiente": true,
+                "pos": "35% 60%",
+                "resumen": "Cajones calientes y de alto vacío para completar la columna de hornos."
+              },
+              "tienda": "/productos/cocina-y-bar/coccion?tipo=cajones"
             },
             {
               "nombre": "Cafeteras",
@@ -1101,7 +1378,8 @@
                     "descripcion": "Cafetera automática con molino integrado sobre la cubierta, con depósito de agua que se rellena.",
                     "specs": "Molino integrado · Depósito de agua · 127 V",
                     "detalle": "Muele, dosifica y extrae el espresso al momento y prepara bebidas con leche según el modelo. No requiere instalación: se coloca sobre la cubierta con espacio para abrir el depósito y retirar la bandeja.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=cafeteras-empotrables&filtro=instalacion:de-mesa"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=cafeteras-empotrables&filtro=instalacion:de-mesa",
+                    "ilustracion": "cafe-mesa"
                   }
                 },
                 {
@@ -1113,16 +1391,31 @@
                     "descripcion": "Cafetera automática built-in que se integra en el muro de hornos con frente a ras.",
                     "specs": "Nicho en columna · Toma de agua opcional · Frente a ras",
                     "detalle": "Se instala en un nicho junto a hornos y microondas, a la altura de trabajo. Funciona con depósito o, en algunos modelos, con conexión fija de agua que evita rellenar. Hay que respetar el hueco y la ventilación de la ficha técnica.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=cafeteras-empotrables&filtro=instalacion:empotre"
+                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=cafeteras-empotrables&filtro=instalacion:empotre",
+                    "ilustracion": "cafe-empotre"
                   }
                 }
               ],
-              "rutaFiltros": "/guias/cocina-y-bar/coccion/cafeteras-empotrables"
+              "rutaFiltros": "/guias/cocina-y-bar/coccion/cafeteras-empotrables",
+              "tarjeta": {
+                "imagen": "/assets/photos/prod-miele.webp",
+                "ambiente": true,
+                "pos": "center 50%",
+                "resumen": "Cafeteras de mesa o de empotre: espresso al toque, integrado al mueble."
+              },
+              "tienda": "/productos/cocina-y-bar/coccion?tipo=cafeteras-empotrables"
             },
             {
               "nombre": "Accesorios de cocción",
               "slug": "accesorios-coccion",
-              "filtro": "/productos/accesorios-coccion/"
+              "filtro": "/productos/accesorios-coccion/",
+              "tarjeta": {
+                "imagen": "/assets/photos/accesorios-coccion-wok-pitt-quemador.webp",
+                "ambiente": true,
+                "pos": "40% 50%",
+                "resumen": "Woks, planchas, sondas y complementos para sacar más a tus equipos."
+              },
+              "tienda": "/productos/cocina-y-bar/coccion?tipo=accesorios-coccion"
             }
           ]
         },
@@ -1162,7 +1455,14 @@
                   }
                 }
               ],
-              "rutaFiltros": "/guias/cocina-y-bar/lavavajillas/lavavajillas-empotrable"
+              "rutaFiltros": "/guias/cocina-y-bar/lavavajillas/lavavajillas-empotrable",
+              "tarjeta": {
+                "imagen": "/assets/photos/brands/hero/cove-lavavajillas.webp",
+                "ambiente": true,
+                "pos": "40% 50%",
+                "resumen": "Integradas al mueble, panelables, con controles al frente u ocultos."
+              },
+              "tienda": "/productos/cocina-y-bar/lavavajillas?tipo=lavavajillas-empotrable"
             },
             {
               "nombre": "Lavavajillas de piso",
@@ -1194,7 +1494,14 @@
                   }
                 }
               ],
-              "rutaFiltros": "/guias/cocina-y-bar/lavavajillas/lavavajillas-de-piso"
+              "rutaFiltros": "/guias/cocina-y-bar/lavavajillas/lavavajillas-de-piso",
+              "tarjeta": {
+                "imagen": "/assets/photos/brands/hero/bosch-electrodomesticos.webp",
+                "ambiente": true,
+                "pos": "20% 60%",
+                "resumen": "De instalación libre, con controles al frente u ocultos."
+              },
+              "tienda": "/productos/cocina-y-bar/lavavajillas?tipo=lavavajillas-de-piso"
             }
           ]
         },
@@ -1294,7 +1601,14 @@
                   }
                 }
               ],
-              "rutaFiltros": "/guias/cocina-y-bar/tarjas-y-griferia/tarjas"
+              "rutaFiltros": "/guias/cocina-y-bar/tarjas-y-griferia/tarjas",
+              "tarjeta": {
+                "imagen": "/assets/photos/brands/hero/dawn-tarjas-y-griferia.webp",
+                "ambiente": true,
+                "pos": "center 50%",
+                "resumen": "Sobreponer, submontar o farmhouse, de una, dos o tres tinas."
+              },
+              "tienda": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas"
             },
             {
               "nombre": "Grifería",
@@ -1410,17 +1724,38 @@
                   }
                 }
               ],
-              "rutaFiltros": "/guias/cocina-y-bar/tarjas-y-griferia/griferia"
+              "rutaFiltros": "/guias/cocina-y-bar/tarjas-y-griferia/griferia",
+              "tarjeta": {
+                "imagen": "/assets/photos/brands/hero/brizo-griferia.webp",
+                "ambiente": true,
+                "pos": "center 40%",
+                "resumen": "Monomandos, extraíbles, profesionales, de pared y pot filler."
+              },
+              "tienda": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos"
             },
             {
               "nombre": "Monomandos de agua filtrada y caliente",
               "slug": "monomandos-de-agua-filtrada",
-              "filtro": "/productos/monomandos-de-agua-filtrada/"
+              "filtro": "/productos/monomandos-de-agua-filtrada/",
+              "tarjeta": {
+                "imagen": "/assets/photos/brands/hero/delta-griferia.webp",
+                "ambiente": true,
+                "pos": "45% 50%",
+                "resumen": "Agua filtrada, caliente o fría desde el mismo monomando."
+              },
+              "tienda": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos"
             },
             {
               "nombre": "Accesorios de Tarjas & Grifería",
               "slug": "accesorios-tarjas-griferia",
-              "filtro": "/productos/accesorios-tarjas-griferia/"
+              "filtro": "/productos/accesorios-tarjas-griferia/",
+              "tarjeta": {
+                "imagen": "/assets/photos/brands/hero/the-galley-tarjas.webp",
+                "ambiente": true,
+                "pos": "center 50%",
+                "resumen": "Tablas, escurridores, canastillas y complementos de la tarja."
+              },
+              "tienda": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=accesorios-tarjas-monomandos"
             }
           ]
         },
@@ -1433,7 +1768,14 @@
             {
               "nombre": "Trituradores",
               "slug": "trituradores",
-              "filtro": "/productos/trituradores/"
+              "filtro": "/productos/trituradores/",
+              "tarjeta": {
+                "imagen": "/assets/photos/triturador-insinkerator-tarja-cocina.webp",
+                "ambiente": true,
+                "pos": "center 60%",
+                "resumen": "Potencia, ruido y alimentación: cómo elegir el triturador de tu tarja."
+              },
+              "tienda": "/productos/cocina-y-bar/trituradores"
             }
           ]
         },
@@ -1512,12 +1854,26 @@
               "rutaFiltros": "/guias/cocina-y-bar/filtros-y-purificadores-de-agua/purificadores-de-agua",
               "etiquetasGrupos": {
                 "tipo": "Tipo de funcionamiento"
-              }
+              },
+              "tarjeta": {
+                "imagen": "/assets/photos/hero-sub1-filtros-purificadores-agua.webp",
+                "ambiente": true,
+                "pos": "35% 50%",
+                "resumen": "Ósmosis inversa o tanque con filtro, bajo cubierta, de mesa o de piso."
+              },
+              "tienda": "/productos/cocina-y-bar/filtros-y-purificadores-de-agua?tipo=purificadores-de-agua"
             },
             {
               "nombre": "Filtros y repuestos",
               "slug": "filtros-y-repuestos",
-              "filtro": "/productos/filtros-y-repuestos/"
+              "filtro": "/productos/filtros-y-repuestos/",
+              "tarjeta": {
+                "imagen": "/assets/photos/filtros-agua-monomando-delta-bronce.webp",
+                "ambiente": true,
+                "pos": "70% 50%",
+                "resumen": "Cartuchos y repuestos para mantener tu sistema de agua al día."
+              },
+              "tienda": "/productos/cocina-y-bar/filtros-y-purificadores-de-agua"
             }
           ]
         }
@@ -1580,6 +1936,13 @@
               "rutaFiltros": "/guias/exterior/asadores-y-hornos/asadores-empotrables",
               "etiquetasGrupos": {
                 "tipo": "Tipo de funcionamiento"
+              },
+              "tienda": "/productos/exterior/asadores-y-hornos?tipo=asadores-empotrables",
+              "tarjeta": {
+                "imagen": "/assets/photos/brands/hero/alfresco-asadores.webp",
+                "ambiente": true,
+                "pos": "center 55%",
+                "resumen": "Gas, carbón o mixtos para empotrar en tu cocina exterior."
               }
             },
             {
@@ -1627,17 +1990,38 @@
               "rutaFiltros": "/guias/exterior/asadores-y-hornos/asadores-con-carrito",
               "etiquetasGrupos": {
                 "tipo": "Tipo de funcionamiento"
+              },
+              "tienda": "/productos/exterior/asadores-y-hornos?tipo=asadores-con-carrito",
+              "tarjeta": {
+                "imagen": "/assets/photos/brands/hero/masterbuilt-asadores.webp",
+                "ambiente": true,
+                "pos": "center 50%",
+                "resumen": "Asadores de pie con carrito: se mueven, se guardan y no requieren obra."
               }
             },
             {
               "nombre": "Hornos de pizza",
               "slug": "hornos-de-pizza",
-              "filtro": "/productos/hornos-de-pizza/"
+              "filtro": "/productos/hornos-de-pizza/",
+              "tienda": "/productos/exterior/asadores-y-hornos?tipo=hornos-de-pizza",
+              "tarjeta": {
+                "imagen": "/assets/photos/brands/hero/wppo-hornos.webp",
+                "ambiente": true,
+                "pos": "center 50%",
+                "resumen": "Hornos de leña o gas para pizza y pan, de mesa o con base."
+              }
             },
             {
               "nombre": "Accesorios Asadores & Hornos",
               "slug": "accesorios-asadores",
-              "filtro": "/productos/accesorios-asadores/"
+              "filtro": "/productos/accesorios-asadores/",
+              "tienda": "/productos/exterior/asadores-y-hornos?tipo=accesorios-asadores-hornos",
+              "tarjeta": {
+                "imagen": "/assets/photos/accesorio-asador-kamado-joe-dojoe-pizza.webp",
+                "ambiente": true,
+                "pos": "center 50%",
+                "resumen": "Rostizadores, planchas, piedras para pizza y complementos para tu asador."
+              }
             }
           ]
         },
@@ -1650,7 +2034,8 @@
             {
               "nombre": "Mosaicos",
               "slug": "mosaicos",
-              "filtro": "/productos/mosaicos/"
+              "filtro": "/productos/mosaicos/",
+              "tienda": "/marcas/onix"
             }
           ]
         }
@@ -1666,43 +2051,90 @@
           "nombre": "Licuadoras",
           "slug": "licuadoras",
           "esLeaf": true,
-          "filtro": "/productos/licuadoras/"
+          "filtro": "/productos/licuadoras/",
+          "tienda": "/productos/electrodomesticos-menores?tipo=licuadoras",
+          "tarjeta": {
+            "imagen": "/assets/photos/licuadora-smeg-cocina-madera-frutas.webp",
+            "ambiente": true,
+            "pos": "center 85%",
+            "resumen": "Potencia, vaso y programas para smoothies, salsas y hielo."
+          }
         },
         {
           "nombre": "Batidoras",
           "slug": "batidoras",
           "esLeaf": true,
-          "filtro": "/productos/batidoras/"
+          "filtro": "/productos/batidoras/",
+          "tienda": "/productos/electrodomesticos-menores?tipo=batidoras",
+          "tarjeta": {
+            "imagen": "/assets/photos/cat-electro-menores-kitchenaid-mixer.webp",
+            "ambiente": true,
+            "pos": "center 50%",
+            "resumen": "De pedestal o de mano para masas, merengues y repostería."
+          }
         },
         {
           "nombre": "Tostadoras",
           "slug": "tostadoras",
           "esLeaf": true,
-          "filtro": "/productos/tostadoras/"
+          "filtro": "/productos/tostadoras/",
+          "tienda": "/productos/electrodomesticos-menores?tipo=tostadoras",
+          "tarjeta": {
+            "imagen": "/assets/photos/tostador-smeg-porsche-design-cocina.webp",
+            "ambiente": true,
+            "pos": "15% 60%",
+            "resumen": "De 2 o 4 rebanadas, con ranuras anchas y control de tostado."
+          }
         },
         {
           "nombre": "Exprimidor de cítricos",
           "slug": "exprimidores",
           "esLeaf": true,
-          "filtro": "/productos/exprimidores/"
+          "filtro": "/productos/exprimidores/",
+          "tienda": "/productos/electrodomesticos-menores?tipo=exprimidor-de-citricos",
+          "tarjeta": {
+            "imagen": "/assets/photos/exprimidor-citricos-smeg-crema-naranjas.webp",
+            "ambiente": true,
+            "pos": "center 55%",
+            "resumen": "Exprimidores eléctricos para jugos de naranja, toronja y limón."
+          }
         },
         {
           "nombre": "Cafeteras",
           "slug": "cafeteras",
           "esLeaf": true,
-          "filtro": "/productos/cafeteras/"
+          "filtro": "/productos/cafeteras/",
+          "tienda": "/productos/electrodomesticos-menores?tipo=cafeteras",
+          "tarjeta": {
+            "imagen": "/assets/photos/cat-electro-menores.webp",
+            "ambiente": true,
+            "pos": "center 50%",
+            "resumen": "Espresso, goteo o cápsulas: la cafetera ideal para tu barra."
+          }
         },
         {
           "nombre": "Accesorios de cocina pequeños",
           "slug": "accesorios-cocina-pequenos",
           "esLeaf": true,
-          "filtro": "/productos/accesorios-cocina-pequenos/"
+          "filtro": "/productos/accesorios-cocina-pequenos/",
+          "tienda": "/productos/electrodomesticos-menores?tipo=accesorios-de-cocina-pequenos",
+          "tarjeta": {
+            "imagen": "/assets/photos/accesorio-batidora-kitchenaid-espiralizador.webp",
+            "ambiente": true,
+            "pos": "center 50%",
+            "resumen": "Aditamentos, hervidores y básculas para completar tu cocina."
+          }
         },
         {
           "nombre": "Despachadores de Agua (Garrafón)",
           "slug": "despachadores-de-agua",
           "esLeaf": true,
-          "filtro": "/productos/despachadores-de-agua/"
+          "filtro": "/productos/despachadores-de-agua/",
+          "tienda": "/productos/cocina-y-bar/filtros-y-purificadores-de-agua?tipo=despachadores-de-agua",
+          "tarjeta": {
+            "imagen": "/assets/photos/subcat-tiles/despachador-agua-garrafon-whirlpool.webp",
+            "resumen": "Agua fría y caliente desde el garrafón, de piso o de mesa."
+          }
         }
       ]
     },
@@ -1716,25 +2148,29 @@
           "nombre": "Lavadoras",
           "slug": "lavadoras",
           "esLeaf": true,
-          "filtro": "/productos/lavadoras/"
+          "filtro": "/productos/lavadoras/",
+          "tienda": "/productos/lavanderia?tipo=lavadoras"
         },
         {
           "nombre": "Secadoras",
           "slug": "secadoras",
           "esLeaf": true,
-          "filtro": "/productos/secadoras/"
+          "filtro": "/productos/secadoras/",
+          "tienda": "/productos/lavanderia?tipo=secadoras"
         },
         {
           "nombre": "Lavasecadoras (2 en 1)",
           "slug": "lavasecadoras",
           "esLeaf": true,
-          "filtro": "/productos/lavasecadoras/"
+          "filtro": "/productos/lavasecadoras/",
+          "tienda": "/productos/lavanderia?tipo=lavasecadoras-2-en-1"
         },
         {
           "nombre": "Centros de Lavado",
           "slug": "centros-de-lavado",
           "esLeaf": true,
-          "filtro": "/productos/centros-de-lavado/"
+          "filtro": "/productos/centros-de-lavado/",
+          "tienda": "/productos/lavanderia?tipo=centros-de-lavado"
         }
       ]
     },
@@ -1748,37 +2184,43 @@
           "nombre": "Lavabos",
           "slug": "lavabos",
           "esLeaf": true,
-          "filtro": "/productos/lavabos/"
+          "filtro": "/productos/lavabos/",
+          "tienda": "/productos/banos?tipo=lavabos"
         },
         {
           "nombre": "Monomandos",
           "slug": "monomandos",
           "esLeaf": true,
-          "filtro": "/productos/monomandos/"
+          "filtro": "/productos/monomandos/",
+          "tienda": "/productos/banos?tipo=monomandos"
         },
         {
           "nombre": "Regaderas",
           "slug": "regaderas",
           "esLeaf": true,
-          "filtro": "/productos/regaderas/"
+          "filtro": "/productos/regaderas/",
+          "tienda": "/productos/banos?tipo=regaderas"
         },
         {
           "nombre": "Tinas",
           "slug": "tinas",
           "esLeaf": true,
-          "filtro": "/productos/tinas/"
+          "filtro": "/productos/tinas/",
+          "tienda": "/productos/banos?tipo=tinas"
         },
         {
           "nombre": "WC y Sanitarios",
           "slug": "wc-y-sanitarios",
           "esLeaf": true,
-          "filtro": "/productos/wc-y-sanitarios/"
+          "filtro": "/productos/wc-y-sanitarios/",
+          "tienda": "/productos/banos?tipo=wc-y-sanitarios"
         },
         {
           "nombre": "Accesorios de Baños",
           "slug": "accesorios-banos",
           "esLeaf": true,
-          "filtro": "/productos/accesorios-banos/"
+          "filtro": "/productos/accesorios-banos/",
+          "tienda": "/productos/banos?tipo=accesorios-de-banos"
         }
       ]
     },
@@ -1792,13 +2234,15 @@
           "nombre": "Minisplit Frío",
           "slug": "minisplit-frio",
           "esLeaf": true,
-          "filtro": "/productos/aire-acondicionado/?tipo=frio"
+          "filtro": "/productos/aire-acondicionado/?tipo=frio",
+          "tienda": "/productos/aire-acondicionado?tipo=minisplit-frio"
         },
         {
           "nombre": "Minisplit Frío & Calor",
           "slug": "minisplit-frio-calor",
           "esLeaf": true,
-          "filtro": "/productos/aire-acondicionado/?tipo=frio-calor"
+          "filtro": "/productos/aire-acondicionado/?tipo=frio-calor",
+          "tienda": "/productos/aire-acondicionado?tipo=minisplit-frio-y-calor"
         }
       ]
     },
@@ -1812,19 +2256,22 @@
           "nombre": "Vapor",
           "slug": "vapor",
           "esLeaf": true,
-          "filtro": "/productos/vapor/"
+          "filtro": "/productos/vapor/",
+          "tienda": "/productos/vapor-y-sauna?tipo=vapor"
         },
         {
           "nombre": "Sauna interior",
           "slug": "sauna-interior",
           "esLeaf": true,
-          "filtro": "/productos/sauna-interior/"
+          "filtro": "/productos/sauna-interior/",
+          "tienda": "/productos/vapor-y-sauna?tipo=sauna-interior"
         },
         {
           "nombre": "Sauna exterior",
           "slug": "sauna-exterior",
           "esLeaf": true,
-          "filtro": "/productos/sauna-exterior/"
+          "filtro": "/productos/sauna-exterior/",
+          "tienda": "/productos/vapor-y-sauna?tipo=sauna-exterior"
         }
       ]
     },
@@ -1838,25 +2285,29 @@
           "nombre": "Tinas de Inmersión",
           "slug": "tinas-de-inmersion",
           "esLeaf": true,
-          "filtro": "/productos/tinas-de-inmersion/"
+          "filtro": "/productos/tinas-de-inmersion/",
+          "tienda": "/productos/wellness?tipo=tinas-de-inmersion"
         },
         {
           "nombre": "Carril de Nado",
           "slug": "carril-de-nado",
           "esLeaf": true,
-          "filtro": "/productos/carril-de-nado/"
+          "filtro": "/productos/carril-de-nado/",
+          "tienda": "/productos/wellness?tipo=carril-de-nado"
         },
         {
           "nombre": "Sillón para masajes",
           "slug": "sillon-para-masajes",
           "esLeaf": true,
-          "filtro": "/productos/sillon-para-masajes/"
+          "filtro": "/productos/sillon-para-masajes/",
+          "tienda": "/productos/wellness?tipo=sillon-para-masajes"
         },
         {
           "nombre": "Jacuzzi",
           "slug": "jacuzzi",
           "esLeaf": true,
-          "filtro": "/productos/jacuzzi/"
+          "filtro": "/productos/jacuzzi/",
+          "tienda": "/productos/wellness?tipo=jacuzzi"
         }
       ]
     },
@@ -1870,19 +2321,22 @@
           "nombre": "Pisos",
           "slug": "pisos",
           "esLeaf": true,
-          "filtro": "/productos/pisos/"
+          "filtro": "/productos/pisos/",
+          "tienda": "/productos/recubrimientos-y-superficies?tipo=pisos"
         },
         {
           "nombre": "Muros",
           "slug": "muros",
           "esLeaf": true,
-          "filtro": "/productos/muros/"
+          "filtro": "/productos/muros/",
+          "tienda": "/productos/recubrimientos-y-superficies?tipo=muros"
         },
         {
           "nombre": "Piedras Sinterizadas",
           "slug": "piedras-sinterizadas",
           "esLeaf": true,
-          "filtro": "/productos/piedras-sinterizadas/"
+          "filtro": "/productos/piedras-sinterizadas/",
+          "tienda": "/productos/recubrimientos-y-superficies?tipo=piedras-sinterizadas"
         }
       ]
     },
@@ -1896,13 +2350,15 @@
           "nombre": "Chimeneas",
           "slug": "chimeneas",
           "esLeaf": true,
-          "filtro": "/productos/chimeneas/"
+          "filtro": "/productos/chimeneas/",
+          "tienda": "/productos/chimeneas-y-calentadores?tipo=chimeneas"
         },
         {
           "nombre": "Calentadores",
           "slug": "calentadores",
           "esLeaf": true,
-          "filtro": "/productos/calentadores/"
+          "filtro": "/productos/calentadores/",
+          "tienda": "/productos/chimeneas-y-calentadores?tipo=calentadores"
         }
       ]
     }

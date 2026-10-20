@@ -34,6 +34,15 @@ con acentos; mayúsculas y "&" o "y" dan igual.
 
 Una entrada **sin etiqueta de lugar válida no se publica** (el sitio la ignora y lo avisa en el log).
 
+- **Categoría de producto** (opcional, desde 2026-10-20): en las páginas de guías con riel
+  "Explora por categoría" (Lavandería, Baños, Wellness, Alberca…) y en las tarjetas de la portada
+  de Electrodomésticos menores, elegir una categoría deja solo sus guías. **Cada guía queda en una
+  categoría**: la que nombre su etiqueta (`Jacuzzi`, `Lavadoras`, `WC y Sanitarios`; puede llevar
+  varias) o, sin etiqueta, la primera que nombra completa en título, extracto o cuerpo. Esa
+  categoría muestra el número en el riel. Al elegir una categoría, los chips de tipo (Todas, Guía
+  de compra…) se quedan fijos y a su derecha aparece **Ver productos en tienda**, que lleva a su
+  página de la tienda con su filtro (`tienda` en `GUIAS/taxonomia-guias.json`).
+
 **URL resultante:** `/guias/{macro}/{subcategoría}/{tipo}/{handle}`, o
 `/guias/{macro}/{tipo}/{handle}` en las macros sin subcategorías.
 Ejemplo: `Refrigeración` + `Guía de compra` + handle `guia-refrigeracion-premium` →
@@ -93,3 +102,14 @@ la copia de lo que se subió; **después de editar en Shopify, la versión buena
 - `app/guias/[...segments]/page.tsx` — hub de macro, subcategoría, filtros y artículo.
 - `components/GuideArticle.tsx` + `.guide-prose` en `styles/guias.css` — diseño del artículo.
 - `app/api/revalidar-guias/route.ts` — refresco inmediato.
+
+## Portada de Subcategoría 1 (2026-10-19, primero Refrigeración)
+
+`/guias/<macro>/<sub1>` usa `components/GuiasPortada.tsx` cuando **todas** sus
+Subcategorías 2 traen `tarjeta` en `GUIAS/taxonomia-guias.json` y la Sub1 tiene foto
+en `PORTADA_FOTO_SUB1` (`app/guias/[...segments]/page.tsx`): hero partido, rejilla de
+tipos (foto de `public/assets/photos/subcat-tiles/`, la misma del slider de Productos,
+ícono de línea en `ICONOS` y resumen) y, abajo, la sección **Blog** con el formulario
+de suscripción (`data-newsletter="guias"`, lo envía v2.js) y las tarjetas de las guías.
+Para pasar Cocción u otra Sub1: agregar `tarjeta: { imagen, resumen }` a cada tipo,
+su foto en `PORTADA_FOTO_SUB1` y, si falta, su ícono en `ICONOS`.

@@ -32,6 +32,8 @@ interface Datos {
   apilar: boolean;
   /** Tipo con botón "Panelar" (Columna) y su estado al abrir. */
   panelable: boolean;
+  /** Nombres de las dos vistas ("Cerrado|Abierto" o "Apagado|Encendido"). */
+  estados: [string, string];
   panel: boolean;
 }
 
@@ -98,6 +100,7 @@ export default function FichaModal({ contexto }: { contexto: string }) {
         apilar: ilus?.dataset.apilar !== undefined,
         panelable: d.panelable !== undefined,
         panel: !!card.querySelector(".tfk-ilus.is-panel"),
+        estados: ((ilus?.dataset.estados ?? "Cerrado|Abierto").split("|") as [string, string]),
       });
     };
     document.addEventListener("click", onClick, true);
@@ -155,8 +158,8 @@ export default function FichaModal({ contexto }: { contexto: string }) {
               </button>
             )}
             <div className={ficha.apilar ? "tfk-duo tfk-duo--apilado" : "tfk-duo"} aria-hidden="true">
-              {(["Cerrado", "Abierto"] as const).map((vista) => (
-                <figure key={vista} className={vista === "Abierto" && abierto ? "tfk-duo-item is-abierto" : "tfk-duo-item"}>
+              {ficha.estados.map((vista, i) => (
+                <figure key={vista} className={i === 1 && abierto ? "tfk-duo-item is-abierto" : "tfk-duo-item"}>
                   <span
                     className="tfk-duo-crop"
                     style={{ aspectRatio: ficha.recorte }}

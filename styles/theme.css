@@ -4526,8 +4526,8 @@ button.wl-wa { border: 0; cursor: pointer; }
 .f-news-legal a { color: inherit; border-bottom: 1px solid currentColor; }
 .f-news-form.is-ok input, .f-news-form.is-ok button { display: none; }
 /* En /ofertas el formulario va en la propia página: no se repite en el pie. */
-body:has([data-newsletter="ofertas"]) .site-footer .f-news { display: none; }
-body:has([data-newsletter="ofertas"]) .site-footer:has(> .f-news) { padding-top: 96px; }
+body:has(:is([data-newsletter="ofertas"], [data-newsletter="guias"])) .site-footer .f-news { display: none; }
+body:has(:is([data-newsletter="ofertas"], [data-newsletter="guias"])) .site-footer:has(> .f-news) { padding-top: 96px; }
 @media (max-width: 900px) {
   .f-news-in { grid-template-columns: auto minmax(0, 1fr); row-gap: 20px; }
   .f-news-form { grid-column: 1 / -1; }
