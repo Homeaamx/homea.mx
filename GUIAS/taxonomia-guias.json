@@ -93,7 +93,7 @@
                     "diagrama": "de-piso",
                     "descripcion": "Gabinete de instalación libre con fondo de 29–36″: sobresale del mueble y necesita holgura lateral y trasera para ventilar.",
                     "specs": "Fondo 29–36″ · Holgura de ventilación · Sin obra",
-                    "detalle": "Los refrigeradores de piso (freestanding) disipan calor por la parte trasera o inferior y su gabinete es más profundo que una cubierta de 24″, por eso sobresalen del mueble. Piden de 1 a 2.5 cm libres a los lados y atrás, un contacto de 127 V y, si traen fábrica de hielos o despachador, una toma de agua.",
+                    "detalle": "Los refrigeradores de piso (freestanding) disipan calor por la parte trasera o inferior y su gabinete es más profundo que una cubierta de 24″, por eso sobresalen del mueble. Piden holgura libre a los lados, atrás y arriba según el fabricante, un contacto de 127 V y, si traen fábrica de hielos o despachador, una toma de agua.",
                     "catalogo": "/productos/cocina-y-bar/refrigeracion/refrigeradores?f=de-piso"
                   }
                 },
@@ -103,9 +103,9 @@
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "empotrado",
-                    "descripcion": "Built-in de 24″ de fondo que queda a ras del mueble: ventila por el zoclo frontal y admite panel o frente de acero.",
+                    "descripcion": "Built-in de 24″ de fondo que queda a ras del mueble: ventila por la parrilla frontal superior y admite panel o frente de acero.",
                     "specs": "Fondo 24″ · Ventilación frontal · Panelable",
-                    "detalle": "Los empotrados se instalan en un nicho de medidas exactas y ventilan por la rejilla del zoclo, así que no necesitan holgura lateral. El hueco se construye con la ficha técnica del modelo: ancho, alto, anclaje antivuelco, contacto y toma de agua en la posición indicada. Admiten frente de acero o panel de carpintería con el kit del fabricante.",
+                    "detalle": "Los empotrados se instalan en un nicho de medidas exactas y ventilan por la parrilla frontal, en la parte superior del equipo, así que no necesitan holgura lateral. El hueco se construye con la ficha técnica del modelo: ancho, alto, anclaje antivuelco, contacto y toma de agua en la posición indicada. Admiten frente de acero o panel de carpintería con el kit del fabricante.",
                     "catalogo": "/productos/cocina-y-bar/refrigeracion/refrigeradores?f=empotrado"
                   }
                 },
@@ -151,7 +151,7 @@
                   "ficha": {
                     "grupo": "estilo",
                     "diagrama": "duplex",
-                    "descripcion": "Congelador y compartimento fresco en dos columnas verticales de piso a techo, con puertas angostas de abatimiento corto.",
+                    "descripcion": "Congelador y compartimento fresco en dos columnas verticales de altura completa, con puertas angostas de abatimiento corto.",
                     "specs": "Anchos 36–48″ · Congelador vertical · Abatimiento corto",
                     "detalle": "El gabinete se divide en vertical: un lado congela y el otro refrigera, cada uno con su puerta. Las puertas angostas piden poco espacio libre al frente, útil en pasillos estrechos. Suele integrar despachador de agua y hielo en la puerta del congelador, lo que requiere toma de agua.",
                     "catalogo": "/productos/cocina-y-bar/refrigeracion/refrigeradores?f=duplex-side-by-side"
@@ -177,7 +177,7 @@
                     "diagrama": "top-mount",
                     "descripcion": "Congelador superior y compartimento fresco abajo con un solo sistema de frío: el formato más simple y de menor consumo.",
                     "specs": "Anchos 24–33″ · Congelador arriba · Bajo consumo",
-                    "detalle": "Con el congelador arriba, el aire frío baja de forma natural al compartimento fresco, lo que simplifica el sistema y reduce el consumo. Es el formato de menor costo y el más común en modelos de piso de ancho medio; su contra es que lo de uso diario queda en la parte baja.",
+                    "detalle": "Al llevar el congelador arriba, el sistema de frío es más simple que en otros formatos, lo que abarata el equipo y baja el consumo. Es el formato de menor costo y el más común en modelos de piso de ancho medio; su contra es que lo de uso diario queda en la parte baja.",
                     "catalogo": "/productos/cocina-y-bar/refrigeracion/refrigeradores?f=top-mount"
                   }
                 },
@@ -223,7 +223,7 @@
                   "ficha": {
                     "grupo": "estilo",
                     "diagrama": "cuatro-puertas",
-                    "descripcion": "Dos puertas arriba para lo fresco y dos abajo para el congelador, cada par con su propio control de temperatura.",
+                    "descripcion": "Dos puertas arriba para lo fresco y dos abajo para el congelador (una puede ser zona convertible), cada zona con su propio control de temperatura.",
                     "specs": "Ancho 33–36″ · Puertas cruzadas · Congelador abajo",
                     "detalle": "Las cuatro medias puertas abren en poco espacio y solo dejan salir el frío de la zona que usas. Arriba van repisas y cajones de humedad controlada; abajo, el congelador dividido en dos. Según el modelo, una de las puertas inferiores se convierte en refrigerador y la izquierda lleva despachador de agua.",
                     "catalogo": "/productos/cocina-y-bar/refrigeracion/refrigeradores?f=4-puertas"
@@ -288,9 +288,9 @@
                     "grupo": "tipo",
                     "diagrama": "empotrado",
                     "ilustracion": "cong-empotrado",
-                    "descripcion": "Columna o equipo built-in de congelación que queda a ras del mueble y ventila por el zoclo frontal.",
+                    "descripcion": "Columna o equipo built-in de congelación que queda a ras del mueble y ventila por la parrilla frontal superior.",
                     "specs": "Anchos 18–36″ · Panelable · Combinable",
-                    "detalle": "Se instala en un nicho a medida, solo o junto a una columna de refrigeración con el kit de unión del fabricante. Ventila por el frente, admite panel o frente de acero y muchos modelos integran fábrica de hielos, por lo que suelen requerir toma de agua.",
+                    "detalle": "Se instala en un nicho a medida, solo o junto a una columna de refrigeración con el kit de unión del fabricante. Ventila por la parrilla superior, admite panel o frente de acero y muchos modelos integran fábrica de hielos, por lo que suelen requerir toma de agua.",
                     "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=congeladores&filtro=instalacion:empotrado"
                   }
                 },
@@ -544,7 +544,7 @@
                     "ilustracion": "cava-columna",
                     "descripcion": "Torre de piso a techo para la colección completa: hasta tres zonas de temperatura y panel de carpintería.",
                     "specs": "Piso a techo · Hasta 3 zonas · Panelable",
-                    "detalle": "Las columnas de vino de 18″ a 30″ de ancho se empotran a ras del mueble, solas o junto a una columna de refrigeración con el kit de unión. Guardan de 80 a más de 140 botellas y separan la guarda del servicio en zonas independientes; la puerta de vidrio con filtro UV puede recibir marco de carpintería.",
+                    "detalle": "Las columnas de vino de 18″ a 30″ de ancho se empotran a ras del mueble, solas o junto a una columna de refrigeración con el kit de unión. Guardan hasta más de 140 botellas según el ancho y separan la guarda del servicio en zonas independientes; la puerta de vidrio con filtro UV puede recibir marco de carpintería.",
                     "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=cavas-de-vino&filtro=diseno:columna&filtro=diseno:piso-techo"
                   }
                 }
@@ -688,9 +688,9 @@
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "estufa-de-piso",
-                    "descripcion": "Estufa freestanding con respaldo y controles atrás: terminada por los costados para quedar sola, sin obra.",
-                    "specs": "Anchos 20–36″ · Con respaldo · Sin obra",
-                    "detalle": "Es la estufa de instalación libre: panel de control trasero y costados terminados, así que puede ir sola o entre muebles. Solo necesita la toma de gas con regulador o el contacto que indique el modelo, y su soporte antivuelco.",
+                    "descripcion": "Estufa freestanding de 20″ a 36″ de ancho con costados terminados: va sola o entre muebles, a gas, eléctrica o de inducción.",
+                    "specs": "Anchos 20–36″ · Costados terminados · Sin obra",
+                    "detalle": "Es la estufa de instalación libre y el formato más común: sus costados van terminados, así que puede ir sola o entre muebles sin obra. Los controles pueden ir en un respaldo trasero o al frente, con perillas o pantalla digital, y el horno queda integrado abajo.",
                     "catalogo": "/productos/cocina-y-bar/coccion?tipo=estufas&filtro=instalacion:de-piso",
                     "ilustracion": "estufa-de-piso"
                   }
@@ -1220,7 +1220,7 @@
                   }
                 },
                 {
-                  "nombre": "Retráctiles",
+                  "nombre": "Retráctiles (Downdraft)",
                   "filtro": "/productos/campanas/?f=retractiles",
                   "ficha": {
                     "grupo": "estilo",
@@ -1635,7 +1635,7 @@
                     "diagrama": "grif-mezcladora",
                     "descripcion": "Dos manijas independientes para agua fría y caliente, con caño central.",
                     "specs": "2 manijas · 1 o 3 perforaciones · Ajuste fino",
-                    "detalle": "Cada manija controla una línea de agua, lo que permite ajustar la temperatura con precisión. Puede ser de una perforación (puente) o de tres: hay que confirmarlo con la tarja o la cubierta antes de comprar.",
+                    "detalle": "Cada manija controla una línea de agua, lo que permite ajustar la temperatura con precisión. Puede ser de una o de tres perforaciones según el modelo: hay que confirmarlo con la tarja o la cubierta antes de comprar.",
                     "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=diseno:mezcladora-2-manijas"
                   }
                 },

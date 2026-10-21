@@ -1101,7 +1101,7 @@
   background: var(--homea-gold-bright, #D4B77E); box-shadow: 0 0 0 3px rgba(189,155,94,.3); }
 .ilus-tag--der::before { left: -4px; }
 .ilus-tag--izq::before { right: -4px; }
-.ilus-tag-tx { position: absolute; top: 0; transform: translateY(-50%); white-space: pre-line; padding: 3px 8px;
+.ilus-tag-tx { position: absolute; top: 0; transform: translateY(calc(-50% + var(--dy, 0px))); white-space: pre-line; padding: 3px 8px;
   box-sizing: border-box; width: max-content;
   /* Cabe dentro de la imagen aun con el zoom del hover (×1.035): cqi = ancho de
      .tfk-ilus (container-type). */
@@ -1125,10 +1125,11 @@
 .tfk-modal--ilus .tfk-modal-fig { padding: 40px 22px 24px; background: var(--ilus-pared-1); }
 .tfk-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; }
 .tfk-duo-item { margin: 0; display: flex; flex-direction: column; gap: 10px; }
-/* Parejas (Carla, 2026-10-19): las dos vistas, una encima de la otra; cada una
-   cabe en media altura del modal para no obligar a desplazarse. */
+/* Todas las fichas (Carla, 2026-10-21; antes solo Parejas): las dos vistas, una
+   encima de la otra; cada una cabe en media altura del modal para no obligar a
+   desplazarse. --ar = proporción del recorte (ancho / alto). */
 .tfk-duo--apilado { grid-template-columns: 1fr; justify-items: center; gap: 16px; }
-.tfk-duo--apilado .tfk-duo-item { width: min(100%, calc((90vh - 170px) / 2 * 490 / 370)); }
+.tfk-duo--apilado .tfk-duo-item { width: min(100%, calc((90vh - 170px) / 2 * var(--ar, 1.32))); }
 .tfk-duo-crop { position: relative; display: block; overflow: hidden; }
 .tfk-duo-crop .ilus { width: calc(var(--rw) * 100%); transform: translate(calc(var(--rx) * -1), calc(var(--ry) * -1)); }
 .tfk-duo-crop .ilus-tags { display: none; }
@@ -1352,9 +1353,254 @@
 .ilus--coccion .c-zoclo-estufa { fill: #1A1C1E; }
 .ilus--coccion .c-ranura { fill: #2E3236; }
 .ilus--coccion .c-junta-acero { stroke: #5A6066; stroke-width: 1; }
+/* Estufa profesional: tablero saliente, perillas rojas, bisel, insignia y patas */
+.ilus--coccion .c-filo-luz { stroke: #F4F6F7; stroke-width: .9; opacity: .75; }
+.ilus--coccion .c-filo-sombra { stroke: #2A2E32; stroke-width: 1; opacity: .8; }
+.ilus--coccion .c-modulo { fill: #4A5056; }
+.ilus--coccion .c-reloj-mini { font-size: 4.6px; fill: #8E959B; }
+.ilus--coccion .c-bisel-perilla { stroke: #3A3F44; stroke-width: .5; }
+.ilus--coccion .c-brillo-perilla { fill: none; stroke: #FFB3B3; stroke-width: 1.1; stroke-linecap: round; opacity: .55; }
+.ilus--coccion .c-marca-perilla { fill: #FFF; opacity: .85; }
+.ilus--coccion .c-rejilla-continua { stroke-width: 1.6; }
+.ilus--coccion .c-bisel { fill: none; stroke: #E9ECEE; stroke-width: 1; opacity: .6; }
+.ilus--coccion .c-bisel-sombra { fill: none; stroke: #3A3F44; stroke-width: 2.4; transform: translate(.8px, .8px); opacity: .5; }
+.ilus--coccion .c-insignia { stroke: #3A3F44; stroke-width: .4; }
+.ilus--coccion .c-insignia-fondo { fill: #1A1C1E; }
+.ilus--coccion .c-insignia-rojo { fill: #B8262E; }
+.ilus--coccion .c-insignia-texto { fill: #B9BFC4; opacity: .8; }
+.ilus--coccion .c-sombra-piso { fill: #000; opacity: .55; filter: url(#ilus-desenfoque); }
+.ilus--coccion .c-pie { fill: #1A1C1E; }
+/* Estufa de empotre: tablero, perillas cromadas, puerta espejo y tapa de vidrio */
+.ilus--coccion .c-perilla-aro { fill: none; stroke: #6E7479; stroke-width: .5; opacity: .7; }
+.ilus--coccion .c-perilla-barra { stroke: #5A6066; stroke-width: .5; }
+.ilus--coccion .c-escala { stroke: #2A2E32; stroke-width: .6; }
+.ilus--coccion .c-escala-punto { fill: #2A2E32; }
+.ilus--coccion .c-boton-luz { stroke: #5A6066; stroke-width: .6; }
+.ilus--coccion .c-leyenda { fill: #3A3F44; opacity: .7; }
+.ilus--coccion .c-junta-parrilla { fill: #2E3236; }
+.ilus--coccion .c-zoclo-liso { fill: #000; opacity: .1; }
+.ilus--coccion .c-espejo-marco { fill: none; stroke: #5A6066; stroke-width: .8; opacity: .55; }
+.ilus--coccion .c-espejo-reflejo { fill: #fff; opacity: .16; }
+.ilus--coccion .c-receso { fill: #000; opacity: .28; }
+.ilus--coccion .c-tapa { transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(.07);
+  transition: transform 700ms var(--ease-standard) 350ms; }
+.ilus--coccion .c-tapa-vidrio { fill: #3A4148; fill-opacity: .42; stroke: #1A1D20; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.ilus--coccion .c-tapa-reflejo { fill: #fff; opacity: .12; }
+.ilus--coccion .c-tapa-canto { stroke: #D9DEE2; stroke-width: 1.2; opacity: .8; vector-effect: non-scaling-stroke; }
+.ilus--coccion .c-bisagra { stroke: #3A3F44; stroke-width: .5; }
+/* Estufa de piso: display digital, íconos del tablero y zoclo negro */
+.ilus--coccion .c-display { fill: #08090A; stroke: #2A2E32; stroke-width: .5; }
+.ilus--coccion .c-display-txt { font-family: var(--font-sans); font-size: 3.6px; font-weight: 600; fill: #F4F6F7; letter-spacing: .04em; }
+.ilus--coccion .c-display-txt--2 { fill: #B9BFC4; }
+.ilus--coccion .c-display-barra { fill: #F4F6F7; }
+.ilus--coccion .c-icono { fill: none; stroke: #3A3F44; stroke-width: .5; }
+.ilus--coccion .c-zoclo-negro { fill: #0B0C0D; }
+/* Parrillas profesional (latón, rejilla hexagonal, plancha) y tradicional (cromo) */
+.ilus--coccion .c-anillo-cromo { fill: url(#ilus-cromo) #B9BFC4; stroke: #4A5056; stroke-width: .5; }
+.ilus--coccion .c-tapa-laton { fill: url(#ilus-laton) #C9A464; stroke: #5A4320; stroke-width: .5; }
+.ilus--coccion .c-brillo-tapa { fill: #fff; opacity: .18; }
+.ilus--coccion .c-bandeja { fill: #1A1C1E; stroke: #0B0C0D; stroke-width: .6; }
+.ilus--coccion .c-plancha-marco { fill: #6E7479; }
+.ilus--coccion .c-moleteado { fill: none; stroke: #5A6066; stroke-width: 1.2; stroke-dasharray: .8 .8; opacity: .8; }
+.ilus--coccion .c-barra-laton { fill: url(#ilus-laton) #C9A464; stroke: #5A4320; stroke-width: .5; }
+.ilus--coccion .c-barra-brillo { fill: #FFF3D6; opacity: .45; }
+.ilus--coccion .c-perilla-cuerpo { stroke: #3A3F44; stroke-width: .4; }
+.ilus--coccion .c-perilla-tope { fill: #DDE1E4; stroke: #6E7479; stroke-width: .4; }
+.ilus--coccion .c-perilla-raya { stroke: #2A2E32; stroke-width: .7; }
+.ilus--coccion .c-placa-marca { fill: #2A2E32; opacity: .75; }
+/* Vitrocerámica: serigrafía de las zonas, espiral al rojo y calor residual */
+.ilus--coccion .c-perimetro-vitro { fill: none; stroke: #8E959B; stroke-width: .9; stroke-dasharray: .4 2.6; stroke-linecap: round; opacity: .8; }
+.ilus--coccion .c-marca-vitro { stroke: #C9CED2; stroke-width: .6; opacity: .65; }
+.ilus--coccion .c-centro-vitro { fill: #050607; }
+.ilus--coccion .c-h-residual { font-family: var(--font-sans); font-size: 4.6px; font-weight: 700; fill: #6E7479;
+  transition: fill 900ms var(--ease-standard) 2600ms; }
+.ilus--coccion .c-halo-vitro { fill: #E0381E; opacity: .35; filter: url(#ilus-desenfoque); }
+.ilus--coccion .c-espira { fill: none; stroke: #FF3B1F; stroke-width: 1.5; stroke-dasharray: 1.6 1.1; opacity: .85; }
+.ilus--coccion .c-espira-separa { fill: none; stroke: #050607; stroke-width: 1.2; }
+/* Al apagarla el rojo se va despacio: la placa conserva el calor. */
+.ilus--coccion .c-zona-vitro .c-zona-calor { transition: opacity 2800ms var(--ease-standard) 200ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-zona-vitro .c-zona-calor { transition: opacity 700ms var(--ease-standard) 200ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-h-residual { fill: #FF4A2A; transition: fill 400ms var(--ease-standard) 600ms; }
+.ilus--coccion .c-guia-tactil { stroke: #8E959B; stroke-width: .5; opacity: .7; }
+.ilus--coccion .c-digito { font-family: var(--font-sans); font-size: 4px; font-weight: 700; fill: #4A2A24; transition: fill 400ms var(--ease-standard) 300ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-digito { fill: #FF4A2A; }
+.ilus--coccion .c-tecla-vitro { fill: none; stroke: #B9BFC4; stroke-width: .5; }
+.ilus--coccion .c-leyenda-vidrio { fill: #8E959B; opacity: .45; }
+/* Inducción (aros cromados, diales), extracción (ventila, sliders), híbrida y submontar */
+.ilus--coccion .c-aro { fill: none; stroke: #BFC5CA; stroke-width: 2.4; }
+.ilus--coccion .c-aro-brillo { fill: none; stroke: #F4F6F7; stroke-width: .6; opacity: .7; }
+.ilus--coccion .c-puente { stroke-linecap: round; }
+.ilus--coccion .c-dial-arco { fill: none; stroke: #5A6066; stroke-width: 1.2; stroke-linecap: round; }
+.ilus--coccion .c-dial-on { fill: none; stroke: #CFEFFF; stroke-width: 1.4; stroke-linecap: round; opacity: 0; transition: opacity 500ms var(--ease-standard) 300ms; }
+.ilus--coccion .c-dial-centro { fill: #2A2E32; stroke: #6E7479; stroke-width: .5; }
+.ilus--coccion .c-ventila-marco { fill: #1A1C1E; stroke: #3A3F44; stroke-width: .6; }
+.ilus--coccion .c-ventila-riel { stroke: #3A3F44; stroke-width: 1.2; }
+.ilus--coccion .c-digito--slider { font-size: 5px; }
+.ilus--coccion .c-slider { stroke: #8E959B; stroke-width: .8; stroke-dasharray: .6 1.6; stroke-linecap: round; opacity: .8; }
+.ilus--coccion .c-slider-on { stroke: #FF4A2A; stroke-width: 1.3; opacity: .25; transition: opacity 500ms var(--ease-standard) 300ms; }
+.ilus--coccion .c-filete { stroke: #8E959B; stroke-width: .5; opacity: .6; }
+.ilus--coccion .c-sombra-quemador { fill: #000; opacity: .22; filter: url(#ilus-desenfoque); }
+.ilus--coccion .c-anillo-hierro { fill: none; stroke: #0E0F10; stroke-width: 4; }
+.ilus--coccion .c-tapa-hierro { fill: #121314; stroke: #3A3F44; stroke-width: .5; }
+.ilus--coccion .c-brazo-hierro { fill: none; stroke: #0E0F10; stroke-width: 4.2; stroke-linecap: round; }
+.ilus--coccion .c-aro-wok { fill: none; stroke: #0E0F10; stroke-width: 3.4; }
+.ilus--coccion .c-perilla-negra { fill: #141517; stroke: #050607; stroke-width: .4; }
+.ilus--coccion .c-perilla-negra-tope { fill: #2A2E32; stroke: #050607; stroke-width: .4; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion :is(.c-dial-on, .c-slider-on) { opacity: 1; }
+/* Sartén de acero, panel táctil negro (invisible) y línea modular tipo Gaggenau */
+.ilus--coccion .c-mango-acero { fill: none; stroke: url(#ilus-cromo-h) #B9BFC4; stroke: #B9BFC4; stroke-width: 3.4; stroke-linecap: round; }
+.ilus--coccion .c-mango-acero-sombra { fill: none; stroke: #000; stroke-width: 4.6; stroke-linecap: round; opacity: .3; transform: translate(1px, 1.5px); }
+.ilus--coccion .c-sarten-acero-borde { stroke: #6E7479; stroke-width: .6; }
+.ilus--coccion .c-sarten-acero-fondo { stroke: #8E959B; stroke-width: .4; }
+.ilus--coccion .c-brillo-acero { fill: #fff; opacity: .45; }
+.ilus--coccion .c-remache { fill: #6E7479; }
+.ilus--coccion .c-panel-negro { fill: #0B0C0D; stroke: #3A3F44; stroke-width: .6; }
+.ilus--coccion .c-panel-reflejo { fill: url(#ilus-cinta); opacity: .12; }
+.ilus--coccion .c-tecla-invisible { stroke: #6E7479; transition: stroke 500ms var(--ease-standard) 300ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-tecla-invisible { stroke: #CFEFFF; }
+.ilus--coccion .c-zona-tenue { fill: none; stroke: #3A3F44; stroke-width: .8; opacity: .8; }
+.ilus--coccion .c-barra-ventila { fill: none; stroke: #2A2E32; stroke-width: 3.2; stroke-linecap: round; }
+.ilus--coccion .c-base-perilla { fill: #2A2E32; }
+.ilus--coccion .c-cara-perilla { stroke: #8E959B; stroke-width: .4; }
+.ilus--coccion .c-aleta { stroke: #3A3F44; stroke-width: .4; }
+.ilus--coccion .c-luz-perilla { fill: none; stroke: #4A3A30; stroke-width: 1.6; transition: stroke 500ms var(--ease-standard) 200ms; }
+.ilus--coccion .c-luz-perilla-halo { fill: #FF6A2A; opacity: 0; filter: url(#ilus-desenfoque); transition: opacity 500ms var(--ease-standard) 200ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-luz-perilla { stroke: #FF6A2A; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-luz-perilla-halo { opacity: .55; }
+/* Hornos de pared por modelo (Thermador · Smeg · Monogram) */
+.ilus--coccion .c-cuerpo-horno { fill: #1A1C1E; }
+.ilus--coccion .c-display-marco { fill: #A9AFB4; stroke: #6E7479; stroke-width: .6; }
+.ilus--coccion .c-lcd { fill: #CBD2D6; stroke: #8E959B; stroke-width: .4; transition: fill 500ms var(--ease-standard) 200ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-lcd { fill: #EEF6FA; }
+.ilus--coccion .c-lcd-tinta { fill: #2A2E32; }
+.ilus--coccion .c-lcd-manecilla { fill: none; stroke: #2A2E32; stroke-width: .6; stroke-linecap: round; }
+.ilus--coccion .c-display-txt--grande { font-size: 5.2px; }
+.ilus--coccion .c-indicador-agua { fill: none; stroke: #2AA8D8; stroke-width: .7; }
+.ilus--coccion .c-nivel-agua { fill: #2AA8D8; }
+.ilus--coccion .c-pantalla-color { stroke: #2A2E32; stroke-width: .4; opacity: .8; transition: opacity 500ms var(--ease-standard) 200ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-pantalla-color { opacity: 1; }
+.ilus--coccion .c-fruta-1 { fill: #5A2A4A; }
+.ilus--coccion .c-fruta-2 { fill: #8E2A3A; }
+.ilus--coccion .c-fruta-3 { fill: #3D6A2A; }
+.ilus--coccion .c-ui-texto { fill: #F4F1EA; opacity: .75; }
+.ilus--coccion .c-ui-linea { stroke: #F4F1EA; stroke-width: .3; opacity: .5; }
+.ilus--coccion .c-ranura-negra { fill: #0B0C0D; }
+.ilus--coccion .c-marco-ventana { fill: #000; fill-opacity: .08; stroke: #6E7479; stroke-width: .8; }
+.ilus--coccion .c-ventana-tenue { fill-opacity: .9; }
+.ilus--coccion .c-insignia-texto--oscuro { fill: #2A2E32; }
+.ilus--coccion .c-base-poste { fill: #8E959B; stroke: #5A6066; stroke-width: .4; }
+.ilus--coccion .c-int-lado { fill: #26292D; }
+.ilus--coccion .c-int-techo { fill: #3A3F44; }
+.ilus--coccion .c-int-piso { fill: #1A1C1E; }
+.ilus--coccion .c-int--acero .c-int-lado { fill: #A9AFB4; }
+.ilus--coccion .c-int--acero .c-int-techo { fill: #C9CED2; }
+.ilus--coccion .c-int--acero .c-int-piso { fill: #7E858B; }
+.ilus--coccion .c-riel-lado { stroke: #9AA3A9; stroke-width: .9; }
+.ilus--coccion .c-tapa-ventilador { fill: #000; opacity: .18; }
+.ilus--coccion .c-reja-radial { stroke: #6E7479; stroke-width: .7; }
+.ilus--coccion .c-reja-aro { fill: none; stroke: #8E959B; stroke-width: .9; }
+.ilus--coccion .c-reja-hex { fill: #B9BFC4; fill-opacity: .4; stroke: #6E7479; stroke-width: .8; }
+.ilus--coccion .c-perforado { fill: #3A3F44; }
+.ilus--coccion .c-luz-lateral { fill: #FFC86A; opacity: .75; filter: url(#ilus-desenfoque); }
+.ilus--coccion .c-aspa-fondo { stroke: #5A6066; stroke-width: 1.6; }
+.ilus--coccion .c-espeton { stroke: #C9CED2; stroke-width: 1.4; }
+.ilus--coccion .c-motor-espeton { fill: #6E7479; }
+.ilus--coccion .c-parrilla-alambre { stroke: #8E959B; stroke-width: .6; }
+.ilus--coccion .c-plato-negro { fill: #2A2E32; stroke: #6E7479; stroke-width: .8; }
+.ilus--coccion .c-plato-negro-int { fill: #3A3F44; }
+.ilus--coccion .c-salmon { fill: #B85A34; stroke: #6E2E14; stroke-width: .5; }
+.ilus--coccion .c-ajonjoli { fill: #1A1410; }
+.ilus--coccion .c-ajonjoli-claro { fill: #F4EAD2; }
+/* Horno doble (Masterpiece) y French Door (Café) */
+.ilus--coccion .c-marco-claro { fill: #D9DEE2; fill-opacity: .45; stroke: #8E959B; stroke-width: .7; }
+.ilus--coccion .c-parrilla-tras-vidrio { stroke: #6E7479; stroke-width: .6; opacity: .55; }
+.ilus--coccion .c-recuadro-negro { fill: #0D0F11; stroke: #2A2E32; stroke-width: .6; }
+.ilus--coccion .c-pantalla-clara { fill: #E9ECEE; opacity: .85; transition: opacity 500ms var(--ease-standard) 200ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-pantalla-clara { opacity: 1; }
+.ilus--coccion .c-tarjeta-ui { fill: #F4F6F7; stroke: #C9CED2; stroke-width: .3; }
+.ilus--coccion .c-foto-ui { fill: #B08A55; opacity: .7; }
+.ilus--coccion .c-boton-ui { fill: #2F5E3A; }
+.ilus--coccion .c-barra-ui { fill: #1A1C1E; }
+.ilus--coccion .c-ventana-cafe { fill: #0D0F11; stroke: #E9ECEE; stroke-width: 1.4; }
+.ilus--coccion .c-banda-cobre { fill: #B8733E; }
+.ilus--coccion .c-int--negro .c-int-lado { fill: #141517; }
+.ilus--coccion .c-int--negro .c-int-techo { fill: #1E2023; }
+.ilus--coccion .c-int--negro .c-int-piso { fill: #0E0F10; }
+/* Microondas por modelo (GE, Thermador, Whirlpool, cajón) */
+.ilus--coccion .c-cuerpo-negro { fill: #121314; stroke: #2A2E32; stroke-width: .5; }
+.ilus--coccion .c-malla { stroke: #0B0C0D; stroke-width: .5; }
+.ilus--coccion .c-emblema { fill: none; stroke: #B9BFC4; stroke-width: .6; }
+.ilus--coccion .c-pata-micro { fill: #0B0C0D; }
+.ilus--coccion .c-display-micro { fill: #0B0C0D; stroke: #2A2E32; stroke-width: .4; }
+.ilus--coccion .c-digitos-verdes { font-family: var(--font-sans); font-size: 5px; font-weight: 600; fill: #4ED34E; }
+.ilus--coccion .c-digitos-azules { font-family: var(--font-sans); font-size: 4.6px; font-weight: 600; fill: #9FD8FF; }
+.ilus--coccion .c-digitos-oscuros { font-family: var(--font-sans); font-size: 4.4px; font-weight: 600; fill: #2A2E32; }
+.ilus--coccion .c-tecla-micro { fill: #5A6066; opacity: .8; }
+.ilus--coccion .c-tecla-micro--claro { fill: #B9BFC4; }
+.ilus--coccion .c-banda-clara { fill: #DDE1E4; opacity: .35; }
+.ilus--coccion .c-boton-apertura { fill: none; stroke: #6E7479; stroke-width: .6; }
+.ilus--coccion .c-base-micro { fill: #1A1C1E; }
+.ilus--coccion .c-junta-marco { fill: #0B0C0D; }
+.ilus--coccion .c-panel-cajon { fill: #E9ECEE; stroke: #9AA3A9; stroke-width: .5; }
+.ilus--coccion .c-display-claro { fill: #F4F6F7; stroke: #9AA3A9; stroke-width: .4; }
+.ilus--coccion .c-vidrio-gris { fill: #B9BFC4; stroke: #8E959B; stroke-width: .5; }
+.ilus--coccion .c-bol { fill: #8E8678; stroke: #5A544A; stroke-width: .5; }
+.ilus--coccion .c-bol-int { fill: #A89F90; }
+.ilus--coccion .c-arroz { fill: #F4F1EA; }
+.ilus--coccion .c-carne { fill: #6E3A1E; }
+.ilus--coccion .c-pimiento { fill: #E8B630; }
+.ilus--coccion .c-jitomate { fill: #C8322A; }
+/* Campanas: isla en penumbra, cristal, cilíndrica e inserto */
+.ilus--coccion .c-piso-penumbra { fill: #000; opacity: .35; }
+.ilus--coccion .c-visera-cristal--io { fill: #DDEBEF; fill-opacity: .5; stroke: #9FC4C4; stroke-width: .6; }
+.ilus--coccion .c-cristal-brillo { fill: none; stroke: #fff; stroke-width: .8; opacity: .55; }
+.ilus--coccion .c-cristal-canto { fill: none; stroke: #2E7A72; stroke-width: 1.2; }
+.ilus--coccion .c-cilindro-junta { fill: #1A1C1E; opacity: .6; }
+.ilus--coccion .c-boton-cilindro { fill: #C9CED2; }
+.ilus--coccion .c-boton-azul { fill: #3D8CFF; }
+.ilus--coccion .c-led-cilindro { fill: #6E7479; transition: fill 500ms var(--ease-standard) 150ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-led-cilindro { fill: #FFF6E4; }
+.ilus--coccion .c-mueble-inserto { transition: opacity 700ms var(--ease-standard) 150ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-mueble-inserto { opacity: .3; }
+.ilus--coccion .c-marco-inserto { stroke: #5A6066; stroke-width: .5; }
+.ilus--coccion .c-fondo-rejilla { fill: #2A2E32; }
+.ilus--coccion .c-lama-clara { stroke: #C9CED2; stroke-width: 2.2; }
+.ilus--coccion .c-lama-oscura { stroke: #1A1C1E; stroke-width: 1; }
+.ilus--coccion .c-led-inserto { fill: #E9ECEE; transition: fill 500ms var(--ease-standard) 150ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-led-inserto { fill: #FFFBF2; }
+/* Campanas: revestir, techo (control), decorativa, retráctil, gran formato, repisa, monolith */
+.ilus--coccion .c-foco-campana { fill: #E9ECEE; transition: fill 500ms var(--ease-standard) 150ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-foco-campana { fill: #FFF3D6; }
+.ilus--coccion .c-piloto-rojo { fill: #C8322A; }
+.ilus--coccion .c-control-remoto { fill: #141517; stroke: #3A3F44; stroke-width: .5; }
+.ilus--coccion .c-tecla-control { fill: #3A3F44; transition: fill 500ms var(--ease-standard) 250ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-tecla-control { fill: #CFEFFF; }
+.ilus--coccion .c-tensor { stroke: #9AA3A9; stroke-width: .5; }
+.ilus--coccion .c-cable-espiral { fill: none; stroke: #2A2E32; stroke-width: 1; stroke-dasharray: 1.4 .6; }
+.ilus--coccion .c-borde-enrollado { fill: none; stroke: #1A1C1E; stroke-width: .8; }
+.ilus--coccion .c-disco-claro { fill: #D9DEE2; stroke: #8E959B; stroke-width: .5; }
+.ilus--coccion .c-boca-downdraft { fill: #1A1C1E; }
+.ilus--coccion .c-tira-azul { fill: #4A7FA8; stroke: #2A4A66; stroke-width: .4; }
+.ilus--coccion .c-tira-azul-txt { fill: #CFEFFF; opacity: .6; }
+.ilus--coccion .c-linea-zona { stroke: #E9ECEE; stroke-width: .8; opacity: .8; }
+.ilus--coccion .c-tira-ind { fill: #9FD8FF; }
+.ilus--coccion .c-led-barra { fill: #6E7479; transition: fill 500ms var(--ease-standard) 150ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-led-barra { fill: #FFF6E4; }
+.ilus--coccion .c-repisa-negra { fill: #1E1F21; }
+.ilus--coccion .c-repisa-cuerpo { fill: #2A2C2F; }
+.ilus--coccion .c-marco-cuadro { fill: #121314; }
+.ilus--coccion .c-lienzo { fill: #D9CFC2; }
+.ilus--coccion .c-figura-cuadro { fill: #3A2E24; }
+.ilus--coccion .c-cuenco { fill: #E9E2D2; stroke: #8E8678; stroke-width: .4; }
+.ilus--coccion .c-junta-monolith { stroke: #2A2E32; stroke-width: .8; }
+.ilus--coccion .c-tapa-monolith { transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(.06); transition: transform 800ms var(--ease-reveal) 150ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-tapa-monolith { transform: none; }
+.ilus--coccion .c-led-perilla { fill: none; stroke: #3D8CFF; stroke-width: 1; opacity: 0; transition: opacity 500ms var(--ease-standard) 200ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-led-perilla { opacity: .9; }
 .ilus--coccion .c-logo { fill: #3A3F44; opacity: .6; }
 /* Ollas, sartenes y decoración */
 .ilus--coccion .c-olla { stroke: #4A5056; stroke-width: .6; }
+.ilus--coccion .c-olla-interior { fill: #3A3F44; opacity: .55; }
 .ilus--coccion .c-olla-borde { fill: #8E959B; stroke: #4A5056; stroke-width: .5; }
 .ilus--coccion .c-olla-tapa { fill: #B9BFC4; stroke: #4A5056; stroke-width: .5; }
 .ilus--coccion .c-asa, .ilus--coccion .c-mango { fill: #2A2E32; }
@@ -1427,6 +1673,14 @@
 .ilus--coccion .c-filtro { fill: #2A2E32; }
 .ilus--coccion .c-led { stroke: #6E7479; stroke-width: 1.4; transition: stroke 500ms var(--ease-standard) 150ms; }
 .ilus--coccion .c-luz polygon { opacity: 0; transition: opacity 700ms var(--ease-standard) 150ms; }
+/* Luz fija de la campana en las escenas de estufa: encendida en reposo, más
+   intensa al encender la estufa. */
+.ilus--coccion .c-luz--fija polygon { opacity: .7; }
+.ilus--coccion .c-luz--fija .c-haz { opacity: .45; }
+.ilus--coccion .c-luz--fija .c-led { stroke: #FFF6E4; }
+.ilus--coccion .c-charco { fill: #FFE6B8; opacity: .3; filter: url(#ilus-desenfoque); transition: opacity 700ms var(--ease-standard) 150ms; }
+.ilus--coccion .c-foco { fill: #FFFBF2; }
+.ilus--coccion .c-foco-halo { fill: #FFE9C2; opacity: .55; filter: url(#ilus-desenfoque); }
 .ilus--coccion .c-visera-cristal { fill: #C9DCE4; fill-opacity: .28; stroke: #9FB4BE; stroke-width: .8; }
 .ilus--coccion .c-moldura { fill: #000; opacity: .18; }
 .ilus--coccion .c-revestida { fill: #D9CFC2; stroke: #8E8678; stroke-width: .6; }
@@ -1486,6 +1740,12 @@
 :is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion :is(.c-llama, .c-bocanada, .c-aire-trazo, .c-calor-onda, .c-ventilador, .c-ducto-flecha, .c-zona-calor) { animation-play-state: running; }
 :is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion :is(.c-flama, .c-vapor, .c-aire, .c-calor, .c-pantalla-ui, .c-reloj-on, .c-luz-horno, .c-zona-calor, .c-zona-borde, .c-teppan-calor) { opacity: 1; }
 :is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-luz polygon { opacity: 1; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-luz--fija .c-haz { opacity: .7; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-charco { opacity: .45; }
+/* La tapa de vidrio se levanta primero; la flama prende cuando ya está arriba. */
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-tapa { transform: none; transition: transform 800ms var(--ease-reveal) 0ms; }
+.ilus--coccion .c-con-tapa .c-flama { transition-delay: 0ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-con-tapa .c-flama { transition-delay: 750ms; }
 :is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-led { stroke: #FFF6E4; }
 :is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-pantalla { fill: #182630; }
 :is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion :is(.c-tactil, .c-tecla) { fill: #CFEFFF; }
@@ -1499,5 +1759,5 @@
 :is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-caja { opacity: 1; transform: translateY(-6%); }
 @media (prefers-reduced-motion: reduce) {
   .ilus--coccion :is(.c-llama, .c-bocanada, .c-aire-trazo, .c-calor-onda, .c-ventilador, .c-ducto-flecha, .c-zona-calor) { animation: none; }
-  .c-puerta-x, .c-puerta-abatida, .c-cajon, .c-caja, .ilus--coccion .c-retractil, .ilus--coccion .c-slider { transition: none; }
+  .c-puerta-x, .c-puerta-abatida, .c-cajon, .c-caja, .ilus--coccion .c-retractil, .ilus--coccion .c-slider, .ilus--coccion .c-tapa, .ilus--coccion .c-tapa-monolith { transition: none; }
 }

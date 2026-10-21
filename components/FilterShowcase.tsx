@@ -18,6 +18,7 @@ import DiagramaDefs from "./DiagramaDefs";
 import FilterList from "./FilterList";
 import FichaModal from "./FichaModal";
 import DestinoBusqueda from "./DestinoBusqueda";
+import EtiquetasSinChoque from "./EtiquetasSinChoque";
 import { slugFicha } from "@/lib/guiasBusqueda";
 import IlustracionTipo, { panelar, tieneIlustracion } from "./IlustracionTipo";
 import IlustracionCoccion, { tieneCoccion } from "./IlustracionCoccion";
@@ -48,6 +49,7 @@ export default function FilterShowcase({ filtros, contexto, etiquetas }: Props) 
       <DiagramaDefs />
       <FichaModal contexto={contexto} />
       <DestinoBusqueda />
+      <EtiquetasSinChoque />
       {GRUPOS.map(({ key, label: labelDefault }) => {
         const label = etiquetas?.[key] ?? labelDefault;
         const grupo = conFicha.filter((f) => f.ficha!.grupo === key);

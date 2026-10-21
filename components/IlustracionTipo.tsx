@@ -117,8 +117,6 @@ interface Aparato {
   /** Cocina exterior: muro de ladrillo, cubierta de granito, gabinetes de acero
    *  y asador (Centros de bebida · Puerta sólida). */
   exterior?: boolean;
-  /** Modal: Cerrado y Abierto uno encima del otro (aparatos anchos: Parejas). */
-  apilar?: boolean;
   /** Escena baja con aparato alto: espacio a los lados (ventilación). */
   holgura?: number;
   /** Vista superior en la esquina (tipos de instalación). */
@@ -1857,7 +1855,7 @@ const APARATOS: Record<string, Aparato> = {
     piezas: [puerta(212, 70, 136, 180, "r"), cajon(212, 254, 136, 112, "congelador")],
     etiquetas: [
       { x: 246, y: 96, hasta: 150, texto: "Fondo 29–36″:\nsobresale del mueble" },
-      { x: 208, y: 196, hasta: 150, texto: "Holgura lateral\npara ventilar" },
+      { x: 208, y: 196, hasta: 150, texto: "Holgura a los lados,\natrás y arriba" },
       { x: 246, y: 318, hasta: 150, texto: "Sin obra: se\nconecta y listo" },
     ],
   },
@@ -1871,9 +1869,10 @@ const APARATOS: Record<string, Aparato> = {
     huecos: [{ x: 190, y: 74, w: 180, h: 292, zona: "fresca", crisper: true }],
     piezas: [puerta(190, 74, 180, 292, "l", { manija: "larga", panelable: true })],
     etiquetas: [
-      { x: 240, y: 100, hasta: 150, texto: "A ras del mueble:\n24″ de fondo" },
-      { x: 240, y: 236, hasta: 150, texto: "Admite panel o\nfrente de acero" },
-      { x: 236, y: 371, hasta: 150, texto: "Ventila por el\nzoclo frontal" },
+      // Ventila por la parrilla frontal de arriba (rejilla del cuerpo), no por el zoclo.
+      { x: 240, y: 64, hasta: 150, texto: "Ventila por la parrilla\nfrontal superior" },
+      { x: 240, y: 160, hasta: 150, texto: "A ras del mueble:\n24″ de fondo" },
+      { x: 240, y: 280, hasta: 150, texto: "Admite panel o\nfrente de acero" },
     ],
   },
   // Counter Depth: libre pero con el fondo de la cubierta; sin nicho a medida.
@@ -1896,7 +1895,6 @@ const APARATOS: Record<string, Aparato> = {
   // rejilla arriba, jaladeras juntas al centro.
   parejas: {
     escena: "alta",
-    apilar: true,
     cuerpos: [{ x: 140, ...ALTO, w: 138, rejilla: 16 }, { x: 282, ...ALTO, w: 138, rejilla: 16 }],
     // Regla de Carla (2026-10-19): congelador a la izquierda, refrigerador a la derecha.
     huecos: [
@@ -1924,8 +1922,8 @@ const APARATOS: Record<string, Aparato> = {
     etiquetas: [
       { x: 238, y: 80, hasta: 150, texto: "Lo fresco a la\naltura de los ojos" },
       { x: 234, y: 318, hasta: 150, texto: "Congelador en cajón\nde extracción total" },
-      { x: 382, y: 120, hasta: 404, texto: "Medias puertas:\nabren en poco espacio" },
-      { x: 330, y: 222, hasta: 404, texto: "Cajones de\nhumedad controlada" },
+      { x: 382, y: 172, hasta: 404, texto: "Medias puertas:\nabren en poco espacio" },
+      { x: 330, y: 238, hasta: 404, texto: "Cajones de\nhumedad controlada" },
     ],
   },
   duplex: {
@@ -1937,7 +1935,7 @@ const APARATOS: Record<string, Aparato> = {
     ],
     piezas: [puerta(200, 56, 70, 310, "l", { zona: "congelador", despachador: true }), puerta(270, 56, 90, 310, "r")],
     etiquetas: [
-      { x: 226, y: 84, hasta: 150, texto: "Congelador vertical\nde piso a techo" },
+      { x: 226, y: 84, hasta: 150, texto: "Congelador vertical\nde altura completa" },
       { x: 186, y: 300, hasta: 150, texto: "Despachador de agua\ny hielo en la puerta" },
       { x: 318, y: 120, hasta: 410, texto: "Compartimento fresco\nde altura completa" },
       { x: 386, y: 236, hasta: 410, texto: "Puertas angostas:\nabatimiento corto" },
@@ -1970,7 +1968,7 @@ const APARATOS: Record<string, Aparato> = {
     etiquetas: [
       { x: 229, y: 96, hasta: 130, texto: "Congelador arriba\ncon su propia puerta" },
       { x: 229, y: 236, hasta: 130, texto: "Compartimento\nfresco abajo" },
-      { x: 241, y: 360, hasta: 130, texto: "Un solo sistema de\nfrío: menor consumo" },
+      { x: 241, y: 360, hasta: 130, texto: "Sistema de frío más\nsimple: menor consumo" },
     ],
   },
   // Torres que se combinan (Carla, 2026-10-19; referencia Sub-Zero): congelador,
@@ -1980,7 +1978,6 @@ const APARATOS: Record<string, Aparato> = {
   columna: {
     escena: "alta",
     panelable: true,
-    apilar: true,
     cuerpos: [
       { x: 96, ...ALTO, w: 120, rejilla: 18 },
       { x: 220, ...ALTO, w: 112, rejilla: 18 },
@@ -2062,9 +2059,9 @@ const APARATOS: Record<string, Aparato> = {
     ],
     etiquetas: [
       { x: 224, y: 128, hasta: 130, texto: "Agua fría sin\nabrir la puerta" },
-      { x: 210, y: 300, hasta: 130, texto: "Congelador en\ndos puertas" },
-      { x: 303, y: 80, hasta: 430, texto: "Control digital\nen la puerta" },
-      { x: 360, y: 170, hasta: 430, texto: "Lo fresco arriba,\na la vista" },
+      { x: 210, y: 300, hasta: 130, texto: "Congelador en dos\npuertas (una convertible)" },
+      { x: 303, y: 120, hasta: 430, texto: "Control digital\nen la puerta" },
+      { x: 360, y: 205, hasta: 430, texto: "Lo fresco arriba,\na la vista" },
       { x: 360, y: 300, hasta: 430, texto: "Medias puertas:\nabren en poco espacio" },
     ],
   },
@@ -2096,7 +2093,7 @@ const APARATOS: Record<string, Aparato> = {
     etiquetas: [
       { x: 222, y: 150, hasta: 150, texto: "Agua y hielo sin\nabrir la puerta" },
       { x: 236, y: 330, hasta: 150, texto: "Congelador en\ncajón inferior" },
-      { x: 322, y: 90, hasta: 410, texto: "Zona fresca\nfrench door" },
+      { x: 322, y: 130, hasta: 410, texto: "Zona fresca\nfrench door" },
       { x: 330, y: 242, hasta: 410, texto: "Dos cajones con\ntemperatura propia" },
     ],
   },
@@ -2130,9 +2127,9 @@ const APARATOS: Record<string, Aparato> = {
     // Abre a la izquierda (Carla, 2026-10-19): etiquetas a la derecha.
     piezas: [puerta(215, 70, 130, 296, "l", { zona: "congelador", manija: "larga" })],
     etiquetas: [
-      { x: 310, y: 110, hasta: 410, texto: "Repisas y cajones\ncon acceso frontal" },
-      { x: 349, y: 190, hasta: 410, texto: "Holgura lateral\npara ventilar" },
-      { x: 310, y: 255, hasta: 410, texto: "Instalación libre:\nse conecta y listo" },
+      { x: 310, y: 140, hasta: 410, texto: "Repisas y cajones\ncon acceso frontal" },
+      { x: 349, y: 215, hasta: 410, texto: "Holgura lateral\npara ventilar" },
+      { x: 310, y: 290, hasta: 410, texto: "Instalación libre:\nse conecta y listo" },
     ],
   },
   "cong-empotrado": {
@@ -2144,9 +2141,9 @@ const APARATOS: Record<string, Aparato> = {
     huecos: [{ x: 200, y: 72, w: 160, h: 294, zona: "congelador" }],
     piezas: [puerta(200, 72, 160, 294, "l", { zona: "congelador", manija: "larga", panelable: true })],
     etiquetas: [
-      { x: 250, y: 100, hasta: 150, texto: "A ras del mueble:\n24″ de fondo" },
-      { x: 250, y: 236, hasta: 150, texto: "Admite panel o\nfrente de acero" },
-      { x: 246, y: 371, hasta: 150, texto: "Ventila por el\nzoclo frontal" },
+      { x: 250, y: 64, hasta: 150, texto: "Ventila por la parrilla\nfrontal superior" },
+      { x: 250, y: 160, hasta: 150, texto: "A ras del mueble:\n24″ de fondo" },
+      { x: 250, y: 280, hasta: 150, texto: "Admite panel o\nfrente de acero" },
     ],
   },
   // Arcón doméstico blanco frente al muro de listones, fuera de la cocina
@@ -2281,7 +2278,7 @@ const APARATOS: Record<string, Aparato> = {
     etiquetas: [
       { x: 214, y: 170, hasta: 130, texto: "Gabinete terminado:\nsin nicho ni obra" },
       { x: 368, y: 250, hasta: 430, texto: "Costados a la\nvista" },
-      { x: 240, y: 371, hasta: 130, texto: "Va donde haga falta:\nbar, oficina o terraza" },
+      { x: 240, y: 360, hasta: 130, texto: "Va donde haga falta:\nbar, oficina o terraza" },
     ],
     recorte: { x: 70, y: 60, w: 420, h: 330 },
   },
@@ -2478,7 +2475,6 @@ export default function IlustracionTipo({ tipo }: { tipo: string }) {
     <span
       className={`ilus ${a.real ? "ilus--real" : "ilus--listones"}${a.exterior ? " ilus--exterior" : ""}${a.antracita ? " ilus--antracita" : ""}${a.grafito ? " ilus--grafito" : ""}${a.piezas.every((p) => p.tipo === "cajon") ? " ilus--cajones" : ""}`}
       style={style}
-      data-apilar={a.apilar ? "" : undefined}
     >
       <Ilustracion a={a} />
     </span>

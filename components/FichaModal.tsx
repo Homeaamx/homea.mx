@@ -14,7 +14,7 @@
 // y el diagrama se clona de la propia tarjeta, así el SVG no se duplica en el
 // bundle. Sin JS la tarjeta es un enlace normal al catálogo filtrado.
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { createPortal } from "react-dom";
 
 interface Datos {
@@ -28,13 +28,19 @@ interface Datos {
   /** Ilustración en escena (outerHTML de .ilus) y su proporción de recorte. */
   ilus: string;
   recorte: string;
-  /** Vistas apiladas (Parejas): la escena es más ancha que alta. */
-  apilar: boolean;
+  /** Vistas lado a lado (microondas) en vez de una encima de la otra. */
+  ladoALado: boolean;
   /** Tipo con botón "Panelar" (Columna) y su estado al abrir. */
   panelable: boolean;
   /** Nombres de las dos vistas ("Cerrado|Abierto" o "Apagado|Encendido"). */
   estados: [string, string];
   panel: boolean;
+}
+
+/** "w / h" → w/h (proporción del recorte; 490/370 si no viene). */
+function proporcion(recorte: string): number {
+  const [w, h] = recorte.split("/").map((n) => parseFloat(n));
+  return w > 0 && h > 0 ? w / h : 490 / 370;
 }
 
 export default function FichaModal({ contexto }: { contexto: string }) {
@@ -97,7 +103,7 @@ export default function FichaModal({ contexto }: { contexto: string }) {
         svg: card.querySelector(".tfk-diagram")?.innerHTML ?? "",
         ilus: ilus?.outerHTML ?? "",
         recorte: ilus?.style.getPropertyValue("--rar") ?? "",
-        apilar: ilus?.dataset.apilar !== undefined,
+        ladoALado: ilus?.dataset.duo === "lado",
         panelable: d.panelable !== undefined,
         panel: !!card.querySelector(".tfk-ilus.is-panel"),
         estados: ((ilus?.dataset.estados ?? "Cerrado|Abierto").split("|") as [string, string]),
@@ -157,7 +163,14 @@ export default function FichaModal({ contexto }: { contexto: string }) {
                 {panel ? "Ver en acero" : "Panelar"}
               </button>
             )}
-            <div className={ficha.apilar ? "tfk-duo tfk-duo--apilado" : "tfk-duo"} aria-hidden="true">
+            {/* Las dos vistas, una encima de la otra (Carla, 2026-10-21); --ar
+                ajusta el ancho para que ambas quepan en alto. Los microondas van
+                lado a lado. */}
+            <div
+              className={ficha.ladoALado ? "tfk-duo" : "tfk-duo tfk-duo--apilado"}
+              style={{ "--ar": proporcion(ficha.recorte) } as CSSProperties}
+              aria-hidden="true"
+            >
               {ficha.estados.map((vista, i) => (
                 <figure key={vista} className={i === 1 && abierto ? "tfk-duo-item is-abierto" : "tfk-duo-item"}>
                   <span

@@ -277,6 +277,57 @@ export default function DiagramaDefs() {
           <stop offset="0%" stopColor="#FFF4DE" stopOpacity="0.55" />
           <stop offset="100%" stopColor="#FFE9C2" stopOpacity="0" />
         </linearGradient>
+        {/* Estufa profesional: sombra bajo el tablero y hueco de las patas. */}
+        <linearGradient id="c-sombra-tablero" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#000" stopOpacity="0.45" />
+          <stop offset="100%" stopColor="#000" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id="c-bajo-estufa" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#050505" />
+          <stop offset="70%" stopColor="#141210" />
+          <stop offset="100%" stopColor="#2A241F" />
+        </linearGradient>
+        {/* Fondo cepillado de la sartén de acero (parrilla invisible). */}
+        <radialGradient id="c-acero-fondo" cx="40%" cy="35%" r="70%">
+          <stop offset="0%" stopColor="#E9ECEE" />
+          <stop offset="55%" stopColor="#B9BFC4" />
+          <stop offset="100%" stopColor="#7E858B" />
+        </radialGradient>
+        {/* Hornos de pared: fondo esmaltado gris, acero brillante y pantalla a color. */}
+        <linearGradient id="c-fondo-esmalte" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#4A4E54" />
+          <stop offset="60%" stopColor="#2E3236" />
+          <stop offset="100%" stopColor="#1E2023" />
+        </linearGradient>
+        <linearGradient id="c-fondo-acero" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#8E959B" />
+          <stop offset="50%" stopColor="#D9DEE2" />
+          <stop offset="100%" stopColor="#8E959B" />
+        </linearGradient>
+        <linearGradient id="c-pantalla-color" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#2A1630" />
+          <stop offset="55%" stopColor="#3B1A24" />
+          <stop offset="100%" stopColor="#1A2418" />
+        </linearGradient>
+        {/* Malla metálica de la ventana del microondas. */}
+        <pattern id="c-malla" width="2.4" height="2.4" patternUnits="userSpaceOnUse">
+          <rect width="2.4" height="2.4" fill="#2A2E32" />
+          <circle cx="1.2" cy="1.2" r="0.55" fill="#4A5056" />
+        </pattern>
+        {/* Campanas de isla: penumbra del muro del fondo (profundidad). */}
+        <linearGradient id="c-fondo-profundo" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#0A0705" stopOpacity="0.72" />
+          <stop offset="60%" stopColor="#0A0705" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#0A0705" stopOpacity="0.4" />
+        </linearGradient>
+        {/* Cilindro de acero oscuro (campana cilíndrica tipo Elica). */}
+        <linearGradient id="c-cilindro-oscuro" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#2A2E32" />
+          <stop offset="30%" stopColor="#8E959B" />
+          <stop offset="45%" stopColor="#D9DEE2" />
+          <stop offset="70%" stopColor="#5A6066" />
+          <stop offset="100%" stopColor="#1A1C1E" />
+        </linearGradient>
         {/* Flama azul: base azul intenso, punta clara. */}
         <linearGradient id="c-llama" x1="0" y1="1" x2="0" y2="0">
           <stop offset="0%" stopColor="#1D4FE0" />
