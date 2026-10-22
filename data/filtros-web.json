@@ -1890,9 +1890,7 @@
         "nombre": "Tipo de instalación",
         "clave": "instalacion",
         "valores": [
-          "Cubierta",
-          "De pared",
-          "De techo"
+          "Cubierta"
         ]
       },
       {

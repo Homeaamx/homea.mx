@@ -1478,17 +1478,17 @@ const DIAGRAMAS: Record<string, ReactElement> = {
 
   "camp-monolith": (
     <>
-      {/* Un solo bloque del techo a la cubierta: sin quiebre entre ducto y campana. */}
-      <line x1="20" y1="12" x2="120" y2="12" className="fl" />
-      <rect x="50" y="12" width="40" height="58" className="fb" />
-      <line x1="50" y1="64" x2="90" y2="64" className="glass-shelf" />
-      <line x1="24" y1="106" x2="116" y2="106" className="ln" />
+      {/* Bloque apoyado en la cubierta tras la parrilla; el módulo central se
+          abre y extrae a ras de cubierta (texto de Cowork, 2026-10-21). */}
+      <rect x="18" y="76" width="104" height="30" className="fb" />
+      <rect x="50" y="64" width="40" height="10" className="fb" />
+      <line x1="52" y1="75" x2="88" y2="75" className="glass-shelf" />
+      <line x1="14" y1="106" x2="126" y2="106" className="ln" />
       <circle cx="56" cy="100" r="6" className="glass" />
       <circle cx="84" cy="100" r="6" className="glass" />
       <g className="in">
-        <line x1="56" y1="96" x2="60" y2="74" strokeDasharray="3 4" />
-        <line x1="70" y1="98" x2="70" y2="74" strokeDasharray="3 4" />
-        <line x1="84" y1="96" x2="80" y2="74" strokeDasharray="3 4" />
+        <line x1="56" y1="94" x2="60" y2="80" strokeDasharray="3 4" />
+        <line x1="84" y1="94" x2="80" y2="80" strokeDasharray="3 4" />
       </g>
     </>
   ),

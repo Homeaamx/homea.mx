@@ -62,7 +62,7 @@ TIPO_A_FAMILIA = {
     "Lavavajillas": "cocina-y-bar/lavavajillas",
     "Tarjas": "cocina-y-bar/tarjas-y-griferia/tarjas",
     "Trituradores": "cocina-y-bar/trituradores",
-    "Filtros de agua": "cocina-y-bar/filtros-y-purificadores-de-agua/filtros-y-repuestos",
+    "Filtros de agua": "/productos/cocina-y-bar/filtros-y-purificadores-de-agua?tipo=purificadores-de-agua",  # filtros y repuestos = accesorios de purificadores
     "Dispensadores de agua": "cocina-y-bar/filtros-y-purificadores-de-agua",
     "Asadores": "exterior/asadores-y-hornos",
     "Hornos de pizza": "exterior/asadores-y-hornos/hornos-de-pizza",

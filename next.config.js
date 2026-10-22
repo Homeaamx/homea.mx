@@ -56,11 +56,10 @@ const nextConfig = {
       "/garantias-instalacion.html": "/garantias-instalacion",
       "/guias.html": "/guias",
     };
-    // Familia "agua" (docs/PLAN-REDIRECTS-MIGRACION.md §5.b): la taxonomía separó
-    // purificadores/filtros · monomandos de agua filtrada · despachadores de garrafón,
-    // que en OXATIS vivían mezclados. 301 explícito (Next emite 308 con permanent).
-    // Nota: el destino de despachadores apunta a la macro mientras Electrodomésticos
-    // menores no tenga páginas de subcat.1 (evita 404).
+    // Familia "agua" (docs/PLAN-REDIRECTS-MIGRACION.md §5.b): purificadores (con sus
+    // filtros y repuestos) y despachadores de garrafón viven juntos en Cocina y Bar ›
+    // Purificadores y Despachadores de Agua (Carla, 2026-10-21); los monomandos de
+    // agua filtrada, en Grifería. 301 explícito (Next emite 308 con permanent).
     // Tier 1–2 de GSC (docs/PLAN-REDIRECTS-MIGRACION.md §5) + categorías ≥20 clics
     // de las familias que YA tienen página nueva (refrigeradores / parrillas /
     // campanas y sus padres). Los ?f= usan los slugs reales de la taxonomía
@@ -142,7 +141,7 @@ const nextConfig = {
     const oxatisAgua = {
       "/filtros-de-agua-c102x3166686": "/productos/cocina-y-bar/filtros-y-purificadores-de-agua",
       "/dispensadores-de-agua-c102x2874855": "/productos/cocina-y-bar/filtros-y-purificadores-de-agua",
-      "/despachadores-de-agua-garrafon-c102x3177457": "/productos/electrodomesticos-menores",
+      "/despachadores-de-agua-garrafon-c102x3177457": "/productos/cocina-y-bar/filtros-y-purificadores-de-agua?tipo=despachadores-de-agua",
       "/monomando-para-filtro-de-agua-c106x4342728":
         "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos-de-agua-filtrada",
     };

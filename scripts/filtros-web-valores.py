@@ -28,7 +28,7 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 JSON = RAIZ / "data" / "filtros-web.json"
 XLSX = Path(
-    "/Users/carlaarteaga/Library/CloudStorage/OneDrive-Homea 2 2/HOMEA/PAGINA WEB/"
+    "/Users/carlaarteaga/Library/CloudStorage/OneDrive-Homea/HOMEA/PAGINA WEB/"
     "PAGINA NUEVA 2026/FILTROS DE BUSQUEDA SHOPIFY 2026/FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx"
 )
 # Hojas con canal SHOPIFY (las "SOLO PDF" se ignoran).

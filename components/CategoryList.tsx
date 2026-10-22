@@ -5,6 +5,7 @@
 //                      categoría actual; enlazan a su filtro PLP vía <CtaProducto> (sin 404).
 
 import Link from "next/link";
+import { conPaginaFichas } from "@/lib/paginaFichas";
 import type { Subcategoria1 } from "@/types/guias";
 import CtaProducto from "./CtaProducto";
 
@@ -41,7 +42,7 @@ export default function CategoryList({
         <span className="cat-rail-head eyebrow">{railHead}</span>
         {leaves.map((l) => {
           // Con varios filtros → página de filtros; si no → filtro PLP directo.
-          const tieneFiltros = Boolean(l.rutaFiltros) && (l.filtros?.length ?? 0) > 1;
+          const tieneFiltros = conPaginaFichas(l);
           return tieneFiltros ? (
             <Link
               key={l.rutaFiltros}

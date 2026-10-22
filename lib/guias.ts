@@ -8,6 +8,7 @@ import { existsSync } from "fs";
 import { join } from "path";
 
 import taxonomiaData from "@/GUIAS/taxonomia-guias.json";
+import { conPaginaFichas } from "./paginaFichas";
 import { guiaPorRuta, guiasPublicadas, type GuiaPublicada } from "@/lib/shopify/guias";
 import type {
   Macrocategoria,
@@ -73,9 +74,9 @@ for (const macro of taxonomia.macrocategorias) {
     // Índice de categoría de guías (ramas de 3 niveles).
     if (sub1.rutaGuias) register({ kind: "categoria", macro, sub1 }, sub1.rutaGuias);
 
-    // Página de filtros de una Subcategoría 2 (cuando tiene varios filtros).
+    // Página de filtros de una Subcategoría 2 (varios filtros o uno ilustrado).
     for (const sub2 of sub1.subcategorias2 ?? []) {
-      if (sub2.rutaFiltros && (sub2.filtros?.length ?? 0) > 1) {
+      if (sub2.rutaFiltros && conPaginaFichas(sub2)) {
         register({ kind: "filtros", macro, sub1, sub2 }, sub2.rutaFiltros);
       }
     }

@@ -143,6 +143,18 @@ export default function DiagramaDefs() {
           </g>
           <path d="M-10 172 C 70 156, 96 212, 162 200 S 262 164, 334 218" fill="none" stroke="#fff" strokeOpacity="0.12" strokeWidth="0.5" />
         </pattern>
+        {/* Mármol claro (campana tipo Repisa, Carla 2026-10-21): el muro se aclara
+            para que la repisa negra destaque. */}
+        <pattern id="ilus-marmol-claro" patternUnits="userSpaceOnUse" width="560" height="400">
+          <rect width="560" height="400" fill="#CBBFAF" />
+          <g fill="none" stroke="#8A7A66" strokeOpacity="0.4" strokeWidth="0.8">
+            <path d="M-10 168 C 60 150, 90 210, 160 196 S 260 160, 330 214 S 470 170, 570 226" />
+            <path d="M20 236 C 70 200, 120 222, 180 178 S 300 230, 380 168 S 500 210, 570 160" />
+            <path d="M-10 200 C 40 190, 110 160, 150 150" strokeOpacity="0.25" />
+            <path d="M400 236 C 430 200, 470 196, 520 152" strokeOpacity="0.28" />
+          </g>
+          <path d="M-10 172 C 70 156, 96 212, 162 200 S 262 164, 334 218" fill="none" stroke="#fff" strokeOpacity="0.35" strokeWidth="0.5" />
+        </pattern>
         {/* Columnas antracita (cava de pared) y su halo gris al centro. */}
         <linearGradient id="ilus-antracita" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#2C2D2F" />
@@ -320,6 +332,60 @@ export default function DiagramaDefs() {
           <stop offset="60%" stopColor="#0A0705" stopOpacity="0.55" />
           <stop offset="100%" stopColor="#0A0705" stopOpacity="0.4" />
         </linearGradient>
+        {/* Tarjas (Carla, 2026-10-21): luz difusa en el muro, tina vista desde
+            arriba y brillo de la cubierta oscura. */}
+        <radialGradient id="t-luz-difusa" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#FFD9A0" stopOpacity="0.42" />
+          <stop offset="45%" stopColor="#E8B878" stopOpacity="0.18" />
+          <stop offset="100%" stopColor="#E8B878" stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id="t-pared-tina" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#B9BFC4" />
+          <stop offset="100%" stopColor="#E9ECEE" />
+        </linearGradient>
+        <radialGradient id="t-tina-planta" cx="50%" cy="45%" r="65%">
+          <stop offset="0%" stopColor="#E9ECEE" />
+          <stop offset="70%" stopColor="#B9BFC4" />
+          <stop offset="100%" stopColor="#7E858B" />
+        </radialGradient>
+        <linearGradient id="t-cubierta-luz" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#fff" stopOpacity="0.08" />
+          <stop offset="55%" stopColor="#fff" stopOpacity="0" />
+          <stop offset="100%" stopColor="#000" stopOpacity="0.25" />
+        </linearGradient>
+        {/* Asadores (Carla, 2026-10-21): jardín de fondo, domo de acero, interior
+            de la tapa y barril negro del ahumador. */}
+        <linearGradient id="a-jardin" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#D9D6C8" />
+          <stop offset="45%" stopColor="#A9B08E" />
+          <stop offset="100%" stopColor="#5E6E40" />
+        </linearGradient>
+        <linearGradient id="a-domo" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#F4F6F7" />
+          <stop offset="55%" stopColor="#C9CED2" />
+          <stop offset="100%" stopColor="#8E959B" />
+        </linearGradient>
+        <linearGradient id="a-interior" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#9AA3A9" />
+          <stop offset="100%" stopColor="#D9DEE2" />
+        </linearGradient>
+        <linearGradient id="a-barril" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#4A4D52" />
+          <stop offset="35%" stopColor="#26282B" />
+          <stop offset="100%" stopColor="#111213" />
+        </linearGradient>
+        {/* Luz cálida bajo la repisa del Airwall, que se desvanece hacia abajo. */}
+        <linearGradient id="c-luz-repisa" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#E8B878" stopOpacity="0.75" />
+          <stop offset="45%" stopColor="#C89060" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="#C89060" stopOpacity="0" />
+        </linearGradient>
+        {/* Cara luminosa del panel Airwall: blanco al centro, gris en las orillas. */}
+        <radialGradient id="c-airwall-cara" cx="50%" cy="45%" r="75%">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="60%" stopColor="#F0EEEA" />
+          <stop offset="100%" stopColor="#C9C5BE" />
+        </radialGradient>
         {/* Cilindro de acero oscuro (campana cilíndrica tipo Elica). */}
         <linearGradient id="c-cilindro-oscuro" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stopColor="#2A2E32" />

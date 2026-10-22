@@ -10,6 +10,12 @@
 //   Campanas                   → luz encendida y el aire subiendo a la campana
 //                                (la retráctil sube desde la cubierta)
 //   Cafeteras                  → pantalla encendida y café sirviéndose
+//   Lavavajillas               → la puerta se abate y deja ver las canastas
+//   Asadores                   → la tapa se abre y se ven parrillas, flama y
+//                                brasa (el ahumador de carbón echa humo)
+//   Tarjas y grifería          → el grifo se abre y cae el agua (la extraíble
+//                                baja su regadera; el pot filler despliega el
+//                                brazo); la tarja dual pasa de sobre a bajo la cubierta
 //
 // El estado de reposo es el aparato apagado/cerrado; al hover de la tarjeta (o
 // en la vista derecha del modal, `.is-abierto`) pasa a encendido/abierto. Las
@@ -37,8 +43,13 @@ import {
   type Rect,
 } from "./IlustracionTipo";
 
-type Estados = "encender" | "abrir";
-const ESTADOS: Record<Estados, string> = { encender: "Apagado|Encendido", abrir: "Cerrado|Abierto" };
+type Estados = "encender" | "abrir" | "montaje";
+const ESTADOS: Record<Estados, string> = {
+  encender: "Apagado|Encendido",
+  abrir: "Cerrado|Abierto",
+  // Tarja de doble instalación: la misma tarja sobre y bajo la cubierta.
+  montaje: "Sobre la cubierta|Bajo la cubierta",
+};
 
 interface Escena {
   estados: Estados;
@@ -219,16 +230,26 @@ function Olla({ cx, y, w = 30, h = 22, tapa, ry = 2.6 }: { cx: number; y: number
 
 /** Cocina en alzado (Estufas, Micro-campana, Campanas de pared): tramos de
  *  cubierta a los lados del hueco x1–x2 y muro de mármol encima. */
-function EscenaCocina({ x1, x2, alacenaCorrida, sinLuces, sinAlacenas }: { x1: number; x2: number; alacenaCorrida?: number; sinLuces?: boolean; sinAlacenas?: boolean }) {
+function EscenaCocina({ x1, x2, alacenaCorrida, sinLuces, sinAlacenas, sinPlanta }: { x1: number; x2: number; alacenaCorrida?: number; sinLuces?: boolean; sinAlacenas?: boolean; sinPlanta?: boolean }) {
+  // Alacena corrida a la altura de las de los lados (Lavavajillas): el muro y su
+  // tira de luz van de lado a lado en una sola pieza, sin cortes de luz en el
+  // hueco (Carla, 2026-10-21).
+  const corrido = alacenaCorrida === 150 && !sinAlacenas;
   return (
     <>
-      <TramoCubierta x1={0} x2={x1} decor="planta" sinAlacena={sinAlacenas} />
-      <TramoCubierta x1={x2} x2={W} decor="tablas" base="cajones" sinAlacena={sinAlacenas} />
-      <rect x={x1} y={20} width={x2 - x1} height={216} className="i-muro" />
+      {corrido && (
+        <>
+          <rect x={0} y={150} width={W} height={86} className="i-muro" />
+          <Cinta x1={0} x2={W} y={150} h={60} />
+        </>
+      )}
+      <TramoCubierta x1={0} x2={x1} decor={sinPlanta ? undefined : "planta"} sinAlacena={sinAlacenas} sinMuro={corrido} />
+      <TramoCubierta x1={x2} x2={W} decor="tablas" base="cajones" sinAlacena={sinAlacenas} sinMuro={corrido} />
+      {!corrido && <rect x={x1} y={20} width={x2 - x1} height={216} className="i-muro" />}
       {alacenaCorrida !== undefined && (
         <>
           <Puertas x1={x1} x2={x2} y1={20} y2={alacenaCorrida} jy={alacenaCorrida - 26} />
-          <Cinta x1={x1} x2={x2} y={alacenaCorrida} h={50} />
+          {!corrido && <Cinta x1={x1} x2={x2} y={alacenaCorrida} h={50} />}
         </>
       )}
       <rect x={x1} y={366} width={x2 - x1} height={10} className="i-zoclo" />
@@ -2040,27 +2061,30 @@ function CampanaPared({ tipo, cx, ancho }: { tipo: TipoCampana; cx: number; anch
         boca: [x1 + 10, x2 - 10, 148],
       };
     case "revestir": {
-      // Forrada en obra (yeso/piedra) con filo de latón, dentro del hueco. Al
-      // encender el forro se vuelve translúcido y deja ver la estructura: ducto,
-      // caja de acero del inserto y, abajo, sus filtros de malla y focos (Teka).
+      // Panel de la misma madera que las alacenas, que cubre todo el hueco del
+      // plafón al filtro y esconde la campana (Carla, 2026-10-21). Al encender el
+      // panel se vuelve translúcido y deja ver la estructura: ducto, transición
+      // de lámina, caja con el motor y, abajo, sus filtros de malla y focos (Teka).
       const a = x1 + 13;
       const b = x2 - 13;
       const i1 = a + 14;
       const i2 = b - 14;
-      const forro = pts([[cx - 50, 20], [cx + 50, 20], [cx + 50, 100], [b, 146], [a, 146], [cx - 50, 100]]);
       return {
         el: (
           <g>
             {/* Por dentro */}
-            <Acero x={cx - 14} y={20} w={28} h={98} />
+            <Acero x={cx - 14} y={20} w={28} h={78} />
+            <polygon points={pts([[cx - 18, 96], [cx + 18, 96], [i2, 116], [i1, 116]])} fill="url(#dgm-acero)" className="i-panel" />
             <Acero x={i1} y={116} w={i2 - i1} h={30} />
             {[0.08, 0.92].map((f) => (
               <circle key={f} cx={i1 + (i2 - i1) * f} cy={122} r={0.9} className="c-remache" />
             ))}
+            <circle cx={cx} cy={131} r={10} className="c-motor" />
+            <circle cx={cx} cy={131} r={3} className="c-motor-eje" />
             <g className="c-mueble-inserto">
-              <polygon points={forro} className="c-revestida" />
-              <polygon points={forro} fill="url(#ilus-modelado)" />
-              <rect x={a} y={142} width={b - a} height={4} className="c-filo-laton" />
+              <rect x={a} y={20} width={b - a} height={126} className="i-mueble" />
+              <rect x={a} y={20} width={b - a} height={126} className="i-modelado" />
+              <rect x={a + 0.5} y={20.5} width={b - a - 1} height={125} className="i-panel-canto" />
             </g>
             {/* Frente inferior: filtros de malla, panel central con dos focos y controles */}
             <Acero x={i1 - 4} y={146} w={i2 - i1 + 8} h={9} />
@@ -2081,18 +2105,30 @@ function CampanaPared({ tipo, cx, ancho }: { tipo: TipoCampana; cx: number; anch
         ducto: [cx, 24, 116],
       };
     }
-    case "airwall":
+    case "airwall": {
+      // Panel luminoso apoyado en la cubierta detrás de la parrilla, más ancho
+      // que ella, con marco negro delgado y la ranura de extracción a media
+      // altura, cargada a la derecha (referencia de Carla, 2026-10-21).
+      const p1 = x1 + 4;
+      const p2 = x2 - 4;
+      const yt = 170;
       return {
         el: (
           <g>
-            <rect x={x1 + 10} y={150} width={ancho - 20} height={76} className="c-airwall" />
-            {Array.from({ length: 10 }, (_, k) => (
-              <line key={k} x1={x1 + 18} y1={156 + k * 7} x2={x2 - 18} y2={156 + k * 7} className="c-airwall-lama" />
-            ))}
+            <rect x={p1 - 2} y={yt - 2} width={p2 - p1 + 4} height={70} className="c-airwall-halo" />
+            <rect x={p1} y={yt} width={p2 - p1} height={66} className="c-airwall-marco" />
+            <rect x={p1 + 1.6} y={yt + 1.6} width={p2 - p1 - 3.2} height={64} fill="url(#c-airwall-cara)" />
+            <rect x={p1 + 1.6} y={yt + 1.6} width={p2 - p1 - 3.2} height={64} className="c-airwall-encendido" />
+            {/* Ranura: sombra arriba, boca negra, labio claro y el tope a la izquierda */}
+            <rect x={cx - 10} y={yt + 27.6} width={62} height={1.4} className="c-airwall-sombra" />
+            <rect x={cx - 10} y={yt + 29} width={62} height={4} className="c-airwall-ranura" />
+            <rect x={cx - 16} y={yt + 27.5} width={7} height={7.5} className="c-airwall-ranura" />
+            <line x1={cx - 16} y1={yt + 35.4} x2={cx + 52} y2={yt + 35.4} className="c-airwall-labio" />
           </g>
         ),
-        boca: [x1 + 10, x2 - 10, 226],
+        boca: [cx - 10, cx + 52, yt + 31],
       };
+    }
     default:
       // De pared (chimenea + canopy recto).
       return {
@@ -2117,22 +2153,24 @@ function CampanaIsla({ tipo }: { tipo: TipoCampana }): { el: ReactElement; boca:
     case "cilindrica":
       // Tipo Elica: tubo del mismo diámetro desde el plafón y cuerpo cilíndrico
       // alto con sus botones al costado; la luz y la extracción salen por abajo.
+      // La base queda a 60 cm de la parrilla (Carla, 2026-10-21): la isla mide
+      // 90 cm en 144 u → 1.6 u/cm → 96 u sobre la cubierta (ISLA_Y − 12).
       return {
         el: (
           <g>
-            <rect x={cx - 30} y={20} width={60} height={70} fill="url(#c-cilindro-oscuro)" className="c-cilindro" />
-            <ellipse cx={cx} cy={90} rx={30} ry={3} className="c-cilindro-junta" />
-            <rect x={cx - 33} y={90} width={66} height={86} fill="url(#c-cilindro-oscuro)" className="c-cilindro" />
-            <rect x={cx - 33} y={90} width={66} height={86} fill="url(#ilus-acero-bandas)" className="i-acero-luz" />
-            {[112, 120, 128].map((y) => (
-              <rect key={y} x={cx - 27} y={y} width={2.4} height={4} rx={0.8} className={y === 120 ? "c-boton-azul" : "c-boton-cilindro"} />
+            <rect x={cx - 30} y={20} width={60} height={40} fill="url(#c-cilindro-oscuro)" className="c-cilindro" />
+            <ellipse cx={cx} cy={60} rx={30} ry={3} className="c-cilindro-junta" />
+            <rect x={cx - 33} y={60} width={66} height={64} fill="url(#c-cilindro-oscuro)" className="c-cilindro" />
+            <rect x={cx - 33} y={60} width={66} height={64} fill="url(#ilus-acero-bandas)" className="i-acero-luz" />
+            {[78, 86, 94].map((y) => (
+              <rect key={y} x={cx - 27} y={y} width={2.4} height={4} rx={0.8} className={y === 86 ? "c-boton-azul" : "c-boton-cilindro"} />
             ))}
-            <ellipse cx={cx} cy={176} rx={33} ry={4.5} className="c-cilindro-base" />
-            <ellipse cx={cx} cy={176} rx={20} ry={2.6} className="c-led-cilindro" />
+            <ellipse cx={cx} cy={124} rx={33} ry={4.5} className="c-cilindro-base" />
+            <ellipse cx={cx} cy={124} rx={20} ry={2.6} className="c-led-cilindro" />
           </g>
         ),
-        boca: [cx - 33, cx + 33, 178],
-        ducto: [cx, 24, 88],
+        boca: [cx - 33, cx + 33, 126],
+        ducto: [cx, 24, 58],
       };
     case "techo":
       return {
@@ -2173,14 +2211,24 @@ function CampanaIsla({ tipo }: { tipo: TipoCampana }): { el: ReactElement; boca:
         boca: [cx - 60, cx + 60, 166],
       };
     case "monolith": {
-      // Caja de vidrio negro sobre la parte trasera de la isla (referencia de
-      // Carla, 2026-10-21): tres módulos con tira de luz abajo; al encender, la
-      // tapa del módulo central se levanta y capta el vapor de la parrilla.
+      // Bloque de aluminio negro con frente de vidrio apoyado en la cubierta,
+      // detrás de la parrilla (referencia de Carla y texto de Cowork,
+      // 2026-10-21): tres módulos con tira de luz abajo; su canal superior
+      // guarda utensilios y una tabla. Al encender, el módulo central se abre
+      // ligeramente, deja ver los controles y capta el vapor a ras de cubierta.
       const yb = ISLA_Y - 22; // canto trasero de la cubierta
       const yt = yb - 30;
       return {
         el: (
           <g>
+            {/* Utensilios y tabla que asoman del canal */}
+            <line x1={98} y1={yt - 26} x2={100} y2={yt} className="c-utensilio" />
+            <ellipse cx={97.6} cy={yt - 28} rx={3.2} ry={4.6} className="c-utensilio-cabeza" />
+            <line x1={110} y1={yt - 22} x2={109} y2={yt} className="c-utensilio c-utensilio--acero" />
+            <rect x={106} y={yt - 30} width={6} height={9} rx={1} className="c-utensilio-pala" />
+            <rect x={130} y={yt - 12} width={8} height={12} rx={1.5} className="c-frasco" />
+            <rect x={141} y={yt - 10} width={8} height={10} rx={1.5} className="c-frasco" />
+            <rect x={400} y={yt - 22} width={34} height={22} rx={3} className="i-tabla" />
             <rect x={70} y={yb - 1} width={420} height={4} className="c-led-barra" />
             <rect x={70} y={yt} width={420} height={30} className="c-monolith" />
             <polygon points={pts([[100, yt], [130, yt], [110, yb], [80, yb]])} className="c-reflejo" />
@@ -2190,9 +2238,12 @@ function CampanaIsla({ tipo }: { tipo: TipoCampana }): { el: ReactElement; boca:
             ))}
             <rect x={214} y={yt - 3} width={132} height={3} className="c-ranura-negra" />
             <g className="c-tapa-monolith">
-              <rect x={212} y={yt - 34} width={136} height={34} className="c-monolith" />
-              <polygon points={pts([[240, yt - 34], [262, yt - 34], [236, yt], [214, yt]])} className="c-reflejo" />
-              <rect x={212} y={yt - 34} width={136} height={2} fill="url(#ilus-cromo-h)" className="i-panel" />
+              <rect x={212} y={yt - 14} width={136} height={14} className="c-monolith" />
+              <polygon points={pts([[240, yt - 14], [256, yt - 14], [240, yt], [224, yt]])} className="c-reflejo" />
+              <rect x={212} y={yt - 14} width={136} height={2} fill="url(#ilus-cromo-h)" className="i-panel" />
+              {[0, 1, 2, 3].map((k) => (
+                <ellipse key={k} cx={268 + k * 8} cy={yt - 6} rx={1.8} ry={1} className="c-tecla-control" />
+              ))}
             </g>
           </g>
         ),
@@ -2265,35 +2316,951 @@ function RanuraRetractil() {
 
 /* ——— Microondas, cafeteras ———————————————————————————————————————— */
 
-/** Cafetera (cuerpo + boquilla + taza); el café cae al encender. */
-function Cafetera({ r, empotre }: { r: Rect; empotre?: boolean }) {
-  const cx = r.x + r.w / 2;
-  const nicho = { x: r.x + r.w * 0.22, y: r.y + r.h * 0.34, w: r.w * 0.56, h: r.h * 0.56 };
-  const tazaY = nicho.y + nicho.h - 6;
+/** Vaso de vidrio doble con café (y leche si es latte); el café sube al encender. */
+function VasoCafe({ cx, y, w, h, latte }: { cx: number; y: number; w: number; h: number; latte?: boolean }) {
+  const b = w * 0.1; // el vaso se angosta hacia abajo
   return (
     <g>
-      {empotre ? <Acero {...r} /> : <rect x={r.x} y={r.y} width={r.w} height={r.h} rx={6} className="c-cafetera" />}
-      {!empotre && <rect x={r.x} y={r.y} width={r.w} height={r.h} rx={6} fill="url(#ilus-acero-luz)" />}
-      {/* Pantalla */}
-      <rect x={cx - r.w * 0.2} y={r.y + r.h * 0.09} width={r.w * 0.4} height={r.h * 0.14} rx={2} className="c-pantalla c-pantalla-cafe" />
-      <g className="c-pantalla-ui">
-        <circle cx={cx - r.w * 0.1} cy={r.y + r.h * 0.16} r={2.4} className="c-ui" />
-        <circle cx={cx} cy={r.y + r.h * 0.16} r={2.4} className="c-ui" />
-        <circle cx={cx + r.w * 0.1} cy={r.y + r.h * 0.16} r={2.4} className="c-ui" />
-      </g>
-      {/* Nicho de servicio */}
-      <rect x={nicho.x} y={nicho.y} width={nicho.w} height={nicho.h} rx={3} className="c-nicho-cafe" />
-      <rect x={cx - 8} y={nicho.y} width={16} height={9} rx={2} className="c-boquilla" />
-      <rect x={nicho.x + 3} y={nicho.y + nicho.h - 5} width={nicho.w - 6} height={4} rx={1} className="c-charola-cafe" />
-      {/* Chorro de café (crece al encender) */}
-      <rect x={cx - 1.6} y={nicho.y + 9} width={3.2} height={tazaY - nicho.y - 22} className="c-chorro" />
-      {/* Taza */}
-      <path d={`M${cx - 11} ${tazaY - 16} L${cx + 11} ${tazaY - 16} L${cx + 9} ${tazaY} L${cx - 9} ${tazaY} Z`} className="c-taza" />
-      <rect x={cx - 10} y={tazaY - 13} width={20} height={11} className="c-cafe-nivel" />
-      <path d={`M${cx + 10} ${tazaY - 12} q 6 2 0 7`} className="c-taza-asa" />
-      <Vapor x={cx} y={tazaY - 22} n={3} ancho={7} />
+      <path d={`M${cx - w / 2} ${y - h} L${cx + w / 2} ${y - h} L${cx + w / 2 - b} ${y} L${cx - w / 2 + b} ${y} Z`} className="c-vaso" />
+      {latte && <rect x={cx - w / 2 + b + 0.6} y={y - h * 0.42} width={w - 2 * b - 1.2} height={h * 0.42 - 1} className="c-leche" />}
+      <rect x={cx - w / 2 + b * 0.7 + 0.6} y={y - h * (latte ? 0.78 : 0.7)} width={w - 1.4 * b - 1.2} height={h * (latte ? 0.36 : 0.7) - 1} className="c-cafe-nivel" />
+      {latte && <rect x={cx - w / 2 + 0.8} y={y - h * 0.93} width={w - 1.6} height={h * 0.15} className="c-espuma" />}
     </g>
   );
+}
+
+/** Cafetera de mesa (referencia Bosch, Carla 2026-10-21): carcasa negra con
+ *  pantalla táctil arriba, frente de acero con la unidad de salida, vaso de
+ *  latte sobre la charola, jarra de leche a la izquierda y depósito de agua
+ *  translúcido a la derecha. Al encender se ilumina la pantalla y cae el café. */
+function CafeteraMesa({ cx, y }: { cx: number; y: number }) {
+  const t = y - 76; // tope de la carcasa
+  return (
+    <g>
+      {/* Jarra de leche */}
+      <rect x={cx - 47} y={t + 30} width={16} height={4} rx={1} className="c-cafetera" />
+      <rect x={cx - 46} y={t + 34} width={14} height={y - t - 36} rx={1.5} className="c-jarra" />
+      <rect x={cx - 45} y={t + 42} width={12} height={y - t - 45} rx={1} className="c-leche" />
+      {/* Depósito de agua */}
+      <rect x={cx + 30} y={t + 4} width={15} height={56} rx={1.5} className="c-deposito" />
+      <rect x={cx + 31} y={t + 22} width={13} height={37} rx={1} className="c-agua" />
+      <rect x={cx + 30} y={t + 60} width={15} height={y - t - 60} className="c-cafetera" />
+      {/* Carcasa: pantalla negra arriba y frente de acero */}
+      <rect x={cx - 31} y={t} width={62} height={36} rx={2} className="c-cafetera" />
+      <rect x={cx - 25} y={t + 4} width={50} height={22} rx={1} className="c-pantalla" />
+      <g className="c-pantalla-ui">
+        {[-14, 0, 14].map((d) => (
+          <circle key={d} cx={cx + d} cy={t + 14} r={d ? 3 : 4.2} className="c-ui-taza" />
+        ))}
+        <rect x={cx - 18} y={t + 21} width={36} height={2} rx={0.6} className="c-ui-linea-clara" />
+      </g>
+      {[-18, -6, 6, 18].map((d) => (
+        <circle key={d} cx={cx + d} cy={t + 30.5} r={0.9} className="c-ui-icono" />
+      ))}
+      <rect x={cx - 31} y={t + 36} width={62} height={7} className="c-banda-logo" />
+      <rect x={cx - 8} y={t + 38.6} width={16} height={1.8} rx={0.6} className="c-logo" />
+      <Acero x={cx - 31} y={t + 43} w={62} h={y - t - 50} />
+      {/* Unidad de salida: bloque negro con línea roja y dos boquillas */}
+      <rect x={cx - 11} y={t + 44} width={22} height={7} rx={1} className="c-cafetera" />
+      <rect x={cx - 8} y={t + 49.4} width={16} height={0.9} className="c-led-rojo" />
+      {[-3, 3].map((d) => (
+        <rect key={d} x={cx + d - 1} y={t + 51} width={2} height={2.6} className="c-boquilla" />
+      ))}
+      {[-3, 3].map((d) => (
+        <rect key={d} x={cx + d - 0.6} y={t + 53.6} width={1.2} height={5} className="c-chorro" />
+      ))}
+      <VasoCafe cx={cx} y={y - 7} w={17} h={19} latte />
+      {/* Charola de goteo */}
+      <rect x={cx - 33} y={y - 7} width={66} height={3} fill="url(#ilus-cromo-h)" className="i-panel" />
+      <rect x={cx - 31} y={y - 4} width={62} height={4} className="c-cafetera" />
+      <Vapor x={cx} y={t + 52} n={2} ancho={6} />
+      {/* Vaso de espresso sobre la cubierta */}
+      <VasoCafe cx={cx + 58} y={y} w={11} h={12} />
+    </g>
+  );
+}
+
+/** Cafetera de empotre (referencia Bosch, Carla 2026-10-21): marco de acero,
+ *  franja de control con pantalla y selector redondo al centro, cavidad negra
+ *  con el bloque de salida y la rejilla, y logotipo abajo. */
+function CafeteraEmpotre({ r }: { r: Rect }) {
+  // Proporciones tomadas del frente Bosch (ancho/alto ≈ 1.4, Carla 2026-10-21):
+  // franja de control en el cuarto superior, cavidad del 30 % al 84 % del alto.
+  const { w, h } = r;
+  const cx = r.x + w / 2;
+  const c = { x: r.x + w * 0.07, y: r.y + h * 0.3, w: w * 0.86, h: h * 0.54 }; // cavidad
+  const rej = c.y + c.h - 3;
+  const dy = r.y + h * 0.08; // tope del marco de la pantalla
+  const dh = h * 0.13;
+  const dc = dy + dh / 2;
+  const blq = { w: w * 0.094, y: c.y + h * 0.03, h: h * 0.11 }; // bloque de salida
+  const boq = blq.y + blq.h + h * 0.05; // punta de las boquillas
+  return (
+    <g>
+      <Acero {...r} />
+      {/* Franja de control: pantalla partida con el selector redondo al centro */}
+      <line x1={r.x + 2} y1={r.y + h * 0.25} x2={r.x + w - 2} y2={r.y + h * 0.25} className="c-junta-marco-linea" />
+      <rect x={cx - w * 0.235} y={dy} width={w * 0.47} height={dh} rx={1} className="c-marco-display" />
+      <rect x={cx - w * 0.215} y={dy + 2} width={w * 0.43} height={dh - 4} className="c-pantalla" />
+      <g className="c-pantalla-ui">
+        {[-0.14, -0.09, 0.09, 0.14].map((f) => (
+          <rect key={f} x={cx + w * f - 3.5} y={dc - 3.5} width={7} height={7} rx={0.8} className="c-ui-taza" />
+        ))}
+      </g>
+      <circle cx={cx} cy={dc} r={h * 0.075} fill="url(#ilus-cromo)" className="c-perilla" />
+      <circle cx={cx} cy={dc} r={h * 0.055} className="c-pantalla" />
+      <rect x={r.x + w * 0.12} y={r.y + h * 0.17} width={w * 0.12} height={2.2} className="c-logo" />
+      {/* Cavidad con panel central, bloque de salida y rejilla */}
+      <rect x={c.x} y={c.y} width={c.w} height={c.h} className="c-nicho-cafe" />
+      <rect x={cx - w * 0.24} y={c.y} width={w * 0.48} height={c.h} className="c-nicho-centro" />
+      <rect x={cx - 1.8} y={c.y} width={3.6} height={blq.y - c.y} className="c-cafetera" />
+      <rect x={cx - blq.w / 2} y={blq.y} width={blq.w} height={blq.h} fill="url(#ilus-cromo)" className="c-boquilla-bloque" />
+      <circle cx={cx} cy={blq.y + blq.h / 2} r={blq.h * 0.32} className="c-logo-circulo" />
+      <rect x={cx - 5} y={blq.y + blq.h} width={10} height={h * 0.035} className="c-cafetera" />
+      {[-2.8, 2.8].map((d) => (
+        <rect key={d} x={cx + d - 1.2} y={boq - h * 0.03} width={2.4} height={h * 0.03} className="c-boquilla" />
+      ))}
+      {[-2.8, 2.8].map((d) => (
+        <rect key={d} x={cx + d - 0.5} y={boq} width={1} height={rej - 18 - boq} className="c-chorro" />
+      ))}
+      {/* Taza de espresso sobre la rejilla */}
+      <path d={`M${cx - 10} ${rej - 17} L${cx + 10} ${rej - 17} L${cx + 8} ${rej} L${cx - 8} ${rej} Z`} className="c-taza" />
+      <rect x={cx - 9} y={rej - 15} width={18} height={12} className="c-cafe-nivel" />
+      <path d={`M${cx + 9.4} ${rej - 14} q 6 2 0 8`} className="c-taza-asa" />
+      <Vapor x={cx} y={rej - 26} n={2} ancho={7} />
+      <rect x={cx - w * 0.2} y={rej} width={w * 0.4} height={2.6} fill="url(#ilus-cromo-h)" className="i-panel" />
+      <rect x={cx - 12} y={r.y + h * 0.9} width={24} height={2.8} rx={0.8} className="c-logo" />
+    </g>
+  );
+}
+
+/* ——— Lavavajillas ————————————————————————————————————————————————— */
+
+type TipoLava = "piso-frente" | "piso-ocultos" | "empotre";
+
+/** Lavavajillas en alzado (referencias de Carla, 2026-10-21):
+ *  piso-frente  → botonera negra arriba, jaladera de cromo y puerta de acero (Whirlpool).
+ *  piso-ocultos → puerta de acero lisa con jaladera plana empotrada arriba (GE).
+ *  empotre      → panel de acero a ras del mueble con jaladera tubular (Smeg).
+ *  Al abrir, la puerta se abate hacia el frente y deja ver la tina con sus dos
+ *  canastas (vasos y tazas arriba, platos abajo); la cara interior queda abajo
+ *  y, con controles ocultos, su canto lleva la botonera (Smeg).
+ *  `i-panelado` es el panel de carpintería (botón Panelar). */
+function Lavavajillas({ r, tipo }: { r: Rect; tipo: TipoLava }) {
+  const { x, y, w, h } = r;
+  const cx = x + w / 2;
+  const ocultos = tipo !== "piso-frente";
+  const yb = y + h; // bisagra
+  // Canastas: arriba vasos y tazas boca abajo; abajo platos de canto.
+  const sup = { y1: y + h * 0.1, y2: y + h * 0.42 };
+  const inf = { y1: y + h * 0.5, y2: y + h * 0.95 };
+  const s = 6; // ensanche de la puerta abatida (perspectiva)
+  const ph = 18; // alto de la puerta abatida (cabe completa en la tarjeta)
+  return (
+    <g>
+      {/* Tina con las dos canastas (se ve con la puerta abierta) */}
+      <rect x={x} y={y} width={w} height={h} className="c-tina" />
+      <rect x={x + 4} y={y + 3} width={w - 8} height={h - 6} className="c-tina-fondo" />
+      {[sup, inf].map((c, k) => (
+        <g key={k}>
+          <rect x={x + 6} y={c.y1} width={w - 12} height={c.y2 - c.y1} className="c-canasta-lava" />
+          {Array.from({ length: 11 }, (_, j) => (
+            <line key={j} x1={x + 6 + ((w - 12) * (j + 0.5)) / 11} y1={c.y2 - (c.y2 - c.y1) * 0.35} x2={x + 6 + ((w - 12) * (j + 0.5)) / 11} y2={c.y2} className="c-alambre" />
+          ))}
+          <line x1={x + 6} y1={c.y2 - (c.y2 - c.y1) * 0.35} x2={x + w - 6} y2={c.y2 - (c.y2 - c.y1) * 0.35} className="c-alambre" />
+        </g>
+      ))}
+      {[0, 1, 2, 3, 4, 5].map((k) => (
+        // Vasos y tazas boca abajo
+        <rect key={k} x={x + 10 + k * ((w - 22) / 6)} y={sup.y1 + 6} width={(w - 22) / 6 - 3} height={(sup.y2 - sup.y1) * 0.62} rx={1.4} className={k % 2 ? "c-taza-lava" : "c-vaso-lava"} />
+      ))}
+      {Array.from({ length: 12 }, (_, k) => (
+        // Platos de canto
+        <ellipse key={k} cx={x + 11 + k * ((w - 22) / 11)} cy={(inf.y1 + inf.y2) / 2 + 2} rx={2.6} ry={(inf.y2 - inf.y1) * 0.42} className="c-plato-lava" />
+      ))}
+      {/* Puerta cerrada: se pliega sobre la bisagra al abrir */}
+      <g className="c-puerta-lava">
+        <Acero x={x} y={y} w={w} h={h} />
+        {tipo === "piso-frente" && (
+          <g>
+            {/* Botonera negra con teclas y pantalla */}
+            <rect x={x} y={y} width={w} height={14} className="c-botonera-lava" />
+            {Array.from({ length: 9 }, (_, k) => (
+              <rect key={k} x={x + 8 + k * 6.4} y={y + 6} width={3.6} height={2.6} rx={0.5} className="c-tecla-lava" />
+            ))}
+            <rect x={x + w - 20} y={y + 4.5} width={12} height={5.5} rx={0.6} className="c-display-lava" />
+            <rect x={x + 2} y={y + 15} width={w - 4} height={6} fill="url(#ilus-cromo-h)" className="i-panel" />
+            <rect x={x + 2} y={y + 21} width={w - 4} height={1.2} className="c-sombra-jaladera" />
+            <rect x={cx - 8} y={y + h * 0.78} width={16} height={2.2} rx={0.6} className="c-logo" />
+          </g>
+        )}
+        {tipo === "piso-ocultos" && (
+          <g>
+            {/* Jaladera plana de acero en su hueco, casi de lado a lado (GE) */}
+            <rect x={x + 4} y={y + 3.4} width={w - 8} height={8.6} className="c-hueco-jaladera" />
+            <rect x={x + 4.6} y={y + 4.6} width={w - 9.2} height={6.4} fill="url(#ilus-cromo-h)" className="i-panel" />
+            <rect x={x + 4.6} y={y + 4.6} width={w - 9.2} height={1} className="c-filo-jaladera" />
+            <rect x={x + w - 24} y={y + 1} width={16} height={1.4} className="c-ranura-negra" />
+            <circle cx={cx} cy={y + h * 0.85} r={3.2} className="c-logo-circulo" />
+          </g>
+        )}
+        {tipo === "empotre" && (
+          // Panel de acero con jaladera tubular y soportes (Carla, 2026-10-21).
+          <g>
+            <Tubo x={x + 6} y={y + h * 0.15} w={w - 12} />
+            <rect x={cx - 7} y={y + h - 8} width={14} height={1.8} rx={0.6} className="c-logo" />
+          </g>
+        )}
+        {ocultos && (
+          // Panel de carpintería (Panelar): mismo nogal y jaladera que los muebles.
+          <g className="i-panelado">
+            <rect x={x} y={y} width={w} height={h} className="i-mueble" />
+            <rect x={x} y={y} width={w} height={h} className="i-modelado" />
+            <rect x={x + 0.5} y={y + 0.5} width={w - 1} height={h - 1} className="i-panel-canto" />
+            <rect x={cx - w * 0.22} y={y + 9} width={w * 0.44} height={2.5} className="i-jaladera" />
+          </g>
+        )}
+      </g>
+      {/* Puerta abierta: cara interior que se acerca; con controles ocultos, la
+          botonera queda en su canto (al frente) */}
+      <g className="c-puerta-lava-int">
+        <polygon points={pts([[x, yb], [x + w, yb], [x + w + s, yb + ph], [x - s, yb + ph]])} className="c-forro-lava" />
+        <polygon points={pts([[x + 6, yb + 3], [x + w - 6, yb + 3], [x + w - 2, yb + ph - 7], [x + 2, yb + ph - 7]])} className="c-forro-lava-int" />
+        <rect x={x - s} y={yb + ph - 5} width={w + 2 * s} height={5} fill="url(#ilus-cromo-h)" className="i-panel" />
+        {ocultos && (
+          <g>
+            {Array.from({ length: 8 }, (_, k) => (
+              <circle key={k} cx={x + 4 + k * 6} cy={yb + ph - 2.5} r={0.9} className="c-icono-canto" />
+            ))}
+            <rect x={x + w - 20} y={yb + ph - 4.2} width={12} height={3.4} className="c-display-lava c-display-lava--on" />
+          </g>
+        )}
+      </g>
+    </g>
+  );
+}
+
+function escenaLavavajillas(tipo: TipoLava, etiquetas: Etiqueta[]): Escena {
+  // 60 cm de ancho en una cocina de 90 cm de alto (1.44 u/cm).
+  const x1 = 234;
+  const x2 = 326;
+  const piso = tipo !== "empotre";
+  const r: Rect = piso ? { x: x1 + 2, y: 241, w: x2 - x1 - 4, h: 119 } : { x: x1 + 2, y: 246, w: x2 - x1 - 4, h: 117 };
+  return {
+    estados: "abrir",
+    fondo: (
+      <>
+        <EscenaCocina x1={x1} x2={x2} alacenaCorrida={150} />
+        {piso ? (
+          <>
+            {/* De piso: hueco entre muebles; cubierta propia y costados terminados */}
+            <rect x={x1} y={236} width={x2 - x1} height={140} className="i-nicho" />
+            <rect x={r.x - 1} y={r.y - 5} width={r.w + 2} height={5} rx={1} className="c-tapa-lava" />
+            <rect x={r.x} y={r.y + r.h} width={r.w} height={376 - r.y - r.h} className="c-zoclo-lava" />
+            {[r.x + 6, r.x + r.w - 9].map((px) => (
+              <rect key={px} x={px} y={372} width={3} height={4} className="c-pata-lava" />
+            ))}
+          </>
+        ) : (
+          <>
+            {/* Empotrable: cubierta corrida encima y zoclo continuo del mueble */}
+            <rect x={x1 - 3} y={236} width={x2 - x1 + 6} height={9} className="i-cubierta" />
+            <line x1={x1 - 3} y1={236.5} x2={x2 + 3} y2={236.5} className="i-cubierta-canto" />
+            <rect x={x1} y={245} width={x2 - x1} height={121} className="i-nicho" />
+          </>
+        )}
+        <Lavavajillas r={r} tipo={tipo} />
+      </>
+    ),
+    etiquetas,
+    recorte: { x: 110, y: 130, w: 340, h: 260 },
+  };
+}
+
+/* ——— Tarjas y grifería ——————————————————————————————————————————— */
+
+type InstalacionTarja = "sobreponer" | "submontar" | "dual" | "farmhouse";
+type TipoGrifo = "monomando" | "mezcladora" | "sencillo" | "extraible" | "profesional" | "inteligente" | "potfiller";
+
+/** Caño de grifo: tubo de acero con su brillo. */
+function Cano({ d, ancho = 9 }: { d: string; ancho?: number }) {
+  return (
+    <g>
+      <path d={d} className="t-cano" style={{ strokeWidth: ancho }} />
+      <path d={d} className="t-cano-luz" style={{ strokeWidth: ancho * 0.28 }} transform={`translate(${-ancho * 0.18} 0)`} />
+    </g>
+  );
+}
+
+/** Chorro de agua (aparece al abrir) y su salpicadura. */
+function Chorro({ x, y1, y2 }: { x: number; y1: number; y2: number }) {
+  return (
+    <g>
+      <line x1={x} y1={y1} x2={x} y2={y2} className="t-agua" />
+      <ellipse cx={x} cy={y2} rx={8} ry={2.2} className="t-salpica" />
+    </g>
+  );
+}
+
+/** Luz difusa sobre el muro, detrás de la tarja (Carla, 2026-10-21: sin ventana). */
+function LuzDifusa({ cx, cy, rx, ry }: { cx: number; cy: number; rx: number; ry: number }) {
+  return <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill="url(#t-luz-difusa)" />;
+}
+
+/* Tarja en la cubierta en perspectiva (vista 3/4 desde arriba, como la foto
+   de referencia): x en unidades del frente, v de 0 (fondo) a 1 (canto). */
+const TA = 190;
+const TB = 370;
+const TV1 = 0.2;
+const TV2 = 0.72;
+const FONDO_TINA = 34; // alto en pantalla de la pared del fondo de la tina
+
+/** Tina vista desde arriba: fondo, pared del fondo, costados y coladera. */
+function TinaPerspectiva({ v2, corte }: { v2: number; corte?: boolean }) {
+  const [p1x, p1y] = P(TA, TV1);
+  const [p2x] = P(TB, TV1);
+  const [p3x, p3y] = P(TB, v2);
+  const [p4x] = P(TA, v2);
+  const d = FONDO_TINA;
+  const yFondo = (p1y + d + p3y) / 2 + 4;
+  return (
+    <g>
+      <polygon points={pts([[p1x, p1y], [p2x, p1y], [p3x, p3y], [p4x, p3y]])} className="t-fondo-tina" />
+      <polygon points={pts([[p1x, p1y], [p1x + 6, p1y + d], [p4x, p3y]])} className="t-costado-tina" />
+      <polygon points={pts([[p2x, p1y], [p2x - 6, p1y + d], [p3x, p3y]])} className="t-costado-tina" />
+      <polygon points={pts([[p1x, p1y], [p2x, p1y], [p2x - 6, p1y + d], [p1x + 6, p1y + d]])} className="t-pared-tina" />
+      {/* Sombra al pie de la pared del fondo y filo del borde frontal */}
+      <polygon points={pts([[p1x + 6, p1y + d], [p2x - 6, p1y + d], [p2x - 9, p1y + d + 7], [p1x + 9, p1y + d + 7]])} className="t-sombra-tina" />
+      <line x1={p4x} y1={p3y} x2={p3x} y2={p3y} className="t-filo-tina" />
+      <ellipse cx={(p1x + p2x) / 2} cy={yFondo} rx={8} ry={2.6} className="t-coladera" />
+      <ellipse cx={(p1x + p2x) / 2} cy={yFondo} rx={4} ry={1.2} className="t-coladera-centro" />
+      {/* Canto pulido de la cubierta (submontar): se ve el corte bajo el borde del fondo */}
+      {corte && <polygon points={pts([[p1x, p1y], [p2x, p1y], [p2x - 1, p1y + 5], [p1x + 1, p1y + 5]])} className="t-canto-corte" />}
+    </g>
+  );
+}
+
+/** Grifo de cuello de ganso visto en 3/4, detrás de la tarja. */
+function GrifoPerspectiva() {
+  const [fx, fy] = P(280, TV1 - 0.07);
+  const d = `M${fx} ${fy - 30} L${fx} ${fy - 74} Q ${fx} ${fy - 96} ${fx + 18} ${fy - 96} Q ${fx + 36} ${fy - 96} ${fx + 36} ${fy - 76} L${fx + 36} ${fy - 66}`;
+  return (
+    <g>
+      <ellipse cx={fx} cy={fy} rx={7} ry={2} className="t-base-grifo" />
+      <rect x={fx - 4.5} y={fy - 32} width={9} height={32} fill="url(#ilus-cromo)" className="t-cuerpo" />
+      <path d={`M${fx + 4} ${fy - 22} L${fx + 13} ${fy - 30}`} className="t-palanca" />
+      <Cano d={d} ancho={6} />
+    </g>
+  );
+}
+
+/** Escena de instalación: muro con luz difusa, cubierta de piedra en perspectiva,
+ *  la tarja según su montaje, grifo y muebles bajo la cubierta. */
+function escenaTarja(tipo: InstalacionTarja): Escena {
+  const farm = tipo === "farmhouse";
+  const v2 = farm ? 1 : TV2;
+  const [p1x, p1y] = P(TA, TV1);
+  const [p3x, p3y] = P(TB, v2);
+  const [fx, fy] = P(280, TV1 - 0.07);
+  const yFondo = (p1y + FONDO_TINA + p3y) / 2 + 4;
+  const ceja = (m: number) => quad(TA - m, TB + m, TV1 - dv(m + 1), v2 + dv(m + 1));
+  const [c4x, c4y] = P(TA - 8, v2 + dv(9));
+  const [c3x] = P(TB + 8, v2 + dv(9));
+  const [fa] = P(TA - 4, 1);
+  const [fb] = P(TB + 4, 1);
+  const etiquetas: Record<InstalacionTarja, Etiqueta[]> = {
+    sobreponer: [
+      { x: c4x + 6, y: c4y, hasta: 110, texto: "Ceja de acero sobre\nla cubierta" },
+      { x: P(TB + 5, 0.45)[0], y: P(TB + 5, 0.45)[1], hasta: 450, texto: "Grapas por debajo:\ncorte sencillo" },
+    ],
+    submontar: [
+      { x: p1x + 24, y: p1y + 2.5, hasta: 110, texto: "Canto pulido\nexpuesto" },
+      { x: p3x - 4, y: p3y - 2, hasta: 450, texto: "Sin ceja: el agua\nse barre a la tina" },
+    ],
+    dual: [
+      { x: c4x + 8, y: P(TA - 4, v2)[1] + 1, hasta: 110, texto: "Ceja delgada" },
+      { x: P(TB + 3, 0.45)[0], y: P(TB + 3, 0.45)[1], hasta: 450, texto: "Sobre o bajo:\nse decide en obra" },
+    ],
+    farmhouse: [
+      { x: fa + 10, y: PF + 34, hasta: 110, texto: "Faldón al frente" },
+      { x: P(TB - 6, 0.5)[0], y: P(TB - 6, 0.5)[1], hasta: 450, texto: "Tina profunda" },
+      { x: fb - 12, y: PF + 50, hasta: 450, texto: "Sustituye el frente\ndel mueble" },
+    ],
+  };
+  return {
+    estados: tipo === "dual" ? "montaje" : "abrir",
+    fondo: (
+      <>
+        {/* Muro con luz difusa detrás de la tarja */}
+        <rect x={0} y={0} width={W} height={PB} className="i-muro" />
+        <LuzDifusa cx={280} cy={86} rx={230} ry={110} />
+        <polygon points={pts([[0, PB], [W, PB], [W, PF], [0, PF]])} className="i-cubierta c-cubierta-plano" />
+        <polygon points={pts([[0, PB], [W, PB], [W, PF], [0, PF]])} className="c-cubierta-luz" />
+        <rect x={0} y={PF} width={W} height={12} className="i-cubierta" />
+        <line x1={0} y1={PF + 0.5} x2={W} y2={PF + 0.5} className="i-cubierta-canto" />
+        <rect x={0} y={PF + 12} width={W} height={4} className="i-nicho" />
+        <Cajones x1={0} x2={186} ys={[316, 360, 404]} />
+        <Puertas x1={190} x2={370} y1={farm ? PF + 72 : 316} y2={404} jy={farm ? PF + 80 : 326} />
+        <Cajones x1={374} x2={W} ys={[316, 360, 404]} />
+        {/* Decoración: planta al fondo a la izquierda y tabla a la derecha */}
+        <g transform={`translate(${P(70, 0.12)[0]} ${P(70, 0.12)[1]}) scale(0.9)`}>
+          <Planta2 x={0} y={0} />
+        </g>
+        <polygon points={quad(420, 520, 0.4, 0.66)} className="i-tabla c-tabla-plano" />
+        {/* Montaje de la tarja */}
+        {tipo === "sobreponer" && (
+          <g>
+            <polygon points={ceja(8)} className="t-ceja" />
+            <polygon points={pts([[c4x, c4y], [c3x, c4y], [c3x, c4y + 2.4], [c4x, c4y + 2.4]])} className="t-ceja-canto" />
+          </g>
+        )}
+        {tipo === "dual" && (
+          <g className="t-dual-sobre">
+            <polygon points={ceja(4)} className="t-ceja" />
+          </g>
+        )}
+        <TinaPerspectiva v2={v2} corte={tipo === "submontar"} />
+        {tipo === "dual" && (
+          <g className="t-dual-bajo">
+            <polygon points={pts([[p1x, p1y], [P(TB, TV1)[0], p1y], [P(TB, TV1)[0] - 1, p1y + 5], [p1x + 1, p1y + 5]])} className="t-canto-corte" />
+          </g>
+        )}
+        {farm && (
+          // Faldón de acero que sustituye el frente del mueble
+          <g>
+            <Acero x={fa} y={PF - 1} w={fb - fa} h={72} />
+            <rect x={fa} y={PF - 2.5} width={fb - fa} height={3} fill="url(#ilus-cromo-h)" className="i-panel" />
+          </g>
+        )}
+        <GrifoPerspectiva />
+        {tipo !== "dual" && <Chorro x={fx + 36} y1={fy - 64} y2={yFondo} />}
+      </>
+    ),
+    etiquetas: etiquetas[tipo],
+    recorte: { x: 100, y: 20, w: 360, h: 360 },
+  };
+}
+
+/** Diseño de la tarja en planta (vista superior, cubierta oscura): una, dos o
+ *  tres tinas, con el grifo atrás y la tabla de picar a un lado. */
+function escenaTarjaPlanta(n: 1 | 2 | 3): Escena {
+  const ancho = n === 1 ? 210 : n === 2 ? 262 : 314;
+  const x0 = 280 - ancho / 2;
+  const x1 = 280 + ancho / 2;
+  const y0 = 150;
+  const y1 = 284;
+  const sep = 9;
+  const tw = (ancho - 20 - sep * (n - 1)) / n;
+  const tinas = Array.from({ length: n }, (_, k) => ({ x: x0 + 10 + k * (tw + sep), y: y0 + 16, w: tw, h: y1 - y0 - 26 }));
+  const usos = n === 1 ? ["Tina única y amplia"] : n === 2 ? ["Lavar", "Enjuagar"] : ["Lavar", "Enjuagar", "Preparar"];
+  const etiquetas: Etiqueta[] =
+    n === 1
+      ? [
+          { x: tinas[0].x + 20, y: (y0 + y1) / 2, hasta: 70, texto: "Tina única\ny amplia" },
+          { x: x1 - 20, y: y1 - 30, hasta: 490, texto: "Caben charolas\ny ollas grandes" },
+        ]
+      : tinas.map((t, k) => ({
+          x: t.x + t.w / 2,
+          y: t.y + (k % 2 ? t.h - 18 : 18),
+          hasta: k === n - 1 ? 490 : k === 0 ? 70 : t.x + t.w / 2,
+          texto: usos[k],
+        })).filter((e) => e.hasta !== e.x);
+  // Tina del centro (3 tinas): su etiqueta va abajo, hacia la derecha.
+  if (n === 3) etiquetas.push({ x: tinas[1].x + tinas[1].w / 2, y: tinas[1].y + tinas[1].h - 14, hasta: 490, texto: usos[1] });
+  return {
+    estados: "abrir",
+    fondo: (
+      <>
+        <rect x={0} y={0} width={W} height={H} className="t-cubierta-negra" />
+        <rect x={0} y={0} width={W} height={H} fill="url(#t-cubierta-luz)" />
+        {/* Muro al fondo */}
+        <rect x={0} y={0} width={W} height={44} className="i-muro" />
+        <rect x={0} y={44} width={W} height={3} className="t-zoclo-muro" />
+        {/* Tabla de picar y planta (vistas desde arriba) */}
+        <rect x={x1 + 30} y={170} width={70} height={104} rx={6} className="i-tabla" />
+        <circle cx={x0 - 56} cy={110} r={24} className="t-maceta" />
+        {[0, 60, 120, 180, 240, 300].map((g) => (
+          <ellipse key={g} cx={x0 - 56} cy={98} rx={5} ry={13} transform={`rotate(${g} ${x0 - 56} 110)`} className="t-hoja-planta" />
+        ))}
+        {/* Tarja: ceja de acero y tinas */}
+        <rect x={x0} y={y0} width={ancho} height={y1 - y0} rx={8} fill="url(#dgm-acero)" className="t-ceja-planta" />
+        {tinas.map((t, k) => (
+          <g key={k}>
+            <rect x={t.x} y={t.y} width={t.w} height={t.h} rx={10} fill="url(#t-tina-planta)" className="t-tina-planta" />
+            <rect x={t.x + 6} y={t.y + 6} width={t.w - 12} height={t.h - 12} rx={8} className="t-agua-tina" />
+            <circle cx={t.x + t.w / 2} cy={t.y + t.h - 22} r={7} className="t-coladera" />
+            <circle cx={t.x + t.w / 2} cy={t.y + t.h - 22} r={3} className="t-coladera-centro" />
+          </g>
+        ))}
+        {/* Grifo visto desde arriba: base atrás y caño hacia la tina */}
+        <circle cx={280} cy={y0 + 4} r={8} fill="url(#ilus-cromo)" className="t-base-grifo" />
+        <rect x={276.5} y={y0 + 4} width={7} height={46} rx={3.5} fill="url(#ilus-cromo)" className="t-cuerpo" />
+        <rect x={286} y={y0 - 2} width={14} height={4} rx={2} fill="url(#ilus-cromo-h)" className="t-cuerpo" />
+        <circle cx={280} cy={y0 + 52} r={6} className="t-salpica-planta" />
+      </>
+    ),
+    etiquetas,
+    recorte: { x: 40, y: 50, w: 480, h: 290 },
+  };
+}
+
+/** Grifo de cocina en alzado, todo en acero (referencias Blanco Candor/Carena/Catris): base
+ *  sobre la cubierta en (bx, by). */
+function GrifoAlzado({ tipo, bx, by }: { tipo: Exclude<TipoGrifo, "potfiller">; bx: number; by: number }) {
+  const cuerpo = (h: number, w = 14) => (
+    <>
+      <ellipse cx={bx} cy={by} rx={w * 0.72} ry={2.6} className="t-base-grifo" />
+      <rect x={bx - w / 2} y={by - h} width={w} height={h} rx={1} fill="url(#ilus-cromo)" className="t-cuerpo" />
+    </>
+  );
+  // Palanca lateral: perno redondo y pala vertical (Candor/Carena).
+  const palanca = (y: number) => (
+    <g>
+      <rect x={bx + 7} y={y - 38} width={4.6} height={38} rx={1.6} fill="url(#ilus-cromo)" className="t-cuerpo" />
+      <circle cx={bx + 9} cy={y + 2} r={6.5} fill="url(#ilus-cromo)" className="t-cuerpo" />
+    </g>
+  );
+  const cuello = (alto: number, r: number) =>
+    `M${bx} ${by - 60} L${bx} ${by - alto} A ${r} ${r} 0 0 1 ${bx + 2 * r} ${by - alto} L${bx + 2 * r} ${by - alto + 26}`;
+  switch (tipo) {
+    case "monomando":
+    case "inteligente":
+      return (
+        <g>
+          <Cano d={cuello(170, 36)} />
+          {cuerpo(72)}
+          {palanca(by - 48)}
+          {tipo === "inteligente" && <rect x={bx - 7} y={by - 28} width={14} height={4} className="t-sensor" />}
+        </g>
+      );
+    case "extraible":
+      return (
+        <g>
+          <Cano d={`M${bx} ${by - 60} L${bx} ${by - 170} A 36 36 0 0 1 ${bx + 72} ${by - 170} L${bx + 72} ${by - 166}`} />
+          {cuerpo(72)}
+          {palanca(by - 48)}
+          {/* Manguera y regadera: bajan al abrir */}
+          <rect x={bx + 70.5} y={by - 140} width={3} height={58} className="t-manguera" />
+          <g className="t-regadera">
+            <rect x={bx + 66} y={by - 168} width={12} height={30} rx={2.5} fill="url(#ilus-cromo)" className="t-cuerpo" />
+            <rect x={bx + 66} y={by - 152} width={12} height={1.2} className="t-junta-regadera" />
+          </g>
+        </g>
+      );
+    case "sencillo":
+      return (
+        <g>
+          <Cano d={`M${bx} ${by - 40} L${bx} ${by - 112} A 26 26 0 0 1 ${bx + 52} ${by - 112} L${bx + 52} ${by - 92}`} />
+          {cuerpo(52)}
+          {/* Palanca arriba, inclinada hacia atrás */}
+          <path d={`M${bx} ${by - 52} L${bx - 20} ${by - 64}`} className="t-palanca t-palanca--gruesa" />
+        </g>
+      );
+    case "mezcladora":
+      return (
+        <g>
+          <rect x={bx - 40} y={by - 4} width={80} height={4} rx={2} fill="url(#ilus-cromo-h)" className="t-cuerpo" />
+          <Cano d={`M${bx} ${by - 40} L${bx} ${by - 150} A 32 32 0 0 1 ${bx + 64} ${by - 150} L${bx + 64} ${by - 124}`} />
+          {cuerpo(44, 13)}
+          {[-28, 28].map((d) => (
+            <g key={d}>
+              <rect x={bx + d - 4} y={by - 22} width={8} height={18} fill="url(#ilus-cromo)" className="t-cuerpo" />
+              <rect x={bx + d - 11} y={by - 28} width={22} height={6} rx={3} fill="url(#ilus-cromo-h)" className="t-cuerpo" />
+            </g>
+          ))}
+        </g>
+      );
+    case "profesional":
+      return (
+        <g>
+          {/* Resorte de acero (Catris en acero, Carla 2026-10-21) y brazo que sostiene la regadera */}
+          <Cano d={`M${bx} ${by - 90} L${bx} ${by - 200} A 44 44 0 0 1 ${bx + 88} ${by - 200} L${bx + 88} ${by - 162}`} ancho={11} />
+          <path d={`M${bx} ${by - 90} L${bx} ${by - 200} A 44 44 0 0 1 ${bx + 88} ${by - 200} L${bx + 88} ${by - 162}`} className="t-resorte" />
+          {cuerpo(100, 16)}
+          <rect x={bx + 8} y={by - 142} width={74} height={6} fill="url(#ilus-cromo-h)" className="t-cuerpo" />
+          <rect x={bx + 81} y={by - 164} width={14} height={50} rx={3} fill="url(#ilus-cromo)" className="t-cuerpo" />
+          {[0, 1].map((k) => (
+            <circle key={k} cx={bx + 96} cy={by - 140 + k * 9} r={1.8} className="t-boton-regadera" />
+          ))}
+          {palanca(by - 56)}
+        </g>
+      );
+  }
+}
+
+/** Escena de grifería: muro oscuro con luz difusa, cubierta oscura con la misma
+ *  tarja submontada para todos los grifos y muebles abajo (Carla, 2026-10-21).
+ *  El pot filler va sobre la parrilla, empotrado al muro. */
+function escenaGrifo(tipo: TipoGrifo): Escena {
+  const bx = 250;
+  const by = 306;
+  const fondo = 330; // fondo de la tarja (donde cae el agua)
+  const punta: Record<Exclude<TipoGrifo, "potfiller">, [number, number]> = {
+    monomando: [bx + 72, by - 142],
+    inteligente: [bx + 72, by - 142],
+    extraible: [bx + 72, by - 80],
+    sencillo: [bx + 52, by - 90],
+    mezcladora: [bx + 64, by - 122],
+    profesional: [bx + 88, by - 112],
+  };
+  // Pot filler: toma en el muro y brazo de dos tramos con bisagra en j.
+  const wx = 150;
+  const wy = 190;
+  const j = wx + 80;
+  const etiquetas: Record<TipoGrifo, Etiqueta[]> = {
+    monomando: [
+      { x: bx + 12, y: by - 74, hasta: 120, texto: "Una palanca: caudal\ny temperatura" },
+      { x: bx - 6, y: by - 4, hasta: 120, texto: "Una perforación" },
+      { x: bx + 72, y: by - 156, hasta: 450, texto: "Cartucho cerámico,\ncaño de arco alto" },
+    ],
+    mezcladora: [
+      { x: bx - 28, y: by - 25, hasta: 120, texto: "Dos manijas:\nfría y caliente" },
+      { x: bx + 4, y: by - 120, hasta: 450, texto: "Caño al centro" },
+    ],
+    sencillo: [
+      { x: bx - 16, y: by - 62, hasta: 120, texto: "Palanca arriba" },
+      { x: bx + 40, y: by - 132, hasta: 450, texto: "Caño fijo,\nsin regadera" },
+    ],
+    extraible: [
+      { x: bx, y: by - 140, hasta: 120, texto: "Manguera con\ncontrapeso" },
+      { x: bx + 78, y: by - 92, hasta: 450, texto: "Regadera extraíble:\nchorro y spray" },
+    ],
+    profesional: [
+      { x: bx, y: by - 170, hasta: 120, texto: "Resorte de acero" },
+      { x: bx + 95, y: by - 136, hasta: 450, texto: "Regadera de\nalto caudal" },
+    ],
+    inteligente: [
+      { x: bx - 7, y: by - 26, hasta: 120, texto: "Sensor al tacto" },
+      { x: bx + 72, y: by - 156, hasta: 450, texto: "Abre y cierra\nsin palanca" },
+    ],
+    potfiller: [
+      { x: wx, y: wy, hasta: 100, texto: "Toma de agua\nen el muro" },
+      { x: j + 40, y: wy, hasta: 450, texto: "Brazo articulado\nsobre la parrilla" },
+    ],
+  };
+  return {
+    estados: "abrir",
+    fondo: (
+      <>
+        {/* Muro oscuro con luz difusa detrás del grifo (Carla, 2026-10-21) */}
+        <rect x={0} y={0} width={W} height={300} className="i-muro" />
+        <LuzDifusa cx={tipo === "potfiller" ? 250 : 290} cy={170} rx={250} ry={150} />
+        {/* Cubierta oscura en perspectiva, canto y muebles */}
+        <polygon points={pts([[0, 300], [W, 300], [W, 350], [0, 350]])} className="t-cubierta-negra" />
+        <polygon points={pts([[0, 300], [W, 300], [W, 350], [0, 350]])} fill="url(#t-cubierta-luz)" />
+        <rect x={0} y={350} width={W} height={12} className="t-cubierta-negra t-canto-negro" />
+        <line x1={0} y1={350.5} x2={W} y2={350.5} className="i-cubierta-canto" />
+        <Cajones x1={0} x2={186} ys={[362, 404]} />
+        <Puertas x1={190} x2={370} y1={362} y2={404} jy={370} jl={14} />
+        <Cajones x1={374} x2={W} ys={[362, 404]} />
+        {tipo === "potfiller" ? (
+          <g>
+            {/* Parrilla de inducción con olla, bajo el brazo */}
+            <polygon points={pts([[206, 314], [414, 314], [420, 338], [200, 338]])} className="c-vidrio-negro" />
+            <Olla cx={j + 80} y={330} w={46} h={34} />
+            <ellipse cx={wx} cy={wy} rx={9} ry={11} fill="url(#ilus-cromo)" className="t-cuerpo" />
+            <Cano d={`M${wx} ${wy} L${j} ${wy}`} ancho={7} />
+            <circle cx={j} cy={wy} r={6} fill="url(#ilus-cromo)" className="t-cuerpo" />
+            {/* Segundo tramo: plegado contra el muro; al abrir se despliega sobre la olla */}
+            <g className="t-brazo-pot" style={{ transformOrigin: `${j}px ${wy}px` }}>
+              <Cano d={`M${j} ${wy} L${j + 72} ${wy} Q ${j + 80} ${wy} ${j + 80} ${wy + 8} L${j + 80} ${wy + 22}`} ancho={7} />
+              <rect x={j + 32} y={wy - 12} width={4} height={10} rx={1.5} fill="url(#ilus-cromo)" className="t-cuerpo" />
+            </g>
+            <Chorro x={j + 80} y1={wy + 24} y2={296} />
+          </g>
+        ) : (
+          <g>
+            {/* La misma tarja submontada para todos los grifos */}
+            {/* Hueco oscuro de la tarja: se lee hundida bajo la cubierta */}
+            <polygon points={pts([[214, 310], [406, 310], [414, 342], [206, 342]])} className="t-tarja-hueco" />
+            <polygon points={pts([[214, 310], [406, 310], [402, 324], [218, 324]])} className="t-tarja-pared" />
+            <line x1={206} y1={342} x2={414} y2={342} className="i-cubierta-canto" />
+            <GrifoAlzado tipo={tipo} bx={bx} by={by} />
+            <Chorro x={punta[tipo][0]} y1={punta[tipo][1]} y2={fondo} />
+          </g>
+        )}
+      </>
+    ),
+    etiquetas: etiquetas[tipo],
+    recorte: { x: 100, y: 30, w: 360, h: 360 },
+  };
+}
+
+/* ——— Asadores (Exterior) ———————————————————————————————————————————— */
+
+type TipoAsador = "emp-gas" | "emp-mixto" | "carro-gas" | "carro-carbon";
+
+/** Jardín desenfocado al fondo (referencia Lynx): casa clara, setos y alberca. */
+function JardinExterior({ hasta }: { hasta: number }) {
+  return (
+    <g>
+      <rect x={0} y={0} width={W} height={hasta} fill="url(#a-jardin)" />
+      <g filter="url(#ilus-desenfoque)">
+        <rect x={190} y={-10} width={230} height={120} className="a-casa" />
+        <rect x={240} y={30} width={70} height={60} className="a-ventana-casa" />
+        <rect x={20} y={hasta * 0.62} width={170} height={16} className="a-alberca" />
+        {[40, 120, 470, 530].map((x, k) => (
+          <ellipse key={x} cx={x} cy={hasta * (k % 2 ? 0.72 : 0.66)} rx={70} ry={38} className="a-seto" />
+        ))}
+        <ellipse cx={500} cy={hasta * 0.35} rx={34} ry={90} className="a-cipres" />
+      </g>
+    </g>
+  );
+}
+
+/** Tapa de asador cerrada (domo de acero con termómetro y jaladera tubular). */
+function TapaAsador({ x1, x2, y1, y2 }: { x1: number; x2: number; y1: number; y2: number }) {
+  const r = Math.min(28, (x2 - x1) * 0.14);
+  const d = `M${x1} ${y2} L${x1} ${y1 + r} Q ${x1} ${y1} ${x1 + r} ${y1} L${x2 - r} ${y1} Q ${x2} ${y1} ${x2} ${y1 + r} L${x2} ${y2} Z`;
+  const cx = (x1 + x2) / 2;
+  return (
+    <g>
+      <path d={d} fill="url(#a-domo)" className="a-acero" />
+      <rect x={x1} y={y2 - 12} width={x2 - x1} height={12} fill="url(#ilus-cromo-h)" className="a-acero" />
+      <circle cx={cx} cy={y1 + (y2 - y1) * 0.38} r={8} className="a-termometro" />
+      <circle cx={cx} cy={y1 + (y2 - y1) * 0.38} r={5.6} className="a-termometro-cara" />
+      <line x1={cx} y1={y1 + (y2 - y1) * 0.38} x2={cx + 3} y2={y1 + (y2 - y1) * 0.38 - 3.5} className="a-aguja" />
+      <Tubo x={x1 + 8} y={y2 - 20} w={x2 - x1 - 16} />
+    </g>
+  );
+}
+
+/** Tapa abierta vista de frente: su cara interior de acero, con la jaladera arriba. */
+function TapaAbierta({ x1, x2, y1, y2 }: { x1: number; x2: number; y1: number; y2: number }) {
+  return (
+    <g>
+      <rect x={x1} y={y1} width={x2 - x1} height={y2 - y1} rx={4} fill="url(#a-interior)" className="a-acero" />
+      {Array.from({ length: Math.floor((x2 - x1) / 9) }, (_, k) => (
+        <line key={k} x1={x1 + 6 + k * 9} y1={y1 + 6} x2={x1 + 6 + k * 9} y2={y2 - 6} className="a-cepillado" />
+      ))}
+      <rect x={x1 + 6} y={y1 - 6} width={x2 - x1 - 12} height={4.5} rx={2.2} fill="url(#ilus-cromo-h)" className="a-acero" />
+    </g>
+  );
+}
+
+/** Parrillas con comida y la flama o brasa que se ve con la tapa abierta. */
+function Parrillas({ x1, x2, y, carbon }: { x1: number; x2: number; y: number; carbon?: boolean }) {
+  return (
+    <g>
+      <rect x={x1} y={y - 3} width={x2 - x1} height={10} className="a-camara" />
+      <ellipse cx={(x1 + x2) / 2} cy={y + 2} rx={(x2 - x1) * 0.45} ry={5} className={carbon ? "a-brasa" : "a-flama-gas"} />
+      {carbon &&
+        Array.from({ length: Math.floor((x2 - x1) / 10) }, (_, k) => (
+          <ellipse key={k} cx={x1 + 6 + k * 10} cy={y + 3} rx={4.4} ry={2.4} className={k % 3 ? "a-carbon" : "a-carbon a-carbon--vivo"} />
+        ))}
+      {Array.from({ length: Math.floor((x2 - x1) / 7) }, (_, k) => (
+        <line key={k} x1={x1 + 3 + k * 7} y1={y - 4} x2={x1 + 3 + k * 7} y2={y} className="a-rejilla" />
+      ))}
+      <line x1={x1} y1={y - 4} x2={x2} y2={y - 4} className="a-rejilla" />
+      {/* Comida sobre la parrilla */}
+      <rect x={x1 + (x2 - x1) * 0.18} y={y - 10} width={26} height={7} rx={3} className="a-carne" />
+      <rect x={x1 + (x2 - x1) * 0.55} y={y - 9} width={22} height={6} rx={3} className="a-carne" />
+      {[0.42, 0.47, 0.8, 0.85].map((f) => (
+        <rect key={f} x={x1 + (x2 - x1) * f} y={y - 8} width={6} height={4} rx={2} className="a-verdura" />
+      ))}
+    </g>
+  );
+}
+
+/** Isla de cocina exterior (referencia Lynx): cubierta de granito, cajones con
+ *  jaladera de acero a los lados y puertas de nogal bajo el asador. */
+function IslaExterior({ g1, g2 }: { g1: number; g2: number }) {
+  return (
+    <g>
+      <rect x={0} y={234} width={W} height={10} className="a-granito" />
+      <line x1={0} y1={234.5} x2={W} y2={234.5} className="i-cubierta-canto" />
+      <rect x={0} y={244} width={W} height={156} className="a-hueco-isla" />
+      {[[0, g1 - 8], [g2 + 8, W]].map(([a, b]) => (
+        <g key={a}>
+          {[244, 296, 348].map((y) => (
+            <g key={y}>
+              <rect x={a + 2} y={y + 2} width={b - a - 4} height={48} className="i-mueble" />
+              <rect x={a + 2} y={y + 2} width={b - a - 4} height={48} className="i-modelado" />
+              <rect x={(a + b) / 2 - 18} y={y + 10} width={36} height={3} rx={1.5} fill="url(#ilus-cromo-h)" className="a-acero" />
+            </g>
+          ))}
+        </g>
+      ))}
+    </g>
+  );
+}
+
+function escenaAsador(tipo: TipoAsador): Escena {
+  const etiquetas: Record<TipoAsador, Etiqueta[]> = {
+    "emp-gas": [
+      { x: 214, y: 214, hasta: 100, texto: "Parrillas sobre\nquemadores de gas" },
+      { x: 372, y: 278, hasta: 470, texto: "Encendido\ninmediato" },
+      { x: 150, y: 239, hasta: 100, texto: "Empotrado en\nla isla" },
+    ],
+    "emp-mixto": [
+      { x: 180, y: 214, hasta: 90, texto: "Zona de carbón" },
+      { x: 360, y: 214, hasta: 470, texto: "Zona de gas" },
+      { x: 160, y: 300, hasta: 90, texto: "Charola de carbón\najustable" },
+    ],
+    "carro-gas": [
+      { x: 230, y: 196, hasta: 110, texto: "Parrillas sobre\nquemadores de gas" },
+      { x: 400, y: 250, hasta: 470, texto: "Repisas laterales\nplegables" },
+      { x: 194, y: 384, hasta: 110, texto: "Ruedas con freno:\nsin obra" },
+    ],
+    "carro-carbon": [
+      { x: 166, y: 150, hasta: 90, texto: "Chimenea con\ntiro ajustable" },
+      { x: 412, y: 238, hasta: 480, texto: "Caja de fuego\nlateral: ahumado" },
+      { x: 325, y: 372, hasta: 480, texto: "Ruedas para\nmoverlo" },
+    ],
+  };
+  let cuerpo: ReactNode;
+  if (tipo === "emp-gas") {
+    // Lynx de una tapa: perillas dos a la izquierda, placa, una al centro y una a la derecha.
+    cuerpo = (
+      <>
+        <JardinExterior hasta={234} />
+        <IslaExterior g1={160} g2={400} />
+        <rect x={156} y={226} width={248} height={10} fill="url(#ilus-cromo-h)" className="a-acero" />
+        <Acero x={162} y={244} w={236} h={72} />
+        {[200, 228, 312, 372].map((x) => (
+          <Perilla key={x} cx={x} cy={279} r={9} />
+        ))}
+        <rect x={250} y={273} width={40} height={11} rx={1.5} className="a-placa" />
+        <rect x={172} y={318} width={216} height={8} className="a-charola" />
+        <Puertas x1={166} x2={394} y1={330} y2={400} jy={340} jl={34} />
+        <g className="a-tapa-abierta">
+          <TapaAbierta x1={168} x2={392} y1={94} y2={222} />
+          <Parrillas x1={170} x2={390} y={224} />
+        </g>
+        <g className="a-tapa-cerrada">
+          <rect x={146} y={176} width={14} height={20} rx={2} fill="url(#ilus-cromo)" className="a-acero" />
+          <TapaAsador x1={160} x2={400} y1={150} y2={232} />
+        </g>
+      </>
+    );
+  } else if (tipo === "emp-mixto") {
+    // Coyote híbrido: dos tapas; a la izquierda la charola de carbón con su
+    // manivela, a la derecha dos perillas de gas y la placa.
+    cuerpo = (
+      <>
+        <JardinExterior hasta={234} />
+        <IslaExterior g1={130} g2={430} />
+        <rect x={126} y={226} width={308} height={10} fill="url(#ilus-cromo-h)" className="a-acero" />
+        <Acero x={132} y={244} w={296} h={72} />
+        <rect x={148} y={252} width={112} height={56} rx={2} fill="url(#dgm-acero)" className="a-acero a-marco" />
+        {[0, 1, 2, 3, 4].flatMap((k) => [160 + k * 5, 236 + k * 5]).map((x) => (
+          <rect key={x} x={x} y={262} width={2} height={12} rx={1} className="a-ranura" />
+        ))}
+        <Perilla cx={204} cy={268} r={8} />
+        <rect x={180} y={288} width={48} height={4} rx={2} fill="url(#ilus-cromo-h)" className="a-acero" />
+        <path d="M138 262 L138 282 L143 282" className="a-manivela" />
+        <Perilla cx={336} cy={279} r={9} />
+        <rect x={354} y={274} width={30} height={10} rx={1.5} className="a-placa" />
+        <Perilla cx={400} cy={279} r={9} />
+        <rect x={142} y={318} width={276} height={8} className="a-charola" />
+        <Puertas x1={136} x2={424} y1={330} y2={400} jy={340} jl={34} />
+        <g className="a-tapa-abierta">
+          <TapaAbierta x1={136} x2={276} y1={100} y2={222} />
+          <TapaAbierta x1={284} x2={424} y1={100} y2={222} />
+          <Parrillas x1={138} x2={276} y={224} carbon />
+          <Parrillas x1={284} x2={422} y={224} />
+        </g>
+        <g className="a-tapa-cerrada">
+          <TapaAsador x1={130} x2={278} y1={158} y2={232} />
+          <TapaAsador x1={282} x2={430} y1={158} y2={232} />
+        </g>
+      </>
+    );
+  } else if (tipo === "carro-gas") {
+    // Coyote con carrito: gabinete de acero con dos puertas, ruedas con freno y
+    // repisas laterales plegadas hacia abajo.
+    cuerpo = (
+      <>
+        <JardinExterior hasta={300} />
+        <rect x={0} y={300} width={W} height={100} className="a-piso-patio" />
+        {[330, 362].map((y) => (
+          <line key={y} x1={0} y1={y} x2={W} y2={y} className="a-junta-piso" />
+        ))}
+        {[60, 160, 260, 360, 460].map((x, k) => (
+          <line key={x} x1={x + (k % 2) * 40} y1={300} x2={x + (k % 2) * 40 - 12} y2={400} className="a-junta-piso" />
+        ))}
+        <ellipse cx={280} cy={392} rx={130} ry={7} className="a-sombra-piso" />
+        {[152, 392].map((x) => (
+          <Acero key={x} x={x} y={214} w={16} h={78} />
+        ))}
+        <Acero x={176} y={250} w={208} h={130} />
+        <line x1={280} y1={252} x2={280} y2={378} className="a-junta-puertas" />
+        {[268, 292].map((x) => (
+          <rect key={x} x={x - 1.6} y={286} width={3.2} height={44} rx={1.6} fill="url(#ilus-cromo)" className="a-acero" />
+        ))}
+        {[190, 370].map((x) => (
+          <g key={x}>
+            <rect x={x - 3} y={380} width={6} height={6} className="a-rueda-eje" />
+            <circle cx={x} cy={390} r={6} className="a-rueda" />
+          </g>
+        ))}
+        <rect x={168} y={206} width={224} height={8} fill="url(#ilus-cromo-h)" className="a-acero" />
+        <Acero x={170} y={214} w={220} h={36} />
+        {[194, 230, 272, 292, 312, 366].map((x) => (
+          <Perilla key={x} cx={x} cy={232} r={7.5} />
+        ))}
+        <rect x={326} y={227} width={30} height={10} rx={1.5} className="a-placa" />
+        <g className="a-tapa-abierta">
+          <TapaAbierta x1={176} x2={384} y1={70} y2={198} />
+          <Parrillas x1={176} x2={384} y={200} />
+        </g>
+        <g className="a-tapa-cerrada">
+          <TapaAsador x1={172} x2={388} y1={136} y2={206} />
+        </g>
+      </>
+    );
+  } else {
+    // Broil King de carbón (ahumador offset): barril negro sobre patas con
+    // ruedas, caja de fuego a la derecha, chimenea a la izquierda, termómetro,
+    // jaladera cromada y repisas al frente y abajo.
+    cuerpo = (
+      <>
+        <JardinExterior hasta={300} />
+        <rect x={0} y={300} width={W} height={100} className="a-piso-patio" />
+        {[330, 362].map((y) => (
+          <line key={y} x1={0} y1={y} x2={W} y2={y} className="a-junta-piso" />
+        ))}
+        <ellipse cx={280} cy={386} rx={150} ry={7} className="a-sombra-piso" />
+        {/* Patas traseras (más oscuras) y delanteras */}
+        {[198, 336].map((x) => (
+          <rect key={x} x={x} y={262} width={10} height={108} className="a-negro a-negro--atras" />
+        ))}
+        <rect x={164} y={326} width={176} height={6} className="a-negro" />
+        {Array.from({ length: 14 }, (_, k) => (
+          <circle key={k} cx={172 + k * 12} cy={329} r={1} className="a-perforacion" />
+        ))}
+        <rect x={168} y={262} width={12} height={120} className="a-negro" />
+        <rect x={314} y={262} width={12} height={104} className="a-negro" />
+        <circle cx={320} cy={372} r={13} className="a-negro" />
+        <circle cx={320} cy={372} r={5} className="a-rueda-centro" />
+        {/* Chimenea, barril, caja de fuego */}
+        <rect x={160} y={140} width={14} height={66} className="a-negro" />
+        <g className="a-humo">
+          <Vapor x={167} y={124} n={5} ancho={22} />
+        </g>
+        <rect x={350} y={206} width={78} height={56} rx={10} fill="url(#a-barril)" className="a-negro" />
+        <rect x={420} y={222} width={8} height={18} className="a-ventila" />
+        <rect x={428} y={226} width={6} height={10} className="a-ventila-brasa" />
+        <path d={`M356 214 L 420 214`} className="a-jaladera-fuego" />
+        <rect x={146} y={192} width={214} height={84} rx={40} fill="url(#a-barril)" className="a-negro" />
+        <line x1={150} y1={236} x2={356} y2={236} className="a-junta-tapa" />
+        <circle cx={250} cy={208} r={8} className="a-termometro" />
+        <circle cx={250} cy={208} r={5.6} className="a-termometro-cara a-termometro-cara--rojo" />
+        <rect x={214} y={224} width={74} height={5} rx={2.5} fill="url(#ilus-cromo-h)" className="a-acero" />
+        {[220, 280].map((x) => (
+          <rect key={x} x={x - 1.5} y={226} width={3} height={8} className="a-acero" />
+        ))}
+        <rect x={120} y={216} width={30} height={5} rx={2} className="a-negro" />
+        <rect x={196} y={246} width={180} height={5} className="a-negro a-repisa-frente" />
+      </>
+    );
+  }
+  return {
+    estados: tipo === "carro-carbon" ? "encender" : "abrir",
+    fondo: cuerpo,
+    etiquetas: etiquetas[tipo],
+    recorte: { x: 70, y: 40, w: 420, h: 350 },
+  };
 }
 
 /* ——— Registro ————————————————————————————————————————————————————— */
@@ -3297,32 +4264,36 @@ function escenaCajon(tipo: "caliente" | "vacio", etiquetas: Etiqueta[]): Escena 
 
 function escenaCafe(tipo: "mesa" | "empotre", etiquetas: Etiqueta[]): Escena {
   if (tipo === "mesa") {
-    const r = { x: 230, y: 140, w: 100, h: 96 };
+    // Ambiente de la campana tipo Repisa, sin campana: la cafetera al centro,
+    // bajo la repisa (Carla, 2026-10-21).
     return {
       estados: "encender",
       fondo: (
         <>
-          <EscenaBarra x1={r.x - 40} x2={r.x + r.w + 40} />
-          <Cafetera r={r} />
-          <rect x={r.x + r.w + 10} y={226} width={22} height={10} rx={2} className="c-frasco" />
+          <FondoRepisa />
+          <RepisaDecorada />
+          {/* Un poco más grande que la escala real para que se lea en la tarjeta. */}
+          <g transform="translate(280 236) scale(1.15) translate(-280 -236)">
+            <CafeteraMesa cx={280} y={236} />
+          </g>
         </>
       ),
       etiquetas,
-      recorte: R_BARRA,
+      recorte: R_COCINA,
     };
   }
   const x1 = 160;
   const x2 = 400;
-  const cafe: Rect = { x: 182, y: 130, w: 196, h: 92 };
+  const cafe: Rect = { x: 182, y: 82, w: 196, h: 140 }; // proporción del frente Bosch
   const cajon: Rect = { x: 182, y: 232, w: 196, h: 40 };
   return {
     estados: "encender",
     fondo: (
       <>
         <EscenaColumna x1={x1} x2={x2} huecos={[cafe, cajon]} />
-        <PuertasColumna x1={x1} x2={x2} y1={24} y2={122} arriba />
+        <PuertasColumna x1={x1} x2={x2} y1={24} y2={74} arriba />
         <PuertasColumna x1={x1} x2={x2} y1={280} y2={362} />
-        <Cafetera r={cafe} empotre />
+        <CafeteraEmpotre r={cafe} />
         <Acero {...cajon} />
         <Tubo x={cajon.x + cajon.w * 0.2} y={cajon.y + 8} w={cajon.w * 0.6} />
       </>
@@ -3352,7 +4323,7 @@ function escenaCampana(tipo: TipoCampana, etiquetas: Etiqueta[]): Escena {
           {tipo !== "monolith" && c?.el}
           {c?.ducto && <Ducto x={c.ducto[0]} y1={c.ducto[1]} y2={c.ducto[2]} />}
           {tipo === "monolith" ? (
-            <Aire trazos={[`M252 ${ISLA_Y - 44} C 250 ${ISLA_Y - 62}, 270 ${ISLA_Y - 74}, 280 ${ISLA_Y - 86}`, `M262 ${ISLA_Y - 38} C 266 ${ISLA_Y - 58}, 292 ${ISLA_Y - 70}, 300 ${ISLA_Y - 84}`]} />
+            <Aire trazos={[`M252 ${ISLA_Y - 44} C 250 ${ISLA_Y - 54}, 262 ${ISLA_Y - 60}, 272 ${ISLA_Y - 61}`, `M262 ${ISLA_Y - 38} C 268 ${ISLA_Y - 50}, 284 ${ISLA_Y - 58}, 300 ${ISLA_Y - 60}`]} />
           ) : c ? (
             <AireCampana x1={c.boca[0]} x2={c.boca[1]} y={c.boca[2]} desde={desde} />
           ) : (
@@ -3378,7 +4349,22 @@ function escenaCampana(tipo: TipoCampana, etiquetas: Etiqueta[]): Escena {
     estados: "encender",
     fondo: (
       <>
-        <EscenaCocina x1={x - 2} x2={x + w + 2} alacenaCorrida={alacena} sinAlacenas={tipo === "piramidal"} />
+        <EscenaCocina x1={x - 2} x2={x + w + 2} alacenaCorrida={alacena} sinAlacenas={tipo === "piramidal" || tipo === "airwall"} />
+        {tipo === "airwall" && (
+          // Sin alacenas: repisa oscura corrida con luz cálida que baña el muro
+          // (referencia de Carla, 2026-10-21).
+          <g>
+            <rect x={0} y={104} width={W} height={74} fill="url(#c-luz-repisa)" />
+            <rect x={0} y={92} width={W} height={12} className="c-repisa-negra" />
+            <rect x={0} y={92} width={W} height={1.4} className="c-repisa-canto" />
+            <line x1={0} y1={104.6} x2={W} y2={104.6} className="c-led-repisa" />
+            <g transform="translate(392 92) scale(0.85)">
+              <Planta2 x={0} y={0} />
+            </g>
+            <rect x={150} y={80} width={11} height={12} rx={2} className="c-repisa-negra c-repisa-cuerpo" />
+            <rect x={164} y={84} width={9} height={8} rx={2} className="c-repisa-negra c-repisa-cuerpo" />
+          </g>
+        )}
         {tipo !== "airwall" && <LuzCampana x1={c.boca[0]} x2={c.boca[1]} y={c.boca[2]} piso={228} />}
         {c.el}
         {c.ducto && <Ducto x={c.ducto[0]} y1={c.ducto[1]} y2={c.ducto[2]} />}
@@ -3387,13 +4373,14 @@ function escenaCampana(tipo: TipoCampana, etiquetas: Etiqueta[]): Escena {
             {/* Parrilla empotrada en la cubierta y gabinetes abajo. */}
             <rect x={x - 3} y={236} width={w + 6} height={9} className="i-cubierta" />
             <Cajones x1={x} x2={x + w} ys={[245, 290, 335, 366]} />
-            <rect x={x + 10} y={231} width={w - 20} height={5} className="c-vidrio-negro" />
+            <rect x={x + 24} y={231} width={w - 48} height={5} className="c-vidrio-negro" />
             <Olla cx={x + w * 0.3} y={231} w={30} h={22} />
             <Vapor x={x + w * 0.3} y={200} n={3} />
+            {/* El vapor se va de lado a la ranura del panel. */}
             <Aire
               trazos={[
-                `M${x + w * 0.3} 204 C ${x + w * 0.32} 192, ${x + w * 0.4} 186, ${x + w * 0.46} 184`,
-                `M${x + w * 0.34} 212 C ${x + w * 0.38} 200, ${x + w * 0.44} 194, ${x + w * 0.5} 192`,
+                `M${x + w * 0.3} 206 C ${x + w * 0.32} 196, ${c.boca[0] - 4} 204, ${c.boca[0] + 6} ${c.boca[2]}`,
+                `M${x + w * 0.36} 212 C ${x + w * 0.42} 204, ${c.boca[0] + 10} 206, ${c.boca[0] + 22} ${c.boca[2]}`,
               ]}
             />
           </>
@@ -3413,55 +4400,80 @@ function escenaCampana(tipo: TipoCampana, etiquetas: Etiqueta[]): Escena {
   };
 }
 
+/** Ambiente de la campana tipo Repisa (también lo usa la cafetera de mesa):
+ *  muro de mármol claro y gabinetes negros sin jaladeras, solo con sus cortes
+ *  (Carla, 2026-10-21). */
+function FondoRepisa() {
+  return (
+    <g className="c-muro-claro c-gabinete-negro">
+      <EscenaCocina x1={280} x2={280} sinAlacenas />
+    </g>
+  );
+}
+
+/** Repisa negra corrida con cuadro, cuenco y planta encima. */
+function RepisaDecorada() {
+  return (
+    <g>
+      <rect x={156} y={90} width={36} height={38} className="c-marco-cuadro" />
+      <rect x={160} y={94} width={28} height={30} className="c-lienzo" />
+      <path d="M166 124 L166 104 Q 174 96 182 104 L182 124 Z" className="c-figura-cuadro" />
+      <g transform="translate(386 128) scale(0.85)">
+        <Planta2 x={0} y={0} />
+      </g>
+      <rect x={210} y={120} width={14} height={8} rx={2} className="c-cuenco" />
+      <rect x={120} y={128} width={320} height={6} className="c-repisa-negra" />
+      <rect x={120} y={134} width={320} height={8} className="c-repisa-negra c-repisa-cuerpo" />
+    </g>
+  );
+}
+
 /** Cocina de muro sin alacenas con cubierta corrida (Gran formato y Repisa):
  *  la parrilla va empotrada en la cubierta, debajo de la campana. */
 function escenaCampanaCorrida(tipo: "gran-formato" | "repisa", etiquetas: Etiqueta[]): Escena {
   const gran = tipo === "gran-formato";
-  // Gran formato (referencia Falmec): barra larga suspendida de tensores con el
-  // ducto descentrado; bajo el ducto va la parrilla de gas y al lado la de inducción.
-  const gas = gran ? { x1: 112, x2: 204 } : { x1: 236, x2: 324 };
+  // Gran formato (referencia Falmec de Carla, 2026-10-21): barra larga y
+  // delgada de 55″ o más —canto superior luminoso, banda de cromo y fondo
+  // hundido—, ducto ancho cargado a la izquierda y el otro extremo colgado del
+  // techo con dos cables. Debajo, una sola parrilla profesional ancha cargada
+  // a la izquierda, bajo el ducto (Carla, 2026-10-21); sin la planta de ese lado.
+  const gas = gran ? { x1: 100, x2: 310 } : { x1: 236, x2: 324 };
   const gx = (gas.x1 + gas.x2) / 2;
-  const boca: [number, number, number] = gran ? [92, 468, 156] : [200, 360, 146];
+  const boca: [number, number, number] = gran ? [64, 516, 158] : [200, 360, 146];
   const desde: [number, number][] = [[gx - 18, 196]];
   return {
     estados: "encender",
     fondo: (
       <>
-        <EscenaCocina x1={280} x2={280} sinAlacenas />
+        {gran ? <EscenaCocina x1={280} x2={280} sinAlacenas sinPlanta /> : <FondoRepisa />}
         <LuzCampana x1={boca[0]} x2={boca[1]} y={boca[2]} piso={232} ancho={1.02} />
         {gran ? (
           <g>
-            {[452, 462].map((x) => (
-              <line key={x} x1={x} y1={20} x2={x} y2={146} className="c-tensor" />
+            {[494, 506].map((x) => (
+              <line key={x} x1={x} y1={20} x2={x} y2={140} className="c-tensor" />
             ))}
-            <Acero x={gx - 28} y={20} w={56} h={126} />
-            <Acero x={84} y={146} w={392} h={6} />
-            <rect x={84} y={152} width={392} height={4} className="c-base-micro" />
-            <rect x={92} y={155} width={376} height={1.4} className="c-led-barra" />
+            <Acero x={158} y={20} w={68} h={120} />
+            {/* Barra: canto luminoso, banda de cromo y fondo hundido con su sensor */}
+            <rect x={56} y={140} width={468} height={5} className="c-canto-luminoso" />
+            <rect x={56} y={145} width={468} height={8} fill="url(#ilus-cromo-h)" className="i-panel" />
+            <polygon points={pts([[56, 153], [524, 153], [516, 158], [64, 158]])} className="c-base-micro" />
+            <rect x={270} y={153} width={20} height={3} className="c-sensor-barra" />
+            <rect x={66} y={156.6} width={448} height={1.4} className="c-led-barra" />
             {[0, 1, 2, 3, 4].map((k) => (
-              <rect key={k} x={gx + 30 + k * 5} y={148} width={3} height={1.4} rx={0.4} className="c-tecla-control" />
+              <rect key={k} x={170 + k * 5} y={148.3} width={3} height={1.4} rx={0.4} className="c-tecla-control" />
             ))}
           </g>
         ) : (
           <g>
-            {/* Cuadro y planta sobre la repisa */}
-            <rect x={156} y={90} width={36} height={38} className="c-marco-cuadro" />
-            <rect x={160} y={94} width={28} height={30} className="c-lienzo" />
-            <path d="M166 124 L166 104 Q 174 96 182 104 L182 124 Z" className="c-figura-cuadro" />
-            <g transform="translate(386 128) scale(0.85)">
-              <Planta2 x={0} y={0} />
-            </g>
-            <rect x={210} y={120} width={14} height={8} rx={2} className="c-cuenco" />
-            {/* Repisa oscura con el módulo de extracción al centro */}
-            <rect x={120} y={128} width={320} height={6} className="c-repisa-negra" />
-            <rect x={120} y={134} width={320} height={8} className="c-repisa-negra c-repisa-cuerpo" />
+            <RepisaDecorada />
+            {/* Módulo de extracción al centro, bajo la repisa */}
             <rect x={200} y={142} width={160} height={4} className="c-base-micro" />
             <rect x={206} y={145} width={148} height={1.2} className="c-led-barra" />
           </g>
         )}
-        {/* Parrilla de gas empotrada en la cubierta (bajo el ducto en gran formato) */}
+        {/* Parrilla de gas empotrada en la cubierta, bajo el ducto */}
         <rect x={gas.x1} y={233} width={gas.x2 - gas.x1} height={3} className="c-vidrio-negro" />
-        {[gas.x1 + (gas.x2 - gas.x1) * 0.28, gas.x1 + (gas.x2 - gas.x1) * 0.72].map((x) => (
+        {(gran ? [1, 3, 5, 7, 9, 11].map((k) => k / 12) : [0.28, 0.72]).map((f) => gas.x1 + (gas.x2 - gas.x1) * f).map((x) => (
           <g key={x}>
             <ellipse cx={x} cy={233} rx={10} ry={2} className="c-quemador" />
             <FlamaLado cx={x} y={233} w={16} />
@@ -3470,13 +4482,6 @@ function escenaCampanaCorrida(tipo: "gran-formato" | "repisa", etiquetas: Etique
         <rect x={gas.x1 + 2} y={229} width={gas.x2 - gas.x1 - 4} height={2.2} className="c-rejilla-lado" />
         <Olla cx={gx - 18} y={229} w={30} h={24} />
         <Vapor x={gx - 18} y={200} n={3} />
-        {gran && (
-          // Parrilla de inducción al lado
-          <g>
-            <rect x={300} y={233} width={120} height={3} className="c-vidrio-negro" />
-            <rect x={312} y={232.2} width={96} height={1.2} className="c-zona-calor c-tira-ind" />
-          </g>
-        )}
         <AireCampana x1={boca[0]} x2={boca[1]} y={boca[2]} desde={desde} />
       </>
     ),
@@ -3646,13 +4651,54 @@ const ESCENAS: Record<string, () => Escena> = {
   // ——— Cafeteras ———
   "cafe-mesa": () =>
     escenaCafe("mesa", [
-      { x: 262, y: 166, hasta: 150, texto: "Pantalla táctil" },
-      { x: 290, y: 214, hasta: 440, texto: "Molino integrado:\ncafé al momento" },
+      { x: 259, y: 162, hasta: 150, texto: "Pantalla táctil" },
+      { x: 280, y: 220, hasta: 150, texto: "Molino integrado:\ncafé al momento" },
+      { x: 324, y: 178, hasta: 440, texto: "Depósito de agua\nque se rellena" },
     ]),
   "cafe-empotre": () =>
     escenaCafe("empotre", [
-      { x: 230, y: 144, hasta: 110, texto: "Integrada al\nmuro de hornos" },
-      { x: 300, y: 200, hasta: 440, texto: "Espresso\nal toque" },
+      { x: 189, y: 160, hasta: 110, texto: "Integrada al\nmuro de hornos" },
+      { x: 280, y: 102, hasta: 440, texto: "Pantalla y\nselector al frente" },
+      { x: 286, y: 188, hasta: 440, texto: "Espresso\nal toque" },
+    ]),
+  // ——— Asadores (Carla, 2026-10-21) ———
+  "asador-emp-gas": () => escenaAsador("emp-gas"),
+  "asador-emp-mixto": () => escenaAsador("emp-mixto"),
+  "asador-carro-gas": () => escenaAsador("carro-gas"),
+  "asador-carro-carbon": () => escenaAsador("carro-carbon"),
+  // ——— Tarjas y grifería (Carla, 2026-10-21) ———
+  "tarja-sobreponer": () => escenaTarja("sobreponer"),
+  "tarja-submontar": () => escenaTarja("submontar"),
+  "tarja-dual": () => escenaTarja("dual"),
+  "tarja-farmhouse": () => escenaTarja("farmhouse"),
+  "tarja-1-tina": () => escenaTarjaPlanta(1),
+  "tarja-2-tinas": () => escenaTarjaPlanta(2),
+  "tarja-3-tinas": () => escenaTarjaPlanta(3),
+  "grif-monomando": () => escenaGrifo("monomando"),
+  "grif-mezcladora": () => escenaGrifo("mezcladora"),
+  "grif-sencillo": () => escenaGrifo("sencillo"),
+  "grif-extraible": () => escenaGrifo("extraible"),
+  "grif-profesional": () => escenaGrifo("profesional"),
+  "grif-inteligente": () => escenaGrifo("inteligente"),
+  "grif-potfiller": () => escenaGrifo("potfiller"),
+  // ——— Lavavajillas ———
+  "lava-piso-frente": () =>
+    escenaLavavajillas("piso-frente", [
+      { x: 250, y: 270, hasta: 120, texto: "Canasta para\nvasos y tazas" },
+      { x: 300, y: 308, hasta: 440, texto: "Canasta\npara platos" },
+      { x: 296, y: 372, hasta: 440, texto: "Puerta abatible" },
+    ]),
+  "lava-piso-ocultos": () =>
+    escenaLavavajillas("piso-ocultos", [
+      { x: 250, y: 270, hasta: 120, texto: "Canasta para\nvasos y tazas" },
+      { x: 300, y: 308, hasta: 440, texto: "Canasta\npara platos" },
+      { x: 296, y: 375, hasta: 440, texto: "Botonera\nen el canto" },
+    ]),
+  "lava-empotre-ocultos": () =>
+    escenaLavavajillas("empotre", [
+      { x: 250, y: 274, hasta: 120, texto: "Canasta para\nvasos y tazas" },
+      { x: 300, y: 312, hasta: 440, texto: "Canasta\npara platos" },
+      { x: 296, y: 378, hasta: 440, texto: "Botonera\nen el canto" },
     ]),
   // ——— Campanas ———
   "camp-pared": () => escenaCampana("pared", [{ x: 230, y: 130, hasta: 110, texto: "Anclada al muro\nsobre la estufa" }, { x: 340, y: 190, hasta: 450, texto: "Capta el humo\ny lo saca" }]),
@@ -3661,7 +4707,7 @@ const ESCENAS: Record<string, () => Escena> = {
   "camp-t-invertida": () => escenaCampana("t-invertida", [{ x: 280, y: 128, hasta: 450, texto: "Cubreductos\nangosto" }, { x: 214, y: 150, hasta: 110, texto: "Visera ancha\ny plana" }]),
   "camp-cristal": () => escenaCampana("cristal", [{ x: 214, y: 148, hasta: 110, texto: "Visera de vidrio\ntemplado" }, { x: 296, y: 139, hasta: 450, texto: "Controles al frente" }, { x: 330, y: 190, hasta: 450, texto: "Retiene y guía\nel vapor" }]),
   "camp-piramidal": () => escenaCampana("piramidal", [{ x: 230, y: 120, hasta: 110, texto: "Cuerpo inclinado\nhacia el ducto" }, { x: 330, y: 190, hasta: 450, texto: "Forma clásica\nde campana" }]),
-  "camp-cilindrica": () => escenaCampana("cilindrica", [{ x: 252, y: 70, hasta: 120, texto: "Tubo desde\nel techo" }, { x: 250, y: 140, hasta: 120, texto: "Cuerpo exento\nsobre la isla" }, { x: 300, y: 178, hasta: 470, texto: "Luz y extracción\nal centro" }]),
+  "camp-cilindrica": () => escenaCampana("cilindrica", [{ x: 252, y: 40, hasta: 120, texto: "Tubo desde\nel techo" }, { x: 250, y: 100, hasta: 120, texto: "Cuerpo exento\nsobre la isla" }, { x: 300, y: 126, hasta: 470, texto: "Luz y extracción\nal centro" }]),
   "camp-inserto": () => escenaCampana("inserto", [{ x: 206, y: 60, hasta: 110, texto: "Mueble a la medida\nque lo oculta" }, { x: 320, y: 116, hasta: 450, texto: "Inserto y ducto\ndentro del mueble" }, { x: 214, y: 162, hasta: 110, texto: "Solo se ven rejillas,\nluces y perillas" }]),
   "camp-bajo-mueble": () => escenaCampana("bajo-mueble", [{ x: 230, y: 140, hasta: 110, texto: "Bajo la alacena" }, { x: 330, y: 190, hasta: 450, texto: "Compacta, con\nsalida al ducto" }]),
   "camp-slider": () => escenaCampana("slider", [{ x: 230, y: 146, hasta: 110, texto: "Visera que se\nextiende al usarla" }, { x: 330, y: 120, hasta: 450, texto: "Integrada bajo\nla alacena" }]),
@@ -3669,10 +4715,10 @@ const ESCENAS: Record<string, () => Escena> = {
   "camp-techo": () => escenaCampana("techo", [{ x: 220, y: 26, hasta: 110, texto: "Al ras del plafón" }, { x: 340, y: 120, hasta: 470, texto: "Sin volumen\ncolgante" }, { x: 405, y: ISLA_Y - 14, hasta: 440, texto: "Incluye un control para\najuste de extracción\ne iluminación" }]),
   "camp-decorativa": () => escenaCampana("decorativa", [{ x: 234, y: 120, hasta: 110, texto: "Forma escultórica,\ntipo lámpara" }, { x: 310, y: 164, hasta: 470, texto: "Luz y extracción\npor abajo" }]),
   "camp-retractil": () => escenaCampana("retractil", [{ x: 230, y: 180, hasta: 110, texto: "Sube desde la\ncubierta al usarla" }, { x: 352, y: 170, hasta: 470, texto: "Controles en\nel costado" }, { x: 300, y: 214, hasta: 470, texto: "Detrás de la parrilla\nde inducción" }]),
-  "camp-gran-formato": () => escenaCampana("gran-formato", [{ x: 158, y: 80, hasta: 100, texto: "Ducto sobre la\nparrilla de gas" }, { x: 100, y: 152, hasta: 70, texto: "55″ o más" }, { x: 360, y: 234, hasta: 450, texto: "Cubre dos parrillas:\ngas e inducción" }]),
+  "camp-gran-formato": () => escenaCampana("gran-formato", [{ x: 192, y: 80, hasta: 100, texto: "Ducto a un lado,\nalto caudal" }, { x: 80, y: 149, hasta: 60, texto: "55″ o más" }, { x: 500, y: 100, hasta: 430, texto: "Suspendida\ncon cables" }, { x: 290, y: 234, hasta: 450, texto: "Una parrilla\nprofesional ancha" }]),
   "camp-repisa": () => escenaCampana("repisa", [{ x: 156, y: 110, hasta: 110, texto: "Repisa para cuadro\no plantas" }, { x: 360, y: 138, hasta: 450, texto: "Perfil delgado" }]),
-  "camp-monolith": () => escenaCampana("monolith", [{ x: 150, y: ISLA_Y - 36, hasta: 110, texto: "Caja sobre la isla,\nsin campana arriba" }, { x: 330, y: ISLA_Y - 66, hasta: 470, texto: "Al encender se abre\ny capta el vapor" }]),
-  "camp-airwall": () => escenaCampana("airwall", [{ x: 230, y: 180, hasta: 110, texto: "Panel al muro\ndetrás de la parrilla" }, { x: 330, y: 200, hasta: 450, texto: "Extrae el vapor\nde lado" }]),
+  "camp-monolith": () => escenaCampana("monolith", [{ x: 222, y: ISLA_Y - 60, hasta: 110, texto: "Se abre y extrae\na ras de cubierta" }, { x: 420, y: ISLA_Y - 64, hasta: 470, texto: "Canal para\nutensilios" }]),
+  "camp-airwall": () => escenaCampana("airwall", [{ x: 222, y: 186, hasta: 110, texto: "Panel al muro\ndetrás de la parrilla" }, { x: 326, y: 201, hasta: 450, texto: "Extrae el vapor\nde lado" }]),
   "camp-superficie": () =>
     escenaParrilla("superficie", [
       { x: 300, y: 221, hasta: 110, texto: "Módulo de extracción\nen la cubierta" },
@@ -3687,6 +4733,18 @@ const ESCENAS: Record<string, () => Escena> = {
 
 export function tieneCoccion(tipo: string): boolean {
   return tipo in ESCENAS;
+}
+
+/** Escenas con botón "Panelar" (lavavajillas con controles ocultos, Carla
+ *  2026-10-21): misma forma que `panelar` de IlustracionTipo. El botón va sobre
+ *  la alacena derecha, a la altura libre más cercana a 100 que no tape las
+ *  etiquetas de ese lado (arriba de 100 va la lupa). */
+const PANELABLES = new Set(["lava-piso-ocultos", "lava-empotre-ocultos"]);
+export function panelarCoccion(tipo: string): { right: string; y: string; inicial: boolean; boton: boolean } | null {
+  if (!PANELABLES.has(tipo)) return null;
+  const derechas = ESCENAS[tipo]().etiquetas.filter((e) => e.hasta > e.x).map((e) => e.y);
+  const y = Array.from({ length: 26 }, (_, k) => 100 + k * 10).find((v) => derechas.every((t) => Math.abs(v - t) >= 46)) ?? 100;
+  return { right: `${((W - 520) / W) * 100}%`, y: `${(y / H) * 100}%`, inicial: false, boton: true };
 }
 
 export default function IlustracionCoccion({ tipo }: { tipo: string }) {

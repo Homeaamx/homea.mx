@@ -25,7 +25,8 @@ Cada entrada lleva **una etiqueta de lugar** y, opcionalmente, **una de tipo**. 
 con acentos; mayúsculas y "&" o "y" dan igual.
 
 - **Lugar.** Cocina y Bar y Exterior van por subcategoría: `Refrigeración`, `Cocción`,
-  `Lavavajillas`, `Tarjas y Grifería`, `Trituradores`, `Filtros y Purificadores de Agua`,
+  `Lavavajillas`, `Tarjas y Grifería`, `Trituradores`, `Purificadores y Despachadores de Agua`
+  (la etiqueta vieja `Filtros y Purificadores de Agua` sigue funcionando porque coincide con el slug),
   `Asadores & Hornos` y `Alberca`. Las demás van por macro: `Electrodomésticos Menores`,
   `Lavandería`, `Baños`, `Aire acondicionado`, `Vapor y Sauna`, `Wellness`,
   `Recubrimientos y Superficies` y `Chimeneas & Calentadores`.
@@ -70,7 +71,7 @@ Blog **Guías** (`guias`) creado. **16 guías**, una por subcategoría o macro, 
 | Lavavajillas | `guia-compra-lavavajillas` |
 | Tarjas y Grifería | `guia-tarjas-y-griferia` |
 | Trituradores | `guia-triturador-de-alimentos` |
-| Filtros y Purificadores de Agua | `guia-filtracion-agua-cocina` |
+| Purificadores y Despachadores de Agua | `guia-filtracion-agua-cocina` |
 | Asadores & Hornos | `guia-asadores-y-hornos-exterior` |
 | Alberca | `elegir-mosaico-para-alberca` |
 | Electrodomésticos Menores | `guia-electrodomesticos-menores` |

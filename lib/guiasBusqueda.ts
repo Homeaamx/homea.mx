@@ -10,6 +10,7 @@
 //                    el detalle técnico del modal)
 
 import type { GrupoFicha, Subcategoria2 } from "@/types/guias";
+import { conPaginaFichas } from "./paginaFichas";
 
 export interface EntradaBusqueda {
   /** Título visible del resultado (nombre de la tarjeta o ficha). */
@@ -55,7 +56,7 @@ export function indiceCategoria(
     if (portada && s.tarjeta) {
       out.push({ titulo: s.nombre, tag: "Categoría", visible: s.tarjeta.resumen, extendido: "", href: `#tipo-${s.slug}` });
     }
-    if (!s.rutaFiltros || (s.filtros?.length ?? 0) < 2) continue;
+    if (!conPaginaFichas(s)) continue;
     for (const f of s.filtros!) {
       if (!f.ficha) continue;
       const slug = slugFicha(f.nombre);

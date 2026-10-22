@@ -312,6 +312,7 @@ export function TramoCubierta({
   decor,
   base = "puertas",
   sinAlacena,
+  sinMuro,
 }: {
   x1: number;
   x2: number;
@@ -319,6 +320,8 @@ export function TramoCubierta({
   base?: "puertas" | "cajones";
   /** Sin alacena: el muro sube hasta el plafón. */
   sinAlacena?: boolean;
+  /** El muro y su tira de luz los pone la escena, corridos de lado a lado. */
+  sinMuro?: boolean;
 }) {
   if (x2 - x1 < 10) return null;
   const cx = (x1 + x2) / 2;
@@ -329,8 +332,12 @@ export function TramoCubierta({
       ) : (
         <>
           <Puertas x1={x1} x2={x2} y1={20} y2={150} jy={124} />
-          <rect x={x1} y={150} width={x2 - x1} height={86} className="i-muro" />
-          <Cinta x1={x1} x2={x2} y={150} h={60} />
+          {!sinMuro && (
+            <>
+              <rect x={x1} y={150} width={x2 - x1} height={86} className="i-muro" />
+              <Cinta x1={x1} x2={x2} y={150} h={60} />
+            </>
+          )}
         </>
       )}
       {decor === "planta" && <Planta2 x={cx} y={236} />}

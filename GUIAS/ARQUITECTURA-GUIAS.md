@@ -114,8 +114,9 @@ Guías: Guía de compra de tarjas *(guía-de-compra)* · Cómo elegir tu grifer�
 Sub2: Trituradores.
 Guías: Guía de compra de triturador *(guía-de-compra)* · ¿Vale la pena un triturador? *(comparativa)*.
 
-**Filtros y Purificadores de Agua** → `/guias/cocina-y-bar/filtros-y-purificadores-de-agua/`
-Sub2: Purificadores de agua · Filtros y repuestos.
+**Purificadores y Despachadores de Agua** → `/guias/cocina-y-bar/filtros-y-purificadores-de-agua/` (slug sin cambio)
+Sub2: Purificadores de agua (con sus filtros y repuestos como accesorios) · Despachadores de agua (garrafón).
+Estructura definitiva (Carla, 2026-10-21), igual que la tabla de filtros v2, el menú y Shopify.
 Guías: Guía de filtración de agua *(guía-de-compra)*.
 
 ### B. Exterior — `/guias/exterior/` · *(3 niveles · guías en Sub1)*

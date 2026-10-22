@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Crumb } from "@/lib/guias";
 import { TIPOS_WEB } from "@/lib/shopify/coleccionesWeb";
+import { conPaginaFichas } from "@/lib/paginaFichas";
 import type { Subcategoria2 } from "@/types/guias";
 import Breadcrumb from "./Breadcrumb";
 import CtaProducto from "./CtaProducto";
@@ -148,14 +149,15 @@ const ICONOS: Record<string, React.ReactNode> = {
       <path d="M9.5 10l5 4M14.5 10l-5 4" />
     </>
   ),
-  // Filtros y purificadores de agua
+  // Purificadores y despachadores de agua
   "purificadores-de-agua": (
     <path d="M12 3c3.5 4.4 6 7.7 6 11a6 6 0 0 1-12 0c0-3.3 2.5-6.6 6-11zM9 15a3 3 0 0 0 3 3" />
   ),
-  "filtros-y-repuestos": (
+  "despachadores-de-agua": (
     <>
-      <rect x="7" y="3.5" width="10" height="17" rx="2" />
-      <path d="M7 8h10M7 16h10M10 11v2M14 11v2" />
+      <path d="M9.5 2.5h5v4h-5zM8 6.5h8v3H8z" />
+      <rect x="6" y="9.5" width="12" height="12" rx="1" />
+      <path d="M10 14h4M12 14v2.5" />
     </>
   ),
   // Exterior · Asadores & Hornos (2026-10-20)
@@ -223,13 +225,6 @@ const ICONOS: Record<string, React.ReactNode> = {
       <path d="M15 11h2a2 2 0 0 1 0 4h-2M9 9V6.5a1.5 1.5 0 0 1 3 0V9" />
     </>
   ),
-  "despachadores-de-agua": (
-    <>
-      <path d="M9.5 2.5h5v4h-5zM8 6.5h8v3H8z" />
-      <rect x="6" y="9.5" width="12" height="12" rx="1" />
-      <path d="M10 14h4M12 14v2.5" />
-    </>
-  ),
   "accesorios-refrigeracion": (
     <>
       <circle cx="12" cy="12" r="3" />
@@ -283,7 +278,7 @@ function Tarjeta({ s, filtraBlog }: { s: TipoPortada; filtraBlog?: boolean }) {
   );
   // Con varios filtros → su página de fichas; si no, su página de la tienda
   // (`tienda` de la taxonomía o coleccionesWeb); sin ninguna, CtaProducto (cae a WhatsApp).
-  const conFichas = Boolean(s.rutaFiltros) && (s.filtros?.length ?? 0) > 1;
+  const conFichas = conPaginaFichas(s);
   const destino = conFichas ? s.rutaFiltros! : (s.tienda ?? TIPOS_WEB.find((t) => t.slugRiel === s.slug)?.ruta);
   // Sin página de fichas (todas las de Menores; Frigobares, Hornos de pizza…):
   // la tarjeta filtra el Blog de abajo (BlogTemas escucha `data-tema-guia`) y el

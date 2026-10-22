@@ -1593,6 +1593,10 @@
 .ilus--coccion .c-figura-cuadro { fill: #3A2E24; }
 .ilus--coccion .c-cuenco { fill: #E9E2D2; stroke: #8E8678; stroke-width: .4; }
 .ilus--coccion .c-junta-monolith { stroke: #2A2E32; stroke-width: .8; }
+.ilus--coccion .c-utensilio { stroke: #8A5A34; stroke-width: 2.2; stroke-linecap: round; }
+.ilus--coccion .c-utensilio--acero { stroke: #9AA3A9; stroke-width: 1.6; }
+.ilus--coccion .c-utensilio-cabeza { fill: #8A5A34; }
+.ilus--coccion .c-utensilio-pala { fill: #9AA3A9; stroke: #5A6066; stroke-width: .4; }
 .ilus--coccion .c-tapa-monolith { transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(.06); transition: transform 800ms var(--ease-reveal) 150ms; }
 :is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-tapa-monolith { transform: none; }
 .ilus--coccion .c-led-perilla { fill: none; stroke: #3D8CFF; stroke-width: 1; opacity: 0; transition: opacity 500ms var(--ease-standard) 200ms; }
@@ -1685,8 +1689,27 @@
 .ilus--coccion .c-moldura { fill: #000; opacity: .18; }
 .ilus--coccion .c-revestida { fill: #D9CFC2; stroke: #8E8678; stroke-width: .6; }
 .ilus--coccion .c-filo-laton { fill: url(#ilus-laton) #B08A55; }
-.ilus--coccion .c-airwall { fill: #E9E6E0; stroke: #8E8678; stroke-width: .6; }
-.ilus--coccion .c-airwall-lama { stroke: #8E959B; stroke-width: .7; opacity: .7; }
+.ilus--coccion .c-motor { fill: #2A2E32; stroke: #8E959B; stroke-width: .8; }
+.ilus--coccion .c-motor-eje { fill: #8E959B; }
+.ilus--coccion .c-muro-claro .i-muro { fill: url(#ilus-marmol-claro) #CBBFAF; }
+.ilus--coccion .c-gabinete-negro .i-mueble { fill: #222326; }
+.ilus--coccion .c-gabinete-negro .i-junta { stroke: #0B0C0D; stroke-width: 1.2; }
+.ilus--coccion .c-gabinete-negro .i-jaladera { display: none; }
+/* Airwall: panel luminoso con marco negro; al encender brilla más y su halo baña el muro. */
+.ilus--coccion .c-airwall-halo { fill: #FFF1D6; opacity: .3; filter: url(#ilus-desenfoque); transition: opacity 700ms var(--ease-standard) 150ms; }
+.ilus--coccion .c-airwall-marco { fill: #141516; }
+.ilus--coccion .c-airwall-encendido { fill: #FFF8EA; opacity: 0; transition: opacity 700ms var(--ease-standard) 150ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-airwall-halo { opacity: .85; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-airwall-encendido { opacity: .55; }
+.ilus--coccion .c-repisa-canto { fill: #4A4D52; }
+/* Gran formato: canto superior luminoso de la barra y sensor en el fondo. */
+.ilus--coccion .c-canto-luminoso { fill: #E9ECEE; transition: fill 500ms var(--ease-standard) 150ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-canto-luminoso { fill: #FFFBF2; }
+.ilus--coccion .c-sensor-barra { fill: #3A3F44; }
+.ilus--coccion .c-led-repisa { stroke: #FFE6B8; stroke-width: 1.2; }
+.ilus--coccion .c-airwall-ranura { fill: #121314; }
+.ilus--coccion .c-airwall-sombra { fill: #000; opacity: .18; }
+.ilus--coccion .c-airwall-labio { stroke: #fff; stroke-width: .8; }
 .ilus--coccion .c-cable { fill: #2A2E32; }
 .ilus--coccion .c-cilindro { stroke: #4A5056; stroke-width: .6; }
 .ilus--coccion .c-cilindro-base { fill: #2A2E32; }
@@ -1709,6 +1732,154 @@
 .ilus--coccion .c-taza { fill: #F4F1EA; stroke: #B9BDBF; stroke-width: .6; }
 .ilus--coccion .c-taza-asa { fill: none; stroke: #F4F1EA; stroke-width: 2; }
 .ilus--coccion .c-cafe-nivel { fill: #4A2810; transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(0); transition: transform 2200ms var(--ease-standard) 900ms; }
+/* Cafeteras tipo Bosch (Carla, 2026-10-21): vasos de vidrio, jarra de leche,
+   depósito de agua, pantalla con iconos de taza y cavidad del empotre. */
+.ilus--coccion .c-vaso { fill: #E8F2F6; fill-opacity: .35; stroke: #C9D6DC; stroke-width: .6; }
+.ilus--coccion .c-leche { fill: #F4F1EA; }
+.ilus--coccion .c-espuma { fill: #FBF7EE; opacity: 0; transition: opacity 600ms var(--ease-standard) 2600ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-espuma { opacity: 1; }
+.ilus--coccion .c-jarra { fill: #E8F2F6; fill-opacity: .4; stroke: #C9D6DC; stroke-width: .6; }
+.ilus--coccion .c-deposito { fill: #C9D6DC; fill-opacity: .3; stroke: #8E959B; stroke-width: .6; }
+.ilus--coccion .c-agua { fill: #9FC4D4; opacity: .45; }
+.ilus--coccion .c-ui-taza { fill: #D98A3A; stroke: #F4F1EA; stroke-width: .5; }
+.ilus--coccion .c-ui-linea-clara { fill: #3A3F44; }
+.ilus--coccion .c-ui-icono { fill: #6E7479; }
+.ilus--coccion .c-banda-logo { fill: #2A2E32; }
+.ilus--coccion .c-led-rojo { fill: #C8322A; }
+.ilus--coccion .c-junta-marco-linea { stroke: #2A2E32; stroke-width: .8; }
+.ilus--coccion .c-marco-display { fill: #C9CED2; stroke: #8E959B; stroke-width: .5; }
+.ilus--coccion .c-nicho-centro { fill: #17191B; }
+.ilus--coccion .c-boquilla-bloque { stroke: #5A6066; stroke-width: .4; }
+.ilus--coccion .c-logo-circulo { fill: none; stroke: #6E7479; stroke-width: .6; }
+/* Lavavajillas (Carla, 2026-10-21): la puerta se abate hacia el frente y
+   deja ver la tina con sus canastas; la cara interior aparece abajo. */
+.ilus--coccion .c-botonera-lava { fill: #141517; }
+.ilus--coccion .c-tecla-lava { fill: #CFEFFF; opacity: .85; }
+.ilus--coccion .c-display-lava { fill: #0B0C0D; stroke: #3A3F44; stroke-width: .4; }
+.ilus--coccion .c-display-lava--on { fill: #E05A3A; }
+.ilus--coccion .c-sombra-jaladera { fill: #000; opacity: .22; }
+.ilus--coccion .c-hueco-jaladera { fill: #2A2E32; }
+.ilus--coccion .c-filo-jaladera { fill: #fff; opacity: .6; }
+.ilus--coccion .c-tapa-lava { fill: #C9CED2; stroke: #8E959B; stroke-width: .5; }
+.ilus--coccion .c-zoclo-lava { fill: #0E0F10; }
+.ilus--coccion .c-pata-lava { fill: #3A3F44; }
+.ilus--coccion .c-tina { fill: #8E959B; }
+.ilus--coccion .c-tina-fondo { fill: #B9BFC4; }
+.ilus--coccion .c-canasta-lava { fill: none; stroke: #6E7479; stroke-width: .9; }
+.ilus--coccion .c-alambre { stroke: #6E7479; stroke-width: .6; }
+.ilus--coccion .c-vaso-lava { fill: #E8F2F6; fill-opacity: .7; stroke: #9FB4BE; stroke-width: .5; }
+.ilus--coccion .c-taza-lava { fill: #F4F1EA; stroke: #B9BDBF; stroke-width: .5; }
+.ilus--coccion .c-plato-lava { fill: #F4F1EA; stroke: #B9BDBF; stroke-width: .5; }
+.ilus--coccion .c-forro-lava { fill: #C9CED2; stroke: #8E959B; stroke-width: .5; }
+.ilus--coccion .c-forro-lava-int { fill: #A9B0B6; }
+.ilus--coccion .c-icono-canto { fill: #4A5056; }
+.ilus--coccion .c-puerta-lava { transform-box: fill-box; transform-origin: 50% 100%; transition: transform 700ms var(--ease-standard) 100ms, opacity 250ms linear 600ms; }
+.ilus--coccion .c-puerta-lava-int { transform-box: fill-box; transform-origin: 50% 0; transform: scaleY(0); opacity: 0;
+  transition: transform 700ms var(--ease-reveal) 550ms, opacity 200ms linear 550ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-puerta-lava { transform: scaleY(.02); opacity: 0; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-puerta-lava-int { transform: none; opacity: 1; }
+/* Tarjas y grifería (Carla, 2026-10-21): al abrir cae el agua; la extraíble
+   baja su regadera, el pot filler despliega el brazo y la tarja dual pasa de
+   sobre a bajo la cubierta. */
+.ilus--coccion .t-fondo-tina { fill: #A3AAB0; }
+.ilus--coccion .t-costado-tina { fill: #7E858B; }
+.ilus--coccion .t-pared-tina { fill: url(#t-pared-tina) #D3D8DC; }
+.ilus--coccion .t-sombra-tina { fill: #000; opacity: .14; }
+.ilus--coccion .t-tarja-hueco { fill: #3A3F44; }
+.ilus--coccion .t-tarja-pared { fill: url(#t-pared-tina) #8E959B; opacity: .55; }
+.ilus--coccion .t-filo-tina { stroke: #E9ECEE; stroke-width: 1.4; }
+.ilus--coccion .t-coladera { fill: #8E959B; stroke: #5A6066; stroke-width: .6; }
+.ilus--coccion .t-coladera-centro { fill: #3A3F44; }
+.ilus--coccion .t-canto-corte { fill: #6B5D4F; }
+.ilus--coccion .t-ceja { fill: #D9DEE2; stroke: #8E959B; stroke-width: .6; }
+.ilus--coccion .t-ceja-canto { fill: #8E959B; }
+.ilus--coccion .t-dual-sobre { transition: opacity 600ms var(--ease-standard) 200ms; }
+.ilus--coccion .t-dual-bajo { opacity: 0; transition: opacity 600ms var(--ease-standard) 500ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .t-dual-sobre { opacity: 0; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .t-dual-bajo { opacity: 1; }
+.ilus--coccion .t-base-grifo { fill: #8E959B; }
+.ilus--coccion .t-cuerpo { stroke: #5E656B; stroke-width: .5; }
+.ilus--coccion .t-cano { fill: none; stroke: #8E959B; stroke-linecap: round; stroke-linejoin: round; }
+.ilus--coccion .t-cano-luz { fill: none; stroke: #F4F6F7; stroke-linecap: round; stroke-linejoin: round; opacity: .9; }
+.ilus--coccion .t-resorte { fill: none; stroke: #5E656B; stroke-width: 11; stroke-dasharray: 1.2 1.8; stroke-linejoin: round; }
+.ilus--coccion .t-palanca { fill: none; stroke: #C9CED2; stroke-width: 2.6; stroke-linecap: round; }
+.ilus--coccion .t-palanca--gruesa { stroke-width: 4.4; }
+.ilus--coccion .t-junta-regadera { fill: #5E656B; }
+.ilus--coccion .t-boton-regadera { fill: #6E7479; }
+.ilus--coccion .t-sensor { fill: #3A3F44; transition: fill 500ms var(--ease-standard) 150ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .t-sensor { fill: #6FC3FF; }
+.ilus--coccion .t-agua { stroke: #CFEFFF; stroke-width: 2.6; stroke-linecap: round; opacity: 0; transition: opacity 500ms var(--ease-standard) 700ms; }
+.ilus--coccion .t-salpica { fill: none; stroke: #DFF3FF; stroke-width: .8; opacity: 0; transition: opacity 500ms var(--ease-standard) 900ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion :is(.t-agua, .t-salpica) { opacity: .85; }
+.ilus--coccion .t-manguera { fill: #3A3F44; transform-box: fill-box; transform-origin: 50% 0; transform: scaleY(0); transition: transform 700ms var(--ease-standard) 150ms; }
+.ilus--coccion .t-regadera { transition: transform 700ms var(--ease-standard) 150ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .t-manguera { transform: none; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .t-regadera { transform: translateY(62px); }
+.ilus--coccion .t-brazo-pot { transform-box: view-box; transform: scaleX(-1); transition: transform 900ms var(--ease-reveal) 100ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .t-brazo-pot { transform: none; }
+/* Vista superior de las tarjas: cubierta oscura, tinas y agua al abrir */
+.ilus--coccion .t-cubierta-negra { fill: #1C1D1F; }
+.ilus--coccion .t-canto-negro { fill: #151617; }
+.ilus--coccion .t-zoclo-muro { fill: #0B0C0D; }
+.ilus--coccion .t-ceja-planta { stroke: #6E7479; stroke-width: .8; }
+.ilus--coccion .t-tina-planta { stroke: #6E7479; stroke-width: .8; }
+.ilus--coccion .t-agua-tina { fill: #9FD8FF; opacity: 0; transition: opacity 900ms var(--ease-standard) 400ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .t-agua-tina { opacity: .28; }
+.ilus--coccion .t-salpica-planta { fill: none; stroke: #DFF3FF; stroke-width: 1; opacity: 0; transition: opacity 500ms var(--ease-standard) 300ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .t-salpica-planta { opacity: .8; }
+.ilus--coccion .t-maceta { fill: #2A2420; stroke: #6B5D4F; stroke-width: 1.2; }
+.ilus--coccion .t-hoja-planta { fill: #7E9A4E; opacity: .9; }
+/* Asadores (Carla, 2026-10-21): jardín, isla de granito y nogal; al abrir la
+   tapa aparecen parrillas, comida y flama o brasa; el ahumador echa humo. */
+.ilus--coccion .a-casa { fill: #E9E2D2; }
+.ilus--coccion .a-ventana-casa { fill: #6E6A60; }
+.ilus--coccion .a-alberca { fill: #7FB2C4; }
+.ilus--coccion .a-seto { fill: #4F6338; }
+.ilus--coccion .a-cipres { fill: #3E5230; }
+.ilus--coccion .a-granito { fill: #1C1D1F; }
+.ilus--coccion .a-hueco-isla { fill: #0E0F10; }
+.ilus--coccion .a-acero { stroke: #5E656B; stroke-width: .5; }
+.ilus--coccion .a-marco { stroke: #8E959B; stroke-width: .8; }
+.ilus--coccion .a-placa { fill: #1E2A3A; stroke: #C9CED2; stroke-width: .6; }
+.ilus--coccion .a-charola { fill: #2A2E32; stroke: #8E959B; stroke-width: .5; }
+.ilus--coccion .a-ranura { fill: #2A2E32; }
+.ilus--coccion .a-manivela { fill: none; stroke: #C9CED2; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.ilus--coccion .a-termometro { fill: #C9CED2; stroke: #5E656B; stroke-width: .6; }
+.ilus--coccion .a-termometro-cara { fill: #1C1D1F; }
+.ilus--coccion .a-termometro-cara--rojo { fill: #C8322A; }
+.ilus--coccion .a-aguja { stroke: #F4F1EA; stroke-width: .9; stroke-linecap: round; }
+.ilus--coccion .a-cepillado { stroke: #fff; stroke-width: .5; opacity: .25; }
+.ilus--coccion .a-camara { fill: #141517; }
+.ilus--coccion .a-rejilla { stroke: #3A3F44; stroke-width: 1.6; }
+.ilus--coccion .a-flama-gas { fill: #3D8CFF; opacity: .55; filter: url(#ilus-desenfoque); }
+.ilus--coccion .a-brasa { fill: #FF7A2E; opacity: .7; filter: url(#ilus-desenfoque); }
+.ilus--coccion .a-carbon { fill: #2A2420; }
+.ilus--coccion .a-carbon--vivo { fill: #E0602A; }
+.ilus--coccion .a-carne { fill: #7A3A1E; stroke: #4A200E; stroke-width: .5; }
+.ilus--coccion .a-verdura { fill: #7E9A4E; }
+.ilus--coccion .a-tapa-abierta { opacity: 0; transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(.2);
+  transition: transform 800ms var(--ease-reveal) 250ms, opacity 300ms linear 250ms; }
+.ilus--coccion .a-tapa-cerrada { transition: opacity 300ms linear 150ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .a-tapa-abierta { opacity: 1; transform: none; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .a-tapa-cerrada { opacity: 0; }
+/* Carritos sobre el patio */
+.ilus--coccion .a-piso-patio { fill: #8E8678; }
+.ilus--coccion .a-junta-piso { stroke: #6B6458; stroke-width: 1; }
+.ilus--coccion .a-sombra-piso { fill: #000; opacity: .3; filter: url(#ilus-desenfoque); }
+.ilus--coccion .a-junta-puertas { stroke: #5E656B; stroke-width: 1; }
+.ilus--coccion .a-rueda { fill: #2A2E32; stroke: #C9CED2; stroke-width: 1.4; }
+.ilus--coccion .a-rueda-eje { fill: #8E959B; }
+.ilus--coccion .a-negro { fill: #1C1D1F; stroke: #0B0C0D; stroke-width: .5; }
+.ilus--coccion .a-negro--atras { fill: #111213; }
+.ilus--coccion .a-perforacion { fill: #3A3D41; }
+.ilus--coccion .a-rueda-centro { fill: #4A4D52; }
+.ilus--coccion .a-junta-tapa { stroke: #0B0C0D; stroke-width: 1.2; }
+.ilus--coccion .a-jaladera-fuego { fill: none; stroke: #C9CED2; stroke-width: 3; stroke-linecap: round; }
+.ilus--coccion .a-repisa-frente { fill: #26282B; }
+.ilus--coccion .a-ventila { fill: #3A3D41; }
+.ilus--coccion .a-ventila-brasa { fill: #3A2420; transition: fill 600ms var(--ease-standard) 200ms; }
+:is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .a-ventila-brasa { fill: #FF7A2E; }
+.ilus--coccion .a-humo .c-bocanada { fill: #5E5A52; }
 /* Flama, vapor, aire, calor (se ven y se animan solo encendidos) */
 .ilus--coccion .c-flama { opacity: 0; transition: opacity 450ms var(--ease-standard) 150ms; }
 .ilus--coccion .c-flama-halo { fill: #3D8CFF; opacity: .22; filter: url(#ilus-desenfoque); }
@@ -1759,5 +1930,5 @@
 :is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-caja { opacity: 1; transform: translateY(-6%); }
 @media (prefers-reduced-motion: reduce) {
   .ilus--coccion :is(.c-llama, .c-bocanada, .c-aire-trazo, .c-calor-onda, .c-ventilador, .c-ducto-flecha, .c-zona-calor) { animation: none; }
-  .c-puerta-x, .c-puerta-abatida, .c-cajon, .c-caja, .ilus--coccion .c-retractil, .ilus--coccion .c-slider, .ilus--coccion .c-tapa, .ilus--coccion .c-tapa-monolith { transition: none; }
+  .c-puerta-x, .c-puerta-abatida, .c-cajon, .c-caja, .ilus--coccion .c-retractil, .ilus--coccion .c-slider, .ilus--coccion .c-tapa, .ilus--coccion .c-tapa-monolith, .ilus--coccion .c-puerta-lava, .ilus--coccion .c-puerta-lava-int, .ilus--coccion .t-brazo-pot, .ilus--coccion .t-regadera, .ilus--coccion .t-manguera, .ilus--coccion .a-tapa-abierta { transition: none; }
 }

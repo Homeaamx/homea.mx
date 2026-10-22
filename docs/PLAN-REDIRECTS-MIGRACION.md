@@ -128,7 +128,7 @@
 | Old URL (path) | Clics | Impresiones | → Nueva URL |
 |---|---|---|---|
 | `/filtros-de-agua-c102x3166686` | 62 | 6,909 | `/productos/cocina-y-bar/filtros-y-purificadores-de-agua` |
-| `/despachadores-de-agua-garrafon-c102x3177457` | 181 | 14,945 | `/productos/electrodomesticos-menores/despachadores-de-agua` |
+| `/despachadores-de-agua-garrafon-c102x3177457` | 181 | 14,945 | `/productos/cocina-y-bar/filtros-y-purificadores-de-agua?tipo=despachadores-de-agua` |
 | `/dispensadores-de-agua-c102x2874855` | 0 | — | `/productos/cocina-y-bar/filtros-y-purificadores-de-agua` |
 | `/monomando-para-filtro-de-agua-c106x4342728` | 0 | — | `/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos-de-agua-filtrada` |
 
@@ -137,9 +137,14 @@ Contexto de tráfico de la familia completa (GSC, 16 meses, top-1000 de páginas
 **monomandos de agua filtrada 69 / 1,678**. Las ~18 fichas de producto de esta familia (Mabe
 PMO050X2BB0 = 200 clics, Whirlpool WK3901Q = 55) llevan su 301 1:1 dentro del mapa general.
 
-⚠️ El destino de `/despachadores-de-agua-...` asume que Electrodomésticos menores tendrá páginas
-de subcat.1 (hoy solo Cocina y Bar y Exterior las tienen). Mientras no exista, el redirect debe
-apuntar a `/productos/electrodomesticos-menores` para no generar un 404.
+**Actualización 2026-10-21 (Carla): estructura definitiva.** Los despachadores de garrafón
+regresan a Cocina y Bar, junto a los purificadores: **Purificadores y Despachadores de Agua** →
+Purificadores de agua (sus filtros y repuestos van como accesorios, `filtros.tipo` = "Accesorio de
+purificador") · Despachadores de agua. Es la misma estructura de la tabla de filtros v2 (2026-10-05),
+del menú y de las colecciones de Shopify. El redirect de la categoría y las 13 fichas viejas de
+despachadores (`palabras-clave.json` → "despachador") van a
+`/productos/cocina-y-bar/filtros-y-purificadores-de-agua?tipo=despachadores-de-agua`; los
+"Filtros de agua" del maestro, a `?tipo=purificadores-de-agua`.
 
 ---
 

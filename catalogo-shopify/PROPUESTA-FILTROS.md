@@ -104,7 +104,7 @@ legítimos se resuelven con **tags + colecciones automáticas**, nunca duplicand
 | Familia de SKUs (Oxatis) | `product_type` | Colección | Tags |
 |---|---|---|---|
 | Mabe PMO/PMU, Whirlpool WK3901Q (ósmosis inversa) | `Purificadores de agua` | `filtros-y-purificadores-de-agua` | `instalacion:bajo-cubierta` · `instalacion:de-mesa` · `instalacion:de-piso` · `tipo:osmosis-inversa` |
-| Cartuchos y repuestos, tanque+filtro InSinkErator SWT-FLTR-4, kit para refrigerador | `Filtros y repuestos` | `filtros-y-purificadores-de-agua` | `refaccion` |
+| Cartuchos y repuestos, tanque+filtro InSinkErator SWT-FLTR-4, kit para refrigerador | `Purificadores de agua` (accesorio, 2026-10-21) | `filtros-y-purificadores-de-agua` | `refaccion` · `filtros.tipo` = Accesorio de purificador |
 | InSinkErator HC3300/HC1100/GN1100, Kele KSS2702B | `Monomandos` | `tarjas-y-griferia` | `tipo:monomando-agua-filtrada` · **`agua-filtrada`** |
 | Mabe EMDPCCB3/EMBL01S, Whirlpool WK5053Q, Hypermark HM0022W | `Despachadores de agua` | `filtros-y-purificadores-de-agua` | `garrafon` |
 

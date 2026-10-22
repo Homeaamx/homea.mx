@@ -85,7 +85,12 @@ export const TIPOS_WEB: TipoWeb[] = [
   { tipo: "Accesorios de Tarjas y Monomandos", coleccion: "accesorios-de-tarjas-y-monomandos", slugRiel: "accesorios-tarjas-monomandos", ruta: `${TARJAS.ruta}?tipo=accesorios-tarjas-monomandos`, macro: COCINA, sub1: TARJAS },
   // Trituradores no tiene riel (un solo tipo): la página entera es su listado.
   { tipo: "Trituradores", coleccion: "trituradores", slugRiel: "trituradores", ruta: TRITURADORES.ruta, macro: COCINA, sub1: TRITURADORES },
-  { tipo: "Purificadores de agua", coleccion: "purificadores-de-agua", slugRiel: "purificadores-de-agua", ruta: `${AGUA.ruta}?tipo=purificadores-de-agua`, macro: COCINA, sub1: AGUA },
+  // Filtros y repuestos (cartuchos, tanques) viven con los purificadores como
+  // accesorios: `filtros.tipo` = "Accesorio de purificador" (Carla, 2026-10-21).
+  {
+    tipo: "Purificadores de agua", coleccion: "purificadores-de-agua", slugRiel: "purificadores-de-agua", ruta: `${AGUA.ruta}?tipo=purificadores-de-agua`, macro: COCINA, sub1: AGUA,
+    accesorios: { slug: "filtros-y-repuestos", nombre: "Filtros y repuestos de agua" },
+  },
   { tipo: "Despachadores de agua", coleccion: "despachadores-de-agua", slugRiel: "despachadores-de-agua", ruta: `${AGUA.ruta}?tipo=despachadores-de-agua`, macro: COCINA, sub1: AGUA },
   // Exterior: colecciones creadas y publicadas al canal Headless el 2026-10-13 (sin piezas).
   // Asadores tiene dos tiles en el riel según `filtros.instalacion` (Empotrable / Carrito).

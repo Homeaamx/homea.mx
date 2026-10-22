@@ -18,10 +18,11 @@ import DiagramaDefs from "./DiagramaDefs";
 import FilterList from "./FilterList";
 import FichaModal from "./FichaModal";
 import DestinoBusqueda from "./DestinoBusqueda";
+import AnimarAlDesplazar from "./AnimarAlDesplazar";
 import EtiquetasSinChoque from "./EtiquetasSinChoque";
 import { slugFicha } from "@/lib/guiasBusqueda";
 import IlustracionTipo, { panelar, tieneIlustracion } from "./IlustracionTipo";
-import IlustracionCoccion, { tieneCoccion } from "./IlustracionCoccion";
+import IlustracionCoccion, { panelarCoccion, tieneCoccion } from "./IlustracionCoccion";
 
 // Las etiquetas son EXACTAMENTE los nombres de los filtros del PLP (tabla de
 // filtros de Carla, 2026-07-28): la guía y el filtro deben nombrar igual el
@@ -50,6 +51,7 @@ export default function FilterShowcase({ filtros, contexto, etiquetas }: Props) 
       <FichaModal contexto={contexto} />
       <DestinoBusqueda />
       <EtiquetasSinChoque />
+      <AnimarAlDesplazar />
       {GRUPOS.map(({ key, label: labelDefault }) => {
         const label = etiquetas?.[key] ?? labelDefault;
         const grupo = conFicha.filter((f) => f.ficha!.grupo === key);
@@ -69,7 +71,7 @@ export default function FilterShowcase({ filtros, contexto, etiquetas }: Props) 
         const linea = grupo.filter((f) => !conEscena(f));
         const tarjeta = (f: FiltroProducto) => {
           const conIlus = conEscena(f);
-          const panel = conIlus ? panelar(escena(f)) : null;
+          const panel = conIlus ? (panelar(escena(f)) ?? panelarCoccion(escena(f))) : null;
           const cuerpo = (
             <>
               {conIlus ? (

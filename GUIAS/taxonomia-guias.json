@@ -1238,7 +1238,7 @@
                   "ficha": {
                     "grupo": "estilo",
                     "diagrama": "camp-gran-formato",
-                    "descripcion": "Campanas de 55″ o más para estufas profesionales o dobles, con motores de alto caudal.",
+                    "descripcion": "Campanas de 55″ o más, más anchas que la parrilla, para una estufa o parrilla profesional de gran formato, con motores de alto caudal.",
                     "specs": "Anchos 55–82″ · Alto CFM · Aire de reposición",
                     "detalle": "Una superficie de cocción grande y de alto BTU exige una campana más ancha que la estufa y un caudal elevado. Con caudales altos conviene prever entrada de aire de reposición para que la casa no quede en presión negativa y la campana rinda.",
                     "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=gran-formato",
@@ -1264,9 +1264,9 @@
                   "ficha": {
                     "grupo": "estilo",
                     "diagrama": "camp-monolith",
-                    "descripcion": "Un solo volumen continuo del techo hasta la altura de captación, sin separación visible entre ducto y campana.",
-                    "specs": "Bloque continuo · Isla · Anclaje a techo",
-                    "detalle": "El cubreductos y el cuerpo forman una sola pieza, así que la campana se lee como volumen arquitectónico sobre la isla. Por su peso requiere anclaje firme al techo y ruta de ducto por el plafón, o versión recirculante.",
+                    "descripcion": "Bloque monolítico que se apoya sobre la cubierta de la isla, junto a la parrilla: extrae el vapor a nivel de superficie y guarda utensilios a la mano (tipo Falmec).",
+                    "specs": "Bloque continuo · Isla · En la cubierta",
+                    "detalle": "El cuerpo de aluminio negro mate con frente de vidrio se integra a la cubierta y capta el vapor a la altura de la parrilla, en lugar de colgar del techo. Al encender, el módulo se abre ligeramente para extraer y mostrar los controles; su canal integrado guarda utensilios, especias y tablas —y aloja contactos—, así que también sirve de separador entre la cocina y la sala. Según el modelo, sale por ducto bajo la isla o recircula con filtro regenerable.",
                     "catalogo": "/productos/cocina-y-bar/coccion/campanas?f=monolith",
                     "ilustracion": "camp-monolith"
                   }
@@ -1431,27 +1431,16 @@
               "filtro": "/productos/lavavajillas-empotrable/",
               "filtros": [
                 {
-                  "nombre": "Controles al frente",
-                  "filtro": "/productos/lavavajillas-empotrable/?f=controles-al-frente",
-                  "ficha": {
-                    "grupo": "estilo",
-                    "diagrama": "lava-controles-frente",
-                    "descripcion": "Panel de control visible en la cara frontal: se programa y se ve el tiempo restante sin abrir la puerta.",
-                    "specs": "Panel frontal · Tiempo visible · Operación directa",
-                    "detalle": "Botones y pantalla quedan al frente, así el estado del ciclo se lee de lejos y se opera sin abrir. El frente muestra la botonera, por lo que no admite panel de carpintería completo.",
-                    "catalogo": "/productos/cocina-y-bar/lavavajillas?tipo=lavavajillas-empotrable&filtro=diseno:controles-al-frente"
-                  }
-                },
-                {
                   "nombre": "Controles ocultos",
                   "filtro": "/productos/lavavajillas-empotrable/?f=controles-ocultos",
                   "ficha": {
                     "grupo": "estilo",
                     "diagrama": "lava-controles-ocultos",
-                    "descripcion": "Controles en el canto superior de la puerta: frente liso, compatible con panel de carpintería.",
-                    "specs": "Controles en el canto · Frente liso · Panelable",
-                    "detalle": "La botonera queda en el borde superior y solo se ve con la puerta entreabierta, así el frente puede recibir un panel de carpintería en modelos totalmente integrables. Muchos modelos indican el avance con una luz o una proyección en el piso.",
-                    "catalogo": "/productos/cocina-y-bar/lavavajillas?tipo=lavavajillas-empotrable&filtro=diseno:controles-ocultos"
+                    "descripcion": "Botones ocultos a la vista, en el borde de arriba de la puerta: el frente se ve liso y puede llevar panel de carpintería.",
+                    "specs": "Botones ocultos · Frente liso · Panelable",
+                    "detalle": "Los botones quedan ocultos a la vista, en el borde de arriba de la puerta, y solo aparecen al abrirla un poco; así el frente queda totalmente liso y puede forrarse con un panel de carpintería en los modelos integrables. Muchos modelos avisan en qué va el ciclo con una luz o una proyección en el piso.",
+                    "catalogo": "/productos/cocina-y-bar/lavavajillas?tipo=lavavajillas-empotrable&filtro=diseno:controles-ocultos",
+                    "ilustracion": "lava-empotre-ocultos"
                   }
                 }
               ],
@@ -1460,7 +1449,7 @@
                 "imagen": "/assets/photos/brands/hero/cove-lavavajillas.webp",
                 "ambiente": true,
                 "pos": "40% 50%",
-                "resumen": "Integradas al mueble, panelables, con controles al frente u ocultos."
+                "resumen": "Integradas al mueble, panelables, con controles ocultos."
               },
               "tienda": "/productos/cocina-y-bar/lavavajillas?tipo=lavavajillas-empotrable"
             },
@@ -1475,10 +1464,11 @@
                   "ficha": {
                     "grupo": "estilo",
                     "diagrama": "lava-controles-frente",
-                    "descripcion": "Panel de control visible en la cara frontal: se programa y se ve el tiempo restante sin abrir la puerta.",
+                    "descripcion": "Los botones y la pantalla van al frente de la puerta: programas el lavado y ves cuánto le falta sin abrir.",
                     "specs": "Panel frontal · Tiempo visible · Operación directa",
-                    "detalle": "Botones y pantalla quedan al frente, así el estado del ciclo se lee de lejos y se opera sin abrir. El frente muestra la botonera.",
-                    "catalogo": "/productos/cocina-y-bar/lavavajillas?tipo=lavavajillas-de-piso&filtro=diseno:controles-al-frente"
+                    "detalle": "Como los controles están a la vista en el frente, operas el lavavajillas y ves cómo va el ciclo de un vistazo, sin abrir la puerta.",
+                    "catalogo": "/productos/cocina-y-bar/lavavajillas?tipo=lavavajillas-de-piso&filtro=diseno:controles-al-frente",
+                    "ilustracion": "lava-piso-frente"
                   }
                 },
                 {
@@ -1487,10 +1477,11 @@
                   "ficha": {
                     "grupo": "estilo",
                     "diagrama": "lava-controles-ocultos",
-                    "descripcion": "Controles en el canto superior de la puerta: frente liso sin botonera visible.",
-                    "specs": "Controles en el canto · Frente liso",
-                    "detalle": "La botonera queda en el borde superior y solo se ve con la puerta entreabierta, lo que deja un frente limpio y minimalista. Muchos modelos indican el avance con una luz o una proyección en el piso.",
-                    "catalogo": "/productos/cocina-y-bar/lavavajillas?tipo=lavavajillas-de-piso&filtro=diseno:controles-ocultos"
+                    "descripcion": "Botones ocultos a la vista, en el borde de arriba de la puerta: el frente se ve liso y limpio.",
+                    "specs": "Botones ocultos · Frente liso",
+                    "detalle": "Los botones quedan ocultos a la vista, en el borde de arriba de la puerta, y solo aparecen al abrirla un poco; así el frente queda limpio y minimalista. Muchos modelos avisan en qué va el ciclo con una luz o una proyección en el piso.",
+                    "catalogo": "/productos/cocina-y-bar/lavavajillas?tipo=lavavajillas-de-piso&filtro=diseno:controles-ocultos",
+                    "ilustracion": "lava-piso-ocultos"
                   }
                 }
               ],
@@ -1525,7 +1516,8 @@
                     "descripcion": "La tarja se apoya con su ceja perimetral sobre la cubierta y se fija con grapas: corte sencillo en cualquier material.",
                     "specs": "Ceja visible · Cualquier cubierta · Fácil reemplazo",
                     "detalle": "La ceja sella contra la cubierta con silicón y soporta el peso de la tarja, por eso funciona con laminado, madera o piedra y el corte no requiere pulido. Su contra es el borde, donde se acumula suciedad.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas&filtro=instalacion:sobreponer"
+                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas&filtro=instalacion:sobreponer",
+                    "ilustracion": "tarja-sobreponer"
                   }
                 },
                 {
@@ -1537,7 +1529,8 @@
                     "descripcion": "La tarja se fija por debajo de la cubierta y el canto pulido queda expuesto: el agua se barre directo a la tina.",
                     "specs": "Cubierta sólida · Canto pulido · Sin ceja",
                     "detalle": "Se ancla bajo una cubierta sólida —piedra, cuarzo, porcelánico o acero— con clips o adhesivo estructural, y el marmolista pule el canto del corte. No es apta para laminados ni maderas, que no resisten el agua en el canto.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas&filtro=instalacion:submontar"
+                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas&filtro=instalacion:submontar",
+                    "ilustracion": "tarja-submontar"
                   }
                 },
                 {
@@ -1549,7 +1542,8 @@
                     "descripcion": "Tarja de diseño dual que se instala sobre o bajo la cubierta según el material del proyecto.",
                     "specs": "Doble instalación · Se decide en obra",
                     "detalle": "Su ceja y sus puntos de fijación permiten ambos montajes, lo que da flexibilidad si la cubierta aún no está definida. El método se elige con el marmolista o el carpintero según el material y el acabado del corte.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas&filtro=instalacion:sobreponer-submontar"
+                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas&filtro=instalacion:sobreponer-submontar",
+                    "ilustracion": "tarja-dual"
                   }
                 },
                 {
@@ -1561,7 +1555,8 @@
                     "descripcion": "Tarja con faldón frontal expuesto que sustituye parte del frente del mueble inferior.",
                     "specs": "Faldón expuesto · Mueble a medida · Tina profunda",
                     "detalle": "El frente de la tarja queda a la vista, así que el gabinete inferior se fabrica a la medida y debe soportar su peso, sobre todo en cerámica o piedra. Suelen tener tinas amplias y profundas.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas&filtro=instalacion:empotre-frontal-farmhouse-faldon"
+                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas&filtro=instalacion:empotre-frontal-farmhouse-faldon",
+                    "ilustracion": "tarja-farmhouse"
                   }
                 },
                 {
@@ -1573,7 +1568,8 @@
                     "descripcion": "Una sola tina amplia y continua donde caben charolas, ollas y rejillas completas.",
                     "specs": "Tina única · Ollas grandes · Máxima amplitud",
                     "detalle": "Sin división, aprovecha todo el ancho para lavar piezas grandes. Se complementa con accesorios —rejilla de fondo, escurridor, tabla— para organizar el trabajo.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas&filtro=diseno:1-tina"
+                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas&filtro=diseno:1-tina",
+                    "ilustracion": "tarja-1-tina"
                   }
                 },
                 {
@@ -1585,7 +1581,8 @@
                     "descripcion": "Dos tinas, iguales o de distinto tamaño, para separar lavado y enjuague o sucio y limpio.",
                     "specs": "Doble tina · Iguales o desiguales · Separa tareas",
                     "detalle": "La división permite remojar en una tina mientras se usa la otra, o lavar y enjuagar en paralelo. Las desiguales dejan una tina grande para ollas y una chica para preparación; la contra es que las piezas más anchas no caben en una sola tina.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas&filtro=diseno:2-tinas-iguales&filtro=diseno:2-tinas-desiguales"
+                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas&filtro=diseno:2-tinas-iguales&filtro=diseno:2-tinas-desiguales",
+                    "ilustracion": "tarja-2-tinas"
                   }
                 },
                 {
@@ -1597,7 +1594,8 @@
                     "descripcion": "Tres tinas para separar lavado, enjuague y preparación en cocinas de alto flujo.",
                     "specs": "Triple tina · Alto flujo · Mueble ancho",
                     "detalle": "Requiere gabinete ancho y cubierta continua; suele incluir una tina central pequeña para triturador o preparación. Es habitual en cocinas de uso intensivo o con dos personas trabajando a la vez.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas&filtro=diseno:3-tinas"
+                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas&filtro=diseno:3-tinas",
+                    "ilustracion": "tarja-3-tinas"
                   }
                 }
               ],
@@ -1624,7 +1622,8 @@
                     "descripcion": "Una sola palanca regula caudal y temperatura mediante un cartucho cerámico.",
                     "specs": "1 palanca · Cartucho cerámico · 1 perforación",
                     "detalle": "El cartucho cerámico mezcla agua fría y caliente con un solo movimiento y se opera con una mano o el antebrazo. Generalmente requiere una perforación en la cubierta o la tarja; revisa la presión mínima de agua que pide el fabricante.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=diseno:monomando"
+                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=diseno:monomando",
+                    "ilustracion": "grif-monomando"
                   }
                 },
                 {
@@ -1636,7 +1635,8 @@
                     "descripcion": "Dos manijas independientes para agua fría y caliente, con caño central.",
                     "specs": "2 manijas · 1 o 3 perforaciones · Ajuste fino",
                     "detalle": "Cada manija controla una línea de agua, lo que permite ajustar la temperatura con precisión. Puede ser de una o de tres perforaciones según el modelo: hay que confirmarlo con la tarja o la cubierta antes de comprar.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=diseno:mezcladora-2-manijas"
+                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=diseno:mezcladora-2-manijas",
+                    "ilustracion": "grif-mezcladora"
                   }
                 },
                 {
@@ -1648,7 +1648,8 @@
                     "descripcion": "Caño fijo sin regadera extraíble: mecanismo simple y de bajo mantenimiento.",
                     "specs": "Caño fijo · Arco alto o bajo · Bajo mantenimiento",
                     "detalle": "Al no tener manguera extraíble, el mecanismo es más sencillo y duradero. La altura y el alcance del caño se eligen en función del tamaño y la profundidad de la tarja.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=diseno:sencillo"
+                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=diseno:sencillo",
+                    "ilustracion": "grif-sencillo"
                   }
                 },
                 {
@@ -1660,7 +1661,8 @@
                     "descripcion": "Regadera que sale del caño con manguera retráctil y contrapeso, con modos de chorro y spray.",
                     "specs": "Manguera con contrapeso · Chorro y spray · Alcance total",
                     "detalle": "La regadera se extrae para enjuagar toda la tarja o llenar recipientes fuera de ella y regresa sola por el contrapeso. Necesita espacio libre bajo la tarja para el recorrido de la manguera.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=diseno:extraible"
+                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=diseno:extraible",
+                    "ilustracion": "grif-extraible"
                   }
                 },
                 {
@@ -1672,7 +1674,8 @@
                     "descripcion": "Grifo de resorte tipo pre-enjuague con regadera de alto caudal, estilo cocina de restaurante.",
                     "specs": "Resorte · Alto caudal · Revisar altura libre",
                     "detalle": "El resorte sostiene una manguera flexible de gran alcance y la regadera suele tener chorro y spray potente. Por su altura conviene revisar el espacio libre bajo alacenas o ventanas y combinarlo con una tarja profunda.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=diseno:profesional"
+                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=diseno:profesional",
+                    "ilustracion": "grif-profesional"
                   }
                 },
                 {
@@ -1684,31 +1687,8 @@
                     "descripcion": "Grifo con sensor de toque o de proximidad que abre y cierra el agua sin girar la palanca.",
                     "specs": "Touch o sensor · Baterías o corriente · Manos libres",
                     "detalle": "Una válvula solenoide abre el paso al tocar el cuerpo del grifo o al acercar las manos, útil cuando están sucias. Funciona con baterías o con adaptador a corriente bajo la tarja; algunos modelos dosifican un volumen exacto.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=diseno:inteligente-touch"
-                  }
-                },
-                {
-                  "nombre": "De pared",
-                  "filtro": "/productos/griferia/?f=de-pared",
-                  "ficha": {
-                    "grupo": "instalacion",
-                    "diagrama": "grif-pared",
-                    "descripcion": "Grifo que sale del muro sobre la tarja: libera la cubierta y requiere tuberías empotradas en el muro.",
-                    "specs": "Montaje a muro · Tubería empotrada · Obra negra",
-                    "detalle": "Las tomas de agua y la válvula se dejan dentro del muro antes del acabado, a la altura y separación que pide el fabricante. Se define en obra negra; después es difícil de cambiar.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=instalacion:de-pared"
-                  }
-                },
-                {
-                  "nombre": "De techo",
-                  "filtro": "/productos/griferia/?f=de-techo",
-                  "ficha": {
-                    "grupo": "instalacion",
-                    "diagrama": "grif-techo",
-                    "descripcion": "Grifo suspendido del plafón sobre la tarja de la isla, con la tubería bajando por el techo.",
-                    "specs": "Montaje a plafón · Tubería por techo · Obra negra",
-                    "detalle": "Requiere llevar el agua fría y caliente por el plafón y una estructura que soporte la pieza; se define en obra negra. Se elige como elemento arquitectónico en islas.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=instalacion:de-techo"
+                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=diseno:inteligente-touch",
+                    "ilustracion": "grif-inteligente"
                   }
                 },
                 {
@@ -1720,7 +1700,8 @@
                     "descripcion": "Brazo articulado de agua fría montado sobre la estufa para llenar ollas donde se cocinan.",
                     "specs": "Sobre la estufa · Agua fría · Toma en muro",
                     "detalle": "Se instala en el muro detrás de la estufa con una toma de agua fría dedicada y se pliega cuando no se usa. Evita cargar ollas llenas desde la tarja; la toma debe dejarse en obra negra a la altura indicada.",
-                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=diseno:pot-filler"
+                    "catalogo": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos&filtro=diseno:pot-filler",
+                    "ilustracion": "grif-potfiller"
                   }
                 }
               ],
@@ -1729,7 +1710,7 @@
                 "imagen": "/assets/photos/brands/hero/brizo-griferia.webp",
                 "ambiente": true,
                 "pos": "center 40%",
-                "resumen": "Monomandos, extraíbles, profesionales, de pared y pot filler."
+                "resumen": "Monomandos, mezcladoras, extraíbles, profesionales, inteligentes y pot filler."
               },
               "tienda": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos"
             },
@@ -1781,7 +1762,7 @@
         },
         {
           "slug": "filtros-y-purificadores-de-agua",
-          "nombre": "Filtros y Purificadores de Agua",
+          "nombre": "Purificadores y Despachadores de Agua",
           "esLeaf": false,
           "rutaGuias": "/guias/cocina-y-bar/filtros-y-purificadores-de-agua",
           "subcategorias2": [
@@ -1851,7 +1832,6 @@
                   }
                 }
               ],
-              "rutaFiltros": "/guias/cocina-y-bar/filtros-y-purificadores-de-agua/purificadores-de-agua",
               "etiquetasGrupos": {
                 "tipo": "Tipo de funcionamiento"
               },
@@ -1859,21 +1839,21 @@
                 "imagen": "/assets/photos/hero-sub1-filtros-purificadores-agua.webp",
                 "ambiente": true,
                 "pos": "35% 50%",
-                "resumen": "Ósmosis inversa o tanque con filtro, bajo cubierta, de mesa o de piso."
+                "resumen": "Ósmosis inversa o tanque con filtro, bajo cubierta, de mesa o de piso, con sus filtros y repuestos."
               },
               "tienda": "/productos/cocina-y-bar/filtros-y-purificadores-de-agua?tipo=purificadores-de-agua"
             },
             {
-              "nombre": "Filtros y repuestos",
-              "slug": "filtros-y-repuestos",
-              "filtro": "/productos/filtros-y-repuestos/",
+              "nombre": "Despachadores de agua",
+              "slug": "despachadores-de-agua",
+              "filtro": "/productos/despachadores-de-agua/",
               "tarjeta": {
-                "imagen": "/assets/photos/filtros-agua-monomando-delta-bronce.webp",
+                "imagen": "/assets/photos/subcat-tiles/despachador-agua-garrafon-whirlpool.webp",
                 "ambiente": true,
-                "pos": "70% 50%",
-                "resumen": "Cartuchos y repuestos para mantener tu sistema de agua al día."
+                "pos": "50% 50%",
+                "resumen": "Agua fría o fría y caliente desde el garrafón, de piso o de mesa."
               },
-              "tienda": "/productos/cocina-y-bar/filtros-y-purificadores-de-agua"
+              "tienda": "/productos/cocina-y-bar/filtros-y-purificadores-de-agua?tipo=despachadores-de-agua"
             }
           ]
         }
@@ -1905,19 +1885,8 @@
                     "descripcion": "Asador built-in de gas con quemadores de acero o hierro y encendido electrónico, empotrado en la isla exterior.",
                     "specs": "Gas natural o LP · Isla ventilada · Encendido inmediato",
                     "detalle": "Se instala en una isla de mampostería o acero con el corte que pide el fabricante y rejillas de ventilación en el gabinete para evitar acumulación de gas. Hay que confirmar gas natural o LP, dejar la línea con llave de paso y usar material no combustible o la camisa aislante del fabricante.",
-                    "catalogo": "/productos/exterior/asadores-y-hornos?tipo=asadores-empotrables&filtro=funcionamiento:gas"
-                  }
-                },
-                {
-                  "nombre": "Carbón",
-                  "filtro": "/productos/asadores-empotrables/?f=carbon",
-                  "ficha": {
-                    "grupo": "tipo",
-                    "diagrama": "asador-emp-carbon",
-                    "descripcion": "Asador empotrable de carbón con cama de altura ajustable para controlar la intensidad de la brasa.",
-                    "specs": "Carbón · Cama ajustable · Isla no combustible",
-                    "detalle": "El calor se controla subiendo o bajando la cama de carbón y con las ventilas. Requiere una isla de material no combustible o camisa aislante y espacio para retirar la ceniza.",
-                    "catalogo": "/productos/exterior/asadores-y-hornos?tipo=asadores-empotrables&filtro=funcionamiento:carbon"
+                    "catalogo": "/productos/exterior/asadores-y-hornos?tipo=asadores-empotrables&filtro=funcionamiento:gas",
+                    "ilustracion": "asador-emp-gas"
                   }
                 },
                 {
@@ -1929,7 +1898,8 @@
                     "descripcion": "Asador empotrable con zona de gas y zona de carbón en la misma unidad.",
                     "specs": "Gas + carbón · Dos zonas · Isla ventilada",
                     "detalle": "Combina el encendido inmediato del gas para el día a día con la brasa de carbón para el sabor ahumado. Necesita la conexión de gas con gabinete ventilado y las previsiones de material no combustible del carbón.",
-                    "catalogo": "/productos/exterior/asadores-y-hornos?tipo=asadores-empotrables&filtro=funcionamiento:mixtos-gas-carbon"
+                    "catalogo": "/productos/exterior/asadores-y-hornos?tipo=asadores-empotrables&filtro=funcionamiento:mixtos-gas-carbon",
+                    "ilustracion": "asador-emp-mixto"
                   }
                 }
               ],
@@ -1942,7 +1912,7 @@
                 "imagen": "/assets/photos/brands/hero/alfresco-asadores.webp",
                 "ambiente": true,
                 "pos": "center 55%",
-                "resumen": "Gas, carbón o mixtos para empotrar en tu cocina exterior."
+                "resumen": "Gas o mixtos (gas + carbón) para empotrar en tu cocina exterior."
               }
             },
             {
@@ -1959,7 +1929,8 @@
                     "descripcion": "Asador de gas montado en carrito con ruedas, alimentado por tanque LP o conexión de gas natural.",
                     "specs": "Móvil · Tanque LP o gas natural · Sin obra",
                     "detalle": "No requiere isla: se coloca en la terraza y se conecta a un tanque de LP alojado en el carrito o a una toma de gas natural con manguera. Debe ubicarse lejos de muros combustibles, a la distancia que indique el fabricante.",
-                    "catalogo": "/productos/exterior/asadores-y-hornos?tipo=asadores-con-carrito&filtro=funcionamiento:gas"
+                    "catalogo": "/productos/exterior/asadores-y-hornos?tipo=asadores-con-carrito&filtro=funcionamiento:gas",
+                    "ilustracion": "asador-carro-gas"
                   }
                 },
                 {
@@ -1971,19 +1942,8 @@
                     "descripcion": "Asador de carbón sobre carrito con ruedas, con control de aire y recolector de ceniza.",
                     "specs": "Móvil · Carbón · Sin conexión",
                     "detalle": "Se mueve donde se necesite y no requiere conexión. La temperatura se controla con las ventilas y la cantidad de carbón; conviene ubicarlo en un área abierta, sobre una superficie que resista calor.",
-                    "catalogo": "/productos/exterior/asadores-y-hornos?tipo=asadores-con-carrito&filtro=funcionamiento:carbon"
-                  }
-                },
-                {
-                  "nombre": "Mixtos (Gas + Carbón)",
-                  "filtro": "/productos/asadores-con-carrito/?f=mixtos-gas-carbon",
-                  "ficha": {
-                    "grupo": "tipo",
-                    "diagrama": "asador-carro-mixto",
-                    "descripcion": "Carrito con zona de gas y zona de carbón para combinar ambos combustibles sin obra.",
-                    "specs": "Móvil · Gas + carbón · Sin obra",
-                    "detalle": "Une la rapidez del gas con el sabor de la brasa en una unidad móvil; la zona de gas necesita tanque de LP o conexión de gas natural.",
-                    "catalogo": "/productos/exterior/asadores-y-hornos?tipo=asadores-con-carrito&filtro=funcionamiento:mixtos-gas-carbon"
+                    "catalogo": "/productos/exterior/asadores-y-hornos?tipo=asadores-con-carrito&filtro=funcionamiento:carbon",
+                    "ilustracion": "asador-carro-carbon"
                   }
                 }
               ],
@@ -2123,17 +2083,6 @@
             "ambiente": true,
             "pos": "center 50%",
             "resumen": "Aditamentos, hervidores y básculas para completar tu cocina."
-          }
-        },
-        {
-          "nombre": "Despachadores de Agua (Garrafón)",
-          "slug": "despachadores-de-agua",
-          "esLeaf": true,
-          "filtro": "/productos/despachadores-de-agua/",
-          "tienda": "/productos/cocina-y-bar/filtros-y-purificadores-de-agua?tipo=despachadores-de-agua",
-          "tarjeta": {
-            "imagen": "/assets/photos/subcat-tiles/despachador-agua-garrafon-whirlpool.webp",
-            "resumen": "Agua fría y caliente desde el garrafón, de piso o de mesa."
           }
         }
       ]

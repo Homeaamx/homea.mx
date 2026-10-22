@@ -414,7 +414,10 @@ function FilterIndex({
         eyebrow={sub1.nombre}
         title={sub2.nombre}
         sub={
-          conFichas
+          // Una sola ficha (Lavavajillas empotrable): no hay nada que comparar.
+          conFichas && filtros.length === 1
+            ? `Un solo tipo: ${filtros[0].nombre.toLowerCase()}. Así se integra a tu cocina.`
+            : conFichas
             ? `Cada tipo de ${sub2.nombre.toLowerCase()} resuelve una cocina distinta. Compara y elige el tuyo.`
             : `Elige un filtro para ver los ${sub2.nombre.toLowerCase()} de ${sub1.nombre} que buscas.`
         }
