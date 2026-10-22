@@ -47,7 +47,10 @@ export default function FichaModal({ contexto }: { contexto: string }) {
   const [ficha, setFicha] = useState<Datos | null>(null);
   const [abierto, setAbierto] = useState(false);
   const [panel, setPanel] = useState(false);
+  // Flecha "hay más abajo" (móvil): se oculta al desplazar o si todo cabe.
+  const [sinMas, setSinMas] = useState(false);
   const xRef = useRef<HTMLButtonElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const origen = useRef<HTMLElement | null>(null);
 
   const cerrar = useCallback(() => {
@@ -126,6 +129,8 @@ export default function FichaModal({ contexto }: { contexto: string }) {
     // modal (apcUp dura 400 ms): una sola apertura, sin pelear con la entrada.
     setAbierto(false);
     setPanel(ficha.panel);
+    const m = modalRef.current;
+    setSinMas(!m || m.scrollHeight <= m.clientHeight + 8);
     const t = window.setTimeout(() => setAbierto(true), 550);
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") cerrar();
@@ -152,7 +157,13 @@ export default function FichaModal({ contexto }: { contexto: string }) {
         if (e.target === e.currentTarget) cerrar();
       }}
     >
-      <div className={ficha.ilus ? "tfk-modal tfk-modal--ilus" : "tfk-modal"}>
+      <div
+        ref={modalRef}
+        className={ficha.ilus ? "tfk-modal tfk-modal--ilus" : "tfk-modal"}
+        onScroll={(e) => {
+          if (!sinMas && e.currentTarget.scrollTop > 40) setSinMas(true);
+        }}
+      >
         <button ref={xRef} type="button" className="apc-x tfk-modal-x" onClick={cerrar} aria-label="Cerrar">
           ×
         </button>
@@ -188,6 +199,14 @@ export default function FichaModal({ contexto }: { contexto: string }) {
             <span className="tfk-diagram" dangerouslySetInnerHTML={{ __html: ficha.svg }} />
             <span className="tfk-modal-hint">Pasa el cursor sobre el plano</span>
           </div>
+        )}
+        {ficha.ilus && (
+          // Flecha dorada (móvil, Carla 2026-10-21): avisa que la ficha sigue abajo.
+          <span className={sinMas ? "tfk-mas is-oculta" : "tfk-mas"} aria-hidden="true">
+            <svg viewBox="0 0 14 44" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M7 1v41M1.5 36 7 42l5.5-6" />
+            </svg>
+          </span>
         )}
         <div className="tfk-modal-body">
           <span className="eyebrow">
