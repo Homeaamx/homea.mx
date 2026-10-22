@@ -35,7 +35,7 @@ const NOMBRES = {
   invisacook: "Invisacook", benessi: "Benessi", bosch: "Bosch",
   thor: "Thor", scotsman: "Scotsman", elica: "Elica",
   tradewind: "Trade-Wind", falmec: "Falmec", "fulgor-milano": "Fulgor Milano",
-  summit: "Summit", kalt: "Kalt", sapphire: "Sapphire", cafe: "Café",
+  summit: "Summit", kalt: "Kalt", cafe: "Café",
   kitchenaid: "KitchenAid", hoshizaki: "Hoshizaki", electrolux: "Electrolux",
   frigidaire: "Frigidaire", smeg: "Smeg", bertazzoni: "Bertazzoni", maytag: "Maytag",
   haier: "Haier", "ge-profile": "GE Profile", whirlpool: "Whirlpool",
@@ -43,7 +43,7 @@ const NOMBRES = {
   mabe: "Mabe", axcent: "Axcent", supra: "Supra", "the-galley": "The Galley",
   brizo: "Brizo", nobili: "Nobili", blanco: "Blanco", franke: "Franke",
   peerless: "Peerless", dawn: "Dawn", schock: "Schock", gessi: "Gessi",
-  delta: "Delta", "poletti-sinks": "Poletti Sinks", eclipse: "Eclipse",
+  delta: "Delta", eclipse: "Eclipse",
   "kele-master-sinks": "Kele Master Sinks", insinkerator: "InSinkErator",
   lynx: "Lynx", "sedona-by-lynx": "Sedona by Lynx", alfresco: "Alfresco",
   coyote: "Coyote", artisan: "Artisan", "alfa-forni": "Alfa Forni", blaze: "Blaze",
@@ -52,13 +52,13 @@ const NOMBRES = {
   "i-drain": "I-Drain", "mr-steam": "Mr. Steam", acros: "Acros",
   // Altas del 2026-09-21 (MARCAS_HOMEA_SEP26_DESCUENTOS.xlsx).
   kraus: "Kraus", faber: "Faber", easy: "Easy", iem: "IEM", commodore: "Commodore",
-  nantucket: "Nantucket", fontana: "Fontana", foster: "Foster", josper: "Josper",
+  nantucket: "Nantucket", josper: "Josper",
   vass: "Vass", hergom: "Hergom",
   valsir: "Valsir",
   // Saunas de Artexa (Carla, 2026-09-21): no venían en el Excel.
   jacuzzi: "Jacuzzi", clearlight: "Clearlight",
-  // Solo PDF por decisión de Carla (2026-09-21): Onix se queda, Firplak se restaura.
-  onix: "Onix", firplak: "Firplak",
+  // Solo PDF por decisión de Carla (2026-09-21): Onix se queda (Firplak se eliminó el 2026-10-22).
+  onix: "Onix",
   // Grupo 90, solo PDF (Carla, 2026-09-22).
   catalano: "Catalano", kaldewei: "Kaldewei", treesse: "Treesse", "sauna-estilo": "Sauna Estilo",
 };

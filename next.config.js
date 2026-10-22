@@ -166,6 +166,13 @@ const nextConfig = {
       "/marcas/asko": "/productos/cocina-y-bar/lavavajillas",
       "/listas-de-precios/asko.pdf": "/productos/cocina-y-bar/lavavajillas",
       "/Files/119914/232245863241526.pdf": "/productos/cocina-y-bar/lavavajillas",
+      // Firplak, Foster, Fontana, Poletti Sinks y Sapphire (SOLO PDF, sin lista
+      // publicada): se quitaron de todo el sitio el 2026-10-22 (Carla).
+      "/marcas/firplak": "/productos/banos",
+      "/marcas/foster": "/productos/cocina-y-bar",
+      "/marcas/fontana": "/productos/exterior",
+      "/marcas/poletti-sinks": "/productos/cocina-y-bar/tarjas-y-griferia",
+      "/marcas/sapphire": "/productos/cocina-y-bar",
     };
 
     // Productos obsoletos (fuera de la lista vigente del proveedor): la ficha va con

@@ -279,33 +279,6 @@
       "espejo": false
     }
   },
-  "firplak": {
-    "eyebrow": "Funcional · Práctico · Accesible",
-    "titulo": "Baños Firplak",
-    "descripcion": "Soluciones para baño con enfoque práctico y funcional, pensadas para proyectos residenciales que buscan buena integración, facilidad de uso y valor.",
-    "cta": {
-      "texto": "Ver catálogo oficial",
-      "url": null
-    }
-  },
-  "fontana": {
-    "eyebrow": "Artesanal · Italiano · Exterior",
-    "titulo": "Hornos Fontana",
-    "descripcion": "Hornos para exterior de inspiración italiana, pensados para una cocción auténtica y versátil con presencia artesanal y enfoque en reuniones al aire libre.",
-    "cta": {
-      "texto": "Ver catálogo oficial",
-      "url": null
-    }
-  },
-  "foster": {
-    "eyebrow": "Italiano · Integrado · Funcional",
-    "titulo": "Cocina Foster",
-    "descripcion": "Soluciones para cocina de diseño italiano que priorizan integración, funcionalidad y detalle, con una estética limpia para proyectos contemporáneos.",
-    "cta": {
-      "texto": "Ver catálogo oficial",
-      "url": null
-    }
-  },
   "franke": {
     "eyebrow": "Suizo · Funcional · Refinado",
     "titulo": "Tarjas y grifería Franke",
@@ -378,7 +351,7 @@
     "descripcion": "Chimeneas y calentadores con enfoque en calidez, construcción duradera y tradición, pensados para crear ambientes confortables y eficientes en el hogar.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/hergom.pdf"
     },
     "imagen": {
       "espejo": false
@@ -546,7 +519,7 @@
     "descripcion": "Asadores y equipos para exterior que combinan cocción con carbón, control práctico e innovación para ampliar técnicas y disfrutar más cada preparación.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/masterbuilt.pdf"
     },
     "imagen": {
       "posicion": "center 55%"
@@ -643,27 +616,6 @@
     "cta": {
       "texto": "Ver catálogo oficial",
       "url": "/listas-de-precios/pitt-cooking.pdf"
-    }
-  },
-  "poletti-sinks": {
-    "eyebrow": "Funcional · Versátil · Refinado",
-    "titulo": "Tarjas Poletti Sinks",
-    "descripcion": "Tarjas y soluciones para cocina con enfoque funcional, diseño versátil y acabados cuidados para integrarse con facilidad en proyectos residenciales.",
-    "cta": {
-      "texto": "Ver catálogo oficial",
-      "url": null
-    },
-    "imagen": {
-      "espejo": false
-    }
-  },
-  "sapphire": {
-    "eyebrow": "Elegante · Integrado · Exclusivo",
-    "titulo": "Cocina Sapphire",
-    "descripcion": "Equipamiento de cocina con una propuesta elegante e integrada, pensado para proyectos que buscan funcionalidad, presencia discreta y acabados de alto nivel.",
-    "cta": {
-      "texto": "Ver catálogo oficial",
-      "url": null
     }
   },
   "sauna-estilo": {
@@ -837,7 +789,7 @@
     "descripcion": "Chimeneas y calentadores de enfoque contemporáneo, pensados para aportar calidez, confort y presencia visual en espacios residenciales bien integrados.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/vass.pdf"
     }
   },
   "viking": {
@@ -875,7 +827,7 @@
     "descripcion": "Hornos para exterior pensados para cocinar con fuego y altas temperaturas, con una propuesta robusta y versátil para pizzas y preparaciones al aire libre.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/wppo.pdf"
     },
     "imagen": {
       "espejo": false

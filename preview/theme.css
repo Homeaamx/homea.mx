@@ -1840,8 +1840,6 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile[data-brand="mr-steam"]{--lazy-bg: url('assets/photos/brands/mr-steam-vapor.webp');}
 .brandtile[data-brand="nobili"]{--lazy-bg: url('assets/photos/brands/nobili-griferia.webp');}
 .brandtile[data-brand="peerless"]{--lazy-bg: url('assets/photos/brands/peerless-griferia.webp');}
-.brandtile[data-brand="poletti-sinks"]{--lazy-bg: url('assets/photos/brands/poletti-sinks-tarjas.webp');}
-.brandtile[data-brand="sapphire"]{--lazy-bg: url('assets/photos/brands/sapphire-cocina.webp');}
 .brandtile[data-brand="schock"]{--lazy-bg: url('assets/photos/brands/schock-tarjas.webp');}
 .brandtile[data-brand="scotsman"]{--lazy-bg: url('assets/photos/brands/scotsman-hielo.webp');}
 .brandtile[data-brand="summit"]{--lazy-bg: url('assets/photos/brands/summit-refrigeracion.webp');}
@@ -1859,9 +1857,6 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile[data-brand="catalano"]{--lazy-bg: url('assets/photos/brands/catalano-banos.webp');}
 .brandtile[data-brand="commodore"]{--lazy-bg: url('assets/photos/brands/commodore-trituradores.webp');}
 .brandtile[data-brand="faber"]{--lazy-bg: url('assets/photos/brands/faber-campanas.webp');}
-.brandtile[data-brand="firplak"]{--lazy-bg: url('assets/photos/brands/firplak-banos.webp');}
-.brandtile[data-brand="fontana"]{--lazy-bg: url('assets/photos/brands/fontana-hornos.webp');}
-.brandtile[data-brand="foster"]{--lazy-bg: url('assets/photos/brands/foster-cocina.webp');}
 .brandtile[data-brand="josper"]{--lazy-bg: url('assets/photos/brands/josper-hornos.webp');}
 .brandtile[data-brand="kaldewei"]{--lazy-bg: url('assets/photos/brands/kaldewei-banos.webp');}
 .brandtile[data-brand="kraus"]{--lazy-bg: url('assets/photos/brands/kraus-tarjas-y-griferia.webp');}

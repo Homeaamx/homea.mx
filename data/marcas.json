@@ -544,54 +544,6 @@
       ]
     },
     {
-      "slug": "firplak",
-      "nombre": "Firplak",
-      "gama": [
-        "economica"
-      ],
-      "categorias": [
-        "banos"
-      ],
-      "canal": "pdf",
-      "logo": "/assets/logos/firplak.webp",
-      "foto": "/assets/photos/brands/firplak-banos.webp",
-      "fotoHero": "/assets/photos/brands/hero/firplak-banos.webp",
-      "logoHero": "/assets/logos/firplak.webp",
-      "listas": []
-    },
-    {
-      "slug": "fontana",
-      "nombre": "Fontana",
-      "gama": [
-        "residencial"
-      ],
-      "categorias": [
-        "asadores"
-      ],
-      "canal": "pdf",
-      "logo": "/assets/logos/fontana.webp",
-      "foto": "/assets/photos/brands/fontana-hornos.webp",
-      "fotoHero": "/assets/photos/brands/hero/fontana-hornos.webp",
-      "logoHero": "/assets/logos/fontana.webp",
-      "listas": []
-    },
-    {
-      "slug": "foster",
-      "nombre": "Foster",
-      "gama": [
-        "residencial"
-      ],
-      "categorias": [
-        "cocina"
-      ],
-      "canal": "pdf",
-      "logo": "/assets/logos/foster.webp",
-      "foto": "/assets/photos/brands/foster-cocina.webp",
-      "fotoHero": "/assets/photos/brands/hero/foster-cocina.webp",
-      "logoHero": "/assets/logos/foster.webp",
-      "listas": []
-    },
-    {
       "slug": "franke",
       "nombre": "Franke",
       "gama": [
@@ -734,7 +686,9 @@
       "foto": "/assets/photos/brands/hergom-chimeneas.webp",
       "fotoHero": "/assets/photos/brands/hero/hergom-chimeneas.webp",
       "logoHero": "/assets/logos/hergom.webp",
-      "listas": []
+      "listas": [
+        "hergom"
+      ]
     },
     {
       "slug": "hoshizaki",
@@ -1038,7 +992,9 @@
       "foto": "/assets/photos/brands/masterbuilt-asadores.webp",
       "fotoHero": "/assets/photos/brands/hero/masterbuilt-asadores.webp",
       "logoHero": "/assets/logos/masterbuilt.png",
-      "listas": []
+      "listas": [
+        "masterbuilt"
+      ]
     },
     {
       "slug": "maytag",
@@ -1218,39 +1174,6 @@
       "listas": [
         "pitt-cooking"
       ]
-    },
-    {
-      "slug": "poletti-sinks",
-      "nombre": "Poletti Sinks",
-      "gama": [
-        "residencial",
-        "media"
-      ],
-      "categorias": [
-        "tarjas"
-      ],
-      "canal": "pdf",
-      "logo": "/assets/logos/poletti-sinks.webp",
-      "foto": "/assets/photos/brands/poletti-sinks-tarjas.webp",
-      "fotoHero": "/assets/photos/brands/hero/poletti-sinks-tarjas.webp",
-      "logoHero": "/assets/logos/poletti-sinks.webp",
-      "listas": []
-    },
-    {
-      "slug": "sapphire",
-      "nombre": "Sapphire",
-      "gama": [
-        "premium"
-      ],
-      "categorias": [
-        "cocina"
-      ],
-      "canal": "pdf",
-      "logo": "/assets/logos/sapphire.webp",
-      "foto": "/assets/photos/brands/sapphire-cocina.webp",
-      "fotoHero": "/assets/photos/brands/hero/sapphire-cocina.webp",
-      "logoHero": "/assets/logos/sapphire.webp",
-      "listas": []
     },
     {
       "slug": "sauna-estilo",
@@ -1559,7 +1482,9 @@
       "foto": "/assets/photos/brands/vass-chimeneas.webp",
       "fotoHero": "/assets/photos/brands/hero/vass-chimeneas.webp",
       "logoHero": "/assets/logos/vass.webp",
-      "listas": []
+      "listas": [
+        "vass"
+      ]
     },
     {
       "slug": "viking",
@@ -1632,7 +1557,9 @@
       "foto": "/assets/photos/brands/wppo-hornos.webp",
       "fotoHero": "/assets/photos/brands/hero/wppo-hornos.webp",
       "logoHero": "/assets/logos/wppo.webp",
-      "listas": []
+      "listas": [
+        "wppo"
+      ]
     }
   ]
 }

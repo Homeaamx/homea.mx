@@ -201,6 +201,18 @@
     ] },
     { "marca": "Nobili", "documentos": [
       { "slug": "nobili", "titulo": "Lista de precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-nobili-2026.pdf?v=1792696903", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Hergom", "documentos": [
+      { "slug": "hergom", "titulo": "Chimeneas · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-chimeneas-hergom-2025.pdf?v=1792701316", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Vass", "documentos": [
+      { "slug": "vass", "titulo": "Catálogo", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-chimeneas-vass-design-2026.pdf?v=1792701316", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "WPPO", "documentos": [
+      { "slug": "wppo", "titulo": "Hornos de pizza · lista de precios", "vigencia": "jul 2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-hornos-pizza-wppo-jul-2025.pdf?v=1792701317", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Masterbuilt", "documentos": [
+      { "slug": "masterbuilt", "titulo": "Asadores · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-asadores-masterbuilt-2025.pdf?v=1792701316", "legacy": [], "estado": "listo" }
     ] }
   ]
 }

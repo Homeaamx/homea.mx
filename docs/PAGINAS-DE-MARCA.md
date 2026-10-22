@@ -1,6 +1,6 @@
 # Páginas de marca — `/marcas/<slug>`
 
-> Una página por marca: **88** hoy (65 SHOPIFY · 23 PDF, desde el 2026-10-22; el 2026-09-22 se quitaron AXOR, TRES, Pizarro, Artexa Bath y Hergom Diseño, el 2026-10-06 Elkay y el 2026-10-08 La Cornue y U-Line, el 2026-10-22 ASKO). Una marca SHOPIFY sin piezas publicadas no enseña tienda: solo hero (con su PDF si lo tiene) y el cierre a WhatsApp, como las PDF (2026-10-22). Todas salen de
+> Una página por marca: **83** hoy (65 SHOPIFY · 18 PDF, desde el 2026-10-22; el 2026-09-22 se quitaron AXOR, TRES, Pizarro, Artexa Bath y Hergom Diseño, el 2026-10-06 Elkay y el 2026-10-08 La Cornue y U-Line, el 2026-10-22 ASKO, Firplak, Foster, Fontana, Poletti Sinks y Sapphire). Una marca SHOPIFY sin piezas publicadas no enseña tienda: solo hero (con su PDF si lo tiene) y el cierre a WhatsApp, como las PDF (2026-10-22). Todas salen de
 > la **misma ruta** (`app/(es)/marcas/[marca]/page.tsx`) y del **mismo registro** (`data/marcas.json`).
 > Cambia el logo, la foto, las categorías, las listas de precios y el **canal**; el armazón es idéntico.
 >
@@ -80,7 +80,7 @@ Es idempotente y **sale con 1** si una marca se queda sin nombre en `NOMBRES`, s
 ## Texto del hero — `data/marcas-hero.json` (2026-09-22)
 
 Contenido del hero **por marca**, escrito a mano o desde el Excel de contenido. El generador no lo toca.
-Tiene las **88 marcas**, cargadas desde `HOMEA_HERO_97_MARCAS_CODE.xlsx` (2026-09-22; Elkay salió el 2026-10-06, La Cornue y U-Line el 2026-10-08). Para actualizarlas, edita el JSON o vuelve a convertir el Excel (columnas SLUG · MARCA · EYEBROW · H1 · DESCRIPCIÓN · BOTÓN). Marca sin entrada → hero de siempre (gama · Distribución oficial + nombre + frase automática).
+Tiene las **83 marcas**, cargadas desde `HOMEA_HERO_97_MARCAS_CODE.xlsx` (2026-09-22; Elkay salió el 2026-10-06, La Cornue y U-Line el 2026-10-08). Para actualizarlas, edita el JSON o vuelve a convertir el Excel (columnas SLUG · MARCA · EYEBROW · H1 · DESCRIPCIÓN · BOTÓN). Marca sin entrada → hero de siempre (gama · Distribución oficial + nombre + frase automática).
 
 ```json
 "acros": {

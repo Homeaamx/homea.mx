@@ -681,7 +681,7 @@
       "nombre": "Mr. Steam",
       "titulo": "Lista de precios",
       "vigencia": "oct 2026",
-      "src": "GRUPO90/LISTA_PRECIOS_MRSTEAM_2026_OCTUBRE.pdf",
+      "src": "GRUPO90 SOLO PDFS/LISTA_PRECIOS_MRSTEAM_2026_OCTUBRE.pdf",
       "archivo": "lista-precios-mr-steam-oct-2026.pdf"
     },
     {
@@ -690,8 +690,49 @@
       "nombre": "Nobili",
       "titulo": "Lista de precios",
       "vigencia": "2026",
-      "src": "GRUPO90/LISTA_PRECIOS_NOBILI_2026.pdf",
+      "src": "GRUPO90 SOLO PDFS/LISTA_PRECIOS_NOBILI_2026.pdf",
       "archivo": "lista-precios-nobili-2026.pdf"
+    },
+    {
+      "slug": "hergom",
+      "marca": "hergom",
+      "nombre": "Hergom",
+      "titulo": "Chimeneas · lista de precios",
+      "vigencia": "2025",
+      "src": "HERGOM SOLO PDFS/Lista_Precios_Chimeneas_HERGOM_2025_1.pdf",
+      "archivo": "lista-precios-chimeneas-hergom-2025.pdf"
+    },
+    {
+      "slug": "vass",
+      "marca": "vass",
+      "nombre": "Vass",
+      "titulo": "Catálogo",
+      "vigencia": "2026",
+      "src": "VASS DESIGN SOLO PDFS/Catalogo VassD-2026.pdf",
+      "archivo": "catalogo-chimeneas-vass-design-2026.pdf",
+      "op": {
+        "back": true,
+        "stamp": "br",
+        "lineas": "Comercializamos a nivel nacional|de manera directa mediante nuestra tienda|com\\.mx, garantizando atenci"
+      }
+    },
+    {
+      "slug": "wppo",
+      "marca": "wppo",
+      "nombre": "WPPO",
+      "titulo": "Hornos de pizza · lista de precios",
+      "vigencia": "jul 2025",
+      "src": "WPPO SOLO PDFS/Lista_Precios_WPPO_Horno_Pizza_2025_07.pdf",
+      "archivo": "lista-precios-hornos-pizza-wppo-jul-2025.pdf"
+    },
+    {
+      "slug": "masterbuilt",
+      "marca": "masterbuilt",
+      "nombre": "Masterbuilt",
+      "titulo": "Asadores · lista de precios",
+      "vigencia": "2025",
+      "src": "MIDDLEBY/JUN 26/Lista_Precios_MASTERBUILT_2025_Asadores.pdf",
+      "archivo": "lista-precios-asadores-masterbuilt-2025.pdf"
     }
   ]
 }

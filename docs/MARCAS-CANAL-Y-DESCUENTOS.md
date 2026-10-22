@@ -13,7 +13,7 @@
 | Canal | En Shopify | En el sitio |
 |---|---|---|
 | **SHOPIFY** (65) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
-| **SOLO PDF** (23) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
+| **SOLO PDF** (18) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
 
 En el código, el canal vive en el tile de `preview/marcas.html` (`data-canal="shopify|pdf"`), pasa a
 `data/marcas.json` con `npm run marcas` y la plantilla `app/(es)/marcas/[marca]/page.tsx` lo respeta.
@@ -35,6 +35,8 @@ plan). Kamado Joe, Masterbuilt y WPPO son de cocina o asadores y van **solo como
    → Cocción, `/marcas/u-line` y su lista `/listas-de-precios/u-line.pdf` → Refrigeración (301, `next.config.js`).
    **ASKO** se quitó igual el 2026-10-22 (Carla): `/marcas/asko`, `/listas-de-precios/asko.pdf` y la URL vieja de
    OXATIS de su lista → Lavavajillas (301, `next.config.js`); también salió de la guía de lavavajillas del blog de Shopify.
+   **Firplak, Foster, Fontana, Poletti Sinks y Sapphire** (SOLO PDF) se quitaron igual el 2026-10-22 (Carla): sin página,
+   tile, menú, logos ni fotos; sus páginas van con 301 a su categoría. Solo quedan en la tabla *Eliminadas* de abajo.
 3. **Saunas:** las de **Grupo 90** son **Mr. Steam, Sauna Estilo y Treesse** (corrección de Carla, 2026-09-22: se mantienen aunque estuvieron en *Eliminadas*); las de **Artexa** son Jacuzzi y Clearlight. Todas SOLO PDF.
    Se crearon las **16 páginas** que faltaban: 6 SHOPIFY y 10 SOLO PDF. Los PDFs vigentes de cada marca
    se le piden a Carla más adelante y se suben a Shopify Files.
@@ -143,45 +145,44 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | WHIRLPOOL | WHIRLPOOL | WHIRL | 282 | 30% | `/marcas/whirlpool` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | WOLF | IESA/LAVISH | WOLF | 665 | 10% | `/marcas/wolf` | completo | Condición distinta para fuera de línea vs. de línea |
 
-## SOLO PDF — 23 marcas
+## SOLO PDF — 18 marcas
 
 | Marca | Proveedor | Línea SAE | Productos tras carga | Descuento Shopify (PLATA) | Página | Arte | Nota |
 |---|---|---|---:|---:|---|---|---|
-| CATALANO | GRUPO 90 | CATAL | 14 | 10% | `/marcas/catalano` | completo | Baños. Estaba en *Eliminadas*; vuelve como SOLO PDF (Carla, 2026-09-22) |
+| CATALANO | GRUPO 90 | CATAL | 14 | 10% | `/marcas/catalano` | completo | Baños. Estaba en *Eliminadas*; vuelve como SOLO PDF (Carla, 2026-09-22) · PDF pendiente (Carla, 2026-10-22) |
 | CLEARLIGHT | ARTEXA | — | — | **PENDIENTE** | `/marcas/clearlight` | completo | Saunas de Artexa; no venía en el Excel (Carla, 2026-09-21) |
-| FIRPLAK | ENVITEB | — | 0 | N/A | `/marcas/firplak` | completo | Económica. Estaba en *Marcas eliminadas*; restaurada como SOLO PDF (Carla, 2026-09-21) |
-| FONTANA | LECROM | FONTA | 29 | N/A | `/marcas/fontana` | completo |  |
-| FOSTER | LECROM | FOSTE | 9 | — | `/marcas/foster` | completo |  |
 | HERGOM | BLOCK | HERGO | 0 | — | `/marcas/hergom` | completo |  |
-| IDRAIN / IDRAIN PROYECTOS | GRUPO 90 | IDRAI | 86 | 10% | `/marcas/i-drain` | completo | iDrain Proyectos: el descuento PLATA no aplica |
+| IDRAIN / IDRAIN PROYECTOS | GRUPO 90 | IDRAI | 86 | 10% | `/marcas/i-drain` | completo | iDrain Proyectos: el descuento PLATA no aplica · PDF pendiente (Carla, 2026-10-22) |
 | JACUZZI | ARTEXA | — | — | **PENDIENTE** | `/marcas/jacuzzi` | completo | Saunas de Artexa; no venía en el Excel (Carla, 2026-09-21) |
 | JOSPER | MIDDLEBY | JOSPE | 0 | — | `/marcas/josper` | completo |  |
-| KALDEWEI | GRUPO 90 | — | 0 | 10% | `/marcas/kaldewei` | completo | Baños. Estaba en *Eliminadas*; vuelve como SOLO PDF (Carla, 2026-09-22) |
+| KALDEWEI | GRUPO 90 | — | 0 | 10% | `/marcas/kaldewei` | completo | Baños. Estaba en *Eliminadas*; vuelve como SOLO PDF (Carla, 2026-09-22) · PDF pendiente (Carla, 2026-10-22) |
 | KALT | LECROM | KALT | 15 | — | `/marcas/kalt` | completo |  |
 | KAMADO JOE | MIDDLEBY | KAMAD | 43 | — | `/marcas/kamado-joe` | completo |  |
 | MASTERBUILT | MIDDLEBY | MASTB | 8 | — | `/marcas/masterbuilt` | completo |  |
 | MR STEAM | GRUPO 90 | MRSTE | 28 | 10% | `/marcas/mr-steam` | completo |  |
 | NOBILI | GRUPO 90 | NOBIL | 191 | 10% | `/marcas/nobili` | completo |  |
 | ONIX | — | — | — | **PENDIENTE** | `/marcas/onix` | completo | Mosaico veneciano, residencial; no venía en el Excel, se queda (Carla, 2026-09-21) |
-| POLETTI | LECROM | POLET | 28 | — | `/marcas/poletti-sinks` | completo |  |
-| SAPPHIRE | LECROM | SAPPH | 19 | — | `/marcas/sapphire` | completo |  |
-| SAUNA ESTILO | GRUPO 90 | — | — | 10% | `/marcas/sauna-estilo` | completo | Vapor y Sauna. Alta como SOLO PDF (Carla, 2026-09-22) |
-| TREESSE | GRUPO 90 | — | — | 10% | `/marcas/treesse` | completo | Baños y saunas. Alta como SOLO PDF (Carla, 2026-09-22) |
-| VALSIR | GRUPO 90 | — | 0 | 10% | `/marcas/valsir` | completo |  |
+| SAUNA ESTILO | GRUPO 90 | — | — | 10% | `/marcas/sauna-estilo` | completo | Vapor y Sauna. Alta como SOLO PDF (Carla, 2026-09-22) · PDF pendiente (Carla, 2026-10-22) |
+| TREESSE | GRUPO 90 | — | — | 10% | `/marcas/treesse` | completo | Baños y saunas. Alta como SOLO PDF (Carla, 2026-09-22) · PDF pendiente (Carla, 2026-10-22) |
+| VALSIR | GRUPO 90 | — | 0 | 10% | `/marcas/valsir` | completo | PDF pendiente (Carla, 2026-10-22) |
 | VASS | VASS | VASS | 3 | — | `/marcas/vass` | completo | Chimeneas, residencial (Carla, 2026-09-21) |
 | WPPO | MARESA | WPPO | 6 | — | `/marcas/wppo` | completo |  |
 
-## ELIMINADAS — 20 marcas
+## ELIMINADAS — 26 marcas
 
 | Marca | Proveedor | Línea SAE | Productos hoy | Nota |
 |---|---|---|---:|---|
 | AMBIANCE | STUDIO & DISEÑO | AMBIA | 39 |  |
 | AMERICAN STANDARD | STUDIO & DISEÑO | AMSTA | 256 | Tenía página; se quitó de todo el sitio el 2026-09-21 |
 | ARTEXA BATH | ARTEXA | — | — | Tenía página; se quitó de todo el sitio el 2026-09-22 (Carla) |
+| ASKO | IESA/LAVISH | ASKO | 355 | Tenía página (SHOPIFY, 10%, *Solo cotizar*) y lista de precios; se quitó de todo el sitio el 2026-10-22 (Carla). `/marcas/asko`, `/listas-de-precios/asko.pdf` y su URL de OXATIS redirigen (301) a `/productos/cocina-y-bar/lavavajillas` |
 | AXOR | GRUPO 90 | AXOR | 1403 | Tenía página; se quitó de todo el sitio el 2026-09-22 (Carla) |
 | DUPLASH | GRUPO 90 | — | 0 |  |
 | ELKAY | ARTEXA | ELKAY | 4 | Tenía página (SHOPIFY, 10%); se quitó de todo el sitio el 2026-10-06 (Carla): no se publicará. `/marcas/elkay` redirige (301) a `/productos/cocina-y-bar/tarjas-y-griferia` |
+| FIRPLAK | ENVITEB | — | 0 | Tenía página (SOLO PDF, sin lista); se quitó de todo el sitio el 2026-10-22 (Carla). `/marcas/firplak` → `/productos/banos` (301) |
+| FONTANA | LECROM | FONTA | 29 | Tenía página (SOLO PDF, sin lista); se quitó de todo el sitio el 2026-10-22 (Carla). `/marcas/fontana` → `/productos/exterior` (301) |
 | FORTUM | — | — | — | No venía en el Excel; se retiró su lista de precios el 2026-09-21 (la URL vieja redirige a Baños) |
+| FOSTER | LECROM | FOSTE | 9 | Tenía página (SOLO PDF, sin lista); se quitó de todo el sitio el 2026-10-22 (Carla). `/marcas/foster` → `/productos/cocina-y-bar` (301) |
 | HANSGROHE | GRUPO 90 | HANSG, HAGNA | 335 | Tenía página; se quitó de todo el sitio el 2026-09-21 |
 | HERGOM DISEÑO | BLOCK | HERGO | 0 | Es la misma marca que Hergom; se quitó de todo el sitio el 2026-09-22 (Carla) |
 | INDA | GRUPO 90 | — | 0 |  |
@@ -191,6 +192,8 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | LAUFEN | GRUPO 90 | — | 0 |  |
 | MOEN | STUDIO & DISEÑO | MOEN | 357 | Tenía página; se quitó de todo el sitio el 2026-09-21 |
 | PIZARRO | PIZARRO | PIZAR | 129 | Tenía página; se quitó de todo el sitio el 2026-09-22 (Carla) |
+| POLETTI | LECROM | POLET | 28 | Tenía página (SOLO PDF, sin lista); se quitó de todo el sitio el 2026-10-22 (Carla). `/marcas/poletti-sinks` → `/productos/cocina-y-bar/tarjas-y-griferia` (301) |
+| SAPPHIRE | LECROM | SAPPH | 19 | Tenía página (SOLO PDF, sin lista); se quitó de todo el sitio el 2026-10-22 (Carla). `/marcas/sapphire` → `/productos/cocina-y-bar` (301) |
 | SAUNAS | GRUPO 90 | — | 0 | Fila genérica del Excel; las saunas de Grupo 90 se presentan por marca: Mr. Steam, Sauna Estilo y Treesse (2026-09-22) |
 | STEAMIST | — | — | — | No venía en el Excel; se retiró su lista de precios el 2026-09-21 (la URL vieja redirige a Vapor y Sauna) |
 | TRES | GRUPO 90 | — | 0 | Tenía página; se quitó de todo el sitio el 2026-09-22 (Carla) |

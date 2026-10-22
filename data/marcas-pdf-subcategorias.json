@@ -3,7 +3,6 @@
   "macros": {
     "banos": {
       "catalano": ["lavabos", "wc-y-sanitarios"],
-      "firplak": ["lavabos"],
       "i-drain": ["accesorios-de-banos"],
       "kaldewei": ["tinas", "regaderas", "lavabos"],
       "nobili": ["monomandos", "regaderas"],

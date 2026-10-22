@@ -11,7 +11,7 @@
 > `wayback/` y `manifest.csv` (clics GSC, tamaños, checksums).
 >
 > **Actualización 2026-09-22:** se cargaron los catálogos vigentes de la carpeta `CATALOGOS VIGENTES`
-> (ver §0). Hoy hay **71 listas publicadas** y **66 de las 88 marcas** enseñan su PDF (2026-10-08: salieron La Cornue y U-Line; 2026-10-22: entraron Gessi, Dexa, Mr. Steam y Nobili y salió ASKO).
+> (ver §0). Hoy hay **75 listas publicadas** y **70 de las 83 marcas** enseñan su PDF (2026-10-08: salieron La Cornue y U-Line; 2026-10-22: entraron Gessi, Dexa, Mr. Steam, Nobili, Hergom, Vass, WPPO y Masterbuilt; salieron ASKO, Firplak, Foster, Fontana, Poletti Sinks y Sapphire).
 
 ## 0. Catálogos vigentes 2026 (carga del 2026-09-22)
 
@@ -52,8 +52,15 @@ portada dice "2025 Product Catalog") y Nobili (2026). Las tres últimas ya traí
 **Sin catálogo, solo tienda (decisión Carla 2026-10-22):** Whirlpool, KitchenAid, Maytag, Acros, Easy e IEM. Su página
 de marca ya no tiene botón "Ver catálogo oficial" (sin `cta` en `data/marcas-hero.json`).
 
-**Faltan (16 marcas sin ningún PDF):** Catalano, Firplak, Fontana, Foster, Hergom, I-Drain, Kaldewei, Masterbuilt,
-Peerless (pendiente por ahora, Carla 2026-10-22), Poletti Sinks, Sapphire, Sauna Estilo, Treesse, Valsir, Vass y WPPO.
+**Subidas el 2026-10-22 (tarde):** Hergom (chimeneas 2025, ya traía datos HOMEA), Vass (catálogo 2026: sin la contraportada
+de ventas directas de Vass Design ni la frase de su tienda en línea; tarjeta y contraportada HOMEA), WPPO (hornos de pizza
+jul 2025, ya con tarjeta HOMEA) y Masterbuilt (asadores; 21.5 → 1 MB; ⚠️ la portada dice "Price List Febrero 2023").
+Carla movió las carpetas de solo PDF a `<DISTRIBUIDOR> SOLO PDFS/` (Grupo 90, Hergom, Vass Design, WPPO).
+
+**Eliminadas del sitio el 2026-10-22 (Carla):** Firplak, Foster, Fontana, Poletti Sinks y Sapphire (no tenían PDF).
+
+**Faltan (7 marcas sin ningún PDF):** Peerless (SHOPIFY) y, pendientes por decisión de Carla (2026-10-22), Catalano,
+I-Drain, Kaldewei, Sauna Estilo, Treesse y Valsir.
 
 **Publicadas pero viejas** (conviene buscar la edición nueva): Frigidaire·Electrolux (jul 2023), Onix (2023),
 Trade-Wind (abr 2024), Nantucket (2024), Mabe, IO Mabe, GE Profile y Haier (2024), Clearlight y Jacuzzi
