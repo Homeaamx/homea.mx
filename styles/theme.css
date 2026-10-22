@@ -2892,6 +2892,18 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 /* Hueco de relleno de la última página: reserva el alto de una fila real (lleva
    su mismo esqueleto) pero no se ve ni responde al cursor. */
 .bsc-row--hueco { visibility: hidden; pointer-events: none; }
+/* Categorías, tipos y marcas que responden a la búsqueda (Carla, 2026-10-21):
+   misma fila sin miniatura ni precio; la clase en dorado, el título y dónde vive. */
+.bsc-row--destino { grid-template-columns: minmax(0, 1fr) auto; }
+.bsc-row--destino .bsc-datos { min-height: 0; }
+.bsc-row--destino .bsc-nombre { -webkit-line-clamp: 1; }
+.bsc-ir { font-family: var(--font-sans); font-size: 16px; color: var(--accent-text); }
+.bsc-seccion {
+  grid-column: 1 / -1; padding: 14px 20px 8px 16px;
+  font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--fg-muted);
+  border-bottom: 1px solid var(--border);
+}
 .bsc-row:hover, .bsc-row.is-cursor {
   background: var(--homea-greige);
   border-left-color: var(--homea-gold);

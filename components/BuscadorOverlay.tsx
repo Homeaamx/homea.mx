@@ -15,10 +15,15 @@
 // Los productos con ficha publicada abren su PDP; el resto —catálogo todavía en
 // migración— resuelve por WhatsApp con el SKU ya escrito, que es el modelo de
 // lead del sitio.
+//
+// Arriba de las piezas van las categorías, tipos y marcas que responden a la
+// búsqueda (también las marcas con catálogo en PDF): así siempre se llega a
+// algún lado. Si no hay nada, se dice tal cual (Carla, 2026-10-21).
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import type { Destino } from "@/lib/buscarDestinos";
 import type { ResultadoBusqueda } from "@/lib/catalogo";
 import { whatsappHref } from "@/lib/whatsapp";
 
@@ -39,6 +44,7 @@ export default function BuscadorOverlay() {
   const [abierto, setAbierto] = useState(false);
   const [q, setQ] = useState("");
   const [resultados, setResultados] = useState<ResultadoBusqueda[]>([]);
+  const [destinos, setDestinos] = useState<Destino[]>([]);
   const [total, setTotal] = useState(0);
   const [paginas, setPaginas] = useState(1);
   const [pagina, setPagina] = useState(1);
@@ -113,6 +119,7 @@ export default function BuscadorOverlay() {
     if (consulta.length < MIN_CARACTERES) {
       peticionRef.current?.abort();
       setResultados([]);
+      setDestinos([]);
       setTotal(0);
       setPaginas(1);
       setSugerencia(null);
@@ -133,6 +140,7 @@ export default function BuscadorOverlay() {
         });
         const data = await res.json();
         setResultados(data.resultados ?? []);
+        setDestinos(data.destinos ?? []);
         setTotal(data.total ?? 0);
         setPaginas(data.paginas ?? 1);
         setPorPagina(data.porPagina ?? 0);
@@ -145,6 +153,7 @@ export default function BuscadorOverlay() {
       } catch (err) {
         if ((err as Error)?.name !== "AbortError") {
           setResultados([]);
+          setDestinos([]);
           setTotal(0);
           setPaginas(1);
           setSugerencia(null);
@@ -200,13 +209,13 @@ export default function BuscadorOverlay() {
       }
     }
 
-    if (resultados.length === 0) return;
+    if (filas === 0) return;
 
     if (e.key === "ArrowDown" || e.key === "ArrowUp") {
       e.preventDefault();
       const paso = e.key === "ArrowDown" ? 1 : -1;
-      const siguiente = (cursor + paso + resultados.length + 1) % (resultados.length + 1);
-      setCursor(siguiente === resultados.length ? -1 : siguiente);
+      const siguiente = (cursor + paso + filas + 1) % (filas + 1);
+      setCursor(siguiente === filas ? -1 : siguiente);
       return;
     }
     if (e.key === "Enter" && cursor >= 0) {
@@ -216,11 +225,17 @@ export default function BuscadorOverlay() {
     }
   }
 
+  // Categorías y marcas solo en la primera página de piezas.
+  const lugares = pagina === 1 ? destinos : [];
+  /** Filas navegables con ↑↓: lugares primero, luego piezas (mismo orden del DOM). */
+  const filas = lugares.length + resultados.length;
+
   if (!abierto) return null;
 
   const consulta = q.trim();
   const sinResultados =
-    consulta.length >= MIN_CARACTERES && !cargando && resultados.length === 0;
+    consulta.length >= MIN_CARACTERES && !cargando && resultados.length === 0 && destinos.length === 0;
+  const totalVisible = total + destinos.length;
 
   // La última página casi nunca viene llena. Sin relleno, el panel encogería al
   // llegar a ella y el paginador saltaría hacia arriba justo cuando el usuario
@@ -277,7 +292,7 @@ export default function BuscadorOverlay() {
           </span>
           {consulta.length >= MIN_CARACTERES && (
             <span className="bsc-count figures">
-              {cargando ? "Buscando…" : `${total} ${total === 1 ? "resultado" : "resultados"}`}
+              {cargando ? "Buscando…" : `${totalVisible} ${totalVisible === 1 ? "resultado" : "resultados"}`}
             </span>
           )}
         </div>
@@ -287,9 +302,7 @@ export default function BuscadorOverlay() {
               repetirlo debajo solo llenaba la capa de texto. */}
           {sinResultados && (
             <div className="bsc-vacio">
-              <p className="bsc-hint">
-                Sin resultados para <i>«{consulta}»</i>.
-              </p>
+              <p className="bsc-hint">No se encontraron resultados de búsqueda.</p>
               <a
                 className="arrow-link"
                 href={whatsappHref(
@@ -306,9 +319,31 @@ export default function BuscadorOverlay() {
             </div>
           )}
 
-          {resultados.length > 0 && (
+          {filas > 0 && (
             <div className="bsc-lista" ref={listaRef} role="listbox">
-              {resultados.map((r, i) => {
+              {lugares.length > 0 && resultados.length > 0 && (
+                <span className="bsc-seccion">Categorías y marcas</span>
+              )}
+              {lugares.map((d, i) => (
+                <a
+                  key={`${d.clase}-${d.href}-${d.titulo}`}
+                  className={`bsc-row bsc-row--destino${i === cursor ? " is-cursor" : ""}`}
+                  href={d.href}
+                  role="option"
+                  aria-selected={i === cursor}
+                  onClick={cerrar}
+                >
+                  <span className="bsc-datos">
+                    <span className="bsc-marca">{d.clase}</span>
+                    <span className="bsc-nombre">{d.titulo}</span>
+                    <span className="bsc-sku">{d.detalle}</span>
+                  </span>
+                  <span className="bsc-ir" aria-hidden="true">→</span>
+                </a>
+              ))}
+              {lugares.length > 0 && resultados.length > 0 && <span className="bsc-seccion">Productos</span>}
+              {resultados.map((r, j) => {
+                const i = lugares.length + j;
                 const { href, externo } = destinoDe(r);
                 return (
                   <a
@@ -374,7 +409,7 @@ export default function BuscadorOverlay() {
           )}
         </div>
 
-        {resultados.length > 0 && (
+        {filas > 0 && (
           <div className="bsc-pie">
             {/* Solo tab y esc: ↑↓ y ↵ siguen funcionando, pero anunciarlos
                 llenaba el pie de instrucciones que nadie lee. */}

@@ -8,7 +8,7 @@
    `.plp` con las mismas tarjetas que genera lib/shopify/htmlCatalogo.ts y los
    filtros los aplica public/catalogo.js (casillas data-fk, "Ver N piezas",
    chips, conteos, orden). Aquí solo se PINTA el markup compatible:
-     · barra lateral: Disponibilidad y Promoción;
+     · barra lateral: Disponibilidad (sin Promoción, Carla 2026-10-21);
      · arriba, desplegables: Tipo de producto, Marca y Precio (con "Listo");
      · a la derecha, el orden de las páginas de producto.
 
@@ -240,8 +240,7 @@
     return '<a class="pcard" href="' + esc(it.href) + '" data-cat-card data-orden="' + orden + '"' +
       ' data-precio="' + pesosDe(it) + '" data-stock="' + (it.stock ? 1 : 0) + '"' +
       ' data-tipo="' + esc(slug(tipo)) + '" data-fv-marca="' + esc(slug(it.brand)) + '"' +
-      ' data-fv-stock="' + (it.stock ? "en-stock" : "bajo-pedido") + '"' +
-      ' data-fv-promo="' + (it.was ? "en-promocion" : "precio-regular") + '">' +
+      ' data-fv-stock="' + (it.stock ? "en-stock" : "bajo-pedido") + '">' +
       '<div class="imgw cutout">' +
       (it.img ? '<img src="' + esc(it.img) + '" alt="' + esc(nombreCorto(it)) + '" loading="lazy" decoding="async">' : "") +
       '</div>' +
@@ -293,16 +292,12 @@
     var lateral = root.querySelector("[data-wl-filtros]");
     if (lateral) {
       var nStock = items.filter(function (it) { return it.stock; }).length;
-      var nPromo = items.filter(function (it) { return !!it.was; }).length;
       lateral.innerHTML =
         '<div class="fchips fchips--panel" data-cat-chips hidden></div>' +
         '<div class="fhead"><h6>Filtros</h6></div>' +
         grupoLateral("Disponibilidad", "stock",
           casilla("stock", "en-stock", "En stock", nStock) +
           casilla("stock", "bajo-pedido", "Bajo pedido", items.length - nStock)) +
-        grupoLateral("Promoción", "promo",
-          casilla("promo", "en-promocion", "En promoción", nPromo) +
-          casilla("promo", "precio-regular", "Precio regular", items.length - nPromo)) +
         '<div class="fbar" data-cat-bar hidden>' +
         '<button type="button" class="fbar-apply" data-cat-apply hidden>Ver <span data-cat-n>0</span> piezas</button>' +
         '<button type="button" class="fbar-clear" data-cat-clear>Limpiar filtros</button></div>' +

@@ -20,6 +20,7 @@ import {
   type Pagina,
   type ResultadoBusqueda,
 } from "@/lib/catalogo";
+import { buscarDestinos, coincide, palabrasDe, type Destino } from "@/lib/buscarDestinos";
 import { todasLasMarcas } from "@/lib/marcas";
 import { obtenerTipoCambio, type TipoCambio } from "@/lib/tipoCambio";
 
@@ -35,16 +36,32 @@ export interface RespuestaBusqueda extends Pagina {
   /** SOLO el tramo que falta para completar lo tecleado ("gagg" → "enau"). */
   sugerencia: string | null;
   porPagina: number;
+  /** Categorías, tipos y marcas que responden a la búsqueda (van arriba de las piezas). */
+  destinos: Destino[];
 }
 
-const vacia = (): RespuestaBusqueda => ({
+const vacia = (destinos: Destino[] = []): RespuestaBusqueda => ({
   resultados: [],
   total: 0,
   pagina: 1,
   paginas: 1,
   porPagina: POR_PAGINA,
   sugerencia: null,
+  destinos,
 });
+
+/**
+ * Solo las piezas que de verdad responden a lo tecleado: título, marca, SKU,
+ * tipo o valores de filtro. Shopify devuelve parecidos sin relación ("maytag"
+ * → piezas Gaggenau); esos se descartan (Carla, 2026-10-21).
+ */
+function pertinentes(productos: ProductoVivo[], consulta: string): ProductoVivo[] {
+  const tokens = palabrasDe(consulta);
+  if (!tokens.length) return [];
+  return productos.filter((p) =>
+    coincide(tokens, [p.titulo, p.marca, p.sku, p.tipo, ...Object.values(p.filtros).flat()].join(" ")),
+  );
+}
 
 const dinero = (n: number) =>
   new Intl.NumberFormat("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
@@ -190,6 +207,7 @@ function marcaDesdePrefijo(q: string): string | null {
 export async function buscarCatalogo(consulta: string, pagina = 1): Promise<RespuestaBusqueda> {
   const q = consulta.trim();
   if (q.length < 2) return vacia();
+  const destinos = buscarDestinos(q);
 
   try {
     let [{ total, productos }, tc] = await Promise.all([
@@ -199,14 +217,18 @@ export async function buscarCatalogo(consulta: string, pagina = 1): Promise<Resp
     // `prefix: LAST` completa títulos, no marcas: "gagg" da 0. Si lo tecleado es
     // el inicio de una marca del sitio, se busca la marca completa y el ghost
     // propone el resto del nombre.
+    productos = pertinentes(productos, q);
+    total = productos.length;
     let marcaCompletada: string | null = null;
     if (!productos.length) {
       const marca = marcaDesdePrefijo(q);
       if (marca) {
         const r = await buscarVivo(marca, MAX_RESULTADOS);
+        const piezas = pertinentes(r.productos, marca);
         // Solo si la marca ya tiene piezas: un ghost hacia 0 resultados no ayuda.
-        if (r.productos.length) {
-          ({ total, productos } = r);
+        if (piezas.length) {
+          productos = piezas;
+          total = piezas.length;
           marcaCompletada = marca;
         }
       }
@@ -224,14 +246,15 @@ export async function buscarCatalogo(consulta: string, pagina = 1): Promise<Resp
       sugerencia: marcaCompletada
         ? marcaCompletada.slice(consulta.trimStart().length) || null
         : sugerirDe(consulta, ordenados),
+      destinos,
     };
   } catch (error) {
     if (error instanceof ErrorShopify && error.clase === "sin-configurar") {
       // Sin token (desarrollo sin .env.local): el índice del CSV, como antes.
       const r = buscarIndice(q, pagina);
-      return { ...r, porPagina: POR_PAGINA, sugerencia: sugerirIndice(consulta) };
+      return { ...r, porPagina: POR_PAGINA, sugerencia: sugerirIndice(consulta), destinos };
     }
     console.warn(`[buscar] Shopify no contestó la búsqueda "${q}":`, (error as Error).message);
-    return vacia();
+    return vacia(destinos);
   }
 }
