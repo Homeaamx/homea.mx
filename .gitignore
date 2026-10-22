@@ -45,3 +45,6 @@ PROYECTOS/
 # Mapa de redirects resuelto en cada build (scripts/build-redirects.mjs)
 data/redirects/oxatis-map.json
 .vercel
+
+# respaldos que deja Cowork al editar la taxonomía (no se versionan)
+*.json.bak*

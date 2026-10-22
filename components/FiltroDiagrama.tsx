@@ -1814,32 +1814,7 @@ const DIAGRAMAS: Record<string, ReactElement> = {
     </>
   ),
 
-  "grif-pared": (
-    <>
-      <line x1="36" y1="24" x2="36" y2="104" className="ln" />
-      <line x1="24" y1="104" x2="116" y2="104" className="ln" />
-      <line x1="36" y1="52" x2="78" y2="52" className="ln" />
-      <path d="M78 52 Q86 52 86 60" className="ln" />
-      <circle cx="52" cy="68" r="5" className="glass" />
-      <g className="in">
-        <path d="M86 62 Q84 82 86 98 Q88 102 86 103" />
-      </g>
-    </>
-  ),
 
-  "grif-techo": (
-    <>
-      <line x1="20" y1="14" x2="120" y2="14" className="fl" />
-      <line x1="70" y1="14" x2="70" y2="50" className="ln" />
-      <rect x="64" y="50" width="12" height="10" className="fb" />
-      <line x1="24" y1="104" x2="116" y2="104" className="ln" />
-      <g className="in">
-        <path d="M70 62 Q68 82 70 98 Q72 102 70 103" />
-        <circle cx="65" cy="102" r="1.5" className="ring" />
-        <circle cx="75" cy="102" r="1.5" className="ring" />
-      </g>
-    </>
-  ),
 
   "grif-potfiller": (
     <>
@@ -1919,29 +1894,6 @@ const DIAGRAMAS: Record<string, ReactElement> = {
     </>
   ),
 
-  "asador-emp-carbon": (
-    <>
-      <line x1="16" y1="124" x2="124" y2="124" className="fl" />
-      <rect x="20" y="66" width="100" height="8" className="fb" />
-      <rect x="26" y="74" width="88" height="50" className="cab" />
-      <rect x="40" y="42" width="60" height="24" className="fb" />
-      <line x1="48" y1="42" x2="48" y2="66" className="glass-shelf" />
-      <line x1="60" y1="42" x2="60" y2="66" className="glass-shelf" />
-      <line x1="72" y1="42" x2="72" y2="66" className="glass-shelf" />
-      <line x1="84" y1="42" x2="84" y2="66" className="glass-shelf" />
-      <g className="lid">
-        <rect x="38" y="30" width="64" height="12" className="fb" />
-        <line x1="62" y1="36" x2="78" y2="36" className="ln" />
-      </g>
-      <g className="in">
-        <circle cx="52" cy="60" r="3" className="zone" />
-        <circle cx="62" cy="62" r="3" className="zone" />
-        <circle cx="72" cy="60" r="3" className="zone" />
-        <circle cx="82" cy="62" r="3" className="zone" />
-        <circle cx="90" cy="60" r="3" className="zone" />
-      </g>
-    </>
-  ),
 
   "asador-emp-mixto": (
     <>
@@ -2009,27 +1961,6 @@ const DIAGRAMAS: Record<string, ReactElement> = {
     </>
   ),
 
-  "asador-carro-mixto": (
-    <>
-      <line x1="16" y1="124" x2="124" y2="124" className="fl" />
-      <rect x="36" y="54" width="68" height="28" className="fb" />
-      <line x1="70" y1="54" x2="70" y2="82" className="ln" />
-      <line x1="44" y1="82" x2="44" y2="118" className="ln" />
-      <line x1="96" y1="82" x2="96" y2="118" className="ln" />
-      <circle cx="44" cy="118" r="6" className="fb" />
-      <circle cx="96" cy="118" r="6" className="fb" />
-      <line x1="104" y1="60" x2="120" y2="60" className="ln" />
-      <g className="lid">
-        <rect x="34" y="42" width="72" height="12" className="fb" />
-        <line x1="60" y1="48" x2="80" y2="48" className="ln" />
-      </g>
-      <g className="in">
-        <path d="M52 76 Q50 70 54 66 Q56 70 58 66 Q60 72 56 76" />
-        <circle cx="80" cy="74" r="3" className="zone" />
-        <circle cx="90" cy="76" r="3" className="zone" />
-      </g>
-    </>
-  ),
 
   // ——— Fallback ————————————————————————————————————————————————————
 

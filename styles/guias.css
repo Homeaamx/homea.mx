@@ -1583,7 +1583,6 @@
 .ilus--coccion .c-tira-azul { fill: #4A7FA8; stroke: #2A4A66; stroke-width: .4; }
 .ilus--coccion .c-tira-azul-txt { fill: #CFEFFF; opacity: .6; }
 .ilus--coccion .c-linea-zona { stroke: #E9ECEE; stroke-width: .8; opacity: .8; }
-.ilus--coccion .c-tira-ind { fill: #9FD8FF; }
 .ilus--coccion .c-led-barra { fill: #6E7479; transition: fill 500ms var(--ease-standard) 150ms; }
 :is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-led-barra { fill: #FFF6E4; }
 .ilus--coccion .c-repisa-negra { fill: #1E1F21; }
@@ -1687,8 +1686,6 @@
 .ilus--coccion .c-foco-halo { fill: #FFE9C2; opacity: .55; filter: url(#ilus-desenfoque); }
 .ilus--coccion .c-visera-cristal { fill: #C9DCE4; fill-opacity: .28; stroke: #9FB4BE; stroke-width: .8; }
 .ilus--coccion .c-moldura { fill: #000; opacity: .18; }
-.ilus--coccion .c-revestida { fill: #D9CFC2; stroke: #8E8678; stroke-width: .6; }
-.ilus--coccion .c-filo-laton { fill: url(#ilus-laton) #B08A55; }
 .ilus--coccion .c-motor { fill: #2A2E32; stroke: #8E959B; stroke-width: .8; }
 .ilus--coccion .c-motor-eje { fill: #8E959B; }
 .ilus--coccion .c-muro-claro .i-muro { fill: url(#ilus-marmol-claro) #CBBFAF; }
@@ -1724,10 +1721,8 @@
 .ilus--coccion .c-tecla { fill: #2A2E32; transition: fill 500ms var(--ease-standard) 300ms; }
 .ilus--coccion .c-cafetera { fill: #1E2023; stroke: #3A3F44; stroke-width: .8; }
 .ilus--coccion .c-pantalla-ui { opacity: 0; transition: opacity 500ms var(--ease-standard) 300ms; }
-.ilus--coccion .c-ui { fill: #F2E6CF; }
 .ilus--coccion .c-nicho-cafe { fill: #0B0C0D; }
 .ilus--coccion .c-boquilla { fill: url(#ilus-cromo) #9AA3A9; }
-.ilus--coccion .c-charola-cafe { fill: #3A3F44; }
 .ilus--coccion .c-chorro { fill: #5A3214; transform-box: fill-box; transform-origin: 50% 0%; transform: scaleY(0); transition: transform 700ms var(--ease-standard) 700ms; }
 .ilus--coccion .c-taza { fill: #F4F1EA; stroke: #B9BDBF; stroke-width: .6; }
 .ilus--coccion .c-taza-asa { fill: none; stroke: #F4F1EA; stroke-width: 2; }
