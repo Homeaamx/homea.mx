@@ -163,7 +163,7 @@ export type Relacionados = { modo: "sugerencias" | "similares"; productos: Produ
 
 export function esImagenTecnica(im: { url: string; alt: string }): boolean {
   const archivo = im.url.split("?")[0].split("/").pop() ?? "";
-  return /^plano|^ficha|^diagrama/i.test(im.alt) || /(^|-)(plano|ficha-tecnica|line-drawing|diagrama)(-|\.)/i.test(archivo);
+  return /^plano|^ficha|^diagrama/i.test(im.alt) || /(^|-)(plano-medidas|ficha-tecnica|line-drawing|diagrama)(-|\.)/i.test(archivo);
 }
 
 /** Nombre de la Subcategoría 1 de una pieza ("Refrigeración"); su Tipo si no está en TIPOS_WEB. */

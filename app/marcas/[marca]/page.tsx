@@ -16,8 +16,8 @@
 // Catálogo vivo (2026-10-13): las marcas "shopify" traen sus piezas publicadas
 // por Vendor desde la Storefront API (`productosDeMarca`, lib/shopify/catalogoVivo.ts)
 // con el mismo panel de filtros, tarjetas y orden que las páginas de /productos.
-// Una marca que todavía no tiene piezas en Shopify enseña la maqueta con salida
-// a WhatsApp; en cuanto se cargue, su página se llena sola.
+// Una marca que todavía no tiene piezas en Shopify no enseña tienda (solo hero
+// con su PDF y el cierre a WhatsApp); en cuanto se cargue, su página se llena sola.
 //
 // ⚠️ NO leer searchParams aquí: vuelve la página dinámica, sale del
 // prerender-manifest y Vercel la sirve con no-store (ver el comentario de
@@ -33,7 +33,6 @@ import { mensajeAsesoria } from "@/lib/whatsapp";
 import { anchoImagen, srcSet, SIZES_SANGRE } from "@/lib/imagenResponsiva";
 import {
   categoriasDeMarca,
-  filtrosDeMarca,
   gamaDeMarca,
   heroDeMarca,
   marcaPorSlug,
@@ -60,16 +59,6 @@ export function generateStaticParams() {
   return todasLasMarcas().map((m) => ({ marca: m.slug }));
 }
 
-/** "Bajo cubierta" → "bajo-cubierta" (mismo criterio que el PLP). */
-function slug(v: string): string {
-  return v
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
-
 /** Frase de apoyo cuando la marca no tiene `descripcion` escrita a mano. */
 function resumen(m: Marca): string {
   const cats = categoriasDeMarca(m).map((c) => c.nombre.toLowerCase());
@@ -83,13 +72,16 @@ export default async function MarcaPage({ params }: Params) {
   const marca = marcaPorSlug(param);
   if (!marca) notFound();
 
-  const filtros = filtrosDeMarca(marca);
   const gama = gamaDeMarca(marca);
   const enPdf = marca.canal === "pdf";
   // Piezas publicadas en Shopify con el Vendor = nombre oficial de la marca.
   // Las "pdf" no consultan nada: su página existe por SEO y cierra por WhatsApp.
   const productos = enPdf ? [] : await productosDeMarca(marca.nombre);
   const tc = productos.length ? await obtenerTipoCambio() : null;
+  // Sin piezas publicadas (solo PDF por ahora) la página no enseña tienda: hero
+  // con su PDF y el cierre hacia un experto, igual que las marcas "pdf"
+  // (Carla, 2026-10-22). En cuanto se publiquen sus piezas, la tienda aparece sola.
+  const conTienda = productos.length > 0 && tc !== null;
   // Contenido del hero por marca (data/marcas-hero.json). Sin entrada, el de siempre.
   const hero = heroDeMarca(marca);
   // Foto de hero de menos de 1100 px: a sangre completa se notan los pixeles, así
@@ -196,52 +188,31 @@ export default async function MarcaPage({ params }: Params) {
       </header>
 
       {/* Catálogo de la marca: mismo armazón (filtros + rejilla) que /productos.
-          Solo marcas "shopify"; las "pdf" no tienen productos en Shopify. */}
-      {!enPdf && (
+          Solo si tiene piezas publicadas en Shopify: sin piezas no hay tienda. */}
+      {conTienda && (
         <section className="sec tight" id="catalogo">
           <div className="container">
             <div className="plp">
-              {productos.length && tc ? (
-                <aside
-                  className="filters"
-                  // Filtros con los valores reales de Shopify (filtros.*) de los
-                  // tipos que la marca tiene publicados, más Subcategoría y Tipo de
-                  // producto; public/catalogo.js filtra las tarjetas en el cliente.
-                  dangerouslySetInnerHTML={{
-                    __html: panelFiltrosHtml(productos, {
-                      tc,
-                      conCategoria: true,
-                      conTipo: true,
-                      tiposRiel: tilesPresentes(productos),
-                      sinMarca: true,
-                    }),
-                  }}
-                />
-              ) : (
-                <aside className="filters">
-                  {filtros.map((f) => (
-                    <div className="fgroup" key={f.nombre}>
-                      <h6>{f.nombre}</h6>
-                      {f.control === "slider" ? (
-                        <div className="fnote">Rango en MXN — se activa con el catálogo cargado.</div>
-                      ) : f.valores ? (
-                        f.valores.map((v) => (
-                          <label key={v} data-tipo={slug(v)}>
-                            <input type="checkbox" /> {v}
-                          </label>
-                        ))
-                      ) : (
-                        <div className="fnote">{f.nota}</div>
-                      )}
-                    </div>
-                  ))}
-                </aside>
-              )}
+              <aside
+                className="filters"
+                // Filtros con los valores reales de Shopify (filtros.*) de los
+                // tipos que la marca tiene publicados, más Subcategoría y Tipo de
+                // producto; public/catalogo.js filtra las tarjetas en el cliente.
+                dangerouslySetInnerHTML={{
+                  __html: panelFiltrosHtml(productos, {
+                    tc,
+                    conCategoria: true,
+                    conTipo: true,
+                    tiposRiel: tilesPresentes(productos),
+                    sinMarca: true,
+                  }),
+                }}
+              />
 
               <div>
                 <div className="toolbar">
                   <span className="results figures">
-                    {productos.length ? conteoHtml(productos) : "0 piezas en línea"} · {marca.nombre}
+                    {conteoHtml(productos)} · {marca.nombre}
                   </span>
                   <select aria-label="Ordenar">
                     <option value="precio-desc">Precio: mayor a menor ↓</option>
@@ -250,42 +221,7 @@ export default async function MarcaPage({ params }: Params) {
                     <option value="pedido-primero">Inventario: de bajo pedido a stock</option>
                   </select>
                 </div>
-                {productos.length && tc ? (
-                  <div className="plp-grid" dangerouslySetInnerHTML={{ __html: rejillaHtml(productos, tc) }} />
-                ) : (
-                  <>
-                    <div className="plp-grid">
-                      {/* Maqueta mientras la marca no tenga piezas publicadas en Shopify. */}
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <div className="pcard pcard--ph" key={i} aria-hidden="true">
-                          <div className="imgw">
-                            <span className="ph">
-                              <span className="ph-inner">Producto</span>
-                            </span>
-                          </div>
-                          <div className="body">
-                            <span className="ph-line ph-line--sm" />
-                            <span className="ph-line" />
-                            <span className="ph-line ph-line--md" />
-                            <span className="ph-line ph-line--sm" />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    <p className="plp-aviso">
-                      Catálogo en migración: las piezas de {marca.nombre} están por publicarse.{" "}
-                      <WhatsAppCta
-                        className="arrow-link"
-                        label={`marca_${marca.slug}`}
-                        message={`¡Hola! Me interesan los productos de ${marca.nombre}. ¿Me pueden asesorar?`}
-                      >
-                        Pedir la lista por WhatsApp <span className="ln" />
-                        <span className="ar">→</span>
-                      </WhatsAppCta>
-                    </p>
-                  </>
-                )}
+                <div className="plp-grid" dangerouslySetInnerHTML={{ __html: rejillaHtml(productos, tc) }} />
               </div>
             </div>
           </div>
@@ -296,9 +232,9 @@ export default async function MarcaPage({ params }: Params) {
         <div className="glow" />
         <div className="container">
           <div className="inner">
-            {/* Marcas "pdf": después del hero solo este cierre, que lleva a un
-                experto por WhatsApp (Carla, 2026-10-21). */}
-            {enPdf ? (
+            {/* Marcas "pdf" o sin piezas publicadas: después del hero solo este
+                cierre, que lleva a un experto por WhatsApp (Carla, 2026-10-21). */}
+            {!conTienda ? (
               <>
                 <div className="eyebrow eyebrow-bright">Conoce más sobre tus marcas favoritas</div>
                 <h2>

@@ -1821,7 +1821,6 @@ a.pcard { border-bottom: 1px solid var(--border); color: inherit; }
 .brandtile[data-brand="whirlpool"]{--lazy-bg: url('assets/photos/brands/whirlpool-electrodomesticos.webp');}
 .brandtile[data-brand="acros"]{--lazy-bg: url('assets/photos/brands/acros-electrodomesticos.webp');}
 .brandtile[data-brand="alfa-forni"]{--lazy-bg: url('assets/photos/brands/alfa-forni-hornos.webp');}
-.brandtile[data-brand="asko"]{--lazy-bg: url('assets/photos/brands/asko-electrodomesticos.webp');}
 .brandtile[data-brand="axcent"]{--lazy-bg: url('assets/photos/brands/axcent-cocina-y-bano.webp');}
 .brandtile[data-brand="benessi"]{--lazy-bg: url('assets/photos/brands/benessi-cocina.webp');}
 .brandtile[data-brand="artisan"]{--lazy-bg: url('assets/photos/brands/artisan-asadores.webp');}

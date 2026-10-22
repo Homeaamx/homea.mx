@@ -63,9 +63,6 @@
     { "marca": "Frigidaire · Electrolux", "documentos": [
       { "slug": "frigidaire-electrolux", "titulo": "Lista de precios", "vigencia": "jul 2023", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-frigidaire-electrolux-2023.pdf", "legacy": ["/Files/119914/232245308137700.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-frigidaire-electrolux-2023.pdf" }
     ] },
-    { "marca": "ASKO", "documentos": [
-      { "slug": "asko", "titulo": "Lista de precios", "vigencia": "jul 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-asko-jul-2026.pdf?v=1790123911", "legacy": ["/Files/119914/232245863241526.pdf"], "estado": "listo" }
-    ] },
     { "marca": "Smeg", "documentos": [
       { "slug": "smeg", "titulo": "Lista de precios", "vigencia": "sep 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-smeg-sep-2026.pdf?v=1790123875", "legacy": [], "estado": "listo" }
     ] },
@@ -192,6 +189,18 @@
     ] },
     { "marca": "InSinkErator", "documentos": [
       { "slug": "insinkerator", "titulo": "Trituradores comerciales · lista de precios", "vigencia": "jun 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-trituradores-comerciales-insinkerator-jun-2026.pdf?v=1790124851", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Gessi", "documentos": [
+      { "slug": "gessi", "titulo": "Lista de precios", "vigencia": "jul 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-gessi-jul-2026.pdf?v=1792696903", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Dexa", "documentos": [
+      { "slug": "dexa", "titulo": "Lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-dexa-2025.pdf?v=1792696902", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Mr. Steam", "documentos": [
+      { "slug": "mr-steam", "titulo": "Lista de precios", "vigencia": "oct 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-mr-steam-oct-2026.pdf?v=1792696903", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Nobili", "documentos": [
+      { "slug": "nobili", "titulo": "Lista de precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-nobili-2026.pdf?v=1792696903", "legacy": [], "estado": "listo" }
     ] }
   ]
 }

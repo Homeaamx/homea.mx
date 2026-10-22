@@ -264,6 +264,7 @@
     badges(plp);
     chips(plp, activos);
     barra(plp, cards);
+    guardarFiltros(plp, activos);
   }
 
   /* Aplica lo marcado ahora mismo (riel, mosaico, botón "Ver N piezas"). */
@@ -328,6 +329,88 @@
     try { u = new URL(a.getAttribute("href"), location.href); } catch (err) { return; }
     if (u.origin !== location.origin || u.pathname !== location.pathname) return;
     document.querySelectorAll(".plp").forEach(function (plp) { reiniciar(plp, u.searchParams.get("tipo")); });
+  }
+
+  /* ---------- Filtros que sobreviven a la ficha (Carla, 2026-10-22) ----------
+     Lo aplicado en cada catálogo (casillas, precio y orden) se guarda en la
+     sesión por página. Al volver de una ficha (atrás, migas o cualquier enlace
+     dentro de la página) el catálogo reaparece igual. Se borra todo al entrar a
+     una página que no es de tienda (inicio, guías, herramientas, nosotros…), y
+     se empieza de cero al entrar desde el menú, el cajón o el pie (enlaces fuera
+     de <main>), como antes. */
+  var CLAVE_F = "homea:filtros:";
+  var TIENDA = /^\/(productos|producto|marcas|ofertas|wishlist|mi-proyecto|cotizacion|c)(\/|$)/;
+  var restaurando = false;
+
+  function claveFiltros(plp) {
+    var i = Array.prototype.indexOf.call(document.querySelectorAll(".plp"), plp);
+    return CLAVE_F + location.pathname + "#" + i;
+  }
+
+  function selectOrden(plp) {
+    return plp.querySelector('.toolbar select[aria-label="Ordenar"]');
+  }
+
+  function guardarFiltros(plp, activos) {
+    if (restaurando) return;
+    var sel = selectOrden(plp);
+    try {
+      if (!Object.keys(activos).length && (!sel || sel.selectedIndex <= 0)) {
+        sessionStorage.removeItem(claveFiltros(plp));
+      } else {
+        sessionStorage.setItem(claveFiltros(plp), JSON.stringify({ a: activos, o: sel ? sel.value : "" }));
+      }
+    } catch (e) {}
+  }
+
+  /* Sin ruta: todas las páginas. Con ruta: solo esa. */
+  function olvidarFiltros(ruta) {
+    try {
+      var prefijo = CLAVE_F + (ruta ? ruta + "#" : "");
+      for (var i = sessionStorage.length - 1; i >= 0; i--) {
+        var k = sessionStorage.key(i);
+        if (k && k.indexOf(prefijo) === 0) sessionStorage.removeItem(k);
+      }
+    } catch (e) {}
+  }
+
+  function restaurarFiltros(plp) {
+    var g = null;
+    try { g = JSON.parse(sessionStorage.getItem(claveFiltros(plp)) || "null"); } catch (e) {}
+    if (!g || !g.a) return;
+    restaurando = true;
+    casillas(plp).forEach(function (cb) {
+      cb.checked = (g.a[cb.getAttribute("data-fk")] || []).indexOf(cb.value) !== -1;
+    });
+    var caja = plp.querySelector("[data-cat-precio]");
+    if (caja) {
+      var r = ((g.a.precio || [""])[0] || "").split("-");
+      caja.querySelector('[data-fp="min"]').value = parseFloat(r[0]) > 0 ? r[0] : "";
+      caja.querySelector('[data-fp="max"]').value = parseFloat(r[1]) > 0 ? r[1] : "";
+      pintarSlider(caja);
+    }
+    var sel = selectOrden(plp);
+    if (sel && g.o && sel.value !== g.o) { sel.value = g.o; ordenar(sel); }
+    restaurando = false;
+    /* tipos.js y PlpFiltro marcan la casilla del tipo según la URL al llegar:
+       durante este respiro respetan lo restaurado (window.__homeaFiltrosRestaurados). */
+    window.__homeaFiltrosRestaurados = { ruta: location.pathname, hasta: Date.now() + 2000 };
+    aplicarMarcado(plp);
+  }
+
+  function revisarRuta() {
+    if (!TIENDA.test(location.pathname)) olvidarFiltros();
+  }
+
+  /* Enlace fuera de <main> (menú, cajón, pie) hacia una página de tienda: se
+     entra de cero a esa página. */
+  function entradaNueva(e, a) {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (a.closest("main")) return;
+    var u;
+    try { u = new URL(a.getAttribute("href"), location.href); } catch (err) { return; }
+    if (u.origin !== location.origin || !TIENDA.test(u.pathname)) return;
+    olvidarFiltros(u.pathname);
   }
 
   /* ---------- Orden ---------- */
@@ -410,7 +493,11 @@
       var plp = t.closest(".plp");
       if (plp) { badges(plp); barra(plp, tarjetas(plp)); }
     }
-    if (t.matches('.plp .toolbar select[aria-label="Ordenar"]')) ordenar(t);
+    if (t.matches('.plp .toolbar select[aria-label="Ordenar"]')) {
+      ordenar(t);
+      var plpO = t.closest(".plp");
+      if (plpO) guardarFiltros(plpO, plpO.__aplicados || {});
+    }
   });
 
   document.addEventListener("click", function (e) {
@@ -444,7 +531,7 @@
     }
 
     var ir = t.closest("a[href]");
-    if (ir) reiniciarSiEsEstaPagina(e, ir);
+    if (ir) { entradaNueva(e, ir); reiniciarSiEsEstaPagina(e, ir); }
 
     /* tipos.js / PlpFiltro marcan casillas a mano: aplicar después de su clic. */
     if (t.closest("a.subcat[data-tipo], .tpg-card[data-f]")) aplicarLuego();
@@ -640,9 +727,15 @@
     if (grid && grid !== visto) {
       visto = grid;
       document.querySelectorAll("[data-cat-precio]").forEach(pintarSlider);
+      /* Antes que el scroll guardado (PreviewRouter lo repite a los 80 ms): la
+         página vuelve con su altura filtrada y al mismo punto. */
+      document.querySelectorAll(".plp").forEach(restaurarFiltros);
       aplicarLuego();
     }
   }
+  window.addEventListener("homea:url", revisarRuta);
+  window.addEventListener("popstate", revisarRuta);
+  revisarRuta();
   new MutationObserver(revisar).observe(document.documentElement, { childList: true, subtree: true });
   revisar();
 })();

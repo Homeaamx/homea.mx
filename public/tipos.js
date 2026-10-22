@@ -105,17 +105,26 @@
   }
 
   /* ---------- Estado visible del filtro ---------- */
-  function pintar(slug) {
+  /* catalogo.js acaba de devolver los filtros guardados de esta página (al
+     volver de una ficha): la URL no manda sobre las casillas en ese respiro. */
+  function filtrosRestaurados() {
+    var r = window.__homeaFiltrosRestaurados;
+    return !!r && r.ruta === location.pathname && Date.now() < r.hasta;
+  }
+
+  function pintar(slug, desdeUrl) {
     tiles().forEach(function (a) {
       var on = a.getAttribute("data-tipo") === slug;
       a.classList.toggle("is-active", on);
       if (on) { a.setAttribute("aria-current", "true"); }
       else { a.removeAttribute("aria-current"); }
     });
-    document.querySelectorAll("label[data-tipo]").forEach(function (l) {
-      var cb = l.querySelector('input[type="checkbox"]');
-      if (cb) { cb.checked = l.getAttribute("data-tipo") === slug; }
-    });
+    if (!(desdeUrl && filtrosRestaurados())) {
+      document.querySelectorAll("label[data-tipo]").forEach(function (l) {
+        var cb = l.querySelector('input[type="checkbox"]');
+        if (cb) { cb.checked = l.getAttribute("data-tipo") === slug; }
+      });
+    }
     /* Las casillas se marcaron a mano (sin "change"): catalogo.js filtra las
        tarjetas y pinta el conteo del grupo y los chips. Sin este aviso, al
        llegar desde el mega-menú la casilla quedaba marcada pero la rejilla
@@ -220,7 +229,7 @@
       return;
     }
     var slug = tipoUrl();
-    pintar(slug);
+    pintar(slug, true);
     ultimoStrip = s;
     ultimoTipo = slug;
     if (!slug) return;

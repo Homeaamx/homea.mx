@@ -33,7 +33,7 @@ const NOMBRES = {
   monogram: "Monogram", miele: "Miele", viking: "Viking", wolf: "Wolf",
   "sub-zero": "Sub-Zero", cove: "Cove", "pitt-cooking": "Pitt Cooking",
   invisacook: "Invisacook", benessi: "Benessi", bosch: "Bosch",
-  thor: "Thor", asko: "ASKO", scotsman: "Scotsman", elica: "Elica",
+  thor: "Thor", scotsman: "Scotsman", elica: "Elica",
   tradewind: "Trade-Wind", falmec: "Falmec", "fulgor-milano": "Fulgor Milano",
   summit: "Summit", kalt: "Kalt", sapphire: "Sapphire", cafe: "Café",
   kitchenaid: "KitchenAid", hoshizaki: "Hoshizaki", electrolux: "Electrolux",

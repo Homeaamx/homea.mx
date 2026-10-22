@@ -11,7 +11,7 @@
 > `wayback/` y `manifest.csv` (clics GSC, tamaños, checksums).
 >
 > **Actualización 2026-09-22:** se cargaron los catálogos vigentes de la carpeta `CATALOGOS VIGENTES`
-> (ver §0). Hoy hay **68 listas publicadas** y **63 de las 89 marcas** enseñan su PDF (2026-10-08: salieron La Cornue y U-Line).
+> (ver §0). Hoy hay **71 listas publicadas** y **66 de las 88 marcas** enseñan su PDF (2026-10-08: salieron La Cornue y U-Line; 2026-10-22: entraron Gessi, Dexa, Mr. Steam y Nobili y salió ASKO).
 
 ## 0. Catálogos vigentes 2026 (carga del 2026-09-22)
 
@@ -44,9 +44,16 @@ comerciales) y Coyote. Se les quitó la palabra "Dealer" (BSH), el encabezado va
 la leyenda "Distributor Price Schedule · Confidential" de Coyote. ⚠️ InSinkErator sigue diciendo en cada página
 "Lista de precios a DISTRIBUIDOR TIPO A": sus precios son de distribuidor. Publicado así por decisión de Carla.
 
-**Faltan (26 marcas sin ningún PDF):** Acros, Catalano, Dexa, Easy, Firplak, Fontana, Foster, Gessi,
-Hergom, I-Drain, IEM, Kaldewei, KitchenAid, Masterbuilt, Maytag, Mr. Steam, Nobili, Peerless,
-Poletti Sinks, Sapphire, Sauna Estilo, Treesse, Valsir, Vass, Whirlpool (solo hay Excel) y WPPO.
+**Subidas el 2026-10-22:** Gessi (lista Artexa jul 2026: sin las "Condiciones generales de venta" B2B de Gessi,
+págs. 52-57, tarjeta HOMEA en portada, fotos a 110 dpi para bajar de 40 a 9.4 MB), Dexa (2025; sin las dos páginas de
+políticas de entrega e instalación dirigidas al *dealer*; ⚠️ la portada todavía dice "2023"), Mr. Steam (oct 2026; la
+portada dice "2025 Product Catalog") y Nobili (2026). Las tres últimas ya traían la tarjeta HOMEA de origen.
+
+**Sin catálogo, solo tienda (decisión Carla 2026-10-22):** Whirlpool, KitchenAid, Maytag, Acros, Easy e IEM. Su página
+de marca ya no tiene botón "Ver catálogo oficial" (sin `cta` en `data/marcas-hero.json`).
+
+**Faltan (16 marcas sin ningún PDF):** Catalano, Firplak, Fontana, Foster, Hergom, I-Drain, Kaldewei, Masterbuilt,
+Peerless (pendiente por ahora, Carla 2026-10-22), Poletti Sinks, Sapphire, Sauna Estilo, Treesse, Valsir, Vass y WPPO.
 
 **Publicadas pero viejas** (conviene buscar la edición nueva): Frigidaire·Electrolux (jul 2023), Onix (2023),
 Trade-Wind (abr 2024), Nantucket (2024), Mabe, IO Mabe, GE Profile y Haier (2024), Clearlight y Jacuzzi
@@ -59,7 +66,8 @@ saunas (2024). Mabe tiene lista 2026 en Excel, pero no en PDF.
 `catalogo-precios-fortum-2023.pdf` (marcas retiradas), `catalogo-mabe-2024.pdf` (duplicado de
 `catalogo-mabe-2024-completo.pdf`), `lista-precios-tecnolam-tarjas-monomandos-2025.pdf` (la sustituye la de
 ene 2026), `lista-precios-artexa-elica-2023.pdf` (la sustituye la de 2026 y trae marca Artexa) y
-`lista-precios-u-line-jun-2026.pdf` (U-Line se quitó del sitio el 2026-10-08; su URL permanente redirige con 301 a Refrigeración).
+`lista-precios-u-line-jun-2026.pdf` (U-Line se quitó del sitio el 2026-10-08; su URL permanente redirige con 301 a Refrigeración) y
+`lista-precios-asko-jul-2026.pdf` (ASKO se quitó del sitio el 2026-10-22; su URL permanente redirige con 301 a Lavavajillas).
 
 **Nuevo PDF de una marca que no tenía:** agrégalo a `scripts/pdfs-marca.json`, prepáralo con el script,
 revisa a ojo portada, una página interior y contraportada, súbelo a Shopify Files, dalo de alta en

@@ -124,24 +124,6 @@
       ]
     },
     {
-      "slug": "asko",
-      "nombre": "ASKO",
-      "gama": [
-        "premium"
-      ],
-      "categorias": [
-        "cocina"
-      ],
-      "canal": "shopify",
-      "logo": "/assets/logos/asko.webp",
-      "foto": "/assets/photos/brands/asko-electrodomesticos.webp",
-      "fotoHero": "/assets/photos/brands/hero/asko-electrodomesticos.webp",
-      "logoHero": "/assets/logos/asko.webp",
-      "listas": [
-        "asko"
-      ]
-    },
-    {
       "slug": "axcent",
       "nombre": "Axcent",
       "gama": [
@@ -450,7 +432,9 @@
       "foto": "/assets/photos/brands/dexa-electrodomesticos.webp",
       "fotoHero": "/assets/photos/brands/hero/dexa-electrodomesticos.webp",
       "logoHero": "/assets/logos/dexa.webp",
-      "listas": []
+      "listas": [
+        "dexa"
+      ]
     },
     {
       "slug": "easy",
@@ -713,7 +697,9 @@
       "foto": "/assets/photos/brands/gessi-griferia.webp",
       "fotoHero": "/assets/photos/brands/hero/gessi-griferia.webp",
       "logoHero": "/assets/logos/gessi.png",
-      "listas": []
+      "listas": [
+        "gessi"
+      ]
     },
     {
       "slug": "haier",
@@ -1139,7 +1125,9 @@
       "foto": "/assets/photos/brands/mr-steam-vapor.webp",
       "fotoHero": "/assets/photos/brands/hero/mr-steam-vapor.webp",
       "logoHero": "/assets/logos/mr-steam.webp",
-      "listas": []
+      "listas": [
+        "mr-steam"
+      ]
     },
     {
       "slug": "nantucket",
@@ -1174,7 +1162,9 @@
       "foto": "/assets/photos/brands/nobili-griferia.webp",
       "fotoHero": "/assets/photos/brands/hero/nobili-griferia.webp",
       "logoHero": "/assets/logos/nobili.webp",
-      "listas": []
+      "listas": [
+        "nobili"
+      ]
     },
     {
       "slug": "onix",

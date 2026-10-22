@@ -12,7 +12,7 @@
 
 | Canal | En Shopify | En el sitio |
 |---|---|---|
-| **SHOPIFY** (66) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
+| **SHOPIFY** (65) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
 | **SOLO PDF** (23) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
 
 En el código, el canal vive en el tile de `preview/marcas.html` (`data-canal="shopify|pdf"`), pasa a
@@ -33,6 +33,8 @@ plan). Kamado Joe, Masterbuilt y WPPO son de cocina o asadores y van **solo como
    no se publicará); su página vieja `/marcas/elkay` redirige (301) a Tarjas y grifería (`next.config.js`).
    **La Cornue** y **U-Line** se quitaron igual el 2026-10-08 (Carla: todo rastro e imagen): `/marcas/la-cornue`
    → Cocción, `/marcas/u-line` y su lista `/listas-de-precios/u-line.pdf` → Refrigeración (301, `next.config.js`).
+   **ASKO** se quitó igual el 2026-10-22 (Carla): `/marcas/asko`, `/listas-de-precios/asko.pdf` y la URL vieja de
+   OXATIS de su lista → Lavavajillas (301, `next.config.js`); también salió de la guía de lavavajillas del blog de Shopify.
 3. **Saunas:** las de **Grupo 90** son **Mr. Steam, Sauna Estilo y Treesse** (corrección de Carla, 2026-09-22: se mantienen aunque estuvieron en *Eliminadas*); las de **Artexa** son Jacuzzi y Clearlight. Todas SOLO PDF.
    Se crearon las **16 páginas** que faltaban: 6 SHOPIFY y 10 SOLO PDF. Los PDFs vigentes de cada marca
    se le piden a Carla más adelante y se suben a Shopify Files.
@@ -71,7 +73,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
   columna *Arte* de las tablas dice qué falta. La carpeta de OneDrive con logos y fotos ya no está
   sincronizada en esta Mac.
 
-## SHOPIFY — 66 marcas
+## SHOPIFY — 65 marcas
 
 | Marca | Proveedor | Línea SAE | Productos tras carga | Descuento Shopify (PLATA) | Página | Arte | Nota |
 |---|---|---|---:|---:|---|---|---|
@@ -79,7 +81,6 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | ALFA FORNI | IESA/LAVISH | ALFA | 20 | 10% | `/marcas/alfa-forni` | completo |  |
 | ALFRESCO | ARTEXA | ALFRE | 247 | 10% | `/marcas/alfresco` | completo |  |
 | ARTISAN | ARTEXA | ARTIS | 104 | 10% | `/marcas/artisan` | completo |  |
-| ASKO | IESA/LAVISH | ASKO | 355 | 10% | `/marcas/asko` | completo |  |
 | AXCENT | ITALY TOP | AXCEN | 101 | 15% | `/marcas/axcent` | completo | Solo línea de cocina |
 | BENESSI | ARTEXA | BENES | 100 | 15% | `/marcas/benessi` | completo |  |
 | BERTAZZONI | ARTEXA | BERTA | 109 | 10% | `/marcas/bertazzoni` | completo |  |

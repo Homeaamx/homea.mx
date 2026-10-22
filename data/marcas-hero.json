@@ -1,13 +1,9 @@
 {
-  "_nota": "Contenido del hero de /marcas/<slug>, una entrada por slug de data/marcas.json. Escrito a mano (o desde el Excel de contenido de marcas); scripts/build-marcas.mjs NO lo toca. Marca sin entrada → hero actual (gama · Distribución oficial + nombre + frase automática). 'eyebrow' se escribe normal: el CSS lo pasa a mayúsculas. 'cta.url' = URL permanente del PDF oficial (/listas-de-precios/<slug>.pdf, que sirve el archivo de Shopify Files; ver data/listas-precios.json); mientras sea null, el botón pide el catálogo por WhatsApp. Cargado desde HOMEA_HERO_97_MARCAS_CODE.xlsx (2026-09-22). Opcionales: 'imagen.espejo' (false = foto al derecho; por defecto va en espejo), 'imagen.posicion' (object-position; por defecto 'center 75%', un % menor enseña más la parte de arriba) y 'logoEscala' (multiplica el alto del logo).",
+  "_nota": "Contenido del hero de /marcas/<slug>, una entrada por slug de data/marcas.json. Escrito a mano (o desde el Excel de contenido de marcas); scripts/build-marcas.mjs NO lo toca. Marca sin entrada → hero actual (gama · Distribución oficial + nombre + frase automática). 'eyebrow' se escribe normal: el CSS lo pasa a mayúsculas. 'cta.url' = URL permanente del PDF oficial (/listas-de-precios/<slug>.pdf, que sirve el archivo de Shopify Files; ver data/listas-precios.json); mientras sea null, el botón pide el catálogo por WhatsApp. Sin 'cta' no hay botón: marcas que no tienen catálogo PDF y solo viven en la tienda (Whirlpool, KitchenAid, Maytag, Acros, Easy, IEM; decisión Carla 2026-10-22). Cargado desde HOMEA_HERO_97_MARCAS_CODE.xlsx (2026-09-22). Opcionales: 'imagen.espejo' (false = foto al derecho; por defecto va en espejo), 'imagen.posicion' (object-position; por defecto 'center 75%', un % menor enseña más la parte de arriba) y 'logoEscala' (multiplica el alto del logo).",
   "acros": {
     "eyebrow": "Funcional · Práctica · Accesible",
     "titulo": "Electrodomésticos Acros",
     "descripcion": "Soluciones prácticas para el hogar, con estufas, refrigeradores, lavandería y otros electrodomésticos diseñados para hacer más simple el día a día.",
-    "cta": {
-      "texto": "Ver catálogo oficial",
-      "url": null
-    },
     "imagen": {
       "posicion": "center 25%"
     }
@@ -40,15 +36,6 @@
     },
     "imagen": {
       "posicion": "center 55%"
-    }
-  },
-  "asko": {
-    "eyebrow": "Escandinavo · Minimalista · Preciso",
-    "titulo": "Electrodomésticos ASKO",
-    "descripcion": "Electrodomésticos de inspiración escandinava que combinan diseño minimalista, precisión y soluciones funcionales para una cocina contemporánea.",
-    "cta": {
-      "texto": "Ver catálogo oficial",
-      "url": "/listas-de-precios/asko.pdf"
     }
   },
   "axcent": {
@@ -222,17 +209,13 @@
     "descripcion": "Electrodomésticos de cocina con propuesta funcional y contemporánea, creados para resolver necesidades cotidianas con diseño limpio y valor equilibrado.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/dexa.pdf"
     }
   },
   "easy": {
     "eyebrow": "Práctica · Sencilla · Accesible",
     "titulo": "Electrodomésticos Easy",
     "descripcion": "Equipos de cocina pensados para el uso diario, con una propuesta sencilla, funcional y accesible que prioriza practicidad y facilidad de operación.",
-    "cta": {
-      "texto": "Ver catálogo oficial",
-      "url": null
-    },
     "imagen": {
       "espejo": false,
       "posicion": "center 22%"
@@ -377,7 +360,7 @@
     "descripcion": "Grifería de diseño italiano con formas escultóricas y acabados sofisticados, creada para convertir la zona de agua en un elemento protagonista.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/gessi.pdf"
     }
   },
   "haier": {
@@ -423,10 +406,6 @@
     "eyebrow": "Práctica · Confiable · Accesible",
     "titulo": "Electrodomésticos IEM",
     "descripcion": "Equipos de cocina con una propuesta práctica y accesible, pensados para el uso diario con funciones claras, operación sencilla y desempeño confiable.",
-    "cta": {
-      "texto": "Ver catálogo oficial",
-      "url": null
-    },
     "imagen": {
       "espejo": false,
       "posicion": "center 25%"
@@ -524,10 +503,6 @@
     "eyebrow": "Icónico · Versátil · Creativo",
     "titulo": "Electrodomésticos KitchenAid",
     "descripcion": "Electrodomésticos para cocina y exterior con una propuesta icónica y versátil, pensados para quienes disfrutan preparar, cocinar y crear con mayor control.",
-    "cta": {
-      "texto": "Ver catálogo oficial",
-      "url": null
-    },
     "imagen": {
       "espejo": false
     }
@@ -580,11 +555,7 @@
   "maytag": {
     "eyebrow": "Robusto · Durable · Confiable",
     "titulo": "Electrodomésticos Maytag",
-    "descripcion": "Electrodomésticos de cocina con enfoque en construcción robusta, desempeño confiable y facilidad de uso para responder al ritmo cotidiano del hogar.",
-    "cta": {
-      "texto": "Ver catálogo oficial",
-      "url": null
-    }
+    "descripcion": "Electrodomésticos de cocina con enfoque en construcción robusta, desempeño confiable y facilidad de uso para responder al ritmo cotidiano del hogar."
   },
   "miele": {
     "eyebrow": "Precisión · Durabilidad · Elegancia",
@@ -623,7 +594,7 @@
     "descripcion": "Sistemas de vapor y sauna enfocados en bienestar, control y tecnología, diseñados para convertir el baño en un espacio privado de relajación y confort.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/mr-steam.pdf"
     },
     "imagen": {
       "espejo": false
@@ -644,7 +615,7 @@
     "descripcion": "Grifería para cocina y baño con diseño italiano, líneas contemporáneas y operación precisa, pensada para integrar funcionalidad y estética en cada espacio.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/nobili.pdf"
     }
   },
   "onix": {
@@ -882,10 +853,6 @@
     "eyebrow": "Funcional · Confiable · Accesible",
     "titulo": "Electrodomésticos Whirlpool",
     "descripcion": "Electrodomésticos de cocina con enfoque en funcionalidad, confiabilidad y facilidad de uso para resolver las necesidades cotidianas de distintos hogares.",
-    "cta": {
-      "texto": "Ver catálogo oficial",
-      "url": null
-    },
     "imagen": {
       "espejo": false
     }

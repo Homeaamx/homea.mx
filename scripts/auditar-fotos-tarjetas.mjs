@@ -28,7 +28,7 @@ const colecciones = [
 
 const esTecnica = (url, alt) => {
   const archivo = url.split("?")[0].split("/").pop() ?? "";
-  return /^plano|^ficha|^diagrama/i.test(alt ?? "") || /(^|-)(plano|ficha-tecnica|line-drawing|diagrama)(-|\.)/i.test(archivo);
+  return /^plano|^ficha|^diagrama/i.test(alt ?? "") || /(^|-)(plano-medidas|ficha-tecnica|line-drawing|diagrama)(-|\.)/i.test(archivo);
 };
 
 const CONSULTA = `query($h: String!, $a: String) {

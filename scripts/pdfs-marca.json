@@ -519,15 +519,6 @@
       "archivo": "lista-precios-asadores-wolf-jun-2026.pdf"
     },
     {
-      "slug": "asko",
-      "marca": "asko",
-      "nombre": "ASKO",
-      "titulo": "Lista de precios",
-      "vigencia": "jul 2026",
-      "src": "LAVISH-IESA/AGO 26/LISTA_PRECIOS_ASKO_COCINAS_2026_07.pdf",
-      "archivo": "lista-precios-asko-jul-2026.pdf"
-    },
-    {
       "slug": "cove",
       "marca": "cove",
       "nombre": "Cove",
@@ -647,6 +638,60 @@
         "stamp": "tr",
         "fraccion": 0.16
       }
+    },
+    {
+      "slug": "gessi",
+      "marca": "gessi",
+      "nombre": "Gessi",
+      "titulo": "Lista de precios",
+      "vigencia": "jul 2026",
+      "src": "ARTEXA/AGO 2026/LP GESSI KITCHEN JUL 2026.pdf",
+      "archivo": "lista-precios-gessi-jul-2026.pdf",
+      "op": {
+        "artexa": true,
+        "del": [
+          52,
+          53,
+          54,
+          55,
+          56,
+          57
+        ],
+        "stamp": "tr"
+      }
+    },
+    {
+      "slug": "dexa",
+      "marca": "dexa",
+      "nombre": "Dexa",
+      "titulo": "Lista de precios",
+      "vigencia": "2025",
+      "src": "LAVISH-IESA/AGO 26/Lista_Precios_DEXA_2025.pdf",
+      "archivo": "lista-precios-dexa-2025.pdf",
+      "op": {
+        "del": [
+          8,
+          9
+        ]
+      }
+    },
+    {
+      "slug": "mr-steam",
+      "marca": "mr-steam",
+      "nombre": "Mr. Steam",
+      "titulo": "Lista de precios",
+      "vigencia": "oct 2026",
+      "src": "GRUPO90/LISTA_PRECIOS_MRSTEAM_2026_OCTUBRE.pdf",
+      "archivo": "lista-precios-mr-steam-oct-2026.pdf"
+    },
+    {
+      "slug": "nobili",
+      "marca": "nobili",
+      "nombre": "Nobili",
+      "titulo": "Lista de precios",
+      "vigencia": "2026",
+      "src": "GRUPO90/LISTA_PRECIOS_NOBILI_2026.pdf",
+      "archivo": "lista-precios-nobili-2026.pdf"
     }
   ]
 }

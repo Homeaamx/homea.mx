@@ -160,6 +160,12 @@ const nextConfig = {
       "/marcas/la-cornue": "/productos/cocina-y-bar/coccion",
       "/marcas/u-line": "/productos/cocina-y-bar/refrigeracion",
       "/listas-de-precios/u-line.pdf": "/productos/cocina-y-bar/refrigeracion",
+      // ASKO (SHOPIFY, lavavajillas y cocina): se quitó de todo el sitio el 2026-10-22
+      // (Carla). Su página, su lista de precios y la URL vieja de OXATIS de esa lista
+      // van con 301 al listado de lavavajillas.
+      "/marcas/asko": "/productos/cocina-y-bar/lavavajillas",
+      "/listas-de-precios/asko.pdf": "/productos/cocina-y-bar/lavavajillas",
+      "/Files/119914/232245863241526.pdf": "/productos/cocina-y-bar/lavavajillas",
     };
 
     // Productos obsoletos (fuera de la lista vigente del proveedor): la ficha va con

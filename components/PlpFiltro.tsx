@@ -25,6 +25,8 @@ declare global {
     __homeaScrollA?: (el: Element, aire?: number) => void;
     /** true mientras dura una navegación atrás/adelante (public/tipos.js). */
     __homeaPorHistorial?: () => boolean;
+    /** Filtros guardados que public/catalogo.js acaba de devolver a la página. */
+    __homeaFiltrosRestaurados?: { ruta: string; hasta: number };
   }
 }
 
@@ -40,7 +42,14 @@ export default function PlpFiltro({ base, tipos }: Props) {
     const leerF = () =>
       new URLSearchParams(window.location.search).get("f");
 
-    const sync = (f: string | null) => {
+    // catalogo.js acaba de devolver los filtros guardados de esta página (al
+    // volver de una ficha): en ese respiro la URL no manda sobre las casillas.
+    const restaurados = () => {
+      const r = window.__homeaFiltrosRestaurados;
+      return !!r && r.ruta === window.location.pathname && Date.now() < r.hasta;
+    };
+
+    const sync = (f: string | null, desdeUrl = false) => {
       // Tiles del mosaico: marcado + href de toggle (clic en el activo lo quita).
       document
         .querySelectorAll<HTMLAnchorElement>(".tpg-card[data-f]")
@@ -58,14 +67,15 @@ export default function PlpFiltro({ base, tipos }: Props) {
           }
         });
       // Checkbox correspondiente del aside de filtros.
-      document
-        .querySelectorAll<HTMLLabelElement>(".filters label[data-tipo]")
-        .forEach((l) => {
-          const input = l.querySelector<HTMLInputElement>(
-            'input[type="checkbox"]',
-          );
-          if (input) input.checked = l.dataset.tipo === f;
-        });
+      if (!(desdeUrl && restaurados()))
+        document
+          .querySelectorAll<HTMLLabelElement>(".filters label[data-tipo]")
+          .forEach((l) => {
+            const input = l.querySelector<HTMLInputElement>(
+              'input[type="checkbox"]',
+            );
+            if (input) input.checked = l.dataset.tipo === f;
+          });
       // Etiqueta "· tipo: X" del toolbar.
       // Con catálogo vivo los chips de catalogo.js ya dicen el tipo activo.
       const label = document.getElementById("plp-tipo-activo");
@@ -124,7 +134,7 @@ export default function PlpFiltro({ base, tipos }: Props) {
     let ultima = window.location.href;
     const onPop = () => {
       ultima = window.location.href;
-      sync(leerF());
+      sync(leerF(), true);
     };
     // "homea:url" también salta con los replaceState internos del router de
     // Next: solo se baja si la URL cambió de verdad.
@@ -135,7 +145,7 @@ export default function PlpFiltro({ base, tipos }: Props) {
       alLlegar();
     };
 
-    sync(leerF());
+    sync(leerF(), true);
     alLlegar();
     // Fase de captura: PreviewRouter también escucha clics en <a> internas (en
     // burbuja) y, si llega primero, hace router.push → la página se vuelve a

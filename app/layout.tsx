@@ -85,9 +85,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* Wishlist (localStorage): corazones, badge del nav y la página /wishlist. */}
         <Script src="/wishlist.js?v=9" strategy="afterInteractive" />
         {/* Filtro de tipo del riel de subcat.1 (?tipo=…) y su scroll lento. */}
-        <Script src="/tipos.js?v=4" strategy="afterInteractive" />
+        <Script src="/tipos.js?v=5" strategy="afterInteractive" />
         {/* Filtros, orden y galería del catálogo vivo de Shopify (lib/shopify/htmlCatalogo.ts). */}
-        <Script src="/catalogo.js?v=19" strategy="afterInteractive" />
+        <Script src="/catalogo.js?v=20" strategy="afterInteractive" />
       </body>
     </html>
   );
