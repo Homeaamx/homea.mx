@@ -27,7 +27,7 @@ recuperación.
 | `canal` | Qué enseña la página |
 |---|---|
 | `shopify` | Hero y **directo al catálogo** con filtros. Sin bloque de categorías ni listas de precios (Carla, 2026-09-22): ahí van los productos de la marca desde Shopify |
-| `pdf` | Bloque **"Asesoría especializada"**: invitación a hablar con un asesor por WhatsApp, su PDF si ya está publicado y sus categorías. **Sin** catálogo ni filtros. El botón de la página, el del hero y el flotante mandan *"Hola, estaba viendo el catálogo de {marca} y me interesa una asesoría."* (`mensajeAsesoria()` en `lib/whatsapp.ts`) |
+| `pdf` | **Solo el hero** (su PDF en el botón) y el cierre previo al pie: *"Conoce más sobre tus marcas favoritas · Conocer más sobre {marca}"* con el botón **"Hablar con un experto"** a WhatsApp (Carla, 2026-10-21; se quitó el bloque "Asesoría especializada" con listas y categorías). **Sin** catálogo ni filtros. El botón del cierre, el del hero y el flotante mandan *"Hola, estaba viendo el catálogo de {marca} y me interesa una asesoría."* (`mensajeAsesoria()` en `lib/whatsapp.ts`) |
 
 ### Marcas sin arte
 

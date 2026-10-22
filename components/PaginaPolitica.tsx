@@ -13,6 +13,8 @@ type Props = {
 
 export default async function PaginaPolitica({ tipo, titulo }: Props) {
   const politica = await obtenerPolitica(tipo);
+  // Devoluciones las atiende post-venta; el resto, el correo legal (Carla, 2026-10-21).
+  const correo = tipo === "refundPolicy" ? "postventa@homea.mx" : "administracion@homea.mx";
 
   return (
     <>
@@ -56,7 +58,7 @@ export default async function PaginaPolitica({ tipo, titulo }: Props) {
               <p>
                 No pudimos cargar el documento en este momento. Para cualquier duda sobre este documento
                 escríbenos a{" "}
-                <a href="mailto:administracion@homea.mx">administracion@homea.mx</a> o llama al (442) 216
+                <a href={`mailto:${correo}`}>{correo}</a> o llama al (442) 216
                 3552.
               </p>
               <p>

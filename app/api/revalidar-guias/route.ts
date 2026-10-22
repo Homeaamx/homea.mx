@@ -27,6 +27,7 @@ export async function GET(request: Request) {
   // /guias (hub, índices y artículos) se regeneran con él.
   revalidateTag(TAG_GUIAS, { expire: 0 });
   revalidatePath("/guias", "layout");
+  revalidatePath("/api/buscar-guias");
   revalidatePath("/sitemap.xml");
   return NextResponse.json({ ok: true, revalidado: TAG_GUIAS });
 }

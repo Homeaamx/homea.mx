@@ -4,6 +4,10 @@
 // de Guías. Así una búsqueda siempre lleva a algún lado aunque la pieza aún no
 // esté en Shopify ("alberca", "bosch", "jacuzzi").
 //
+// La tienda manda (Carla, 2026-10-21): cada categoría lleva a su página de la
+// tienda —la suya, la de su macro o la de sus tipos— y Guías solo aparece cuando
+// nada de la tienda responde ("alberca" → /productos/exterior, no a Guías).
+//
 // También define `coincide`: la regla para decidir si un texto responde de
 // verdad a lo tecleado. Shopify a veces devuelve parecidos sin relación
 // ("maytag" → 29 Gaggenau); con esta regla esos se descartan y, si no queda
@@ -140,10 +144,14 @@ function destinos() {
     sumar({ clase: "Categoría", titulo: macro.nombre, detalle: "Ver la categoría en la tienda", href: rutaMacro }, macro.nombre, 1);
     for (const s1 of macro.subcategorias1 ?? []) {
       const tw = TIPOS_WEB.find((t) => t.slugRiel === s1.slug);
+      // Sin página propia en la tienda (Alberca): la de su macro, donde vive su
+      // tarjeta; después la de sus tipos; Guías solo si no hay tienda.
       const href =
         tw?.ruta ??
         (subs.has(`${macro.slug}/${s1.slug}`) ? `/productos/${macro.slug}/${s1.slug}` : null) ??
         s1.tienda ??
+        (cats.has(macro.slug) ? rutaMacro : null) ??
+        s1.subcategorias2?.find((s2) => s2.tienda)?.tienda ??
         s1.rutaGuias ??
         rutaMacro;
       sumar({ clase: "Categoría", titulo: s1.nombre, detalle: macro.nombre, href }, s1.nombre, 1);
@@ -194,10 +202,14 @@ function destinos() {
 
 const MAX_DESTINOS = 6;
 
+/** ¿El destino es una página de Guías (no de la tienda)? */
+export const esDeGuias = (d: Destino) => d.href.startsWith("/guias");
+
 /**
  * Destinos que responden a la consulta: primero los que empatan TODAS las
  * palabras; si ninguno, los que empatan alguna (lo más parecido que hay).
- * Orden: marca exacta, luego por inicio del título y por clase.
+ * Orden: marca exacta, luego por inicio del título y por clase. Si alguno es
+ * de la tienda, los de Guías se quitan.
  */
 export function buscarDestinos(consulta: string): Destino[] {
   const tokens = palabrasDe(consulta);
@@ -207,6 +219,7 @@ export function buscarDestinos(consulta: string): Destino[] {
   const sinonimos = conSinonimos(tokens);
   if (!hallados.length && sinonimos) hallados = todos.filter((d) => coincide(sinonimos, d.texto));
   if (!hallados.length) hallados = todos.filter((d) => coincide(sinonimos ?? tokens, d.texto, true));
+  if (hallados.some((d) => !esDeGuias(d.destino))) hallados = hallados.filter((d) => !esDeGuias(d.destino));
   const q = plano(consulta.trim());
   return hallados
     .map((d, i) => {

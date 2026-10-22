@@ -12,6 +12,7 @@ import { conPaginaFichas } from "@/lib/paginaFichas";
 import type { Subcategoria2 } from "@/types/guias";
 import Breadcrumb from "./Breadcrumb";
 import CtaProducto from "./CtaProducto";
+import DestinoBusqueda from "./DestinoBusqueda";
 
 /** Íconos de línea por tipo (24×24, trazo). Sin ícono propio → refrigerador. */
 const ICONOS: Record<string, React.ReactNode> = {
@@ -337,6 +338,8 @@ export default function GuiasPortada({ crumbs, nombre, tipos, foto, buscador, fi
       </header>
 
       <section className="sec gx-cats">
+        {/* Llegada desde el buscador de otra página de Guías (#tipo-<slug>). */}
+        <DestinoBusqueda />
         <div className="container">
           <div className="gx-cats-head">
             <p className="eyebrow">Explora por categoría</p>

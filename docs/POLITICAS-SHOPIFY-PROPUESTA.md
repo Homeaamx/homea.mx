@@ -119,7 +119,7 @@ Son textos de borrador que quedaron publicados: comentan la ley en vez de establ
 >
 > **8. Contacto**
 > Teléfono: (442) 216 3552
-> Correo electrónico: administracion@homea.mx
+> Correo electrónico: postventa@homea.mx
 >
 > HOMEA Premium — New Products Connection, S.A. de C.V.
 

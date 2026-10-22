@@ -4,7 +4,7 @@ import GuideCard, { type GuideCardData } from "@/components/GuideCard";
 import GuiaSearch from "@/components/GuiaSearch";
 import Breadcrumb from "@/components/Breadcrumb";
 import JsonLd from "@/components/JsonLd";
-import { getMacros, guiasDestacadas, todasLasGuias, nombreTipo, HUB_PATH, type GuiaPublicada } from "@/lib/guias";
+import { getMacros, guiasDestacadas, nombreTipo, HUB_PATH, type GuiaPublicada } from "@/lib/guias";
 import { absUrl } from "@/lib/site";
 
 // ISR — las guías se publican en Shopify; revalidar cada hora (o al momento con /api/revalidar-guias).
@@ -32,8 +32,6 @@ export default async function GuiasHubPage() {
   const macros = getMacros();
   // Artículos del blog "Guías" de Shopify (lib/shopify/guias.ts).
   const destacadas = (await guiasDestacadas(6)).map(aTarjeta);
-  // Índice de búsqueda: todas las guías (solo guías, no productos).
-  const todas = (await todasLasGuias()).map(aTarjeta);
 
   const itemListLd = {
     "@context": "https://schema.org",
@@ -62,7 +60,8 @@ export default async function GuiasHubPage() {
             con confianza.
           </p>
           <div className="reveal" style={{ transitionDelay: "320ms" }}>
-            <GuiaSearch guias={todas} />
+            {/* Busca en todo Guías (índice global de /api/buscar-guias). */}
+            <GuiaSearch guias={[]} />
           </div>
         </div>
       </header>

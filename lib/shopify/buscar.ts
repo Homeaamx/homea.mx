@@ -20,7 +20,8 @@ import {
   type Pagina,
   type ResultadoBusqueda,
 } from "@/lib/catalogo";
-import { buscarDestinos, coincide, palabrasDe, type Destino } from "@/lib/buscarDestinos";
+import { buscarDestinos, coincide, esDeGuias, palabrasDe, type Destino } from "@/lib/buscarDestinos";
+import { indiceGuias } from "@/lib/guiasIndice";
 import { todasLasMarcas } from "@/lib/marcas";
 import { obtenerTipoCambio, type TipoCambio } from "@/lib/tipoCambio";
 
@@ -202,6 +203,41 @@ function marcaDesdePrefijo(q: string): string | null {
   return marca ? marca.nombre : null;
 }
 
+/* ---------- Respaldo: Guías ---------------------------------------------- */
+
+const MAX_GUIAS = 6;
+
+/**
+ * La tienda manda (Carla, 2026-10-21): solo cuando ninguna pieza ni categoría
+ * de la tienda responde se busca en el contenido de Guías — guías del blog,
+ * tipos y fichas con su texto ("decibeles" → Guía de lavavajillas).
+ */
+async function conRespaldoGuias(q: string, destinos: Destino[], hayPiezas: boolean): Promise<Destino[]> {
+  if (hayPiezas || destinos.some((d) => !esDeGuias(d))) return destinos;
+  const tokens = palabrasDe(q);
+  if (!tokens.length) return destinos;
+  let indice;
+  try {
+    indice = await indiceGuias();
+  } catch {
+    return destinos;
+  }
+  const vistos = new Set(destinos.map((d) => d.href));
+  const guias = indice
+    .filter((e) => !vistos.has(e.href) && coincide(tokens, `${e.titulo} ${e.visible} ${e.extendido}`))
+    // Primero lo que responde en el título, luego en el texto visible.
+    .map((e, i) => ({ e, i, nivel: coincide(tokens, e.titulo) ? 0 : coincide(tokens, e.visible) ? 1 : 2 }))
+    .sort((a, b) => a.nivel - b.nivel || a.i - b.i)
+    .slice(0, Math.max(0, MAX_GUIAS - destinos.length))
+    .map(({ e }) => ({
+      clase: e.extendido.length > 2000 ? "Guía" : "Guías",
+      titulo: e.titulo,
+      detalle: e.tag,
+      href: e.hrefDetalle && !coincide(tokens, `${e.titulo} ${e.visible}`) ? e.hrefDetalle : e.href,
+    }));
+  return [...destinos, ...guias];
+}
+
 /* ---------- Entrada ------------------------------------------------------- */
 
 export async function buscarCatalogo(consulta: string, pagina = 1): Promise<RespuestaBusqueda> {
@@ -246,15 +282,20 @@ export async function buscarCatalogo(consulta: string, pagina = 1): Promise<Resp
       sugerencia: marcaCompletada
         ? marcaCompletada.slice(consulta.trimStart().length) || null
         : sugerirDe(consulta, ordenados),
-      destinos,
+      destinos: await conRespaldoGuias(q, destinos, ordenados.length > 0),
     };
   } catch (error) {
     if (error instanceof ErrorShopify && error.clase === "sin-configurar") {
       // Sin token (desarrollo sin .env.local): el índice del CSV, como antes.
       const r = buscarIndice(q, pagina);
-      return { ...r, porPagina: POR_PAGINA, sugerencia: sugerirIndice(consulta), destinos };
+      return {
+        ...r,
+        porPagina: POR_PAGINA,
+        sugerencia: sugerirIndice(consulta),
+        destinos: await conRespaldoGuias(q, destinos, r.total > 0),
+      };
     }
     console.warn(`[buscar] Shopify no contestó la búsqueda "${q}":`, (error as Error).message);
-    return vacia(destinos);
+    return vacia(await conRespaldoGuias(q, destinos, false));
   }
 }

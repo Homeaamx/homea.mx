@@ -1,7 +1,7 @@
 "use client";
 
 // GuiaSearch — buscador de la sección Guías.
-//  • En el hub /guias: filtra entre TODAS las guías (título, resumen, etiqueta).
+//  • En el hub /guias: solo el índice global (abajo), sin nada propio.
 //  • En una categoría (Subcategoría 1, p.ej. Refrigeración): se pasa `topics`
 //    (las Subcategorías 2 / tipos de producto) además de las guías de esa
 //    categoría → la búsqueda queda ACOTADA a esa subcategoría y encuentra tanto
@@ -11,11 +11,16 @@
 //    encuentra; el resultado lleva a ESA tarjeta, cerrada o con su descripción
 //    extendida (DestinoBusqueda). Autocompletado en línea (ghost gris, Tab o →
 //    lo aceptan) con frases de la propia sección de 1 a 3 palabras.
+//  • Índice GLOBAL (Carla 2026-10-21): no es solo un buscador de guías, es de
+//    todo lo que vive en /guias — categorías, tipos de producto, fichas (con su
+//    detalle técnico) y el texto completo de cada guía. Se descarga de
+//    /api/buscar-guias la primera vez que se usa el buscador; en una categoría
+//    sus propios resultados van primero y después los del resto de Guías.
 // Los temas enlazan a su filtro PLP vía <CtaProducto> (sin 404); las guías a su ruta.
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type { GuideCardData } from "./GuideCard";
 import CtaProducto from "./CtaProducto";
 import { irADestino } from "./DestinoBusqueda";
@@ -28,7 +33,19 @@ const norm = (s: string) => Array.from(s, (c) => c.normalize("NFD")[0].toLowerCa
 const VACIAS = new Set(
   "a al con como de del e el en es la las lo los más mas o para por que se según segun sin su sus u un una y ya".split(" "),
 );
-const MAX_RESULTADOS = 8;
+const MAX_RESULTADOS = 10;
+
+// Índice global: una sola descarga por visita, compartida por todos los buscadores.
+let indiceGlobal: Promise<EntradaBusqueda[]> | null = null;
+function cargarIndiceGlobal(): Promise<EntradaBusqueda[]> {
+  indiceGlobal ??= fetch("/api/buscar-guias")
+    .then((r) => (r.ok ? (r.json() as Promise<EntradaBusqueda[]>) : []))
+    .catch(() => {
+      indiceGlobal = null; // se reintenta en el siguiente uso
+      return [];
+    });
+  return indiceGlobal;
+}
 
 interface Topic {
   nombre: string;
@@ -57,6 +74,13 @@ interface Resultado {
   extracto?: [string, string, string];
   href: string;
   tipo: "link" | "cta";
+}
+
+/** Singular aproximado (ya normalizado): -es tras consonante (cajones → cajon), si no -s. */
+function raiz(p: string): string {
+  if (p.length <= 4) return p;
+  if (/[rlnd]es$/.test(p)) return p.slice(0, -2);
+  return p.endsWith("s") ? p.slice(0, -1) : p;
 }
 
 /** Frases de 1–3 palabras de un texto que no empiezan ni terminan en palabra vacía. */
@@ -101,7 +125,9 @@ export default function GuiaSearch({
   scopeLabel = "Tema",
 }: Props) {
   const router = useRouter();
+  const pathname = usePathname();
   const [q, setQ] = useState("");
+  const [global, setGlobal] = useState<EntradaBusqueda[] | null>(null);
   const [open, setOpen] = useState(false);
   const [cursor, setCursor] = useState(-1);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -109,8 +135,37 @@ export default function GuiaSearch({
   const inputRef = useRef<HTMLInputElement>(null);
   const listaRef = useRef<HTMLUListElement>(null);
 
+  // El índice global se pide al primer uso (hover, foco o tecleo).
+  useEffect(() => {
+    if (!open || global) return;
+    let vivo = true;
+    cargarIndiceGlobal().then((idx) => vivo && setGlobal(idx));
+    return () => {
+      vivo = false;
+    };
+  }, [open, global]);
+
+  // Entradas del índice global que no repiten las fichas de la página; lo que
+  // vive en esta misma página se vuelve ancla (#…) para centrarlo sin recargar.
+  // Las guías de la página se toman del global (traen su texto completo) y se
+  // marcan `propia` para que conserven su lugar antes del resto de Guías.
+  const resto = useMemo(() => {
+    if (!global) return [];
+    const propio = (h: string) => (h.startsWith("#") ? pathname + h : h);
+    const vistos = new Set(fichas.map((f) => propio(f.href)));
+    const deLaPagina = new Set(guias.map((g) => g.href));
+    return global
+      .filter((e) => !vistos.has(e.href) && e.href !== pathname)
+      .map((e) => ({
+        ...e,
+        href: e.href.startsWith(pathname + "#") ? e.href.slice(pathname.length) : e.href,
+        propia: deLaPagina.has(e.href),
+      }));
+  }, [global, fichas, guias, pathname]);
+
   const term = norm(q.trim()).replace(/\s+/g, " ");
-  const palabras = term ? term.split(" ") : [];
+  // Cada palabra por su raíz singular: "secadoras" encuentra "secadora" y "cajones", "cajón".
+  const palabras = term ? term.split(" ").map(raiz) : [];
 
   // Vocabulario de la sección para el autocompletado: los títulos pesan más.
   const vocab = useMemo(() => {
@@ -122,12 +177,17 @@ export default function GuiaSearch({
     }
     for (const t of topics) frases(t.nombre, 6, cuenta);
     for (const g of guias) frases(g.titulo, 2, cuenta);
+    for (const e of resto) {
+      frases(e.titulo, 4, cuenta);
+      frases(e.visible, 1, cuenta);
+      frases(e.extendido, 1, cuenta);
+    }
     // Frases de varias palabras que salen una sola vez son ruido.
     return [...cuenta.entries()]
       .filter(([k, e]) => !k.includes(" ") || e.n >= 2)
       .map(([k, e]) => ({ k, txt: e.txt, n: e.n }))
       .sort((a, b) => b.n - a.n || a.k.length - b.k.length);
-  }, [fichas, topics, guias]);
+  }, [fichas, topics, guias, resto]);
 
   // Ghost: completa lo último que se escribió (hasta 3 palabras) con la frase más
   // usada de la sección que empieza así.
@@ -148,16 +208,17 @@ export default function GuiaSearch({
     if (term.length < 2) return [];
     const todas = (h: string) => palabras.every((p) => h.includes(p));
     const out: (Resultado & { rango: number })[] = [];
-    fichas.forEach((f, i) => {
+    // Entradas con texto (tarjetas, fichas, guías): título > visible > extendido.
+    const buscar = (f: EntradaBusqueda, key: string, base: number) => {
       const tit = norm(f.titulo);
       const vis = norm(f.visible);
       const ext = norm(f.extendido);
       if (!todas(`${tit} ${vis} ${ext}`)) return;
       const enCerrada = todas(`${tit} ${vis}`);
-      const rango = tit.includes(term) ? 0 : enCerrada ? 1 : 2;
-      const fuente = rango === 0 ? undefined : vis.includes(palabras[0]) ? f.visible : f.extendido;
+      const rango = base + (tit.includes(palabras.join(" ")) ? 0 : enCerrada ? 1 : 2);
+      const fuente = rango === base ? undefined : vis.includes(palabras[0]) ? f.visible : f.extendido;
       out.push({
-        key: `f-${i}`,
+        key,
         tag: f.tag,
         titulo: f.titulo,
         extracto: fuente ? extracto(fuente, palabras[0]) : undefined,
@@ -165,20 +226,25 @@ export default function GuiaSearch({
         tipo: "link",
         rango,
       });
-    });
+    };
+    fichas.forEach((f, i) => buscar(f, `f-${i}`, 0));
     topics.forEach((t) => {
       if (todas(norm(t.nombre))) out.push({ key: `t-${t.filtro}`, tag: scopeLabel, titulo: t.nombre, href: t.filtro, tipo: "cta", rango: 0 });
     });
+    const enGlobal = new Set(resto.filter((e) => e.propia).map((e) => e.href));
     guias.forEach((g) => {
+      if (enGlobal.has(g.href)) return;
       if (todas(norm(`${g.titulo} ${g.resumen} ${g.etiqueta}`)))
         out.push({ key: `g-${g.href}`, tag: g.etiqueta, titulo: g.titulo, href: g.href, tipo: "link", rango: 3 });
     });
+    // Resto de Guías, después de lo propio de la página.
+    resto.forEach((e, i) => buscar(e, `r-${i}`, e.propia ? 3 : 10));
     return out
       .sort((a, b) => a.rango - b.rango)
       .slice(0, MAX_RESULTADOS)
       .map(({ rango: _, ...r }) => r);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [term, fichas, topics, guias, scopeLabel]);
+  }, [term, fichas, topics, guias, resto, scopeLabel]);
 
   const total = resultados.length;
 
@@ -326,7 +392,9 @@ export default function GuiaSearch({
       {showPanel && (
         <div className="guia-search-panel" ref={panelRef} role="listbox" aria-label="Resultados de búsqueda">
           {total === 0 ? (
-            <p className="guia-search-empty">Sin resultados para «{q.trim()}».</p>
+            <p className="guia-search-empty">
+              {global ? `Sin resultados para «${q.trim()}».` : "Buscando en Guías…"}
+            </p>
           ) : (
             <ul className="guia-search-results" ref={listaRef}>
               {resultados.map((r, i) => (

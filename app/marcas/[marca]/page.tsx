@@ -6,8 +6,9 @@
 // Dos canales (marca.canal, decisión de Carla 2026-09-21):
 //   - "shopify": hero y directo al catálogo con filtros (Shopify), sin bloque de
 //     categorías ni listas de precios (Carla, 2026-09-22).
-//   - "pdf": categorías + su PDF (catálogo o lista) y cotización. Sin listado ni
-//     filtros: la marca no se sube a Shopify, la página existe por SEO.
+//   - "pdf": solo el hero (su PDF en el botón) y el cierre "Conocer más sobre
+//     <marca>" hacia WhatsApp (Carla, 2026-10-21). Sin listado ni filtros: la
+//     marca no se sube a Shopify, la página existe por SEO.
 //
 // Sin foto o sin logo (marcas recién dadas de alta) el hero cae a fondo oscuro
 // con el nombre: nunca una imagen rota.
@@ -30,13 +31,11 @@ import JsonLd from "@/components/JsonLd";
 import WhatsAppCta from "@/components/WhatsAppCta";
 import { mensajeAsesoria } from "@/lib/whatsapp";
 import { anchoImagen, srcSet, SIZES_SANGRE } from "@/lib/imagenResponsiva";
-import { rutaListaPrecios } from "@/lib/listasPrecios";
 import {
   categoriasDeMarca,
   filtrosDeMarca,
   gamaDeMarca,
   heroDeMarca,
-  listasDeMarca,
   marcaPorSlug,
   rutaMarca,
   todasLasMarcas,
@@ -84,8 +83,6 @@ export default async function MarcaPage({ params }: Params) {
   const marca = marcaPorSlug(param);
   if (!marca) notFound();
 
-  const categorias = categoriasDeMarca(marca);
-  const listas = listasDeMarca(marca);
   const filtros = filtrosDeMarca(marca);
   const gama = gamaDeMarca(marca);
   const enPdf = marca.canal === "pdf";
@@ -107,13 +104,6 @@ export default async function MarcaPage({ params }: Params) {
       <style>{`
         .marca-logo{max-height:84px;max-width:min(300px,62vw);width:auto;object-fit:contain;display:block;
           margin-bottom:22px;filter:brightness(0) invert(1) drop-shadow(0 2px 10px rgba(0,0,0,.45))}
-        .marca-listas{margin:28px 0 0;padding:0;list-style:none;display:grid;gap:10px}
-        .marca-cats{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
-        .marca-asesoria-caja{max-width:640px}
-        .marca-asesoria-caja h2{margin:14px 0 0}
-        .marca-asesoria-caja p{margin:18px 0 32px;color:var(--fg-muted);font-weight:300;font-size:var(--fs-md);line-height:1.6}
-        .marca-asesoria-cats{margin-top:56px;padding-top:28px;border-top:1px solid var(--border)}
-        .marca-asesoria-cats .marca-cats{margin-top:14px}
       `}</style>
 
       <header
@@ -204,70 +194,6 @@ export default async function MarcaPage({ params }: Params) {
           )}
         </div>
       </header>
-
-      {/* Marcas "pdf": invitación a una asesoría por WhatsApp (el canal que cierra
-          el ticket alto), su PDF si ya está publicado y las categorías que cubre.
-          En las "shopify" el hero va directo al catálogo (Carla, 2026-09-22). */}
-      {enPdf && (
-        <section className="sec marca-asesoria">
-          <div className="container">
-            <div className="marca-asesoria-caja">
-              <div className="eyebrow">Asesoría especializada</div>
-              <h2>
-                Descubre <i>{marca.nombre}</i> con la guía de un experto
-              </h2>
-              <p>
-                Si quieres conocer más sobre {marca.nombre}, un asesor HOMEA te acompaña de forma personal:
-                te ayuda a elegir el modelo ideal, resolver medidas e instalación y te comparte el precio
-                vigente.
-              </p>
-              <WhatsAppCta
-                className="btn btn-primary"
-                label={`marca_${marca.slug}_asesoria`}
-                message={mensajeAsesoria(marca.nombre)}
-              >
-                Hablar con un asesor
-              </WhatsAppCta>
-              {listas.some((d) => d.url) && (
-                <ul className="marca-listas">
-                  {listas
-                    .filter((d) => d.url)
-                    .map((d) => (
-                      <li key={d.slug}>
-                        {/* URL permanente: sirve la edición vigente y no cambia
-                            entre años (app/listas-de-precios/[archivo]/route.ts). */}
-                        <a className="arrow-link" href={rutaListaPrecios(d)} target="_blank" rel="noopener">
-                          ⬇ {d.titulo} <span className="ln" />
-                          <span className="ar">→</span>
-                        </a>
-                        {d.vigencia && (
-                          <>
-                            {" "}
-                            <span className="dot-sep">·</span>{" "}
-                            <span className="caption">vigente {d.vigencia}</span>
-                          </>
-                        )}{" "}
-                        <span className="dot-sep">·</span> <span className="caption">PDF</span>
-                      </li>
-                    ))}
-                </ul>
-              )}
-            </div>
-            {categorias.length > 0 && (
-              <div className="marca-asesoria-cats">
-                <span className="caption">Categorías de {marca.nombre}</span>
-                <div className="marca-cats">
-                  {categorias.map((c) => (
-                    <Link className="btn btn-ghost" key={c.ruta} href={c.ruta}>
-                      {c.nombre}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
-      )}
 
       {/* Catálogo de la marca: mismo armazón (filtros + rejilla) que /productos.
           Solo marcas "shopify"; las "pdf" no tienen productos en Shopify. */}
@@ -370,14 +296,35 @@ export default async function MarcaPage({ params }: Params) {
         <div className="glow" />
         <div className="container">
           <div className="inner">
-            <div className="eyebrow eyebrow-bright">Showroom en Querétaro</div>
-            <h2>
-              Ve {marca.nombre} <i>en persona</i>.
-            </h2>
-            <Link className="btn btn-gold" href="/contacto">
-              Agenda una visita
-            </Link>
-            <p>Atención personal, sin call centers.</p>
+            {/* Marcas "pdf": después del hero solo este cierre, que lleva a un
+                experto por WhatsApp (Carla, 2026-10-21). */}
+            {enPdf ? (
+              <>
+                <div className="eyebrow eyebrow-bright">Conoce más sobre tus marcas favoritas</div>
+                <h2>
+                  Conocer más sobre <i>{marca.nombre}</i>.
+                </h2>
+                <WhatsAppCta
+                  className="btn btn-gold"
+                  label={`marca_${marca.slug}_asesoria`}
+                  message={mensajeAsesoria(marca.nombre)}
+                >
+                  Hablar con un experto
+                </WhatsAppCta>
+                <p>Atención personal. Sin call centers.</p>
+              </>
+            ) : (
+              <>
+                <div className="eyebrow eyebrow-bright">Showroom en Querétaro</div>
+                <h2>
+                  Ve {marca.nombre} <i>en persona</i>.
+                </h2>
+                <Link className="btn btn-gold" href="/contacto">
+                  Agenda una visita
+                </Link>
+                <p>Atención personal, sin call centers.</p>
+              </>
+            )}
           </div>
         </div>
       </section>
