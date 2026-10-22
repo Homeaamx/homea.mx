@@ -1138,6 +1138,18 @@
 @media (max-width: 720px) {
   .tfk-modal--ilus { grid-template-columns: 1fr; }
   .tfk-modal--ilus .tfk-modal-fig { padding: 44px 14px 16px; }
+  /* La X se perdía sobre la ilustración negra (Carla, 2026-10-21): botón
+     redondo claro que se queda arriba mientras se lee la ficha. El modal pasa a
+     bloque (una columna igual) para que `sticky` funcione; el margen negativo
+     evita que el botón empuje la ilustración. */
+  .tfk-modal--ilus { display: block; }
+  .tfk-modal--ilus .tfk-modal-x {
+    position: sticky; top: 10px; z-index: 6;
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; margin: 10px 10px -50px auto; padding: 0 0 3px;
+    border-radius: 50%; background: var(--homea-bone); color: var(--homea-black);
+    font-size: 28px; box-shadow: 0 2px 10px rgba(0, 0, 0, .35);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .ilus, .ilus-puerta, .ilus-cajon, .ilus-canasta, .ilus-apagado, .ilus-tag { transition: none; }
