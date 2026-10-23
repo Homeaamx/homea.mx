@@ -216,6 +216,8 @@ export interface ProductoVivo {
   instalacion: { url: string; nombre: string }[];
   /** Bajo pedido (sigue vendiendo sin inventario) o En stock. */
   enStock: boolean;
+  /** Piezas disponibles en el inventario de Shopify (solo si está En stock y hay dato). */
+  piezas: number | null;
 }
 
 function lista(valor: string): string[] {
@@ -292,6 +294,15 @@ function normalizar(raw: ProductoRaw): ProductoVivo | null {
   const instalacion = archivos(raw.instalacion);
   const mxn = Number.parseFloat(v.price.amount);
   const comparar = v.compareAtPrice ? Number.parseFloat(v.compareAtPrice.amount) : null;
+  // Promoción = el descuento que trae la pieza (precio vs. tachado), redondeado a
+  // múltiplos de 5: Thermador con 10% cae en "10%". Manda sobre filtros.promocion
+  // (Carla, 2026-10-22: sin "Outlet"; cada pieza va en el % que tiene asignado).
+  if (comparar && comparar > mxn) {
+    const pct = Math.round(((1 - mxn / comparar) * 100) / 5) * 5;
+    if (pct >= 5) filtros.promocion = [`${pct}%`];
+    else delete filtros.promocion;
+  } else delete filtros.promocion;
+  const enStock = (filtros.disponibilidad ?? []).includes("En stock");
   return {
     sku: v.sku,
     slug: v.sku.toLowerCase(),
@@ -317,7 +328,8 @@ function normalizar(raw: ProductoRaw): ProductoVivo | null {
     empaque,
     fichas,
     instalacion,
-    enStock: (filtros.disponibilidad ?? []).includes("En stock"),
+    enStock,
+    piezas: enStock && typeof v.quantityAvailable === "number" && v.quantityAvailable > 0 ? v.quantityAvailable : null,
   };
 }
 

@@ -3324,3 +3324,15 @@ body:has([data-newsletter="ofertas"]) .site-footer:has(> .f-news) { padding-top:
   .f-news-form { grid-template-columns: 1fr; }
   .f-news-form button { padding: 14px 20px; }
 }
+
+/* ---------- 2026-10-22: disponibilidad con ícono y piezas en stock (Carla) ----------
+   "En stock" en dorado intenso, más notorio que el oro de texto: #94700F da 4.5:1
+   con blanco (legible en 10–11px). Ícono: palomita en círculo (stock) y reloj
+   (bajo pedido). Junto a la etiqueta, cuántas piezas quedan según el inventario. */
+:root { --homea-gold-stock: #94700F; }
+.pcard-tag { display: inline-flex; align-items: center; gap: 6px; }
+.pcard-tag-ic { width: 13px; height: 13px; flex: none; margin: -2px 0 -2px -1px; }
+.pcard-tag.is-stock { background: var(--homea-gold-stock); border-color: var(--homea-gold-stock); color: #fff; }
+.pcard-tag.is-stock .ic-check { stroke: var(--homea-gold-stock); }
+.pcard-disp { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; min-width: 0; }
+.pcard-piezas { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--homea-gold-stock); white-space: nowrap; }

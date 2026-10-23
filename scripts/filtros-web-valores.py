@@ -34,6 +34,13 @@ XLSX = Path(
 # Hojas con canal SHOPIFY (las "SOLO PDF" se ignoran).
 HOJAS = {"COCINA Y BAR", "EXTERIOR", "ELECTRODOMÉSTICOS MENORES", "LAVANDERÍA", "AIRE ACONDICIONADO"}
 NS = {"m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+# (subcategoría, clave) → [(insertar antes de, valor)] — valores añadidos en Shopify
+# después de la tabla de Carla.
+ADICIONALES = {
+    ("Lavandería", "tipo"): [("", "Accesorio de lavandería")],
+    ("Lavandería", "capacidad"): [("19 kg", "9 kg"), ("19 kg", "10 kg")],
+    ("Lavavajillas", "capacidad"): [("12", "10")],
+}
 # Valores que no son lista cerrada.
 SIN_LISTA = re.compile(r"^(depende del producto|min-max|—|-)?$", re.I)
 
@@ -99,6 +106,17 @@ def leer_tabla():
             nombre = str(f[5]).strip()
             crudo = (f[7] or "").strip()
             valores = [] if SIN_LISTA.match(crudo) else [v.strip() for v in crudo.split(";") if v.strip()]
+            # Promoción = % de descuento real de cada pieza (precio vs. tachado, lo
+            # calcula lib/shopify/catalogoVivo.ts); "Outlet" ya no existe (Carla, 2026-10-22).
+            if clave == "promocion":
+                valores = [v for v in valores if v.lower() != "outlet"]
+            # Valores que se agregaron en Shopify después de la tabla (Carla, 2026-10-22,
+            # carga de Bosch): se insertan en su lugar aunque la tabla no los traiga.
+            for (t_, c_), extra in ADICIONALES.items():
+                if t_ == tipo and c_ == clave:
+                    for antes, v in extra:
+                        if v not in valores:
+                            valores.insert(valores.index(antes) if antes in valores else len(valores), v)
             tabla.setdefault(tipo, []).append((orden, nombre, clave, valores))
     for tipo in tabla:
         tabla[tipo].sort(key=lambda x: x[0])

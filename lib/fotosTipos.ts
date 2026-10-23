@@ -135,8 +135,8 @@ export const FOTOS_TIPOS: Record<string, Record<string, FotoTipo>> = {
       alt: "Campana de isla piramidal suspendida del techo sobre una isla de cocina",
     },
     rectas: {
-      src: "/assets/photos/tipos/campana-recta-isla-acero-kuadra.webp",
-      alt: "Campana recta de isla en acero inoxidable, prisma continuo sin quiebres",
+      src: "/assets/photos/tipos/campana-recta-pared-90cm-acero-ge-profile.webp",
+      alt: "Campana recta de pared de 90 cm en acero inoxidable, frente liso",
     },
     "t-invertida": {
       src: "/assets/photos/tipos/campana-t-invertida-visera-ancha-acero.webp",

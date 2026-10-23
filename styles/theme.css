@@ -4381,9 +4381,25 @@ button.wl-wa { border: 0; cursor: pointer; }
    nombre "cot"), así nada se corta aunque el diálogo de impresión esté en
    "Márgenes: ninguno" (Chrome recuerda la última opción). */
 @page { size: A4 portrait; margin: 12mm; }
-@page cot { size: A4 portrait; margin: 12mm 0; }
+/* 2026-10-22 (Carla: la 2.ª hoja salía cortada arriba): TODO el margen va dentro
+   de la hoja y se repite en cada página (box-decoration-break: clone), así cada
+   hoja trae 14 mm arriba/abajo y 12 mm a los lados con cualquier opción de
+   "Márgenes" del diálogo (ninguno, predeterminado…). */
+@page cot { size: A4 portrait; margin: 0; }
 @media print {
-  .pc-modal, .cot-hoja { page: cot; padding: 0 12mm !important; box-sizing: border-box; }
+  /* Toda la página usa la hoja "cot": si solo la llevara la hoja, lo que viene
+     después (relleno de <main>) cambiaba de tipo de página y salía una hoja en blanco. */
+  body:has(.cot-hoja), body:has(> .pc-overlay) { page: cot; }
+  .pc-modal, .cot-hoja {
+    page: cot; padding: 14mm 12mm !important; box-sizing: border-box;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  }
+  /* Cortes de página limpios: el encabezado de la tabla se repite, ninguna
+     partida se parte y los totales viajan juntos con su nota. */
+  .pc-tabla thead { display: table-header-group; }
+  .pc-tabla tr, .pc-head, .pc-datos { break-inside: avoid; }
+  .pc-totales, .pc-nota { break-inside: avoid; }
+  .pc-nota { break-before: avoid; }
   html, body { background: #fff !important; width: auto; }
   .pc-modal, .cot-hoja { max-width: none; width: 100%; font-size: 11px; }
   .pc { font-size: 11px; }
@@ -4650,3 +4666,15 @@ body:has(:is([data-newsletter="ofertas"], [data-newsletter="guias"])) .site-foot
 @media print { .ck { display: none !important; } }
 /* Enlace "Preferencias de cookies" del footer: botón con aspecto de enlace. */
 .site-footer .lnk a[data-cookies-preferencias] { cursor: pointer; }
+
+/* ---------- 2026-10-22: disponibilidad con ícono y piezas en stock (Carla) ----------
+   "En stock" en dorado intenso, más notorio que el oro de texto: #94700F da 4.5:1
+   con blanco (legible en 10–11px). Ícono: palomita en círculo (stock) y reloj
+   (bajo pedido). Junto a la etiqueta, cuántas piezas quedan según el inventario. */
+:root { --homea-gold-stock: #94700F; }
+.pcard-tag { display: inline-flex; align-items: center; gap: 6px; }
+.pcard-tag-ic { width: 13px; height: 13px; flex: none; margin: -2px 0 -2px -1px; }
+.pcard-tag.is-stock { background: var(--homea-gold-stock); border-color: var(--homea-gold-stock); color: #fff; }
+.pcard-tag.is-stock .ic-check { stroke: var(--homea-gold-stock); }
+.pcard-disp { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; min-width: 0; }
+.pcard-piezas { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--homea-gold-stock); white-space: nowrap; }

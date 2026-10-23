@@ -117,7 +117,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -222,7 +221,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -314,7 +312,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -399,7 +396,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -519,7 +515,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -641,7 +636,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -731,7 +725,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -788,7 +781,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -920,7 +912,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -1023,7 +1014,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -1145,7 +1135,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -1232,7 +1221,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -1381,7 +1369,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -1482,7 +1469,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -1567,7 +1553,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -1624,7 +1609,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -1687,6 +1671,7 @@
         "nombre": "Servicios",
         "clave": "capacidad",
         "valores": [
+          "10",
           "12",
           "13",
           "14",
@@ -1750,7 +1735,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -1864,7 +1848,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -1947,7 +1930,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -2010,7 +1992,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -2062,7 +2043,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -2122,7 +2102,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -2173,7 +2152,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -2263,7 +2241,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -2355,7 +2332,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -2412,7 +2388,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -2490,7 +2465,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -2555,7 +2529,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -2635,7 +2608,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -2701,7 +2673,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -2773,7 +2744,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -2883,7 +2853,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -2953,7 +2922,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -2982,7 +2950,8 @@
           "Lavadoras",
           "Secadoras",
           "Lavasecadoras (2 en 1)",
-          "Centros de lavado"
+          "Centros de lavado",
+          "Accesorio de lavandería"
         ]
       },
       {
@@ -2997,6 +2966,8 @@
         "nombre": "Capacidad de carga",
         "clave": "capacidad",
         "valores": [
+          "9 kg",
+          "10 kg",
           "19 kg",
           "20 kg",
           "21 kg",
@@ -3044,7 +3015,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",
@@ -3140,7 +3110,6 @@
         "nombre": "Promoción",
         "clave": "promocion",
         "valores": [
-          "Outlet",
           "10%",
           "15%",
           "20%",

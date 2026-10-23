@@ -60,6 +60,24 @@ function srcsetCdn(url: string, maximo: number): string {
 const CORAZON =
   '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.9 13a4.8 4.8 0 0 1 0-6.8 4.7 4.7 0 0 1 6.7 0l.4.4.4-.4a4.7 4.7 0 0 1 6.7 0 4.8 4.8 0 0 1 0 6.8Z"/></svg>';
 
+/* Disponibilidad (Carla, 2026-10-22): ícono + texto. En stock = palomita en
+   círculo sobre dorado intenso; Bajo pedido = reloj. Las mismas figuras van en
+   public/wishlist.js. */
+const ICONO_STOCK =
+  '<svg class="pcard-tag-ic" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.2" fill="currentColor"/><path class="ic-check" d="m4.9 8.2 2.1 2.1 4.1-4.4" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const ICONO_PEDIDO =
+  '<svg class="pcard-tag-ic" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.6V8l2.4 1.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+/** Etiqueta En stock / Bajo pedido y, con inventario, cuántas piezas quedan. */
+function etiquetaDisponibilidad(p: ProductoVivo, clase = ""): string {
+  const extra = clase ? ` ${clase}` : "";
+  if (!p.enStock) return `<span class="pcard-tag${extra} is-pedido">${ICONO_PEDIDO}Bajo pedido</span>`;
+  const piezas = p.piezas
+    ? `<span class="pcard-piezas figures">${p.piezas === 1 ? "Queda 1 pieza" : `Quedan ${p.piezas} piezas`}</span>`
+    : "";
+  return `<span class="pcard-disp"><span class="pcard-tag${extra} is-stock">${ICONO_STOCK}En stock</span>${piezas}</span>`;
+}
+
 /* ---------- Logo de marca ------------------------------------------------- */
 
 const normMarca = (s: string) =>
@@ -202,9 +220,7 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
     : `<span class="ph" style="height:100%"><span class="ph-inner">${esc(p.tipo)}</span></span>`;
 
   const { nombre, serie } = nombreYSerie(p.titulo);
-  const stock = p.enStock
-    ? `<span class="pcard-tag is-stock">EN STOCK</span>`
-    : `<span class="pcard-tag is-pedido">Bajo pedido</span>`;
+  const stock = etiquetaDisponibilidad(p);
 
   // Solo lo que decide una compra, en este orden (Carla, 2026-10-06): marca y
   // línea · disponibilidad · nombre · modelo · precio tachado y precio final.
@@ -748,9 +764,7 @@ export function fichaHtml(
   const cabecera = logo
     ? `<img class="pdp-logo" src="${esc(logo)}" alt="${esc(p.marca)}" loading="eager" decoding="async">`
     : `<div class="eyebrow">${esc(p.marca)}</div>`;
-  const etiquetaStock = p.enStock
-    ? `<span class="pcard-tag pdp-tag is-stock">EN STOCK</span>`
-    : `<span class="pcard-tag pdp-tag is-pedido">Bajo pedido</span>`;
+  const etiquetaStock = etiquetaDisponibilidad(p, "pdp-tag");
   const descripcionLarga = p.descripcionHtml || p.descripcion
     ? `<div class="pdp-desc"><div class="eyebrow">Descripción</div>${
         p.descripcionHtml

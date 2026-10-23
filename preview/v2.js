@@ -922,11 +922,36 @@
       media: ["Media", "Marcas que ponen la tecnología a tu alcance: una compra inteligente que equilibra calidad y precio."],
       economica: ["Económica", "Marcas al mejor precio, con el rendimiento necesario para el día a día."]
     };
+    /* El riel vive junto a la vista visible: la plana (.brands-wrap) o la agrupada
+       (#brandsGrouped, que se vacía en cada render; por eso se vuelve a colocar). Al
+       final del contenedor: es absoluto y no debe romper .brand-group:first-child. */
+    function colocarPmRail() {
+      if (!pmRail) return;
+      var host = magicOn ? brandsGrouped : brandsWrap;
+      if (host && pmRail.parentNode !== host) { host.appendChild(pmRail); }
+      nivelarPmRail();
+    }
+    /* Con categorías, el "+" queda a la altura de la línea bajo el título del
+       primer grupo (Carla, 2026-10-22); en la vista plana arranca arriba, junto
+       a las marcas, como siempre. */
+    function nivelarPmRail() {
+      if (!pmRail) return;
+      pmRail.style.top = "";
+      if (!magicOn || pmRail.classList.contains("hide") || !brandsGrouped) return;
+      var h = brandsGrouped.querySelector(".brand-group-h");
+      var mas = pmRail.querySelector(".pm-plus");
+      if (!h || !mas) return;
+      var linea = h.getBoundingClientRect().bottom;
+      var m = mas.getBoundingClientRect();
+      pmRail.style.top = Math.round(linea - (m.top + m.height / 2)) + "px";
+    }
     function applyGama(filter, animate) {
       activeFilter = filter;
-      /* La nota de costo se mantiene también en MODO MAGIA (cada grupo se ordena por
-         costo); solo se oculta en "Todas". Los rieles A→Z / +→− sí se ocultan. */
-      if (gamaNote) { gamaNote.classList.toggle("hide", filter === "all"); }
+      /* La nota de costo va con cualquier gama y con "Organizar x categoría" (cada
+         grupo se ordena por costo, también en "Todas": Carla, 2026-10-22). Solo se
+         oculta en "Todas" sin categorías, que es alfabética (riel A→Z). */
+      var porCosto = filter !== "all" || magicOn;
+      if (gamaNote) { gamaNote.classList.toggle("hide", !porCosto); }
       /* Panel de descripción del rango: cambia de tono (data-gama) y de texto. */
       var gamaDesc = document.querySelector(".gama-desc");
       if (gamaDesc) {
@@ -938,10 +963,14 @@
       /* Con una búsqueda activa los rieles A→Z / +→− no dicen nada (quedan dos o tres
          marcas sueltas), así que se ocultan mientras se busca. */
       if (azRail) { azRail.classList.toggle("hide", magicOn || filter !== "all" || !!searchTerm); updateAzArrow(); }
-      if (pmRail) { pmRail.classList.toggle("hide", magicOn || filter === "all" || !!searchTerm); updatePmArrow(); }
+      /* El riel +→− (mayor a menor costo) también acompaña a "Organizar x categoría",
+         en todas las gamas y en "Todas" (Carla, 2026-10-22). */
+      if (pmRail) { pmRail.classList.toggle("hide", !porCosto || !!searchTerm); }
       if (brandsWrap) { brandsWrap.classList.toggle("hide", magicOn); }
       if (brandsGrouped) { brandsGrouped.classList.toggle("hide", !magicOn); }
       if (magicOn) { renderGrouped(filter, animate); } else { renderFlat(filter, animate); }
+      colocarPmRail();
+      updatePmArrow();
       updateSearchStatus();
     }
     /* Ráfaga de destellos oro que se esparcen sobre las marcas al activar MODO MAGIA. */
@@ -1003,6 +1032,8 @@
       };
       on(window, "scroll", onRailScroll, { passive: true });
       on(window, "resize", onRailScroll);
+      on(window, "resize", nivelarPmRail);
+      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(nivelarPmRail); }
       updateAzArrow(); updatePmArrow();
     }
     tabs.forEach(function (t) {
