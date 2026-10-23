@@ -27,9 +27,11 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 JSON = RAIZ / "data" / "filtros-web.json"
-XLSX = Path(
-    "/Users/carlaarteaga/Library/CloudStorage/OneDrive-Homea/HOMEA/PAGINA WEB/"
-    "PAGINA NUEVA 2026/FILTROS DE BUSQUEDA SHOPIFY 2026/FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx"
+_TABLA = "HOMEA/PAGINA WEB/PAGINA NUEVA 2026/FILTROS DE BUSQUEDA SHOPIFY 2026/FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx"
+# OneDrive renombra su carpeta al reiniciarse ("OneDrive-Homea", "OneDrive-Homea 2"…): la que exista.
+XLSX = next(
+    (r / _TABLA for r in sorted((Path.home() / "Library/CloudStorage").glob("OneDrive-Homea*"), reverse=True) if (r / _TABLA).exists()),
+    Path.home() / "Library/CloudStorage/OneDrive-Homea 2" / _TABLA,
 )
 # Hojas con canal SHOPIFY (las "SOLO PDF" se ignoran).
 HOJAS = {"COCINA Y BAR", "EXTERIOR", "ELECTRODOMÉSTICOS MENORES", "LAVANDERÍA", "AIRE ACONDICIONADO"}

@@ -187,6 +187,19 @@ con dos grupos extra: **Subcategoría** (Refrigeración · Cocción · Lavavajil
 
 Ver `lib/flags.ts` → `PLP_READY` y `CLAUDE.md` §3.
 
+### Logo en la ficha de producto: SIEMPRE sin fondo (regla de Carla, 2026-10-23)
+
+Toda marca de la tienda lleva en `/producto/<sku>` su logo **sin fondo** (nada de
+recuadro blanco o negro), recortado al trazo y alineado con la línea dorada.
+
+1. Conseguir el logo transparente o sobre blanco (OneDrive `DISEÑO 2026/Logos Marcas png`).
+   Si la marca solo lo tiene en blanco sobre oscuro, buscar la versión en negro o a color.
+2. `python3 scripts/logo-ficha.py <slug> <archivo>` → `public/assets/logos/ficha/<slug>.webp`.
+3. Darle su alto en `styles/theme.css` (`.pdp-logo[data-marca="<slug>"]`) para que pese
+   lo mismo que las demás (hoy: Bosch 35 px, Thermador 62 px con lema, Gaggenau 30 px).
+4. Revisar la ficha. Si falta el archivo, la ficha usa el de `logos/color/` (con fondo)
+   y el build lo avisa: `[catalogo] <marca>: falta su logo sin fondo`.
+
 ## Relacionado
 
 - `docs/PDFS-OXATIS-PENDIENTES.md` — las listas de precios que enlaza cada marca.

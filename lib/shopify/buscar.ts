@@ -22,6 +22,7 @@ import {
 } from "@/lib/catalogo";
 import { buscarDestinos, coincide, esDeGuias, palabrasDe, type Destino } from "@/lib/buscarDestinos";
 import { indiceGuias } from "@/lib/guiasIndice";
+import { imagenDeDestino } from "@/lib/imagenDestino";
 import { todasLasMarcas } from "@/lib/marcas";
 import { obtenerTipoCambio, type TipoCambio } from "@/lib/tipoCambio";
 
@@ -32,6 +33,41 @@ import { esImagenTecnica, nombreYSerie } from "./htmlCatalogo";
 
 /** Se traen de una vez hasta 6 páginas: el overlay pagina en memoria. */
 const MAX_RESULTADOS = POR_PAGINA * 6;
+
+/* Vista del overlay (Carla, 2026-10-23): sin scroll y sin saturar. Si la
+   búsqueda trae categorías, la primera página enseña 3 tarjetas de categoría y
+   4 piezas; si no, 6 piezas. Las páginas siguientes, siempre 6. */
+const MAX_TARJETAS = 3;
+const PIEZAS_CON_TARJETAS = 4;
+const PIEZAS_POR_PAGINA = 6;
+
+/** Orden de las tarjetas: la marca escrita tal cual, luego subcategorías y tipos,
+ *  luego la categoría grande, las demás marcas y al final Guías. */
+function tarjetas(q: string, destinos: Destino[]): Destino[] {
+  const plano = (t: string) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+  const rango = (d: Destino) => {
+    if (d.clase === "Marca" && plano(d.titulo) === plano(q)) return 0;
+    if (esDeGuias(d)) return 4;
+    if (d.clase === "Tipo" || (d.clase === "Categoría" && d.detalle !== "Ver la categoría en la tienda")) return 1;
+    if (d.clase === "Categoría") return 2;
+    return 3;
+  };
+  return destinos
+    .map((d, i) => ({ d, i, r: rango(d) }))
+    .sort((a, b) => a.r - b.r || a.i - b.i)
+    .slice(0, MAX_TARJETAS)
+    .map(({ d }) => ({ ...d, imagen: imagenDeDestino(d.href) }));
+}
+
+/** Página `n` de las piezas: la primera más corta cuando hay tarjetas. */
+function paginar<T>(lista: T[], pagina: number, conTarjetas: boolean) {
+  const primera = conTarjetas ? PIEZAS_CON_TARJETAS : PIEZAS_POR_PAGINA;
+  const paginas = lista.length <= primera ? 1 : 1 + Math.ceil((lista.length - primera) / PIEZAS_POR_PAGINA);
+  const actual = Math.min(Math.max(1, Math.trunc(pagina) || 1), paginas);
+  const tam = actual === 1 ? primera : PIEZAS_POR_PAGINA;
+  const desde = actual === 1 ? 0 : primera + (actual - 2) * PIEZAS_POR_PAGINA;
+  return { paginas, actual, porPagina: tam, items: lista.slice(desde, desde + tam) };
+}
 
 export interface RespuestaBusqueda extends Pagina {
   /** SOLO el tramo que falta para completar lo tecleado ("gagg" → "enau"). */
@@ -95,6 +131,7 @@ function resultado(p: ProductoVivo, tc: TipoCambio): ResultadoBusqueda {
     ficha: `/producto/${p.slug}`,
     precio: dinero(precio.venta),
     moneda: precio.moneda,
+    enStock: p.enStock,
   };
 }
 
@@ -270,19 +307,18 @@ export async function buscarCatalogo(consulta: string, pagina = 1): Promise<Resp
       }
     }
     const ordenados = ordenar(productos, q);
-    const paginas = Math.max(1, Math.ceil(ordenados.length / POR_PAGINA));
-    const actual = Math.min(Math.max(1, Math.trunc(pagina) || 1), paginas);
-    const desde = (actual - 1) * POR_PAGINA;
+    const lugares = tarjetas(q, await conRespaldoGuias(q, destinos, ordenados.length > 0));
+    const { paginas, actual, porPagina, items } = paginar(ordenados, pagina, lugares.length > 0);
     return {
       total,
       pagina: actual,
       paginas,
-      porPagina: POR_PAGINA,
-      resultados: ordenados.slice(desde, desde + POR_PAGINA).map((p) => resultado(p, tc)),
+      porPagina,
+      resultados: items.map((p) => resultado(p, tc)),
       sugerencia: marcaCompletada
         ? marcaCompletada.slice(consulta.trimStart().length) || null
         : sugerirDe(consulta, ordenados),
-      destinos: await conRespaldoGuias(q, destinos, ordenados.length > 0),
+      destinos: lugares,
     };
   } catch (error) {
     if (error instanceof ErrorShopify && error.clase === "sin-configurar") {
@@ -292,10 +328,10 @@ export async function buscarCatalogo(consulta: string, pagina = 1): Promise<Resp
         ...r,
         porPagina: POR_PAGINA,
         sugerencia: sugerirIndice(consulta),
-        destinos: await conRespaldoGuias(q, destinos, r.total > 0),
+        destinos: tarjetas(q, await conRespaldoGuias(q, destinos, r.total > 0)),
       };
     }
     console.warn(`[buscar] Shopify no contestó la búsqueda "${q}":`, (error as Error).message);
-    return vacia(await conRespaldoGuias(q, destinos, false));
+    return vacia(tarjetas(q, await conRespaldoGuias(q, destinos, false)));
   }
 }

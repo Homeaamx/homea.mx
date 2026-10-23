@@ -835,6 +835,19 @@
         ]
       },
       {
+        "nombre": "Número de quemadores",
+        "clave": "quemadores",
+        "valores": [
+          "1 quemador",
+          "2 quemadores",
+          "3 quemadores",
+          "4 quemadores",
+          "5 quemadores",
+          "6 quemadores",
+          "8 quemadores"
+        ]
+      },
+      {
         "nombre": "Configuración de cubierta",
         "clave": "cubierta",
         "valores": [
@@ -953,6 +966,27 @@
           "Submontar",
           "Invisible",
           "Modulares"
+        ]
+      },
+      {
+        "nombre": "Número de quemadores",
+        "clave": "quemadores",
+        "valores": [
+          "1 quemador",
+          "2 quemadores",
+          "3 quemadores",
+          "4 quemadores",
+          "5 quemadores",
+          "6 quemadores",
+          "8 quemadores"
+        ]
+      },
+      {
+        "nombre": "Acabado del quemador",
+        "clave": "acabado_quemador",
+        "valores": [
+          "Latón",
+          "Negro"
         ]
       },
       {

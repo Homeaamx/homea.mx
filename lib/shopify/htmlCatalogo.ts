@@ -60,6 +60,8 @@ function srcsetCdn(url: string, maximo: number): string {
 const CORAZON =
   '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.9 13a4.8 4.8 0 0 1 0-6.8 4.7 4.7 0 0 1 6.7 0l.4.4.4-.4a4.7 4.7 0 0 1 6.7 0 4.8 4.8 0 0 1 0 6.8Z"/></svg>';
 
+const MAS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
+
 /* Disponibilidad (Carla, 2026-10-22): ícono + texto. En stock = palomita en
    círculo sobre dorado intenso; Bajo pedido = reloj. Las mismas figuras van en
    public/wishlist.js. */
@@ -84,22 +86,35 @@ const normMarca = (s: string) =>
   s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, "");
 
 /**
- * Logo original (a color) de la marca para la cabecera de la ficha:
- * public/assets/logos/color/<slug>.* — los mismos del directorio de garantías.
- * Los de /assets/logos/<slug>.webp son blancos (van sobre foto) y no sirven aquí.
+ * Logo original (a color) de la marca para la cabecera de la ficha.
+ *
+ * REGLA (Carla, 2026-10-23): en la ficha toda marca de la tienda va SIN FONDO.
+ * El logo sale de public/assets/logos/ficha/<slug>.webp, recortado al trazo
+ * (lo genera scripts/logo-ficha.py) y con su alto en styles/theme.css
+ * (.pdp-logo[data-marca="<slug>"]). Mientras una marca no lo tenga se usa el de
+ * public/assets/logos/color/<slug>.* (directorio de garantías, con fondo) y el
+ * build avisa en consola. Los de /assets/logos/<slug>.webp son blancos (van
+ * sobre foto) y no sirven aquí.
  */
-function logoDeMarca(vendor: string): string | null {
+const avisadosSinFicha = new Set<string>();
+function logoDeMarca(vendor: string): { ruta: string; slug: string; sinFondo: boolean } | null {
   type MarcaMin = { slug: string; nombre: string };
   const crudo = marcasJson as unknown as MarcaMin[] | { marcas: MarcaMin[] };
   const lista: MarcaMin[] = Array.isArray(crudo) ? crudo : (crudo.marcas ?? []);
   const n = normMarca(vendor);
   const m = lista.find((x) => normMarca(x.nombre) === n || normMarca(x.slug) === n);
   const slug = m?.slug ?? vendor.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  for (const ext of ["webp", "png", "jpg", "svg"]) {
-    const ruta = `/assets/logos/color/${slug}.${ext}`;
-    if (existsSync(join(process.cwd(), "public", ruta))) return ruta;
+  const candidatas = [
+    `/assets/logos/ficha/${slug}.webp`,
+    ...["webp", "png", "jpg", "svg"].map((ext) => `/assets/logos/color/${slug}.${ext}`),
+  ];
+  const ruta = candidatas.find((r) => existsSync(join(process.cwd(), "public", r)));
+  const sinFondo = ruta === candidatas[0];
+  if (!sinFondo && !avisadosSinFicha.has(slug)) {
+    avisadosSinFicha.add(slug);
+    console.warn(`[catalogo] ${vendor}: falta su logo sin fondo (python3 scripts/logo-ficha.py ${slug} <archivo>)`);
   }
-  return null;
+  return ruta ? { ruta, slug, sinFondo } : null;
 }
 
 /* ---------- Definición de filtros por tipo -------------------------------- */
@@ -229,13 +244,22 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
   return `<a class="pcard" href="${href}" ${atributos.join(" ")} data-accion="${decision.accion}">
   <div class="imgw cutout">${imagen}</div>
   <div class="body">
-    <div class="pcard-top">${stock}<button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(spec.join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${img ? esc(cdn(img.url, 400)) : ""}" data-wl-href="${href}" data-wl-tipo="${esc(p.tipo)}" data-wl-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-wl-stock="${p.enStock ? 1 : 0}" data-wl-was="${precio.tachado ? esc(`$${dinero(precio.tachado)} ${precio.moneda}`) : ""}" data-wl-mxn="${precio.mxnEquivalente ?? precio.venta}" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button></div>
+    <div class="pcard-top">${stock}<span class="pcard-acc">${botonAgregarTarjeta(p, precio, img)}<button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(spec.join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${img ? esc(cdn(img.url, 400)) : ""}" data-wl-href="${href}" data-wl-tipo="${esc(p.tipo)}" data-wl-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-wl-stock="${p.enStock ? 1 : 0}" data-wl-was="${precio.tachado ? esc(`$${dinero(precio.tachado)} ${precio.moneda}`) : ""}" data-wl-mxn="${precio.mxnEquivalente ?? precio.venta}" data-tip="Agregar a mi Wishlist" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button></span></div>
     <div class="pcard-head"><span class="brand">${esc(p.marca)}</span>${serie ? `<span class="pcard-serie">${esc(serie)}</span>` : ""}</div>
     <h3 class="pcard-name">${esc(nombre)}</h3>
     <span class="pcard-sku figures">${esc(p.sku)}</span>
     ${precioTarjeta(precio)}
   </div>
 </a>`;
+}
+
+/**
+ * "+" de la tarjeta (Carla, 2026-10-23): agrega una pieza a Mi proyecto sin
+ * entrar a la ficha; el texto "Agregar a Mi Proyecto" sale al pasar el cursor
+ * (.pcard-add::after). Lo atiende el mismo .cart-add de CarritoProvider.
+ */
+function botonAgregarTarjeta(p: ProductoVivo, precio: PrecioPublico, img: ProductoVivo["imagenes"][number] | undefined): string {
+  return `<button class="cart-add pcard-add" type="button" data-tip="Agregar a Mi Proyecto" aria-label="Agregar a Mi Proyecto" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${img ? esc(cdn(img.url, 400)) : ""}" data-cart-href="/producto/${p.slug}">${MAS}</button>`;
 }
 
 /** Orden por defecto: equipos antes que accesorios; dentro, de mayor a menor precio. */
@@ -564,7 +588,7 @@ export function ctaHtml(p: ProductoVivo, decision: Decision, precio: PrecioPubli
   // Al cerrar, el proyecto va al pago de Shopify si cada pieza cumple la regla
   // (marca + monto + stock); si alguna se cotiza, el proyecto completo se manda
   // como cotización por WhatsApp. La regla se vuelve a evaluar en el servidor.
-  const agregar = `<button class="btn btn-primary cart-add" type="button" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(numericId)}" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${p.imagenes[0] ? esc(cdn(p.imagenes[0].url, 400)) : ""}" data-cart-href="/producto/${p.slug}">Agregar a mi proyecto</button>`;
+  const agregar = `<button class="btn btn-primary cart-add" type="button" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(numericId)}" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${p.imagenes[0] ? esc(cdn(p.imagenes[0].url, 400)) : ""}" data-cart-href="/producto/${p.slug}">Agregar a Mi Proyecto</button>`;
   let nota: string;
   if (decision.accion === "comprar") {
     nota = p.enStock
@@ -617,6 +641,8 @@ const NOMBRES_FILTRO: Record<string, string> = {
   tipo: "Tipo",
   compatible: "Compatible con",
   tipo_gas: "Tipo de gas",
+  quemadores: "Número de quemadores",
+  acabado_quemador: "Acabado del quemador",
   cubierta: "Configuración de cubierta",
   hornos: "Número de hornos",
   horneado: "Tipo de horneado",
@@ -762,7 +788,7 @@ export function fichaHtml(
 
   const logo = logoDeMarca(p.marca);
   const cabecera = logo
-    ? `<img class="pdp-logo" src="${esc(logo)}" alt="${esc(p.marca)}" loading="eager" decoding="async">`
+    ? `<img class="pdp-logo${logo.sinFondo ? " is-sin-fondo" : ""}" data-marca="${esc(logo.slug)}" src="${esc(logo.ruta)}" alt="${esc(p.marca)}" loading="eager" decoding="async">`
     : `<div class="eyebrow">${esc(p.marca)}</div>`;
   const etiquetaStock = etiquetaDisponibilidad(p, "pdp-tag");
   const descripcionLarga = p.descripcionHtml || p.descripcion
@@ -833,19 +859,23 @@ ${relacionados.productos.map((r, i) => tarjetaHtml(r, tc, i)).join("\n")}
 </div></section>`
     : "";
 
+  // Corazón de wishlist a la derecha del logo, a la altura de la marca
+  // (Carla, 2026-10-23); antes iba sobre la foto.
+  const corazonFicha = `<button class="wl-heart pdp-wl" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(lineaSpec(p).join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${principal ? esc(cdn(principal.url, 400)) : ""}" data-wl-href="${href}" data-wl-tipo="${esc(p.tipo)}" data-wl-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-wl-stock="${p.enStock ? 1 : 0}" data-wl-was="${precio.tachado ? esc(`$${dinero(precio.tachado)} ${precio.moneda}`) : ""}" data-wl-mxn="${precio.mxnEquivalente ?? precio.venta}" data-tip="Agregar a mi Wishlist" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button>`;
+
   return `<section class="sec tight" style="padding-top:40px"><div class="container">
   <div class="crumbs" style="font-size:12px;color:var(--fg-muted);margin-bottom:36px">${migas}</div>
 
   <div class="pdp">
     <div class="gallery">
       <div class="gallery-sticky">
-      <div class="pdp-stage"><div class="main pdp-cutout" data-pdp-zoom role="button" tabindex="0" aria-label="Ampliar imagen"><button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(lineaSpec(p).join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${principal ? esc(cdn(principal.url, 400)) : ""}" data-wl-href="${href}" data-wl-tipo="${esc(p.tipo)}" data-wl-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-wl-stock="${p.enStock ? 1 : 0}" data-wl-was="${precio.tachado ? esc(`$${dinero(precio.tachado)} ${precio.moneda}`) : ""}" data-wl-mxn="${precio.mxnEquivalente ?? precio.venta}" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button>${imagenPrincipal}</div>${flechasGaleria}</div>
+      <div class="pdp-stage"><div class="main pdp-cutout" data-pdp-zoom role="button" tabindex="0" aria-label="Ampliar imagen">${imagenPrincipal}</div>${flechasGaleria}</div>
       ${miniaturas}
       </div>
       ${pestanasHtml(p, spec)}
     </div>
     <div class="info">
-      ${cabecera}
+      <div class="pdp-cabecera">${cabecera}${corazonFicha}</div>
       <span class="rule-gold"></span>
       <div class="pdp-titulo"><h1>${tituloH1(p.titulo)}</h1>${etiquetaStock}</div>
       ${serieYModeloHtml(p)}

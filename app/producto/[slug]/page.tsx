@@ -22,7 +22,8 @@ import { obtenerTipoCambio } from "@/lib/tipoCambio";
 // ISR — una hora: la ficha trae precio y tipo de cambio vivos.
 export const revalidate = 3600;
 // Dos orígenes de ficha:
-//   1. Las 5 del piloto, con su HTML curado del preview (producto-<slug>.html).
+//   1. Las fichas del piloto que siguen vigentes, con su HTML curado del preview
+//      (producto-<slug>.html; las retiradas viven en preview/_retirados/).
 //   2. Cualquier producto publicado en Shopify (canal Headless): la ficha se arma
 //      con sus datos (lib/shopify/htmlCatalogo.ts). Las que no se generaron en el
 //      build se crean al primer visitante y quedan en caché (ISR on-demand), que
@@ -44,8 +45,9 @@ export async function generateStaticParams(): Promise<Params[]> {
 /** El slug de la ficha ES el SKU en minúsculas (scripts/build-search-index.mjs). */
 const skuDeSlug = (slug: string) => slug.toUpperCase();
 
-/** Un slug válido es un modelo: letras, números y guiones. Lo demás ni se consulta. */
-const slugValido = (slug: string) => /^[a-z0-9-]{3,40}$/.test(slug);
+/** Un slug válido es un modelo: letras, números, guiones y puntos (Pitt Cooking:
+ *  52.01.04.112). Lo demás ni se consulta. */
+const slugValido = (slug: string) => /^[a-z0-9][a-z0-9.-]{2,39}$/.test(slug);
 
 /** El gancho de una línea de la ficha; sirve de descripción en metadatos y JSON-LD. */
 function ganchoDeFicha(file: string): string | null {

@@ -48,6 +48,8 @@ export interface ResultadoBusqueda {
   /** Precio CON IVA ya formateado, p. ej. "$12,884.67". */
   precio: string;
   moneda: "USD" | "MXN";
+  /** Pieza en inventario físico (filtros.disponibilidad = En stock); el índice local no lo sabe. */
+  enStock?: boolean;
 }
 
 export const IVA = 0.16;

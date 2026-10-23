@@ -30,6 +30,8 @@ export interface Destino {
   /** Contexto: dónde vive ("Cocina y Bar · Refrigeración") o "Catálogo en PDF". */
   detalle: string;
   href: string;
+  /** Foto o logo de la tarjeta del buscador (lib/imagenDestino.ts); null si no hay. */
+  imagen?: string | null;
 }
 
 /* ---------- Coincidencia -------------------------------------------------- */

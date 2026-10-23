@@ -3031,6 +3031,148 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
   .bsc-pie { padding: 10px 16px; justify-content: flex-end; }
 }
 
+/* ---------- Buscador 2026-10-23 (Carla): tarjetas, texto más grande, sin scroll ----------
+   Hasta 3 categorías con foto arriba y las piezas en tarjetas de 2 columnas
+   (4 si hay categorías, 6 si no; lo decide lib/shopify/buscar.ts). El panel
+   crece hasta su contenido: en escritorio no hay barra de scroll. */
+.bsc-panel { width: min(1120px, 100%); max-height: calc(100vh - 48px); }
+.bsc-scrim { padding-top: clamp(24px, 5vh, 64px); }
+.bsc-bar { padding: 26px 64px 24px 32px; }
+.bsc-input, .bsc-ghost { font-size: clamp(22px, 2.8vw, 32px); }
+.bsc-body { overflow-y: auto; }
+.bsc-lista { display: block; padding: 8px 32px 24px; }
+.bsc-sec + .bsc-sec { margin-top: 8px; border-top: 1px solid var(--border); }
+.bsc-sec-tit {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  margin: 0; padding: 18px 2px 14px;
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--fg-muted);
+}
+.bsc-sec-num { font-weight: 500; letter-spacing: .16em; }
+
+/* Tarjeta base: superficie blanca, filo fino, hover greige con borde dorado. */
+.bsc-row {
+  border: 1px solid var(--border); border-left-width: 1px; background: var(--homea-white);
+  transition: background-color var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard),
+              transform var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard);
+}
+.bsc-row:hover, .bsc-row.is-cursor {
+  background: var(--homea-white); border-color: var(--homea-gold); border-bottom-color: var(--homea-gold);
+  box-shadow: var(--shadow-sm); transform: translateY(-2px);
+}
+
+/* Categorías sugeridas */
+.bsc-cats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.bsc-cat {
+  display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; align-items: center; gap: 16px;
+  padding: 12px 18px 12px 12px; min-height: 96px;
+}
+.bsc-cat-img {
+  width: 96px; height: 72px; display: grid; place-items: center; overflow: hidden;
+  background: var(--homea-greige);
+}
+.bsc-cat-img img { width: 100%; height: 100%; object-fit: cover; }
+.bsc-cat-img.is-logo { background: var(--homea-white); }
+.bsc-cat-img.is-logo img { object-fit: contain; padding: 10px; }
+.bsc-cat-txt { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.bsc-cat-tit {
+  font-family: var(--font-display); font-size: 20px; line-height: 1.2; color: var(--fg);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.bsc-ir { font-size: 18px; transition: transform var(--dur-fast) var(--ease-standard); }
+.bsc-cat:hover .bsc-ir, .bsc-cat.is-cursor .bsc-ir { transform: translateX(4px); }
+
+/* Productos */
+.bsc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.bsc-card {
+  display: grid; grid-template-columns: 128px minmax(0, 1fr) auto; align-items: center; gap: 20px;
+  padding: 14px 20px 14px 14px; min-height: 156px;
+}
+.bsc-card .bsc-thumb { width: 128px; height: 128px; border: 0; background: var(--homea-greige); }
+.bsc-card .bsc-thumb img { padding: 10px; }
+.bsc-card .bsc-datos { gap: 6px; min-height: 0; }
+.bsc-card .bsc-marca { font-size: 11px; letter-spacing: .2em; }
+.bsc-card .bsc-nombre { font-size: 19px; line-height: 1.25; -webkit-line-clamp: 3; }
+.bsc-card .bsc-sku { font-size: 11.5px; letter-spacing: .12em; margin-top: 2px; }
+.bsc-card .bsc-precio { gap: 3px; align-self: center; }
+.bsc-card .bsc-moneda { font-size: 10.5px; }
+.bsc-card .bsc-cifra { font-size: 20px; font-weight: 600; letter-spacing: -.01em; }
+.bsc-card .bsc-iva { font-size: 9.5px; letter-spacing: .14em; }
+.bsc-row--hueco { border-color: transparent; background: none; box-shadow: none; }
+.bsc-disp {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 10px;
+  padding: 5px 10px; font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: .02em;
+}
+.bsc-disp::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.bsc-disp.is-stock { color: var(--homea-gold-stock); background: rgba(148, 112, 15, .1); }
+.bsc-disp.is-pedido { color: var(--homea-gold-text); background: var(--homea-n100); }
+
+/* Pie: mismas flechas de página, un poco más grandes. */
+.bsc-pie { padding: 14px 32px; }
+.bsc-pg { width: 34px; height: 34px; }
+.bsc-pg-num { font-size: 12px; }
+
+@media (max-width: 760px) {
+  .bsc-cats { grid-template-columns: 1fr; gap: 10px; }
+  .bsc-cat { min-height: 0; grid-template-columns: 72px minmax(0, 1fr) auto; }
+  .bsc-cat-img { width: 72px; height: 56px; }
+  .bsc-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 620px) {
+  .bsc-lista { padding: 4px 14px 16px; }
+  .bsc-card { grid-template-columns: 84px minmax(0, 1fr) auto; gap: 12px; padding: 10px 12px 10px 10px; min-height: 0; }
+  .bsc-card .bsc-thumb { width: 84px; height: 84px; }
+  .bsc-card .bsc-nombre { font-size: 16px; }
+  .bsc-card .bsc-cifra { font-size: 16px; }
+  .bsc-cat-tit { font-size: 17px; }
+  .bsc-disp { margin-top: 6px; font-size: 10px; padding: 3px 8px; }
+}
+@media (prefers-reduced-motion: reduce) { .bsc-row, .bsc-ir { transition: none; } .bsc-row:hover { transform: none; } }
+
+/* Todo cabe sin scroll (Carla, 2026-10-23, laptop de ~600 px de alto): el alto de
+   cada tarjeta sale del alto de la ventana — 3 filas de piezas + barra, títulos
+   de sección y pie — y la foto se ajusta a ese alto. En pantallas bajas el texto
+   se compacta y el nombre va en 2 renglones. */
+@media (min-width: 621px) {
+  .bsc-panel { --bsc-card: clamp(92px, calc((100vh - 256px) / 3), 156px); }
+  .bsc-card {
+    height: var(--bsc-card); min-height: 0;
+    grid-template-columns: calc(var(--bsc-card) - 24px) minmax(0, 1fr) auto;
+    padding-top: 10px; padding-bottom: 10px;
+  }
+  .bsc-card .bsc-thumb { width: calc(var(--bsc-card) - 24px); height: calc(var(--bsc-card) - 24px); }
+}
+@media (min-width: 621px) and (max-height: 860px) {
+  .bsc-scrim { padding-top: 16px; padding-bottom: 16px; }
+  .bsc-panel { max-height: calc(100vh - 32px); }
+  .bsc-bar { padding: 16px 58px 14px 28px; }
+  .bsc-input, .bsc-ghost { font-size: 24px; }
+  .bsc-lista { padding: 2px 28px 14px; }
+  .bsc-sec-tit { padding: 12px 2px 10px; }
+  .bsc-sec + .bsc-sec { margin-top: 4px; }
+  .bsc-cats, .bsc-grid { gap: 10px; }
+  .bsc-cat { min-height: 0; padding: 8px 14px 8px 8px; grid-template-columns: 72px minmax(0, 1fr) auto; }
+  .bsc-cat-img { width: 72px; height: 54px; }
+  .bsc-cat-tit { font-size: 17px; }
+  .bsc-card { gap: 16px; }
+  .bsc-card .bsc-datos { gap: 3px; }
+  .bsc-card .bsc-marca { font-size: 10px; letter-spacing: .18em; }
+  .bsc-card .bsc-nombre { font-size: 16.5px; -webkit-line-clamp: 2; }
+  .bsc-card .bsc-sku { font-size: 10.5px; margin-top: 0; }
+  .bsc-card .bsc-cifra { font-size: 17px; }
+  .bsc-card .bsc-precio { gap: 1px; }
+  .bsc-disp { margin-top: 6px; padding: 3px 8px; font-size: 10px; }
+  .bsc-pie { padding: 8px 28px; }
+  .bsc-pg { width: 30px; height: 30px; }
+}
+@media (min-width: 621px) and (max-height: 680px) {
+  .bsc-bar { padding: 12px 58px 10px 24px; }
+  .bsc-input, .bsc-ghost { font-size: 21px; }
+  .bsc-card .bsc-nombre { font-size: 15px; }
+  .bsc-card .bsc-cifra { font-size: 15.5px; }
+  .bsc-disp { margin-top: 4px; }
+}
+
 /* ---------- Fondos diferidos (ver scripts/lazy-backgrounds.mjs) ----------
    La URL vive en --lazy-bg y solo se pide cuando v2.js marca el elemento como
    visible. Sin esta regla el navegador descargaría todo el carrusel de marcas
@@ -3742,6 +3884,16 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 
 /* ---------- Ficha 2026-10-08: logo +30 %, pestañas sin desborde, documentos iguales ---------- */
 .pdp-logo { height: 66px; max-width: 364px; }
+/* 2026-10-23: logos sin fondo (public/assets/logos/ficha/), recortados al trazo.
+   Bosch y Thermador conservan el tamaño que tenían dentro de su recuadro blanco;
+   Gaggenau, en negro, crece para quedar a la par. */
+/* Alto de partida para un logo sin fondo nuevo; se afina por marca abajo. */
+.pdp-logo.is-sin-fondo { height: 40px; max-width: 260px; }
+.pdp-logo[data-marca="bosch"] { height: 35px; }
+.pdp-logo[data-marca="thermador"] { height: 62px; }
+.pdp-logo[data-marca="gaggenau"] { height: 30px; }
+.pdp-logo[data-marca="pitt-cooking"] { height: 50px; }
+.pdp-logo[data-marca="thor"] { height: 46px; }
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
    técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
    una línea, baja a dos dentro de su pestaña. */
@@ -4678,3 +4830,38 @@ body:has(:is([data-newsletter="ofertas"], [data-newsletter="guias"])) .site-foot
 .pcard-tag.is-stock .ic-check { stroke: var(--homea-gold-stock); }
 .pcard-disp { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; min-width: 0; }
 .pcard-piezas { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--homea-gold-stock); white-space: nowrap; }
+
+/* ---------- 2026-10-23 (Carla): "+" en tarjetas, descripción 14px, corazón junto al logo ---------- */
+/* Tarjeta: "+" y corazón juntos a la derecha de la disponibilidad. El texto
+   "Agregar a mi proyecto" sale al pasar el cursor, sin clic. */
+.pcard[data-cat-card] .pcard-acc { display: inline-flex; align-items: center; gap: 8px; flex: none; }
+.pcard-add {
+  position: relative; flex: none; width: 34px; height: 34px; display: grid; place-items: center; padding: 0;
+  background: transparent; border: 1px solid var(--border); color: var(--homea-black); cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard);
+}
+.pcard-add svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: square; }
+.pcard-add:hover { background: var(--homea-gold); border-color: var(--homea-gold); }
+.pcard-add:focus:not(:focus-visible) { outline: none; }
+.pcard-add:focus-visible { outline: 1px solid var(--homea-gold); outline-offset: 2px; }
+.pcard-add::after, .wl-heart[data-tip]::after {
+  content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); right: 0; z-index: 4;
+  padding: 6px 10px; white-space: nowrap; pointer-events: none;
+  background: var(--homea-bone); border: 1px solid var(--border-strong); box-shadow: 0 2px 8px rgba(30, 25, 20, .12);
+  font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: .02em; color: var(--fg);
+  opacity: 0; transform: translateY(3px); transition: opacity var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard);
+}
+.pcard-add:hover::after, .pcard-add:focus-visible::after,
+.wl-heart[data-tip]:hover::after, .wl-heart[data-tip]:focus-visible::after { opacity: 1; transform: none; transition-delay: .25s; }
+@media (hover: none) { .pcard-add::after, .wl-heart[data-tip]::after { display: none; } }
+/* Corazón con texto en hover (tarjeta y ficha); ya guardado, dice que lo quita. */
+.pcard[data-cat-card] .wl-heart[data-tip] { position: relative; top: auto; right: auto; }
+.wl-heart[data-tip].on::after { content: "Quitar de mi Wishlist"; }
+
+/* Ficha: descripción a 14px en todos los productos. */
+.pdp-desc p, .pdp-desc li { font-size: 14px; }
+
+/* Ficha: corazón a la derecha del logo, más grande. */
+.pdp-cabecera { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; }
+.pdp .info .pdp-wl { position: relative; top: auto; right: auto; flex: none; width: 46px; height: 46px; }
+.pdp .info .pdp-wl svg { width: 22px; height: 22px; }

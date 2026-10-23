@@ -19,6 +19,10 @@
 // Arriba de las piezas van las categorías, tipos y marcas que responden a la
 // búsqueda (también las marcas con catálogo en PDF): así siempre se llega a
 // algún lado. Si no hay nada, se dice tal cual (Carla, 2026-10-21).
+//
+// Vista (Carla, 2026-10-23): tarjetas como el resto del sitio y sin scroll. Hasta
+// 3 categorías con foto (subcategorías primero) y 4 piezas; sin categorías, 6
+// piezas por página (lo decide lib/shopify/buscar.ts). Las flechas paginan.
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -65,9 +69,20 @@ export default function BuscadorOverlay() {
   // lenta de hace 3 teclas puede pisar la que ya se está mostrando.
   const peticionRef = useRef<AbortController | null>(null);
 
+  // Al cerrar se borra la búsqueda (Carla, 2026-10-23): la próxima vez que se
+  // abre la lupa arranca en blanco, sin la consulta ni los resultados de antes.
   const cerrar = useCallback(() => {
+    peticionRef.current?.abort();
     setAbierto(false);
     setCursor(-1);
+    setQ("");
+    setPagina(1);
+    setResultados([]);
+    setDestinos([]);
+    setTotal(0);
+    setPaginas(1);
+    setSugerencia(null);
+    setCargando(false);
   }, []);
 
   /* ---- Disparadores: lupa del nav (delegado) y ⌘K / Ctrl+K ---- */
@@ -149,7 +164,6 @@ export default function BuscadorOverlay() {
         if (data.pagina && data.pagina !== pagina) setPagina(data.pagina);
         setSugerencia(data.sugerencia ? { para: q, texto: data.sugerencia } : null);
         setCursor(-1);
-        listaRef.current?.scrollTo?.({ top: 0 });
       } catch (err) {
         if ((err as Error)?.name !== "AbortError") {
           setResultados([]);
@@ -235,7 +249,6 @@ export default function BuscadorOverlay() {
   const consulta = q.trim();
   const sinResultados =
     consulta.length >= MIN_CARACTERES && !cargando && resultados.length === 0 && destinos.length === 0;
-  const totalVisible = total + destinos.length;
 
   // La última página casi nunca viene llena. Sin relleno, el panel encogería al
   // llegar a ella y el paginador saltaría hacia arriba justo cuando el usuario
@@ -290,11 +303,7 @@ export default function BuscadorOverlay() {
               spellCheck={false}
             />
           </span>
-          {consulta.length >= MIN_CARACTERES && (
-            <span className="bsc-count figures">
-              {cargando ? "Buscando…" : `${totalVisible} ${totalVisible === 1 ? "resultado" : "resultados"}`}
-            </span>
-          )}
+          {cargando && <span className="bsc-count">Buscando…</span>}
         </div>
 
         <div className="bsc-body">
@@ -321,90 +330,110 @@ export default function BuscadorOverlay() {
 
           {filas > 0 && (
             <div className="bsc-lista" ref={listaRef} role="listbox">
-              {lugares.length > 0 && resultados.length > 0 && (
-                <span className="bsc-seccion">Categorías y marcas</span>
+              {lugares.length > 0 && (
+                <section className="bsc-sec">
+                  <h3 className="bsc-sec-tit">Categorías sugeridas</h3>
+                  <div className="bsc-cats">
+                    {lugares.map((d, i) => {
+                      const [grupo, ...resto] = d.titulo.split(" · ");
+                      const titulo = resto.length ? resto.join(" · ") : grupo;
+                      const antetitulo = resto.length ? grupo : d.clase;
+                      return (
+                        <a
+                          key={`${d.clase}-${d.href}-${d.titulo}`}
+                          className={`bsc-row bsc-cat${i === cursor ? " is-cursor" : ""}`}
+                          href={d.href}
+                          role="option"
+                          aria-selected={i === cursor}
+                          onClick={cerrar}
+                        >
+                          <span className={`bsc-cat-img${d.clase === "Marca" ? " is-logo" : ""}`}>
+                            {d.imagen ? (
+                              <Image src={d.imagen} alt="" width={96} height={72} sizes="96px" />
+                            ) : (
+                              <span className="bsc-thumb-ph" aria-hidden="true" />
+                            )}
+                          </span>
+                          <span className="bsc-cat-txt">
+                            <span className="bsc-marca">{antetitulo}</span>
+                            <span className="bsc-cat-tit">{titulo}</span>
+                          </span>
+                          <span className="bsc-ir" aria-hidden="true">→</span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </section>
               )}
-              {lugares.map((d, i) => (
-                <a
-                  key={`${d.clase}-${d.href}-${d.titulo}`}
-                  className={`bsc-row bsc-row--destino${i === cursor ? " is-cursor" : ""}`}
-                  href={d.href}
-                  role="option"
-                  aria-selected={i === cursor}
-                  onClick={cerrar}
-                >
-                  <span className="bsc-datos">
-                    <span className="bsc-marca">{d.clase}</span>
-                    <span className="bsc-nombre">{d.titulo}</span>
-                    <span className="bsc-sku">{d.detalle}</span>
-                  </span>
-                  <span className="bsc-ir" aria-hidden="true">→</span>
-                </a>
-              ))}
-              {lugares.length > 0 && resultados.length > 0 && <span className="bsc-seccion">Productos</span>}
-              {resultados.map((r, j) => {
-                const i = lugares.length + j;
-                const { href, externo } = destinoDe(r);
-                return (
-                  <a
-                    key={r.sku}
-                    className={`bsc-row${i === cursor ? " is-cursor" : ""}`}
-                    href={href}
-                    role="option"
-                    aria-selected={i === cursor}
-                    onClick={cerrar}
-                    {...(externo
-                      ? {
-                          target: "_blank",
-                          rel: "noopener",
-                          "data-track": "whatsapp_click",
-                          "data-label": `buscador_${r.sku}`,
-                        }
-                      : {})}
-                  >
-                    <span className="bsc-thumb">
-                      {r.imagen ? (
-                        // next/image y no <img>: los packshots pesan hasta 4.4 MB
-                        // y aquí se ven a 62 px. Servidos en crudo, ocho filas
-                        // pedían ~16 MB y las miniaturas tardaban segundos en
-                        // aparecer. Next entrega una versión del tamaño real.
-                        <Image src={r.imagen} alt="" width={62} height={62} />
-                      ) : (
-                        <span className="bsc-thumb-ph" aria-hidden="true" />
-                      )}
+              {resultados.length > 0 && (
+                <section className="bsc-sec">
+                  <h3 className="bsc-sec-tit">
+                    Productos
+                    <span className="bsc-sec-num figures">
+                      {total} {total === 1 ? "resultado" : "resultados"}
                     </span>
-                    <span className="bsc-datos">
-                      <span className="bsc-marca">
-                        {r.marca}
-                        {r.serie && <span className="bsc-serie"> · {r.serie}</span>}
+                  </h3>
+                  <div className="bsc-grid">
+                    {resultados.map((r, j) => {
+                      const i = lugares.length + j;
+                      const { href, externo } = destinoDe(r);
+                      return (
+                        <a
+                          key={r.sku}
+                          className={`bsc-row bsc-card${i === cursor ? " is-cursor" : ""}`}
+                          href={href}
+                          role="option"
+                          aria-selected={i === cursor}
+                          onClick={cerrar}
+                          {...(externo
+                            ? {
+                                target: "_blank",
+                                rel: "noopener",
+                                "data-track": "whatsapp_click",
+                                "data-label": `buscador_${r.sku}`,
+                              }
+                            : {})}
+                        >
+                          <span className="bsc-thumb">
+                            {r.imagen ? (
+                              // next/image y no <img>: los packshots pesan hasta 4.4 MB;
+                              // Next entrega una versión del tamaño en que se pinta.
+                              <Image src={r.imagen} alt="" width={128} height={128} sizes="128px" />
+                            ) : (
+                              <span className="bsc-thumb-ph" aria-hidden="true" />
+                            )}
+                          </span>
+                          <span className="bsc-datos">
+                            <span className="bsc-marca">
+                              {r.marca}
+                              {r.serie && <span className="bsc-serie"> · {r.serie}</span>}
+                            </span>
+                            <span className="bsc-nombre">{r.nombre}</span>
+                            <span className="bsc-sku figures">{r.sku}</span>
+                          </span>
+                          <span className="bsc-precio figures">
+                            <span className="bsc-moneda">{r.moneda}</span>
+                            <span className="bsc-cifra">${r.precio}</span>
+                            <span className="bsc-iva">IVA incluido</span>
+                            {r.enStock !== undefined && (
+                              <span className={`bsc-disp ${r.enStock ? "is-stock" : "is-pedido"}`}>
+                                {r.enStock ? "En stock" : "Bajo pedido"}
+                              </span>
+                            )}
+                          </span>
+                        </a>
+                      );
+                    })}
+                    {/* Huecos de relleno en la última página: el panel no cambia de
+                        alto al paginar. Mismo esqueleto que una tarjeta, invisible. */}
+                    {huecos.map((n) => (
+                      <span className="bsc-row bsc-card bsc-row--hueco" key={`hueco-${n}`} aria-hidden="true">
+                        <span className="bsc-thumb" />
                       </span>
-                      <span className="bsc-nombre">{r.nombre}</span>
-                      <span className="bsc-sku figures">{r.sku}</span>
-                    </span>
-                    <span className="bsc-precio figures">
-                      <span className="bsc-moneda">{r.moneda}</span>
-                      <span className="bsc-cifra">${r.precio}</span>
-                      <span className="bsc-iva">IVA incluido</span>
-                    </span>
-                  </a>
-                );
-              })}
-              {/* Huecos de relleno en la última página. Solo cuando hay
-                  paginación: en una búsqueda de un único resultado dejarían
-                  siete filas vacías sin motivo. */}
-              {huecos.map((n) => (
-                // Mismo esqueleto que una fila real, en invisible: así el alto
-                // lo calcula el propio CSS y no hay que mantener un número
-                // mágico que se rompa al cambiar tipografía o breakpoint.
-                <span className="bsc-row bsc-row--hueco" key={`hueco-${n}`} aria-hidden="true">
-                  <span className="bsc-thumb" />
-                  <span className="bsc-datos">
-                    <span className="bsc-marca">&nbsp;</span>
-                    <span className="bsc-nombre">&nbsp;</span>
-                    <span className="bsc-sku">&nbsp;</span>
-                  </span>
-                </span>
-              ))}
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
           )}
         </div>
