@@ -8,7 +8,7 @@
 // Lee el carrito de Shopify por contexto (CarritoProvider envuelve <main>) y usa
 // <ProyectoCierre> para totales, tipo de cambio aplicado, notas y botón, así
 // dice exactamente lo mismo que el cajón: sin peros → "Pagar"; si algo se
-// cotiza → "Enviar listado por WhatsApp" (abre la pre-cotización).
+// cotiza → "Enviar listado a un ejecutivo" (abre la pre-cotización).
 
 import { useCarrito } from "./CarritoContexto";
 import { topeAlcanzado } from "./CarritoDrawer";

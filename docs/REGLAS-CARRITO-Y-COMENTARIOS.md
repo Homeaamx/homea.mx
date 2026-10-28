@@ -31,7 +31,7 @@ Cuatro casos, y solo cuatro. El modo (`checkout` / `cotizacion`) lo decide el se
 | **Todo está en stock** (regla 1 en cada pieza) | **Pagar** → checkout de Shopify | *Sin comentario.* |
 | Todo se compra y **todo es en pesos** | **Pagar** → Shopify | "Tu tiempo estimado de entrega puede variar de acuerdo a los productos seleccionados." |
 | Todo se compra y **hay piezas en dólares** (ninguna pasa de $100,000 con IVA al TC del día) | **Pagar** → Shopify | "Las piezas en dólares se cobran en pesos al tipo de cambio del día, se recomienda cotizar con un ejecutivo." |
-| **Alguna pieza se cotiza** (marca "Solo cotizar" o más de $100,000 con IVA, sin stock) | **Enviar listado por WhatsApp** (pide nombre, teléfono, ciudad, tipo de proyecto) | "Totales con el tipo de cambio al día, tu listado se enviará a un ejecutivo de ventas para confirmar montos y tiempos estimados de entrega." |
+| **Alguna pieza se cotiza** (marca "Solo cotizar" o más de $100,000 con IVA, sin stock) | **Enviar listado a un ejecutivo** (abre la pre-cotización, cuyo botón final es "Enviar por WhatsApp a un ejecutivo"; pide nombre, teléfono, ciudad, tipo de proyecto) | "Totales con el tipo de cambio al día, tu listado se enviará a un ejecutivo de ventas para confirmar montos y tiempos estimados de entrega." |
 | Pago bloqueado (tienda con contraseña o precio en pesos incoherente) | **Pagar** deshabilitado + explicación + enlace a WhatsApp | La explicación del bloqueo |
 
 Notas de implementación:

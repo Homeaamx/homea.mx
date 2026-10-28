@@ -3894,6 +3894,7 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="gaggenau"] { height: 30px; }
 .pdp-logo[data-marca="pitt-cooking"] { height: 50px; }
 .pdp-logo[data-marca="thor"] { height: 46px; }
+.pdp-logo[data-marca="elica"] { height: 40px; }
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
    técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
    una línea, baja a dos dentro de su pestaña. */
@@ -4865,3 +4866,9 @@ body:has(:is([data-newsletter="ofertas"], [data-newsletter="guias"])) .site-foot
 .pdp-cabecera { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; }
 .pdp .info .pdp-wl { position: relative; top: auto; right: auto; flex: none; width: 46px; height: 46px; }
 .pdp .info .pdp-wl svg { width: 22px; height: 22px; }
+
+/* Pieza sin foto (Carla, 2026-10-27): el logo HOMEA sobre blanco la representa.
+   Sin multiply, para que el blanco se vea blanco y no se funda con el greige. */
+.pcard[data-cat-card] .imgw.cutout img.is-respaldo,
+.pcard[data-cat-card]:hover .imgw.cutout img.is-respaldo,
+.pdp .gallery .main #pdp-img.is-respaldo { mix-blend-mode: normal; }

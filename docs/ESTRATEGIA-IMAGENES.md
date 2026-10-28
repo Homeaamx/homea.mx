@@ -74,11 +74,17 @@ La tarjeta de producto muestra la **1.ª foto**; la galería de la ficha muestra
 
 **Orden en Shopify:** foto 1 → foto 2 → (más fotos) → planos/fichas. El sitio distingue los planos por el `alt` ("Plano de medidas: …") o por el nombre de archivo (`-plano-medidas-`, `-ficha-tecnica-`, `-line-drawing-`, `-diagrama-`); respetar esa nomenclatura al subir.
 
+**La 1.ª imagen siempre es el producto real o en ambiente** (regla de Carla, 2026-10-28): nunca un dibujo de línea, plano o ficha técnica, salvo que sea la única imagen que existe. Ojo con las fotos de Artexa: traen dibujos con nombre de foto normal (p. ej. la Seashell Blanca PRF0098392 / PRF0024262A llegaba con el dibujo primero), así que el nombre de archivo no basta. Tras cada carga, revisar a ojo una hoja de contactos con la 1.ª imagen de cada pieza que tenga 2 o más y mover el dibujo al final (`productReorderMedia`). Revisión del 2026-10-28 en los 1,012 productos: solo esas dos Seashell estaban mal.
+
 **Hover de la tarjeta:** toda la tarjeta (foto + texto) toma el marco claro del diseño original (greige con filete fino); el filete nunca toca al aparato. Al subir fotos nuevas, preferir PNG/WebP **con transparencia**.
 
 **Auditoría:** `node --env-file=.env.local scripts/auditar-fotos-tarjetas.mjs [--csv salida.csv]` resume por tipo cuántas piezas tienen 0, 1 o ≥2 fotos y si algún plano quedó antes de una foto. Correrla tras cada carga de catálogo.
 
 Estado 2026-10-08 (110 piezas Gaggenau publicadas): **6 con ≥2 fotos**, 96 con 1, 8 sin foto. La página de Gaggenau US (`/us/en/mkt-product/<SKU>`) solo publica **una** foto de producto por modelo (el resto son planos): la 2.ª foto hay que conseguirla de otra fuente (portal de medios de BSH/Gaggenau, el representante o foto propia del showroom).
+
+## 3 ter. Logos de marca sin fondo ⭐ (regla de Carla, 2026-10-23 · 2026-10-28)
+
+**Todas las marcas van sin fondo**: el logo de origen es un **PNG transparente** (OneDrive `PUBLICIDAD/DISEÑO 2026/Logos Marcas png`; la subcarpeta `ARTEXA` trae Gaggenau, Bosch, Thermador y Elica). Nunca un logo con recuadro blanco o negro. `python3 scripts/logo-ficha.py <slug> <png>` lo recorta al trazo y lo deja en `public/assets/logos/ficha/<slug>.webp` (WebP con la misma transparencia, más ligero), que usan la ficha de producto y el buscador; el alto se afina en `styles/theme.css` (`.pdp-logo[data-marca]`). Elica: `Elica-Logo-PNG-SVG-Vector-01-300x300.png` (2026-10-28).
 
 ## 4. Mapeo a fases
 

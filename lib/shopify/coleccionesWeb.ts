@@ -153,6 +153,27 @@ export const EXTRAS_DE_MACRO: Record<
   ],
 };
 
+/**
+ * Piezas de OTRA colección que también se listan en la PLP de un tipo, acotadas
+ * por un filtro: las parrillas de inducción con extractor integrado (Elica
+ * NikolaTesla) son Tipo "Parrillas" y salen también en Campanas, en el diseño
+ * "Inducción con sistema de extracción" (Carla, 2026-10-27).
+ */
+export const EXTRAS_DE_TIPO: Record<
+  string,
+  { coleccion: string; filtro: { clave: string; valor: string }; quitar?: string[] }[]
+> = {
+  // `quitar`: filtros de su propio tipo que no aplican aquí (la instalación
+  // "Tradicional" de parrilla no es una opción de campana).
+  Campanas: [
+    {
+      coleccion: "parrillas",
+      filtro: { clave: "diseno", valor: "Inducción con sistema de extracción" },
+      quitar: ["instalacion", "funcionamiento", "quemadores"],
+    },
+  ],
+};
+
 export const tipoWeb = (tipo: string) => TIPOS_WEB.find((t) => t.tipo === tipo) ?? null;
 
 type Pieza = { tipo: string; filtros: Record<string, string[]> };

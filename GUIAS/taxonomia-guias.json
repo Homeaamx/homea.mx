@@ -1446,9 +1446,9 @@
               ],
               "rutaFiltros": "/guias/cocina-y-bar/lavavajillas/lavavajillas-empotrable",
               "tarjeta": {
-                "imagen": "/assets/photos/brands/hero/cove-lavavajillas.webp",
+                "imagen": "/assets/photos/guia-lavavajillas-empotrable-acero-inoxidable-cocina.webp",
                 "ambiente": true,
-                "pos": "40% 50%",
+                "pos": "50% 55%",
                 "resumen": "Integradas al mueble, panelables, con controles ocultos."
               },
               "tienda": "/productos/cocina-y-bar/lavavajillas?tipo=lavavajillas-empotrable"
@@ -1487,9 +1487,9 @@
               ],
               "rutaFiltros": "/guias/cocina-y-bar/lavavajillas/lavavajillas-de-piso",
               "tarjeta": {
-                "imagen": "/assets/photos/brands/hero/bosch-electrodomesticos.webp",
+                "imagen": "/assets/photos/guia-lavavajillas-de-piso-acero-inoxidable.webp",
                 "ambiente": true,
-                "pos": "20% 60%",
+                "pos": "50% 50%",
                 "resumen": "De instalación libre, con controles al frente u ocultos."
               },
               "tienda": "/productos/cocina-y-bar/lavavajillas?tipo=lavavajillas-de-piso"

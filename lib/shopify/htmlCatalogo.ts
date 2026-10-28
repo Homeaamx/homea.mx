@@ -19,6 +19,7 @@ import filtrosWeb from "@/data/filtros-web.json";
 import marcasJson from "@/data/marcas.json";
 import type { Decision } from "@/lib/reglas/reglaMarca";
 import type { TipoCambio } from "@/lib/tipoCambio";
+import { IMAGEN_RESPALDO } from "@/lib/imagenRespaldo";
 
 import { TIPOS_WEB, esAccesorio, tileDePieza, tipoDePieza, tipoWeb } from "./coleccionesWeb";
 import { clasificarDimensiones } from "./dimensiones";
@@ -194,6 +195,10 @@ export function precioFichaHtml(precio: PrecioPublico, tc: TipoCambio): string {
 /** Lo que va en "Productos relacionados" de la ficha. */
 export type Relacionados = { modo: "sugerencias" | "similares"; productos: ProductoVivo[] };
 
+function imgRespaldo(p: ProductoVivo, extra = ""): string {
+  return `<img class="is-respaldo"${extra} width="${IMAGEN_RESPALDO.ancho}" height="${IMAGEN_RESPALDO.alto}" decoding="async" src="${IMAGEN_RESPALDO.url}" alt="${esc(`${p.marca} ${p.sku}: imagen no disponible`)}">`;
+}
+
 export function esImagenTecnica(im: { url: string; alt: string }): boolean {
   const archivo = im.url.split("?")[0].split("/").pop() ?? "";
   return /^plano|^ficha|^diagrama/i.test(im.alt) || /(^|-)(plano-medidas|ficha-tecnica|line-drawing|diagrama)(-|\.)/i.test(archivo);
@@ -232,7 +237,7 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
 
   const imagen = img
     ? `<img width="${img.ancho}" height="${img.alto}" srcset="${srcsetCdn(img.url, img.ancho)}" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 34vw" loading="lazy" decoding="async" src="${cdn(img.url, 640)}" alt="${esc(img.alt)}">`
-    : `<span class="ph" style="height:100%"><span class="ph-inner">${esc(p.tipo)}</span></span>`;
+    : imgRespaldo(p, ' loading="lazy"');
 
   const { nombre, serie } = nombreYSerie(p.titulo);
   const stock = etiquetaDisponibilidad(p);
@@ -588,7 +593,7 @@ export function ctaHtml(p: ProductoVivo, decision: Decision, precio: PrecioPubli
   // Al cerrar, el proyecto va al pago de Shopify si cada pieza cumple la regla
   // (marca + monto + stock); si alguna se cotiza, el proyecto completo se manda
   // como cotización por WhatsApp. La regla se vuelve a evaluar en el servidor.
-  const agregar = `<button class="btn btn-primary cart-add" type="button" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(numericId)}" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${p.imagenes[0] ? esc(cdn(p.imagenes[0].url, 400)) : ""}" data-cart-href="/producto/${p.slug}">Agregar a Mi Proyecto</button>`;
+  const agregar = `<button class="btn btn-primary cart-add" type="button" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(numericId)}" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${p.imagenes[0] ? esc(cdn(p.imagenes[0].url, 400)) : IMAGEN_RESPALDO.url}" data-cart-href="/producto/${p.slug}">Agregar a Mi Proyecto</button>`;
   let nota: string;
   if (decision.accion === "comprar") {
     nota = p.enStock
@@ -801,7 +806,7 @@ export function fichaHtml(
 
   const imagenPrincipal = principal
     ? `<img id="pdp-img" width="${principal.ancho}" height="${principal.alto}" srcset="${srcsetCdn(principal.url, principal.ancho)}" sizes="(max-width: 700px) 100vw, 50vw" fetchpriority="high" decoding="async" src="${cdn(principal.url, 960)}" alt="${esc(principal.alt)}">`
-    : `<span class="ph" style="height:100%"><span class="ph-inner">${esc(p.tipo)}</span></span>`;
+    : imgRespaldo(p, ' id="pdp-img" fetchpriority="high"');
 
   // Flechas sutiles a los costados de la foto grande (Carla, 2026-10-13):
   // recorren las miniaturas; public/catalogo.js las maneja.

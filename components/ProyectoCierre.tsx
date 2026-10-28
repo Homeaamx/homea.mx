@@ -80,7 +80,7 @@ function textoBloqueo(carrito: Carrito): string | null {
  *   · todo se compra, todo en pesos     → Pagar + tiempo de entrega puede variar.
  *   · todo se compra, hay dólares       → Pagar + se cobra al TC del día, se
  *                                         recomienda cotizar con un ejecutivo.
- *   · algo se cotiza (marca / monto)    → Enviar listado por WhatsApp + totales al
+ *   · algo se cotiza (marca / monto)    → Enviar listado a un ejecutivo + totales al
  *                                         TC del día, el listado va a un ejecutivo.
  */
 export function notasDelProyecto(carrito: Carrito): string[] {
@@ -178,7 +178,7 @@ export default function ProyectoCierre({ carrito, aviso, ocupado }: Props) {
       {seCotiza ? (
         // Abre la pre-cotización al centro (cierra el cajón): ahí van los datos del cliente.
         <button type="button" className="wl-wa cart-checkout" onClick={() => ctx?.abrirCotizacion()}>
-          Enviar listado por WhatsApp <span className="ar">→</span>
+          Enviar listado a un ejecutivo <span className="ar">→</span>
         </button>
       ) : puedePagar ? (
         <a className="wl-wa cart-checkout" href={carrito.checkoutUrl ?? undefined} rel="noopener">
@@ -194,7 +194,7 @@ export default function ProyectoCierre({ carrito, aviso, ocupado }: Props) {
               {bloqueo}{" "}
               {/* Pasa por la pre-cotización: así también queda como borrador en Shopify. */}
               <button type="button" className="cart-aviso-link" onClick={() => ctx?.abrirCotizacion()}>
-                Enviar listado por WhatsApp
+                Enviar listado a un ejecutivo
               </button>
             </p>
           ) : null}

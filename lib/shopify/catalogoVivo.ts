@@ -523,6 +523,7 @@ export function precioPublico(p: ProductoVivo, tc: TipoCambio): PrecioPublico {
 export function decisionDeCompra(p: ProductoVivo, precio: PrecioPublico): Decision {
   return decidirCompra({
     vendor: p.marca,
+    sku: p.sku,
     precioMxnConIva: precio.mxnEquivalente ?? precio.venta,
     enStock: p.enStock,
   });

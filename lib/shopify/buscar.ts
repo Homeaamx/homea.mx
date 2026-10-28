@@ -23,6 +23,7 @@ import {
 import { buscarDestinos, coincide, esDeGuias, palabrasDe, type Destino } from "@/lib/buscarDestinos";
 import { indiceGuias } from "@/lib/guiasIndice";
 import { imagenDeDestino } from "@/lib/imagenDestino";
+import { IMAGEN_RESPALDO } from "@/lib/imagenRespaldo";
 import { todasLasMarcas } from "@/lib/marcas";
 import { obtenerTipoCambio, type TipoCambio } from "@/lib/tipoCambio";
 
@@ -112,9 +113,9 @@ function plano(texto: string): string {
 }
 
 /** Miniatura del CDN de Shopify al tamaño que pinta el overlay (62 px, 2x). */
-function miniatura(p: ProductoVivo): string | null {
+function miniatura(p: ProductoVivo): string {
   const img = p.imagenes.find((im) => !esImagenTecnica(im)) ?? p.imagenes[0];
-  if (!img) return null;
+  if (!img) return IMAGEN_RESPALDO.url;
   return `${img.url}${img.url.includes("?") ? "&" : "?"}width=160`;
 }
 

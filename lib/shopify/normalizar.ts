@@ -17,6 +17,7 @@
 // proyecto completo es `checkout` solo si todas se compran.
 
 import { IVA, productoPorSku } from "@/lib/catalogo";
+import { IMAGEN_RESPALDO } from "@/lib/imagenRespaldo";
 import { decidirCompra, montoAlto } from "@/lib/reglas/reglaMarca";
 
 import type { CarritoRaw, DineroRaw, VarianteRaw } from "./respuestas";
@@ -150,6 +151,7 @@ function aLinea(raw: CarritoRaw["lines"]["nodes"][number]): LineaCarrito {
 
   const decision = decidirCompra({
     vendor: v.product.vendor || enIndice?.marca || "",
+    sku,
     precioMxnConIva: centavos(mxn * (1 + IVA)),
     enStock: stock,
   });
@@ -159,7 +161,7 @@ function aLinea(raw: CarritoRaw["lines"]["nodes"][number]): LineaCarrito {
     sku,
     nombre: v.product.title || enIndice?.nombre || "",
     marca: v.product.vendor || enIndice?.marca || "",
-    imagen: v.image?.url ?? v.product.featuredImage?.url ?? enIndice?.imagen ?? null,
+    imagen: v.image?.url ?? v.product.featuredImage?.url ?? enIndice?.imagen ?? IMAGEN_RESPALDO.url,
     ficha,
     cantidad: raw.quantity,
     precioUnitario: aDinero(raw.cost.amountPerQuantity),

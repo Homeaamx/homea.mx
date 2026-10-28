@@ -1,5 +1,5 @@
 {
-  "_nota": "Orden y nombre visible de los filtros por Subcategoría 2 (= Tipo de producto en Shopify). Clave = metafield filtros.<clave>; \"marca\" = vendor, \"precio\" = precio. GENERADO desde FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx (OneDrive, columna E = orden propuesto) el 2026-10-06. Si cambia la tabla, se regenera. 2026-10-07: se añade filtros.bisagra (Bisagra / apertura) a refrigeración por indicación de Carla (prioritario en refrigeración y hornos). 2026-10-09: Bisagra / apertura también en Hornos y Microondas (hornos de velocidad), después de Diseño. 2026-10-12: se añade filtros.altura_ada (\"Altura\": Estándar / ADA) a Lavavajillas y a refrigeración (todas menos Accesorios), después de Ancho, por indicación de Carla.",
+  "_nota": "Orden y nombre visible de los filtros por Subcategoría 2 (= Tipo de producto en Shopify). Clave = metafield filtros.<clave>; \"marca\" = vendor, \"precio\" = precio. GENERADO desde FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx (OneDrive, columna E = orden propuesto) el 2026-10-06. Si cambia la tabla, se regenera. 2026-10-07: se añade filtros.bisagra (Bisagra / apertura) a refrigeración por indicación de Carla (prioritario en refrigeración y hornos). 2026-10-09: Bisagra / apertura también en Hornos y Microondas (hornos de velocidad), después de Diseño. 2026-10-12: se añade filtros.altura_ada (\"Altura\": Estándar / ADA) a Lavavajillas y a refrigeración (todas menos Accesorios), después de Ancho, por indicación de Carla. 2026-10-27: Microondas suma \"Tipo de instalación\" (Empotre · De cajón · De mesa · Sobre estufa; el de cajón lleva también Empotre) y \"Tipo de funcionamiento\" (solo Multifunción = horno + microondas; los convencionales van sin valor, porque Empotre / De cajón / De mesa / Sobre estufa ya lo implican) antes de Diseño, por indicación de Carla; Diseño se queda porque las fichas de Guías enlazan con diseno:*. 2026-10-27: Campanas suma los anchos 20\", 26\", 34\", 40\", 46\" y 72\" (catálogo Elica).",
   "subcategorias": {
     "Refrigeradores": [
       {
@@ -1191,6 +1191,23 @@
         "clave": "precio"
       },
       {
+        "nombre": "Tipo de instalación",
+        "clave": "instalacion",
+        "valores": [
+          "Empotre",
+          "De cajón",
+          "De mesa",
+          "Sobre estufa"
+        ]
+      },
+      {
+        "nombre": "Tipo de funcionamiento",
+        "clave": "funcionamiento",
+        "valores": [
+          "Multifunción"
+        ]
+      },
+      {
         "nombre": "Diseño",
         "clave": "diseno",
         "valores": [
@@ -1311,21 +1328,28 @@
         "nombre": "Ancho",
         "clave": "ancho",
         "valores": [
+          "20\"",
           "21\"",
           "24\"",
+          "26\"",
           "28\"",
           "29\"",
           "30\"",
           "32\"",
+          "34\"",
           "35\"",
           "36\"",
           "39\"",
+          "40\"",
           "42\"",
           "44\"",
+          "46\"",
           "48\"",
+          "54\"",
           "55\"",
           "60\"",
           "70\"",
+          "72\"",
           "82\""
         ]
       },

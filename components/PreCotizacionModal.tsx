@@ -1,6 +1,6 @@
 "use client";
 
-// PreCotizacionModal — al pulsar "Enviar listado por WhatsApp" se cierra el cajón
+// PreCotizacionModal — al pulsar "Enviar listado a un ejecutivo" se cierra el cajón
 // y se abre, al centro y con el fondo oscuro, la pre-cotización con las piezas
 // del proyecto (Carla, 2026-10-08). El cliente llena sus datos en el propio
 // formato y al final descarga el PDF o envía por WhatsApp. Cualquiera de los dos
@@ -201,7 +201,7 @@ export default function PreCotizacionModal({ carrito, onCerrar }: Props) {
               {ocupado ? "Registrando…" : "Descargar PDF"} <span className="ar">↓</span>
             </button>
             <button type="button" className="btn btn-ghost pc-enviar" onClick={enviar} disabled={!listo || ocupado}>
-              Enviar por WhatsApp <span className="ar">→</span>
+              Enviar por WhatsApp a un ejecutivo <span className="ar">→</span>
             </button>
             <button type="button" className="pc-volver" onClick={onCerrar}>
               Volver a mi proyecto

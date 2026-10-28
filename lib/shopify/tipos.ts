@@ -14,7 +14,7 @@ export interface Dinero {
 /** Qué pasa con una pieza al cerrar el proyecto (regla marca + monto + stock). */
 export interface DecisionLinea {
   accion: "comprar" | "cotizar";
-  motivo: "stock" | "marca" | "monto" | "general";
+  motivo: "stock" | "marca" | "pieza" | "monto" | "general";
 }
 
 export interface LineaCarrito {

@@ -177,6 +177,10 @@ def main():
             por_sku.setdefault(m.group(1).upper(), []).append(f)
     for sku, archivos in por_sku.items():
         prod = producto(sku)
+        if not prod and "_" in sku:
+            # SKU con diagonal (KIT01609/1): el archivo la lleva como guion bajo.
+            sku = sku.replace("_", "/")
+            prod = producto(sku)
         print(f"{sku}: {prod['title'] if prod else 'NO ESTÁ EN SHOPIFY'}")
         if prod:
             subir(prod, sku, archivos, prueba)

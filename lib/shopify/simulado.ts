@@ -82,6 +82,7 @@ function aLinea({ sku, cantidad }: LineaSim, tc: TipoCambio): LineaCarrito | nul
     // cambio del sitio solo para la regla de monto; en producción decide Shopify.
     decision: decidirCompra({
       vendor: p.marca,
+      sku: p.sku,
       precioMxnConIva: centavos(mxn * (1 + IVA)),
       enStock: false,
     }),
