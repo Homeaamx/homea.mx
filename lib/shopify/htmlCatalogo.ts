@@ -19,6 +19,7 @@ import filtrosWeb from "@/data/filtros-web.json";
 import marcasJson from "@/data/marcas.json";
 import type { Decision } from "@/lib/reglas/reglaMarca";
 import type { TipoCambio } from "@/lib/tipoCambio";
+import { TONOS_ESTANDAR, type Tono } from "@/lib/coloresMarca";
 import { IMAGEN_RESPALDO } from "@/lib/imagenRespaldo";
 
 import { TIPOS_WEB, esAccesorio, tileDePieza, tipoDePieza, tipoWeb } from "./coleccionesWeb";
@@ -149,7 +150,8 @@ export function lineaSpec(p: ProductoVivo): string[] {
     ...(f.tipo ?? []),
     ...(f.funcionamiento ?? []).filter((v) => !/^Todo /.test(v)),
   ];
-  return [...new Set(partes)].slice(0, 3).concat(p.sku);
+  // El color elegido (Standard / Custom Color) siempre se ve: cambia el precio.
+  return [...new Set(partes)].slice(0, 3).concat(p.color ? [p.color] : [], p.sku);
 }
 
 /* ---------- Precio -------------------------------------------------------- */
@@ -593,7 +595,7 @@ export function ctaHtml(p: ProductoVivo, decision: Decision, precio: PrecioPubli
   // Al cerrar, el proyecto va al pago de Shopify si cada pieza cumple la regla
   // (marca + monto + stock); si alguna se cotiza, el proyecto completo se manda
   // como cotización por WhatsApp. La regla se vuelve a evaluar en el servidor.
-  const agregar = `<button class="btn btn-primary cart-add" type="button" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(numericId)}" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${p.imagenes[0] ? esc(cdn(p.imagenes[0].url, 400)) : IMAGEN_RESPALDO.url}" data-cart-href="/producto/${p.slug}">Agregar a Mi Proyecto</button>`;
+  const agregar = `<button class="btn btn-primary cart-add" type="button" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(numericId)}" data-cart-tono="" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${p.imagenes[0] ? esc(cdn(p.imagenes[0].url, 400)) : IMAGEN_RESPALDO.url}" data-cart-href="/producto/${p.slug}">Agregar a Mi Proyecto</button>`;
   let nota: string;
   if (decision.accion === "comprar") {
     nota = p.enStock
@@ -614,6 +616,59 @@ export function ctaHtml(p: ProductoVivo, decision: Decision, precio: PrecioPubli
         ${agregar}
       </div>
       <p class="note">${nota}</p>`;
+}
+
+/* ---------- Opciones de color --------------------------------------------- */
+
+function notaColor(nombre: string, tono?: Tono): string {
+  if (tono) {
+    return `Standard Color · ${tono.nombre}. No hay foto por tono: el tono queda anotado en tu pedido y tu asesor lo confirma contigo.`;
+  }
+  if (/^standard/i.test(nombre)) {
+    return "Standard Color: uno de los colores estándar de la marca. Tu asesor confirma el tono contigo.";
+  }
+  if (/^custom/i.test(nombre)) {
+    // Adaptación del texto de Alfresco (Color Options), Carla 2026-10-29.
+    return "Custom Color: elige entre los diez colores estándar o lleva tu cocina exterior a otro nivel con la colección RAL Classic, con 216 colores para tu jardín. Tu asesor confirma el tono y el tiempo de entrega.";
+  }
+  return `${nombre}: el acabado original de la pieza.`;
+}
+
+/**
+ * Precio + selector de color de la ficha (Carla, 2026-10-28). Solo cambia el
+ * precio: no hay fotos por color. Acero con su degradado; "Standard Color" se
+ * abre en un círculo por cada tono de la marca (lib/coloresMarca.ts), todos al
+ * precio de esa variante; "Custom Color" queda como círculo CC. public/catalogo.js
+ * cambia el precio visible, la variante y el tono (`data-cart-tono`) que se
+ * agregan a Mi Proyecto.
+ */
+function precioYColorHtml(p: ProductoVivo, precio: PrecioPublico, tc: TipoCambio): string {
+  if (p.colores.length < 2) return precioFichaHtml(precio, tc);
+  const opciones = p.colores.map((c) => ({ ...c, precio: precioPublico({ ...p, ...c }, tc) }));
+  const precios = opciones
+    .map((o, i) => `<div class="pdp-precio-color" data-color-precio="${i}"${i ? " hidden" : ""}>${precioFichaHtml(o.precio, tc)}</div>`)
+    .join("");
+  const tonos = TONOS_ESTANDAR[p.marca] ?? [];
+  const boton = (o: (typeof opciones)[number], i: number, clase: string, contenido: string, tono?: Tono) => {
+    const nombre = tono ? `Standard Color · ${tono.nombre}` : o.nombre;
+    return `<button type="button" role="radio" aria-checked="${i === 0}" class="pdp-swatch ${clase}${i === 0 ? " is-active" : ""}" data-color="${i}" data-sku="${esc(o.sku)}" data-vid="${esc(o.variantId.split("/").pop() ?? "")}" data-tono="${tono ? esc(tono.nombre) : ""}" data-nombre="${esc(nombre)}" data-nota="${esc(notaColor(o.nombre, tono))}" data-mxn="${o.mxn}" data-usd="${esc(textoPrecio(o.precio))}" data-was="${o.precio.tachado ? esc(`$${dinero(o.precio.tachado)} ${o.precio.moneda}`) : ""}" data-mxn-pub="${o.precio.mxnEquivalente ?? o.precio.venta}" aria-label="${esc(nombre)}" title="${esc(tono ? tono.nombre : o.nombre)}"${tono ? ` style="--tono:${tono.hex}"` : ""}>${contenido}</button>`;
+  };
+  const botones = opciones
+    .map((o, i) => {
+      if (/^standard/i.test(o.nombre) && tonos.length) {
+        return tonos.map((t) => boton(o, i, "is-tono", "", t)).join("");
+      }
+      if (/^standard/i.test(o.nombre)) return boton(o, i, "is-ini", `<span aria-hidden="true">SC</span>`);
+      if (/^custom/i.test(o.nombre)) return boton(o, i, "is-ini", `<span aria-hidden="true">CC</span>`);
+      return boton(o, i, "is-acero", "");
+    })
+    .join("");
+  return `${precios}
+      <div class="pdp-color" role="radiogroup" aria-label="Color">
+        <div class="pdp-color-head"><span class="pdp-color-lbl">Color</span><span class="pdp-color-val" data-color-nombre>${esc(opciones[0].nombre)}</span></div>
+        <div class="pdp-color-opts">${botones}</div>
+        <p class="pdp-color-nota" data-color-nota>${esc(notaColor(opciones[0].nombre))}</p>
+      </div>`;
 }
 
 /* ---------- Ficha completa ----------------------------------------------- */
@@ -884,7 +939,7 @@ ${relacionados.productos.map((r, i) => tarjetaHtml(r, tc, i)).join("\n")}
       <span class="rule-gold"></span>
       <div class="pdp-titulo"><h1>${tituloH1(p.titulo)}</h1>${etiquetaStock}</div>
       ${serieYModeloHtml(p)}
-      ${precioFichaHtml(precio, tc)}
+      ${precioYColorHtml(p, precio, tc)}
       ${descripcionLarga}
 
       ${ctaHtml(p, decision, precio)}

@@ -95,6 +95,8 @@ export default function MiProyectoPagina() {
                       <span className="sel-sku figures">
                         <b>Modelo</b>
                         {l.sku}
+                        {l.color ? ` · ${l.color}` : ""}
+                        {l.tono ? ` · ${l.tono}` : ""}
                       </span>
                       <span className="proy-tags">
                         <span className={`proy-tag${l.enStock ? " is-stock" : ""}`}>

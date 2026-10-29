@@ -15,9 +15,13 @@
 // Este módulo lo usan el navegador (cajón) y el servidor (página): sin imports
 // de servidor.
 
+import { tonoDe } from "@/lib/coloresMarca";
+
 export interface PartidaRef {
   sku: string;
   cantidad: number;
+  /** Código del tono de Standard Color ("1023", "M9003"), si la pieza lo lleva. */
+  tono?: string;
 }
 
 export interface DatosCliente {
@@ -51,6 +55,8 @@ export interface PartidaCotizacion {
   lista: number;
   descuento: number;
   enStock: boolean;
+  /** Tono de Standard Color ("1023 Traffic Yellow"), anotado como comentario de la partida. */
+  tono?: string;
   /** No está publicada en Shopify: precio del índice local, por confirmar. */
   preliminar?: boolean;
 }
@@ -100,11 +106,14 @@ export const VIGENCIA_DIAS = 14;
 
 const SKU_VALIDO = /^[A-Z0-9-]{3,40}$/;
 
-/** "RVC467790:1,RB282705:2" ← partidas. */
+/** "RVC467790:1,RB282705:2,ALXE56C-SC:1:1023" ← partidas (el tercer tramo es el tono). */
 export function serializarPartidas(partidas: PartidaRef[]): string {
   return partidas
     .filter((p) => SKU_VALIDO.test(p.sku.toUpperCase()) && p.cantidad > 0)
-    .map((p) => `${p.sku.toUpperCase()}:${Math.min(99, Math.round(p.cantidad))}`)
+    .map((p) => {
+      const tono = tonoDe(p.tono);
+      return `${p.sku.toUpperCase()}:${Math.min(99, Math.round(p.cantidad))}${tono ? `:${tono.codigo}` : ""}`;
+    })
     .join(",");
 }
 
@@ -114,12 +123,15 @@ export function parsearPartidas(p: string | null | undefined): PartidaRef[] {
   const vistas = new Set<string>();
   const partidas: PartidaRef[] = [];
   for (const tramo of p.split(",").slice(0, 50)) {
-    const [skuCrudo, cantCruda] = tramo.split(":");
+    const [skuCrudo, cantCruda, tonoCrudo] = tramo.split(":");
     const sku = (skuCrudo ?? "").trim().toUpperCase();
-    if (!SKU_VALIDO.test(sku) || vistas.has(sku)) continue;
+    // El mismo modelo en dos tonos son dos partidas.
+    const tono = tonoDe(tonoCrudo)?.codigo;
+    const clave = `${sku}:${tono ?? ""}`;
+    if (!SKU_VALIDO.test(sku) || vistas.has(clave)) continue;
     const cantidad = Math.min(99, Math.max(1, Number.parseInt(cantCruda ?? "1", 10) || 1));
-    vistas.add(sku);
-    partidas.push({ sku, cantidad });
+    vistas.add(clave);
+    partidas.push(tono ? { sku, cantidad, tono } : { sku, cantidad });
   }
   return partidas;
 }

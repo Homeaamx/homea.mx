@@ -3667,6 +3667,28 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-sku { font-size: 13px; color: var(--fg-muted); letter-spacing: .02em; white-space: nowrap; }
 .pdp-sku-lbl { font-family: var(--font-sans); font-size: 10px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-subtle); margin-right: 6px; }
 
+/* 2026-10-28: selector de color (Alfresco: acero · Standard Color · Custom Color).
+   Solo cambia el precio; círculos con iniciales porque no hay foto por color. */
+.pdp-color { margin-top: 20px; }
+.pdp-color-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+.pdp-color-lbl { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg); }
+.pdp-color-val { font-size: 14px; color: var(--fg-muted); }
+.pdp-color-opts { display: flex; gap: 14px; flex-wrap: wrap; }
+.pdp-swatch { width: 48px; height: 48px; border-radius: 50%; padding: 0; cursor: pointer; display: grid; place-items: center;
+  background: var(--surface); border: 1px solid rgba(30, 25, 20, .22); box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px transparent;
+  font-family: var(--font-sans); font-size: 13px; font-weight: 600; letter-spacing: .06em; color: var(--fg);
+  transition: box-shadow var(--dur-fast, .2s) ease, border-color var(--dur-fast, .2s) ease; }
+.pdp-swatch.is-acero { background: linear-gradient(135deg, #f4f4f2 0%, #c9cac7 45%, #eeeeec 60%, #a9aaa7 100%); }
+/* Tonos de Standard Color (Alfresco): el círculo ES el tono (lib/coloresMarca.ts). */
+.pdp-color-opts:has(.is-tono) { gap: 10px; }
+.pdp-color-opts:has(.is-tono) .pdp-swatch { width: 40px; height: 40px; }
+.pdp-swatch.is-tono { background: var(--tono); }
+.pdp-swatch:hover { border-color: var(--homea-gold); }
+.pdp-swatch.is-active { border-color: var(--homea-gold); box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--homea-gold); }
+.pdp-swatch:focus-visible { outline: 2px solid var(--homea-gold); outline-offset: 4px; }
+.pdp-color-nota { margin: 12px 0 0; font-size: 13px; line-height: 1.5; color: var(--fg-muted); max-width: 52ch; }
+.pdp-precio-color[hidden] { display: none; }
+
 /* Descripción larga con listas (Shopify descriptionHtml). */
 .pdp-desc ul, .pdp-desc ol { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 5px; }
 .pdp-desc li { font-size: 12px; line-height: 1.55; color: var(--fg); }
@@ -3895,6 +3917,9 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="pitt-cooking"] { height: 50px; }
 .pdp-logo[data-marca="thor"] { height: 46px; }
 .pdp-logo[data-marca="elica"] { height: 40px; }
+.pdp-logo[data-marca="artisan"] { height: 38px; }
+.pdp-logo[data-marca="alfresco"] { height: 42px; }
+.pdp-logo[data-marca="napoleon"] { height: 52px; }
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
    técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
    una línea, baja a dos dentro de su pestaña. */

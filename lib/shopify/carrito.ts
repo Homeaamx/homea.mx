@@ -78,9 +78,12 @@ export async function leerCarrito(id: string): Promise<Carrito> {
   return aCarrito(datos.cart);
 }
 
-export async function crearCarrito(idVariante: string, cantidad: number): Promise<Carrito> {
+/** Comentarios de la línea (atributos de Shopify): hoy, el tono de Standard Color. */
+type Atributo = { key: string; value: string };
+
+export async function crearCarrito(idVariante: string, cantidad: number, atributos: Atributo[] = []): Promise<Carrito> {
   const datos = await shopifyFetch<{ cartCreate: RespuestaMutacion }>(CREAR_CARRITO, {
-    variables: { lineas: [{ merchandiseId: gidVariante(idVariante), quantity: cantidad }] },
+    variables: { lineas: [{ merchandiseId: gidVariante(idVariante), quantity: cantidad, attributes: atributos }] },
     ...SIN_CACHE,
   });
   return aCarrito(revisarErrores(datos.cartCreate));
@@ -90,11 +93,12 @@ export async function agregarLinea(
   idCarrito: string,
   idVariante: string,
   cantidad: number,
+  atributos: Atributo[] = [],
 ): Promise<Carrito> {
   const datos = await shopifyFetch<{ cartLinesAdd: RespuestaMutacion }>(AGREGAR_LINEAS, {
     variables: {
       id: idCarrito,
-      lineas: [{ merchandiseId: gidVariante(idVariante), quantity: cantidad }],
+      lineas: [{ merchandiseId: gidVariante(idVariante), quantity: cantidad, attributes: atributos }],
     },
     ...SIN_CACHE,
   });

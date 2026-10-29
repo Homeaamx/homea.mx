@@ -15,6 +15,7 @@
 // borrador en base 36 + una firma HMAC, para que no se puedan adivinar las demás.
 // Nada personal viaja en la URL.
 
+import { ATRIBUTO_TONO, tonoDe } from "@/lib/coloresMarca";
 import "server-only";
 
 import { createHmac, timingSafeEqual } from "node:crypto";
@@ -31,8 +32,10 @@ const c2 = (n: number) => Math.round(n * 100) / 100;
 export type PartidaArmada = PartidaCotizacion & { variantId: string | null };
 
 /** Una partida en la moneda original y sin IVA, con los precios vivos de Shopify. */
-export async function armarPartida(sku: string, cantidad: number): Promise<PartidaArmada | null> {
+export async function armarPartida(sku: string, cantidad: number, codigoTono?: string): Promise<PartidaArmada | null> {
   const vivo = await productoVivoPorSku(sku);
+  // El tono solo vale en la variante Standard Color de una pieza con colores.
+  const tono = vivo?.color && /^standard/i.test(vivo.color) ? tonoDe(codigoTono)?.nombre : undefined;
   if (vivo) {
     const { nombre, serie } = nombreYSerie(vivo.titulo);
     const factor = vivo.mxnLista ? vivo.mxn / vivo.mxnLista : 1;
@@ -45,7 +48,8 @@ export async function armarPartida(sku: string, cantidad: number): Promise<Parti
       marca: vivo.marca,
       nombre,
       serie,
-      descripcion: lineaSpec(vivo).filter((s) => s !== vivo.sku).join(" · "),
+      descripcion: [...lineaSpec(vivo).filter((s) => s !== vivo.sku), ...(tono ? [tono] : [])].join(" · "),
+      ...(tono ? { tono } : {}),
       imagen: vivo.imagenes[0]?.url ?? null,
       ficha: `/producto/${vivo.slug}`,
       moneda: usd !== null ? "USD" : "MXN",
@@ -198,6 +202,7 @@ function entradaBorrador(partidas: PartidaArmada[], datos: DatosCliente, fechaIs
         { key: "Precio de lista sin IVA", value: `${n2(p.lista)} ${p.moneda}` },
         ...(p.descuento > 0 ? [{ key: "Descuento por pieza", value: `${n2(p.descuento)} ${p.moneda}` }] : []),
         { key: "Disponibilidad", value: p.enStock ? "En stock" : "Bajo pedido" },
+        ...(p.tono ? [{ key: ATRIBUTO_TONO, value: p.tono }] : []),
       ];
       return p.variantId
         ? { variantId: p.variantId, quantity: p.cantidad, customAttributes: atributos }
@@ -224,7 +229,7 @@ export async function guardarPreCotizacion(
   datos: DatosCliente,
   refAnterior?: string,
 ): Promise<PreCotizacionCreada | null> {
-  const partidas = (await Promise.all(refs.map((r) => armarPartida(r.sku, r.cantidad)))).filter(
+  const partidas = (await Promise.all(refs.map((r) => armarPartida(r.sku, r.cantidad, r.tono)))).filter(
     (x): x is PartidaArmada => x !== null,
   );
   if (!partidas.length) return null;

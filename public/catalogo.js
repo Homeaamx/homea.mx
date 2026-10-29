@@ -589,6 +589,46 @@
       mini.parentNode.querySelectorAll(".pdp-thumb").forEach(function (b) {
         b.classList.toggle("is-active", b === mini);
       });
+      return;
+    }
+
+    /* Color de la ficha (acero · SC · CC, Alfresco): cambia el precio visible y
+       la variante que se agrega a Mi Proyecto; la foto no cambia (Carla, 2026-10-28). */
+    var sw = t.closest(".pdp-swatch");
+    if (sw) {
+      var info = sw.closest(".info") || document;
+      var i = sw.getAttribute("data-color");
+      sw.parentNode.querySelectorAll(".pdp-swatch").forEach(function (b) {
+        var on = b === sw;
+        b.classList.toggle("is-active", on);
+        b.setAttribute("aria-checked", on ? "true" : "false");
+      });
+      info.querySelectorAll("[data-color-precio]").forEach(function (pr) {
+        pr.hidden = pr.getAttribute("data-color-precio") !== i;
+      });
+      var nom = info.querySelector("[data-color-nombre]");
+      if (nom) nom.textContent = sw.getAttribute("data-nombre");
+      var nota = info.querySelector("[data-color-nota]");
+      if (nota) nota.textContent = sw.getAttribute("data-nota");
+      var add = info.querySelector(".pdp-cta .cart-add");
+      if (add) {
+        add.setAttribute("data-cart-sku", sw.getAttribute("data-sku"));
+        /* Tono de Standard Color: viaja como comentario de la línea del pedido. */
+        add.setAttribute("data-cart-tono", sw.getAttribute("data-tono") || "");
+        add.setAttribute("data-cart-vid", sw.getAttribute("data-vid"));
+        add.setAttribute("data-cart-mxn", sw.getAttribute("data-mxn"));
+        add.setAttribute("data-cart-usd", sw.getAttribute("data-usd"));
+        var spec = (add.getAttribute("data-cart-spec") || "").split(" · Color: ")[0];
+        add.setAttribute("data-cart-spec", spec + (i === "0" ? "" : " · Color: " + sw.getAttribute("data-nombre")));
+      }
+      var wl = info.querySelector(".pdp-wl");
+      if (wl) {
+        wl.setAttribute("data-wl-id", sw.getAttribute("data-sku"));
+        wl.setAttribute("data-wl-vid", sw.getAttribute("data-vid"));
+        wl.setAttribute("data-wl-price", sw.getAttribute("data-usd"));
+        wl.setAttribute("data-wl-was", sw.getAttribute("data-was"));
+        wl.setAttribute("data-wl-mxn", sw.getAttribute("data-mxn-pub"));
+      }
     }
   });
 

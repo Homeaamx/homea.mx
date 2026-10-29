@@ -12,7 +12,7 @@
 
 | Canal | En Shopify | En el sitio |
 |---|---|---|
-| **SHOPIFY** (65) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
+| **SHOPIFY** (66) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
 | **SOLO PDF** (18) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
 
 En el código, el canal vive en el tile de `preview/marcas.html` (`data-canal="shopify|pdf"`), pasa a
@@ -75,7 +75,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
   columna *Arte* de las tablas dice qué falta. La carpeta de OneDrive con logos y fotos ya no está
   sincronizada en esta Mac.
 
-## SHOPIFY — 65 marcas
+## SHOPIFY — 66 marcas
 
 | Marca | Proveedor | Línea SAE | Productos tras carga | Descuento Shopify (PLATA) | Página | Arte | Nota |
 |---|---|---|---:|---:|---|---|---|
@@ -83,6 +83,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | ALFA FORNI | IESA/LAVISH | ALFA | 20 | 10% | `/marcas/alfa-forni` | completo |  |
 | ALFRESCO | ARTEXA | ALFRE | 247 | 10% | `/marcas/alfresco` | completo |  |
 | ARTISAN | ARTEXA | ARTIS | 104 | 10% | `/marcas/artisan` | completo |  |
+| NAPOLEON | — | — | 0 | — | `/marcas/napoleon` | completo | Alta 2026-10-29 (Carla): asadores; logo, fotos y hero listos; sin piezas en Shopify todavía (se ve sin tienda) |
 | AXCENT | ITALY TOP | AXCEN | 101 | 15% | `/marcas/axcent` | completo | Solo línea de cocina |
 | BENESSI | ARTEXA | BENES | 100 | 15% | `/marcas/benessi` | completo |  |
 | BERTAZZONI | ARTEXA | BERTA | 109 | 10% | `/marcas/bertazzoni` | completo |  |

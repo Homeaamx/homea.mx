@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 
 import JsonLd from "@/components/JsonLd";
 import MarketingPage from "@/components/MarketingPage";
@@ -164,6 +164,8 @@ export default async function ProductoFichaPage(props: { params: Promise<Params>
 
   // 2. Ficha generada con los datos de Shopify.
   if (!vivo) notFound();
+  // El SKU de un color (ALXE56C-SC) lleva a la ficha de su modelo: una sola URL por pieza.
+  if (vivo.slug !== slug) permanentRedirect(`/producto/${vivo.slug}`);
   const [tc, relacionados] = await Promise.all([obtenerTipoCambio(), relacionadosDe(vivo)]);
   const precio = precioPublico(vivo, tc);
   return (

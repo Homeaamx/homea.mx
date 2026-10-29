@@ -15,6 +15,7 @@
 // Comentarios al pie: cuatro casos exactos de Carla (2026-10-08), documentados
 // en docs/REGLAS-CARRITO-Y-COMENTARIOS.md.
 
+import { tonoDe } from "@/lib/coloresMarca";
 import { mensajeCotizacion, queryCotizacion, serializarPartidas, type DatosCliente } from "@/lib/cotizacion";
 import type { Aviso, Carrito, Dinero } from "@/lib/shopify/tipos";
 import { formatearDinero } from "@/lib/shopify/tipos";
@@ -42,9 +43,12 @@ function origen(): string {
   return SITE_URL;
 }
 
-/** Partidas del proyecto en el formato de la cotización (SKU:cantidad). */
+/** Partida de la cotización de una línea del proyecto: SKU, cantidad y tono de Standard Color. */
+const refDeLinea = (l: Carrito["lineas"][number]) => ({ sku: l.sku, cantidad: l.cantidad, tono: tonoDe(l.tono)?.codigo });
+
+/** Partidas del proyecto en el formato de la cotización (SKU:cantidad[:tono]). */
 export function partidasDe(carrito: Carrito): string {
-  return serializarPartidas(carrito.lineas.map((l) => ({ sku: l.sku, cantidad: l.cantidad })));
+  return serializarPartidas(carrito.lineas.map(refDeLinea));
 }
 
 /**
@@ -55,7 +59,7 @@ export function partidasDe(carrito: Carrito): string {
 export function mensajeListado(carrito: Carrito, datos: DatosCliente): string {
   if (!carrito.lineas.length) return whatsappHref();
   const link = `${origen()}/cotizacion?${queryCotizacion(
-    carrito.lineas.map((l) => ({ sku: l.sku, cantidad: l.cantidad })),
+    carrito.lineas.map(refDeLinea),
     datos,
   )}`;
   return whatsappHref(mensajeCotizacion(link));

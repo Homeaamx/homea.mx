@@ -114,7 +114,11 @@ export default function CarritoDrawer({
                     {linea.nombre.split(" — ")[0]}
                   </a>
                   {/* 3 · Modelo / SKU */}
-                  <span className="proy-sku figures">Modelo {linea.sku}</span>
+                  <span className="proy-sku figures">
+                    Modelo {linea.sku}
+                    {linea.color ? ` · ${linea.color}` : ""}
+                    {linea.tono ? ` · ${linea.tono}` : ""}
+                  </span>
                   {/* 4 · Disponibilidad */}
                   <span className="proy-tags">
                     <span className={`proy-tag${linea.enStock ? " is-stock" : ""}`}>

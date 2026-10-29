@@ -150,6 +150,10 @@ export const EXTRAS_DE_MACRO: Record<
 > = {
   "/productos/exterior": [
     { coleccion: "campanas", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Campanas — Uso: Exterior" },
+    // Tarjas, llaves y accesorios de bar para cocina de exterior (Alfresco; Carla, 2026-10-29).
+    { coleccion: "tarjas", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Tarjas" },
+    { coleccion: "monomandos", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Monomandos" },
+    { coleccion: "accesorios-de-tarjas-y-monomandos", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Accesorios de Tarjas y Monomandos" },
   ],
 };
 

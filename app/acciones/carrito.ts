@@ -18,6 +18,7 @@
 //    Shopify ni cookie: `obtenerCarrito()` sin cookie devuelve el carrito vacío sin
 //    salir a la red. `cartCreate` ocurre en la primera alta exitosa.
 
+import { ATRIBUTO_TONO, tonoDe } from "@/lib/coloresMarca";
 import { CHECKOUT_ABIERTO } from "@/lib/flags";
 import { cerrarProyecto, whatsappDeCotizacion } from "@/lib/reglas/compra";
 import { ErrorShopify } from "@/lib/shopify/cliente";
@@ -109,7 +110,11 @@ export async function agregarAlCarrito(
   idVariante: string,
   sku: string,
   cantidad = 1,
+  tono = "",
 ): Promise<ResultadoCarrito> {
+  // Solo tonos del catálogo (lib/coloresMarca.ts): lo demás no se anota.
+  const tonoValido = tonoDe(tono);
+  const atributos = tonoValido ? [{ key: ATRIBUTO_TONO, value: tonoValido.nombre }] : [];
   try {
     const variante = await buscarVariante(idVariante, sku);
 
@@ -143,15 +148,15 @@ export async function agregarAlCarrito(
     let carrito: Carrito;
     if (id) {
       try {
-        carrito = await agregarLinea(id, variante.id, cantidad);
+        carrito = await agregarLinea(id, variante.id, cantidad, atributos);
       } catch (error) {
         if (!(error instanceof CarritoCaducado)) throw error;
         // Carrito purgado por Shopify: se crea uno nuevo y se reintenta UNA vez.
         await olvidarCarrito();
-        carrito = await crearCarrito(variante.id, cantidad);
+        carrito = await crearCarrito(variante.id, cantidad, atributos);
       }
     } else {
-      carrito = await crearCarrito(variante.id, cantidad);
+      carrito = await crearCarrito(variante.id, cantidad, atributos);
     }
 
     if (carrito.id) await guardarIdCarrito(carrito.id);

@@ -20,6 +20,7 @@ export const FRAGMENTO_CARRITO = /* GraphQL */ `
       nodes {
         id
         quantity
+        attributes { key value }
         cost {
           totalAmount { amount currencyCode }
           amountPerQuantity { amount currencyCode }
@@ -46,6 +47,9 @@ export const FRAGMENTO_CARRITO = /* GraphQL */ `
                 { namespace: "filtros", key: "tipo" },
                 { namespace: "filtros", key: "funcionamiento" }
               ]) { key value }
+              # Variante base (acero inoxidable): las de color (Standard / Custom
+              # Color) sacan su USD de lista en proporción a ella.
+              base: variants(first: 1) { nodes { compareAtPrice { amount currencyCode } price { amount currencyCode } } }
             }
           }
         }

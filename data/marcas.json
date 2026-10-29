@@ -1104,6 +1104,23 @@
       ]
     },
     {
+      "slug": "napoleon",
+      "nombre": "Napoleon",
+      "gama": [
+        "premium",
+        "residencial"
+      ],
+      "categorias": [
+        "asadores"
+      ],
+      "canal": "shopify",
+      "logo": "/assets/logos/napoleon.webp",
+      "foto": "/assets/photos/brands/napoleon-asadores.webp",
+      "fotoHero": "/assets/photos/brands/hero/napoleon-asadores.webp",
+      "logoHero": "/assets/logos/napoleon.webp",
+      "listas": []
+    },
+    {
       "slug": "nobili",
       "nombre": "Nobili",
       "gama": [

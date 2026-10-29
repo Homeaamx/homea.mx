@@ -69,6 +69,8 @@ function aLinea({ sku, cantidad }: LineaSim, tc: TipoCambio): LineaCarrito | nul
     marca: p.marca,
     imagen: p.imagen,
     ficha: p.ficha,
+    color: null,
+    tono: null,
     cantidad,
     precioUnitario: { monto: mxn, moneda: "MXN" },
     total: { monto: centavos(mxn * cantidad), moneda: "MXN" },

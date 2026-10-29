@@ -64,6 +64,8 @@ const CAMPOS_PRODUCTO = /* GraphQL */ `
       nodes {
         id
         sku
+        title
+        selectedOptions { name value }
         availableForSale
         quantityAvailable
         price { amount currencyCode }
@@ -165,6 +167,8 @@ interface ProductoRaw {
     nodes: {
       id: string;
       sku: string | null;
+      title?: string;
+      selectedOptions?: { name: string; value: string }[];
       availableForSale: boolean;
       quantityAvailable: number | null;
       price: { amount: string; currencyCode: string };
@@ -181,6 +185,17 @@ export interface ImagenVivo {
   alt: string;
   ancho: number;
   alto: number;
+}
+
+/** Una opción de color de la pieza (Alfresco: acero, Standard Color, Custom Color). */
+export interface ColorVivo {
+  variantId: string;
+  /** SKU de la variante: el modelo base para acero, `<modelo>-SC` / `<modelo>-CC` para los colores. */
+  sku: string;
+  nombre: string;
+  mxn: number;
+  mxnLista: number | null;
+  usdLista: number | null;
 }
 
 export interface ProductoVivo {
@@ -219,6 +234,14 @@ export interface ProductoVivo {
   enStock: boolean;
   /** Piezas disponibles en el inventario de Shopify (solo si está En stock y hay dato). */
   piezas: number | null;
+  /**
+   * Opciones de color con su precio, la base (acero) primero. Vacío si la pieza
+   * se vende en un solo acabado. Solo cambia el precio: no hay fotos por color
+   * (Carla, 2026-10-28).
+   */
+  colores: ColorVivo[];
+  /** Color de la variante, cuando la pieza se pidió por el SKU de un color (cotización). */
+  color?: string;
 }
 
 function lista(valor: string): string[] {
@@ -304,6 +327,27 @@ function normalizar(raw: ProductoRaw): ProductoVivo | null {
     else delete filtros.promocion;
   } else delete filtros.promocion;
   const enStock = (filtros.disponibilidad ?? []).includes("En stock");
+  // Variantes de color: comparten modelo y foto; el USD de cada una sale de la
+  // proporción de su precio de lista con el de la base (repreciar.ts la conserva).
+  const colorDe = (x: ProductoRaw["variants"]["nodes"][number]) =>
+    x.selectedOptions?.find((o) => o.name === "Color")?.value ?? null;
+  const listaDe = (x: ProductoRaw["variants"]["nodes"][number]) =>
+    Number.parseFloat((x.compareAtPrice ?? x.price).amount);
+  const colores: ColorVivo[] =
+    raw.variants.nodes.length > 1 && raw.variants.nodes.every((x) => colorDe(x))
+      ? raw.variants.nodes.map((x) => {
+          const precio = Number.parseFloat(x.price.amount);
+          const lista = x.compareAtPrice ? Number.parseFloat(x.compareAtPrice.amount) : null;
+          return {
+            variantId: x.id,
+            sku: x.sku ?? v.sku ?? "",
+            nombre: colorDe(x) as string,
+            mxn: precio,
+            mxnLista: lista && lista > precio ? lista : null,
+            usdLista: usdLista === null ? null : x === v ? usdLista : Math.round(usdLista * (listaDe(x) / listaDe(v))),
+          };
+        })
+      : [];
   return {
     sku: v.sku,
     slug: v.sku.toLowerCase(),
@@ -331,6 +375,7 @@ function normalizar(raw: ProductoRaw): ProductoVivo | null {
     instalacion,
     enStock,
     piezas: enStock && typeof v.quantityAvailable === "number" && v.quantityAvailable > 0 ? v.quantityAvailable : null,
+    colores,
   };
 }
 
@@ -384,16 +429,32 @@ export async function productoVivoPorSku(sku: string): Promise<ProductoVivo | nu
     for (const raw of data.products.nodes) {
       const p = normalizar(raw);
       if (p && p.sku.toUpperCase() === buscado) return p;
+      const enColor = p && conColor(p, buscado);
+      if (enColor) return enColor;
     }
   } catch (error) {
     console.warn(`[catalogo] Búsqueda de ${sku} sin respuesta:`, (error as Error).message);
   }
   const { TIPOS_WEB } = await import("./coleccionesWeb");
   for (const t of TIPOS_WEB) {
-    const p = (await productosDeColeccion(t.coleccion)).find((x) => x.sku.toUpperCase() === buscado);
-    if (p) return p;
+    for (const p of await productosDeColeccion(t.coleccion)) {
+      if (p.sku.toUpperCase() === buscado) return p;
+      const enColor = conColor(p, buscado);
+      if (enColor) return enColor;
+    }
   }
   return null;
+}
+
+/**
+ * La pieza vista como la variante de color de ese SKU (`ALXE56C-SC`): su precio,
+ * su variante y su color; la ficha (slug) sigue siendo la del modelo base. Lo usa
+ * la pre-cotización, que arma cada partida por SKU.
+ */
+function conColor(p: ProductoVivo, sku: string): ProductoVivo | null {
+  const c = p.colores.find((x) => x.sku.toUpperCase() === sku && x.variantId !== p.variantId);
+  if (!c) return null;
+  return { ...p, sku: c.sku, variantId: c.variantId, mxn: c.mxn, mxnLista: c.mxnLista, usdLista: c.usdLista, color: c.nombre };
 }
 
 /**

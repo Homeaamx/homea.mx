@@ -37,12 +37,16 @@ export interface VarianteRaw {
     featuredImage?: ImagenRaw | null;
     /** Solo en el carrito: `homea.precio_usd`, `filtros.disponibilidad` y los filtros de la línea de specs. */
     metafields?: ({ key: string; value: string } | null)[];
+    /** Solo en el carrito: la primera variante (acero), para escalar el USD de las de color. */
+    base?: { nodes: { price: DineroRaw; compareAtPrice: DineroRaw | null }[] };
   };
 }
 
 export interface LineaRaw {
   id: string;
   quantity: number;
+  /** Comentarios de la línea: el tono de Standard Color ("Tono"). */
+  attributes?: { key: string; value: string }[];
   cost: {
     totalAmount: DineroRaw;
     amountPerQuantity: DineroRaw;

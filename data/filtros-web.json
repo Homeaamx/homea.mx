@@ -1,5 +1,5 @@
 {
-  "_nota": "Orden y nombre visible de los filtros por Subcategoría 2 (= Tipo de producto en Shopify). Clave = metafield filtros.<clave>; \"marca\" = vendor, \"precio\" = precio. GENERADO desde FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx (OneDrive, columna E = orden propuesto) el 2026-10-06. Si cambia la tabla, se regenera. 2026-10-07: se añade filtros.bisagra (Bisagra / apertura) a refrigeración por indicación de Carla (prioritario en refrigeración y hornos). 2026-10-09: Bisagra / apertura también en Hornos y Microondas (hornos de velocidad), después de Diseño. 2026-10-12: se añade filtros.altura_ada (\"Altura\": Estándar / ADA) a Lavavajillas y a refrigeración (todas menos Accesorios), después de Ancho, por indicación de Carla. 2026-10-27: Microondas suma \"Tipo de instalación\" (Empotre · De cajón · De mesa · Sobre estufa; el de cajón lleva también Empotre) y \"Tipo de funcionamiento\" (solo Multifunción = horno + microondas; los convencionales van sin valor, porque Empotre / De cajón / De mesa / Sobre estufa ya lo implican) antes de Diseño, por indicación de Carla; Diseño se queda porque las fichas de Guías enlazan con diseno:*. 2026-10-27: Campanas suma los anchos 20\", 26\", 34\", 40\", 46\" y 72\" (catálogo Elica).",
+  "_nota": "Orden y nombre visible de los filtros por Subcategoría 2 (= Tipo de producto en Shopify). Clave = metafield filtros.<clave>; \"marca\" = vendor, \"precio\" = precio. GENERADO desde FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx (OneDrive, columna E = orden propuesto) el 2026-10-06. Si cambia la tabla, se regenera. 2026-10-07: se añade filtros.bisagra (Bisagra / apertura) a refrigeración por indicación de Carla (prioritario en refrigeración y hornos). 2026-10-09: Bisagra / apertura también en Hornos y Microondas (hornos de velocidad), después de Diseño. 2026-10-12: se añade filtros.altura_ada (\"Altura\": Estándar / ADA) a Lavavajillas y a refrigeración (todas menos Accesorios), después de Ancho, por indicación de Carla. 2026-10-27: Microondas suma \"Tipo de instalación\" (Empotre · De cajón · De mesa · Sobre estufa; el de cajón lleva también Empotre) y \"Tipo de funcionamiento\" (solo Multifunción = horno + microondas; los convencionales van sin valor, porque Empotre / De cajón / De mesa / Sobre estufa ya lo implican) antes de Diseño, por indicación de Carla; Diseño se queda porque las fichas de Guías enlazan con diseno:*. 2026-10-27: Campanas suma los anchos 20\", 26\", 34\", 40\", 46\" y 72\" (catálogo Elica). 2026-10-28: anchos de Artisan (Asadores 26\"; Quemador lateral 14\"; Gabinetes 15, 17, 20, 26, 36 y 42\"), aprobados por Carla. 2026-10-29: Uso (Cocina / Exterior) en Tarjas y Accesorios de Tarjas, Exterior en Monomandos, 23\" en Gabinetes y 56\" en Asadores (Alfresco).",
   "subcategorias": {
     "Refrigeradores": [
       {
@@ -1837,6 +1837,14 @@
         ]
       },
       {
+        "nombre": "Uso",
+        "clave": "uso",
+        "valores": [
+          "Cocina",
+          "Exterior"
+        ]
+      },
+      {
         "nombre": "Ancho",
         "clave": "ancho",
         "valores": [
@@ -1953,7 +1961,8 @@
         "valores": [
           "Cocina",
           "Para filtros de agua",
-          "Mixto"
+          "Mixto",
+          "Exterior"
         ]
       },
       {
@@ -2020,6 +2029,14 @@
           "Escurridor de platos",
           "Escurridor de verduras",
           "Rejilla de fondo"
+        ]
+      },
+      {
+        "nombre": "Uso",
+        "clave": "uso",
+        "valores": [
+          "Cocina",
+          "Exterior"
         ]
       },
       {
@@ -2253,12 +2270,14 @@
         "nombre": "Ancho",
         "clave": "ancho",
         "valores": [
+          "26\"",
           "30\"",
           "32\"",
           "36\"",
           "42\"",
           "51\"",
-          "54\""
+          "54\"",
+          "56\""
         ]
       },
       {
@@ -2481,6 +2500,7 @@
         "clave": "ancho",
         "valores": [
           "13\"",
+          "14\"",
           "15\"",
           "20\"",
           "24\"",
@@ -2765,13 +2785,20 @@
         "nombre": "Ancho",
         "clave": "ancho",
         "valores": [
+          "15\"",
+          "17\"",
           "18\"",
+          "20\"",
           "21\"",
+          "23\"",
           "24\"",
+          "26\"",
           "28\"",
           "30\"",
           "32\"",
-          "40\""
+          "36\"",
+          "40\"",
+          "42\""
         ]
       },
       {

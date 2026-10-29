@@ -46,7 +46,7 @@ const NOMBRES = {
   delta: "Delta", eclipse: "Eclipse",
   "kele-master-sinks": "Kele Master Sinks", insinkerator: "InSinkErator",
   lynx: "Lynx", "sedona-by-lynx": "Sedona by Lynx", alfresco: "Alfresco",
-  coyote: "Coyote", artisan: "Artisan", "alfa-forni": "Alfa Forni", blaze: "Blaze",
+  coyote: "Coyote", artisan: "Artisan", napoleon: "Napoleon", "alfa-forni": "Alfa Forni", blaze: "Blaze",
   "kamado-joe": "Kamado Joe", masterbuilt: "Masterbuilt", wppo: "WPPO",
   "mont-alpi": "Mont Alpi", "broil-king": "Broil King",
   "i-drain": "I-Drain", "mr-steam": "Mr. Steam", acros: "Acros",

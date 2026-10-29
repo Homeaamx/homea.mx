@@ -36,6 +36,10 @@ export interface LineaCarrito {
   enStock: boolean;
   /** Línea / serie de la pieza ("Serie 400"), si el título la trae. */
   serie: string | null;
+  /** Color elegido (Standard / Custom Color), si la pieza se vende en varios colores. */
+  color: string | null;
+  /** Tono de Standard Color ("1023 Traffic Yellow"), anotado en la línea. */
+  tono: string | null;
   /** Línea de specs de la tarjeta ("30\" · Inducción · Modulares"), sin el SKU. */
   spec: string;
   /**

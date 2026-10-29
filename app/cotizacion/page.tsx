@@ -46,7 +46,7 @@ export default async function CotizacionPage(props: { searchParams: Promise<Reco
     Object.entries(sp).flatMap(([k, v]) => (typeof v === "string" ? [[k, v] as [string, string]] : [])),
   ).toString()}`;
 
-  const partidas: PartidaCotizacion[] = (await Promise.all(refs.map((r) => armarPartida(r.sku, r.cantidad)))).filter(
+  const partidas: PartidaCotizacion[] = (await Promise.all(refs.map((r) => armarPartida(r.sku, r.cantidad, r.tono)))).filter(
     (x) => x !== null,
   );
   // Mismo texto que manda el modal de "Mi proyecto" (lib/cotizacion.ts).

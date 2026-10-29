@@ -2253,5 +2253,18 @@
  "/assets/photos/subcat-tiles/lavavajillas-de-piso-acero-inoxidable.webp": [
   400,
   640
+ ],
+ "/assets/photos/brands/hero/napoleon-asadores.webp": [
+  400,
+  640,
+  960,
+  1280,
+  1600,
+  2000
+ ],
+ "/assets/photos/brands/napoleon-asadores.webp": [
+  400,
+  640,
+  700
  ]
 }

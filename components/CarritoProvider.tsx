@@ -102,11 +102,11 @@ export default function CarritoProvider({ children }: { children?: ReactNode }) 
 
   /* ---------- Acciones ---------- */
   const agregar = useCallback(
-    (vid: string, sku: string, cantidad = 1) => {
+    (vid: string, sku: string, cantidad = 1, tono = "") => {
       const turno = ++secuencia.current;
       setAviso(undefined);
       setAbierto(true);
-      iniciar(async () => aplicar(turno, await agregarAlCarrito(vid, sku, cantidad)));
+      iniciar(async () => aplicar(turno, await agregarAlCarrito(vid, sku, cantidad, tono)));
     },
     [aplicar],
   );
@@ -163,10 +163,12 @@ export default function CarritoProvider({ children }: { children?: ReactNode }) 
         ev.preventDefault();
         const vid = alta.getAttribute("data-cart-vid") ?? "";
         const sku = alta.getAttribute("data-cart-sku") ?? "";
+        // Tono de Standard Color (Alfresco): comentario de la línea del pedido.
+        const tono = alta.getAttribute("data-cart-tono") ?? "";
         // Selector de unidades junto al botón (ficha): si no hay, una pieza.
         const campo = alta.closest(".pdp-cta")?.querySelector<HTMLInputElement>("[data-cart-qty]");
         const cantidad = Math.min(99, Math.max(1, Number.parseInt(campo?.value ?? "1", 10) || 1));
-        if (vid || sku) agregar(vid, sku, cantidad);
+        if (vid || sku) agregar(vid, sku, cantidad, tono);
         return;
       }
 

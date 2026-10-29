@@ -16,6 +16,7 @@
 // datos de Shopify: cada pieza sabe si se compra en línea o se cotiza, y el
 // proyecto completo es `checkout` solo si todas se compran.
 
+import { ATRIBUTO_TONO } from "@/lib/coloresMarca";
 import { IVA, productoPorSku } from "@/lib/catalogo";
 import { IMAGEN_RESPALDO } from "@/lib/imagenRespaldo";
 import { decidirCompra, montoAlto } from "@/lib/reglas/reglaMarca";
@@ -38,8 +39,25 @@ const centavos = (n: number) => Math.round(n * 100) / 100;
 function usdLista(variante: VarianteRaw): number | null {
   const m = variante.product?.metafields?.find((x) => x?.key === "precio_usd");
   const n = m ? Number.parseFloat(m.value) : NaN;
-  return Number.isFinite(n) && n > 0 ? n : null;
+  if (!(Number.isFinite(n) && n > 0)) return null;
+  // `homea.precio_usd` es el de la variante base (acero). Las de color (Standard /
+  // Custom Color de Alfresco) guardan la misma proporción en pesos que en la
+  // lista en dólares (repreciar.ts la conserva), así que su USD sale de ahí.
+  const base = variante.product?.base?.nodes[0];
+  const listaDe = (v: { price: DineroRaw; compareAtPrice?: DineroRaw | null }) =>
+    Number.parseFloat((v.compareAtPrice ?? v.price).amount);
+  if (base) {
+    const escala = listaDe(variante) / listaDe(base);
+    if (Number.isFinite(escala) && Math.abs(escala - 1) > 0.001) return Math.round(n * escala);
+  }
+  return n;
 }
+
+/** Color elegido ("Standard Color"), si la pieza se vende en varios colores. */
+function colorDe(variante: VarianteRaw): string | null {
+  return variante.title && variante.title !== "Default Title" ? variante.title : null;
+}
+
 
 /** `filtros.disponibilidad` = ["En stock"] → inventario físico (y por tanto comprable). */
 function enStock(variante: VarianteRaw): boolean {
@@ -170,6 +188,8 @@ function aLinea(raw: CarritoRaw["lines"]["nodes"][number]): LineaCarrito {
     maximo: v.quantityAvailable,
     enStock: stock,
     serie: serieDe(v.product.title || ""),
+    color: colorDe(v),
+    tono: raw.attributes?.find((a) => a.key === ATRIBUTO_TONO)?.value || null,
     spec: specDe(v),
     precioPublico,
     decision,

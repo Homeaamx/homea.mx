@@ -1,6 +1,6 @@
 # Páginas de marca — `/marcas/<slug>`
 
-> Una página por marca: **83** hoy (65 SHOPIFY · 18 PDF, desde el 2026-10-22; el 2026-09-22 se quitaron AXOR, TRES, Pizarro, Artexa Bath y Hergom Diseño, el 2026-10-06 Elkay y el 2026-10-08 La Cornue y U-Line, el 2026-10-22 ASKO, Firplak, Foster, Fontana, Poletti Sinks y Sapphire). Una marca SHOPIFY sin piezas publicadas no enseña tienda: solo hero (con su PDF si lo tiene) y el cierre a WhatsApp, como las PDF (2026-10-22). Todas salen de
+> Una página por marca: **84** hoy (66 SHOPIFY · 18 PDF; Napoleon se agregó el 2026-10-29; el 2026-09-22 se quitaron AXOR, TRES, Pizarro, Artexa Bath y Hergom Diseño, el 2026-10-06 Elkay y el 2026-10-08 La Cornue y U-Line, el 2026-10-22 ASKO, Firplak, Foster, Fontana, Poletti Sinks y Sapphire). Una marca SHOPIFY sin piezas publicadas no enseña tienda: solo hero (con su PDF si lo tiene) y el cierre a WhatsApp, como las PDF (2026-10-22). Todas salen de
 > la **misma ruta** (`app/(es)/marcas/[marca]/page.tsx`) y del **mismo registro** (`data/marcas.json`).
 > Cambia el logo, la foto, las categorías, las listas de precios y el **canal**; el armazón es idéntico.
 >
