@@ -94,7 +94,7 @@ export default function MiProyectoPagina() {
                       </h3>
                       <span className="sel-sku figures">
                         <b>Modelo</b>
-                        {l.sku}
+                        <span className="es-modelo">{l.sku}</span>
                         {l.color ? ` · ${l.color}` : ""}
                         {l.tono ? ` · ${l.tono}` : ""}
                       </span>
@@ -109,10 +109,10 @@ export default function MiProyectoPagina() {
                         regla, cantidad en control segmentado e importe. */}
                     <div className="mp-datos">
                     <div className={`mp-precio${ocupado ? " is-pendiente" : ""}`}>
-                      <strong className="figures">{formatearDinero(l.precioPublico.venta)}</strong>
+                      <strong className="figures es-precio">{formatearDinero(l.precioPublico.venta)}</strong>
                       <span className="mp-iva">IVA incl.</span>
                       {l.precioPublico.tachado ? (
-                        <s className="figures">{formatearDinero(l.precioPublico.tachado)}</s>
+                        <s className="figures es-precio">{formatearDinero(l.precioPublico.tachado)}</s>
                       ) : null}
                     </div>
 
@@ -146,7 +146,7 @@ export default function MiProyectoPagina() {
                     <div className={`mp-fila${ocupado ? " is-pendiente" : ""}`}>
                       <span className="mp-lbl">Importe</span>
                       <span className="mp-val">
-                        <strong className="figures">{formatearDinero(importeDe(l))}</strong>
+                        <strong className="figures es-precio">{formatearDinero(importeDe(l))}</strong>
                         <span className="mp-iva">IVA incl.</span>
                       </span>
                     </div>

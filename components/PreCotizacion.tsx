@@ -140,7 +140,7 @@ export default function PreCotizacion({ folio, fechaIso, partidas, datos, editab
           {partidas.map((p) => (
             <tr key={p.sku}>
               <td className="num figures" data-l="Cantidad">{p.cantidad}</td>
-              <td className="figures pc-sku" data-l="Modelo">{p.sku}</td>
+              <td className="figures pc-sku es-modelo" data-l="Modelo">{p.sku}</td>
               <td className="pc-desc">
                 <div className="pc-desc-in">
                 <strong>
@@ -154,12 +154,12 @@ export default function PreCotizacion({ folio, fechaIso, partidas, datos, editab
                 </span>
                 </div>
               </td>
-              <td className="num figures" data-l="P/U sin IVA">
+              <td className="num figures es-precio" data-l="P/U sin IVA">
                 {num(p.lista)}
                 {mixta ? <em className="pc-mon">{p.moneda}</em> : null}
               </td>
-              <td className="num figures" data-l="Desc.">{p.descuento > 0 ? num(p.descuento) : "—"}</td>
-              <td className="num figures" data-l="Importe sin IVA">
+              <td className="num figures es-precio" data-l="Desc.">{p.descuento > 0 ? num(p.descuento) : "—"}</td>
+              <td className="num figures es-precio" data-l="Importe sin IVA">
                 {num(importeDe(p))}
                 {mixta ? <em className="pc-mon">{p.moneda}</em> : null}
               </td>
@@ -190,19 +190,19 @@ export default function PreCotizacion({ folio, fechaIso, partidas, datos, editab
               ) : null}
               <div className="cart-subtotal">
                 <span>Subtotal sin IVA</span>
-                <span className="figures">{num(t.subtotal)} {t.moneda}</span>
+                <span className="figures es-precio">{num(t.subtotal)} {t.moneda}</span>
               </div>
               <div className="cart-subtotal proy-ahorro">
                 <span>Ahorro</span>
-                <span className="figures">−{num(t.ahorro)} {t.moneda}</span>
+                <span className="figures es-precio">−{num(t.ahorro)} {t.moneda}</span>
               </div>
               <div className="cart-subtotal">
                 <span>IVA (16 %)</span>
-                <span className="figures">{num(t.iva)} {t.moneda}</span>
+                <span className="figures es-precio">{num(t.iva)} {t.moneda}</span>
               </div>
               <div className="cart-subtotal proy-total">
                 <span>{t.moneda === "USD" ? "Total estimado · IVA incl." : "Total en pesos · IVA incl."}</span>
-                <span className="cart-subtotal-num figures">
+                <span className="cart-subtotal-num figures es-precio">
                   {num(t.total)} {t.moneda}
                 </span>
               </div>

@@ -115,7 +115,7 @@ export default function CarritoDrawer({
                   </a>
                   {/* 3 · Modelo / SKU */}
                   <span className="proy-sku figures">
-                    Modelo {linea.sku}
+                    Modelo <span className="es-modelo">{linea.sku}</span>
                     {linea.color ? ` · ${linea.color}` : ""}
                     {linea.tono ? ` · ${linea.tono}` : ""}
                   </span>
@@ -127,12 +127,12 @@ export default function CarritoDrawer({
                   </span>
                   {/* 5 · Precio final con IVA · 6 · Precio tachado */}
                   <span className={`wl-price figures${ocupado ? " is-pendiente" : ""}`}>
-                    <span className="proy-venta">
+                    <span className="proy-venta es-precio">
                       {formatearDinero(linea.precioPublico.venta)}
                       <span className="proy-iva"> IVA incl.</span>
                     </span>
                     {linea.precioPublico.tachado ? (
-                      <s className="proy-was">{formatearDinero(linea.precioPublico.tachado)}</s>
+                      <s className="proy-was es-precio">{formatearDinero(linea.precioPublico.tachado)}</s>
                     ) : null}
                   </span>
                   {/* 7 · Cantidad */}
@@ -160,7 +160,7 @@ export default function CarritoDrawer({
                       +
                     </button>
                     {linea.cantidad > 1 ? (
-                      <span className={`proy-linea-total figures${ocupado ? " is-pendiente" : ""}`}>
+                      <span className={`proy-linea-total figures es-precio${ocupado ? " is-pendiente" : ""}`}>
                         ={" "}
                         {formatearDinero({
                           monto: Math.round(linea.precioPublico.venta.monto * linea.cantidad * 100) / 100,

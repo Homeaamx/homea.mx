@@ -65,7 +65,7 @@ const CORAZON =
 const MAS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
 
 /* Disponibilidad (Carla, 2026-10-22): ícono + texto. En stock = palomita en
-   círculo sobre dorado intenso; Bajo pedido = reloj. Las mismas figuras van en
+   círculo sobre verde olivo (2026-10-29); Bajo pedido = reloj sobre rojo oscuro. Las mismas figuras van en
    public/wishlist.js. */
 const ICONO_STOCK =
   '<svg class="pcard-tag-ic" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.2" fill="currentColor"/><path class="ic-check" d="m4.9 8.2 2.1 2.1 4.1-4.4" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -75,7 +75,9 @@ const ICONO_PEDIDO =
 /** Etiqueta En stock / Bajo pedido y, con inventario, cuántas piezas quedan. */
 function etiquetaDisponibilidad(p: ProductoVivo, clase = ""): string {
   const extra = clase ? ` ${clase}` : "";
-  if (!p.enStock) return `<span class="pcard-tag${extra} is-pedido">${ICONO_PEDIDO}Bajo pedido</span>`;
+  // Las dos van en .pcard-disp: en la tarjeta la etiqueta ocupa el mismo renglón
+  // de 34px (alineada con "+" y corazón) haya o no piezas debajo.
+  if (!p.enStock) return `<span class="pcard-disp"><span class="pcard-tag${extra} is-pedido">${ICONO_PEDIDO}Bajo pedido</span></span>`;
   const piezas = p.piezas
     ? `<span class="pcard-piezas figures">${p.piezas === 1 ? "Queda 1 pieza" : `Quedan ${p.piezas} piezas`}</span>`
     : "";
@@ -170,6 +172,8 @@ function precioTarjeta(precio: PrecioPublico): string {
 }
 
 export function precioFichaHtml(precio: PrecioPublico, tc: TipoCambio): string {
+  // El % de descuento va en píldora junto al precio final (Carla, 2026-10-30).
+  const pct = porcentajeDescuento(precio);
   const tachado = precio.tachado
     ? `<s class="pdp-was figures">$${dinero(precio.tachado)} ${precio.moneda}</s>`
     : "";
@@ -180,7 +184,7 @@ export function precioFichaHtml(precio: PrecioPublico, tc: TipoCambio): string {
   // Orden (Carla, 2026-10-13): precio final con moneda · tachado · IVA INCLUIDO ·
   // equivalencia en pesos. Igual que la tarjeta.
   return `<div class="pdp-precio">
-      <span class="price-big figures"><b>$${dinero(precio.venta)}</b><span class="currency">${precio.moneda}</span></span>
+      <span class="price-big figures"><b>$${dinero(precio.venta)}</b><span class="currency">${precio.moneda}</span></span>${pct ? `<span class="pdp-desc-pct figures">−${pct}%</span>` : ""}
       ${tachado}
       <span class="pdp-iva">IVA incluido</span>
       ${equivalencia}
@@ -243,21 +247,29 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
 
   const { nombre, serie } = nombreYSerie(p.titulo);
   const stock = etiquetaDisponibilidad(p);
+  const pct = porcentajeDescuento(precio);
 
-  // Solo lo que decide una compra, en este orden (Carla, 2026-10-06): marca y
-  // línea · disponibilidad · nombre · modelo · precio tachado y precio final.
-  // La foto ocupa todo el recuadro (2026-10-08): disponibilidad y corazón van
-  // en el renglón superior del cuerpo, nunca encima del aparato.
+  // Solo lo que decide una compra, en este orden (Carla, 2026-10-06): marca ·
+  // línea con el modelo a la derecha (2026-10-29; el renglón va aunque no haya
+  // línea, para que los nombres alineen entre tarjetas) · disponibilidad · nombre ·
+  // precio final y tachado. La foto ocupa todo el recuadro (2026-10-08):
+  // disponibilidad y corazón van en el renglón superior del cuerpo; sobre la
+  // foto solo el % de descuento, en la esquina derecha (2026-10-29).
   return `<a class="pcard" href="${href}" ${atributos.join(" ")} data-accion="${decision.accion}">
-  <div class="imgw cutout">${imagen}</div>
+  <div class="imgw cutout">${imagen}${pct ? `<span class="pcard-desc figures">−${pct}%</span>` : ""}</div>
   <div class="body">
     <div class="pcard-top">${stock}<span class="pcard-acc">${botonAgregarTarjeta(p, precio, img)}<button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(spec.join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${img ? esc(cdn(img.url, 400)) : ""}" data-wl-href="${href}" data-wl-tipo="${esc(p.tipo)}" data-wl-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-wl-stock="${p.enStock ? 1 : 0}" data-wl-was="${precio.tachado ? esc(`$${dinero(precio.tachado)} ${precio.moneda}`) : ""}" data-wl-mxn="${precio.mxnEquivalente ?? precio.venta}" data-tip="Agregar a mi Wishlist" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button></span></div>
-    <div class="pcard-head"><span class="brand">${esc(p.marca)}</span>${serie ? `<span class="pcard-serie">${esc(serie)}</span>` : ""}</div>
+    <div class="pcard-head"><span class="brand">${esc(p.marca)}</span><div class="pcard-linea"><span class="pcard-serie">${esc(serie ?? "")}</span><span class="pcard-sku figures">${esc(p.sku)}</span></div></div>
     <h3 class="pcard-name">${esc(nombre)}</h3>
-    <span class="pcard-sku figures">${esc(p.sku)}</span>
     ${precioTarjeta(precio)}
   </div>
 </a>`;
+}
+
+/** % de descuento entre el tachado y el precio final (entero); 0 si no hay. */
+function porcentajeDescuento(precio: PrecioPublico): number {
+  if (!precio.tachado || precio.tachado <= precio.venta) return 0;
+  return Math.round((1 - precio.venta / precio.tachado) * 100);
 }
 
 /**
@@ -727,12 +739,6 @@ function tituloH1(titulo: string): string {
   return `<b>${esc(nombreYSerie(titulo).nombre)}</b>`;
 }
 
-/** Renglón bajo el título: la línea a la izquierda y el modelo a la derecha. */
-function serieYModeloHtml(p: ProductoVivo): string {
-  const { serie } = nombreYSerie(p.titulo);
-  return `<div class="pdp-serie-row"><span class="pdp-h1-serie">${serie ? esc(serie) : ""}</span><span class="pdp-sku figures"><span class="pdp-sku-lbl">Modelo</span> ${esc(p.sku)}</span></div>`;
-}
-
 /**
  * Descripción de Shopify con su marcado, pero solo etiquetas de texto: párrafos,
  * listas, negritas y saltos. Todo lo demás (scripts, estilos, atributos) se quita.
@@ -748,7 +754,30 @@ function htmlSeguro(html: string): string {
     });
 }
 
-/** Pestañas bajo la galería: Características · Dimensiones · Fichas técnicas. */
+/**
+ * Pestaña "Descripción" de la ficha: el párrafo de entrada a la
+ * izquierda y las viñetas a la derecha, en dos columnas.
+ */
+function descripcionHtml(p: ProductoVivo): string {
+  const html = p.descripcionHtml
+    ? htmlSeguro(p.descripcionHtml)
+    : p.descripcion
+      ? `<p>${esc(p.descripcion).replace(/\n+/g, "</p><p>")}</p>`
+      : "";
+  if (!html) return "";
+  const listas = html.match(/<(ul|ol)>[\s\S]*?<\/\1>/g) ?? [];
+  const intro = listas.reduce((resto, l) => resto.replace(l, ""), html);
+  return `<div class="pdp-desc2${listas.length ? "" : " is-sola"}">
+          <div class="pdp-desc2-intro"><div class="eyebrow">Descripción</div><h2 class="pdp-desc2-t">${esc(nombreYSerie(p.titulo).nombre)}</h2>${intro}</div>
+          ${listas.length ? `<div class="pdp-desc2-lista">${listas.join("")}</div>` : ""}
+        </div>`;
+}
+
+/**
+ * Pestañas de la ficha, a todo lo ancho bajo la foto y la compra (Carla,
+ * 2026-10-30): Descripción · Características · Dimensiones (en recuadros) ·
+ * Especificaciones técnicas (fichas técnicas).
+ */
 function pestanasHtml(p: ProductoVivo, spec: string): string {
   const filas = (lista: { nombre: string; valor: string }[]) =>
     lista
@@ -757,14 +786,22 @@ function pestanasHtml(p: ProductoVivo, spec: string): string {
           `<div class="spec-row"><span class="spec-label">${esc(d.nombre)}</span><span class="spec-value figures">${esc(d.valor)}</span></div>`,
       )
       .join("\n");
+  // Cada medida en su recuadro; "83 3/4" (212.7 cm)" → cifra grande + cm abajo.
+  const recuadros = (lista: { nombre: string; valor: string }[]) =>
+    `<div class="pdp-medidas">${lista
+      .map((d) => {
+        const m = d.valor.match(/^(.*?)\s*\(([^)]*)\)\s*$/);
+        return `<div class="pdp-medida"><span class="pdp-medida-k">${esc(d.nombre)}</span><span class="pdp-medida-v figures">${esc(m ? m[1] : d.valor)}</span>${m ? `<span class="pdp-medida-m figures">${esc(m[2])}</span>` : ""}</div>`;
+      })
+      .join("")}</div>`;
   // Solo las medidas DEL PRODUCTO (alto, ancho, profundidad, peso; Carla,
   // 2026-10-13). Nicho, corte, cable… pasan a Características.
   const { producto: medidas } = clasificarDimensiones(p.dimensiones);
   const dimProducto = medidas.length
-    ? `<h6 class="pdp-tab-sub">Dimensiones del producto</h6><div class="spec">${filas(medidas)}</div>`
+    ? `<h6 class="pdp-tab-sub">Dimensiones del producto</h6>${recuadros(medidas)}`
     : "";
   const dimEmpaque = p.empaque.length
-    ? `<h6 class="pdp-tab-sub">Dimensiones del empaque</h6><div class="spec">${filas(p.empaque)}</div>`
+    ? `<h6 class="pdp-tab-sub">Dimensiones del empaque</h6>${recuadros(p.empaque)}`
     : "";
   const dimensiones =
     dimProducto || dimEmpaque
@@ -779,16 +816,18 @@ function pestanasHtml(p: ProductoVivo, spec: string): string {
     ...p.instalacion.map((f, i) => boton(f, "Instrucciones de instalación", i + 1)),
   ];
   const fichas = docs.length
-    ? `<div class="pdp-docs">${docs.join("")}</div>`
+    ? `<h6 class="pdp-tab-sub">Fichas técnicas</h6><div class="pdp-docs">${docs.join("")}</div>`
     : `<p class="pdp-tab-aviso">Para más información sobre las especificaciones técnicas de este producto, favor de contactar a tu asesor de ventas.</p>`;
 
+  const descripcion = descripcionHtml(p);
   const tabs: [string, string, string][] = [
+    ...(descripcion ? [["descripcion", "Descripción", descripcion] as [string, string, string]] : []),
     [
       "caracteristicas",
       "Características",
       // Las medidas de nicho / instalación NO se pintan en texto (Carla,
       // 2026-10-13): para eso están las fichas técnicas.
-      `<div class="spec">${spec}</div>`,
+      `<h6 class="pdp-tab-sub">Características</h6><div class="spec">${spec}</div>`,
     ],
     ["dimensiones", "Dimensiones", dimensiones],
     ["fichas", "Especificaciones técnicas", fichas],
@@ -843,21 +882,14 @@ export function fichaHtml(
             : [`<a href="${migaTipo.ruta}" style="color:var(--fg-muted);border-bottom:none">${esc(migaTipo.nombre)}</a>`]),
         ]
       : []),
-    `<span class="figures">${esc(p.marca)} ${esc(p.sku)}</span>`,
-  ].join('<span class="sep" style="color:var(--homea-gold);padding:0 .6em">·</span>');
+    `<span class="figures">${esc(p.marca)} <span class="es-modelo">${esc(p.sku)}</span></span>`,
+  ].join('<span class="sep" aria-hidden="true" style="color:var(--fg-muted);padding:0 .7em">›</span>');
 
   const logo = logoDeMarca(p.marca);
   const cabecera = logo
     ? `<img class="pdp-logo${logo.sinFondo ? " is-sin-fondo" : ""}" data-marca="${esc(logo.slug)}" src="${esc(logo.ruta)}" alt="${esc(p.marca)}" loading="eager" decoding="async">`
     : `<div class="eyebrow">${esc(p.marca)}</div>`;
   const etiquetaStock = etiquetaDisponibilidad(p, "pdp-tag");
-  const descripcionLarga = p.descripcionHtml || p.descripcion
-    ? `<div class="pdp-desc"><div class="eyebrow">Descripción</div>${
-        p.descripcionHtml
-          ? htmlSeguro(p.descripcionHtml)
-          : `<p>${esc(p.descripcion).replace(/\n+/g, "</p><p>")}</p>`
-      }</div>`
-    : "";
 
   const imagenPrincipal = principal
     ? `<img id="pdp-img" width="${principal.ancho}" height="${principal.alto}" srcset="${srcsetCdn(principal.url, principal.ancho)}" sizes="(max-width: 700px) 100vw, 50vw" fetchpriority="high" decoding="async" src="${cdn(principal.url, 960)}" alt="${esc(principal.alt)}">`
@@ -874,14 +906,18 @@ export function fichaHtml(
       ? `<button type="button" class="pdp-nav pdp-prev" data-pdp-prev aria-label="Imagen anterior">${chevron("prev")}</button><button type="button" class="pdp-nav pdp-next" data-pdp-next aria-label="Imagen siguiente">${chevron("next")}</button>`
       : "";
 
+  // Se ven 5 miniaturas; si hay más, la quinta lleva "+N" y abre la galería ampliada.
+  const fotos = [principal, ...resto];
+  const masFotos = fotos.length > 5 ? fotos.length - 4 : 0;
   const miniaturas = principal && resto.length
-    ? `<div class="pdp-thumbs" role="list">${[principal, ...resto]
+    ? `<div class="pdp-thumbs" role="list">${fotos
         .map(
           (im, i) =>
-            `<button type="button" class="pdp-thumb${i === 0 ? " is-active" : ""}" role="listitem" data-src="${esc(cdn(im.url, 960))}" data-srcset="${esc(srcsetCdn(im.url, im.ancho))}" data-alt="${esc(im.alt)}" aria-label="Ver imagen ${i + 1}"><img src="${esc(cdn(im.url, 160))}" alt="" loading="lazy" decoding="async"></button>`,
+            `<button type="button" class="pdp-thumb${i === 0 ? " is-active" : ""}" role="listitem" data-src="${esc(cdn(im.url, 960))}" data-srcset="${esc(srcsetCdn(im.url, im.ancho))}" data-alt="${esc(im.alt)}"${masFotos && i === 4 ? ` data-pdp-mas="+${masFotos}" aria-label="Ver las ${masFotos} imágenes restantes"` : ` aria-label="Ver imagen ${i + 1}"`}><img src="${esc(cdn(im.url, 160))}" alt="" loading="lazy" decoding="async"></button>`,
         )
         .join("")}</div>`
     : "";
+  const ampliar = `<button type="button" class="pdp-ampliar" data-pdp-zoom aria-label="Ampliar imagen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5M4 4l6 6M20 4l-6 6M4 20l6-6M20 20l-6-6"/></svg></button>`;
 
   const filas: [string, string][] = [
     ["Marca", p.marca],
@@ -894,10 +930,11 @@ export function fichaHtml(
   filas.push(["Modelo", p.sku]);
   filas.push(["Disponibilidad", p.enStock ? "En stock · entrega inmediata" : "Bajo pedido · importación"]);
 
+  // El modelo va en la fuente de precios y modelos (HK Grotesk, .es-modelo).
   const spec = filas
     .map(
       ([k, v]) =>
-        `<div class="spec-row"><span class="spec-label">${esc(k)}</span><span class="spec-value figures">${esc(v)}</span></div>`,
+        `<div class="spec-row"><span class="spec-label">${esc(k)}</span><span class="spec-value figures${k === "Modelo" ? " es-modelo" : ""}">${esc(v)}</span></div>`,
     )
     .join("\n        ");
 
@@ -923,32 +960,32 @@ ${relacionados.productos.map((r, i) => tarjetaHtml(r, tc, i)).join("\n")}
   // (Carla, 2026-10-23); antes iba sobre la foto.
   const corazonFicha = `<button class="wl-heart pdp-wl" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(lineaSpec(p).join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${principal ? esc(cdn(principal.url, 400)) : ""}" data-wl-href="${href}" data-wl-tipo="${esc(p.tipo)}" data-wl-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-wl-stock="${p.enStock ? 1 : 0}" data-wl-was="${precio.tachado ? esc(`$${dinero(precio.tachado)} ${precio.moneda}`) : ""}" data-wl-mxn="${precio.mxnEquivalente ?? precio.venta}" data-tip="Agregar a mi Wishlist" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button>`;
 
-  return `<section class="sec tight" style="padding-top:40px"><div class="container">
-  <div class="crumbs" style="font-size:12px;color:var(--fg-muted);margin-bottom:36px">${migas}</div>
+  const { serie } = nombreYSerie(p.titulo);
+  // Ficha (mockup "Ficha de producto — primera pantalla", Carla 2026-10-30):
+  // foto, modelo, precio y "Agregar a mi proyecto" caben en la primera pantalla;
+  // la disponibilidad va junto al corazón y las pestañas, a todo lo ancho debajo.
+  return `<section class="sec tight pdp-sec--v2" style="padding-top:16px"><div class="container">
+<div class="crumbs" style="font-size:12.5px;color:var(--fg-muted);margin-bottom:16px">${migas}</div>
 
-  <div class="pdp">
-    <div class="gallery">
-      <div class="gallery-sticky">
-      <div class="pdp-stage"><div class="main pdp-cutout" data-pdp-zoom role="button" tabindex="0" aria-label="Ampliar imagen">${imagenPrincipal}</div>${flechasGaleria}</div>
-      ${miniaturas}
-      </div>
-      ${pestanasHtml(p, spec)}
-    </div>
-    <div class="info">
-      <div class="pdp-cabecera">${cabecera}${corazonFicha}</div>
-      <span class="rule-gold"></span>
-      <div class="pdp-titulo"><h1>${tituloH1(p.titulo)}</h1>${etiquetaStock}</div>
-      ${serieYModeloHtml(p)}
-      ${precioYColorHtml(p, precio, tc)}
-      ${descripcionLarga}
-
-      ${ctaHtml(p, decision, precio)}
+<div class="pdp pdp--v2">
+  <div class="gallery">
+    <div class="gallery-sticky">
+    <div class="pdp-stage"><div class="main pdp-cutout" data-pdp-zoom role="button" tabindex="0" aria-label="Ampliar imagen">${imagenPrincipal}</div>${flechasGaleria}${ampliar}</div>
+    ${miniaturas}
     </div>
   </div>
-</div></section>
+  <div class="info">
+    <div class="pdp-cabecera">${cabecera}<span class="pdp-cab-acc">${etiquetaStock}${corazonFicha}</span></div>
+    <span class="rule-gold"></span>
+    <div class="pdp-titulo"><h1>${tituloH1(p.titulo)}</h1></div>
+    <p class="pdp-modelo">Modelo: <span class="figures">${esc(p.sku)}</span>${serie ? `<span class="pdp-modelo-sep" aria-hidden="true">|</span><span class="pdp-modelo-serie">${esc(serie)}</span>` : ""}</p>
+    ${precioYColorHtml(p, precio, tc)}
 
-<!-- Aquí irá la conexión a Syndigo (contenido enriquecido del fabricante) para las
-     marcas que la tengan; mientras, se pasa directo a Productos relacionados. -->
+    ${ctaHtml(p, decision, precio)}
+  </div>
+</div>
+<div class="pdp-tabs-v2">${pestanasHtml(p, spec)}</div>
+</div></section>
 
 ${relacionadosHtml}`;
 }

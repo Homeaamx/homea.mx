@@ -4897,3 +4897,225 @@ body:has(:is([data-newsletter="ofertas"], [data-newsletter="guias"])) .site-foot
 .pcard[data-cat-card] .imgw.cutout img.is-respaldo,
 .pcard[data-cat-card]:hover .imgw.cutout img.is-respaldo,
 .pdp .gallery .main #pdp-img.is-respaldo { mix-blend-mode: normal; }
+
+/* ---------- 2026-10-29 (Carla): tarjeta — modelo a la derecha, precio más grande, % de descuento ----------
+   La línea y el modelo comparten renglón (modelo pegado a la derecha) y el precio
+   sube a donde estaba el modelo. Precio final 20px bold. El tachado va dibujado un
+   poco abajo del centro para que se lean las cifras. Serie y etiqueta "Modelo" del
+   mismo tono, el modelo un tono más oscuro; los dos a 12px. En stock = verde olivo
+   (--homea-success, 5.5:1 con blanco); Bajo pedido se queda en su tono (#4A3F36).
+   El % de descuento va en píldora en la esquina de la foto, rojo vivo pero mate. */
+:root {
+  --homea-stock: var(--homea-success);
+  --homea-desc: #BE3A2C;
+}
+.pcard-head .pcard-linea { align-self: stretch; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; min-width: 0; }
+/* Modelo (solo el SKU) a la derecha de la línea, un tono más oscuro que ella. El
+   renglón va aunque la pieza no tenga línea, para que los nombres alineen. */
+/* Un solo renglón: si la línea no cabe se corta con "…" y el modelo no baja. La
+   tarjeta puede encogerse a su columna (sin esto una línea larga ensancha la columna). */
+.pcard[data-cat-card] { min-width: 0; }
+.pcard-head .pcard-linea { align-items: center; flex-wrap: nowrap; }
+.pcard-linea .pcard-serie { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pcard-linea .pcard-sku { flex: none; margin-left: auto; white-space: nowrap; text-align: right; font-size: 12px; line-height: 18px; color: var(--homea-n600); }
+.pcard-head .pcard-serie { font-size: 12px; line-height: 18px; min-height: 18px; color: var(--fg-muted); }
+.pcard-price { margin-top: 4px; }
+.pcard-price .price-tag, .pcard-price .price-tag .currency { font-weight: 700; }
+/* [data-cat-card] gana al `.pcard .price-tag { font-size: 16px }` que traen los
+   <style> de preview/categoria-*.html y subcategoria-*.html (MarketingPage los inyecta después). */
+[data-cat-card] .pcard-price .price-tag { font-size: 25px; } /* 2026-10-30: 25px (Carla) */
+/* El precio va pegado al nombre (Carla, 2026-10-30): renglón ajustado y sin margen arriba. */
+[data-cat-card] .pcard-price { margin-top: 0; }
+[data-cat-card] .pcard-price .price-tag { line-height: 1.1; }
+[data-cat-card] .pcard-price .price-was { font-size: 17px; } /* 2026-10-30 (Carla) */
+.pcard-price .price-was { position: relative; text-decoration: none; }
+.pcard-price .price-was::after { content: ""; position: absolute; left: -1px; right: -1px; top: 57%; border-top: 1px solid currentColor; }
+.pcard-tag.is-stock { background: var(--homea-stock); border-color: var(--homea-stock); }
+.pcard-tag.is-stock .ic-check { stroke: var(--homea-stock); }
+.pcard-piezas { color: var(--homea-stock); }
+.bsc-disp.is-stock { color: var(--homea-stock); background: color-mix(in srgb, var(--homea-stock) 12%, transparent); }
+.pcard-desc {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  font-family: var(--font-sans); font-size: 12px; font-weight: 700; letter-spacing: .02em; line-height: 1;
+  padding: 6px 11px 5px; border-radius: 999px; background: var(--homea-desc); color: #fff;
+}
+@media print { .pcard-desc { print-color-adjust: exact; -webkit-print-color-adjust: exact; } }
+
+/* 2026-10-29 (2): en la tarjeta las piezas van siempre bajo la etiqueta, y la
+   etiqueta queda centrada con el "+" y el corazón (renglón de 34px, su alto). */
+.pcard[data-cat-card] .pcard-top { align-items: flex-start; }
+.pcard[data-cat-card] .pcard-top > .pcard-tag { align-self: center; }
+.pcard-top .pcard-disp { display: grid; grid-template-rows: 34px auto; align-items: center; justify-items: start; gap: 2px; }
+.pcard-top .pcard-piezas { line-height: 16px; }
+/* Si el listado trae piezas en stock, todas las tarjetas guardan el renglón de
+   "Queda N piezas" (34 + 2 + 16px): marca, nombre y precio alinean entre tarjetas. */
+.plp-grid:has(.pcard-piezas) .pcard[data-cat-card] .pcard-top { min-height: 52px; }
+/* El nombre reserva sus dos renglones (es el máximo): el precio alinea aunque un nombre sea corto. */
+[data-cat-card] h3.pcard-name { min-height: calc(2em * 1.35); }
+
+/* 2026-10-29 (3): títulos de los grupos de filtros con letras más juntas
+   (0.18em → 0.12em: 1.98px → 1.32px a 11px). */
+.fgroup h6 { letter-spacing: .12em; }
+
+/* ---------- 2026-10-29 (4): ficha — línea y modelo, orden en una columna (Carla) ----------
+   Línea, etiqueta "Modelo" y SKU a 22px sobre la misma línea base. Si no caben en
+   un renglón, el modelo baja pegado a la derecha. */
+.pdp-serie-row { flex-wrap: wrap; align-items: baseline; gap: 4px 16px; }
+.pdp-serie-row .pdp-h1-serie { font-size: 22px; line-height: 1.3; }
+.pdp-serie-row .pdp-sku { margin-left: auto; font-size: 22px; line-height: 1.3; }
+.pdp-serie-row .pdp-sku-lbl { font-size: 22px; letter-spacing: .08em; margin-right: 4px; }
+/* REGLA (Carla, 2026-10-29): en TODAS las vistas el orden es imagen → nombre,
+   precio y compra → pestañas (características, dimensiones, especificaciones) →
+   productos relacionados. En escritorio las pestañas van bajo las fotos en la
+   columna izquierda; en una columna (≤1080px) la galería se "abre" para que las
+   pestañas bajen después de la información. */
+@media (max-width: 1080px) {
+  .pdp .gallery { display: contents; }
+  .pdp .gallery-sticky { order: 1; min-width: 0; }
+  .pdp > .info { order: 2; min-width: 0; }
+  .pdp .gallery > .pdp-tabs { order: 3; margin-top: 0; min-width: 0; }
+}
+
+/* ---------- 2026-10-30: ficha v2 (mockup "Ficha de producto — primera pantalla", Carla) ----------
+   Solo en las fichas de FICHA_V2 (lib/shopify/htmlCatalogo.ts) mientras se revisa.
+   Primera pantalla: miniaturas en columna a la izquierda de la foto (la quinta con
+   "+N" abre el resto), disponibilidad junto al corazón, título a todo lo ancho,
+   "Modelo | línea", precio con su % de descuento y la compra. Debajo, las pestañas a
+   todo lo ancho y en horizontal (Descripción · Características · Dimensiones ·
+   Especificaciones técnicas). En una columna (≤1080px) el orden sigue siendo foto →
+   compra → pestañas → relacionados. */
+.pdp-sec--v2 .container { max-width: 1440px; padding-left: clamp(20px, 5.5vw, 80px); padding-right: clamp(20px, 5.5vw, 80px); }
+.pdp.pdp--v2 { grid-template-columns: minmax(0, 656fr) minmax(0, 576fr); gap: 48px; }
+@media (max-width: 1080px) { .pdp.pdp--v2 { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
+
+/* Galería */
+@media (min-width: 701px) {
+  .pdp--v2 .gallery-sticky { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 12px; align-items: start; }
+  .pdp--v2 .gallery-sticky > .pdp-stage { grid-column: 2; grid-row: 1; }
+  .pdp--v2 .gallery-sticky > .pdp-thumbs { grid-column: 1; grid-row: 1; flex-direction: column; flex-wrap: nowrap; gap: 15px; margin: 0; }
+  .pdp--v2 .pdp-thumbs .pdp-thumb { width: 84px; height: 84px; }
+}
+.pdp--v2 .pdp-thumb:nth-child(n+6) { display: none; }
+.pdp--v2 .pdp-thumb[data-pdp-mas] { position: relative; }
+.pdp--v2 .pdp-thumb[data-pdp-mas]::after { content: attr(data-pdp-mas); position: absolute; inset: 0; display: grid; place-items: center;
+  background: rgba(10, 10, 10, .6); color: var(--homea-bone); font-family: var(--font-sans); font-size: 16px; font-weight: 600; }
+.pdp--v2 .gallery .main { height: clamp(340px, calc(100svh - 300px), 520px); aspect-ratio: auto; }
+@media (max-width: 1080px) { .pdp--v2 .gallery .main { height: auto; aspect-ratio: 1 / 1; } }
+.pdp--v2 .pdp-nav { width: 40px; height: 40px; border-radius: 50%; background: #fff; opacity: 1; box-shadow: 0 2px 8px rgba(10, 10, 10, .12); }
+.pdp--v2 .pdp-nav:hover, .pdp--v2 .pdp-nav:focus-visible { background: #fff; opacity: 1; }
+.pdp--v2 .pdp-nav svg { width: 16px; height: 16px; stroke-width: 1.8; }
+.pdp--v2 .pdp-prev { left: 20px; }
+.pdp--v2 .pdp-next { right: 20px; }
+.pdp-ampliar { position: absolute; right: 14px; bottom: 14px; z-index: 2; width: 38px; height: 38px; padding: 0; border: 0; background: #fff;
+  display: grid; place-items: center; cursor: pointer; }
+.pdp-ampliar svg { width: 18px; height: 18px; fill: none; stroke: var(--homea-black); stroke-width: 1.6; }
+.pdp-ampliar:focus-visible { outline: 2px solid var(--homea-gold); outline-offset: 2px; }
+
+/* Información y compra */
+.pdp--v2 > .info { gap: 0; min-width: 0; }
+.pdp--v2 .pdp-cabecera { align-items: flex-start; }
+.pdp--v2 .pdp-cab-acc { display: inline-flex; align-items: center; gap: 12px; flex: none; }
+.pdp--v2 .pdp-cab-acc .pcard-disp { gap: 4px 10px; }
+.pdp--v2 .pdp-cab-acc .pcard-tag { height: 30px; box-sizing: border-box; padding: 0 10px; gap: 6px; font-size: 10px; letter-spacing: .12em; margin: 0; }
+.pdp--v2 .pdp-cab-acc .pcard-tag-ic { width: 13px; height: 13px; }
+.pdp--v2 > .info > .rule-gold { margin: 8px 0 0; }
+.pdp--v2 .pdp-titulo { display: block; margin-top: 16px; }
+.pdp--v2.pdp .info .pdp-titulo h1 { font-size: 36px; line-height: 1.12; max-width: none; }
+@media (max-width: 1080px) { .pdp--v2.pdp .info .pdp-titulo h1 { font-size: 30px; } }
+.pdp-modelo { margin: 14px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; font-size: 16px; color: var(--homea-n600); }
+.pdp-modelo .figures { letter-spacing: .03em; }
+.pdp-modelo-sep { color: var(--homea-n300); }
+.pdp--v2 > .info > .pdp-precio, .pdp--v2 > .info > .pdp-precio-color { margin-top: 22px; }
+.pdp--v2 .pdp-precio { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 14px; row-gap: 6px; }
+.pdp--v2 .pdp-precio > :not(.price-big):not(.pdp-desc-pct) { grid-column: 1 / -1; }
+.pdp--v2 .pdp-precio .price-big { font-size: 34px; line-height: 1; }
+.pdp--v2 .pdp-precio .price-big b, .pdp--v2.pdp .price-big .currency { font-weight: 700; }
+.pdp-desc-pct { justify-self: start; background: var(--homea-desc); color: #fff; font-family: var(--font-sans); font-size: 14px; font-weight: 700;
+  line-height: 1; padding: 6px 12px 5px; border-radius: 999px; }
+.pdp--v2 .pdp-was { font-size: 22px; margin-top: 4px; }
+.pdp--v2 .pdp-iva { font-size: 14px; font-weight: 500; color: var(--homea-n600); }
+.pdp--v2 .pdp-precio .pdp-mxn { margin: 0; font-size: 14px; }
+.pdp--v2 .pdp-color { margin-top: 18px; }
+.pdp--v2 .pdp-color-opts { gap: 8px; }
+.pdp--v2 .pdp-color-opts .pdp-swatch, .pdp--v2 .pdp-color-opts:has(.is-tono) .pdp-swatch { width: 30px; height: 30px; font-size: 9px; }
+.pdp--v2 .pdp-color-nota { display: none; }
+.pdp--v2 .pdp-cta { width: 100%; margin-top: 24px !important; }
+.pdp--v2 .pdp-cta .cart-add { flex: 1 1 auto; }
+.pdp--v2 > .info > .note { margin-top: 10px; font-size: 12.5px; }
+
+/* Pestañas a todo lo ancho */
+.pdp-tabs-v2 { margin-top: 26px; }
+.pdp-tabs-v2 .pdp-tabs { display: block; }
+.pdp-tabs-v2 .pdp-tablist { display: flex; flex-wrap: wrap; gap: 0 44px; align-items: flex-end; border-bottom: 1px solid var(--border); padding: 0 20px; }
+.pdp-tabs-v2 .pdp-tab { flex: none; display: block; position: static; background: transparent; border: 0; border-bottom: 2px solid transparent;
+  margin: 0 0 -1px; padding: 0 2px 12px; font-family: var(--font-sans); font-size: 12px; font-weight: 500; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--homea-n600); white-space: nowrap; text-align: left; }
+.pdp-tabs-v2 .pdp-tab.is-active { background: transparent; color: var(--fg); font-weight: 600; border-bottom-color: var(--homea-gold); }
+.pdp-tabs-v2 .pdp-tab.is-active::before { display: none; }
+.pdp-tabs-v2 .pdp-panel { margin-top: 28px; padding: 36px 44px; background: var(--bg-greige); min-height: 0; }
+.pdp-tabs-v2 .pdp-panel[hidden] { display: none; }
+.pdp-tabs-v2 .pdp-tab-sub { margin: 0 0 18px; color: var(--homea-gold-text); letter-spacing: .22em; }
+@media (max-width: 700px) {
+  .pdp-tabs-v2 .pdp-tablist { gap: 14px 24px; padding: 0; }
+  .pdp-tabs-v2 .pdp-panel { padding: 24px 20px; }
+}
+/* Descripción: párrafo a la izquierda, viñetas en dos columnas */
+.pdp-desc2 { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 48px; }
+.pdp-desc2.is-sola { grid-template-columns: minmax(0, 1fr); }
+.pdp-desc2-intro { display: flex; flex-direction: column; gap: 14px; }
+.pdp-desc2-intro .eyebrow { margin: 0; }
+.pdp-desc2-t { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 26px; line-height: 1.2; }
+.pdp-desc2-intro p { margin: 0; font-size: 14.5px; line-height: 1.65; }
+.pdp-desc2-lista ul, .pdp-desc2-lista ol { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: 48px; }
+.pdp-desc2-lista li { position: relative; break-inside: avoid; padding-left: 18px; margin: 0 0 14px; font-size: 14px; line-height: 1.55; }
+.pdp-desc2-lista li::before { content: ""; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; border-radius: 50%; background: var(--homea-gold); }
+@media (max-width: 1080px) { .pdp-desc2 { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+@media (max-width: 700px) { .pdp-desc2-lista ul, .pdp-desc2-lista ol { columns: 1; } }
+/* Características: rejilla de 4 columnas */
+.pdp-tabs-v2 #panel-caracteristicas .spec { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 44px; row-gap: 0; }
+.pdp-tabs-v2 #panel-caracteristicas .spec-row { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 16px 0 14px; border-bottom: 1px solid #D9D2C2; }
+.pdp-tabs-v2 #panel-caracteristicas .spec-label { font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--homea-n600); }
+.pdp-tabs-v2 #panel-caracteristicas .spec-value { font-size: 16px; line-height: 1.35; text-align: left; }
+.pdp-tabs-v2 #panel-caracteristicas .spec-label, .pdp-tabs-v2 #panel-caracteristicas .spec-value { padding: 0; border: 0; }
+@media (max-width: 1080px) { .pdp-tabs-v2 #panel-caracteristicas .spec { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; } }
+/* Dimensiones: una medida por recuadro */
+.pdp-medidas { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.pdp-medidas + .pdp-tab-sub { margin-top: 28px; }
+.pdp-medida { display: flex; flex-direction: column; gap: 8px; padding: 22px 20px 20px; background: var(--homea-bone); border: 1px solid var(--border); }
+.pdp-medida-k { font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--homea-n600); }
+.pdp-medida-v { font-family: var(--font-display); font-size: 38px; line-height: 1; }
+.pdp-medida-m { font-size: 14px; color: var(--homea-n600); }
+@media (max-width: 1080px) { .pdp-medidas { grid-template-columns: repeat(2, minmax(0, 1fr)); } .pdp-medida-v { font-size: 30px; } }
+/* Especificaciones técnicas: un documento por recuadro, tres por renglón */
+.pdp-tabs-v2 .pdp-docs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; max-width: none; }
+.pdp-tabs-v2 .pdp-doc { padding: 18px 20px; background: #fff; }
+@media (max-width: 1080px) { .pdp-tabs-v2 .pdp-docs { grid-template-columns: minmax(0, 1fr); } }
+/* Ficha v2 en móvil: logo más chico para que logo, disponibilidad y corazón quepan
+   en un renglón (si no, bajan), precio a 28px con el % a un lado y las pestañas en
+   un solo renglón que se desliza de lado. */
+@media (max-width: 700px) {
+  .pdp--v2 .pdp-cabecera { flex-wrap: wrap; row-gap: 12px; }
+  .pdp--v2 .pdp-logo { zoom: .6; }
+  .pdp--v2 .pdp-cab-acc { gap: 8px; }
+  .pdp--v2 .pdp-cab-acc .pdp-wl { width: 40px; height: 40px; }
+  .pdp--v2 .pdp-precio { grid-template-columns: auto auto; justify-content: start; }
+  .pdp--v2 .pdp-precio .price-big { font-size: 28px; }
+  .pdp-desc-pct { font-size: 13px; padding: 5px 10px 4px; }
+  .pdp--v2 .pdp-was { font-size: 18px; }
+  .pdp-tabs-v2 .pdp-tablist { flex-wrap: nowrap; overflow-x: auto; gap: 24px; scrollbar-width: none; }
+  .pdp-tabs-v2 .pdp-tablist::-webkit-scrollbar { display: none; }
+}
+/* ---------- 2026-10-30: regla de fuentes en números (Carla) ----------
+   HK Grotesk (--font-cifras, tokens-v2.css): precios de ficha, tarjetas, buscador,
+   Mi proyecto y pre-cotización; % de descuento; modelo/SKU. Todos los demás números
+   (unidades, medidas, tipo de cambio, folio, fechas…), la línea/serie y la marca se
+   quedan en Montserrat; Newsreader solo en títulos. En el markup: .es-precio y
+   .es-modelo (Mi proyecto, pre-cotización, ficha). */
+.es-precio, .es-modelo,
+.pdp .price-big, .pdp .price-big b, .pdp .price-big .currency, .pdp-was, .pdp-mxn, .pdp-desc-pct, .pdp-modelo .figures,
+.pcard-price .price-tag, .pcard-price .price-tag .currency, .pcard-price .price-was, .pcard-sku, .pcard-desc,
+.bsc-cifra, .bsc-moneda, .bsc-sku { font-family: var(--font-cifras); }
+.es-precio .proy-iva, .es-precio .mp-iva { font-family: var(--font-sans); }
+.pdp .price-big b, .pdp .price-big .currency { font-weight: 700; letter-spacing: 0; }
+.pdp-sec--v2 .pdp-qty-num, .pdp-sec--v2 .pdp-medida-v, .pdp-sec--v2 .pdp-medida-m { font-family: var(--font-sans); }
+.pdp-sec--v2 .pdp-medida-v { font-weight: 500; font-size: 30px; }

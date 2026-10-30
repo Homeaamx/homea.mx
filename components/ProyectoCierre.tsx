@@ -104,7 +104,7 @@ export function notasDelProyecto(carrito: Carrito): string[] {
 }
 
 const Precio = ({ d, pendiente }: { d: Dinero; pendiente: boolean }) => (
-  <span className={`figures${pendiente ? " is-pendiente" : ""}`}>{formatearDinero(d)}</span>
+  <span className={`figures es-precio${pendiente ? " is-pendiente" : ""}`}>{formatearDinero(d)}</span>
 );
 
 export default function ProyectoCierre({ carrito, aviso, ocupado }: Props) {
@@ -130,11 +130,11 @@ export default function ProyectoCierre({ carrito, aviso, ocupado }: Props) {
         </div>
         <div className="cart-subtotal proy-ahorro">
           <span>Ahorro en pesos</span>
-          <span className={`figures${ocupado ? " is-pendiente" : ""}`}>−{formatearDinero(carrito.ahorroConIva)}</span>
+          <span className={`figures es-precio${ocupado ? " is-pendiente" : ""}`}>−{formatearDinero(carrito.ahorroConIva)}</span>
         </div>
         <div className="cart-subtotal proy-total">
           <span>{dolares ? "Total estimado" : "Total en pesos"}</span>
-          <span className={`cart-subtotal-num figures${ocupado ? " is-pendiente" : ""}`}>
+          <span className={`cart-subtotal-num figures es-precio${ocupado ? " is-pendiente" : ""}`}>
             {formatearDinero(carrito.totalEstimado)}
           </span>
         </div>

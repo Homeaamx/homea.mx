@@ -237,23 +237,27 @@
         (precio.moneda ? '<span class="currency">' + esc(precio.moneda) + '</span>' : "") + '</span>' +
         (it.was ? '<s class="price-was figures">' + esc(it.was) + '</s>' : "") +
         '<span class="price-note">IVA incluido</span></div>';
+    // % de descuento sobre la foto (2026-10-29), del tachado guardado ("$11,130.20 USD").
+    var was = it.was ? parseFloat(String(it.was).replace(/[^0-9.]/g, "")) : NaN;
+    var pct = was > precio.monto ? Math.round((1 - precio.monto / was) * 100) : 0;
     var stock = it.stock
-      ? '<span class="pcard-tag is-stock">' + ICONO_STOCK + 'En stock</span>'
-      : '<span class="pcard-tag is-pedido">' + ICONO_PEDIDO + 'Bajo pedido</span>';
+      ? '<span class="pcard-disp"><span class="pcard-tag is-stock">' + ICONO_STOCK + 'En stock</span></span>'
+      : '<span class="pcard-disp"><span class="pcard-tag is-pedido">' + ICONO_PEDIDO + 'Bajo pedido</span></span>';
     return '<a class="pcard" href="' + esc(it.href) + '" data-cat-card data-orden="' + orden + '"' +
       ' data-precio="' + pesosDe(it) + '" data-stock="' + (it.stock ? 1 : 0) + '"' +
       ' data-tipo="' + esc(slug(tipo)) + '" data-fv-marca="' + esc(slug(it.brand)) + '"' +
       ' data-fv-stock="' + (it.stock ? "en-stock" : "bajo-pedido") + '">' +
       '<div class="imgw cutout">' +
       (it.img ? '<img src="' + esc(it.img) + '" alt="' + esc(nombreCorto(it)) + '" loading="lazy" decoding="async">' : "") +
+      (pct ? '<span class="pcard-desc figures">−' + pct + '%</span>' : "") +
       '</div>' +
       '<div class="body">' +
       '<div class="pcard-top">' + stock +
       '<button class="wl-heart on" type="button" data-wl-id="' + esc(it.id) + '" aria-label="Quitar de la wishlist" aria-pressed="true">' + CORAZON + '</button></div>' +
-      '<div class="pcard-head"><span class="brand">' + esc(it.brand) + '</span>' +
-      (serie ? '<span class="pcard-serie">' + esc(serie) + '</span>' : "") + '</div>' +
+      '<div class="pcard-head"><span class="brand">' + esc(it.brand) + '</span><div class="pcard-linea">' +
+      '<span class="pcard-serie">' + esc(serie || "") + '</span>' +
+      (it.id ? '<span class="pcard-sku figures">' + esc(it.id) + '</span>' : "") + '</div></div>' +
       '<h3 class="pcard-name">' + esc(nombreCorto(it)) + '</h3>' +
-      (it.id ? '<span class="pcard-sku figures">' + esc(it.id) + '</span>' : "") +
       precioHtml +
       '</div></a>';
   }

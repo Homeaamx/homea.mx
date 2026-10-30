@@ -460,7 +460,8 @@
     if (!panel) return;
     var cta = document.querySelector(".pdp .info .pdp-cta");
     panel.style.minHeight = "";
-    if (!cta || window.innerWidth <= 1080) return;
+    /* En la ficha v2 las pestañas van a todo lo ancho, debajo de la compra. */
+    if (!cta || window.innerWidth <= 1080 || document.querySelector(".pdp--v2")) return;
     var objetivo = cta.getBoundingClientRect().bottom - panel.getBoundingClientRect().top;
     if (objetivo <= 0) return;
     panel.style.minHeight = Math.round(objetivo) + "px";
@@ -589,6 +590,10 @@
       mini.parentNode.querySelectorAll(".pdp-thumb").forEach(function (b) {
         b.classList.toggle("is-active", b === mini);
       });
+      /* Ficha v2: la quinta miniatura ("+N") abre la galería ampliada con todas. */
+      /* Después de este clic: si no, el cierre del lightbox (otro listener del
+         mismo clic) lo cerraría al instante. */
+      if (mini.hasAttribute("data-pdp-mas")) setTimeout(lbAbrir, 0);
       return;
     }
 
