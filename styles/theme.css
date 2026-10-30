@@ -5119,3 +5119,110 @@ body:has(:is([data-newsletter="ofertas"], [data-newsletter="guias"])) .site-foot
 .pdp .price-big b, .pdp .price-big .currency { font-weight: 700; letter-spacing: 0; }
 .pdp-sec--v2 .pdp-qty-num, .pdp-sec--v2 .pdp-medida-v, .pdp-sec--v2 .pdp-medida-m { font-family: var(--font-sans); }
 .pdp-sec--v2 .pdp-medida-v { font-weight: 500; font-size: 30px; }
+
+/* /mi-proyecto más legible (Carla, 2026-10-30): textos ~15 % más grandes y
+   grises más oscuros (n600 para etiquetas, n700 para los textos de apoyo, peso
+   400 en vez de 300). Tarjetas compactas para que quepan dos por pantalla y
+   resumen pegajoso que cabe completo en la pantalla. Solo en esta página: el
+   cajón y la wishlist conservan su escala. */
+[data-mi-proyecto] .wlp-hero .crumbs { font-size: 13px; color: var(--homea-n600); }
+[data-mi-proyecto] .wlp-hero .crumbs a { color: var(--homea-n600); }
+[data-mi-proyecto] .wlp-hero .sub { max-width: 700px; font-size: 17px; line-height: 1.6; font-weight: 400; color: var(--homea-n700); }
+[data-mi-proyecto] .sel-layout { grid-template-columns: minmax(0, 1fr) 440px; }
+
+/* Tarjeta: una fila (foto · datos · precio / cantidad / importe), sin alto mínimo. */
+[data-mi-proyecto] .sel-lista.is-proyecto { gap: 12px; }
+[data-mi-proyecto] .sel-lista.is-proyecto .sel-row { grid-template-columns: 128px minmax(0, 1fr) 290px; column-gap: 24px; min-height: 0; padding: 16px 18px; }
+[data-mi-proyecto] .sel-lista.is-proyecto .sel-thumb { width: 128px; height: 156px; }
+[data-mi-proyecto] .sel-lista.is-proyecto .sel-info { gap: 5px; padding-right: 30px; }
+[data-mi-proyecto] .sel-lista.is-proyecto .sel-brand { font-size: 12px; }
+[data-mi-proyecto] .sel-brand .sel-serie { color: var(--homea-n600); }
+[data-mi-proyecto] .sel-lista.is-proyecto .sel-name { font-size: 19px; line-height: 1.25; }
+[data-mi-proyecto] .sel-lista.is-proyecto .sel-sku { font-size: 13.5px; line-height: 1.45; color: var(--homea-n700); }
+[data-mi-proyecto] .sel-sku b { font-size: 11.5px; color: var(--homea-n600); }
+/* Tag de disponibilidad = el de las tarjetas del catálogo (.pcard-tag), en línea. */
+[data-mi-proyecto] .proy-tag.pcard-tag { position: static; font-size: 10.5px; padding: 7px 10px 6px; }
+[data-mi-proyecto] .sel-lista.is-proyecto .sel-x { top: 10px; right: 10px; width: 30px; height: 30px; font-size: 20px; color: var(--homea-n600); }
+[data-mi-proyecto] .mp-datos { gap: 10px; }
+[data-mi-proyecto] .mp-precio { padding-bottom: 10px; }
+[data-mi-proyecto] .mp-precio strong { font-size: 21px; font-weight: 700; }
+[data-mi-proyecto] .mp-precio s { font-size: 15px; color: var(--homea-n500); }
+/* El tachado va en su propio renglón con un salto (::after) y no con
+   flex-basis 100 %: así la caja mide lo que el texto y la línea del tachado
+   (s::after, abajo) no cruza toda la columna. */
+[data-mi-proyecto] .mp-precio > :not(s) { order: 1; }
+[data-mi-proyecto] .mp-precio::after { content: ""; order: 2; flex-basis: 100%; height: 0; }
+[data-mi-proyecto] .mp-precio > s { order: 3; flex: none; }
+[data-mi-proyecto] .mp-iva { font-size: 12.5px; font-weight: 400; color: var(--homea-n600); }
+[data-mi-proyecto] .mp-lbl { font-size: 11px; color: var(--homea-n600); }
+[data-mi-proyecto] .mp-val strong { font-size: 17px; }
+[data-mi-proyecto] .cart-qty.mp-qty .cart-q { width: 36px; height: 34px; font-size: 16px; }
+[data-mi-proyecto] .cart-qty.mp-qty > span { min-width: 44px; font-size: 15px; }
+[data-mi-proyecto] .sel-pie { padding-top: 32px; }
+[data-mi-proyecto] .sel-pie .arrow-link { font-size: 13px; }
+
+/* Resumen: pegajoso bajo el menú fijo (solo el piso de enlaces, --nav-main-h)
+   y del alto de la pantalla (Carla, 2026-10-30): texto más grande, notas y
+   botón al pie. Sin barra de desplazamiento propia (Carla, 2026-10-30): en
+   una pantalla muy baja el panel crece y se lee completo al bajar. */
+[data-mi-proyecto] .sel-aside { top: calc(var(--nav-main-h, var(--nav-h)) + 20px); min-height: calc(100vh - var(--nav-main-h, var(--nav-h)) - 40px); overflow: visible; display: flex; flex-direction: column; padding: 30px 30px 28px; box-sizing: border-box; }
+[data-mi-proyecto] .sel-aside h3 { font-size: 30px; margin-bottom: 8px; }
+[data-mi-proyecto] .sel-aside-sub { font-size: 16.5px; line-height: 1.5; font-weight: 400; color: var(--homea-n700); margin-bottom: 16px; }
+[data-mi-proyecto] .sel-aside-h { font-size: 22px; margin-bottom: 10px; padding-top: 16px; }
+[data-mi-proyecto] .sel-aside .proy-cierre { flex: 1 0 auto; display: flex; flex-direction: column; }
+[data-mi-proyecto] .sel-aside .proy-totales { gap: 9px; padding-bottom: 14px; margin-bottom: auto; }
+[data-mi-proyecto] .sel-aside .proy-totales .cart-subtotal { font-size: 17px; }
+[data-mi-proyecto] .sel-aside .proy-totales .cart-subtotal span:first-child { font-size: 11.5px; color: var(--homea-n600); }
+[data-mi-proyecto] .sel-aside .proy-totales .proy-total { margin-top: 6px; padding-top: 14px; }
+[data-mi-proyecto] .sel-aside .proy-totales .proy-total span:first-child { color: var(--fg); }
+[data-mi-proyecto] .sel-aside .proy-totales .proy-total .cart-subtotal-num { font-size: 25px; font-weight: 700; }
+/* Si un monto largo (millones) no cabe junto a su etiqueta, baja alineado a la derecha. */
+[data-mi-proyecto] .sel-aside .proy-totales .cart-subtotal { flex-wrap: wrap; row-gap: 2px; column-gap: 10px; }
+[data-mi-proyecto] .sel-aside .proy-totales .cart-subtotal span:last-child { margin-left: auto; text-align: right; }
+[data-mi-proyecto] .sel-aside .proy-totales .proy-tc span:last-child { font-size: 14.5px; color: var(--homea-n700); }
+[data-mi-proyecto] .sel-aside .proy-notas { margin: 0 0 14px; }
+[data-mi-proyecto] .sel-aside .proy-notas .cart-tax-note { font-size: 15px; line-height: 1.55; font-weight: 400; color: var(--homea-n700); }
+[data-mi-proyecto] .sel-aside .cart-checkout { padding-top: 20px; padding-bottom: 20px; white-space: nowrap; }
+
+@media (max-width: 1400px) {
+  [data-mi-proyecto] .sel-layout { grid-template-columns: minmax(0, 1fr) 420px; }
+  [data-mi-proyecto] .sel-aside { padding: 22px 22px 20px; }
+}
+@media (max-width: 900px) {
+  [data-mi-proyecto] .sel-layout { grid-template-columns: 1fr; }
+  [data-mi-proyecto] .sel-aside { min-height: 0; }
+}
+@media (max-width: 640px) {
+  [data-mi-proyecto] .wlp-hero .sub { font-size: 16px; }
+  [data-mi-proyecto] .sel-aside { padding: 22px 18px 20px; }
+  [data-mi-proyecto] .sel-aside h3 { font-size: 23px; }
+}
+/* Tarjeta mediana (lista de menos de 820 px, p. ej. laptop de 1440): la foto
+   ocupa dos filas; precio y cantidad van lado a lado debajo del nombre y el
+   importe cierra la tarjeta, así cabe el nombre y la tarjeta queda baja. */
+@container (max-width: 820px) {
+  [data-mi-proyecto] .sel-lista.is-proyecto .sel-row { grid-template-columns: 116px minmax(0, 1fr); grid-template-areas: "thumb info" "thumb datos"; column-gap: 22px; row-gap: 10px; align-items: start; }
+  /* La foto, centrada a lo alto de la tarjeta (Carla, 2026-10-30). */
+  [data-mi-proyecto] .sel-lista.is-proyecto .sel-thumb { width: 116px; height: 146px; align-self: center; }
+  [data-mi-proyecto] .mp-datos { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "precio cant" "importe importe"; column-gap: 16px; row-gap: 8px; align-items: center; padding-top: 10px; border-top: 1px solid #E8E3DB; }
+  [data-mi-proyecto] .mp-precio { grid-area: precio; padding-bottom: 0; border-bottom: 0; }
+  [data-mi-proyecto] .mp-datos > .mp-fila:nth-child(2) { grid-area: cant; }
+  [data-mi-proyecto] .mp-datos > .mp-fila:nth-child(3) { grid-area: importe; padding-top: 8px; border-top: 1px solid #E8E3DB; }
+}
+/* Móvil: la columna de datos baja completa, una fila bajo otra. */
+@container (max-width: 600px) {
+  [data-mi-proyecto] .sel-lista.is-proyecto .sel-row { grid-template-columns: 96px minmax(0, 1fr); grid-template-areas: "thumb info" "datos datos"; column-gap: 14px; row-gap: 14px; padding: 16px; }
+  [data-mi-proyecto] .sel-lista.is-proyecto .sel-thumb { width: 96px; height: 122px; align-self: start; }
+  [data-mi-proyecto] .sel-lista.is-proyecto .sel-name { font-size: 18px; }
+  [data-mi-proyecto] .mp-datos { display: flex; flex-direction: column; gap: 10px; padding-top: 12px; }
+  [data-mi-proyecto] .mp-datos > .mp-fila:nth-child(3) { padding-top: 0; border-top: 0; }
+}
+
+/* Tachado de precios en todo el sitio (Carla, 2026-10-30): la misma línea de
+   las tarjetas del catálogo, un poco abajo del centro (57 %), en la ficha,
+   /mi-proyecto, el cajón del carrito y la wishlist. */
+.price-was, .pdp-was, .proy-was, s.es-precio { position: relative; text-decoration: none; }
+.price-was::after, .pdp-was::after, .proy-was::after, s.es-precio::after { content: ""; position: absolute; left: -1px; right: -1px; top: 57%; border-top: 1px solid currentColor; pointer-events: none; }
+/* En la ficha el tachado es un renglón propio (bloque en la rejilla .pdp-precio):
+   se ajusta al texto para que la línea no cruce toda la columna. */
+.pdp-was { width: fit-content; justify-self: start; }
