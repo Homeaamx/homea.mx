@@ -350,7 +350,7 @@ function normalizar(raw: ProductoRaw): ProductoVivo | null {
       : [];
   return {
     sku: v.sku,
-    slug: v.sku.toLowerCase(),
+    slug: slugDeSku(v.sku),
     handle: raw.handle,
     titulo: raw.title,
     marca: raw.vendor,
@@ -413,6 +413,14 @@ export async function productosDeColeccion(handle: string): Promise<ProductoVivo
 }
 
 /**
+ * Slug de la ficha: el SKU en minúsculas, con "/" cambiada por "-" para que sea
+ * un solo segmento de URL (Kraus KWU110-32/PGM → /producto/kwu110-32-pgm).
+ */
+export function slugDeSku(sku: string): string {
+  return sku.toLowerCase().replace(/\//g, "-");
+}
+
+/**
  * Un producto publicado, por su SKU. La Storefront API ignora el filtro `sku:`
  * (verificado 2026-10-06: devuelve cualquier producto), así que se busca el
  * modelo como texto y se exige coincidencia exacta del SKU. Si la búsqueda no
@@ -420,6 +428,8 @@ export async function productosDeColeccion(handle: string): Promise<ProductoVivo
  */
 export async function productoVivoPorSku(sku: string): Promise<ProductoVivo | null> {
   const buscado = sku.toUpperCase();
+  // El slug cambia "/" por "-" (KWU110-32/PGM → kwu110-32-pgm): se compara igual.
+  const mismo = (otro: string) => otro.toUpperCase() === buscado || slugDeSku(otro).toUpperCase() === buscado;
   try {
     const data: { products: { nodes: ProductoRaw[] } } = await shopifyFetch(CONSULTA_POR_SKU, {
       variables: { consulta: `"${buscado}"` },
@@ -428,7 +438,7 @@ export async function productoVivoPorSku(sku: string): Promise<ProductoVivo | nu
     });
     for (const raw of data.products.nodes) {
       const p = normalizar(raw);
-      if (p && p.sku.toUpperCase() === buscado) return p;
+      if (p && mismo(p.sku)) return p;
       const enColor = p && conColor(p, buscado);
       if (enColor) return enColor;
     }
@@ -438,7 +448,7 @@ export async function productoVivoPorSku(sku: string): Promise<ProductoVivo | nu
   const { TIPOS_WEB } = await import("./coleccionesWeb");
   for (const t of TIPOS_WEB) {
     for (const p of await productosDeColeccion(t.coleccion)) {
-      if (p.sku.toUpperCase() === buscado) return p;
+      if (mismo(p.sku)) return p;
       const enColor = conColor(p, buscado);
       if (enColor) return enColor;
     }
