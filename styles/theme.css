@@ -3921,6 +3921,7 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="alfresco"] { height: 42px; }
 .pdp-logo[data-marca="napoleon"] { height: 52px; }
 .pdp-logo[data-marca="bertazzoni"] { height: 44px; }
+.pdp-logo[data-marca="kraus"] { height: 36px; }
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
    técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
    una línea, baja a dos dentro de su pestaña. */
