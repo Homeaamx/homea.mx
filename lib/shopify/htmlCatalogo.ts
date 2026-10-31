@@ -158,11 +158,20 @@ export function lineaSpec(p: ProductoVivo): string[] {
 
 /* ---------- Precio -------------------------------------------------------- */
 
+/**
+ * Pieza publicada sin precio (precio 0 en Shopify): se ve "Precio por confirmar"
+ * en lugar de $0 (Carla, 2026-10-30, Bertazzoni 901390 en stock sin lista).
+ */
+const sinPrecio = (precio: PrecioPublico) => !(precio.venta > 0);
+const POR_CONFIRMAR = "Precio por confirmar";
+
 function textoPrecio(precio: PrecioPublico): string {
+  if (sinPrecio(precio)) return POR_CONFIRMAR;
   return `$${dinero(precio.venta)} ${precio.moneda} IVA incluido`;
 }
 
 function precioTarjeta(precio: PrecioPublico): string {
+  if (sinPrecio(precio)) return `<div class="pcard-price"><span class="price-note">${POR_CONFIRMAR}</span></div>`;
   // Orden pedido (Carla, 2026-10-07): precio final arriba, tachado debajo, "IVA
   // incluido" al final.
   const tachado = precio.tachado
@@ -172,6 +181,7 @@ function precioTarjeta(precio: PrecioPublico): string {
 }
 
 export function precioFichaHtml(precio: PrecioPublico, tc: TipoCambio): string {
+  if (sinPrecio(precio)) return `<div class="pdp-precio"><span class="pdp-iva">${POR_CONFIRMAR}</span></div>`;
   // El % de descuento va en píldora junto al precio final (Carla, 2026-10-30).
   const pct = porcentajeDescuento(precio);
   const tachado = precio.tachado

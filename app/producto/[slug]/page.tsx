@@ -96,16 +96,21 @@ function jsonLdVivo(p: ProductoVivo, precio: PrecioPublico, url: string): Record
     ...(p.imagenes.length ? { image: p.imagenes.slice(0, 4).map((i) => i.url) } : {}),
     description: descripcionVivo(p),
     category: p.tipo,
-    offers: {
-      "@type": "Offer",
-      priceCurrency: precio.moneda,
-      // Con IVA: es el precio que se publica. "Bajo pedido" es PreOrder, no
-      // OutOfStock (marcarlo agotado apaga los resultados enriquecidos).
-      price: precio.venta.toFixed(2),
-      availability: p.enStock ? "https://schema.org/InStock" : "https://schema.org/PreOrder",
-      url,
-      seller: { "@type": "Organization", name: "HOMEA" },
-    },
+    // Sin precio publicado ("Precio por confirmar"): sin Offer, para no anunciar $0.
+    ...(precio.venta > 0
+      ? {
+          offers: {
+            "@type": "Offer",
+            priceCurrency: precio.moneda,
+            // Con IVA: es el precio que se publica. "Bajo pedido" es PreOrder, no
+            // OutOfStock (marcarlo agotado apaga los resultados enriquecidos).
+            price: precio.venta.toFixed(2),
+            availability: p.enStock ? "https://schema.org/InStock" : "https://schema.org/PreOrder",
+            url,
+            seller: { "@type": "Organization", name: "HOMEA" },
+          },
+        }
+      : {}),
   };
 }
 
@@ -122,8 +127,9 @@ async function relacionadosDe(p: ProductoVivo): Promise<Relacionados> {
     productosDeColeccion(tw.coleccion),
     ...handles.map((h) => productosDeColeccion(h)),
   ]);
-  // Los accesorios que viven en la colección del equipo (Lavavajillas) también son candidatos.
-  const sugeridos = sugerenciasDeCompra(p, [...otras.flat(), ...mismoTipo.filter(esAccesorio)]);
+  // La colección del propio equipo también da candidatos: sus accesorios (Lavavajillas)
+  // y el mismo modelo en otros colores (sugerencias-marca.json).
+  const sugeridos = sugerenciasDeCompra(p, [...otras.flat(), ...mismoTipo]);
   if (sugeridos.length) return { modo: "sugerencias", productos: sugeridos };
   return {
     modo: "similares",

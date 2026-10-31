@@ -1,0 +1,485 @@
+{
+ "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30.",
+ "DW24T3IPV": {
+  "accesorios": [
+   "HK24PRODWX",
+   "HK24MASDWX",
+   "HK24HERDWX",
+   "901661",
+   "901668",
+   "DS2HERTGO"
+  ]
+ },
+ "FPRO30COVTC": {
+  "colores": [
+   "FPRO30COVTX"
+  ]
+ },
+ "FPRO30COVTX": {
+  "colores": [
+   "FPRO30COVTC"
+  ]
+ },
+ "FPRO30FSVTC": {
+  "colores": [
+   "FPRO30FSVTX"
+  ]
+ },
+ "FPRO30FSVTX": {
+  "colores": [
+   "FPRO30FSVTC"
+  ]
+ },
+ "HER366BCFGMAG": {
+  "colores": [
+   "HER366BCFGMXG",
+   "HER366BCFGMNG"
+  ],
+  "accesorios": [
+   "901472",
+   "DSHERTKHGO",
+   "DSHERTKHPC",
+   "DSHERTKHSB"
+  ]
+ },
+ "HER366BCFGMNG": {
+  "colores": [
+   "HER366BCFGMXG",
+   "HER366BCFGMAG"
+  ],
+  "accesorios": [
+   "901472",
+   "DSHERTKHGO",
+   "DSHERTKHPC",
+   "DSHERTKHSB"
+  ]
+ },
+ "HER366BCFGMXG": {
+  "colores": [
+   "HER366BCFGMNG",
+   "HER366BCFGMAG"
+  ],
+  "accesorios": [
+   "901472",
+   "DSHERTKHGO",
+   "DSHERTKHPC",
+   "DSHERTKHSB"
+  ]
+ },
+ "HER486BTFGMAG": {
+  "colores": [
+   "HER486BTFGMXG",
+   "HER486BTFGMNG"
+  ],
+  "accesorios": [
+   "901472",
+   "DSHERTKHGO",
+   "DSHERTKHPC",
+   "DSHERTKHSB"
+  ]
+ },
+ "HER486BTFGMNG": {
+  "colores": [
+   "HER486BTFGMXG",
+   "HER486BTFGMAG"
+  ],
+  "accesorios": [
+   "901472",
+   "DSHERTKHGO",
+   "DSHERTKHPC",
+   "DSHERTKHSB"
+  ]
+ },
+ "HER486BTFGMXG": {
+  "colores": [
+   "HER486BTFGMNG",
+   "HER486BTFGMAG"
+  ],
+  "accesorios": [
+   "901472",
+   "DSHERTKHGO",
+   "DSHERTKHPC",
+   "DSHERTKHSB"
+  ]
+ },
+ "K36HERTX": {
+  "accesorios": [
+   "KC36HERTX",
+   "KC36HERTAV",
+   "KC36HERTNE",
+   "901395",
+   "DSHERTKHGO",
+   "DSHERTKHPC",
+   "DSHERTKHSB"
+  ]
+ },
+ "K48HERTX": {
+  "accesorios": [
+   "KC48HERTX",
+   "KC48HERTAV",
+   "KC48HERTNE",
+   "901395",
+   "DSHERTKHGO",
+   "DSHERTKHPC",
+   "DSHERTKHSB"
+  ]
+ },
+ "KC36HERTAV": {
+  "colores": [
+   "KC36HERTX",
+   "KC36HERTNE"
+  ]
+ },
+ "KC36HERTNE": {
+  "colores": [
+   "KC36HERTX",
+   "KC36HERTAV"
+  ]
+ },
+ "KC36HERTX": {
+  "colores": [
+   "KC36HERTAV",
+   "KC36HERTNE"
+  ]
+ },
+ "KC48HERTAV": {
+  "colores": [
+   "KC48HERTX",
+   "KC48HERTNE"
+  ]
+ },
+ "KC48HERTNE": {
+  "colores": [
+   "KC48HERTX",
+   "KC48HERTAV"
+  ]
+ },
+ "KC48HERTX": {
+  "colores": [
+   "KC48HERTAV",
+   "KC48HERTNE"
+  ]
+ },
+ "KIN36XV2": {
+  "accesorios": [
+   "901531",
+   "901532",
+   "901575"
+  ]
+ },
+ "MAS365GASBG": {
+  "colores": [
+   "MAS365GASXVLP",
+   "MAS365GASNG"
+  ],
+  "accesorios": [
+   "901472",
+   "DSMASGKSG",
+   "DSMASGKSB",
+   "DSMASHSG",
+   "DSMASHSB"
+  ]
+ },
+ "MAS365GASNG": {
+  "colores": [
+   "MAS365GASXVLP",
+   "MAS365GASBG"
+  ],
+  "accesorios": [
+   "901472",
+   "DSMASGKSG",
+   "DSMASGKSB",
+   "DSMASHSG",
+   "DSMASHSB"
+  ]
+ },
+ "MAS365GASXVLP": {
+  "colores": [
+   "MAS365GASNG",
+   "MAS365GASBG"
+  ],
+  "accesorios": [
+   "901472",
+   "DSMASGKSG",
+   "DSMASGKSB",
+   "DSMASHSG",
+   "DSMASHSB"
+  ]
+ },
+ "MAS486GGASBG": {
+  "colores": [
+   "MAS486GGASXVLP",
+   "MAS486GGASNG"
+  ],
+  "accesorios": [
+   "901472",
+   "DSMASGKSG",
+   "DSMASGKSB",
+   "DSMASHSG",
+   "DSMASHSB"
+  ]
+ },
+ "MAS486GGASNG": {
+  "colores": [
+   "MAS486GGASXVLP",
+   "MAS486GGASBG"
+  ],
+  "accesorios": [
+   "901472",
+   "DSMASGKSG",
+   "DSMASGKSB",
+   "DSMASHSG",
+   "DSMASHSB"
+  ]
+ },
+ "MAS486GGASXVLP": {
+  "colores": [
+   "MAS486GGASNG",
+   "MAS486GGASBG"
+  ],
+  "accesorios": [
+   "901472",
+   "DSMASGKSG",
+   "DSMASGKSB",
+   "DSMASHSG",
+   "DSMASHSB"
+  ]
+ },
+ "MAST366QBXT": {
+  "accesorios": [
+   "901309"
+  ]
+ },
+ "MAST366RTBXT": {
+  "accesorios": [
+   "901309"
+  ]
+ },
+ "MO30STANE/24": {
+  "accesorios": [
+   "FR30PROX"
+  ]
+ },
+ "PRO366BCFGMART": {
+  "colores": [
+   "PRO366BCFGMXT",
+   "PRO366BCFGMGIT",
+   "PRO366BCFGMROT",
+   "PRO366BCFGMCAT"
+  ],
+  "accesorios": [
+   "901472"
+  ]
+ },
+ "PRO366BCFGMCAT": {
+  "colores": [
+   "PRO366BCFGMXT",
+   "PRO366BCFGMGIT",
+   "PRO366BCFGMART",
+   "PRO366BCFGMROT"
+  ],
+  "accesorios": [
+   "901472"
+  ]
+ },
+ "PRO366BCFGMGIT": {
+  "colores": [
+   "PRO366BCFGMXT",
+   "PRO366BCFGMART",
+   "PRO366BCFGMROT",
+   "PRO366BCFGMCAT"
+  ],
+  "accesorios": [
+   "901472"
+  ]
+ },
+ "PRO366BCFGMROT": {
+  "colores": [
+   "PRO366BCFGMXT",
+   "PRO366BCFGMGIT",
+   "PRO366BCFGMART",
+   "PRO366BCFGMCAT"
+  ],
+  "accesorios": [
+   "901472"
+  ]
+ },
+ "PRO366BCFGMXT": {
+  "colores": [
+   "PRO366BCFGMGIT",
+   "PRO366BCFGMART",
+   "PRO366BCFGMROT",
+   "PRO366BCFGMCAT"
+  ],
+  "accesorios": [
+   "901472"
+  ]
+ },
+ "PRO366BCFGMXTLP": {
+  "colores": [
+   "PRO366BCFGMGIT",
+   "PRO366BCFGMART",
+   "PRO366BCFGMROT",
+   "PRO366BCFGMCAT"
+  ],
+  "accesorios": [
+   "901472"
+  ]
+ },
+ "PRO486BTFGMART": {
+  "colores": [
+   "PRO486BTFGMXT",
+   "PRO486BTFGMGIT",
+   "PRO486BTFGMROT"
+  ],
+  "accesorios": [
+   "901472"
+  ]
+ },
+ "PRO486BTFGMGIT": {
+  "colores": [
+   "PRO486BTFGMXT",
+   "PRO486BTFGMART",
+   "PRO486BTFGMROT"
+  ],
+  "accesorios": [
+   "901472"
+  ]
+ },
+ "PRO486BTFGMROT": {
+  "colores": [
+   "PRO486BTFGMXT",
+   "PRO486BTFGMGIT",
+   "PRO486BTFGMART"
+  ],
+  "accesorios": [
+   "901472"
+  ]
+ },
+ "PRO486BTFGMXT": {
+  "colores": [
+   "PRO486BTFGMGIT",
+   "PRO486BTFGMART",
+   "PRO486BTFGMROT"
+  ],
+  "accesorios": [
+   "901472"
+  ]
+ },
+ "PRO486BTFGMXTLP": {
+  "colores": [
+   "PRO486BTFGMGIT",
+   "PRO486BTFGMART",
+   "PRO486BTFGMROT"
+  ],
+  "accesorios": [
+   "901472"
+  ]
+ },
+ "PROF366QBXT": {
+  "accesorios": [
+   "901309"
+  ]
+ },
+ "PROF366RTBXT": {
+  "accesorios": [
+   "901309"
+  ]
+ },
+ "REF18FCBIPLV": {
+  "accesorios": [
+   "SP18CX",
+   "901667",
+   "PROHKCOL",
+   "MASHKCOL",
+   "HERHKCOL",
+   "901669",
+   "9100277"
+  ]
+ },
+ "REF18WCBPLV": {
+  "accesorios": [
+   "SP18WXV",
+   "901663",
+   "PROHKCOL",
+   "MASHKCOL",
+   "HERHKCOL",
+   "901669",
+   "9100277"
+  ]
+ },
+ "REF18WCBPRV": {
+  "accesorios": [
+   "SP18WXV",
+   "901663",
+   "PROHKCOL",
+   "MASHKCOL",
+   "HERHKCOL",
+   "901669",
+   "9100277"
+  ]
+ },
+ "REF24FCBIPNV": {
+  "accesorios": [
+   "SP24CX",
+   "901665",
+   "PROHKCOL",
+   "MASHKCOL",
+   "HERHKCOL",
+   "901669",
+   "9100277"
+  ]
+ },
+ "REF24RCBPNV": {
+  "accesorios": [
+   "SP24CX",
+   "901665",
+   "PROHKCOL",
+   "MASHKCOL",
+   "HERHKCOL",
+   "901669",
+   "9100277"
+  ]
+ },
+ "REF24WCBPNV": {
+  "accesorios": [
+   "SP24WXV",
+   "901662",
+   "PROHKCOL",
+   "MASHKCOL",
+   "HERHKCOL",
+   "901669",
+   "9100277"
+  ]
+ },
+ "REF30RCBPNV": {
+  "accesorios": [
+   "SP30CX",
+   "901666",
+   "PROHKCOL",
+   "MASHKCOL",
+   "HERHKCOL",
+   "901669",
+   "9100277"
+  ]
+ },
+ "REF36BMBZPNV": {
+  "accesorios": [
+   "SP36BMX",
+   "PROHK36PI",
+   "MASHK36PI",
+   "HERHK36P",
+   "CTXV",
+   "DS2HERTGO"
+  ]
+ },
+ "RFD36FZNX": {
+  "accesorios": [
+   "HK36PROFD3X",
+   "HK36MASFD3X",
+   "HK36MASFD3XG",
+   "HK36HERFD3XG",
+   "BHFDX"
+  ]
+ }
+}

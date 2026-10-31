@@ -15,14 +15,23 @@
 //
 // Para una marca o familia nueva: sumar su fuente al script del punto 1 o una
 // regla en REGLAS_CRUZADAS / candidatosDe().
+//
+// Aparte, data/sugerencias-marca.json (a mano, por marca; hoy Bertazzoni):
+//   - "colores": el mismo modelo en otros colores, cada uno con su propia clave
+//     (Carla, 2026-10-30). Van primero y no le quitan lugar a las campanas ni a
+//     los accesorios: la rejilla crece a una tercera fila si hace falta.
+//   - "accesorios": jaladeras, paneles, filtros y kits del modelo; pesan menos
+//     que las campanas sugeridas para estufas y parrillas.
 
 import sugerenciasFabricante from "@/data/sugerencias-compra.json";
+import sugerenciasMarca from "@/data/sugerencias-marca.json";
 
 import type { ProductoVivo } from "./catalogoVivo";
 import { esAccesorio } from "./coleccionesWeb";
 
 type ListasFabricante = { accesorios: string[]; limpieza: string[]; combinables: string[] };
 const FABRICANTE = sugerenciasFabricante as Record<string, ListasFabricante>;
+const MARCA = sugerenciasMarca as unknown as Record<string, { colores?: string[]; accesorios?: string[] }>;
 
 /** Máximo de tarjetas en "Sugerencias de compra" (dos filas de la rejilla de 3). */
 export const MAX_SUGERENCIAS = 6;
@@ -211,21 +220,32 @@ function puntaje(equipo: ProductoVivo, acc: ProductoVivo): number {
  * de colecciones relacionadas). Devuelve [] si no hay ninguna.
  */
 export function sugerenciasDeCompra(equipo: ProductoVivo, candidatos: ProductoVivo[]): ProductoVivo[] {
-  if (esAccesorio(equipo)) return []; // a un accesorio se le muestran similares
   const porSku = new Map(candidatos.map((c) => [c.sku, c]));
+  const deMarca = MARCA[equipo.sku] ?? {};
+  // 0. El mismo modelo en otros colores.
+  const colores = (deMarca.colores ?? []).flatMap((s) => (s !== equipo.sku && porSku.has(s) ? [porSku.get(s)!] : []));
+  const enColores = new Set(colores.map((c) => c.sku));
+  if (esAccesorio(equipo)) return colores; // a un accesorio se le muestran similares (o sus otros colores)
   const elegidos = new Map<string, number>();
 
   // 1. Catálogo del fabricante.
   const lista = FABRICANTE[equipo.sku];
   if (lista) {
     for (const sku of [...lista.accesorios, ...lista.limpieza, ...lista.combinables]) {
-      if (porSku.has(sku) && sku !== equipo.sku) elegidos.set(sku, 1000);
+      const c = porSku.get(sku);
+      // Equipos del mismo tipo no entran por aquí (como antes de sumar la colección propia a los candidatos).
+      if (c && sku !== equipo.sku && !(c.tipo === equipo.tipo && !esAccesorio(c))) elegidos.set(sku, 1000);
     }
+  }
+  for (const sku of deMarca.accesorios ?? []) {
+    if (porSku.has(sku) && sku !== equipo.sku) elegidos.set(sku, 50);
   }
 
   // 2. Reglas por familia, medida, línea y tipo.
   for (const c of candidatos) {
-    if (c.sku === equipo.sku || c.marca !== equipo.marca) continue;
+    if (c.sku === equipo.sku || c.marca !== equipo.marca || enColores.has(c.sku)) continue;
+    // Equipos del mismo tipo solo entran como "otros colores".
+    if (c.tipo === equipo.tipo && !esAccesorio(c)) continue;
     let pts: number;
     if (esAccesorio(c)) {
       pts = puntaje(equipo, c);
@@ -238,10 +258,13 @@ export function sugerenciasDeCompra(equipo: ProductoVivo, candidatos: ProductoVi
     if (pts > 0) elegidos.set(c.sku, Math.max(elegidos.get(c.sku) ?? 0, pts));
   }
 
-  return [...elegidos.entries()]
+  // Con más de 3 colores la rejilla pasa a tres filas para que sigan cabiendo campanas y accesorios.
+  const total = colores.length > 3 ? MAX_SUGERENCIAS + 3 : MAX_SUGERENCIAS;
+  const resto = [...elegidos.entries()]
     .map(([sku, pts]) => ({ p: porSku.get(sku)!, pts }))
     // Más relevantes primero; con foto antes que sin foto.
     .sort((a, b) => b.pts - a.pts || Number(b.p.imagenes.length > 0) - Number(a.p.imagenes.length > 0))
-    .slice(0, MAX_SUGERENCIAS)
+    .slice(0, total - colores.length)
     .map((x) => x.p);
+  return [...colores, ...resto];
 }
