@@ -84,7 +84,12 @@ export const TIPOS_WEB: TipoWeb[] = [
   { tipo: "Monomandos", coleccion: "monomandos", slugRiel: "monomandos", ruta: `${TARJAS.ruta}?tipo=monomandos`, macro: COCINA, sub1: TARJAS },
   { tipo: "Accesorios de Tarjas y Monomandos", coleccion: "accesorios-de-tarjas-y-monomandos", slugRiel: "accesorios-tarjas-monomandos", ruta: `${TARJAS.ruta}?tipo=accesorios-tarjas-monomandos`, macro: COCINA, sub1: TARJAS },
   // Trituradores no tiene riel (un solo tipo): la página entera es su listado.
-  { tipo: "Trituradores", coleccion: "trituradores", slugRiel: "trituradores", ruta: TRITURADORES.ruta, macro: COCINA, sub1: TRITURADORES },
+  // Sus accesorios (tapones, bridas, air gaps…) llevan `filtros.tipo` =
+  // "Accesorio de triturador" y salen como opción "Accesorios" del panel.
+  {
+    tipo: "Trituradores", coleccion: "trituradores", slugRiel: "trituradores", ruta: TRITURADORES.ruta, macro: COCINA, sub1: TRITURADORES,
+    accesorios: { slug: "accesorios-trituradores", nombre: "Accesorios" },
+  },
   // Filtros y repuestos (cartuchos, tanques) viven con los purificadores como
   // accesorios: `filtros.tipo` = "Accesorio de purificador" (Carla, 2026-10-21).
   {
