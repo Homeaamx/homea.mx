@@ -481,5 +481,94 @@
    "HK36HERFD3XG",
    "BHFDX"
   ]
+ },
+ "AM50BAK": {
+  "accesorios": [
+   "HS5061",
+   "H9320-51",
+   "HS0182",
+   "HS2133"
+  ]
+ },
+ "AM50BAKAD": {
+  "accesorios": [
+   "HS5061",
+   "H9320-51",
+   "HS0182",
+   "HS2133"
+  ]
+ },
+ "AM50BAKDS": {
+  "accesorios": [
+   "HS0229",
+   "HS5061",
+   "H9320-51",
+   "HS0182",
+   "HS2133"
+  ]
+ },
+ "AM50BAKADDS": {
+  "accesorios": [
+   "HS0229",
+   "HS5061",
+   "H9320-51",
+   "HS0182",
+   "HS2133"
+  ]
+ },
+ "C80BAK": {
+  "accesorios": [
+   "HS5061",
+   "H9320-51",
+   "HS0182",
+   "HS2133"
+  ]
+ },
+ "C80BAKAD": {
+  "accesorios": [
+   "HS5061",
+   "H9320-51",
+   "HS0182",
+   "HS2133"
+  ]
+ },
+ "C80BAKDS": {
+  "accesorios": [
+   "HS0229",
+   "HS5061",
+   "H9320-51",
+   "HS0182",
+   "HS2133"
+  ]
+ },
+ "C80BAKADDS": {
+  "accesorios": [
+   "HS0229",
+   "HS5061",
+   "H9320-51",
+   "HS0182",
+   "HS2133"
+  ]
+ },
+ "KM81BAK": {
+  "accesorios": [
+   "HS5061",
+   "H9320-51"
+  ]
+ },
+ "IM50BAALM": {
+  "accesorios": [
+   "H9320-51"
+  ]
+ },
+ "IM50BAAQ": {
+  "accesorios": [
+   "H9320-51"
+  ]
+ },
+ "IM200BAK": {
+  "accesorios": [
+   "H9320-51"
+  ]
  }
 }

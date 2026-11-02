@@ -42,6 +42,10 @@ ADICIONALES = {
     ("Lavandería", "tipo"): [("", "Accesorio de lavandería")],
     ("Lavandería", "capacidad"): [("19 kg", "9 kg"), ("19 kg", "10 kg")],
     ("Lavavajillas", "capacidad"): [("12", "10")],
+    # Hoshizaki (Carla, 2026-11-02): valor exacto de la ficha.
+    ("Máquinas de hielo", "ancho"): [("", '20"'), ("", '25"'), ("", '40"')],
+    ("Máquinas de hielo", "capacidad"): [("25 lb", "22 lb"), ("30 lb", "27 lb"), ("65 lb", "36 lb"), ("65 lb", "38 lb"), ("110 lb", "75 lb")],
+    ("Máquinas de hielo", "produccion"): [("", "92 lb"), ("", "98 lb"), ("", "186 lb")],
 }
 # Valores que no son lista cerrada.
 SIN_LISTA = re.compile(r"^(depende del producto|min-max|—|-)?$", re.I)
