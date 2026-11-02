@@ -39,6 +39,13 @@ NS = {"m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
 # (subcategoría, clave) → [(insertar antes de, valor)] — valores añadidos en Shopify
 # después de la tabla de Carla.
 ADICIONALES = {
+    # Blanco (Carla, 2026-11-02): Silgranit, color Café, llaves de bar/pared y accesorios.
+    ("Tarjas", "material"): [("", "Granito (Silgranit)")],
+    ("Tarjas", "acabado"): [("Dorado", "Café")],
+    ("Monomandos", "instalacion"): [("", "De pared")],
+    ("Monomandos", "diseno"): [("Pot filler", "Bar")],
+    ("Monomandos", "acabado"): [("", "Plata"), ("", "Gris"), ("", "Blanco"), ("", "Café"), ("", "Arena")],
+    ("Accesorios de Tarjas y Monomandos", "tipo"): [("", v) for v in ("Colador", "Paquete de accesorios", "Filtro o cartucho", "Kit de instalación o conexión", "Organizador bajo tarja", "Limpiador")],
     ("Lavandería", "tipo"): [("", "Accesorio de lavandería")],
     ("Lavandería", "capacidad"): [("19 kg", "9 kg"), ("19 kg", "10 kg")],
     ("Lavavajillas", "capacidad"): [("12", "10")],

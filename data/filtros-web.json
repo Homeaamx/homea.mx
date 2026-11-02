@@ -1870,7 +1870,8 @@
         "valores": [
           "Inoxidable",
           "Cuarzo",
-          "Cerámica"
+          "Cerámica",
+          "Granito (Silgranit)"
         ]
       },
       {
@@ -1882,6 +1883,7 @@
           "Blanco",
           "Gris",
           "Arena",
+          "Café",
           "Dorado"
         ]
       },
@@ -1940,7 +1942,8 @@
         "nombre": "Tipo de instalación",
         "clave": "instalacion",
         "valores": [
-          "Cubierta"
+          "Cubierta",
+          "De pared"
         ]
       },
       {
@@ -1953,6 +1956,7 @@
           "Extraíble",
           "Profesional",
           "Inteligente (touch)",
+          "Bar",
           "Pot filler"
         ]
       },
@@ -1974,7 +1978,12 @@
           "Cromado",
           "Negro",
           "Cobre",
-          "Dorado"
+          "Dorado",
+          "Plata",
+          "Gris",
+          "Blanco",
+          "Café",
+          "Arena"
         ]
       },
       {
@@ -2029,7 +2038,13 @@
           "Tabla de picar",
           "Escurridor de platos",
           "Escurridor de verduras",
-          "Rejilla de fondo"
+          "Rejilla de fondo",
+          "Colador",
+          "Paquete de accesorios",
+          "Filtro o cartucho",
+          "Kit de instalación o conexión",
+          "Organizador bajo tarja",
+          "Limpiador"
         ]
       },
       {
