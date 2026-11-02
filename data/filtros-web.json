@@ -426,6 +426,19 @@
         ]
       },
       {
+        "nombre": "Bisagra / apertura",
+        "clave": "bisagra",
+        "valores": [
+          "Izquierda",
+          "Derecha",
+          "Izquierda (reversible)",
+          "Derecha (reversible)",
+          "Reversible",
+          "Abatible hacia abajo",
+          "Corrediza"
+        ]
+      },
+      {
         "nombre": "Ancho",
         "clave": "ancho",
         "valores": [
