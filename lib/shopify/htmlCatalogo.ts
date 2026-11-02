@@ -44,6 +44,53 @@ export function slugValor(v: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
+/**
+ * Valor numérico de una opción de filtro para ordenarla: '24"' → 24,
+ * "15 1/2\"" → 15.5, "0.75 HP" → 0.75, "1,200 CFM" → 1200. "Hasta 45 cm" y
+ * "Menor a 24\"" van justo antes de su número; "Más de 100 cm", justo después.
+ * Texto sin número al inicio → null.
+ */
+function numeroDeValor(v: string): number | null {
+  const s = v.trim().toLowerCase();
+  const num = (t: string) => {
+    const m = t.match(/^(\d[\d,]*(?:\.\d+)?)(?:\s+(\d+)\/(\d+))?|^(\d+)\/(\d+)/);
+    if (!m) return null;
+    if (m[4]) return Number(m[4]) / Number(m[5]);
+    return Number(m[1].replace(/,/g, "")) + (m[2] ? Number(m[2]) / Number(m[3]) : 0);
+  };
+  const tope = s.match(/^(hasta|menor a|menos de)\s+(.*)$/);
+  if (tope) return (num(tope[2]) ?? NaN) - 0.001;
+  const piso = s.match(/^(más de|mas de|mayor a)\s+(.*)$/);
+  if (piso) return (num(piso[2]) ?? NaN) + 0.001;
+  return num(s);
+}
+
+/**
+ * Orden de las opciones de los filtros (Carla, 2026-11-02): siempre de menor a
+ * mayor y de la A a la Z. Los números van primero; el texto, después y alfabético.
+ */
+export function ordenValores(a: string, b: string): number {
+  const na = numeroDeValor(a);
+  const nb = numeroDeValor(b);
+  const va = na !== null && !Number.isNaN(na);
+  const vb = nb !== null && !Number.isNaN(nb);
+  // Un filtro compartido puede mezclar unidades (Capacidad: botellas de cava y
+  // libras de máquina de hielo): cada unidad va junta y en su orden.
+  // Solo cuenta como unidad lo que va tras el número ("27 lb", "51 a 100",
+  // "Hasta 400 CFM"); "2 tinas iguales" no tiene unidad y se ordena por número.
+  const unidad = (v: string) => {
+    const resto = v.trim().replace(/^(hasta|menor a|menos de|más de|mas de|mayor a)\s+/i, "");
+    const m = resto.match(/^[\d.,/\s]+(?:a\s+[\d.,/]+\s*)?([a-záéíóúñ"%°]*)\s*$/i);
+    return m ? m[1].toLowerCase().replace(/(.{2,})s$/, "$1") : null;
+  };
+  const ua = unidad(a);
+  const ub = unidad(b);
+  if (va && vb && ua !== null && ub !== null && ua !== ub) return ua.localeCompare(ub, "es");
+  if (va && vb && na !== nb) return na! - nb!;
+  if (va !== vb) return va ? -1 : 1;
+  return a.localeCompare(b, "es", { sensitivity: "base", numeric: true });
+}
+
 const dinero = (n: number) =>
   new Intl.NumberFormat("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
 
@@ -269,7 +316,7 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
   <div class="imgw cutout">${imagen}${pct ? `<span class="pcard-desc figures">−${pct}%</span>` : ""}</div>
   <div class="body">
     <div class="pcard-top">${stock}<span class="pcard-acc">${botonAgregarTarjeta(p, precio, img)}<button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(spec.join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${img ? esc(cdn(img.url, 400)) : ""}" data-wl-href="${href}" data-wl-tipo="${esc(p.tipo)}" data-wl-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-wl-stock="${p.enStock ? 1 : 0}" data-wl-was="${precio.tachado ? esc(`$${dinero(precio.tachado)} ${precio.moneda}`) : ""}" data-wl-mxn="${precio.mxnEquivalente ?? precio.venta}" data-tip="Agregar a mi Wishlist" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button></span></div>
-    <div class="pcard-head"><span class="brand">${esc(p.marca)}</span><div class="pcard-linea"><span class="pcard-serie">${esc(serie ?? "")}</span><span class="pcard-sku figures">${esc(p.sku)}</span></div></div>
+    <div class="pcard-head"><span class="brand">${esc(p.marca)}</span><div class="pcard-linea"><span class="pcard-serie">${esc(serie ?? "")}</span><span class="pcard-sku figures" title="${esc(p.sku)}">${esc(p.sku)}</span></div></div>
     <h3 class="pcard-name">${esc(nombre)}</h3>
     ${precioTarjeta(precio)}
   </div>
@@ -435,7 +482,7 @@ export function panelFiltrosHtml(
     for (const p of productos) sumar(subcategoriaDe(p), 1);
     if (cuenta.size > 1) {
       const etiquetas = [...cuenta]
-        .sort((a, b) => a[1].orden - b[1].orden)
+        .sort((a, b) => ordenValores(a[1].nombre, b[1].nombre))
         .map(
           ([k, c]) =>
             `<label><input type="checkbox" data-fk="categoria" value="${esc(k)}"> <span class="flbl">${esc(c.nombre)}</span> <span class="count figures">${c.n}</span></label>`,
@@ -456,6 +503,7 @@ export function panelFiltrosHtml(
       cuenta.set(slug, c);
     }
     const etiquetas = [...cuenta]
+      .sort((a, b) => ordenValores(a[1].nombre, b[1].nombre))
       .map(
         ([slug, c]) =>
           `<label data-tipo="${esc(slug)}"><input type="checkbox" data-fk="tipo-web" value="${esc(slug)}"> <span class="flbl">${esc(c.nombre)}</span> <span class="count figures">${c.n}</span></label>`,
@@ -549,18 +597,10 @@ export function panelFiltrosHtml(
       );
       continue;
     }
-    // Orden: mosaico → lista cerrada de la tabla → valores extra de Shopify (alfabético).
-    const fijos = new Map<string, number>();
-    [...delMosaico.map(claveMosaico), ...cerrados.map(slugValor)].forEach((k, i) => {
-      if (!fijos.has(k)) fijos.set(k, i);
-    });
+    // Orden: siempre de menor a mayor y de la A a la Z (Carla, 2026-11-02),
+    // sin importar si el valor viene del mosaico, de la tabla o de Shopify.
     const etiquetas = [...cuenta]
-      .sort((a, b) => {
-        const fa = fijos.get(a[0]) ?? Infinity;
-        const fb = fijos.get(b[0]) ?? Infinity;
-        if (fa !== fb) return fa - fb;
-        return a[1].texto.localeCompare(b[1].texto, "es", { numeric: true });
-      })
+      .sort((a, b) => ordenValores(a[1].texto, b[1].texto))
       .map(
         ([k, c]) =>
           `<label${c.tipo ? ` data-tipo="${esc(c.tipo)}"` : ""}><input type="checkbox" data-fk="${esc(d.clave)}" value="${esc(k)}"> <span class="flbl">${esc(c.texto)}</span> <span class="count figures">${c.n}</span></label>`,

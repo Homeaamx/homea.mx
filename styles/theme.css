@@ -4941,9 +4941,11 @@ body:has(:is([data-newsletter="ofertas"], [data-newsletter="guias"])) .site-foot
 /* Un solo renglón: si la línea no cabe se corta con "…" y el modelo no baja. La
    tarjeta puede encogerse a su columna (sin esto una línea larga ensancha la columna). */
 .pcard[data-cat-card] { min-width: 0; }
-.pcard-head .pcard-linea { align-items: center; flex-wrap: nowrap; }
+.pcard-head .pcard-linea { align-items: center; flex-wrap: nowrap; max-width: 100%; }
 .pcard-linea .pcard-serie { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pcard-linea .pcard-sku { flex: none; margin-left: auto; white-space: nowrap; text-align: right; font-size: 12px; line-height: 18px; color: var(--homea-n600); }
+/* Códigos largos (InSinkErator EVOLUTION-PLUS-1000-SR-4-AS): el modelo también
+   se encoge y se corta con "…" para no salirse de la tarjeta (Carla, 2026-11-02). */
+.pcard-linea .pcard-sku { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; margin-left: auto; white-space: nowrap; text-align: right; font-size: 12px; line-height: 18px; color: var(--homea-n600); }
 .pcard-head .pcard-serie { font-size: 12px; line-height: 18px; min-height: 18px; color: var(--fg-muted); }
 .pcard-price { margin-top: 4px; }
 .pcard-price .price-tag, .pcard-price .price-tag .currency { font-weight: 700; }
