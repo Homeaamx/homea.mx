@@ -430,7 +430,10 @@
         "clave": "ancho",
         "valores": [
           "15\"",
-          "18\""
+          "18\"",
+          "20\"",
+          "25\"",
+          "40\""
         ]
       },
       {
@@ -460,9 +463,14 @@
         "nombre": "Capacidad (almacenamiento)",
         "clave": "capacidad",
         "valores": [
+          "22 lb",
           "25 lb",
+          "27 lb",
           "30 lb",
+          "36 lb",
+          "38 lb",
           "65 lb",
+          "75 lb",
           "110 lb"
         ]
       },
@@ -475,7 +483,10 @@
           "54 lb",
           "65 lb",
           "85 lb",
-          "90 lb"
+          "90 lb",
+          "92 lb",
+          "98 lb",
+          "186 lb"
         ]
       },
       {
