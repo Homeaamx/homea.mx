@@ -10784,5 +10784,766 @@
   "accesorios": [
    "H9320-51"
   ]
+ },
+ "EVOLUTION-PLUS-1000-SR-4-AS": {
+  "accesorios": [
+   "FLG-SS",
+   "STP-SS",
+   "DWC-00",
+   "FDT-00",
+   "WRN-00"
+  ]
+ },
+ "EVOLUTION-PLUS-750-SR-4-AS": {
+  "accesorios": [
+   "FLG-SS",
+   "STP-SS",
+   "DWC-00",
+   "FDT-00",
+   "WRN-00"
+  ]
+ },
+ "F-701R": {
+  "accesorios": [
+   "SWT-FLTR-4"
+  ]
+ },
+ "F-GN1100BC": {
+  "colores": [
+   "F-GN1100C",
+   "F-GN1100BR",
+   "F-GN1100PN",
+   "F-GN1100MBLK",
+   "F-GN1100ORB",
+   "F-GN1100BIS",
+   "F-GN1100W",
+   "F-GN1100BLK",
+   "F-GN1100FG",
+   "F-GN1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-GN1100BIS": {
+  "colores": [
+   "F-GN1100C",
+   "F-GN1100BR",
+   "F-GN1100BC",
+   "F-GN1100PN",
+   "F-GN1100MBLK",
+   "F-GN1100ORB",
+   "F-GN1100W",
+   "F-GN1100BLK",
+   "F-GN1100FG",
+   "F-GN1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-GN1100BLK": {
+  "colores": [
+   "F-GN1100C",
+   "F-GN1100BR",
+   "F-GN1100BC",
+   "F-GN1100PN",
+   "F-GN1100MBLK",
+   "F-GN1100ORB",
+   "F-GN1100BIS",
+   "F-GN1100W",
+   "F-GN1100FG",
+   "F-GN1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-GN1100BR": {
+  "colores": [
+   "F-GN1100C",
+   "F-GN1100BC",
+   "F-GN1100PN",
+   "F-GN1100MBLK",
+   "F-GN1100ORB",
+   "F-GN1100BIS",
+   "F-GN1100W",
+   "F-GN1100BLK",
+   "F-GN1100FG",
+   "F-GN1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-GN1100C": {
+  "colores": [
+   "F-GN1100BR",
+   "F-GN1100BC",
+   "F-GN1100PN",
+   "F-GN1100MBLK",
+   "F-GN1100ORB",
+   "F-GN1100BIS",
+   "F-GN1100W",
+   "F-GN1100BLK",
+   "F-GN1100FG",
+   "F-GN1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-GN1100FG": {
+  "colores": [
+   "F-GN1100C",
+   "F-GN1100BR",
+   "F-GN1100BC",
+   "F-GN1100PN",
+   "F-GN1100MBLK",
+   "F-GN1100ORB",
+   "F-GN1100BIS",
+   "F-GN1100W",
+   "F-GN1100BLK",
+   "F-GN1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-GN1100MB": {
+  "colores": [
+   "F-GN1100C",
+   "F-GN1100BR",
+   "F-GN1100BC",
+   "F-GN1100PN",
+   "F-GN1100MBLK",
+   "F-GN1100ORB",
+   "F-GN1100BIS",
+   "F-GN1100W",
+   "F-GN1100BLK",
+   "F-GN1100FG"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-GN1100MBLK": {
+  "colores": [
+   "F-GN1100C",
+   "F-GN1100BR",
+   "F-GN1100BC",
+   "F-GN1100PN",
+   "F-GN1100ORB",
+   "F-GN1100BIS",
+   "F-GN1100W",
+   "F-GN1100BLK",
+   "F-GN1100FG",
+   "F-GN1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-GN1100ORB": {
+  "colores": [
+   "F-GN1100C",
+   "F-GN1100BR",
+   "F-GN1100BC",
+   "F-GN1100PN",
+   "F-GN1100MBLK",
+   "F-GN1100BIS",
+   "F-GN1100W",
+   "F-GN1100BLK",
+   "F-GN1100FG",
+   "F-GN1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-GN1100PN": {
+  "colores": [
+   "F-GN1100C",
+   "F-GN1100BR",
+   "F-GN1100BC",
+   "F-GN1100MBLK",
+   "F-GN1100ORB",
+   "F-GN1100BIS",
+   "F-GN1100W",
+   "F-GN1100BLK",
+   "F-GN1100FG",
+   "F-GN1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-GN1100W": {
+  "colores": [
+   "F-GN1100C",
+   "F-GN1100BR",
+   "F-GN1100BC",
+   "F-GN1100PN",
+   "F-GN1100MBLK",
+   "F-GN1100ORB",
+   "F-GN1100BIS",
+   "F-GN1100BLK",
+   "F-GN1100FG",
+   "F-GN1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-H3300BR": {
+  "colores": [
+   "F-H3300C"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-H3300C": {
+  "colores": [
+   "F-H3300BR"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-H3N1-AN": {
+  "colores": [
+   "F-H3N1-C",
+   "F-H3N1-BR",
+   "F-H3N1-NS",
+   "F-H3N1-ORG",
+   "F-H3N1-W"
+  ]
+ },
+ "F-H3N1-BR": {
+  "colores": [
+   "F-H3N1-C",
+   "F-H3N1-NS",
+   "F-H3N1-ORG",
+   "F-H3N1-W",
+   "F-H3N1-AN"
+  ]
+ },
+ "F-H3N1-C": {
+  "colores": [
+   "F-H3N1-BR",
+   "F-H3N1-NS",
+   "F-H3N1-ORG",
+   "F-H3N1-W",
+   "F-H3N1-AN"
+  ]
+ },
+ "F-H3N1-NS": {
+  "colores": [
+   "F-H3N1-C",
+   "F-H3N1-BR",
+   "F-H3N1-ORG",
+   "F-H3N1-W",
+   "F-H3N1-AN"
+  ]
+ },
+ "F-H3N1-ORG": {
+  "colores": [
+   "F-H3N1-C",
+   "F-H3N1-BR",
+   "F-H3N1-NS",
+   "F-H3N1-W",
+   "F-H3N1-AN"
+  ]
+ },
+ "F-H3N1-W": {
+  "colores": [
+   "F-H3N1-C",
+   "F-H3N1-BR",
+   "F-H3N1-NS",
+   "F-H3N1-ORG",
+   "F-H3N1-AN"
+  ]
+ },
+ "F-HC1100BC": {
+  "colores": [
+   "F-HC1100C",
+   "F-HC1100BR",
+   "F-HC1100PN",
+   "F-HC1100MBLK",
+   "F-HC1100ORB",
+   "F-HC1100BIS",
+   "F-HC1100W",
+   "F-HC1100BLK",
+   "F-HC1100FG",
+   "F-HC1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-HC1100BIS": {
+  "colores": [
+   "F-HC1100C",
+   "F-HC1100BR",
+   "F-HC1100BC",
+   "F-HC1100PN",
+   "F-HC1100MBLK",
+   "F-HC1100ORB",
+   "F-HC1100W",
+   "F-HC1100BLK",
+   "F-HC1100FG",
+   "F-HC1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-HC1100BLK": {
+  "colores": [
+   "F-HC1100C",
+   "F-HC1100BR",
+   "F-HC1100BC",
+   "F-HC1100PN",
+   "F-HC1100MBLK",
+   "F-HC1100ORB",
+   "F-HC1100BIS",
+   "F-HC1100W",
+   "F-HC1100FG",
+   "F-HC1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-HC1100BR": {
+  "colores": [
+   "F-HC1100C",
+   "F-HC1100BC",
+   "F-HC1100PN",
+   "F-HC1100MBLK",
+   "F-HC1100ORB",
+   "F-HC1100BIS",
+   "F-HC1100W",
+   "F-HC1100BLK",
+   "F-HC1100FG",
+   "F-HC1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-HC1100C": {
+  "colores": [
+   "F-HC1100BR",
+   "F-HC1100BC",
+   "F-HC1100PN",
+   "F-HC1100MBLK",
+   "F-HC1100ORB",
+   "F-HC1100BIS",
+   "F-HC1100W",
+   "F-HC1100BLK",
+   "F-HC1100FG",
+   "F-HC1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-HC1100FG": {
+  "colores": [
+   "F-HC1100C",
+   "F-HC1100BR",
+   "F-HC1100BC",
+   "F-HC1100PN",
+   "F-HC1100MBLK",
+   "F-HC1100ORB",
+   "F-HC1100BIS",
+   "F-HC1100W",
+   "F-HC1100BLK",
+   "F-HC1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-HC1100MB": {
+  "colores": [
+   "F-HC1100C",
+   "F-HC1100BR",
+   "F-HC1100BC",
+   "F-HC1100PN",
+   "F-HC1100MBLK",
+   "F-HC1100ORB",
+   "F-HC1100BIS",
+   "F-HC1100W",
+   "F-HC1100BLK",
+   "F-HC1100FG"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-HC1100MBLK": {
+  "colores": [
+   "F-HC1100C",
+   "F-HC1100BR",
+   "F-HC1100BC",
+   "F-HC1100PN",
+   "F-HC1100ORB",
+   "F-HC1100BIS",
+   "F-HC1100W",
+   "F-HC1100BLK",
+   "F-HC1100FG",
+   "F-HC1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-HC1100ORB": {
+  "colores": [
+   "F-HC1100C",
+   "F-HC1100BR",
+   "F-HC1100BC",
+   "F-HC1100PN",
+   "F-HC1100MBLK",
+   "F-HC1100BIS",
+   "F-HC1100W",
+   "F-HC1100BLK",
+   "F-HC1100FG",
+   "F-HC1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-HC1100PN": {
+  "colores": [
+   "F-HC1100C",
+   "F-HC1100BR",
+   "F-HC1100BC",
+   "F-HC1100MBLK",
+   "F-HC1100ORB",
+   "F-HC1100BIS",
+   "F-HC1100W",
+   "F-HC1100BLK",
+   "F-HC1100FG",
+   "F-HC1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-HC1100W": {
+  "colores": [
+   "F-HC1100C",
+   "F-HC1100BR",
+   "F-HC1100BC",
+   "F-HC1100PN",
+   "F-HC1100MBLK",
+   "F-HC1100ORB",
+   "F-HC1100BIS",
+   "F-HC1100BLK",
+   "F-HC1100FG",
+   "F-HC1100MB"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-HC3300BR": {
+  "colores": [
+   "F-HC3300C"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "F-HC3300C": {
+  "colores": [
+   "F-HC3300BR"
+  ],
+  "accesorios": [
+   "SWT-FLTR-4",
+   "F-701R"
+  ]
+ },
+ "FLG-BIS": {
+  "colores": [
+   "FLG-SS",
+   "FLG-WH",
+   "FLG-MB",
+   "FLG-ORB",
+   "FLG-MTBLK",
+   "FLG-FG"
+  ],
+  "accesorios": [
+   "STP-BIS"
+  ]
+ },
+ "FLG-FG": {
+  "colores": [
+   "FLG-SS",
+   "FLG-WH",
+   "FLG-BIS",
+   "FLG-MB",
+   "FLG-ORB",
+   "FLG-MTBLK"
+  ],
+  "accesorios": [
+   "STP-FG"
+  ]
+ },
+ "FLG-MB": {
+  "colores": [
+   "FLG-SS",
+   "FLG-WH",
+   "FLG-BIS",
+   "FLG-ORB",
+   "FLG-MTBLK",
+   "FLG-FG"
+  ],
+  "accesorios": [
+   "STP-MB"
+  ]
+ },
+ "FLG-MTBLK": {
+  "colores": [
+   "FLG-SS",
+   "FLG-WH",
+   "FLG-BIS",
+   "FLG-MB",
+   "FLG-ORB",
+   "FLG-FG"
+  ],
+  "accesorios": [
+   "STP-MTBLK"
+  ]
+ },
+ "FLG-ORB": {
+  "colores": [
+   "FLG-SS",
+   "FLG-WH",
+   "FLG-BIS",
+   "FLG-MB",
+   "FLG-MTBLK",
+   "FLG-FG"
+  ],
+  "accesorios": [
+   "STP-ORB"
+  ]
+ },
+ "FLG-SS": {
+  "colores": [
+   "FLG-WH",
+   "FLG-BIS",
+   "FLG-MB",
+   "FLG-ORB",
+   "FLG-MTBLK",
+   "FLG-FG"
+  ],
+  "accesorios": [
+   "STP-SS"
+  ]
+ },
+ "FLG-WH": {
+  "colores": [
+   "FLG-SS",
+   "FLG-BIS",
+   "FLG-MB",
+   "FLG-ORB",
+   "FLG-MTBLK",
+   "FLG-FG"
+  ],
+  "accesorios": [
+   "STP-WH"
+  ]
+ },
+ "PREMIUM-550-SR-4-AS": {
+  "accesorios": [
+   "FLG-SS",
+   "STP-SS",
+   "DWC-00",
+   "FDT-00",
+   "WRN-00"
+  ]
+ },
+ "PREMIUM-700-SR-4-AS": {
+  "accesorios": [
+   "FLG-SS",
+   "STP-SS",
+   "DWC-00",
+   "FDT-00",
+   "WRN-00"
+  ]
+ },
+ "STANDARD-460-SR-4": {
+  "accesorios": [
+   "FLG-SS",
+   "STP-SS",
+   "DWC-00",
+   "FDT-00",
+   "WRN-00"
+  ]
+ },
+ "STP-BIS": {
+  "colores": [
+   "STP-SS",
+   "STP-WH",
+   "STP-MB",
+   "STP-ORB",
+   "STP-MTBLK",
+   "STP-FG",
+   "STP-DS",
+   "STP-PL"
+  ],
+  "accesorios": [
+   "FLG-BIS"
+  ]
+ },
+ "STP-DS": {
+  "colores": [
+   "STP-SS",
+   "STP-WH",
+   "STP-BIS",
+   "STP-MB",
+   "STP-ORB",
+   "STP-MTBLK",
+   "STP-FG",
+   "STP-PL"
+  ]
+ },
+ "STP-FG": {
+  "colores": [
+   "STP-SS",
+   "STP-WH",
+   "STP-BIS",
+   "STP-MB",
+   "STP-ORB",
+   "STP-MTBLK",
+   "STP-DS",
+   "STP-PL"
+  ],
+  "accesorios": [
+   "FLG-FG"
+  ]
+ },
+ "STP-MB": {
+  "colores": [
+   "STP-SS",
+   "STP-WH",
+   "STP-BIS",
+   "STP-ORB",
+   "STP-MTBLK",
+   "STP-FG",
+   "STP-DS",
+   "STP-PL"
+  ],
+  "accesorios": [
+   "FLG-MB"
+  ]
+ },
+ "STP-MTBLK": {
+  "colores": [
+   "STP-SS",
+   "STP-WH",
+   "STP-BIS",
+   "STP-MB",
+   "STP-ORB",
+   "STP-FG",
+   "STP-DS",
+   "STP-PL"
+  ],
+  "accesorios": [
+   "FLG-MTBLK"
+  ]
+ },
+ "STP-ORB": {
+  "colores": [
+   "STP-SS",
+   "STP-WH",
+   "STP-BIS",
+   "STP-MB",
+   "STP-MTBLK",
+   "STP-FG",
+   "STP-DS",
+   "STP-PL"
+  ],
+  "accesorios": [
+   "FLG-ORB"
+  ]
+ },
+ "STP-PL": {
+  "colores": [
+   "STP-SS",
+   "STP-WH",
+   "STP-BIS",
+   "STP-MB",
+   "STP-ORB",
+   "STP-MTBLK",
+   "STP-FG",
+   "STP-DS"
+  ]
+ },
+ "STP-SS": {
+  "colores": [
+   "STP-WH",
+   "STP-BIS",
+   "STP-MB",
+   "STP-ORB",
+   "STP-MTBLK",
+   "STP-FG",
+   "STP-DS",
+   "STP-PL"
+  ],
+  "accesorios": [
+   "FLG-SS"
+  ]
+ },
+ "STP-WH": {
+  "colores": [
+   "STP-SS",
+   "STP-BIS",
+   "STP-MB",
+   "STP-ORB",
+   "STP-MTBLK",
+   "STP-FG",
+   "STP-DS",
+   "STP-PL"
+  ],
+  "accesorios": [
+   "FLG-WH"
+  ]
+ },
+ "SWT-FLTR-4": {
+  "accesorios": [
+   "F-701R"
+  ]
  }
 }
