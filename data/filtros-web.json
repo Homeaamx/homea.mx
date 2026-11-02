@@ -490,7 +490,7 @@
         ]
       },
       {
-        "nombre": "Tipo de drenaje",
+        "nombre": "Bomba",
         "clave": "drenaje",
         "valores": [
           "Con bomba",

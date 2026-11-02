@@ -719,7 +719,7 @@ const NOMBRES_FILTRO: Record<string, string> = {
   produccion: "Producción diaria",
   despachador_agua: "Despachador de agua",
   llenado_agua: "Llenado de agua",
-  drenaje: "Drenaje",
+  drenaje: "Bomba",
   tipo: "Tipo",
   compatible: "Compatible con",
   tipo_gas: "Tipo de gas",
