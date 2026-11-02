@@ -2100,6 +2100,19 @@
         ]
       },
       {
+        "nombre": "Acabado",
+        "clave": "acabado",
+        "valores": [
+          "Inoxidable",
+          "Plata",
+          "Negro",
+          "Blanco",
+          "Crema",
+          "Bronce",
+          "Dorado"
+        ]
+      },
+      {
         "nombre": "Disponibilidad",
         "clave": "disponibilidad",
         "valores": [
@@ -2113,7 +2126,10 @@
         "valores": [
           "1 año",
           "2 años",
-          "3 años"
+          "3 años",
+          "4 años",
+          "5 años",
+          "6 años"
         ]
       },
       {
@@ -2205,7 +2221,25 @@
         "clave": "funcionamiento",
         "valores": [
           "Agua fría",
-          "Agua fría y caliente"
+          "Agua fría y caliente",
+          "Agua caliente"
+        ]
+      },
+      {
+        "nombre": "Acabado",
+        "clave": "acabado",
+        "valores": [
+          "Cromado",
+          "Inoxidable",
+          "Plata",
+          "Negro",
+          "Bronce",
+          "Crema",
+          "Blanco",
+          "Dorado",
+          "Arena",
+          "Naranja",
+          "Gris"
         ]
       },
       {
@@ -2222,7 +2256,8 @@
         "valores": [
           "1 año",
           "2 años",
-          "3 años"
+          "3 años",
+          "5 años"
         ]
       },
       {

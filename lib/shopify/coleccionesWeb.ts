@@ -96,7 +96,12 @@ export const TIPOS_WEB: TipoWeb[] = [
     tipo: "Purificadores de agua", coleccion: "purificadores-de-agua", slugRiel: "purificadores-de-agua", ruta: `${AGUA.ruta}?tipo=purificadores-de-agua`, macro: COCINA, sub1: AGUA,
     accesorios: { slug: "filtros-y-repuestos", nombre: "Filtros y repuestos de agua" },
   },
-  { tipo: "Despachadores de agua", coleccion: "despachadores-de-agua", slugRiel: "despachadores-de-agua", ruta: `${AGUA.ruta}?tipo=despachadores-de-agua`, macro: COCINA, sub1: AGUA },
+  // Tanque, filtro y extensión de los grifos de agua caliente (InSinkErator):
+  // `filtros.tipo` = "Accesorio de despachador" → tile "Tanques y accesorios" (Carla, 2026-11-02).
+  {
+    tipo: "Despachadores de agua", coleccion: "despachadores-de-agua", slugRiel: "despachadores-de-agua", ruta: `${AGUA.ruta}?tipo=despachadores-de-agua`, macro: COCINA, sub1: AGUA,
+    accesorios: { slug: "tanques-y-accesorios", nombre: "Tanques y accesorios de agua caliente" },
+  },
   // Exterior: colecciones creadas y publicadas al canal Headless el 2026-10-13 (sin piezas).
   // Asadores tiene dos tiles en el riel según `filtros.instalacion` (Empotrable / Carrito).
   {
