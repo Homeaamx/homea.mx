@@ -747,7 +747,7 @@
   cursor: pointer; color: var(--fg-muted);
   transition: border-color .25s, color .25s;
 }
-.apc-step em { font-family: var(--font-display); font-style: italic; font-size: 15px; color: var(--homea-gold); font-variant-numeric: tabular-nums; }
+.apc-step em { font-family: var(--font-display); font-style: italic; font-size: 15px; color: var(--accent-text); font-variant-numeric: tabular-nums; }
 .apc-step:hover { color: var(--fg); }
 .apc-step.on { border-color: var(--fg); color: var(--fg); }
 
@@ -1193,7 +1193,7 @@
 .gx-hero-in .eyebrow { margin: 0 0 18px; }
 .gx-hero-in h1 { font-size: clamp(36px, 3.6vw, 54px); line-height: 1.04; margin: 0; }
 .gx-hero-in h1 i { font-style: italic; }
-.gx-hero-sub { margin: 18px 0 26px; font-size: var(--fs-md); font-weight: 300; line-height: 1.55; color: var(--homea-black); }
+.gx-hero-sub { margin: 18px 0 26px; font-size: var(--fs-md); font-weight: 400; line-height: 1.55; color: var(--homea-black); }
 .gx-hero .guia-search { margin: 0; width: 100%; }
 /* Sobre bone, la barra clara del buscador se perdía: blanca con filo oro. */
 .gx-hero .guia-search-bar { background: var(--homea-white, #fff); border: 1px solid color-mix(in srgb, var(--homea-gold) 55%, var(--border));

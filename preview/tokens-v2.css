@@ -141,8 +141,12 @@
   --surface:        var(--homea-white);
   --surface-alt:    var(--homea-n050);
   --fg:             var(--homea-black);
-  --fg-muted:       var(--homea-n500);
-  --fg-subtle:      var(--homea-n400);
+  /* Texto secundario y tenue, un paso más oscuros que n500/n400 (misma tinta
+     cálida): n500 daba 4.0:1 en bone y 3.7:1 en greige, n400 2.5:1. Ahora
+     5.4:1 / 4.9:1 y 4.6:1 / 4.2:1 (AA en bone y blanco). Los n500/n400 se
+     quedan para filetes, rellenos y lo deshabilitado. */
+  --fg-muted:       #6B634F;
+  --fg-subtle:      #776E59;
   --border:         var(--homea-n200);
   --border-strong:  var(--homea-n300);
   --accent:         var(--homea-gold);
@@ -292,7 +296,7 @@ h4, .h4 { font-family: var(--font-sans); font-weight: 600;
 p, .p { font-family: var(--font-sans); font-weight: 400;
   font-size: var(--fs-base); line-height: var(--lh-normal);
   color: var(--fg); margin: 0 0 1em 0; text-wrap: pretty; }
-.lead    { font-size: var(--fs-lg); font-weight: 300; line-height: var(--lh-normal); color: var(--fg); }
+.lead    { font-size: var(--fs-lg); font-weight: 400; line-height: var(--lh-normal); color: var(--fg); }
 .lead-serif { font-family: var(--font-display); font-size: var(--fs-xl);
   font-weight: 400; line-height: var(--lh-normal); }
 .small, small { font-size: var(--fs-sm); color: var(--fg-muted); }
