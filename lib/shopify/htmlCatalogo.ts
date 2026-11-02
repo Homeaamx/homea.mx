@@ -17,6 +17,7 @@ import { join } from "node:path";
 
 import filtrosWeb from "@/data/filtros-web.json";
 import marcasJson from "@/data/marcas.json";
+import descuentosMarca from "@/data/descuentos-marca.json";
 import type { Decision } from "@/lib/reglas/reglaMarca";
 import type { TipoCambio } from "@/lib/tipoCambio";
 import { TONOS_ESTANDAR, type Tono } from "@/lib/coloresMarca";
@@ -327,6 +328,25 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
 function porcentajeDescuento(precio: PrecioPublico): number {
   if (!precio.tachado || precio.tachado <= precio.venta) return 0;
   return Math.round((1 - precio.venta / precio.tachado) * 100);
+}
+
+/** Descuento normal de la web de la marca (data/descuentos-marca.json); sin dato, 10 %. */
+function descuentoNormal(vendor: string): number {
+  const tabla = (descuentosMarca as { descuentos: Record<string, number> }).descuentos;
+  const n = normMarca(vendor);
+  type MarcaMin = { slug: string; nombre: string };
+  const crudo = marcasJson as unknown as MarcaMin[] | { marcas: MarcaMin[] };
+  const lista: MarcaMin[] = Array.isArray(crudo) ? crudo : (crudo.marcas ?? []);
+  const slug = lista.find((x) => normMarca(x.nombre) === n || normMarca(x.slug) === n)?.slug;
+  return (slug ? tabla[slug] : undefined) ?? 10;
+}
+
+/**
+ * Pieza de /ofertas (Carla, 2026-11-02): en stock y con un descuento MAYOR al
+ * normal de su marca. El stock al precio de siempre no es oferta.
+ */
+export function esOferta(p: ProductoVivo, tc: TipoCambio): boolean {
+  return p.enStock && porcentajeDescuento(precioPublico(p, tc)) > descuentoNormal(p.marca);
 }
 
 /**

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import MarketingPage from "@/components/MarketingPage";
 import { productosEnStock } from "@/lib/shopify/catalogoVivo";
-import { panelFiltrosHtml, rejillaHtml } from "@/lib/shopify/htmlCatalogo";
+import { esOferta, panelFiltrosHtml, rejillaHtml } from "@/lib/shopify/htmlCatalogo";
 import { opcionesPanelMacro } from "@/lib/shopify/panelMacro";
 import { obtenerTipoCambio } from "@/lib/tipoCambio";
 
@@ -22,12 +22,13 @@ const MAXIMO = 500;
 /**
  * Stock con precio final: mismo catálogo que /productos/cocina-y-bar (panel de
  * filtros de esa macro, decisión Carla 2026-10-19), con las piezas de Shopify en
- * `filtros.disponibilidad = "En stock"`. Sin piezas, el panel y la rejilla quedan
- * listos (vacíos) para cuando se publique stock.
+ * `filtros.disponibilidad = "En stock"` que además traen un descuento MAYOR al
+ * normal de su marca (Carla, 2026-11-02; ver `esOferta`). Sin piezas, el panel y
+ * la rejilla quedan listos (vacíos) para cuando se carguen los precios especiales.
  */
 async function slotsDeStock(): Promise<Record<string, string>> {
-  const productos = await productosEnStock(MAXIMO);
   const tc = await obtenerTipoCambio();
+  const productos = (await productosEnStock(MAXIMO)).filter((p) => esOferta(p, tc));
   const n = productos.length;
   // Lo que pasa del límite lleva `of-fuera`; el JS de preview/ofertas.html lo
   // recalcula al filtrar, ordenar o cambiar el selector.
@@ -40,7 +41,7 @@ async function slotsDeStock(): Promise<Record<string, string>> {
     : "";
   return {
     "stock-filtros": panelFiltrosHtml(productos, { tc, ...opcionesPanelMacro("cocina-y-bar", productos) }),
-    "stock-conteo": `${n} ${n === 1 ? "pieza" : "piezas"} en stock`,
+    "stock-conteo": `${n} ${n === 1 ? "pieza" : "piezas"} en oferta`,
     "stock-grid": rejilla,
   };
 }
