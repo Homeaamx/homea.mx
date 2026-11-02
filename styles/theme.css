@@ -5228,3 +5228,7 @@ body:has(:is([data-newsletter="ofertas"], [data-newsletter="guias"])) .site-foot
 /* En la ficha el tachado es un renglón propio (bloque en la rejilla .pdp-precio):
    se ajusta al texto para que la línea no cruce toda la columna. */
 .pdp-was { width: fit-content; justify-self: start; }
+/* Galería de la ficha estática (Carla, 2026-10-31): ya no es pegajosa. Con una
+   columna de compra más alta que la foto (títulos largos, Bertazzoni) la imagen
+   se deslizaba al bajar. Ahora sube junto con la página. */
+.pdp .gallery { position: static; top: auto; }
