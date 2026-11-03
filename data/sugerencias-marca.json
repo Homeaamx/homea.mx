@@ -11545,5 +11545,15 @@
   "accesorios": [
    "F-701R"
   ]
+ },
+ "KWU110-32": {
+  "colores": [
+   "KWU110-32/PGM"
+  ]
+ },
+ "KWU110-32/PGM": {
+  "colores": [
+   "KWU110-32"
+  ]
  }
 }

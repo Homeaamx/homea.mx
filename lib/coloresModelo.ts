@@ -26,6 +26,8 @@ const MUESTRAS: Record<string, string> = {
   "acero inoxidable": METAL,
   "stainless steel": METAL,
   "acero cepillado": METAL,
+  // Kraus: acero inoxidable con PVD negro (gunmetal), "… en Acero Inoxidable Negro".
+  "acero inoxidable negro": "linear-gradient(135deg, #5c5c5c 0%, #2e2e2e 50%, #1a1a1a 100%)",
   "pvd steel": "linear-gradient(135deg, #e6e6e3 0%, #b3b3ae 45%, #dadad6 60%, #8f8f8a 100%)",
   chrome: CROMO,
   cromo: CROMO,
@@ -135,10 +137,12 @@ export function coloresDeModelo(
   const comunes = palabras(grupo[0].titulo)
     .map((w) => w.toLowerCase())
     .filter((w) => grupo.every((g) => palabras(g.titulo).some((x) => x.toLowerCase() === w)));
-  const nombreDe = (g: (typeof grupo)[number]) =>
-    palabras(g.titulo)
-      .filter((w) => !comunes.includes(w.toLowerCase()))
-      .join(" ") || nombreRespaldo(g.acabado);
+  const nombreDe = (g: (typeof grupo)[number]) => {
+    const propias = palabras(g.titulo).filter((w) => !comunes.includes(w.toLowerCase()));
+    // "en Acero Inoxidable Negro" → "Acero Inoxidable Negro": sin conectores al inicio.
+    while (propias.length && RELLENO.has(propias[0].toLowerCase()) && propias[0].toLowerCase() !== "silgranit") propias.shift();
+    return propias.join(" ") || nombreRespaldo(g.acabado);
+  };
   const opciones: ColorHermano[] = [];
   for (const g of grupo) {
     const nombre = nombreDe(g);
