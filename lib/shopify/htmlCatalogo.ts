@@ -21,6 +21,7 @@ import descuentosMarca from "@/data/descuentos-marca.json";
 import type { Decision } from "@/lib/reglas/reglaMarca";
 import type { TipoCambio } from "@/lib/tipoCambio";
 import { TONOS_ESTANDAR, type Tono } from "@/lib/coloresMarca";
+import type { ColorHermano } from "@/lib/coloresModelo";
 import { IMAGEN_RESPALDO } from "@/lib/imagenRespaldo";
 
 import { TIPOS_WEB, esAccesorio, tileDePieza, tipoDePieza, tipoWeb } from "./coleccionesWeb";
@@ -756,6 +757,27 @@ function precioYColorHtml(p: ProductoVivo, precio: PrecioPublico, tc: TipoCambio
       </div>`;
 }
 
+/**
+ * El mismo modelo en otros colores, cada uno producto propio (Carla, 2026-11-03):
+ * un círculo por color que lleva a la ficha de ese color. Va donde el selector de
+ * variantes de Alfresco y con su misma forma.
+ */
+function coloresModeloHtml(colores: ColorHermano[]): string {
+  if (colores.length < 2) return "";
+  const actual = colores.find((c) => c.actual)!;
+  const circulos = colores
+    .map((c) =>
+      c.actual
+        ? `<span class="pdp-swatch is-tono is-active" role="radio" aria-checked="true" aria-label="${esc(c.nombre)}" title="${esc(c.nombre)}" style="--tono:${c.fondo}"></span>`
+        : `<a class="pdp-swatch is-tono" role="radio" aria-checked="false" href="/producto/${esc(c.slug)}" aria-label="${esc(c.nombre)} · modelo ${esc(c.sku)}" title="${esc(c.nombre)}" style="--tono:${c.fondo}"></a>`,
+    )
+    .join("");
+  return `<div class="pdp-color pdp-color--modelos" role="radiogroup" aria-label="Color">
+        <div class="pdp-color-head"><span class="pdp-color-lbl">Color</span><span class="pdp-color-val">${esc(actual.nombre)}</span></div>
+        <div class="pdp-color-opts">${circulos}</div>
+      </div>`;
+}
+
 /* ---------- Ficha completa ----------------------------------------------- */
 
 /**
@@ -930,6 +952,7 @@ export function fichaHtml(
   p: ProductoVivo,
   tc: TipoCambio,
   relacionados: Relacionados,
+  coloresModelo: ColorHermano[] = [],
 ): string {
   const precio = precioPublico(p, tc);
   const decision = decisionDeCompra(p, precio);
@@ -1053,6 +1076,7 @@ ${relacionados.productos.map((r, i) => tarjetaHtml(r, tc, i)).join("\n")}
     <div class="pdp-titulo"><h1>${tituloH1(p.titulo)}</h1></div>
     <p class="pdp-modelo">Modelo: <span class="figures">${esc(p.sku)}</span>${serie ? `<span class="pdp-modelo-sep" aria-hidden="true">|</span><span class="pdp-modelo-serie">${esc(serie)}</span>` : ""}</p>
     ${precioYColorHtml(p, precio, tc)}
+    ${p.colores.length < 2 ? coloresModeloHtml(coloresModelo) : ""}
 
     ${ctaHtml(p, decision, precio)}
   </div>

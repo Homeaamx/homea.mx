@@ -14,7 +14,8 @@ import {
 } from "@/lib/shopify/catalogoVivo";
 import { TIPOS_WEB, esAccesorio, tipoWeb } from "@/lib/shopify/coleccionesWeb";
 import { fichaHtml, type Relacionados } from "@/lib/shopify/htmlCatalogo";
-import { coleccionesCandidatas, sugerenciasDeCompra } from "@/lib/shopify/sugerencias";
+import { coleccionesCandidatas, otrosColores, sugerenciasDeCompra } from "@/lib/shopify/sugerencias";
+import { coloresDeModelo } from "@/lib/coloresModelo";
 import { contenidoDeFicha, jsonLdProducto } from "@/lib/shopify/pdpSlots";
 import { absUrl } from "@/lib/site";
 import { obtenerTipoCambio } from "@/lib/tipoCambio";
@@ -172,11 +173,21 @@ export default async function ProductoFichaPage(props: { params: Promise<Params>
   if (!vivo) notFound();
   // El SKU de un color (ALXE56C-SC) lleva a la ficha de su modelo: una sola URL por pieza.
   if (vivo.slug !== slug) permanentRedirect(`/producto/${vivo.slug}`);
-  const [tc, relacionados] = await Promise.all([obtenerTipoCambio(), relacionadosDe(vivo)]);
+  const [tc, relacionados, hermanos] = await Promise.all([
+    obtenerTipoCambio(),
+    relacionadosDe(vivo),
+    // El mismo modelo en otros colores (cada uno su producto): círculos que llevan a su ficha.
+    Promise.all(otrosColores(vivo.sku).map((s) => productoVivoPorSku(s))),
+  ]);
+  const comoColor = (x: NonNullable<typeof vivo>) => ({ sku: x.sku, slug: x.slug, titulo: x.titulo, acabado: x.filtros.acabado?.[0] });
+  const colores = coloresDeModelo(
+    comoColor(vivo),
+    hermanos.flatMap((h) => (h ? [comoColor(h)] : [])),
+  );
   const precio = precioPublico(vivo, tc);
   return (
     <>
-      <div dangerouslySetInnerHTML={{ __html: fichaHtml(vivo, tc, relacionados) }} />
+      <div dangerouslySetInnerHTML={{ __html: fichaHtml(vivo, tc, relacionados, colores) }} />
       <JsonLd data={jsonLdVivo(vivo, precio, url)} />
     </>
   );

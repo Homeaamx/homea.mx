@@ -215,6 +215,11 @@ function puntaje(equipo: ProductoVivo, acc: ProductoVivo): number {
   return pts;
 }
 
+/** El mismo modelo en otros colores (data/sugerencias-marca.json), sin la pieza misma. */
+export function otrosColores(sku: string): string[] {
+  return (MARCA[sku]?.colores ?? []).filter((s) => s !== sku);
+}
+
 /**
  * Sugerencias de compra para `equipo` entre `candidatos` (accesorios y equipos
  * de colecciones relacionadas). Devuelve [] si no hay ninguna.
