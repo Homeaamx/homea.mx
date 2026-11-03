@@ -391,36 +391,34 @@ function precioRefMxn(p: ProductoVivo): number {
 
 const fmtPesos = (n: number) => `$${n.toLocaleString("es-MX")}`;
 
-/** Cifra "redonda" para el corte de un rango (48,300 → 50,000; 437,000 → 450,000). */
-function redondo(v: number): number {
-  if (v <= 0) return 0;
-  const paso = 10 ** Math.floor(Math.log10(v)) / 2;
-  return Math.round(v / paso) * paso;
-}
+
+/** Cortes fijos de los rangos de precio; de 50 000 en adelante van cada 50 000. */
+const CORTES_PRECIO = [4500, 15000, 30000, 50000];
+const PASO_PRECIO = 50000;
 
 /**
- * Rangos de precio PROPORCIONALES (Carla, 2026-10-08): los cortes salen de los
- * cuantiles de los precios de la página, así cada rango junta más o menos el
- * mismo número de piezas, y se redondean a cifras legibles. Hasta 5 rangos; el
- * último llega hasta el producto más caro (redondeado hacia arriba al millar,
- * el mismo tope del slider). Se calculan aquí con los precios de Shopify
- * (en pesos con IVA, los de dólares a su equivalente del día): no hace falta
- * ningún dato extra en Shopify.
+ * Rangos de precio FIJOS (Carla, 2026-11-03; antes eran proporcionales):
+ * Hasta $4,500 · $4,500–$15,000 · $15,000–$30,000 · $30,000–$50,000 y de ahí
+ * cada $50,000 hasta el producto más caro, redondeado hacia arriba al siguiente
+ * corte. Los rangos son [lo, hi) y solo se enseñan los que tienen piezas, para
+ * que una página con una pieza de $685,000 no liste diez rangos vacíos. Los
+ * precios son los de Shopify en pesos con IVA (los de dólares a su equivalente
+ * del día).
  */
-export function rangosPrecio(precios: number[], maxRangos = 5): { lo: number; hi: number }[] {
-  const v = precios.filter((n) => n > 0).sort((a, b) => a - b);
+export function rangosPrecio(precios: number[]): { lo: number; hi: number }[] {
+  const v = precios.filter((n) => n > 0);
   if (v.length < 2) return [];
-  const k = Math.min(maxRangos, v.length);
-  const cortes: number[] = [];
-  for (let i = 1; i < k; i++) {
-    const c = redondo(v[Math.floor((i * v.length) / k)]);
-    if (c > (cortes[cortes.length - 1] ?? 0) && c < v[v.length - 1]) cortes.push(c);
+  const max = Math.max(...v);
+  const cortes = [0, ...CORTES_PRECIO];
+  while (cortes[cortes.length - 1] <= max) cortes.push(cortes[cortes.length - 1] + PASO_PRECIO);
+  const rangos: { lo: number; hi: number }[] = [];
+  for (let i = 0; i < cortes.length - 1; i++) {
+    const lo = cortes[i];
+    const hi = cortes[i + 1];
+    if (lo > max) break;
+    if (v.some((x) => x >= lo && x < hi)) rangos.push({ lo, hi });
   }
-  if (!cortes.length) return [];
-  // Tope = precio más caro redondeado hacia arriba al millar (+1 000 si cae
-  // justo en millar, para que esa pieza quede dentro: los rangos son [lo, hi)).
-  const tope = Math.floor(v[v.length - 1] / 1000) * 1000 + 1000;
-  return [0, ...cortes].map((lo, i) => ({ lo, hi: cortes[i] ?? tope }));
+  return rangos.length > 1 ? rangos : [];
 }
 
 interface OpcionesPanel {

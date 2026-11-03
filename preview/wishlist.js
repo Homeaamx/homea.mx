@@ -189,22 +189,20 @@
     return valores[0] + ", " + valores[1] + " y " + (valores.length - 2) + " más";
   }
 
-  /* Rangos de precio proporcionales, como rangosPrecio() del servidor. */
-  function redondo(v) {
-    var mag = Math.pow(10, Math.max(3, Math.floor(Math.log10(Math.max(v, 1))) - 1));
-    return Math.round(v / mag) * mag;
-  }
+  /* Rangos de precio fijos, como rangosPrecio() del servidor (Carla, 2026-11-03):
+     hasta 4,500 · 4,500–15,000 · 15,000–30,000 · 30,000–50,000 y luego cada
+     50,000 hasta el más caro; solo los que tienen piezas. */
   function rangosPrecio(precios) {
-    var v = precios.filter(function (n) { return n > 0; }).sort(function (a, b) { return a - b; });
+    var v = precios.filter(function (n) { return n > 0; });
     if (v.length < 2) return [];
-    var k = Math.min(4, v.length), cortes = [];
-    for (var i = 1; i < k; i++) {
-      var c = redondo(v[Math.floor((i * v.length) / k)]);
-      if (c > (cortes[cortes.length - 1] || 0) && c < v[v.length - 1]) cortes.push(c);
+    var max = Math.max.apply(null, v), cortes = [0, 4500, 15000, 30000, 50000], rangos = [];
+    while (cortes[cortes.length - 1] <= max) cortes.push(cortes[cortes.length - 1] + 50000);
+    for (var i = 0; i < cortes.length - 1; i++) {
+      var lo = cortes[i], hi = cortes[i + 1];
+      if (lo > max) break;
+      if (v.some(function (x) { return x >= lo && x < hi; })) rangos.push({ lo: lo, hi: hi });
     }
-    if (!cortes.length) return [];
-    var tope = Math.floor(v[v.length - 1] / 1000) * 1000 + 1000;
-    return [0].concat(cortes).map(function (lo, j) { return { lo: lo, hi: cortes[j] || tope }; });
+    return rangos.length > 1 ? rangos : [];
   }
 
   /* Una casilla del panel (misma estructura que lib/shopify/htmlCatalogo.ts). */
