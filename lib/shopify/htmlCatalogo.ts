@@ -623,13 +623,19 @@ export function panelFiltrosHtml(
     }
     // Orden: siempre de menor a mayor y de la A a la Z (Carla, 2026-11-02),
     // sin importar si el valor viene del mosaico, de la tabla o de Shopify.
+    // Color y Acabado (Carla, 2026-11-03): un valor sin piezas no se enseña hasta
+    // que alguna lo traiga; el resto de los grupos sigue con la lista completa.
+    const ocultarVacios = d.clave === "color" || d.clave === "acabado";
     const etiquetas = [...cuenta]
+      .filter(([, c]) => !ocultarVacios || c.n > 0 || c.tipo)
       .sort((a, b) => ordenValores(a[1].texto, b[1].texto))
       .map(
         ([k, c]) =>
           `<label${c.tipo ? ` data-tipo="${esc(c.tipo)}"` : ""}><input type="checkbox" data-fk="${esc(d.clave)}" value="${esc(k)}"> <span class="flbl">${esc(c.texto)}</span> <span class="count figures">${c.n}</span></label>`,
       )
       .join("");
+    // Sin ningún color o acabado con piezas, el grupo entero espera a que lleguen.
+    if (ocultarVacios && !etiquetas) continue;
     // Marca (Carla, 2026-10-08): caja "Busca por marca" y solo las marcas que
     // aplican con los demás filtros (catalogo.js oculta las que darían 0).
     const buscador =
