@@ -659,6 +659,7 @@ sirvió de piloto del patrón (5 fichas + import en borrador).
 ## 🔵 Fase 7 — Cuentas de cliente (después de publicar) ⭐ NUEVO (2026-10-10)
 *Decisión Carla (2026-10-10): se deja para **después de publicar** `homea.mx`. Objetivo: que el cliente no pierda su proyecto ni su wishlist al salir del sitio, cambiar de dispositivo o regresar semanas después (hoy: wishlist en el navegador, carrito ~10 días en Shopify).*
 
+- [x] **Paso 1 (2026-11-03):** botón "Iniciar sesión" en la barra superior, a la derecha de las redes → cuenta hospedada de Shopify (`shopify.com/68807884860/account`, correo → código): pedidos, direcciones y perfil. Cuentas nuevas ya activas, enlace de acceso visible en el checkout, no obligatorio. Abre en pestaña nueva mientras la cuenta regrese a homeashop.mx.
 - [ ] **Acceso sin contraseña:** cuentas de cliente de Shopify (correo → código de 6 dígitos), vía Customer Account API. Opcional: nunca se pide para navegar, cotizar ni enviar por WhatsApp.
 - [ ] **Dónde va:** ícono de cuenta en la **barra superior, a la derecha de las redes sociales** (marcado por Carla en captura del 2026-10-10) + invitación "Guarda tu proyecto" en el cajón de Mi proyecto.
 - [ ] **Qué se guarda:** proyecto (modelos + cantidades) y wishlist en metafields del cliente; al entrar se juntan con lo del navegador. Si el carrito de Shopify ya caducó, se rearma desde la lista.

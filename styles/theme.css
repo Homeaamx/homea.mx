@@ -3848,6 +3848,20 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .ubar a.u-soc { width: 34px; height: 34px; display: grid; place-items: center; color: var(--dark-fg-muted); }
 .ubar a.u-soc:hover { color: var(--homea-gold-bright); }
 .ubar .u-soc svg { width: 19px; height: 19px; display: block; }
+/* Cuenta de cliente (2026-11-03): a la derecha de las redes, separada por la
+   misma línea fina; ícono + texto en el estilo de "Contáctanos". */
+.ubar a.u-cuenta { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; line-height: 15px;
+  transition: color var(--dur-fast) var(--ease-standard); }
+.ubar a.u-cuenta svg { display: block; flex: none; }
+.ubar a.u-cuenta:focus-visible { outline: 1px solid var(--homea-gold); outline-offset: 4px; }
+@media (max-width: 1080px) {
+  .ubar .u-right > .u-sep { display: none; }
+}
+@media (max-width: 720px) {
+  /* En móvil solo el ícono, con área táctil de 34px. */
+  .ubar .u-cuenta-lbl { display: none; }
+  .ubar a.u-cuenta { width: 34px; height: 34px; justify-content: center; }
+}
 
 /* ---------- 2 + 3) Bloque fijo: logo + nav ---------- */
 .site-nav { height: auto; }
