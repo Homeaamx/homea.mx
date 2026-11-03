@@ -40,8 +40,13 @@ export const COMPRA_DIRECTA_ACTIVA = true;
  *
  * // TODO CHECKOUT: ponerlo en `true` el día que se quite la contraseña de la tienda
  *   (y se redirija/`noindex` el storefront hacia homea.mx, ver CLAUDE.md §3).
+ *
+ * Prueba con la tienda aún cerrada (Carla, 2026-11-03): `CHECKOUT_ABIERTO=1` en
+ * `.env.local` lo enciende solo en esa máquina. El checkout responde si en ese
+ * navegador ya se escribió la contraseña de la tienda en homeashop.mx/password.
+ * En Vercel la variable no existe, así que allá sigue apagado.
  */
-export const CHECKOUT_ABIERTO = false;
+export const CHECKOUT_ABIERTO = process.env.CHECKOUT_ABIERTO === "1";
 
 /**
  * Histórico: los 5 Gaggenau del piloto se podían comprar como excepción para
