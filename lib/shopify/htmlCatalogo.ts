@@ -392,25 +392,28 @@ function precioRefMxn(p: ProductoVivo): number {
 const fmtPesos = (n: number) => `$${n.toLocaleString("es-MX")}`;
 
 
-/** Cortes fijos de los rangos de precio; de 50 000 en adelante van cada 50 000. */
+/** Cortes fijos de los rangos de precio; de 50 000 en adelante van cada `paso`. */
 const CORTES_PRECIO = [4500, 15000, 30000, 50000];
 const PASO_PRECIO = 50000;
+/** Paso de los rangos en la página general de Cocina y Bar (Carla, 2026-11-03). */
+export const PASO_PRECIO_MACRO = 100000;
 
 /**
  * Rangos de precio FIJOS (Carla, 2026-11-03; antes eran proporcionales):
  * Hasta $4,500 · $4,500–$15,000 · $15,000–$30,000 · $30,000–$50,000 y de ahí
- * cada $50,000 hasta el producto más caro, redondeado hacia arriba al siguiente
+ * cada $50,000 (cada $100,000 en la página general de Cocina y Bar) hasta el
+ * producto más caro, redondeado hacia arriba al siguiente
  * corte. Los rangos son [lo, hi) y solo se enseñan los que tienen piezas, para
  * que una página con una pieza de $685,000 no liste diez rangos vacíos. Los
  * precios son los de Shopify en pesos con IVA (los de dólares a su equivalente
  * del día).
  */
-export function rangosPrecio(precios: number[]): { lo: number; hi: number }[] {
+export function rangosPrecio(precios: number[], paso = PASO_PRECIO): { lo: number; hi: number }[] {
   const v = precios.filter((n) => n > 0);
   if (v.length < 2) return [];
   const max = Math.max(...v);
   const cortes = [0, ...CORTES_PRECIO];
-  while (cortes[cortes.length - 1] <= max) cortes.push(cortes[cortes.length - 1] + PASO_PRECIO);
+  while (cortes[cortes.length - 1] <= max) cortes.push(cortes[cortes.length - 1] + paso);
   const rangos: { lo: number; hi: number }[] = [];
   for (let i = 0; i < cortes.length - 1; i++) {
     const lo = cortes[i];
@@ -448,6 +451,8 @@ interface OpcionesPanel {
    * Se suman a los tipos presentes en `productos`.
    */
   tipos?: string[];
+  /** Paso de los rangos de precio desde $50,000 (por defecto 50 000). */
+  pasoPrecio?: number;
 }
 
 /** Todos los grupos arrancan plegados (Carla, 2026-10-07): se abren al tocar su título. */
@@ -468,7 +473,7 @@ function grupoHtml(nombre: string, clave: string, etiquetas: string, abierto: bo
 
 export function panelFiltrosHtml(
   productos: ProductoVivo[],
-  { tc, conTipo = false, tiposRiel = [], mosaico = [], conCategoria = false, sinMarca = false, tipos = [] }: OpcionesPanel = {},
+  { tc, conTipo = false, tiposRiel = [], mosaico = [], conCategoria = false, sinMarca = false, tipos = [], pasoPrecio }: OpcionesPanel = {},
 ): string {
   tcPanel = tc ?? null;
   // Filtros aplicados, arriba del todo (como "Ahora comprando por" de Artexa):
@@ -555,7 +560,7 @@ export function panelFiltrosHtml(
       // especificación se ve completa); se recalcula solo al llegar el catálogo.
       const max = precios.length ? Math.ceil(Math.max(0, ...precios) / 1000) * 1000 : 250000;
       // Rangos proporcionales como casillas (suman entre sí) + el slider de siempre.
-      const rangosHtml = rangosPrecio(precios)
+      const rangosHtml = rangosPrecio(precios, pasoPrecio)
         .map(({ lo, hi }) => {
           const n = precios.filter((x) => x >= lo && x < hi).length;
           const txt = lo === 0 ? `Hasta ${fmtPesos(hi)}` : `${fmtPesos(lo)} – ${fmtPesos(hi)}`;

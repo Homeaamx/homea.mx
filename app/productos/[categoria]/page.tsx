@@ -9,7 +9,7 @@ import { opcionesPanelMacro } from "@/lib/shopify/panelMacro";
 import filtrosWeb from "@/data/filtros-web.json";
 import marcasPdf from "@/data/marcas-pdf-subcategorias.json";
 import { marcaPorSlug, rutaMarca } from "@/lib/marcas";
-import { conteoHtml, panelFiltrosHtml, rejillaHtml, slugValor } from "@/lib/shopify/htmlCatalogo";
+import { PASO_PRECIO_MACRO, conteoHtml, panelFiltrosHtml, rejillaHtml, slugValor } from "@/lib/shopify/htmlCatalogo";
 import { obtenerTipoCambio } from "@/lib/tipoCambio";
 
 // ISR — una hora: la rejilla trae precios y productos vivos de Shopify.
@@ -87,7 +87,12 @@ async function slotsDeCatalogo(file: string, categoria: string): Promise<Record<
   // Riel + tipos de las subcategorías: lib/shopify/panelMacro.ts (lo comparte /ofertas).
   const tc = await obtenerTipoCambio();
   return {
-    "catalogo-filtros": panelFiltrosHtml(productos, { tc, ...opcionesPanelMacro(categoria, productos) }),
+    "catalogo-filtros": panelFiltrosHtml(productos, {
+      tc,
+      ...opcionesPanelMacro(categoria, productos),
+      // Cocina y Bar general junta todo el catálogo: rangos más anchos (Carla, 2026-11-03).
+      ...(categoria === "cocina-y-bar" ? { pasoPrecio: PASO_PRECIO_MACRO } : {}),
+    }),
     ...(productos.length ? { "catalogo-grid": rejillaHtml(productos, tc) } : {}),
     "catalogo-conteo": conteoHtml(productos),
   };
