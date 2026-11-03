@@ -27,9 +27,9 @@ export const TAG_CATALOGO = "catalogo";
 
 /** Claves de `filtros.*` que existen en Shopify (las 38 definiciones de 2026-10-06,
  *  + bisagra el 2026-10-07, altura_ada el 2026-10-12 y quemadores / acabado_quemador
- *  el 2026-10-23). */
+ *  el 2026-10-23; color el 2026-11-03, separado del acabado). */
 export const CLAVES_FILTRO = [
-  "disponibilidad", "garantia", "promocion", "acabado", "ancho", "instalacion", "diseno",
+  "disponibilidad", "garantia", "promocion", "color", "acabado", "ancho", "instalacion", "diseno",
   "funcionamiento", "voltaje", "tipo", "tipo_gas", "uso", "capacidad", "compatible",
   "potencia", "horneado", "material", "extraccion", "fabrica_hielos", "motor",
   "accesorios_incluidos", "altura", "carga", "cubierta", "despachador_agua", "drenaje",

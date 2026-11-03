@@ -179,7 +179,7 @@ export default async function ProductoFichaPage(props: { params: Promise<Params>
     // El mismo modelo en otros colores (cada uno su producto): círculos que llevan a su ficha.
     Promise.all(otrosColores(vivo.sku).map((s) => productoVivoPorSku(s))),
   ]);
-  const comoColor = (x: NonNullable<typeof vivo>) => ({ sku: x.sku, slug: x.slug, titulo: x.titulo, acabado: x.filtros.acabado?.[0] });
+  const comoColor = (x: NonNullable<typeof vivo>) => ({ sku: x.sku, slug: x.slug, titulo: x.titulo, acabado: x.filtros.color?.[0] });
   const colores = coloresDeModelo(
     comoColor(vivo),
     hermanos.flatMap((h) => (h ? [comoColor(h)] : [])),

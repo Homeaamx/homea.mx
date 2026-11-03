@@ -61,10 +61,10 @@
         "clave": "altura_ada"
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Panelable",
           "Negro",
           "Blanco",
@@ -176,10 +176,10 @@
         "clave": "altura_ada"
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Panelable",
           "Blanco"
         ]
@@ -276,10 +276,10 @@
         "clave": "altura_ada"
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Panelable"
         ]
       },
@@ -366,10 +366,10 @@
         "clave": "altura_ada"
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Gris",
           "Negro",
           "Blanco"
@@ -454,10 +454,10 @@
         "clave": "altura_ada"
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Panelable"
         ]
       },
@@ -624,10 +624,10 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Panelable"
         ]
       },
@@ -713,10 +713,10 @@
         "clave": "altura_ada"
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Panelable"
         ]
       },
@@ -898,10 +898,10 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Negro",
           "Gris",
           "Blanco",
@@ -1026,10 +1026,10 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Negro",
           "Gris",
           "Blanco"
@@ -1146,14 +1146,15 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Negro",
           "Gris",
           "Blanco",
-          "Verde"
+          "Verde",
+          "Cristal"
         ]
       },
       {
@@ -1258,13 +1259,14 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Negro",
           "Gris",
-          "Blanco"
+          "Blanco",
+          "Cristal"
         ]
       },
       {
@@ -1405,13 +1407,14 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Negro",
           "Gris",
-          "Blanco"
+          "Blanco",
+          "Panelable"
         ]
       },
       {
@@ -1514,12 +1517,13 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Negro",
-          "Gris"
+          "Gris",
+          "Cristal"
         ]
       },
       {
@@ -1589,13 +1593,14 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Negro",
           "Gris",
-          "Panelable"
+          "Panelable",
+          "Cristal"
         ]
       },
       {
@@ -1779,10 +1784,10 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Negro",
           "Blanco",
           "Panelable"
@@ -1900,15 +1905,22 @@
       },
       {
         "nombre": "Color",
+        "clave": "color",
+        "valores": [
+          "Acero inoxidable",
+          "Blanco",
+          "Café",
+          "Gris",
+          "Gris oscuro",
+          "Negro"
+        ]
+      },
+      {
+        "nombre": "Acabado",
         "clave": "acabado",
         "valores": [
-          "Inoxidable",
-          "Negro",
-          "Blanco",
-          "Gris",
-          "Arena",
-          "Café",
-          "Dorado"
+          "Satinado",
+          "Mate"
         ]
       },
       {
@@ -1995,19 +2007,32 @@
         ]
       },
       {
+        "nombre": "Color",
+        "clave": "color",
+        "valores": [
+          "Acero inoxidable",
+          "Acero oscuro",
+          "Cromo",
+          "Cromo y blanco",
+          "Cromo y negro",
+          "Dorado",
+          "Gris",
+          "Gris oscuro",
+          "Negro",
+          "Platino"
+        ]
+      },
+      {
         "nombre": "Acabado",
         "clave": "acabado",
         "valores": [
-          "Inoxidable",
-          "Cromado",
-          "Negro",
-          "Cobre",
-          "Dorado",
-          "Plata",
-          "Gris",
-          "Blanco",
-          "Café",
-          "Arena"
+          "Pulido",
+          "Cepillado",
+          "Satinado",
+          "Mate",
+          "Brillante",
+          "Aceitado",
+          "PVD"
         ]
       },
       {
@@ -2139,16 +2164,32 @@
         ]
       },
       {
+        "nombre": "Color",
+        "clave": "color",
+        "valores": [
+          "Acero inoxidable",
+          "Acero oscuro",
+          "Beige",
+          "Blanco",
+          "Bronce",
+          "Cromo",
+          "Dorado",
+          "Negro",
+          "Plata",
+          "Platino"
+        ]
+      },
+      {
         "nombre": "Acabado",
         "clave": "acabado",
         "valores": [
-          "Inoxidable",
-          "Plata",
-          "Negro",
-          "Blanco",
-          "Crema",
-          "Bronce",
-          "Dorado"
+          "Pulido",
+          "Cepillado",
+          "Satinado",
+          "Mate",
+          "Brillante",
+          "Aceitado",
+          "PVD"
         ]
       },
       {
@@ -2265,20 +2306,31 @@
         ]
       },
       {
+        "nombre": "Color",
+        "clave": "color",
+        "valores": [
+          "Acero inoxidable",
+          "Beige",
+          "Blanco",
+          "Bronce",
+          "Cromo",
+          "Dorado",
+          "Gris oscuro",
+          "Naranja",
+          "Negro",
+          "Níquel"
+        ]
+      },
+      {
         "nombre": "Acabado",
         "clave": "acabado",
         "valores": [
-          "Cromado",
-          "Inoxidable",
-          "Plata",
-          "Negro",
-          "Bronce",
-          "Crema",
-          "Blanco",
-          "Dorado",
-          "Arena",
-          "Naranja",
-          "Gris"
+          "Pulido",
+          "Cepillado",
+          "Satinado",
+          "Mate",
+          "Brillante",
+          "Aceitado"
         ]
       },
       {
@@ -2356,10 +2408,10 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Negro",
           "Rojo"
         ]
@@ -2445,10 +2497,10 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Negro",
           "Rojo",
           "Amarillo",
@@ -2583,10 +2635,10 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable"
+          "Acero inoxidable"
         ]
       },
       {
@@ -2647,10 +2699,10 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable"
+          "Acero inoxidable"
         ]
       },
       {
@@ -2731,10 +2783,10 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Negro",
           "Rojo",
           "Verde"
@@ -2799,10 +2851,10 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable"
+          "Acero inoxidable"
         ]
       },
       {
@@ -2877,10 +2929,10 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable"
+          "Acero inoxidable"
         ]
       },
       {
@@ -2975,13 +3027,14 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
-          "Inoxidable",
+          "Acero inoxidable",
           "Negro",
           "Gris",
-          "Blanco"
+          "Blanco",
+          "Panelable"
         ]
       },
       {
@@ -3048,7 +3101,7 @@
       },
       {
         "nombre": "Color",
-        "clave": "acabado",
+        "clave": "color",
         "valores": [
           "Negro",
           "Blanco",
@@ -3058,7 +3111,7 @@
           "Azul",
           "Verde",
           "Plata",
-          "Inoxidable"
+          "Acero inoxidable"
         ]
       },
       {
@@ -3146,8 +3199,8 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
           "Negro",
           "Gris",
@@ -3233,8 +3286,8 @@
         ]
       },
       {
-        "nombre": "Acabado",
-        "clave": "acabado",
+        "nombre": "Color",
+        "clave": "color",
         "valores": [
           "Negro",
           "Gris",

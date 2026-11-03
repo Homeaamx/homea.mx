@@ -197,7 +197,7 @@ export function lineaSpec(p: ProductoVivo): string[] {
   const partes = [
     ...(f.diseno ?? []),
     ...(f.ancho ?? []),
-    ...(f.acabado ?? []),
+    ...(f.color ?? []),
     ...(f.tipo ?? []),
     ...(f.funcionamiento ?? []).filter((v) => !/^Todo /.test(v)),
   ];
@@ -794,6 +794,7 @@ const NOMBRES_FILTRO: Record<string, string> = {
   altura_ada: "Altura",
   altura: "Altura",
   profundidad: "Profundidad",
+  color: "Color",
   acabado: "Acabado",
   material: "Material",
   puerta: "Puerta",

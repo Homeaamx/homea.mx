@@ -88,7 +88,7 @@ function specDe(variante: VarianteRaw): string {
   const partes = [
     ...valoresFiltro(variante, "diseno"),
     ...valoresFiltro(variante, "ancho"),
-    ...valoresFiltro(variante, "acabado"),
+    ...valoresFiltro(variante, "color"),
     ...valoresFiltro(variante, "tipo"),
     ...valoresFiltro(variante, "funcionamiento").filter((v) => !/^Todo /.test(v)),
   ];

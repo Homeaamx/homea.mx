@@ -119,6 +119,7 @@ export function coloresDeModelo(
   actual: { sku: string; slug: string; titulo: string; acabado?: string },
   hermanos: { sku: string; slug: string; titulo: string; acabado?: string }[],
 ): ColorHermano[] {
+  // Respaldo: el color de `filtros.color` cuando el título no lo dice (la versión de acero).
   const nombreRespaldo = (a?: string) => (a === "Inoxidable" ? "Acero inoxidable" : (a ?? ""));
   // 1. Hermanos que de veras son otro color (frente a la pieza actual).
   const validos = hermanos.filter((h) => {
