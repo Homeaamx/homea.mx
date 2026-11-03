@@ -157,7 +157,13 @@ def ordenar(pid):
     def es_plano(n):
         return "-plano-medidas-" in ((n.get("image") or {}).get("url") or "")
 
-    orden = [n for n in nodos if not es_plano(n)] + [n for n in nodos if es_plano(n)]
+    def numero(n):
+        # `<…>-<N>.webp`: una -1 nueva va antes que la -2 que ya estaba.
+        m = re.search(r"-(\d+)\.webp", (n.get("image") or {}).get("url") or "")
+        return int(m.group(1)) if m else 999
+
+    fotos = sorted((n for n in nodos if not es_plano(n)), key=numero)
+    orden = fotos + [n for n in nodos if es_plano(n)]
     if [n["id"] for n in orden] != [n["id"] for n in nodos]:
         gql("""mutation($id:ID!,$m:[MoveInput!]!){ productReorderMedia(id:$id, moves:$m){ userErrors{ message } } }""",
             {"id": pid, "m": [{"id": n["id"], "newPosition": str(i)} for i, n in enumerate(orden)]})
