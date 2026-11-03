@@ -113,10 +113,15 @@ export async function shopifyFetch<T>(
     throw new ErrorShopify("red", `Shopify respondió HTTP ${respuesta.status}.`);
   }
 
-  const json = (await respuesta.json()) as {
-    data?: T;
-    errors?: { message: string; extensions?: { code?: string } }[];
-  };
+  // El límite de tiempo también corre mientras llega el cuerpo: si vence aquí,
+  // es el mismo fallo de red y debe caer al plan B, no escapar sin atrapar.
+  let json: { data?: T; errors?: { message: string; extensions?: { code?: string } }[] };
+  try {
+    json = await respuesta.json();
+  } catch (error) {
+    const causa = error instanceof Error ? error.message : String(error);
+    throw new ErrorShopify("red", `Respuesta incompleta de Shopify: ${causa}`);
+  }
 
   if (json.errors?.length) {
     const mensaje = json.errors.map((e) => e.message).join(" · ");

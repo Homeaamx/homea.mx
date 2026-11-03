@@ -3854,6 +3854,9 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
   transition: color var(--dur-fast) var(--ease-standard); }
 .ubar a.u-cuenta svg { display: block; flex: none; }
 .ubar a.u-cuenta:focus-visible { outline: 1px solid var(--homea-gold); outline-offset: 4px; }
+/* Sin "Ofertas exclusivas" (oculto ≤1120px) la zona derecha caía a la columna
+   central y se encimaba con el tipo de cambio: siempre en la tercera. */
+.ubar .u-right { grid-column: 3; }
 @media (max-width: 1080px) {
   .ubar .u-right > .u-sep { display: none; }
 }
