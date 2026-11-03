@@ -98,6 +98,11 @@
   "/producto/ws461710": "/producto/gw451720",
   "/producto/ws463710": "/producto/gw453720",
   "/producto/ws482710": "/producto/gw483720",
-  "/producto/wsp221710": "/producto/gw451720"
+  "/producto/wsp221710": "/producto/gw451720",
+  "/producto/axefw": "/productos/exterior/asadores-y-hornos?tipo=accesorios-asadores-hornos",
+  "/producto/axefwc": "/productos/exterior/asadores-y-hornos?tipo=accesorios-asadores-hornos",
+  "/producto/agv-30csb": "/productos/exterior/asadores-y-hornos?tipo=accesorios-asadores-hornos",
+  "/producto/agv-36csb": "/productos/exterior/asadores-y-hornos?tipo=accesorios-asadores-hornos",
+  "/producto/agv-42csb": "/productos/exterior/asadores-y-hornos?tipo=accesorios-asadores-hornos"
  }
 }
