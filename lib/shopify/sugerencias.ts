@@ -47,6 +47,9 @@ const ACCESORIOS_POR_SUB1: Record<string, string[]> = {
 /** Equipos que se sugieren entre tipos distintos (cocción → campana, etc.). */
 const REGLAS_CRUZADAS: { de: RegExp; sugerir: string[] }[] = [
   { de: /^(Parrillas|Estufas|Rangetops|Hornos|Cocinetas)$/i, sugerir: ["campanas"] },
+  // Los grifos de agua caliente viven en Tarjas y Monomandos, pero se venden sin
+  // tanque: su tanque y cartucho siguen en Despachadores de agua (Carla, 2026-11-03).
+  { de: /^Dispensadores de agua$/i, sugerir: ["despachadores-de-agua"] },
 ];
 
 /** Colecciones donde buscar sugerencias para un producto. */

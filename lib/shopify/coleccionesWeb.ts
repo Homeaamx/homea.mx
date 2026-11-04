@@ -82,6 +82,10 @@ export const TIPOS_WEB: TipoWeb[] = [
   // 2026-10-13 (aún sin piezas). Al publicar productos con ese Tipo, aparecen solos.
   { tipo: "Tarjas", coleccion: "tarjas", slugRiel: "tarjas", ruta: `${TARJAS.ruta}?tipo=tarjas`, macro: COCINA, sub1: TARJAS },
   { tipo: "Monomandos", coleccion: "monomandos", slugRiel: "monomandos", ruta: `${TARJAS.ruta}?tipo=monomandos`, macro: COCINA, sub1: TARJAS },
+  // Grifos de agua caliente / fría que salen de un tanque o filtro bajo la tarja
+  // (InSinkErator HC/GN/3300/3N1). Sus tanques y cartuchos se quedan en
+  // Purificadores y Despachadores de Agua (Carla, 2026-11-03).
+  { tipo: "Dispensadores de agua", coleccion: "dispensadores-de-agua", slugRiel: "dispensadores-de-agua", ruta: `${TARJAS.ruta}?tipo=dispensadores-de-agua`, macro: COCINA, sub1: TARJAS },
   { tipo: "Accesorios de Tarjas y Monomandos", coleccion: "accesorios-de-tarjas-y-monomandos", slugRiel: "accesorios-tarjas-monomandos", ruta: `${TARJAS.ruta}?tipo=accesorios-tarjas-monomandos`, macro: COCINA, sub1: TARJAS },
   // Trituradores no tiene riel (un solo tipo): la página entera es su listado.
   // Sus accesorios (tapones, bridas, air gaps…) llevan `filtros.tipo` =

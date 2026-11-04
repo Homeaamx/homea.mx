@@ -2068,6 +2068,85 @@
         ]
       }
     ],
+    "Dispensadores de agua": [
+      {
+        "nombre": "Marca",
+        "clave": "marca"
+      },
+      {
+        "nombre": "Precio",
+        "clave": "precio"
+      },
+      {
+        "nombre": "Tipo de funcionamiento",
+        "clave": "funcionamiento",
+        "valores": [
+          "Agua fría",
+          "Agua fría y caliente",
+          "Agua caliente"
+        ]
+      },
+      {
+        "nombre": "Color",
+        "clave": "color",
+        "valores": [
+          "Acero inoxidable",
+          "Beige",
+          "Blanco",
+          "Bronce",
+          "Cromo",
+          "Dorado",
+          "Gris oscuro",
+          "Naranja",
+          "Negro",
+          "Níquel"
+        ]
+      },
+      {
+        "nombre": "Acabado",
+        "clave": "acabado",
+        "valores": [
+          "Pulido",
+          "Cepillado",
+          "Satinado",
+          "Mate",
+          "Brillante",
+          "Aceitado"
+        ]
+      },
+      {
+        "nombre": "Disponibilidad",
+        "clave": "disponibilidad",
+        "valores": [
+          "Bajo pedido",
+          "En stock"
+        ]
+      },
+      {
+        "nombre": "Garantía",
+        "clave": "garantia",
+        "valores": [
+          "1 año",
+          "2 años",
+          "3 años"
+        ]
+      },
+      {
+        "nombre": "Promoción",
+        "clave": "promocion",
+        "valores": [
+          "10%",
+          "15%",
+          "20%",
+          "25%",
+          "30%",
+          "35%",
+          "40%",
+          "50%",
+          "60%"
+        ]
+      }
+    ],
     "Accesorios de Tarjas y Monomandos": [
       {
         "nombre": "Marca",
