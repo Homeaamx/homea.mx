@@ -84,14 +84,6 @@ const RELLENO = new Set(["silgranit", "en", "de", "con"]);
 
 const palabras = (titulo: string) => titulo.split(" — ")[0].split(/\s+/).filter(Boolean);
 
-/** Lo que tiene `a` y no `b`, en el orden de `a` ("Satin Gold"). */
-function sobrante(a: string, b: string): string {
-  const otras = new Set(palabras(b).map((w) => w.toLowerCase()));
-  return palabras(a)
-    .filter((w) => !otras.has(w.toLowerCase()))
-    .join(" ");
-}
-
 function muestra(nombre: string): string | null {
   const k = nombre.toLowerCase();
   if (MUESTRAS[k]) return MUESTRAS[k];
@@ -112,10 +104,15 @@ export interface ColorHermano {
 
 /**
  * Círculos de color de una ficha. `actual` y `hermanos` son el producto de la
- * página y sus otros colores (título, slug, SKU y acabado de respaldo). Solo
- * entran los hermanos cuya diferencia con la pieza actual es un color conocido:
- * así la versión LP de una estufa (misma estufa, otro gas) o la tarja "Doble"
- * no se cuelan como colores. Sin al menos dos colores, no hay selector.
+ * página y sus otros colores (título, slug, SKU y acabado de respaldo).
+ *
+ * El nombre de cada color se saca contra TODO el grupo, nunca de dos en dos: de
+ * dos en dos, "Cromo Cepillado" frente a "Acero Cepillado" deja "Cromo" vs
+ * "Acero" y el círculo se perdía solo en algunas fichas (Carla, 2026-11-03: los
+ * colores deben estar estáticos). Las piezas cuyo nombre no es un color conocido
+ * (la versión LP de una estufa, la tarja "Doble") salen del grupo y se vuelve a
+ * calcular, hasta que todos los que quedan son colores. Sin al menos dos colores,
+ * no hay selector.
  */
 export function coloresDeModelo(
   actual: { sku: string; slug: string; titulo: string; acabado?: string },
@@ -123,33 +120,33 @@ export function coloresDeModelo(
 ): ColorHermano[] {
   // Respaldo: el color de `filtros.color` cuando el título no lo dice (la versión de acero).
   const nombreRespaldo = (a?: string) => (a === "Inoxidable" ? "Acero inoxidable" : (a ?? ""));
-  // 1. Hermanos que de veras son otro color (frente a la pieza actual).
-  const validos = hermanos.filter((h) => {
-    if (h.sku === actual.sku) return false;
-    const suyo = sobrante(h.titulo, actual.titulo) || nombreRespaldo(h.acabado);
-    const mio = sobrante(actual.titulo, h.titulo) || nombreRespaldo(actual.acabado);
-    return Boolean(muestra(suyo) && muestra(mio));
-  });
-  if (!validos.length) return [];
-  // 2. El nombre de cada color = lo que no comparte con TODO el grupo, para que
-  //    "Satin Platinum" no quede en "Platinum" junto a "Satin Gold".
-  const grupo = [actual, ...validos];
-  const comunes = palabras(grupo[0].titulo)
-    .map((w) => w.toLowerCase())
-    .filter((w) => grupo.every((g) => palabras(g.titulo).some((x) => x.toLowerCase() === w)));
-  const nombreDe = (g: (typeof grupo)[number]) => {
-    const propias = palabras(g.titulo).filter((w) => !comunes.includes(w.toLowerCase()));
-    // "en Acero Inoxidable Negro" → "Acero Inoxidable Negro": sin conectores al inicio.
-    while (propias.length && RELLENO.has(propias[0].toLowerCase()) && propias[0].toLowerCase() !== "silgranit") propias.shift();
-    return propias.join(" ") || nombreRespaldo(g.acabado);
+  type Pieza = (typeof hermanos)[number];
+  const nombresDe = (grupo: Pieza[]) => {
+    // Lo que no comparte con TODO el grupo, para que "Satin Platinum" no quede en
+    // "Platinum" junto a "Satin Gold".
+    const comunes = palabras(grupo[0].titulo)
+      .map((w) => w.toLowerCase())
+      .filter((w) => grupo.every((g) => palabras(g.titulo).some((x) => x.toLowerCase() === w)));
+    return grupo.map((g) => {
+      const propias = palabras(g.titulo).filter((w) => !comunes.includes(w.toLowerCase()));
+      // "en Acero Inoxidable Negro" → "Acero Inoxidable Negro": sin conectores al inicio.
+      while (propias.length && RELLENO.has(propias[0].toLowerCase()) && propias[0].toLowerCase() !== "silgranit") propias.shift();
+      return propias.join(" ") || nombreRespaldo(g.acabado);
+    });
   };
-  const opciones: ColorHermano[] = [];
-  for (const g of grupo) {
-    const nombre = nombreDe(g);
-    const fondo = muestra(nombre);
-    if (!fondo) continue;
-    opciones.push({ sku: g.sku, slug: g.slug, nombre, fondo, actual: g.sku === actual.sku });
+  let grupo: Pieza[] = [actual, ...hermanos.filter((h) => h.sku !== actual.sku)];
+  let nombres = nombresDe(grupo);
+  for (let vuelta = 0; vuelta < 5; vuelta++) {
+    const quedan = grupo.filter((_, i) => muestra(nombres[i]));
+    if (quedan.length === grupo.length || quedan.length < 2) break;
+    grupo = quedan;
+    nombres = nombresDe(grupo);
   }
+  const opciones: ColorHermano[] = [];
+  grupo.forEach((g, i) => {
+    const fondo = muestra(nombres[i]);
+    if (fondo) opciones.push({ sku: g.sku, slug: g.slug, nombre: nombres[i], fondo, actual: g.sku === actual.sku });
+  });
   if (opciones.length < 2 || !opciones.some((o) => o.actual)) return [];
   // Mismo orden en todas las fichas del grupo: los círculos no "brincan" al navegar.
   return opciones.sort((a, b) => a.sku.localeCompare(b.sku, "es", { numeric: true }));
