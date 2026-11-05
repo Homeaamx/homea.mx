@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import MarketingPage from "@/components/MarketingPage";
 import { getMain, getTitle, subcategoriaFile, subcategoriaParams } from "@/lib/preview";
-import { productosDeColeccion } from "@/lib/shopify/catalogoVivo";
+import { productosDeSub1 } from "@/lib/shopify/listados";
 import { tiposDeSub1 } from "@/lib/shopify/coleccionesWeb";
 import { conteoHtml, panelFiltrosHtml, rejillaHtml } from "@/lib/shopify/htmlCatalogo";
 import { obtenerTipoCambio } from "@/lib/tipoCambio";
@@ -48,7 +48,7 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
 async function slotsDeCatalogo(file: string, params: Params): Promise<Record<string, string>> {
   const tipos = tiposDeSub1(params.categoria, params.subcategoria);
   if (!tipos.length) return {};
-  const productos = (await Promise.all(tipos.map((t) => productosDeColeccion(t.coleccion)))).flat();
+  const productos = await productosDeSub1(params.categoria, params.subcategoria);
 
   // Los tipos del riel (aunque aún no tengan piezas) entran al grupo "Tipo":
   // elegir uno vacío muestra el aviso en vez de dejar todo el catálogo visible.
@@ -66,7 +66,7 @@ async function slotsDeCatalogo(file: string, params: Params): Promise<Record<str
       tiposRiel: riel,
       tipos: tipos.map((t) => t.tipo),
     }),
-    ...(productos.length ? { "catalogo-grid": rejillaHtml(productos, tc) } : {}),
+    ...(productos.length ? { "catalogo-grid": rejillaHtml(productos, tc, { lista: `/productos/${params.categoria}/${params.subcategoria}` }) } : {}),
     "catalogo-conteo": conteoHtml(productos),
   };
 }

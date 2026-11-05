@@ -140,6 +140,96 @@ export function inyectarTipoCambio(html: string, tc: TipoCambio): string {
   );
 }
 
+const MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+
+/** "04/11/2026" (como lo publica Banxico) → "4 de noviembre de 2026". */
+export function fechaLarga(fecha: string): string {
+  const [d, m, a] = fecha.split("/").map((x) => Number.parseInt(x, 10));
+  return MESES[m - 1] ? `${d} de ${MESES[m - 1]} de ${a}` : fecha;
+}
+
+/**
+ * Diferencia entre dos tipos de cambio que se toma como el mismo FIX. El del
+ * carrito se recupera de los pesos de Shopify (redondeados a centavos) y llega
+ * con 2 decimales, así que puede bailar un centavo.
+ */
+const MISMO_TC = 0.015;
+
+/**
+ * Fecha (dd/mm/aaaa) del FIX de los últimos 15 días que, con el diferencial del
+ * sitio, da `valor`; la más reciente si se repite. null si ninguno coincide.
+ */
+async function fechaDeFix(valor: number): Promise<string | null> {
+  const token = process.env.BANXICO_TOKEN;
+  if (!token) return null;
+  const iso = (d: Date) => d.toISOString().slice(0, 10);
+  const hoy = new Date();
+  const desde = new Date(hoy.getTime() - 15 * 86_400_000);
+  try {
+    const respuesta = await fetch(
+      `https://www.banxico.org.mx/SieAPIRest/service/v1/series/${SERIE_FIX}/datos/${iso(desde)}/${iso(hoy)}`,
+      {
+        headers: { "Bmx-Token": token, Accept: "application/json" },
+        signal: AbortSignal.timeout(4000),
+        next: { revalidate: 3600, tags: [TAG_TIPO_CAMBIO] },
+      },
+    );
+    if (!respuesta.ok) return null;
+    const json = (await respuesta.json()) as RespuestaBanxico;
+    const datos = json.bmx?.series?.[0]?.datos ?? [];
+    for (let i = datos.length - 1; i >= 0; i--) {
+      const fix = Number.parseFloat(datos[i].dato);
+      if (Number.isFinite(fix) && Math.abs(Math.round(fix * (1 + spread()) * 100) / 100 - valor) < MISMO_TC) {
+        return datos[i].fecha;
+      }
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * ¿El FIX (dd/mm/aaaa) es el del día de hoy en la Ciudad de México? Sábado y
+ * domingo Banxico no publica: vale el del último día hábil. En un día feriado
+ * bancario tampoco publica, y ese día el pago en dólares queda en cotización.
+ */
+function esFixDeHoy(fecha: string): boolean {
+  const partes = Object.fromEntries(
+    new Intl.DateTimeFormat("en-US", { timeZone: "America/Mexico_City", year: "numeric", month: "2-digit", day: "2-digit", weekday: "short" })
+      .formatToParts(new Date())
+      .map((x) => [x.type, x.value]),
+  );
+  if (partes.weekday === "Sat" || partes.weekday === "Sun") return true;
+  return fecha === `${partes.day}/${partes.month}/${partes.year}`;
+}
+
+/**
+ * ¿De qué día es el tipo de cambio con el que Shopify tiene los pesos de las
+ * piezas en dólares de un carrito? (Carla, 2026-11-04). Cada pieza trae el suyo
+ * (`tipoCambio`) y su precio unitario en dólares (`usd`, para la tolerancia: en
+ * una pieza de centavos los pesos redondeados no dan el tipo de cambio exacto).
+ * Si todas tienen el FIX vigente, `vencido` es false y `dia` es su fecha. Si una
+ * trae el de un día anterior, `vencido` es true, `tipoCambio` es el suyo y `dia`
+ * dice de cuándo es (null si no se encuentra). Sin Banxico no se puede comparar
+ * y nunca se bloquea.
+ */
+export async function diaDelTipoCambio(
+  piezas: { tipoCambio: number; usd: number }[],
+): Promise<{ dia: string | null; vencido: boolean; tipoCambio: number | null }> {
+  const vigente = await obtenerTipoCambio();
+  if (vigente.fuente !== "banxico" || !vigente.fecha) return { dia: null, vencido: false, tipoCambio: null };
+  const fuera = piezas.find((p) => Math.abs(p.tipoCambio - vigente.valor) >= Math.max(MISMO_TC, 0.006 / p.usd));
+  if (!fuera) {
+    // Al día con el último FIX, pero ese FIX tiene que ser el de HOY (Carla,
+    // 2026-11-05): un día hábil, mientras no llegue el FIX de hoy (Banxico lo
+    // publica ≈12:00 y el cron reprecia a las 13:00), tampoco se paga.
+    return { dia: fechaLarga(vigente.fecha), vencido: !esFixDeHoy(vigente.fecha), tipoCambio: null };
+  }
+  const fecha = await fechaDeFix(fuera.tipoCambio);
+  return { dia: fecha ? fechaLarga(fecha) : null, vencido: true, tipoCambio: fuera.tipoCambio };
+}
+
 /** Dólares → pesos, redondeado a centavos. */
 export function aPesos(usd: number, tc: TipoCambio): number {
   return Math.round(usd * tc.valor * 100) / 100;

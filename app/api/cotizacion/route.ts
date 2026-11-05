@@ -9,7 +9,7 @@
 
 import { NextResponse } from "next/server";
 
-import { datosDeQuery, parsearPartidas } from "@/lib/cotizacion";
+import { datosDeQuery, erroresDeDatos, parsearPartidas } from "@/lib/cotizacion";
 import { guardarPreCotizacion } from "@/lib/cotizacionServidor";
 import { HAY_ADMIN } from "@/lib/shopify/admin";
 
@@ -54,6 +54,12 @@ export async function POST(request: Request) {
   );
   if (!refs.length || !datos.nombre || !datos.telefono) {
     return NextResponse.json({ ok: false, motivo: "incompleta" }, { status: 400 });
+  }
+  // La misma revisión del formulario (teléfono de 10 dígitos, correo real…): un
+  // borrador con datos que el ejecutivo no puede usar no se guarda.
+  const errores = erroresDeDatos(datos);
+  if (Object.keys(errores).length) {
+    return NextResponse.json({ ok: false, motivo: "datos", errores }, { status: 400 });
   }
 
   const anterior = typeof cuerpo.ref === "string" ? cuerpo.ref.slice(0, 40) : undefined;

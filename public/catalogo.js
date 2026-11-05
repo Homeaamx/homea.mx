@@ -237,6 +237,16 @@
   function aplicar(plp, activos) {
     var cards = tarjetas(plp);
     if (!cards.length) return;
+    /* Página: vuelve a la 1 solo si los filtros cambiaron (al regresar de una
+       ficha el mismo filtro se aplica dos veces y debe quedar la página guardada). */
+    var firma = JSON.stringify(activos);
+    if (plp.__paginaRestaurada) {
+      plp.__pagina = plp.__paginaRestaurada;
+      plp.__paginaRestaurada = null;
+    } else if (plp.__firmaFiltros !== undefined && plp.__firmaFiltros !== firma) {
+      plp.__pagina = 1;
+    }
+    plp.__firmaFiltros = firma;
     plp.__aplicados = activos;
     var visibles = 0;
     cards.forEach(function (card) {
@@ -264,6 +274,7 @@
     badges(plp);
     chips(plp, activos);
     barra(plp, cards);
+    paginar(plp);
     guardarFiltros(plp, activos);
   }
 
@@ -355,10 +366,12 @@
     if (restaurando) return;
     var sel = selectOrden(plp);
     try {
-      if (!Object.keys(activos).length && (!sel || sel.selectedIndex <= 0)) {
+      var pag = plp.__pagina || 1;
+      var por = plp.__porPagina || POR_PAGINA;
+      if (!Object.keys(activos).length && (!sel || sel.selectedIndex <= 0) && pag === 1 && por === POR_PAGINA) {
         sessionStorage.removeItem(claveFiltros(plp));
       } else {
-        sessionStorage.setItem(claveFiltros(plp), JSON.stringify({ a: activos, o: sel ? sel.value : "" }));
+        sessionStorage.setItem(claveFiltros(plp), JSON.stringify({ a: activos, o: sel ? sel.value : "", p: pag, n: por }));
       }
     } catch (e) {}
   }
@@ -379,6 +392,8 @@
     try { g = JSON.parse(sessionStorage.getItem(claveFiltros(plp)) || "null"); } catch (e) {}
     if (!g || !g.a) return;
     restaurando = true;
+    if (OPCIONES_PAGINA.indexOf(g.n) !== -1) plp.__porPagina = g.n;
+    if (g.p > 1) plp.__paginaRestaurada = g.p;
     casillas(plp).forEach(function (cb) {
       cb.checked = (g.a[cb.getAttribute("data-fk")] || []).indexOf(cb.value) !== -1;
     });
@@ -413,6 +428,197 @@
     olvidarFiltros(u.pathname);
   }
 
+  /* ---------- Páginas (Carla, 2026-11-04) ----------
+     50 piezas por página y, hasta abajo, el selector de página (‹ 1 2 3 … ›) y
+     "Mostrar 50 · 100 · 200". Solo en las rejillas con data-cat-lista
+     (lib/shopify/htmlCatalogo.ts → rejillaHtml): ahí el servidor manda completas
+     las primeras 50 y el resto como tarjetas vacías (.pcard-vacia) con sus datos
+     de filtro. Los filtros, conteos y orden trabajan sobre todas; aquí solo se
+     decide cuáles se ven (data-fuera) y se pide a /api/tarjetas el contenido de
+     las vacías que entran en la página. Sin data-cat-lista (/ofertas) no se toca. */
+  var POR_PAGINA = 50;
+  var OPCIONES_PAGINA = [50, 100, 200];
+
+  function listaDe(grid) {
+    var m = grid && grid.querySelector("[data-cat-lista]");
+    return m ? m.getAttribute("data-cat-lista") : null;
+  }
+
+  /* Llena una tarjeta vacía con la completa, en el mismo elemento: conserva su
+     lugar, su estado de filtro y su identidad (otros scripts la tienen a la mano). */
+  function llenarTarjeta(card, html) {
+    var t = document.createElement("template");
+    t.innerHTML = html.trim();
+    var nueva = t.content.firstElementChild;
+    if (!nueva) return;
+    card.innerHTML = nueva.innerHTML;
+    card.classList.remove("pcard-vacia", "pcard-ligera");
+    card.removeAttribute("aria-hidden");
+    card.removeAttribute("tabindex");
+    /* Lo que la tarjeta aún no trae (data-accion, href de una hermana suelta) se
+       copia; sus datos de filtro y orden se respetan (la wishlist usa los suyos). */
+    Array.prototype.forEach.call(nueva.attributes, function (a) {
+      if (!card.hasAttribute(a.name)) card.setAttribute(a.name, a.value);
+    });
+  }
+
+  /* Pide el contenido de tarjetas vacías (en tandas de hasta 200). */
+  /* Pide el contenido de tarjetas vacías o ligeras. Las de un listado (en la
+     rejilla con data-cat-lista) van por su listado; las demás —la wishlist, una
+     hermana de color fuera de la página— como sueltas, por SKU (2026-11-05:
+     "todas las tarjetas deben ser iguales en toda la página"). */
+  function cargarTarjetas(grid, cards) {
+    var lista = listaDe(grid);
+    var faltan = cards.filter(function (c) {
+      return (c.classList.contains("pcard-vacia") || c.classList.contains("pcard-ligera")) && !c.__cargando && !c.__sinTarjeta;
+    });
+    if (!faltan.length) return Promise.resolve();
+    var tandas = [];
+    var deLista = faltan.filter(function (c) { return lista && c.isConnected && grid && grid.contains(c); });
+    var sueltas = faltan.filter(function (c) { return deLista.indexOf(c) === -1; });
+    for (var i = 0; i < deLista.length; i += 200) tandas.push({ lista: lista, cards: deLista.slice(i, i + 200) });
+    for (var j = 0; j < sueltas.length; j += 60) tandas.push({ lista: null, cards: sueltas.slice(j, j + 60) });
+    return Promise.all(tandas.map(function (t) {
+      var tanda = t.cards;
+      tanda.forEach(function (c) { c.__cargando = true; });
+      var skus = tanda.map(function (c) { return c.getAttribute("data-sku"); }).join(",");
+      return fetch("/api/tarjetas?" + (t.lista ? "lista=" + encodeURIComponent(t.lista) + "&" : "") + "skus=" + encodeURIComponent(skus))
+        .then(function (r) { return r.ok ? r.json() : { tarjetas: {} }; })
+        .catch(function () { return { tarjetas: {} }; })
+        .then(function (d) {
+          tanda.forEach(function (c) {
+            c.__cargando = false;
+            var html = d.tarjetas && d.tarjetas[c.getAttribute("data-sku")];
+            if (html) llenarTarjeta(c, html);
+            else c.__sinTarjeta = true; // no se vuelve a pedir: se queda como está
+          });
+        });
+    }));
+  }
+
+  function numerosDePagina(p, total) {
+    if (total <= 7) return Array.from({ length: total }, function (_, i) { return i + 1; });
+    var out = [1];
+    var desde = Math.max(2, p - 1), hasta = Math.min(total - 1, p + 1);
+    if (p <= 3) { desde = 2; hasta = 4; }
+    if (p >= total - 2) { desde = total - 3; hasta = total - 1; }
+    if (desde > 2) out.push("…");
+    for (var i = desde; i <= hasta; i++) out.push(i);
+    if (hasta < total - 1) out.push("…");
+    out.push(total);
+    return out;
+  }
+
+  var FLECHA_IZQ = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+  var FLECHA_DER = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+
+  function pintarPaginador(plp, grid, p, paginas, por, total) {
+    var nav = plp.querySelector(".plp-paginas");
+    if (!nav) {
+      nav = document.createElement("nav");
+      nav.className = "plp-paginas";
+      nav.setAttribute("aria-label", "Páginas del catálogo");
+      grid.insertAdjacentElement("afterend", nav);
+    }
+    nav.hidden = total <= OPCIONES_PAGINA[0];
+    if (nav.hidden) return;
+    var fmt = function (x) { return x.toLocaleString("es-MX"); };
+    var desde = (p - 1) * por + 1, hasta = Math.min(total, p * por);
+    var nums = numerosDePagina(p, paginas).map(function (x) {
+      if (x === "…") return '<span class="plp-pag-salto" aria-hidden="true">…</span>';
+      return '<button type="button" class="plp-pag-num' + (x === p ? ' is-on" aria-current="page' : "") +
+        '" data-pag="' + x + '" aria-label="Página ' + x + '">' + x + "</button>";
+    }).join("");
+    var html =
+      '<div class="plp-pag-nums">' +
+      '<button type="button" class="plp-pag-flecha" data-pag="' + (p - 1) + '" aria-label="Página anterior"' + (p <= 1 ? " disabled" : "") + ">" + FLECHA_IZQ + "</button>" +
+      nums +
+      '<button type="button" class="plp-pag-flecha" data-pag="' + (p + 1) + '" aria-label="Página siguiente"' + (p >= paginas ? " disabled" : "") + ">" + FLECHA_DER + "</button>" +
+      "</div>" +
+      '<p class="plp-pag-rango">' + fmt(desde) + "–" + fmt(hasta) + " de " + fmt(total) + " piezas</p>";
+    if (nav.__html !== html) { nav.innerHTML = html; nav.__html = html; }
+  }
+
+  /* "Mostrar 50 piezas ↓" en la barra de arriba, a la izquierda del orden y con
+     su mismo estilo (Carla, 2026-11-04). Siempre visible, también con menos de 50
+     piezas, como en la wishlist (2026-11-05). */
+  function selectorPorPagina(plp, por, total) {
+    var orden = selectOrden(plp);
+    if (!orden) return;
+    var sel = plp.querySelector(".toolbar select[data-por-pagina]");
+    if (!sel) {
+      sel = document.createElement("select");
+      sel.setAttribute("aria-label", "Piezas por página");
+      sel.setAttribute("data-por-pagina", "");
+      sel.className = "plp-por-sel";
+      sel.innerHTML = OPCIONES_PAGINA.map(function (n) {
+        return '<option value="' + n + '">Mostrar ' + n + " piezas ↓</option>";
+      }).join("");
+      orden.insertAdjacentElement("beforebegin", sel);
+    }
+    if (sel.value !== String(por)) sel.value = String(por);
+  }
+
+  /* Decide qué tarjetas se ven en la página actual y pide las que faltan. */
+  function paginar(plp) {
+    var grid = plp.querySelector(".plp-grid");
+    // Listados con data-cat-lista y la wishlist (data-cat-paginar, 2026-11-05).
+    if (!grid || (!listaDe(grid) && !grid.hasAttribute("data-cat-paginar"))) return;
+    var por = plp.__porPagina || POR_PAGINA;
+    var cards = tarjetas(grid);
+    selectorPorPagina(plp, por, cards.length);
+    var visibles = cards.filter(function (c) { return !c.hidden; });
+    var paginas = Math.max(1, Math.ceil(visibles.length / por));
+    var p = Math.min(Math.max(1, plp.__pagina || 1), paginas);
+    plp.__pagina = p;
+    var desde = (p - 1) * por, hasta = desde + por;
+    var enPagina = [];
+    var i = 0;
+    cards.forEach(function (c) {
+      var dentro = !c.hidden && i >= desde && i < hasta;
+      if (!c.hidden) i++;
+      if (dentro) {
+        if (c.hasAttribute("data-fuera")) c.removeAttribute("data-fuera");
+        enPagina.push(c);
+      } else if (!c.hasAttribute("data-fuera")) {
+        c.setAttribute("data-fuera", "");
+      }
+    });
+    cargarTarjetas(grid, enPagina);
+    pintarPaginador(plp, grid, p, paginas, por, visibles.length);
+  }
+
+  function irAPagina(plp) {
+    paginar(plp);
+    guardarFiltros(plp, plp.__aplicados || {});
+    var toolbar = plp.querySelector(".toolbar") || plp.querySelector(".plp-grid");
+    if (!toolbar) return;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (window.__homeaScrollA && !reduce) window.__homeaScrollA(toolbar, 24);
+    else toolbar.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }
+
+  document.addEventListener("click", function (e) {
+    var b = e.target && e.target.closest && e.target.closest(".plp-paginas [data-pag]");
+    if (!b || b.disabled) return;
+    var plp = b.closest(".plp");
+    if (!plp) return;
+    plp.__pagina = parseInt(b.getAttribute("data-pag"), 10) || 1;
+    irAPagina(plp);
+  });
+
+  /* Cambio de "Mostrar N piezas": página 1, sin mover la vista (la barra ya está a la mano). */
+  document.addEventListener("change", function (e) {
+    var sel = e.target;
+    if (!sel || !sel.matches || !sel.matches(".plp .toolbar select[data-por-pagina]")) return;
+    var plp = sel.closest(".plp");
+    if (!plp) return;
+    plp.__porPagina = parseInt(sel.value, 10) || POR_PAGINA;
+    plp.__pagina = 1;
+    paginar(plp);
+    guardarFiltros(plp, plp.__aplicados || {});
+  });
+
   /* ---------- Orden ---------- */
   function ordenar(select) {
     var plp = select.closest(".plp");
@@ -435,6 +641,8 @@
       return orden(a) - orden(b);
     });
     cards.forEach(function (c) { grid.appendChild(c); });
+    plp.__pagina = 1;
+    paginar(plp);
   }
 
   /* Buscador dentro de un grupo ("Busca por marca"): oculta las casillas cuyo
@@ -783,4 +991,191 @@
   revisarRuta();
   new MutationObserver(revisar).observe(document.documentElement, { childList: true, subtree: true });
   revisar();
+  /* Colores en la tarjeta (Carla 2026-11-03, todas las marcas; círculos de
+     lib/shopify/htmlCatalogo.ts). Cada color es su propia tarjeta en la rejilla.
+     · Cursor sobre otro círculo: la foto cambia a la de ese color y vuelve al salir.
+     · Clic en el círculo: la tarjeta se queda con ese color (foto, cuerpo y enlace
+       de la tarjeta hermana, tal como se pintó), sin salir de la página.
+     · Clic en el resto de la tarjeta: abre la ficha del color que muestra.
+     El clic va en captura para ganarle al <a> de la tarjeta y a PreviewRouter. */
+  function originalDe(card) {
+    if (!card.__colorOrig) {
+      card.__colorOrig = {
+        href: card.getAttribute("href"),
+        accion: card.getAttribute("data-accion"),
+        imgw: card.querySelector(".imgw").cloneNode(true),
+        body: card.querySelector(".body").cloneNode(true)
+      };
+    }
+    return card.__colorOrig;
+  }
+  /* Hermanas de color que no están en la página (wishlist, relacionados de la
+     ficha): una tarjeta fuera del documento que se llena por SKU cuando hace falta. */
+  var hermanasSueltas = {};
+  function hermanaDe(card, sku) {
+    var rejilla = card.closest(".plp-grid") || document;
+    var h = rejilla.querySelector('[data-cat-card][data-sku="' + sku + '"]') ||
+      document.querySelector('[data-cat-card][data-sku="' + sku + '"]');
+    if (h) return h;
+    if (!hermanasSueltas[sku]) {
+      var a = document.createElement("a");
+      a.className = "pcard pcard-vacia";
+      a.setAttribute("data-cat-card", "");
+      a.setAttribute("data-sku", sku);
+      hermanasSueltas[sku] = a;
+    }
+    return hermanasSueltas[sku];
+  }
+  function fotoDe(card, sku) {
+    var h = hermanaDe(card, sku);
+    /* Hermana aún vacía (otra página): se pide su tarjeta; la vista previa sale
+       en cuanto llegue si el cursor sigue ahí. */
+    if (h && h.classList.contains("pcard-vacia")) {
+      cargarTarjetas(card.closest(".plp-grid"), [h]).then(function () {
+        var c = card.querySelector('.pcard-color[data-color-sku="' + sku + '"]');
+        if (c && c.matches(":hover, :focus-visible")) previa(c);
+      });
+      return null;
+    }
+    var img = h && originalDe(h).imgw.querySelector("img");
+    if (!img) return null;
+    var copia = img.cloneNode(true);
+    copia.removeAttribute("loading");
+    return copia;
+  }
+  /* Vista previa: la foto del color sin fijarlo (cursor encima o foco de teclado). */
+  function previa(c) {
+    if (c.classList.contains("is-active")) return;
+    var card = c.closest("[data-cat-card]");
+    var actual = card && card.querySelector(".imgw img");
+    var nueva = actual && fotoDe(card, c.getAttribute("data-color-sku"));
+    if (!nueva) return;
+    /* Su estado original se guarda ANTES de cambiarle la foto: si se guardaba
+       después (al hacer clic), recordaba la foto de la vista previa y al volver a
+       su color se quedaba con la del otro (Carla, 2026-11-05). */
+    if (!card.__fotoFija) { originalDe(card); card.__fotoFija = actual; }
+    actual.replaceWith(nueva);
+  }
+  function quitarPrevia(card) {
+    if (!card || !card.__fotoFija) return;
+    var img = card.querySelector(".imgw img");
+    if (img) img.replaceWith(card.__fotoFija);
+    card.__fotoFija = null;
+  }
+  /* La tarjeta se queda con el color del círculo. Con teclado, el foco pasa al
+     círculo marcado de la tarjeta nueva (el cuerpo se reemplaza entero). */
+  function aplicarColor(c, teclado) {
+    if (c.classList.contains("is-active")) return;
+    var card = c.closest("[data-cat-card]");
+    var sku = c.getAttribute("data-color-sku");
+    var h = card && hermanaDe(card, sku);
+    if (!h) return;
+    // Hermana aún vacía: primero se pide su tarjeta y luego se aplica el color.
+    if (h.classList.contains("pcard-vacia")) {
+      cargarTarjetas(card.closest(".plp-grid"), [h]).then(function () {
+        if (!h.classList.contains("pcard-vacia")) aplicarColor(c, teclado);
+      });
+      return;
+    }
+    var o = originalDe(h);
+    quitarPrevia(card); // la tarjeta vuelve a su foto antes de guardar su estado
+    originalDe(card);
+    card.__fotoFija = null;
+    card.querySelector(".imgw").replaceWith(o.imgw.cloneNode(true));
+    card.querySelector(".body").replaceWith(o.body.cloneNode(true));
+    card.setAttribute("href", o.href);
+    if (o.accion) card.setAttribute("data-accion", o.accion);
+    if (teclado) {
+      var marcado = card.querySelector('.pcard-color[data-color-sku="' + sku + '"]');
+      if (marcado) marcado.focus();
+    }
+  }
+  function circuloDe(e) {
+    return e.target && e.target.closest && e.target.closest(".pcard-color");
+  }
+  document.addEventListener("mouseover", function (e) {
+    var c = circuloDe(e);
+    if (c) previa(c);
+  });
+  document.addEventListener("mouseout", function (e) {
+    var fila = e.target && e.target.closest && e.target.closest(".pcard-colores");
+    if (!fila || (e.relatedTarget && fila.contains(e.relatedTarget))) return;
+    quitarPrevia(fila.closest("[data-cat-card]"));
+  });
+  document.addEventListener("focusin", function (e) {
+    var c = circuloDe(e);
+    if (c && c.matches(":focus-visible")) previa(c);
+  });
+  document.addEventListener("focusout", function (e) {
+    var fila = e.target && e.target.closest && e.target.closest(".pcard-colores");
+    if (!fila || (e.relatedTarget && fila.contains(e.relatedTarget))) return;
+    quitarPrevia(fila.closest("[data-cat-card]"));
+  });
+  document.addEventListener("click", function (e) {
+    var c = circuloDe(e);
+    if (!c) return;
+    e.preventDefault();
+    aplicarColor(c, false);
+  }, true);
+  /* Cuántos círculos caben (Carla, 2026-11-03): todos los que entren en el ancho
+     de la fila sin salirse de los márgenes de la tarjeta; si no caben todos, el
+     último lugar es "+N". El de la tarjeta siempre queda a la vista. Se recalcula
+     cuando la fila cambia de ancho (ventana, filtros que la muestran, color nuevo). */
+  var PASO_COLOR = 28; // círculo de 24px + 4px de separación
+  var ANCHO_MAS = 34; // "+N": 4px de separación + 4px de margen + 26px fijos en CSS (.pcard-colores-mas)
+  /* Sin leer el layout aquí dentro: el ancho llega de ResizeObserver
+     (contentRect). Leer clientWidth/offsetWidth después de esconder círculos de
+     la fila anterior obligaba a recalcular la página entera por cada fila: con
+     ~650 filas y 1,800 tarjetas, Cocina y Bar se trababa ~45 s (2026-11-04). */
+  function ajustarColores(fila, ancho) {
+    if (!ancho) return;
+    var circ = fila.querySelectorAll(".pcard-color");
+    var mas = fila.querySelector(".pcard-colores-mas");
+    var n = circ.length;
+    if (!mas || !n) return;
+    var k = Math.floor((ancho + 4) / PASO_COLOR);
+    if (k < n) k = Math.max(1, Math.floor((ancho - ANCHO_MAS + 4) / PASO_COLOR)); // 28k − 4 + 34 ≤ ancho
+    k = Math.min(k, n);
+    if (fila.__colK === k) return; // ya está así: no se toca el DOM
+    fila.__colK = k;
+    var activo = -1;
+    for (var i = 0; i < n; i++) {
+      circ[i].hidden = i >= k;
+      if (circ[i].classList.contains("is-active")) activo = i;
+    }
+    if (activo >= k) { circ[k - 1].hidden = true; circ[activo].hidden = false; }
+    mas.hidden = k >= n;
+    mas.textContent = "+" + (n - k);
+  }
+  var filasVistas = typeof WeakSet === "function" ? new WeakSet() : null;
+  var medidor = typeof ResizeObserver === "function"
+    ? new ResizeObserver(function (entradas) {
+        entradas.forEach(function (en) { ajustarColores(en.target, en.contentRect.width); });
+      })
+    : null;
+  var buscarFilas = 0;
+  function vigilarFilas() {
+    buscarFilas = 0;
+    /* Tarjetas ligeras (las pinta wishlist.js con lo guardado en el corazón): se
+       cambian por la tarjeta completa del catálogo, con "+" y círculos. */
+    var ligeras = Array.prototype.slice.call(document.querySelectorAll(".pcard-ligera:not([data-fuera])"))
+      .filter(function (c) { return !c.__cargando && !c.__sinTarjeta; });
+    if (ligeras.length) cargarTarjetas(ligeras[0].closest(".plp-grid"), ligeras);
+    document.querySelectorAll(".pcard-colores").forEach(function (fila) {
+      if (filasVistas && filasVistas.has(fila)) return;
+      if (filasVistas) filasVistas.add(fila);
+      if (medidor) medidor.observe(fila); else ajustarColores(fila, fila.clientWidth);
+    });
+  }
+  new MutationObserver(function () {
+    if (!buscarFilas) buscarFilas = requestAnimationFrame(vigilarFilas);
+  }).observe(document.documentElement, { childList: true, subtree: true });
+  vigilarFilas();
+  document.addEventListener("keydown", function (e) {
+    var c = circuloDe(e);
+    if (!c || (e.key !== "Enter" && e.key !== " ")) return;
+    e.preventDefault();
+    e.stopPropagation();
+    aplicarColor(c, true);
+  }, true);
 })();

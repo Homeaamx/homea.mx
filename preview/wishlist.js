@@ -224,7 +224,10 @@
   }
 
   /* Tarjeta IGUAL a la del catálogo (tarjetaHtml en htmlCatalogo.ts), con los
-     data-* que lee catalogo.js: precio en pesos, stock, tipo y valores de filtro. */
+     data-* que lee catalogo.js: precio en pesos, stock, tipo y valores de filtro.
+     Va como "ligera" (2026-11-05): se ve al instante con lo guardado en el corazón
+     y catalogo.js la cambia por la tarjeta completa del catálogo (/api/tarjetas por
+     SKU), con el "+" de Mi proyecto y los círculos de color. */
   function tarjeta(it, orden) {
     var serie = serieDe(it);
     var precio = precioDe(it);
@@ -241,7 +244,8 @@
     var stock = it.stock
       ? '<span class="pcard-disp"><span class="pcard-tag is-stock">' + ICONO_STOCK + 'En stock</span></span>'
       : '<span class="pcard-disp"><span class="pcard-tag is-pedido">' + ICONO_PEDIDO + 'Bajo pedido</span></span>';
-    return '<a class="pcard" href="' + esc(it.href) + '" data-cat-card data-orden="' + orden + '"' +
+    return '<a class="pcard' + (it.id ? " pcard-ligera" : "") + '" href="' + esc(it.href) + '" data-cat-card' +
+      (it.id ? ' data-sku="' + esc(it.id) + '"' : "") + ' data-orden="' + orden + '"' +
       ' data-precio="' + pesosDe(it) + '" data-stock="' + (it.stock ? 1 : 0) + '"' +
       ' data-tipo="' + esc(slug(tipo)) + '" data-fv-marca="' + esc(slug(it.brand)) + '"' +
       ' data-fv-stock="' + (it.stock ? "en-stock" : "bajo-pedido") + '">' +

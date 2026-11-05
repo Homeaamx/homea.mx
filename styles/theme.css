@@ -5275,3 +5275,170 @@ body:has(:is([data-newsletter="ofertas"], [data-newsletter="guias"])) .site-foot
    columna de compra más alta que la foto (títulos largos, Bertazzoni) la imagen
    se deslizaba al bajar. Ahora sube junto con la página. */
 .pdp .gallery { position: static; top: auto; }
+
+/* Colores en la tarjeta (Carla 2026-11-03; todas las marcas con grupo "colores").
+   Una fila de círculos de 18px entre el nombre y el precio; cada círculo mide
+   24px para tocarlo bien. El de la tarjeta lleva el aro dorado; los demás llevan
+   a la ficha de su color (data-href). Si la rejilla trae alguna fila de colores,
+   las tarjetas sin ella reservan el mismo alto para que los precios alineen. */
+.pcard-colores { display: flex; align-items: center; gap: 4px; height: 24px; margin-left: -3px; }
+.pcard-color { position: relative; flex: none; width: 24px; height: 24px; border-radius: 50%; cursor: pointer;
+  transition: box-shadow var(--dur-fast) var(--ease-standard); }
+.pcard-color::before { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--tono);
+  box-shadow: inset 0 0 0 1px rgba(30, 25, 20, .18); }
+.pcard-color:hover { box-shadow: inset 0 0 0 1px var(--border-strong); }
+.pcard-color.is-active { box-shadow: inset 0 0 0 1px var(--homea-gold); cursor: default; }
+.pcard-colores-mas { flex: none; width: 26px; margin-left: 4px; font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: .02em; color: var(--fg-muted); }
+.pcard-color::after {
+  content: attr(data-tip); position: absolute; bottom: calc(100% + 6px); left: 50%; z-index: 4;
+  padding: 6px 10px; white-space: nowrap; pointer-events: none;
+  background: var(--homea-bone); border: 1px solid var(--border-strong); box-shadow: 0 2px 8px rgba(30, 25, 20, .12);
+  font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: .02em; color: var(--fg);
+  opacity: 0; transform: translate(-50%, 3px); transition: opacity var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard);
+}
+.pcard-color:hover::after { opacity: 1; transform: translate(-50%, 0); transition-delay: .25s; }
+@media (hover: none) { .pcard-color::after { display: none; } }
+.plp-grid:has(.pcard-colores) .pcard[data-cat-card]:not(:has(.pcard-colores)) h3.pcard-name { margin-bottom: 32px; }
+
+/* La tarjeta del catálogo cabe completa en la pantalla (Carla, 2026-11-03): con la
+   barra del menú fija (58px) arriba, la foto se encoge lo necesario para que
+   marca, nombre, colores y precio se vean junto con ella. El cuerpo no se encoge;
+   la foto nunca baja de 160px. */
+.pcard[data-cat-card] { max-height: calc(100svh - 88px); }
+.pcard[data-cat-card] .imgw,
+.pcard[data-cat-card] .imgw.cutout { flex: 0 1 auto; min-height: 160px; }
+.pcard[data-cat-card] .body { flex: none; }
+/* Círculos de color con teclado: aro de foco y el nombre del color, como en hover. */
+.pcard-color:focus { outline: none; }
+.pcard-color:focus-visible { box-shadow: inset 0 0 0 1px var(--homea-gold), 0 0 0 2px var(--homea-gold); }
+.pcard-color:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+/* Círculo del tono en el filtro Color (Carla, 2026-11-03), entre la casilla y el nombre. */
+.fopts .fcolor { flex: none; width: 16px; height: 16px; border-radius: 50%; background: var(--tono);
+  box-shadow: inset 0 0 0 1px rgba(30, 25, 20, .18); }
+/* Los círculos que no caben (catalogo.js) se ocultan con [hidden]. */
+.pcard-color[hidden], .pcard-colores-mas[hidden] { display: none; }
+
+/* Aviso antes de pagar o de pasar a la pre-cotización (Carla, 2026-11-04):
+   components/AvisoCierre.tsx. Rojo oscuro (el mismo de .cart-aviso.is-error) con
+   el triángulo de alerta; esquinas vivas como todo el sistema. */
+.aviso-cierre-overlay { z-index: 120; align-items: center; }
+.aviso-cierre {
+  position: relative; width: min(560px, 100%); margin: auto 0; padding: clamp(24px, 4vw, 40px);
+  background: var(--homea-bone); border: 1px solid #8c2f24; border-top-width: 4px; box-shadow: var(--shadow-md);
+}
+.aviso-cierre-cabeza { display: flex; align-items: center; gap: 12px; margin: 0 28px 16px 0; color: #8c2f24; }
+.aviso-cierre-icono { flex: none; width: 34px; height: 34px; }
+.aviso-cierre-cabeza h2 {
+  margin: 0; font-family: var(--font-sans); font-size: 13px; font-weight: 700;
+  letter-spacing: var(--tracking-wider); text-transform: uppercase; color: #8c2f24;
+}
+.aviso-cierre-texto {
+  margin: 0; padding: 14px 16px; font-size: 15px; line-height: 1.55; color: #5e1f18;
+  background: rgba(140, 47, 36, .07); border-left: 2px solid #8c2f24;
+}
+.aviso-cierre-pie { margin: 14px 0 0; font-size: 13px; line-height: 1.5; color: var(--fg-muted); }
+.aviso-cierre-acciones { margin-top: 22px; display: flex; flex-direction: column; gap: 14px; }
+.aviso-cierre .aviso-cierre-boton { width: 100%; justify-content: center; text-align: center; }
+.aviso-cierre-otras { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; font-size: 12px; color: var(--fg-muted); }
+
+/* Páginas del catálogo (Carla, 2026-11-04): 50 por página, selector de página y
+   "Mostrar 50 · 100 · 200" hasta abajo. public/catalogo.js → paginar(). */
+.plp-grid > [data-cat-card][data-fuera] { display: none; }
+/* Tarjeta vacía que ya entró en la página y está llegando de /api/tarjetas. */
+.pcard[data-cat-card].pcard-vacia { min-height: 460px; background: var(--bg-greige); pointer-events: none;
+  animation: pcard-cargando 1.2s var(--ease-standard) infinite alternate; }
+@keyframes pcard-cargando { from { opacity: .55; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .pcard[data-cat-card].pcard-vacia { animation: none; } }
+
+.plp-paginas { grid-column: 1 / -1; margin: 48px 0 8px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.plp-paginas[hidden] { display: none; }
+.plp-pag-nums { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px; }
+.plp-pag-num, .plp-pag-flecha {
+  display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%;
+  background: none; color: var(--fg); cursor: pointer;
+  font-family: var(--font-sans); font-size: 17px; font-weight: 500; font-variant-numeric: tabular-nums;
+  transition: background var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard);
+}
+.plp-pag-num:hover { background: var(--bg-greige); }
+.plp-pag-num.is-on { background: var(--homea-black); color: #fff; cursor: default; }
+.plp-pag-flecha svg { width: 22px; height: 22px; }
+.plp-pag-flecha:disabled { opacity: .3; cursor: default; }
+.plp-pag-num:focus-visible, .plp-pag-flecha:focus-visible { outline: 1px solid var(--homea-gold); outline-offset: 2px; }
+.plp-pag-salto { width: 24px; text-align: center; color: var(--fg-muted); font-family: var(--font-sans); }
+/* Rango bajo los números, centrado con ellos (Carla, 2026-11-04). */
+.plp-pag-rango { margin: 0; text-align: center;
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-muted); }
+/* "Mostrar N piezas ↓" en la barra, a la izquierda del orden y con su mismo estilo
+   (las reglas de .toolbar select): empuja a la derecha y deja aire con el orden. */
+.toolbar select.plp-por-sel { margin-left: auto; }
+/* Cada selector mide lo que dice su opción elegida (no la más larga): así el de
+   piezas queda pegado al de orden, a la distancia del gap de la barra (24px). */
+.plp .toolbar select { field-sizing: content; }
+.toolbar select.plp-por-sel[hidden] { display: none; }
+@media (max-width: 640px) {
+  .plp-pag-num, .plp-pag-flecha { width: 38px; height: 38px; font-size: 15px; }
+}
+/* Celular: el conteo arriba y los dos selectores juntos en una línea (piezas a
+   la izquierda, orden a la derecha). */
+@media (max-width: 640px) {
+  .plp .toolbar:has(.plp-por-sel:not([hidden])) .results { flex: 0 0 100%; }
+  .plp .toolbar select.plp-por-sel { margin-left: 0; }
+  .plp .toolbar:has(.plp-por-sel:not([hidden])) select[aria-label="Ordenar"] { margin-left: auto; }
+  .plp .toolbar:has(.plp-por-sel:not([hidden])) { column-gap: 12px; }
+  .plp .toolbar:has(.plp-por-sel:not([hidden])) select { font-size: 11px; letter-spacing: .02em; }
+}
+/* Selectores de la barra (piezas por página y orden) con fondo greige para
+   distinguirlos como botones (Carla, 2026-11-05). */
+.plp .toolbar select {
+  background-color: var(--bg-greige); padding: 9px 14px; text-align: left; text-align-last: left;
+  transition: background-color var(--dur-fast) var(--ease-standard);
+}
+.plp .toolbar select:hover { background-color: var(--homea-greige-deep); }
+.plp .toolbar select:focus-visible { outline: 1px solid var(--homea-gold); outline-offset: 2px; }
+@media (max-width: 640px) {
+  .plp .toolbar:has(.plp-por-sel:not([hidden])) select { padding: 9px 10px; }
+}
+
+/* Cierre del proyecto (Carla, 2026-11-05): las notas bajo el tipo de cambio en
+   12px y rojo oscuro (el de los avisos, #8c2f24), en el cajón y en /mi-proyecto. */
+.proy-notas .cart-tax-note,
+.sel-aside .proy-notas .cart-tax-note,
+[data-mi-proyecto] .sel-aside .proy-notas .cart-tax-note { font-size: 12px; line-height: 1.55; color: #8c2f24; }
+.proy-notas .cart-tax-note strong, .cart-aviso strong, .aviso-cierre-texto strong { font-weight: 700; }
+/* Botones de salida que son enlace (Pagar, Continuar con pago, WhatsApp): al
+   pasar el cursor solo cambia el fondo; el texto se queda claro. */
+a.wl-wa:hover, a.wl-wa:focus-visible { color: var(--homea-bone); }
+
+/* Pre-cotización (Carla, 2026-11-05): campos obligatorios con un tono dorado
+   suave para que resalten; el campo con error, en rojo con su mensaje debajo. */
+/* Solo mientras está vacío (:placeholder-shown): ya lleno vuelve al tono normal
+   (Carla, 2026-11-05); si lo escrito tiene un error, lo marca .is-error. */
+.pc-campo input[aria-required="true"]:placeholder-shown { background: rgba(140, 47, 36, .07); border-color: rgba(140, 47, 36, .55); }
+.pc-campo input[aria-required="true"]::placeholder { color: #8c2f24; opacity: .7; }
+.pc-campo input[aria-required="true"]:placeholder-shown:hover, .pc-campo input[aria-required="true"]:placeholder-shown:focus { background: #fff; }
+.pc-entrada { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.pc-campo.is-error input, .pc-campo.is-error input[aria-required="true"], .pc-campo.is-error input[aria-required="true"]:placeholder-shown { border-color: #8c2f24; box-shadow: inset 0 0 0 1px #8c2f24; background: rgba(140, 47, 36, .05); }
+.pc-error { font-family: var(--font-sans); font-size: 11.5px; line-height: 1.35; color: #8c2f24; }
+.pc-hint.is-error { color: #8c2f24; }
+/* Botones con datos por corregir: se ven atenuados pero responden, para marcar qué falta. */
+.pc-botones .is-incompleto { opacity: .55; }
+@media print { .pc-error { display: none; } }
+/* Notas del cierre (Carla, 2026-11-05): en el cajón, rojo con línea roja a la
+   izquierda; en /mi-proyecto, con el formato de aviso (texto oscuro y línea
+   dorada, como .cart-aviso.is-bloqueo). */
+.proy-notas .cart-tax-note { padding-left: 12px; border-left: 2px solid #8c2f24; }
+[data-mi-proyecto] .sel-aside .proy-notas .cart-tax-note {
+  font-size: 14px; line-height: 1.6; color: var(--fg); padding: 2px 0 2px 16px; border-left: 2px solid var(--accent);
+}
+/* Relacionados de la ficha (2026-11-05): con círculos, las tarjetas sin colores
+   reservan el renglón para que los precios alineen, igual que en el catálogo. */
+.grid-3:has(.pcard-colores) .pcard[data-cat-card]:not(:has(.pcard-colores)) h3.pcard-name { margin-bottom: 32px; }
+
+/* Wishlist (Carla, 2026-11-05): el conteo arriba de los filtros y en negritas, y
+   hasta abajo un solo botón "Seguir comprando →" a Cocina y Bar. */
+.wl-toolbar .results { order: -1; font-weight: 700; }
+.wl-seguir { display: flex; justify-content: center; margin: 48px 0 8px; }
+.wl-seguir .wl-seguir-btn { width: auto; min-width: 280px; padding: 18px 36px; }
+/* Wishlist: los filtros ocupan su renglón y los dos selectores (piezas y orden)
+   van juntos debajo, a la derecha. */
+.wl-toolbar .filters.filters--top { flex: 1 1 100%; }

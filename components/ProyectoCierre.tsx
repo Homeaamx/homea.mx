@@ -15,6 +15,8 @@
 // Comentarios al pie: cuatro casos exactos de Carla (2026-10-08), documentados
 // en docs/REGLAS-CARRITO-Y-COMENTARIOS.md.
 
+import { useState } from "react";
+
 import { tonoDe } from "@/lib/coloresMarca";
 import { mensajeCotizacion, queryCotizacion, serializarPartidas, type DatosCliente } from "@/lib/cotizacion";
 import type { Aviso, Carrito, Dinero } from "@/lib/shopify/tipos";
@@ -22,6 +24,8 @@ import { formatearDinero } from "@/lib/shopify/tipos";
 import { SITE_URL } from "@/lib/site";
 import { whatsappHref } from "@/lib/whatsapp";
 
+import AvisoCierre, { type TipoAviso } from "./AvisoCierre";
+import ConNegritas from "./ConNegritas";
 import { useCarrito } from "./CarritoContexto";
 
 interface Props {
@@ -69,9 +73,9 @@ export function mensajeListado(carrito: Carrito, datos: DatosCliente): string {
 function textoBloqueo(carrito: Carrito): string | null {
   switch (carrito.bloqueo) {
     case "moneda-incoherente":
-      return "Precio por confirmar: una pieza en dólares no tiene su precio en pesos al día. Un especialista te confirma el total.";
+      return "**Precio por confirmar:** una pieza en dólares no tiene su **precio en pesos al día**. Un especialista te confirma el total.";
     case "tienda-con-password":
-      return "El pago en línea está en preparación. Cierra tu proyecto con un especialista por WhatsApp.";
+      return "El **pago en línea está en preparación**. Cierra tu proyecto con **un especialista por WhatsApp**.";
     default:
       return null;
   }
@@ -82,8 +86,9 @@ function textoBloqueo(carrito: Carrito): string | null {
  * COMPRA POR MARCA como referencia). Exactamente cuatro casos:
  *   · todo en stock                     → Pagar, sin comentario.
  *   · todo se compra, todo en pesos     → Pagar + tiempo de entrega puede variar.
- *   · todo se compra, hay dólares       → Pagar + se cobra al TC del día, se
- *                                         recomienda cotizar con un ejecutivo.
+ *   · todo se compra, hay dólares       → Pagar + "Tipo de cambio al <día>", se
+ *                                         cobra al TC del día, se debe cotizar
+ *                                         con un ejecutivo (2026-11-04).
  *   · algo se cotiza (marca / monto)    → Enviar listado a un ejecutivo + totales al
  *                                         TC del día, el listado va a un ejecutivo.
  */
@@ -91,16 +96,25 @@ export function notasDelProyecto(carrito: Carrito): string[] {
   if (!carrito.lineas.length) return [];
   if (carrito.modo === "cotizacion") {
     return [
-      "Totales con el tipo de cambio al día, tu listado se enviará a un ejecutivo de ventas para confirmar montos y tiempos estimados de entrega.",
+      `Totales con el **tipo de cambio ${carrito.tipoCambioDia ? `al ${carrito.tipoCambioDia}` : "al día"}**, tu listado se enviará a **un ejecutivo de ventas** para confirmar montos y **tiempos estimados de entrega**.`,
+    ];
+  }
+  // Tipo de cambio de un día anterior (Carla, 2026-11-05): el comentario dice
+  // por qué no se puede pagar todavía; "Pagar" abre el aviso tc-vencido.
+  if (carrito.tipoCambioVencido) {
+    const varias = carrito.lineas.filter((l) => l.tipoCambio !== null).length > 1;
+    return [
+      `${varias ? "Tus productos tienen" : "Tu producto tiene"} **el tipo de cambio ${carrito.tipoCambioDia ? `del día ${carrito.tipoCambioDia}` : "de un día anterior"}**, necesitas **contactar a un ejecutivo** para que te proporcione el precio con **el tipo de cambio del día de hoy**.`,
     ];
   }
   if (carrito.lineas.every((l) => l.enStock)) return [];
   if (hayDolares(carrito)) {
+    // Carla, 2026-11-04: el comentario dice de qué día es el tipo de cambio.
     return [
-      "Las piezas en dólares se cobran en pesos al tipo de cambio del día, se recomienda cotizar con un ejecutivo.",
+      `${carrito.tipoCambioDia ? `**Tipo de cambio al ${carrito.tipoCambioDia}.** ` : ""}Las **piezas en dólares** se cobran en pesos al **tipo de cambio del día**, se recomienda **cotizar con un ejecutivo**.`,
     ];
   }
-  return ["Tu tiempo estimado de entrega puede variar de acuerdo a los productos seleccionados."];
+  return ["Tu **tiempo estimado de entrega** puede variar de acuerdo a los productos seleccionados."];
 }
 
 const Precio = ({ d, pendiente }: { d: Dinero; pendiente: boolean }) => (
@@ -109,6 +123,9 @@ const Precio = ({ d, pendiente }: { d: Dinero; pendiente: boolean }) => (
 
 export default function ProyectoCierre({ carrito, aviso, ocupado }: Props) {
   const ctx = useCarrito();
+  // Aviso antes de salir del proyecto (Carla, 2026-11-04): Pagar y Enviar listado
+  // pasan primero por <AvisoCierre>; su botón principal sigue el camino elegido.
+  const [confirmar, setConfirmar] = useState<TipoAviso | null>(null);
 
   const vacio = carrito.lineas.length === 0;
   const bloqueo = textoBloqueo(carrito);
@@ -159,7 +176,7 @@ export default function ProyectoCierre({ carrito, aviso, ocupado }: Props) {
         <div className="proy-notas">
           {notas.map((n) => (
             <p className="cart-tax-note" key={n}>
-              {n}
+              <ConNegritas texto={n} />
             </p>
           ))}
         </div>
@@ -181,21 +198,38 @@ export default function ProyectoCierre({ carrito, aviso, ocupado }: Props) {
 
       {seCotiza ? (
         // Abre la pre-cotización al centro (cierra el cajón): ahí van los datos del cliente.
-        <button type="button" className="wl-wa cart-checkout" onClick={() => ctx?.abrirCotizacion()}>
+        <button type="button" className="wl-wa cart-checkout" onClick={() => setConfirmar("cotizacion")}>
           Enviar listado a un ejecutivo <span className="ar">→</span>
         </button>
       ) : puedePagar ? (
-        <a className="wl-wa cart-checkout" href={carrito.checkoutUrl ?? undefined} rel="noopener">
+        <a
+          className="wl-wa cart-checkout"
+          href={carrito.checkoutUrl ?? undefined}
+          rel="noopener"
+          onClick={(e) => {
+            e.preventDefault();
+            setConfirmar(dolares ? "pago-usd" : "pago");
+          }}
+        >
           Pagar <span className="ar">→</span>
         </a>
       ) : (
         <>
-          <span className="wl-wa cart-checkout" aria-disabled="true">
-            Pagar <span className="ar">→</span>
-          </span>
-          {bloqueo ? (
+          {carrito.bloqueo === "tc-vencido" ? (
+            // Con el tipo de cambio vencido el botón dice "Continuar" (aún no se puede
+            // pagar) y abre el aviso que lleva a la pre-cotización (Carla, 2026-11-05).
+            <button type="button" className="wl-wa cart-checkout" onClick={() => setConfirmar("tc-vencido")}>
+              Continuar <span className="ar">→</span>
+            </button>
+          ) : (
+            <span className="wl-wa cart-checkout" aria-disabled="true">
+              Pagar <span className="ar">→</span>
+            </span>
+          )}
+          {/* Con el tipo de cambio vencido solo sale el aviso al pulsar Pagar (Carla, 2026-11-05). */}
+          {carrito.bloqueo !== "tc-vencido" && bloqueo ? (
             <p className="cart-aviso" role="status">
-              {bloqueo}{" "}
+              <ConNegritas texto={bloqueo} />{" "}
               {/* Pasa por la pre-cotización: así también queda como borrador en Shopify. */}
               <button type="button" className="cart-aviso-link" onClick={() => ctx?.abrirCotizacion()}>
                 Enviar listado a un ejecutivo
@@ -204,6 +238,26 @@ export default function ProyectoCierre({ carrito, aviso, ocupado }: Props) {
           ) : null}
         </>
       )}
+
+      {confirmar ? (
+        <AvisoCierre
+          tipo={confirmar}
+          href={confirmar === "cotizacion" || confirmar === "tc-vencido" ? undefined : (carrito.checkoutUrl ?? undefined)}
+          onContinuar={() => {
+            setConfirmar(null);
+            ctx?.abrirCotizacion();
+          }}
+          onEjecutivo={
+            confirmar === "cotizacion" || confirmar === "tc-vencido"
+              ? undefined
+              : () => {
+                  setConfirmar(null);
+                  ctx?.abrirCotizacion();
+                }
+          }
+          onCerrar={() => setConfirmar(null)}
+        />
+      ) : null}
     </div>
   );
 }

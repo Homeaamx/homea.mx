@@ -1016,6 +1016,11 @@
 .ilus .i-collar { fill: none; stroke: #EDEAE3; stroke-width: 2.4; }
 .ilus .i-tapon-crema { fill: #E9E3C6; }
 .ilus .i-control-num { font-family: var(--font-sans); font-size: 5.5px; fill: #EEF1F2; }
+/* Humidor para puros (Benessi BKHUM24): cedro al fondo, puros con anillo dorado. */
+.ilus .i-humidor-fondo { fill: #1C120B; }
+.ilus .i-puro { fill: #8A5A33; stroke: #2A180C; stroke-width: .6; }
+.ilus .i-anillo { fill: #D8B57C; }
+.ilus .i-puro-brillo { stroke: #A97C55; stroke-width: .7; opacity: .55; stroke-linecap: round; }
 /* Acabado antracita (Bajo cubierta). */
 .ilus--antracita .i-marco { fill: #2A2B2D; }
 .ilus--antracita .i-marco-cristal { fill: #2C2D2F; stroke: #1A1B1C; }

@@ -397,6 +397,64 @@
               "tienda": "/productos/cocina-y-bar/refrigeracion?tipo=centros-de-bebida"
             },
             {
+              "nombre": "Humidor para puros",
+              "slug": "humidor-para-puros",
+              "filtro": "/productos/humidor-para-puros/",
+              "rutaFiltros": "/guias/cocina-y-bar/refrigeracion/humidor-para-puros",
+              "filtros": [
+                {
+                  "nombre": "Empotrado",
+                  "filtro": "/productos/humidor-para-puros/?f=empotrado",
+                  "ficha": {
+                    "grupo": "tipo",
+                    "diagrama": "bajo-cubierta",
+                    "ilustracion": "humidor-empotrado",
+                    "descripcion": "Humidor de 24″ que se empotra bajo la cubierta y ventila por el frente: los puros a la mano en el bar, la sala o la cava.",
+                    "specs": "Bajo cubierta · 24″ · Puerta reversible",
+                    "detalle": "Se instala bajo una cubierta estándar como una cava undercounter y, al ventilar por el zoclo frontal, no necesita holgura a los lados. Una sola zona de clima de 4 a 18 °C, compresor de velocidad variable y sistema no frost mantienen estable el ambiente; las charolas de nogal Canaletto corren con cierre suave para guardar y exhibir la colección.",
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=humidor-para-puros&filtro=instalacion:empotrado"
+                  }
+                },
+                {
+                  "nombre": "Acero inoxidable",
+                  "filtro": "/productos/humidor-para-puros/?f=acero-inoxidable",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "bajo-cubierta",
+                    "ilustracion": "humidor-acero",
+                    "descripcion": "Cuerpo de acero inoxidable AISI 304 y puerta de cristal: combina con el equipamiento profesional del bar.",
+                    "specs": "Acero AISI 304 · Cristal con filtro UV",
+                    "detalle": "El marco de acero y el cristal bronceado de triple capa protegen los puros de la luz UV y de los cambios de temperatura exteriores, sin ocultar la colección. Es la opción para barras y cocinas con frentes de acero.",
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=humidor-para-puros&filtro=color:acero-inoxidable"
+                  }
+                },
+                {
+                  "nombre": "Panelable",
+                  "filtro": "/productos/humidor-para-puros/?f=panelable",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "bajo-cubierta",
+                    "ilustracion": "humidor-panelable",
+                    "descripcion": "Listo para panel: el marco de la puerta se cubre con el mismo material del mueble y el humidor queda integrado.",
+                    "specs": "Panel de carpintería · Integración total",
+                    "detalle": "Llega sin frente decorativo y el carpintero fabrica el panel con las medidas de la ficha técnica; el cristal sigue dejando ver los puros. Ideal cuando la barra o la sala llevan carpintería continua.",
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=humidor-para-puros&filtro=color:panelable"
+                  }
+                }
+              ],
+              "etiquetasGrupos": {
+                "tipo": "Tipo de instalación",
+                "estilo": "Color"
+              },
+              "tarjeta": {
+                "imagen": "/assets/photos/humidor-para-puros-benessi-bajo-cubierta-bar.webp",
+                "ambiente": true,
+                "pos": "center 60%",
+                "resumen": "Temperatura estable y charolas de nogal para conservar tus puros."
+              },
+              "tienda": "/productos/cocina-y-bar/refrigeracion?tipo=humidor-para-puros"
+            },
+            {
               "nombre": "Frigobares",
               "slug": "frigobares",
               "filtro": "/productos/frigobares/",

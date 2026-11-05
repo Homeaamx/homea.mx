@@ -248,7 +248,11 @@ export function aCarrito(raw: CarritoRaw, { simulado = false } = {}): Carrito {
     subtotalConIva,
     ahorroConIva: { monto: centavos(subtotalConIva.monto - totalEstimado.monto), moneda: subtotal.moneda },
     // El FIX con el que el cron escribió los pesos: todas las piezas en dólares
-    // deberían traer el mismo; se toma el de la primera.
-    tipoCambio: lineas.find((l) => l.tipoCambio !== null)?.tipoCambio ?? null,
+    // deberían traer el mismo. Se toma el de la pieza más cara, la que lo da con
+    // más precisión (los pesos vienen redondeados a centavos).
+    tipoCambio:
+      lineas
+        .filter((l) => l.tipoCambio !== null)
+        .sort((a, b) => b.cotizacion.lista - a.cotizacion.lista)[0]?.tipoCambio ?? null,
   };
 }

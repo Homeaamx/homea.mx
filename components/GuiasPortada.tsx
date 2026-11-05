@@ -31,6 +31,13 @@ const ICONOS: Record<string, React.ReactNode> = {
       <path d="M8.4 12h7.2M8.4 17h7.2" />
     </>
   ),
+  // Humidor para puros (2026-11-04): un puro con su anillo y el humo.
+  "humidor-para-puros": (
+    <>
+      <rect x="3" y="13.5" width="15.5" height="3.6" rx="1.8" />
+      <path d="M7 13.5v3.6M8.6 13.5v3.6M19.8 11.2c-.9-1 .9-1.9 0-3s.9-2 0-3" />
+    </>
+  ),
   frigobares: (
     <>
       <rect x="5" y="5" width="14" height="15" rx="1" />

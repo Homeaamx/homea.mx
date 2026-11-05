@@ -18,8 +18,8 @@ import TipoGrid, { ejeDeGrupo } from "@/components/TipoGrid";
 import PlpFiltro from "@/components/PlpFiltro";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppCta from "@/components/WhatsAppCta";
-import { productosDeColeccion } from "@/lib/shopify/catalogoVivo";
-import { EXTRAS_DE_TIPO, tipoDePlp } from "@/lib/shopify/coleccionesWeb";
+import { tipoDePlp } from "@/lib/shopify/coleccionesWeb";
+import { productosDeTipo } from "@/lib/shopify/listados";
 import { conteoHtml, panelFiltrosHtml, rejillaHtml } from "@/lib/shopify/htmlCatalogo";
 import { obtenerTipoCambio } from "@/lib/tipoCambio";
 
@@ -88,23 +88,7 @@ export default async function Page({ params }: Params) {
   // Catálogo vivo de Shopify (colección automática del tipo). Vacío → plantilla
   // con placeholders, como antes de la carga.
   const tw = tipoDePlp(categoria, subcategoria, tipo);
-  const productos = tw
-    ? (
-        await Promise.all([
-          productosDeColeccion(tw.coleccion),
-          ...(EXTRAS_DE_TIPO[tw.tipo] ?? []).map((e) =>
-            productosDeColeccion(e.coleccion).then((l) =>
-              l
-                .filter((p) => (p.filtros[e.filtro.clave] ?? []).includes(e.filtro.valor))
-                .map((p) => ({
-                  ...p,
-                  filtros: Object.fromEntries(Object.entries(p.filtros).filter(([k]) => !e.quitar?.includes(k))),
-                })),
-            ),
-          ),
-        ])
-      ).flat()
-    : [];
+  const productos = tw ? await productosDeTipo(categoria, subcategoria, tipo) : [];
   const tc = productos.length ? await obtenerTipoCambio() : null;
   const hero = HERO_PLP[`${categoria}/${subcategoria}/${tipo}`];
   const tipos = sub2.filtros ?? [];
@@ -224,7 +208,7 @@ export default async function Page({ params }: Params) {
                 </select>
               </div>
               {productos.length && tc ? (
-                <div className="plp-grid" dangerouslySetInnerHTML={{ __html: rejillaHtml(productos, tc) }} />
+                <div className="plp-grid" dangerouslySetInnerHTML={{ __html: rejillaHtml(productos, tc, { lista: base }) }} />
               ) : (
                 <>
               <div className="plp-grid">

@@ -20,7 +20,7 @@ import { cookies } from "next/headers";
 
 import { IVA, productoPorSku } from "@/lib/catalogo";
 import { decidirCompra, montoAlto } from "@/lib/reglas/reglaMarca";
-import { obtenerTipoCambio, type TipoCambio } from "@/lib/tipoCambio";
+import { fechaLarga, obtenerTipoCambio, type TipoCambio } from "@/lib/tipoCambio";
 
 import type { Carrito, LineaCarrito } from "./tipos";
 
@@ -120,6 +120,7 @@ async function armar(lineas: LineaSim[]): Promise<Carrito> {
     subtotalConIva: { monto: centavos(subtotal * (1 + IVA)), moneda },
     ahorroConIva: { monto: 0, moneda },
     tipoCambio: resueltas.some((l) => l.tipoCambio !== null) ? tc.valor : null,
+    tipoCambioDia: tc.fecha ? fechaLarga(tc.fecha) : null,
   };
 }
 

@@ -38,6 +38,112 @@ export interface DatosCliente {
 export const DATOS_VACIOS: DatosCliente = { nombre: "", telefono: "", ciudad: "", cp: "", correo: "", proyecto: "" };
 
 /**
+ * Proveedores de correo que más usan los clientes. Un dominio a 1 o 2 letras de
+ * uno de estos (jotmail.com, gmial.com, gmail.con, outlok.com) casi seguro es un
+ * error de dedo y se pide corregirlo. Los que no se parecen a ninguno, como un
+ * correo de empresa (homea.mx), pasan sin revisión (Carla, 2026-11-05: no
+ * trabar al usuario).
+ */
+const PROVEEDORES = [
+  "gmail.com", "hotmail.com", "outlook.com", "yahoo.com", "icloud.com", "live.com",
+  "hotmail.es", "outlook.es", "yahoo.com.mx", "live.com.mx", "hotmail.com.mx", "outlook.com.mx",
+  "prodigy.net.mx", "msn.com", "aol.com", "protonmail.com",
+];
+/** Dominios reales que quedan cerca de un proveedor y no deben marcarse. */
+const REALES = new Set([
+  ...PROVEEDORES, "mail.com", "gmx.com", "gmx.net", "me.com", "mac.com", "ymail.com", "yahoo.es",
+  "live.mx", "proton.me", "zoho.com", "email.com", "hotmail.fr", "outlook.fr", "gmail.es",
+]);
+/** Terminaciones mal escritas de ".com" (empresa.con, empresa.cmo…). */
+const TERMINACIONES_TYPO = new Set(["con", "cmo", "cpm", "vom", "xom", "comm", "coom", "cim", "clm", "ocm", "cm", "om"]);
+
+/** Distancia de edición (con transposición): cuántas letras hay que cambiar. */
+function distancia(a: string, b: string): number {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const c = a[i - 1] === b[j - 1] ? 0 : 1;
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + c);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+    }
+  }
+  return d[a.length][b.length];
+}
+
+/** Dominio correcto si `dominio` parece un error de dedo de un proveedor conocido; null si se ve bien. */
+function sugerenciaDominio(dominio: string): string | null {
+  if (REALES.has(dominio)) return null;
+  if (dominio === "gmail.com.mx") return "gmail.com";
+  let mejor: string | null = null;
+  let menor = 3;
+  for (const p of PROVEEDORES) {
+    const dist = distancia(dominio, p);
+    if (dist < menor) { menor = dist; mejor = p; }
+  }
+  if (mejor && menor <= (dominio.length >= 9 ? 2 : 1)) return mejor;
+  // Cualquier dominio (también de empresa) con ".com" mal escrito: empresa.con → empresa.com.
+  const partes = dominio.split(".");
+  if (TERMINACIONES_TYPO.has(partes[partes.length - 1])) return [...partes.slice(0, -1), "com"].join(".");
+  return null;
+}
+
+/** Solo los dígitos de un teléfono, sin la lada internacional de México (52 / 521). */
+function digitosTelefono(t: string): string {
+  const d = t.replace(/\D/g, "");
+  if (d.length === 13 && d.startsWith("521")) return d.slice(3);
+  if (d.length === 12 && d.startsWith("52")) return d.slice(2);
+  return d;
+}
+
+/**
+ * Errores de los datos del cliente de la pre-cotización (Carla, 2026-11-05: un
+ * teléfono completo y un correo real antes de avanzar). Devuelve un mensaje por
+ * campo con problema; vacío = todo bien. Nombre y teléfono son obligatorios; los
+ * opcionales solo se revisan si traen algo.
+ */
+export function erroresDeDatos(d: DatosCliente): Partial<Record<keyof DatosCliente, string>> {
+  const e: Partial<Record<keyof DatosCliente, string>> = {};
+
+  const nombre = d.nombre.trim();
+  if (!nombre) e.nombre = "Escribe tu nombre.";
+  else if ((nombre.match(/\p{L}/gu) ?? []).length < 3 || /[\d@_#$%*=<>{}[\]\\|/]/.test(nombre))
+    e.nombre = "Escribe tu nombre completo, solo con letras.";
+
+  const tel = d.telefono.trim();
+  const digitos = digitosTelefono(tel);
+  if (!tel) e.telefono = "Escribe tu teléfono.";
+  else if (/[^\d\s()+.-]/.test(tel) || digitos.length !== 10)
+    e.telefono = "Escribe un teléfono de 10 dígitos, por ejemplo 442 123 4567.";
+  else if (/^(\d)\1+$/.test(digitos) || "01234567890".includes(digitos) || "09876543210".includes(digitos))
+    e.telefono = "Revisa tu teléfono: parece incompleto o de prueba.";
+
+  const correo = d.correo.trim().toLowerCase();
+  if (correo) {
+    const [local = "", dominio = "", ...resto] = correo.split("@");
+    const forma =
+      !resto.length &&
+      /^[a-z0-9._%+-]+$/.test(local) &&
+      !/^\.|\.$|\.\./.test(local) &&
+      /^([a-z0-9-]+\.)+[a-z]{2,24}$/.test(dominio) &&
+      !/(^|\.)-|-(\.|$)/.test(dominio);
+    if (!forma) e.correo = "Revisa tu correo, por ejemplo nombre@gmail.com.";
+    else {
+      const sugerido = sugerenciaDominio(dominio);
+      if (sugerido) e.correo = `Revisa tu correo: ¿quisiste decir ${local}@${sugerido}?`;
+    }
+  }
+
+  const cp = d.cp.trim();
+  if (cp && !/^\d{5}$/.test(cp)) e.cp = "El código postal lleva 5 dígitos.";
+
+  const ciudad = d.ciudad.trim();
+  if (ciudad && ((ciudad.match(/\p{L}/gu) ?? []).length < 2 || /\d/.test(ciudad))) e.ciudad = "Escribe el nombre de tu ciudad.";
+
+  return e;
+}
+
+/**
  * Una partida de la pre-cotización, en la MONEDA ORIGINAL de la pieza y SIN IVA
  * (Carla, 2026-10-08: aquí el dólar no se convierte). `lista` = P/U antes del
  * descuento; `descuento` por unidad; importe = (lista − descuento) × cantidad.

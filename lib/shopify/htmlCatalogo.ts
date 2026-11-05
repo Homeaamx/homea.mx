@@ -21,11 +21,12 @@ import descuentosMarca from "@/data/descuentos-marca.json";
 import type { Decision } from "@/lib/reglas/reglaMarca";
 import type { TipoCambio } from "@/lib/tipoCambio";
 import { TONOS_ESTANDAR, type Tono } from "@/lib/coloresMarca";
-import type { ColorHermano } from "@/lib/coloresModelo";
+import { coloresDeModelo, muestraFiltroColor, type ColorHermano } from "@/lib/coloresModelo";
 import { IMAGEN_RESPALDO } from "@/lib/imagenRespaldo";
 
 import { TIPOS_WEB, esAccesorio, tileDePieza, tipoDePieza, tipoWeb } from "./coleccionesWeb";
 import { clasificarDimensiones } from "./dimensiones";
+import { otrosColores } from "./sugerencias";
 import {
   decisionDeCompra,
   precioPublico,
@@ -274,17 +275,17 @@ function subcategoriaDe(p: ProductoVivo): string {
   return tipoWeb(p.tipo)?.sub1.nombre ?? p.tipo;
 }
 
-export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string {
-  const precio = precioPublico(p, tc);
-  const decision = decisionDeCompra(p, precio);
-  const href = `/producto/${p.slug}`;
-  // Foto del aparato primero; los planos solo si no hay ninguna foto.
-  const img = p.imagenes.find((im) => !esImagenTecnica(im)) ?? p.imagenes[0];
-  const spec = lineaSpec(p);
+/** Foto de la tarjeta: la del aparato primero; los planos solo si no hay ninguna foto. */
+const fotoDeTarjeta = (p: ProductoVivo) => p.imagenes.find((im) => !esImagenTecnica(im)) ?? p.imagenes[0];
 
-  // Valores de filtro para public/catalogo.js (slugs separados por espacio).
+/**
+ * Datos de la tarjeta que leen los filtros y el orden de public/catalogo.js
+ * (slugs separados por espacio). Los llevan igual la tarjeta completa y la vacía.
+ */
+function atributosDeTarjeta(p: ProductoVivo, precio: PrecioPublico, orden: number): string {
   const atributos: string[] = [
     `data-cat-card`,
+    `data-sku="${esc(p.sku)}"`,
     `data-orden="${orden}"`,
     `data-precio="${precio.mxnEquivalente ?? precio.venta}"`,
     // Para ordenar por inventario (public/catalogo.js): 1 = en stock, 0 = bajo pedido.
@@ -299,6 +300,27 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
     if (clave === "compatible") continue;
     atributos.push(`data-fv-${clave}="${valores.map(slugValor).join(" ")}"`);
   }
+  atributos.push(`data-accion="${decisionDeCompra(p, precio).accion}"`);
+  return atributos.join(" ");
+}
+
+/**
+ * Tarjeta vacía (Carla, 2026-11-04: 50 por página): solo los datos de filtro y
+ * orden, sin foto ni textos. public/catalogo.js la cuenta y la filtra como a
+ * cualquier otra, y cuando entra en la página que se ve pide su contenido a
+ * /api/tarjetas. Va con `data-fuera`: oculta hasta que le toque. Sin foto a
+ * propósito (pesaba 0.3 MB en Cocina y Bar): si una hermana de color vacía hace
+ * falta para la vista previa, catalogo.js la pide en ese momento.
+ */
+export function tarjetaVaciaHtml(p: ProductoVivo, tc: TipoCambio, orden: number): string {
+  return `<a class="pcard pcard-vacia" href="/producto/${p.slug}" ${atributosDeTarjeta(p, precioPublico(p, tc), orden)} data-fuera tabindex="-1" aria-hidden="true"></a>`;
+}
+
+export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0, colores: ColorHermano[] = []): string {
+  const precio = precioPublico(p, tc);
+  const href = `/producto/${p.slug}`;
+  const img = fotoDeTarjeta(p);
+  const spec = lineaSpec(p);
 
   const imagen = img
     ? `<img width="${img.ancho}" height="${img.alto}" srcset="${srcsetCdn(img.url, img.ancho)}" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 34vw" loading="lazy" decoding="async" src="${cdn(img.url, 640)}" alt="${esc(img.alt)}">`
@@ -314,15 +336,73 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0): string 
   // precio final y tachado. La foto ocupa todo el recuadro (2026-10-08):
   // disponibilidad y corazón van en el renglón superior del cuerpo; sobre la
   // foto solo el % de descuento, en la esquina derecha (2026-10-29).
-  return `<a class="pcard" href="${href}" ${atributos.join(" ")} data-accion="${decision.accion}">
+  return `<a class="pcard" href="${href}" ${atributosDeTarjeta(p, precio, orden)}>
   <div class="imgw cutout">${imagen}${pct ? `<span class="pcard-desc figures">−${pct}%</span>` : ""}</div>
   <div class="body">
     <div class="pcard-top">${stock}<span class="pcard-acc">${botonAgregarTarjeta(p, precio, img)}<button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(spec.join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${img ? esc(cdn(img.url, 400)) : ""}" data-wl-href="${href}" data-wl-tipo="${esc(p.tipo)}" data-wl-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-wl-stock="${p.enStock ? 1 : 0}" data-wl-was="${precio.tachado ? esc(`$${dinero(precio.tachado)} ${precio.moneda}`) : ""}" data-wl-mxn="${precio.mxnEquivalente ?? precio.venta}" data-tip="Agregar a mi Wishlist" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button></span></div>
     <div class="pcard-head"><span class="brand">${esc(p.marca)}</span><div class="pcard-linea"><span class="pcard-serie">${esc(serie ?? "")}</span><span class="pcard-sku figures" title="${esc(p.sku)}">${esc(p.sku)}</span></div></div>
     <h3 class="pcard-name">${esc(nombre)}</h3>
+    ${coloresTarjetaHtml(colores)}
     ${precioTarjeta(precio)}
   </div>
 </a>`;
+}
+
+/** Círculo del tono junto a cada casilla del grupo Color (lib/coloresModelo.ts). */
+function circuloFiltro(clave: string, texto: string): string {
+  const fondo = clave === "color" ? muestraFiltroColor(texto) : null;
+  return fondo ? `<span class="fcolor" aria-hidden="true" style="--tono:${fondo}"></span>` : "";
+}
+
+/* ---------- Colores en la tarjeta ------------------------------------------ */
+
+/**
+ * Círculos de color en la tarjeta (Carla, 2026-11-03; probado en la tarja Blanco
+ * Ikon 402525 y llevado a todas las marcas): toda pieza con grupo "colores" en
+ * data/sugerencias-marca.json. Cada color sigue siendo su propia tarjeta y su
+ * círculo va marcado. Al pasar el cursor por otro círculo la foto cambia a ese
+ * color; al hacer clic la tarjeta se queda con ese color (foto, modelo, precio y
+ * enlace a su ficha). Lo hace public/catalogo.js con la tarjeta hermana de la
+ * misma rejilla (data-sku). Cómo sumar una marca: docs/COLORES-POR-MARCA.md.
+ */
+const MAX_COLORES_TARJETA = 5;
+
+/** Círculos de cada tarjeta de la rejilla, con los hermanos que vienen en el mismo listado. */
+function coloresDeRejilla(productos: ProductoVivo[]): Map<string, ColorHermano[]> {
+  const porSku = new Map(productos.map((p) => [p.sku, p]));
+  const comoColor = (x: ProductoVivo) => ({ sku: x.sku, slug: x.slug, titulo: x.titulo, acabado: x.filtros.color?.[0] });
+  const mapa = new Map<string, ColorHermano[]>();
+  for (const p of productos) {
+    const otros = otrosColores(p.sku);
+    if (!otros.length) continue;
+    const hermanos = otros.flatMap((s) => {
+      const h = porSku.get(s);
+      return h ? [comoColor(h)] : [];
+    });
+    const colores = coloresDeModelo(comoColor(p), hermanos);
+    if (colores.length > 1) mapa.set(p.sku, colores);
+  }
+  return mapa;
+}
+
+/**
+ * Todos los círculos en el orden fijo del modelo y "+N" (Carla, 2026-11-03: los
+ * que quepan en el ancho de la tarjeta). El HTML deja ver 5, el de la tarjeta
+ * siempre entre ellos; public/catalogo.js mide la fila y enseña los que caben.
+ */
+function coloresTarjetaHtml(colores: ColorHermano[]): string {
+  if (colores.length < 2) return "";
+  let vista = colores.slice(0, MAX_COLORES_TARJETA);
+  const actual = colores.find((c) => c.actual);
+  if (actual && !vista.includes(actual)) vista = [...vista.slice(0, MAX_COLORES_TARJETA - 1), actual];
+  const resto = colores.length - vista.length;
+  const circulos = colores
+    .map((c) =>
+      // Con teclado: Tab llega a cada círculo y Enter/Espacio aplica el color (catalogo.js).
+      `<span class="pcard-color${c.actual ? " is-active" : ""}" role="radio" tabindex="0" aria-checked="${c.actual}" data-color-sku="${esc(c.sku)}" data-tip="${esc(c.nombre)}" aria-label="${esc(c.nombre)}" style="--tono:${c.fondo}"${vista.includes(c) ? "" : " hidden"}></span>`,
+    )
+    .join("");
+  return `<div class="pcard-colores" role="radiogroup" aria-label="Color · ${colores.length} opciones">${circulos}<span class="pcard-colores-mas" aria-hidden="true"${resto ? "" : " hidden"}>+${resto}</span></div>`;
 }
 
 /** % de descuento entre el tachado y el precio final (entero); 0 si no hay. */
@@ -371,13 +451,44 @@ function ordenar(productos: ProductoVivo[], tc: TipoCambio): ProductoVivo[] {
   });
 }
 
-/** Rejilla de tarjetas (sin tarjeta de lead: Carla la quitó el 2026-10-09). */
-export function rejillaHtml(productos: ProductoVivo[], tc: TipoCambio): string {
-  const piezas = ordenar(productos, tc).map((p, i) => tarjetaHtml(p, tc, i));
+/** Piezas por página de los listados (Carla, 2026-11-04: 50 por defecto; selector 50 · 100 · 200). */
+export const POR_PAGINA = 50;
+
+/**
+ * Rejilla de tarjetas (sin tarjeta de lead: Carla la quitó el 2026-10-09).
+ *
+ * Con `lista` (la ruta del listado, p. ej. "/productos/cocina-y-bar"): solo las
+ * primeras POR_PAGINA van completas y el resto como tarjetas vacías. Antes se
+ * mandaban todas: Cocina y Bar pesaba 18.6 MB con 1,863 tarjetas. La ruta viaja
+ * en `data-cat-lista` para que public/catalogo.js pida a /api/tarjetas las de
+ * la página que se ve. Sin `lista` (/ofertas, que pagina a su manera) van todas.
+ */
+export function rejillaHtml(productos: ProductoVivo[], tc: TipoCambio, opciones: { lista?: string } = {}): string {
+  const colores = coloresDeRejilla(productos);
+  const { lista } = opciones;
+  const piezas = ordenar(productos, tc).map((p, i) =>
+    lista && i >= POR_PAGINA ? tarjetaVaciaHtml(p, tc, i) : tarjetaHtml(p, tc, i, colores.get(p.sku)),
+  );
+  if (lista) piezas.unshift(`<span hidden data-cat-lista="${esc(lista)}"></span>`);
   piezas.push(
     `<p class="plp-aviso" data-cat-vacio hidden style="grid-column:1/-1">Aún no hay piezas publicadas con esa combinación. <a class="arrow-link" href="/contacto">Pregúntanos por ellas <span class="ln"></span><span class="ar">→</span></a></p>`,
   );
   return piezas.join("\n");
+}
+
+/**
+ * Tarjetas completas de unas piezas de un listado, para /api/tarjetas: el mismo
+ * orden (data-orden) y los mismos círculos de color que si la página las hubiera
+ * pintado. Las piezas que no están en el listado no se devuelven.
+ */
+export function tarjetasDeListado(productos: ProductoVivo[], tc: TipoCambio, skus: string[]): Record<string, string> {
+  const pedidas = new Set(skus);
+  const colores = coloresDeRejilla(productos);
+  const out: Record<string, string> = {};
+  ordenar(productos, tc).forEach((p, i) => {
+    if (pedidas.has(p.sku)) out[p.sku] = tarjetaHtml(p, tc, i, colores.get(p.sku));
+  });
+  return out;
 }
 
 /** Precio con IVA en pesos (equivalente al FIX si la lista es en dólares): la cifra por la que se filtra. */
@@ -631,7 +742,7 @@ export function panelFiltrosHtml(
       .sort((a, b) => ordenValores(a[1].texto, b[1].texto))
       .map(
         ([k, c]) =>
-          `<label${c.tipo ? ` data-tipo="${esc(c.tipo)}"` : ""}><input type="checkbox" data-fk="${esc(d.clave)}" value="${esc(k)}"> <span class="flbl">${esc(c.texto)}</span> <span class="count figures">${c.n}</span></label>`,
+          `<label${c.tipo ? ` data-tipo="${esc(c.tipo)}"` : ""}><input type="checkbox" data-fk="${esc(d.clave)}" value="${esc(k)}"> ${circuloFiltro(d.clave, c.texto)}<span class="flbl">${esc(c.texto)}</span> <span class="count figures">${c.n}</span></label>`,
       )
       .join("");
     // Sin ningún color o acabado con piezas, el grupo entero espera a que lleguen.
@@ -1043,6 +1154,9 @@ export function fichaHtml(
 
   // Sugerencias de compra del catálogo; si no hay, similares del mismo tipo.
   const sugerencias = relacionados.modo === "sugerencias";
+  // Mismas tarjetas que en el catálogo, con sus círculos de color (2026-11-05). La
+  // pieza de la ficha cuenta como hermana: su color también sale en los círculos.
+  const coloresRelacionados = coloresDeRejilla([p, ...relacionados.productos]);
   const relacionadosHtml = relacionados.productos.length
     ? `<section class="sec"><div class="container">
   <div class="sec-head-row">
@@ -1054,7 +1168,7 @@ export function fichaHtml(
     ${!sugerencias && tw ? `<a class="arrow-link" href="${tw.ruta}">Ver ${esc(p.tipo)} <span class="ln"></span><span class="ar">→</span></a>` : ""}
   </div>
   <div class="grid-3" style="margin-top:64px">
-${relacionados.productos.map((r, i) => tarjetaHtml(r, tc, i)).join("\n")}
+${relacionados.productos.map((r, i) => tarjetaHtml(r, tc, i, coloresRelacionados.get(r.sku))).join("\n")}
   </div>
 </div></section>`
     : "";

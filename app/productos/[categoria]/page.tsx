@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 
 import MarketingPage from "@/components/MarketingPage";
 import { categoriaFile, categoriaSlugs, getMain, getTitle } from "@/lib/preview";
-import { productosDeColeccion, type ProductoVivo } from "@/lib/shopify/catalogoVivo";
-import { EXTRAS_DE_MACRO, tiposDeMacro } from "@/lib/shopify/coleccionesWeb";
+import { tiposDeMacro } from "@/lib/shopify/coleccionesWeb";
+import { productosDeMacro } from "@/lib/shopify/listados";
 import { opcionesPanelMacro } from "@/lib/shopify/panelMacro";
 import filtrosWeb from "@/data/filtros-web.json";
 import marcasPdf from "@/data/marcas-pdf-subcategorias.json";
@@ -45,16 +45,7 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
 async function slotsDeCatalogo(file: string, categoria: string): Promise<Record<string, string>> {
   const tipos = tiposDeMacro(categoria);
   if (!tipos.length) return {};
-  const extras = EXTRAS_DE_MACRO[`/productos/${categoria}`] ?? [];
-  const [propios, ...ajenos] = await Promise.all([
-    Promise.all(tipos.map((t) => productosDeColeccion(t.coleccion))).then((l) => l.flat()),
-    ...extras.map((e) =>
-      productosDeColeccion(e.coleccion).then((l) =>
-        l.filter((p: ProductoVivo) => (p.filtros[e.filtro.clave] ?? []).includes(e.filtro.valor)),
-      ),
-    ),
-  ]);
-  const productos = [...propios, ...ajenos.flat()];
+  const productos = await productosDeMacro(categoria);
   // Macros de una sola colección con el riel por filtro (Electrodomésticos
   // menores, Lavandería, Aire acondicionado): los tiles son casillas del grupo
   // de la tabla ("Tipo" / "Tipo de funcionamiento"), no un grupo aparte.
@@ -80,7 +71,7 @@ async function slotsDeCatalogo(file: string, categoria: string): Promise<Record<
         mosaico: riel.map((r) => ({ eje: eje.nombre, slug: r.slug, nombre: textoDe(r.slug) ?? r.nombre, valor: eje.valores?.[r.slug] })),
         tipos: tipos.map((t) => t.tipo),
       }),
-      ...(productos.length ? { "catalogo-grid": rejillaHtml(productos, tc) } : {}),
+      ...(productos.length ? { "catalogo-grid": rejillaHtml(productos, tc, { lista: `/productos/${categoria}` }) } : {}),
       "catalogo-conteo": conteoHtml(productos),
     };
   }
@@ -93,7 +84,7 @@ async function slotsDeCatalogo(file: string, categoria: string): Promise<Record<
       // Cocina y Bar general junta todo el catálogo: rangos más anchos (Carla, 2026-11-03).
       ...(categoria === "cocina-y-bar" ? { pasoPrecio: PASO_PRECIO_MACRO } : {}),
     }),
-    ...(productos.length ? { "catalogo-grid": rejillaHtml(productos, tc) } : {}),
+    ...(productos.length ? { "catalogo-grid": rejillaHtml(productos, tc, { lista: `/productos/${categoria}` }) } : {}),
     "catalogo-conteo": conteoHtml(productos),
   };
 }

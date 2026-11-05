@@ -59,6 +59,8 @@ export const TIPOS_WEB: TipoWeb[] = [
   { tipo: "Cavas de vino", coleccion: "cavas-de-vino", slugRiel: "cavas-de-vino", ruta: `${REFRI.ruta}?tipo=cavas-de-vino`, macro: COCINA, sub1: REFRI },
   // Colecciones creadas y publicadas al canal Headless el 2026-10-07 (aún sin piezas).
   { tipo: "Centros de bebida", coleccion: "centros-de-bebida", slugRiel: "centros-de-bebida", ruta: `${REFRI.ruta}?tipo=centros-de-bebida`, macro: COCINA, sub1: REFRI },
+  // Humidor para puros: tipo nuevo de Refrigeración tras Centros de bebida (Carla, 2026-11-04; Benessi BKHUM24).
+  { tipo: "Humidor para puros", coleccion: "humidor-para-puros", slugRiel: "humidor-para-puros", ruta: `${REFRI.ruta}?tipo=humidor-para-puros`, macro: COCINA, sub1: REFRI },
   { tipo: "Frigobares", coleccion: "frigobares", slugRiel: "frigobares", ruta: `${REFRI.ruta}?tipo=frigobares`, macro: COCINA, sub1: REFRI },
   { tipo: "Máquinas de hielo", coleccion: "maquinas-de-hielo", slugRiel: "maquinas-de-hielo", ruta: `${REFRI.ruta}?tipo=maquinas-de-hielo`, macro: COCINA, sub1: REFRI },
   { tipo: "Cajones refrigerantes", coleccion: "cajones-refrigerantes", slugRiel: "cajones-refrigerantes", ruta: `${REFRI.ruta}?tipo=cajones-refrigerantes`, macro: COCINA, sub1: REFRI },

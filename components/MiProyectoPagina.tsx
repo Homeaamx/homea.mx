@@ -46,6 +46,8 @@ export default function MiProyectoPagina() {
   const n = carrito?.cantidadTotal ?? 0;
   const vacio = cargado && lineas.length === 0;
   const seCotiza = carrito?.modo === "cotizacion";
+  // Tipo de cambio de un día anterior (Carla, 2026-11-05): mismo cierre con un solo botón (Pagar abre el aviso), y el título dice por qué falta un paso.
+  const tcVencido = carrito?.bloqueo === "tc-vencido";
 
   return (
     <div data-mi-proyecto>
@@ -195,6 +197,10 @@ export default function MiProyectoPagina() {
                       <>
                         Se cierra <i>con un ejecutivo</i>.
                       </>
+                    ) : tcVencido ? (
+                      <>
+                        Casi listo para <i>pagar</i>.
+                      </>
                     ) : (
                       <>
                         Todo listo para <i>pagar</i>.
@@ -204,7 +210,9 @@ export default function MiProyectoPagina() {
                   <p className="sel-aside-sub">
                     {seCotiza
                       ? "Una o más piezas deben revisarse detenidamente, así que el proyecto completo se envía a un ejecutivo de ventas con tu pre-cotización."
-                      : "Todas las piezas se pueden pagar en línea. Envío y facturación se confirman al pagar."}
+                      : tcVencido
+                        ? "Tus piezas en dólares necesitan el tipo de cambio de hoy. Un ejecutivo te lo confirma para que puedas completar tu compra."
+                        : "Todas las piezas se pueden pagar en línea. Envío y facturación se confirman al pagar."}
                   </p>
                   <h4 className="sel-aside-h">
                     Resumen del <i>pedido</i>.

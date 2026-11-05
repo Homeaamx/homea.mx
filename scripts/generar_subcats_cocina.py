@@ -18,7 +18,7 @@ def P(slug):  # nombre de archivo de página de subcat.1
 MEGA = {
     "Refrigeración": ("refrigeracion", [
         ("refrigeradores", "Refrigeradores"), ("congeladores", "Congeladores"),
-        ("centros-de-bebida", "Centros de bebida"), ("frigobares", "Frigobares"),
+        ("centros-de-bebida", "Centros de bebida"), ("humidor-para-puros", "Humidor para puros"), ("frigobares", "Frigobares"),
         ("maquinas-de-hielo", "Máquinas de hielo"), ("cavas-de-vino", "Cavas de vino"),
         ("cajones-refrigerantes", "Cajones refrigerantes"), ("accesorios-refrigeracion", "Accesorios de refrigeración"),
     ]),
@@ -105,6 +105,7 @@ PAGES = [
          tiles=[("refrigeradores", "Refrigeradores", GG + "gaggenau-rb282705.png", ""),
                 ("congeladores", "Congeladores", None, ""),
                 ("centros-de-bebida", "Centros de bebida", None, ""),
+                ("humidor-para-puros", "Humidor para puros", "assets/photos/subcat-tiles/humidor-para-puros-benessi-bkhum24ss.webp", ""),
                 ("frigobares", "Frigobares", None, ""),
                 ("maquinas-de-hielo", "Máquinas de hielo", "assets/photos/maquina-de-hielo.png", ""),
                 ("cavas-de-vino", "Cavas de vino", None, ""),

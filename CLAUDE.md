@@ -88,6 +88,7 @@ Migramos de OXATIS → Next.js conservando el dominio `homea.mx`. El riesgo #1 e
 - `docs/PAGINAS-DE-MARCA.md` — `/marcas/<slug>`: una página por marca (77) desde `data/marcas.json`. Cómo agregar una marca y qué cambiar cuando llegue el catálogo.
 - `docs/ESTRATEGIA-IMAGENES.md` — dónde se almacenan las imágenes (producto→Shopify CDN, editoriales→Vercel/`next/image`), optimización de carga y **nomenclatura SEO de archivos** (descriptiva + trends de búsqueda).
 - `docs/GUIAS-BLOG-SHOPIFY.md` — **los artículos de Guías se escriben y publican en el blog "Guías" de Shopify** (2026-10-14): etiquetas que los ubican, URL que resulta, cómo se refrescan. 16 guías publicadas (una por subcategoría/macro).
+- `docs/COLORES-POR-MARCA.md` — círculos de color en tarjeta (hover cambia la foto, clic cambia la tarjeta), ficha y filtro Color. **Al cargar una marca con modelos en varios colores:** `scripts/grupos-color.py <marca> --aplicar` + muestras en `lib/coloresModelo.ts`.
 - `docs/PATRON-FICHAS-TIPO.md` — patrón "Planos de cocina": fichas de tipo de producto en Guías (diagrama de línea + hover puertas abiertas). Referencia: Refrigeradores. **Usar este patrón al definir los tipos de cada categoría nueva.**
 - `docs/FASE1-CONCEPTO-Y-SECCIONES.md` — concepto + arquitectura de secciones de la landing.
 - `docs/FASE1-ANALISIS-Y-SECCIONES.md` — análisis (auditoría+benchmark) + secciones por plantilla (7 plantillas).

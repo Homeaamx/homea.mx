@@ -9,7 +9,14 @@
 
 import { useMemo, useRef, useState } from "react";
 
-import { DATOS_VACIOS, folioDe, mensajeCotizacion, type DatosCliente, type PartidaCotizacion } from "@/lib/cotizacion";
+import {
+  DATOS_VACIOS,
+  erroresDeDatos,
+  folioDe,
+  mensajeCotizacion,
+  type DatosCliente,
+  type PartidaCotizacion,
+} from "@/lib/cotizacion";
 import type { Carrito } from "@/lib/shopify/tipos";
 import { whatsappHref } from "@/lib/whatsapp";
 
@@ -72,11 +79,26 @@ export default function PreCotizacionModal({ carrito, onCerrar }: Props) {
   const huella = JSON.stringify({ p, datos });
   const vigente = guardada && guardada.huella === huella ? guardada : null;
   const fechaIso = useMemo(() => new Date().toISOString(), []);
-  // Solo los campos obligatorios (nombre y teléfono) habilitan descargar y
-  // enviar; los opcionales pueden quedar vacíos (Carla, 2026-10-10). Sin
-  // validar formato: el cliente nos comparte el PDF por WhatsApp, así que el
-  // contacto llega de todos modos.
-  const listo = datos.nombre.trim() !== "" && datos.telefono.trim() !== "";
+  // Nombre y teléfono son obligatorios; los opcionales pueden quedar vacíos
+  // (Carla, 2026-10-10). Desde 2026-11-05 además se revisa la forma: teléfono de
+  // 10 dígitos, correo real, CP de 5 dígitos (lib/cotizacion.ts → erroresDeDatos).
+  // Cada error se enseña en rojo bajo su campo al salir de él o al intentar
+  // descargar o enviar; mientras haya alguno, no se avanza.
+  const errores = useMemo(() => erroresDeDatos(datos), [datos]);
+  const [tocados, setTocados] = useState<Set<keyof DatosCliente>>(() => new Set());
+  const [intento, setIntento] = useState(false);
+  const listo = Object.keys(errores).length === 0;
+  const visibles = Object.fromEntries(
+    Object.entries(errores).filter(([k]) => intento || tocados.has(k as keyof DatosCliente)),
+  ) as typeof errores;
+  /** Antes de descargar o enviar: si algo falta, se marca todo y se va al primer campo. */
+  function revisar(): boolean {
+    if (listo) return true;
+    setIntento(true);
+    const primero = (["nombre", "telefono", "ciudad", "cp", "correo"] as const).find((k) => errores[k]);
+    if (primero) document.querySelector<HTMLInputElement>(`.pc-modal input[data-campo="${primero}"]`)?.focus();
+    return false;
+  }
 
   /**
    * Guarda la pre-cotización como pedido borrador de Shopify (una sola vez por
@@ -124,6 +146,7 @@ export default function PreCotizacionModal({ carrito, onCerrar }: Props) {
 
   /** El navegador hace el PDF (Imprimir → Guardar como PDF) con el folio como nombre de archivo. */
   async function descargarPdf() {
+    if (!revisar()) return;
     suscribir();
     const g = await guardar();
     const folio = g?.folio ?? folioDe(p);
@@ -141,6 +164,7 @@ export default function PreCotizacionModal({ carrito, onCerrar }: Props) {
    * el navegador la bloquea) y se manda a WhatsApp en cuanto hay liga.
    */
   async function enviar() {
+    if (!revisar()) return;
     const ventana = window.open("", "_blank");
     medirWhatsapp("precotizacion_enviar");
     suscribir();
@@ -167,6 +191,8 @@ export default function PreCotizacionModal({ carrito, onCerrar }: Props) {
           datos={datos}
           editable
           onDatos={setDatos}
+          errores={visibles}
+          onSalir={(k) => setTocados((t) => (t.has(k) ? t : new Set(t).add(k)))}
         />
 
         <footer className="pc-acciones">
@@ -174,8 +200,10 @@ export default function PreCotizacionModal({ carrito, onCerrar }: Props) {
             Llena tus datos, descarga tu pre-cotización y envíala por WhatsApp. ¡Así de fácil!
           </p>
           {!listo ? (
-            <p className="pc-hint" role="status">
-              Llena los campos obligatorios (nombre y teléfono) para descargar o enviar.
+            <p className={`pc-hint${intento ? " is-error" : ""}`} role="status">
+              {intento
+                ? "Corrige los campos marcados en rojo para descargar o enviar tu pre-cotización."
+                : "Llena los campos obligatorios (nombre y teléfono) para descargar o enviar."}
             </p>
           ) : null}
           <label className="pc-boletin">
@@ -198,10 +226,10 @@ export default function PreCotizacionModal({ carrito, onCerrar }: Props) {
             </p>
           ) : null}
           <div className="pc-botones">
-            <button type="button" className="wl-wa pc-descargar" onClick={descargarPdf} disabled={!listo || ocupado}>
+            <button type="button" className={`wl-wa pc-descargar${listo ? "" : " is-incompleto"}`} onClick={descargarPdf} disabled={ocupado}>
               {ocupado ? "Registrando…" : "Descargar PDF"} <span className="ar">↓</span>
             </button>
-            <button type="button" className="btn btn-ghost pc-enviar" onClick={enviar} disabled={!listo || ocupado}>
+            <button type="button" className={`btn btn-ghost pc-enviar${listo ? "" : " is-incompleto"}`} onClick={enviar} disabled={ocupado}>
               Enviar por WhatsApp a un ejecutivo <span className="ar">→</span>
             </button>
             <button type="button" className="pc-volver" onClick={onCerrar}>

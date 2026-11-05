@@ -68,7 +68,13 @@ export type MotivoBloqueo =
   /** La moneda del carrito no cuadra con la del producto → riesgo de cobrar de menos. */
   | "moneda-incoherente"
   /** La tienda sigue con contraseña: el checkout redirige a /password. */
-  | "tienda-con-password";
+  | "tienda-con-password"
+  /**
+   * Las piezas en dólares traen el tipo de cambio de un día anterior (el cron no
+   * ha repreciado con el FIX de hoy): no se paga, se pide el precio al ejecutivo
+   * (Carla, 2026-11-04).
+   */
+  | "tc-vencido";
 
 export interface Carrito {
   id: string | null;
@@ -121,6 +127,14 @@ export interface Carrito {
    * bajo los totales para que el salto USD → MXN sea trazable (2026-10-09).
    */
   tipoCambio: number | null;
+  /**
+   * Día del FIX de `tipoCambio`, ya escrito ("4 de noviembre de 2026"). Lo pone
+   * el servidor al cerrar el proyecto (app/acciones/carrito.ts); null si no se
+   * pudo saber (sin Banxico, o un tipo de cambio que no es ningún FIX reciente).
+   */
+  tipoCambioDia?: string | null;
+  /** True si `tipoCambio` no es el FIX de hoy: el pago se bloquea con "tc-vencido". */
+  tipoCambioVencido?: boolean;
 }
 
 /** Aviso puntual de una operación (sin existencia, tope de stock, error de Shopify). */

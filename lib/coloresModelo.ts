@@ -24,8 +24,11 @@ const mitad = (a: string, b: string) => `linear-gradient(135deg, ${a} 0 50%, ${b
 const MUESTRAS: Record<string, string> = {
   // Metales y acabados de grifería
   "acero inoxidable": METAL,
+  inoxidable: METAL,
   "stainless steel": METAL,
   "acero cepillado": METAL,
+  // Panelable (Elica, Hoshizaki): lleva el panel de la cocina; chapa de madera.
+  panelable: "repeating-linear-gradient(100deg, #c9a585 0 3px, #b8936f 3px 5px, #cfad8e 5px 8px)",
   // Kraus: acero inoxidable con PVD negro (gunmetal), "… en Acero Inoxidable Negro".
   "acero inoxidable negro": "linear-gradient(135deg, #5c5c5c 0%, #2e2e2e 50%, #1a1a1a 100%)",
   "pvd steel": "linear-gradient(135deg, #e6e6e3 0%, #b3b3ae 45%, #dadad6 60%, #8f8f8a 100%)",
@@ -44,8 +47,12 @@ const MUESTRAS: Record<string, string> = {
   "bronce aceitado": "linear-gradient(135deg, #6a4c38 0%, #4a3426 55%, #2f2018 100%)",
   "bronce moca": "linear-gradient(135deg, #8a705c 0%, #6b5444 55%, #4c3a2e 100%)",
   "matte black": "#1d1d1d",
+  negro: "#1d1d1d",
+  negra: "#1d1d1d",
   "negro mate": "#222222",
   "negro brillante": "#0d0d0d",
+  // Benessi: frente de cristal negro (hornos, microondas y cafetera).
+  "cristal negro": "linear-gradient(135deg, #3a3a3a 0%, #111111 45%, #262626 60%, #050505 100%)",
   "plástico negro": "#262626",
   "chrome/coal black": mitad("#c9cdd0", "#1f1f1f"),
   "chrome/white": mitad("#c9cdd0", "#f4f4f2"),
@@ -60,6 +67,7 @@ const MUESTRAS: Record<string, string> = {
   "cloud white": "#f2f1ec",
   white: "#f4f4f2",
   blanco: "#f4f4f2",
+  blanca: "#f4f4f2",
   truffle: "#6b5c50",
   "volcano gray": "#6e6e6c",
   biscuit: "#e8dcc4",
@@ -78,6 +86,52 @@ const MUESTRAS: Record<string, string> = {
   "nero detalles dorados": mitad("#111111", "#c8a24a"),
   rosso: "#b3262b",
 };
+
+/**
+ * Círculo de cada valor del filtro Color (filtros.color, color base; Carla,
+ * 2026-11-03): en el panel de filtros de todas las categorías, aunque la pieza no
+ * tenga selector de color en su tarjeta o su ficha. Llave = valor sin acentos ni
+ * mayúsculas. Un valor nuevo sin círculo se ve sin él hasta sumarlo aquí.
+ */
+const MUESTRAS_FILTRO: Record<string, string> = {
+  "acero inoxidable": METAL,
+  "acero oscuro": OSCURO,
+  amarillo: "#f2c230",
+  azul: "#2b4c7e",
+  beige: "#e8dcc4",
+  blanco: "#f4f4f2",
+  bronce: "linear-gradient(135deg, #b08a5e 0%, #8a6640 50%, #6a4c2e 100%)",
+  cafe: "#5a4636",
+  cobre: "linear-gradient(135deg, #e0a27a 0%, #b87348 50%, #8f5532 100%)",
+  crema: "#efe6d2",
+  cristal: "linear-gradient(135deg, rgba(255,255,255,.95) 0%, rgba(196,214,220,.55) 45%, rgba(255,255,255,.9) 60%, rgba(170,192,200,.5) 100%)",
+  cromo: CROMO,
+  "cromo y blanco": mitad("#c9cdd0", "#f4f4f2"),
+  "cromo y negro": mitad("#c9cdd0", "#1f1f1f"),
+  dorado: "linear-gradient(135deg, #e8cf8a 0%, #c8a24a 50%, #a8842e 100%)",
+  gris: "#8e8e8b",
+  "gris oscuro": "#4a4a47",
+  marfil: "#efe6d2",
+  morado: "#6c4675",
+  naranja: "#e8692c",
+  negro: "#1d1d1d",
+  niquel: "linear-gradient(135deg, #ece8df 0%, #c8c3b8 45%, #e4e0d6 60%, #a49e92 100%)",
+  "oro rosa": "linear-gradient(135deg, #f0c4b0 0%, #d29a82 50%, #b07a62 100%)",
+  // Panelable: lleva el panel de la cocina; se pinta como chapa de madera.
+  panelable: "repeating-linear-gradient(100deg, #c9a585 0 3px, #b8936f 3px 5px, #cfad8e 5px 8px)",
+  plata: "linear-gradient(135deg, #ececec 0%, #c0c0c0 50%, #a2a2a2 100%)",
+  platino: "linear-gradient(135deg, #e6e4de 0%, #c0beb8 50%, #a09e98 100%)",
+  rojo: "#b3262b",
+  rosa: "#d9a3a8",
+  verde: "#4f6b4a",
+};
+
+const sinAcentos = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+
+/** Fondo del círculo de un valor del filtro Color; null si aún no tiene. */
+export function muestraFiltroColor(valor: string): string | null {
+  return MUESTRAS_FILTRO[sinAcentos(valor)] ?? null;
+}
 
 /** Palabras que acompañan al color en el título pero no lo distinguen. */
 const RELLENO = new Set(["silgranit", "en", "de", "con"]);

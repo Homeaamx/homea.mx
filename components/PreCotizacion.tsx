@@ -30,6 +30,10 @@ interface Props {
   datos: DatosCliente;
   editable?: boolean;
   onDatos?: (datos: DatosCliente) => void;
+  /** Mensajes en rojo bajo cada campo que hay que corregir (lib/cotizacion.ts → erroresDeDatos). */
+  errores?: Partial<Record<keyof DatosCliente, string>>;
+  /** Al salir de un campo: desde ahí se le enseña su error. */
+  onSalir?: (clave: keyof DatosCliente) => void;
 }
 
 const num = (n: number) =>
@@ -41,29 +45,43 @@ const miniatura = (url: string) =>
 
 const NOMBRE_MONEDA = { MXN: "Pesos mexicanos (MXN)", USD: "Dólares (USD)", MIXTA: "Mixta (MXN y USD)", "—": "—" } as const;
 
-export default function PreCotizacion({ folio, fechaIso, partidas, datos, editable = false, onDatos }: Props) {
+export default function PreCotizacion({ folio, fechaIso, partidas, datos, editable = false, onDatos, errores = {}, onSalir }: Props) {
   const fecha = new Date(fechaIso);
   const moneda = monedaDeCotizacion(partidas);
   const mixta = moneda === "MIXTA";
   const totales = totalesPorMoneda(partidas);
 
-  const campo = (clave: keyof DatosCliente, etiqueta: string, extra: Partial<React.InputHTMLAttributes<HTMLInputElement>> = {}) => (
-    <div className="pc-campo" key={clave}>
-      <span className="pc-lbl">{etiqueta}</span>
-      {editable ? (
-        <input
-          value={datos[clave]}
-          onChange={(ev) => onDatos?.({ ...datos, [clave]: ev.target.value })}
-          maxLength={80}
-          placeholder={extra.required ? "Obligatorio" : "Opcional"}
-          aria-required={extra.required ? true : undefined}
-          {...extra}
-        />
-      ) : (
-        <span className={`pc-val${datos[clave] ? "" : " is-vacio"}`}>{datos[clave] || "—"}</span>
-      )}
-    </div>
-  );
+  const campo = (clave: keyof DatosCliente, etiqueta: string, extra: Partial<React.InputHTMLAttributes<HTMLInputElement>> = {}) => {
+    const error = editable ? errores[clave] : undefined;
+    return (
+      <div className={`pc-campo${error ? " is-error" : ""}`} key={clave}>
+        <span className="pc-lbl">{etiqueta}</span>
+        {editable ? (
+          <span className="pc-entrada">
+            <input
+              value={datos[clave]}
+              onChange={(ev) => onDatos?.({ ...datos, [clave]: ev.target.value })}
+              onBlur={() => onSalir?.(clave)}
+              maxLength={80}
+              placeholder={extra.required ? "Obligatorio" : "Opcional"}
+              aria-required={extra.required ? true : undefined}
+              aria-invalid={error ? true : undefined}
+              aria-describedby={error ? `pc-error-${clave}` : undefined}
+              data-campo={clave}
+              {...extra}
+            />
+            {error ? (
+              <span className="pc-error" id={`pc-error-${clave}`} role="alert">
+                {error}
+              </span>
+            ) : null}
+          </span>
+        ) : (
+          <span className={`pc-val${datos[clave] ? "" : " is-vacio"}`}>{datos[clave] || "—"}</span>
+        )}
+      </div>
+    );
+  };
 
   return (
     <article className="pc" aria-label={`Pre-cotización ${folio}`}>
@@ -211,7 +229,7 @@ export default function PreCotizacion({ folio, fechaIso, partidas, datos, editab
         </section>
       ) : null}
 
-      <p className="pc-nota">Se le proporcionará un tipo de cambio vigente y tiempos de entrega estimados.</p>
+      <p className="pc-nota">Se te proporcionará un tipo de cambio vigente y tiempos de entrega estimados.</p>
     </article>
   );
 }

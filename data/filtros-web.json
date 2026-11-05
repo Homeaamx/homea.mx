@@ -1,5 +1,5 @@
 {
-  "_nota": "Orden y nombre visible de los filtros por Subcategoría 2 (= Tipo de producto en Shopify). Clave = metafield filtros.<clave>; \"marca\" = vendor, \"precio\" = precio. GENERADO desde FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx (OneDrive, columna E = orden propuesto) el 2026-10-06. Si cambia la tabla, se regenera. 2026-10-07: se añade filtros.bisagra (Bisagra / apertura) a refrigeración por indicación de Carla (prioritario en refrigeración y hornos). 2026-10-09: Bisagra / apertura también en Hornos y Microondas (hornos de velocidad), después de Diseño. 2026-10-12: se añade filtros.altura_ada (\"Altura\": Estándar / ADA) a Lavavajillas y a refrigeración (todas menos Accesorios), después de Ancho, por indicación de Carla. 2026-10-27: Microondas suma \"Tipo de instalación\" (Empotre · De cajón · De mesa · Sobre estufa; el de cajón lleva también Empotre) y \"Tipo de funcionamiento\" (solo Multifunción = horno + microondas; los convencionales van sin valor, porque Empotre / De cajón / De mesa / Sobre estufa ya lo implican) antes de Diseño, por indicación de Carla; Diseño se queda porque las fichas de Guías enlazan con diseno:*. 2026-10-27: Campanas suma los anchos 20\", 26\", 34\", 40\", 46\" y 72\" (catálogo Elica). 2026-10-28: anchos de Artisan (Asadores 26\"; Quemador lateral 14\"; Gabinetes 15, 17, 20, 26, 36 y 42\"), aprobados por Carla. 2026-10-29: Uso (Cocina / Exterior) en Tarjas y Accesorios de Tarjas, Exterior en Monomandos, 23\" en Gabinetes y 56\" en Asadores (Alfresco).",
+  "_nota": "Orden y nombre visible de los filtros por Subcategoría 2 (= Tipo de producto en Shopify). Clave = metafield filtros.<clave>; \"marca\" = vendor, \"precio\" = precio. GENERADO desde FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx (OneDrive, columna E = orden propuesto) el 2026-10-06. Si cambia la tabla, se regenera. 2026-10-07: se añade filtros.bisagra (Bisagra / apertura) a refrigeración por indicación de Carla (prioritario en refrigeración y hornos). 2026-10-09: Bisagra / apertura también en Hornos y Microondas (hornos de velocidad), después de Diseño. 2026-10-12: se añade filtros.altura_ada (\"Altura\": Estándar / ADA) a Lavavajillas y a refrigeración (todas menos Accesorios), después de Ancho, por indicación de Carla. 2026-10-27: Microondas suma \"Tipo de instalación\" (Empotre · De cajón · De mesa · Sobre estufa; el de cajón lleva también Empotre) y \"Tipo de funcionamiento\" (solo Multifunción = horno + microondas; los convencionales van sin valor, porque Empotre / De cajón / De mesa / Sobre estufa ya lo implican) antes de Diseño, por indicación de Carla; Diseño se queda porque las fichas de Guías enlazan con diseno:*. 2026-10-27: Campanas suma los anchos 20\", 26\", 34\", 40\", 46\" y 72\" (catálogo Elica). 2026-10-28: anchos de Artisan (Asadores 26\"; Quemador lateral 14\"; Gabinetes 15, 17, 20, 26, 36 y 42\"), aprobados por Carla. 2026-10-29: Uso (Cocina / Exterior) en Tarjas y Accesorios de Tarjas, Exterior en Monomandos, 23\" en Gabinetes y 56\" en Asadores (Alfresco). 2026-11-04: nuevo tipo \"Humidor para puros\" (Refrigeración, tras Centros de bebida; Benessi BKHUM24) con filtros de su ficha técnica; Cavas de vino suma ancho 36\" (Benessi BKFW36).",
   "subcategorias": {
     "Refrigeradores": [
       {
@@ -324,6 +324,101 @@
         ]
       }
     ],
+    "Humidor para puros": [
+      {
+        "nombre": "Marca",
+        "clave": "marca"
+      },
+      {
+        "nombre": "Precio",
+        "clave": "precio"
+      },
+      {
+        "nombre": "Tipo de instalación",
+        "clave": "instalacion",
+        "valores": [
+          "Empotrado"
+        ]
+      },
+      {
+        "nombre": "Diseño",
+        "clave": "diseno",
+        "valores": [
+          "Bajo cubierta"
+        ]
+      },
+      {
+        "nombre": "Puerta",
+        "clave": "puerta",
+        "valores": [
+          "Acero",
+          "Vidrio"
+        ]
+      },
+      {
+        "nombre": "Bisagra / apertura",
+        "clave": "bisagra"
+      },
+      {
+        "nombre": "Ancho",
+        "clave": "ancho",
+        "valores": [
+          "24\""
+        ]
+      },
+      {
+        "nombre": "Zonas de temperatura",
+        "clave": "zonas",
+        "valores": [
+          "1 zona",
+          "2 zonas"
+        ]
+      },
+      {
+        "nombre": "Nivel de ruido",
+        "clave": "ruido"
+      },
+      {
+        "nombre": "Color",
+        "clave": "color",
+        "valores": [
+          "Acero inoxidable",
+          "Panelable"
+        ]
+      },
+      {
+        "nombre": "Disponibilidad",
+        "clave": "disponibilidad",
+        "valores": [
+          "Bajo pedido",
+          "En stock"
+        ]
+      },
+      {
+        "nombre": "Garantía",
+        "clave": "garantia",
+        "valores": [
+          "1 año",
+          "2 años",
+          "3 años"
+        ]
+      },
+      {
+        "nombre": "Promoción",
+        "clave": "promocion",
+        "valores": [
+          "10%",
+          "15%",
+          "20%",
+          "25%",
+          "30%",
+          "35%",
+          "40%",
+          "50%",
+          "60%"
+        ]
+      }
+    ],
     "Frigobares": [
       {
         "nombre": "Marca",
@@ -597,7 +692,8 @@
           "15\"",
           "18\"",
           "24\"",
-          "30\""
+          "30\"",
+          "36\""
         ]
       },
       {

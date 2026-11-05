@@ -23,7 +23,7 @@ import { Fragment, type CSSProperties, type ReactElement } from "react";
 export const W = 560;
 export const H = 400;
 
-type Zona = "fresca" | "congelador" | "flex" | "bebidas" | "vino" | "cava" | "vinoteca" | "hielo" | "pared";
+type Zona = "fresca" | "congelador" | "flex" | "bebidas" | "vino" | "cava" | "vinoteca" | "hielo" | "pared" | "humidor";
 
 export interface Rect {
   x: number;
@@ -824,6 +824,7 @@ const PATRONES: Record<Zona, Objeto[][]> = {
   vinoteca: [],
   hielo: [],
   pared: [],
+  humidor: [],
 };
 
 const ANCHO: Record<Objeto, number> = { jarra: 15, frasco: 13, limones: 28, botella: 9, caja: 26, hielo: 24, lata: 8 };
@@ -1162,6 +1163,51 @@ function BodegaPared({ o }: { o: Rect }) {
 }
 
 /** Cavidad en perspectiva con repisas, contenido y luz. */
+/** Humidor para puros (Benessi BKHUM24, Carla 2026-11-04): interior de cedro,
+ *  tres charolas de nogal con frente de madera y puros acostados (anillo dorado),
+ *  y la franja de control con temperatura y humedad. */
+function Humidor({ o }: { o: Rect }) {
+  const control = 15;
+  const util = o.h - control - 6;
+  const charolas = 3;
+  const alto = util / charolas;
+  const largo = Math.min(o.w * 0.62, 92);
+  return (
+    <g>
+      <rect x={o.x} y={o.y} width={o.w} height={o.h} className="i-humidor-fondo" />
+      <rect x={o.x + 2} y={o.y + 4} width={o.w - 4} height={control - 4} className="i-control" />
+      <text x={o.x + o.w / 2} y={o.y + 12} textAnchor="middle" className="i-control-num">
+        16 °C
+      </text>
+      {Array.from({ length: charolas }, (_, c) => {
+        const base = o.y + control + 4 + (c + 1) * alto;
+        const filas = 2;
+        return (
+          <g key={c}>
+            {Array.from({ length: filas }, (_, f) => {
+              const y = base - 13 - f * 8;
+              const n = Math.max(2, Math.floor((o.w - 16) / (largo + 6)) + (f % 2));
+              return Array.from({ length: n }, (_, q) => {
+                const x = o.x + 8 + ((q + (f % 2) * 0.5) * (o.w - 16 - largo)) / Math.max(1, n - 0.5);
+                return (
+                  <g key={`${f}-${q}`}>
+                    <rect x={x} y={y} width={largo} height={6.4} rx={3.2} className="i-puro" />
+                    <rect x={x + largo * 0.18} y={y} width={4.5} height={6.4} className="i-anillo" />
+                    <line x1={x + 3} y1={y + 1.6} x2={x + largo - 3} y2={y + 1.6} className="i-puro-brillo" />
+                  </g>
+                );
+              });
+            })}
+            {/* Frente de la charola de nogal y su jaladera. */}
+            <rect x={o.x + 2} y={base - 4} width={o.w - 4} height={7} className="i-repisa-madera" />
+            <rect x={o.x + o.w / 2 - 9} y={base - 1.5} width={18} height={1.6} rx={0.8} className="i-control-luz" />
+          </g>
+        );
+      })}
+    </g>
+  );
+}
+
 function Cavidad({ r, n, cristal }: { r: Hueco; n: number; cristal?: boolean }) {
   const o = { x: r.x + 3, y: r.y + 3, w: r.w - 6, h: r.h - 6 };
   const dx = Math.max(7, Math.min(15, o.w * 0.1));
@@ -1171,7 +1217,7 @@ function Cavidad({ r, n, cristal }: { r: Hueco; n: number; cristal?: boolean }) 
   const crisper = r.crisper && o.h > 120 ? 46 : 0;
   const util = o.h - crisper - (crisper ? 4 : 0);
   const sinRepisas =
-    r.zona === "vino" || r.zona === "cava" || r.zona === "vinoteca" || r.zona === "hielo" || r.zona === "bebidas" || r.zona === "pared";
+    r.zona === "vino" || r.zona === "cava" || r.zona === "vinoteca" || r.zona === "hielo" || r.zona === "bebidas" || r.zona === "pared" || r.zona === "humidor";
   const niveles = sinRepisas ? 0 : Math.max(1, Math.round(util / 54));
   const repisas: number[] = Array.from({ length: niveles }, (_, k) => o.y + (util * (k + 1)) / niveles);
   const filas = PATRONES[r.zona];
@@ -1227,6 +1273,7 @@ function Cavidad({ r, n, cristal }: { r: Hueco; n: number; cristal?: boolean }) 
       {r.zona === "hielo" && <Hielo o={o} />}
       {r.zona === "bebidas" && <Bebidas o={o} dx={dx} />}
       {r.zona === "pared" && <BodegaPared o={o} />}
+      {r.zona === "humidor" && <Humidor o={o} />}
 
       {cosas}
       {repisas.map((ys, k) =>
@@ -2326,6 +2373,49 @@ const APARATOS: Record<string, Aparato> = {
       { x: 200, y: 300, hasta: 130, texto: "Certificado\npara exterior" },
     ],
     recorte: { x: 60, y: 60, w: 440, h: 330 },
+  },
+
+  // Humidor para puros (Carla, 2026-11-04; referencia Benessi BKHUM24 en
+  // artexa.com): bajo cubierta como Centros de bebida, puerta de cristal y
+  // charolas de nogal. Acero: marco de acero; Panelable: marco del mueble.
+  "humidor-empotrado": {
+    escena: "baja",
+    marmol: true,
+    panelable: true,
+    cuerpos: [{ x: 196, y: 150, w: 168, h: 226, zocloAcero: true }],
+    huecos: [{ x: 196, y: 150, w: 168, h: 214, zona: "humidor" }],
+    piezas: [puerta(196, 150, 168, 214, "l", { zona: "humidor", cristal: true, manija: "tubo", panelable: true })],
+    etiquetas: [
+      { x: 214, y: 128, hasta: 150, texto: "Bajo la cubierta:\n24″ de ancho" },
+      { x: 236, y: 250, hasta: 150, texto: "Charolas de nogal\ncon cierre suave" },
+      { x: 240, y: 371, hasta: 150, texto: "Ventila por\nel zoclo frontal" },
+    ],
+    recorte: { x: 70, y: 60, w: 420, h: 330 },
+  },
+  "humidor-acero": {
+    escena: "baja",
+    marmol: true,
+    cuerpos: [{ x: 196, y: 150, w: 168, h: 226, zocloAcero: true }],
+    huecos: [{ x: 196, y: 150, w: 168, h: 214, zona: "humidor" }],
+    piezas: [puerta(196, 150, 168, 214, "r", { zona: "humidor", cristal: true, manija: "tubo" })],
+    etiquetas: [
+      { x: 236, y: 190, hasta: 150, texto: "Marco de acero\ny cristal con filtro UV" },
+      { x: 236, y: 290, hasta: 150, texto: "Una zona de\n4 a 18 °C" },
+    ],
+    recorte: { x: 70, y: 60, w: 420, h: 330 },
+  },
+  "humidor-panelable": {
+    escena: "baja",
+    marmol: true,
+    panelFijo: true,
+    cuerpos: [{ x: 196, y: 150, w: 168, h: 226, zocloAcero: true }],
+    huecos: [{ x: 196, y: 150, w: 168, h: 214, zona: "humidor" }],
+    piezas: [puerta(196, 150, 168, 214, "r", { zona: "humidor", cristal: true, manija: "tubo", panelable: true })],
+    etiquetas: [
+      { x: 236, y: 190, hasta: 150, texto: "Marco del mismo\nmaterial del mueble" },
+      { x: 236, y: 290, hasta: 150, texto: "Los puros quedan\na la vista" },
+    ],
+    recorte: { x: 70, y: 60, w: 420, h: 330 },
   },
 
   // Cavas de vino · Diseño (Carla, 2026-10-19). Bajo cubierta reutiliza la

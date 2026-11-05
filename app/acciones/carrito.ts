@@ -40,6 +40,7 @@ import {
   quitarSimulado,
 } from "@/lib/shopify/simulado";
 import { CARRITO_VACIO, type Carrito, type ResultadoCarrito } from "@/lib/shopify/tipos";
+import { diaDelTipoCambio } from "@/lib/tipoCambio";
 import { whatsappHref } from "@/lib/whatsapp";
 
 /** Mensajes de la degradación: siempre explican QUÉ pasa y ofrecen salida. */
@@ -51,13 +52,30 @@ const SIN_SHOPIFY =
  * con el candado puesto, el `checkoutUrl` responde 302 → /password, así que
  * mostrarlo activo sería mandar al cliente a un callejón sin salida.
  */
-function aplicarEstadoCheckout(carrito: Carrito): Carrito {
+async function aplicarEstadoCheckout(carrito: Carrito): Promise<Carrito> {
   if (carrito.simulado || carrito.lineas.length === 0) return carrito;
   // Regla de compra (marca + monto + stock): un proyecto que se cotiza nunca
   // lleva checkoutUrl al navegador.
-  const cerrado = cerrarProyecto(carrito);
+  const cerrado = await fecharTipoCambio(cerrarProyecto(carrito));
+  // Tipo de cambio de un día anterior (Carla, 2026-11-04): no se paga; el
+  // ejecutivo le da el precio con el FIX de hoy. Va antes que el candado de la
+  // tienda para que el cliente sepa el motivo real.
+  if (cerrado.tipoCambioVencido && cerrado.modo === "checkout") {
+    return { ...cerrado, checkoutUrl: null, bloqueo: cerrado.bloqueo ?? "tc-vencido" };
+  }
   if (CHECKOUT_ABIERTO) return cerrado;
   return { ...cerrado, bloqueo: cerrado.bloqueo ?? "tienda-con-password" };
+}
+
+/** Día del tipo de cambio de las piezas en dólares y si ya no es el de hoy. */
+async function fecharTipoCambio(carrito: Carrito): Promise<Carrito> {
+  const piezas = carrito.lineas.flatMap((l) =>
+    l.tipoCambio !== null && l.cotizacion.unitario > 0 ? [{ tipoCambio: l.tipoCambio, usd: l.cotizacion.unitario }] : [],
+  );
+  if (!piezas.length) return carrito;
+  const { dia, vencido, tipoCambio } = await diaDelTipoCambio(piezas);
+  // Con una pieza vencida, el tipo de cambio que se enseña es el suyo: el mismo día que dice el aviso.
+  return { ...carrito, tipoCambio: tipoCambio ?? carrito.tipoCambio, tipoCambioDia: dia, tipoCambioVencido: vencido };
 }
 
 /** Plan B único para todos los fallos de Shopify. */
@@ -96,7 +114,7 @@ export async function obtenerCarrito(): Promise<ResultadoCarrito> {
   }
 
   try {
-    return { carrito: aplicarEstadoCheckout(await leerCarrito(id)) };
+    return { carrito: await aplicarEstadoCheckout(await leerCarrito(id)) };
   } catch (error) {
     if (error instanceof CarritoCaducado) {
       await olvidarCarrito();
@@ -160,7 +178,7 @@ export async function agregarAlCarrito(
     }
 
     if (carrito.id) await guardarIdCarrito(carrito.id);
-    return { carrito: aplicarEstadoCheckout(carrito) };
+    return { carrito: await aplicarEstadoCheckout(carrito) };
   } catch (error) {
     if (SIMULACION_PERMITIDA && (error instanceof ErrorShopify || error instanceof CarritoCaducado)) {
       const detalle = error instanceof ErrorShopify ? error.clase : "carrito-caducado";
@@ -187,7 +205,7 @@ export async function cambiarCantidad(
   }
 
   try {
-    return { carrito: aplicarEstadoCheckout(await cambiarCantidadLinea(id, idLinea, cantidad)) };
+    return { carrito: await aplicarEstadoCheckout(await cambiarCantidadLinea(id, idLinea, cantidad)) };
   } catch (error) {
     return degradar(error);
   }
@@ -201,7 +219,7 @@ export async function quitarDelCarrito(idLinea: string): Promise<ResultadoCarrit
   }
 
   try {
-    return { carrito: aplicarEstadoCheckout(await quitarLinea(id, idLinea)) };
+    return { carrito: await aplicarEstadoCheckout(await quitarLinea(id, idLinea)) };
   } catch (error) {
     return degradar(error);
   }

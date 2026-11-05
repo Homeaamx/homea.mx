@@ -221,7 +221,7 @@ export default async function MarcaPage({ params }: Params) {
                     <option value="pedido-primero">Inventario: de bajo pedido a stock</option>
                   </select>
                 </div>
-                <div className="plp-grid" dangerouslySetInnerHTML={{ __html: rejillaHtml(productos, tc) }} />
+                <div className="plp-grid" dangerouslySetInnerHTML={{ __html: rejillaHtml(productos, tc, { lista: `/marcas/${marca.slug}` }) }} />
               </div>
             </div>
           </div>
