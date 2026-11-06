@@ -10147,6 +10147,10 @@
    "PRF0024262A",
    "PRF0098393",
    "PRF0098394"
+  ],
+  "accesorios": [
+   "CFC0141725A",
+   "KIT0067590"
   ]
  },
  "PRF0098394": {
@@ -10154,6 +10158,10 @@
    "PRF0024262A",
    "PRF0098392",
    "PRF0098393"
+  ],
+  "accesorios": [
+   "CFC0141725A",
+   "KIT0067590"
   ]
  },
  "PRF0098393": {
@@ -10161,72 +10169,119 @@
    "PRF0024262A",
    "PRF0098392",
    "PRF0098394"
+  ],
+  "accesorios": [
+   "CFC0141725A",
+   "KIT0067590"
   ]
  },
  "PRF0157470": {
   "colores": [
    "PRF0157472",
    "PRF0157477"
+  ],
+  "accesorios": [
+   "CFC0141725AUL",
+   "CFC0141529A"
   ]
  },
  "PRF0157472": {
   "colores": [
    "PRF0157470",
    "PRF0157477"
+  ],
+  "accesorios": [
+   "CFC0141725AUL",
+   "CFC0141529A"
   ]
  },
  "PRF0157477": {
   "colores": [
    "PRF0157470",
    "PRF0157472"
+  ],
+  "accesorios": [
+   "CFC0141725AUL",
+   "CFC0141529A"
   ]
  },
  "PRF0156894": {
   "colores": [
    "PRF0156852"
+  ],
+  "accesorios": [
+   "KIT0167875"
   ]
  },
  "PRF0156852": {
   "colores": [
    "PRF0156894"
+  ],
+  "accesorios": [
+   "KIT0167875"
   ]
  },
  "PRF0158013": {
   "colores": [
    "PRF0158012"
+  ],
+  "accesorios": [
+   "KIT0167875"
   ]
  },
  "PRF0158012": {
   "colores": [
    "PRF0158013"
+  ],
+  "accesorios": [
+   "KIT0167875"
   ]
  },
  "PRF0157432": {
   "colores": [
    "PRF0157421",
    "PRF0157391"
+  ],
+  "accesorios": [
+   "CFC0141725AUL"
   ]
  },
  "PRF0157421": {
   "colores": [
    "PRF0157432",
    "PRF0157391"
+  ],
+  "accesorios": [
+   "CFC0141725AUL"
   ]
  },
  "PRF0157391": {
   "colores": [
    "PRF0157432",
    "PRF0157421"
+  ],
+  "accesorios": [
+   "CFC0141725AUL"
   ]
  },
  "PRF0202699": {
   "colores": [
    "PRF0195484"
+  ],
+  "accesorios": [
+   "PRF0140695A",
+   "KIT0203069",
+   "KIT0203071"
   ]
  },
  "PRF0195484": {
   "colores": [
    "PRF0202699"
+  ],
+  "accesorios": [
+   "PRF0140695A",
+   "KIT0203030",
+   "KIT0203029"
   ]
  },
  "PRF0200023": {
@@ -10252,11 +10307,23 @@
  "PRF0202757": {
   "colores": [
    "PRF0198876"
+  ],
+  "accesorios": [
+   "PRF0141607A",
+   "PRF0168092",
+   "KIT0203068",
+   "KIT0203070"
   ]
  },
  "PRF0198876": {
   "colores": [
    "PRF0202757"
+  ],
+  "accesorios": [
+   "PRF0141607A",
+   "PRF0168092",
+   "KIT0203059",
+   "KIT0203032"
   ]
  },
  "PRF0199867": {
@@ -10272,21 +10339,45 @@
  "PRF0129429": {
   "colores": [
    "PRF0206409"
+  ],
+  "accesorios": [
+   "CFC0140088",
+   "KIT01889",
+   "KIT01921",
+   "KIT0121394"
   ]
  },
  "PRF0206409": {
   "colores": [
    "PRF0129429"
+  ],
+  "accesorios": [
+   "CFC0140088",
+   "KIT01889",
+   "KIT01921",
+   "KIT0121394"
   ]
  },
  "PRF0120352A": {
   "colores": [
    "PRF0120354A"
+  ],
+  "accesorios": [
+   "CFC0140088",
+   "KIT01889",
+   "KIT01921",
+   "KIT0121394"
   ]
  },
  "PRF0120354A": {
   "colores": [
    "PRF0120352A"
+  ],
+  "accesorios": [
+   "CFC0140088",
+   "KIT01889",
+   "KIT01921",
+   "KIT0121394"
   ]
  },
  "RSG36BLP": {
@@ -10766,6 +10857,10 @@
    "PRF0098392",
    "PRF0098393",
    "PRF0098394"
+  ],
+  "accesorios": [
+   "CFC0141725A",
+   "KIT0067590"
   ]
  },
  "KIT0203070": {
@@ -10808,18 +10903,882 @@
    "KIT0203069"
   ]
  },
- "CWE19SP4NW9": {
-  "colores": [
-   "CWE19SP2NS9",
-   "CWE19SP3ND9"
-  ],
+ "PRF0195202": {
   "accesorios": [
-   "CXMA3H3PNSS",
-   "CXMA3H3PNBZ",
-   "CXMA3H3PNBT",
-   "CXMA3H3PNCU",
-   "CXMA3H3PNFB",
-   "CXMA3H3PNCG"
+   "KIT0198147",
+   "KIT0198146",
+   "KIT0198148",
+   "KIT0154387",
+   "KIT0153054",
+   "KIT0167875"
+  ]
+ },
+ "PRF0195332": {
+  "accesorios": [
+   "KIT0198147",
+   "KIT0198146",
+   "KIT0198148",
+   "KIT0154387",
+   "KIT0153054",
+   "KIT0167875"
+  ]
+ },
+ "PRF0092333A": {
+  "accesorios": [
+   "CFC0162221",
+   "CFC0140343"
+  ]
+ },
+ "PRF0095073A": {
+  "accesorios": [
+   "CFC0162221",
+   "CFC0140343"
+  ]
+ },
+ "PRF0097676A": {
+  "accesorios": [
+   "CFC0162221",
+   "CFC0140343"
+  ]
+ },
+ "PRF0097708A": {
+  "accesorios": [
+   "CFC0162221",
+   "CFC0140343"
+  ]
+ },
+ "PRF0151809": {
+  "accesorios": [
+   "CFC0140090",
+   "KIT0112772"
+  ]
+ },
+ "PRF0157487": {
+  "accesorios": [
+   "CFC0141725AUL",
+   "CFC0141529A"
+  ]
+ },
+ "PRF0157462": {
+  "accesorios": [
+   "CFC0141725AUL",
+   "CFC0141529A"
+  ]
+ },
+ "PRF0157449": {
+  "accesorios": [
+   "CFC0141725AUL"
+  ]
+ },
+ "PRF0157412": {
+  "accesorios": [
+   "CFC0141725AUL"
+  ]
+ },
+ "PRF0157407": {
+  "accesorios": [
+   "CFC0141725AUL"
+  ]
+ },
+ "PRF0181016": {
+  "accesorios": [
+   "PRF0141607A",
+   "PRF0168092",
+   "KIT0182782",
+   "KIT0182781"
+  ]
+ },
+ "PRF0181015": {
+  "accesorios": [
+   "PRF0140695A",
+   "KIT0182784",
+   "KIT0182783"
+  ]
+ },
+ "PRF0181014": {
+  "accesorios": [
+   "PRF0168019",
+   "PRF0140694A",
+   "KIT0182786",
+   "KIT0182785"
+  ]
+ },
+ "PRF0181008": {
+  "accesorios": [
+   "PRF0173794",
+   "KIT0182788",
+   "KIT0182787"
+  ]
+ },
+ "PRF0140693A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0205342",
+   "KIT0192765",
+   "KIT0195736",
+   "KIT0192763",
+   "KIT0209305"
+  ]
+ },
+ "PRF0141607A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0205342",
+   "KIT0192765",
+   "KIT0195736",
+   "KIT0192763",
+   "KIT0209305"
+  ]
+ },
+ "PRF0168092": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0205342",
+   "KIT0192765",
+   "KIT0195736",
+   "KIT0192763",
+   "KIT0209305"
+  ]
+ },
+ "PRF0140695A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0205342",
+   "KIT0192765",
+   "KIT0195736",
+   "KIT0192763",
+   "KIT0209305"
+  ]
+ },
+ "PRF0140696A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0205342",
+   "KIT0192765",
+   "KIT0195736",
+   "KIT0192763",
+   "KIT0209305"
+  ]
+ },
+ "PRF0190021": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0205342",
+   "KIT0192765",
+   "KIT0195736",
+   "KIT0192763",
+   "KIT0209305"
+  ]
+ },
+ "PRF0168019": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0205342",
+   "KIT0192765",
+   "KIT0195736",
+   "KIT0192763",
+   "KIT0209305"
+  ]
+ },
+ "PRF0140694A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0205342",
+   "KIT0192765",
+   "KIT0195736",
+   "KIT0192763",
+   "KIT0209305"
+  ]
+ },
+ "PRF0173794": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0205342",
+   "KIT0192765",
+   "KIT0195736",
+   "KIT0192763",
+   "KIT0209305"
+  ]
+ },
+ "PRF0190022": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0205342",
+   "KIT0192765",
+   "KIT0195736",
+   "KIT0192763",
+   "KIT0209305"
+  ]
+ },
+ "PRF0195422": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0205342",
+   "KIT0192765",
+   "KIT0195736",
+   "KIT0192763",
+   "KIT0209305"
+  ]
+ },
+ "PRF0190023": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0205342",
+   "KIT0192765",
+   "KIT0195736",
+   "KIT0192763",
+   "KIT0209305"
+  ]
+ },
+ "PRF0195408": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0205342",
+   "KIT0192765",
+   "KIT0195736",
+   "KIT0192763",
+   "KIT0209305"
+  ]
+ },
+ "PRF0137940A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0100317",
+   "KIT0192765",
+   "KIT0209305"
+  ]
+ },
+ "PRF0137941A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0100317",
+   "KIT0192765",
+   "KIT0209305"
+  ]
+ },
+ "PRF0142550A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0145610",
+   "KIT0192765",
+   "KIT0209305"
+  ]
+ },
+ "PRF0142551A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0145610",
+   "KIT0192765",
+   "KIT0209305"
+  ]
+ },
+ "PRF0139495A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0154387",
+   "KIT02158",
+   "KIT02161",
+   "KIT0192765",
+   "KIT0142867",
+   "KIT0209305"
+  ]
+ },
+ "PRF0139334A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0154387",
+   "KIT02159",
+   "KIT02160",
+   "KIT0192765",
+   "KIT0142864",
+   "KIT0209305"
+  ]
+ },
+ "PRF0135517A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT02785",
+   "KIT01936",
+   "KIT0192759",
+   "KIT0192767",
+   "KIT0192765",
+   "KIT0209305"
+  ]
+ },
+ "PRF0137788A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT02785",
+   "KIT01936",
+   "KIT0192759",
+   "KIT0192767",
+   "KIT0192765",
+   "KIT0209305"
+  ]
+ },
+ "PRF0137852A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT02785",
+   "KIT01936",
+   "KIT0192759",
+   "KIT0192767",
+   "KIT0192765",
+   "KIT0209305"
+  ]
+ },
+ "PRF0152005A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT02785",
+   "KIT01936",
+   "KIT0192759",
+   "KIT0192767",
+   "KIT0192765",
+   "KIT0209305"
+  ]
+ },
+ "PRF0142453A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0146881",
+   "KIT0184907",
+   "KIT0192759",
+   "KIT0192767",
+   "KIT0192765",
+   "KIT0209305"
+  ]
+ },
+ "PRF0142452A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT0146881",
+   "KIT0184907",
+   "KIT0192759",
+   "KIT0192767",
+   "KIT0192765",
+   "KIT0209305"
+  ]
+ },
+ "PRF0140012A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT02160",
+   "KIT02159",
+   "KIT0192765",
+   "KIT0142864",
+   "KIT0209305"
+  ]
+ },
+ "PRF0140117A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT02161",
+   "KIT02158",
+   "KIT0192765",
+   "KIT0142867",
+   "KIT0209305"
+  ]
+ },
+ "PRF0140246A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT02623",
+   "KIT02622",
+   "KIT0192765",
+   "KIT0142868",
+   "KIT0209305"
+  ]
+ },
+ "PRF0140247A": {
+  "accesorios": [
+   "KIT0153054",
+   "KIT0179547",
+   "KIT0154387",
+   "KIT0179549",
+   "KIT02165",
+   "KIT02164",
+   "KIT0192765",
+   "KIT0142870",
+   "KIT0209305"
+  ]
+ },
+ "PRF0147397A": {
+  "accesorios": [
+   "KIT0156655",
+   "KIT0153054",
+   "KIT0154387",
+   "KIT0153304",
+   "KIT0145610",
+   "KIT0156645",
+   "KIT0156637"
+  ]
+ },
+ "PRF0147396A": {
+  "accesorios": [
+   "KIT0156655",
+   "KIT0153054",
+   "KIT0154387",
+   "KIT0156641",
+   "KIT0145610",
+   "KIT0153305",
+   "KIT0156649"
+  ]
+ },
+ "PRF0135457B": {
+  "accesorios": [
+   "KIT02773",
+   "KIT02770"
+  ]
+ },
+ "PRF0139570A": {
+  "accesorios": [
+   "KIT0141924"
+  ]
+ },
+ "PRF0142693A": {
+  "accesorios": [
+   "KIT0141924"
+  ]
+ },
+ "PRF0143191A": {
+  "accesorios": [
+   "KIT0100317",
+   "KIT02665"
+  ]
+ },
+ "PRF0143195A": {
+  "accesorios": [
+   "KIT0100317",
+   "KIT02665"
+  ]
+ },
+ "PRF0143098A": {
+  "accesorios": [
+   "KIT02785",
+   "KIT0141925"
+  ]
+ },
+ "PRF0143099A": {
+  "accesorios": [
+   "KIT02785",
+   "KIT0141925"
+  ]
+ },
+ "PRF0135050A": {
+  "accesorios": [
+   "KIT02785",
+   "KIT0102875"
+  ]
+ },
+ "PRF0135052A": {
+  "accesorios": [
+   "KIT02785",
+   "KIT0102875"
+  ]
+ },
+ "PRF0138662A": {
+  "accesorios": [
+   "KIT02762",
+   "KIT02766"
+  ]
+ },
+ "PRF0138663A": {
+  "accesorios": [
+   "KIT02762",
+   "KIT02766"
+  ]
+ },
+ "PRF0187463A": {
+  "accesorios": [
+   "KIT02773",
+   "KIT02770"
+  ]
+ },
+ "PRF0187464A": {
+  "accesorios": [
+   "KIT02774",
+   "KIT02770"
+  ]
+ },
+ "PRF0131095": {
+  "accesorios": [
+   "KIT02770"
+  ]
+ },
+ "PRF0135371": {
+  "accesorios": [
+   "KIT0100317"
+  ]
+ },
+ "PRF0160634": {
+  "accesorios": [
+   "CFC0038668",
+   "DF01EA"
+  ]
+ },
+ "PRF0156318": {
+  "accesorios": [
+   "CFC0038668",
+   "DF01EA"
+  ]
+ },
+ "PRF0159311": {
+  "accesorios": [
+   "CFC0038668",
+   "DF01EA"
+  ]
+ },
+ "PRF0193952": {
+  "accesorios": [
+   "KIT02178",
+   "KIT02723"
+  ]
+ },
+ "PRF0193951": {
+  "accesorios": [
+   "KIT02179",
+   "KIT02723"
+  ]
+ },
+ "PRF0187361": {
+  "accesorios": [
+   "KIT02762",
+   "KIT02766"
+  ]
+ },
+ "PRF0187351": {
+  "accesorios": [
+   "KIT02762",
+   "KIT02766"
+  ]
+ },
+ "PRF0147397B": {
+  "accesorios": [
+   "KIT0156655",
+   "KIT0153054",
+   "KIT0154387",
+   "KIT0153304",
+   "KIT0145610",
+   "KIT0156645",
+   "KIT0156637"
+  ]
+ },
+ "PRF0147396B": {
+  "accesorios": [
+   "KIT0156655",
+   "KIT0153054",
+   "KIT0154387",
+   "KIT0156641",
+   "KIT0145610",
+   "KIT0153305",
+   "KIT0156649"
+  ]
+ },
+ "PRF0135457C": {
+  "accesorios": [
+   "KIT02773",
+   "KIT02770"
+  ]
+ },
+ "PRF0187463B": {
+  "accesorios": [
+   "KIT02773",
+   "KIT02770"
+  ]
+ },
+ "PRF0187464B": {
+  "accesorios": [
+   "KIT02774",
+   "KIT02770"
+  ]
+ },
+ "PRF0131095A": {
+  "accesorios": [
+   "KIT02770"
+  ]
+ },
+ "PRF0209524": {
+  "accesorios": [
+   "CFC0141529A",
+   "CFC0140343"
+  ]
+ },
+ "PRF0209527": {
+  "accesorios": [
+   "CFC0141529A",
+   "CFC0140343"
+  ]
+ },
+ "PRF0212304": {
+  "accesorios": [
+   "CFC0141529A",
+   "CFC0140343"
+  ]
+ },
+ "HMWB30WS": {
+  "accesorios": [
+   "DCT3016W",
+   "DC30MTW",
+   "RECHMWB30",
+   "CHFHMCD"
+  ]
+ },
+ "HMWB36WS": {
+  "accesorios": [
+   "DCT3616W",
+   "DC36MTW",
+   "RECHMWB36",
+   "CHFHMCD"
+  ]
+ },
+ "HMWB48WS": {
+  "accesorios": [
+   "DCT4816W",
+   "DC48MTW",
+   "CHFHMCD"
+  ]
+ },
+ "HMWB361WS": {
+  "accesorios": [
+   "DCT3616W",
+   "DC36MTW",
+   "RECHMWB36",
+   "CHFHMCD"
+  ]
+ },
+ "HMWB481WS": {
+  "accesorios": [
+   "DCT4816W",
+   "DC48MTW",
+   "CHFHMCD"
+  ]
+ },
+ "HDDB30WS": {
+  "accesorios": [
+   "CHXTHDDW",
+   "RECHDDB",
+   "CHFHMCD"
+  ]
+ },
+ "HMCB30WS": {
+  "accesorios": [
+   "CHXTHMCB",
+   "RECHMCB",
+   "CHFHMCD"
+  ]
+ },
+ "HMDW30WS": {
+  "accesorios": [
+   "RECHMDW30",
+   "CHFHMDW30"
+  ]
+ },
+ "VCI6B30ZS": {
+  "accesorios": [
+   "CHFVCI30ZS"
+  ]
+ },
+ "HDDB36WS": {
+  "accesorios": [
+   "CHXTHDDW",
+   "RECHDDB",
+   "CHFHMCD"
+  ]
+ },
+ "HMCB36WS": {
+  "accesorios": [
+   "CHXTHMCB",
+   "RECHMCB",
+   "CHFHMCD"
+  ]
+ },
+ "HMDW36WS": {
+  "accesorios": [
+   "RECHMDW36",
+   "CHFHMDW36"
+  ]
+ },
+ "VCI6B36ZS": {
+  "accesorios": [
+   "CHFVCI36ZS"
+  ]
+ },
+ "HMIB36WS": {
+  "accesorios": [
+   "CHXTHMIB",
+   "RECHMIB",
+   "CHFHMCD"
+  ]
+ },
+ "HMIB42WS": {
+  "accesorios": [
+   "CHXTHMIB",
+   "RECHMIB",
+   "CHFHMCD"
+  ]
+ },
+ "VCIN36GWS": {
+  "accesorios": [
+   "VTN2FZ",
+   "VTI1FZ",
+   "VTI2FZ",
+   "VTR2FZ",
+   "EXTNCB25W"
+  ]
+ },
+ "VCIN42GWS": {
+  "accesorios": [
+   "VTN2FZ",
+   "VTI1FZ",
+   "VTI2FZ",
+   "VTR2FZ",
+   "EXTNCB25W"
+  ]
+ },
+ "VCIN48GWS": {
+  "accesorios": [
+   "VTN2FZ",
+   "VTI1FZ",
+   "VTI2FZ",
+   "VTR2FZ",
+   "EXTNCB25W"
+  ]
+ },
+ "VCIN54GWS": {
+  "accesorios": [
+   "VTN2FZ",
+   "VTI1FZ",
+   "VTI2FZ",
+   "VTR2FZ",
+   "EXTNCB25W"
+  ]
+ },
+ "VCIN60GWS": {
+  "accesorios": [
+   "VTN2FZ",
+   "VTI1FZ",
+   "VTI2FZ",
+   "VTR2FZ",
+   "EXTNCB25W"
+  ]
+ },
+ "ZVW1360SPSS": {
+  "accesorios": [
+   "ZX8D13SPSS",
+   "ZX10D13SPSS",
+   "ZX12D13SPSS"
+  ]
+ },
+ "ZVW1480SPSS": {
+  "accesorios": [
+   "ZX8D14SPSS",
+   "ZX10D14SPSS"
+  ]
+ },
+ "ZVIS361SRSS": {
+  "accesorios": [
+   "ZXR6101RSS",
+   "ZXR1220RSS",
+   "ZX8IC1SRSS",
+   "ZX12IC1SRSS",
+   "ZX14IC1SRSS",
+   "UXIN36W"
+  ]
+ },
+ "ZVIS481SRSS": {
+  "accesorios": [
+   "ZXR6101RSS",
+   "ZXR1220RSS",
+   "ZX8IC1SRSS",
+   "ZX12IC1SRSS",
+   "ZX14IC1SRSS"
+  ]
+ },
+ "ZVWS361SRSS": {
+  "accesorios": [
+   "ZXR6101RSS",
+   "ZXR1220RSS"
+  ]
+ },
+ "ZVWS481SRSS": {
+  "accesorios": [
+   "ZXR6101RSS",
+   "ZXR1220RSS"
   ]
  },
  "CWE19SP2NS9": {
@@ -11794,6 +12753,20 @@
    "CXQW1H1PPCU",
    "CXQW1H1PPFB",
    "CXQW1H1PPCG"
+  ]
+ },
+ "CWE19SP4NW9": {
+  "colores": [
+   "CWE19SP2NS9",
+   "CWE19SP3ND9"
+  ],
+  "accesorios": [
+   "CXMA3H3PNSS",
+   "CXMA3H3PNBZ",
+   "CXMA3H3PNBT",
+   "CXMA3H3PNCU",
+   "CXMA3H3PNFB",
+   "CXMA3H3PNCG"
   ]
  }
 }

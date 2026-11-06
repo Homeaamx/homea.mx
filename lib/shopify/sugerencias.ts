@@ -245,12 +245,17 @@ export function sugerenciasDeCompra(equipo: ProductoVivo, candidatos: ProductoVi
       if (c && sku !== equipo.sku && !(c.tipo === equipo.tipo && !esAccesorio(c))) elegidos.set(sku, 1000);
     }
   }
-  for (const sku of deMarca.accesorios ?? []) {
-    if (porSku.has(sku) && sku !== equipo.sku) elegidos.set(sku, 50);
-  }
+  // Campanas (Carla, 2026-11-06): sus motores, insertos, cubreductos y kits van
+  // siempre, en el orden de la lista (insertos y motores primero), y la rejilla
+  // crece para que quepan todos. En los demás equipos pesan menos que las
+  // campanas sugeridas para estufas y parrillas.
+  const esCampana = equipo.tipo === "Campanas";
+  const propios = (deMarca.accesorios ?? []).filter((sku) => porSku.has(sku) && sku !== equipo.sku);
+  propios.forEach((sku, i) => elegidos.set(sku, esCampana ? 900 - i : 50));
 
-  // 2. Reglas por familia, medida, línea y tipo.
-  for (const c of candidatos) {
+  // 2. Reglas por familia, medida, línea y tipo. Una campana con lista propia no
+  // pasa por aquí: la regla por medida colaba kits de otras series del mismo ancho.
+  for (const c of esCampana && propios.length ? [] : candidatos) {
     if (c.sku === equipo.sku || c.marca !== equipo.marca || enColores.has(c.sku)) continue;
     // Equipos del mismo tipo solo entran como "otros colores".
     if (c.tipo === equipo.tipo && !esAccesorio(c)) continue;
@@ -267,7 +272,9 @@ export function sugerenciasDeCompra(equipo: ProductoVivo, candidatos: ProductoVi
   }
 
   // Con más de 3 colores la rejilla pasa a tres filas para que sigan cabiendo campanas y accesorios.
-  const total = colores.length > 3 ? MAX_SUGERENCIAS + 3 : MAX_SUGERENCIAS;
+  let total = colores.length > 3 ? MAX_SUGERENCIAS + 3 : MAX_SUGERENCIAS;
+  // Campana: todos sus accesorios propios, en filas completas de 3 (tope 12).
+  if (esCampana && colores.length + propios.length > total) total = Math.min(12, Math.ceil((colores.length + propios.length) / 3) * 3);
   const resto = [...elegidos.entries()]
     .map(([sku, pts]) => ({ p: porSku.get(sku)!, pts }))
     // Más relevantes primero; con foto antes que sin foto.

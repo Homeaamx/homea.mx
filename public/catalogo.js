@@ -1180,4 +1180,50 @@
     e.stopPropagation();
     aplicarColor(c, true);
   }, true);
+
+  /* Título completo al pasar el mouse (Carla, 2026-11-06): el nombre de la
+     tarjeta se corta a dos renglones; si está cortado, sale entero en una
+     etiqueta blanca como la de "Agregar a mi proyecto". Una sola etiqueta
+     flotante en el <body>: el título recorta lo que lleva dentro.
+     Vale para TODA tarjeta de producto, vieja o nueva: la del catálogo
+     (.pcard), los resultados del buscador (.bsc-nombre), Mi proyecto
+     (.proy-peek-name) y la wishlist (.wl-name). Una tarjeta nueva entra sola si
+     su título usa una de esas clases o lleva el atributo data-titulo-completo. */
+  var TITULOS = ".pcard h3, .pcard .pcard-name, .bsc-nombre, .proy-peek-name, .wl-name, [data-titulo-completo]";
+  var cortado = function (h) { return h.scrollHeight > h.clientHeight + 1 || h.scrollWidth > h.clientWidth + 1; };
+  if (window.matchMedia && window.matchMedia("(hover: hover)").matches) {
+    var tipTitulo = null, tipEspera = 0, tipDe = null;
+    var quitarTip = function () {
+      clearTimeout(tipEspera);
+      tipDe = null;
+      if (tipTitulo) tipTitulo.classList.remove("is-on");
+    };
+    document.addEventListener("mouseover", function (e) {
+      var h = e.target && e.target.closest && e.target.closest(TITULOS);
+      if (h === tipDe) return;
+      quitarTip();
+      if (!h || !cortado(h)) return;
+      tipDe = h;
+      tipEspera = setTimeout(function () {
+        if (tipDe !== h || !h.isConnected) return;
+        if (!tipTitulo) {
+          tipTitulo = document.createElement("div");
+          tipTitulo.className = "pcard-tip-titulo";
+          tipTitulo.setAttribute("role", "tooltip");
+          document.body.appendChild(tipTitulo);
+        }
+        tipTitulo.textContent = (h.getAttribute("data-titulo-completo") || h.textContent).replace(/\s+/g, " ").trim();
+        var r = h.getBoundingClientRect();
+        tipTitulo.style.maxWidth = Math.max(220, r.width + 24) + "px";
+        tipTitulo.style.left = Math.max(8, r.left - 12) + "px";
+        tipTitulo.style.top = "0px";
+        var alto = tipTitulo.offsetHeight;
+        // Arriba del título; si no cabe, abajo.
+        var arriba = r.top - alto - 8;
+        tipTitulo.style.top = (arriba > 8 ? arriba : r.bottom + 8) + "px";
+        tipTitulo.classList.add("is-on");
+      }, 250);
+    });
+    window.addEventListener("scroll", quitarTip, { passive: true });
+  }
 })();
