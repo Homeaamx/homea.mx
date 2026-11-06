@@ -49,6 +49,13 @@ const MUESTRAS: Record<string, string> = {
   "níquel pulido": "linear-gradient(135deg, #ece8df 0%, #c8c3b8 45%, #e4e0d6 60%, #a49e92 100%)",
   "bronce aceitado": "linear-gradient(135deg, #6a4c38 0%, #4a3426 55%, #2f2018 100%)",
   "bronce moca": "linear-gradient(135deg, #8a705c 0%, #6b5444 55%, #4c3a2e 100%)",
+  // Café (2026-11-06): equipos en Blanco Mate y kits de herrajes en 6 acabados.
+  "blanco mate": "#ecebe6",
+  "acero inoxidable cepillado": METAL,
+  "latón cepillado": "linear-gradient(135deg, #d9c48e 0%, #b39a5c 50%, #927a40 100%)",
+  "bronce cepillado": "linear-gradient(135deg, #b08a5e 0%, #8a6640 50%, #6a4c2e 100%)",
+  "cobre cepillado": "linear-gradient(135deg, #e0a27a 0%, #b87348 50%, #8f5532 100%)",
+  "negro cepillado": "linear-gradient(135deg, #4a4947 0%, #2b2a28 50%, #1a1918 100%)",
   "matte black": "#1d1d1d",
   negro: "#1d1d1d",
   negra: "#1d1d1d",

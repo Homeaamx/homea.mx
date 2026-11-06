@@ -10807,5 +10807,993 @@
   "colores": [
    "KIT0203069"
   ]
+ },
+ "CWE19SP4NW9": {
+  "colores": [
+   "CWE19SP2NS9",
+   "CWE19SP3ND9"
+  ],
+  "accesorios": [
+   "CXMA3H3PNSS",
+   "CXMA3H3PNBZ",
+   "CXMA3H3PNBT",
+   "CXMA3H3PNCU",
+   "CXMA3H3PNFB",
+   "CXMA3H3PNCG"
+  ]
+ },
+ "CWE19SP2NS9": {
+  "colores": [
+   "CWE19SP4NW9",
+   "CWE19SP3ND9"
+  ],
+  "accesorios": [
+   "CXMA3H3PNSS",
+   "CXMA3H3PNBZ",
+   "CXMA3H3PNBT",
+   "CXMA3H3PNCU",
+   "CXMA3H3PNFB",
+   "CXMA3H3PNCG"
+  ]
+ },
+ "CWE19SP3ND9": {
+  "colores": [
+   "CWE19SP4NW9",
+   "CWE19SP2NS9"
+  ],
+  "accesorios": [
+   "CXMA3H3PNSS",
+   "CXMA3H3PNBZ",
+   "CXMA3H3PNBT",
+   "CXMA3H3PNCU",
+   "CXMA3H3PNFB",
+   "CXMA3H3PNCG"
+  ]
+ },
+ "CFE28TP3MD1": {
+  "colores": [
+   "CFE28TP4MW2",
+   "CFE28TP2MS1"
+  ],
+  "accesorios": [
+   "CXLB3H3PMSS",
+   "CXLB3H3PMBZ",
+   "CXLB3H3PMBT",
+   "CXLB3H3PMCU",
+   "CXLB3H3PMFB",
+   "CXLB3H3PMCG"
+  ]
+ },
+ "CFE28TP4MW2": {
+  "colores": [
+   "CFE28TP3MD1",
+   "CFE28TP2MS1"
+  ],
+  "accesorios": [
+   "CXLB3H3PMSS",
+   "CXLB3H3PMBZ",
+   "CXLB3H3PMBT",
+   "CXLB3H3PMCU",
+   "CXLB3H3PMFB",
+   "CXLB3H3PMCG"
+  ]
+ },
+ "CFE28TP2MS1": {
+  "colores": [
+   "CFE28TP3MD1",
+   "CFE28TP4MW2"
+  ],
+  "accesorios": [
+   "CXLB3H3PMSS",
+   "CXLB3H3PMBZ",
+   "CXLB3H3PMBT",
+   "CXLB3H3PMCU",
+   "CXLB3H3PMFB",
+   "CXLB3H3PMCG"
+  ]
+ },
+ "CCP06DP4PW2": {
+  "colores": [
+   "CCP06DP2PS1"
+  ],
+  "accesorios": [
+   "CXQW1H1PPSS",
+   "CXQW1H1PPBZ",
+   "CXQW1H1PPBT",
+   "CXQW1H1PPCU",
+   "CXQW1H1PPFB",
+   "CXQW1H1PPCG"
+  ]
+ },
+ "CCP06DP2PS1": {
+  "colores": [
+   "CCP06DP4PW2"
+  ],
+  "accesorios": [
+   "CXQW1H1PPSS",
+   "CXQW1H1PPBZ",
+   "CXQW1H1PPBT",
+   "CXQW1H1PPCU",
+   "CXQW1H1PPFB",
+   "CXQW1H1PPCG"
+  ]
+ },
+ "CCP06BP2PS1": {
+  "colores": [
+   "CCP06BP4PW2"
+  ],
+  "accesorios": [
+   "CXQW1H1PPSS",
+   "CXQW1H1PPBZ",
+   "CXQW1H1PPBT",
+   "CXQW1H1PPCU",
+   "CXQW1H1PPFB",
+   "CXQW1H1PPCG"
+  ]
+ },
+ "CCP06BP4PW2": {
+  "colores": [
+   "CCP06BP2PS1"
+  ],
+  "accesorios": [
+   "CXQW1H1PPSS",
+   "CXQW1H1PPBZ",
+   "CXQW1H1PPBT",
+   "CXQW1H1PPCU",
+   "CXQW1H1PPFB",
+   "CXQW1H1PPCG"
+  ]
+ },
+ "CGY366P3TD1": {
+  "colores": [
+   "CGY366P4TW2",
+   "CGY366P2TS1"
+  ],
+  "accesorios": [
+   "CXPR6HKPTSS",
+   "CXPR6HKPTBZ",
+   "CXPR6HKPTBT",
+   "CXPR6HKPTCU",
+   "CXPR6HKPTFB",
+   "CXPR6HKPTCG"
+  ]
+ },
+ "CGY366P4TW2": {
+  "colores": [
+   "CGY366P3TD1",
+   "CGY366P2TS1"
+  ],
+  "accesorios": [
+   "CXPR6HKPTSS",
+   "CXPR6HKPTBZ",
+   "CXPR6HKPTBT",
+   "CXPR6HKPTCU",
+   "CXPR6HKPTFB",
+   "CXPR6HKPTCG"
+  ]
+ },
+ "CGY366P2TS1": {
+  "colores": [
+   "CGY366P3TD1",
+   "CGY366P4TW2"
+  ],
+  "accesorios": [
+   "CXPR6HKPTSS",
+   "CXPR6HKPTBZ",
+   "CXPR6HKPTBT",
+   "CXPR6HKPTCU",
+   "CXPR6HKPTFB",
+   "CXPR6HKPTCG"
+  ]
+ },
+ "CGU366P3TD1": {
+  "colores": [
+   "CGU366P4TW2",
+   "CGU366P2TS1"
+  ],
+  "accesorios": [
+   "CXPR6HKPTSS",
+   "CXPR6HKPTBZ",
+   "CXPR6HKPTBT",
+   "CXPR6HKPTCU",
+   "CXPR6HKPTFB",
+   "CXPR6HKPTCG"
+  ]
+ },
+ "CGU366P4TW2": {
+  "colores": [
+   "CGU366P3TD1",
+   "CGU366P2TS1"
+  ],
+  "accesorios": [
+   "CXPR6HKPTSS",
+   "CXPR6HKPTBZ",
+   "CXPR6HKPTBT",
+   "CXPR6HKPTCU",
+   "CXPR6HKPTFB",
+   "CXPR6HKPTCG"
+  ]
+ },
+ "CGU366P2TS1": {
+  "colores": [
+   "CGU366P3TD1",
+   "CGU366P4TW2"
+  ],
+  "accesorios": [
+   "CXPR6HKPTSS",
+   "CXPR6HKPTBZ",
+   "CXPR6HKPTBT",
+   "CXPR6HKPTCU",
+   "CXPR6HKPTFB",
+   "CXPR6HKPTCG"
+  ]
+ },
+ "CVW93643PDS": {
+  "colores": [
+   "CVW93644PWM",
+   "UVW93642PSS"
+  ],
+  "accesorios": [
+   "CX10DC9SPDS",
+   "CX12DC9SPDS"
+  ]
+ },
+ "CVW93644PWM": {
+  "colores": [
+   "CVW93643PDS",
+   "UVW93642PSS"
+  ],
+  "accesorios": [
+   "CX10DC9SPWM",
+   "CX12DC9SPWM"
+  ]
+ },
+ "UVW93642PSS": {
+  "colores": [
+   "CVW93643PDS",
+   "CVW93644PWM"
+  ],
+  "accesorios": [
+   "CX10DC9SPSS",
+   "CX12DC9SPSS"
+  ]
+ },
+ "CTS90FP3ND1": {
+  "colores": [
+   "CTS90FP4NW2",
+   "CTS90FP2NS1"
+  ],
+  "accesorios": [
+   "CXWSFHKPMSS",
+   "CXWSFHKPMBZ",
+   "CXWSFHKPMBT",
+   "CXWSFHKPMCU",
+   "CXWSFHKPMFB",
+   "CXWSFHKPMCG"
+  ]
+ },
+ "CTS90FP4NW2": {
+  "colores": [
+   "CTS90FP3ND1",
+   "CTS90FP2NS1"
+  ],
+  "accesorios": [
+   "CXWSFHKPMSS",
+   "CXWSFHKPMBZ",
+   "CXWSFHKPMBT",
+   "CXWSFHKPMCU",
+   "CXWSFHKPMFB",
+   "CXWSFHKPMCG"
+  ]
+ },
+ "CTS90FP2NS1": {
+  "colores": [
+   "CTS90FP3ND1",
+   "CTS90FP4NW2"
+  ],
+  "accesorios": [
+   "CXWSFHKPMSS",
+   "CXWSFHKPMBZ",
+   "CXWSFHKPMBT",
+   "CXWSFHKPMCU",
+   "CXWSFHKPMFB",
+   "CXWSFHKPMCG"
+  ]
+ },
+ "CTS90DP2NS1": {
+  "colores": [
+   "CTS90DP4NW2",
+   "CTS90DP3ND1"
+  ],
+  "accesorios": [
+   "CXWS0H0PMSS",
+   "CXWS0H0PMBZ",
+   "CXWS0H0PMBT",
+   "CXWS0H0PMCU",
+   "CXWS0H0PMFB",
+   "CXWS0H0PMCG"
+  ]
+ },
+ "CTS90DP4NW2": {
+  "colores": [
+   "CTS90DP2NS1",
+   "CTS90DP3ND1"
+  ],
+  "accesorios": [
+   "CXWS0H0PMSS",
+   "CXWS0H0PMBZ",
+   "CXWS0H0PMBT",
+   "CXWS0H0PMCU",
+   "CXWS0H0PMFB",
+   "CXWS0H0PMCG"
+  ]
+ },
+ "CTS90DP3ND1": {
+  "colores": [
+   "CTS90DP2NS1",
+   "CTS90DP4NW2"
+  ],
+  "accesorios": [
+   "CXWS0H0PMSS",
+   "CXWS0H0PMBZ",
+   "CXWS0H0PMBT",
+   "CXWS0H0PMCU",
+   "CXWS0H0PMFB",
+   "CXWS0H0PMCG"
+  ]
+ },
+ "CSB913P4VW2": {
+  "colores": [
+   "CSB913P2VS1",
+   "CSB913P3VD1"
+  ],
+  "accesorios": [
+   "CXWS0H0PMSS",
+   "CXWS0H0PMBZ",
+   "CXWS0H0PMBT",
+   "CXWS0H0PMCU",
+   "CXWS0H0PMFB",
+   "CXWS0H0PMCG"
+  ]
+ },
+ "CSB913P2VS1": {
+  "colores": [
+   "CSB913P4VW2",
+   "CSB913P3VD1"
+  ],
+  "accesorios": [
+   "CXWS0H0PMSS",
+   "CXWS0H0PMBZ",
+   "CXWS0H0PMBT",
+   "CXWS0H0PMCU",
+   "CXWS0H0PMFB",
+   "CXWS0H0PMCG"
+  ]
+ },
+ "CSB913P3VD1": {
+  "colores": [
+   "CSB913P4VW2",
+   "CSB913P2VS1"
+  ],
+  "accesorios": [
+   "CXWS0H0PMSS",
+   "CXWS0H0PMBZ",
+   "CXWS0H0PMBT",
+   "CXWS0H0PMCU",
+   "CXWS0H0PMFB",
+   "CXWS0H0PMCG"
+  ]
+ },
+ "CCWK15C1WWM": {
+  "colores": [
+   "CCWK15C1WSS",
+   "CCWK15C1WDS"
+  ],
+  "accesorios": [
+   "CX152P4MWM",
+   "CX153P4MWM"
+  ]
+ },
+ "CCWK15C1WSS": {
+  "colores": [
+   "CCWK15C1WWM",
+   "CCWK15C1WDS"
+  ],
+  "accesorios": [
+   "CX152P2MSS",
+   "CX153P2MSS"
+  ]
+ },
+ "CCWK15C1WDS": {
+  "colores": [
+   "CCWK15C1WWM",
+   "CCWK15C1WSS"
+  ],
+  "accesorios": [
+   "CX152P3MDS",
+   "CX153P3MDS"
+  ]
+ },
+ "CDT858P2VS1": {
+  "colores": [
+   "CDT858P3VD1",
+   "CDT858P4VW2"
+  ],
+  "accesorios": [
+   "CXADTH1PVSS",
+   "CXADTH1PVBZ",
+   "CXADTH1PVBT",
+   "CXADTH1PVCU",
+   "CXADTH1PVFB",
+   "CXADTH1PVCG"
+  ]
+ },
+ "CDT858P3VD1": {
+  "colores": [
+   "CDT858P2VS1",
+   "CDT858P4VW2"
+  ],
+  "accesorios": [
+   "CXADTH1PVSS",
+   "CXADTH1PVBZ",
+   "CXADTH1PVBT",
+   "CXADTH1PVCU",
+   "CXADTH1PVFB",
+   "CXADTH1PVCG"
+  ]
+ },
+ "CDT858P4VW2": {
+  "colores": [
+   "CDT858P2VS1",
+   "CDT858P3VD1"
+  ],
+  "accesorios": [
+   "CXADTH1PVSS",
+   "CXADTH1PVBZ",
+   "CXADTH1PVBT",
+   "CXADTH1PVCU",
+   "CXADTH1PVFB",
+   "CXADTH1PVCG"
+  ]
+ },
+ "CK1UP150RS1": {
+  "colores": [
+   "CK1UP150RD1",
+   "CK1UP150RW2"
+  ]
+ },
+ "CK1UP150RD1": {
+  "colores": [
+   "CK1UP150RS1",
+   "CK1UP150RW2"
+  ]
+ },
+ "CK1UP150RW2": {
+  "colores": [
+   "CK1UP150RS1",
+   "CK1UP150RD1"
+  ]
+ },
+ "CX10DC9SPDS": {
+  "colores": [
+   "CX10DC9SPWM",
+   "CX10DC9SPSS"
+  ]
+ },
+ "CX10DC9SPWM": {
+  "colores": [
+   "CX10DC9SPDS",
+   "CX10DC9SPSS"
+  ]
+ },
+ "CX10DC9SPSS": {
+  "colores": [
+   "CX10DC9SPDS",
+   "CX10DC9SPWM"
+  ]
+ },
+ "CX12DC9SPDS": {
+  "colores": [
+   "CX12DC9SPWM",
+   "CX12DC9SPSS"
+  ]
+ },
+ "CX12DC9SPWM": {
+  "colores": [
+   "CX12DC9SPDS",
+   "CX12DC9SPSS"
+  ]
+ },
+ "CX12DC9SPSS": {
+  "colores": [
+   "CX12DC9SPDS",
+   "CX12DC9SPWM"
+  ]
+ },
+ "CX152P3MDS": {
+  "colores": [
+   "CX152P2MSS",
+   "CX152P4MWM"
+  ]
+ },
+ "CX152P2MSS": {
+  "colores": [
+   "CX152P3MDS",
+   "CX152P4MWM"
+  ]
+ },
+ "CX152P4MWM": {
+  "colores": [
+   "CX152P3MDS",
+   "CX152P2MSS"
+  ]
+ },
+ "CX153P3MDS": {
+  "colores": [
+   "CX153P2MSS",
+   "CX153P4MWM"
+  ]
+ },
+ "CX153P2MSS": {
+  "colores": [
+   "CX153P3MDS",
+   "CX153P4MWM"
+  ]
+ },
+ "CX153P4MWM": {
+  "colores": [
+   "CX153P3MDS",
+   "CX153P2MSS"
+  ]
+ },
+ "CXMA3H3PNSS": {
+  "colores": [
+   "CXMA3H3PNBZ",
+   "CXMA3H3PNBT",
+   "CXMA3H3PNCU",
+   "CXMA3H3PNFB",
+   "CXMA3H3PNCG"
+  ]
+ },
+ "CXMA3H3PNBZ": {
+  "colores": [
+   "CXMA3H3PNSS",
+   "CXMA3H3PNBT",
+   "CXMA3H3PNCU",
+   "CXMA3H3PNFB",
+   "CXMA3H3PNCG"
+  ]
+ },
+ "CXMA3H3PNBT": {
+  "colores": [
+   "CXMA3H3PNSS",
+   "CXMA3H3PNBZ",
+   "CXMA3H3PNCU",
+   "CXMA3H3PNFB",
+   "CXMA3H3PNCG"
+  ]
+ },
+ "CXMA3H3PNCU": {
+  "colores": [
+   "CXMA3H3PNSS",
+   "CXMA3H3PNBZ",
+   "CXMA3H3PNBT",
+   "CXMA3H3PNFB",
+   "CXMA3H3PNCG"
+  ]
+ },
+ "CXMA3H3PNFB": {
+  "colores": [
+   "CXMA3H3PNSS",
+   "CXMA3H3PNBZ",
+   "CXMA3H3PNBT",
+   "CXMA3H3PNCU",
+   "CXMA3H3PNCG"
+  ]
+ },
+ "CXMA3H3PNCG": {
+  "colores": [
+   "CXMA3H3PNSS",
+   "CXMA3H3PNBZ",
+   "CXMA3H3PNBT",
+   "CXMA3H3PNCU",
+   "CXMA3H3PNFB"
+  ]
+ },
+ "CXLB3H3PMSS": {
+  "colores": [
+   "CXLB3H3PMBZ",
+   "CXLB3H3PMBT",
+   "CXLB3H3PMCU",
+   "CXLB3H3PMFB",
+   "CXLB3H3PMCG"
+  ]
+ },
+ "CXLB3H3PMBZ": {
+  "colores": [
+   "CXLB3H3PMSS",
+   "CXLB3H3PMBT",
+   "CXLB3H3PMCU",
+   "CXLB3H3PMFB",
+   "CXLB3H3PMCG"
+  ]
+ },
+ "CXLB3H3PMBT": {
+  "colores": [
+   "CXLB3H3PMSS",
+   "CXLB3H3PMBZ",
+   "CXLB3H3PMCU",
+   "CXLB3H3PMFB",
+   "CXLB3H3PMCG"
+  ]
+ },
+ "CXLB3H3PMCU": {
+  "colores": [
+   "CXLB3H3PMSS",
+   "CXLB3H3PMBZ",
+   "CXLB3H3PMBT",
+   "CXLB3H3PMFB",
+   "CXLB3H3PMCG"
+  ]
+ },
+ "CXLB3H3PMFB": {
+  "colores": [
+   "CXLB3H3PMSS",
+   "CXLB3H3PMBZ",
+   "CXLB3H3PMBT",
+   "CXLB3H3PMCU",
+   "CXLB3H3PMCG"
+  ]
+ },
+ "CXLB3H3PMCG": {
+  "colores": [
+   "CXLB3H3PMSS",
+   "CXLB3H3PMBZ",
+   "CXLB3H3PMBT",
+   "CXLB3H3PMCU",
+   "CXLB3H3PMFB"
+  ]
+ },
+ "CXSS2H2PMBZ": {
+  "colores": [
+   "CXSS2H2PMBT",
+   "CXSS2H2PMCU",
+   "CXSS2H2PMFB",
+   "CXSS2H2PMCG"
+  ]
+ },
+ "CXSS2H2PMBT": {
+  "colores": [
+   "CXSS2H2PMBZ",
+   "CXSS2H2PMCU",
+   "CXSS2H2PMFB",
+   "CXSS2H2PMCG"
+  ]
+ },
+ "CXSS2H2PMCU": {
+  "colores": [
+   "CXSS2H2PMBZ",
+   "CXSS2H2PMBT",
+   "CXSS2H2PMFB",
+   "CXSS2H2PMCG"
+  ]
+ },
+ "CXSS2H2PMFB": {
+  "colores": [
+   "CXSS2H2PMBZ",
+   "CXSS2H2PMBT",
+   "CXSS2H2PMCU",
+   "CXSS2H2PMCG"
+  ]
+ },
+ "CXSS2H2PMCG": {
+  "colores": [
+   "CXSS2H2PMBZ",
+   "CXSS2H2PMBT",
+   "CXSS2H2PMCU",
+   "CXSS2H2PMFB"
+  ]
+ },
+ "CXQW1H1PPSS": {
+  "colores": [
+   "CXQW1H1PPBZ",
+   "CXQW1H1PPBT",
+   "CXQW1H1PPCU",
+   "CXQW1H1PPFB",
+   "CXQW1H1PPCG"
+  ]
+ },
+ "CXQW1H1PPBZ": {
+  "colores": [
+   "CXQW1H1PPSS",
+   "CXQW1H1PPBT",
+   "CXQW1H1PPCU",
+   "CXQW1H1PPFB",
+   "CXQW1H1PPCG"
+  ]
+ },
+ "CXQW1H1PPBT": {
+  "colores": [
+   "CXQW1H1PPSS",
+   "CXQW1H1PPBZ",
+   "CXQW1H1PPCU",
+   "CXQW1H1PPFB",
+   "CXQW1H1PPCG"
+  ]
+ },
+ "CXQW1H1PPCU": {
+  "colores": [
+   "CXQW1H1PPSS",
+   "CXQW1H1PPBZ",
+   "CXQW1H1PPBT",
+   "CXQW1H1PPFB",
+   "CXQW1H1PPCG"
+  ]
+ },
+ "CXQW1H1PPFB": {
+  "colores": [
+   "CXQW1H1PPSS",
+   "CXQW1H1PPBZ",
+   "CXQW1H1PPBT",
+   "CXQW1H1PPCU",
+   "CXQW1H1PPCG"
+  ]
+ },
+ "CXQW1H1PPCG": {
+  "colores": [
+   "CXQW1H1PPSS",
+   "CXQW1H1PPBZ",
+   "CXQW1H1PPBT",
+   "CXQW1H1PPCU",
+   "CXQW1H1PPFB"
+  ]
+ },
+ "CXPR6HKPTSS": {
+  "colores": [
+   "CXPR6HKPTBZ",
+   "CXPR6HKPTBT",
+   "CXPR6HKPTCU",
+   "CXPR6HKPTFB",
+   "CXPR6HKPTCG"
+  ]
+ },
+ "CXPR6HKPTBZ": {
+  "colores": [
+   "CXPR6HKPTSS",
+   "CXPR6HKPTBT",
+   "CXPR6HKPTCU",
+   "CXPR6HKPTFB",
+   "CXPR6HKPTCG"
+  ]
+ },
+ "CXPR6HKPTBT": {
+  "colores": [
+   "CXPR6HKPTSS",
+   "CXPR6HKPTBZ",
+   "CXPR6HKPTCU",
+   "CXPR6HKPTFB",
+   "CXPR6HKPTCG"
+  ]
+ },
+ "CXPR6HKPTCU": {
+  "colores": [
+   "CXPR6HKPTSS",
+   "CXPR6HKPTBZ",
+   "CXPR6HKPTBT",
+   "CXPR6HKPTFB",
+   "CXPR6HKPTCG"
+  ]
+ },
+ "CXPR6HKPTFB": {
+  "colores": [
+   "CXPR6HKPTSS",
+   "CXPR6HKPTBZ",
+   "CXPR6HKPTBT",
+   "CXPR6HKPTCU",
+   "CXPR6HKPTCG"
+  ]
+ },
+ "CXPR6HKPTCG": {
+  "colores": [
+   "CXPR6HKPTSS",
+   "CXPR6HKPTBZ",
+   "CXPR6HKPTBT",
+   "CXPR6HKPTCU",
+   "CXPR6HKPTFB"
+  ]
+ },
+ "CXWSFHKPMSS": {
+  "colores": [
+   "CXWSFHKPMBZ",
+   "CXWSFHKPMBT",
+   "CXWSFHKPMCU",
+   "CXWSFHKPMFB",
+   "CXWSFHKPMCG"
+  ]
+ },
+ "CXWSFHKPMBZ": {
+  "colores": [
+   "CXWSFHKPMSS",
+   "CXWSFHKPMBT",
+   "CXWSFHKPMCU",
+   "CXWSFHKPMFB",
+   "CXWSFHKPMCG"
+  ]
+ },
+ "CXWSFHKPMBT": {
+  "colores": [
+   "CXWSFHKPMSS",
+   "CXWSFHKPMBZ",
+   "CXWSFHKPMCU",
+   "CXWSFHKPMFB",
+   "CXWSFHKPMCG"
+  ]
+ },
+ "CXWSFHKPMCU": {
+  "colores": [
+   "CXWSFHKPMSS",
+   "CXWSFHKPMBZ",
+   "CXWSFHKPMBT",
+   "CXWSFHKPMFB",
+   "CXWSFHKPMCG"
+  ]
+ },
+ "CXWSFHKPMFB": {
+  "colores": [
+   "CXWSFHKPMSS",
+   "CXWSFHKPMBZ",
+   "CXWSFHKPMBT",
+   "CXWSFHKPMCU",
+   "CXWSFHKPMCG"
+  ]
+ },
+ "CXWSFHKPMCG": {
+  "colores": [
+   "CXWSFHKPMSS",
+   "CXWSFHKPMBZ",
+   "CXWSFHKPMBT",
+   "CXWSFHKPMCU",
+   "CXWSFHKPMFB"
+  ]
+ },
+ "CXWS0H0PMSS": {
+  "colores": [
+   "CXWS0H0PMBZ",
+   "CXWS0H0PMBT",
+   "CXWS0H0PMCU",
+   "CXWS0H0PMFB",
+   "CXWS0H0PMCG"
+  ]
+ },
+ "CXWS0H0PMBZ": {
+  "colores": [
+   "CXWS0H0PMSS",
+   "CXWS0H0PMBT",
+   "CXWS0H0PMCU",
+   "CXWS0H0PMFB",
+   "CXWS0H0PMCG"
+  ]
+ },
+ "CXWS0H0PMBT": {
+  "colores": [
+   "CXWS0H0PMSS",
+   "CXWS0H0PMBZ",
+   "CXWS0H0PMCU",
+   "CXWS0H0PMFB",
+   "CXWS0H0PMCG"
+  ]
+ },
+ "CXWS0H0PMCU": {
+  "colores": [
+   "CXWS0H0PMSS",
+   "CXWS0H0PMBZ",
+   "CXWS0H0PMBT",
+   "CXWS0H0PMFB",
+   "CXWS0H0PMCG"
+  ]
+ },
+ "CXWS0H0PMFB": {
+  "colores": [
+   "CXWS0H0PMSS",
+   "CXWS0H0PMBZ",
+   "CXWS0H0PMBT",
+   "CXWS0H0PMCU",
+   "CXWS0H0PMCG"
+  ]
+ },
+ "CXWS0H0PMCG": {
+  "colores": [
+   "CXWS0H0PMSS",
+   "CXWS0H0PMBZ",
+   "CXWS0H0PMBT",
+   "CXWS0H0PMCU",
+   "CXWS0H0PMFB"
+  ]
+ },
+ "CXADTH1PVSS": {
+  "colores": [
+   "CXADTH1PVBZ",
+   "CXADTH1PVBT",
+   "CXADTH1PVCU",
+   "CXADTH1PVFB",
+   "CXADTH1PVCG"
+  ]
+ },
+ "CXADTH1PVBZ": {
+  "colores": [
+   "CXADTH1PVSS",
+   "CXADTH1PVBT",
+   "CXADTH1PVCU",
+   "CXADTH1PVFB",
+   "CXADTH1PVCG"
+  ]
+ },
+ "CXADTH1PVBT": {
+  "colores": [
+   "CXADTH1PVSS",
+   "CXADTH1PVBZ",
+   "CXADTH1PVCU",
+   "CXADTH1PVFB",
+   "CXADTH1PVCG"
+  ]
+ },
+ "CXADTH1PVCU": {
+  "colores": [
+   "CXADTH1PVSS",
+   "CXADTH1PVBZ",
+   "CXADTH1PVBT",
+   "CXADTH1PVFB",
+   "CXADTH1PVCG"
+  ]
+ },
+ "CXADTH1PVFB": {
+  "colores": [
+   "CXADTH1PVSS",
+   "CXADTH1PVBZ",
+   "CXADTH1PVBT",
+   "CXADTH1PVCU",
+   "CXADTH1PVCG"
+  ]
+ },
+ "CXADTH1PVCG": {
+  "colores": [
+   "CXADTH1PVSS",
+   "CXADTH1PVBZ",
+   "CXADTH1PVBT",
+   "CXADTH1PVCU",
+   "CXADTH1PVFB"
+  ]
+ },
+ "CSB48WP2NS1": {
+  "accesorios": [
+   "CXSS2H2PMBZ",
+   "CXSS2H2PMBT",
+   "CXSS2H2PMCU",
+   "CXSS2H2PMFB",
+   "CXSS2H2PMCG"
+  ]
+ },
+ "CTS90FP3MD1": {
+  "accesorios": [
+   "CXWSFHKPMSS",
+   "CXWSFHKPMBZ",
+   "CXWSFHKPMBT",
+   "CXWSFHKPMCU",
+   "CXWSFHKPMFB",
+   "CXWSFHKPMCG"
+  ]
+ },
+ "UCC15NPRII": {
+  "accesorios": [
+   "CK1UP150RS1",
+   "CK1UP150RD1",
+   "CK1UP150RW2",
+   "CXQW1H1PPSS",
+   "CXQW1H1PPBZ",
+   "CXQW1H1PPBT",
+   "CXQW1H1PPCU",
+   "CXQW1H1PPFB",
+   "CXQW1H1PPCG"
+  ]
  }
 }
