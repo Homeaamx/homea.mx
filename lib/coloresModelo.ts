@@ -29,6 +29,9 @@ const MUESTRAS: Record<string, string> = {
   "acero cepillado": METAL,
   // Panelable (Elica, Hoshizaki): lleva el panel de la cocina; chapa de madera.
   panelable: "repeating-linear-gradient(100deg, #c9a585 0 3px, #b8936f 3px 5px, #cfad8e 5px 8px)",
+  // Monogram: cajones refrigerantes dobles "Panelables" y parrilla de inducción "Gris".
+  panelables: "repeating-linear-gradient(100deg, #c9a585 0 3px, #b8936f 3px 5px, #cfad8e 5px 8px)",
+  gris: "#8e8e8b",
   // Kraus: acero inoxidable con PVD negro (gunmetal), "… en Acero Inoxidable Negro".
   "acero inoxidable negro": "linear-gradient(135deg, #5c5c5c 0%, #2e2e2e 50%, #1a1a1a 100%)",
   "pvd steel": "linear-gradient(135deg, #e6e6e3 0%, #b3b3ae 45%, #dadad6 60%, #8f8f8a 100%)",
@@ -50,6 +53,10 @@ const MUESTRAS: Record<string, string> = {
   negro: "#1d1d1d",
   negra: "#1d1d1d",
   "negro mate": "#222222",
+  // Elica Seashell (2026-11-06): blanca y negra en mate y en brillante.
+  "blanca mate": "#ecebe6",
+  "blanca brillante": "linear-gradient(135deg, #ffffff 0%, #e9e9e6 45%, #ffffff 60%, #d6d6d2 100%)",
+  "negra mate": "#222222",
   "negro brillante": "#0d0d0d",
   // Benessi: frente de cristal negro (hornos, microondas y cafetera).
   "cristal negro": "linear-gradient(135deg, #3a3a3a 0%, #111111 45%, #262626 60%, #050505 100%)",

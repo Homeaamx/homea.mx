@@ -10144,18 +10144,21 @@
  },
  "PRF0098392": {
   "colores": [
-   "PRF0098394",
-   "PRF0098393"
+   "PRF0024262A",
+   "PRF0098393",
+   "PRF0098394"
   ]
  },
  "PRF0098394": {
   "colores": [
+   "PRF0024262A",
    "PRF0098392",
    "PRF0098393"
   ]
  },
  "PRF0098393": {
   "colores": [
+   "PRF0024262A",
    "PRF0098392",
    "PRF0098394"
   ]
@@ -10706,6 +10709,103 @@
  "BKSOSS30MAST": {
   "colores": [
    "BKSO30"
+  ]
+ },
+ "ZISS480DNSS": {
+  "colores": [
+   "ZISB480DNII"
+  ]
+ },
+ "ZISB480DNII": {
+  "colores": [
+   "ZISS480DNSS"
+  ]
+ },
+ "ZISS420DNSS": {
+  "colores": [
+   "ZISB420DNII"
+  ]
+ },
+ "ZISB420DNII": {
+  "colores": [
+   "ZISS420DNSS"
+  ]
+ },
+ "ZISS360DNSS": {
+  "colores": [
+   "ZISB360DNII"
+  ]
+ },
+ "ZISB360DNII": {
+  "colores": [
+   "ZISS360DNSS"
+  ]
+ },
+ "ZHU36RSTSS": {
+  "colores": [
+   "ZHU36RDTBB"
+  ]
+ },
+ "ZHU36RDTBB": {
+  "colores": [
+   "ZHU36RSTSS"
+  ]
+ },
+ "ZIDS240NSS": {
+  "colores": [
+   "ZIDI240HII"
+  ]
+ },
+ "ZIDI240HII": {
+  "colores": [
+   "ZIDS240NSS"
+  ]
+ },
+ "PRF0024262A": {
+  "colores": [
+   "PRF0098392",
+   "PRF0098393",
+   "PRF0098394"
+  ]
+ },
+ "KIT0203070": {
+  "colores": [
+   "KIT0203032"
+  ]
+ },
+ "KIT0203032": {
+  "colores": [
+   "KIT0203070"
+  ]
+ },
+ "KIT0203071": {
+  "colores": [
+   "KIT0203029"
+  ]
+ },
+ "KIT0203029": {
+  "colores": [
+   "KIT0203071"
+  ]
+ },
+ "KIT0203068": {
+  "colores": [
+   "KIT0203059"
+  ]
+ },
+ "KIT0203059": {
+  "colores": [
+   "KIT0203068"
+  ]
+ },
+ "KIT0203069": {
+  "colores": [
+   "KIT0203030"
+  ]
+ },
+ "KIT0203030": {
+  "colores": [
+   "KIT0203069"
   ]
  }
 }

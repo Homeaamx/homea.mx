@@ -380,13 +380,28 @@
     document.querySelectorAll(".nav-ic.wl-open").forEach(function (a) {
       a.classList.toggle("has-items", n > 0);
     });
+    syncHearts();
+    renderPage();
+  }
+
+  /* Corazón lleno en toda pieza guardada; un clic la quita (Carla, 2026-11-06).
+     También corre cuando catalogo.js llena una tarjeta ligera de la página de
+     wishlist: la tarjeta completa llega del servidor con el corazón vacío. */
+  function syncHearts() {
+    var ids = {};
+    read().forEach(function (it) { ids[it.id] = true; });
     document.querySelectorAll(".wl-heart").forEach(function (h) {
-      var on = has(h.getAttribute("data-wl-id"));
-      h.classList.toggle("on", on);
+      var on = !!ids[h.getAttribute("data-wl-id")];
+      if (h.classList.contains("on") !== on) h.classList.toggle("on", on);
       var pressed = on ? "true" : "false";
       if (h.getAttribute("aria-pressed") !== pressed) h.setAttribute("aria-pressed", pressed);
+      var label = on ? "Quitar de la wishlist" : "Guardar en wishlist";
+      if (h.getAttribute("aria-label") !== label) h.setAttribute("aria-label", label);
+      if (h.hasAttribute("data-tip")) {
+        var tip = on ? "Quitar de mi Wishlist" : "Agregar a mi Wishlist";
+        if (h.getAttribute("data-tip") !== tip) h.setAttribute("data-tip", tip);
+      }
     });
-    renderPage();
   }
 
   /* Desplegables de arriba: uno abierto a la vez; se cierran con "Listo" o al
@@ -430,11 +445,21 @@
      pintarse (su raíz [data-wl-page]) para no entrar en bucle. */
   var pending = null;
   var mo = new MutationObserver(function (muts) {
+    var page = document.querySelector("[data-wl-page]");
     var external = muts.some(function (m) {
-      var page = document.querySelector("[data-wl-page]");
       return !(page && page.contains(m.target) && m.target !== page);
     });
-    if (!external || pending) return;
+    if (!external) {
+      // Tarjeta llenada dentro de la página: solo los corazones (sin repintar).
+      var hayCorazon = muts.some(function (m) {
+        return Array.prototype.some.call(m.addedNodes, function (n) {
+          return n.nodeType === 1 && (n.matches(".wl-heart") || n.querySelector(".wl-heart"));
+        });
+      });
+      if (hayCorazon) syncHearts();
+      return;
+    }
+    if (pending) return;
     pending = setTimeout(function () { pending = null; sync(); }, 80);
   });
 

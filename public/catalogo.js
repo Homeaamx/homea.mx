@@ -551,8 +551,10 @@
       sel.setAttribute("aria-label", "Piezas por página");
       sel.setAttribute("data-por-pagina", "");
       sel.className = "plp-por-sel";
+      // En la wishlist el selector ya trae su chevrón (CSS): sin "↓" en el texto (2026-11-05).
+      var flecha = orden.closest(".wl-toolbar") ? "" : " ↓";
       sel.innerHTML = OPCIONES_PAGINA.map(function (n) {
-        return '<option value="' + n + '">Mostrar ' + n + " piezas ↓</option>";
+        return '<option value="' + n + '">Mostrar ' + n + " piezas" + flecha + "</option>";
       }).join("");
       orden.insertAdjacentElement("beforebegin", sel);
     }

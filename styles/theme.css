@@ -5398,6 +5398,12 @@ body:has(:is([data-newsletter="ofertas"], [data-newsletter="guias"])) .site-foot
 @media (max-width: 640px) {
   .plp .toolbar:has(.plp-por-sel:not([hidden])) select { padding: 9px 10px; }
 }
+/* Wishlist (Carla, 2026-11-05): el chevrón de los selectores con su propio aire
+   a la derecha, sin encimarse al texto (el padding greige de arriba lo pisaba). */
+.plp .wl-toolbar.toolbar select { padding: 9px 36px 9px 14px; background-position: right 14px center; }
+@media (max-width: 640px) {
+  .plp .wl-toolbar.toolbar:has(.plp-por-sel:not([hidden])) select { padding: 9px 30px 9px 10px; background-position: right 10px center; }
+}
 
 /* Cierre del proyecto (Carla, 2026-11-05): las notas bajo el tipo de cambio en
    12px y rojo oscuro (el de los avisos, #8c2f24), en el cajón y en /mi-proyecto. */
@@ -5437,8 +5443,21 @@ a.wl-wa:hover, a.wl-wa:focus-visible { color: var(--homea-bone); }
 /* Wishlist (Carla, 2026-11-05): el conteo arriba de los filtros y en negritas, y
    hasta abajo un solo botón "Seguir comprando →" a Cocina y Bar. */
 .wl-toolbar .results { order: -1; font-weight: 700; }
-.wl-seguir { display: flex; justify-content: center; margin: 48px 0 8px; }
-.wl-seguir .wl-seguir-btn { width: auto; min-width: 280px; padding: 18px 36px; }
+/* Banda blanca de "Seguir comprando" (Carla, 2026-11-06): como la celda-guía de
+   la home (.cat-guide: superficie blanca, raya dorada, Newsreader con itálica y
+   botón negro), pero en una banda a todo el ancho de la rejilla. */
+.wl-seguir { display: flex; align-items: center; justify-content: space-between; gap: 24px 48px;
+  margin: 48px 0 8px; padding: clamp(28px, 3vw, 44px) clamp(28px, 3.5vw, 52px);
+  background: var(--surface); border: 1px solid var(--border); }
+.wl-seguir-body { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.wl-seguir-body .rule-gold { margin: 0; }
+.wl-seguir-body p { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(24px, 2.2vw, 32px);
+  line-height: 1.26; color: var(--homea-espresso); max-width: 34ch; }
+.wl-seguir-body p em { font-style: italic; }
+.wl-seguir .wl-seguir-btn { flex: none; width: auto; }
+@media (max-width: 760px) {
+  .wl-seguir { flex-direction: column; align-items: flex-start; }
+}
 /* Wishlist: los filtros ocupan su renglón y los dos selectores (piezas y orden)
    van juntos debajo, a la derecha. */
 .wl-toolbar .filters.filters--top { flex: 1 1 100%; }
