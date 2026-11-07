@@ -60,6 +60,9 @@ const MUESTRAS: Record<string, string> = {
   negro: "#1d1d1d",
   negra: "#1d1d1d",
   "negro mate": "#222222",
+  // GE Profile (2026-11-06): Black Slate (gris muy oscuro mate) y Grafito (centros de lavado).
+  "black slate": "linear-gradient(135deg, #5a5856 0%, #3d3b39 50%, #2c2a28 100%)",
+  grafito: "#4a4a48",
   // Elica Seashell (2026-11-06): blanca y negra en mate y en brillante.
   "blanca mate": "#ecebe6",
   "blanca brillante": "linear-gradient(135deg, #ffffff 0%, #e9e9e6 45%, #ffffff 60%, #d6d6d2 100%)",

@@ -3418,6 +3418,7 @@
           "20 kg",
           "21 kg",
           "22 kg",
+          "23 kg",
           "24 kg",
           "25 kg"
         ]
@@ -3428,7 +3429,8 @@
         "valores": [
           "Eléctrica",
           "Gas LP",
-          "Gas natural"
+          "Gas natural",
+          "Gas"
         ]
       },
       {

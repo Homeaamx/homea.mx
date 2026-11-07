@@ -12768,5 +12768,53 @@
    "CXMA3H3PNFB",
    "CXMA3H3PNCG"
   ]
+ },
+ "PWN22JYWCFS": {
+  "colores": [
+   "PWN22JEWCDS",
+   "PWN22JBWCKB"
+  ]
+ },
+ "PWN22JEWCDS": {
+  "colores": [
+   "PWN22JYWCFS",
+   "PWN22JBWCKB"
+  ]
+ },
+ "PWN22JBWCKB": {
+  "colores": [
+   "PWN22JYWCFS",
+   "PWN22JEWCDS"
+  ]
+ },
+ "PYN21JYWCFS": {
+  "colores": [
+   "PYN21JEWCDS"
+  ]
+ },
+ "PYN21JEWCDS": {
+  "colores": [
+   "PYN21JYWCFS"
+  ]
+ },
+ "PNM26PGTCFS": {
+  "colores": [
+   "PNM26PGTFPS"
+  ]
+ },
+ "PNM26PGTFPS": {
+  "colores": [
+   "PNM26PGTCFS"
+  ]
+ },
+ "GCL2340PSBB0": {
+  "colores": [
+   "GCL2340PSDG0"
+  ]
+ },
+ "GCL2340PSDG0": {
+  "colores": [
+   "GCL2340PSBB0"
+  ]
  }
 }
