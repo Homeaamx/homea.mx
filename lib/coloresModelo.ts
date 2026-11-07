@@ -70,6 +70,8 @@ const MUESTRAS: Record<string, string> = {
   "negro brillante": "#0d0d0d",
   // Benessi: frente de cristal negro (hornos, microondas y cafetera).
   "cristal negro": "linear-gradient(135deg, #3a3a3a 0%, #111111 45%, #262626 60%, #050505 100%)",
+  // IO Mabe (2026-11-06): parrillas de gas en vidrio negro frente a las de acero inoxidable.
+  "vidrio negro": "linear-gradient(135deg, #3a3a3a 0%, #111111 45%, #262626 60%, #050505 100%)",
   "plástico negro": "#262626",
   "chrome/coal black": mitad("#c9cdd0", "#1f1f1f"),
   "chrome/white": mitad("#c9cdd0", "#f4f4f2"),

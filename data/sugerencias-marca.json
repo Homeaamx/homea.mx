@@ -12816,5 +12816,45 @@
   "colores": [
    "GCL2340PSBB0"
   ]
+ },
+ "PIO64KRNR0": {
+  "colores": [
+   "PIO64KRTI0"
+  ]
+ },
+ "PIO64KRTI0": {
+  "colores": [
+   "PIO64KRNR0"
+  ]
+ },
+ "PIO75KMNR0": {
+  "colores": [
+   "PIO75KMTI0"
+  ]
+ },
+ "PIO75KMTI0": {
+  "colores": [
+   "PIO75KMNR0"
+  ]
+ },
+ "IO950FS0": {
+  "colores": [
+   "IO950TS0"
+  ]
+ },
+ "IO950TS0": {
+  "colores": [
+   "IO950FS0"
+  ]
+ },
+ "IO160MDI1": {
+  "accesorios": [
+   "JX160"
+  ]
+ },
+ "IO160MDI": {
+  "accesorios": [
+   "JX160"
+  ]
  }
 }
