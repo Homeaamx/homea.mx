@@ -3971,6 +3971,8 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="ge-profile"] { height: 40px; }
 /* IO Mabe (2026-11-06): MABE/iomabelogo.png (negro, transparente), palabra "io mabe". */
 .pdp-logo[data-marca="io-mabe"] { height: 30px; }
+/* Mabe (2026-11-06): logotipo 2026 de MABE/NUEVOS MABE 2026/Logotipo Mabe - RGB.png (azul marino, transparente). */
+.pdp-logo[data-marca="mabe"] { height: 32px; }
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
    técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
    una línea, baja a dos dentro de su pestaña. */

@@ -1,5 +1,5 @@
 {
-  "_nota": "Orden y nombre visible de los filtros por Subcategoría 2 (= Tipo de producto en Shopify). Clave = metafield filtros.<clave>; \"marca\" = vendor, \"precio\" = precio. GENERADO desde FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx (OneDrive, columna E = orden propuesto) el 2026-10-06. Si cambia la tabla, se regenera. 2026-10-07: se añade filtros.bisagra (Bisagra / apertura) a refrigeración por indicación de Carla (prioritario en refrigeración y hornos). 2026-10-09: Bisagra / apertura también en Hornos y Microondas (hornos de velocidad), después de Diseño. 2026-10-12: se añade filtros.altura_ada (\"Altura\": Estándar / ADA) a Lavavajillas y a refrigeración (todas menos Accesorios), después de Ancho, por indicación de Carla. 2026-10-27: Microondas suma \"Tipo de instalación\" (Empotre · De cajón · De mesa · Sobre estufa; el de cajón lleva también Empotre) y \"Tipo de funcionamiento\" (solo Multifunción = horno + microondas; los convencionales van sin valor, porque Empotre / De cajón / De mesa / Sobre estufa ya lo implican) antes de Diseño, por indicación de Carla; Diseño se queda porque las fichas de Guías enlazan con diseno:*. 2026-10-27: Campanas suma los anchos 20\", 26\", 34\", 40\", 46\" y 72\" (catálogo Elica). 2026-10-28: anchos de Artisan (Asadores 26\"; Quemador lateral 14\"; Gabinetes 15, 17, 20, 26, 36 y 42\"), aprobados por Carla. 2026-10-29: Uso (Cocina / Exterior) en Tarjas y Accesorios de Tarjas, Exterior en Monomandos, 23\" en Gabinetes y 56\" en Asadores (Alfresco). 2026-11-04: nuevo tipo \"Humidor para puros\" (Refrigeración, tras Centros de bebida; Benessi BKHUM24) con filtros de su ficha técnica; Cavas de vino suma ancho 36\" (Benessi BKFW36). 2026-11-06: Campanas (y Campanas — Uso: Exterior) suman el grupo Acabado (filtros.acabado: Pulido · Cepillado · Mate · Brillante) después de Color, por indicación de Carla. 2026-11-06: Accesorios de cocción suma Color y Acabado (cubreductos, extensiones de chimenea y cubiertas decorativas de campana, con el color y acabado de su campana). 2026-11-06: Accesorios de refrigeración suma Color y Acabado (kits de jaladeras Café por acabado) y Refrigeradores el ancho 33\" (Café CWE19), aprobados por Carla. 2026-11-06: Parrillas suma el ancho 12\" (dominó de 30 cm IO Mabe) y Estufas el horneado Air Fry (estufas IO Mabe y Monogram).",
+  "_nota": "Orden y nombre visible de los filtros por Subcategoría 2 (= Tipo de producto en Shopify). Clave = metafield filtros.<clave>; \"marca\" = vendor, \"precio\" = precio. GENERADO desde FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx (OneDrive, columna E = orden propuesto) el 2026-10-06. Si cambia la tabla, se regenera. 2026-10-07: se añade filtros.bisagra (Bisagra / apertura) a refrigeración por indicación de Carla (prioritario en refrigeración y hornos). 2026-10-09: Bisagra / apertura también en Hornos y Microondas (hornos de velocidad), después de Diseño. 2026-10-12: se añade filtros.altura_ada (\"Altura\": Estándar / ADA) a Lavavajillas y a refrigeración (todas menos Accesorios), después de Ancho, por indicación de Carla. 2026-10-27: Microondas suma \"Tipo de instalación\" (Empotre · De cajón · De mesa · Sobre estufa; el de cajón lleva también Empotre) y \"Tipo de funcionamiento\" (solo Multifunción = horno + microondas; los convencionales van sin valor, porque Empotre / De cajón / De mesa / Sobre estufa ya lo implican) antes de Diseño, por indicación de Carla; Diseño se queda porque las fichas de Guías enlazan con diseno:*. 2026-10-27: Campanas suma los anchos 20\", 26\", 34\", 40\", 46\" y 72\" (catálogo Elica). 2026-10-28: anchos de Artisan (Asadores 26\"; Quemador lateral 14\"; Gabinetes 15, 17, 20, 26, 36 y 42\"), aprobados por Carla. 2026-10-29: Uso (Cocina / Exterior) en Tarjas y Accesorios de Tarjas, Exterior en Monomandos, 23\" en Gabinetes y 56\" en Asadores (Alfresco). 2026-11-04: nuevo tipo \"Humidor para puros\" (Refrigeración, tras Centros de bebida; Benessi BKHUM24) con filtros de su ficha técnica; Cavas de vino suma ancho 36\" (Benessi BKFW36). 2026-11-06: Campanas (y Campanas — Uso: Exterior) suman el grupo Acabado (filtros.acabado: Pulido · Cepillado · Mate · Brillante) después de Color, por indicación de Carla. 2026-11-06: Accesorios de cocción suma Color y Acabado (cubreductos, extensiones de chimenea y cubiertas decorativas de campana, con el color y acabado de su campana). 2026-11-06: Accesorios de refrigeración suma Color y Acabado (kits de jaladeras Café por acabado) y Refrigeradores el ancho 33\" (Café CWE19), aprobados por Carla. 2026-11-06: Parrillas suma el ancho 12\" (dominó de 30 cm IO Mabe) y Estufas el horneado Air Fry (estufas IO Mabe y Monogram). 2026-11-06 (Mabe): valores nuevos de la carga Mabe (anchos de refrigeración y estufas 20\", Air Fry, Gris oscuro/Rosa/Plata, capacidades de lavandería, 'Lavadoras de 2 tinas', Portátil/Ducto y 4–5 toneladas en Aire acondicionado, Ultrafiltración en Purificadores).",
   "subcategorias": {
     "Refrigeradores": [
       {
@@ -45,7 +45,12 @@
         "clave": "ancho",
         "valores": [
           "18\"",
+          "22\"",
+          "23\"",
           "24\"",
+          "26\"",
+          "27\"",
+          "29\"",
           "30\"",
           "33\"",
           "36\"",
@@ -70,7 +75,8 @@
           "Negro",
           "Blanco",
           "Crema",
-          "Rojo"
+          "Rojo",
+          "Gris oscuro"
         ]
       },
       {
@@ -454,6 +460,7 @@
         "clave": "ancho",
         "valores": [
           "18\"",
+          "19\"",
           "24\""
         ]
       },
@@ -468,7 +475,8 @@
           "Acero inoxidable",
           "Gris",
           "Negro",
-          "Blanco"
+          "Blanco",
+          "Plata"
         ]
       },
       {
@@ -692,6 +700,7 @@
         "valores": [
           "15\"",
           "18\"",
+          "20\"",
           "24\"",
           "30\"",
           "36\""
@@ -725,7 +734,8 @@
         "clave": "color",
         "valores": [
           "Acero inoxidable",
-          "Panelable"
+          "Panelable",
+          "Negro"
         ]
       },
       {
@@ -963,6 +973,7 @@
         "nombre": "Ancho",
         "clave": "ancho",
         "valores": [
+          "20\"",
           "24\"",
           "30\"",
           "36\"",
@@ -1024,7 +1035,9 @@
           "Amarillo",
           "Rojo",
           "Naranja",
-          "Crema"
+          "Crema",
+          "Plata",
+          "Gris oscuro"
         ]
       },
       {
@@ -1382,7 +1395,9 @@
           "Negro",
           "Gris",
           "Blanco",
-          "Cristal"
+          "Cristal",
+          "Plata",
+          "Rosa"
         ]
       },
       {
@@ -1530,7 +1545,9 @@
           "Negro",
           "Gris",
           "Blanco",
-          "Panelable"
+          "Panelable",
+          "Plata",
+          "Gris oscuro"
         ]
       },
       {
@@ -2467,7 +2484,8 @@
         "clave": "funcionamiento",
         "valores": [
           "Ósmosis inversa",
-          "Tanque con filtro"
+          "Tanque con filtro",
+          "Ultrafiltración"
         ]
       },
       {
@@ -2543,7 +2561,9 @@
           "Gris oscuro",
           "Naranja",
           "Negro",
-          "Níquel"
+          "Níquel",
+          "Plata",
+          "Gris"
         ]
       },
       {
@@ -3399,7 +3419,8 @@
           "Secadoras",
           "Lavasecadoras (2 en 1)",
           "Centros de lavado",
-          "Accesorio de lavandería"
+          "Accesorio de lavandería",
+          "Lavadoras de 2 tinas"
         ]
       },
       {
@@ -3416,6 +3437,11 @@
         "valores": [
           "9 kg",
           "10 kg",
+          "11 kg",
+          "13 kg",
+          "16 kg",
+          "17 kg",
+          "18 kg",
           "19 kg",
           "20 kg",
           "21 kg",
@@ -3441,7 +3467,8 @@
         "valores": [
           "Negro",
           "Gris",
-          "Blanco"
+          "Blanco",
+          "Plata"
         ]
       },
       {
@@ -3501,7 +3528,9 @@
           "Minisplit de pared",
           "Multisplit",
           "Piso-techo",
-          "Cassette"
+          "Cassette",
+          "Portátil",
+          "Ducto"
         ]
       },
       {
@@ -3511,7 +3540,9 @@
           "1 tonelada (12,000 BTU)",
           "1.5 toneladas (18,000 BTU)",
           "2 toneladas (24,000 BTU)",
-          "3 toneladas (36,000 BTU)"
+          "3 toneladas (36,000 BTU)",
+          "4 toneladas (48,000 BTU)",
+          "5 toneladas (60,000 BTU)"
         ]
       },
       {

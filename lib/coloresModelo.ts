@@ -63,6 +63,17 @@ const MUESTRAS: Record<string, string> = {
   // GE Profile (2026-11-06): Black Slate (gris muy oscuro mate) y Grafito (centros de lavado).
   "black slate": "linear-gradient(135deg, #5a5856 0%, #3d3b39 50%, #2c2a28 100%)",
   grafito: "#4a4a48",
+  // Mabe (2026-11-06): nombres comerciales de Mabe tal como van en el título.
+  "plata mercury": "linear-gradient(135deg, #e4e5e6 0%, #b9bcbf 50%, #9a9da0 100%)",
+  silver: "linear-gradient(135deg, #e8e8e8 0%, #bdbdbd 50%, #9e9e9e 100%)",
+  "diamond gray": "linear-gradient(135deg, #a9a9a6 0%, #7f7f7c 50%, #66665f 100%)",
+  "dark silver": "linear-gradient(135deg, #8d8f91 0%, #66686a 50%, #4c4e50 100%)",
+  "acero inoxidable mate": "linear-gradient(135deg, #d4d4d1 0%, #b4b4b0 50%, #a0a09c 100%)",
+  espejo: "linear-gradient(135deg, #f2f2f2 0%, #a9abad 45%, #e6e7e8 60%, #8c8e90 100%)",
+  "negro espejo": "linear-gradient(135deg, #4a4a4a 0%, #0f0f0f 45%, #2f2f2f 60%, #050505 100%)",
+  "rose gold": "linear-gradient(135deg, #f0c4b0 0%, #d29a82 50%, #b07a62 100%)",
+  "black slate y rose gold": mitad("#3d3b39", "#d29a82"),
+  "diamond gray y rose gold": mitad("#7f7f7c", "#d29a82"),
   // Elica Seashell (2026-11-06): blanca y negra en mate y en brillante.
   "blanca mate": "#ecebe6",
   "blanca brillante": "linear-gradient(135deg, #ffffff 0%, #e9e9e6 45%, #ffffff 60%, #d6d6d2 100%)",
