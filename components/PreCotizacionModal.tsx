@@ -199,11 +199,13 @@ export default function PreCotizacionModal({ carrito, onCerrar }: Props) {
           <p className="pc-acciones-t">
             Llena tus datos, descarga tu pre-cotización y envíala por WhatsApp. ¡Así de fácil!
           </p>
-          {!listo ? (
-            <p className={`pc-hint${intento ? " is-error" : ""}`} role="status">
-              {intento
-                ? "Corrige los campos marcados en rojo para descargar o enviar tu pre-cotización."
-                : "Llena los campos obligatorios (nombre y teléfono) para descargar o enviar."}
+          {/* Solo cuando el cliente intenta descargar o enviar sin sus datos, y en
+              rojo (Carla, 2026-11-06); antes salía siempre como instrucción. */}
+          {!listo && intento ? (
+            <p className="pc-hint is-error" role="alert">
+              {!datos.nombre.trim() || !datos.telefono.trim()
+                ? "Llena los campos obligatorios (nombre y teléfono) para descargar o enviar."
+                : "Corrige los campos marcados en rojo para descargar o enviar tu pre-cotización."}
             </p>
           ) : null}
           <label className="pc-boletin">

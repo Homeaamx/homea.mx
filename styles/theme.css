@@ -3965,6 +3965,8 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="blanco"] { height: 28px; }
 /* Monogram (2026-11-06): logo horizontal con el monograma, del PNG de OneDrive MABE/monogram_logo.png. */
 .pdp-logo[data-marca="monogram"] { height: 30px; }
+/* Café (2026-11-06): sin fondo, del PNG MABE/Logos Café Slogan/Logo_Distinct_by_design_Negro_y_dorado.png; más grande que el de recuadro. */
+.pdp-logo[data-marca="cafe"] { height: 76px; max-width: 200px; }
 /* GE Profile (2026-11-06): MABE/geprofile.png (blanco transparente) pasado a negro, monograma + "Profile". */
 .pdp-logo[data-marca="ge-profile"] { height: 40px; }
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
