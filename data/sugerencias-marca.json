@@ -13430,5 +13430,15 @@
    "RWU505NVMRX0",
    "RWU430NVMRX0"
   ]
+ },
+ "EI5020BAPN1": {
+  "colores": [
+   "EI5020BAPS1"
+  ]
+ },
+ "EI5020BAPS1": {
+  "colores": [
+   "EI5020BAPN1"
+  ]
  }
 }
