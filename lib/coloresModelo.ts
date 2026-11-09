@@ -63,6 +63,11 @@ const MUESTRAS: Record<string, string> = {
   // GE Profile (2026-11-06): Black Slate (gris muy oscuro mate) y Grafito (centros de lavado).
   "black slate": "linear-gradient(135deg, #5a5856 0%, #3d3b39 50%, #2c2a28 100%)",
   grafito: "#4a4a48",
+  // KitchenAid (2026-11-09): Black Ore (negro grafito mate) y Juniper (verde profundo).
+  "black ore": "linear-gradient(135deg, #4a4542 0%, #2e2a28 50%, #1f1c1a 100%)",
+  juniper: "linear-gradient(135deg, #4a6159 0%, #2f453e 50%, #22342e 100%)",
+  // Parrillas KitchenAid: vidrio negro con marco de acero frente a la versión sin marco (Negro).
+  "marco acero inoxidable": mitad("#1d1d1d", "#c8c8c4"),
   // Mabe (2026-11-06): nombres comerciales de Mabe tal como van en el título.
   "plata mercury": "linear-gradient(135deg, #e4e5e6 0%, #b9bcbf 50%, #9a9da0 100%)",
   silver: "linear-gradient(135deg, #e8e8e8 0%, #bdbdbd 50%, #9e9e9e 100%)",
@@ -74,6 +79,13 @@ const MUESTRAS: Record<string, string> = {
   "rose gold": "linear-gradient(135deg, #f0c4b0 0%, #d29a82 50%, #b07a62 100%)",
   "black slate y rose gold": mitad("#3d3b39", "#d29a82"),
   "diamond gray y rose gold": mitad("#7f7f7c", "#d29a82"),
+  // Acros (2026-11-09): nombres de la lista Whirlpool tal como van en el título.
+  "gris acero": METAL,
+  titanio: "linear-gradient(135deg, #a3a39f 0%, #77776f 50%, #5c5c57 100%)",
+  plateado: "linear-gradient(135deg, #ececec 0%, #c0c0c0 50%, #a2a2a2 100%)",
+  coral: "#e8796b",
+  morado: "#6c4675",
+  rosa: "#d9a3a8",
   // Elica Seashell (2026-11-06): blanca y negra en mate y en brillante.
   "blanca mate": "#ecebe6",
   "blanca brillante": "linear-gradient(135deg, #ffffff 0%, #e9e9e6 45%, #ffffff 60%, #d6d6d2 100%)",
@@ -115,6 +127,10 @@ const MUESTRAS: Record<string, string> = {
   "nero con detalles dorados": mitad("#111111", "#c8a24a"),
   "nero detalles dorados": mitad("#111111", "#c8a24a"),
   rosso: "#b3262b",
+  // Maytag (2026-11-09): lavadoras y secadoras Pet Pro. "Gris Acero" usa la muestra
+  // que trae la rama de Acros (se junta antes que Maytag) y "Cromo" la de arriba.
+  "midnight steel": "linear-gradient(135deg, #5d6066 0%, #43464c 50%, #33363b 100%)",
+  "volcano black": "#2a2a2a",
 };
 
 /**

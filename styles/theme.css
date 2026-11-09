@@ -3963,6 +3963,8 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="kraus"] { height: 36px; }
 .pdp-logo[data-marca="hoshizaki"] { height: 56px; }
 .pdp-logo[data-marca="blanco"] { height: 28px; }
+/* KitchenAid (2026-11-09): WHIRLPOOL/KitchenAid.png (rojo, transparente); muy horizontal (10:1). */
+.pdp-logo[data-marca="kitchenaid"] { height: 24px; }
 /* Monogram (2026-11-06): logo horizontal con el monograma, del PNG de OneDrive MABE/monogram_logo.png. */
 .pdp-logo[data-marca="monogram"] { height: 30px; }
 /* Café (2026-11-06): sin fondo, del PNG MABE/Logos Café Slogan/Logo_Distinct_by_design_Negro_y_dorado.png; más grande que el de recuadro. */
@@ -3978,6 +3980,12 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 /* IEM y Easy (2026-11-09): MABE/iem.png y MABE/easy.png (blancos, transparentes) pasados a negro. */
 .pdp-logo[data-marca="iem"] { height: 34px; }
 .pdp-logo[data-marca="easy"] { height: 36px; }
+/* Whirlpool (2026-11-09): WHIRLPOOL/whirlpool-logo-0.png (negro con el aro amarillo, transparente). */
+.pdp-logo[data-marca="whirlpool"] { height: 34px; }
+/* Acros (2026-11-09): WHIRLPOOL/acros-mexico-vector-logo.png (morado, transparente). */
+.pdp-logo[data-marca="acros"] { height: 36px; }
+/* Maytag (2026-11-09): WHIRLPOOL/Maytag-Logo.png (escudo oficial, transparente alrededor). */
+.pdp-logo[data-marca="maytag"] { height: 34px; }
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
    técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
    una línea, baja a dos dentro de su pestaña. */

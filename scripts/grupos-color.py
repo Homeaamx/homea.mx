@@ -23,6 +23,7 @@ muestra, la pieza no aparece en los círculos. Detalle: docs/COLORES-POR-MARCA.m
 import collections
 import html
 import json
+import os
 import re
 import sys
 import urllib.request
@@ -31,14 +32,14 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 SUGERENCIAS = RAIZ / "data" / "sugerencias-marca.json"
 MARCAS = RAIZ / "data" / "marcas.json"
-SITIO = "http://localhost:3000"
+SITIO = os.environ.get("SITIO", "http://localhost:3000")  # otro puerto: SITIO=http://localhost:3014
 
 # Palabras de color o acabado que cambian entre los títulos de un mismo modelo.
 COLOR = re.compile(
     r"\b(negro|negra|blanco|blanca|gris|acero inoxidable|inoxidable|acero|cromo|cromado|dorado|oro|bronce|"
     r"níquel|niquel|mate|cepillado|pulido|satinado|matte black|black|white|stainless|steel|chrome|gold|"
     r"champagne|nero|bianco|grafito|antracita|carbón|cobre|platino|plata|rojo|azul|verde|crema|beige|café|"
-    r"panelable|vidrio)\b"
+    r"rosa|morado|coral|titanio|plateado|panelable|vidrio)\b"
 )
 
 
