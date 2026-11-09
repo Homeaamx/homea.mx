@@ -2,7 +2,8 @@
 """
 Sube a Shopify las fotos que HOMEA deja en OneDrive — HOMEA
 
-Carla deja las fotos en `FOTOS PRODUCTO/<MARCA>/<SKU>-<N>.<ext>` (OneDrive que ve
+Carla deja las fotos en `FOTOS PRODUCTO/<PROVEEDOR>/<MARCA>/<SKU>-<N>.<ext>`
+(carpetas por proveedor desde 2026-11-09: ARTEXA/, GRUPO MABE/…; OneDrive que ve
 en Finder: ~/Library/CloudStorage/OneDrive-Homea 2/…; OneDrive cambia el nombre
 de la carpeta al reiniciarse, así que se toma la que exista). Este script, por cada SKU:
 
@@ -17,7 +18,8 @@ Credenciales: .env.local (SHOPIFY_ADMIN_DOMAIN, SHOPIFY_ADMIN_CLIENT_ID,
 SHOPIFY_ADMIN_CLIENT_SECRET; client credentials de la app "HOMEA Sitio Web").
 
 Uso:
-  python3 scripts/subir-fotos-producto.py <MARCA> [SKU …] [--prueba]
+  python3 scripts/subir-fotos-producto.py "<PROVEEDOR>/<MARCA>" [SKU …] [--prueba]
+    p. ej. "ARTEXA/ELICA" o "GRUPO MABE/GE PROFILE".
     sin SKUs: todos los archivos de la carpeta de la marca.
     --prueba: dice qué subiría, sin escribir en Shopify.
 """
