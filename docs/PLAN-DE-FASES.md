@@ -492,6 +492,7 @@ sirvió de piloto del patrón (5 fichas + import en borrador).
 
 ### 4.3 Import a Shopify + consumo headless
 - [ ] Carga masiva (Shopify MCP / Matrixify); validación de integridad.
+- [ ] **Whirlpool — segunda revisión (Carla, 2026-11-09):** 7 refrigeradores Top Mount vienen con precio 0 en `Listas de precios WHIRLPOOL 2026-2 05.xlsx` y se quedaron fuera hasta tener la info completa: WT1230K, WT1231D, WT1433D, WT1435V (sin descripción), WT1736N, WT1880A, WT1890A (WT1433D, WT1435V, WT1880A y WT1890A tampoco están en SAE). Cuando haya precio, subirlos con el mismo proceso (`.carga/whirlpool/`).
 - [ ] Consumo por **Storefront API** con **ISR / on-demand revalidation** (no se construyen 25k de golpe).
 - [ ] ⭐ **REGENERAR EL ÍNDICE DEL BUSCADOR** después de cada carga o cambio de catálogo:
 
