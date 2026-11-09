@@ -13402,5 +13402,33 @@
   "colores": [
    "RMF0411YMXS1"
   ]
+ },
+ "HS18HFW13MIE": {
+  "colores": [
+   "HS18HFB13MIE"
+  ]
+ },
+ "HS18HFB13MIE": {
+  "colores": [
+   "HS18HFW13MIE"
+  ]
+ },
+ "RWU505NVMRX0": {
+  "accesorios": [
+   "B30LA0Z00",
+   "RWU430NVMRX0"
+  ]
+ },
+ "RWU430NVMRX0": {
+  "accesorios": [
+   "B30LA0Z00",
+   "RWU505NVMRX0"
+  ]
+ },
+ "B30LA0Z00": {
+  "accesorios": [
+   "RWU505NVMRX0",
+   "RWU430NVMRX0"
+  ]
  }
 }
