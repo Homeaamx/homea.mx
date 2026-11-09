@@ -5488,3 +5488,9 @@ a.wl-wa:hover, a.wl-wa:focus-visible { color: var(--homea-bone); }
   opacity: 0; transform: translateY(3px); transition: opacity var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard);
 }
 .pcard-tip-titulo.is-on { opacity: 1; transform: none; }
+
+/* Cajón "Mi proyecto" (Carla, 2026-11-09): el tag de disponibilidad es el de las
+   tarjetas (.pcard-tag: En stock verde olivo con palomita, Bajo pedido café con
+   reloj), en línea y a la escala del cajón. */
+.proy-drawer .proy-tag.pcard-tag { position: static; font-size: 9.5px; padding: 5px 8px 4px; gap: 5px; }
+.proy-drawer .proy-tag.pcard-tag .pcard-tag-ic { width: 11px; height: 11px; }

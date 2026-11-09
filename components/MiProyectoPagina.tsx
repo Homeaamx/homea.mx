@@ -11,23 +11,9 @@
 // cotiza → "Enviar listado a un ejecutivo" (abre la pre-cotización).
 
 import { useCarrito } from "./CarritoContexto";
-import { topeAlcanzado } from "./CarritoDrawer";
+import { ICONO_PEDIDO, ICONO_STOCK, topeAlcanzado } from "./CarritoDrawer";
 import ProyectoCierre from "./ProyectoCierre";
 import { formatearDinero, type LineaCarrito } from "@/lib/shopify/tipos";
-
-/** Íconos de disponibilidad: las mismas figuras que las tarjetas del catálogo. */
-const ICONO_STOCK = (
-  <svg className="pcard-tag-ic" viewBox="0 0 16 16" aria-hidden="true">
-    <circle cx="8" cy="8" r="7.2" fill="currentColor" />
-    <path className="ic-check" d="m4.9 8.2 2.1 2.1 4.1-4.4" fill="none" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-const ICONO_PEDIDO = (
-  <svg className="pcard-tag-ic" viewBox="0 0 16 16" aria-hidden="true">
-    <circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" strokeWidth="1.4" />
-    <path d="M8 4.6V8l2.4 1.5" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
 
 /** Importe de la línea: precio público con IVA × cantidad, en la moneda de lista. */
 function importeDe(l: LineaCarrito) {

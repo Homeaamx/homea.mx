@@ -21,6 +21,21 @@ import { formatearDinero } from "@/lib/shopify/tipos";
 
 import ProyectoCierre from "./ProyectoCierre";
 
+/** Íconos de disponibilidad: las mismas figuras que las tarjetas del catálogo
+ *  (lib/shopify/htmlCatalogo.ts). Los usan el cajón y /mi-proyecto. */
+export const ICONO_STOCK = (
+  <svg className="pcard-tag-ic" viewBox="0 0 16 16" aria-hidden="true">
+    <circle cx="8" cy="8" r="7.2" fill="currentColor" />
+    <path className="ic-check" d="m4.9 8.2 2.1 2.1 4.1-4.4" fill="none" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+export const ICONO_PEDIDO = (
+  <svg className="pcard-tag-ic" viewBox="0 0 16 16" aria-hidden="true">
+    <circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" strokeWidth="1.4" />
+    <path d="M8 4.6V8l2.4 1.5" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 /** ¿Ya no se puede pedir una más? Solo aplica a piezas en stock con existencia conocida. */
 export function topeAlcanzado(linea: LineaCarrito): boolean {
   return linea.enStock && linea.maximo !== null && linea.maximo > 0 && linea.cantidad >= linea.maximo;
@@ -121,7 +136,9 @@ export default function CarritoDrawer({
                   </span>
                   {/* 4 · Disponibilidad */}
                   <span className="proy-tags">
-                    <span className={`proy-tag${linea.enStock ? " is-stock" : ""}`}>
+                    {/* Mismo tag que tarjetas, ficha y /mi-proyecto (Carla, 2026-11-09). */}
+                    <span className={`proy-tag pcard-tag ${linea.enStock ? "is-stock" : "is-pedido"}`}>
+                      {linea.enStock ? ICONO_STOCK : ICONO_PEDIDO}
                       {linea.enStock ? "En stock" : "Bajo pedido"}
                     </span>
                   </span>
