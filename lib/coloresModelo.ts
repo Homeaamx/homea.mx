@@ -63,6 +63,11 @@ const MUESTRAS: Record<string, string> = {
   // GE Profile (2026-11-06): Black Slate (gris muy oscuro mate) y Grafito (centros de lavado).
   "black slate": "linear-gradient(135deg, #5a5856 0%, #3d3b39 50%, #2c2a28 100%)",
   grafito: "#4a4a48",
+  // KitchenAid (2026-11-09): Black Ore (negro grafito mate) y Juniper (verde profundo).
+  "black ore": "linear-gradient(135deg, #4a4542 0%, #2e2a28 50%, #1f1c1a 100%)",
+  juniper: "linear-gradient(135deg, #4a6159 0%, #2f453e 50%, #22342e 100%)",
+  // Parrillas KitchenAid: vidrio negro con marco de acero frente a la versión sin marco (Negro).
+  "marco acero inoxidable": mitad("#1d1d1d", "#c8c8c4"),
   // Mabe (2026-11-06): nombres comerciales de Mabe tal como van en el título.
   "plata mercury": "linear-gradient(135deg, #e4e5e6 0%, #b9bcbf 50%, #9a9da0 100%)",
   silver: "linear-gradient(135deg, #e8e8e8 0%, #bdbdbd 50%, #9e9e9e 100%)",

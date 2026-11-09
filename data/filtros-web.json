@@ -78,7 +78,8 @@
           "Crema",
           "Rojo",
           "Gris oscuro",
-          "Gris"
+          "Gris",
+          "Verde"
         ]
       },
       {
@@ -291,7 +292,9 @@
         "clave": "color",
         "valores": [
           "Acero inoxidable",
-          "Panelable"
+          "Panelable",
+          "Negro",
+          "Verde"
         ]
       },
       {
@@ -567,7 +570,9 @@
         "clave": "color",
         "valores": [
           "Acero inoxidable",
-          "Panelable"
+          "Panelable",
+          "Negro",
+          "Verde"
         ]
       },
       {
@@ -743,7 +748,8 @@
           "Acero inoxidable",
           "Panelable",
           "Negro",
-          "Plata"
+          "Plata",
+          "Verde"
         ]
       },
       {
@@ -1269,6 +1275,7 @@
         "clave": "ancho",
         "valores": [
           "24\"",
+          "27\"",
           "30\"",
           "31.5\"",
           "36\""
@@ -1393,6 +1400,7 @@
         "valores": [
           "Menor a 24\"",
           "24\"",
+          "27\"",
           "30\"",
           "31.5\""
         ]
@@ -1407,7 +1415,8 @@
           "Blanco",
           "Cristal",
           "Plata",
-          "Rosa"
+          "Rosa",
+          "Verde"
         ]
       },
       {
@@ -1557,7 +1566,8 @@
           "Blanco",
           "Panelable",
           "Plata",
-          "Gris oscuro"
+          "Gris oscuro",
+          "Verde"
         ]
       },
       {
@@ -1567,7 +1577,8 @@
           "Pulido",
           "Cepillado",
           "Mate",
-          "Brillante"
+          "Brillante",
+          "Satinado"
         ]
       },
       {
@@ -1742,6 +1753,7 @@
         "clave": "ancho",
         "valores": [
           "24\"",
+          "27\"",
           "30\""
         ]
       },
@@ -1753,7 +1765,8 @@
           "Negro",
           "Gris",
           "Panelable",
-          "Cristal"
+          "Cristal",
+          "Verde"
         ]
       },
       {
@@ -1818,7 +1831,9 @@
         "nombre": "Tipo",
         "clave": "tipo",
         "valores": [
-          "Depende del producto (se define marca por marca)"
+          "Depende del producto (se define marca por marca)",
+          "Kit de instalación o conexión",
+          "Motor de campana"
         ]
       },
       {
@@ -1845,7 +1860,8 @@
         "valores": [
           "Pulido",
           "Cepillado",
-          "Brillante"
+          "Brillante",
+          "Satinado"
         ]
       },
       {
@@ -1964,7 +1980,8 @@
           "Negro",
           "Blanco",
           "Panelable",
-          "Gris"
+          "Gris",
+          "Verde"
         ]
       },
       {
@@ -2413,7 +2430,8 @@
         "valores": [
           "0.55 HP",
           "0.75 HP",
-          "1.0 HP"
+          "1.0 HP",
+          "0.5 HP"
         ]
       },
       {
