@@ -3963,6 +3963,8 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="kraus"] { height: 36px; }
 .pdp-logo[data-marca="hoshizaki"] { height: 56px; }
 .pdp-logo[data-marca="blanco"] { height: 28px; }
+/* KitchenAid (2026-11-09): WHIRLPOOL/KitchenAid.png (rojo, transparente); muy horizontal (10:1). */
+.pdp-logo[data-marca="kitchenaid"] { height: 24px; }
 /* Monogram (2026-11-06): logo horizontal con el monograma, del PNG de OneDrive MABE/monogram_logo.png. */
 .pdp-logo[data-marca="monogram"] { height: 30px; }
 /* Café (2026-11-06): sin fondo, del PNG MABE/Logos Café Slogan/Logo_Distinct_by_design_Negro_y_dorado.png; más grande que el de recuadro. */
