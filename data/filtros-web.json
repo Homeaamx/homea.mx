@@ -77,7 +77,8 @@
           "Blanco",
           "Crema",
           "Rojo",
-          "Gris oscuro"
+          "Gris oscuro",
+          "Plata"
         ]
       },
       {
@@ -3442,6 +3443,7 @@
           "11 kg",
           "12 kg",
           "13 kg",
+          "15 kg",
           "16 kg",
           "17 kg",
           "18 kg",
@@ -3472,7 +3474,9 @@
           "Gris",
           "Gris oscuro",
           "Blanco",
-          "Plata"
+          "Plata",
+          "Rosa",
+          "Morado"
         ]
       },
       {

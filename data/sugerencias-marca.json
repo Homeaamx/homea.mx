@@ -13440,5 +13440,139 @@
   "colores": [
    "EI5020BAPN1"
   ]
+ },
+ "AFR4010G": {
+  "colores": [
+   "AFR4010B"
+  ]
+ },
+ "AFR4010B": {
+  "colores": [
+   "AFR4010G"
+  ]
+ },
+ "AFR2110G": {
+  "colores": [
+   "AFR2110B"
+  ]
+ },
+ "AFR2110B": {
+  "colores": [
+   "AFR2110G"
+  ]
+ },
+ "AFR2000G": {
+  "colores": [
+   "AFR2000B"
+  ]
+ },
+ "AFR2000B": {
+  "colores": [
+   "AFR2000G"
+  ]
+ },
+ "ALF2253EG": {
+  "colores": [
+   "ALF2253EC",
+   "ALF2253EM",
+   "ALF2253EB"
+  ]
+ },
+ "ALF2253EC": {
+  "colores": [
+   "ALF2253EG",
+   "ALF2253EM",
+   "ALF2253EB"
+  ]
+ },
+ "ALF2253EM": {
+  "colores": [
+   "ALF2253EG",
+   "ALF2253EC",
+   "ALF2253EB"
+  ]
+ },
+ "ALF2253EB": {
+  "colores": [
+   "ALF2253EG",
+   "ALF2253EC",
+   "ALF2253EM"
+  ]
+ },
+ "NAW1001S": {
+  "colores": [
+   "NAW1001B"
+  ]
+ },
+ "NAW1001B": {
+  "colores": [
+   "NAW1001S"
+  ]
+ },
+ "ALF1551ER": {
+  "colores": [
+   "ALF1551EG"
+  ]
+ },
+ "ALF1551EG": {
+  "colores": [
+   "ALF1551ER"
+  ]
+ },
+ "AM1807D": {
+  "colores": [
+   "AM1807B",
+   "AM1807W"
+  ]
+ },
+ "AM1807B": {
+  "colores": [
+   "AM1807D",
+   "AM1807W"
+  ]
+ },
+ "AM1807W": {
+  "colores": [
+   "AM1807D",
+   "AM1807B"
+  ]
+ },
+ "AH8510G": {
+  "colores": [
+   "AH8510DD"
+  ]
+ },
+ "AH8510DD": {
+  "colores": [
+   "AH8510G"
+  ]
+ },
+ "AH7510SS": {
+  "colores": [
+   "AH7510G",
+   "AH7510DD",
+   "AH7510BB"
+  ]
+ },
+ "AH7510G": {
+  "colores": [
+   "AH7510SS",
+   "AH7510DD",
+   "AH7510BB"
+  ]
+ },
+ "AH7510DD": {
+  "colores": [
+   "AH7510SS",
+   "AH7510G",
+   "AH7510BB"
+  ]
+ },
+ "AH7510BB": {
+  "colores": [
+   "AH7510SS",
+   "AH7510G",
+   "AH7510DD"
+  ]
  }
 }

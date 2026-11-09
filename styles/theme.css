@@ -3978,6 +3978,8 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 /* IEM y Easy (2026-11-09): MABE/iem.png y MABE/easy.png (blancos, transparentes) pasados a negro. */
 .pdp-logo[data-marca="iem"] { height: 34px; }
 .pdp-logo[data-marca="easy"] { height: 36px; }
+/* Acros (2026-11-09): WHIRLPOOL/acros-mexico-vector-logo.png (morado, transparente). */
+.pdp-logo[data-marca="acros"] { height: 36px; }
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
    técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
    una línea, baja a dos dentro de su pestaña. */
