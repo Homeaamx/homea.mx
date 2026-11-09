@@ -60,7 +60,8 @@
         "economica"
       ],
       "categorias": [
-        "cocina"
+        "cocina",
+        "lavanderia"
       ],
       "canal": "shopify",
       "logo": "/assets/logos/acros.webp",

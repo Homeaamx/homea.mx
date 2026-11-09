@@ -79,6 +79,13 @@ const MUESTRAS: Record<string, string> = {
   "rose gold": "linear-gradient(135deg, #f0c4b0 0%, #d29a82 50%, #b07a62 100%)",
   "black slate y rose gold": mitad("#3d3b39", "#d29a82"),
   "diamond gray y rose gold": mitad("#7f7f7c", "#d29a82"),
+  // Acros (2026-11-09): nombres de la lista Whirlpool tal como van en el título.
+  "gris acero": METAL,
+  titanio: "linear-gradient(135deg, #a3a39f 0%, #77776f 50%, #5c5c57 100%)",
+  plateado: "linear-gradient(135deg, #ececec 0%, #c0c0c0 50%, #a2a2a2 100%)",
+  coral: "#e8796b",
+  morado: "#6c4675",
+  rosa: "#d9a3a8",
   // Elica Seashell (2026-11-06): blanca y negra en mate y en brillante.
   "blanca mate": "#ecebe6",
   "blanca brillante": "linear-gradient(135deg, #ffffff 0%, #e9e9e6 45%, #ffffff 60%, #d6d6d2 100%)",
