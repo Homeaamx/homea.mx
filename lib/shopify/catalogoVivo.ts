@@ -27,7 +27,7 @@ export const TAG_CATALOGO = "catalogo";
 
 /** Claves de `filtros.*` que existen en Shopify (las 38 definiciones de 2026-10-06,
  *  + bisagra el 2026-10-07, altura_ada el 2026-10-12 y quemadores / acabado_quemador
- *  el 2026-10-23; color el 2026-11-03, separado del acabado). */
+ *  el 2026-10-23; color el 2026-11-03, separado del acabado; paquete el 2026-11-09). */
 export const CLAVES_FILTRO = [
   "disponibilidad", "garantia", "promocion", "color", "acabado", "ancho", "instalacion", "diseno",
   "funcionamiento", "voltaje", "tipo", "tipo_gas", "uso", "capacidad", "compatible",
@@ -35,7 +35,7 @@ export const CLAVES_FILTRO = [
   "accesorios_incluidos", "altura", "carga", "cubierta", "despachador_agua", "drenaje",
   "hornos", "llenado_agua", "produccion", "profundidad", "puerta", "racks", "ruido",
   "tecnologia", "tina", "tipo_hielo", "variedades_cafe", "zonas", "bisagra",
-  "altura_ada", "quemadores", "acabado_quemador",
+  "altura_ada", "quemadores", "acabado_quemador", "paquete",
 ] as const;
 
 const IDENTIFICADORES = [
@@ -497,6 +497,52 @@ export async function productosDeMarca(vendor: string): Promise<ProductoVivo[]> 
     }
   } catch (error) {
     console.warn(`[catalogo] Sin productos de la marca "${vendor}":`, (error as Error).message);
+    return [];
+  }
+  return productos;
+}
+
+const CONSULTA_POR_ETIQUETA = /* GraphQL */ `
+  ${CAMPOS_PRODUCTO}
+  query PorEtiqueta($consulta: String!, $despues: String) @inContext(country: MX, language: ES) {
+    products(first: 100, after: $despues, query: $consulta) {
+      pageInfo { hasNextPage endCursor }
+      nodes { ...ProductoVivo tags }
+    }
+  }
+`;
+
+/**
+ * Productos publicados con una etiqueta exacta de Shopify (p. ej.
+ * `tambien-en-campanas`: paquetes que también se listan en otra categoría,
+ * Carla 2026-11-09). Devuelve [] si Shopify no contesta.
+ */
+export async function productosConEtiqueta(etiqueta: string): Promise<ProductoVivo[]> {
+  const productos: ProductoVivo[] = [];
+  let despues: string | null = null;
+  try {
+    for (let pagina = 0; pagina < 5; pagina++) {
+      const data: {
+        products: {
+          pageInfo: { hasNextPage: boolean; endCursor: string };
+          nodes: (ProductoRaw & { tags?: string[] })[];
+        };
+      } = await shopifyFetch(CONSULTA_POR_ETIQUETA, {
+        variables: { consulta: `tag:"${etiqueta.replace(/"/g, "")}"`, despues },
+        tags: [TAG_CATALOGO],
+        timeoutMs: 8000,
+      });
+      for (const raw of data.products.nodes) {
+        // La búsqueda de Shopify empata por texto: se exige la etiqueta exacta.
+        if (!(raw.tags ?? []).some((t) => t.toLowerCase() === etiqueta.toLowerCase())) continue;
+        const p = normalizar(raw);
+        if (p) productos.push(p);
+      }
+      if (!data.products.pageInfo.hasNextPage) break;
+      despues = data.products.pageInfo.endCursor;
+    }
+  } catch (error) {
+    console.warn(`[catalogo] Sin productos con la etiqueta "${etiqueta}":`, (error as Error).message);
     return [];
   }
   return productos;

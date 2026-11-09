@@ -342,7 +342,7 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0, colores:
     <div class="pcard-top">${stock}<span class="pcard-acc">${botonAgregarTarjeta(p, precio, img)}<button class="wl-heart" type="button" data-wl-id="${esc(p.sku)}" data-wl-brand="${esc(p.marca)}" data-wl-name="${esc(p.titulo)}" data-wl-spec="${esc(spec.join(" · "))}" data-wl-price="${esc(textoPrecio(precio))}" data-wl-img="${img ? esc(cdn(img.url, 400)) : ""}" data-wl-href="${href}" data-wl-tipo="${esc(p.tipo)}" data-wl-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-wl-stock="${p.enStock ? 1 : 0}" data-wl-was="${precio.tachado ? esc(`$${dinero(precio.tachado)} ${precio.moneda}`) : ""}" data-wl-mxn="${precio.mxnEquivalente ?? precio.venta}" data-tip="Agregar a mi Wishlist" aria-label="Guardar en wishlist" aria-pressed="false">${CORAZON}</button></span></div>
     <div class="pcard-head"><span class="brand">${esc(p.marca)}</span><div class="pcard-linea"><span class="pcard-serie">${esc(serie ?? "")}</span><span class="pcard-sku figures" title="${esc(p.sku)}">${esc(p.sku)}</span></div></div>
     <h3 class="pcard-name">${esc(nombre)}</h3>
-    ${coloresTarjetaHtml(colores)}
+    ${colores.length > 1 ? coloresTarjetaHtml(colores) : coloresVarianteTarjetaHtml(p, tc)}
     ${precioTarjeta(precio)}
   </div>
 </a>`;
@@ -403,6 +403,47 @@ function coloresTarjetaHtml(colores: ColorHermano[]): string {
     )
     .join("");
   return `<div class="pcard-colores" role="radiogroup" aria-label="Color · ${colores.length} opciones">${circulos}<span class="pcard-colores-mas" aria-hidden="true"${resto ? "" : " hidden"}>+${resto}</span></div>`;
+}
+
+/**
+ * Círculos de las VARIANTES de color (Alfresco: Acero · Standard Color por tono ·
+ * Custom Color; Carla, 2026-11-09: las tarjetas con sus círculos de color en
+ * todas las rutas). A diferencia de los colores-producto (cada uno su tarjeta),
+ * aquí es UN producto: el círculo no cambia la foto (no hay foto por tono);
+ * cambia el precio de la tarjeta (los <template> de abajo), la variante que
+ * agregan el "+" y el corazón, y el enlace a la ficha, que abre con ese color
+ * elegido (?color=<SKU>&tono=<nombre>). Lo hace public/catalogo.js.
+ */
+const FONDO_ACERO = "linear-gradient(135deg, #f4f4f2 0%, #c9cac7 45%, #eeeeec 60%, #a9aaa7 100%)";
+const FONDO_CUSTOM = "conic-gradient(#F7B401, #FF4B18, #C61D34, #6C4675, #002C75, #85C3BE, #F7B401)";
+const FONDO_ESTANDAR = "conic-gradient(#9B2322, #002C75, #85C3BE, #F7B401, #9B2322)";
+
+function coloresVarianteTarjetaHtml(p: ProductoVivo, tc: TipoCambio): string {
+  if (p.colores.length < 2) return "";
+  const tonos = TONOS_ESTANDAR[p.marca] ?? [];
+  type Op = { i: number; c: ProductoVivo["colores"][number]; nombre: string; tono: string; fondo: string; precio: PrecioPublico };
+  const ops: Op[] = [];
+  p.colores.forEach((c, i) => {
+    const precio = precioPublico({ ...p, ...c }, tc);
+    if (/^standard/i.test(c.nombre) && tonos.length) {
+      for (const t of tonos) ops.push({ i, c, nombre: `Standard Color · ${t.nombre}`, tono: t.nombre, fondo: t.hex, precio });
+    } else {
+      const fondo = /^standard/i.test(c.nombre) ? FONDO_ESTANDAR : /^custom/i.test(c.nombre) ? FONDO_CUSTOM : FONDO_ACERO;
+      ops.push({ i, c, nombre: c.nombre, tono: "", fondo, precio });
+    }
+  });
+  const vista = MAX_COLORES_TARJETA;
+  const resto = Math.max(0, ops.length - vista);
+  const circulos = ops
+    .map((o, k) => {
+      const was = o.precio.tachado ? `$${dinero(o.precio.tachado)} ${o.precio.moneda}` : "";
+      return `<span class="pcard-color${k === 0 ? " is-active" : ""}" role="radio" tabindex="0" aria-checked="${k === 0}" data-var="${o.i}" data-var-sku="${esc(o.c.sku)}" data-var-vid="${esc(o.c.variantId.split("/").pop() ?? "")}" data-var-tono="${esc(o.tono)}" data-var-nombre="${esc(o.nombre)}" data-var-mxn="${o.c.mxn}" data-var-usd="${esc(textoPrecio(o.precio))}" data-var-was="${esc(was)}" data-var-mxn-pub="${o.precio.mxnEquivalente ?? o.precio.venta}" data-tip="${esc(o.nombre)}" aria-label="${esc(o.nombre)}" style="--tono:${o.fondo}"${k < vista ? "" : " hidden"}></span>`;
+    })
+    .join("");
+  const precios = p.colores
+    .map((c, i) => `<template data-var-precio="${i}">${precioTarjeta(precioPublico({ ...p, ...c }, tc))}</template>`)
+    .join("");
+  return `<div class="pcard-colores" role="radiogroup" aria-label="Color · ${ops.length} opciones">${circulos}<span class="pcard-colores-mas" aria-hidden="true"${resto ? "" : " hidden"}>+${resto}</span></div>${precios}`;
 }
 
 /** % de descuento entre el tachado y el precio final (entero); 0 si no hay. */
@@ -645,6 +686,31 @@ export function panelFiltrosHtml(
       )
       .join("");
     grupos.push(grupoHtml("Tipo de producto", "tipo-web", etiquetas, false));
+  }
+
+  // Paquetes (Carla, 2026-11-09): dos o más aparatos que se venden juntos,
+  // marcados en Shopify con `filtros.paquete`. Cada uno con lo que le
+  // corresponde: "Paquete" (parrilla + campana) o "Combo" (pareja lavadora +
+  // secadora, refrigerador + congelador). El grupo no está en la tabla de ningún
+  // tipo: sale solo en los listados que traen al menos uno, con una casilla por
+  // valor presente. Los juegos de accesorios (desagüe, jaladeras) no lo llevan.
+  const porPaquete = new Map<string, { texto: string; n: number }>();
+  for (const p of productos) {
+    for (const v of p.filtros.paquete ?? []) {
+      const c = porPaquete.get(slugValor(v)) ?? { texto: v, n: 0 };
+      c.n++;
+      porPaquete.set(slugValor(v), c);
+    }
+  }
+  if (porPaquete.size) {
+    const etiquetas = [...porPaquete]
+      .sort((a, b) => ordenValores(a[1].texto, b[1].texto))
+      .map(
+        ([k, c]) =>
+          `<label><input type="checkbox" data-fk="paquete" value="${esc(k)}"> <span class="flbl">${esc(c.texto)}</span> <span class="count figures">${c.n}</span></label>`,
+      )
+      .join("");
+    grupos.push(grupoHtml("Paquetes", "paquete", etiquetas, false));
   }
 
   // Unión ordenada de los filtros de cada tipo presente (tabla de filtros v2).

@@ -1048,6 +1048,7 @@
   /* Vista previa: la foto del color sin fijarlo (cursor encima o foco de teclado). */
   function previa(c) {
     if (c.classList.contains("is-active")) return;
+    if (c.hasAttribute("data-var")) return; // variante (Alfresco): no hay foto por color
     var card = c.closest("[data-cat-card]");
     var actual = card && card.querySelector(".imgw img");
     var nueva = actual && fotoDe(card, c.getAttribute("data-color-sku"));
@@ -1066,8 +1067,69 @@
   }
   /* La tarjeta se queda con el color del círculo. Con teclado, el foco pasa al
      círculo marcado de la tarjeta nueva (el cuerpo se reemplaza entero). */
+  /* Variante de color del MISMO producto (Alfresco: Acero · Standard Color por
+     tono · Custom Color; Carla, 2026-11-09). La foto se queda; cambian el precio
+     (<template data-var-precio>), el modelo, lo que agregan el "+" y el corazón,
+     y el enlace: la ficha abre con ese color elegido (?color=&tono=). */
+  function aplicarVariante(c, teclado) {
+    if (c.classList.contains("is-active")) return;
+    var card = c.closest("[data-cat-card]");
+    var fila = c.closest(".pcard-colores");
+    if (!card || !fila) return;
+    fila.querySelectorAll(".pcard-color").forEach(function (b) {
+      var on = b === c;
+      b.classList.toggle("is-active", on);
+      b.setAttribute("aria-checked", on ? "true" : "false");
+    });
+    var i = c.getAttribute("data-var");
+    var tpl = card.querySelector('template[data-var-precio="' + i + '"]');
+    var precio = card.querySelector(".pcard-price");
+    if (tpl && precio && tpl.content.firstElementChild) precio.replaceWith(tpl.content.firstElementChild.cloneNode(true));
+    var sku = c.getAttribute("data-var-sku");
+    var tono = c.getAttribute("data-var-tono") || "";
+    var add = card.querySelector(".pcard-add");
+    if (add) {
+      if (add.__specBase == null) add.__specBase = add.getAttribute("data-cart-spec") || "";
+      add.setAttribute("data-cart-sku", sku);
+      add.setAttribute("data-cart-vid", c.getAttribute("data-var-vid"));
+      add.setAttribute("data-cart-mxn", c.getAttribute("data-var-mxn"));
+      add.setAttribute("data-cart-usd", c.getAttribute("data-var-usd"));
+      add.setAttribute("data-cart-tono", tono);
+      add.setAttribute("data-cart-spec", add.__specBase + (i === "0" ? "" : " · Color: " + c.getAttribute("data-var-nombre")));
+    }
+    var wl = card.querySelector(".wl-heart");
+    if (wl) {
+      wl.setAttribute("data-wl-id", sku);
+      wl.setAttribute("data-wl-vid", c.getAttribute("data-var-vid"));
+      wl.setAttribute("data-wl-price", c.getAttribute("data-var-usd"));
+      wl.setAttribute("data-wl-was", c.getAttribute("data-var-was"));
+      wl.setAttribute("data-wl-mxn", c.getAttribute("data-var-mxn-pub"));
+    }
+    var modelo = card.querySelector(".pcard-sku");
+    if (modelo) { modelo.textContent = sku; modelo.setAttribute("title", sku); }
+    if (card.__hrefBase == null) card.__hrefBase = (card.getAttribute("href") || "").split("?")[0];
+    card.setAttribute("href", i === "0" && !tono ? card.__hrefBase
+      : card.__hrefBase + "?color=" + encodeURIComponent(sku) + (tono ? "&tono=" + encodeURIComponent(tono) : ""));
+    if (teclado) c.focus();
+  }
+  /* Ficha abierta desde una tarjeta con color elegido: marca ese color al cargar. */
+  var colorPedido = "";
+  function preseleccionarColor() {
+    var q = location.pathname + location.search;
+    if (q === colorPedido || location.search.indexOf("color=") === -1) return;
+    var opts = document.querySelector(".pdp-color-opts");
+    if (!opts) return;
+    colorPedido = q;
+    var ps = new URLSearchParams(location.search);
+    var sku = ps.get("color"), tono = ps.get("tono") || "";
+    var sw = Array.prototype.find.call(opts.querySelectorAll(".pdp-swatch[data-sku]"), function (b) {
+      return b.getAttribute("data-sku") === sku && (b.getAttribute("data-tono") || "") === tono;
+    });
+    if (sw && !sw.classList.contains("is-active")) sw.click();
+  }
   function aplicarColor(c, teclado) {
     if (c.classList.contains("is-active")) return;
+    if (c.hasAttribute("data-var")) { aplicarVariante(c, teclado); return; }
     var card = c.closest("[data-cat-card]");
     var sku = c.getAttribute("data-color-sku");
     var h = card && hermanaDe(card, sku);
@@ -1158,6 +1220,7 @@
   var buscarFilas = 0;
   function vigilarFilas() {
     buscarFilas = 0;
+    preseleccionarColor();
     /* Tarjetas ligeras (las pinta wishlist.js con lo guardado en el corazón): se
        cambian por la tarjeta completa del catálogo, con "+" y círculos. */
     var ligeras = Array.prototype.slice.call(document.querySelectorAll(".pcard-ligera:not([data-fuera])"))
