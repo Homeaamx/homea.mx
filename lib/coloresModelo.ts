@@ -127,6 +127,10 @@ const MUESTRAS: Record<string, string> = {
   "nero con detalles dorados": mitad("#111111", "#c8a24a"),
   "nero detalles dorados": mitad("#111111", "#c8a24a"),
   rosso: "#b3262b",
+  // Maytag (2026-11-09): lavadoras y secadoras Pet Pro. "Gris Acero" usa la muestra
+  // que trae la rama de Acros (se junta antes que Maytag) y "Cromo" la de arriba.
+  "midnight steel": "linear-gradient(135deg, #5d6066 0%, #43464c 50%, #33363b 100%)",
+  "volcano black": "#2a2a2a",
 };
 
 /**

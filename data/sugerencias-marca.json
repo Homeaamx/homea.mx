@@ -14956,5 +14956,173 @@
    "AH7510G",
    "AH7510DD"
   ]
+ },
+ "7MMVW7230LC": {
+  "accesorios": [
+   "7MMED7230LC",
+   "7MMGD7230LC"
+  ]
+ },
+ "7MMVW7230LW": {
+  "accesorios": [
+   "7MMED7230LW",
+   "7MMGD7230LW"
+  ]
+ },
+ "7MMED7230LC": {
+  "colores": [
+   "7MMED7230LW"
+  ],
+  "accesorios": [
+   "7MMVW7230LC"
+  ]
+ },
+ "7MMED7230LW": {
+  "colores": [
+   "7MMED7230LC"
+  ],
+  "accesorios": [
+   "7MMVW7230LW"
+  ]
+ },
+ "7MMGD7230LC": {
+  "colores": [
+   "7MMGD7230LW"
+  ],
+  "accesorios": [
+   "7MMVW7230LC"
+  ]
+ },
+ "7MMGD7230LW": {
+  "colores": [
+   "7MMGD7230LC"
+  ],
+  "accesorios": [
+   "7MMVW7230LW"
+  ]
+ },
+ "7MMHW6621HC": {
+  "colores": [
+   "7MMHW6621HW"
+  ],
+  "accesorios": [
+   "7MMGD6630HC"
+  ]
+ },
+ "7MMHW6621HW": {
+  "colores": [
+   "7MMHW6621HC"
+  ],
+  "accesorios": [
+   "7MMGD6630HW"
+  ]
+ },
+ "7MMGD6630HC": {
+  "colores": [
+   "7MMGD6630HW"
+  ],
+  "accesorios": [
+   "7MMHW6621HC"
+  ]
+ },
+ "7MMGD6630HW": {
+  "colores": [
+   "7MMGD6630HC"
+  ],
+  "accesorios": [
+   "7MMHW6621HW"
+  ]
+ },
+ "7MMFW7020RF": {
+  "colores": [
+   "7MMFW7020RU"
+  ],
+  "accesorios": [
+   "7MMGD7020RF",
+   "7MMED7020RF"
+  ]
+ },
+ "7MMFW7020RU": {
+  "colores": [
+   "7MMFW7020RF"
+  ],
+  "accesorios": [
+   "7MMGD7020RU",
+   "7MMED7020RU"
+  ]
+ },
+ "7MMGD7020RF": {
+  "colores": [
+   "7MMGD7020RU"
+  ],
+  "accesorios": [
+   "7MMFW7020RF"
+  ]
+ },
+ "7MMGD7020RU": {
+  "colores": [
+   "7MMGD7020RF"
+  ],
+  "accesorios": [
+   "7MMFW7020RU"
+  ]
+ },
+ "7MMED7020RF": {
+  "colores": [
+   "7MMED7020RU"
+  ],
+  "accesorios": [
+   "7MMFW7020RF"
+  ]
+ },
+ "7MMED7020RU": {
+  "colores": [
+   "7MMED7020RF"
+  ],
+  "accesorios": [
+   "7MMFW7020RU"
+  ]
+ },
+ "7MMGD6500RB": {
+  "colores": [
+   "7MMGD6500RW"
+  ],
+  "accesorios": [
+   "7MMVW6500RB"
+  ]
+ },
+ "7MMVW5035PW": {
+  "accesorios": [
+   "7MMED5430PW",
+   "7MMGD5430PW"
+  ]
+ },
+ "7MMED5430PW": {
+  "accesorios": [
+   "7MMVW5035PW",
+   "7MMVW5430PW"
+  ]
+ },
+ "7MMGD5430PW": {
+  "accesorios": [
+   "7MMVW5035PW",
+   "7MMVW5430PW"
+  ]
+ },
+ "7MMVWC465JW": {
+  "accesorios": [
+   "7MMEDC300DW",
+   "7MMGDC300DW"
+  ]
+ },
+ "7MMEDC300DW": {
+  "accesorios": [
+   "7MMVWC465JW"
+  ]
+ },
+ "7MMGDC300DW": {
+  "accesorios": [
+   "7MMVWC465JW"
+  ]
  }
 }
