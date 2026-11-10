@@ -3422,9 +3422,14 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .fgroup--acc .fopts { padding: 0 0 14px; }
 .fgroup--acc .fopts label { padding: 6px 0; }
 .fgroup--acc .fopts .flbl { flex: 1 1 auto; min-width: 0; }
-/* Opción sin piezas: deshabilitada a propósito, más clara que el resto. */
-.fgroup--acc .fopts label.is-cero { color: #8C8068; }
-.fgroup--acc .fopts label.is-cero .count { color: var(--border-strong); }
+/* Opción sin piezas (Carla, 2026-11-10: que se note más): la fila entera
+   (casilla, círculo de color, nombre y conteo) se apaga y el nombre va
+   tachado; sigue siendo marcable (catalogo.js). Las disponibles ganan peso. */
+.fopts label.is-cero { opacity: .38; }
+.fopts label.is-cero .flbl { text-decoration: line-through; text-decoration-thickness: 1px; text-decoration-color: var(--homea-n500); }
+.fopts label.is-cero:hover { opacity: .6; }
+.fgroup--acc .fopts label:not(.is-cero):not(.fprecio-campo) .flbl { font-weight: 500; }
+.fgroup--acc .fopts label:not(.is-cero) .count { color: var(--fg); font-weight: 500; }
 .fsel {
   display: inline-grid; place-items: center; min-width: 16px; height: 16px; padding: 0 4px;
   font-size: 9.5px; font-weight: 600; letter-spacing: 0; background: var(--homea-gold); color: var(--homea-black);

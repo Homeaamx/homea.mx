@@ -245,7 +245,7 @@
         "tarjas",
         "banos"
       ],
-      "canal": "shopify",
+      "canal": "pdf",
       "logo": "/assets/logos/brizo.webp",
       "foto": "/assets/photos/brands/brizo-griferia.webp",
       "fotoHero": "/assets/photos/brands/hero/brizo-griferia.webp",
@@ -411,7 +411,7 @@
         "tarjas",
         "banos"
       ],
-      "canal": "shopify",
+      "canal": "pdf",
       "logo": "/assets/logos/delta.png",
       "foto": "/assets/photos/brands/delta-griferia.webp",
       "fotoHero": "/assets/photos/brands/hero/delta-griferia.webp",
@@ -647,7 +647,7 @@
       "categorias": [
         "tarjas"
       ],
-      "canal": "shopify",
+      "canal": "pdf",
       "logo": "/assets/logos/gessi.png",
       "foto": "/assets/photos/brands/gessi-griferia.webp",
       "fotoHero": "/assets/photos/brands/hero/gessi-griferia.webp",
@@ -1174,7 +1174,7 @@
       "categorias": [
         "tarjas"
       ],
-      "canal": "shopify",
+      "canal": "pdf",
       "logo": "/assets/logos/peerless.png",
       "foto": "/assets/photos/brands/peerless-griferia.webp",
       "fotoHero": "/assets/photos/brands/hero/peerless-griferia.webp",

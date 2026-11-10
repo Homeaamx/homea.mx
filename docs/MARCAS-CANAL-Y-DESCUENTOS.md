@@ -12,8 +12,8 @@
 
 | Canal | En Shopify | En el sitio |
 |---|---|---|
-| **SHOPIFY** (66) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
-| **SOLO PDF** (18) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
+| **SHOPIFY** (62) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
+| **SOLO PDF** (22) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
 
 En el código, el canal vive en el tile de `preview/marcas.html` (`data-canal="shopify|pdf"`), pasa a
 `data/marcas.json` con `npm run marcas` y la plantilla `app/(es)/marcas/[marca]/page.tsx` lo respeta.
@@ -75,7 +75,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
   columna *Arte* de las tablas dice qué falta. La carpeta de OneDrive con logos y fotos ya no está
   sincronizada en esta Mac.
 
-## SHOPIFY — 66 marcas
+## SHOPIFY — 62 marcas
 
 | Marca | Proveedor | Línea SAE | Productos tras carga | Descuento Shopify (PLATA) | Página | Arte | Nota |
 |---|---|---|---:|---:|---|---|---|
@@ -90,14 +90,12 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | BLANCO | ARTEXA | BLANC | 881 | 10% | `/marcas/blanco` | completo |  |
 | BLAZE | MARESA | BLAZE | 119 | 10% | `/marcas/blaze` | completo |  |
 | BOSCH | ARTEXA | BOSCH | 58 | 10% | `/marcas/bosch` | completo |  |
-| BRIZO | ARTEXA | BRIZO | 806 | 10% | `/marcas/brizo` | completo | Solo línea de cocina |
 | BROIL KING | MARESA | BROIL | 26 | 10% | `/marcas/broil-king` | completo |  |
 | CAFÉ | MABE | CAFE | 99 | 10% | `/marcas/cafe` | completo |  |
 | COMMODORE | ECLIPSE | COMMO | 9 | **PENDIENTE** | `/marcas/commodore` | completo | No está en la política de descuentos |
 | COVE | IESA/LAVISH | COVE | 15 | 10% | `/marcas/cove` | completo |  |
 | COYOTE | LECROM | COYOT | 224 | 10% | `/marcas/coyote` | completo |  |
 | DAWN | LECROM / MARESA | DAWN | 25 | 10% | `/marcas/dawn` | completo |  |
-| DELTA | ARTEXA | DELTA | 2791 | 10% | `/marcas/delta` | completo | Solo línea de cocina |
 | DEXA | IESA/LAVISH | DEXA | 112 | 10% | `/marcas/dexa` | completo |  |
 | EASY | MABE | EASY | 13 | 30% | `/marcas/easy` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | ECLIPSE | ECLIPSE | ECLIP | 98 | 10% | `/marcas/eclipse` | completo | Revisar Serie Value Line (condición distinta) |
@@ -110,7 +108,6 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | FULGOR MILANO | LECROM / TECNOLAM | FULGO | 40 | 10% | `/marcas/fulgor-milano` | completo |  |
 | GAGGENAU | ARTEXA | GAGGE | 297 | 10% | `/marcas/gaggenau` | completo |  |
 | GE PROFILE | MABE | GEPRO | 84 | 30% | `/marcas/ge-profile` | completo | Validar margen con lista PPS (nota 4 de la política) |
-| GESSI | ARTEXA | GESSI | 213 | 10% | `/marcas/gessi` | completo |  |
 | HAIER | MABE | HAIER | 21 | 30% | `/marcas/haier` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | HOSHIZAKI | ARTEXA | HOSHI | 20 | 10% | `/marcas/hoshizaki` | completo |  |
 | IEM | MABE | IEM | 9 | 30% | `/marcas/iem` | completo | Validar margen con lista PPS (nota 4 de la política) |
@@ -127,7 +124,6 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | MONOGRAM | MABE | MONOG | 87 | 10% | `/marcas/monogram` | completo |  |
 | MONT ALPI | MARESA | MONTA | 87 | 10% | `/marcas/mont-alpi` | completo |  |
 | NANTUCKET | LECROM | NANTU | 20 | 10% | `/marcas/nantucket` | completo |  |
-| PEERLESS | ARTEXA | PEERL | 140 | **PENDIENTE** | `/marcas/peerless` | completo | No está en la política de descuentos |
 | PITT | ARTEXA | PITT | 108 | 10% | `/marcas/pitt-cooking` | completo |  |
 | SCHOCK | ECLIPSE | SCHOC | 33 | 10% | `/marcas/schock` | completo |  |
 | SCOTSMAN | IESA/LAVISH | SCOTS | 66 | 10% | `/marcas/scotsman` | completo |  |
@@ -146,10 +142,14 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | WHIRLPOOL | WHIRLPOOL | WHIRL | 282 | 30% | `/marcas/whirlpool` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | WOLF | IESA/LAVISH | WOLF | 665 | 10% | `/marcas/wolf` | completo | Condición distinta para fuera de línea vs. de línea |
 
-## SOLO PDF — 18 marcas
+## SOLO PDF — 22 marcas
 
 | Marca | Proveedor | Línea SAE | Productos tras carga | Descuento Shopify (PLATA) | Página | Arte | Nota |
 |---|---|---|---:|---:|---|---|---|
+| BRIZO | ARTEXA | BRIZO | 806 | 10% | `/marcas/brizo` | completo | Solo línea de cocina · **Pasa a SOLO PDF (Carla, 2026-11-10)** |
+| DELTA | ARTEXA | DELTA | 2791 | 10% | `/marcas/delta` | completo | Solo línea de cocina · **Pasa a SOLO PDF (Carla, 2026-11-10)** |
+| GESSI | ARTEXA | GESSI | 213 | 10% | `/marcas/gessi` | completo | **Pasa a SOLO PDF (Carla, 2026-11-10)** |
+| PEERLESS | ARTEXA | PEERL | 140 | **PENDIENTE** | `/marcas/peerless` | completo | No está en la política de descuentos · **Pasa a SOLO PDF (Carla, 2026-11-10)** |
 | CATALANO | GRUPO 90 | CATAL | 14 | 10% | `/marcas/catalano` | completo | Baños. Estaba en *Eliminadas*; vuelve como SOLO PDF (Carla, 2026-09-22) · PDF pendiente (Carla, 2026-10-22) |
 | CLEARLIGHT | ARTEXA | — | — | **PENDIENTE** | `/marcas/clearlight` | completo | Saunas de Artexa; no venía en el Excel (Carla, 2026-09-21) |
 | HERGOM | BLOCK | HERGO | 0 | — | `/marcas/hergom` | completo |  |

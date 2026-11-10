@@ -1,5 +1,5 @@
 {
- "_nota": "Fichas de productos obsoletos (fuera de la lista vigente del proveedor) → su reemplazo o su listado. 301 en next.config.js. Generado 2026-10-09 (Carla: el SEO de un producto obsoleto redirige al nuevo). 2026-11-04: 170 Blanco descontinuados (BAM_2027 Discontinuations) + rojos/naranjas sin stock de la lista Artexa NOV 3 2026 (Blanco 234689, Alfresco AXEVP-C, AKK, ACK).",
+ "_nota": "Fichas de productos obsoletos (fuera de la lista vigente del proveedor) → su reemplazo o su listado. 301 en next.config.js. Generado 2026-10-09 (Carla: el SEO de un producto obsoleto redirige al nuevo). 2026-11-04: 170 Blanco descontinuados (BAM_2027 Discontinuations) + rojos/naranjas sin stock de la lista Artexa NOV 3 2026 (Blanco 234689, Alfresco AXEVP-C, AKK, ACK). 2026-11-10: 22 monomandos Blanco (Alta II bar/agua filtrada/extraíble y LUNEOO semiprofesional) en rojo en la lista NOV 10 2026, sin stock.",
  "redirects": {
   "/producto/ai230700": "/productos/cocina-y-bar/coccion/campanas",
   "/producto/aw230790": "/productos/cocina-y-bar/coccion/campanas",
@@ -277,6 +277,28 @@
   "/producto/441078": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=tarjas",
   "/producto/axevp-c": "/productos/exterior/asadores-y-hornos?tipo=accesorios-asadores-hornos",
   "/producto/akk": "/productos/exterior/asadores-y-hornos?tipo=accesorios-asadores-hornos",
-  "/producto/ack": "/productos/exterior/asadores-y-hornos?tipo=accesorios-asadores-hornos"
+  "/producto/ack": "/productos/exterior/asadores-y-hornos?tipo=accesorios-asadores-hornos",
+  "/producto/527568": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/527570": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/527569": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/527572": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/527571": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/443258": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/527563": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/527565": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/527564": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/527567": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/527566": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/443257": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/527558": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/527560": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/527559": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/527562": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/527561": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/443256": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/443395": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/443396": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/443397": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/443398": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos"
  }
 }
