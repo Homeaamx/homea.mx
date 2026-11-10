@@ -136,7 +136,11 @@
     "descripcion": "Soluciones para baño de diseño italiano, líneas depuradas y estética refinada, creadas para proyectos que buscan limpieza visual y alto nivel de detalle.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/catalano.pdf"
+    },
+    "cta2": {
+      "texto": "Paquetes sanitarios",
+      "url": "/listas-de-precios/catalano-valsir-kits.pdf"
     }
   },
   "clearlight": {
@@ -372,7 +376,7 @@
     "descripcion": "Soluciones de drenaje para baño con estética minimalista e integración discreta, pensadas para mantener continuidad visual y resolver el desagüe con precisión.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/i-drain.pdf"
     }
   },
   "iem": {
@@ -442,7 +446,7 @@
     "descripcion": "Soluciones para baño con líneas depuradas, superficies resistentes y diseño preciso, creadas para proyectos que buscan durabilidad y una estética atemporal.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/kaldewei.pdf"
     }
   },
   "kalt": {
@@ -780,7 +784,7 @@
     "descripcion": "Soluciones para baño, vapor y sauna con diseño italiano y formas escultóricas, pensadas para crear espacios de bienestar con fuerte presencia visual.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/treesse.pdf"
     }
   },
   "valsir": {
@@ -789,7 +793,11 @@
     "descripcion": "Soluciones técnicas para baño orientadas a una instalación limpia, funcional e integrada, pensadas para resolver sistemas ocultos con precisión y orden.",
     "cta": {
       "texto": "Ver catálogo oficial",
-      "url": null
+      "url": "/listas-de-precios/valsir.pdf"
+    },
+    "cta2": {
+      "texto": "Paquetes sanitarios",
+      "url": "/listas-de-precios/catalano-valsir-kits.pdf"
     }
   },
   "vass": {

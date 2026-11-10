@@ -60,8 +60,7 @@
         "economica"
       ],
       "categorias": [
-        "cocina",
-        "lavanderia"
+        "cocina"
       ],
       "canal": "shopify",
       "logo": "/assets/logos/acros.webp",
@@ -305,7 +304,10 @@
       "foto": "/assets/photos/brands/catalano-banos.webp",
       "fotoHero": "/assets/photos/brands/hero/catalano-banos.webp",
       "logoHero": "/assets/logos/catalano.webp",
-      "listas": []
+      "listas": [
+        "catalano-valsir-kits",
+        "catalano"
+      ]
     },
     {
       "slug": "clearlight",
@@ -444,7 +446,7 @@
         "economica"
       ],
       "categorias": [
-        "lavanderia"
+        "cocina"
       ],
       "canal": "shopify",
       "logo": "/assets/logos/easy.webp",
@@ -723,7 +725,9 @@
       "foto": "/assets/photos/brands/i-drain-banos.webp",
       "fotoHero": "/assets/photos/brands/hero/i-drain-banos.webp",
       "logoHero": "/assets/logos/i-drain.webp",
-      "listas": []
+      "listas": [
+        "i-drain"
+      ]
     },
     {
       "slug": "iem",
@@ -850,7 +854,9 @@
       "foto": "/assets/photos/brands/kaldewei-banos.webp",
       "fotoHero": "/assets/photos/brands/hero/kaldewei-banos.webp",
       "logoHero": "/assets/logos/kaldewei.webp",
-      "listas": []
+      "listas": [
+        "kaldewei"
+      ]
     },
     {
       "slug": "kalt",
@@ -1468,7 +1474,9 @@
       "foto": "/assets/photos/brands/treesse-wellness.webp",
       "fotoHero": "/assets/photos/brands/hero/treesse-wellness.webp",
       "logoHero": "/assets/logos/treesse.webp",
-      "listas": []
+      "listas": [
+        "treesse"
+      ]
     },
     {
       "slug": "valsir",
@@ -1484,7 +1492,9 @@
       "foto": "/assets/photos/brands/valsir-banos.webp",
       "fotoHero": "/assets/photos/brands/hero/valsir-banos.webp",
       "logoHero": "/assets/logos/valsir.webp",
-      "listas": []
+      "listas": [
+        "valsir"
+      ]
     },
     {
       "slug": "vass",

@@ -172,6 +172,11 @@ export default async function MarcaPage({ params }: Params) {
                       {hero.cta.texto}
                     </WhatsAppCta>
                   )}
+                  {hero.cta2?.url && (
+                    <a className="btn btn-ghost-light" href={hero.cta2.url} target="_blank" rel="noopener">
+                      {hero.cta2.texto}
+                    </a>
+                  )}
                 </div>
               )}
             </div>

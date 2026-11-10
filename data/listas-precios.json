@@ -160,7 +160,7 @@
       { "slug": "tradewind", "titulo": "Campanas · lista de precios", "vigencia": "abr 2024", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-campanas-trade-wind-2024.pdf?v=1790123911", "legacy": [], "estado": "listo" }
     ] },
     { "marca": "Invisacook", "documentos": [
-      { "slug": "invisacook", "titulo": "Lista de precios", "vigencia": "mar 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-invisacook-mar-2026.pdf?v=1790123610", "legacy": [], "estado": "listo" }
+      { "slug": "invisacook", "titulo": "Lista de precios", "vigencia": "nov 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-invisacook-nov-2026.pdf?v=1794269992", "legacy": [], "estado": "listo" }
     ] },
     { "marca": "Wolf", "documentos": [
       { "slug": "wolf", "titulo": "Lista de precios", "vigencia": "jun 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-wolf-jun-2026.pdf?v=1790123912", "legacy": [], "estado": "listo" },
@@ -197,7 +197,7 @@
       { "slug": "dexa", "titulo": "Lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-dexa-2025.pdf?v=1792696902", "legacy": [], "estado": "listo" }
     ] },
     { "marca": "Mr. Steam", "documentos": [
-      { "slug": "mr-steam", "titulo": "Lista de precios", "vigencia": "oct 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-mr-steam-oct-2026.pdf?v=1792696903", "legacy": [], "estado": "listo" }
+      { "slug": "mr-steam", "titulo": "Lista de precios", "vigencia": "nov 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-mr-steam-nov-2026.pdf?v=1794269993", "legacy": [], "estado": "listo" }
     ] },
     { "marca": "Nobili", "documentos": [
       { "slug": "nobili", "titulo": "Lista de precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-nobili-2026.pdf?v=1792696903", "legacy": [], "estado": "listo" }
@@ -213,6 +213,22 @@
     ] },
     { "marca": "Masterbuilt", "documentos": [
       { "slug": "masterbuilt", "titulo": "Asadores · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-asadores-masterbuilt-2025.pdf?v=1792701316", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Catalano", "documentos": [
+      { "slug": "catalano-valsir-kits", "titulo": "Paquetes sanitarios y mingitorios Catalano + Valsir · lista de precios", "vigencia": "nov 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-kits-sanitarios-catalano-valsir-nov-2026.pdf?v=1794270405", "legacy": [], "estado": "listo" },
+      { "slug": "catalano", "titulo": "Catálogo", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-catalano-ceramica-bano-2026.pdf?v=1794269993", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Valsir", "documentos": [
+      { "slug": "valsir", "titulo": "Placas de accionamiento · catálogo", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-valsir-placas-accionamiento-2026.pdf?v=1794269993", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "I-Drain", "documentos": [
+      { "slug": "i-drain", "titulo": "Catálogo", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-i-drain-canaletas-drenaje-2026.pdf?v=1794269994", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Kaldewei", "documentos": [
+      { "slug": "kaldewei", "titulo": "Catálogo", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-kaldewei-tinas-regaderas-acero-vitrificado-2026.pdf?v=1794269993", "legacy": [], "estado": "listo" }
+    ] },
+    { "marca": "Treesse", "documentos": [
+      { "slug": "treesse", "titulo": "Catálogo", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-treesse-tinas-hidromasaje-2026.pdf?v=1794269993", "legacy": [], "estado": "listo" }
     ] }
   ]
 }

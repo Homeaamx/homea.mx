@@ -5502,3 +5502,7 @@ a.wl-wa:hover, a.wl-wa:focus-visible { color: var(--homea-bone); }
    reloj), en línea y a la escala del cajón. */
 .proy-drawer .proy-tag.pcard-tag { position: static; font-size: 9.5px; padding: 5px 8px 4px; gap: 5px; }
 .proy-drawer .proy-tag.pcard-tag .pcard-tag-ic { width: 11px; height: 11px; }
+
+/* Hero de marca con dos botones (Carla, 2026-11-09: Catalano y Valsir → "Paquetes
+   sanitarios" junto a "Ver catálogo oficial"): en renglón, y abajo si no caben. */
+.marcas-hero--contenido .marca-hero-cta { display: flex; flex-wrap: wrap; gap: 14px 16px; align-items: center; }

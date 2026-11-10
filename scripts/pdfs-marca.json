@@ -487,9 +487,9 @@
       "marca": "invisacook",
       "nombre": "Invisacook",
       "titulo": "Lista de precios",
-      "vigencia": "mar 2026",
-      "src": "INVISACOOK/MAR 26/LISTA_PRECIOS_INVISACOOK_2026_03.pdf",
-      "archivo": "lista-precios-invisacook-mar-2026.pdf"
+      "vigencia": "nov 2026",
+      "src": "INVISACOOK/NOV 26/LISTA_PRECIOS_INVISACOOK_2026_11.pdf",
+      "archivo": "lista-precios-invisacook-nov-2026.pdf"
     },
     {
       "slug": "sub-zero",
@@ -680,9 +680,30 @@
       "marca": "mr-steam",
       "nombre": "Mr. Steam",
       "titulo": "Lista de precios",
-      "vigencia": "oct 2026",
-      "src": "GRUPO90 SOLO PDFS/LISTA_PRECIOS_MRSTEAM_2026_OCTUBRE.pdf",
-      "archivo": "lista-precios-mr-steam-oct-2026.pdf"
+      "vigencia": "nov 2026",
+      "src": "GRUPO90 SOLO PDFS/LISTA_PRECIOS_MRSTEAM_2026_NOVIEMBRE.pdf",
+      "archivo": "lista-precios-mr-steam-nov-2026.pdf",
+      "op": {
+        "tapar": {
+          "83": [
+            50,
+            395,
+            480,
+            605
+          ]
+        },
+        "tarjeta_en": {
+          "83": [
+            50,
+            400,
+            280,
+            600
+          ]
+        },
+        "reemplazar": {
+          "Grupo 90": "HOMEA"
+        }
+      }
     },
     {
       "slug": "nobili",
@@ -733,6 +754,88 @@
       "vigencia": "2025",
       "src": "MIDDLEBY/JUN 26/Lista_Precios_MASTERBUILT_2025_Asadores.pdf",
       "archivo": "lista-precios-asadores-masterbuilt-2025.pdf"
+    },
+    {
+      "slug": "catalano-valsir-kits",
+      "marca": "catalano",
+      "nombre": "Catalano + Valsir",
+      "titulo": "Paquetes sanitarios y mingitorios · lista de precios",
+      "vigencia": "nov 2026",
+      "src": "BAÑOS SOLO PDFS/LISTA_KITS_CATALANO_VALSIR_NOV_2026.pdf",
+      "archivo": "lista-precios-kits-sanitarios-catalano-valsir-nov-2026.pdf",
+      "op": {
+        "del": [
+          36
+        ],
+        "stamp": "bl"
+      }
+    },
+    {
+      "slug": "catalano",
+      "marca": "catalano",
+      "nombre": "Catalano",
+      "titulo": "Catálogo",
+      "vigencia": "2026",
+      "src": "BAÑOS SOLO PDFS/CATALOGO_CATALANO_GENERAL.pdf",
+      "archivo": "catalogo-catalano-ceramica-bano-2026.pdf",
+      "op": {
+        "stamp": "tr"
+      }
+    },
+    {
+      "slug": "valsir",
+      "marca": "valsir",
+      "nombre": "Valsir",
+      "titulo": "Placas de accionamiento · catálogo",
+      "vigencia": "2026",
+      "src": "BAÑOS SOLO PDFS/CATALOGO_VALSIR_PUSHPLATES.pdf",
+      "archivo": "catalogo-valsir-placas-accionamiento-2026.pdf",
+      "op": {
+        "stamp": "tr"
+      }
+    },
+    {
+      "slug": "i-drain",
+      "marca": "i-drain",
+      "nombre": "I-Drain",
+      "titulo": "Catálogo",
+      "vigencia": "2026",
+      "src": "BAÑOS SOLO PDFS/CATALOGO_IDRAIN.pdf",
+      "archivo": "catalogo-i-drain-canaletas-drenaje-2026.pdf",
+      "op": {
+        "stamp": "tl"
+      }
+    },
+    {
+      "slug": "kaldewei",
+      "marca": "kaldewei",
+      "nombre": "Kaldewei",
+      "titulo": "Catálogo",
+      "vigencia": "2026",
+      "src": "BAÑOS SOLO PDFS/CATALOGO_KALDEWEI.pdf",
+      "archivo": "catalogo-kaldewei-tinas-regaderas-acero-vitrificado-2026.pdf",
+      "op": {
+        "tarjeta_en": {
+          "1": [
+            420,
+            175,
+            578,
+            321
+          ]
+        }
+      }
+    },
+    {
+      "slug": "treesse",
+      "marca": "treesse",
+      "nombre": "Treesse",
+      "titulo": "Catálogo",
+      "vigencia": "2026",
+      "src": "BAÑOS SOLO PDFS/CATALOGO_TREESSE.pdf",
+      "archivo": "catalogo-treesse-tinas-hidromasaje-2026.pdf",
+      "op": {
+        "stamp": "tr"
+      }
     }
   ]
 }

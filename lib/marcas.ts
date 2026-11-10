@@ -69,6 +69,11 @@ export interface HeroMarca {
   descripcion: string;
   /** Botón principal. `url` = PDF oficial en Shopify Files; null mientras no se sube. */
   cta?: { texto: string; url: string | null };
+  /**
+   * Segundo botón, de contorno, junto al principal (Carla, 2026-11-09: "Paquetes
+   * sanitarios" en Catalano y Valsir → lista de kits Catalano + Valsir). Solo se pinta con url.
+   */
+  cta2?: { texto: string; url: string };
   /** Ajustes de la foto del hero, solo cuando la marca los necesita. */
   imagen?: {
     /** El hero va en espejo por defecto; false lo deja al derecho (p. ej. si la foto trae texto). */

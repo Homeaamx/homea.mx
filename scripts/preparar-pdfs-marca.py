@@ -176,6 +176,27 @@ def preparar(doc, op, salida, tarjeta, banner):
         caja = op.get("tapar", {}).get(str(i + 1))
         if caja:
             p.add_redact_annot(fitz.Rect(caja), fill=False)
+        # Texto del distribuidor dentro de un párrafo (p. ej. "Ni MrSteam ni Grupo 90 son
+        # responsables…"): se cambia por otro, con su mismo tamaño y color.
+        escribir = []
+        for viejo, nuevo in op.get("reemplazar", {}).items():
+            for r in p.search_for(viejo):
+                tam, color = r.height * 0.82, (0, 0, 0)
+                centro = (r.tl + r.br) / 2
+                for b in p.get_text("dict")["blocks"]:
+                    for l in b.get("lines", []):
+                        for s in l["spans"]:
+                            if centro in fitz.Rect(s["bbox"]):
+                                tam, color = s["size"], fitz.sRGB_to_pdf(s["color"])
+                                # Helvetica pesa más que una fuente Light: se aclara el
+                                # tono para que la palabra no resalte en el párrafo.
+                                if "light" in s["font"].lower() or "thin" in s["font"].lower():
+                                    color = tuple(c + (1 - c) * 0.5 for c in color)
+                p.add_redact_annot(r, fill=False)
+                # El texto nuevo se escribe después de borrar el viejo: como texto de
+                # reemplazo del redact, PyMuPDF lo omite si la caja es más baja que la letra.
+                escribir.append((fitz.Point(r.x0, r.y1 - r.height * 0.22), nuevo, tam, color))
+                lineas += 1
         if marcas or lineas or caja:
             # Solo quita texto y trazos cubiertos por completo: las fotos de fondo se quedan.
             p.apply_redactions(
@@ -183,6 +204,8 @@ def preparar(doc, op, salida, tarjeta, banner):
                 graphics=fitz.PDF_REDACT_LINE_ART_REMOVE_IF_COVERED,
                 text=fitz.PDF_REDACT_TEXT_REMOVE,
             )
+        for punto, nuevo, tam, color in escribir:
+            p.insert_text(punto, nuevo, fontname="helv", fontsize=tam, color=color)
     if op.get("banner_dims"):
         dims = tuple(op["banner_dims"])
         sitios = [
@@ -197,6 +220,10 @@ def preparar(doc, op, salida, tarjeta, banner):
         for i, _, r in sitios:
             pdf[i].insert_image(r, stream=banner, keep_proportion=True)
         hecho.append(f"banner HOMEA en {len({i for i, _, _ in sitios})} páginas")
+    # Tarjeta HOMEA donde iban los datos del distribuidor (p. ej. la página de contacto).
+    for n, caja in op.get("tarjeta_en", {}).items():
+        pdf[int(n) - 1].insert_image(fitz.Rect(caja), stream=tarjeta, keep_proportion=True)
+        hecho.append(f"tarjeta HOMEA en p{n}")
     portada = pdf[0]
     for img in portada.get_images(full=True):
         # logo del distribuidor como imagen: 1×1 con máscara (Artexa) o por tamaño (Lecrom)
