@@ -194,6 +194,23 @@ function muestra(nombre: string): string | null {
   return MUESTRAS[sinRelleno] ?? null;
 }
 
+/**
+ * Respaldo cuando lo que distingue a una pieza de su grupo no es un color conocido:
+ * la frase de color conocida más larga del título. Pasa cuando el grupo comparte una
+ * palabra del color (Whirlpool WMMF5930: "Gris Acero" y "Acero Inoxidable Negro"
+ * comparten "Acero" y quedaban "Gris" e "Inoxidable Negro"; Carla, 2026-11-09).
+ */
+function fraseDeColor(titulo: string): string | null {
+  const w = palabras(titulo);
+  for (let largo = Math.min(4, w.length); largo >= 1; largo--) {
+    for (let i = 0; i + largo <= w.length; i++) {
+      const frase = w.slice(i, i + largo).join(" ");
+      if (MUESTRAS[frase.toLowerCase()]) return frase;
+    }
+  }
+  return null;
+}
+
 export interface ColorHermano {
   sku: string;
   slug: string;
@@ -222,6 +239,22 @@ export function coloresDeModelo(
   const nombreRespaldo = (a?: string) => (a === "Inoxidable" ? "Acero inoxidable" : (a ?? ""));
   type Pieza = (typeof hermanos)[number];
   const nombresDe = (grupo: Pieza[]) => {
+    const base = nombresBase(grupo);
+    // Si alguna pieza no dio un color conocido, todo el grupo toma su frase de color
+    // del título cuando la incluye ("Gris" → "Gris Acero" junto a "Acero Inoxidable
+    // Negro"). Los grupos que ya daban colores no cambian.
+    if (base.every((n) => muestra(n))) return base;
+    const con = grupo.map((g, i) => {
+      const frase = fraseDeColor(g.titulo);
+      return frase && (!muestra(base[i]) || frase.toLowerCase().includes(base[i].toLowerCase())) ? frase : base[i];
+    });
+    // Un respaldo que repite el color de otra pieza no sirve ("Black Slate y Rose Gold"
+    // daría otro "Black Slate"): esa pieza conserva su nombre y sale del grupo como antes.
+    return con.map((n, i) =>
+      n !== base[i] && !muestra(base[i]) && con.some((m, j) => j !== i && m.toLowerCase() === n.toLowerCase()) ? base[i] : n,
+    );
+  };
+  const nombresBase = (grupo: Pieza[]) => {
     // Lo que no comparte con TODO el grupo, para que "Satin Platinum" no quede en
     // "Platinum" junto a "Satin Gold".
     const comunes = palabras(grupo[0].titulo)
