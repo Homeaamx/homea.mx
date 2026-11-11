@@ -21949,5 +21949,49 @@
    "9029357",
    "9016697"
   ]
+ },
+ "ALFA2GSC": {
+  "colores": [
+   "ALFA2RSC"
+  ],
+  "accesorios": [
+   "BF-2P-NER",
+   "KITPIZ",
+   "AC-SETPALE",
+   "AC-BBQ500-30"
+  ]
+ },
+ "ALFA2RSC": {
+  "colores": [
+   "ALFA2GSC"
+  ],
+  "accesorios": [
+   "BF-2P-NER",
+   "KITPIZ",
+   "AC-SETPALE",
+   "AC-BBQ500-30"
+  ]
+ },
+ "ALFA5RSC": {
+  "colores": [
+   "ALFA5ASC"
+  ],
+  "accesorios": [
+   "BFALLE-NER",
+   "KITPIZ",
+   "AC-SETPALE",
+   "AC-BBQ500-30"
+  ]
+ },
+ "ALFA5ASC": {
+  "colores": [
+   "ALFA5RSC"
+  ],
+  "accesorios": [
+   "BFALLE-NER",
+   "KITPIZ",
+   "AC-SETPALE",
+   "AC-BBQ500-30"
+  ]
  }
 }

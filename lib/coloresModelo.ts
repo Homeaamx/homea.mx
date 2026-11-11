@@ -139,6 +139,10 @@ const MUESTRAS: Record<string, string> = {
   // que trae la rama de Acros (se junta antes que Maytag) y "Cromo" la de arriba.
   "midnight steel": "linear-gradient(135deg, #5d6066 0%, #43464c 50%, #33363b 100%)",
   "volcano black": "#2a2a2a",
+  // Alfa Forni (2026-11-11): hornos de pizza Moderno, colores de la lista IESA.
+  "gris ardesia": "#4a4c4e",
+  "rojo antiguo": "#8f2b2e",
+  "amarillo fuego": "#e9b22f",
 };
 
 /**

@@ -3997,6 +3997,8 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="sub-zero"] { height: 32px; }
 /* Wolf (2026-11-10): IESA/wolf.png (placa de acero oficial, transparente alrededor). */
 .pdp-logo[data-marca="wolf"] { height: 32px; }
+/* Alfa Forni (2026-11-11): letras ALFA en negro del sitio oficial alfaforni.com (PNG transparente). */
+.pdp-logo[data-marca="alfa-forni"] { height: 28px; }
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
    técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
    una línea, baja a dos dentro de su pestaña. */
