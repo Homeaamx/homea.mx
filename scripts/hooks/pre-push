@@ -17,6 +17,9 @@ SRC="/Users/carlaarteaga/Desktop/Homea Landing Page Oficial/"
 # listarla. Se usa la carpeta real del cliente en Group Containers (2026-09-22).
 DST="/Users/carlaarteaga/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive-Homea 2.noindex/OneDrive-Homea 2/HOMEA/PAGINA WEB/LANDING PAGE 2026 HTML/"
 
+# Errores del último respaldo (2026-11-11: antes se perdían y no se sabía por qué falló).
+LOG="$(git rev-parse --git-dir)/respaldo-onedrive.log"
+
 respaldar() {
   if [ ! -d "$DST" ]; then
     echo "[respaldo] AVISO: carpeta de OneDrive no encontrada, se omite el backup." >&2
@@ -39,9 +42,16 @@ respaldar() {
     --exclude='.DS_Store' \
     --exclude='.next-check/' \
     --exclude='.env*.local' \
-    "$SRC" "$DST" \
-    && echo "[respaldo] OneDrive actualizado: $DST" >&2 \
-    || echo "[respaldo] AVISO: rsync falló (el push continúa de todas formas)." >&2
+    "$SRC" "$DST" 2> "$LOG"
+  codigo=$?
+  # 24 = algún archivo desapareció mientras se copiaba (p. ej. un temporal de una
+  # sesión de carga): el resto del respaldo quedó bien.
+  if [ $codigo -eq 0 ] || [ $codigo -eq 24 ]; then
+    echo "[respaldo] OneDrive actualizado: $DST" >&2
+  else
+    echo "[respaldo] AVISO: rsync falló con código $codigo (el push continúa de todas formas). Detalle en $LOG:" >&2
+    tail -5 "$LOG" >&2
+  fi
 }
 
 while read -r local_ref local_sha remote_ref remote_sha; do
