@@ -425,7 +425,7 @@
                     "descripcion": "Cuerpo de acero inoxidable AISI 304 y puerta de cristal: combina con el equipamiento profesional del bar.",
                     "specs": "Acero AISI 304 · Cristal con filtro UV",
                     "detalle": "El marco de acero y el cristal bronceado de triple capa protegen los puros de la luz UV y de los cambios de temperatura exteriores, sin ocultar la colección. Es la opción para barras y cocinas con frentes de acero.",
-                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=humidor-para-puros&filtro=color:acero-inoxidable"
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=humidor-para-puros&filtro=panel:acero-inoxidable"
                   }
                 },
                 {
@@ -438,7 +438,7 @@
                     "descripcion": "Listo para panel: el marco de la puerta se cubre con el mismo material del mueble y el humidor queda integrado.",
                     "specs": "Panel de carpintería · Integración total",
                     "detalle": "Llega sin frente decorativo y el carpintero fabrica el panel con las medidas de la ficha técnica; el cristal sigue dejando ver los puros. Ideal cuando la barra o la sala llevan carpintería continua.",
-                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=humidor-para-puros&filtro=color:panelable"
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=humidor-para-puros&filtro=panel:panelable"
                   }
                 }
               ],
@@ -507,7 +507,7 @@
                     "descripcion": "Frente de acero inoxidable de grado profesional, resistente a la humedad del bar y fácil de limpiar.",
                     "specs": "Acero inoxidable · Interior o exterior",
                     "detalle": "El frente de acero combina con el equipamiento profesional y resiste mejor la humedad. Para exterior, además del acero, el modelo debe estar certificado para intemperie.",
-                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=maquinas-de-hielo&filtro=acabado:inoxidable"
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=maquinas-de-hielo&filtro=panel:acero-inoxidable"
                   }
                 },
                 {
@@ -520,7 +520,7 @@
                     "descripcion": "Frente preparado para recibir el panel de carpintería y quedar oculta dentro del mueble.",
                     "specs": "Panel de carpintería · Integración total",
                     "detalle": "El equipo llega sin frente decorativo y se le monta un panel del mismo material de los muebles, con las medidas y el peso máximo que indica el fabricante. El carpintero lo fabrica con la plantilla de la ficha técnica.",
-                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=maquinas-de-hielo&filtro=acabado:panelable"
+                    "catalogo": "/productos/cocina-y-bar/refrigeracion?tipo=maquinas-de-hielo&filtro=panel:panelable"
                   }
                 }
               ],

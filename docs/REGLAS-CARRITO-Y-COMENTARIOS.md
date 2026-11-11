@@ -20,7 +20,9 @@ Reglas de conjunto:
 - **Límite propio por marca:** el Excel permite un monto distinto por marca (columna *MONTO LÍMITE PROPIO*). Hoy ninguna marca lo usa; si se llena, hay que llevarlo al JSON.
 - **Stock vendible por marca:** columna *¿LO EN STOCK / OFERTA SE PUEDE COMPRAR?*. Hoy todas dicen "Sí".
 
-Marcas "Solo cotizar" (21 en el Excel; U-Line ya no está en el sitio): Asko, Benessi, Bertazzoni, Bosch, Brizo, Cove, Delta, Dexa, Franke, Gaggenau, Gessi, Hoshizaki, Miele, Pitt Cooking, Scotsman, Sub-Zero, The Galley, Thermador, Viking, Wolf.
+Marcas "Solo cotizar" (21 en el Excel; U-Line ya no está en el sitio; Alfa Forni sumada el 2026-11-10 por la regla IESA): Alfa Forni, Asko, Benessi, Bertazzoni, Bosch, Brizo, Cove, Delta, Dexa, Franke, Gaggenau, Gessi, Hoshizaki, Miele, Pitt Cooking, Scotsman, Sub-Zero, The Galley, Thermador, Viking, Wolf.
+
+**Regla IESA/Lavish (Carla, 2026-11-10):** cualquier marca que se compra a IESA/Lavish (hoy Alfa Forni, Cove, Dexa, Scotsman, Sub-Zero, The Galley y Wolf) **se cotiza siempre, salvo la pieza que esté en stock** (esa se paga en línea por la regla 1). Toda marca nueva de IESA entra a `soloCotizar`.
 
 ## 2. Qué ve el cliente al cerrar el proyecto (Carla, 2026-10-08)
 

@@ -129,7 +129,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | SCOTSMAN | IESA/LAVISH | SCOTS | 66 | 10% | `/marcas/scotsman` | completo |  |
 | SEDONA | MIDDLEBY | SEDON | 55 | 5% | `/marcas/sedona-by-lynx` | completo |  |
 | SMEG | SMEG | SMEG | 240 | 10% | `/marcas/smeg` | completo |  |
-| SUB-ZERO | IESA/LAVISH | SUBZE | 462 | 10% | `/marcas/sub-zero` | completo | Condición distinta para fuera de línea vs. de línea |
+| SUB-ZERO | IESA/LAVISH | SUBZE | 515 | 10% | `/marcas/sub-zero` | completo | Condición distinta para fuera de línea vs. de línea (solo costo: PLATA 10 % y 2 años en ambas). Cargada 2026-11-10: 222 equipos + 293 accesorios; se cotiza salvo stock (regla IESA) |
 | SUMMIT | LECROM | SUMMI | 19 | 10% | `/marcas/summit` | completo |  |
 | SUPRA | SUPER FLAMA | SUPRA | 111 | 5% | `/marcas/supra` | completo |  |
 | TECNOLAM | TECNOLAM | TECNO | 138 | 10% | `/marcas/tecnolam` | completo |  |

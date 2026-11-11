@@ -53,5 +53,6 @@ Las variantes de una misma pieza (Alfresco *Standard Color / Custom Color*, `-SC
 | Thor | 6 (Gordon Ramsay negra / inoxidable) |
 | Kraus | 2 |
 | Benessi | 46 (2026-11-04, a mano: acero ↔ panelable en refrigeración, bajo cubierta y lavavajillas; acero ↔ negra/cristal negro en parrillas Masterpiece, cafetera 24", combi-vapor y microondas combinado 30") |
+| Sub-Zero | 114 (2026-11-10, a mano: Classic por familia + bisagra → Panelable · Acero jaladera Tubular · Acero jaladera Pro; muestras "acero inoxidable jaladera tubular/pro", "tubular", "pro") |
 
 Pendiente de Carla: Elica **PRF0024262A** y **PRF0098392** son la misma campana Seashell 32" Blanca; solo PRF0098392 quedó en el grupo.

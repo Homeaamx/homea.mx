@@ -44,6 +44,7 @@ export const FRAGMENTO_CARRITO = /* GraphQL */ `
                 { namespace: "filtros", key: "diseno" },
                 { namespace: "filtros", key: "ancho" },
                 { namespace: "filtros", key: "color" },
+                { namespace: "filtros", key: "panel" },
                 { namespace: "filtros", key: "tipo" },
                 { namespace: "filtros", key: "funcionamiento" }
               ]) { key value }

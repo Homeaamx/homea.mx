@@ -36,6 +36,11 @@ export const CLAVES_FILTRO = [
   "hornos", "llenado_agua", "produccion", "profundidad", "puerta", "racks", "ruido",
   "tecnologia", "tina", "tipo_hielo", "variedades_cafe", "zonas", "bisagra",
   "altura_ada", "quemadores", "acabado_quemador", "paquete",
+  // Panel (Carla, 2026-11-10): Panelable / Acero inoxidable de fábrica, en refrigeración,
+  // Cajones y Lavavajillas; ahí Color ya no lleva esos dos valores.
+  "panel",
+  // Sub-Zero (Carla, 2026-11-10): solo "Alta altitud"; las demás piezas no llevan valor.
+  "altitud",
 ] as const;
 
 const IDENTIFICADORES = [

@@ -31,6 +31,11 @@ const MUESTRAS: Record<string, string> = {
   panelable: "repeating-linear-gradient(100deg, #c9a585 0 3px, #b8936f 3px 5px, #cfad8e 5px 8px)",
   // Monogram: cajones refrigerantes dobles "Panelables" y parrilla de inducción "Gris".
   panelables: "repeating-linear-gradient(100deg, #c9a585 0 3px, #b8936f 3px 5px, #cfad8e 5px 8px)",
+  // Sub-Zero Classic (2026-11-10): acabados panelable · acero con jaladera tubular · acero con jaladera Pro.
+  "acero inoxidable jaladera tubular": METAL,
+  "acero inoxidable jaladera pro": METAL,
+  tubular: METAL,
+  pro: METAL,
   gris: "#8e8e8b",
   // Kraus: acero inoxidable con PVD negro (gunmetal), "… en Acero Inoxidable Negro".
   "acero inoxidable negro": "linear-gradient(135deg, #5c5c5c 0%, #2e2e2e 50%, #1a1a1a 100%)",
@@ -95,6 +100,9 @@ const MUESTRAS: Record<string, string> = {
   "cristal negro": "linear-gradient(135deg, #3a3a3a 0%, #111111 45%, #262626 60%, #050505 100%)",
   // IO Mabe (2026-11-06): parrillas de gas en vidrio negro frente a las de acero inoxidable.
   "vidrio negro": "linear-gradient(135deg, #3a3a3a 0%, #111111 45%, #262626 60%, #050505 100%)",
+  // Wolf (2026-11-10): campanas VW/VI en vidrio y VC de techo en vidrio blanco.
+  vidrio: "linear-gradient(135deg, rgba(255,255,255,.95) 0%, rgba(196,214,220,.55) 45%, rgba(255,255,255,.9) 60%, rgba(170,192,200,.5) 100%)",
+  "vidrio blanco": "linear-gradient(135deg, #ffffff 0%, #ececea 45%, #ffffff 60%, #dcdcd8 100%)",
   "plástico negro": "#262626",
   "chrome/coal black": mitad("#c9cdd0", "#1f1f1f"),
   "chrome/white": mitad("#c9cdd0", "#f4f4f2"),

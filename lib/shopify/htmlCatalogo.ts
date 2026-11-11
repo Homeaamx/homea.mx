@@ -199,6 +199,7 @@ export function lineaSpec(p: ProductoVivo): string[] {
     ...(f.diseno ?? []),
     ...(f.ancho ?? []),
     ...(f.color ?? []),
+    ...(f.panel ?? []),
     ...(f.tipo ?? []),
     ...(f.funcionamiento ?? []).filter((v) => !/^Todo /.test(v)),
   ];
@@ -350,7 +351,7 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0, colores:
 
 /** Círculo del tono junto a cada casilla del grupo Color (lib/coloresModelo.ts). */
 function circuloFiltro(clave: string, texto: string): string {
-  const fondo = clave === "color" ? muestraFiltroColor(texto) : null;
+  const fondo = clave === "color" || clave === "panel" ? muestraFiltroColor(texto) : null;
   return fondo ? `<span class="fcolor" aria-hidden="true" style="--tono:${fondo}"></span>` : "";
 }
 
@@ -370,7 +371,7 @@ const MAX_COLORES_TARJETA = 5;
 /** Círculos de cada tarjeta de la rejilla, con los hermanos que vienen en el mismo listado. */
 function coloresDeRejilla(productos: ProductoVivo[]): Map<string, ColorHermano[]> {
   const porSku = new Map(productos.map((p) => [p.sku, p]));
-  const comoColor = (x: ProductoVivo) => ({ sku: x.sku, slug: x.slug, titulo: x.titulo, acabado: x.filtros.color?.[0] });
+  const comoColor = (x: ProductoVivo) => ({ sku: x.sku, slug: x.slug, titulo: x.titulo, acabado: x.filtros.color?.[0] ?? x.filtros.panel?.[0] });
   const mapa = new Map<string, ColorHermano[]>();
   for (const p of productos) {
     const otros = otrosColores(p.sku);
@@ -713,6 +714,28 @@ export function panelFiltrosHtml(
     grupos.push(grupoHtml("Paquetes", "paquete", etiquetas, false));
   }
 
+  // Altitud (Carla, 2026-11-10, carga Sub-Zero): refrigeración con puerta de
+  // vidrio para instalar a más de 1,524 m s. n. m. (CDMX, Querétaro…), marcada
+  // con `filtros.altitud = Alta altitud`. Como Paquetes, sale solo en los
+  // listados que traen al menos una; las demás piezas no llevan valor.
+  const porAltitud = new Map<string, { texto: string; n: number }>();
+  for (const p of productos) {
+    for (const v of p.filtros.altitud ?? []) {
+      const c = porAltitud.get(slugValor(v)) ?? { texto: v, n: 0 };
+      c.n++;
+      porAltitud.set(slugValor(v), c);
+    }
+  }
+  if (porAltitud.size) {
+    const etiquetas = [...porAltitud]
+      .map(
+        ([k, c]) =>
+          `<label><input type="checkbox" data-fk="altitud" value="${esc(k)}"> <span class="flbl">${esc(c.texto)}</span> <span class="count figures">${c.n}</span></label>`,
+      )
+      .join("");
+    grupos.push(grupoHtml("Altitud", "altitud", etiquetas, false));
+  }
+
   // Unión ordenada de los filtros de cada tipo presente (tabla de filtros v2).
   const defs: DefFiltro[] = [];
   for (const tipo of new Set([...tipos, ...productos.map((p) => p.tipo)])) {
@@ -977,6 +1000,7 @@ const NOMBRES_FILTRO: Record<string, string> = {
   altura_ada: "Altura",
   altura: "Altura",
   profundidad: "Profundidad",
+  panel: "Panel",
   color: "Color",
   acabado: "Acabado",
   material: "Material",

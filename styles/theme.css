@@ -3991,6 +3991,12 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="acros"] { height: 36px; }
 /* Maytag (2026-11-09): WHIRLPOOL/Maytag-Logo.png (escudo oficial, transparente alrededor). */
 .pdp-logo[data-marca="maytag"] { height: 34px; }
+/* Cove (2026-11-10): IESA/cove.png (placa de acero cepillado oficial, transparente alrededor). */
+.pdp-logo[data-marca="cove"] { height: 32px; }
+/* Sub-Zero (2026-11-10): IESA/subzero.png (placa de acero oficial, transparente alrededor). */
+.pdp-logo[data-marca="sub-zero"] { height: 32px; }
+/* Wolf (2026-11-10): IESA/wolf.png (placa de acero oficial, transparente alrededor). */
+.pdp-logo[data-marca="wolf"] { height: 32px; }
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
    técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
    una línea, baja a dos dentro de su pestaña. */

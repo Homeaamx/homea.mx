@@ -89,6 +89,7 @@ function specDe(variante: VarianteRaw): string {
     ...valoresFiltro(variante, "diseno"),
     ...valoresFiltro(variante, "ancho"),
     ...valoresFiltro(variante, "color"),
+    ...valoresFiltro(variante, "panel"),
     ...valoresFiltro(variante, "tipo"),
     ...valoresFiltro(variante, "funcionamiento").filter((v) => !/^Todo /.test(v)),
   ];
