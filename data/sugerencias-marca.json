@@ -21993,5 +21993,27 @@
    "AC-SETPALE",
    "AC-BBQ500-30"
   ]
+ },
+ "DRCG033A-1SS": {
+  "accesorios": [
+   "SS33",
+   "K-SS",
+   "KHAND"
+  ]
+ },
+ "SRCP065A-1SU": {
+  "accesorios": [
+   "KDFS",
+   "KDFR",
+   "KSSKP",
+   "KATB"
+  ]
+ },
+ "SRNP110A-1SU": {
+  "accesorios": [
+   "KDFS",
+   "KDFR",
+   "KATB"
+  ]
  }
 }
