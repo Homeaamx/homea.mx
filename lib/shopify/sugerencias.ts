@@ -22,6 +22,10 @@
 //     los accesorios: la rejilla crece a una tercera fila si hace falta.
 //   - "accesorios": jaladeras, paneles, filtros y kits del modelo; pesan menos
 //     que las campanas sugeridas para estufas y parrillas.
+//   - "kits": kits que cambian el color del equipo (Carla, 2026-11-11: puertas
+//     y faldones blancos o negros de las estufas Wolf). Van justo después de los
+//     colores y antes que todo lo demás; la rejilla crece una fila para que
+//     sigan cabiendo campanas y accesorios.
 
 import sugerenciasFabricante from "@/data/sugerencias-compra.json";
 import sugerenciasMarca from "@/data/sugerencias-marca.json";
@@ -31,7 +35,7 @@ import { esAccesorio } from "./coleccionesWeb";
 
 type ListasFabricante = { accesorios: string[]; limpieza: string[]; combinables: string[] };
 const FABRICANTE = sugerenciasFabricante as Record<string, ListasFabricante>;
-const MARCA = sugerenciasMarca as unknown as Record<string, { colores?: string[]; accesorios?: string[] }>;
+const MARCA = sugerenciasMarca as unknown as Record<string, { colores?: string[]; accesorios?: string[]; kits?: string[] }>;
 
 /** Máximo de tarjetas en "Sugerencias de compra" (dos filas de la rejilla de 3). */
 export const MAX_SUGERENCIAS = 6;
@@ -252,6 +256,9 @@ export function sugerenciasDeCompra(equipo: ProductoVivo, candidatos: ProductoVi
   const esCampana = equipo.tipo === "Campanas";
   const propios = (deMarca.accesorios ?? []).filter((sku) => porSku.has(sku) && sku !== equipo.sku);
   propios.forEach((sku, i) => elegidos.set(sku, esCampana ? 900 - i : 50));
+  // Kits de color (puerta y faldón): siempre, en el orden de la lista.
+  const kits = (deMarca.kits ?? []).filter((sku) => porSku.has(sku) && sku !== equipo.sku);
+  kits.forEach((sku, i) => elegidos.set(sku, 950 - i));
 
   // 2. Reglas por familia, medida, línea y tipo. Una campana con lista propia no
   // pasa por aquí: la regla por medida colaba kits de otras series del mismo ancho.
@@ -275,6 +282,8 @@ export function sugerenciasDeCompra(equipo: ProductoVivo, candidatos: ProductoVi
   let total = colores.length > 3 ? MAX_SUGERENCIAS + 3 : MAX_SUGERENCIAS;
   // Campana: todos sus accesorios propios, en filas completas de 3 (tope 12).
   if (esCampana && colores.length + propios.length > total) total = Math.min(12, Math.ceil((colores.length + propios.length) / 3) * 3);
+  // Kits de color: una fila más para que quepan los kits y al menos tres sugerencias más.
+  if (kits.length) total = Math.max(total, Math.min(12, Math.ceil((colores.length + kits.length + 3) / 3) * 3));
   const resto = [...elegidos.entries()]
     .map(([sku, pts]) => ({ p: porSku.get(sku)!, pts }))
     // Más relevantes primero; con foto antes que sin foto.
