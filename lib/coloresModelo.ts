@@ -143,6 +143,20 @@ const MUESTRAS: Record<string, string> = {
   "gris ardesia": "#4a4c4e",
   "rojo antiguo": "#8f2b2e",
   "amarillo fuego": "#e9b22f",
+  // The Galley (2026-11-11): kits de las tarjas (madera o resina) y acabados de grifería.
+  "roble blanco": "repeating-linear-gradient(100deg, #d9b98c 0 3px, #c9a679 3px 5px, #dcc096 5px 8px)",
+  nogal: "repeating-linear-gradient(100deg, #6b4632 0 3px, #573826 3px 5px, #74503a 5px 8px)",
+  "resina gris": "#a9a8a4",
+  "resina blanca": "#f1f0ec",
+  "acero inoxidable pulido": "linear-gradient(135deg, #f4f4f2 0%, #b9bbbc 45%, #eceded 60%, #9a9c9e 100%)",
+  "pvd gris metálico": "linear-gradient(135deg, #8a8a88 0%, #5e5e5c 50%, #474745 100%)",
+  "gris metálico": "linear-gradient(135deg, #8a8a88 0%, #5e5e5c 50%, #474745 100%)",
+  "pvd negro satinado": "linear-gradient(135deg, #3c3b3a 0%, #252423 50%, #181716 100%)",
+  "negro satinado": "linear-gradient(135deg, #3c3b3a 0%, #252423 50%, #181716 100%)",
+  "pvd oro cepillado": "linear-gradient(135deg, #e3cc95 0%, #c2a062 50%, #a8864a 100%)",
+  "oro cepillado": "linear-gradient(135deg, #e3cc95 0%, #c2a062 50%, #a8864a 100%)",
+  "pvd bronce bruñido": "linear-gradient(135deg, #c79f6e 0%, #9c7448 50%, #7a5734 100%)",
+  "bronce bruñido": "linear-gradient(135deg, #c79f6e 0%, #9c7448 50%, #7a5734 100%)",
 };
 
 /**

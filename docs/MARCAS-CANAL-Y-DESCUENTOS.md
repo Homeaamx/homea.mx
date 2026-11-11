@@ -134,7 +134,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | SUPRA | SUPER FLAMA | SUPRA | 111 | 5% | `/marcas/supra` | completo |  |
 | TECNOLAM | TECNOLAM | TECNO | 138 | 10% | `/marcas/tecnolam` | completo |  |
 | TEKA (todas las líneas) | TEKA | TEKA | 210 | 10% | `/marcas/teka` | completo | Estufas económicas: 5% |
-| THE GALLEY | IESA/LAVISH | GALLE | 153 | **PENDIENTE** | `/marcas/the-galley` | completo | No está en la política de descuentos |
+| THE GALLEY | IESA/LAVISH | GALLE | 153 | 0% | `/marcas/the-galley` | completo | Sin descuento, solo cotizar (Carla, 2026-11-11); 92 piezas de la lista 2025-26 en Shopify |
 | THERMADOR | ARTEXA | THERM | 243 | 10% | `/marcas/thermador` | completo |  |
 | THOR | ARTEXA | THOR | 34 | 10% | `/marcas/thor` | completo |  |
 | TRADEWIND | MIDDLEBY | TRADE | 154 | 5% | `/marcas/tradewind` | completo |  |

@@ -22015,5 +22015,1291 @@
    "KDFR",
    "KATB"
   ]
+ },
+ "IWS-7-S-2-QW": {
+  "colores": [
+   "IWS-7-S-2-WA",
+   "IWS-7-S-2-GT",
+   "IWS-7-S-2-GR",
+   "IWS-7-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-7-S-3-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-7-S-2-WA": {
+  "colores": [
+   "IWS-7-S-2-QW",
+   "IWS-7-S-2-GT",
+   "IWS-7-S-2-GR",
+   "IWS-7-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-7-S-3-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-7-S-2-GT": {
+  "colores": [
+   "IWS-7-S-2-QW",
+   "IWS-7-S-2-WA",
+   "IWS-7-S-2-GR",
+   "IWS-7-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-7-S-3-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-7-S-2-GR": {
+  "colores": [
+   "IWS-7-S-2-QW",
+   "IWS-7-S-2-WA",
+   "IWS-7-S-2-GT",
+   "IWS-7-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-7-S-3-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-7-S-2-WH": {
+  "colores": [
+   "IWS-7-S-2-QW",
+   "IWS-7-S-2-WA",
+   "IWS-7-S-2-GT",
+   "IWS-7-S-2-GR"
+  ],
+  "accesorios": [
+   "BG-7-S-3-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-6-S-2-QW": {
+  "colores": [
+   "IWS-6-S-2-WA",
+   "IWS-6-S-2-GT",
+   "IWS-6-S-2-GR",
+   "IWS-6-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-6-S-3-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-6-S-2-WA": {
+  "colores": [
+   "IWS-6-S-2-QW",
+   "IWS-6-S-2-GT",
+   "IWS-6-S-2-GR",
+   "IWS-6-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-6-S-3-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-6-S-2-GT": {
+  "colores": [
+   "IWS-6-S-2-QW",
+   "IWS-6-S-2-WA",
+   "IWS-6-S-2-GR",
+   "IWS-6-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-6-S-3-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-6-S-2-GR": {
+  "colores": [
+   "IWS-6-S-2-QW",
+   "IWS-6-S-2-WA",
+   "IWS-6-S-2-GT",
+   "IWS-6-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-6-S-3-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-6-S-2-WH": {
+  "colores": [
+   "IWS-6-S-2-QW",
+   "IWS-6-S-2-WA",
+   "IWS-6-S-2-GT",
+   "IWS-6-S-2-GR"
+  ],
+  "accesorios": [
+   "BG-6-S-3-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-5-S-2-QW": {
+  "colores": [
+   "IWS-5-S-2-WA",
+   "IWS-5-S-2-GT",
+   "IWS-5-S-2-GR",
+   "IWS-5-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-5-S-2-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-5-S-2-WA": {
+  "colores": [
+   "IWS-5-S-2-QW",
+   "IWS-5-S-2-GT",
+   "IWS-5-S-2-GR",
+   "IWS-5-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-5-S-2-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-5-S-2-GT": {
+  "colores": [
+   "IWS-5-S-2-QW",
+   "IWS-5-S-2-WA",
+   "IWS-5-S-2-GR",
+   "IWS-5-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-5-S-2-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-5-S-2-GR": {
+  "colores": [
+   "IWS-5-S-2-QW",
+   "IWS-5-S-2-WA",
+   "IWS-5-S-2-GT",
+   "IWS-5-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-5-S-2-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-5-S-2-WH": {
+  "colores": [
+   "IWS-5-S-2-QW",
+   "IWS-5-S-2-WA",
+   "IWS-5-S-2-GT",
+   "IWS-5-S-2-GR"
+  ],
+  "accesorios": [
+   "BG-5-S-2-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-4-S-2-QW": {
+  "colores": [
+   "IWS-4-S-2-WA",
+   "IWS-4-S-2-GT",
+   "IWS-4-S-2-GR",
+   "IWS-4-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-4-S-2-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-4-S-2-WA": {
+  "colores": [
+   "IWS-4-S-2-QW",
+   "IWS-4-S-2-GT",
+   "IWS-4-S-2-GR",
+   "IWS-4-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-4-S-2-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-4-S-2-GT": {
+  "colores": [
+   "IWS-4-S-2-QW",
+   "IWS-4-S-2-WA",
+   "IWS-4-S-2-GR",
+   "IWS-4-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-4-S-2-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-4-S-2-GR": {
+  "colores": [
+   "IWS-4-S-2-QW",
+   "IWS-4-S-2-WA",
+   "IWS-4-S-2-GT",
+   "IWS-4-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-4-S-2-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-4-S-2-WH": {
+  "colores": [
+   "IWS-4-S-2-QW",
+   "IWS-4-S-2-WA",
+   "IWS-4-S-2-GT",
+   "IWS-4-S-2-GR"
+  ],
+  "accesorios": [
+   "BG-4-S-2-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-3-S-2-QW": {
+  "colores": [
+   "IWS-3-S-2-WA",
+   "IWS-3-S-2-GT",
+   "IWS-3-S-2-GR",
+   "IWS-3-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-3-S-1-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-3-S-2-WA": {
+  "colores": [
+   "IWS-3-S-2-QW",
+   "IWS-3-S-2-GT",
+   "IWS-3-S-2-GR",
+   "IWS-3-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-3-S-1-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-3-S-2-GT": {
+  "colores": [
+   "IWS-3-S-2-QW",
+   "IWS-3-S-2-WA",
+   "IWS-3-S-2-GR",
+   "IWS-3-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-3-S-1-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-3-S-2-GR": {
+  "colores": [
+   "IWS-3-S-2-QW",
+   "IWS-3-S-2-WA",
+   "IWS-3-S-2-GT",
+   "IWS-3-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-3-S-1-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-3-S-2-WH": {
+  "colores": [
+   "IWS-3-S-2-QW",
+   "IWS-3-S-2-WA",
+   "IWS-3-S-2-GT",
+   "IWS-3-S-2-GR"
+  ],
+  "accesorios": [
+   "BG-3-S-1-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-30-S-2-QW": {
+  "colores": [
+   "IWS-30-S-2-WA",
+   "IWS-30-S-2-GT",
+   "IWS-30-S-2-GR",
+   "IWS-30-S-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-30-S-2-WA": {
+  "colores": [
+   "IWS-30-S-2-QW",
+   "IWS-30-S-2-GT",
+   "IWS-30-S-2-GR",
+   "IWS-30-S-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-30-S-2-GT": {
+  "colores": [
+   "IWS-30-S-2-QW",
+   "IWS-30-S-2-WA",
+   "IWS-30-S-2-GR",
+   "IWS-30-S-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-30-S-2-GR": {
+  "colores": [
+   "IWS-30-S-2-QW",
+   "IWS-30-S-2-WA",
+   "IWS-30-S-2-GT",
+   "IWS-30-S-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-30-S-2-WH": {
+  "colores": [
+   "IWS-30-S-2-QW",
+   "IWS-30-S-2-WA",
+   "IWS-30-S-2-GT",
+   "IWS-30-S-2-GR"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-2-C-2-QW": {
+  "colores": [
+   "IWS-2-C-2-WA",
+   "IWS-2-C-2-GT",
+   "IWS-2-C-2-GR",
+   "IWS-2-C-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-2-C-2-WA": {
+  "colores": [
+   "IWS-2-C-2-QW",
+   "IWS-2-C-2-GT",
+   "IWS-2-C-2-GR",
+   "IWS-2-C-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-2-C-2-GT": {
+  "colores": [
+   "IWS-2-C-2-QW",
+   "IWS-2-C-2-WA",
+   "IWS-2-C-2-GR",
+   "IWS-2-C-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-2-C-2-GR": {
+  "colores": [
+   "IWS-2-C-2-QW",
+   "IWS-2-C-2-WA",
+   "IWS-2-C-2-GT",
+   "IWS-2-C-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWS-2-C-2-WH": {
+  "colores": [
+   "IWS-2-C-2-QW",
+   "IWS-2-C-2-WA",
+   "IWS-2-C-2-GT",
+   "IWS-2-C-2-GR"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-4-S-2-QW": {
+  "colores": [
+   "IWA-4-S-2-WA",
+   "IWA-4-S-2-GT",
+   "IWA-4-S-2-GR",
+   "IWA-4-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-4-S-2-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-4-S-2-WA": {
+  "colores": [
+   "IWA-4-S-2-QW",
+   "IWA-4-S-2-GT",
+   "IWA-4-S-2-GR",
+   "IWA-4-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-4-S-2-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-4-S-2-GT": {
+  "colores": [
+   "IWA-4-S-2-QW",
+   "IWA-4-S-2-WA",
+   "IWA-4-S-2-GR",
+   "IWA-4-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-4-S-2-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-4-S-2-GR": {
+  "colores": [
+   "IWA-4-S-2-QW",
+   "IWA-4-S-2-WA",
+   "IWA-4-S-2-GT",
+   "IWA-4-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-4-S-2-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-4-S-2-WH": {
+  "colores": [
+   "IWA-4-S-2-QW",
+   "IWA-4-S-2-WA",
+   "IWA-4-S-2-GT",
+   "IWA-4-S-2-GR"
+  ],
+  "accesorios": [
+   "BG-4-S-2-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-3-S-2-QW": {
+  "colores": [
+   "IWA-3-S-2-WA",
+   "IWA-3-S-2-GT",
+   "IWA-3-S-2-GR",
+   "IWA-3-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-3-S-1-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-3-S-2-WA": {
+  "colores": [
+   "IWA-3-S-2-QW",
+   "IWA-3-S-2-GT",
+   "IWA-3-S-2-GR",
+   "IWA-3-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-3-S-1-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-3-S-2-GT": {
+  "colores": [
+   "IWA-3-S-2-QW",
+   "IWA-3-S-2-WA",
+   "IWA-3-S-2-GR",
+   "IWA-3-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-3-S-1-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-3-S-2-GR": {
+  "colores": [
+   "IWA-3-S-2-QW",
+   "IWA-3-S-2-WA",
+   "IWA-3-S-2-GT",
+   "IWA-3-S-2-WH"
+  ],
+  "accesorios": [
+   "BG-3-S-1-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-3-S-2-WH": {
+  "colores": [
+   "IWA-3-S-2-QW",
+   "IWA-3-S-2-WA",
+   "IWA-3-S-2-GT",
+   "IWA-3-S-2-GR"
+  ],
+  "accesorios": [
+   "BG-3-S-1-SS",
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-30-S-2-QW": {
+  "colores": [
+   "IWA-30-S-2-WA",
+   "IWA-30-S-2-GT",
+   "IWA-30-S-2-GR",
+   "IWA-30-S-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-30-S-2-WA": {
+  "colores": [
+   "IWA-30-S-2-QW",
+   "IWA-30-S-2-GT",
+   "IWA-30-S-2-GR",
+   "IWA-30-S-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-30-S-2-GT": {
+  "colores": [
+   "IWA-30-S-2-QW",
+   "IWA-30-S-2-WA",
+   "IWA-30-S-2-GR",
+   "IWA-30-S-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-30-S-2-GR": {
+  "colores": [
+   "IWA-30-S-2-QW",
+   "IWA-30-S-2-WA",
+   "IWA-30-S-2-GT",
+   "IWA-30-S-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-30-S-2-WH": {
+  "colores": [
+   "IWA-30-S-2-QW",
+   "IWA-30-S-2-WA",
+   "IWA-30-S-2-GT",
+   "IWA-30-S-2-GR"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-2-S-2-QW": {
+  "colores": [
+   "IWA-2-S-2-WA",
+   "IWA-2-S-2-GT",
+   "IWA-2-S-2-GR",
+   "IWA-2-S-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-2-S-2-WA": {
+  "colores": [
+   "IWA-2-S-2-QW",
+   "IWA-2-S-2-GT",
+   "IWA-2-S-2-GR",
+   "IWA-2-S-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-2-S-2-GT": {
+  "colores": [
+   "IWA-2-S-2-QW",
+   "IWA-2-S-2-WA",
+   "IWA-2-S-2-GR",
+   "IWA-2-S-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-2-S-2-GR": {
+  "colores": [
+   "IWA-2-S-2-QW",
+   "IWA-2-S-2-WA",
+   "IWA-2-S-2-GT",
+   "IWA-2-S-2-WH"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "IWA-2-S-2-WH": {
+  "colores": [
+   "IWA-2-S-2-QW",
+   "IWA-2-S-2-WA",
+   "IWA-2-S-2-GT",
+   "IWA-2-S-2-GR"
+  ],
+  "accesorios": [
+   "A-DRN-MSS",
+   "M-DRN-MSS",
+   "G-DRN-MSS",
+   "IWT-D-MSS-HF",
+   "IWTF-D-MSS-HF",
+   "ISD-1-MSS",
+   "IDS-1-MSS"
+  ]
+ },
+ "A-DRN-PSS": {
+  "colores": [
+   "A-DRN-MSS",
+   "A-DRN-BSS",
+   "A-DRN-YSS"
+  ]
+ },
+ "A-DRN-MSS": {
+  "colores": [
+   "A-DRN-PSS",
+   "A-DRN-BSS",
+   "A-DRN-YSS"
+  ]
+ },
+ "A-DRN-BSS": {
+  "colores": [
+   "A-DRN-PSS",
+   "A-DRN-MSS",
+   "A-DRN-YSS"
+  ]
+ },
+ "A-DRN-YSS": {
+  "colores": [
+   "A-DRN-PSS",
+   "A-DRN-MSS",
+   "A-DRN-BSS"
+  ]
+ },
+ "IWT-D-PSS-HF": {
+  "colores": [
+   "IWT-D-MSS-HF",
+   "IWT-D-GSS-HF",
+   "IWT-D-BSS-HF",
+   "IWT-D-YSS-HF",
+   "IWT-D-ZSS-HF"
+  ],
+  "accesorios": [
+   "ISD-1-PSS",
+   "IDS-1-PSS",
+   "IWF-79-HF",
+   "IWS-4-S-2-WA"
+  ]
+ },
+ "IWT-D-MSS-HF": {
+  "colores": [
+   "IWT-D-PSS-HF",
+   "IWT-D-GSS-HF",
+   "IWT-D-BSS-HF",
+   "IWT-D-YSS-HF",
+   "IWT-D-ZSS-HF"
+  ],
+  "accesorios": [
+   "ISD-1-MSS",
+   "IDS-1-MSS",
+   "IWF-79-HF",
+   "IWS-4-S-2-WA"
+  ]
+ },
+ "IWT-D-GSS-HF": {
+  "colores": [
+   "IWT-D-PSS-HF",
+   "IWT-D-MSS-HF",
+   "IWT-D-BSS-HF",
+   "IWT-D-YSS-HF",
+   "IWT-D-ZSS-HF"
+  ],
+  "accesorios": [
+   "ISD-1-GSS",
+   "IDS-1-GSS",
+   "IWF-79-HF",
+   "IWS-4-S-2-WA"
+  ]
+ },
+ "IWT-D-BSS-HF": {
+  "colores": [
+   "IWT-D-PSS-HF",
+   "IWT-D-MSS-HF",
+   "IWT-D-GSS-HF",
+   "IWT-D-YSS-HF",
+   "IWT-D-ZSS-HF"
+  ],
+  "accesorios": [
+   "ISD-1-BSS",
+   "IDS-1-BSS",
+   "IWF-79-HF",
+   "IWS-4-S-2-WA"
+  ]
+ },
+ "IWT-D-YSS-HF": {
+  "colores": [
+   "IWT-D-PSS-HF",
+   "IWT-D-MSS-HF",
+   "IWT-D-GSS-HF",
+   "IWT-D-BSS-HF",
+   "IWT-D-ZSS-HF"
+  ],
+  "accesorios": [
+   "ISD-1-YSS",
+   "IDS-1-YSS",
+   "IWF-79-HF",
+   "IWS-4-S-2-WA"
+  ]
+ },
+ "IWT-D-ZSS-HF": {
+  "colores": [
+   "IWT-D-PSS-HF",
+   "IWT-D-MSS-HF",
+   "IWT-D-GSS-HF",
+   "IWT-D-BSS-HF",
+   "IWT-D-YSS-HF"
+  ],
+  "accesorios": [
+   "ISD-1-ZSS",
+   "IDS-1-ZSS",
+   "IWF-79-HF",
+   "IWS-4-S-2-WA"
+  ]
+ },
+ "IWTF-D-PSS-HF": {
+  "colores": [
+   "IWTF-D-MSS-HF",
+   "IWTF-D-GSS-HF",
+   "IWTF-D-BSS-HF",
+   "IWTF-D-YSS-HF",
+   "IWTF-D-ZSS-HF"
+  ],
+  "accesorios": [
+   "ISD-1-PSS",
+   "IDS-1-PSS",
+   "RFC-79-HF",
+   "IWS-4-S-2-WA"
+  ]
+ },
+ "IWTF-D-MSS-HF": {
+  "colores": [
+   "IWTF-D-PSS-HF",
+   "IWTF-D-GSS-HF",
+   "IWTF-D-BSS-HF",
+   "IWTF-D-YSS-HF",
+   "IWTF-D-ZSS-HF"
+  ],
+  "accesorios": [
+   "ISD-1-MSS",
+   "IDS-1-MSS",
+   "RFC-79-HF",
+   "IWS-4-S-2-WA"
+  ]
+ },
+ "IWTF-D-GSS-HF": {
+  "colores": [
+   "IWTF-D-PSS-HF",
+   "IWTF-D-MSS-HF",
+   "IWTF-D-BSS-HF",
+   "IWTF-D-YSS-HF",
+   "IWTF-D-ZSS-HF"
+  ],
+  "accesorios": [
+   "ISD-1-GSS",
+   "IDS-1-GSS",
+   "RFC-79-HF",
+   "IWS-4-S-2-WA"
+  ]
+ },
+ "IWTF-D-BSS-HF": {
+  "colores": [
+   "IWTF-D-PSS-HF",
+   "IWTF-D-MSS-HF",
+   "IWTF-D-GSS-HF",
+   "IWTF-D-YSS-HF",
+   "IWTF-D-ZSS-HF"
+  ],
+  "accesorios": [
+   "ISD-1-BSS",
+   "IDS-1-BSS",
+   "RFC-79-HF",
+   "IWS-4-S-2-WA"
+  ]
+ },
+ "IWTF-D-YSS-HF": {
+  "colores": [
+   "IWTF-D-PSS-HF",
+   "IWTF-D-MSS-HF",
+   "IWTF-D-GSS-HF",
+   "IWTF-D-BSS-HF",
+   "IWTF-D-ZSS-HF"
+  ],
+  "accesorios": [
+   "ISD-1-YSS",
+   "IDS-1-YSS",
+   "RFC-79-HF",
+   "IWS-4-S-2-WA"
+  ]
+ },
+ "IWTF-D-ZSS-HF": {
+  "colores": [
+   "IWTF-D-PSS-HF",
+   "IWTF-D-MSS-HF",
+   "IWTF-D-GSS-HF",
+   "IWTF-D-BSS-HF",
+   "IWTF-D-YSS-HF"
+  ],
+  "accesorios": [
+   "ISD-1-ZSS",
+   "IDS-1-ZSS",
+   "RFC-79-HF",
+   "IWS-4-S-2-WA"
+  ]
+ },
+ "ISD-1-PSS": {
+  "colores": [
+   "ISD-1-MSS",
+   "ISD-1-GSS",
+   "ISD-1-BSS",
+   "ISD-1-YSS",
+   "ISD-1-ZSS"
+  ]
+ },
+ "ISD-1-MSS": {
+  "colores": [
+   "ISD-1-PSS",
+   "ISD-1-GSS",
+   "ISD-1-BSS",
+   "ISD-1-YSS",
+   "ISD-1-ZSS"
+  ]
+ },
+ "ISD-1-GSS": {
+  "colores": [
+   "ISD-1-PSS",
+   "ISD-1-MSS",
+   "ISD-1-BSS",
+   "ISD-1-YSS",
+   "ISD-1-ZSS"
+  ]
+ },
+ "ISD-1-BSS": {
+  "colores": [
+   "ISD-1-PSS",
+   "ISD-1-MSS",
+   "ISD-1-GSS",
+   "ISD-1-YSS",
+   "ISD-1-ZSS"
+  ]
+ },
+ "ISD-1-YSS": {
+  "colores": [
+   "ISD-1-PSS",
+   "ISD-1-MSS",
+   "ISD-1-GSS",
+   "ISD-1-BSS",
+   "ISD-1-ZSS"
+  ]
+ },
+ "ISD-1-ZSS": {
+  "colores": [
+   "ISD-1-PSS",
+   "ISD-1-MSS",
+   "ISD-1-GSS",
+   "ISD-1-BSS",
+   "ISD-1-YSS"
+  ]
+ },
+ "IDS-1-PSS": {
+  "colores": [
+   "IDS-1-MSS",
+   "IDS-1-GSS",
+   "IDS-1-BSS",
+   "IDS-1-YSS",
+   "IDS-1-ZSS"
+  ]
+ },
+ "IDS-1-MSS": {
+  "colores": [
+   "IDS-1-PSS",
+   "IDS-1-GSS",
+   "IDS-1-BSS",
+   "IDS-1-YSS",
+   "IDS-1-ZSS"
+  ]
+ },
+ "IDS-1-GSS": {
+  "colores": [
+   "IDS-1-PSS",
+   "IDS-1-MSS",
+   "IDS-1-BSS",
+   "IDS-1-YSS",
+   "IDS-1-ZSS"
+  ]
+ },
+ "IDS-1-BSS": {
+  "colores": [
+   "IDS-1-PSS",
+   "IDS-1-MSS",
+   "IDS-1-GSS",
+   "IDS-1-YSS",
+   "IDS-1-ZSS"
+  ]
+ },
+ "IDS-1-YSS": {
+  "colores": [
+   "IDS-1-PSS",
+   "IDS-1-MSS",
+   "IDS-1-GSS",
+   "IDS-1-BSS",
+   "IDS-1-ZSS"
+  ]
+ },
+ "IDS-1-ZSS": {
+  "colores": [
+   "IDS-1-PSS",
+   "IDS-1-MSS",
+   "IDS-1-GSS",
+   "IDS-1-BSS",
+   "IDS-1-YSS"
+  ]
  }
 }
