@@ -422,7 +422,9 @@ export async function productosDeColeccion(handle: string): Promise<ProductoVivo
  * un solo segmento de URL (Kraus KWU110-32/PGM → /producto/kwu110-32-pgm).
  */
 export function slugDeSku(sku: string): string {
-  return sku.toLowerCase().replace(/\//g, "-");
+  // "/" y espacios → "-" (KWU110-32/PGM → kwu110-32-pgm; Dawn "AB53 3498C" → ab53-3498c,
+  // 2026-11-12): la ruta /producto/<slug> solo acepta letras, números, guiones y puntos.
+  return sku.toLowerCase().replace(/[\/\s]+/g, "-");
 }
 
 /**

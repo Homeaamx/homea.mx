@@ -23625,5 +23625,184 @@
   "accesorios": [
    "911470"
   ]
+ },
+ "DSR4217": {
+  "accesorios": [
+   "CB710",
+   "COL710",
+   "T710",
+   "DM710",
+   "SD-01"
+  ]
+ },
+ "DSR4817": {
+  "accesorios": [
+   "CB710",
+   "COL710",
+   "T710",
+   "DM710",
+   "SD-01"
+  ]
+ },
+ "DSR421717": {
+  "accesorios": [
+   "CB710",
+   "COL710",
+   "T710",
+   "DM710",
+   "SD-01"
+  ]
+ },
+ "DSR481717": {
+  "accesorios": [
+   "CB710",
+   "COL710",
+   "T710",
+   "DM710",
+   "SD-01"
+  ]
+ },
+ "SRU311710": {
+  "accesorios": [
+   "G710",
+   "CB710",
+   "COL710",
+   "T710",
+   "DM710",
+   "SD-01"
+  ]
+ },
+ "XSR421616": {
+  "accesorios": [
+   "SD-01"
+  ]
+ },
+ "XSR421610": {
+  "accesorios": [
+   "SD-01"
+  ]
+ },
+ "XSR311610": {
+  "accesorios": [
+   "SD-01"
+  ]
+ },
+ "XSR201609": {
+  "accesorios": [
+   "SD-01"
+  ]
+ },
+ "SRU331616-N": {
+  "accesorios": [
+   "SD-01"
+  ]
+ },
+ "ESR310900": {
+  "accesorios": [
+   "SD-01"
+  ]
+ },
+ "ESR300909": {
+  "accesorios": [
+   "SD-01"
+  ]
+ },
+ "SRU201609-N": {
+  "accesorios": [
+   "SD-01"
+  ]
+ },
+ "BS161609-N": {
+  "accesorios": [
+   "SD-01"
+  ]
+ },
+ "BS131507-N": {
+  "accesorios": [
+   "SD-01"
+  ]
+ },
+ "BS121307-N": {
+  "accesorios": [
+   "SD-01"
+  ]
+ },
+ "CB710": {
+  "accesorios": [
+   "COL710",
+   "T710",
+   "DM710",
+   "G710"
+  ]
+ },
+ "COL710": {
+  "accesorios": [
+   "CB710",
+   "T710",
+   "DM710",
+   "G710"
+  ]
+ },
+ "T710": {
+  "accesorios": [
+   "CB710",
+   "COL710",
+   "DM710",
+   "G710"
+  ]
+ },
+ "DM710": {
+  "accesorios": [
+   "CB710",
+   "COL710",
+   "T710",
+   "G710"
+  ]
+ },
+ "G710": {
+  "accesorios": [
+   "CB710",
+   "COL710",
+   "T710",
+   "DM710"
+  ]
+ },
+ "SD-01": {
+  "accesorios": [
+   "CB710",
+   "COL710",
+   "T710",
+   "DM710"
+  ]
+ },
+ "AB53 3498C": {
+  "colores": [
+   "AB53 3498BN"
+  ]
+ },
+ "AB53 3498BN": {
+  "colores": [
+   "AB53 3498C"
+  ]
+ },
+ "AB50 3776MAG": {
+  "colores": [
+   "AB50 3776MB"
+  ]
+ },
+ "AB50 3776MB": {
+  "colores": [
+   "AB50 3776MAG"
+  ]
+ },
+ "AB50 3787MB": {
+  "colores": [
+   "AB50 3787C"
+  ]
+ },
+ "AB50 3787C": {
+  "colores": [
+   "AB50 3787MB"
+  ]
  }
 }

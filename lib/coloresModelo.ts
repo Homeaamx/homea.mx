@@ -52,6 +52,8 @@ const MUESTRAS: Record<string, string> = {
   "satin dark steel": OSCURO,
   "dark steel": OSCURO,
   "níquel pulido": "linear-gradient(135deg, #ece8df 0%, #c8c3b8 45%, #e4e0d6 60%, #a49e92 100%)",
+  // Dawn (2026-11-12): monomando AB53 3498 en Cromo y Níquel Cepillado.
+  "níquel cepillado": "linear-gradient(135deg, #ddd8cd 0%, #b7b1a5 45%, #d2cdc2 60%, #958f83 100%)",
   "bronce aceitado": "linear-gradient(135deg, #6a4c38 0%, #4a3426 55%, #2f2018 100%)",
   "bronce moca": "linear-gradient(135deg, #8a705c 0%, #6b5444 55%, #4c3a2e 100%)",
   // Café (2026-11-06): equipos en Blanco Mate y kits de herrajes en 6 acabados.
