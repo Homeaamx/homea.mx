@@ -90,7 +90,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | BLANCO | ARTEXA | BLANC | 881 | 10% | `/marcas/blanco` | completo |  |
 | BLAZE | MARESA | BLAZE | 119 | 10% | `/marcas/blaze` | completo |  |
 | BOSCH | ARTEXA | BOSCH | 58 | 10% | `/marcas/bosch` | completo |  |
-| BROIL KING | MARESA | BROIL | 26 | 10% | `/marcas/broil-king` | completo |  |
+| BROIL KING | MARESA | BROIL | 24 | 10% | `/marcas/broil-king` | completo | Lista oct 2026 (2026-11-12) |
 | CAFÉ | MABE | CAFE | 99 | 10% | `/marcas/cafe` | completo |  |
 | COMMODORE | ECLIPSE | COMMO | 9 | **PENDIENTE** | `/marcas/commodore` | completo | No está en la política de descuentos |
 | COVE | IESA/LAVISH | COVE | 15 | 10% | `/marcas/cove` | completo |  |

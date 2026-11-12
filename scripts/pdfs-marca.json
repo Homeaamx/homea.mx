@@ -312,9 +312,15 @@
       "marca": "broil-king",
       "nombre": "Broil King",
       "titulo": "Asadores · lista de precios",
-      "vigencia": "mar 2026",
-      "src": "MARESA/PRECIOS_ASADORES_BROIL_KING_2026_03.pdf",
-      "archivo": "lista-precios-asadores-broil-king-mar-2026.pdf"
+      "vigencia": "oct 2026",
+      "src": "MARESA/OCTUBRE 2026/PRECIOS BROIL KING OCTUBRE 2026.pdf",
+      "archivo": "lista-precios-asadores-broil-king-oct-2026.pdf",
+      "op": {
+        "banner_dims": [
+          423,
+          91
+        ]
+      }
     },
     {
       "slug": "blaze",

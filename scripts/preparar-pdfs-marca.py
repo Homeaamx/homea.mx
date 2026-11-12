@@ -46,10 +46,11 @@ TOPE = 19_500_000
 CDN = "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/"
 
 # Artes HOMEA: se toman de PDFs ya publicados (no viven en el repo).
-#   tarjeta: contraportada de la lista de Elica · banner: encabezado de la de Broil King.
+#   tarjeta: contraportada de la lista de Elica · banner: encabezado de la de Broil King (oct 2026;
+#   la de mar 2026 se borró de Shopify el 2026-11-12).
 ARTE = {
     "tarjeta": ("lista-precios-campanas-elica-2026.pdf", 25, (612, 564)),
-    "banner": ("lista-precios-asadores-broil-king-mar-2026.pdf", 0, (1278, 230)),
+    "banner": ("lista-precios-asadores-broil-king-oct-2026.pdf", 0, (1278, 230)),
 }
 
 TEXTO_DISTRIBUIDOR = re.compile(

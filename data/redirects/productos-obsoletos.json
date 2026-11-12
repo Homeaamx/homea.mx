@@ -1,5 +1,5 @@
 {
- "_nota": "Fichas de productos obsoletos (fuera de la lista vigente del proveedor) → su reemplazo o su listado. 301 en next.config.js. Generado 2026-10-09 (Carla: el SEO de un producto obsoleto redirige al nuevo). 2026-11-04: 170 Blanco descontinuados (BAM_2027 Discontinuations) + rojos/naranjas sin stock de la lista Artexa NOV 3 2026 (Blanco 234689, Alfresco AXEVP-C, AKK, ACK). 2026-11-10: 22 monomandos Blanco (Alta II bar/agua filtrada/extraíble y LUNEOO semiprofesional) en rojo en la lista NOV 10 2026, sin stock.",
+ "_nota": "Fichas de productos obsoletos (fuera de la lista vigente del proveedor) → su reemplazo o su listado. 301 en next.config.js. Generado 2026-10-09 (Carla: el SEO de un producto obsoleto redirige al nuevo). 2026-11-04: 170 Blanco descontinuados (BAM_2027 Discontinuations) + rojos/naranjas sin stock de la lista Artexa NOV 3 2026 (Blanco 234689, Alfresco AXEVP-C, AKK, ACK). 2026-11-10: 22 monomandos Blanco (Alta II bar/agua filtrada/extraíble y LUNEOO semiprofesional) en rojo en la lista NOV 10 2026, sin stock. 2026-11-12: Broil King fuera de la lista de octubre 2026 (Keg 5000→Keg Kamado, Crown 420→Crown S 440, Crown 310 Shadow→Signet 320 Shadow, Offset 500 y fundas a su listado).",
  "redirects": {
   "/producto/ai230700": "/productos/cocina-y-bar/coccion/campanas",
   "/producto/aw230790": "/productos/cocina-y-bar/coccion/campanas",
@@ -299,6 +299,13 @@
   "/producto/443395": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
   "/producto/443396": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
   "/producto/443397": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
-  "/producto/443398": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos"
+  "/producto/443398": "/productos/cocina-y-bar/tarjas-y-griferia?tipo=monomandos",
+  "/producto/911470": "/producto/420150",
+  "/producto/ka5535": "/producto/68360",
+  "/producto/865254": "/producto/865364",
+  "/producto/864054": "/producto/844154",
+  "/producto/958050": "/productos/exterior?tipo=ahumadores",
+  "/producto/67470": "/productos/exterior/asadores-y-hornos?tipo=accesorios-asadores-hornos",
+  "/producto/67069": "/productos/exterior/asadores-y-hornos?tipo=accesorios-asadores-hornos"
  }
 }
