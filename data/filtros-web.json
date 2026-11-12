@@ -48,6 +48,7 @@
           "22\"",
           "23\"",
           "24\"",
+          "25\"",
           "26\"",
           "27\"",
           "28\"",
@@ -127,7 +128,8 @@
         "valores": [
           "1 año",
           "2 años",
-          "3 años"
+          "3 años",
+          "7 años"
         ]
       },
       {
@@ -293,7 +295,11 @@
         "valores": [
           "15\"",
           "18\"",
-          "24\""
+          "24\"",
+          "38\"",
+          "48\"",
+          "62\"",
+          "82\""
         ]
       },
       {
@@ -338,7 +344,8 @@
         "valores": [
           "1 año",
           "2 años",
-          "3 años"
+          "3 años",
+          "7 años"
         ]
       },
       {
@@ -2716,7 +2723,8 @@
         "clave": "instalacion",
         "valores": [
           "Empotrable",
-          "Carrito"
+          "Carrito",
+          "Isla"
         ]
       },
       {
@@ -2780,7 +2788,8 @@
         "valores": [
           "1 año",
           "2 años",
-          "3 años"
+          "3 años",
+          "7 años"
         ]
       },
       {
@@ -2871,7 +2880,8 @@
         "valores": [
           "1 año",
           "2 años",
-          "3 años"
+          "3 años",
+          "7 años"
         ]
       },
       {
@@ -2927,7 +2937,8 @@
         "valores": [
           "1 año",
           "2 años",
-          "3 años"
+          "3 años",
+          "7 años"
         ]
       },
       {
@@ -3249,7 +3260,9 @@
         "valores": [
           "Cajones",
           "Puertas",
-          "Compartimiento de basura"
+          "Compartimiento de basura",
+          "Esquinero",
+          "Módulo kamado"
         ]
       },
       {
@@ -3263,6 +3276,7 @@
           "21\"",
           "23\"",
           "24\"",
+          "25\"",
           "26\"",
           "28\"",
           "30\"",
@@ -3293,7 +3307,8 @@
         "valores": [
           "1 año",
           "2 años",
-          "3 años"
+          "3 años",
+          "7 años"
         ]
       },
       {

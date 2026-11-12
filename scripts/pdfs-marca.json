@@ -299,15 +299,12 @@
       "slug": "mont-alpi",
       "marca": "mont-alpi",
       "nombre": "Mont Alpi",
-      "titulo": "Lista de precios",
-      "vigencia": "ene 2026",
-      "src": "MARESA/LISTA DE PRECIOS MONT ALPI ENERO 2026.pdf",
-      "archivo": "lista-precios-mont-alpi-ene-2026.pdf",
+      "titulo": "Catálogo",
+      "vigencia": "2026",
+      "src": "MARESA/LISTA_PRECIOS_MONT_ALPI_ASADORES_2026_OCTUBRE.pdf",
+      "archivo": "catalogo-mont-alpi-2026.pdf",
       "op": {
-        "banner_dims": [
-          568,
-          133
-        ]
+        "del": [29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]
       }
     },
     {

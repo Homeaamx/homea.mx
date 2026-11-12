@@ -23804,5 +23804,6400 @@
   "colores": [
    "AB50 3787MB"
   ]
+ },
+ "MAi805-D": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS"
+  ]
+ },
+ "MAi400-D": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS"
+  ]
+ },
+ "MAi805-D90": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS90"
+  ]
+ },
+ "MAi400-D90": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90"
+  ]
+ },
+ "MAi805-DFC": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSSFC"
+  ]
+ },
+ "MAi400-DFC": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSSFC"
+  ]
+ },
+ "MAi805-D90FC": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS90FC"
+  ]
+ },
+ "MAi400-D90FC": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90FC"
+  ]
+ },
+ "MAi805-DBEV": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSSBEV"
+  ]
+ },
+ "MAi400-DBEV": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSSBEV"
+  ]
+ },
+ "MAi805-D90BEV": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAI805-BSS90BEV"
+  ]
+ },
+ "MAi400-D90BEV": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90BEV"
+  ]
+ },
+ "MAi805-DBEVFC": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSSBEVFC"
+  ]
+ },
+ "MAi400-DBEVFC": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSSBEVFC"
+  ]
+ },
+ "MAi805-D90BEVFC": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi-BSS90BEVFC"
+  ]
+ },
+ "MAi400-D90BEVFC": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90BEVFC"
+  ]
+ },
+ "MAi805-DKEG": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEG": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEG": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEG": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGFC": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGFC": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGFC": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGFC": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEV": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEV": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEV": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEV": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEVFC": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEVFC": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEVFC": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEVFC": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D45": {
+  "accesorios": [
+   "COVMAi805-45",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS45"
+  ]
+ },
+ "MAi400-D45": {
+  "accesorios": [
+   "COVMAi400-45",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS45"
+  ]
+ },
+ "MAi805-D45FC": {
+  "accesorios": [
+   "COVMAi805-45",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS45FC"
+  ]
+ },
+ "MAi400-D45FC": {
+  "accesorios": [
+   "COVMAi400-45",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS45FC"
+  ]
+ },
+ "MAi805-DXL": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSSXL"
+  ]
+ },
+ "MAi400-DXL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSSXL"
+  ]
+ },
+ "MAi805-D90XL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS90XL"
+  ]
+ },
+ "MAi400-D90XL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90XL"
+  ]
+ },
+ "MAi805-DFCXL": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSSFCXL"
+  ]
+ },
+ "MAi400-DFCXL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSSFCXL"
+  ]
+ },
+ "MAi805-D90FCXL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS90FCXL"
+  ]
+ },
+ "MAi400-D90FCXL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90FCXL"
+  ]
+ },
+ "MAi805-DBEVXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSSBEVXL"
+  ]
+ },
+ "MAi400-DBEVXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSSBEVXL"
+  ]
+ },
+ "MAi805-D90BEVXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS90BEVXL"
+  ]
+ },
+ "MAi400-D90BEVXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90BEVXL"
+  ]
+ },
+ "MAi805-DBEVFCXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSSBEVFCXL"
+  ]
+ },
+ "MAi400-DBEVFCXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSSBEVFCXL"
+  ]
+ },
+ "MAi805-D90BEVFCXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS90BEVFCXL"
+  ]
+ },
+ "MAi400-D90BEVFCXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90BEVFCXL"
+  ]
+ },
+ "MAi805-DKEGXL": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGXL": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGXL": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGXL": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGFCXL": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGFCXL": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGFCXL": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGFCXL": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEVXL": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEVXL": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEVXL": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEVXL": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEVFCXL": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEVFCXL": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEVFCXL": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEVFCXL": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DDR": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSSDR"
+  ]
+ },
+ "MAi400-DDR": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSSDR"
+  ]
+ },
+ "MAi805-D90DR": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS90DR"
+  ]
+ },
+ "MAi400-D90DR": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90DR"
+  ]
+ },
+ "MAi805-DFCDR": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSSFCDR"
+  ]
+ },
+ "MAi400-DFCDR": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSSFCDR"
+  ]
+ },
+ "MAi805-D90FCDR": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS90FCDR"
+  ]
+ },
+ "MAi400-D90FCDR": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90FCDR"
+  ]
+ },
+ "MAi805-DBEVDR": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSSBEVDR"
+  ]
+ },
+ "MAi400-DBEVDR": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSSBEVDR"
+  ]
+ },
+ "MAi805-D90BEVDR": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS90BEVDR"
+  ]
+ },
+ "MAi400-D90BEVDR": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90BEVDR"
+  ]
+ },
+ "MAi805-DBEVFCDR": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSSBEVFCDR"
+  ]
+ },
+ "MAi400-DBEVFCDR": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSSBEVFCDR"
+  ]
+ },
+ "MAi805-D90BEVFCDR": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS90BEVFCDR"
+  ]
+ },
+ "MAi400-D90BEVFCDR": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90BEVFCDR"
+  ]
+ },
+ "MAi805-DKEGDR": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGDR": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGDR": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGDR": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGFCDR": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGFCDR": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGFCDR": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGFCDR": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEVDR": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEVDR": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEVDR": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEVDR": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEVFCDR": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEVFCDR": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEVFCDR": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEVFCDR": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKAM": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKAM": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KAM": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KAM": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DFCKAM": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DFCKAM": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90FCKAM": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90FCKAM": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DBEVKAM": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DBEVKAM": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90BEVKAM": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90BEVKAM": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DBEVFCKAM": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DBEVFCKAM": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90BEVFCKAM": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90BEVFCKAM": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGKAM": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGKAM": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGKAM": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGKAM": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGFCKAM": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGFCKAM": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGFCKAM": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGFCKAM": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEVKAM": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEVKAM": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEVKAM": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEVKAM": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEVFCKAM": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEVFCKAM": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEVFCKAM": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEVFCKAM": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKAMDR": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKAMDR": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KAMDR": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KAMDR": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DFCKAMDR": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DFCKAMDR": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90FCKAMDR": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90FCKAMDR": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DBEVKAMDR": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DBEVKAMDR": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90BEVKAMDR": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90BEVKAMDR": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DBEVFCKAMDR": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DBEVFCKAMDR": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90BEVFCKAMDR": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90BEVFCKAMDR": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGKAMDR": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGKAMDR": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGKAMDR": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGKAMDR": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGFCKAMDR": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGFCKAMDR": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGFCKAMDR": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGFCKAMDR": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEVKAMDR": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEVKAMDR": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEVKAMDR": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEVKAMDR": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEVFCKAMDR": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEVFCKAMDR": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEVFCKAMDR": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEVFCKAMDR": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKAMXL": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKAMXL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KAMXL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KAMXL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DFCKAMXL": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DFCKAMXL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90FCKAMXL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90FCKAMXL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DBEVKAMXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DBEVKAMXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90BEVKAMXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90BEVKAMXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DBEVFCKAMXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DBEVFCKAMXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90BEVFCKAMXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90BEVFCKAMXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGKAMXL": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGKAMXL": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGKAMXL": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGKAMXL": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGFCKAMXL": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGFCKAMXL": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGFCKAMXL": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGFCKAMXL": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEVKAMXL": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEVKAMXL": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEVKAMXL": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEVKAMXL": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEVFCKAMXL": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEVFCKAMXL": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEVFCKAMXL": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEVFCKAMXL": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKAMDRXL": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKAMDRXL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KAMDRXL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KAMDRXL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DFCKAMDRXL": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DFCKAMDRXL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90FCKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90FCKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DBEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DBEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90BEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90BEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DBEVFCKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DBEVFCKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90BEVFCKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90BEVFCKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGFCKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGFCKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGFCKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGFCKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEVFCKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEVFCKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEVFCKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEVFCKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DDRXL": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSSDRXL"
+  ]
+ },
+ "MAi400-DDRXL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSSDRXL"
+  ]
+ },
+ "MAi805-D90DRXL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS90DRXL"
+  ]
+ },
+ "MAi400-D90DRXL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90DRXL"
+  ]
+ },
+ "MAi805-DFCDRXL": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSSFCDRXL"
+  ]
+ },
+ "MAi400-DFCDRXL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSSFCDRXL"
+  ]
+ },
+ "MAi805-D90FCDRXL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS90FCDRXL"
+  ]
+ },
+ "MAi400-D90FCDRXL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90FCDRXL"
+  ]
+ },
+ "MAi805-DBEVDRXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSSBEVDRXL"
+  ]
+ },
+ "MAi400-DBEVDRXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSSBEVDRXL"
+  ]
+ },
+ "MAi805-D90BEVDRXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS90BEVDRXL"
+  ]
+ },
+ "MAi400-D90BEVDRXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90BEVDRXL"
+  ]
+ },
+ "MAi805-DBEVFCDRXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSSBEVFCDRXL"
+  ]
+ },
+ "MAi400-DBEVFCDRXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSSBEVFCDRXL"
+  ]
+ },
+ "MAi805-D90BEVFCDRXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-BSS90BEVFCDRXL"
+  ]
+ },
+ "MAi400-D90BEVFCDRXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-BSS90BEVFCDRXL"
+  ]
+ },
+ "MAi805-DKEGDRXL": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGDRXL": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGDRXL": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGDRXL": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGFCDRXL": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGFCDRXL": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGFCDRXL": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGFCDRXL": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEVDRXL": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEVDRXL": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEVDRXL": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEVDRXL": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DKEGBEVFCDRXL": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DKEGBEVFCDRXL": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-D90KEGBEVFCDRXL": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-D90KEGBEVFCDRXL": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-BSS": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D"
+  ]
+ },
+ "MAi400-BSS": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D"
+  ]
+ },
+ "MAi805-BSS90": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90"
+  ]
+ },
+ "MAi400-BSS90": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90"
+  ]
+ },
+ "MAi805-BSSFC": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-DFC"
+  ]
+ },
+ "MAi400-BSSFC": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-DFC"
+  ]
+ },
+ "MAi805-BSS90FC": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90FC"
+  ]
+ },
+ "MAi400-BSS90FC": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90FC"
+  ]
+ },
+ "MAi805-BSSBEV": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-DBEV"
+  ]
+ },
+ "MAi400-BSSBEV": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-DBEV"
+  ]
+ },
+ "MAI805-BSS90BEV": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90BEV"
+  ]
+ },
+ "MAi400-BSS90BEV": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90BEV"
+  ]
+ },
+ "MAi805-BSSBEVFC": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-DBEVFC"
+  ]
+ },
+ "MAi400-BSSBEVFC": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-DBEVFC"
+  ]
+ },
+ "MAi-BSS90BEVFC": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90BEVFC"
+  ]
+ },
+ "MAi400-BSS90BEVFC": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90BEVFC"
+  ]
+ },
+ "MAi805-BSS45": {
+  "accesorios": [
+   "COVMAi805-45",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D45"
+  ]
+ },
+ "MAi400-BSS45": {
+  "accesorios": [
+   "COVMAi400-45",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D45"
+  ]
+ },
+ "MAi805-BSS45FC": {
+  "accesorios": [
+   "COVMAi805-45",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D45FC"
+  ]
+ },
+ "MAi400-BSS45FC": {
+  "accesorios": [
+   "COVMAi400-45",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D45FC"
+  ]
+ },
+ "MAi805-BSSXL": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-DXL"
+  ]
+ },
+ "MAi400-BSSXL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-DXL"
+  ]
+ },
+ "MAi805-BSS90XL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90XL"
+  ]
+ },
+ "MAi400-BSS90XL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90XL"
+  ]
+ },
+ "MAi805-BSSFCXL": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-DFCXL"
+  ]
+ },
+ "MAi400-BSSFCXL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-DFCXL"
+  ]
+ },
+ "MAi805-BSS90FCXL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90FCXL"
+  ]
+ },
+ "MAi400-BSS90FCXL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90FCXL"
+  ]
+ },
+ "MAi805-BSSBEVXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-DBEVXL"
+  ]
+ },
+ "MAi400-BSSBEVXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-DBEVXL"
+  ]
+ },
+ "MAi805-BSS90BEVXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90BEVXL"
+  ]
+ },
+ "MAi400-BSS90BEVXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90BEVXL"
+  ]
+ },
+ "MAi805-BSSBEVFCXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-DBEVFCXL"
+  ]
+ },
+ "MAi400-BSSBEVFCXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-DBEVFCXL"
+  ]
+ },
+ "MAi805-BSS90BEVFCXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90BEVFCXL"
+  ]
+ },
+ "MAi400-BSS90BEVFCXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90BEVFCXL"
+  ]
+ },
+ "MAi805-BSSDR": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-DDR"
+  ]
+ },
+ "MAi400-BSSDR": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-DDR"
+  ]
+ },
+ "MAi805-BSS90DR": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90DR"
+  ]
+ },
+ "MAi400-BSS90DR": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90DR"
+  ]
+ },
+ "MAi805-BSSFCDR": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-DFCDR"
+  ]
+ },
+ "MAi400-BSSFCDR": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-DFCDR"
+  ]
+ },
+ "MAi805-BSS90FCDR": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90FCDR"
+  ]
+ },
+ "MAi400-BSS90FCDR": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90FCDR"
+  ]
+ },
+ "MAi805-BSSBEVDR": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-DBEVDR"
+  ]
+ },
+ "MAi400-BSSBEVDR": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-DBEVDR"
+  ]
+ },
+ "MAi805-BSS90BEVDR": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90BEVDR"
+  ]
+ },
+ "MAi400-BSS90BEVDR": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90BEVDR"
+  ]
+ },
+ "MAi805-BSSBEVFCDR": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-DBEVFCDR"
+  ]
+ },
+ "MAi400-BSSBEVFCDR": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-DBEVFCDR"
+  ]
+ },
+ "MAi805-BSS90BEVFCDR": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90BEVFCDR"
+  ]
+ },
+ "MAi400-BSS90BEVFCDR": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90BEVFCDR"
+  ]
+ },
+ "MAi805-BSSDRXL": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-DDRXL"
+  ]
+ },
+ "MAi400-BSSDRXL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-DDRXL"
+  ]
+ },
+ "MAi805-BSS90DRXL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90DRXL"
+  ]
+ },
+ "MAi400-BSS90DRXL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90DRXL"
+  ]
+ },
+ "MAi805-BSSFCDRXL": {
+  "accesorios": [
+   "COVMAi805",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-DFCDRXL"
+  ]
+ },
+ "MAi400-BSSFCDRXL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-DFCDRXL"
+  ]
+ },
+ "MAi805-BSS90FCDRXL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90FCDRXL"
+  ]
+ },
+ "MAi400-BSS90FCDRXL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90FCDRXL"
+  ]
+ },
+ "MAi805-BSSBEVDRXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-DBEVDRXL"
+  ]
+ },
+ "MAi400-BSSBEVDRXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-DBEVDRXL"
+  ]
+ },
+ "MAi805-BSS90BEVDRXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90BEVDRXL"
+  ]
+ },
+ "MAi400-BSS90BEVDRXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90BEVDRXL"
+  ]
+ },
+ "MAi805-BSSBEVFCDRXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-DBEVFCDRXL"
+  ]
+ },
+ "MAi400-BSSBEVFCDRXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-DBEVFCDRXL"
+  ]
+ },
+ "MAi805-BSS90BEVFCDRXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi805-D90BEVFCDRXL"
+  ]
+ },
+ "MAi400-BSS90BEVFCDRXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ],
+  "colores": [
+   "MAi400-D90BEVFCDRXL"
+  ]
+ },
+ "MAi805": {
+  "accesorios": [
+   "COVMAi805",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-BEV": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-BEV": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90BEV": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90BEV": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEG": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEG": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEG": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEG": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEGBEV": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEGBEV": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEGBEV": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEGBEV": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-45": {
+  "accesorios": [
+   "COVMAi805-45",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-45": {
+  "accesorios": [
+   "COVMAi400-45",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-XL": {
+  "accesorios": [
+   "COVMAi805",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-XL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90XL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90XL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-BEVXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-BEVXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90BEVXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90BEVXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEGXL": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEGXL": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEGXL": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEGXL": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEGBEVXL": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEGBEVXL": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEGBEVXL": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEGBEVXL": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DR": {
+  "accesorios": [
+   "COVMAi805",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DR": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90DR": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90DR": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-BEVDR": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-BEVDR": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90BEVDR": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90BEVDR": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEGDR": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEGDR": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEGDR": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEGDR": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEGBEVDR": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEGBEVDR": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEGBEVDR": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEGBEVDR": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KAM": {
+  "accesorios": [
+   "COVMAi805",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KAM": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KAM": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KAM": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-BEVKAM": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-BEVKAM": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90BEVKAM": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90BEVKAM": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEGKAM": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEGKAM": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEGKAM": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEGKAM": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEGBEVKAM": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEGBEVKAM": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEGBEVKAM": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEGBEVKAM": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KAMDR": {
+  "accesorios": [
+   "COVMAi805",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KAMDR": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KAMDR": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KAMDR": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-BEVKAMDR": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-BEVKAMDR": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90BEVKAMDR": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90BEVKAMDR": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEGKAMDR": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEGKAMDR": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEGKAMDR": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEGKAMDR": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEGBEVKAMDR": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEGBEVKAMDR": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEGBEVKAMDR": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEGBEVKAMDR": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KAMXL": {
+  "accesorios": [
+   "COVMAi805",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KAMXL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KAMXL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KAMXL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-BEVKAMXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-BEVKAMXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90BEVKAMXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90BEVKAMXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEGKAMXL": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEGKAMXL": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEGKAMXL": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEGKAMXL": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEGBEVKAMXL": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEGBEVKAMXL": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEGBEVKAMXL": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEGBEVKAMXL": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KAMDRXL": {
+  "accesorios": [
+   "COVMAi805",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KAMDRXL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KAMDRXL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KAMDRXL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-BEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-BEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90BEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90BEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEGKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEGKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEGKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEGKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEGBEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEGBEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEGBEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEGBEVKAMDRXL": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-DRXL": {
+  "accesorios": [
+   "COVMAi805",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-DRXL": {
+  "accesorios": [
+   "COVMAi400",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90DRXL": {
+  "accesorios": [
+   "COVMAi805-90",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90DRXL": {
+  "accesorios": [
+   "COVMAi400-90",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-BEVDRXL": {
+  "accesorios": [
+   "COVMAi805-BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-BEVDRXL": {
+  "accesorios": [
+   "COVMAi400-BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90BEVDRXL": {
+  "accesorios": [
+   "COVMAi805-90BEV",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90BEVDRXL": {
+  "accesorios": [
+   "COVMAi400-90BEV",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEGDRXL": {
+  "accesorios": [
+   "COVMAi805-KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEGDRXL": {
+  "accesorios": [
+   "COVMAi400-KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEGDRXL": {
+  "accesorios": [
+   "COVMAi805-90KEG",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEGDRXL": {
+  "accesorios": [
+   "COVMAi400-90KEG",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-KEGBEVDRXL": {
+  "accesorios": [
+   "COVMAi805-KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-KEGBEVDRXL": {
+  "accesorios": [
+   "COVMAi400-KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi805-90KEGBEVDRXL": {
+  "accesorios": [
+   "COVMAi805-90KEGBEV",
+   "COV-KEG",
+   "MAROTIS",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MAi400-90KEGBEVDRXL": {
+  "accesorios": [
+   "COVMAi400-90KEGBEV",
+   "COV-KEG",
+   "MANGK",
+   "MAGR",
+   "MASHP",
+   "MAPK",
+   "MASBP",
+   "MACT",
+   "MATK"
+  ]
+ },
+ "MA-957": {
+  "accesorios": [
+   "COVMA-957",
+   "MANGK",
+   "MAGR",
+   "MACT"
+  ],
+  "colores": [
+   "MA-957RS"
+  ]
+ },
+ "MA400-AW": {
+  "accesorios": [
+   "COV-AW400",
+   "MANGK",
+   "MAGR",
+   "MACT"
+  ],
+  "colores": [
+   "MA400-AWBSS"
+  ]
+ },
+ "MA-957RS": {
+  "accesorios": [
+   "COVMA-957",
+   "MANGK",
+   "MAGR",
+   "MACT"
+  ],
+  "colores": [
+   "MA-957"
+  ]
+ },
+ "MA400-AWBSS": {
+  "accesorios": [
+   "COV-AW400",
+   "MANGK",
+   "MAGR",
+   "MACT"
+  ],
+  "colores": [
+   "MA400-AW"
+  ]
+ },
+ "MA-957FC": {
+  "accesorios": [
+   "COVMA-957",
+   "MANGK",
+   "MAGR",
+   "MACT"
+  ],
+  "colores": [
+   "MA-957RSFC"
+  ]
+ },
+ "MA805-AW": {
+  "accesorios": [
+   "COV-AW805",
+   "MANGK",
+   "MAGR",
+   "MACT"
+  ],
+  "colores": [
+   "MA805-AWBSS"
+  ]
+ },
+ "MA-957RSFC": {
+  "accesorios": [
+   "COVMA-957",
+   "MANGK",
+   "MAGR",
+   "MACT"
+  ],
+  "colores": [
+   "MA-957FC"
+  ]
+ },
+ "MA805-AWBSS": {
+  "accesorios": [
+   "COV-AW805",
+   "MANGK",
+   "MAGR",
+   "MACT"
+  ],
+  "colores": [
+   "MA805-AW"
+  ]
+ },
+ "MABi400": {
+  "accesorios": [
+   "COVBi400",
+   "MANGK",
+   "MAGR",
+   "MACT",
+   "MASBP"
+  ],
+  "colores": [
+   "MABI400-BSS"
+  ]
+ },
+ "MABI400-BSS": {
+  "colores": [
+   "MABi400"
+  ]
+ },
+ "MABi805": {
+  "accesorios": [
+   "COVBi805",
+   "MANGK",
+   "MAGR",
+   "MACT",
+   "MASBP"
+  ],
+  "colores": [
+   "MABi805-BSS"
+  ]
+ },
+ "MABi805-BSS": {
+  "accesorios": [
+   "COVBi805",
+   "MANGK",
+   "MAGR",
+   "MACT",
+   "MASBP"
+  ],
+  "colores": [
+   "MABi805"
+  ]
+ },
+ "MA-KEG": {
+  "accesorios": [
+   "COV-KEG"
+  ]
+ },
+ "MASFM": {
+  "accesorios": [
+   "COVCAB-R/L"
+  ],
+  "colores": [
+   "MASFM-BSS"
+  ]
+ },
+ "MASFM-BSS": {
+  "accesorios": [
+   "COVCAB-R/L"
+  ],
+  "colores": [
+   "MASFM"
+  ]
+ },
+ "MASF-SS": {
+  "accesorios": [
+   "COVMASF",
+   "COVMASF-FULL"
+  ],
+  "colores": [
+   "MASF-BSS"
+  ]
+ },
+ "MASF-BSS": {
+  "accesorios": [
+   "COVMASF",
+   "COVMASF-FULL"
+  ],
+  "colores": [
+   "MASF-SS"
+  ]
+ },
+ "MA-EXC-SS": {
+  "accesorios": [
+   "COVCAB-R/L"
+  ],
+  "colores": [
+   "MA-EXC-BSS"
+  ]
+ },
+ "MA-EXC-BSS": {
+  "accesorios": [
+   "COVCAB-R/L"
+  ],
+  "colores": [
+   "MA-EXC-SS"
+  ]
+ },
+ "MADRW-SS": {
+  "accesorios": [
+   "COVCAB-R/L"
+  ],
+  "colores": [
+   "MADRW-BSS"
+  ]
+ },
+ "MADRW-BSS": {
+  "accesorios": [
+   "COVCAB-R/L"
+  ],
+  "colores": [
+   "MADRW-SS"
+  ]
+ },
+ "MA45C": {
+  "accesorios": [
+   "COVMA45C"
+  ]
+ },
+ "MAPZ-SS": {
+  "accesorios": [
+   "POCB"
+  ]
+ },
+ "MA90C": {
+  "accesorios": [
+   "COVMA90C"
+  ]
+ },
+ "POCB": {
+  "accesorios": [
+   "MAPZ-SS"
+  ]
+ },
+ "COV-AW400": {
+  "accesorios": [
+   "MANGK",
+   "MAGR",
+   "MACT"
+  ]
+ },
+ "COV-AW805": {
+  "accesorios": [
+   "MANGK",
+   "MAGR",
+   "MACT"
+  ]
  }
 }
