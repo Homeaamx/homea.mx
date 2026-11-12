@@ -266,6 +266,13 @@ html { scroll-behavior: smooth; }
    "Ver más" como item normal. */
 .mega-subcols.is-grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 40px; row-gap: 26px; column-count: auto; align-items: start; }
 .mega-subcols.is-grid2 > .mega-subcol { margin: 0; }
+/* Exterior con 11 categorías (Carla, 2026-11-11): sin "Ver más". Asadores &
+   Hornos (la única con tipos) ocupa la 1.ª columna por 4 filas; las demás son
+   solo título, en orden: cocción, ventilación, frío y guardado. */
+.mega-subcols.is-exterior { row-gap: 18px; flex: 1 1 auto; align-content: space-between; padding-bottom: 28px; }
+/* Las filas se reparten el alto del panel hasta "Ver todo Exterior" (Carla, 2026-11-11: más aire entre títulos). */
+.mega-subcols.is-exterior > .mega-span { grid-row: span 4; }
+.mega-subcols.is-exterior > .solo-titulo h5 { margin-bottom: 0; }
 /* Más aire entre el nav y el primer título en todas las macros menos Cocina y
    Bar: el primer título arranca a la misma altura que "Refrigeración" (~41px). */
 .mega-pane:not([data-pane="cocina"]) > .mega-subcols { padding-top: 10px; }
@@ -3648,7 +3655,7 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-qty-num { width: 52px; border: 0; background: none; text-align: center; font-family: var(--font-sans); font-size: 14px; font-weight: 600; color: var(--fg); -moz-appearance: textfield; }
 .pdp-qty-num::-webkit-outer-spin-button, .pdp-qty-num::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 .pdp-qty-num:focus-visible { outline: 1px solid var(--homea-gold); outline-offset: -1px; }
-.pdp-cta .btn-primary { flex: 1 1 auto; }
+.pdp-cta .btn-primary { flex: 1 1 auto; justify-content: center; text-align: center; }
 /* Pestañas bajo la galería */
 .pdp-tabs { margin-top: 28px; }
 .pdp-tablist { display: flex; gap: 0; border-bottom: 1px solid var(--border-strong); }

@@ -166,6 +166,12 @@ export const EXTRAS_DE_MACRO: Record<
 > = {
   "/productos/exterior": [
     { coleccion: "campanas", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Campanas — Uso: Exterior" },
+    // Subcategorías de Exterior que viven en Cocina y Bar (Carla, 2026-11-11): cada
+    // una es un tile del riel de /productos/exterior y un título del mega-menú.
+    { coleccion: "refrigeradores", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Refrigeradores" },
+    { coleccion: "maquinas-de-hielo", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Máquinas de hielo" },
+    { coleccion: "cajones-refrigerantes", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Cajones refrigerantes" },
+    { coleccion: "cajones", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Cajones" },
     // Tarjas, llaves y accesorios de bar para cocina de exterior (Alfresco; Carla, 2026-10-29).
     { coleccion: "tarjas", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Tarjas" },
     { coleccion: "monomandos", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Monomandos" },
