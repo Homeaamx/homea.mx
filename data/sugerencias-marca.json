@@ -30173,5 +30173,655 @@
   "accesorios": [
    "420150"
   ]
+ },
+ "BLZ-4LTE3MG": {
+  "accesorios": [
+   "BLZ-4-IJ2-MG",
+   "BLZ-4-CART-SC-MG",
+   "BLZ-34-ROTIS-SS",
+   "BLZ-IRN",
+   "BLZ-SMBX",
+   "BLZ-XL-SMBX",
+   "BLZ-CRM-TMR",
+   "BLZ-CRM-TMR4",
+   "BLZ-PZST"
+  ]
+ },
+ "BLZ-20-KAMADO": {
+  "accesorios": [
+   "BLZ-20-KMDO-CART-SC",
+   "BLZ-KMDO-SLV-LT",
+   "BLZ-KMDO-2-ROTIS",
+   "BLZ-KMDO-15SSP",
+   "BLZ-KMDO-CBDRP",
+   "BLZ-KMDO-SSHAND"
+  ]
+ },
+ "BLZ-GRIDDLE-LTE3": {
+  "accesorios": [
+   "BLZ-GRIDDLE-IJ",
+   "GRDBICV",
+   "GRDLTE3BICV",
+   "GRDLTE3CTCV",
+   "BLZ-GRIDDLE-CART-SC2"
+  ]
+ },
+ "BLZ-GRIDDLE40": {
+  "accesorios": [
+   "BLZ-GRIDDLE40-IJ",
+   "GRD40BICV",
+   "GRD40CTCV",
+   "BLZ-GRIDDLE40-CART-LTSC"
+  ]
+ },
+ "BLZ-LTE3OVN": {
+  "accesorios": [
+   "BLZ-26-PZOVN-IJ",
+   "26PZOVN-BICV",
+   "26PZOVN-CTCV",
+   "26PZOVN-TBCV",
+   "BLZ-26-PZOVN-CART",
+   "BLZ-26-PZOVN-TBL"
+  ]
+ },
+ "BLZ-SSRF126": {
+  "accesorios": [
+   "BLZ-SSFP-126",
+   "BLZ-SSFP-126-LH"
+  ]
+ },
+ "BLZ-36-VHOOD": {
+  "accesorios": [
+   "BLZ-36-VHOOD-DCVR-12",
+   "BLZ-36-VHOOD-DCVR-22"
+  ]
+ },
+ "BLZ-42-VHOOD": {
+  "accesorios": [
+   "BLZ-42-VHOOD-DCVR-12",
+   "BLZ-42-VHOOD-DCVR-22"
+  ]
+ },
+ "BLZ-48-VHOOD": {
+  "accesorios": [
+   "BLZ-48-VHOOD-DCVR-12",
+   "BLZ-48-VHOOD-DCVR-22"
+  ]
+ },
+ "BLZ-3BCM": {
+  "accesorios": [
+   "BLZ-3-IJ",
+   "3BICV",
+   "3CTCV",
+   "BLZ-3-CART-SC",
+   "BLZ-IRN",
+   "BLZ-SMBX",
+   "BLZ-XL-SMBX",
+   "BLZ-CRM-TMR",
+   "BLZ-PZST"
+  ]
+ },
+ "BLZ-4BCM": {
+  "accesorios": [
+   "BLZ-4-IJ",
+   "4BICV",
+   "4CTCV",
+   "BLZ-4-CART-SC",
+   "BLZ-34-ROTIS-SS",
+   "BLZ-IRN",
+   "BLZ-SMBX",
+   "BLZ-XL-SMBX",
+   "BLZ-CRM-TMR",
+   "BLZ-CRM-TMR4",
+   "BLZ-PZST"
+  ]
+ },
+ "BLZ-4LTE3": {
+  "accesorios": [
+   "BLZ-4-IJ",
+   "4BICV",
+   "4CTCV",
+   "BLZ-4-CART-SC",
+   "BLZ-34-ROTIS-SS",
+   "BLZ-IRN",
+   "BLZ-SMBX",
+   "BLZ-XL-SMBX",
+   "BLZ-CRM-TMR",
+   "BLZ-CRM-TMR4",
+   "BLZ-PZST"
+  ]
+ },
+ "BLZ-5LTE3": {
+  "accesorios": [
+   "BLZ-5-IJ",
+   "5BICV",
+   "5CTCV",
+   "BLZ-5-CART-SC",
+   "BLZ-5-ROTIS-SS",
+   "BLZ-IRN",
+   "BLZ-SMBX",
+   "BLZ-XL-SMBX",
+   "BLZ-CRM-TMR",
+   "BLZ-CRM-TMR5",
+   "BLZ-PZST"
+  ]
+ },
+ "BLZ-3PRO": {
+  "accesorios": [
+   "BLZ-3PRO-IJ",
+   "3PROBICV",
+   "3PROCTCV",
+   "BLZ-3PRO-CART-LTSC",
+   "BLZ-PRO-IR",
+   "BLZ-PRO-SMBX",
+   "BLZ-XL-PROSMBX",
+   "BLZ-PRO-PZST-2"
+  ]
+ },
+ "BLZ-4PRO": {
+  "accesorios": [
+   "BLZ-4PRO-IJ",
+   "4PROBICV",
+   "4PROCTCV",
+   "BLZ-4PRO-CART-LTSC",
+   "BLZ-PRO-IR",
+   "BLZ-PRO-SMBX",
+   "BLZ-XL-PROSMBX",
+   "BLZ-PRO-PZST-2"
+  ]
+ },
+ "BLZ-4LTEPRO": {
+  "accesorios": [
+   "BLZ-4-IJ2",
+   "4LTEPROBICV",
+   "4LTEPROCTCV",
+   "BLZ-4LTEPRO-CART-LTSC",
+   "BLZ-34-ROTIS-SS",
+   "BLZ-SMBX",
+   "BLZ-XL-SMBX",
+   "BLZ-CRM-TMR4",
+   "BLZ-PZST"
+  ]
+ },
+ "BLZ-5LTEPRO": {
+  "accesorios": [
+   "BLZ-5-IJ2",
+   "5LTEPROBICV",
+   "5LTEPROCTCV",
+   "BLZ-5LTEPRO-CART-LTSC",
+   "BLZ-5-ROTIS-SS",
+   "BLZ-SMBX",
+   "BLZ-XL-SMBX",
+   "BLZ-CRM-TMR5",
+   "BLZ-PZST"
+  ]
+ },
+ "BLZ-SB2-LTE3": {
+  "accesorios": [
+   "BLZ-SB2-IJ",
+   "2SBBICV",
+   "SB2BICV"
+  ]
+ },
+ "BLZ-PBLTE3": {
+  "accesorios": [
+   "BLZ-PB-IJ",
+   "PBBICV"
+  ]
+ },
+ "BLZ-PROPB": {
+  "accesorios": [
+   "BLZ-PROPB-IJ",
+   "PBBICV"
+  ]
+ },
+ "BLZ-PBLTEPRO": {
+  "accesorios": [
+   "BLZ-PROPB-IJ"
+  ]
+ },
+ "BLZ-38-FBOWL-LP": {
+  "accesorios": [
+   "BLZ-FBOWL-TCOVER"
+  ]
+ },
+ "BLZ-4-CART-SC-MG": {
+  "accesorios": [
+   "BLZ-4LTE3MG"
+  ]
+ },
+ "BLZ-4-IJ2-MG": {
+  "accesorios": [
+   "BLZ-4LTE3MG"
+  ]
+ },
+ "BLZ-20-KMDO-CART-SC": {
+  "accesorios": [
+   "BLZ-20-KAMADO"
+  ]
+ },
+ "BLZ-KMDO-CBDRP": {
+  "accesorios": [
+   "BLZ-20-KAMADO"
+  ]
+ },
+ "BLZ-KMDO-15SSP": {
+  "accesorios": [
+   "BLZ-20-KAMADO"
+  ]
+ },
+ "BLZ-KMDO-SSHAND": {
+  "accesorios": [
+   "BLZ-20-KAMADO"
+  ]
+ },
+ "BLZ-KMDO-2-ROTIS": {
+  "accesorios": [
+   "BLZ-20-KAMADO"
+  ]
+ },
+ "BLZ-KMDO-SLV-LT": {
+  "accesorios": [
+   "BLZ-20-KAMADO"
+  ]
+ },
+ "BLZ-GRIDDLE-CART-SC2": {
+  "accesorios": [
+   "BLZ-GRIDDLE-LTE3"
+  ]
+ },
+ "BLZ-GRIDDLE40-CART-LTSC": {
+  "accesorios": [
+   "BLZ-GRIDDLE40"
+  ]
+ },
+ "BLZ-26-PZOVN-CART": {
+  "accesorios": [
+   "BLZ-LTE3OVN"
+  ]
+ },
+ "BLZ-26-PZOVN-TBL": {
+  "accesorios": [
+   "BLZ-LTE3OVN"
+  ]
+ },
+ "BLZ-SSFP-126": {
+  "accesorios": [
+   "BLZ-SSRF126"
+  ]
+ },
+ "BLZ-SSFP-126-LH": {
+  "accesorios": [
+   "BLZ-SSRF126"
+  ]
+ },
+ "BLZ-36-VHOOD-DCVR-12": {
+  "accesorios": [
+   "BLZ-36-VHOOD"
+  ]
+ },
+ "BLZ-36-VHOOD-DCVR-22": {
+  "accesorios": [
+   "BLZ-36-VHOOD"
+  ]
+ },
+ "BLZ-42-VHOOD-DCVR-12": {
+  "accesorios": [
+   "BLZ-42-VHOOD"
+  ]
+ },
+ "BLZ-42-VHOOD-DCVR-22": {
+  "accesorios": [
+   "BLZ-42-VHOOD"
+  ]
+ },
+ "BLZ-48-VHOOD-DCVR-12": {
+  "accesorios": [
+   "BLZ-48-VHOOD"
+  ]
+ },
+ "BLZ-48-VHOOD-DCVR-22": {
+  "accesorios": [
+   "BLZ-48-VHOOD"
+  ]
+ },
+ "BLZ-IRN": {
+  "accesorios": [
+   "BLZ-3BCM",
+   "BLZ-4BCM",
+   "BLZ-4LTE3",
+   "BLZ-5LTE3",
+   "BLZ-4LTE3MG"
+  ]
+ },
+ "BLZ-PRO-IR": {
+  "accesorios": [
+   "BLZ-3PRO",
+   "BLZ-4PRO"
+  ]
+ },
+ "BLZ-SMBX": {
+  "accesorios": [
+   "BLZ-3BCM",
+   "BLZ-4BCM",
+   "BLZ-4LTE3",
+   "BLZ-5LTE3",
+   "BLZ-4LTE3MG",
+   "BLZ-4LTEPRO",
+   "BLZ-5LTEPRO"
+  ]
+ },
+ "BLZ-XL-SMBX": {
+  "accesorios": [
+   "BLZ-3BCM",
+   "BLZ-4BCM",
+   "BLZ-4LTE3",
+   "BLZ-5LTE3",
+   "BLZ-4LTE3MG",
+   "BLZ-4LTEPRO",
+   "BLZ-5LTEPRO"
+  ]
+ },
+ "BLZ-PRO-SMBX": {
+  "accesorios": [
+   "BLZ-3PRO",
+   "BLZ-4PRO"
+  ]
+ },
+ "BLZ-XL-PROSMBX": {
+  "accesorios": [
+   "BLZ-3PRO",
+   "BLZ-4PRO"
+  ]
+ },
+ "BLZ-CRM-TMR": {
+  "accesorios": [
+   "BLZ-3BCM",
+   "BLZ-4BCM",
+   "BLZ-4LTE3",
+   "BLZ-5LTE3",
+   "BLZ-4LTE3MG"
+  ]
+ },
+ "BLZ-CRM-TMR4": {
+  "accesorios": [
+   "BLZ-4BCM",
+   "BLZ-4LTE3",
+   "BLZ-4LTEPRO",
+   "BLZ-4LTE3MG"
+  ]
+ },
+ "BLZ-CRM-TMR5": {
+  "accesorios": [
+   "BLZ-5LTE3",
+   "BLZ-5LTEPRO"
+  ]
+ },
+ "BLZ-34-ROTIS-SS": {
+  "accesorios": [
+   "BLZ-4BCM",
+   "BLZ-4LTE3",
+   "BLZ-4LTEPRO",
+   "BLZ-4LTE3MG"
+  ]
+ },
+ "BLZ-5-ROTIS-SS": {
+  "accesorios": [
+   "BLZ-5LTE3",
+   "BLZ-5LTEPRO"
+  ]
+ },
+ "BLZ-3-CART-SC": {
+  "accesorios": [
+   "BLZ-3BCM"
+  ]
+ },
+ "BLZ-4-CART-SC": {
+  "accesorios": [
+   "BLZ-4BCM",
+   "BLZ-4LTE3"
+  ]
+ },
+ "BLZ-5-CART-SC": {
+  "accesorios": [
+   "BLZ-5LTE3"
+  ]
+ },
+ "BLZ-3PRO-CART-LTSC": {
+  "accesorios": [
+   "BLZ-3PRO"
+  ]
+ },
+ "BLZ-4PRO-CART-LTSC": {
+  "accesorios": [
+   "BLZ-4PRO"
+  ]
+ },
+ "BLZ-4LTEPRO-CART-LTSC": {
+  "accesorios": [
+   "BLZ-4LTEPRO"
+  ]
+ },
+ "BLZ-5LTEPRO-CART-LTSC": {
+  "accesorios": [
+   "BLZ-5LTEPRO"
+  ]
+ },
+ "3BICV": {
+  "accesorios": [
+   "BLZ-3BCM"
+  ]
+ },
+ "4LTEPROBICV": {
+  "accesorios": [
+   "BLZ-4LTEPRO"
+  ]
+ },
+ "5LTEPROBICV": {
+  "accesorios": [
+   "BLZ-5LTEPRO"
+  ]
+ },
+ "3PROBICV": {
+  "accesorios": [
+   "BLZ-3PRO"
+  ]
+ },
+ "4PROBICV": {
+  "accesorios": [
+   "BLZ-4PRO"
+  ]
+ },
+ "GRDLTE3BICV": {
+  "accesorios": [
+   "BLZ-GRIDDLE-LTE3"
+  ]
+ },
+ "GRD40BICV": {
+  "accesorios": [
+   "BLZ-GRIDDLE40"
+  ]
+ },
+ "SB2BICV": {
+  "accesorios": [
+   "BLZ-SB2-LTE3"
+  ]
+ },
+ "PBBICV": {
+  "accesorios": [
+   "BLZ-PBLTE3",
+   "BLZ-PROPB"
+  ]
+ },
+ "3CTCV": {
+  "accesorios": [
+   "BLZ-3BCM"
+  ]
+ },
+ "4LTEPROCTCV": {
+  "accesorios": [
+   "BLZ-4LTEPRO"
+  ]
+ },
+ "5LTEPROCTCV": {
+  "accesorios": [
+   "BLZ-5LTEPRO"
+  ]
+ },
+ "3PROCTCV": {
+  "accesorios": [
+   "BLZ-3PRO"
+  ]
+ },
+ "4PROCTCV": {
+  "accesorios": [
+   "BLZ-4PRO"
+  ]
+ },
+ "GRDLTE3CTCV": {
+  "accesorios": [
+   "BLZ-GRIDDLE-LTE3"
+  ]
+ },
+ "GRD40CTCV": {
+  "accesorios": [
+   "BLZ-GRIDDLE40"
+  ]
+ },
+ "26PZOVN-TBCV": {
+  "accesorios": [
+   "BLZ-LTE3OVN"
+  ]
+ },
+ "26PZOVN-CTCV": {
+  "accesorios": [
+   "BLZ-LTE3OVN"
+  ]
+ },
+ "26PZOVN-BICV": {
+  "accesorios": [
+   "BLZ-LTE3OVN"
+  ]
+ },
+ "BLZ-3-IJ": {
+  "accesorios": [
+   "BLZ-3BCM"
+  ]
+ },
+ "BLZ-4-IJ": {
+  "accesorios": [
+   "BLZ-4BCM",
+   "BLZ-4LTE3"
+  ]
+ },
+ "BLZ-5-IJ": {
+  "accesorios": [
+   "BLZ-5LTE3"
+  ]
+ },
+ "BLZ-3PRO-IJ": {
+  "accesorios": [
+   "BLZ-3PRO"
+  ]
+ },
+ "BLZ-4PRO-IJ": {
+  "accesorios": [
+   "BLZ-4PRO"
+  ]
+ },
+ "BLZ-GRIDDLE-IJ": {
+  "accesorios": [
+   "BLZ-GRIDDLE-LTE3"
+  ]
+ },
+ "BLZ-SB2-IJ": {
+  "accesorios": [
+   "BLZ-SB2-LTE3"
+  ]
+ },
+ "BLZ-PB-IJ": {
+  "accesorios": [
+   "BLZ-PBLTE3"
+  ]
+ },
+ "BLZ-PROPB-IJ": {
+  "accesorios": [
+   "BLZ-PROPB",
+   "BLZ-PBLTEPRO"
+  ]
+ },
+ "BLZ-4-IJ2": {
+  "accesorios": [
+   "BLZ-4LTEPRO"
+  ]
+ },
+ "BLZ-5-IJ2": {
+  "accesorios": [
+   "BLZ-5LTEPRO"
+  ]
+ },
+ "BLZ-GRIDDLE40-IJ": {
+  "accesorios": [
+   "BLZ-GRIDDLE40"
+  ]
+ },
+ "BLZ-26-PZOVN-IJ": {
+  "accesorios": [
+   "BLZ-LTE3OVN"
+  ]
+ },
+ "BLZ-PZST": {
+  "accesorios": [
+   "BLZ-3BCM",
+   "BLZ-4BCM",
+   "BLZ-4LTE3",
+   "BLZ-5LTE3",
+   "BLZ-4LTE3MG",
+   "BLZ-4LTEPRO",
+   "BLZ-5LTEPRO"
+  ]
+ },
+ "BLZ-PRO-PZST-2": {
+  "accesorios": [
+   "BLZ-3PRO",
+   "BLZ-4PRO"
+  ]
+ },
+ "BLZ-FBOWL-TCOVER": {
+  "accesorios": [
+   "BLZ-38-FBOWL-LP"
+  ]
+ },
+ "4BICV": {
+  "accesorios": [
+   "BLZ-4BCM",
+   "BLZ-4LTE3"
+  ]
+ },
+ "5BICV": {
+  "accesorios": [
+   "BLZ-5LTE3"
+  ]
+ },
+ "4CTCV": {
+  "accesorios": [
+   "BLZ-4BCM",
+   "BLZ-4LTE3"
+  ]
+ },
+ "5CTCV": {
+  "accesorios": [
+   "BLZ-5LTE3"
+  ]
+ },
+ "GRDBICV": {
+  "accesorios": [
+   "BLZ-GRIDDLE-LTE3"
+  ]
+ },
+ "2SBBICV": {
+  "accesorios": [
+   "BLZ-SB2-LTE3"
+  ]
  }
 }

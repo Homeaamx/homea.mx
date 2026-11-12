@@ -295,6 +295,7 @@
         "valores": [
           "15\"",
           "18\"",
+          "20\"",
           "24\"",
           "38\"",
           "48\"",
@@ -2742,13 +2743,17 @@
         "clave": "ancho",
         "valores": [
           "18\"",
+          "20\"",
           "22\"",
+          "25\"",
           "26\"",
           "28\"",
           "30\"",
           "32\"",
+          "34\"",
           "36\"",
           "38\"",
+          "40\"",
           "41\"",
           "42\"",
           "44\"",
@@ -2984,6 +2989,7 @@
           "13\"",
           "14\"",
           "15\"",
+          "16\"",
           "18\"",
           "20\"",
           "24\"",
@@ -3051,7 +3057,8 @@
         "nombre": "Ancho",
         "clave": "ancho",
         "valores": [
-          "30\""
+          "30\"",
+          "40\""
         ]
       },
       {
@@ -3271,7 +3278,9 @@
         "nombre": "Ancho",
         "clave": "ancho",
         "valores": [
+          "13\"",
           "15\"",
+          "16\"",
           "17\"",
           "18\"",
           "20\"",
@@ -3284,8 +3293,10 @@
           "30\"",
           "32\"",
           "36\"",
+          "39\"",
           "40\"",
-          "42\""
+          "42\"",
+          "72\""
         ]
       },
       {
@@ -3692,6 +3703,65 @@
         "valores": [
           "110 V",
           "220 V"
+        ]
+      },
+      {
+        "nombre": "Disponibilidad",
+        "clave": "disponibilidad",
+        "valores": [
+          "Bajo pedido",
+          "En stock"
+        ]
+      },
+      {
+        "nombre": "Garantía",
+        "clave": "garantia",
+        "valores": [
+          "1 año",
+          "2 años",
+          "3 años"
+        ]
+      },
+      {
+        "nombre": "Promoción",
+        "clave": "promocion",
+        "valores": [
+          "10%",
+          "15%",
+          "20%",
+          "25%",
+          "30%",
+          "35%",
+          "40%",
+          "50%",
+          "60%"
+        ]
+      }
+    ],
+    "Fire pits": [
+      {
+        "nombre": "Marca",
+        "clave": "marca"
+      },
+      {
+        "nombre": "Precio",
+        "clave": "precio"
+      },
+      {
+        "nombre": "Tipo",
+        "clave": "tipo",
+        "valores": [
+          "Mesa de fuego",
+          "Tazón de fuego",
+          "Cubierta para tanque de gas"
+        ]
+      },
+      {
+        "nombre": "Tipo de gas",
+        "clave": "tipo_gas",
+        "valores": [
+          "Natural",
+          "LP"
         ]
       },
       {

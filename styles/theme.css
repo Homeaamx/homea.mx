@@ -4014,6 +4014,8 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="broil-king"] { height: 24px; }
 /* Mont Alpi (2026-11-12): logo de la marca (flama + "Peak Performance", PNG transparente de public/assets/logos); proporción 3.5:1. */
 .pdp-logo[data-marca="mont-alpi"] { height: 36px; }
+/* Blaze (2026-11-12): flama + "BLAZE Outdoor Products" a color (PNG transparente de public/assets/logos); proporción 2.5:1. */
+.pdp-logo[data-marca="blaze"] { height: 40px; }
 /* Dawn (2026-11-12): letra cursiva negra (mismo logo transparente del muro de marcas); alto y angosto, va un poco más alto. */
 .pdp-logo[data-marca="dawn"] { height: 34px; }
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
@@ -5536,3 +5538,17 @@ a.wl-wa:hover, a.wl-wa:focus-visible { color: var(--homea-bone); }
 /* Hero de marca con dos botones (Carla, 2026-11-09: Catalano y Valsir → "Paquetes
    sanitarios" junto a "Ver catálogo oficial"): en renglón, y abajo si no caben. */
 .marcas-hero--contenido .marca-hero-cta { display: flex; flex-wrap: wrap; gap: 14px 16px; align-items: center; }
+
+/* =====================================================================
+   Elegir gas al agregar (Blaze, 2026-11-12) · components/CarritoProvider.tsx
+   ===================================================================== */
+.gas-overlay { align-items: center; }
+.gas-modal { position: relative; width: min(440px, 100%); background: #fff; border: 1px solid var(--border); padding: clamp(24px, 4vw, 36px); box-shadow: var(--shadow-md); }
+.gas-modal .eyebrow { margin: 0 0 8px; }
+.gas-titulo { font-family: var(--font-display); font-weight: 400; font-size: 26px; line-height: 1.15; margin: 0 0 8px; }
+.gas-pieza { margin: 0 0 20px; color: var(--fg-muted); font-size: 14px; }
+.gas-opciones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.gas-op { display: flex; flex-direction: column; align-items: center; gap: 4px; padding-top: 14px; padding-bottom: 14px; }
+.gas-sku { font-family: var(--font-cifras); font-size: 11px; letter-spacing: .04em; opacity: .75; font-weight: 400; }
+.gas-nota { margin: 16px 0 0; font-size: 12.5px; color: var(--fg-muted); }
+@media (max-width: 640px) { .gas-opciones { grid-template-columns: 1fr; } }

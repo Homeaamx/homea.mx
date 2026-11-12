@@ -123,6 +123,8 @@ export const TIPOS_WEB: TipoWeb[] = [
   { tipo: "Ahumadores", coleccion: "ahumadores", slugRiel: "ahumadores", ruta: `${EXTERIOR.ruta}?tipo=ahumadores`, macro: EXTERIOR, sub1: EXTERIOR },
   { tipo: "Hieleras", coleccion: "hieleras", slugRiel: "hieleras", ruta: `${EXTERIOR.ruta}?tipo=hieleras`, macro: EXTERIOR, sub1: EXTERIOR },
   { tipo: "Gabinetes", coleccion: "gabinetes", slugRiel: "gabinetes", ruta: `${EXTERIOR.ruta}?tipo=gabinetes`, macro: EXTERIOR, sub1: EXTERIOR },
+  // Mesas y tazones de fuego (Blaze; Carla, 2026-11-12).
+  { tipo: "Fire pits", coleccion: "fire-pits", slugRiel: "fire-pits", ruta: `${EXTERIOR.ruta}?tipo=fire-pits`, macro: EXTERIOR, sub1: EXTERIOR },
   // Una colección por macro (tabla de filtros: Subcategoría 2 = la macro) y el
   // riel por valor de filtro. Colecciones creadas y publicadas al canal Headless
   // el 2026-10-14 (aún sin piezas).
@@ -168,7 +170,9 @@ export const EXTRAS_DE_MACRO: Record<
     { coleccion: "campanas", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Campanas — Uso: Exterior" },
     // Subcategorías de Exterior que viven en Cocina y Bar (Carla, 2026-11-11): cada
     // una es un tile del riel de /productos/exterior y un título del mega-menú.
-    { coleccion: "refrigeradores", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Refrigeradores" },
+    // Refrigeración bajo cubierta de exterior (puerta sólida o de cristal) = Centros de
+    // bebida; las cavas de exterior van en Cavas de vino (Carla, 2026-11-12).
+    { coleccion: "centros-de-bebida", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Centros de bebida" },
     { coleccion: "maquinas-de-hielo", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Máquinas de hielo" },
     { coleccion: "cajones-refrigerantes", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Cajones refrigerantes" },
     { coleccion: "cajones", filtro: { clave: "uso", valor: "Exterior" }, tablaFiltros: "Cajones" },

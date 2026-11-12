@@ -203,6 +203,20 @@ export interface ColorVivo {
   usdLista: number | null;
 }
 
+/**
+ * Una opción de gas de la pieza (Blaze: "Gas LP" / "Gas natural"). Mismo precio;
+ * el cliente la elige al agregar la pieza a Mi Proyecto (Carla, 2026-11-12).
+ */
+export interface GasVivo {
+  variantId: string;
+  /** SKU de la variante: `<modelo>-LP` / `<modelo>-NG`. */
+  sku: string;
+  nombre: string;
+}
+
+/** Nombre de la opción de Shopify que lleva el gas. */
+export const OPCION_GAS = "Tipo de gas";
+
 export interface ProductoVivo {
   sku: string;
   /** Ruta de la ficha: el SKU en minúsculas, igual que las 5 fichas del piloto. */
@@ -245,6 +259,8 @@ export interface ProductoVivo {
    * (Carla, 2026-10-28).
    */
   colores: ColorVivo[];
+  /** Opciones de gas (LP / natural), vacío si la pieza no las tiene. */
+  gases: GasVivo[];
   /** Color de la variante, cuando la pieza se pidió por el SKU de un color (cotización). */
   color?: string;
 }
@@ -353,6 +369,12 @@ function normalizar(raw: ProductoRaw): ProductoVivo | null {
           };
         })
       : [];
+  const gasDe = (x: ProductoRaw["variants"]["nodes"][number]) =>
+    x.selectedOptions?.find((o) => o.name === OPCION_GAS)?.value ?? null;
+  const gases: GasVivo[] =
+    raw.variants.nodes.length > 1 && raw.variants.nodes.every((x) => gasDe(x))
+      ? raw.variants.nodes.map((x) => ({ variantId: x.id, sku: x.sku ?? v.sku ?? "", nombre: gasDe(x) as string }))
+      : [];
   return {
     sku: v.sku,
     slug: slugDeSku(v.sku),
@@ -381,6 +403,7 @@ function normalizar(raw: ProductoRaw): ProductoVivo | null {
     enStock,
     piezas: enStock && typeof v.quantityAvailable === "number" && v.quantityAvailable > 0 ? v.quantityAvailable : null,
     colores,
+    gases,
   };
 }
 
@@ -469,6 +492,9 @@ export async function productoVivoPorSku(sku: string): Promise<ProductoVivo | nu
  * la pre-cotización, que arma cada partida por SKU.
  */
 function conColor(p: ProductoVivo, sku: string): ProductoVivo | null {
+  // Variante de gas (Blaze …-NG): mismo precio, solo cambian SKU y variante.
+  const g = p.gases.find((x) => x.sku.toUpperCase() === sku && x.variantId !== p.variantId);
+  if (g) return { ...p, sku: g.sku, variantId: g.variantId, color: g.nombre };
   const c = p.colores.find((x) => x.sku.toUpperCase() === sku && x.variantId !== p.variantId);
   if (!c) return null;
   return { ...p, sku: c.sku, variantId: c.variantId, mxn: c.mxn, mxnLista: c.mxnLista, usdLista: c.usdLista, color: c.nombre };

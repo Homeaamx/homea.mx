@@ -52,6 +52,12 @@ export default function CarritoProvider({ children }: { children?: ReactNode }) 
   // Pre-cotización abierta al centro (cierra el cajón): Carla, 2026-10-08.
   const [cotizando, setCotizando] = useState(false);
   const [pendiente, iniciar] = useTransition();
+  // Pieza con dos gases (Blaze): antes de agregarla se pregunta cuál (Carla, 2026-11-12).
+  const [eligeGas, setEligeGas] = useState<{
+    nombre: string;
+    cantidad: number;
+    opciones: { n: string; vid: string; sku: string }[];
+  } | null>(null);
 
   // El optimismo cubre SOLO la cantidad y el badge: son datos sin dinero de por
   // medio. El subtotal se queda con el valor anterior atenuado hasta que Shopify
@@ -168,6 +174,18 @@ export default function CarritoProvider({ children }: { children?: ReactNode }) 
         // Selector de unidades junto al botón (ficha): si no hay, una pieza.
         const campo = alta.closest(".pdp-cta")?.querySelector<HTMLInputElement>("[data-cart-qty]");
         const cantidad = Math.min(99, Math.max(1, Number.parseInt(campo?.value ?? "1", 10) || 1));
+        const gas = alta.getAttribute("data-cart-gas");
+        if (gas) {
+          try {
+            const opciones = JSON.parse(gas) as { n: string; vid: string; sku: string }[];
+            if (opciones.length > 1) {
+              setEligeGas({ nombre: alta.getAttribute("data-cart-name") ?? "", cantidad, opciones });
+              return;
+            }
+          } catch {
+            /* atributo malformado: se agrega la variante del botón. */
+          }
+        }
         if (vid || sku) agregar(vid, sku, cantidad, tono);
         return;
       }
@@ -237,15 +255,16 @@ export default function CarritoProvider({ children }: { children?: ReactNode }) 
 
   /* ---------- Esc cierra ---------- */
   useEffect(() => {
-    if (!abierto && !cotizando) return;
+    if (!abierto && !cotizando && !eligeGas) return;
     function alTeclear(ev: KeyboardEvent) {
       if (ev.key !== "Escape") return;
       setAbierto(false);
       setCotizando(false);
+      setEligeGas(null);
     }
     document.addEventListener("keydown", alTeclear);
     return () => document.removeEventListener("keydown", alTeclear);
-  }, [abierto, cotizando]);
+  }, [abierto, cotizando, eligeGas]);
 
   /* ---------- Bloqueo del scroll ---------- */
   useEffect(() => {
@@ -317,6 +336,35 @@ export default function CarritoProvider({ children }: { children?: ReactNode }) 
               />
               {cotizando ? (
                 <PreCotizacionModal carrito={carritoVista} onCerrar={() => setCotizando(false)} />
+              ) : null}
+              {eligeGas ? (
+                <div className="pc-overlay gas-overlay" role="dialog" aria-modal="true" aria-labelledby="gas-titulo" onClick={() => setEligeGas(null)}>
+                  <div className="gas-modal" onClick={(ev) => ev.stopPropagation()}>
+                    <button type="button" className="pc-x" aria-label="Cerrar" onClick={() => setEligeGas(null)}>
+                      ×
+                    </button>
+                    <p className="eyebrow">Tipo de gas</p>
+                    <h2 id="gas-titulo" className="gas-titulo">¿Con qué gas lo vas a conectar?</h2>
+                    {eligeGas.nombre ? <p className="gas-pieza">{eligeGas.nombre}</p> : null}
+                    <div className="gas-opciones">
+                      {eligeGas.opciones.map((o) => (
+                        <button
+                          key={o.vid || o.sku}
+                          type="button"
+                          className="btn btn-primary gas-op"
+                          onClick={() => {
+                            const elegido = eligeGas;
+                            setEligeGas(null);
+                            agregar(o.vid, o.sku, elegido.cantidad);
+                          }}
+                        >
+                          {o.n}
+                        </button>
+                      ))}
+                    </div>
+                    <p className="gas-nota">Mismo precio en las dos versiones. Si no sabes cuál tienes, un especialista te ayuda a confirmarlo.</p>
+                  </div>
+                </div>
               ) : null}
             </>,
             document.body,

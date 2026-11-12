@@ -478,7 +478,7 @@ export function esOferta(p: ProductoVivo, tc: TipoCambio): boolean {
  * (.pcard-add::after). Lo atiende el mismo .cart-add de CarritoProvider.
  */
 function botonAgregarTarjeta(p: ProductoVivo, precio: PrecioPublico, img: ProductoVivo["imagenes"][number] | undefined): string {
-  return `<button class="cart-add pcard-add" type="button" data-tip="Agregar a Mi Proyecto" aria-label="Agregar a Mi Proyecto" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${img ? esc(cdn(img.url, 400)) : ""}" data-cart-href="/producto/${p.slug}">${MAS}</button>`;
+  return `<button class="cart-add pcard-add" type="button" data-tip="Agregar a Mi Proyecto" aria-label="Agregar a Mi Proyecto" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${img ? esc(cdn(img.url, 400)) : ""}" data-cart-href="/producto/${p.slug}"${gasAttr(p)}>${MAS}</button>`;
 }
 
 /** Orden por defecto: equipos antes que accesorios; dentro, de mayor a menor precio. */
@@ -878,6 +878,18 @@ export function conteoHtml(productos: ProductoVivo[]): string {
   return `${n} ${n === 1 ? "pieza" : "piezas"} en línea`;
 }
 
+/* ---------- Opciones de gas (Blaze) --------------------------------------- */
+
+/**
+ * Pieza con variantes de gas: el botón lleva las opciones y CarritoProvider
+ * pregunta "¿Gas LP o gas natural?" antes de agregarla (Carla, 2026-11-12).
+ */
+export function gasAttr(p: ProductoVivo): string {
+  if (p.gases.length < 2) return "";
+  const op = p.gases.map((g) => ({ n: g.nombre, vid: g.variantId.split("/").pop() ?? "", sku: g.sku }));
+  return ` data-cart-gas="${esc(JSON.stringify(op))}"`;
+}
+
 /* ---------- Llamado a la acción ------------------------------------------ */
 
 export function ctaHtml(p: ProductoVivo, decision: Decision, precio: PrecioPublico): string {
@@ -887,7 +899,7 @@ export function ctaHtml(p: ProductoVivo, decision: Decision, precio: PrecioPubli
   // Al cerrar, el proyecto va al pago de Shopify si cada pieza cumple la regla
   // (marca + monto + stock); si alguna se cotiza, el proyecto completo se manda
   // como cotización por WhatsApp. La regla se vuelve a evaluar en el servidor.
-  const agregar = `<button class="btn btn-primary cart-add" type="button" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(numericId)}" data-cart-tono="" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${p.imagenes[0] ? esc(cdn(p.imagenes[0].url, 400)) : IMAGEN_RESPALDO.url}" data-cart-href="/producto/${p.slug}">Agregar a Mi Proyecto</button>`;
+  const agregar = `<button class="btn btn-primary cart-add" type="button" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(numericId)}" data-cart-tono="" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${p.imagenes[0] ? esc(cdn(p.imagenes[0].url, 400)) : IMAGEN_RESPALDO.url}" data-cart-href="/producto/${p.slug}"${gasAttr(p)}>Agregar a Mi Proyecto</button>`;
   let nota: string;
   if (decision.accion === "comprar") {
     nota = p.enStock
@@ -907,6 +919,7 @@ export function ctaHtml(p: ProductoVivo, decision: Decision, precio: PrecioPubli
         ${unidades}
         ${agregar}
       </div>
+      ${p.gases.length > 1 ? `<p class="note pdp-gas-nota">Disponible en ${p.gases.map((g) => g.nombre.charAt(0).toLowerCase() + g.nombre.slice(1)).join(" o ")}: eliges el gas al agregarlo a tu proyecto.</p>` : ""}
       <p class="note">${nota}</p>`;
 }
 
