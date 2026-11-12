@@ -4010,6 +4010,8 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="scotsman"] { height: 30px; }
 /* The Galley (2026-11-11): logo gris "Reinvent your kitchen" (OneDrive LOGOTIPOS PROVEEDORES, PNG transparente); muy ancho, va más bajo. */
 .pdp-logo[data-marca="the-galley"] { height: 24px; }
+/* Broil King (2026-11-12): MARESA/broilKing.png (wordmark negro con las flamas azules, fondo blanco quitado); ancho 6:1, va bajo. */
+.pdp-logo[data-marca="broil-king"] { height: 24px; }
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
    técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
    una línea, baja a dos dentro de su pestaña. */
