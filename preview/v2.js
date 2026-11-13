@@ -118,8 +118,8 @@
     }
 
     /* ---------- Tipo de cambio del día (slot de temporada del ubar) ----------
-       El valor lo resuelve el SERVIDOR una vez al día (lib/tipoCambio.ts, serie
-       SF43718 del SIE de Banxico) y llega ya renderizado con data-fx-servidor.
+       El valor lo resuelve el SERVIDOR una vez al día (lib/tipoCambio.ts, tipo
+       de cambio del DOF) y llega ya renderizado con data-fx-servidor.
        Aquí NO vive ningún token: el que había antes en este archivo se servía a
        todo visitante. Este bloque solo cubre el preview standalone, que se abre
        sin Next.js, y para eso basta una API pública sin credenciales. */

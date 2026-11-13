@@ -1,15 +1,15 @@
 // Cron diario del tipo de cambio.
 //
-// Banxico determina el FIX alrededor del mediodía y lo publica ese mismo día
-// hábil. Este endpoint corre después (ver `vercel.json`), invalida el tag del
-// Data Cache y vuelve a consultar para dejar el valor nuevo ya caliente: así el
-// primer visitante de la tarde no paga la espera de la consulta.
+// El sitio usa el tipo de cambio del DOF (Carla, 2026-11-12: el mismo de SAE).
+// El DOF publica el FIX del día hábil anterior, así que el valor de hoy se
+// conoce desde ayer al mediodía. Este endpoint corre a las 00:05 de la Ciudad de
+// México (ver `vercel.json`), invalida el tag del Data Cache y vuelve a
+// consultar para dejar el valor nuevo ya caliente.
 //
 // Sin este cron el sitio igual se actualizaría —la consulta tiene `revalidate`
-// de un día— pero lo haría a la hora en que cayera la primera visita, que puede
-// ser antes de que Banxico publique. Con el cron, el sitio cambia de precio a
-// una hora conocida, que es lo que un vendedor necesita para saber qué número
-// está viendo su cliente.
+// de una hora— pero lo haría a la hora en que cayera la primera visita. Con el
+// cron, el sitio cambia de precio a una hora conocida, que es lo que un vendedor
+// necesita para saber qué número está viendo su cliente.
 //
 // Además (Carla, 2026-10-10): con el TC nuevo reescribe en Shopify los pesos de
 // toda pieza en dólares (lib/shopify/repreciar.ts). Así el carrito de un cliente
@@ -46,7 +46,7 @@ export async function GET(request: Request) {
   }
 
   // Next 16 pide el perfil de caché como segundo argumento; "max" marca como
-  // vencido todo lo etiquetado, que es justo lo que se busca al publicar el FIX.
+  // vencido todo lo etiquetado, que es justo lo que se busca al cambiar el DOF.
   revalidateTag(TAG_TIPO_CAMBIO, "max");
   const tc = await obtenerTipoCambio();
 

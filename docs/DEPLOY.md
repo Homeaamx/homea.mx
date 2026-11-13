@@ -82,11 +82,11 @@ token de Banxico incrustado en `/v2.js`, es decir, servido a todo visitante.
 
 | Pieza | Dónde |
 |---|---|
-| Consulta del FIX (serie `SF43718` del SIE de Banxico) | `lib/tipoCambio.ts` |
+| Tipo de cambio del DOF (FIX de la serie `SF43718` del SIE de Banxico, recorrido al día hábil en que lo publica el DOF) | `lib/tipoCambio.ts` |
 | Cron diario que revalida el valor | `app/api/cron/tipo-cambio/route.ts` + `vercel.json` |
-| Horario | `0 19 * * 1-5` (UTC) = 13:00 en México, después de que Banxico publica |
+| Horario | `5 6 * * 1-5` (UTC) = 00:05 en México, en cuanto cambia el día del DOF |
 
-**Precedencia:** `TIPO_CAMBIO_MANUAL` → Banxico FIX × (1 + `TIPO_CAMBIO_SPREAD`) → respaldo 17.43.
+**Precedencia:** `TIPO_CAMBIO_MANUAL` → tipo de cambio del DOF × (1 + `TIPO_CAMBIO_SPREAD`) → respaldo 17.43.
 La nota que acompaña al precio dice siempre con qué tipo de cambio se calculó y de qué día,
 para que una cotización siga siendo defendible tres días después.
 

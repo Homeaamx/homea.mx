@@ -70,7 +70,7 @@ En Vercel aplica desde el siguiente deployment.
 
 | | |
 |---|---|
-| **Desbloquea** | El FIX del día (serie `SF43718` del SIE de Banxico) en barra superior y fichas |
+| **Desbloquea** | El tipo de cambio del DOF (FIX de la serie `SF43718` del SIE de Banxico) en barra superior y fichas |
 | **Lo lee** | `lib/tipoCambio.ts` |
 | **Sin él** | Tipo de cambio de respaldo **17.43**, y la nota del precio lo advierte |
 | **Firma del fallo** | La ficha dice `TC 17.43` sin fecha; con token dice `TC 17.24 · 18/09/2026` |

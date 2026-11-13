@@ -6,9 +6,13 @@
 // decir tres números distintos y nadie se entera. Aquí se resuelve una vez y
 // todos leen lo mismo.
 //
-// Fuente: serie **SF43718** del SIE de Banxico — el FIX, el tipo de cambio para
-// solventar obligaciones en moneda extranjera. Es el dato oficial y auditable,
-// que es lo que hace defendible una cotización cuando el peso se mueve.
+// Fuente: el **tipo de cambio del DOF** (Carla, 2026-11-12: es el que usa SAE).
+// Banxico determina el FIX (serie **SF43718** del SIE) alrededor del mediodía y
+// lo publica en el Diario Oficial el día hábil bancario SIGUIENTE: el DOF del
+// jueves trae el FIX del miércoles. El SIE no tiene una serie fechada por día de
+// publicación en el DOF (SF60653 va por fecha de liquidación, dos días hábiles
+// después), así que aquí se toma SF43718 y se recorre un día hábil. Es el dato
+// oficial y auditable, que es lo que hace defendible una cotización.
 //
 // Orden de precedencia:
 //   1. `TIPO_CAMBIO_MANUAL` — lo pone una persona cuando la cotización debe usar
@@ -25,7 +29,6 @@ import "server-only";
 
 /** Serie del FIX en el SIE de Banxico. */
 const SERIE_FIX = "SF43718";
-const API_BANXICO = `https://www.banxico.org.mx/SieAPIRest/service/v1/series/${SERIE_FIX}/datos/oportuno`;
 
 /** Tag del Data Cache: el cron diario lo revalida (app/api/cron/tipo-cambio). */
 export const TAG_TIPO_CAMBIO = "tipo-cambio";
@@ -41,9 +44,9 @@ export type FuenteTipoCambio = "manual" | "banxico" | "respaldo";
 export interface TipoCambio {
   /** Pesos por dólar, ya con el diferencial aplicado. */
   valor: number;
-  /** FIX publicado por Banxico, sin diferencial (null si no se pudo consultar). */
+  /** Tipo de cambio publicado en el DOF, sin diferencial (null si no se pudo consultar). */
   fix: number | null;
-  /** Fecha de determinación del FIX, tal como la publica Banxico (dd/mm/aaaa). */
+  /** Día en que el DOF publica ese tipo de cambio (dd/mm/aaaa): el día al que corresponde. */
   fecha: string | null;
   fuente: FuenteTipoCambio;
 }
@@ -67,35 +70,133 @@ function spread(): number {
   return Number.isFinite(valor) && valor >= 0 ? valor : 0;
 }
 
-/** Consulta el FIX del día. Devuelve null ante cualquier fallo: nunca lanza. */
-export async function consultarFixBanxico(): Promise<{ fix: number; fecha: string } | null> {
-  const token = process.env.BANXICO_TOKEN;
-  if (!token) return null;
+// ── Calendario bancario ────────────────────────────────────────────────────
+// Para saber qué día publica el DOF el FIX más reciente hace falta saber cuál es
+// el siguiente día hábil bancario. Los pasados se deducen de la propia serie (un
+// día entre semana sin FIX fue inhábil); este calendario solo sirve para el que
+// todavía no llega. Son los días inhábiles de la CNBV.
 
+const DIA = 86_400_000;
+
+/** "aaaa-mm-dd" de una fecha UTC. */
+const iso = (d: Date) => d.toISOString().slice(0, 10);
+
+/** "dd/mm/aaaa" (Banxico) → fecha UTC a medianoche. */
+function deBanxico(fecha: string): Date {
+  const [d, m, a] = fecha.split("/").map((x) => Number.parseInt(x, 10));
+  return new Date(Date.UTC(a, m - 1, d));
+}
+
+/** Fecha UTC → "dd/mm/aaaa" (Banxico). */
+function aBanxico(d: Date): string {
+  return `${String(d.getUTCDate()).padStart(2, "0")}/${String(d.getUTCMonth() + 1).padStart(2, "0")}/${d.getUTCFullYear()}`;
+}
+
+/** Domingo de Pascua (algoritmo anónimo gregoriano). */
+function pascua(a: number): Date {
+  const b = Math.floor(a / 100), c = a % 100, d = Math.floor(b / 4), e = b % 4;
+  const f = Math.floor((b + 8) / 25), g = Math.floor((b - f + 1) / 3);
+  const h = (19 * (a % 19) + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4), k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor(((a % 19) + 11 * h + 22 * l) / 451);
+  const n = h + l - 7 * m + 114;
+  return new Date(Date.UTC(a, Math.floor(n / 31) - 1, (n % 31) + 1));
+}
+
+/** n-ésimo lunes del mes (mes 0–11), "aaaa-mm-dd". */
+function lunes(a: number, mes: number, n: number): string {
+  const primero = new Date(Date.UTC(a, mes, 1));
+  return iso(new Date(primero.getTime() + (((8 - primero.getUTCDay()) % 7) + 7 * (n - 1)) * DIA));
+}
+
+function inhabiles(a: number): Set<string> {
+  const p = pascua(a).getTime();
+  const f = (m: number, d: number) => iso(new Date(Date.UTC(a, m - 1, d)));
+  return new Set([
+    f(1, 1), lunes(a, 1, 1), lunes(a, 2, 3), iso(new Date(p - 3 * DIA)), iso(new Date(p - 2 * DIA)),
+    f(5, 1), f(9, 16), f(11, 2), lunes(a, 10, 3), f(12, 12), f(12, 25),
+    // Transmisión del Poder Ejecutivo (cada seis años, 1 de octubre).
+    ...((a - 2024) % 6 === 0 ? [f(10, 1)] : []),
+  ]);
+}
+
+function esHabil(d: Date): boolean {
+  const dia = d.getUTCDay();
+  return dia !== 0 && dia !== 6 && !inhabiles(d.getUTCFullYear()).has(iso(d));
+}
+
+function siguienteHabil(d: Date): Date {
+  let x = new Date(d.getTime() + DIA);
+  while (!esHabil(x)) x = new Date(x.getTime() + DIA);
+  return x;
+}
+
+/** Hoy en la Ciudad de México, como fecha UTC a medianoche. */
+function hoyCdmx(): Date {
+  const p = Object.fromEntries(
+    new Intl.DateTimeFormat("en-US", { timeZone: "America/Mexico_City", year: "numeric", month: "2-digit", day: "2-digit" })
+      .formatToParts(new Date())
+      .map((x) => [x.type, x.value]),
+  );
+  return new Date(Date.UTC(Number(p.year), Number(p.month) - 1, Number(p.day)));
+}
+
+/**
+ * El tipo de cambio del DOF de los últimos días: cada FIX con el día en que el
+ * Diario Oficial lo publica (el siguiente día hábil bancario). Incluye el FIX
+ * de hoy si Banxico ya lo determinó, con fecha del siguiente día hábil.
+ * Lista vacía ante cualquier fallo: nunca lanza.
+ */
+async function serieDof(): Promise<{ fecha: string; tc: number }[]> {
+  const token = process.env.BANXICO_TOKEN;
+  if (!token) return [];
+  const hoy = hoyCdmx();
+  // 20 días: cubre Semana Santa y cualquier puente con varios FIX de margen.
+  const desde = new Date(hoy.getTime() - 20 * DIA);
   try {
-    const respuesta = await fetch(API_BANXICO, {
-      headers: { "Bmx-Token": token, Accept: "application/json" },
-      signal: AbortSignal.timeout(4000),
-      // Un día de vida; el cron revalida el tag en cuanto Banxico publica.
-      next: { revalidate: 86400, tags: [TAG_TIPO_CAMBIO] },
-    });
+    const respuesta = await fetch(
+      `https://www.banxico.org.mx/SieAPIRest/service/v1/series/${SERIE_FIX}/datos/${iso(desde)}/${iso(hoy)}`,
+      {
+        headers: { "Bmx-Token": token, Accept: "application/json" },
+        signal: AbortSignal.timeout(4000),
+        // La URL cambia cada día; el cron de las 00:05 revalida el tag.
+        next: { revalidate: 3600, tags: [TAG_TIPO_CAMBIO] },
+      },
+    );
     if (!respuesta.ok) {
       console.warn(`[tipo-cambio] Banxico respondió HTTP ${respuesta.status}.`);
-      return null;
+      return [];
     }
-
     const json = (await respuesta.json()) as RespuestaBanxico;
-    const dato = json.bmx?.series?.[0]?.datos?.[0];
-    if (!dato) return null;
-
-    const fix = Number.parseFloat(dato.dato);
-    if (!Number.isFinite(fix) || fix <= 0) return null;
-    return { fix, fecha: dato.fecha };
+    const datos = (json.bmx?.series?.[0]?.datos ?? [])
+      .map((x) => ({ dia: deBanxico(x.fecha), tc: Number.parseFloat(x.dato) }))
+      .filter((x) => Number.isFinite(x.tc) && x.tc > 0)
+      .sort((a, b) => a.dia.getTime() - b.dia.getTime());
+    // El FIX de un día lo publica el DOF el día del siguiente FIX; el último,
+    // el siguiente día hábil según el calendario.
+    return datos.map((x, i) => ({
+      fecha: aBanxico(datos[i + 1]?.dia ?? siguienteHabil(x.dia)),
+      tc: x.tc,
+    }));
   } catch (error) {
     const causa = error instanceof Error ? error.message : String(error);
     console.warn(`[tipo-cambio] Banxico no respondió (${causa}).`);
-    return null;
+    return [];
   }
+}
+
+/**
+ * El tipo de cambio que publica hoy el DOF (sábado, domingo o día inhábil: el
+ * último publicado). Devuelve null ante cualquier fallo: nunca lanza.
+ */
+export async function consultarTipoCambioDof(): Promise<{ fix: number; fecha: string } | null> {
+  const hoy = hoyCdmx().getTime();
+  const serie = await serieDof();
+  for (let i = serie.length - 1; i >= 0; i--) {
+    if (deBanxico(serie[i].fecha).getTime() <= hoy) return { fix: serie[i].tc, fecha: serie[i].fecha };
+  }
+  return null;
 }
 
 /** El tipo de cambio vigente del sitio, con su procedencia. */
@@ -103,7 +204,7 @@ export async function obtenerTipoCambio(): Promise<TipoCambio> {
   const manual = numeroDeEnv("TIPO_CAMBIO_MANUAL");
   if (manual) return { valor: manual, fix: null, fecha: null, fuente: "manual" };
 
-  const banxico = await consultarFixBanxico();
+  const banxico = await consultarTipoCambioDof();
   if (banxico) {
     return {
       // Se redondea a centavos: un tipo de cambio con 6 decimales en una ficha
@@ -131,7 +232,7 @@ export function inyectarTipoCambio(html: string, tc: TipoCambio): string {
   const factor = tc.valor.toFixed(2);
   const titulo =
     tc.fuente === "banxico" && tc.fecha
-      ? ` title="FIX de Banxico del ${tc.fecha}"`
+      ? ` title="Tipo de cambio del DOF del ${tc.fecha}"`
       : "";
   // La etiqueta va en su propio <span>: en móvil se oculta y queda solo la cifra.
   return html.replace(
@@ -156,52 +257,27 @@ export function fechaLarga(fecha: string): string {
 const MISMO_TC = 0.015;
 
 /**
- * Fecha (dd/mm/aaaa) del FIX de los últimos 15 días que, con el diferencial del
+ * Fecha (dd/mm/aaaa) del DOF de los últimos días que, con el diferencial del
  * sitio, da `valor`; la más reciente si se repite. null si ninguno coincide.
  */
 async function fechaDeFix(valor: number): Promise<string | null> {
-  const token = process.env.BANXICO_TOKEN;
-  if (!token) return null;
-  const iso = (d: Date) => d.toISOString().slice(0, 10);
-  const hoy = new Date();
-  const desde = new Date(hoy.getTime() - 15 * 86_400_000);
-  try {
-    const respuesta = await fetch(
-      `https://www.banxico.org.mx/SieAPIRest/service/v1/series/${SERIE_FIX}/datos/${iso(desde)}/${iso(hoy)}`,
-      {
-        headers: { "Bmx-Token": token, Accept: "application/json" },
-        signal: AbortSignal.timeout(4000),
-        next: { revalidate: 3600, tags: [TAG_TIPO_CAMBIO] },
-      },
-    );
-    if (!respuesta.ok) return null;
-    const json = (await respuesta.json()) as RespuestaBanxico;
-    const datos = json.bmx?.series?.[0]?.datos ?? [];
-    for (let i = datos.length - 1; i >= 0; i--) {
-      const fix = Number.parseFloat(datos[i].dato);
-      if (Number.isFinite(fix) && Math.abs(Math.round(fix * (1 + spread()) * 100) / 100 - valor) < MISMO_TC) {
-        return datos[i].fecha;
-      }
-    }
-    return null;
-  } catch {
-    return null;
+  const serie = await serieDof();
+  for (let i = serie.length - 1; i >= 0; i--) {
+    if (Math.abs(Math.round(serie[i].tc * (1 + spread()) * 100) / 100 - valor) < MISMO_TC) return serie[i].fecha;
   }
+  return null;
 }
 
 /**
- * ¿El FIX (dd/mm/aaaa) es el del día de hoy en la Ciudad de México? Sábado y
- * domingo Banxico no publica: vale el del último día hábil. En un día feriado
- * bancario tampoco publica, y ese día el pago en dólares queda en cotización.
+ * ¿El tipo de cambio (fecha del DOF, dd/mm/aaaa) es el que corresponde hoy en la
+ * Ciudad de México? Un día hábil, el del DOF de hoy; sábado, domingo o inhábil,
+ * el del último día hábil. Como el DOF publica el FIX del día anterior, el de
+ * hoy se conoce desde ayer al mediodía y el cron lo escribe a las 00:05.
  */
 function esFixDeHoy(fecha: string): boolean {
-  const partes = Object.fromEntries(
-    new Intl.DateTimeFormat("en-US", { timeZone: "America/Mexico_City", year: "numeric", month: "2-digit", day: "2-digit", weekday: "short" })
-      .formatToParts(new Date())
-      .map((x) => [x.type, x.value]),
-  );
-  if (partes.weekday === "Sat" || partes.weekday === "Sun") return true;
-  return fecha === `${partes.day}/${partes.month}/${partes.year}`;
+  let dia = hoyCdmx();
+  while (!esHabil(dia)) dia = new Date(dia.getTime() - DIA);
+  return fecha === aBanxico(dia);
 }
 
 /**
@@ -221,9 +297,9 @@ export async function diaDelTipoCambio(
   if (vigente.fuente !== "banxico" || !vigente.fecha) return { dia: null, vencido: false, tipoCambio: null };
   const fuera = piezas.find((p) => Math.abs(p.tipoCambio - vigente.valor) >= Math.max(MISMO_TC, 0.006 / p.usd));
   if (!fuera) {
-    // Al día con el último FIX, pero ese FIX tiene que ser el de HOY (Carla,
-    // 2026-11-05): un día hábil, mientras no llegue el FIX de hoy (Banxico lo
-    // publica ≈12:00 y el cron reprecia a las 13:00), tampoco se paga.
+    // Al día con el último tipo de cambio, pero tiene que ser el del DOF de HOY
+    // (Carla, 2026-11-05 y 2026-11-12): si Banxico no trae el FIX de ayer, no
+    // se paga.
     return { dia: fechaLarga(vigente.fecha), vencido: !esFixDeHoy(vigente.fecha), tipoCambio: null };
   }
   const fecha = await fechaDeFix(fuera.tipoCambio);
@@ -244,7 +320,7 @@ export function notaTipoCambio(tc: TipoCambio): string {
   const factor = tc.valor.toFixed(2);
   switch (tc.fuente) {
     case "banxico":
-      return `Equivalencia calculada con el tipo de cambio FIX de Banxico ($${factor} del ${tc.fecha}).`;
+      return `Equivalencia calculada con el tipo de cambio del DOF ($${factor} del ${tc.fecha}).`;
     case "manual":
       return `Equivalencia calculada con el tipo de cambio de referencia de HOMEA ($${factor}).`;
     default:

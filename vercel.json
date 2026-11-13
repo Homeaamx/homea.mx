@@ -3,7 +3,7 @@
   "crons": [
     {
       "path": "/api/cron/tipo-cambio",
-      "schedule": "0 19 * * 1-5"
+      "schedule": "5 6 * * 1-5"
     }
   ]
 }
