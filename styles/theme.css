@@ -4018,6 +4018,8 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="blaze"] { height: 40px; }
 /* Dawn (2026-11-12): letra cursiva negra (mismo logo transparente del muro de marcas); alto y angosto, va un poco más alto. */
 .pdp-logo[data-marca="dawn"] { height: 34px; }
+/* Smeg (2026-11-14): OneDrive Logos Marcas png/SMEG/Smeg-Logo.png (puntos + "smeg" en negro, transparente; el rombo blanco entre círculos se volvió transparente); proporción 5:1. */
+.pdp-logo[data-marca="smeg"] { height: 30px; }
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
    técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
    una línea, baja a dos dentro de su pestaña. */

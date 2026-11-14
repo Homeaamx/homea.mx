@@ -609,6 +609,67 @@ interface OpcionesPanel {
   pasoPrecio?: number;
 }
 
+/**
+ * Orden único de los grupos del panel, de lo más a lo menos importante, en
+ * todas las categorías (Carla, 2026-11-14). Subcategoría y Tipo de producto van
+ * antes, fijos. Al unir varios tipos (macro, subcategoría, marca) cada grupo cae
+ * en su lugar de esta lista; una clave nueva que no esté aquí se pinta antes de
+ * Accesorios, en el orden de su tabla. "carga" (Lavandería) y "tecnologia" (Aire
+ * acondicionado) no venían en la lista de Carla: van junto a Tipo y Tipo de
+ * funcionamiento.
+ */
+const ORDEN_FILTROS = [
+  "marca",
+  "precio",
+  "instalacion",
+  "ancho",
+  "profundidad",
+  "diseno",
+  "panel",
+  "color",
+  "acabado",
+  "bisagra",
+  "puerta",
+  "voltaje",
+  "uso",
+  "tipo",
+  "carga",
+  "funcionamiento",
+  "tecnologia",
+  "material",
+  "altura",
+  "altura_ada",
+  "altitud",
+  "fabrica_hielos",
+  "despachador_agua",
+  "zonas",
+  "capacidad",
+  "ruido",
+  "tipo_hielo",
+  "produccion",
+  "drenaje",
+  "quemadores",
+  "cubierta",
+  "acabado_quemador",
+  "hornos",
+  "tipo_gas",
+  "horneado",
+  "extraccion",
+  "motor",
+  "potencia",
+  "llenado_agua",
+  "variedades_cafe",
+  "racks",
+  "tina",
+  // ← claves sin lugar en la lista
+  "accesorios_incluidos",
+  "paquete",
+  "disponibilidad",
+  "garantia",
+  "promocion",
+];
+const IDX_SIN_LUGAR = ORDEN_FILTROS.indexOf("accesorios_incluidos") - 0.5;
+
 /** Todos los grupos arrancan plegados (Carla, 2026-10-07): se abren al tocar su título. */
 const GRUPOS_ABIERTOS = 0;
 
@@ -695,6 +756,8 @@ export function panelFiltrosHtml(
   // secadora, refrigerador + congelador). El grupo no está en la tabla de ningún
   // tipo: sale solo en los listados que traen al menos uno, con una casilla por
   // valor presente. Los juegos de accesorios (desagüe, jaladeras) no lo llevan.
+  // Su lugar lo marca ORDEN_FILTROS (antes de Disponibilidad · Garantía · Promoción).
+  const extras = new Map<string, string>();
   const porPaquete = new Map<string, { texto: string; n: number }>();
   for (const p of productos) {
     for (const v of p.filtros.paquete ?? []) {
@@ -711,13 +774,14 @@ export function panelFiltrosHtml(
           `<label><input type="checkbox" data-fk="paquete" value="${esc(k)}"> <span class="flbl">${esc(c.texto)}</span> <span class="count figures">${c.n}</span></label>`,
       )
       .join("");
-    grupos.push(grupoHtml("Paquetes", "paquete", etiquetas, false));
+    extras.set("paquete", grupoHtml("Paquetes", "paquete", etiquetas, false));
   }
 
   // Altitud (Carla, 2026-11-10, carga Sub-Zero): refrigeración con puerta de
   // vidrio para instalar a más de 1,524 m s. n. m. (CDMX, Querétaro…), marcada
   // con `filtros.altitud = Alta altitud`. Como Paquetes, sale solo en los
-  // listados que traen al menos una; las demás piezas no llevan valor.
+  // listados que traen al menos una; las demás piezas no llevan valor. Su lugar
+  // lo marca ORDEN_FILTROS.
   const porAltitud = new Map<string, { texto: string; n: number }>();
   for (const p of productos) {
     for (const v of p.filtros.altitud ?? []) {
@@ -733,7 +797,7 @@ export function panelFiltrosHtml(
           `<label><input type="checkbox" data-fk="altitud" value="${esc(k)}"> <span class="flbl">${esc(c.texto)}</span> <span class="count figures">${c.n}</span></label>`,
       )
       .join("");
-    grupos.push(grupoHtml("Altitud", "altitud", etiquetas, false));
+    extras.set("altitud", grupoHtml("Altitud", "altitud", etiquetas, false));
   }
 
   // Unión ordenada de los filtros de cada tipo presente (tabla de filtros v2).
@@ -747,12 +811,26 @@ export function panelFiltrosHtml(
     }
   }
   if (!defs.length) defs.push({ nombre: "Marca", clave: "marca" });
+  // Orden global de importancia (ORDEN_FILTROS, Carla 2026-11-14). Altitud y
+  // Paquetes no están en ninguna tabla: entran como grupos ya pintados.
+  const lugar = (clave: string) => {
+    const i = ORDEN_FILTROS.indexOf(clave);
+    return i < 0 ? IDX_SIN_LUGAR : i;
+  };
+  const ordenados: (DefFiltro | string)[] = [...defs, ...extras.keys()]
+    .map((d, i) => ({ d, i, k: lugar(typeof d === "string" ? d : d.clave) }))
+    .sort((a, b) => a.k - b.k || a.i - b.i)
+    .map((x) => x.d);
 
   // Se muestran TODOS los filtros de la tabla de la subcategoría (Carla,
   // 2026-10-07), aunque las piezas publicadas aún no traigan ese dato: el grupo
   // sale plegado con la nota "Sin opciones por ahora" y se llena solo cuando
   // Shopify tenga valores.
-  for (const d of defs) {
+  for (const d of ordenados) {
+    if (typeof d === "string") {
+      grupos.push(extras.get(d)!);
+      continue;
+    }
     if (d.clave === "compatible") continue;
     if (d.clave === "marca" && sinMarca) continue;
     if (d.clave === "precio") {
@@ -1010,8 +1088,8 @@ const NOMBRES_FILTRO: Record<string, string> = {
   funcionamiento: "Funcionamiento",
   bisagra: "Bisagra / apertura",
   ancho: "Ancho",
-  altura_ada: "Altura",
-  altura: "Altura",
+  altura_ada: "Altura ADA",
+  altura: "Altura de horno",
   profundidad: "Profundidad",
   panel: "Panel",
   color: "Color",
@@ -1049,6 +1127,19 @@ const NOMBRES_FILTRO: Record<string, string> = {
   garantia: "Garantía",
   promocion: "Promoción",
 };
+
+/**
+ * Condición de la garantía por marca, junto al plazo en la ficha. Smeg (Carla,
+ * 2026-11-14): los 2 años valen solo si instalan técnicos especializados de la
+ * marca; si no, 1 año (igual que la nota del directorio de garantías). No aplica a
+ * electrodomésticos menores (no llevan instalación).
+ */
+function notaGarantia(p: ProductoVivo, macroRuta?: string): string {
+  if (p.marca.toLowerCase() === "smeg" && macroRuta !== "/productos/electrodomesticos-menores") {
+    return " si lo instalan técnicos especializados de Smeg; si no, 1 año";
+  }
+  return "";
+}
 
 /** "Columna de Refrigeración Panelable 24\" — Serie Expressive" → título con la serie en negritas. */
 function tituloH1(titulo: string): string {
@@ -1242,7 +1333,9 @@ export function fichaHtml(
   ];
   for (const [clave, nombre] of Object.entries(NOMBRES_FILTRO)) {
     const v = p.filtros[clave];
-    if (v?.length) filas.push([nombre, v.join(" · ")]);
+    if (!v?.length) continue;
+    const nota = clave === "garantia" ? notaGarantia(p, tw?.macro.ruta) : "";
+    filas.push([nombre, v.join(" · ") + nota]);
   }
   filas.push(["Modelo", p.sku]);
   filas.push(["Disponibilidad", p.enStock ? "En stock · entrega inmediata" : "Bajo pedido · importación"]);

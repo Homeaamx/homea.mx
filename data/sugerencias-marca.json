@@ -1,5 +1,5 @@
 {
- "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador.",
+ "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador. 2026-11-14 (Carla): Porsche x Smeg, 50's Style y Dolce&Gabbana son líneas distintas: sus círculos de color no se mezclan (refris FAB28, tostador TSF01, licuadora BLF03); D&G FAB28URDGME3 sin círculos.",
  "DW2451": {
   "accesorios": [
    "9019420",
@@ -30856,86 +30856,44 @@
   "colores": [
    "FAB28URCR3",
    "FAB28URRD3",
-   "FAB28URWH3",
-   "FAB28URDGME3",
-   "FAB28URDP9176",
-   "FAB28URDPSG6",
-   "FAB28URDPCW6"
+   "FAB28URWH3"
   ]
  },
  "FAB28URCR3": {
   "colores": [
    "FAB28URBL3",
    "FAB28URRD3",
-   "FAB28URWH3",
-   "FAB28URDGME3",
-   "FAB28URDP9176",
-   "FAB28URDPSG6",
-   "FAB28URDPCW6"
+   "FAB28URWH3"
   ]
  },
  "FAB28URRD3": {
   "colores": [
    "FAB28URBL3",
    "FAB28URCR3",
-   "FAB28URWH3",
-   "FAB28URDGME3",
-   "FAB28URDP9176",
-   "FAB28URDPSG6",
-   "FAB28URDPCW6"
+   "FAB28URWH3"
   ]
  },
  "FAB28URWH3": {
   "colores": [
    "FAB28URBL3",
    "FAB28URCR3",
-   "FAB28URRD3",
-   "FAB28URDGME3",
-   "FAB28URDP9176",
-   "FAB28URDPSG6",
-   "FAB28URDPCW6"
-  ]
- },
- "FAB28URDGME3": {
-  "colores": [
-   "FAB28URBL3",
-   "FAB28URCR3",
-   "FAB28URRD3",
-   "FAB28URWH3",
-   "FAB28URDP9176",
-   "FAB28URDPSG6",
-   "FAB28URDPCW6"
+   "FAB28URRD3"
   ]
  },
  "FAB28URDP9176": {
   "colores": [
-   "FAB28URBL3",
-   "FAB28URCR3",
-   "FAB28URRD3",
-   "FAB28URWH3",
-   "FAB28URDGME3",
    "FAB28URDPSG6",
    "FAB28URDPCW6"
   ]
  },
  "FAB28URDPSG6": {
   "colores": [
-   "FAB28URBL3",
-   "FAB28URCR3",
-   "FAB28URRD3",
-   "FAB28URWH3",
-   "FAB28URDGME3",
    "FAB28URDP9176",
    "FAB28URDPCW6"
   ]
  },
  "FAB28URDPCW6": {
   "colores": [
-   "FAB28URBL3",
-   "FAB28URCR3",
-   "FAB28URRD3",
-   "FAB28URWH3",
-   "FAB28URDGME3",
    "FAB28URDP9176",
    "FAB28URDPSG6"
   ]
@@ -31204,9 +31162,7 @@
    "BLF03BLUS",
    "BLF03PBUS",
    "BLF03PGUS",
-   "BLF03WHUS",
-   "BLF03PCGUS",
-   "BLF03PCWUS"
+   "BLF03WHUS"
   ]
  },
  "BLF03CRUS": {
@@ -31215,9 +31171,7 @@
    "BLF03BLUS",
    "BLF03PBUS",
    "BLF03PGUS",
-   "BLF03WHUS",
-   "BLF03PCGUS",
-   "BLF03PCWUS"
+   "BLF03WHUS"
   ]
  },
  "BLF03BLUS": {
@@ -31226,9 +31180,7 @@
    "BLF03CRUS",
    "BLF03PBUS",
    "BLF03PGUS",
-   "BLF03WHUS",
-   "BLF03PCGUS",
-   "BLF03PCWUS"
+   "BLF03WHUS"
   ]
  },
  "BLF03PBUS": {
@@ -31237,9 +31189,7 @@
    "BLF03CRUS",
    "BLF03BLUS",
    "BLF03PGUS",
-   "BLF03WHUS",
-   "BLF03PCGUS",
-   "BLF03PCWUS"
+   "BLF03WHUS"
   ]
  },
  "BLF03PGUS": {
@@ -31248,9 +31198,7 @@
    "BLF03CRUS",
    "BLF03BLUS",
    "BLF03PBUS",
-   "BLF03WHUS",
-   "BLF03PCGUS",
-   "BLF03PCWUS"
+   "BLF03WHUS"
   ]
  },
  "BLF03WHUS": {
@@ -31259,30 +31207,16 @@
    "BLF03CRUS",
    "BLF03BLUS",
    "BLF03PBUS",
-   "BLF03PGUS",
-   "BLF03PCGUS",
-   "BLF03PCWUS"
+   "BLF03PGUS"
   ]
  },
  "BLF03PCGUS": {
   "colores": [
-   "BLF03RDUS",
-   "BLF03CRUS",
-   "BLF03BLUS",
-   "BLF03PBUS",
-   "BLF03PGUS",
-   "BLF03WHUS",
    "BLF03PCWUS"
   ]
  },
  "BLF03PCWUS": {
   "colores": [
-   "BLF03RDUS",
-   "BLF03CRUS",
-   "BLF03BLUS",
-   "BLF03PBUS",
-   "BLF03PGUS",
-   "BLF03WHUS",
    "BLF03PCGUS"
   ]
  },
@@ -31460,9 +31394,7 @@
    "TSF01BLUS",
    "TSF01PBUS",
    "TSF01PGUS",
-   "TSF01WHUS",
-   "TSF01PCGUS",
-   "TSF01PCWUS"
+   "TSF01WHUS"
   ],
   "accesorios": [
    "TSSR01",
@@ -31475,9 +31407,7 @@
    "TSF01BLUS",
    "TSF01PBUS",
    "TSF01PGUS",
-   "TSF01WHUS",
-   "TSF01PCGUS",
-   "TSF01PCWUS"
+   "TSF01WHUS"
   ],
   "accesorios": [
    "TSSR01",
@@ -31490,9 +31420,7 @@
    "TSF01CRUS",
    "TSF01PBUS",
    "TSF01PGUS",
-   "TSF01WHUS",
-   "TSF01PCGUS",
-   "TSF01PCWUS"
+   "TSF01WHUS"
   ],
   "accesorios": [
    "TSSR01",
@@ -31505,9 +31433,7 @@
    "TSF01CRUS",
    "TSF01BLUS",
    "TSF01PGUS",
-   "TSF01WHUS",
-   "TSF01PCGUS",
-   "TSF01PCWUS"
+   "TSF01WHUS"
   ],
   "accesorios": [
    "TSSR01",
@@ -31520,9 +31446,7 @@
    "TSF01CRUS",
    "TSF01BLUS",
    "TSF01PBUS",
-   "TSF01WHUS",
-   "TSF01PCGUS",
-   "TSF01PCWUS"
+   "TSF01WHUS"
   ],
   "accesorios": [
    "TSSR01",
@@ -31535,9 +31459,7 @@
    "TSF01CRUS",
    "TSF01BLUS",
    "TSF01PBUS",
-   "TSF01PGUS",
-   "TSF01PCGUS",
-   "TSF01PCWUS"
+   "TSF01PGUS"
   ],
   "accesorios": [
    "TSSR01",
@@ -31546,12 +31468,6 @@
  },
  "TSF01PCGUS": {
   "colores": [
-   "TSF01RDUS",
-   "TSF01CRUS",
-   "TSF01BLUS",
-   "TSF01PBUS",
-   "TSF01PGUS",
-   "TSF01WHUS",
    "TSF01PCWUS"
   ],
   "accesorios": [
@@ -31561,12 +31477,6 @@
  },
  "TSF01PCWUS": {
   "colores": [
-   "TSF01RDUS",
-   "TSF01CRUS",
-   "TSF01BLUS",
-   "TSF01PBUS",
-   "TSF01PGUS",
-   "TSF01WHUS",
    "TSF01PCGUS"
   ],
   "accesorios": [
