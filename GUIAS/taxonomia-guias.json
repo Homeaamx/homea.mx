@@ -1384,29 +1384,42 @@
               "filtro": "/productos/cajones/",
               "filtros": [
                 {
-                  "nombre": "Cajones Calientes",
-                  "filtro": "/productos/cajones/?f=cajones-calientes",
+                  "nombre": "Calientes",
+                  "filtro": "/productos/cajones/?f=calientes",
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "cajon-caliente",
                     "descripcion": "Cajón con resistencia y termostato que mantiene platos y alimentos a temperatura de servicio o leuda masa.",
                     "specs": "Rango 30–80 °C · Bajo horno · Leudar masa",
                     "detalle": "Mantiene alimentos a temperatura de servicio sin seguir cocinándolos, calienta vajilla y, en temperatura baja, sirve para leudar masa o cocciones lentas. Se empotra normalmente bajo un horno de pared o un combi, del mismo ancho, para un frente continuo.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=cajones&filtro=tipo:calientes",
+                    "catalogo": "/productos/cocina-y-bar/coccion/cajones?f=calientes",
                     "ilustracion": "cajon-caliente"
                   }
                 },
                 {
-                  "nombre": "Cajones de Alto Vacío",
-                  "filtro": "/productos/cajones/?f=cajones-de-alto-vacio",
+                  "nombre": "Alto vacío",
+                  "filtro": "/productos/cajones/?f=alto-vacio",
                   "ficha": {
                     "grupo": "tipo",
                     "diagrama": "cajon-vacio",
                     "descripcion": "Cajón con bomba de vacío que sella alimentos en bolsa para sous-vide, conservación y marinados.",
                     "specs": "Bomba de vacío · Sous-vide · Bajo horno de vapor",
                     "detalle": "Extrae el aire de la bolsa o el recipiente y lo sella: prolonga la conservación y prepara el alimento para cocción al vacío (sous-vide) en horno de vapor. Se empotra bajo un horno combi o de vapor del mismo ancho.",
-                    "catalogo": "/productos/cocina-y-bar/coccion?tipo=cajones&filtro=tipo:alto-vacio",
+                    "catalogo": "/productos/cocina-y-bar/coccion/cajones?f=alto-vacio",
                     "ilustracion": "cajon-vacio"
+                  }
+                },
+                {
+                  "nombre": "Sommelier",
+                  "filtro": "/productos/cajones/?f=sommelier",
+                  "ficha": {
+                    "grupo": "tipo",
+                    "diagrama": "cajon-sommelier",
+                    "descripcion": "Cajón sin calor con bandeja de madera para guardar sacacorchos, tapones y accesorios de vino junto a la cava.",
+                    "specs": "Sin resistencia · Bandeja de madera · Bajo la cava",
+                    "detalle": "No calienta ni enfría: es un cajón de guarda con interior de madera y apertura por presión (push-pull) para tener a la mano las herramientas del vino. Se empotra bajo una cava de 45 cm o junto a la columna de hornos, del mismo ancho, para un frente continuo.",
+                    "catalogo": "/productos/cocina-y-bar/coccion/cajones?f=sommelier",
+                    "ilustracion": "cajon-sommelier"
                   }
                 }
               ],
@@ -1418,9 +1431,9 @@
                 "imagen": "/assets/photos/cajon-calentador-wolf-abierto-cocina.webp",
                 "ambiente": true,
                 "pos": "35% 60%",
-                "resumen": "Cajones calientes y de alto vacío para completar la columna de hornos."
+                "resumen": "Cajones calientes, de alto vacío y sommelier para completar la columna de hornos."
               },
-              "tienda": "/productos/cocina-y-bar/coccion?tipo=cajones"
+              "tienda": "/productos/cocina-y-bar/coccion/cajones"
             },
             {
               "nombre": "Cafeteras",

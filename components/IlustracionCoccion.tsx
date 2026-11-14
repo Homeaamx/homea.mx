@@ -946,7 +946,7 @@ function PuertaLado({ r, o, lado }: { r: Rect; o: CaraOpc; lado: "l" | "r" }) {
 }
 
 /** Cajón que sale (frente + caja con su contenido encima). */
-function CajonSale({ r, contenido, o, k = 0 }: { r: Rect; contenido: "platos" | "vacio" | "plato-micro" | "comida"; o: CaraOpc; k?: number }) {
+function CajonSale({ r, contenido, o, k = 0 }: { r: Rect; contenido: "platos" | "vacio" | "plato-micro" | "comida" | "sommelier"; o: CaraOpc; k?: number }) {
   const cw = r.w - 10;
   return (
     <>
@@ -972,6 +972,18 @@ function CajonSale({ r, contenido, o, k = 0 }: { r: Rect; contenido: "platos" | 
             <rect x={cw * 0.3} y={8} width={cw * 0.4} height={12} rx={3} className="c-bolsa" />
             <rect x={cw * 0.38} y={11} width={cw * 0.24} height={6} rx={2} className="c-zanahoria" />
             <rect x={cw * 0.08} y={4} width={cw * 0.84} height={4} rx={1.5} className="c-tapa-vidrio" />
+          </g>
+        )}
+        {contenido === "sommelier" && (
+          // Bandeja de madera con divisiones: sacacorchos, tapón y copa de cata.
+          <g>
+            <rect x={cw * 0.12} y={6} width={cw * 0.76} height={15} rx={1.5} className="c-madera" />
+            {[0.37, 0.62].map((f) => (
+              <line key={f} x1={cw * f} y1={6.5} x2={cw * f} y2={20.5} className="c-madera-div" />
+            ))}
+            <path d={`M${cw * 0.19} 11 h${cw * 0.11} M${cw * 0.245} 11 v7`} className="c-herramienta" />
+            <circle cx={cw * 0.5} cy={13.5} r={3.2} className="c-herramienta-relleno" />
+            <rect x={cw * 0.72} y={9} width={6} height={9} rx={2} className="c-herramienta-relleno" />
           </g>
         )}
         {contenido === "comida" && (
@@ -4240,11 +4252,31 @@ function CaraEstatica({ r, control, espejo }: { r: Rect; control?: boolean; espe
   );
 }
 
-function escenaCajon(tipo: "caliente" | "vacio", etiquetas: Etiqueta[]): Escena {
+/** Cava empotrable de 45 cm: cristal oscuro con tres repisas de botellas (Sommelier). */
+function CavaFrente({ r }: { r: Rect }) {
+  const filas = [0.3, 0.55, 0.8];
+  return (
+    <g>
+      <VidrioNegro x={r.x} y={r.y} w={r.w} h={r.h} />
+      {filas.map((f) => (
+        <g key={f}>
+          <line x1={r.x + 10} y1={r.y + r.h * f + 7} x2={r.x + r.w - 10} y2={r.y + r.h * f + 7} className="c-repisa-cava" />
+          {Array.from({ length: 9 }).map((_, i) => (
+            <ellipse key={i} cx={r.x + 22 + i * ((r.w - 44) / 8)} cy={r.y + r.h * f} rx={7} ry={6} className="c-botella-fondo" />
+          ))}
+        </g>
+      ))}
+      <rect x={r.x + r.w / 2 - 14} y={r.y + 6} width={28} height={4} rx={1} className="c-pantalla" />
+    </g>
+  );
+}
+
+function escenaCajon(tipo: "caliente" | "vacio" | "sommelier", etiquetas: Etiqueta[]): Escena {
   const x1 = 160;
   const x2 = 400;
   const horno: Rect = { x: 182, y: 120, w: 196, h: 124 };
   const cajon: Rect = { x: 182, y: 254, w: 196, h: 52 };
+  const sommelier = tipo === "sommelier";
   return {
     estados: "abrir",
     fondo: (
@@ -4252,11 +4284,17 @@ function escenaCajon(tipo: "caliente" | "vacio", etiquetas: Etiqueta[]): Escena 
         <EscenaColumna x1={x1} x2={x2} huecos={[horno, cajon]} />
         <PuertasColumna x1={x1} x2={x2} y1={24} y2={112} arriba />
         <PuertasColumna x1={x1} x2={x2} y1={314} y2={362} />
-        <CaraEstatica r={horno} control />
+        {sommelier ? <CavaFrente r={horno} /> : <CaraEstatica r={horno} control />}
         <rect x={cajon.x} y={cajon.y} width={cajon.w} height={cajon.h} className="c-cavidad" />
       </>
     ),
-    capas: <CajonSale r={cajon} contenido={tipo === "caliente" ? "platos" : "vacio"} o={{ acabado: "acero", manija: tipo === "vacio" ? "ninguna" : "tubo", control: tipo === "vacio" }} />,
+    capas: (
+      <CajonSale
+        r={cajon}
+        contenido={tipo === "caliente" ? "platos" : tipo === "vacio" ? "vacio" : "sommelier"}
+        o={{ acabado: sommelier ? "negro" : "acero", manija: tipo === "caliente" ? "tubo" : "ninguna", control: tipo === "vacio" }}
+      />
+    ),
     etiquetas,
     recorte: R_COLUMNA,
   };
@@ -4647,6 +4685,12 @@ const ESCENAS: Record<string, () => Escena> = {
     escenaCajon("vacio", [
       { x: 240, y: 266, hasta: 110, texto: "Sella al vacío\npara sous-vide" },
       { x: 340, y: 290, hasta: 440, texto: "Conserva y\nmarina" },
+    ]),
+  "cajon-sommelier": () =>
+    escenaCajon("sommelier", [
+      { x: 236, y: 268, hasta: 110, texto: "Sin calor: guarda\nlo del vino" },
+      { x: 300, y: 170, hasta: 440, texto: "Bajo la cava\nde 45 cm" },
+      { x: 340, y: 290, hasta: 440, texto: "Abre por presión" },
     ]),
   // ——— Cafeteras ———
   "cafe-mesa": () =>

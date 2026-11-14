@@ -1958,3 +1958,10 @@
   .ilus--coccion :is(.c-llama, .c-bocanada, .c-aire-trazo, .c-calor-onda, .c-ventilador, .c-ducto-flecha, .c-zona-calor) { animation: none; }
   .c-puerta-x, .c-puerta-abatida, .c-cajon, .c-caja, .ilus--coccion .c-retractil, .ilus--coccion .c-slider, .ilus--coccion .c-tapa, .ilus--coccion .c-tapa-monolith, .ilus--coccion .c-puerta-lava, .ilus--coccion .c-puerta-lava-int, .ilus--coccion .t-brazo-pot, .ilus--coccion .t-regadera, .ilus--coccion .t-manguera, .ilus--coccion .a-tapa-abierta { transition: none; }
 }
+/* Cajón sommelier (Smeg CPS, 2026-11-13): bandeja de madera y cava de 45 cm. */
+.ilus--coccion .c-madera { fill: #B8875A; stroke: #7A5634; stroke-width: .6; }
+.ilus--coccion .c-madera-div { stroke: #7A5634; stroke-width: .6; }
+.ilus--coccion .c-herramienta { fill: none; stroke: #C9CED2; stroke-width: 1.4; stroke-linecap: round; }
+.ilus--coccion .c-herramienta-relleno { fill: #8E959B; stroke: #C9CED2; stroke-width: .5; }
+.ilus--coccion .c-repisa-cava { stroke: #B8875A; stroke-width: 1.2; }
+.ilus--coccion .c-botella-fondo { fill: #1F2A18; stroke: #3D4A2A; stroke-width: .8; }

@@ -71,7 +71,8 @@ export const TIPOS_WEB: TipoWeb[] = [
   // Cocción completa: colecciones creadas y publicadas al canal Headless el 2026-10-09.
   { tipo: "Estufas", coleccion: "estufas", slugRiel: "estufas", ruta: `${COCCION.ruta}?tipo=estufas`, macro: COCINA, sub1: COCCION },
   { tipo: "Microondas", coleccion: "microondas", slugRiel: "microondas", ruta: `${COCCION.ruta}?tipo=microondas`, macro: COCINA, sub1: COCCION },
-  { tipo: "Cajones", coleccion: "cajones", slugRiel: "cajones", ruta: `${COCCION.ruta}?tipo=cajones`, macro: COCINA, sub1: COCCION },
+  // Cajones con página propia (subcat.3) desde 2026-11-13: Calientes, Alto vacío y Sommelier.
+  { tipo: "Cajones", coleccion: "cajones", slugRiel: "cajones", ruta: `${COCCION.ruta}/cajones`, macro: COCINA, sub1: COCCION },
   { tipo: "Cafeteras", coleccion: "cafeteras", slugRiel: "cafeteras-empotrables", ruta: `${COCCION.ruta}?tipo=cafeteras-empotrables`, macro: COCINA, sub1: COCCION },
   { tipo: "Accesorios de cocción", coleccion: "accesorios-de-coccion", slugRiel: "accesorios-coccion", ruta: `${COCCION.ruta}?tipo=accesorios-coccion`, macro: COCINA, sub1: COCCION },
   {

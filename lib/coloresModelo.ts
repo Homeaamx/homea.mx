@@ -56,6 +56,16 @@ const MUESTRAS: Record<string, string> = {
   "níquel cepillado": "linear-gradient(135deg, #ddd8cd 0%, #b7b1a5 45%, #d2cdc2 60%, #958f83 100%)",
   "bronce aceitado": "linear-gradient(135deg, #6a4c38 0%, #4a3426 55%, #2f2018 100%)",
   "bronce moca": "linear-gradient(135deg, #8a705c 0%, #6b5444 55%, #4c3a2e 100%)",
+  // Smeg (2026-11-13): enseres 50's Style, batería de cocina, refrigeradores FAB y ediciones especiales.
+  rojo: "#b3262b",
+  crema: "#efe6d2",
+  "azul pastel": "#a9c6dd",
+  "verde pastel": "#b7d3b4",
+  "crema mate": "#e9e0cc",
+  "shade green": "#8fa39a",
+  "carrara white": "#f1efea",
+  "blu mediterraneo": "linear-gradient(135deg, #f4f4f2 0 30%, #1f4e8c 30% 55%, #f4f4f2 55% 70%, #e3b23c 70% 100%)",
+  "red salzburg": "#a3161f",
   // Café (2026-11-06): equipos en Blanco Mate y kits de herrajes en 6 acabados.
   "blanco mate": "#ecebe6",
   "acero inoxidable cepillado": METAL,

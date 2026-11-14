@@ -982,8 +982,8 @@
     if (grid && grid !== visto) {
       visto = grid;
       document.querySelectorAll("[data-cat-precio]").forEach(pintarSlider);
-      /* Antes que el scroll guardado (PreviewRouter lo repite a los 80 ms): la
-         página vuelve con su altura filtrada y al mismo punto. */
+      /* Mientras PreviewRouter sostiene el scroll guardado (hasta que la altura
+         se asienta): la página vuelve con su altura filtrada y al mismo punto. */
       document.querySelectorAll(".plp").forEach(restaurarFiltros);
       aplicarLuego();
     }

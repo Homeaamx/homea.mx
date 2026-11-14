@@ -55,6 +55,13 @@ const HERO_PLP: Record<string, { src: string; alt: string; pos?: string }> = {
     alt: "Campana de isla suspendida sobre la isla de una cocina contemporánea",
     pos: "center 12%",
   },
+  // Muro de columnas Smeg Neptune Grey: hornos, cava con cajón sommelier y
+  // cafetera (foto de Carla, 2026-11-13). La fila de equipos queda al centro.
+  "cocina-y-bar/coccion/cajones": {
+    src: "/assets/photos/hero-sub2-cajones-smeg-sommelier-cps115g.webp",
+    alt: "Columna de hornos, cava de vino con cajón sommelier y cafetera empotrable Smeg en gris Neptune",
+    pos: "center 52%",
+  },
 };
 
 /** "Bajo cubierta" → "bajo-cubierta" (para casar valor de filtro ↔ ?f=). */

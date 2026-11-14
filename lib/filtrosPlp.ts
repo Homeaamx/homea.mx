@@ -185,6 +185,20 @@ export const FILTROS_PLP: Record<string, FiltroPlp[]> = {
       valores: ["Outlet", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "50%", "60%"],
     },
   ],
+
+  // Cajones (Carla, 2026-11-13): subcat.3 con página propia al llegar el cajón
+  // Sommelier de Smeg. El mosaico es el eje "Tipo" (filtros.tipo).
+  "cocina-y-bar/coccion/cajones": [
+    { nombre: "Marca", control: "multi", nota: "Depende del producto — sale del Vendor de Shopify" },
+    { nombre: "Precio", control: "slider" },
+    { nombre: "Tipo", control: "multi", valores: ["Calientes", "Alto vacío", "Sommelier"] },
+    { nombre: "Ancho", control: "multi", valores: ['24"', '27"', '30"'] },
+    { nombre: "Panel", control: "multi", valores: ["Panelable", "Acero inoxidable"] },
+    { nombre: "Color", control: "multi", valores: ["Negro", "Gris", "Cristal", "Verde"] },
+    { nombre: "Voltaje", control: "multi", valores: ["110 V", "220 V"] },
+    { nombre: "Disponibilidad", control: "multi", valores: ["En stock", "Bajo pedido"] },
+    { nombre: "Garantía", control: "multi", valores: ["1 año", "2 años", "3 años"] },
+  ],
 };
 
 export function getFiltrosPlp(macro: string, sub1: string, tipo: string): FiltroPlp[] {

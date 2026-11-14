@@ -207,6 +207,22 @@ export const FOTOS_TIPOS: Record<string, Record<string, FotoTipo>> = {
       alt: "Placa de inducción con extractor integrado en la cubierta, sin campana",
     },
   },
+
+  // Cajones (Carla, 2026-11-13): los tres abiertos para que se lea qué guarda cada uno.
+  "cocina-y-bar/coccion/cajones": {
+    calientes: {
+      src: "/assets/photos/tipos/cajon-calientaplatos-abierto-acero-smeg-cpr315x.webp",
+      alt: "Cajón calientaplatos de acero abierto, con perilla de temperatura",
+    },
+    "alto-vacio": {
+      src: "/assets/photos/tipos/cajon-alto-vacio-abierto-acero-wolf.webp",
+      alt: "Cajón de sellado al vacío abierto, con la cámara de vacío y la tapa de cristal",
+    },
+    sommelier: {
+      src: "/assets/photos/tipos/cajon-sommelier-bandeja-madera-acero-smeg.webp",
+      alt: "Cajón sommelier abierto con bandeja de madera para sacacorchos y accesorios de vino",
+    },
+  },
 };
 
 export function getFotoTipo(plpKey: string, slug: string): FotoTipo | undefined {

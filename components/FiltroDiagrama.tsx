@@ -1582,6 +1582,29 @@ const DIAGRAMAS: Record<string, ReactElement> = {
     </>
   ),
 
+  // Sommelier (Smeg CPS, Carla 2026-11-13): sin calor, bandeja de madera con
+  // sacacorchos y tapón; frente sin jaladera (abre por presión).
+  "cajon-sommelier": (
+    <>
+      <line x1="16" y1="124" x2="124" y2="124" className="fl" />
+      <rect x="16" y="34" width="108" height="8" className="fb" />
+      <rect x="22" y="50" width="18" height="74" className="cab" />
+      <rect x="100" y="50" width="18" height="74" className="cab" />
+      <g className="in">
+        <rect x="46" y="52" width="48" height="34" className="zone" />
+        <line x1="62" y1="56" x2="62" y2="82" />
+        <line x1="78" y1="56" x2="78" y2="82" />
+        <path d="M52 64 L58 64 M55 64 L55 76" />
+        <circle cx="70" cy="70" r="3" />
+        <rect x="83" y="62" width="6" height="12" rx="2" />
+      </g>
+      <g className="dw">
+        <rect x="44" y="50" width="52" height="38" />
+        <line x1="66" y1="84" x2="74" y2="84" />
+      </g>
+    </>
+  ),
+
   // ——— Lavavajillas ————————————————————————————————————————————————
 
   "lava-controles-frente": (
