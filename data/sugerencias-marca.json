@@ -1,5 +1,5 @@
 {
- "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador. 2026-11-14 (Carla): Porsche x Smeg, 50's Style y Dolce&Gabbana son líneas distintas: sus círculos de color no se mezclan (refris FAB28, tostador TSF01, licuadora BLF03); D&G FAB28URDGME3 sin círculos.",
+ "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador. 2026-11-14 (Carla): Porsche x Smeg, 50's Style y Dolce&Gabbana son líneas distintas: sus círculos de color no se mezclan (refris FAB28, tostador TSF01, licuadora BLF03); D&G FAB28URDGME3 sin círculos. Fulgor Milano, 2026-11-14: cocción → campana del mismo ancho; hornos → cajón calientaplatos; cafetera ↔ trim; lavavajillas panelable ↔ jaladera; refrigeración acero ↔ panelable como círculos (misma bisagra y medida, como Sub-Zero) y columna de refrigerador → congelador y cava.",
  "DW2451": {
   "accesorios": [
    "9019420",
@@ -32168,6 +32168,214 @@
    "TanqueCO2",
    "SKC01BLMUS",
    "SKC01WHMUS"
+  ]
+ },
+ "F6PDF366S1": {
+  "accesorios": [
+   "F6PH36DS1"
+  ]
+ },
+ "F6PDF304S1": {
+  "accesorios": [
+   "F6PH30S2"
+  ]
+ },
+ "F6PDF364GS1": {
+  "accesorios": [
+   "F6PH36DS1"
+  ]
+ },
+ "F6PDF486GS1": {
+  "accesorios": [
+   "F6PH48DS1"
+  ]
+ },
+ "F6GRT486GS1": {
+  "accesorios": [
+   "F6PH48DS1"
+  ]
+ },
+ "F6GRT366S1": {
+  "accesorios": [
+   "F6PH36DS1"
+  ]
+ },
+ "F6GRT364GS1": {
+  "accesorios": [
+   "F6PH36DS1"
+  ]
+ },
+ "F6GRT304S1": {
+  "accesorios": [
+   "F6PH30S2"
+  ]
+ },
+ "F6PGK305S2": {
+  "accesorios": [
+   "F6PH30S2"
+  ]
+ },
+ "F6PGK365S1": {
+  "accesorios": [
+   "F6PH36DS1"
+  ]
+ },
+ "F6PSP30S1": {
+  "accesorios": [
+   "F6PWD30S1"
+  ]
+ },
+ "F6PDP30S1": {
+  "accesorios": [
+   "F6PWD30S1"
+  ]
+ },
+ "F6PSCO30S1": {
+  "accesorios": [
+   "F6PWD30S1"
+  ]
+ },
+ "F6PSPD30S1": {
+  "accesorios": [
+   "F6PWD30S1"
+  ]
+ },
+ "F7BC24B1": {
+  "accesorios": [
+   "F6PTK30BC"
+  ]
+ },
+ "F6PTK30BC": {
+  "accesorios": [
+   "F7BC24B1"
+  ]
+ },
+ "F7DWT24FI1": {
+  "accesorios": [
+   "F6UHK24DISH"
+  ]
+ },
+ "F6UHK24DISH": {
+  "accesorios": [
+   "F7DWT24FI1"
+  ]
+ },
+ "F7SRC36S1-R": {
+  "colores": [
+   "F7IRC36O1-R"
+  ],
+  "accesorios": [
+   "F7SFC36S1-L",
+   "F7SWC24S1-L"
+  ]
+ },
+ "F7IRC36O1-R": {
+  "colores": [
+   "F7SRC36S1-R"
+  ],
+  "accesorios": [
+   "F7IFC36O1-L",
+   "F7IWC24O1-L"
+  ]
+ },
+ "F7SRC30S1-R": {
+  "colores": [
+   "F7IRC30O1-R"
+  ],
+  "accesorios": [
+   "F7SFC30S1-L",
+   "F7SWC24S1-L"
+  ]
+ },
+ "F7IRC30O1-R": {
+  "colores": [
+   "F7SRC30S1-R"
+  ],
+  "accesorios": [
+   "F7IFC30O1-L",
+   "F7IWC24O1-L"
+  ]
+ },
+ "F7SFC36S1-L": {
+  "colores": [
+   "F7IFC36O1-L"
+  ],
+  "accesorios": [
+   "F7SRC36S1-R"
+  ]
+ },
+ "F7IFC36O1-L": {
+  "colores": [
+   "F7SFC36S1-L"
+  ],
+  "accesorios": [
+   "F7IRC36O1-R"
+  ]
+ },
+ "F7SFC30S1-L": {
+  "colores": [
+   "F7IFC30O1-L"
+  ],
+  "accesorios": [
+   "F7SRC30S1-R"
+  ]
+ },
+ "F7IFC30O1-L": {
+  "colores": [
+   "F7SFC30S1-L"
+  ],
+  "accesorios": [
+   "F7IRC30O1-R"
+  ]
+ },
+ "F7SFC24S1-L": {
+  "colores": [
+   "F7IFC24O1-L"
+  ]
+ },
+ "F7IFC24O1-L": {
+  "colores": [
+   "F7SFC24S1-L"
+  ]
+ },
+ "F7SWC24S1-L": {
+  "colores": [
+   "F7IWC24O1-L"
+  ]
+ },
+ "F7IWC24O1-L": {
+  "colores": [
+   "F7SWC24S1-L"
+  ]
+ },
+ "F7PBM36S2-R": {
+  "colores": [
+   "F7IBM36O2-R"
+  ]
+ },
+ "F7IBM36O2-R": {
+  "colores": [
+   "F7PBM36S2-R"
+  ]
+ },
+ "F7PBM36S2-L": {
+  "colores": [
+   "F7IBM36O2-L"
+  ]
+ },
+ "F7IBM36O2-L": {
+  "colores": [
+   "F7PBM36S2-L"
+  ]
+ },
+ "F7PBW24S1-L": {
+  "colores": [
+   "F7IBW24O2-L"
+  ]
+ },
+ "F7IBW24O2-L": {
+  "colores": [
+   "F7PBW24S1-L"
   ]
  }
 }
