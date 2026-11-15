@@ -135,7 +135,12 @@ function aLinea(raw: CarritoRaw["lines"]["nodes"][number]): LineaCarrito {
   // `data-cart-href` del botón: ese atributo es HTML estático y puede mentir.
   const enIndice = sku ? productoPorSku(sku) : null;
   // Toda pieza publicada en Shopify tiene ficha generada en /producto/<sku>.
-  const ficha = enIndice?.ficha ?? (sku ? `/producto/${sku.toLowerCase().replace(/\//g, "-")}` : null);
+  // Misma regla que slugDeSku (catalogoVivo.ts): todo lo que no sea a-z, 0-9, "." o "-" pasa a "-".
+  const ficha =
+    enIndice?.ficha ??
+    (sku
+      ? `/producto/${sku.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9.-]+/g, "-")}`
+      : null);
 
   const mxn = Number.parseFloat(v.price.amount);
   const comparar = v.compareAtPrice ? Number.parseFloat(v.compareAtPrice.amount) : null;

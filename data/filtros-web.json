@@ -1219,9 +1219,13 @@
           "11\"",
           "12\"",
           "15\"",
+          "23\"",
           "24\"",
           "30\"",
+          "31\"",
+          "33\"",
           "34\"",
+          "35\"",
           "36\"",
           "48\""
         ]
@@ -1531,7 +1535,9 @@
         "clave": "instalacion",
         "valores": [
           "De pared",
-          "De isla"
+          "De isla",
+          "Sobre cubierta",
+          "De techo"
         ]
       },
       {
@@ -1561,8 +1567,10 @@
         "nombre": "Ancho",
         "clave": "ancho",
         "valores": [
+          "14\"",
           "20\"",
           "21\"",
+          "23\"",
           "24\"",
           "26\"",
           "28\"",
@@ -1580,8 +1588,11 @@
           "48\"",
           "54\"",
           "55\"",
+          "59\"",
           "60\"",
+          "69\"",
           "70\"",
+          "71\"",
           "72\"",
           "82\""
         ]
@@ -1624,7 +1635,10 @@
           "Panelable",
           "Plata",
           "Gris oscuro",
-          "Verde"
+          "Verde",
+          "Cobre",
+          "Dorado",
+          "Bronce"
         ]
       },
       {
@@ -1897,7 +1911,9 @@
         "valores": [
           "Depende del producto (se define marca por marca)",
           "Kit de instalación o conexión",
-          "Motor de campana"
+          "Motor de campana",
+          "Control remoto",
+          "Lámpara"
         ]
       },
       {

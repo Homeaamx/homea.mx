@@ -1,5 +1,5 @@
 {
- "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador. 2026-11-14 (Carla): Porsche x Smeg, 50's Style y Dolce&Gabbana son líneas distintas: sus círculos de color no se mezclan (refris FAB28, tostador TSF01, licuadora BLF03); D&G FAB28URDGME3 sin círculos. Fulgor Milano, 2026-11-14: cocción → campana del mismo ancho; hornos → cajón calientaplatos; cafetera ↔ trim; lavavajillas panelable ↔ jaladera; refrigeración acero ↔ panelable como círculos (misma bisagra y medida, como Sub-Zero) y columna de refrigerador → congelador y cava.",
+ "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador. 2026-11-14 (Carla): Porsche x Smeg, 50's Style y Dolce&Gabbana son líneas distintas: sus círculos de color no se mezclan (refris FAB28, tostador TSF01, licuadora BLF03); D&G FAB28URDGME3 sin círculos. Fulgor Milano, 2026-11-14: cocción → campana del mismo ancho; hornos → cajón calientaplatos; cafetera ↔ trim; lavavajillas panelable ↔ jaladera; refrigeración acero ↔ panelable como círculos (misma bisagra y medida, como Sub-Zero) y columna de refrigerador → congelador y cava. Falmec, 2026-11-14: colores de campanas decorativas, Stella Plus, Polar Evo y Valentina Plus, lámparas Sophie y accesorios Spazio; accesorios = los que la lista pone bajo cada campana (filtros primero; en Stella Plus y Alba, que se venden sin motor, los motores primero).",
  "DW2451": {
   "accesorios": [
    "9019420",
@@ -32376,6 +32376,550 @@
  "F7IBW24O2-L": {
   "colores": [
    "F7PBW24S1-L"
+  ]
+ },
+ "Shelf": {
+  "accesorios": [
+   "KACL.1058",
+   "KACL.451#NF",
+   "KACL.452#NF",
+   "KACL.458#3F",
+   "KACL.459#3F"
+  ]
+ },
+ "Monolith": {
+  "accesorios": [
+   "KACL.1054",
+   "KACL.455#NF",
+   "KACL.454#NF",
+   "KACL.453#NF",
+   "KACL.1011",
+   "KACL.1012",
+   "KACL.1013",
+   "KACL.1014",
+   "KACL.1021",
+   "105080053"
+  ]
+ },
+ "Brooklyn": {
+  "accesorios": [
+   "KACL.1054",
+   "KACL.1051#NF",
+   "KACL.1053#NF",
+   "KACL.1052#NF",
+   "KACL.1060#NF",
+   "105080053"
+  ]
+ },
+ "Quantum Pro Easy": {
+  "accesorios": [
+   "KACL.963"
+  ]
+ },
+ "Brera": {
+  "accesorios": [
+   "KACL.1054"
+  ]
+ },
+ "Spazio Acero Inoxidable": {
+  "colores": [
+   "Spazio Negro"
+  ],
+  "accesorios": [
+   "KACL.1048",
+   "KACL.744#IF",
+   "KACL.745#IF",
+   "KACL.746#IF",
+   "KACL.748#IF"
+  ]
+ },
+ "Spazio Negro": {
+  "colores": [
+   "Spazio Acero Inoxidable"
+  ],
+  "accesorios": [
+   "KACL.1048",
+   "KACL.744#IF",
+   "KACL.745#IF",
+   "KACL.746#HF",
+   "KACL.748#HF"
+  ]
+ },
+ "Levante Blanco": {
+  "colores": [
+   "Levante Negro",
+   "Levante Graphite"
+  ],
+  "accesorios": [
+   "KACL.1048"
+  ]
+ },
+ "Levante Negro": {
+  "colores": [
+   "Levante Blanco",
+   "Levante Graphite"
+  ],
+  "accesorios": [
+   "KACL.1048"
+  ]
+ },
+ "Levante Graphite": {
+  "colores": [
+   "Levante Blanco",
+   "Levante Negro"
+  ],
+  "accesorios": [
+   "KACL.1048"
+  ]
+ },
+ "Soffio": {
+  "accesorios": [
+   "KACL.1048",
+   "KACL.143MX",
+   "105080053"
+  ]
+ },
+ "Dama Cobre": {
+  "colores": [
+   "Dama Blanco",
+   "Dama Gris Gunmetal"
+  ],
+  "accesorios": [
+   "KACL.1048",
+   "KACL.143MX",
+   "105080053"
+  ]
+ },
+ "Dama Blanco": {
+  "colores": [
+   "Dama Cobre",
+   "Dama Gris Gunmetal"
+  ],
+  "accesorios": [
+   "KACL.1048",
+   "KACL.143MX",
+   "105080053"
+  ]
+ },
+ "Dama Gris Gunmetal": {
+  "colores": [
+   "Dama Cobre",
+   "Dama Blanco"
+  ],
+  "accesorios": [
+   "KACL.1048",
+   "KACL.143MX",
+   "105080053"
+  ]
+ },
+ "Vetra Acero Inoxidable": {
+  "colores": [
+   "Vetra Negro"
+  ],
+  "accesorios": [
+   "KACL.1048",
+   "KACL.144MX"
+  ]
+ },
+ "Vetra Negro": {
+  "colores": [
+   "Vetra Acero Inoxidable"
+  ],
+  "accesorios": [
+   "KACL.1048",
+   "KACL.144MX"
+  ]
+ },
+ "Sophie Antracita": {
+  "colores": [
+   "Sophie Cobre Antiguo",
+   "Sophie Laton Antiguo"
+  ],
+  "accesorios": [
+   "KACL.1048",
+   "KACL.143MX",
+   "KACL.162#J4F",
+   "105080053"
+  ]
+ },
+ "Sophie Cobre Antiguo": {
+  "colores": [
+   "Sophie Antracita",
+   "Sophie Laton Antiguo"
+  ],
+  "accesorios": [
+   "KACL.1048",
+   "KACL.143MX",
+   "KACL.162#A4F",
+   "105080053"
+  ]
+ },
+ "Sophie Laton Antiguo": {
+  "colores": [
+   "Sophie Antracita",
+   "Sophie Cobre Antiguo"
+  ],
+  "accesorios": [
+   "KACL.1048",
+   "KACL.143MX",
+   "KACL.162#E4F",
+   "105080053"
+  ]
+ },
+ "Vogue Blanco": {
+  "colores": [
+   "Vogue Verde",
+   "Vogue Gris Oscuro"
+  ],
+  "accesorios": [
+   "KACL.1048",
+   "KACL.143MX",
+   "105080053"
+  ]
+ },
+ "Vogue Verde": {
+  "colores": [
+   "Vogue Blanco",
+   "Vogue Gris Oscuro"
+  ],
+  "accesorios": [
+   "KACL.1048",
+   "KACL.143MX",
+   "105080053"
+  ]
+ },
+ "Vogue Gris Oscuro": {
+  "colores": [
+   "Vogue Blanco",
+   "Vogue Verde"
+  ],
+  "accesorios": [
+   "KACL.1048",
+   "KACL.143MX",
+   "105080053"
+  ]
+ },
+ "Mare E.ion Cristal Blanco": {
+  "colores": [
+   "Mare E.ion Cristal Negro"
+  ],
+  "accesorios": [
+   "101078810",
+   "KACL.140MX"
+  ]
+ },
+ "Mare E.ion Cristal Negro": {
+  "colores": [
+   "Mare E.ion Cristal Blanco"
+  ],
+  "accesorios": [
+   "101078810",
+   "KACL.140MX"
+  ]
+ },
+ "Light 120 Negro": {
+  "colores": [
+   "Light 120 Bronce"
+  ],
+  "accesorios": [
+   "KACL.1057",
+   "KACL.144MX"
+  ]
+ },
+ "Light 120 Bronce": {
+  "colores": [
+   "Light 120 Negro"
+  ],
+  "accesorios": [
+   "KACL.1057",
+   "KACL.144MX"
+  ]
+ },
+ "Light 180 Negro": {
+  "colores": [
+   "Light 180 Bronce"
+  ],
+  "accesorios": [
+   "KACL.1057",
+   "KACL.144MX"
+  ]
+ },
+ "Light 180 Bronce": {
+  "colores": [
+   "Light 180 Negro"
+  ],
+  "accesorios": [
+   "KACL.1057",
+   "KACL.144MX"
+  ]
+ },
+ "Europa 175 Black": {
+  "accesorios": [
+   "KACL.1039",
+   "KACL.866",
+   "KACL.557#N",
+   "KACL.1027#HF",
+   "105080053"
+  ]
+ },
+ "Lumen Isla 175 Derecha": {
+  "accesorios": [
+   "KACL.1039",
+   "KACL.866",
+   "KACL.557#I"
+  ]
+ },
+ "Lumen Isla 175 Izquierda": {
+  "accesorios": [
+   "KACL.1039",
+   "KACL.866",
+   "KACL.557#I"
+  ]
+ },
+ "Elle": {
+  "accesorios": [
+   "KACL.1039",
+   "KACL.866",
+   "KACL.557#N",
+   "105080053"
+  ]
+ },
+ "Level": {
+  "accesorios": [
+   "KACL.1042",
+   "105080053"
+  ]
+ },
+ "Level Invisible": {
+  "accesorios": [
+   "KACL.1042",
+   "105080053"
+  ]
+ },
+ "Stella Plus 90 Acero Inoxidable": {
+  "colores": [
+   "Stella Plus 90 Blanco",
+   "Stella Plus 90 Negro"
+  ],
+  "accesorios": [
+   "KACL.798#41F",
+   "KACL.797#4AF",
+   "KACL.782#49F",
+   "KACL.786#41F",
+   "KACL.796#4AF",
+   "KACL.789",
+   "KACL.376",
+   "KACL.939#BF",
+   "KACL.928",
+   "KACL.953#BF",
+   "KACL.931"
+  ]
+ },
+ "Stella Plus 90 Blanco": {
+  "colores": [
+   "Stella Plus 90 Acero Inoxidable",
+   "Stella Plus 90 Negro"
+  ],
+  "accesorios": [
+   "KACL.798#41F",
+   "KACL.797#4AF",
+   "KACL.782#49F",
+   "KACL.786#41F",
+   "KACL.796#4AF",
+   "KACL.789",
+   "KACL.376",
+   "KACL.939#BF",
+   "KACL.928",
+   "KACL.953#BF",
+   "KACL.931"
+  ]
+ },
+ "Stella Plus 90 Negro": {
+  "colores": [
+   "Stella Plus 90 Acero Inoxidable",
+   "Stella Plus 90 Blanco"
+  ],
+  "accesorios": [
+   "KACL.798#41F",
+   "KACL.797#4AF",
+   "KACL.782#49F",
+   "KACL.786#41F",
+   "KACL.796#4AF",
+   "KACL.789",
+   "KACL.376",
+   "KACL.939#BF",
+   "KACL.928",
+   "KACL.953#BF",
+   "KACL.931"
+  ]
+ },
+ "Stella Plus 120 Acero Inoxidable": {
+  "colores": [
+   "Stella Plus 120 Blanco"
+  ],
+  "accesorios": [
+   "KACL.798#41F",
+   "KACL.797#4AF",
+   "KACL.782#49F",
+   "KACL.786#41F",
+   "KACL.796#4AF",
+   "KACL.789",
+   "KACL.376",
+   "KACL.939#BF",
+   "KACL.928",
+   "KACL.953#BF",
+   "KACL.931"
+  ]
+ },
+ "Stella Plus 120 Blanco": {
+  "colores": [
+   "Stella Plus 120 Acero Inoxidable"
+  ],
+  "accesorios": [
+   "KACL.798#41F",
+   "KACL.797#4AF",
+   "KACL.782#49F",
+   "KACL.786#41F",
+   "KACL.796#4AF",
+   "KACL.789",
+   "KACL.376",
+   "KACL.939#BF",
+   "KACL.928",
+   "KACL.953#BF",
+   "KACL.931"
+  ]
+ },
+ "Alba": {
+  "accesorios": [
+   "KACL.798#41F",
+   "KACL.797#4AF",
+   "KACL.782#49F",
+   "KACL.786#41F",
+   "KACL.796#4AF",
+   "KACL.789",
+   "KACL.376",
+   "KACL.939#BF",
+   "KACL.928",
+   "KACL.953#BF",
+   "KACL.931"
+  ]
+ },
+ "Laguna Cristal Blanco": {
+  "colores": [
+   "Laguna Cristal Negro"
+  ],
+  "accesorios": [
+   "103050091"
+  ]
+ },
+ "Laguna Cristal Negro": {
+  "colores": [
+   "Laguna Cristal Blanco"
+  ],
+  "accesorios": [
+   "103050091"
+  ]
+ },
+ "Polar Evo White": {
+  "colores": [
+   "Polar Evo Black",
+   "Polar EVO"
+  ],
+  "accesorios": [
+   "103050091"
+  ]
+ },
+ "Polar Evo Black": {
+  "colores": [
+   "Polar Evo White",
+   "Polar EVO"
+  ],
+  "accesorios": [
+   "103050091"
+  ]
+ },
+ "Polar EVO": {
+  "colores": [
+   "Polar Evo White",
+   "Polar Evo Black"
+  ],
+  "accesorios": [
+   "103050091"
+  ]
+ },
+ "Valentina Plus Acero Inoxidable": {
+  "colores": [
+   "Valentina Plus Blanca",
+   "Valentina Plus Negra"
+  ],
+  "accesorios": [
+   "103050091"
+  ]
+ },
+ "Valentina Plus Blanca": {
+  "colores": [
+   "Valentina Plus Acero Inoxidable",
+   "Valentina Plus Negra"
+  ],
+  "accesorios": [
+   "103050091"
+  ]
+ },
+ "Valentina Plus Negra": {
+  "colores": [
+   "Valentina Plus Acero Inoxidable",
+   "Valentina Plus Blanca"
+  ],
+  "accesorios": [
+   "103050091"
+  ]
+ },
+ "Massimo Pro 87": {
+  "accesorios": [
+   "103050091"
+  ]
+ },
+ "Massimo Pro 116": {
+  "accesorios": [
+   "103050091"
+  ]
+ },
+ "KACL.746#IF": {
+  "colores": [
+   "KACL.746#HF"
+  ]
+ },
+ "KACL.748#IF": {
+  "colores": [
+   "KACL.748#HF"
+  ]
+ },
+ "KACL.746#HF": {
+  "colores": [
+   "KACL.746#IF"
+  ]
+ },
+ "KACL.748#HF": {
+  "colores": [
+   "KACL.748#IF"
+  ]
+ },
+ "KACL.162#J4F": {
+  "colores": [
+   "KACL.162#A4F",
+   "KACL.162#E4F"
+  ]
+ },
+ "KACL.162#A4F": {
+  "colores": [
+   "KACL.162#J4F",
+   "KACL.162#E4F"
+  ]
+ },
+ "KACL.162#E4F": {
+  "colores": [
+   "KACL.162#J4F",
+   "KACL.162#A4F"
   ]
  }
 }

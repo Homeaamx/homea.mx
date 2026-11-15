@@ -445,9 +445,15 @@ export async function productosDeColeccion(handle: string): Promise<ProductoVivo
  * un solo segmento de URL (Kraus KWU110-32/PGM → /producto/kwu110-32-pgm).
  */
 export function slugDeSku(sku: string): string {
-  // "/" y espacios → "-" (KWU110-32/PGM → kwu110-32-pgm; Dawn "AB53 3498C" → ab53-3498c,
-  // 2026-11-12): la ruta /producto/<slug> solo acepta letras, números, guiones y puntos.
-  return sku.toLowerCase().replace(/[\/\s]+/g, "-");
+  // La ruta /producto/<slug> solo acepta letras, números, guiones y puntos: todo lo
+  // demás pasa a "-" ("/" y espacios: KWU110-32/PGM → kwu110-32-pgm, Dawn "AB53 3498C"
+  // → ab53-3498c; "#" de Falmec: KACL.455#NF → kacl.455-nf, 2026-11-14). Los acentos se
+  // quitan. Un slug que ya era válido no cambia.
+  return sku
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9.-]+/g, "-");
 }
 
 /**

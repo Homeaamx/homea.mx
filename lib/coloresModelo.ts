@@ -169,6 +169,15 @@ const MUESTRAS: Record<string, string> = {
   "oro cepillado": "linear-gradient(135deg, #e3cc95 0%, #c2a062 50%, #a8864a 100%)",
   "pvd bronce bruñido": "linear-gradient(135deg, #c79f6e 0%, #9c7448 50%, #7a5734 100%)",
   "bronce bruñido": "linear-gradient(135deg, #c79f6e 0%, #9c7448 50%, #7a5734 100%)",
+  // Falmec (2026-11-14): campanas decorativas Dama, Sophie, Vogue, Levante y Light.
+  cobre: "linear-gradient(135deg, #e0a27a 0%, #b87348 50%, #8f5532 100%)",
+  "cobre antiguo": "linear-gradient(135deg, #b77a55 0%, #8c5338 50%, #63391f 100%)",
+  "latón antiguo": "linear-gradient(135deg, #cdb07a 0%, #a3854e 50%, #7a6134 100%)",
+  bronce: "linear-gradient(135deg, #b08a5e 0%, #8a6640 50%, #6a4c2e 100%)",
+  "gris gunmetal": "#55575a",
+  "gris oscuro": "#4a4b4d",
+  "grafito mate": "#4a4a48",
+  verde: "#3f5a3c",
 };
 
 /**

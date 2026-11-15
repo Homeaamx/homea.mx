@@ -32,3 +32,11 @@ Cuadrada" en una T invertida). Al cambiar el título, el handle se queda igual (
 1. Hoja de contactos con la foto principal de cada campana, agrupada por Diseño.
 2. Revisar a ojo contra la tabla y corregir con `metafieldsSet` (`filtros.diseno`, lista).
 3. Revisar también la instalación (`filtros.instalacion`): pared / isla.
+
+## Falmec (Carla, 2026-11-14)
+
+- Toda campana de isla **suspendida** (colgantes tipo lámpara, cajas o barras que cuelgan con cables o de un marco: Spazio, Light, Elle, Levante, Vetra, Vogue, Dama, Sophie) = **Decorativas**.
+- Islas grandes que no cuelgan: Europa 175 Black = Rectas + **Gran formato**; Lumen Isla 175 = T invertida + **Gran formato** (aunque midan 69", menos de 72").
+- Cubo o columna en la isla: Laguna (cubo de vidrio) y Polar Evo = **Cilíndrica o cuadrada**.
+- Integradas: Valentina Plus = **Para revestir**; Massimo Pro = **Tipo inserto**.
+- Sobre cubierta: Monolith = **Monolith**; Level, Level Invisible y Brooklyn (suben desde la cubierta) = **Retráctiles**. Shelf = **Tipo repisa**. Stella Plus y Alba (plafón, sin motor) = **A techo**.
