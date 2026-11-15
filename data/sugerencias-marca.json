@@ -1,5 +1,5 @@
 {
- "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador. 2026-11-14 (Carla): Porsche x Smeg, 50's Style y Dolce&Gabbana son líneas distintas: sus círculos de color no se mezclan (refris FAB28, tostador TSF01, licuadora BLF03); D&G FAB28URDGME3 sin círculos. Fulgor Milano, 2026-11-14: cocción → campana del mismo ancho; hornos → cajón calientaplatos; cafetera ↔ trim; lavavajillas panelable ↔ jaladera; refrigeración acero ↔ panelable como círculos (misma bisagra y medida, como Sub-Zero) y columna de refrigerador → congelador y cava. Falmec, 2026-11-14: colores de campanas decorativas, Stella Plus, Polar Evo y Valentina Plus, lámparas Sophie y accesorios Spazio; accesorios = los que la lista pone bajo cada campana (filtros primero; en Stella Plus y Alba, que se venden sin motor, los motores primero).",
+ "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador. 2026-11-14 (Carla): Porsche x Smeg, 50's Style y Dolce&Gabbana son líneas distintas: sus círculos de color no se mezclan (refris FAB28, tostador TSF01, licuadora BLF03); D&G FAB28URDGME3 sin círculos. Fulgor Milano, 2026-11-14: cocción → campana del mismo ancho; hornos → cajón calientaplatos; cafetera ↔ trim; lavavajillas panelable ↔ jaladera; refrigeración acero ↔ panelable como círculos (misma bisagra y medida, como Sub-Zero) y columna de refrigerador → congelador y cava. Falmec, 2026-11-14: colores de campanas decorativas, Stella Plus, Polar Evo y Valentina Plus, lámparas Sophie y accesorios Spazio; accesorios = los que la lista pone bajo cada campana (filtros primero; en Stella Plus y Alba, que se venden sin motor, los motores primero). Tecnolam, 2026-11-14: círculos Nevada Mix (4 colores, 1 y 2 tinas), monomandos acero/cromo ↔ negro mate, Doppio, BIM30, H45MWCG, TECDW60 acero ↔ panelable, Lyra, Altair, Vortex AC ↔ NE (Vortex SI fuera: mismo título que AC; cava H45WC24 fuera: la .NE abre hacia abajo y la B de lado); comal GRIDDLE en FGR366/GTR366/GTR488, KITMAGIC en las Magic, pareja TSD559PR ↔ TSD559PF.",
  "DW2451": {
   "accesorios": [
    "9019420",
@@ -32920,6 +32920,252 @@
   "colores": [
    "KACL.162#J4F",
    "KACL.162#A4F"
+  ]
+ },
+ "NEVADAMIX79X501V06": {
+  "colores": [
+   "NEVADAMIX79X501V02",
+   "NEVADAMIX79X501V08",
+   "NEVADAMIX79X501V01"
+  ]
+ },
+ "NEVADAMIX79X501V02": {
+  "colores": [
+   "NEVADAMIX79X501V06",
+   "NEVADAMIX79X501V08",
+   "NEVADAMIX79X501V01"
+  ]
+ },
+ "NEVADAMIX79X501V08": {
+  "colores": [
+   "NEVADAMIX79X501V06",
+   "NEVADAMIX79X501V02",
+   "NEVADAMIX79X501V01"
+  ]
+ },
+ "NEVADAMIX79X501V01": {
+  "colores": [
+   "NEVADAMIX79X501V06",
+   "NEVADAMIX79X501V02",
+   "NEVADAMIX79X501V08"
+  ]
+ },
+ "NEVADAMIX79X502V06": {
+  "colores": [
+   "NEVADAMIX79X502V02",
+   "NEVADAMIX79X502V08",
+   "NEVADAMIX79X502V01"
+  ]
+ },
+ "NEVADAMIX79X502V02": {
+  "colores": [
+   "NEVADAMIX79X502V06",
+   "NEVADAMIX79X502V08",
+   "NEVADAMIX79X502V01"
+  ]
+ },
+ "NEVADAMIX79X502V08": {
+  "colores": [
+   "NEVADAMIX79X502V06",
+   "NEVADAMIX79X502V02",
+   "NEVADAMIX79X502V01"
+  ]
+ },
+ "NEVADAMIX79X502V01": {
+  "colores": [
+   "NEVADAMIX79X502V06",
+   "NEVADAMIX79X502V02",
+   "NEVADAMIX79X502V08"
+  ]
+ },
+ "TEC143SS": {
+  "colores": [
+   "TEC143NEGRO"
+  ]
+ },
+ "TEC143NEGRO": {
+  "colores": [
+   "TEC143SS"
+  ]
+ },
+ "TEC149SS": {
+  "colores": [
+   "TEC149NEGRO"
+  ]
+ },
+ "TEC149NEGRO": {
+  "colores": [
+   "TEC149SS"
+  ]
+ },
+ "TEC102SS": {
+  "colores": [
+   "TEC102NEGRO"
+  ]
+ },
+ "TEC102NEGRO": {
+  "colores": [
+   "TEC102SS"
+  ]
+ },
+ "TEC546SS": {
+  "colores": [
+   "TEC546NEGRO"
+  ]
+ },
+ "TEC546NEGRO": {
+  "colores": [
+   "TEC546SS"
+  ]
+ },
+ "TEC124SS": {
+  "colores": [
+   "TEC124NEGRO"
+  ]
+ },
+ "TEC124NEGRO": {
+  "colores": [
+   "TEC124SS"
+  ]
+ },
+ "TEC685CH": {
+  "colores": [
+   "TEC685NEGRO"
+  ]
+ },
+ "TEC685NEGRO": {
+  "colores": [
+   "TEC685CH"
+  ]
+ },
+ "DOPPIO916.AC": {
+  "colores": [
+   "DOPPIO916.NE"
+  ]
+ },
+ "DOPPIO916.NE": {
+  "colores": [
+   "DOPPIO916.AC"
+  ]
+ },
+ "BIM30INOX": {
+  "colores": [
+   "BIM30NE"
+  ]
+ },
+ "BIM30NE": {
+  "colores": [
+   "BIM30INOX"
+  ]
+ },
+ "H45MWCG": {
+  "colores": [
+   "H45MWCG.NE"
+  ]
+ },
+ "H45MWCG.NE": {
+  "colores": [
+   "H45MWCG"
+  ]
+ },
+ "TECDW60.SS": {
+  "colores": [
+   "TECDW60.PA"
+  ]
+ },
+ "TECDW60.PA": {
+  "colores": [
+   "TECDW60.SS"
+  ]
+ },
+ "LYRA.AC140": {
+  "colores": [
+   "LYRA.NE140"
+  ]
+ },
+ "LYRA.NE140": {
+  "colores": [
+   "LYRA.AC140"
+  ]
+ },
+ "ALTAIR55.AC": {
+  "colores": [
+   "ALTAIR55.BK"
+  ]
+ },
+ "ALTAIR55.BK": {
+  "colores": [
+   "ALTAIR55.AC"
+  ]
+ },
+ "ALTAIR75.AC": {
+  "colores": [
+   "ALTAIR75.BK"
+  ]
+ },
+ "ALTAIR75.BK": {
+  "colores": [
+   "ALTAIR75.AC"
+  ]
+ },
+ "VORTEX.AC60": {
+  "colores": [
+   "VORTEX.NE60"
+  ]
+ },
+ "VORTEX.NE60": {
+  "colores": [
+   "VORTEX.AC60"
+  ]
+ },
+ "VORTEX.AC80": {
+  "colores": [
+   "VORTEX.NE80"
+  ]
+ },
+ "VORTEX.NE80": {
+  "colores": [
+   "VORTEX.AC80"
+  ]
+ },
+ "FGR366": {
+  "accesorios": [
+   "GRIDDLE"
+  ]
+ },
+ "GTR366": {
+  "accesorios": [
+   "GRIDDLE"
+  ]
+ },
+ "GTR488": {
+  "accesorios": [
+   "GRIDDLE"
+  ]
+ },
+ "MAGIC02": {
+  "accesorios": [
+   "KITMAGIC"
+  ]
+ },
+ "MAGIC04": {
+  "accesorios": [
+   "KITMAGIC"
+  ]
+ },
+ "MAGIC06": {
+  "accesorios": [
+   "KITMAGIC"
+  ]
+ },
+ "TSD559PR": {
+  "accesorios": [
+   "TSD559PF"
+  ]
+ },
+ "TSD559PF": {
+  "accesorios": [
+   "TSD559PR"
   ]
  }
 }

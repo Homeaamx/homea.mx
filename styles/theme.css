@@ -4024,6 +4024,8 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="fulgor-milano"] { height: 40px; }
 /* Falmec (2026-11-14): OneDrive PROVEEDORES/LOGOTIPOS PROVEEDORES/falmec-logo PNG.png (wordmark negro, PNG transparente); proporción 5.4:1. */
 .pdp-logo[data-marca="falmec"] { height: 26px; }
+/* Tecnolam (2026-11-14): OneDrive PROVEEDORES/PROVEEDORES PRODUCTO/LOGOTIPOS PROVEEDORES/Tecnolam PNG.png (isotipo + wordmark negro, PNG transparente); proporción 4.6:1. */
+.pdp-logo[data-marca="tecnolam"] { height: 28px; }
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
    técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
    una línea, baja a dos dentro de su pestaña. */

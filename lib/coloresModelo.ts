@@ -178,6 +178,11 @@ const MUESTRAS: Record<string, string> = {
   "gris oscuro": "#4a4b4d",
   "grafito mate": "#4a4a48",
   verde: "#3f5a3c",
+  // Tecnolam (2026-11-14): tarjas de cuarzo sinterizado Granitgem Nevada Mix (tono medido en la foto de la lista).
+  "ágata tierra": "#786a5f",
+  "gris cuarzo": "#767774",
+  "gris hematita": "#464542",
+  "negro obsidiana": "#2c2a27",
 };
 
 /**
