@@ -1,5 +1,5 @@
 {
- "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador. 2026-11-14 (Carla): Porsche x Smeg, 50's Style y Dolce&Gabbana son líneas distintas: sus círculos de color no se mezclan (refris FAB28, tostador TSF01, licuadora BLF03); D&G FAB28URDGME3 sin círculos. Fulgor Milano, 2026-11-14: cocción → campana del mismo ancho; hornos → cajón calientaplatos; cafetera ↔ trim; lavavajillas panelable ↔ jaladera; refrigeración acero ↔ panelable como círculos (misma bisagra y medida, como Sub-Zero) y columna de refrigerador → congelador y cava. Falmec, 2026-11-14: colores de campanas decorativas, Stella Plus, Polar Evo y Valentina Plus, lámparas Sophie y accesorios Spazio; accesorios = los que la lista pone bajo cada campana (filtros primero; en Stella Plus y Alba, que se venden sin motor, los motores primero). Tecnolam, 2026-11-14: círculos Nevada Mix (4 colores, 1 y 2 tinas), monomandos acero/cromo ↔ negro mate, Doppio, BIM30, H45MWCG, TECDW60 acero ↔ panelable, Lyra, Altair, Vortex AC ↔ NE (Vortex SI fuera: mismo título que AC; cava H45WC24 fuera: la .NE abre hacia abajo y la B de lado); comal GRIDDLE en FGR366/GTR366/GTR488, KITMAGIC en las Magic, pareja TSD559PR ↔ TSD559PF.",
+ "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador. 2026-11-14 (Carla): Porsche x Smeg, 50's Style y Dolce&Gabbana son líneas distintas: sus círculos de color no se mezclan (refris FAB28, tostador TSF01, licuadora BLF03); D&G FAB28URDGME3 sin círculos. Fulgor Milano, 2026-11-14: cocción → campana del mismo ancho; hornos → cajón calientaplatos; cafetera ↔ trim; lavavajillas panelable ↔ jaladera; refrigeración acero ↔ panelable como círculos (misma bisagra y medida, como Sub-Zero) y columna de refrigerador → congelador y cava. Falmec, 2026-11-14: colores de campanas decorativas, Stella Plus, Polar Evo y Valentina Plus, lámparas Sophie y accesorios Spazio; accesorios = los que la lista pone bajo cada campana (filtros primero; en Stella Plus y Alba, que se venden sin motor, los motores primero). Tecnolam, 2026-11-14: círculos Nevada Mix (4 colores, 1 y 2 tinas), monomandos acero/cromo ↔ negro mate, Doppio, BIM30, H45MWCG, TECDW60 acero ↔ panelable, Lyra, Altair, Vortex AC ↔ NE ↔ SI (SI = plata, distinta al acero AC: Carla 2026-11-17; cava H45WC24 fuera: la .NE abre hacia abajo y la B de lado); comal GRIDDLE en FGR366/GTR366/GTR488, KITMAGIC en las Magic, pareja TSD559PR ↔ TSD559PF.",
  "DW2451": {
   "accesorios": [
    "9019420",
@@ -33110,22 +33110,26 @@
  },
  "VORTEX.AC60": {
   "colores": [
-   "VORTEX.NE60"
+   "VORTEX.NE60",
+   "VORTEX.SI60"
   ]
  },
  "VORTEX.NE60": {
   "colores": [
-   "VORTEX.AC60"
+   "VORTEX.AC60",
+   "VORTEX.SI60"
   ]
  },
  "VORTEX.AC80": {
   "colores": [
-   "VORTEX.NE80"
+   "VORTEX.NE80",
+   "VORTEX.SI80"
   ]
  },
  "VORTEX.NE80": {
   "colores": [
-   "VORTEX.AC80"
+   "VORTEX.AC80",
+   "VORTEX.SI80"
   ]
  },
  "FGR366": {
@@ -33166,6 +33170,18 @@
  "TSD559PF": {
   "accesorios": [
    "TSD559PR"
+  ]
+ },
+ "VORTEX.SI80": {
+  "colores": [
+   "VORTEX.AC80",
+   "VORTEX.NE80"
+  ]
+ },
+ "VORTEX.SI60": {
+  "colores": [
+   "VORTEX.AC60",
+   "VORTEX.NE60"
   ]
  }
 }
