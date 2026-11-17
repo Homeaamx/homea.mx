@@ -189,6 +189,19 @@ def main():
             # SKU con diagonal (KIT01609/1): el archivo la lleva como guion bajo.
             sku = sku.replace("_", "/")
             prod = producto(sku)
+        if not prod and "-" in sku:
+            # Desde 2026-11-13 el Excel pide "-" en lugar de "/" (CI30460C/B →
+            # CI30460C-B-1.jpg): se prueba cada combinación de guiones a diagonal.
+            import itertools
+            partes = sku.split("-")
+            for combo in itertools.product("-/", repeat=min(len(partes) - 1, 4)):
+                if "/" not in combo:
+                    continue
+                cand = partes[0] + "".join(s + p for s, p in zip(combo, partes[1:]))
+                prod = producto(cand)
+                if prod:
+                    sku = cand
+                    break
         print(f"{sku}: {prod['title'] if prod else 'NO ESTÁ EN SHOPIFY'}")
         if prod:
             subir(prod, sku, archivos, prueba)
