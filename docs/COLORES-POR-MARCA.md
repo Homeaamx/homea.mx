@@ -56,3 +56,13 @@ Las variantes de una misma pieza (Alfresco *Standard Color / Custom Color*, `-SC
 | Sub-Zero | 114 (2026-11-10, a mano: Classic por familia + bisagra → Panelable · Acero jaladera Tubular · Acero jaladera Pro; muestras "acero inoxidable jaladera tubular/pro", "tubular", "pro") |
 
 Pendiente de Carla: Elica **PRF0024262A** y **PRF0098392** son la misma campana Seashell 32" Blanca; solo PRF0098392 quedó en el grupo.
+
+## Colores como variantes de un solo producto (Viking, 2026-11-17)
+
+Carla pidió para Viking **un producto por modelo** (foto de acero) con los colores en círculos, como Alfresco, en lugar de un producto por color. En Shopify cada producto Viking lleva hasta tres opciones: **Color** (nombre de Viking: Slate Blue, Damascus Gray…), **Herraje** (Estándar / Latón cepillado) y **Tipo de gas** (Gas LP primero, Gas natural); hasta 76 variantes.
+
+- `lib/shopify/catalogoVivo.ts` lee hasta 100 variantes. Cada círculo es Color + Herraje ("Slate Blue · Latón cepillado") y guarda su propio gas en `ColorVivo.gases`.
+- El tono de cada círculo sale de `TONOS_VARIANTE` en `lib/coloresMarca.ts` (`fondoVariante`); el latón se pinta como una franja dorada.
+- El botón lleva en `data-cart-gas` un mapa por SKU de color y `CarritoProvider` pregunta el gas del color elegido.
+- `filtros.color` lleva el tono percibido de todos los colores del modelo y `filtros.herraje = Latón cepillado` si el modelo también se vende con latón (grupo "Herraje" del panel).
+- `/producto/<sku de variante>` redirige (308) a la ficha del modelo.

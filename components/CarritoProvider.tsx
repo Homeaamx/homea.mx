@@ -177,7 +177,13 @@ export default function CarritoProvider({ children }: { children?: ReactNode }) 
         const gas = alta.getAttribute("data-cart-gas");
         if (gas) {
           try {
-            const opciones = JSON.parse(gas) as { n: string; vid: string; sku: string }[];
+            type Op = { n: string; vid: string; sku: string };
+            const crudo = JSON.parse(gas) as Op[] | Record<string, Op[]>;
+            // Viking (Carla, 2026-11-17): un mapa por SKU de color; vale el del
+            // color elegido en el botón (catalogo.js cambia data-cart-sku).
+            const opciones: Op[] = Array.isArray(crudo)
+              ? crudo
+              : (crudo[sku] ?? Object.values(crudo).find((ops) => ops.some((o) => o.sku === sku)) ?? []);
             if (opciones.length > 1) {
               setEligeGas({ nombre: alta.getAttribute("data-cart-name") ?? "", cantidad, opciones });
               return;

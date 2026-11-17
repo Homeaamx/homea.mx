@@ -47,3 +47,54 @@ export function tonoDe(valor: string | null | undefined): Tono | null {
   if (!v) return null;
   return TODOS.find((t) => t.codigo.toUpperCase() === v || t.nombre.toUpperCase() === v) ?? null;
 }
+
+/**
+ * Colores con nombre propio que llegan como variante "Color" de un mismo producto
+ * (Viking, Carla 2026-11-17: un producto por modelo con foto de acero y los colores
+ * en círculos, con el nombre de la marca). El tono se tomó de las fotos de
+ * vikingrange.com. Las variantes con "Herraje: Latón cepillado" llevan una franja
+ * dorada en el círculo.
+ */
+export const TONOS_VARIANTE: Record<string, string> = {
+  "Damascus Gray": "#7D7B78",
+  "Cast Black": "#4A4B4D",
+  "Slate Blue": "#1F3352",
+  "Antique Bronze": "#3A3530",
+  "November Sky": "#8FA4B0",
+  "Spiced Cider": "#B2442A",
+  Eucalyptus: "#7D8B74",
+  Splash: "#A8D3CC",
+  Martini: "#5E5E3E",
+  Blush: "#EBC9C3",
+  Ivy: "#1E5A3C",
+  "Pure White": "#F1ECE0",
+  "Golden Hour": "#A08C6A",
+  Nantucket: "#A89E92",
+  Squall: "#2F4250",
+  Valentine: "#C2283F",
+  Onyx: "#1C1C1C",
+  Daffodil: "#F2BE1C",
+};
+
+/** Sufijo del nombre de una variante con herraje de latón ("Slate Blue · Latón cepillado"). */
+export const SUFIJO_LATON = " · Latón cepillado";
+
+const ACERO_CSS = "linear-gradient(135deg, #f4f4f2 0%, #c9cac7 45%, #eeeeec 60%, #a9aaa7 100%)";
+const LATON = "#B08D57";
+
+/**
+ * Fondo CSS del círculo de una variante de color con nombre (Viking); null si el
+ * nombre no es de esos (Alfresco sigue con su lógica de Standard/Custom Color).
+ */
+export function fondoVariante(nombre: string): string | null {
+  const laton = nombre.endsWith(SUFIJO_LATON);
+  const base = laton ? nombre.slice(0, -SUFIJO_LATON.length) : nombre;
+  const hex = TONOS_VARIANTE[base];
+  const acero = /^acero inoxidable$/i.test(base);
+  if (!hex && !acero && !laton) return null;
+  const fondo = hex ?? (acero ? null : "#9FA0A2");
+  if (!laton) return fondo ?? ACERO_CSS;
+  return fondo
+    ? `linear-gradient(135deg, ${fondo} 0 60%, ${LATON} 60% 100%)`
+    : `linear-gradient(135deg, #f4f4f2 0%, #c9cac7 35%, #e2e2df 60%, ${LATON} 60% 100%)`;
+}

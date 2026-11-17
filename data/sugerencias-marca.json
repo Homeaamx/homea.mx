@@ -33183,5 +33183,1552 @@
    "VORTEX.AC60",
    "VORTEX.NE60"
   ]
+ },
+ "VGIC53024BSSLP": {
+  "accesorios": [
+   "BG8530SS",
+   "HS24530SS",
+   "P30CRTSS",
+   "P30CBF4SS",
+   "P24CSTSS",
+   "TGOG530",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVGR53036"
+  ]
+ },
+ "VGIC53626BSSLP": {
+  "accesorios": [
+   "BG8536SS",
+   "HS24536SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "P24CSTSS",
+   "TGOG536",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVGR53036"
+  ]
+ },
+ "VGIC54828BSSLP": {
+  "accesorios": [
+   "BG8548SS",
+   "HS24548SS",
+   "P48CRTSS",
+   "P48CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVGR54860"
+  ]
+ },
+ "VGR53044BSSLP": {
+  "accesorios": [
+   "BG8530SS",
+   "HS24530SS",
+   "P30CRTSS",
+   "P30CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVGR53036"
+  ]
+ },
+ "VGR53646BSSLP": {
+  "accesorios": [
+   "BG8536SS",
+   "HS24536SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVGR53036"
+  ]
+ },
+ "VGR53644GSSLP": {
+  "accesorios": [
+   "BG8536SS",
+   "HS24536SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVGR53036",
+   "CBC12G",
+   "CSC12USS",
+   "SBPGD"
+  ]
+ },
+ "VGR54848BSSLP": {
+  "accesorios": [
+   "BG8548SS",
+   "HS24548SS",
+   "P48CRTSS",
+   "P48CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVGR54860"
+  ]
+ },
+ "VGR54846GSSLP": {
+  "accesorios": [
+   "BG8548SS",
+   "HS24548SS",
+   "P48CRTSS",
+   "P48CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVGR54860",
+   "CBC12G",
+   "CSC12USS",
+   "SBPGD"
+  ]
+ },
+ "VGR56046GQSSLP": {
+  "accesorios": [
+   "BG8560SS",
+   "HS24560SS",
+   "P60CRTSS",
+   "P60CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVGR54860",
+   "CBC12G",
+   "CSC12USS",
+   "SBPGD"
+  ]
+ },
+ "VGR73626BSSLP": {
+  "accesorios": [
+   "BG107362SS",
+   "HS24736SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "LPKVGR702",
+   "NKVGR702",
+   "LPKHAVGR",
+   "NKHAVGR",
+   "GCKVGR",
+   "WOKVGR7",
+   "CRG7VGR",
+   "CBGVGR",
+   "SSKKVGR736"
+  ]
+ },
+ "VGR73624GSSLP": {
+  "accesorios": [
+   "BG107362SS",
+   "HS24736SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "LPKVGR702",
+   "NKVGR702",
+   "LPKHAVGR",
+   "NKHAVGR",
+   "GCKVGR",
+   "WOKVGR7",
+   "CRG7VGR",
+   "CBGVGR",
+   "SSKKVGR736"
+  ]
+ },
+ "VGR74828BSSLP": {
+  "accesorios": [
+   "BG107482SS",
+   "HS24748SS",
+   "P48CRTSS",
+   "P48CBF4SS",
+   "LPKVGR702",
+   "NKVGR702",
+   "LPKHAVGR",
+   "NKHAVGR",
+   "GCKVGR",
+   "WOKVGR7",
+   "CRG7VGR",
+   "CBGVGR",
+   "SSKKVGR748"
+  ]
+ },
+ "VGR74826GSSLP": {
+  "accesorios": [
+   "BG107482SS",
+   "HS24748SS",
+   "P48CRTSS",
+   "P48CBF4SS",
+   "LPKVGR702",
+   "NKVGR702",
+   "LPKHAVGR",
+   "NKHAVGR",
+   "GCKVGR",
+   "WOKVGR7",
+   "CRG7VGR",
+   "CBGVGR",
+   "SSKKVGR748"
+  ]
+ },
+ "VDR53044BSSLP": {
+  "accesorios": [
+   "BG8530SS",
+   "HS24530SS",
+   "P30CRTSS",
+   "P30CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVDR53036"
+  ]
+ },
+ "VDR53646BSSLP": {
+  "accesorios": [
+   "BG8536SS",
+   "HS24536SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVDR53036"
+  ]
+ },
+ "VDR53644GSSLP": {
+  "accesorios": [
+   "BG8536SS",
+   "HS24536SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVDR53036",
+   "CBC12G",
+   "CSC12USS",
+   "SBPGD"
+  ]
+ },
+ "VDR54848BSSLP": {
+  "accesorios": [
+   "BG8548SS",
+   "HS24548SS",
+   "P48CRTSS",
+   "P48CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVDR54860"
+  ]
+ },
+ "VDR54846GSSLP": {
+  "accesorios": [
+   "BG8548SS",
+   "HS24548SS",
+   "P48CRTSS",
+   "P48CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVDR54860",
+   "CBC12G",
+   "CSC12USS",
+   "SBPGD"
+  ]
+ },
+ "VDR56046GQSSLP": {
+  "accesorios": [
+   "BG8560SS",
+   "HS24560SS",
+   "P60CRTSS",
+   "P60CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVDR54860",
+   "CBC12G",
+   "CSC12USS",
+   "SBPGD"
+  ]
+ },
+ "VDR73626BSSLP": {
+  "accesorios": [
+   "BG107362SS",
+   "HS24736SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "LPKVGR702",
+   "NKVGR702",
+   "LPKHAVGR",
+   "NKHAVGR",
+   "GCKVGR",
+   "WOKVGR7",
+   "CRG7VGR",
+   "CBGVGR",
+   "SSKKVDR736"
+  ]
+ },
+ "VDR73624GSSLP": {
+  "accesorios": [
+   "BG107362SS",
+   "HS24736SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "LPKVGR702",
+   "NKVGR702",
+   "LPKHAVGR",
+   "NKHAVGR",
+   "GCKVGR",
+   "WOKVGR7",
+   "CRG7VGR",
+   "CBGVGR",
+   "SSKKVDR736"
+  ]
+ },
+ "VDR74828BSSLP": {
+  "accesorios": [
+   "BG107482SS",
+   "HS24748SS",
+   "P48CRTSS",
+   "P48CBF4SS",
+   "LPKVGR702",
+   "NKVGR702",
+   "LPKHAVGR",
+   "NKHAVGR",
+   "GCKVGR",
+   "WOKVGR7",
+   "CRG7VGR",
+   "CBGVGR",
+   "SSKKVDR748"
+  ]
+ },
+ "VDR74826GSSLP": {
+  "accesorios": [
+   "BG107482SS",
+   "HS24748SS",
+   "P48CRTSS",
+   "P48CBF4SS",
+   "LPKVGR702",
+   "NKVGR702",
+   "LPKHAVGR",
+   "NKHAVGR",
+   "GCKVGR",
+   "WOKVGR7",
+   "CRG7VGR",
+   "CBGVGR",
+   "SSKKVDR748"
+  ]
+ },
+ "VER53044BSS": {
+  "accesorios": [
+   "BG8530SS",
+   "HS24530SS",
+   "P30CRTSS",
+   "P30CBF4SS",
+   "P24CSTSS",
+   "BCKKVIR53036"
+  ]
+ },
+ "VIR53044BSS": {
+  "accesorios": [
+   "BG8530SS",
+   "HS24530SS",
+   "P30CRTSS",
+   "P30CBF4SS",
+   "P24CSTSS",
+   "BCKKVIR53036"
+  ]
+ },
+ "VIR53646BSS": {
+  "accesorios": [
+   "BG8536SS",
+   "HS24536SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "P24CSTSS",
+   "BCKKVIR53036"
+  ]
+ },
+ "VIR54846BSS": {
+  "accesorios": [
+   "BG8548SS",
+   "HS24548SS",
+   "P48CRTSS",
+   "P48CBF4SS",
+   "P24CSTSS",
+   "BCKKVIR548"
+  ]
+ },
+ "VRT53044BSSLP": {
+  "accesorios": [
+   "BG8530SS",
+   "HS24530SS",
+   "P30CRTSS",
+   "P30CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVGR53036"
+  ]
+ },
+ "VRT53646BSSLP": {
+  "accesorios": [
+   "BG8536SS",
+   "HS24536SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVGR53036"
+  ]
+ },
+ "VRT53644GSSLP": {
+  "accesorios": [
+   "BG8536SS",
+   "HS24536SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVGR53036",
+   "CBC12G",
+   "CSC12USS",
+   "SBPGD"
+  ]
+ },
+ "VRT54848BSSLP": {
+  "accesorios": [
+   "BG8548SS",
+   "HS24548SS",
+   "P48CRTSS",
+   "P48CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVGR54860"
+  ]
+ },
+ "VRT54846GSSLP": {
+  "accesorios": [
+   "BG8548SS",
+   "HS24548SS",
+   "P48CRTSS",
+   "P48CBF4SS",
+   "P24CSTSS",
+   "LPKPDR01",
+   "CWGT",
+   "LPKHAVGR5",
+   "NKHAVGR5",
+   "BCKKVGR54860",
+   "CBC12G",
+   "CSC12USS",
+   "SBPGD"
+  ]
+ },
+ "VRT7366BSSLP": {
+  "accesorios": [
+   "BG107362SS",
+   "HS24736SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "LPKVGR702",
+   "NKVGR702",
+   "LPKHAVGR",
+   "NKHAVGR",
+   "GCKVGR",
+   "WOKVGR7",
+   "CRG7VGR",
+   "CBGVGR",
+   "SSKKVGR736"
+  ]
+ },
+ "VRT7364GSSLP": {
+  "accesorios": [
+   "BG107362SS",
+   "HS24736SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "LPKVGR702",
+   "NKVGR702",
+   "LPKHAVGR",
+   "NKHAVGR",
+   "GCKVGR",
+   "WOKVGR7",
+   "CRG7VGR",
+   "CBGVGR",
+   "SSKKVGR736"
+  ]
+ },
+ "VRT7488BSSLP": {
+  "accesorios": [
+   "BG107482SS",
+   "HS24748SS",
+   "P48CRTSS",
+   "P48CBF4SS",
+   "LPKVGR702",
+   "NKVGR702",
+   "LPKHAVGR",
+   "NKHAVGR",
+   "GCKVGR",
+   "WOKVGR7",
+   "CRG7VGR",
+   "CBGVGR",
+   "SSKKVGR748"
+  ]
+ },
+ "VRT7486GSSLP": {
+  "accesorios": [
+   "BG107482SS",
+   "HS24748SS",
+   "P48CRTSS",
+   "P48CBF4SS",
+   "LPKVGR702",
+   "NKVGR702",
+   "LPKHAVGR",
+   "NKHAVGR",
+   "GCKVGR",
+   "WOKVGR7",
+   "CRG7VGR",
+   "CBGVGR",
+   "SSKKVGR748"
+  ]
+ },
+ "VERT53044BSS": {
+  "accesorios": [
+   "BG8530SS",
+   "HS24530SS",
+   "P30CRTSS",
+   "P30CBF4SS",
+   "P24CSTSS"
+  ]
+ },
+ "VERT53646BSS": {
+  "accesorios": [
+   "BG8536SS",
+   "HS24536SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "P24CSTSS"
+  ]
+ },
+ "VIRT53044BSS": {
+  "accesorios": [
+   "BG8530SS",
+   "HS24530SS",
+   "P30CRTSS",
+   "P30CBF4SS",
+   "P24CSTSS"
+  ]
+ },
+ "VIRT53646BSS": {
+  "accesorios": [
+   "BG8536SS",
+   "HS24536SS",
+   "P36CRTSS",
+   "P36CBF4SS",
+   "P24CSTSS"
+  ]
+ },
+ "VGSU53015BSSLP": {
+  "accesorios": [
+   "WRGVGC",
+   "LPKVGC",
+   "NATVGC",
+   "LPKHAVGC",
+   "NKHAVGC",
+   "SSKKVGSU",
+   "BCKKVICU"
+  ]
+ },
+ "VGSU53616BSSLP": {
+  "accesorios": [
+   "WRGVGC",
+   "LPKVGC",
+   "NATVGC",
+   "LPKHAVGC",
+   "NKHAVGC",
+   "SSKKVGSU",
+   "BCKKVICU"
+  ]
+ },
+ "VICU53014BST": {
+  "accesorios": [
+   "BCKKVICU"
+  ]
+ },
+ "VICU53616BST": {
+  "accesorios": [
+   "BCKKVICU"
+  ]
+ },
+ "VSOE130SS": {
+  "accesorios": [
+   "P301FTSSS",
+   "SSKKVDOF"
+  ]
+ },
+ "VDOE130SS": {
+  "accesorios": [
+   "P301FTDSS",
+   "SSKKVDOF"
+  ]
+ },
+ "VSOE527SS": {
+  "accesorios": [
+   "P301FTSSS",
+   "SSKKVDOF"
+  ]
+ },
+ "VDOE527SS": {
+  "accesorios": [
+   "P301FTDSS",
+   "SSKKVDOF"
+  ]
+ },
+ "VSOE530SS": {
+  "accesorios": [
+   "P301FTSSS",
+   "SSKKVDOF"
+  ]
+ },
+ "VDOE530SS": {
+  "accesorios": [
+   "P301FTDSS",
+   "SSKKVDOF"
+  ]
+ },
+ "VSOF7301SS": {
+  "accesorios": [
+   "P301FTSSS",
+   "SSKKVDOF"
+  ]
+ },
+ "VDOF7301SS": {
+  "accesorios": [
+   "P301FTDSS",
+   "SSKKVDOF"
+  ]
+ },
+ "VMOS501SS": {
+  "accesorios": [
+   "VMTK272SS",
+   "VMTK302SS",
+   "PMF302TKSS"
+  ]
+ },
+ "VMOC506SS": {
+  "accesorios": [
+   "VMTK277SS",
+   "VMTK307SS",
+   "PMF307TKSS"
+  ]
+ },
+ "VMOD5240SS": {
+  "accesorios": [
+   "PMD240FTKSS"
+  ]
+ },
+ "VMODC5240SS": {
+  "accesorios": [
+   "PMD240FTKSS"
+  ]
+ },
+ "VWD527SS": {
+  "accesorios": [
+   "PANVEWD"
+  ]
+ },
+ "VWD530SS": {
+  "accesorios": [
+   "PANVEWD"
+  ]
+ },
+ "VWH3010SS": {
+  "accesorios": [
+   "DCW30SS",
+   "VINV600",
+   "VINV1200",
+   "DEV900",
+   "DEV15001",
+   "DIL1200",
+   "VSIL10",
+   "ILVK",
+   "G6MD",
+   "G8MD",
+   "BKS30SS",
+   "WGP30SS",
+   "DCCE1210SS",
+   "VRK30SS",
+   "CFV13",
+   "VARK300M",
+   "VARK390L"
+  ]
+ },
+ "VWH3610SS": {
+  "accesorios": [
+   "DCW36SS",
+   "VINV600",
+   "VINV1200",
+   "DEV900",
+   "DEV15001",
+   "DIL1200",
+   "VSIL10",
+   "ILVK",
+   "G6MD",
+   "G8MD",
+   "BKS36SS",
+   "WGP36SS",
+   "DCCE1210SS",
+   "VRK36SS",
+   "CFV13",
+   "VARK300M",
+   "VARK390L"
+  ]
+ },
+ "VWH530121SS": {
+  "accesorios": [
+   "DCW30SS",
+   "VINV600",
+   "VINV1200",
+   "DEV900",
+   "DEV15001",
+   "DIL1200",
+   "VSIL10",
+   "ILVK",
+   "G6MD",
+   "G8MD",
+   "BKS30SS",
+   "WGP30SS",
+   "DCCE1210SS",
+   "VRK30SS",
+   "CFV13"
+  ]
+ },
+ "VWH536121SS": {
+  "accesorios": [
+   "DCW36SS",
+   "VINV600",
+   "VINV1200",
+   "DEV900",
+   "DEV15001",
+   "DIL1200",
+   "VSIL10",
+   "ILVK",
+   "G6MD",
+   "G8MD",
+   "BKS36SS",
+   "WGP36SS",
+   "DCCE1210SS",
+   "VRK36SS",
+   "CFV13"
+  ]
+ },
+ "VWH530481SS": {
+  "accesorios": [
+   "DCW30SS",
+   "VINV600",
+   "VINV1200",
+   "DEV900",
+   "DEV15001",
+   "DIL1200",
+   "VSIL10",
+   "ILVK",
+   "G6MD",
+   "G8MD",
+   "BKS30SS",
+   "WGP30SS",
+   "DCCE1210SS",
+   "VRK30SS",
+   "CFV13"
+  ]
+ },
+ "VWH536481SS": {
+  "accesorios": [
+   "DCW36SS",
+   "VINV600",
+   "VINV1200",
+   "DEV900",
+   "DEV15001",
+   "DIL1200",
+   "VSIL10",
+   "ILVK",
+   "G6MD",
+   "G8MD",
+   "BKS36SS",
+   "WGP36SS",
+   "DCCE1210SS",
+   "VRK36SS",
+   "CFV13"
+  ]
+ },
+ "VWH548481SS": {
+  "accesorios": [
+   "DCW48SS",
+   "VINV600",
+   "VINV1200",
+   "DEV900",
+   "DEV15001",
+   "DIL1200",
+   "VSIL10",
+   "ILVK",
+   "G6MD",
+   "G8MD",
+   "BKS48SS",
+   "WGP48SS",
+   "DCCE1810SS"
+  ]
+ },
+ "VWH560481SS": {
+  "accesorios": [
+   "DCW60SS",
+   "VINV600",
+   "VINV1200",
+   "DEV900",
+   "DEV15001",
+   "DIL1200",
+   "VSIL10",
+   "ILVK",
+   "G6MD",
+   "G8MD",
+   "BKS60SS",
+   "DCCE2410SS"
+  ]
+ },
+ "VCWH53048SS": {
+  "accesorios": [
+   "DCW30SS",
+   "VINV600",
+   "VINV1200",
+   "DEV900",
+   "DEV15001",
+   "DIL1200",
+   "VSIL10",
+   "ILVK",
+   "G6MD",
+   "G8MD",
+   "BKS30SS",
+   "WGP30SS",
+   "DCCE1210SS",
+   "VRK30SS",
+   "CFV13"
+  ]
+ },
+ "VCWH53648SS": {
+  "accesorios": [
+   "DCW36SS",
+   "VINV600",
+   "VINV1200",
+   "DEV900",
+   "DEV15001",
+   "DIL1200",
+   "VSIL10",
+   "ILVK",
+   "G6MD",
+   "G8MD",
+   "BKS36SS",
+   "WGP36SS",
+   "DCCE1210SS",
+   "VRK36SS",
+   "CFV13"
+  ]
+ },
+ "VCWH54848SS": {
+  "accesorios": [
+   "DCW48SS",
+   "VINV600",
+   "VINV1200",
+   "DEV900",
+   "DEV15001",
+   "DIL1200",
+   "VSIL10",
+   "ILVK",
+   "G6MD",
+   "G8MD",
+   "BKS48SS",
+   "WGP48SS",
+   "DCCE1810SS"
+  ]
+ },
+ "VCWH56048SS": {
+  "accesorios": [
+   "DCW60SS",
+   "VINV600",
+   "VINV1200",
+   "DEV900",
+   "DEV15001",
+   "DIL1200",
+   "VSIL10",
+   "ILVK",
+   "G6MD",
+   "G8MD",
+   "BKS60SS",
+   "DCCE2410SS"
+  ]
+ },
+ "VBCV53638": {
+  "accesorios": [
+   "DCW36SS",
+   "VINV600",
+   "VINV1200",
+   "DEV900",
+   "DEV15001",
+   "DIL1200",
+   "VSIL10",
+   "ILVK",
+   "G6MD",
+   "G8MD",
+   "BKS36SS",
+   "WGP36SS",
+   "DCCE1210SS",
+   "VRK36SS",
+   "CFV13"
+  ]
+ },
+ "VBCV54838": {
+  "accesorios": [
+   "DCW48SS",
+   "VINV600",
+   "VINV1200",
+   "DEV900",
+   "DEV15001",
+   "DIL1200",
+   "VSIL10",
+   "ILVK",
+   "G6MD",
+   "G8MD",
+   "BKS48SS",
+   "WGP48SS",
+   "DCCE1810SS"
+  ]
+ },
+ "VBCV56038": {
+  "accesorios": [
+   "DCW60SS",
+   "VINV600",
+   "VINV1200",
+   "DEV900",
+   "DEV15001",
+   "DIL1200",
+   "VSIL10",
+   "ILVK",
+   "G6MD",
+   "G8MD",
+   "BKS60SS",
+   "DCCE2410SS"
+  ]
+ },
+ "VDD5300SS": {
+  "accesorios": [
+   "VDVE900",
+   "VDVE1200",
+   "VDVI600",
+   "ARKD",
+   "BPFD",
+   "HATKD8",
+   "HATKD10",
+   "RCVD8",
+   "RCVD10",
+   "AXKD2",
+   "AXD5",
+   "VACE36",
+   "FSVDD30SS",
+   "FSVRVDD30SS"
+  ]
+ },
+ "VDD5360SS": {
+  "accesorios": [
+   "VDVE900",
+   "VDVE1200",
+   "VDVI600",
+   "ARKD",
+   "BPFD",
+   "HATKD8",
+   "HATKD10",
+   "RCVD8",
+   "RCVD10",
+   "AXKD2",
+   "AXD5",
+   "VACE36",
+   "FSVDD36SS",
+   "FSVRVDD36SS"
+  ]
+ },
+ "VDD5450SS": {
+  "accesorios": [
+   "VDVE900",
+   "VDVE1200",
+   "VDVI600",
+   "ARKD",
+   "BPFD",
+   "HATKD8",
+   "HATKD10",
+   "RCVD8",
+   "RCVD10",
+   "AXKD2",
+   "AXD5",
+   "VACE36"
+  ]
+ },
+ "VDD5480SS": {
+  "accesorios": [
+   "VDVE900",
+   "VDVE1200",
+   "VDVI600",
+   "ARKD",
+   "BPFD",
+   "HATKD8",
+   "HATKD10",
+   "RCVD8",
+   "RCVD10",
+   "AXKD2",
+   "AXD5",
+   "VACE36",
+   "FSVRVDD48SS"
+  ]
+ },
+ "VCBB5364LSS": {
+  "accesorios": [
+   "PBIRFTKSS",
+   "FCTKSS",
+   "PHK528SS",
+   "VCDPB536LDG"
+  ]
+ },
+ "VCBB5364RSS": {
+  "accesorios": [
+   "PBIRFTKSS",
+   "FCTKSS",
+   "PHK528SS",
+   "VCDPB536RDG"
+  ]
+ },
+ "FDBB5364L": {
+  "accesorios": [
+   "PBIRFTKSS",
+   "FCTKSS",
+   "PHK528SS",
+   "VCDPB536LDG"
+  ]
+ },
+ "FDBB5364R": {
+  "accesorios": [
+   "PBIRFTKSS",
+   "FCTKSS",
+   "PHK528SS",
+   "VCDPB536RDG"
+  ]
+ },
+ "VCSB5424SS": {
+  "accesorios": [
+   "PBIRFTKSS",
+   "PHK528SS",
+   "VCDPS542DG"
+  ]
+ },
+ "FDSB5424": {
+  "accesorios": [
+   "PBIRFTKSS",
+   "PHK528SS",
+   "VCDPS542DG"
+  ]
+ },
+ "VCSB5484SS": {
+  "accesorios": [
+   "PBIRFTKSS",
+   "PHK528SS",
+   "VCDPS548DG"
+  ]
+ },
+ "FDSB5484": {
+  "accesorios": [
+   "PBIRFTKSS",
+   "PHK528SS",
+   "VCDPS548DG"
+  ]
+ },
+ "FDBMIC7360L": {
+  "accesorios": [
+   "VI7364BDPLSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDBMIC7360R": {
+  "accesorios": [
+   "VI7364BDPRSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDFZIC7180L": {
+  "accesorios": [
+   "VI7184CDPSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDFZIC7180R": {
+  "accesorios": [
+   "VI7184CDPSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDFZIC7240L": {
+  "accesorios": [
+   "VI7244CDPSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDFZIC7240R": {
+  "accesorios": [
+   "VI7244CDPSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDFZIC7300L": {
+  "accesorios": [
+   "VI7304CDPSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDFZIC7300R": {
+  "accesorios": [
+   "VI7304CDPSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDFZIC7360L": {
+  "accesorios": [
+   "VI7364CDPSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDFZIC7360R": {
+  "accesorios": [
+   "VI7364CDPSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDREIC7240L": {
+  "accesorios": [
+   "VI7244CDPSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDREIC7240R": {
+  "accesorios": [
+   "VI7244CDPSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDREIC7300L": {
+  "accesorios": [
+   "VI7304CDPSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDREIC7300R": {
+  "accesorios": [
+   "VI7304CDPSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDREIC7360L": {
+  "accesorios": [
+   "VI7364CDPSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDREIC7360R": {
+  "accesorios": [
+   "VI7364CDPSS",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDWCIC7240L": {
+  "accesorios": [
+   "VI7244WDPLSS",
+   "ICAF",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDWCIC7240R": {
+  "accesorios": [
+   "VI7244WDPRSS",
+   "ICAF",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDWCIC7300L": {
+  "accesorios": [
+   "VI7304WDPLSS",
+   "ICAF",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FDWCIC7300R": {
+  "accesorios": [
+   "VI7304WDPRSS",
+   "ICAF",
+   "IC90DS",
+   "ICWFC",
+   "ICWFK"
+  ]
+ },
+ "FRUI5242D": {
+  "accesorios": [
+   "PDPUS524SS",
+   "CDPUS524SS"
+  ]
+ },
+ "FRUI5242G": {
+  "accesorios": [
+   "PDPUG524SS",
+   "CDPUG524SS"
+  ]
+ },
+ "FDUI5242D": {
+  "accesorios": [
+   "PDPUD524SS",
+   "CDPUD524SS"
+  ]
+ },
+ "FBUI5242D": {
+  "accesorios": [
+   "PDPUS524SS",
+   "CDPUS524SS"
+  ]
+ },
+ "FBUI5242G": {
+  "accesorios": [
+   "PDPUG524SS",
+   "CDPUG524SS"
+  ]
+ },
+ "FWUI5152G": {
+  "accesorios": [
+   "PDPUG515SS",
+   "CDPUG515SS"
+  ]
+ },
+ "FWUI5242G": {
+  "accesorios": [
+   "PDPUG524SS",
+   "CDPUG524SS"
+  ]
+ },
+ "FIUI5152D": {
+  "accesorios": [
+   "PDPUS515SS",
+   "CDPUS515SS"
+  ]
+ },
+ "FNIU515D": {
+  "accesorios": [
+   "PDPUS115SS",
+   "CDPUS115SS"
+  ]
+ },
+ "FCIU515D": {
+  "accesorios": [
+   "PDPUS515SS",
+   "CDPUS515SS"
+  ]
+ },
+ "FDWU724": {
+  "accesorios": [
+   "PDDP524SS",
+   "PHK23SS"
+  ]
+ },
+ "FDWU524": {
+  "accesorios": [
+   "PDDP524SS",
+   "PHK23SS"
+  ]
+ },
+ "FDWU524WS": {
+  "accesorios": [
+   "PDDP524SS",
+   "PHK23SS"
+  ]
+ },
+ "VQGI5301LSS": {
+  "accesorios": [
+   "VIJ5301",
+   "CQ530BI",
+   "WGO300",
+   "PROLPK1",
+   "PRONGK1",
+   "LASK1",
+   "LPEK1"
+  ]
+ },
+ "VQGI5361LSS": {
+  "accesorios": [
+   "VIJ5361",
+   "CQ536BI",
+   "WGO360",
+   "PROLPK1",
+   "PRONGK1",
+   "LASK1",
+   "LPEK1"
+  ]
+ },
+ "VQGI5421LSS": {
+  "accesorios": [
+   "VIJ5421",
+   "CQ542BI",
+   "WGO420",
+   "PROLPK1",
+   "PRONGK1",
+   "LASK1",
+   "LPEK1"
+  ]
+ },
+ "VQGI5541LSS": {
+  "accesorios": [
+   "VIJ5541",
+   "CQ554BI",
+   "WGO540",
+   "PROLPK1",
+   "PRONGK1",
+   "LASK1",
+   "LPEK1"
+  ]
+ },
+ "VQGSB5131LSS": {
+  "accesorios": [
+   "VIJSB2"
+  ]
+ },
+ "VQGPB5201LSS": {
+  "accesorios": [
+   "VIJPB"
+  ]
+ },
+ "RVGR33025BSSLP": {
+  "accesorios": [
+   "RD301BG6SS",
+   "RD24CSTSS",
+   "RLPKR2",
+   "RDPGD",
+   "RVCH330SS"
+  ]
+ },
+ "RVDR33025BSSLP": {
+  "accesorios": [
+   "RD301BG6SS",
+   "RD24CSTSS",
+   "RLPKR2",
+   "RDPGD",
+   "RVCH330SS"
+  ]
+ },
+ "RVER33015BSS": {
+  "accesorios": [
+   "RD30BG6SS",
+   "RD24CSTSS",
+   "RLPKR2",
+   "RDPGD",
+   "RVCH330SS"
+  ]
+ },
+ "RVIR3304BSS": {
+  "accesorios": [
+   "RD301BG6SS",
+   "RD24CSTSS",
+   "RLPKR2",
+   "RDPGD",
+   "RVCH330SS"
+  ]
+ },
+ "RVGC33015BSSLP": {
+  "accesorios": [
+   "WRGVGC",
+   "LPKVGC",
+   "NATVGC",
+   "LPKHAVGC",
+   "NKHAVGC",
+   "SSKKVGSU",
+   "BCKKVICU"
+  ]
+ },
+ "RVGC33615BSSLP": {
+  "accesorios": [
+   "WRGVGC",
+   "LPKVGC",
+   "NATVGC",
+   "LPKHAVGC",
+   "NKHAVGC",
+   "SSKKVGSU",
+   "BCKKVICU"
+  ]
+ },
+ "RVM320SS": {
+  "accesorios": [
+   "RVMTK330SS"
+  ]
+ },
+ "RVMH330SS": {
+  "accesorios": [
+   "CFOR"
+  ]
+ },
+ "RVMHC330SS": {
+  "accesorios": [
+   "CFOR1"
+  ]
+ },
+ "RVEWD330SS": {
+  "accesorios": [
+   "PANVEWD"
+  ]
+ },
+ "RVCH330SS": {
+  "accesorios": [
+   "DRK30SS",
+   "CFD12",
+   "DCCE1610SS"
+  ]
+ },
+ "RVCH336SS": {
+  "accesorios": [
+   "DRK36SS",
+   "CFD14",
+   "DCCE1610SS"
+  ]
+ },
+ "RVFFR336SS": {
+  "accesorios": [
+   "RWFRVFFR",
+   "TKRVFFRSS",
+   "GKRVFFRSS"
+  ]
+ },
+ "TVDR3614BDG": {
+  "accesorios": [
+   "CBGTVDR",
+   "LPKTVDR1",
+   "TVDDP524DG"
+  ]
+ },
+ "TVDR4816BDG": {
+  "accesorios": [
+   "CBGTVDR",
+   "LPKTVDR1",
+   "TVDDP524DG"
+  ]
+ },
+ "TVDR4814GDG": {
+  "accesorios": [
+   "CBGTVDR",
+   "LPKTVDR1",
+   "TVDDP524DG"
+  ]
+ },
+ "TVDR4814IDG": {
+  "accesorios": [
+   "CBGTVDR",
+   "LPKTVDR1",
+   "TVDDP524DG"
+  ]
+ },
+ "TVDR6618BDG": {
+  "accesorios": [
+   "CBGTVDR",
+   "LPKTVDR1",
+   "TVDDP524DG"
+  ]
+ },
+ "TVDR6616GDG": {
+  "accesorios": [
+   "CBGTVDR",
+   "LPKTVDR1",
+   "TVDDP524DG"
+  ]
+ },
+ "TVDR6616IDG": {
+  "accesorios": [
+   "CBGTVDR",
+   "LPKTVDR1",
+   "TVDDP524DG"
+  ]
  }
 }

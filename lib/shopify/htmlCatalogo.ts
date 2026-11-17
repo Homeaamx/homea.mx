@@ -20,7 +20,7 @@ import marcasJson from "@/data/marcas.json";
 import descuentosMarca from "@/data/descuentos-marca.json";
 import type { Decision } from "@/lib/reglas/reglaMarca";
 import type { TipoCambio } from "@/lib/tipoCambio";
-import { TONOS_ESTANDAR, type Tono } from "@/lib/coloresMarca";
+import { TONOS_ESTANDAR, fondoVariante, type Tono } from "@/lib/coloresMarca";
 import { coloresDeModelo, muestraFiltroColor, type ColorHermano } from "@/lib/coloresModelo";
 import { IMAGEN_RESPALDO } from "@/lib/imagenRespaldo";
 
@@ -429,7 +429,7 @@ function coloresVarianteTarjetaHtml(p: ProductoVivo, tc: TipoCambio): string {
     if (/^standard/i.test(c.nombre) && tonos.length) {
       for (const t of tonos) ops.push({ i, c, nombre: `Standard Color · ${t.nombre}`, tono: t.nombre, fondo: t.hex, precio });
     } else {
-      const fondo = /^standard/i.test(c.nombre) ? FONDO_ESTANDAR : /^custom/i.test(c.nombre) ? FONDO_CUSTOM : FONDO_ACERO;
+      const fondo = fondoVariante(c.nombre) ?? (/^standard/i.test(c.nombre) ? FONDO_ESTANDAR : /^custom/i.test(c.nombre) ? FONDO_CUSTOM : FONDO_ACERO);
       ops.push({ i, c, nombre: c.nombre, tono: "", fondo, precio });
     }
   });
@@ -628,6 +628,7 @@ const ORDEN_FILTROS = [
   "panel",
   "color",
   "acabado",
+  "herraje",
   "bisagra",
   "puerta",
   "voltaje",
@@ -800,6 +801,27 @@ export function panelFiltrosHtml(
     extras.set("altitud", grupoHtml("Altitud", "altitud", etiquetas, false));
   }
 
+  // Herraje (Carla, 2026-11-17, carga Viking): las piezas que también se venden
+  // con detalles de latón cepillado llevan `filtros.herraje = Latón cepillado`.
+  // Como Altitud: sale solo en los listados que traen al menos una.
+  const porHerraje = new Map<string, { texto: string; n: number }>();
+  for (const p of productos) {
+    for (const v of p.filtros.herraje ?? []) {
+      const c = porHerraje.get(slugValor(v)) ?? { texto: v, n: 0 };
+      c.n++;
+      porHerraje.set(slugValor(v), c);
+    }
+  }
+  if (porHerraje.size) {
+    const etiquetas = [...porHerraje]
+      .map(
+        ([k, c]) =>
+          `<label><input type="checkbox" data-fk="herraje" value="${esc(k)}"> <span class="flbl">${esc(c.texto)}</span> <span class="count figures">${c.n}</span></label>`,
+      )
+      .join("");
+    extras.set("herraje", grupoHtml("Herraje", "herraje", etiquetas, false));
+  }
+
   // Unión ordenada de los filtros de cada tipo presente (tabla de filtros v2).
   const defs: DefFiltro[] = [];
   for (const tipo of new Set([...tipos, ...productos.map((p) => p.tipo)])) {
@@ -963,6 +985,15 @@ export function conteoHtml(productos: ProductoVivo[]): string {
  * pregunta "¿Gas LP o gas natural?" antes de agregarla (Carla, 2026-11-12).
  */
 export function gasAttr(p: ProductoVivo): string {
+  // Viking (Carla, 2026-11-17): cada color trae su LP y su natural. Va un mapa por
+  // SKU del color; CarritoProvider toma el del color que esté elegido en el botón.
+  if (p.colores.some((c) => (c.gases?.length ?? 0) > 1)) {
+    const mapa: Record<string, { n: string; vid: string; sku: string }[]> = {};
+    for (const c of p.colores) {
+      if ((c.gases?.length ?? 0) > 1) mapa[c.sku] = c.gases!.map((g) => ({ n: g.nombre, vid: g.variantId.split("/").pop() ?? "", sku: g.sku }));
+    }
+    return ` data-cart-gas="${esc(JSON.stringify(mapa))}"`;
+  }
   if (p.gases.length < 2) return "";
   const op = p.gases.map((g) => ({ n: g.nombre, vid: g.variantId.split("/").pop() ?? "", sku: g.sku }));
   return ` data-cart-gas="${esc(JSON.stringify(op))}"`;
@@ -1004,6 +1035,9 @@ export function ctaHtml(p: ProductoVivo, decision: Decision, precio: PrecioPubli
 /* ---------- Opciones de color --------------------------------------------- */
 
 function notaColor(nombre: string, tono?: Tono): string {
+  if (!tono && fondoVariante(nombre) && !/^acero inoxidable$/i.test(nombre)) {
+    return `${nombre}. Las fotos pueden mostrar el modelo en otro color; tu asesor confirma el color contigo.`;
+  }
   if (tono) {
     return `Standard Color · ${tono.nombre}. No hay foto por tono: el tono queda anotado en tu pedido y tu asesor lo confirma contigo.`;
   }
@@ -1043,6 +1077,8 @@ function precioYColorHtml(p: ProductoVivo, precio: PrecioPublico, tc: TipoCambio
       }
       if (/^standard/i.test(o.nombre)) return boton(o, i, "is-ini", `<span aria-hidden="true">SC</span>`);
       if (/^custom/i.test(o.nombre)) return boton(o, i, "is-ini", `<span aria-hidden="true">CC</span>`);
+      const fondo = fondoVariante(o.nombre);
+      if (fondo) return boton(o, i, "is-tono", "").replace('aria-label=', `style="--tono:${fondo}" aria-label=`);
       return boton(o, i, "is-acero", "");
     })
     .join("");

@@ -52,7 +52,7 @@ const PRODUCTOS_USD = /* GraphQL */ `
       nodes {
         id
         usd: metafield(namespace: "homea", key: "precio_usd") { value }
-        variants(first: 20) { nodes { id price compareAtPrice } }
+        variants(first: 100) { nodes { id price compareAtPrice } }
       }
     }
   }

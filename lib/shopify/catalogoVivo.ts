@@ -41,6 +41,8 @@ export const CLAVES_FILTRO = [
   "panel",
   // Sub-Zero (Carla, 2026-11-10): solo "Alta altitud"; las demás piezas no llevan valor.
   "altitud",
+  // Viking (Carla, 2026-11-17): "Latón cepillado" en las piezas que también se venden con ese herraje.
+  "herraje",
 ] as const;
 
 const IDENTIFICADORES = [
@@ -65,7 +67,7 @@ const CAMPOS_PRODUCTO = /* GraphQL */ `
     descriptionHtml
     availableForSale
     images(first: 8) { nodes { url altText width height } }
-    variants(first: 5) {
+    variants(first: 100) {
       nodes {
         id
         sku
@@ -201,6 +203,11 @@ export interface ColorVivo {
   mxn: number;
   mxnLista: number | null;
   usdLista: number | null;
+  /**
+   * Gas de ESTE color (Viking: cada color/herraje tiene su variante LP y natural,
+   * Carla 2026-11-17). Vacío si la pieza no tiene opción de gas.
+   */
+  gases?: GasVivo[];
 }
 
 /**
@@ -212,6 +219,10 @@ export interface GasVivo {
   /** SKU de la variante: `<modelo>-LP` / `<modelo>-NG`. */
   sku: string;
   nombre: string;
+  /** Precio de esta variante (Viking: hay LP que cuesta distinto que el natural). */
+  mxn?: number;
+  mxnLista?: number | null;
+  usdLista?: number | null;
 }
 
 /** Nombre de la opción de Shopify que lleva el gas. */
@@ -350,31 +361,53 @@ function normalizar(raw: ProductoRaw): ProductoVivo | null {
   const enStock = (filtros.disponibilidad ?? []).includes("En stock");
   // Variantes de color: comparten modelo y foto; el USD de cada una sale de la
   // proporción de su precio de lista con el de la base (repreciar.ts la conserva).
-  const colorDe = (x: ProductoRaw["variants"]["nodes"][number]) =>
-    x.selectedOptions?.find((o) => o.name === "Color")?.value ?? null;
-  const listaDe = (x: ProductoRaw["variants"]["nodes"][number]) =>
-    Number.parseFloat((x.compareAtPrice ?? x.price).amount);
-  const colores: ColorVivo[] =
-    raw.variants.nodes.length > 1 && raw.variants.nodes.every((x) => colorDe(x))
-      ? raw.variants.nodes.map((x) => {
-          const precio = Number.parseFloat(x.price.amount);
-          const lista = x.compareAtPrice ? Number.parseFloat(x.compareAtPrice.amount) : null;
-          return {
-            variantId: x.id,
-            sku: x.sku ?? v.sku ?? "",
-            nombre: colorDe(x) as string,
-            mxn: precio,
-            mxnLista: lista && lista > precio ? lista : null,
-            usdLista: usdLista === null ? null : x === v ? usdLista : Math.round(usdLista * (listaDe(x) / listaDe(v))),
-          };
-        })
-      : [];
-  const gasDe = (x: ProductoRaw["variants"]["nodes"][number]) =>
-    x.selectedOptions?.find((o) => o.name === OPCION_GAS)?.value ?? null;
-  const gases: GasVivo[] =
-    raw.variants.nodes.length > 1 && raw.variants.nodes.every((x) => gasDe(x))
-      ? raw.variants.nodes.map((x) => ({ variantId: x.id, sku: x.sku ?? v.sku ?? "", nombre: gasDe(x) as string }))
-      : [];
+  type Nodo = ProductoRaw["variants"]["nodes"][number];
+  const opcion = (x: Nodo, nombre: string) => x.selectedOptions?.find((o) => o.name === nombre)?.value ?? null;
+  // Color de la variante. Viking (Carla, 2026-11-17) combina Color × Herraje × Tipo
+  // de gas: cada círculo es Color (+ " · Latón cepillado"), y el gas se elige al
+  // agregar. Alfresco solo trae Color; una pieza solo con Herraje también vale.
+  const colorDe = (x: Nodo) => {
+    const c = opcion(x, "Color");
+    const h = opcion(x, "Herraje");
+    if (!c && !h) return null;
+    const laton = h && /lat[oó]n/i.test(h);
+    return `${c ?? "Acero inoxidable"}${laton ? " · Latón cepillado" : ""}`;
+  };
+  const gasDe = (x: Nodo) => opcion(x, OPCION_GAS);
+  const listaDe = (x: Nodo) => Number.parseFloat((x.compareAtPrice ?? x.price).amount);
+  const aGas = (x: Nodo): GasVivo => {
+    const precio = Number.parseFloat(x.price.amount);
+    const lista = x.compareAtPrice ? Number.parseFloat(x.compareAtPrice.amount) : null;
+    return {
+      variantId: x.id,
+      sku: x.sku ?? v.sku ?? "",
+      nombre: gasDe(x) as string,
+      mxn: precio,
+      mxnLista: lista && lista > precio ? lista : null,
+      usdLista: usdLista === null ? null : x === v ? usdLista : Math.round(usdLista * (listaDe(x) / listaDe(v))),
+    };
+  };
+  const nodos = raw.variants.nodes;
+  const conColores = nodos.length > 1 && nodos.every((x) => colorDe(x)) && new Set(nodos.map(colorDe)).size > 1;
+  const conGas = nodos.length > 1 && nodos.every((x) => gasDe(x));
+  // Un círculo por color: su primera variante (Gas LP va primero en Viking).
+  const porColor = new Map<string, Nodo[]>();
+  if (conColores) for (const x of nodos) porColor.set(colorDe(x) as string, [...(porColor.get(colorDe(x) as string) ?? []), x]);
+  const colores: ColorVivo[] = [...porColor.entries()].map(([nombre, xs]) => {
+    const x = xs[0];
+    const precio = Number.parseFloat(x.price.amount);
+    const lista = x.compareAtPrice ? Number.parseFloat(x.compareAtPrice.amount) : null;
+    return {
+      variantId: x.id,
+      sku: x.sku ?? v.sku ?? "",
+      nombre,
+      mxn: precio,
+      mxnLista: lista && lista > precio ? lista : null,
+      usdLista: usdLista === null ? null : x === v ? usdLista : Math.round(usdLista * (listaDe(x) / listaDe(v))),
+      ...(conGas && xs.length > 1 ? { gases: xs.map(aGas) } : {}),
+    };
+  });
+  const gases: GasVivo[] = conColores ? (colores[0]?.gases ?? []) : conGas ? nodos.map(aGas) : [];
   return {
     sku: v.sku,
     slug: slugDeSku(v.sku),
@@ -500,10 +533,19 @@ export async function productoVivoPorSku(sku: string): Promise<ProductoVivo | nu
 function conColor(p: ProductoVivo, sku: string): ProductoVivo | null {
   // Variante de gas (Blaze …-NG): mismo precio, solo cambian SKU y variante.
   const g = p.gases.find((x) => x.sku.toUpperCase() === sku && x.variantId !== p.variantId);
-  if (g) return { ...p, sku: g.sku, variantId: g.variantId, color: g.nombre };
-  const c = p.colores.find((x) => x.sku.toUpperCase() === sku && x.variantId !== p.variantId);
-  if (!c) return null;
-  return { ...p, sku: c.sku, variantId: c.variantId, mxn: c.mxn, mxnLista: c.mxnLista, usdLista: c.usdLista, color: c.nombre };
+  if (g && !p.colores.length) return { ...p, sku: g.sku, variantId: g.variantId, color: g.nombre };
+  // Color (y, en Viking, el gas de ese color: …SBLP / …SB).
+  for (const c of p.colores) {
+    const gc = c.gases?.find((x) => x.sku.toUpperCase() === sku);
+    if (c.sku.toUpperCase() !== sku && !gc) continue;
+    if (c.variantId === p.variantId && !gc) return null;
+    const variante = gc ?? c;
+    if (variante.variantId === p.variantId) return null;
+    const nombre = gc && c.gases && c.gases.length > 1 ? `${c.nombre} · ${gc.nombre}` : c.nombre;
+    const precio = gc && gc.mxn !== undefined ? { mxn: gc.mxn, mxnLista: gc.mxnLista ?? null, usdLista: gc.usdLista ?? null } : { mxn: c.mxn, mxnLista: c.mxnLista, usdLista: c.usdLista };
+    return { ...p, sku: variante.sku, variantId: variante.variantId, ...precio, color: nombre };
+  }
+  return null;
 }
 
 /**
