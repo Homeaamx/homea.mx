@@ -66,3 +66,5 @@ Carla pidió para Viking **un producto por modelo** (foto de acero) con los colo
 - El botón lleva en `data-cart-gas` un mapa por SKU de color y `CarritoProvider` pregunta el gas del color elegido.
 - `filtros.color` lleva el tono percibido de todos los colores del modelo y `filtros.herraje = Latón cepillado` si el modelo también se vende con latón (grupo "Herraje" del panel).
 - `/producto/<sku de variante>` redirige (308) a la ficha del modelo.
+
+**Lynx (2026-11-17):** mismo esquema que Viking sin herraje. Los 16 equipos con *Exclusive Color Finishes* llevan **Color** (Acero Inoxidable + California Poppy, Obsidian, Desert Sage, Limestone, Pacific Blue, Sierra, Glacier, Surf; precio ECF de la lista) × **Tipo de gas** cuando aplica; SKU de color = modelo + código Lynx (`L36TROB`, `L36TROB-NG`). Tonos en `TONOS_VARIANTE` (muestras de lynxgrills.com). Kamado LCGRBK ↔ LCGRMG va como dos productos (grupo `colores` a mano: el script no quita "Brillante").

@@ -4027,6 +4027,8 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="falmec"] { height: 26px; }
 /* Tecnolam (2026-11-14): OneDrive PROVEEDORES/PROVEEDORES PRODUCTO/LOGOTIPOS PROVEEDORES/Tecnolam PNG.png (isotipo + wordmark negro, PNG transparente); proporción 4.6:1. */
 .pdp-logo[data-marca="tecnolam"] { height: 28px; }
+/* Lynx (2026-11-17): OneDrive DISEÑO 2026/Logos Marcas png/MIDDLEBY/lynx.png (isotipo + wordmark negro); proporción 5:1. */
+.pdp-logo[data-marca="lynx"] { height: 30px; }
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
    técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
    una línea, baja a dos dentro de su pestaña. */

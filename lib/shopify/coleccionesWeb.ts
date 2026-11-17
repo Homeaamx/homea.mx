@@ -126,6 +126,8 @@ export const TIPOS_WEB: TipoWeb[] = [
   { tipo: "Gabinetes", coleccion: "gabinetes", slugRiel: "gabinetes", ruta: `${EXTERIOR.ruta}?tipo=gabinetes`, macro: EXTERIOR, sub1: EXTERIOR },
   // Mesas y tazones de fuego (Blaze; Carla, 2026-11-12).
   { tipo: "Fire pits", coleccion: "fire-pits", slugRiel: "fire-pits", ruta: `${EXTERIOR.ruta}?tipo=fire-pits`, macro: EXTERIOR, sub1: EXTERIOR },
+  // Despachadores de cerveza (kegerators) de exterior (Lynx LN24BF1; Carla, 2026-11-17).
+  { tipo: "Despachadores de cerveza", coleccion: "despachadores-de-cerveza", slugRiel: "despachadores-de-cerveza", ruta: `${EXTERIOR.ruta}?tipo=despachadores-de-cerveza`, macro: EXTERIOR, sub1: EXTERIOR, nombreRiel: "Despachador de cerveza" },
   // Una colección por macro (tabla de filtros: Subcategoría 2 = la macro) y el
   // riel por valor de filtro. Colecciones creadas y publicadas al canal Headless
   // el 2026-10-14 (aún sin piezas).

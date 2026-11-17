@@ -77,6 +77,7 @@ const MUESTRAS: Record<string, string> = {
   negro: "#1d1d1d",
   negra: "#1d1d1d",
   "negro mate": "#222222",
+  "gris mate": "#6f706d",
   // GE Profile (2026-11-06): Black Slate (gris muy oscuro mate) y Grafito (centros de lavado).
   "black slate": "linear-gradient(135deg, #5a5856 0%, #3d3b39 50%, #2c2a28 100%)",
   grafito: "#4a4a48",

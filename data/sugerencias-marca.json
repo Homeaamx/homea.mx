@@ -1,5 +1,5 @@
 {
- "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador. 2026-11-14 (Carla): Porsche x Smeg, 50's Style y Dolce&Gabbana son líneas distintas: sus círculos de color no se mezclan (refris FAB28, tostador TSF01, licuadora BLF03); D&G FAB28URDGME3 sin círculos. Fulgor Milano, 2026-11-14: cocción → campana del mismo ancho; hornos → cajón calientaplatos; cafetera ↔ trim; lavavajillas panelable ↔ jaladera; refrigeración acero ↔ panelable como círculos (misma bisagra y medida, como Sub-Zero) y columna de refrigerador → congelador y cava. Falmec, 2026-11-14: colores de campanas decorativas, Stella Plus, Polar Evo y Valentina Plus, lámparas Sophie y accesorios Spazio; accesorios = los que la lista pone bajo cada campana (filtros primero; en Stella Plus y Alba, que se venden sin motor, los motores primero). Tecnolam, 2026-11-14: círculos Nevada Mix (4 colores, 1 y 2 tinas), monomandos acero/cromo ↔ negro mate, Doppio, BIM30, H45MWCG, TECDW60 acero ↔ panelable, Lyra, Altair, Vortex AC ↔ NE ↔ SI (SI = plata, distinta al acero AC: Carla 2026-11-17; cava H45WC24 fuera: la .NE abre hacia abajo y la B de lado); comal GRIDDLE en FGR366/GTR366/GTR488, KITMAGIC en las Magic, pareja TSD559PR ↔ TSD559PF.",
+ "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador. 2026-11-14 (Carla): Porsche x Smeg, 50's Style y Dolce&Gabbana son líneas distintas: sus círculos de color no se mezclan (refris FAB28, tostador TSF01, licuadora BLF03); D&G FAB28URDGME3 sin círculos. Fulgor Milano, 2026-11-14: cocción → campana del mismo ancho; hornos → cajón calientaplatos; cafetera ↔ trim; lavavajillas panelable ↔ jaladera; refrigeración acero ↔ panelable como círculos (misma bisagra y medida, como Sub-Zero) y columna de refrigerador → congelador y cava. Falmec, 2026-11-14: colores de campanas decorativas, Stella Plus, Polar Evo y Valentina Plus, lámparas Sophie y accesorios Spazio; accesorios = los que la lista pone bajo cada campana (filtros primero; en Stella Plus y Alba, que se venden sin motor, los motores primero). Tecnolam, 2026-11-14: círculos Nevada Mix (4 colores, 1 y 2 tinas), monomandos acero/cromo ↔ negro mate, Doppio, BIM30, H45MWCG, TECDW60 acero ↔ panelable, Lyra, Altair, Vortex AC ↔ NE ↔ SI (SI = plata, distinta al acero AC: Carla 2026-11-17; cava H45WC24 fuera: la .NE abre hacia abajo y la B de lado); comal GRIDDLE en FGR366/GTR366/GTR488, KITMAGIC en las Magic, pareja TSD559PR ↔ TSD559PF. Lynx, 2026-11-17: asadores → chaqueta, funda, protector de viento, carrito y kits de gas (PROLPK1/PRONGK1/WGO* los publica Viking); planchas Asado, hornos Napoli y quemadores → su funda, chaqueta y kits; despachador de cerveza → torres y fundas; tarjas → monomando LPFK y funda; puertas Ventana → kits LDRKS/LDRKL; cada accesorio → sus equipos.",
  "DW2451": {
   "accesorios": [
    "9019420",
@@ -34729,6 +34729,864 @@
    "CBGTVDR",
    "LPKTVDR1",
    "TVDDP524DG"
+  ]
+ },
+ "L30R-3": {
+  "accesorios": [
+   "LIJ30",
+   "CC30",
+   "WGO300",
+   "L30CART",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "ADAKIT",
+   "LSCF"
+  ]
+ },
+ "L30TR": {
+  "accesorios": [
+   "LIJ30",
+   "CC30",
+   "WGO300",
+   "L30CART",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "ADAKIT",
+   "LSCF"
+  ]
+ },
+ "L30ATR": {
+  "accesorios": [
+   "LIJ30",
+   "CC30",
+   "WGO300",
+   "L30CART",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "ADAKIT",
+   "LSCF"
+  ]
+ },
+ "L30TRF": {
+  "accesorios": [
+   "CC30F",
+   "CC30FCB",
+   "WGO300",
+   "LSTLP",
+   "LCB2-3",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "LSCF"
+  ]
+ },
+ "L30ATRF": {
+  "accesorios": [
+   "CC30F",
+   "CC30FCB",
+   "WGO300",
+   "LSTLP",
+   "LCB2-3",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "LSCF"
+  ]
+ },
+ "L36R-3": {
+  "accesorios": [
+   "LIJ36",
+   "CC36",
+   "WGO360",
+   "L36CART",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "ADAKIT",
+   "LSCF"
+  ]
+ },
+ "L36TR": {
+  "accesorios": [
+   "LIJ36",
+   "CC36",
+   "WGO360",
+   "L36CART",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "ADAKIT",
+   "LSCF"
+  ]
+ },
+ "L36ATR": {
+  "accesorios": [
+   "LIJ36",
+   "CC36",
+   "WGO360",
+   "L36CART",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "ADAKIT",
+   "LSCF"
+  ]
+ },
+ "L36TRF": {
+  "accesorios": [
+   "CC36F",
+   "CC36FCB",
+   "WGO360",
+   "LSTLP",
+   "LCB2-3",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "LSCF"
+  ]
+ },
+ "L36ATRF": {
+  "accesorios": [
+   "CC36F",
+   "CC36FCB",
+   "WGO360",
+   "LSTLP",
+   "LCB2-3",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "LSCF"
+  ]
+ },
+ "L42R-3": {
+  "accesorios": [
+   "LIJ42",
+   "CC42",
+   "WGO420",
+   "L42CART",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "ADAKIT",
+   "LSCF"
+  ]
+ },
+ "L42TR": {
+  "accesorios": [
+   "LIJ42",
+   "CC42",
+   "WGO420",
+   "L42CART",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "ADAKIT",
+   "LSCF"
+  ]
+ },
+ "L42ATR": {
+  "accesorios": [
+   "LIJ42",
+   "CC42",
+   "WGO420",
+   "L42CART",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "ADAKIT",
+   "LSCF"
+  ]
+ },
+ "L42TRF": {
+  "accesorios": [
+   "CC42F",
+   "CC42FCB",
+   "WGO420",
+   "LSTLP",
+   "LCB2-3",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "LSCF"
+  ]
+ },
+ "L42ATRF": {
+  "accesorios": [
+   "CC42F",
+   "CC42FCB",
+   "WGO420",
+   "LSTLP",
+   "LCB2-3",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "LSCF"
+  ]
+ },
+ "L54TR": {
+  "accesorios": [
+   "LIJ54",
+   "CC54",
+   "WGO540",
+   "L54CART",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "ADAKIT",
+   "LSCF"
+  ]
+ },
+ "L54TRF": {
+  "accesorios": [
+   "CC54F",
+   "CC54FCB",
+   "WGO540",
+   "LSTLP",
+   "LCB2-3",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "LSCF"
+  ]
+ },
+ "L30R-3+LMKC54": {
+  "accesorios": [
+   "CC30M",
+   "WGO300",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "LSCF"
+  ]
+ },
+ "L30TR+LMKC54": {
+  "accesorios": [
+   "CC30M",
+   "WGO300",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "LSCF"
+  ]
+ },
+ "L30ATR+LMKC54": {
+  "accesorios": [
+   "CC30M",
+   "WGO300",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411",
+   "RB8",
+   "GP",
+   "LSCF"
+  ]
+ },
+ "LCGRBK": {
+  "accesorios": [
+   "CCLCG"
+  ],
+  "colores": [
+   "LCGRMG"
+  ]
+ },
+ "LCGRMG": {
+  "accesorios": [
+   "CCLCG"
+  ],
+  "colores": [
+   "LCGRBK"
+  ]
+ },
+ "L30AG": {
+  "accesorios": [
+   "LIJ30",
+   "CCASADO",
+   "L30CART",
+   "LMKC54",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411"
+  ]
+ },
+ "L30AG+L30CART": {
+  "accesorios": [
+   "CCASADOF",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411"
+  ]
+ },
+ "L30AG+LMKC54": {
+  "accesorios": [
+   "CCAGSERVE",
+   "PROLPK1",
+   "PRONGK1",
+   "LBR411"
+  ]
+ },
+ "LPZA": {
+  "accesorios": [
+   "CCLPZA",
+   "CCLPZAB",
+   "LMKC54",
+   "LPZALPK",
+   "LPZANGK"
+  ]
+ },
+ "LPZAF": {
+  "accesorios": [
+   "CCLPZAF",
+   "LPZALPK",
+   "LPZANGK"
+  ]
+ },
+ "LSB1-3": {
+  "accesorios": [
+   "CCLSB1",
+   "PROLPK1",
+   "PRONGK1",
+   "LASK",
+   "LPEK"
+  ]
+ },
+ "LSB2-2": {
+  "accesorios": [
+   "CCLSB",
+   "LIJSB2",
+   "PROLPK1",
+   "PRONGK1",
+   "LASK",
+   "LPEK"
+  ]
+ },
+ "LSB2PC-1": {
+  "accesorios": [
+   "CCLSB2PC",
+   "PROLPK1",
+   "PRONGK1",
+   "LASK",
+   "LPEK"
+  ]
+ },
+ "LPB": {
+  "accesorios": [
+   "CCLPB",
+   "LIJPB",
+   "PROLPK1",
+   "PRONGK1",
+   "LASK",
+   "LPEK"
+  ]
+ },
+ "LCB2-3": {
+  "accesorios": [
+   "CC30FCB",
+   "CC36FCB",
+   "CC42FCB",
+   "CC54FCB",
+   "PROLPK1",
+   "PRONGK1"
+  ]
+ },
+ "LN24BF1": {
+  "accesorios": [
+   "L24TWS",
+   "L24TWD",
+   "CCTWR",
+   "CCTWD"
+  ]
+ },
+ "LN15ICE": {
+  "accesorios": [
+   "LN15ICE-DP"
+  ]
+ },
+ "LSK18": {
+  "accesorios": [
+   "LPFK",
+   "CCLSK18"
+  ]
+ },
+ "LSK24": {
+  "accesorios": [
+   "LPFK",
+   "CCLSK24"
+  ]
+ },
+ "LSK30": {
+  "accesorios": [
+   "LPFK",
+   "CCLSK30"
+  ]
+ },
+ "LCS30": {
+  "accesorios": [
+   "CCLSK30"
+  ]
+ },
+ "LCS30F": {
+  "accesorios": [
+   "LCSPS"
+  ]
+ },
+ "LDR18L-4": {
+  "accesorios": [
+   "LDRKS"
+  ]
+ },
+ "LDR18R-4": {
+  "accesorios": [
+   "LDRKS"
+  ]
+ },
+ "LDR30T-4": {
+  "accesorios": [
+   "LDRKS"
+  ]
+ },
+ "LDR24L-4": {
+  "accesorios": [
+   "LDRKL"
+  ]
+ },
+ "LDR24R-4": {
+  "accesorios": [
+   "LDRKL"
+  ]
+ },
+ "LDR36T-4": {
+  "accesorios": [
+   "LDRKL"
+  ]
+ },
+ "LDR42T-4": {
+  "accesorios": [
+   "LDRKL"
+  ]
+ },
+ "LMD": {
+  "accesorios": [
+   "LMD-KIT"
+  ]
+ },
+ "LMD-4": {
+  "accesorios": [
+   "LMD-KIT"
+  ]
+ },
+ "L20TR": {
+  "accesorios": [
+   "L18TS"
+  ]
+ },
+ "L20TR-4": {
+  "accesorios": [
+   "L18TS"
+  ]
+ },
+ "LTA30": {
+  "accesorios": [
+   "L18TS"
+  ]
+ },
+ "LTA30-4": {
+  "accesorios": [
+   "L18TS"
+  ]
+ },
+ "L18TS": {
+  "accesorios": [
+   "CCTS"
+  ]
+ },
+ "LIJ30": {
+  "accesorios": [
+   "L30R-3",
+   "L30TR",
+   "L30ATR",
+   "L30AG"
+  ]
+ },
+ "CC30": {
+  "accesorios": [
+   "L30R-3",
+   "L30TR",
+   "L30ATR"
+  ]
+ },
+ "WGO300": {
+  "accesorios": []
+ },
+ "L30CART": {
+  "accesorios": [
+   "L30R-3",
+   "L30TR",
+   "L30ATR",
+   "L30AG"
+  ]
+ },
+ "PROLPK1": {
+  "accesorios": []
+ },
+ "PRONGK1": {
+  "accesorios": []
+ },
+ "LBR411": {
+  "accesorios": []
+ },
+ "RB8": {
+  "accesorios": []
+ },
+ "GP": {
+  "accesorios": []
+ },
+ "ADAKIT": {
+  "accesorios": []
+ },
+ "LSCF": {
+  "accesorios": []
+ },
+ "CC30F": {
+  "accesorios": [
+   "L30TRF",
+   "L30ATRF"
+  ]
+ },
+ "CC30FCB": {
+  "accesorios": [
+   "L30TRF",
+   "L30ATRF",
+   "LCB2-3"
+  ]
+ },
+ "LSTLP": {
+  "accesorios": [
+   "L30TRF",
+   "L30ATRF",
+   "L36TRF",
+   "L36ATRF",
+   "L42TRF",
+   "L42ATRF"
+  ]
+ },
+ "LIJ36": {
+  "accesorios": [
+   "L36R-3",
+   "L36TR",
+   "L36ATR"
+  ]
+ },
+ "CC36": {
+  "accesorios": [
+   "L36R-3",
+   "L36TR",
+   "L36ATR"
+  ]
+ },
+ "WGO360": {
+  "accesorios": []
+ },
+ "L36CART": {
+  "accesorios": [
+   "L36R-3",
+   "L36TR",
+   "L36ATR"
+  ]
+ },
+ "CC36F": {
+  "accesorios": [
+   "L36TRF",
+   "L36ATRF"
+  ]
+ },
+ "CC36FCB": {
+  "accesorios": [
+   "L36TRF",
+   "L36ATRF",
+   "LCB2-3"
+  ]
+ },
+ "LIJ42": {
+  "accesorios": [
+   "L42R-3",
+   "L42TR",
+   "L42ATR"
+  ]
+ },
+ "CC42": {
+  "accesorios": [
+   "L42R-3",
+   "L42TR",
+   "L42ATR"
+  ]
+ },
+ "WGO420": {
+  "accesorios": []
+ },
+ "L42CART": {
+  "accesorios": [
+   "L42R-3",
+   "L42TR",
+   "L42ATR"
+  ]
+ },
+ "CC42F": {
+  "accesorios": [
+   "L42TRF",
+   "L42ATRF"
+  ]
+ },
+ "CC42FCB": {
+  "accesorios": [
+   "L42TRF",
+   "L42ATRF",
+   "LCB2-3"
+  ]
+ },
+ "LIJ54": {
+  "accesorios": [
+   "L54TR"
+  ]
+ },
+ "CC54": {
+  "accesorios": [
+   "L54TR"
+  ]
+ },
+ "WGO540": {
+  "accesorios": []
+ },
+ "L54CART": {
+  "accesorios": [
+   "L54TR"
+  ]
+ },
+ "CC54F": {
+  "accesorios": [
+   "L54TRF"
+  ]
+ },
+ "CC54FCB": {
+  "accesorios": [
+   "L54TRF",
+   "LCB2-3"
+  ]
+ },
+ "CC30M": {
+  "accesorios": [
+   "L30R-3+LMKC54",
+   "L30TR+LMKC54",
+   "L30ATR+LMKC54"
+  ]
+ },
+ "CCLCG": {
+  "accesorios": [
+   "LCGRBK",
+   "LCGRMG"
+  ]
+ },
+ "CCASADO": {
+  "accesorios": [
+   "L30AG"
+  ]
+ },
+ "LMKC54": {
+  "accesorios": [
+   "L30AG",
+   "LPZA"
+  ]
+ },
+ "CCASADOF": {
+  "accesorios": [
+   "L30AG+L30CART"
+  ]
+ },
+ "CCAGSERVE": {
+  "accesorios": [
+   "L30AG+LMKC54"
+  ]
+ },
+ "CCLPZA": {
+  "accesorios": [
+   "LPZA"
+  ]
+ },
+ "CCLPZAB": {
+  "accesorios": [
+   "LPZA"
+  ]
+ },
+ "LPZALPK": {
+  "accesorios": [
+   "LPZA",
+   "LPZAF"
+  ]
+ },
+ "LPZANGK": {
+  "accesorios": [
+   "LPZA",
+   "LPZAF"
+  ]
+ },
+ "CCLPZAF": {
+  "accesorios": [
+   "LPZAF"
+  ]
+ },
+ "CCLSB1": {
+  "accesorios": [
+   "LSB1-3"
+  ]
+ },
+ "LASK": {
+  "accesorios": []
+ },
+ "LPEK": {
+  "accesorios": []
+ },
+ "CCLSB": {
+  "accesorios": [
+   "LSB2-2"
+  ]
+ },
+ "LIJSB2": {
+  "accesorios": [
+   "LSB2-2"
+  ]
+ },
+ "CCLSB2PC": {
+  "accesorios": [
+   "LSB2PC-1"
+  ]
+ },
+ "CCLPB": {
+  "accesorios": [
+   "LPB"
+  ]
+ },
+ "LIJPB": {
+  "accesorios": [
+   "LPB"
+  ]
+ },
+ "L24TWS": {
+  "accesorios": [
+   "LN24BF1"
+  ]
+ },
+ "L24TWD": {
+  "accesorios": [
+   "LN24BF1"
+  ]
+ },
+ "CCTWR": {
+  "accesorios": [
+   "LN24BF1"
+  ]
+ },
+ "CCTWD": {
+  "accesorios": [
+   "LN24BF1"
+  ]
+ },
+ "LN15ICE-DP": {
+  "accesorios": [
+   "LN15ICE"
+  ]
+ },
+ "LPFK": {
+  "accesorios": [
+   "LSK18",
+   "LSK24",
+   "LSK30"
+  ]
+ },
+ "CCLSK18": {
+  "accesorios": [
+   "LSK18"
+  ]
+ },
+ "CCLSK24": {
+  "accesorios": [
+   "LSK24"
+  ]
+ },
+ "CCLSK30": {
+  "accesorios": [
+   "LSK30",
+   "LCS30"
+  ]
+ },
+ "LCSPS": {
+  "accesorios": [
+   "LCS30F"
+  ]
+ },
+ "LDRKS": {
+  "accesorios": [
+   "LDR18L-4",
+   "LDR18R-4",
+   "LDR30T-4"
+  ]
+ },
+ "LDRKL": {
+  "accesorios": [
+   "LDR24L-4",
+   "LDR24R-4",
+   "LDR36T-4",
+   "LDR42T-4"
+  ]
+ },
+ "LMD-KIT": {
+  "accesorios": [
+   "LMD",
+   "LMD-4"
+  ]
+ },
+ "CCTS": {
+  "accesorios": [
+   "L18TS"
   ]
  }
 }

@@ -1826,7 +1826,8 @@
         "valores": [
           "24\"",
           "27\"",
-          "30\""
+          "30\"",
+          "42\""
         ]
       },
       {
@@ -1844,7 +1845,11 @@
           "Negro",
           "Gris",
           "Cristal",
-          "Verde"
+          "Verde",
+          "Amarillo",
+          "Azul",
+          "Blanco",
+          "Café"
         ]
       },
       {
@@ -2787,7 +2792,13 @@
         "valores": [
           "Acero inoxidable",
           "Negro",
-          "Rojo"
+          "Rojo",
+          "Amarillo",
+          "Azul",
+          "Blanco",
+          "Café",
+          "Gris",
+          "Verde"
         ]
       },
       {
@@ -3017,7 +3028,14 @@
         "nombre": "Color",
         "clave": "color",
         "valores": [
-          "Acero inoxidable"
+          "Acero inoxidable",
+          "Amarillo",
+          "Azul",
+          "Blanco",
+          "Café",
+          "Gris",
+          "Negro",
+          "Verde"
         ]
       },
       {
@@ -3082,7 +3100,14 @@
         "nombre": "Color",
         "clave": "color",
         "valores": [
-          "Acero inoxidable"
+          "Acero inoxidable",
+          "Amarillo",
+          "Azul",
+          "Blanco",
+          "Café",
+          "Gris",
+          "Negro",
+          "Verde"
         ]
       },
       {
@@ -3313,7 +3338,8 @@
           "39\"",
           "40\"",
           "42\"",
-          "72\""
+          "72\"",
+          "19\""
         ]
       },
       {
@@ -3784,6 +3810,71 @@
         "valores": [
           "Natural",
           "LP"
+        ]
+      },
+      {
+        "nombre": "Disponibilidad",
+        "clave": "disponibilidad",
+        "valores": [
+          "Bajo pedido",
+          "En stock"
+        ]
+      },
+      {
+        "nombre": "Garantía",
+        "clave": "garantia",
+        "valores": [
+          "1 año",
+          "2 años",
+          "3 años"
+        ]
+      },
+      {
+        "nombre": "Promoción",
+        "clave": "promocion",
+        "valores": [
+          "10%",
+          "15%",
+          "20%",
+          "25%",
+          "30%",
+          "35%",
+          "40%",
+          "50%",
+          "60%"
+        ]
+      }
+    ],
+    "Despachadores de cerveza": [
+      {
+        "nombre": "Marca",
+        "clave": "marca"
+      },
+      {
+        "nombre": "Precio",
+        "clave": "precio"
+      },
+      {
+        "nombre": "Instalación",
+        "clave": "instalacion",
+        "valores": [
+          "De piso",
+          "Empotrado"
+        ]
+      },
+      {
+        "nombre": "Ancho",
+        "clave": "ancho",
+        "valores": [
+          "24\""
+        ]
+      },
+      {
+        "nombre": "Panel",
+        "clave": "panel",
+        "valores": [
+          "Panelable",
+          "Acero inoxidable"
         ]
       },
       {

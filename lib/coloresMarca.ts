@@ -74,6 +74,16 @@ export const TONOS_VARIANTE: Record<string, string> = {
   Valentine: "#C2283F",
   Onyx: "#1C1C1C",
   Daffodil: "#F2BE1C",
+  // Lynx Professional (Carla, 2026-11-17): los 8 "Exclusive Color Finishes", con el
+  // color de las muestras de lynxgrills.com.
+  "California Poppy": "#FFC117",
+  Obsidian: "#282529",
+  "Desert Sage": "#939983",
+  Limestone: "#9E9C99",
+  "Pacific Blue": "#004599",
+  Sierra: "#783E29",
+  Glacier: "#E1DDD5",
+  Surf: "#C2EDDB",
 };
 
 /** Sufijo del nombre de una variante con herraje de latón ("Slate Blue · Latón cepillado"). */
