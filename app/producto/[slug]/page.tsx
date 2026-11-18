@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
+import { after } from "next/server";
 
 import JsonLd from "@/components/JsonLd";
 import MarketingPage from "@/components/MarketingPage";
@@ -9,12 +10,14 @@ import {
   precioPublico,
   productoVivoPorSku,
   productosDeColeccion,
+  productosEnStock,
   type PrecioPublico,
   type ProductoVivo,
 } from "@/lib/shopify/catalogoVivo";
-import { TIPOS_WEB, esAccesorio, tipoWeb } from "@/lib/shopify/coleccionesWeb";
+import { esAccesorio, tipoWeb } from "@/lib/shopify/coleccionesWeb";
 import { fichaHtml, type Relacionados } from "@/lib/shopify/htmlCatalogo";
 import { coleccionesCandidatas, otrosColores, sugerenciasDeCompra } from "@/lib/shopify/sugerencias";
+import { anotarFichaLenta, LIMITE_FICHA_MS } from "@/lib/shopify/fichasLentas";
 import { coloresDeModelo } from "@/lib/coloresModelo";
 import { contenidoDeFicha, jsonLdProducto } from "@/lib/shopify/pdpSlots";
 import { absUrl } from "@/lib/site";
@@ -35,11 +38,17 @@ interface Params {
   slug: string;
 }
 
-/** Prerender: las del piloto + las de las colecciones con catálogo vivo. */
+/**
+ * Prerender: solo las del piloto y las piezas En stock (las de /ofertas, las que
+ * más se anuncian). Las demás se arman en su primera visita y quedan en caché
+ * (ISR, `dynamicParams`). Antes se armaban las ~6,500 en cada despliegue: ~2.5 GB
+ * y 12 min por despliegue, contra el tope de 10 GB del plan (Carla, 2026-11-17).
+ * Los listados sí se siguen armando al publicar, y con ellos queda en el Data
+ * Cache cada colección que la ficha usa para sus sugerencias.
+ */
 export async function generateStaticParams(): Promise<Params[]> {
   const slugs = new Set(productoSlugs());
-  const listas = await Promise.all(TIPOS_WEB.map((t) => productosDeColeccion(t.coleccion)));
-  for (const p of listas.flat()) slugs.add(p.slug);
+  for (const p of await productosEnStock()) slugs.add(p.slug);
   return [...slugs].map((slug) => ({ slug }));
 }
 
@@ -143,9 +152,20 @@ async function relacionadosDe(p: ProductoVivo): Promise<Relacionados> {
 
 export default async function ProductoFichaPage(props: { params: Promise<Params> }) {
   const { slug } = await props.params;
+  // Cronómetro (Carla, 2026-11-17): si armar la ficha tarda más de 5 s, se anota
+  // (lib/shopify/fichasLentas.ts). Corre al final, cuando ya se entregó la página.
+  const inicio = performance.now();
+  let resultado = "error";
+  after(() => {
+    const ms = performance.now() - inicio;
+    if (ms > LIMITE_FICHA_MS) return anotarFichaLenta(slug, ms, resultado);
+  });
   const sku = skuDeSlug(slug);
   const esPiloto = productoSlugs().includes(slug);
-  if (!esPiloto && !slugValido(slug)) notFound();
+  if (!esPiloto && !slugValido(slug)) {
+    resultado = "404";
+    notFound();
+  }
 
   const vivo = await productoVivoPorSku(sku);
   const url = absUrl(`/producto/${slug}`);
@@ -158,6 +178,7 @@ export default async function ProductoFichaPage(props: { params: Promise<Params>
     const file = productoFile(slug);
     const indexado = productoPorSku(sku);
     const { slots, datos } = await contenidoDeFicha(sku);
+    resultado = "ok";
     return (
       <>
         <MarketingPage file={file} slots={slots} />
@@ -170,9 +191,15 @@ export default async function ProductoFichaPage(props: { params: Promise<Params>
   if (vivo && esPiloto && !vivo.lead) vivo.lead = ganchoDeFicha(productoFile(slug));
 
   // 2. Ficha generada con los datos de Shopify.
-  if (!vivo) notFound();
+  if (!vivo) {
+    resultado = "404";
+    notFound();
+  }
   // El SKU de un color (ALXE56C-SC) lleva a la ficha de su modelo: una sola URL por pieza.
-  if (vivo.slug !== slug) permanentRedirect(`/producto/${vivo.slug}`);
+  if (vivo.slug !== slug) {
+    resultado = "redirect";
+    permanentRedirect(`/producto/${vivo.slug}`);
+  }
   const [tc, relacionados, hermanos] = await Promise.all([
     obtenerTipoCambio(),
     relacionadosDe(vivo),
@@ -185,6 +212,7 @@ export default async function ProductoFichaPage(props: { params: Promise<Params>
     hermanos.flatMap((h) => (h ? [comoColor(h)] : [])),
   );
   const precio = precioPublico(vivo, tc);
+  resultado = "ok";
   return (
     <>
       <div dangerouslySetInnerHTML={{ __html: fichaHtml(vivo, tc, relacionados, colores) }} />

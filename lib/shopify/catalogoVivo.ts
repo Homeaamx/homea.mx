@@ -56,15 +56,25 @@ const IDENTIFICADORES = [
   `{namespace: "custom", key: "profundidad"}`,
 ].join(", ");
 
-const CAMPOS_PRODUCTO = /* GraphQL */ `
+/*
+ * Dos versiones del mismo fragmento (2026-11-17, rendimiento):
+ *   - CAMPOS_PRODUCTO (completo): la ficha. Trae la descripción y los PDFs.
+ *   - CAMPOS_LISTA (ligero): listados, marcas, stock, buscador y los candidatos a
+ *     sugerencia. Sin descripción ni PDFs, que solo pinta la ficha: la respuesta
+ *     pesa entre 25 y 55 % menos, cada página queda lejos del tope de 2 MB del Data
+ *     Cache de Vercel y la primera visita a una ficha espera menos.
+ * Un ProductoVivo que viene de una lista trae `descripcion`, `descripcionHtml`,
+ * `fichas` e `instalacion` vacíos: para pintar una ficha hay que pedirlo con
+ * productoVivoPorSku (consulta completa).
+ */
+const camposProducto = (completo: boolean) => /* GraphQL */ `
   fragment ProductoVivo on Product {
     id
     handle
     title
     vendor
     productType
-    description
-    descriptionHtml
+    ${completo ? "description\n    descriptionHtml" : ""}
     availableForSale
     images(first: 8) { nodes { url altText width height } }
     variants(first: 100) {
@@ -80,17 +90,19 @@ const CAMPOS_PRODUCTO = /* GraphQL */ `
       }
     }
     metafields(identifiers: [${IDENTIFICADORES}]) { namespace key value }
-    fichas: metafield(namespace: "homea", key: "fichas_tecnicas") {
+    ${completo ? `fichas: metafield(namespace: "homea", key: "fichas_tecnicas") {
       references(first: 10) { nodes { __typename ... on GenericFile { url mimeType } } }
     }
     instalacion: metafield(namespace: "homea", key: "instrucciones_instalacion") {
       references(first: 10) { nodes { __typename ... on GenericFile { url mimeType } } }
-    }
+    }` : ""}
   }
 `;
+const CAMPOS_PRODUCTO = camposProducto(true);
+const CAMPOS_LISTA = camposProducto(false);
 
 const CONSULTA_COLECCION = /* GraphQL */ `
-  ${CAMPOS_PRODUCTO}
+  ${CAMPOS_LISTA}
   query Coleccion($handle: String!, $despues: String) @inContext(country: MX, language: ES) {
     collection(handle: $handle) {
       title
@@ -111,7 +123,7 @@ const CONSULTA_POR_SKU = /* GraphQL */ `
 
 /** Todo lo publicado de una marca (Vendor de Shopify), paginado de 100 en 100. */
 const CONSULTA_POR_MARCA = /* GraphQL */ `
-  ${CAMPOS_PRODUCTO}
+  ${CAMPOS_LISTA}
   query PorMarca($consulta: String!, $despues: String) @inContext(country: MX, language: ES) {
     products(first: 100, after: $despues, query: $consulta, sortKey: BEST_SELLING) {
       pageInfo { hasNextPage endCursor }
@@ -127,7 +139,7 @@ const CONSULTA_POR_MARCA = /* GraphQL */ `
  * `predictiveSearch` NO devuelve nada en este canal, por eso no se usa.
  */
 const CONSULTA_BUSQUEDA = /* GraphQL */ `
-  ${CAMPOS_PRODUCTO}
+  ${CAMPOS_LISTA}
   query Buscar($consulta: String!, $primeros: Int!) @inContext(country: MX, language: ES) {
     search(query: $consulta, first: $primeros, types: PRODUCT, prefix: LAST, unavailableProducts: SHOW) {
       totalCount
@@ -142,7 +154,7 @@ const CONSULTA_BUSQUEDA = /* GraphQL */ `
  * en el canal Headless; "*" empata todo el catálogo publicado).
  */
 const CONSULTA_EN_STOCK = /* GraphQL */ `
-  ${CAMPOS_PRODUCTO}
+  ${CAMPOS_LISTA}
   query EnStock($despues: String) @inContext(country: MX, language: ES) {
     search(
       query: "*", first: 250, after: $despues, types: PRODUCT, unavailableProducts: SHOW,
@@ -514,15 +526,39 @@ export async function productoVivoPorSku(sku: string): Promise<ProductoVivo | nu
   } catch (error) {
     console.warn(`[catalogo] Búsqueda de ${sku} sin respuesta:`, (error as Error).message);
   }
+  // Las colecciones vienen con la consulta ligera (sin descripción ni PDFs): la pieza
+  // que se encuentre ahí se vuelve a pedir completa por su handle.
   const { TIPOS_WEB } = await import("./coleccionesWeb");
   for (const t of TIPOS_WEB) {
     for (const p of await productosDeColeccion(t.coleccion)) {
-      if (mismo(p.sku)) return p;
-      const enColor = conColor(p, buscado);
-      if (enColor) return enColor;
+      if (!mismo(p.sku) && !conColor(p, buscado)) continue;
+      const completo = (await productoPorHandle(p.handle)) ?? p;
+      return mismo(completo.sku) ? completo : (conColor(completo, buscado) ?? completo);
     }
   }
   return null;
+}
+
+const CONSULTA_POR_HANDLE = /* GraphQL */ `
+  ${CAMPOS_PRODUCTO}
+  query PorHandle($handle: String!) @inContext(country: MX, language: ES) {
+    product(handle: $handle) { ...ProductoVivo }
+  }
+`;
+
+/** Un producto completo (con descripción y PDFs) por su handle; null si no está o no contesta. */
+async function productoPorHandle(handle: string): Promise<ProductoVivo | null> {
+  try {
+    const data: { product: ProductoRaw | null } = await shopifyFetch(CONSULTA_POR_HANDLE, {
+      variables: { handle },
+      tags: [TAG_CATALOGO],
+      timeoutMs: 5000,
+    });
+    return data.product ? normalizar(data.product) : null;
+  } catch (error) {
+    console.warn(`[catalogo] ${handle} sin respuesta:`, (error as Error).message);
+    return null;
+  }
 }
 
 /**
@@ -584,7 +620,7 @@ export async function productosDeMarca(vendor: string): Promise<ProductoVivo[]> 
 }
 
 const CONSULTA_POR_ETIQUETA = /* GraphQL */ `
-  ${CAMPOS_PRODUCTO}
+  ${CAMPOS_LISTA}
   query PorEtiqueta($consulta: String!, $despues: String) @inContext(country: MX, language: ES) {
     products(first: 100, after: $despues, query: $consulta) {
       pageInfo { hasNextPage endCursor }
