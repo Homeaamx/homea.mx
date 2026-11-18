@@ -54,7 +54,7 @@ plan). Kamado Joe, Masterbuilt y WPPO son de cocina o asadores y van **solo como
 La columna **Descuento Shopify (PLATA)** es el descuento asignado a cada marca. **Va a cambiar:**
 revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 
-- **PENDIENTE:** Commodore, Peerless y The Galley (Shopify). No están en la política de descuentos.
+- **PENDIENTE:** Peerless y The Galley (Shopify). No están en la política de descuentos. (Commodore: PLATA 10 % y 3 años del renglón "ECLIPSE SERIE VALUE LINE, TRITURADORES", Carla 2026-11-18.)
 - **Validar con la lista PPS** (nota 4 de la política): los grupos Mabe (Easy, GE Profile, Haier, IEM, IO Mabe,
   Mabe) y Whirlpool (Acros, KitchenAid, Maytag, Whirlpool), todos al 30%.
 - Las marcas **SOLO PDF** de Grupo 90 llevan 10% aunque no se venden en Shopify. **No se asigna en Shopify** (no hay productos ahí): queda solo como referencia para la cotización.
@@ -92,7 +92,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | BOSCH | ARTEXA | BOSCH | 58 | 10% | `/marcas/bosch` | completo |  |
 | BROIL KING | MARESA | BROIL | 24 | 10% | `/marcas/broil-king` | completo | Lista oct 2026 (2026-11-12) |
 | CAFÉ | MABE | CAFE | 99 | 10% | `/marcas/cafe` | completo |  |
-| COMMODORE | ECLIPSE | COMMO | 9 | **PENDIENTE** | `/marcas/commodore` | completo | No está en la política de descuentos |
+| COMMODORE | ECLIPSE | COMMO | 13 | 10% | `/marcas/commodore` | completo | Cargada 2026-11-18: 13 productos (catálogo eKitchen ago 2026, MXN con IVA ÷ 1.16 con centavos; adaptador Perfect Drain en USD). PLATA 10 % y garantía 3 años en trituradores, del renglón "ECLIPSE SERIE VALUE LINE, TRITURADORES" (Commodore no tiene renglón propio). |
 | COVE | IESA/LAVISH | COVE | 15 | 10% | `/marcas/cove` | completo |  |
 | COYOTE | LECROM | COYOT | 224 | 10% | `/marcas/coyote` | completo |  |
 | DAWN | LECROM / MARESA | DAWN | 25 | 10% | `/marcas/dawn` | completo |  |

@@ -305,10 +305,10 @@ existe en ninguna herramienta.
 > | Descuento | Marcas SHOPIFY |
 > |---|---|
 > | **5%** | Faber, Lynx, Miele, Sedona, Supra, Tradewind, Viking |
-> | **10%** | Alfa Forni, Alfresco, Artisan, Asko, Bertazzoni, Blanco, Blaze, Bosch, Brizo, Broil King, Café, Cove, Coyote, Dawn, Delta, Dexa, Eclipse, Electrolux / Electrolux Icon, Elica, Falmec, Franke, Frigidaire / Gallery / Pro, Fulgor Milano, Gaggenau, Gessi, Hoshizaki, InSinkErator, Invisacook, Kele, Kraus, Monogram, Mont Alpi, Nantucket, Pitt, Schock, Scotsman, Smeg, Sub-Zero, Summit, Tecnolam, Teka (estufas económicas 5%), Thermador, Thor, Wolf |
+> | **10%** | Alfa Forni, Alfresco, Artisan, Asko, Bertazzoni, Blanco, Blaze, Bosch, Brizo, Broil King, Café, Commodore, Cove, Coyote, Dawn, Delta, Dexa, Eclipse, Electrolux / Electrolux Icon, Elica, Falmec, Franke, Frigidaire / Gallery / Pro, Fulgor Milano, Gaggenau, Gessi, Hoshizaki, InSinkErator, Invisacook, Kele, Kraus, Monogram, Mont Alpi, Nantucket, Pitt, Schock, Scotsman, Smeg, Sub-Zero, Summit, Tecnolam, Teka (estufas económicas 5%), Thermador, Thor, Wolf |
 > | **15%** | Axcent, Benessi |
 > | **30%** | Acros, Easy, GE Profile, Haier, IEM, IO Mabe, KitchenAid, Mabe, Maytag, Whirlpool (validar margen con lista PPS) |
-> | **PENDIENTE** | Commodore, Peerless, The Galley (no están en la política de descuentos) |
+> | **PENDIENTE** | Peerless, The Galley (no están en la política de descuentos) |
 >
 > Marcas SOLO PDF con descuento: 10% para Axor, iDrain, Mr Steam, Nobili, TRES y Valsir (iDrain Proyectos: no
 > aplica). Artexa Bath, Jacuzzi, Clearlight y Onix: pendiente. El resto: sin descuento asignado.
