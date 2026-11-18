@@ -2031,6 +2031,30 @@
               }
             },
             {
+              "nombre": "Quemador lateral",
+              "slug": "quemador-lateral",
+              "filtro": "/productos/quemador-lateral/",
+              "tienda": "/productos/exterior/asadores-y-hornos?tipo=quemador-lateral",
+              "tarjeta": {
+                "imagen": "/assets/photos/subcats/quemador-lateral-doble-empotrable-acero-blaze.webp",
+                "ambiente": false,
+                "pos": "center 50%",
+                "resumen": "Uno o dos quemadores junto al asador para salsas, guarniciones o una olla."
+              }
+            },
+            {
+              "nombre": "Plancha Teppanyaki",
+              "slug": "plancha-teppanyaki",
+              "filtro": "/productos/plancha-teppanyaki/",
+              "tienda": "/productos/exterior/asadores-y-hornos?tipo=plancha-teppanyaki",
+              "tarjeta": {
+                "imagen": "/assets/photos/subcats/plancha-teppanyaki-30-gas-acero-blaze.webp",
+                "ambiente": false,
+                "pos": "center 50%",
+                "resumen": "Plancha de gas empotrable para huevos, mariscos y vegetales al aire libre."
+              }
+            },
+            {
               "nombre": "Hornos de pizza",
               "slug": "hornos-de-pizza",
               "filtro": "/productos/hornos-de-pizza/",

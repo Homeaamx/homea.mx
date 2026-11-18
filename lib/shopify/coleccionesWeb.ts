@@ -116,12 +116,16 @@ export const TIPOS_WEB: TipoWeb[] = [
     nombreRiel: "Asadores empotrables",
     porInstalacion: { Carrito: { slug: "asadores-con-carrito", nombre: "Asadores con carrito" } },
   },
+  // Quemador lateral, Plancha Teppanyaki y Ahumadores pasan de la macro a Asadores & Hornos
+  // (Carla, 2026-11-17): riel, mega-menú y Guías los muestran bajo Asadores & Hornos.
+  { tipo: "Quemador lateral", coleccion: "quemador-lateral", slugRiel: "quemador-lateral", ruta: `${ASADORES.ruta}?tipo=quemador-lateral`, macro: EXTERIOR, sub1: ASADORES },
+  { tipo: "Plancha Teppanyaki", coleccion: "plancha-teppanyaki", slugRiel: "plancha-teppanyaki", ruta: `${ASADORES.ruta}?tipo=plancha-teppanyaki`, macro: EXTERIOR, sub1: ASADORES },
+  // Ahumadores ARCHIVADO (Carla, 2026-11-17: sin piezas activas). Para volver: descomentar,
+  // y regresar su enlace al mega-menú, su tile al riel de Asadores y su tarjeta en Guías.
+  // { tipo: "Ahumadores", coleccion: "ahumadores", slugRiel: "ahumadores", ruta: `${ASADORES.ruta}?tipo=ahumadores`, macro: EXTERIOR, sub1: ASADORES },
   { tipo: "Hornos de pizza", coleccion: "hornos-de-pizza", slugRiel: "hornos-de-pizza", ruta: `${ASADORES.ruta}?tipo=hornos-de-pizza`, macro: EXTERIOR, sub1: ASADORES },
   { tipo: "Accesorios Asadores & Hornos", coleccion: "accesorios-asadores-y-hornos", slugRiel: "accesorios-asadores-hornos", ruta: `${ASADORES.ruta}?tipo=accesorios-asadores-hornos`, macro: EXTERIOR, sub1: ASADORES },
   // Tipos que cuelgan directo de la macro (Carla, 2026-10-05): su riel vive en /productos/exterior.
-  { tipo: "Quemador lateral", coleccion: "quemador-lateral", slugRiel: "quemador-lateral", ruta: `${EXTERIOR.ruta}?tipo=quemador-lateral`, macro: EXTERIOR, sub1: EXTERIOR },
-  { tipo: "Plancha Teppanyaki", coleccion: "plancha-teppanyaki", slugRiel: "plancha-teppanyaki", ruta: `${EXTERIOR.ruta}?tipo=plancha-teppanyaki`, macro: EXTERIOR, sub1: EXTERIOR },
-  { tipo: "Ahumadores", coleccion: "ahumadores", slugRiel: "ahumadores", ruta: `${EXTERIOR.ruta}?tipo=ahumadores`, macro: EXTERIOR, sub1: EXTERIOR },
   { tipo: "Hieleras", coleccion: "hieleras", slugRiel: "hieleras", ruta: `${EXTERIOR.ruta}?tipo=hieleras`, macro: EXTERIOR, sub1: EXTERIOR },
   { tipo: "Gabinetes", coleccion: "gabinetes", slugRiel: "gabinetes", ruta: `${EXTERIOR.ruta}?tipo=gabinetes`, macro: EXTERIOR, sub1: EXTERIOR },
   // Mesas y tazones de fuego (Blaze; Carla, 2026-11-12).

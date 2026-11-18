@@ -12,8 +12,8 @@
 
 | Canal | En Shopify | En el sitio |
 |---|---|---|
-| **SHOPIFY** (61) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
-| **SOLO PDF** (23) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
+| **SHOPIFY** (59) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
+| **SOLO PDF** (25) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
 
 En el código, el canal vive en el tile de `preview/marcas.html` (`data-canal="shopify|pdf"`), pasa a
 `data/marcas.json` con `npm run marcas` y la plantilla `app/(es)/marcas/[marca]/page.tsx` lo respeta.
@@ -75,7 +75,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
   columna *Arte* de las tablas dice qué falta. La carpeta de OneDrive con logos y fotos ya no está
   sincronizada en esta Mac.
 
-## SHOPIFY — 61 marcas
+## SHOPIFY — 59 marcas
 
 | Marca | Proveedor | Línea SAE | Productos tras carga | Descuento Shopify (PLATA) | Página | Arte | Nota |
 |---|---|---|---:|---:|---|---|---|
@@ -126,7 +126,6 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | PITT | ARTEXA | PITT | 108 | 10% | `/marcas/pitt-cooking` | completo |  |
 | SCHOCK | ECLIPSE | SCHOC | 33 | 10% | `/marcas/schock` | completo |  |
 | SCOTSMAN | IESA/LAVISH | SCOTS | 66 | 10% | `/marcas/scotsman` | completo |  |
-| SEDONA | MIDDLEBY | SEDON | 55 | 5% | `/marcas/sedona-by-lynx` | completo |  |
 | SMEG | SMEG | SMEG | 240 | 15% | `/marcas/smeg` | completo | PLATA 15 % (Rev 22; la Rev 24 de 25 % es Buen Fin). Precios de lista CON IVA ÷ 1.16. Cargada 2026-11-13. |
 | SUB-ZERO | IESA/LAVISH | SUBZE | 515 | 10% | `/marcas/sub-zero` | completo | Condición distinta para fuera de línea vs. de línea (solo costo: PLATA 10 % y 2 años en ambas). Cargada 2026-11-10: 222 equipos + 293 accesorios; se cotiza salvo stock (regla IESA) |
 | SUMMIT | LECROM | SUMMI | 19 | 10% | `/marcas/summit` | completo |  |
@@ -136,15 +135,16 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | THE GALLEY | IESA/LAVISH | GALLE | 153 | 0% | `/marcas/the-galley` | completo | Sin descuento, solo cotizar (Carla, 2026-11-11); 92 piezas de la lista 2025-26 en Shopify |
 | THERMADOR | ARTEXA | THERM | 243 | 10% | `/marcas/thermador` | completo |  |
 | THOR | ARTEXA | THOR | 34 | 10% | `/marcas/thor` | completo |  |
-| TRADEWIND | MIDDLEBY | TRADE | 154 | 5% | `/marcas/tradewind` | completo |  |
 | VIKING (todas las series) | MIDDLEBY | VIKIN | 3401 | 5% | `/marcas/viking` | completo | Revisar Serie 3/6/Tuscany (condición distinta) |
 | WHIRLPOOL | WHIRLPOOL | WHIRL | 282 | 30% | `/marcas/whirlpool` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | WOLF | IESA/LAVISH | WOLF | 665 | 10% | `/marcas/wolf` | completo | Condición distinta para fuera de línea vs. de línea |
 
-## SOLO PDF — 23 marcas
+## SOLO PDF — 25 marcas
 
 | Marca | Proveedor | Línea SAE | Productos tras carga | Descuento Shopify (PLATA) | Página | Arte | Nota |
 |---|---|---|---:|---:|---|---|---|
+| SEDONA | MIDDLEBY | SEDON | 55 | 5% | `/marcas/sedona-by-lynx` | completo | **Pasa a SOLO PDF (Carla, 2026-11-17)**: de MIDDLEBY solo Viking y Lynx van a tienda |
+| TRADEWIND | MIDDLEBY | TRADE | 154 | 5% | `/marcas/tradewind` | completo | **Pasa a SOLO PDF (Carla, 2026-11-17)**: de MIDDLEBY solo Viking y Lynx van a tienda |
 | BRIZO | ARTEXA | BRIZO | 806 | 10% | `/marcas/brizo` | completo | Solo línea de cocina · **Pasa a SOLO PDF (Carla, 2026-11-10)** |
 | DELTA | ARTEXA | DELTA | 2791 | 10% | `/marcas/delta` | completo | Solo línea de cocina · **Pasa a SOLO PDF (Carla, 2026-11-10)** |
 | GESSI | ARTEXA | GESSI | 213 | 10% | `/marcas/gessi` | completo | **Pasa a SOLO PDF (Carla, 2026-11-10)** |

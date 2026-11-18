@@ -183,6 +183,28 @@ const ICONOS: Record<string, React.ReactNode> = {
       <circle cx="17" cy="20.5" r=".8" />
     </>
   ),
+  // Quemador lateral, Plancha Teppanyaki y Ahumadores (bajo Asadores & Hornos, 2026-11-17)
+  "quemador-lateral": (
+    <>
+      <rect x="3" y="7" width="18" height="11" rx="1" />
+      <circle cx="8.5" cy="12.5" r="2.5" />
+      <circle cx="15.5" cy="12.5" r="2.5" />
+      <path d="M5 18v2M19 18v2" />
+    </>
+  ),
+  "plancha-teppanyaki": (
+    <>
+      <path d="M3 11h18v4H3zM5 15v3h14v-3" />
+      <path d="M8 8.5h8M12 8.5V11" />
+    </>
+  ),
+  ahumadores: (
+    <>
+      <path d="M4 12a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v3H4z" />
+      <path d="M17 8V4.5h2.5V8M6 15v5M18 15v5M2.5 12H4" />
+      <path d="M18.3 3c-.8-.8.8-1.5 0-2.3" />
+    </>
+  ),
   "hornos-de-pizza": (
     <>
       <path d="M3 18a9 9 0 0 1 18 0z" />
