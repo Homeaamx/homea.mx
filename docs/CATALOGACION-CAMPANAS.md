@@ -40,3 +40,14 @@ Cuadrada" en una T invertida). Al cambiar el título, el handle se queda igual (
 - Cubo o columna en la isla: Laguna (cubo de vidrio) y Polar Evo = **Cilíndrica o cuadrada**.
 - Integradas: Valentina Plus = **Para revestir**; Massimo Pro = **Tipo inserto**.
 - Sobre cubierta: Monolith = **Monolith**; Level, Level Invisible y Brooklyn (suben desde la cubierta) = **Retráctiles**. Shelf = **Tipo repisa**. Stella Plus y Alba (plafón, sin motor) = **A techo**.
+
+## Tecnolam (Carla, 2026-11-17)
+
+- Lyra 140 (LYRA.AC140 y LYRA.NE140, isla de 55" con chimenea y cubierta plana) = **T invertida + Gran formato**, no Decorativas: no cuelga de cables, aunque mida menos de 72" (mismo criterio que Lumen Isla 175 de Falmec).
+- Campanas profesionales PWRH36, PWRH48 (pared) y PIRH36 (isla): chimenea + cubierta con laterales inclinados = **Piramidal**, no Rectas, aunque sean "profesionales" (Carla, 2026-11-17).
+
+## Viking (Carla, 2026-11-17)
+
+- Campanas de pared con chimenea VCWH (Serie 5) y RVCH (Serie 3): cubierta con laterales inclinados = **Piramidal**, no Rectas.
+- Tuscany TVHW (cargadas como "Para revestir") = **Rectas**.
+- Siguen igual: VWH profesionales = Rectas; VDD = Retráctiles; VBCV = Tipo inserto.

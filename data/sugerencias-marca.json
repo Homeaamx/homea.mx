@@ -35086,8 +35086,8 @@
    "CCLSB1",
    "PROLPK1",
    "PRONGK1",
-   "LASK",
-   "LPEK"
+   "LASK1",
+   "LPEK1"
   ]
  },
  "LSB2-2": {
@@ -35096,8 +35096,8 @@
    "LIJSB2",
    "PROLPK1",
    "PRONGK1",
-   "LASK",
-   "LPEK"
+   "LASK1",
+   "LPEK1"
   ]
  },
  "LSB2PC-1": {
@@ -35105,8 +35105,8 @@
    "CCLSB2PC",
    "PROLPK1",
    "PRONGK1",
-   "LASK",
-   "LPEK"
+   "LASK1",
+   "LPEK1"
   ]
  },
  "LPB": {
@@ -35115,8 +35115,8 @@
    "LIJPB",
    "PROLPK1",
    "PRONGK1",
-   "LASK",
-   "LPEK"
+   "LASK1",
+   "LPEK1"
   ]
  },
  "LCB2-3": {
@@ -35478,12 +35478,6 @@
   "accesorios": [
    "LSB1-3"
   ]
- },
- "LASK": {
-  "accesorios": []
- },
- "LPEK": {
-  "accesorios": []
  },
  "CCLSB": {
   "accesorios": [
