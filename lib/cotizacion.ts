@@ -210,15 +210,30 @@ export function monedaDeCotizacion(partidas: PartidaCotizacion[]): "MXN" | "USD"
 /** Días que la cotización preliminar se considera vigente: 2 semanas desde su emisión (Carla, 2026-10-13). */
 export const VIGENCIA_DIAS = 14;
 
-const SKU_VALIDO = /^[A-Z0-9-]{3,40}$/;
+// SKU tal como viene del catálogo (2026-11-18): además de letras, números y guiones,
+// espacios ("7100 CR" Commodore, "EA 62B" Eclipse), "/" (Kraus, rejillas Eclipse),
+// "." (Tecnolam, Falmec), "#" (Falmec), "+" y "," (CINZIA78,4X482V); 2 letras en
+// Alfresco/Lynx (BO, GP). Antes solo pasaban A-Z 0-9 - y el 10 % del catálogo se
+// caía sin aviso de la pre-cotización.
+const SKU_VALIDO = /^[A-Z0-9 ./#+,&()-]{2,40}$/;
 
-/** "RVC467790:1,RB282705:2,ALXE56C-SC:1:1023" ← partidas (el tercer tramo es el tono). */
+/** En la liga, "," separa partidas y ":" sus tramos: el SKU va codificado (EA%2062B). */
+const codificarSku = (sku: string) => encodeURIComponent(sku).replace(/[()]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`);
+function decodificarSku(crudo: string): string {
+  try {
+    return decodeURIComponent(crudo);
+  } catch {
+    return "";
+  }
+}
+
+/** "RVC467790:1,RB282705:2,ALXE56C-SC:1:1023,7100%20CR:1" ← partidas (el tercer tramo es el tono). */
 export function serializarPartidas(partidas: PartidaRef[]): string {
   return partidas
-    .filter((p) => SKU_VALIDO.test(p.sku.toUpperCase()) && p.cantidad > 0)
+    .filter((p) => SKU_VALIDO.test(p.sku.trim().toUpperCase()) && p.cantidad > 0)
     .map((p) => {
       const tono = tonoDe(p.tono);
-      return `${p.sku.toUpperCase()}:${Math.min(99, Math.round(p.cantidad))}${tono ? `:${tono.codigo}` : ""}`;
+      return `${codificarSku(p.sku.trim().toUpperCase())}:${Math.min(99, Math.round(p.cantidad))}${tono ? `:${tono.codigo}` : ""}`;
     })
     .join(",");
 }
@@ -230,7 +245,7 @@ export function parsearPartidas(p: string | null | undefined): PartidaRef[] {
   const partidas: PartidaRef[] = [];
   for (const tramo of p.split(",").slice(0, 50)) {
     const [skuCrudo, cantCruda, tonoCrudo] = tramo.split(":");
-    const sku = (skuCrudo ?? "").trim().toUpperCase();
+    const sku = decodificarSku(skuCrudo ?? "").trim().toUpperCase();
     // El mismo modelo en dos tonos son dos partidas.
     const tono = tonoDe(tonoCrudo)?.codigo;
     const clave = `${sku}:${tono ?? ""}`;
