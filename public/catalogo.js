@@ -294,7 +294,10 @@
   }
 
   /* Tras aplicar desde el panel: en móvil se pliega la hoja de filtros, y si la
-     barra de resultados quedó arriba del viewport se sube hasta ella. */
+     barra de resultados quedó fuera de vista se salta a ella SIN animación
+     (Carla, 2026-11-17: nada de recorrido lento al filtrar; solo cambian las
+     piezas, se ven desde la primera y la columna de filtros se queda donde
+     estaba). */
   function enfocarResultados(plp) {
     var sheet = plp.querySelector("details.filters-sheet");
     if (sheet && sheet.open && window.matchMedia("(max-width: 1080px)").matches) sheet.open = false;
@@ -304,9 +307,7 @@
     var banda = document.querySelector(".site-nav .nav-main");
     var nav = banda ? Math.round(banda.getBoundingClientRect().height) : 80;
     if (top >= nav && top < window.innerHeight * 0.6) return;
-    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (window.__homeaScrollA && !reduce) window.__homeaScrollA(toolbar, 24);
-    else toolbar.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    window.scrollTo({ top: Math.max(0, window.scrollY + top - nav - 24), behavior: "instant" });
   }
 
   function limpiar(plp) {
