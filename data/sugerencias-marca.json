@@ -35648,5 +35648,214 @@
    "IMAN",
    "21-DSFS-BK"
   ]
+ },
+ "KALLIO N175": {
+  "accesorios": [
+   "KALLIO N175 COMPLEMENTOS",
+   "SC-520",
+   "SC-550",
+   "SET-PRO-CARE",
+   "JUEGO-3-ESPONJAS"
+  ]
+ },
+ "PREPSTATION D150": {
+  "accesorios": [
+   "PREPSTATION D150 COMPLEMENTOS",
+   "ADAPTADOR PERFECT DRAIN",
+   "629726EDM",
+   "629051",
+   "629064",
+   "629158",
+   "629063",
+   "SC-520",
+   "SC-550",
+   "7600 3-BOLT",
+   "8100 3-BOLT",
+   "SET-PRO-CARE",
+   "JUEGO-3-ESPONJAS"
+  ]
+ },
+ "GREENWICH N100 S": {
+  "accesorios": [
+   "GREENWICH N100 S COMPLEMENTOS",
+   "ADAPTADOR PERFECT DRAIN",
+   "629184",
+   "SC-520",
+   "SC-550",
+   "7600 3-BOLT",
+   "8100 3-BOLT",
+   "SET-PRO-CARE",
+   "JUEGO-3-ESPONJAS"
+  ]
+ },
+ "GREENWICH N100 L": {
+  "accesorios": [
+   "GREENWICH N100 L COMPLEMENTOS",
+   "ADAPTADOR PERFECT DRAIN",
+   "629184",
+   "SC-520",
+   "SC-550",
+   "7600 3-BOLT",
+   "8100 3-BOLT",
+   "SET-PRO-CARE",
+   "JUEGO-3-ESPONJAS"
+  ]
+ },
+ "GREENWICH N100 XL": {
+  "accesorios": [
+   "GREENWICH N100 XL COMPLEMENTOS",
+   "ADAPTADOR PERFECT DRAIN",
+   "629726EDM",
+   "629184",
+   "629051",
+   "629064",
+   "629158",
+   "629063",
+   "SC-520",
+   "SC-550",
+   "7600 3-BOLT",
+   "8100 3-BOLT",
+   "SET-PRO-CARE",
+   "JUEGO-3-ESPONJAS"
+  ]
+ },
+ "MONO D100 XS": {
+  "accesorios": [
+   "MONO D100 XS COMPLEMENTOS",
+   "629725EDM",
+   "629184",
+   "SC-520",
+   "SC-550",
+   "SET-PRO-CARE",
+   "JUEGO-3-ESPONJAS"
+  ]
+ },
+ "HORIZONT N200": {
+  "accesorios": [
+   "HORIZONT N200 COMPLEMENTOS",
+   "629726EDM",
+   "629184",
+   "629051",
+   "629064",
+   "629158",
+   "629063",
+   "SC-520",
+   "SC-550",
+   "SET-PRO-CARE",
+   "JUEGO-3-ESPONJAS"
+  ]
+ },
+ "VIRTUS N100 S": {
+  "accesorios": [
+   "VIRTUS N100 S COMPLEMENTOS",
+   "629184",
+   "SC-520",
+   "SC-550",
+   "SET-PRO-CARE",
+   "JUEGO-3-ESPONJAS"
+  ]
+ },
+ "CHELSEA N100 XL": {
+  "accesorios": [
+   "CHELSEA N100 XL COMPLEMENTOS",
+   "REJILLA PLEGABLE MEDIANA",
+   "629184",
+   "SC-520",
+   "SC-550",
+   "SET-PRO-CARE",
+   "JUEGO-3-ESPONJAS"
+  ]
+ },
+ "CHELSEA N200": {
+  "accesorios": [
+   "CHELSEA N200 COMPLEMENTOS",
+   "REJILLA PLEGABLE MEDIANA",
+   "629184",
+   "SC-520",
+   "SC-550",
+   "SET-PRO-CARE",
+   "JUEGO-3-ESPONJAS"
+  ]
+ },
+ "MADISON N175": {
+  "accesorios": [
+   "MADISON N175 COMPLEMENTOS",
+   "629725EDM",
+   "629184",
+   "SC-520",
+   "SC-550",
+   "SET-PRO-CARE",
+   "JUEGO-3-ESPONJAS"
+  ]
+ },
+ "MANSION M100 L": {
+  "accesorios": [
+   "MANSION M100 L COMPLEMENTOS",
+   "REJILLA PLEGABLE MEDIANA",
+   "SC-520",
+   "SC-550",
+   "SET-PRO-CARE",
+   "JUEGO-3-ESPONJAS"
+  ]
+ },
+ "SC-510": {
+  "accesorios": [
+   "SC-520",
+   "SC-530",
+   "SC-540",
+   "SC-550",
+   "GREENWICH N100 L",
+   "MONO D100 XS",
+   "HORIZONT N200",
+   "CHELSEA N100 XL"
+  ]
+ },
+ "SC-520": {
+  "accesorios": [
+   "SC-510",
+   "SC-530",
+   "SC-540",
+   "SC-550",
+   "GREENWICH N100 L",
+   "MONO D100 XS",
+   "HORIZONT N200",
+   "CHELSEA N100 XL"
+  ]
+ },
+ "SC-530": {
+  "accesorios": [
+   "SC-510",
+   "SC-520",
+   "SC-540",
+   "SC-550",
+   "GREENWICH N100 L",
+   "MONO D100 XS",
+   "HORIZONT N200",
+   "CHELSEA N100 XL"
+  ]
+ },
+ "SC-540": {
+  "accesorios": [
+   "SC-510",
+   "SC-520",
+   "SC-530",
+   "SC-550",
+   "GREENWICH N100 L",
+   "MONO D100 XS",
+   "HORIZONT N200",
+   "CHELSEA N100 XL"
+  ]
+ },
+ "SC-550": {
+  "accesorios": [
+   "SC-510",
+   "SC-520",
+   "SC-530",
+   "SC-540",
+   "GREENWICH N100 L",
+   "MONO D100 XS",
+   "HORIZONT N200",
+   "CHELSEA N100 XL"
+  ]
  }
 }

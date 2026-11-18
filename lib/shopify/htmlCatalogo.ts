@@ -20,6 +20,7 @@ import marcasJson from "@/data/marcas.json";
 import descuentosMarca from "@/data/descuentos-marca.json";
 import type { Decision } from "@/lib/reglas/reglaMarca";
 import type { TipoCambio } from "@/lib/tipoCambio";
+import { accesoriosAElegir } from "@/lib/accesoriosIncluidos";
 import { TONOS_ESTANDAR, fondoVariante, type Tono } from "@/lib/coloresMarca";
 import { coloresDeModelo, muestraFiltroColor, type ColorHermano } from "@/lib/coloresModelo";
 import { IMAGEN_RESPALDO } from "@/lib/imagenRespaldo";
@@ -478,7 +479,7 @@ export function esOferta(p: ProductoVivo, tc: TipoCambio): boolean {
  * (.pcard-add::after). Lo atiende el mismo .cart-add de CarritoProvider.
  */
 function botonAgregarTarjeta(p: ProductoVivo, precio: PrecioPublico, img: ProductoVivo["imagenes"][number] | undefined): string {
-  return `<button class="cart-add pcard-add" type="button" data-tip="Agregar a Mi Proyecto" aria-label="Agregar a Mi Proyecto" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${img ? esc(cdn(img.url, 400)) : ""}" data-cart-href="/producto/${p.slug}"${gasAttr(p)}>${MAS}</button>`;
+  return `<button class="cart-add pcard-add" type="button" data-tip="Agregar a Mi Proyecto" aria-label="Agregar a Mi Proyecto" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(p.variantId.split("/").pop() ?? "")}" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${img ? esc(cdn(img.url, 400)) : ""}" data-cart-href="/producto/${p.slug}"${gasAttr(p)}${incluyeAttr(p)}>${MAS}</button>`;
 }
 
 /** Orden por defecto: equipos antes que accesorios; dentro, de mayor a menor precio. */
@@ -999,6 +1000,18 @@ export function gasAttr(p: ProductoVivo): string {
   return ` data-cart-gas="${esc(JSON.stringify(op))}"`;
 }
 
+/* ---------- Accesorios incluidos a elegir (Schock) ------------------------ */
+
+/**
+ * Pieza que incluye accesorios a elegir (Schock Prepstation D150 y Horizont N200,
+ * Carla 2026-11-18): el botón lleva las opciones y CarritoProvider abre la ventana
+ * para escogerlas antes de agregarla. Ver lib/accesoriosIncluidos.ts.
+ */
+export function incluyeAttr(p: ProductoVivo): string {
+  const cfg = accesoriosAElegir(p.sku);
+  return cfg ? ` data-cart-incluye="${esc(JSON.stringify(cfg))}"` : "";
+}
+
 /* ---------- Llamado a la acción ------------------------------------------ */
 
 export function ctaHtml(p: ProductoVivo, decision: Decision, precio: PrecioPublico): string {
@@ -1008,7 +1021,7 @@ export function ctaHtml(p: ProductoVivo, decision: Decision, precio: PrecioPubli
   // Al cerrar, el proyecto va al pago de Shopify si cada pieza cumple la regla
   // (marca + monto + stock); si alguna se cotiza, el proyecto completo se manda
   // como cotización por WhatsApp. La regla se vuelve a evaluar en el servidor.
-  const agregar = `<button class="btn btn-primary cart-add" type="button" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(numericId)}" data-cart-tono="" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${p.imagenes[0] ? esc(cdn(p.imagenes[0].url, 400)) : IMAGEN_RESPALDO.url}" data-cart-href="/producto/${p.slug}"${gasAttr(p)}>Agregar a Mi Proyecto</button>`;
+  const agregar = `<button class="btn btn-primary cart-add" type="button" data-cart-sku="${esc(p.sku)}" data-cart-vid="${esc(numericId)}" data-cart-tono="" data-cart-name="${esc(p.titulo)}" data-cart-brand="${esc(p.marca)}" data-cart-spec="${esc(lineaSpec(p).join(" · "))}" data-cart-mxn="${p.mxn}" data-cart-usd="${esc(textoPrecio(precio))}" data-cart-img="${p.imagenes[0] ? esc(cdn(p.imagenes[0].url, 400)) : IMAGEN_RESPALDO.url}" data-cart-href="/producto/${p.slug}"${gasAttr(p)}${incluyeAttr(p)}>Agregar a Mi Proyecto</button>`;
   let nota: string;
   if (decision.accion === "comprar") {
     nota = p.enStock

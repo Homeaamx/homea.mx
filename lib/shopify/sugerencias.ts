@@ -222,6 +222,12 @@ function puntaje(equipo: ProductoVivo, acc: ProductoVivo): number {
   return pts;
 }
 
+/** Sugerencias a mano de la pieza (data/sugerencias-marca.json: kits y accesorios). */
+export function sugeridasAMano(sku: string): string[] {
+  const m = MARCA[sku];
+  return m ? [...(m.kits ?? []), ...(m.accesorios ?? [])].filter((s) => s !== sku) : [];
+}
+
 /** El mismo modelo en otros colores (data/sugerencias-marca.json), sin la pieza misma. */
 export function otrosColores(sku: string): string[] {
   return (MARCA[sku]?.colores ?? []).filter((s) => s !== sku);

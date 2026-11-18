@@ -134,6 +134,7 @@ export default function CarritoDrawer({
                     {linea.color ? ` · ${linea.color}` : ""}
                     {linea.tono ? ` · ${linea.tono}` : ""}
                   </span>
+                  {linea.incluye ? <span className="proy-incluye">Incluye: {linea.incluye}</span> : null}
                   {/* 4 · Disponibilidad */}
                   <span className="proy-tags">
                     {/* Mismo tag que tarjetas, ficha y /mi-proyecto (Carla, 2026-11-09). */}

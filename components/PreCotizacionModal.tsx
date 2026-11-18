@@ -36,7 +36,7 @@ export function partidasDelCarrito(carrito: Carrito): PartidaCotizacion[] {
     marca: l.marca,
     nombre: l.nombre.split(" — ")[0],
     serie: l.serie,
-    descripcion: [l.spec, l.color, l.tono].filter(Boolean).join(" · "),
+    descripcion: [l.spec, l.color, l.tono, l.incluye ? `Incluye: ${l.incluye}` : ""].filter(Boolean).join(" · "),
     ...(l.tono ? { tono: l.tono } : {}),
     imagen: l.imagen,
     ficha: l.ficha,

@@ -3975,6 +3975,7 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="kraus"] { height: 36px; }
 .pdp-logo[data-marca="hoshizaki"] { height: 56px; }
 .pdp-logo[data-marca="blanco"] { height: 28px; }
+.pdp-logo[data-marca="schock"] { height: 34px; } /* "SCHOCK Handmade in Germany", 2026-11-18 */
 /* KitchenAid (2026-11-09): WHIRLPOOL/KitchenAid.png (rojo, transparente); muy horizontal (10:1). */
 .pdp-logo[data-marca="kitchenaid"] { height: 24px; }
 /* Monogram (2026-11-06): logo horizontal con el monograma, del PNG de OneDrive MABE/monogram_logo.png. */
@@ -5565,3 +5566,13 @@ a.wl-wa:hover, a.wl-wa:focus-visible { color: var(--homea-bone); }
 .gas-sku { font-family: var(--font-cifras); font-size: 11px; letter-spacing: .04em; opacity: .75; font-weight: 400; }
 .gas-nota { margin: 16px 0 0; font-size: 12.5px; color: var(--fg-muted); }
 @media (max-width: 640px) { .gas-opciones { grid-template-columns: 1fr; } }
+
+/* Accesorios incluidos a elegir (Schock Prepstation / Horizont, 2026-11-18) · components/CarritoProvider.tsx */
+.incl-opciones { border: 0; padding: 0; margin: 0 0 20px; display: grid; gap: 8px; }
+.incl-op { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--border); cursor: pointer; font-size: 14px; transition: border-color .2s, background .2s; }
+.incl-op input { width: 18px; height: 18px; accent-color: var(--accent); margin: 0; flex: none; }
+.incl-op.is-on { border-color: var(--accent); background: var(--bg); }
+.incl-op.is-off { opacity: .45; cursor: not-allowed; }
+.incl-agregar { width: 100%; }
+.incl-agregar:disabled { opacity: .45; cursor: not-allowed; }
+.proy-incluye { display: block; font-size: 11.5px; color: var(--fg-muted); margin-top: 2px; }

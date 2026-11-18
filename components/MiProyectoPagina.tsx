@@ -100,6 +100,7 @@ export default function MiProyectoPagina() {
                         {l.color ? ` · ${l.color}` : ""}
                         {l.tono ? ` · ${l.tono}` : ""}
                       </span>
+                      {l.incluye ? <span className="proy-incluye">Incluye: {l.incluye}</span> : null}
                       {/* Mismo tag que las tarjetas del catálogo (Carla, 2026-10-30):
                           colores e íconos de .pcard-tag (lib/shopify/htmlCatalogo.ts). */}
                       <span className="proy-tags">

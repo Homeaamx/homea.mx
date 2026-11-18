@@ -207,6 +207,9 @@ const MUESTRAS_FILTRO: Record<string, string> = {
   cromo: CROMO,
   "cromo y blanco": mitad("#c9cdd0", "#f4f4f2"),
   "cromo y negro": mitad("#c9cdd0", "#1f1f1f"),
+  // Llaves Schock (Carla, 2026-11-18): cuerpo cromado con cono de cuarzo gris (Stone/Dusk) o café (Bronze).
+  "cromo y gris": mitad("#c9cdd0", "#585856"),
+  "cromo y cafe": mitad("#c9cdd0", "#4c423a"),
   dorado: "linear-gradient(135deg, #e8cf8a 0%, #c8a24a 50%, #a8842e 100%)",
   gris: "#8e8e8b",
   "gris oscuro": "#4a4a47",

@@ -16,7 +16,7 @@ import {
 } from "@/lib/shopify/catalogoVivo";
 import { esAccesorio, tipoWeb } from "@/lib/shopify/coleccionesWeb";
 import { fichaHtml, type Relacionados } from "@/lib/shopify/htmlCatalogo";
-import { coleccionesCandidatas, otrosColores, sugerenciasDeCompra } from "@/lib/shopify/sugerencias";
+import { coleccionesCandidatas, otrosColores, sugerenciasDeCompra, sugeridasAMano } from "@/lib/shopify/sugerencias";
 import { anotarFichaLenta, LIMITE_FICHA_MS } from "@/lib/shopify/fichasLentas";
 import { coloresDeModelo } from "@/lib/coloresModelo";
 import { contenidoDeFicha, jsonLdProducto } from "@/lib/shopify/pdpSlots";
@@ -139,7 +139,16 @@ async function relacionadosDe(p: ProductoVivo): Promise<Relacionados> {
   ]);
   // La colección del propio equipo también da candidatos: sus accesorios (Lavavajillas)
   // y el mismo modelo en otros colores (sugerencias-marca.json).
-  const sugeridos = sugerenciasDeCompra(p, [...otras.flat(), ...mismoTipo]);
+  const candidatos = [...otras.flat(), ...mismoTipo];
+  // Sugerencias a mano que viven en otra colección (Schock, Carla 2026-11-18: llaves
+  // para la tarja, adaptador y trituradores Commodore): se traen por SKU.
+  const ya = new Set(candidatos.map((c) => c.sku.toUpperCase()));
+  const faltan = sugeridasAMano(p.sku).filter((s) => !ya.has(s.toUpperCase())).slice(0, 12);
+  if (faltan.length) {
+    const extra = await Promise.all(faltan.map((s) => productoVivoPorSku(s)));
+    candidatos.push(...extra.filter((x): x is ProductoVivo => !!x && x.sku.toUpperCase() !== p.sku.toUpperCase()));
+  }
+  const sugeridos = sugerenciasDeCompra(p, candidatos);
   if (sugeridos.length) return { modo: "sugerencias", productos: sugeridos };
   return {
     modo: "similares",

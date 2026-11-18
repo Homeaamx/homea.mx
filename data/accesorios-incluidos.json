@@ -1,0 +1,21 @@
+{
+  "_nota": "Piezas que incluyen accesorios a elegir (Carla, 2026-11-18: Schock Prepstation D150 y Horizont N200 incluyen 2 de los 4 de la pág. 24 del catálogo). Al agregar la pieza a Mi proyecto se abre una ventana para elegirlos; lo elegido viaja como atributo de la línea ('Accesorios incluidos') hasta el carrito, el pedido de Shopify y la pre-cotización, sin cobrarse aparte. Llave = SKU base del producto (vale para todas sus variantes de color). Lo usa lib/accesoriosIncluidos.ts.",
+  "PREPSTATION D150": {
+    "elegir": 2,
+    "opciones": [
+      { "sku": "629051", "nombre": "Tina auxiliar de acero inoxidable" },
+      { "sku": "629064", "nombre": "Tabla de vidrio para picar" },
+      { "sku": "629158", "nombre": "Tabla de madera para picar" },
+      { "sku": "629063", "nombre": "Kit escurridor grande auxiliar" }
+    ]
+  },
+  "HORIZONT N200": {
+    "elegir": 2,
+    "opciones": [
+      { "sku": "629051", "nombre": "Tina auxiliar de acero inoxidable" },
+      { "sku": "629064", "nombre": "Tabla de vidrio para picar" },
+      { "sku": "629158", "nombre": "Tabla de madera para picar" },
+      { "sku": "629063", "nombre": "Kit escurridor grande auxiliar" }
+    ]
+  }
+}

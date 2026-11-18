@@ -40,6 +40,8 @@ export interface LineaCarrito {
   color: string | null;
   /** Tono de Standard Color ("1023 Traffic Yellow"), anotado en la línea. */
   tono: string | null;
+  /** Accesorios incluidos elegidos al agregar (Schock Prepstation / Horizont), separados por " · ". */
+  incluye: string | null;
   /** Línea de specs de la tarjeta ("30\" · Inducción · Modulares"), sin el SKU. */
   spec: string;
   /**

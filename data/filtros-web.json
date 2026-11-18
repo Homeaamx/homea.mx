@@ -2246,6 +2246,7 @@
           "1 año",
           "2 años",
           "3 años",
+          "15 años",
           "De por vida"
         ]
       },
@@ -2317,6 +2318,8 @@
           "Cromo",
           "Cromo y blanco",
           "Cromo y negro",
+          "Cromo y gris",
+          "Cromo y café",
           "Dorado",
           "Gris",
           "Gris oscuro",

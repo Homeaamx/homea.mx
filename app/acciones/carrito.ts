@@ -18,6 +18,7 @@
 //    Shopify ni cookie: `obtenerCarrito()` sin cookie devuelve el carrito vacío sin
 //    salir a la red. `cartCreate` ocurre en la primera alta exitosa.
 
+import { ATRIBUTO_INCLUIDOS, valorIncluidos } from "@/lib/accesoriosIncluidos";
 import { ATRIBUTO_TONO, tonoDe } from "@/lib/coloresMarca";
 import { CHECKOUT_ABIERTO } from "@/lib/flags";
 import { cerrarProyecto, whatsappDeCotizacion } from "@/lib/reglas/compra";
@@ -129,10 +130,14 @@ export async function agregarAlCarrito(
   sku: string,
   cantidad = 1,
   tono = "",
+  incluidos: string[] = [],
 ): Promise<ResultadoCarrito> {
   // Solo tonos del catálogo (lib/coloresMarca.ts): lo demás no se anota.
   const tonoValido = tonoDe(tono);
   const atributos = tonoValido ? [{ key: ATRIBUTO_TONO, value: tonoValido.nombre }] : [];
+  // Accesorios incluidos a elegir (Schock, Carla 2026-11-18): solo si cuadran con la pieza.
+  const incluye = valorIncluidos(sku, incluidos);
+  if (incluye) atributos.push({ key: ATRIBUTO_INCLUIDOS, value: incluye });
   try {
     const variante = await buscarVariante(idVariante, sku);
 

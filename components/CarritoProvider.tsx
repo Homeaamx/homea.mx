@@ -58,6 +58,18 @@ export default function CarritoProvider({ children }: { children?: ReactNode }) 
     cantidad: number;
     opciones: { n: string; vid: string; sku: string }[];
   } | null>(null);
+  // Pieza con accesorios incluidos a elegir (Schock Prepstation D150 / Horizont N200,
+  // Carla 2026-11-18): antes de agregarla se escogen en una ventana.
+  const [eligeIncluye, setEligeIncluye] = useState<{
+    nombre: string;
+    vid: string;
+    sku: string;
+    cantidad: number;
+    tono: string;
+    elegir: number;
+    opciones: { sku: string; nombre: string }[];
+    marcados: string[];
+  } | null>(null);
 
   // El optimismo cubre SOLO la cantidad y el badge: son datos sin dinero de por
   // medio. El subtotal se queda con el valor anterior atenuado hasta que Shopify
@@ -108,11 +120,11 @@ export default function CarritoProvider({ children }: { children?: ReactNode }) 
 
   /* ---------- Acciones ---------- */
   const agregar = useCallback(
-    (vid: string, sku: string, cantidad = 1, tono = "") => {
+    (vid: string, sku: string, cantidad = 1, tono = "", incluidos: string[] = []) => {
       const turno = ++secuencia.current;
       setAviso(undefined);
       setAbierto(true);
-      iniciar(async () => aplicar(turno, await agregarAlCarrito(vid, sku, cantidad, tono)));
+      iniciar(async () => aplicar(turno, await agregarAlCarrito(vid, sku, cantidad, tono, incluidos)));
     },
     [aplicar],
   );
@@ -192,6 +204,18 @@ export default function CarritoProvider({ children }: { children?: ReactNode }) 
             /* atributo malformado: se agrega la variante del botón. */
           }
         }
+        const incluye = alta.getAttribute("data-cart-incluye");
+        if (incluye) {
+          try {
+            const cfg = JSON.parse(incluye) as { elegir: number; opciones: { sku: string; nombre: string }[] };
+            if (cfg.elegir > 0 && cfg.opciones.length > cfg.elegir) {
+              setEligeIncluye({ nombre: alta.getAttribute("data-cart-name") ?? "", vid, sku, cantidad, tono, ...cfg, marcados: [] });
+              return;
+            }
+          } catch {
+            /* atributo malformado: se agrega sin elegir. */
+          }
+        }
         if (vid || sku) agregar(vid, sku, cantidad, tono);
         return;
       }
@@ -261,16 +285,17 @@ export default function CarritoProvider({ children }: { children?: ReactNode }) 
 
   /* ---------- Esc cierra ---------- */
   useEffect(() => {
-    if (!abierto && !cotizando && !eligeGas) return;
+    if (!abierto && !cotizando && !eligeGas && !eligeIncluye) return;
     function alTeclear(ev: KeyboardEvent) {
       if (ev.key !== "Escape") return;
       setAbierto(false);
       setCotizando(false);
       setEligeGas(null);
+      setEligeIncluye(null);
     }
     document.addEventListener("keydown", alTeclear);
     return () => document.removeEventListener("keydown", alTeclear);
-  }, [abierto, cotizando, eligeGas]);
+  }, [abierto, cotizando, eligeGas, eligeIncluye]);
 
   /* ---------- Bloqueo del scroll ---------- */
   useEffect(() => {
@@ -369,6 +394,59 @@ export default function CarritoProvider({ children }: { children?: ReactNode }) 
                       ))}
                     </div>
                     <p className="gas-nota">Mismo precio en las dos versiones. Si no sabes cuál tienes, un especialista te ayuda a confirmarlo.</p>
+                  </div>
+                </div>
+              ) : null}
+              {eligeIncluye ? (
+                <div className="pc-overlay gas-overlay" role="dialog" aria-modal="true" aria-labelledby="incl-titulo" onClick={() => setEligeIncluye(null)}>
+                  <div className="gas-modal incl-modal" onClick={(ev) => ev.stopPropagation()}>
+                    <button type="button" className="pc-x" aria-label="Cerrar" onClick={() => setEligeIncluye(null)}>
+                      ×
+                    </button>
+                    <p className="eyebrow">Accesorios incluidos</p>
+                    <h2 id="incl-titulo" className="gas-titulo">
+                      Elige {eligeIncluye.elegir === 2 ? "tus 2 accesorios" : `${eligeIncluye.elegir} accesorios`}
+                    </h2>
+                    {eligeIncluye.nombre ? <p className="gas-pieza">{eligeIncluye.nombre}</p> : null}
+                    <fieldset className="incl-opciones">
+                      <legend className="sr-only">Accesorios incluidos</legend>
+                      {eligeIncluye.opciones.map((o) => {
+                        const marcado = eligeIncluye.marcados.includes(o.sku);
+                        const lleno = eligeIncluye.marcados.length >= eligeIncluye.elegir;
+                        return (
+                          <label key={o.sku} className={`incl-op${marcado ? " is-on" : ""}${!marcado && lleno ? " is-off" : ""}`}>
+                            <input
+                              type="checkbox"
+                              checked={marcado}
+                              disabled={!marcado && lleno}
+                              onChange={() =>
+                                setEligeIncluye((e) =>
+                                  e
+                                    ? { ...e, marcados: marcado ? e.marcados.filter((m) => m !== o.sku) : [...e.marcados, o.sku] }
+                                    : e,
+                                )
+                              }
+                            />
+                            <span>{o.nombre}</span>
+                          </label>
+                        );
+                      })}
+                    </fieldset>
+                    <button
+                      type="button"
+                      className="btn btn-primary incl-agregar"
+                      disabled={eligeIncluye.marcados.length !== eligeIncluye.elegir}
+                      onClick={() => {
+                        const e = eligeIncluye;
+                        setEligeIncluye(null);
+                        agregar(e.vid, e.sku, e.cantidad, e.tono, e.marcados);
+                      }}
+                    >
+                      Agregar a Mi Proyecto
+                    </button>
+                    <p className="gas-nota">
+                      {eligeIncluye.marcados.length}/{eligeIncluye.elegir} elegidos · Vienen incluidos en el precio de la tarja; aparecen en tu proyecto y en tu pedido.
+                    </p>
                   </div>
                 </div>
               ) : null}

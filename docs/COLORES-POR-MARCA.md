@@ -68,3 +68,9 @@ Carla pidió para Viking **un producto por modelo** (foto de acero) con los colo
 - `/producto/<sku de variante>` redirige (308) a la ficha del modelo.
 
 **Lynx (2026-11-17):** mismo esquema que Viking sin herraje. Los 16 equipos con *Exclusive Color Finishes* llevan **Color** (Acero Inoxidable + California Poppy, Obsidian, Desert Sage, Limestone, Pacific Blue, Sierra, Glacier, Surf; precio ECF de la lista) × **Tipo de gas** cuando aplica; SKU de color = modelo + código Lynx (`L36TROB`, `L36TROB-NG`). Tonos en `TONOS_VARIANTE` (muestras de lynxgrills.com). Kamado LCGRBK ↔ LCGRMG va como dos productos (grupo `colores` a mano: el script no quita "Brillante").
+
+## Schock (2026-11-18)
+
+Un producto por modelo con opción **Color** con el nombre de Schock, mismo precio en todos: tarjas Green Line (Night · Day · Dusk), Cristadur (Magma · Polaris · Stone · Bronze) y Cristalite (Nero · Alpina); llaves SC-510…SC-550 en los 7. SKU = nombre del modelo para el primer color (`GREENWICH N100 S`) y nombre + color para los demás (`GREENWICH N100 S POLARIS`). Tonos en `TONOS_VARIANTE` (muestras de ekitchen.com.mx); filtro Color de las llaves con "Cromo y gris" y "Cromo y café" (`MUESTRAS_FILTRO`, lib/coloresModelo.ts).
+Los complementos en color (Black · Bronze) son un producto aparte por tarja, sugerido en su ficha.
+**Accesorios incluidos a elegir:** Prepstation D150 y Horizont N200 incluyen 2 de 4 accesorios. Al agregarlas se abre una ventana para escogerlos (`data/accesorios-incluidos.json`, `lib/accesoriosIncluidos.ts`, CarritoProvider). Lo elegido viaja como atributo de línea "Accesorios incluidos" (carrito, pedido de Shopify, cajón, Mi proyecto y pre-cotización) y no se cobra aparte.

@@ -16,6 +16,7 @@
 // datos de Shopify: cada pieza sabe si se compra en línea o se cotiza, y el
 // proyecto completo es `checkout` solo si todas se compran.
 
+import { ATRIBUTO_INCLUIDOS } from "@/lib/accesoriosIncluidos";
 import { ATRIBUTO_TONO } from "@/lib/coloresMarca";
 import { IVA, productoPorSku } from "@/lib/catalogo";
 import { IMAGEN_RESPALDO } from "@/lib/imagenRespaldo";
@@ -196,6 +197,7 @@ function aLinea(raw: CarritoRaw["lines"]["nodes"][number]): LineaCarrito {
     serie: serieDe(v.product.title || ""),
     color: colorDe(v),
     tono: raw.attributes?.find((a) => a.key === ATRIBUTO_TONO)?.value || null,
+    incluye: raw.attributes?.find((a) => a.key === ATRIBUTO_INCLUIDOS)?.value || null,
     spec: specDe(v),
     precioPublico,
     decision,

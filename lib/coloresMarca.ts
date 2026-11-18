@@ -84,6 +84,18 @@ export const TONOS_VARIANTE: Record<string, string> = {
   Sierra: "#783E29",
   Glacier: "#E1DDD5",
   Surf: "#C2EDDB",
+  // Schock (Carla, 2026-11-18): colores del cuarzo con el nombre de Schock, tono de las
+  // fotos de ekitchen.com.mx. Bronze también es el de los complementos en color.
+  Magma: "#2D2D2D",
+  Polaris: "#EBE6E1",
+  Stone: "#585856",
+  Bronze: "#4C423A",
+  Night: "#21201E",
+  Day: "#F4F5F5",
+  Dusk: "#423F40",
+  Nero: "#2F2E2E",
+  Alpina: "#F9F8F7",
+  Black: "#1E1E1E",
 };
 
 /** Sufijo del nombre de una variante con herraje de latón ("Slate Blue · Latón cepillado"). */
