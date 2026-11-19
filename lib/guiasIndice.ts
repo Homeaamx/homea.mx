@@ -62,7 +62,12 @@ export async function indiceGuias(): Promise<EntradaBusqueda[]> {
     // Categorías sin página propia de una macro de 3 niveles (Exterior: Campanas…
     // Alberca; Carla, 2026-11-19): tarjetas de la portada de la macro.
     const cats = macro.subcategorias1 as (Subcategoria1 & Tipo)[];
-    for (const l of cats) if (l.esLeaf) out.push(entradaTipo(l, cats, macro));
+    for (const l of cats) {
+      if (!l.esLeaf) continue;
+      const e = entradaTipo(l, cats, macro);
+      // Ya vive en Cocina y Bar (Campanas, Centros de bebida…): a su página de Guías allá.
+      out.push(l.verEnGuias ? { ...e, href: l.verEnGuias } : e);
+    }
 
     for (const sub1 of macro.subcategorias1) {
       if (!sub1.rutaGuias) continue;

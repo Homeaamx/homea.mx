@@ -297,11 +297,18 @@ async function MacroIndex({ macro, node }: { macro: Macrocategoria; node: RouteN
       const nombre = cats.find((c) => c.slug === temas.temas[0])?.nombre ?? g.sub1?.nombre ?? macro.nombre;
       return guiasToCards([g], nombre, cats)[0];
     });
-    // Las categorías con página propia (Asadores & Hornos) llevan a ella.
-    const tipos = cats.map((c) => (c.esLeaf ? c : { ...c, ruta: c.rutaGuias }));
-    // Buscador: las tarjetas de esta portada y, de las categorías con página
-    // propia, sus tipos (a su tarjeta allá) y sus fichas.
-    const fichas: EntradaBusqueda[] = indiceCategoria(cats, true);
+    // Las categorías con página propia (Asadores & Hornos) llevan a ella; las
+    // que ya viven en Cocina y Bar (Campanas, Centros de bebida…), a su página
+    // de Guías allá (`verEnGuias`, Carla 2026-11-19).
+    const tipos = cats.map((c) =>
+      c.esLeaf ? (c.verEnGuias ? { ...c, ruta: c.verEnGuias } : c) : { ...c, ruta: c.rutaGuias },
+    );
+    // Buscador: las tarjetas de esta portada (las de `verEnGuias`, a su página)
+    // y, de las categorías con página propia, sus tipos (a su tarjeta allá) y sus fichas.
+    const fichas: EntradaBusqueda[] = indiceCategoria(cats, true).map((e) => {
+      const c = cats.find((x) => e.href === `#tipo-${x.slug}`);
+      return c?.verEnGuias ? { ...e, href: c.verEnGuias } : e;
+    });
     for (const c of cats) {
       if (c.esLeaf || !c.rutaGuias) continue;
       const subs = c.subcategorias2 ?? [];
@@ -330,7 +337,8 @@ async function MacroIndex({ macro, node }: { macro: Macrocategoria; node: RouteN
             />
           }
         />
-        <BlogGuias cards={cards} temas={cats} />
+        {/* Las de `verEnGuias` no filtran el Blog (su tarjeta sale de la página). */}
+        <BlogGuias cards={cards} temas={cats.filter((c) => !c.verEnGuias)} />
         <JsonLd
           data={itemListLd(
             `Guías de ${macro.nombre}`,

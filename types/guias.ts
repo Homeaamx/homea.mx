@@ -107,6 +107,9 @@ export interface Subcategoria1 {
   tienda?: string;
   /** Tarjeta de la portada de guías de su macro (Electrodomésticos menores). */
   tarjeta?: Subcategoria2["tarjeta"];
+  /** Leaf que ya tiene su página de Guías en otra macro (Exterior → Campanas,
+   *  Centros de bebida… de Cocina y Bar; Carla, 2026-11-19): la tarjeta lleva ahí. */
+  verEnGuias?: string;
 }
 
 export interface Macrocategoria {

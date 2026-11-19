@@ -130,6 +130,12 @@ Fotos: ambiente del repo; Hieleras (Coyote) y Fire pits (Lynx) las dio Carla el 
 Despachador de cerveza sigue con packshot (no hay foto en ambiente). Para sumar una categoría: agregarla como leaf con `tarjeta` e ícono en
 `ICONOS` (`components/GuiasPortada.tsx`).
 
+Las que ya tienen página de Guías en Cocina y Bar llevan ahí con `verEnGuias` (Carla,
+2026-11-19): Campanas → `/guias/cocina-y-bar/coccion/campanas`, Centros de bebida, Máquinas de
+hielo y Cajones refrigerantes → su página en Refrigeración, Cajones calentadores →
+`/guias/cocina-y-bar/coccion/cajones`. Esas tarjetas no filtran el Blog y el buscador lleva a
+la misma página. No hubo 301: nunca tuvieron URL propia en Exterior (solo `#tipo-…`).
+
 ### Botón "O conoce más sobre …" (2026-11-19)
 
 En toda portada cuyas tarjetas filtran el Blog (Menores, Exterior y las Subcategorías 1 de

@@ -2092,6 +2092,7 @@
           "esLeaf": true,
           "filtro": "/productos/exterior?tipo=campanas",
           "tienda": "/productos/exterior?tipo=campanas",
+          "verEnGuias": "/guias/cocina-y-bar/coccion/campanas",
           "tarjeta": {
             "imagen": "/assets/photos/hero-exterior-cocina-asador.webp",
             "ambiente": true,
@@ -2105,6 +2106,7 @@
           "esLeaf": true,
           "filtro": "/productos/exterior?tipo=centros-de-bebida",
           "tienda": "/productos/exterior?tipo=centros-de-bebida",
+          "verEnGuias": "/guias/cocina-y-bar/refrigeracion/centros-de-bebida",
           "tarjeta": {
             "imagen": "/assets/photos/brands/hero/mont-alpi-asadores.webp",
             "ambiente": true,
@@ -2118,6 +2120,7 @@
           "esLeaf": true,
           "filtro": "/productos/exterior?tipo=maquinas-de-hielo",
           "tienda": "/productos/exterior?tipo=maquinas-de-hielo",
+          "verEnGuias": "/guias/cocina-y-bar/refrigeracion/maquinas-de-hielo",
           "tarjeta": {
             "imagen": "/assets/photos/brands/hero/hoshizaki-hielo.webp",
             "ambiente": true,
@@ -2131,6 +2134,7 @@
           "esLeaf": true,
           "filtro": "/productos/exterior?tipo=cajones-refrigerantes",
           "tienda": "/productos/exterior?tipo=cajones-refrigerantes",
+          "verEnGuias": "/guias/cocina-y-bar/refrigeracion/cajones-refrigerantes",
           "tarjeta": {
             "imagen": "/assets/photos/hero-exterior-subzero-wolf-cocina.webp",
             "ambiente": true,
@@ -2170,6 +2174,7 @@
           "esLeaf": true,
           "filtro": "/productos/exterior?tipo=cajones",
           "tienda": "/productos/exterior?tipo=cajones",
+          "verEnGuias": "/guias/cocina-y-bar/coccion/cajones",
           "tarjeta": {
             "imagen": "/assets/photos/cajon-calentador-wolf-abierto-cocina.webp",
             "ambiente": true,
