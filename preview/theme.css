@@ -252,6 +252,13 @@ html { scroll-behavior: smooth; }
 /* Las filas se reparten el alto del panel hasta "Ver todo Exterior" (Carla, 2026-11-11: más aire entre títulos). */
 .mega-subcols.is-exterior > .mega-span { grid-row: span 4; }
 .mega-subcols.is-exterior > .solo-titulo h5 { margin-bottom: 0; }
+/* Todo alineado (Carla, 2026-11-19): 7 filas iguales (Asadores & Hornos ocupa 4)
+   y cada título en una caja de dos renglones con el texto abajo, así las líneas
+   doradas de las dos columnas caen a la misma altura aunque "Despachador de
+   cerveza" ocupe dos renglones. */
+.mega-subcols.is-exterior { grid-template-rows: repeat(7, minmax(0, 1fr)); }
+.mega-subcols.is-exterior > .mega-subcol > h5 { min-height: calc(2 * 1.45em + 8px); display: flex; align-items: flex-end; line-height: 1.45; }
+.mega-subcols.is-exterior > .mega-span a { padding-top: 4px; padding-bottom: 4px; }
 /* Más aire entre el nav y el primer título en todas las macros menos Cocina y
    Bar: el primer título arranca a la misma altura que "Refrigeración" (~41px). */
 .mega-pane:not([data-pane="cocina"]) > .mega-subcols { padding-top: 10px; }
