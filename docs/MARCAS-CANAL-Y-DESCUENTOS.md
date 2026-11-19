@@ -97,7 +97,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | COYOTE | LECROM | COYOT | 224 | 10% | `/marcas/coyote` | completo |  |
 | DAWN | LECROM / MARESA | DAWN | 25 | 10% | `/marcas/dawn` | completo |  |
 | EASY | MABE | EASY | 13 | 30% | `/marcas/easy` | completo | Validar margen con lista PPS (nota 4 de la política) |
-| ECLIPSE | ECLIPSE | ECLIP | 98 | 10% | `/marcas/eclipse` | completo | Revisar Serie Value Line (condición distinta) |
+| ECLIPSE | ECLIPSE | ECLIP | 98 | 10% | `/marcas/eclipse` | completo | Cargada 2026-11-18: 56 productos (catálogo eKitchen ago 2026, USD con IVA ÷ 1.16 con centavos). Value Line = mismo PLATA 10 %, garantía 3 años (resto 10 años). |
 | ELECTROLUX / ELECTROLUX ICON | INTERMUEBLES | ELECT | 12 | 10% | `/marcas/electrolux` | completo |  |
 | ELICA (todas las series) | ARTEXA | ELICA | 166 | 10% | `/marcas/elica` | completo |  |
 | FABER | LECROM | FABER | 12 | 5% | `/marcas/faber` | completo |  |

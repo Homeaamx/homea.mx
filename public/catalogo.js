@@ -837,6 +837,16 @@
         var spec = (add.getAttribute("data-cart-spec") || "").split(" · Color: ")[0];
         add.setAttribute("data-cart-spec", spec + (i === "0" ? "" : " · Color: " + sw.getAttribute("data-nombre")));
       }
+      /* Eclipse (2026-11-18): si la galería trae fotos por color (alt que termina en
+         " — color <nombre>"), salta a la del color elegido; acero = primera foto.
+         Las marcas sin esas fotos (Alfresco, Viking, Lynx) no cambian. */
+      var minis = Array.prototype.slice.call(document.querySelectorAll(".pdp-thumb"));
+      if (minis.some(function (b) { return (b.getAttribute("data-alt") || "").indexOf(" — color ") > -1; })) {
+        var meta = i === "0" ? minis[0] : minis.find(function (b) {
+          return (b.getAttribute("data-alt") || "").endsWith(" — color " + sw.getAttribute("data-nombre"));
+        });
+        if (meta && !meta.hasAttribute("data-pdp-mas")) meta.click();
+      }
       var wl = info.querySelector(".pdp-wl");
       if (wl) {
         wl.setAttribute("data-wl-id", sw.getAttribute("data-sku"));

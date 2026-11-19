@@ -18,7 +18,7 @@
 
 import { ATRIBUTO_INCLUIDOS } from "@/lib/accesoriosIncluidos";
 import { ATRIBUTO_TONO } from "@/lib/coloresMarca";
-import { IVA, productoPorSku } from "@/lib/catalogo";
+import { IVA, productoPorSku, usdEscalado } from "@/lib/catalogo";
 import { IMAGEN_RESPALDO } from "@/lib/imagenRespaldo";
 import { decidirCompra, montoAlto } from "@/lib/reglas/reglaMarca";
 
@@ -49,7 +49,7 @@ function usdLista(variante: VarianteRaw): number | null {
     Number.parseFloat((v.compareAtPrice ?? v.price).amount);
   if (base) {
     const escala = listaDe(variante) / listaDe(base);
-    if (Number.isFinite(escala) && Math.abs(escala - 1) > 0.001) return Math.round(n * escala);
+    if (Number.isFinite(escala) && Math.abs(escala - 1) > 0.001) return usdEscalado(n, escala);
   }
   return n;
 }

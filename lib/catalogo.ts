@@ -54,6 +54,17 @@ export interface ResultadoBusqueda {
 
 export const IVA = 0.16;
 
+/**
+ * USD de lista de una variante de color a partir del de la base (acero) y la
+ * proporción de sus precios en pesos. Las listas en dólares enteros (Viking,
+ * Alfresco, Lynx) se quedan en el dólar; las que traen centavos (Eclipse,
+ * 2026-11-18: el catálogo da $240.57 con IVA) conservan los centavos.
+ */
+export function usdEscalado(base: number, escala: number): number {
+  const r = base * escala;
+  return Number.isInteger(base) ? Math.round(r) : Math.round(r * 100) / 100;
+}
+
 /* ---------- Autocompletado en línea (ghost text) ------------------------- */
 
 interface Frase {

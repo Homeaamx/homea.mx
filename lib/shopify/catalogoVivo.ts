@@ -17,7 +17,7 @@
 
 import "server-only";
 
-import { IVA } from "@/lib/catalogo";
+import { IVA, usdEscalado } from "@/lib/catalogo";
 import { decidirCompra, type Decision } from "@/lib/reglas/reglaMarca";
 import type { TipoCambio } from "@/lib/tipoCambio";
 
@@ -396,7 +396,7 @@ function normalizar(raw: ProductoRaw): ProductoVivo | null {
       nombre: gasDe(x) as string,
       mxn: precio,
       mxnLista: lista && lista > precio ? lista : null,
-      usdLista: usdLista === null ? null : x === v ? usdLista : Math.round(usdLista * (listaDe(x) / listaDe(v))),
+      usdLista: usdLista === null ? null : x === v ? usdLista : usdEscalado(usdLista, listaDe(x) / listaDe(v)),
     };
   };
   const nodos = raw.variants.nodes;
@@ -415,7 +415,7 @@ function normalizar(raw: ProductoRaw): ProductoVivo | null {
       nombre,
       mxn: precio,
       mxnLista: lista && lista > precio ? lista : null,
-      usdLista: usdLista === null ? null : x === v ? usdLista : Math.round(usdLista * (listaDe(x) / listaDe(v))),
+      usdLista: usdLista === null ? null : x === v ? usdLista : usdEscalado(usdLista, listaDe(x) / listaDe(v)),
       ...(conGas && xs.length > 1 ? { gases: xs.map(aGas) } : {}),
     };
   });

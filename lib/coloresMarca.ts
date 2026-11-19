@@ -84,6 +84,10 @@ export const TONOS_VARIANTE: Record<string, string> = {
   Sierra: "#783E29",
   Glacier: "#E1DDD5",
   Surf: "#C2EDDB",
+  // Eclipse Línea Colors (Carla, 2026-11-18): BZ y NG en PVD, tono de las fotos de
+  // eclipsestainless.com.mx.
+  Bronce: "#7E5638",
+  Negro: "#252424",
   // Schock (Carla, 2026-11-18): colores del cuarzo con el nombre de Schock, tono de las
   // fotos de ekitchen.com.mx. Bronze también es el de los complementos en color.
   Magma: "#2D2D2D",

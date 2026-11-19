@@ -24,6 +24,7 @@ import { accesoriosAElegir } from "@/lib/accesoriosIncluidos";
 import { TONOS_ESTANDAR, fondoVariante, type Tono } from "@/lib/coloresMarca";
 import { coloresDeModelo, muestraFiltroColor, type ColorHermano } from "@/lib/coloresModelo";
 import { IMAGEN_RESPALDO } from "@/lib/imagenRespaldo";
+import { conVersion } from "@/lib/versionAsset";
 
 import { TIPOS_WEB, esAccesorio, tileDePieza, tipoDePieza, tipoWeb } from "./coleccionesWeb";
 import { clasificarDimensiones } from "./dimensiones";
@@ -169,7 +170,7 @@ function logoDeMarca(vendor: string): { ruta: string; slug: string; sinFondo: bo
     avisadosSinFicha.add(slug);
     console.warn(`[catalogo] ${vendor}: falta su logo sin fondo (python3 scripts/logo-ficha.py ${slug} <archivo>)`);
   }
-  return ruta ? { ruta, slug, sinFondo } : null;
+  return ruta ? { ruta: conVersion(ruta), slug, sinFondo } : null;
 }
 
 /* ---------- Definición de filtros por tipo -------------------------------- */

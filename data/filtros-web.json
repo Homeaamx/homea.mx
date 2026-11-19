@@ -2246,6 +2246,7 @@
           "1 año",
           "2 años",
           "3 años",
+          "10 años",
           "15 años",
           "De por vida"
         ]
@@ -2354,7 +2355,8 @@
         "valores": [
           "1 año",
           "2 años",
-          "3 años"
+          "3 años",
+          "10 años"
         ]
       },
       {
@@ -2512,6 +2514,7 @@
           "1 año",
           "2 años",
           "3 años",
+          "10 años",
           "De por vida"
         ]
       },

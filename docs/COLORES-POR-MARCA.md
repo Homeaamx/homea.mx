@@ -69,6 +69,12 @@ Carla pidió para Viking **un producto por modelo** (foto de acero) con los colo
 
 **Lynx (2026-11-17):** mismo esquema que Viking sin herraje. Los 16 equipos con *Exclusive Color Finishes* llevan **Color** (Acero Inoxidable + California Poppy, Obsidian, Desert Sage, Limestone, Pacific Blue, Sierra, Glacier, Surf; precio ECF de la lista) × **Tipo de gas** cuando aplica; SKU de color = modelo + código Lynx (`L36TROB`, `L36TROB-NG`). Tonos en `TONOS_VARIANTE` (muestras de lynxgrills.com). Kamado LCGRBK ↔ LCGRMG va como dos productos (grupo `colores` a mano: el script no quita "Brillante").
 
+## Eclipse (2026-11-18)
+
+Línea Colors = opción **Color** del mismo producto (Acero inoxidable · Bronce · Negro), cada una con su precio de lista (el Colors cuesta más que el acero). SKU de variante = clave del catálogo + código: `EA 62B`, `EA 62B BZ`, `EA 62B NG`. Tonos `Bronce` y `Negro` en `TONOS_VARIANTE` (lib/coloresMarca.ts).
+Las fotos de color llevan alt que termina en ` — color <nombre>`: al pulsar el círculo, `public/catalogo.js` salta a esa foto (acero = primera). Las marcas sin esas fotos (Alfresco, Viking, Lynx) no cambian.
+El USD de cada color sale de la proporción de precios (`usdEscalado`, lib/catalogo.ts): conserva los centavos cuando el precio base los trae (Eclipse) y se queda en el dólar entero en las listas enteras.
+
 ## Schock (2026-11-18)
 
 **Un producto por color** (Carla, 2026-11-18, como Bertazzoni y Blanco; primero se cargó con opción Color y se cambió el mismo día). Tarjas Green Line (Night · Day · Dusk), Cristadur (Magma · Polaris · Stone · Bronze) y Cristalite (Nero · Alpina); llaves SC-510…SC-550 en los 7; complementos en color Black · Bronze; rejillas plegables acero inoxidable · negra. El color va en el título antes de " — línea" (`… Greenwich N100 S Polaris — Cristadur`) y en `filtros.color`.
