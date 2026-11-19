@@ -69,11 +69,14 @@ Carla pidió para Viking **un producto por modelo** (foto de acero) con los colo
 
 **Lynx (2026-11-17):** mismo esquema que Viking sin herraje. Los 16 equipos con *Exclusive Color Finishes* llevan **Color** (Acero Inoxidable + California Poppy, Obsidian, Desert Sage, Limestone, Pacific Blue, Sierra, Glacier, Surf; precio ECF de la lista) × **Tipo de gas** cuando aplica; SKU de color = modelo + código Lynx (`L36TROB`, `L36TROB-NG`). Tonos en `TONOS_VARIANTE` (muestras de lynxgrills.com). Kamado LCGRBK ↔ LCGRMG va como dos productos (grupo `colores` a mano: el script no quita "Brillante").
 
-## Eclipse (2026-11-18)
+## Eclipse (2026-11-18 → 2026-11-19)
 
-Línea Colors = opción **Color** del mismo producto (Acero inoxidable · Bronce · Negro), cada una con su precio de lista (el Colors cuesta más que el acero). SKU de variante = clave del catálogo + código: `EA 62B`, `EA 62B BZ`, `EA 62B NG`. Tonos `Bronce` y `Negro` en `TONOS_VARIANTE` (lib/coloresMarca.ts).
-Las fotos de color llevan alt que termina en ` — color <nombre>`: al pulsar el círculo, `public/catalogo.js` salta a esa foto (acero = primera). Las marcas sin esas fotos (Alfresco, Viking, Lynx) no cambian.
-El USD de cada color sale de la proporción de precios (`usdEscalado`, lib/catalogo.ts): conserva los centavos cuando el precio base los trae (Eclipse) y se queda en el dólar entero en las listas enteras.
+**Un producto por color** desde 2026-11-19 (Carla, como Schock; el 2026-11-18 se cargó con opción Color). Línea Colors en 10 modelos: llaves EA 62B, EA 62C, EA 73, EA 74, EC 108, KS 3032, KS 3033, F 7A, pot filler EK 55 y dosificador ESD, cada uno en Acero inoxidable · Bronce · Negro (30 productos), con su precio de lista (el Colors cuesta más).
+- SKU = clave del catálogo: el acero conserva producto, URL y variante (`EA 62B`, `/producto/ea-62b`; EK 55 conserva su inventario); bronce y negro = `EA 62B BZ` / `EA 62B NG` (`/producto/ea-62b-bz`). Sin 301: esas rutas ya existían (redirigían al modelo) y ahora son fichas propias.
+- Título: el acero sin color (como el resto de Eclipse, su círculo sale de `filtros.color`); los demás terminan en " Bronce" / " Negro". `filtros.color` = su color y `filtros.acabado` = Cepillado (acero) o PVD.
+- Grupos `colores` en `data/sugerencias-marca.json`; la llave sugiere el dosificador ESD de su mismo color. Muestras `acero inoxidable`, `bronce` y `negro` ya existían en `MUESTRAS`. Los tonos de `TONOS_VARIANTE` (lib/coloresMarca.ts) ya no se usan.
+- Cada ficha solo con fotos de su color (web Eclipse + ambiente del catálogo si es de ese color + plano). Sin foto propia del color: se queda con el plano (o con el logo HOMEA en ESD BZ/NG) hasta que Cowork la consiga.
+El USD de cada producto conserva los centavos de la lista (`usdEscalado`, lib/catalogo.ts, sigue sirviendo a otras marcas con variantes).
 
 ## Schock (2026-11-18)
 

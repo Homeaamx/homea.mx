@@ -1,5 +1,5 @@
 {
- "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador. 2026-11-14 (Carla): Porsche x Smeg, 50's Style y Dolce&Gabbana son líneas distintas: sus círculos de color no se mezclan (refris FAB28, tostador TSF01, licuadora BLF03); D&G FAB28URDGME3 sin círculos. Fulgor Milano, 2026-11-14: cocción → campana del mismo ancho; hornos → cajón calientaplatos; cafetera ↔ trim; lavavajillas panelable ↔ jaladera; refrigeración acero ↔ panelable como círculos (misma bisagra y medida, como Sub-Zero) y columna de refrigerador → congelador y cava. Falmec, 2026-11-14: colores de campanas decorativas, Stella Plus, Polar Evo y Valentina Plus, lámparas Sophie y accesorios Spazio; accesorios = los que la lista pone bajo cada campana (filtros primero; en Stella Plus y Alba, que se venden sin motor, los motores primero). Tecnolam, 2026-11-14: círculos Nevada Mix (4 colores, 1 y 2 tinas), monomandos acero/cromo ↔ negro mate, Doppio, BIM30, H45MWCG, TECDW60 acero ↔ panelable, Lyra, Altair, Vortex AC ↔ NE ↔ SI (SI = plata, distinta al acero AC: Carla 2026-11-17; cava H45WC24 fuera: la .NE abre hacia abajo y la B de lado); comal GRIDDLE en FGR366/GTR366/GTR488, KITMAGIC en las Magic, pareja TSD559PR ↔ TSD559PF. Lynx, 2026-11-17: asadores → chaqueta, funda, protector de viento, carrito y kits de gas (PROLPK1/PRONGK1/WGO* los publica Viking); planchas Asado, hornos Napoli y quemadores → su funda, chaqueta y kits; despachador de cerveza → torres y fundas; tarjas → monomando LPFK y funda; puertas Ventana → kits LDRKS/LDRKL; cada accesorio → sus equipos. Eclipse, 2026-11-18: tarjas → rejilla compatible, contracanasta AAICON y dosificador ESD; llaves KS → su kit TEKS con dosificador y ESD. Commodore, 2026-11-18: triturador → su combo con control remoto (y 3-Bolt en 7600/8100), control remoto, switch de aire, imán y contracanasta; combo → su triturador, imán y contracanasta; 3-Bolt → adaptador Perfect Drain, control, switch e imán.",
+ "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador. 2026-11-14 (Carla): Porsche x Smeg, 50's Style y Dolce&Gabbana son líneas distintas: sus círculos de color no se mezclan (refris FAB28, tostador TSF01, licuadora BLF03); D&G FAB28URDGME3 sin círculos. Fulgor Milano, 2026-11-14: cocción → campana del mismo ancho; hornos → cajón calientaplatos; cafetera ↔ trim; lavavajillas panelable ↔ jaladera; refrigeración acero ↔ panelable como círculos (misma bisagra y medida, como Sub-Zero) y columna de refrigerador → congelador y cava. Falmec, 2026-11-14: colores de campanas decorativas, Stella Plus, Polar Evo y Valentina Plus, lámparas Sophie y accesorios Spazio; accesorios = los que la lista pone bajo cada campana (filtros primero; en Stella Plus y Alba, que se venden sin motor, los motores primero). Tecnolam, 2026-11-14: círculos Nevada Mix (4 colores, 1 y 2 tinas), monomandos acero/cromo ↔ negro mate, Doppio, BIM30, H45MWCG, TECDW60 acero ↔ panelable, Lyra, Altair, Vortex AC ↔ NE ↔ SI (SI = plata, distinta al acero AC: Carla 2026-11-17; cava H45WC24 fuera: la .NE abre hacia abajo y la B de lado); comal GRIDDLE en FGR366/GTR366/GTR488, KITMAGIC en las Magic, pareja TSD559PR ↔ TSD559PF. Lynx, 2026-11-17: asadores → chaqueta, funda, protector de viento, carrito y kits de gas (PROLPK1/PRONGK1/WGO* los publica Viking); planchas Asado, hornos Napoli y quemadores → su funda, chaqueta y kits; despachador de cerveza → torres y fundas; tarjas → monomando LPFK y funda; puertas Ventana → kits LDRKS/LDRKL; cada accesorio → sus equipos. Eclipse, 2026-11-18: tarjas → rejilla compatible, contracanasta AAICON y dosificador ESD; llaves KS → su kit TEKS con dosificador y ESD. Commodore, 2026-11-18: triturador → su combo con control remoto (y 3-Bolt en 7600/8100), control remoto, switch de aire, imán y contracanasta; combo → su triturador, imán y contracanasta; 3-Bolt → adaptador Perfect Drain, control, switch e imán. Eclipse, 2026-11-19 (Carla): Línea Colors un producto por color (acero · BZ bronce · NG negro, como Schock); la llave sugiere el dosificador ESD de su mismo color.",
  "DW2451": {
   "accesorios": [
    "9019420",
@@ -35594,37 +35594,65 @@
   ]
  },
  "EA 62B": {
+  "colores": [
+   "EA 62B BZ",
+   "EA 62B NG"
+  ],
   "accesorios": [
    "ESD"
   ]
  },
  "EA 62C": {
+  "colores": [
+   "EA 62C BZ",
+   "EA 62C NG"
+  ],
   "accesorios": [
    "ESD"
   ]
  },
  "EA 73": {
+  "colores": [
+   "EA 73 BZ",
+   "EA 73 NG"
+  ],
   "accesorios": [
    "ESD"
   ]
  },
  "EA 74": {
+  "colores": [
+   "EA 74 BZ",
+   "EA 74 NG"
+  ],
   "accesorios": [
    "ESD"
   ]
  },
  "EC 108": {
+  "colores": [
+   "EC 108 BZ",
+   "EC 108 NG"
+  ],
   "accesorios": [
    "ESD"
   ]
  },
  "KS 3032": {
+  "colores": [
+   "KS 3032 BZ",
+   "KS 3032 NG"
+  ],
   "accesorios": [
    "TEKS 3032",
    "ESD"
   ]
  },
  "KS 3033": {
+  "colores": [
+   "KS 3033 BZ",
+   "KS 3033 NG"
+  ],
   "accesorios": [
    "TEKS 3033",
    "ESD"
@@ -35641,6 +35669,10 @@
   ]
  },
  "F 7A": {
+  "colores": [
+   "F 7A BZ",
+   "F 7A NG"
+  ],
   "accesorios": [
    "ESD"
   ]
@@ -35651,6 +35683,10 @@
   ]
  },
  "EK 55": {
+  "colores": [
+   "EK 55 BZ",
+   "EK 55 NG"
+  ],
   "accesorios": [
    "ESD"
   ]
@@ -37474,6 +37510,190 @@
  "MANSION M100 L COMPLEMENTOS BRONZE": {
   "colores": [
    "MANSION M100 L COMPLEMENTOS"
+  ]
+ },
+ "EA 62B BZ": {
+  "colores": [
+   "EA 62B",
+   "EA 62B NG"
+  ],
+  "accesorios": [
+   "ESD BZ"
+  ]
+ },
+ "EA 62B NG": {
+  "colores": [
+   "EA 62B",
+   "EA 62B BZ"
+  ],
+  "accesorios": [
+   "ESD NG"
+  ]
+ },
+ "EA 62C BZ": {
+  "colores": [
+   "EA 62C",
+   "EA 62C NG"
+  ],
+  "accesorios": [
+   "ESD BZ"
+  ]
+ },
+ "EA 62C NG": {
+  "colores": [
+   "EA 62C",
+   "EA 62C BZ"
+  ],
+  "accesorios": [
+   "ESD NG"
+  ]
+ },
+ "EA 73 BZ": {
+  "colores": [
+   "EA 73",
+   "EA 73 NG"
+  ],
+  "accesorios": [
+   "ESD BZ"
+  ]
+ },
+ "EA 73 NG": {
+  "colores": [
+   "EA 73",
+   "EA 73 BZ"
+  ],
+  "accesorios": [
+   "ESD NG"
+  ]
+ },
+ "EA 74 BZ": {
+  "colores": [
+   "EA 74",
+   "EA 74 NG"
+  ],
+  "accesorios": [
+   "ESD BZ"
+  ]
+ },
+ "EA 74 NG": {
+  "colores": [
+   "EA 74",
+   "EA 74 BZ"
+  ],
+  "accesorios": [
+   "ESD NG"
+  ]
+ },
+ "EC 108 BZ": {
+  "colores": [
+   "EC 108",
+   "EC 108 NG"
+  ],
+  "accesorios": [
+   "ESD BZ"
+  ]
+ },
+ "EC 108 NG": {
+  "colores": [
+   "EC 108",
+   "EC 108 BZ"
+  ],
+  "accesorios": [
+   "ESD NG"
+  ]
+ },
+ "KS 3032 BZ": {
+  "colores": [
+   "KS 3032",
+   "KS 3032 NG"
+  ],
+  "accesorios": [
+   "TEKS 3032",
+   "ESD BZ"
+  ]
+ },
+ "KS 3032 NG": {
+  "colores": [
+   "KS 3032",
+   "KS 3032 BZ"
+  ],
+  "accesorios": [
+   "TEKS 3032",
+   "ESD NG"
+  ]
+ },
+ "KS 3033 BZ": {
+  "colores": [
+   "KS 3033",
+   "KS 3033 NG"
+  ],
+  "accesorios": [
+   "TEKS 3033",
+   "ESD BZ"
+  ]
+ },
+ "KS 3033 NG": {
+  "colores": [
+   "KS 3033",
+   "KS 3033 BZ"
+  ],
+  "accesorios": [
+   "TEKS 3033",
+   "ESD NG"
+  ]
+ },
+ "F 7A BZ": {
+  "colores": [
+   "F 7A",
+   "F 7A NG"
+  ],
+  "accesorios": [
+   "ESD BZ"
+  ]
+ },
+ "F 7A NG": {
+  "colores": [
+   "F 7A",
+   "F 7A BZ"
+  ],
+  "accesorios": [
+   "ESD NG"
+  ]
+ },
+ "EK 55 BZ": {
+  "colores": [
+   "EK 55",
+   "EK 55 NG"
+  ],
+  "accesorios": [
+   "ESD BZ"
+  ]
+ },
+ "EK 55 NG": {
+  "colores": [
+   "EK 55",
+   "EK 55 BZ"
+  ],
+  "accesorios": [
+   "ESD NG"
+  ]
+ },
+ "ESD": {
+  "colores": [
+   "ESD BZ",
+   "ESD NG"
+  ]
+ },
+ "ESD BZ": {
+  "colores": [
+   "ESD",
+   "ESD NG"
+  ]
+ },
+ "ESD NG": {
+  "colores": [
+   "ESD",
+   "ESD BZ"
   ]
  }
 }
