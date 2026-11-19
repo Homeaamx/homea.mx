@@ -184,6 +184,18 @@ const MUESTRAS: Record<string, string> = {
   "gris cuarzo": "#767774",
   "gris hematita": "#464542",
   "negro obsidiana": "#2c2a27",
+  // Schock (2026-11-18): cuarzo Cristadur, Green Line y Cristalite con el nombre de Schock
+  // (tono medido en las fotos de ekitchen.com.mx); Black/Bronze = complementos en color.
+  // "nero", "negra" y "acero inoxidable" ya están arriba.
+  magma: "#2d2d2d",
+  polaris: "#ebe6e1",
+  stone: "#585856",
+  bronze: "#4c423a",
+  night: "#21201e",
+  day: "#f4f5f5",
+  dusk: "#423f40",
+  alpina: "#f9f8f7",
+  black: "#1e1e1e",
 };
 
 /**

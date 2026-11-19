@@ -124,7 +124,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | MONT ALPI | MARESA | MONTA | 87 | 10% | `/marcas/mont-alpi` | completo |  |
 | NANTUCKET | LECROM | NANTU | 20 | 10% | `/marcas/nantucket` | completo |  |
 | PITT | ARTEXA | PITT | 108 | 10% | `/marcas/pitt-cooking` | completo |  |
-| SCHOCK | ECLIPSE | SCHOC | 33 | 10% | `/marcas/schock` | completo | Cargada 2026-11-18: 39 productos (catálogo eKitchen ago 2026, USD con IVA ÷ 1.16). Garantía por línea del catálogo: Cristadur y Green Line 15 años, Cristalite 10, llaves 2, accesorios 3 (la política dice 15 para todo). |
+| SCHOCK | ECLIPSE | SCHOC | 33 | 10% | `/marcas/schock` | completo | Cargada 2026-11-18: 108 productos, uno por color (catálogo eKitchen ago 2026, USD con IVA ÷ 1.16). Garantía por línea del catálogo: Cristadur y Green Line 15 años, Cristalite 10, llaves 2, accesorios 3 (la política dice 15 para todo). |
 | SCOTSMAN | IESA/LAVISH | SCOTS | 66 | 10% | `/marcas/scotsman` | completo |  |
 | SMEG | SMEG | SMEG | 240 | 15% | `/marcas/smeg` | completo | PLATA 15 % (Rev 22; la Rev 24 de 25 % es Buen Fin). Precios de lista CON IVA ÷ 1.16. Cargada 2026-11-13. |
 | SUB-ZERO | IESA/LAVISH | SUBZE | 515 | 10% | `/marcas/sub-zero` | completo | Condición distinta para fuera de línea vs. de línea (solo costo: PLATA 10 % y 2 años en ambas). Cargada 2026-11-10: 222 equipos + 293 accesorios; se cotiza salvo stock (regla IESA) |
