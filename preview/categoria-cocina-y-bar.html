@@ -690,13 +690,17 @@
   var gRoot = document.getElementById('hsceneGroups');
   var spotsRoot = document.getElementById('hsceneSpots');
   var defs = scene.querySelector('defs');
-  var groups = [], markers = [];
+  var groups = [], markers = [], layouts = [];
 
   // Controlador central con "puente" temporal: al salir de una zona no se cierra de inmediato,
   // dando margen para que el cursor viaje del cuadrado al texto (o de vuelta) sin perder el spotlight.
   var closeTimer = null, CLOSE_DELAY = 420;
   function activate(i){
     clearTimeout(closeTimer);
+    // Se re-mide al encenderse: en móvil la etiqueta pasa a 44px (media query del
+    // <style> de la página) y, si se midió antes de que ese CSS o la fuente
+    // estuvieran listos, el texto se salía del fondo blanco (2026-11-19).
+    if (layouts[i]) layouts[i]();
     scene.classList.add('has-active');
     groups.forEach(function(g, idx){ g.classList.toggle('on', idx === i); });
     markers.forEach(function(m, idx){ m.classList.toggle('act', idx === i); });
@@ -731,7 +735,7 @@
     if (spotsRoot.childElementCount) return;
     while (gRoot.firstChild) gRoot.removeChild(gRoot.firstChild);
     defs.querySelectorAll('mask').forEach(function(m){ m.remove(); });
-    groups.length = 0; markers.length = 0;
+    groups.length = 0; markers.length = 0; layouts.length = 0;
     SPOTS.forEach(function(s){
     // Máscara: todo visible (blanco) menos el hueco difuminado del electrodoméstico
     var mask = document.createElementNS(NS,'mask'); mask.setAttribute('id','hm'+s.i);
@@ -786,6 +790,7 @@
       line.setAttribute('x2', s.side==='r'? x0 : x0+w); line.setAttribute('y2',s.anchor[1]);
     }
     layout();
+    layouts[s.i] = layout;
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
 
     // Marcador HTML (link real)
@@ -808,6 +813,8 @@
   }
   buildScene();
   window.addEventListener('pageshow', buildScene);
+  // Al girar el teléfono o cruzar los 760px cambia el tamaño de la etiqueta.
+  window.addEventListener('resize', function(){ layouts.forEach(function(f){ if (f) f(); }); }, { passive: true });
 })();
 
 // Filtro Ancho: valores reales del maestro (06-MAESTRO-SHOPIFY, universo VIGENTE+NUEVO), orden por piezas

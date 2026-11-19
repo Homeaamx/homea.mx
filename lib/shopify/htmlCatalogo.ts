@@ -326,7 +326,7 @@ export function tarjetaHtml(p: ProductoVivo, tc: TipoCambio, orden = 0, colores:
   const spec = lineaSpec(p);
 
   const imagen = img
-    ? `<img width="${img.ancho}" height="${img.alto}" srcset="${srcsetCdn(img.url, img.ancho)}" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 34vw" loading="lazy" decoding="async" src="${cdn(img.url, 640)}" alt="${esc(img.alt)}">`
+    ? `<img width="${img.ancho}" height="${img.alto}" srcset="${srcsetCdn(img.url, img.ancho)}" sizes="(max-width: 1100px) 50vw, 34vw" loading="lazy" decoding="async" src="${cdn(img.url, 640)}" alt="${esc(img.alt)}">`
     : imgRespaldo(p, ' loading="lazy"');
 
   const { nombre, serie } = nombreYSerie(p.titulo);

@@ -558,7 +558,8 @@
        encontrando por selector. */
     var aside = document.querySelector(".plp > .filters");
     var mqFiltros = window.matchMedia("(max-width: 1080px)");
-    if (aside && !aside.querySelector(".filters-sheet") && mqFiltros.matches) {
+    var envolverFiltros = function () {
+      if (!aside || aside.querySelector(".filters-sheet") || !mqFiltros.matches) { return; }
       var caja = document.createElement("div");
       caja.className = "filters-sheet-body";
       while (aside.firstChild) { caja.appendChild(aside.firstChild); }
@@ -571,7 +572,11 @@
       /* Si la ventana crece a escritorio el envoltorio se queda, así que se abre
          para no esconder la columna de filtros. */
       on(window, "resize", function () { if (!mqFiltros.matches) { det.open = true; } }, { passive: true });
-    }
+    };
+    envolverFiltros();
+    /* Si se abrió en escritorio y la ventana baja a tablet/móvil, también se
+       envuelve: el CSS esconde la columna hasta que exista el "Filtrar". */
+    if (aside) { on(window, "resize", envolverFiltros, { passive: true }); }
 
     /* ---------- Reveals: una vez, al entrar al viewport ---------- */
     if ("IntersectionObserver" in window) {
@@ -609,7 +614,9 @@
       scArrows.forEach(function (btn) {
         ctx.on(btn, "click", function () {
           var max = scStrip.scrollWidth - scStrip.clientWidth;
-          var delta = 201 * 3 * parseInt(btn.getAttribute("data-scroll"), 10);
+          /* ~3 tarjetas; en móvil, lo que cabe a la vista (3 × 201 se saltaba todo). */
+          var paso = Math.min(201 * 3, Math.round(scStrip.clientWidth * 0.85));
+          var delta = paso * parseInt(btn.getAttribute("data-scroll"), 10);
           scStrip.scrollTo({ left: Math.max(0, Math.min(max, scStrip.scrollLeft + delta)), behavior: "smooth" });
         });
       });
@@ -783,6 +790,18 @@
       if (nextBtn) {
         nextBtn.addEventListener("click", function () { render(idx + 1); start(); });
       }
+      /* Táctil (2026-11-19): el giro cada 10 s cambiaba texto y enlace del botón
+         mientras el dedo iba hacia él ("Explorar categorías" se volvía "Agendar
+         asesoría" y abría WhatsApp). Al tocar el hero se congela el mensaje
+         visible y el giro se reanuda 12 s después del último toque. */
+      var resumeT = null;
+      on(hero, "pointerdown", function (e) {
+        if (e.pointerType === "mouse") { return; }
+        stop();
+        clearTimeout(resumeT);
+        resumeT = setTimeout(start, 12000);
+      }, { passive: true });
+      ctx.onAbort(function () { clearTimeout(resumeT); });
     }
 
     /* ---------- Tabs de marcas: filtran por gama · MODO MAGIA: agrupa por macro ---------- */

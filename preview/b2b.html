@@ -118,7 +118,16 @@
 #proyectos-destacados .pj-count { font-size: 11px; letter-spacing: .12em; color: var(--fg-subtle); font-variant-numeric: tabular-nums; white-space: nowrap; }
 #proyectos-destacados .pj-more { margin-top: 40px; text-align: right; }
 @media (max-width: 980px) { #proyectos-destacados .pj-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 640px) { #proyectos-destacados .pj-grid { grid-template-columns: 1fr; } }
+/* Móvil (Carla, 2026-11-19): 2 columnas — 19 proyectos a una columna eran 6,000px de scroll. */
+@media (max-width: 640px) {
+  #proyectos-destacados .pj-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 12px; margin-top: 32px; }
+  #proyectos-destacados .pj-nav { right: 6px; bottom: 6px; gap: 4px; }
+  #proyectos-destacados .pj-arrow { width: 28px; height: 28px; font-size: 15px; }
+  #proyectos-destacados .pj-cap { flex-direction: column; gap: 2px; padding-top: 8px; }
+  #proyectos-destacados .pj-cap h3 { font-size: 15px; }
+  #proyectos-destacados .pj-cap .loc { font-size: 9px; letter-spacing: .12em; }
+  #proyectos-destacados .pj-count { display: none; }
+}
 
 /* Lightbox de imagen grande */
 .pj-lb {
@@ -459,7 +468,7 @@
   <div class="pj-grid reveal">
     <article class="pj-card" data-slug="artigas" data-n="8" data-name="Artigas Arquitectos" data-loc="El Campanario, QRO">
       <div class="pj-media">
-        <img width="1600" height="1067" srcset="assets/projects/g/artigas-1-400.webp 400w, assets/projects/g/artigas-1-640.webp 640w, assets/projects/g/artigas-1-960.webp 960w, assets/projects/g/artigas-1-1280.webp 1280w, assets/projects/g/artigas-1.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" loading="lazy" decoding="async" src="assets/projects/g/artigas-1.webp" alt="Artigas Arquitectos — proyecto equipado por HOMEA">
+        <img width="1600" height="1067" srcset="assets/projects/g/artigas-1-400.webp 400w, assets/projects/g/artigas-1-640.webp 640w, assets/projects/g/artigas-1-960.webp 960w, assets/projects/g/artigas-1-1280.webp 1280w, assets/projects/g/artigas-1.webp 1600w" sizes="(max-width: 980px) 50vw, 33vw" loading="lazy" decoding="async" src="assets/projects/g/artigas-1.webp" alt="Artigas Arquitectos — proyecto equipado por HOMEA">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -472,7 +481,7 @@
     </article>
     <article class="pj-card" data-slug="zorrilla" data-n="11" data-name="Arquitecto Zorrilla" data-loc="El Campanario, QRO">
       <div class="pj-media">
-        <img width="1200" height="1600" srcset="assets/projects/g/zorrilla-1-400.webp 400w, assets/projects/g/zorrilla-1-640.webp 640w, assets/projects/g/zorrilla-1-960.webp 960w, assets/projects/g/zorrilla-1.webp 1200w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/zorrilla-1.webp" alt="Arquitecto Zorrilla — proyecto equipado por HOMEA" loading="lazy">
+        <img width="1200" height="1600" srcset="assets/projects/g/zorrilla-1-400.webp 400w, assets/projects/g/zorrilla-1-640.webp 640w, assets/projects/g/zorrilla-1-960.webp 960w, assets/projects/g/zorrilla-1.webp 1200w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/zorrilla-1.webp" alt="Arquitecto Zorrilla — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -485,7 +494,7 @@
     </article>
     <article class="pj-card" data-slug="hausa" data-n="7" data-name="Hausa Arquitectura" data-loc="El Campanario, QRO">
       <div class="pj-media">
-        <img width="1200" height="1600" srcset="assets/projects/g/hausa-1-400.webp 400w, assets/projects/g/hausa-1-640.webp 640w, assets/projects/g/hausa-1-960.webp 960w, assets/projects/g/hausa-1.webp 1200w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/hausa-1.webp" alt="Hausa Arquitectura — proyecto equipado por HOMEA" loading="lazy">
+        <img width="1200" height="1600" srcset="assets/projects/g/hausa-1-400.webp 400w, assets/projects/g/hausa-1-640.webp 640w, assets/projects/g/hausa-1-960.webp 960w, assets/projects/g/hausa-1.webp 1200w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/hausa-1.webp" alt="Hausa Arquitectura — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -498,7 +507,7 @@
     </article>
     <article class="pj-card" data-slug="kah" data-n="7" data-name="KAH Arquitectura" data-loc="El Campanario, QRO">
       <div class="pj-media">
-        <img width="1600" height="1067" srcset="assets/projects/g/kah-1-400.webp 400w, assets/projects/g/kah-1-640.webp 640w, assets/projects/g/kah-1-960.webp 960w, assets/projects/g/kah-1-1280.webp 1280w, assets/projects/g/kah-1.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/kah-1.webp" alt="KAH Arquitectura — proyecto equipado por HOMEA" loading="lazy">
+        <img width="1600" height="1067" srcset="assets/projects/g/kah-1-400.webp 400w, assets/projects/g/kah-1-640.webp 640w, assets/projects/g/kah-1-960.webp 960w, assets/projects/g/kah-1-1280.webp 1280w, assets/projects/g/kah-1.webp 1600w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/kah-1.webp" alt="KAH Arquitectura — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -511,7 +520,7 @@
     </article>
     <article class="pj-card" data-slug="reims" data-n="9" data-name="Reims Arquitectura" data-loc="El Campanario, QRO">
       <div class="pj-media">
-        <img width="1600" height="1067" srcset="assets/projects/g/reims-1-400.webp 400w, assets/projects/g/reims-1-640.webp 640w, assets/projects/g/reims-1-960.webp 960w, assets/projects/g/reims-1-1280.webp 1280w, assets/projects/g/reims-1.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/reims-1.webp" alt="Reims Arquitectura — proyecto equipado por HOMEA" loading="lazy">
+        <img width="1600" height="1067" srcset="assets/projects/g/reims-1-400.webp 400w, assets/projects/g/reims-1-640.webp 640w, assets/projects/g/reims-1-960.webp 960w, assets/projects/g/reims-1-1280.webp 1280w, assets/projects/g/reims-1.webp 1600w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/reims-1.webp" alt="Reims Arquitectura — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -524,7 +533,7 @@
     </article>
     <article class="pj-card" data-slug="zane" data-n="5" data-name="Zane Interiorismo" data-loc="El Campanario, QRO">
       <div class="pj-media">
-        <img width="1200" height="1600" srcset="assets/projects/g/zane-1-400.webp 400w, assets/projects/g/zane-1-640.webp 640w, assets/projects/g/zane-1-960.webp 960w, assets/projects/g/zane-1.webp 1200w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/zane-1.webp" alt="Zane Interiorismo — proyecto equipado por HOMEA" loading="lazy">
+        <img width="1200" height="1600" srcset="assets/projects/g/zane-1-400.webp 400w, assets/projects/g/zane-1-640.webp 640w, assets/projects/g/zane-1-960.webp 960w, assets/projects/g/zane-1.webp 1200w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/zane-1.webp" alt="Zane Interiorismo — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -537,7 +546,7 @@
     </article>
     <article class="pj-card" data-slug="punta-serra" data-n="6" data-name="Punta Serra Residencial" data-loc="Querétaro">
       <div class="pj-media">
-        <img width="1200" height="1600" srcset="assets/projects/g/punta-serra-1-400.webp 400w, assets/projects/g/punta-serra-1-640.webp 640w, assets/projects/g/punta-serra-1-960.webp 960w, assets/projects/g/punta-serra-1.webp 1200w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/punta-serra-1.webp" alt="Punta Serra Residencial — proyecto equipado por HOMEA" loading="lazy">
+        <img width="1200" height="1600" srcset="assets/projects/g/punta-serra-1-400.webp 400w, assets/projects/g/punta-serra-1-640.webp 640w, assets/projects/g/punta-serra-1-960.webp 960w, assets/projects/g/punta-serra-1.webp 1200w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/punta-serra-1.webp" alt="Punta Serra Residencial — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -550,7 +559,7 @@
     </article>
     <article class="pj-card" data-slug="gabor" data-n="8" data-name="Gabor Arquitectos" data-loc="San Miguel de Allende">
       <div class="pj-media">
-        <img width="1100" height="618" srcset="assets/projects/g/gabor-1-400.webp 400w, assets/projects/g/gabor-1-640.webp 640w, assets/projects/g/gabor-1-960.webp 960w, assets/projects/g/gabor-1.webp 1100w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/gabor-1.webp" alt="Gabor Arquitectos — proyecto equipado por HOMEA" loading="lazy">
+        <img width="1100" height="618" srcset="assets/projects/g/gabor-1-400.webp 400w, assets/projects/g/gabor-1-640.webp 640w, assets/projects/g/gabor-1-960.webp 960w, assets/projects/g/gabor-1.webp 1100w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/gabor-1.webp" alt="Gabor Arquitectos — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -563,7 +572,7 @@
     </article>
     <article class="pj-card" data-slug="campanario-3" data-n="8" data-name="El Campanario I" data-loc="Querétaro">
       <div class="pj-media">
-        <img width="1200" height="1600" srcset="assets/projects/g/campanario-3-1-400.webp 400w, assets/projects/g/campanario-3-1-640.webp 640w, assets/projects/g/campanario-3-1-960.webp 960w, assets/projects/g/campanario-3-1.webp 1200w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campanario-3-1.webp" alt="El Campanario I — proyecto equipado por HOMEA" loading="lazy">
+        <img width="1200" height="1600" srcset="assets/projects/g/campanario-3-1-400.webp 400w, assets/projects/g/campanario-3-1-640.webp 640w, assets/projects/g/campanario-3-1-960.webp 960w, assets/projects/g/campanario-3-1.webp 1200w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campanario-3-1.webp" alt="El Campanario I — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -576,7 +585,7 @@
     </article>
     <article class="pj-card" data-slug="campanario-11" data-n="8" data-name="El Campanario II" data-loc="Querétaro">
       <div class="pj-media">
-        <img width="1600" height="1067" srcset="assets/projects/g/campanario-11-1-400.webp 400w, assets/projects/g/campanario-11-1-640.webp 640w, assets/projects/g/campanario-11-1-960.webp 960w, assets/projects/g/campanario-11-1-1280.webp 1280w, assets/projects/g/campanario-11-1.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campanario-11-1.webp" alt="El Campanario II — proyecto equipado por HOMEA" loading="lazy">
+        <img width="1600" height="1067" srcset="assets/projects/g/campanario-11-1-400.webp 400w, assets/projects/g/campanario-11-1-640.webp 640w, assets/projects/g/campanario-11-1-960.webp 960w, assets/projects/g/campanario-11-1-1280.webp 1280w, assets/projects/g/campanario-11-1.webp 1600w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campanario-11-1.webp" alt="El Campanario II — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -589,7 +598,7 @@
     </article>
     <article class="pj-card" data-slug="campanario-9" data-n="6" data-name="El Campanario III" data-loc="Querétaro">
       <div class="pj-media">
-        <img width="1100" height="1466" srcset="assets/projects/g/campanario-9-1-400.webp 400w, assets/projects/g/campanario-9-1-640.webp 640w, assets/projects/g/campanario-9-1-960.webp 960w, assets/projects/g/campanario-9-1.webp 1100w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campanario-9-1.webp" alt="El Campanario III — proyecto equipado por HOMEA" loading="lazy" style="object-position:50% 72%">
+        <img width="1100" height="1466" srcset="assets/projects/g/campanario-9-1-400.webp 400w, assets/projects/g/campanario-9-1-640.webp 640w, assets/projects/g/campanario-9-1-960.webp 960w, assets/projects/g/campanario-9-1.webp 1100w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campanario-9-1.webp" alt="El Campanario III — proyecto equipado por HOMEA" loading="lazy" style="object-position:50% 72%">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -602,7 +611,7 @@
     </article>
     <article class="pj-card" data-slug="campanario-8" data-n="9" data-name="El Campanario IV" data-loc="Querétaro">
       <div class="pj-media">
-        <img width="1200" height="1600" srcset="assets/projects/g/campanario-8-1-400.webp 400w, assets/projects/g/campanario-8-1-640.webp 640w, assets/projects/g/campanario-8-1-960.webp 960w, assets/projects/g/campanario-8-1.webp 1200w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campanario-8-1.webp" alt="El Campanario IV — proyecto equipado por HOMEA" loading="lazy">
+        <img width="1200" height="1600" srcset="assets/projects/g/campanario-8-1-400.webp 400w, assets/projects/g/campanario-8-1-640.webp 640w, assets/projects/g/campanario-8-1-960.webp 960w, assets/projects/g/campanario-8-1.webp 1200w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campanario-8-1.webp" alt="El Campanario IV — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -615,7 +624,7 @@
     </article>
     <article class="pj-card" data-slug="campanario-2" data-n="9" data-name="El Campanario V" data-loc="Querétaro">
       <div class="pj-media">
-        <img width="1199" height="1600" srcset="assets/projects/g/campanario-2-1-400.webp 400w, assets/projects/g/campanario-2-1-640.webp 640w, assets/projects/g/campanario-2-1-960.webp 960w, assets/projects/g/campanario-2-1.webp 1199w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campanario-2-1.webp" alt="El Campanario V — proyecto equipado por HOMEA" loading="lazy">
+        <img width="1199" height="1600" srcset="assets/projects/g/campanario-2-1-400.webp 400w, assets/projects/g/campanario-2-1-640.webp 640w, assets/projects/g/campanario-2-1-960.webp 960w, assets/projects/g/campanario-2-1.webp 1199w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campanario-2-1.webp" alt="El Campanario V — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -628,7 +637,7 @@
     </article>
     <article class="pj-card" data-slug="campanario-12" data-n="7" data-name="El Campanario VI" data-loc="Querétaro">
       <div class="pj-media">
-        <img width="900" height="1600" srcset="assets/projects/g/campanario-12-1-400.webp 400w, assets/projects/g/campanario-12-1-640.webp 640w, assets/projects/g/campanario-12-1.webp 900w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campanario-12-1.webp" alt="El Campanario VI — proyecto equipado por HOMEA" loading="lazy">
+        <img width="900" height="1600" srcset="assets/projects/g/campanario-12-1-400.webp 400w, assets/projects/g/campanario-12-1-640.webp 640w, assets/projects/g/campanario-12-1.webp 900w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campanario-12-1.webp" alt="El Campanario VI — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -641,7 +650,7 @@
     </article>
     <article class="pj-card" data-slug="alamos" data-n="8" data-name="Arquitecto Galileo Zuart" data-loc="Querétaro">
       <div class="pj-media">
-        <img width="1100" height="1955" srcset="assets/projects/g/alamos-1-400.webp 400w, assets/projects/g/alamos-1-640.webp 640w, assets/projects/g/alamos-1-960.webp 960w, assets/projects/g/alamos-1.webp 1100w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/alamos-1.webp" alt="Arquitecto Galileo Zuart — proyecto equipado por HOMEA" loading="lazy" style="object-position:50% 60%">
+        <img width="1100" height="1955" srcset="assets/projects/g/alamos-1-400.webp 400w, assets/projects/g/alamos-1-640.webp 640w, assets/projects/g/alamos-1-960.webp 960w, assets/projects/g/alamos-1.webp 1100w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/alamos-1.webp" alt="Arquitecto Galileo Zuart — proyecto equipado por HOMEA" loading="lazy" style="object-position:50% 60%">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -654,7 +663,7 @@
     </article>
     <article class="pj-card" data-slug="campestre" data-n="8" data-name="Cocinas Gourmet" data-loc="Querétaro">
       <div class="pj-media">
-        <img width="1600" height="1067" srcset="assets/projects/g/campestre-1-400.webp 400w, assets/projects/g/campestre-1-640.webp 640w, assets/projects/g/campestre-1-960.webp 960w, assets/projects/g/campestre-1-1280.webp 1280w, assets/projects/g/campestre-1.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campestre-1.webp" alt="Cocinas Gourmet — proyecto equipado por HOMEA" loading="lazy">
+        <img width="1600" height="1067" srcset="assets/projects/g/campestre-1-400.webp 400w, assets/projects/g/campestre-1-640.webp 640w, assets/projects/g/campestre-1-960.webp 960w, assets/projects/g/campestre-1-1280.webp 1280w, assets/projects/g/campestre-1.webp 1600w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campestre-1.webp" alt="Cocinas Gourmet — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -667,7 +676,7 @@
     </article>
     <article class="pj-card" data-slug="campestre-1" data-n="9" data-name="El Campestre I" data-loc="Querétaro">
       <div class="pj-media">
-        <img width="1600" height="1067" srcset="assets/projects/g/campestre-1-1-400.webp 400w, assets/projects/g/campestre-1-1-640.webp 640w, assets/projects/g/campestre-1-1-960.webp 960w, assets/projects/g/campestre-1-1-1280.webp 1280w, assets/projects/g/campestre-1-1.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campestre-1-1.webp" alt="El Campestre I — proyecto equipado por HOMEA" loading="lazy">
+        <img width="1600" height="1067" srcset="assets/projects/g/campestre-1-1-400.webp 400w, assets/projects/g/campestre-1-1-640.webp 640w, assets/projects/g/campestre-1-1-960.webp 960w, assets/projects/g/campestre-1-1-1280.webp 1280w, assets/projects/g/campestre-1-1.webp 1600w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/campestre-1-1.webp" alt="El Campestre I — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -680,7 +689,7 @@
     </article>
     <article class="pj-card" data-slug="jurica" data-n="6" data-name="Jurica I" data-loc="Querétaro">
       <div class="pj-media">
-        <img width="1200" height="1600" srcset="assets/projects/g/jurica-1-400.webp 400w, assets/projects/g/jurica-1-640.webp 640w, assets/projects/g/jurica-1-960.webp 960w, assets/projects/g/jurica-1.webp 1200w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/jurica-1.webp" alt="Jurica I — proyecto equipado por HOMEA" loading="lazy">
+        <img width="1200" height="1600" srcset="assets/projects/g/jurica-1-400.webp 400w, assets/projects/g/jurica-1-640.webp 640w, assets/projects/g/jurica-1-960.webp 960w, assets/projects/g/jurica-1.webp 1200w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/jurica-1.webp" alt="Jurica I — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>
@@ -693,7 +702,7 @@
     </article>
     <article class="pj-card" data-slug="san-miguel-1" data-n="5" data-name="San Miguel I" data-loc="San Miguel de Allende">
       <div class="pj-media">
-        <img width="1506" height="899" srcset="assets/projects/g/san-miguel-1-1-400.webp 400w, assets/projects/g/san-miguel-1-1-640.webp 640w, assets/projects/g/san-miguel-1-1-960.webp 960w, assets/projects/g/san-miguel-1-1-1280.webp 1280w, assets/projects/g/san-miguel-1-1.webp 1506w" sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/san-miguel-1-1.webp" alt="San Miguel I — proyecto equipado por HOMEA" loading="lazy">
+        <img width="1506" height="899" srcset="assets/projects/g/san-miguel-1-1-400.webp 400w, assets/projects/g/san-miguel-1-1-640.webp 640w, assets/projects/g/san-miguel-1-1-960.webp 960w, assets/projects/g/san-miguel-1-1-1280.webp 1280w, assets/projects/g/san-miguel-1-1.webp 1506w" sizes="(max-width: 980px) 50vw, 33vw" decoding="async" src="assets/projects/g/san-miguel-1-1.webp" alt="San Miguel I — proyecto equipado por HOMEA" loading="lazy">
         <div class="pj-nav">
           <button type="button" class="pj-arrow pj-prev" aria-label="Imagen anterior">&#8249;</button>
           <button type="button" class="pj-arrow pj-next" aria-label="Imagen siguiente">&#8250;</button>

@@ -5577,3 +5577,152 @@ a.wl-wa:hover, a.wl-wa:focus-visible { color: var(--homea-bone); }
 .incl-agregar { width: 100%; }
 .incl-agregar:disabled { opacity: .45; cursor: not-allowed; }
 .proy-incluye { display: block; font-size: 11.5px; color: var(--fg-muted); margin-top: 2px; }
+
+/* =====================================================================
+   Pasada móvil 2 (Carla, 2026-11-19) — densidad: íconos más chicos, 4 piezas
+   por pantalla, botones sin "hover pegado". Todo dentro de max-width o de
+   (hover: none): el escritorio no cambia. Va al final para ganar por orden;
+   donde el <style> de la página (inyectado después) pisaría la regla, el
+   selector lleva una clase más.
+   ===================================================================== */
+
+/* Táctil: el :hover se queda "pegado" tras el toque (el botón del hero se
+   quedaba dorado y el siguiente mensaje heredaba ese color). En pantallas sin
+   cursor cada botón conserva su color base; el :active da la respuesta al toque. */
+@media (hover: none) {
+  .btn-primary:hover { background: var(--homea-black); color: var(--homea-bone); border-color: var(--homea-black); }
+  .btn-bone:hover { background: var(--homea-bone); color: var(--homea-black); border-color: var(--homea-bone); }
+  .btn-ghost:hover { background: transparent; color: var(--homea-black); }
+  .btn-ghost-light:hover { background: transparent; color: var(--homea-bone); }
+  .btn-gold:hover, .on-dark .btn-gold:hover, .on-espresso .btn-gold:hover { background: var(--homea-gold); border-color: var(--homea-gold); }
+  .btn:active { transform: scale(.98); opacity: .88; }
+  .pcard:hover, .subcat:hover { transform: none; }
+  .nav-ic:hover svg { transform: none; }
+  .nav-ic:hover::before { opacity: 0; }
+}
+
+@media (max-width: 640px) {
+  /* ---- Barra: logo e íconos más chicos (40px → 34px, trazo 23px → 19px) ---- */
+  .site-nav .brand-bar img { height: 28px; width: auto; }
+  .site-nav .nav-icons { gap: 0; padding-left: 8px; }
+  .nav-ic { width: 34px; height: 34px; }
+  .nav-ic svg { width: 19px; height: 19px; }
+  .nav-ic.nav-proyecto { height: 32px; padding: 0 7px; }
+  .nav-ic.nav-proyecto svg { width: 16px; height: 16px; }
+  .nav-toggle { width: 36px; height: 36px; padding: 9px 7px; gap: 4px; }
+  .nav-toggle span { height: 1.5px; }
+  .site-nav.nav-open .nav-toggle span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+  .site-nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+  /* ---- Home: categorías a 2 columnas (11 tiles de 281px = 3,100px de scroll) ---- */
+  .catsec .cat-grid:not(.macro-grid) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 28px; padding: 0 16px; }
+  .catsec .cat-grid:not(.macro-grid) > .cat { aspect-ratio: 1 / 1; }
+  .catsec .cat-grid:not(.macro-grid) > .cat:last-child:nth-child(odd) { grid-column: 1 / -1; aspect-ratio: 2 / 1; }
+  .catsec .cat-grid:not(.macro-grid) .cat-cap { padding: 12px; gap: 4px; }
+  .catsec .cat-grid:not(.macro-grid) .cat-cap h3 { font-size: 19px; line-height: 1.08; }
+  .catsec .cat-grid:not(.macro-grid) .cat-brands { display: none; }
+  .catsec .cat::before { display: none; }
+
+  /* ---- /guias: mosaico de macros a 2 columnas (como en tablet) en vez de 10 tiles apilados ---- */
+  .catsec .macro-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 132px;
+    grid-template-areas: "coc coc" "ext ele" "lav wel" "ban ban" "vap min" "rec chi";
+  }
+  .catsec .macro-grid .cat--big { min-height: 0; }
+  .catsec .macro-grid .cat-cap, .catsec .macro-grid .cat--sm .cat-cap { padding: 12px; gap: 4px; }
+  .catsec .macro-grid .cat--big .cat-cap h3 { font-size: 24px; }
+  .catsec .macro-grid .cat--wide .cat-cap h3,
+  .catsec .macro-grid .cat--sm .cat-cap h3 { font-size: 17px; }
+  .catsec .macro-grid .cat-brands { display: none; }
+
+  /* ---- Riel de subcategorías (Cocina y Bar, Exterior…): 3½ tiles a la vista ---- */
+  .subcat-band .container { padding-top: 16px; padding-bottom: 14px; }
+  .subcat-band .subcat { flex: 1 0 31%; min-width: 104px; padding: 12px 4px 10px; gap: 8px; }
+  .subcat-band .subcat .img { height: 74px; }
+  .subcat-band .subcat .img img,
+  .subcat-band .subcat .img img.photo { max-height: 74px; height: auto; }
+  .subcat-band .subcat .img img.photo { height: 74px; }
+  .subcat-band .subcat .img .ph { height: 64px; }
+  .subcat-band .subcat .lbl { font-size: 9px; letter-spacing: .03em; line-height: 1.3; }
+  .subcat-band .subcat .n { font-size: 9.5px; }
+  /* Flechas chicas en los márgenes laterales (el riel se sigue deslizando con el dedo). */
+  .subcat-band .subcat-carousel { position: relative; gap: 0; }
+  .subcat-band .subcat-arrow { display: grid; position: absolute; top: 50%; z-index: 2; width: 22px; height: 44px;
+    margin-top: -22px; box-shadow: none; }
+  .subcat-band .subcat-arrow.prev { left: -23px; }
+  .subcat-band .subcat-arrow.next { right: -23px; }
+  .subcat-band .subcat-arrow svg { width: 15px; height: 15px; }
+  .subcat-band .subcat-arrow:disabled { opacity: .22; }
+
+  /* ---- Listados: 2 columnas → 4 piezas por pantalla ---- */
+  .plp .plp-grid, .sec .plp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 12px; }
+  .grid-3:has(> .pcard[data-cat-card]) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 12px; }
+  .pcard[data-cat-card] { max-height: none; }
+  .pcard[data-cat-card] .imgw,
+  .pcard[data-cat-card] .imgw.cutout { aspect-ratio: 1 / 1; min-height: 0; padding: 30px 12px 10px; }
+  .pcard[data-cat-card] .body { padding: 8px 8px 10px; gap: 3px; }
+  /* "+" y corazón pasan a la esquina de la foto; el % de descuento, a la otra. */
+  .pcard[data-cat-card] .pcard-acc { position: absolute; top: 6px; right: 6px; z-index: 3; gap: 4px; }
+  .pcard[data-cat-card] .pcard-add,
+  .pcard[data-cat-card] .wl-heart { width: 30px; height: 30px; background: rgba(247, 243, 236, .9); }
+  .pcard[data-cat-card] .pcard-add svg, .pcard[data-cat-card] .wl-heart svg { width: 15px; height: 15px; }
+  .pcard-desc { top: 8px; left: 8px; right: auto; font-size: 10px; padding: 4px 7px 3px; }
+  .pcard[data-cat-card] .pcard-top { min-height: 0; margin-bottom: 2px; }
+  .plp-grid:has(.pcard-piezas) .pcard[data-cat-card] .pcard-top { min-height: 0; }
+  .pcard[data-cat-card] .pcard-top .pcard-disp { grid-template-rows: auto auto; min-height: 0; gap: 2px; }
+  .pcard[data-cat-card] .pcard-tag { font-size: 8.5px; padding: 4px 6px 3px; letter-spacing: .12em; gap: 4px; }
+  .pcard[data-cat-card] .pcard-tag-ic { width: 10px; height: 10px; }
+  .pcard[data-cat-card] .pcard-piezas { font-size: 10px; }
+  .pcard[data-cat-card] .pcard-head { gap: 0; }
+  .pcard[data-cat-card] .pcard-head .brand { font-size: 10px; }
+  .pcard[data-cat-card] .pcard-serie { font-size: 11px; }
+  .pcard[data-cat-card] .pcard-serie:empty { display: none; }
+  .pcard[data-cat-card] .pcard-linea { justify-content: flex-start; text-align: left; }
+  .pcard[data-cat-card] .pcard-sku { font-size: 10px; text-align: left; margin-left: 0; }
+  .pcard[data-cat-card] h3.pcard-name { font-size: 12px; line-height: 1.3; }
+  .plp-grid:has(.pcard-colores) .pcard[data-cat-card]:not(:has(.pcard-colores)) h3.pcard-name,
+  .grid-3:has(.pcard-colores) .pcard[data-cat-card]:not(:has(.pcard-colores)) h3.pcard-name { margin-bottom: 28px; }
+  .pcard[data-cat-card] .pcard-price { margin-top: 2px; gap: 1px; }
+  .pcard[data-cat-card] .pcard-price .price-tag { font-size: 14px; gap: 0; }
+  .pcard[data-cat-card] .pcard-price .price-tag .currency { margin-left: .28em; }
+  .pcard[data-cat-card] .pcard-price .price-was { font-size: 10.5px; }
+  .pcard[data-cat-card] .pcard-price .price-note { font-size: 9px; margin-top: 0; }
+
+  /* Barra de resultados: total arriba; "Mostrar 50" y "Orden" lado a lado, sin cortarse. */
+  .plp .toolbar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 8px; }
+  .plp .toolbar .results { grid-column: 1 / -1; }
+  .plp .toolbar select { width: 100%; min-width: 0; min-height: 40px; padding: 8px 8px; font-size: 10px; letter-spacing: .02em; text-overflow: ellipsis; }
+  .plp .toolbar select.plp-por-sel { width: 100%; }
+  .plp .toolbar:has(.plp-por-sel:not([hidden])) select { font-size: 9.5px; letter-spacing: 0; padding: 8px 6px; margin-left: 0; text-align: center; text-align-last: center; }
+  .plp .wl-toolbar.toolbar:has(.plp-por-sel:not([hidden])) select { padding: 8px 26px 8px 8px; background-position: right 8px center; }
+
+  /* ---- Ficha: pestañas en rejilla 2×2 (con scroll lateral se cortaban arriba y abajo) ---- */
+  .pdp-tabs-v2 .pdp-tablist { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; overflow: visible; }
+  .pdp-tabs-v2 .pdp-tab { padding: 12px 2px 10px; font-size: 10.5px; letter-spacing: .08em; white-space: normal; line-height: 1.3; }
+  .pdp-tabs-v2 .pdp-panel { margin-top: 18px; }
+}
+
+/* Filtros del listado en móvil/tablet: v2.js los envuelve en un <details>
+   "Filtrar" plegado, pero corre después de pintar — mientras tanto la lista
+   completa (~2,000px) se veía abierta un instante y la página saltaba al
+   plegarse. Hasta que exista el envoltorio, se pinta solo la barra "Filtrar"
+   con la misma medida (2026-11-19). */
+@media (max-width: 1080px) {
+  .plp > .filters:not(:has(.filters-sheet)) { position: relative; }
+  .plp > .filters:not(:has(.filters-sheet)) > * { display: none; }
+  .plp > .filters:not(:has(.filters-sheet))::before {
+    content: "Filtrar"; display: block; box-sizing: border-box; min-height: 58px; padding: 18px 20px;
+    border: 1px solid var(--border-strong); background: var(--surface);
+    font-family: var(--font-sans); font-size: 12px; font-weight: 600; line-height: 20px;
+    letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg);
+  }
+  .plp > .filters:not(:has(.filters-sheet))::after {
+    content: "+"; position: absolute; right: 21px; top: 17px; font-size: 20px; line-height: 1; color: var(--homea-gold-deep);
+  }
+}
+
+/* Riel de subcategorías/tipos con pocos tiles (Carla, 2026-11-19): si no llenan
+   el ancho, se estiran para cubrirlo en vez de dejar un hueco al final. Con más
+   tiles de los que caben, flex-grow no hace nada y el riel se desliza igual. */
+.subcat-strip > .subcat { flex-grow: 1; }

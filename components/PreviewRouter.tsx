@@ -262,6 +262,24 @@ export default function PreviewRouter() {
       const el = e.target as Element | null;
       const a = el?.closest?.("a") as HTMLAnchorElement | null;
       if (!a) return;
+      // Ancla dentro de la misma página ("Ver catálogo" / "Explorar categorías"
+      // del hero → #categorias). Dejada al navegador, el salto de fragmento
+      // dispara popstate y onPop lo tomaba por un "atrás": restauraba la altura
+      // guardada (arriba) y la sostenía, así que la URL cambiaba y la página no
+      // bajaba (Carla, 2026-11-19). Se desplaza aquí y la URL se actualiza sin
+      // crear una entrada de historial.
+      const crudo = a.getAttribute("href") || "";
+      if (crudo.length > 1 && crudo.charAt(0) === "#" && !a.target) {
+        let destino: HTMLElement | null = null;
+        try { destino = document.getElementById(decodeURIComponent(crudo.slice(1))); } catch {}
+        if (destino) {
+          e.preventDefault();
+          soltarFijado?.();
+          try { window.history.replaceState(window.history.state, "", crudo); } catch {}
+          destino.scrollIntoView({ block: "start" });
+        }
+        return;
+      }
       const href = internalHref(a);
       if (!href) return;
       e.preventDefault();
