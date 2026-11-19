@@ -56,7 +56,18 @@ function useTema(temas: TemaGuia[]) {
 }
 
 /** Chips fijos + guías del tema + botón a la tienda. */
-function GuiasDelTema({ tema, cards, tipos }: { tema: TemaGuia | null; cards: GuideCardData[]; tipos: Props["tipos"] }) {
+function GuiasDelTema({
+  tema,
+  cards,
+  tipos,
+  conTienda = true,
+}: {
+  tema: TemaGuia | null;
+  cards: GuideCardData[];
+  tipos: Props["tipos"];
+  /** Botón "Ver productos en tienda" junto a los chips (en BlogTemas lo sustituye la burbuja). */
+  conTienda?: boolean;
+}) {
   const visibles = tema ? cards.filter((c) => c.temas?.includes(tema.slug)) : cards;
   return (
     <GuideTypeFilter
@@ -64,7 +75,7 @@ function GuiasDelTema({ tema, cards, tipos }: { tema: TemaGuia | null; cards: Gu
       tipos={tipos}
       visibles={visibles}
       accion={
-        tema?.tienda ? (
+        conTienda && tema?.tienda ? (
           <Link className="btn tema-tienda" href={tema.tienda}>
             Ver productos en tienda
           </Link>
@@ -121,8 +132,11 @@ export function BlogTemas({ temas, cards, tipos }: Omit<Props, "railHead">) {
       elegir(card.dataset.temaGuia!);
       document.getElementById("blog")?.scrollIntoView({ behavior: "smooth", block: "start" });
     };
-    document.addEventListener("click", onClick);
-    return () => document.removeEventListener("click", onClick);
+    // En captura: PreviewRouter atiende en burbuja los enlaces "#…" y, si la
+    // página llegó por navegación interna, su listener corre antes y previene el
+    // clic (la tarjeta solo bajaba a #blog sin elegir la categoría; Carla, 2026-11-19).
+    document.addEventListener("click", onClick, true);
+    return () => document.removeEventListener("click", onClick, true);
   }, [elegir]);
 
   // La tarjeta elegida se marca (y se desmarca al volver a todas).
@@ -134,5 +148,42 @@ export function BlogTemas({ temas, cards, tipos }: Omit<Props, "railHead">) {
     });
   }, [tema]);
 
-  return <GuiasDelTema tema={tema} cards={cards} tipos={tipos} />;
+  // Botón circular "O conoce más sobre <categoría>" (Carla, 2026-11-19): con una
+  // categoría elegida, emerge mientras el Blog está a la vista y lleva a su
+  // tienda con el filtro aplicado (`tienda`).
+  const zona = useRef<HTMLDivElement>(null);
+  const [enVista, setEnVista] = useState(false);
+  useEffect(() => {
+    const el = zona.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(([e]) => setEnVista(e.isIntersecting), {
+      rootMargin: "0px 0px -15% 0px",
+    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div className="blog-temas" ref={zona}>
+      {tema?.tienda && (
+        <div className="tema-burbuja-ancla">
+          <Link
+            key={tema.slug}
+            href={tema.tienda}
+            className={`tema-burbuja${enVista ? " is-visible" : ""}`}
+            data-cta="burbuja-tienda"
+            tabIndex={enVista ? 0 : -1}
+            aria-hidden={!enVista}
+          >
+            <span className="tema-burbuja-pre">O conoce más sobre</span>
+            <span className="tema-burbuja-nombre">{tema.nombre.toLowerCase()}</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" />
+            </svg>
+          </Link>
+        </div>
+      )}
+      <GuiasDelTema tema={tema} cards={cards} tipos={tipos} conTienda={false} />
+    </div>
+  );
 }

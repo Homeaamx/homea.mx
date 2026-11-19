@@ -274,3 +274,15 @@ export function temasDeGuia(guia: GuiaPublicada, leaves: { nombre: string; slug:
   }
   return { temas: mejor ? [mejor.slug] : [] };
 }
+
+/**
+ * Categoría sin página propia de una guía que vive directo en una macro de 3
+ * niveles (Exterior → Alberca; Carla, 2026-11-19): da el nombre, la tienda y la
+ * foto del encabezado del artículo. `undefined` en las demás guías.
+ */
+export function categoriaDeGuiaEnMacro(guia: GuiaPublicada): Subcategoria1 | undefined {
+  if (guia.sub1 || guia.macro.nivelGuias !== "subcategoria1") return undefined;
+  const leaves = leavesDeMacro(guia.macro);
+  const [slug] = temasDeGuia(guia, leaves).temas;
+  return leaves.find((l) => l.slug === slug);
+}

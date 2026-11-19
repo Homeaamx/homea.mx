@@ -2036,9 +2036,9 @@
               "filtro": "/productos/quemador-lateral/",
               "tienda": "/productos/exterior/asadores-y-hornos?tipo=quemador-lateral",
               "tarjeta": {
-                "imagen": "/assets/photos/subcats/quemador-lateral-doble-empotrable-acero-blaze.webp",
-                "ambiente": false,
-                "pos": "center 50%",
+                "imagen": "/assets/photos/quemador-lateral-doble-exterior-coyote-isla.webp",
+                "ambiente": true,
+                "pos": "center 55%",
                 "resumen": "Uno o dos quemadores junto al asador para salsas, guarniciones o una olla."
               }
             },
@@ -2048,9 +2048,9 @@
               "filtro": "/productos/plancha-teppanyaki/",
               "tienda": "/productos/exterior/asadores-y-hornos?tipo=plancha-teppanyaki",
               "tarjeta": {
-                "imagen": "/assets/photos/subcats/plancha-teppanyaki-30-gas-acero-blaze.webp",
-                "ambiente": false,
-                "pos": "center 50%",
+                "imagen": "/assets/photos/plancha-teppanyaki-30-gas-exterior-coyote-isla.webp",
+                "ambiente": true,
+                "pos": "center 45%",
                 "resumen": "Plancha de gas empotrable para huevos, mariscos y vegetales al aire libre."
               }
             },
@@ -2078,21 +2078,143 @@
                 "resumen": "Rostizadores, planchas, piedras para pizza y complementos para tu asador."
               }
             }
-          ]
+          ],
+          "tarjeta": {
+            "imagen": "/assets/photos/cat-exterior.webp",
+            "ambiente": true,
+            "pos": "center 60%",
+            "resumen": "Asadores, quemadores, planchas y hornos de pizza para tu cocina exterior."
+          }
         },
         {
-          "slug": "alberca",
+          "nombre": "Campanas",
+          "slug": "campanas",
+          "esLeaf": true,
+          "filtro": "/productos/exterior?tipo=campanas",
+          "tienda": "/productos/exterior?tipo=campanas",
+          "tarjeta": {
+            "imagen": "/assets/photos/hero-exterior-cocina-asador.webp",
+            "ambiente": true,
+            "pos": "45% 35%",
+            "resumen": "Campanas para exterior que sacan el humo y el calor del asador bajo techo o pérgola."
+          }
+        },
+        {
+          "nombre": "Centros de bebida",
+          "slug": "centros-de-bebida",
+          "esLeaf": true,
+          "filtro": "/productos/exterior?tipo=centros-de-bebida",
+          "tienda": "/productos/exterior?tipo=centros-de-bebida",
+          "tarjeta": {
+            "imagen": "/assets/photos/brands/hero/mont-alpi-asadores.webp",
+            "ambiente": true,
+            "pos": "78% 60%",
+            "resumen": "Refrigeración bajo cubierta para exterior, con puerta sólida o de cristal."
+          }
+        },
+        {
+          "nombre": "Máquinas de hielo",
+          "slug": "maquinas-de-hielo",
+          "esLeaf": true,
+          "filtro": "/productos/exterior?tipo=maquinas-de-hielo",
+          "tienda": "/productos/exterior?tipo=maquinas-de-hielo",
+          "tarjeta": {
+            "imagen": "/assets/photos/brands/hero/hoshizaki-hielo.webp",
+            "ambiente": true,
+            "pos": "center 50%",
+            "resumen": "Hielo cristalino a la mano en tu bar de exterior, sin depender de bolsas."
+          }
+        },
+        {
+          "nombre": "Cajones refrigerantes",
+          "slug": "cajones-refrigerantes",
+          "esLeaf": true,
+          "filtro": "/productos/exterior?tipo=cajones-refrigerantes",
+          "tienda": "/productos/exterior?tipo=cajones-refrigerantes",
+          "tarjeta": {
+            "imagen": "/assets/photos/hero-exterior-subzero-wolf-cocina.webp",
+            "ambiente": true,
+            "pos": "88% 62%",
+            "resumen": "Bebidas y botanas frías junto al asador, en cajones aptos para exterior."
+          }
+        },
+        {
+          "nombre": "Despachador de cerveza",
+          "slug": "despachadores-de-cerveza",
+          "esLeaf": true,
+          "filtro": "/productos/exterior?tipo=despachadores-de-cerveza",
+          "tienda": "/productos/exterior?tipo=despachadores-de-cerveza",
+          "tarjeta": {
+            "imagen": "/assets/photos/subcats/despachador-de-cerveza-exterior-acero-lynx.webp",
+            "ambiente": false,
+            "pos": "center 50%",
+            "resumen": "Cerveza de barril fría y lista para servir en tu terraza."
+          }
+        },
+        {
+          "nombre": "Hieleras",
+          "slug": "hieleras",
+          "esLeaf": true,
+          "filtro": "/productos/exterior?tipo=hieleras",
+          "tienda": "/productos/exterior?tipo=hieleras",
+          "tarjeta": {
+            "imagen": "/assets/photos/hielera-empotrable-exterior-acero-coyote-isla.webp",
+            "ambiente": true,
+            "pos": "30% 70%",
+            "resumen": "Hieleras empotrables con desagüe para enfriar bebidas en la isla."
+          }
+        },
+        {
+          "nombre": "Cajones calentadores",
+          "slug": "cajones-calentadores",
+          "esLeaf": true,
+          "filtro": "/productos/exterior?tipo=cajones",
+          "tienda": "/productos/exterior?tipo=cajones",
+          "tarjeta": {
+            "imagen": "/assets/photos/cajon-calentador-wolf-abierto-cocina.webp",
+            "ambiente": true,
+            "pos": "center 60%",
+            "resumen": "Platos y guarniciones a temperatura de servicio mientras termina el asado."
+          }
+        },
+        {
+          "nombre": "Gabinetes",
+          "slug": "gabinetes",
+          "esLeaf": true,
+          "filtro": "/productos/exterior?tipo=gabinetes",
+          "tienda": "/productos/exterior?tipo=gabinetes",
+          "tarjeta": {
+            "imagen": "/assets/photos/brands/hero/blaze-asadores.webp",
+            "ambiente": true,
+            "pos": "center 75%",
+            "resumen": "Puertas, cajones y gabinetes de acero para completar tu isla de exterior."
+          }
+        },
+        {
+          "nombre": "Fire pits",
+          "slug": "fire-pits",
+          "esLeaf": true,
+          "filtro": "/productos/exterior?tipo=fire-pits",
+          "tienda": "/productos/exterior?tipo=fire-pits",
+          "tarjeta": {
+            "imagen": "/assets/photos/fire-pit-mesa-de-fuego-exterior-lynx-terraza.webp",
+            "ambiente": true,
+            "pos": "55% 50%",
+            "resumen": "Mesas y tazones de fuego a gas para reunir a todos en la terraza."
+          }
+        },
+        {
           "nombre": "Alberca",
-          "esLeaf": false,
-          "rutaGuias": "/guias/exterior/alberca",
-          "subcategorias2": [
-            {
-              "nombre": "Mosaicos",
-              "slug": "mosaicos",
-              "filtro": "/productos/mosaicos/",
-              "tienda": "/marcas/onix"
-            }
-          ]
+          "slug": "alberca",
+          "esLeaf": true,
+          "filtro": "/marcas/onix",
+          "tienda": "/marcas/onix",
+          "tarjeta": {
+            "imagen": "/assets/photos/brands/hero/onix-superficies.webp",
+            "ambiente": true,
+            "pos": "center 62%",
+            "resumen": "Mosaicos de vidrio para revestir tu alberca y definir el color del agua."
+          }
         }
       ]
     },

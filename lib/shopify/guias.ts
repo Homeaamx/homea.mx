@@ -138,9 +138,13 @@ export function ubicar(etiquetas: string[]): Ubicacion | null {
       if (!sub1.esLeaf && coincide(sub1.slug, sub1.nombre)) return { macro, sub1, tipo };
     }
   }
-  // 2) Macro cuyas guías viven en la macro (ramas de 2 niveles).
+  // 2) Macro cuyas guías viven en la macro: ramas de 2 niveles y las de 3 niveles
+  //    con categorías sin página propia (Exterior: Alberca, Campanas…; Carla,
+  //    2026-11-19). La categoría la da otra etiqueta ("Alberca") vía temasDeGuia.
   for (const macro of taxonomia.macrocategorias) {
-    if (macro.nivelGuias === "macrocategoria" && coincide(macro.slug, macro.nombre)) {
+    const enMacro =
+      macro.nivelGuias === "macrocategoria" || (macro.subcategorias1 ?? []).some((s) => s.esLeaf);
+    if (enMacro && coincide(macro.slug, macro.nombre)) {
       return { macro, tipo };
     }
   }

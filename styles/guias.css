@@ -1965,3 +1965,47 @@
 .ilus--coccion .c-herramienta-relleno { fill: #8E959B; stroke: #C9CED2; stroke-width: .5; }
 .ilus--coccion .c-repisa-cava { stroke: #B8875A; stroke-width: 1.2; }
 .ilus--coccion .c-botella-fondo { fill: #1F2A18; stroke: #3D4A2A; stroke-width: .8; }
+
+/* ——— Botón circular "O conoce más sobre <categoría>" (Carla, 2026-11-19) ———
+   BlogTemas: con una categoría elegida en la portada, emerge a la derecha del
+   Blog mientras está a la vista y lleva a la tienda con su filtro. El ancla es
+   sticky dentro del Blog (height 0 efectivo) para no empujar las tarjetas. */
+.blog-temas { position: relative; }
+/* Sin guías de la categoría, el Blog es corto: espacio para que la burbuja no se salga. */
+.blog-temas:has(.tema-burbuja) { min-height: 300px; }
+.tema-burbuja-ancla { position: sticky; top: calc(50vh - 190px); z-index: 3; height: 280px; margin-bottom: -280px;
+  padding-top: 100px; display: flex; justify-content: flex-end; pointer-events: none; }
+.tema-burbuja { pointer-events: auto; width: 184px; height: 184px; border-radius: 50%; margin-right: clamp(0px, 4vw, 72px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 22px; text-align: center;
+  background: var(--homea-espresso); color: var(--homea-white); text-decoration: none;
+  border: 1px solid color-mix(in srgb, var(--homea-gold) 55%, transparent); box-shadow: var(--shadow-lg);
+  opacity: 0; transform: scale(.55); visibility: hidden;
+  transition: opacity 450ms var(--ease-reveal), transform 600ms cubic-bezier(.34, 1.56, .64, 1), visibility 0s linear 600ms,
+    box-shadow var(--dur-med) var(--ease-standard), border-color var(--dur-med) var(--ease-standard); }
+.tema-burbuja.is-visible { opacity: 1; transform: scale(1); visibility: visible; transition-delay: 0s;
+  /* Respiración (como el WhatsApp): late suave con un halo dorado; se pausa al pasar el cursor. */
+  animation: temaRespira 3.4s ease-in-out 700ms infinite; }
+.tema-burbuja.is-visible:hover { transform: translateY(-4px); border-color: var(--homea-gold); animation-play-state: paused; }
+@keyframes temaRespira {
+  0%, 100% { scale: 1; box-shadow: var(--shadow-lg), 0 0 0 0 rgb(189 155 94 / .45); }
+  50% { scale: 1.045; box-shadow: var(--shadow-lg), 0 0 0 16px rgb(189 155 94 / 0); }
+}
+.tema-burbuja-pre { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; line-height: 1.5; color: var(--homea-white); }
+.tema-burbuja-nombre { font-family: var(--font-display); font-style: italic; font-size: 21px; line-height: 1.1; color: var(--homea-gold); }
+.tema-burbuja svg { width: 20px; height: 20px; color: var(--homea-gold); transition: transform var(--dur-med) var(--ease-standard); }
+.tema-burbuja:hover svg { transform: translateX(4px); }
+@media (max-width: 560px) {
+  /* Móvil: las guías van a una columna; la burbuja flota abajo a la izquierda
+     (a la derecha van el WhatsApp y "subir") solo mientras el Blog está a la
+     vista, y sube por encima del aviso de cookies igual que el WhatsApp. */
+  .blog-temas:has(.tema-burbuja) { min-height: 0; }
+  .tema-burbuja-ancla { position: static; height: 0; margin: 0; padding: 0; }
+  .tema-burbuja { position: fixed; left: 16px; bottom: 20px; margin: 0; width: 124px; height: 124px; padding: 14px; gap: 3px; z-index: 40; }
+  .cookies-abierto .tema-burbuja { bottom: calc(var(--cookies-h, 0px) + 16px); }
+  .tema-burbuja-pre { font-size: 9px; letter-spacing: .12em; }
+  .tema-burbuja-nombre { font-size: 16px; }
+  .tema-burbuja svg { width: 16px; height: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tema-burbuja, .tema-burbuja.is-visible { transition: opacity 200ms linear, visibility 0s; transform: none; animation: none; }
+}

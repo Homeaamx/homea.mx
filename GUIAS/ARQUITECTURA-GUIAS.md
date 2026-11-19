@@ -119,15 +119,23 @@ Sub2: Purificadores de agua (con sus filtros y repuestos como accesorios) · Des
 Estructura definitiva (Carla, 2026-10-21), igual que la tabla de filtros v2, el menú y Shopify.
 Guías: Guía de filtración de agua *(guía-de-compra)*.
 
-### B. Exterior — `/guias/exterior/` · *(3 niveles · guías en Sub1)*
+### B. Exterior — `/guias/exterior/` · *(3 niveles · guías en Sub1 o en la macro)*
+
+Portada (Carla, 2026-11-19) igual a la de Electrodomésticos menores: hero partido con
+buscador "Busca en Exterior" y una tarjeta por categoría, en el orden del mega-menú:
+Asadores & Hornos (lleva a su portada) · Campanas · Centros de bebida · Máquinas de hielo ·
+Cajones refrigerantes · Despachador de cerveza · Hieleras · Cajones calentadores · Gabinetes ·
+Fire pits · Alberca. Las que no son Asadores & Hornos son leaves (`esLeaf`) sin página propia:
+su tarjeta filtra el Blog y ofrece "Ver productos en tienda". Sus guías llevan la etiqueta
+`Exterior` + la de la categoría (`Alberca`) y viven en `/guias/exterior/{tipo}/{handle}`.
 
 **Asadores & Hornos** → `/guias/exterior/asadores-y-hornos/`
-Sub2: Asadores empotrables · Asadores con carrito · Hornos de pizza · Accesorios Asadores & Hornos.
+Sub2: Asadores empotrables · Asadores con carrito · Quemador lateral · Plancha Teppanyaki · Hornos de pizza · Accesorios Asadores & Hornos.
 Guías: Guía de compra de asadores *(guía-de-compra)* · Cómo diseñar tu cocina exterior *(como-elegir)* · Mejores asadores premium *(top-picks)*.
 
-**Alberca** → `/guias/exterior/alberca/`
-Sub2: Mosaicos.
-Guías: Guía de mosaicos para alberca *(guía-de-compra)*.
+**Alberca** → tarjeta de la portada de Exterior (`/guias/exterior#alberca`); su página propia
+`/guias/exterior/alberca` se eliminó el 2026-11-19 con 301. Tienda: `/marcas/onix` (solo PDF).
+Guías: Cómo elegir el mosaico para tu alberca *(como-elegir)* → `/guias/exterior/como-elegir/elegir-mosaico-para-alberca`.
 
 ### C. Electrodomésticos Menores — `/guias/electrodomesticos-menores/` · *(2 niveles · guías en la Macro)*
 Sub1 (leaves): Licuadoras · Batidoras · Tostadoras · Exprimidor de cítricos · Cafeteras · Accesorios de cocina pequeños.

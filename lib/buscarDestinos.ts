@@ -146,9 +146,12 @@ function destinos() {
     sumar({ clase: "Categoría", titulo: macro.nombre, detalle: "Ver la categoría en la tienda", href: rutaMacro }, macro.nombre, 1);
     for (const s1 of macro.subcategorias1 ?? []) {
       const tw = TIPOS_WEB.find((t) => t.slugRiel === s1.slug);
-      // Sin página propia en la tienda (Alberca): la de su macro, donde vive su
+      // Sin página propia en la tienda: la de su macro, donde vive su
       // tarjeta; después la de sus tipos; Guías solo si no hay tienda.
+      // Las categorías sin página de Guías propia (Exterior: Campanas, Alberca…)
+      // van primero a su `tienda`: su slug puede coincidir con un tipo de Cocina y Bar.
       const href =
+        (s1.esLeaf ? s1.tienda : undefined) ??
         tw?.ruta ??
         (subs.has(`${macro.slug}/${s1.slug}`) ? `/productos/${macro.slug}/${s1.slug}` : null) ??
         s1.tienda ??

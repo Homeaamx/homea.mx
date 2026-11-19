@@ -27,17 +27,22 @@ con acentos; mayúsculas y "&" o "y" dan igual.
 - **Lugar.** Cocina y Bar y Exterior van por subcategoría: `Refrigeración`, `Cocción`,
   `Lavavajillas`, `Tarjas y Grifería`, `Trituradores`, `Purificadores y Despachadores de Agua`
   (la etiqueta vieja `Filtros y Purificadores de Agua` sigue funcionando porque coincide con el slug),
-  `Asadores & Hornos` y `Alberca`. Las demás van por macro: `Electrodomésticos Menores`,
+  `Asadores & Hornos`. Las demás van por macro: `Electrodomésticos Menores`,
   `Lavandería`, `Baños`, `Aire acondicionado`, `Vapor y Sauna`, `Wellness`,
   `Recubrimientos y Superficies` y `Chimeneas & Calentadores`.
+- **Exterior sin Asadores** (desde 2026-11-19): Alberca, Campanas, Centros de bebida, Máquinas
+  de hielo, Cajones refrigerantes, Despachador de cerveza, Hieleras, Cajones calentadores,
+  Gabinetes y Fire pits no tienen página propia en Guías: la guía lleva **`Exterior`** (lugar) +
+  **el nombre de la categoría** (`Alberca`, `Hieleras`…), vive en `/guias/exterior/{tipo}/{handle}`
+  y aparece al elegir esa tarjeta en la portada de Exterior.
 - **Tipo** (si falta, se toma "Guía de compra"): `Guía de compra`, `Top picks`, `Cómo elegir`,
   `Comparativa`, `Mantenimiento`, `Tendencias` o `Reseña`.
 
 Una entrada **sin etiqueta de lugar válida no se publica** (el sitio la ignora y lo avisa en el log).
 
 - **Categoría de producto** (opcional, desde 2026-10-20): en las páginas de guías con riel
-  "Explora por categoría" (Lavandería, Baños, Wellness, Alberca…) y en las tarjetas de la portada
-  de Electrodomésticos menores, elegir una categoría deja solo sus guías. **Cada guía queda en una
+  "Explora por categoría" (Lavandería, Baños, Wellness…) y en las tarjetas de las portadas
+  de Electrodomésticos menores y Exterior, elegir una categoría deja solo sus guías. **Cada guía queda en una
   categoría**: la que nombre su etiqueta (`Jacuzzi`, `Lavadoras`, `WC y Sanitarios`; puede llevar
   varias) o, sin etiqueta, la primera que nombra completa en título, extracto o cuerpo. Esa
   categoría muestra el número en el riel. Al elegir una categoría, los chips de tipo (Todas, Guía
@@ -73,7 +78,7 @@ Blog **Guías** (`guias`) creado. **16 guías**, una por subcategoría o macro, 
 | Trituradores | `guia-triturador-de-alimentos` |
 | Purificadores y Despachadores de Agua | `guia-filtracion-agua-cocina` |
 | Asadores & Hornos | `guia-asadores-y-hornos-exterior` |
-| Alberca | `elegir-mosaico-para-alberca` |
+| Exterior + Alberca (antes solo `Alberca`; movida el 2026-11-19, 301 desde `/guias/exterior/alberca/…`) | `elegir-mosaico-para-alberca` |
 | Electrodomésticos Menores | `guia-electrodomesticos-menores` |
 | Lavandería | `guia-lavadora-y-secadora` |
 | Baños | `guia-bano-premium` |
@@ -114,3 +119,25 @@ tipos (foto de `public/assets/photos/subcat-tiles/`, la misma del slider de Prod
 de suscripción (`data-newsletter="guias"`, lo envía v2.js) y las tarjetas de las guías.
 Para pasar Cocción u otra Sub1: agregar `tarjeta: { imagen, resumen }` a cada tipo,
 su foto en `PORTADA_FOTO_SUB1` y, si falta, su ícono en `ICONOS`.
+
+## Portada de Exterior (2026-11-19)
+
+`/guias/exterior` usa `GuiasPortada` a nivel macro (`PORTADA_FOTO_MACRO.exterior` en
+`app/guias/[...segments]/page.tsx`) cuando todas sus Subcategorías 1 traen `tarjeta`:
+Asadores & Hornos lleva a su portada; las demás son leaves (`esLeaf: true`, con `tienda`) que
+filtran el Blog. El buscador del hero incluye además los tipos y fichas de Asadores & Hornos.
+Fotos: ambiente del repo; Hieleras (Coyote) y Fire pits (Lynx) las dio Carla el 2026-11-19;
+Despachador de cerveza sigue con packshot (no hay foto en ambiente). Para sumar una categoría: agregarla como leaf con `tarjeta` e ícono en
+`ICONOS` (`components/GuiasPortada.tsx`).
+
+### Botón "O conoce más sobre …" (2026-11-19)
+
+En toda portada cuyas tarjetas filtran el Blog (Menores, Exterior y las Subcategorías 1 de
+Cocina y Bar), al elegir una categoría emerge un botón circular espresso (texto blanco, la
+categoría en dorado itálica) a la derecha del Blog mientras está a la vista; lleva a su
+`tienda` con el filtro aplicado. En móvil flota abajo a la izquierda (sube con el aviso de
+cookies). Código: `BlogTemas` en `components/GuiasPorTema.tsx` + `.tema-burbuja` en
+`styles/guias.css`. Respira (late suave con halo dorado, como el WhatsApp) y sustituye al
+botón "Ver productos en tienda" en esas portadas (Carla, 2026-11-19); las páginas con riel
+(Lavandería, Baños…) conservan ese botón. El clic de las tarjetas se escucha en captura porque
+PreviewRouter atiende los enlaces `#…` y, tras una navegación interna, se adelantaba.

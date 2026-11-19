@@ -1,5 +1,5 @@
 // GuiasPortada — portada de una Subcategoría 1 en Guías (Carla, 2026-10-19;
-// primero Refrigeración): hero partido (texto sobre bone · foto a la derecha) y
+// primero Refrigeración; también Menores y Exterior a nivel macro): hero partido (texto sobre bone · foto a la derecha) y
 // rejilla de tarjetas, una por tipo de producto (Subcategoría 2), con su foto,
 // ícono de línea, resumen y flecha. Las guías del blog van abajo, en su propia
 // sección (page.tsx). Se activa cuando todas las Subcategorías 2 traen `tarjeta`.
@@ -217,6 +217,51 @@ const ICONOS: Record<string, React.ReactNode> = {
       <path d="M14 20l7-7M19 15l1.5 1.5" />
     </>
   ),
+  // Portada de Exterior (Carla, 2026-11-19): Asadores & Hornos como categoría y
+  // los tipos que cuelgan de la macro (Campanas, Centros de bebida… ya tienen ícono).
+  "asadores-y-hornos": (
+    <>
+      <path d="M3 10h18v3H3zM4.5 13v7.5h15V13M8 16.5h8" />
+      <path d="M6 10V7.5a6 6 0 0 1 12 0V10" />
+    </>
+  ),
+  "despachadores-de-cerveza": (
+    <>
+      <rect x="6" y="10" width="12" height="11" rx="1" />
+      <path d="M9 10V6.5h6M15 6.5V4.5M13 4.5h4M15 6.5v1.8M9.5 14h5M8 21v.8M16 21v.8" />
+    </>
+  ),
+  hieleras: (
+    <>
+      <rect x="3" y="8" width="18" height="12" rx="1" />
+      <path d="M3 11.5h18M9.5 14.5h5" />
+      <path d="M8.5 8 9.5 4.5h2.5L11 8M13 8l1-3h2.5l-1 3" />
+    </>
+  ),
+  "cajones-calentadores": (
+    <>
+      <rect x="3" y="11" width="18" height="9" rx="1" />
+      <path d="M9 14.5h6M8 8.5c-.8-.9.8-1.6 0-2.5s.8-1.6 0-2.5M12 8.5c-.8-.9.8-1.6 0-2.5s.8-1.6 0-2.5M16 8.5c-.8-.9.8-1.6 0-2.5s.8-1.6 0-2.5" />
+    </>
+  ),
+  gabinetes: (
+    <>
+      <rect x="3" y="4" width="18" height="16" rx="1" />
+      <path d="M12 4v16M3 10h9M6 7h3M15 11v2.5M6 13.5h3" />
+    </>
+  ),
+  "fire-pits": (
+    <>
+      <path d="M2.5 15h19v5h-19z" />
+      <path d="M12 13c-2.4 0-3.5-1.6-3.5-3.3 0-2 1.6-2.8 1.6-4.7 1.7.8 2 2.3 1.9 3.4.6-.5 1-1.3 1-2.1 1.6 1.2 2.5 2.4 2.5 3.8 0 1.7-1.1 2.9-3.5 2.9z" />
+    </>
+  ),
+  alberca: (
+    <>
+      <path d="M8 15V5a2 2 0 0 1 4 0M16 15V5a2 2 0 0 0-4 0M8 8h8M8 11.5h8" />
+      <path d="M2.5 17.5c1.6 0 1.6-1 3.2-1s1.6 1 3.2 1 1.6-1 3.2-1 1.6 1 3.2 1 1.6-1 3.2-1M2.5 20.5c1.6 0 1.6-1 3.2-1s1.6 1 3.2 1 1.6-1 3.2-1 1.6 1 3.2 1 1.6-1 3.2-1" />
+    </>
+  ),
   // Electrodomésticos menores
   licuadoras: (
     <>
@@ -277,6 +322,8 @@ function Icono({ slug }: { slug: string }) {
 type TipoPortada = Pick<Subcategoria2, "nombre" | "slug" | "tarjeta" | "tienda" | "rutaFiltros"> & {
   filtro?: string;
   filtros?: unknown[];
+  /** Categoría con portada propia en Guías (Exterior → Asadores & Hornos): la tarjeta lleva a ella. */
+  ruta?: string;
 };
 
 function Tarjeta({ s, filtraBlog }: { s: TipoPortada; filtraBlog?: boolean }) {
@@ -308,8 +355,8 @@ function Tarjeta({ s, filtraBlog }: { s: TipoPortada; filtraBlog?: boolean }) {
   );
   // Con varios filtros → su página de fichas; si no, su página de la tienda
   // (`tienda` de la taxonomía o coleccionesWeb); sin ninguna, CtaProducto (cae a WhatsApp).
-  const conFichas = conPaginaFichas(s);
-  const destino = conFichas ? s.rutaFiltros! : (s.tienda ?? TIPOS_WEB.find((t) => t.slugRiel === s.slug)?.ruta);
+  const conFichas = Boolean(s.ruta) || conPaginaFichas(s);
+  const destino = s.ruta ?? (conFichas ? s.rutaFiltros! : (s.tienda ?? TIPOS_WEB.find((t) => t.slugRiel === s.slug)?.ruta));
   // Sin página de fichas (todas las de Menores; Frigobares, Hornos de pizza…):
   // la tarjeta filtra el Blog de abajo (BlogTemas escucha `data-tema-guia`) y el
   // Blog ofrece "Ver productos en tienda"; sin JS baja al Blog.
@@ -342,9 +389,11 @@ interface Props {
   buscador?: React.ReactNode;
   /** Las tarjetas sin página de fichas eligen categoría en el Blog (BlogTemas). */
   filtraBlog?: boolean;
+  /** Subtítulo propio del hero (Exterior); sin esto, el genérico. */
+  sub?: string;
 }
 
-export default function GuiasPortada({ crumbs, nombre, tipos, foto, buscador, filtraBlog }: Props) {
+export default function GuiasPortada({ crumbs, nombre, tipos, foto, buscador, filtraBlog, sub }: Props) {
   return (
     <>
       <header className="gx-hero">
@@ -359,8 +408,12 @@ export default function GuiasPortada({ crumbs, nombre, tipos, foto, buscador, fi
           </h1>
           <p className="gx-hero-sub">
             {/* "tus tarjas…", "tus electrodomésticos…": plural si la primera palabra lo es. */}
-            Información clara y visual para ayudarte a elegir, especificar e integrar {/^\S+s\b/i.test(nombre) ? "tus" : "tu"}{" "}
-            {nombre.toLowerCase()} en cualquier proyecto.
+            {sub ?? (
+              <>
+                Información clara y visual para ayudarte a elegir, especificar e integrar {/^\S+s\b/i.test(nombre) ? "tus" : "tu"}{" "}
+                {nombre.toLowerCase()} en cualquier proyecto.
+              </>
+            )}
           </p>
           {buscador}
         </div>

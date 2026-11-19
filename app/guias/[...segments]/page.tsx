@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import {
   allRouteSegments,
   buildBreadcrumb,
+  categoriaDeGuiaEnMacro,
   categoriasDeGuias,
   getTiposDeGuia,
   guiasDeMacro,
@@ -25,7 +26,7 @@ import CategoryList from "@/components/CategoryList";
 import FilterList from "@/components/FilterList";
 import FilterShowcase from "@/components/FilterShowcase";
 import GuiaSearch from "@/components/GuiaSearch";
-import { indiceCategoria } from "@/lib/guiasBusqueda";
+import { indiceCategoria, type EntradaBusqueda } from "@/lib/guiasBusqueda";
 import GuideArticle from "@/components/GuideArticle";
 import GuiasPortada from "@/components/GuiasPortada";
 import GuiasPorTema, { BlogTemas, type TemaGuia } from "@/components/GuiasPorTema";
@@ -118,8 +119,8 @@ const HERO_FOTO_SUB1: Record<string, { src: string; pos?: string; flip?: boolean
   "tarjas-y-griferia": { src: "/assets/photos/hero-sub1-tarjas-griferia-blanco.webp", pos: "center 50%" },
   trituradores: { src: "/assets/photos/hero-sub1-trituradores-insinkerator.webp", pos: "center 100%" },
   "filtros-y-purificadores-de-agua": { src: "/assets/photos/hero-sub1-filtros-purificadores-agua.webp", pos: "center 50%" },
-  // Alberca: mosaico Onix (Carla, 2026-10-20); su página se queda con el formato de lista.
-  alberca: { src: "/assets/photos/brands/hero/onix-superficies.webp", pos: "center 62%" },
+  // Alberca ya no tiene página propia (Carla, 2026-11-19): es una tarjeta de la
+  // portada de Exterior y su guía toma la foto de esa tarjeta (ArticleView).
 };
 
 // Foto de la portada de guías por Subcategoría 1 (GuiasPortada: hero partido).
@@ -132,14 +133,23 @@ const PORTADA_FOTO_SUB1: Record<string, { src: string; pos?: string; flip?: bool
   "tarjas-y-griferia": { src: "/assets/photos/hero-sub1-tarjas-griferia-blanco.webp", pos: "40% 50%" },
   trituradores: { src: "/assets/photos/hero-sub1-trituradores-insinkerator.webp", pos: "center 70%" },
   "filtros-y-purificadores-de-agua": { src: "/assets/photos/purificador-agua-monomando-delta-cocina.webp", pos: "center 45%", flip: true },
-  // Exterior: solo Asadores & Hornos (Alberca se queda como está; Carla, 2026-10-20).
+  // Exterior · Asadores & Hornos (Carla, 2026-10-20).
   "asadores-y-hornos": { src: "/assets/photos/brands/hero/lynx-asadores.webp", pos: "center 55%" },
 };
 
-// Portada por macrocategoría de 2 niveles (sus leaves son las tarjetas): por
-// ahora Electrodomésticos menores (Carla, 2026-10-20).
+// Portada por macrocategoría: en las de 2 niveles sus leaves son las tarjetas
+// (Electrodomésticos menores, Carla 2026-10-20); en Exterior (Carla, 2026-11-19)
+// son todas sus Subcategorías 1: Asadores & Hornos lleva a su portada y las
+// demás (Campanas… Alberca) filtran el Blog, como en Menores.
 const PORTADA_FOTO_MACRO: Record<string, { src: string; pos?: string; flip?: boolean }> = {
   "electrodomesticos-menores": { src: "/assets/photos/hero-electrodomesticos-menores.webp", pos: "8% 55%" },
+  exterior: { src: "/assets/photos/brands/hero/coyote-asadores.webp", pos: "62% 60%" },
+};
+
+/** Subtítulo del hero de la portada cuando el genérico no se lee bien. */
+const PORTADA_SUB: Record<string, string> = {
+  exterior:
+    "Información clara y visual para ayudarte a elegir, especificar e integrar tu cocina exterior, tu bar y tu alberca en cualquier proyecto.",
 };
 
 // --------------------------------------------------------------------------
@@ -273,6 +283,60 @@ async function MacroIndex({ macro, node }: { macro: Macrocategoria; node: RouteN
           <GuiasPorTema temas={leaves} cards={cards} tipos={getTiposDeGuia()} />
         </section>
         {jsonLd}
+      </>
+    );
+  }
+
+  // Rama de 3 niveles con portada (Exterior): una tarjeta por Subcategoría 1.
+  const portadaMacro = PORTADA_FOTO_MACRO[macro.slug];
+  const cats = macro.subcategorias1 ?? [];
+  if (portadaMacro && cats.length > 0 && cats.every((c) => c.tarjeta)) {
+    const guias = await guiasDeMacro(macro);
+    const cards: GuideCardData[] = guias.map((g) => {
+      const temas = temasDeGuia(g, cats);
+      const nombre = cats.find((c) => c.slug === temas.temas[0])?.nombre ?? g.sub1?.nombre ?? macro.nombre;
+      return guiasToCards([g], nombre, cats)[0];
+    });
+    // Las categorías con página propia (Asadores & Hornos) llevan a ella.
+    const tipos = cats.map((c) => (c.esLeaf ? c : { ...c, ruta: c.rutaGuias }));
+    // Buscador: las tarjetas de esta portada y, de las categorías con página
+    // propia, sus tipos (a su tarjeta allá) y sus fichas.
+    const fichas: EntradaBusqueda[] = indiceCategoria(cats, true);
+    for (const c of cats) {
+      if (c.esLeaf || !c.rutaGuias) continue;
+      const subs = c.subcategorias2 ?? [];
+      for (const s2 of subs) {
+        if (!s2.tarjeta) continue;
+        fichas.push({ titulo: s2.nombre, tag: c.nombre, visible: s2.tarjeta.resumen, extendido: "", href: `${c.rutaGuias}#tipo-${s2.slug}` });
+      }
+      fichas.push(...indiceCategoria(subs, false));
+    }
+    return (
+      <>
+        <GuiasPortada
+          crumbs={crumbs}
+          nombre={macro.nombre}
+          tipos={tipos}
+          foto={portadaMacro}
+          sub={PORTADA_SUB[macro.slug]}
+          filtraBlog
+          buscador={
+            <GuiaSearch
+              guias={cards}
+              fichas={fichas}
+              placeholder={`Busca en ${macro.nombre}`}
+              ariaLabel={`Buscar en ${macro.nombre}`}
+              scopeLabel={macro.nombre}
+            />
+          }
+        />
+        <BlogGuias cards={cards} temas={cats} />
+        <JsonLd
+          data={itemListLd(
+            `Guías de ${macro.nombre}`,
+            guias.map((g) => ({ name: g.titulo, url: absUrl(g.ruta) }))
+          )}
+        />
       </>
     );
   }
@@ -455,10 +519,14 @@ function FilterIndex({
 function ArticleView({ node }: { node: Extract<RouteNode, { kind: "guia" }> }) {
   const crumbs = buildBreadcrumb(node);
   // Fondo del encabezado: la imagen de la entrada en Shopify; si no tiene, la
-  // foto de su subcategoría o de su macro.
+  // foto de su subcategoría, la de la tarjeta de su categoría en la portada
+  // (Exterior → Alberca) o la de su macro.
+  const tarjeta = categoriaDeGuiaEnMacro(node.guia)?.tarjeta;
   const foto = node.guia.imagen
     ? { src: `${node.guia.imagen.url}${node.guia.imagen.url.includes("?") ? "&" : "?"}width=1800` }
-    : (node.sub1 && HERO_FOTO_SUB1[node.sub1.slug]) || HERO_FOTO_MACRO[node.macro.slug];
+    : (node.sub1 && HERO_FOTO_SUB1[node.sub1.slug]) ||
+      (tarjeta?.ambiente ? { src: tarjeta.imagen, pos: tarjeta.pos } : undefined) ||
+      HERO_FOTO_MACRO[node.macro.slug];
   return (
     <>
       <PageHero

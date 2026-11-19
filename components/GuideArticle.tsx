@@ -7,7 +7,7 @@
 
 import Link from "next/link";
 
-import { nombreTipo, rutaProductos, type RouteNode } from "@/lib/guias";
+import { categoriaDeGuiaEnMacro, nombreTipo, rutaProductos, type RouteNode } from "@/lib/guias";
 import { absUrl, SITE_NAME } from "@/lib/site";
 import WhatsAppCta from "./WhatsAppCta";
 import JsonLd from "./JsonLd";
@@ -16,9 +16,12 @@ type GuiaNode = Extract<RouteNode, { kind: "guia" }>;
 
 export default function GuideArticle({ node }: { node: GuiaNode }) {
   const { guia, macro, sub1 } = node;
-  const categoria = sub1?.nombre ?? macro.nombre;
+  // Guía en la macro con categoría sin página propia (Exterior → Alberca): su
+  // nombre y su tienda (/marcas/onix).
+  const cat = categoriaDeGuiaEnMacro(guia);
+  const categoria = sub1?.nombre ?? cat?.nombre ?? macro.nombre;
   const waMessage = `¡Hola! Vi la guía "${guia.titulo}" en su sitio y me interesa una cotización.`;
-  const productos = rutaProductos(macro, sub1);
+  const productos = cat?.tienda ?? rutaProductos(macro, sub1);
   const canonical = absUrl(guia.ruta);
 
   const articleLd = {

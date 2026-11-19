@@ -6,7 +6,7 @@
 //
 // Solo servidor: lee el blog de Shopify (lib/guias).
 
-import { getMacros, nombreTipo, todasLasGuias } from "./guias";
+import { categoriaDeGuiaEnMacro, getMacros, nombreTipo, todasLasGuias } from "./guias";
 import { indiceCategoria, type EntradaBusqueda } from "./guiasBusqueda";
 import { conPaginaFichas } from "./paginaFichas";
 import type { Subcategoria1, Subcategoria2 } from "@/types/guias";
@@ -59,6 +59,11 @@ export async function indiceGuias(): Promise<EntradaBusqueda[]> {
       continue;
     }
 
+    // Categorías sin página propia de una macro de 3 niveles (Exterior: Campanas…
+    // Alberca; Carla, 2026-11-19): tarjetas de la portada de la macro.
+    const cats = macro.subcategorias1 as (Subcategoria1 & Tipo)[];
+    for (const l of cats) if (l.esLeaf) out.push(entradaTipo(l, cats, macro));
+
     for (const sub1 of macro.subcategorias1) {
       if (!sub1.rutaGuias) continue;
       const tipos = sub1.subcategorias2 ?? [];
@@ -71,7 +76,7 @@ export async function indiceGuias(): Promise<EntradaBusqueda[]> {
   for (const g of await todasLasGuias()) {
     out.push({
       titulo: g.titulo,
-      tag: `${g.sub1?.nombre ?? g.macro.nombre} · ${nombreTipo(g.tipo)}`,
+      tag: `${g.sub1?.nombre ?? categoriaDeGuiaEnMacro(g)?.nombre ?? g.macro.nombre} · ${nombreTipo(g.tipo)}`,
       visible: g.resumen,
       extendido: textoPlano(g.html),
       href: g.ruta,

@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Solo desarrollo: abrir `next dev` desde el iPhone u otro equipo de la misma
+  // red (http://<IP de la Mac>:3000). Sin esto Next responde 403 a su propio JS
+  // cuando el origen no es localhost y el sitio queda sin menús ni botones.
+  allowedDevOrigins: ["192.168.*.*", "10.*.*.*", "172.*.*.*", "*.local"],
   // El layout y varias páginas leen preview/*.html con readFileSync en tiempo de
   // ejecución (lib/preview.ts). El file tracing de Next no sigue rutas dinámicas,
   // así que sin esto las funciones en Vercel no incluyen esos archivos y cualquier
@@ -180,7 +184,16 @@ const nextConfig = {
     // en data/redirects/productos-obsoletos.json al archivar productos en Shopify.
     const productosObsoletos = require("./data/redirects/productos-obsoletos.json").redirects;
 
+    // Guías: Alberca dejó de tener página propia y vive como categoría de la
+    // portada de Exterior (Carla, 2026-11-19). Su guía (Mosaicos) pasa de
+    // /guias/exterior/alberca/<tipo>/<handle> a /guias/exterior/<tipo>/<handle>.
+    const guiasMovidas = [
+      { source: "/guias/exterior/alberca", destination: "/guias/exterior#alberca" },
+      { source: "/guias/exterior/alberca/:tipo/:handle", destination: "/guias/exterior/:tipo/:handle" },
+    ];
+
     return [
+      ...guiasMovidas.map((r) => ({ ...r, statusCode: 301 })),
       ...Object.entries(marcasEliminadas).map(([source, destination]) => ({
         source,
         destination,
