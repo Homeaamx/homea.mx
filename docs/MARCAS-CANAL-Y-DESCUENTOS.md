@@ -12,8 +12,8 @@
 
 | Canal | En Shopify | En el sitio |
 |---|---|---|
-| **SHOPIFY** (59) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
-| **SOLO PDF** (25) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
+| **SHOPIFY** (56) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
+| **SOLO PDF** (28) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
 
 En el código, el canal vive en el tile de `preview/marcas.html` (`data-canal="shopify|pdf"`), pasa a
 `data/marcas.json` con `npm run marcas` y la plantilla `app/(es)/marcas/[marca]/page.tsx` lo respeta.
@@ -75,7 +75,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
   columna *Arte* de las tablas dice qué falta. La carpeta de OneDrive con logos y fotos ya no está
   sincronizada en esta Mac.
 
-## SHOPIFY — 59 marcas
+## SHOPIFY — 56 marcas
 
 | Marca | Proveedor | Línea SAE | Productos tras carga | Descuento Shopify (PLATA) | Página | Arte | Nota |
 |---|---|---|---:|---:|---|---|---|
@@ -100,9 +100,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | ECLIPSE | ECLIPSE | ECLIP | 98 | 10% | `/marcas/eclipse` | completo | Cargada 2026-11-18: 56 productos (catálogo eKitchen ago 2026, USD con IVA ÷ 1.16 con centavos); 2026-11-19: Línea Colors un producto por color → 76 productos. Value Line = mismo PLATA 10 %, garantía 3 años (resto 10 años). |
 | ELECTROLUX / ELECTROLUX ICON | INTERMUEBLES | ELECT | 12 | 10% | `/marcas/electrolux` | completo |  |
 | ELICA (todas las series) | ARTEXA | ELICA | 166 | 10% | `/marcas/elica` | completo |  |
-| FABER | LECROM | FABER | 12 | 5% | `/marcas/faber` | completo |  |
 | FALMEC | TECNOLAM | FALME | 53 | 10% | `/marcas/falmec` | completo |  |
-| FRANKE | LECROM | FRANK | 28 | 10% | `/marcas/franke` | completo | Se compra por Lecrom (no IESA) |
 | FRIGIDAIRE / GALLERY / PRO | INTERMUEBLES | FRIGI | 23 | 10% | `/marcas/frigidaire` | completo | Parejas Pro: checar precio Palacio |
 | FULGOR MILANO | LECROM / TECNOLAM | FULGO | 40 | 10% | `/marcas/fulgor-milano` | completo |  |
 | GAGGENAU | ARTEXA | GAGGE | 297 | 10% | `/marcas/gaggenau` | completo |  |
@@ -122,7 +120,6 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | MIELE | MIELE | MIELE | 292 | 5% | `/marcas/miele` | completo |  |
 | MONOGRAM | MABE | MONOG | 87 | 10% | `/marcas/monogram` | completo |  |
 | MONT ALPI | MARESA | MONTA | 87 | 10% | `/marcas/mont-alpi` | completo |  |
-| NANTUCKET | LECROM | NANTU | 20 | 10% | `/marcas/nantucket` | completo |  |
 | PITT | ARTEXA | PITT | 108 | 10% | `/marcas/pitt-cooking` | completo |  |
 | SCHOCK | ECLIPSE | SCHOC | 33 | 10% | `/marcas/schock` | completo | Cargada 2026-11-18: 108 productos, uno por color (catálogo eKitchen ago 2026, USD con IVA ÷ 1.16). Garantía por línea del catálogo: Cristadur y Green Line 15 años, Cristalite 10, llaves 2, accesorios 3 (la política dice 15 para todo). |
 | SCOTSMAN | IESA/LAVISH | SCOTS | 66 | 10% | `/marcas/scotsman` | completo |  |
@@ -139,10 +136,13 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | WHIRLPOOL | WHIRLPOOL | WHIRL | 282 | 30% | `/marcas/whirlpool` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | WOLF | IESA/LAVISH | WOLF | 665 | 10% | `/marcas/wolf` | completo | Condición distinta para fuera de línea vs. de línea |
 
-## SOLO PDF — 25 marcas
+## SOLO PDF — 28 marcas
 
 | Marca | Proveedor | Línea SAE | Productos tras carga | Descuento Shopify (PLATA) | Página | Arte | Nota |
 |---|---|---|---:|---:|---|---|---|
+| FABER | LECROM | FABER | 12 | 5% | `/marcas/faber` | completo | **Pasa a SOLO PDF (Carla, 2026-11-19)**: de LECROM solo Coyote, Dawn y Summit van a tienda |
+| FRANKE | LECROM | FRANK | 28 | 10% | `/marcas/franke` | completo | Se compra por Lecrom (no IESA) · **Pasa a SOLO PDF (Carla, 2026-11-19)**: de LECROM solo Coyote, Dawn y Summit van a tienda |
+| NANTUCKET | LECROM | NANTU | 20 | 10% | `/marcas/nantucket` | completo | **Pasa a SOLO PDF (Carla, 2026-11-19)**: de LECROM solo Coyote, Dawn y Summit van a tienda |
 | SEDONA | MIDDLEBY | SEDON | 55 | 5% | `/marcas/sedona-by-lynx` | completo | **Pasa a SOLO PDF (Carla, 2026-11-17)**: de MIDDLEBY solo Viking y Lynx van a tienda |
 | TRADEWIND | MIDDLEBY | TRADE | 154 | 5% | `/marcas/tradewind` | completo | **Pasa a SOLO PDF (Carla, 2026-11-17)**: de MIDDLEBY solo Viking y Lynx van a tienda |
 | BRIZO | ARTEXA | BRIZO | 806 | 10% | `/marcas/brizo` | completo | Solo línea de cocina · **Pasa a SOLO PDF (Carla, 2026-11-10)** |
@@ -157,7 +157,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | JACUZZI | ARTEXA | — | — | **PENDIENTE** | `/marcas/jacuzzi` | completo | Saunas de Artexa; no venía en el Excel (Carla, 2026-09-21) |
 | JOSPER | MIDDLEBY | JOSPE | 0 | — | `/marcas/josper` | completo |  |
 | KALDEWEI | GRUPO 90 | — | 0 | 10% | `/marcas/kaldewei` | completo | Baños. Estaba en *Eliminadas*; vuelve como SOLO PDF (Carla, 2026-09-22) · PDF pendiente (Carla, 2026-10-22) |
-| KALT | LECROM | KALT | 15 | — | `/marcas/kalt` | completo |  |
+| KALT | LECROM | KALT | 15 | — | `/marcas/kalt` | completo | Confirmado SOLO PDF (Carla, 2026-11-19) |
 | KAMADO JOE | MIDDLEBY | KAMAD | 43 | — | `/marcas/kamado-joe` | completo |  |
 | MASTERBUILT | MIDDLEBY | MASTB | 8 | — | `/marcas/masterbuilt` | completo |  |
 | MR STEAM | GRUPO 90 | MRSTE | 28 | 10% | `/marcas/mr-steam` | completo |  |

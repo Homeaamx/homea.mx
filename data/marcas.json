@@ -519,7 +519,7 @@
       "categorias": [
         "cocina"
       ],
-      "canal": "shopify",
+      "canal": "pdf",
       "logo": "/assets/logos/faber.webp",
       "foto": "/assets/photos/brands/faber-campanas.webp",
       "fotoHero": "/assets/photos/brands/hero/faber-campanas.webp",
@@ -555,7 +555,7 @@
       "categorias": [
         "tarjas"
       ],
-      "canal": "shopify",
+      "canal": "pdf",
       "logo": "/assets/logos/franke.png",
       "foto": "/assets/photos/brands/franke-tarjas-y-griferia.webp",
       "fotoHero": "/assets/photos/brands/hero/franke-tarjas-y-griferia.webp",
@@ -1101,7 +1101,7 @@
       "categorias": [
         "tarjas"
       ],
-      "canal": "shopify",
+      "canal": "pdf",
       "logo": "/assets/logos/nantucket.webp",
       "foto": "/assets/photos/brands/nantucket-tarjas.webp",
       "fotoHero": "/assets/photos/brands/hero/nantucket-tarjas.webp",
