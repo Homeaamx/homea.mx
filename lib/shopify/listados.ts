@@ -15,7 +15,7 @@ import { marcaPorSlug } from "@/lib/marcas";
 import filtrosWeb from "@/data/filtros-web.json";
 
 import { productosConEtiqueta, productosDeColeccion, productosDeMarca, type ProductoVivo } from "./catalogoVivo";
-import { EXTRAS_DE_MACRO, EXTRAS_DE_TIPO, tipoDePlp, tiposDeMacro, tiposDeSub1, type TipoWeb } from "./coleccionesWeb";
+import { EXTRAS_DE_MACRO, EXTRAS_DE_TIPO, TIPOS_WEB, tipoDePlp, tiposDeMacro, tiposDeSub1, type TipoWeb } from "./coleccionesWeb";
 
 type DefFiltro = { clave: string; valores?: string[] };
 const DEFS = (filtrosWeb as unknown as { subcategorias: Record<string, DefFiltro[]> }).subcategorias;
@@ -78,11 +78,16 @@ export async function productosDeMacro(categoria: string): Promise<ProductoVivo[
   const extras = EXTRAS_DE_MACRO[`/productos/${categoria}`] ?? [];
   const [propios, ...ajenos] = await Promise.all([
     Promise.all(tipos.map((t) => productosDeColeccion(t.coleccion))).then((l) => l.flat()),
-    ...extras.map((e) =>
-      productosDeColeccion(e.coleccion).then((l) =>
-        l.filter((p: ProductoVivo) => (p.filtros[e.filtro.clave] ?? []).includes(e.filtro.valor)),
-      ),
-    ),
+    // Un extra trae su colección y las piezas de otro tipo con `tambien-en-<colección>`
+    // presentadas como de esa colección: el congelador de exterior Summit SPFF51OS
+    // (Tipo Congeladores) sale en Exterior › Centros de bebida › Todo congelador
+    // (Carla, 2026-11-23).
+    ...extras.map((e) => {
+      const tw = TIPOS_WEB.find((t) => t.coleccion === e.coleccion);
+      return Promise.all([productosDeColeccion(e.coleccion), tw ? tambienEn(tw) : Promise.resolve([])]).then(([l, t]) =>
+        [...l, ...t].filter((p: ProductoVivo) => (p.filtros[e.filtro.clave] ?? []).includes(e.filtro.valor)),
+      );
+    }),
   ]);
   const tambien = (await Promise.all(tipos.map(tambienEn))).flat();
   return unicos([...propios, ...ajenos.flat(), ...tambien]);

@@ -125,7 +125,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | SCOTSMAN | IESA/LAVISH | SCOTS | 66 | 10% | `/marcas/scotsman` | completo |  |
 | SMEG | SMEG | SMEG | 240 | 15% | `/marcas/smeg` | completo | PLATA 15 % (Rev 22; la Rev 24 de 25 % es Buen Fin). Precios de lista CON IVA ÷ 1.16. Cargada 2026-11-13. |
 | SUB-ZERO | IESA/LAVISH | SUBZE | 515 | 10% | `/marcas/sub-zero` | completo | Condición distinta para fuera de línea vs. de línea (solo costo: PLATA 10 % y 2 años en ambas). Cargada 2026-11-10: 222 equipos + 293 accesorios; se cotiza salvo stock (regla IESA) |
-| SUMMIT | LECROM | SUMMI | 19 | 10% | `/marcas/summit` | completo |  |
+| SUMMIT | LECROM | SUMMI | 19 | 10% | `/marcas/summit` | completo | **16 en tienda (2026-11-23):** solo los equipos de las págs. 2–8 de la lista NOV 2026 (Carla); USD, 1 año, Bajo pedido; el congelador de exterior SPFF51OS también sale en Exterior › Centros de bebida |
 | SUPRA | SUPER FLAMA | SUPRA | 111 | 5% | `/marcas/supra` | completo |  |
 | TECNOLAM | TECNOLAM | TECNO | 138 | 10% | `/marcas/tecnolam` | completo |  |
 | TEKA (todas las líneas) | TEKA | TEKA | 210 | 10% | `/marcas/teka` | completo | Estufas económicas: 5% |

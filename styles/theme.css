@@ -4041,6 +4041,7 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="eclipse"] { height: 44px; } /* "eclipse STAINLESS" gris, 2026-11-18 */
 .pdp-logo[data-marca="schock"] { height: 34px; } /* "SCHOCK Handmade in Germany", 2026-11-18 */
 .pdp-logo[data-marca="commodore"] { height: 40px; } /* escudo + "COMMODORE TRITURADORES", 2026-11-18 */
+.pdp-logo[data-marca="summit"] { height: 38px; } /* "SUMMIT APPLIANCE" negro, OneDrive Logos Marcas png/MIDDLEBY/summitappliance_logo.png; proporción 2.3:1, 2026-11-23 */
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
    técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
    una línea, baja a dos dentro de su pestaña. */
