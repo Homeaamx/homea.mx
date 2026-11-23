@@ -94,7 +94,7 @@
       });
     }
     var propios = clave === "tipo-web"
-      ? [card.getAttribute("data-tipo") || ""]
+      ? (card.getAttribute("data-tipo") || "").split(" ")
       : (card.getAttribute("data-fv-" + clave) || "").split(" ");
     for (var i = 0; i < valores.length; i++) {
       if (propios.indexOf(valores[i]) !== -1) return true;

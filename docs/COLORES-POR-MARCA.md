@@ -54,6 +54,7 @@ Las variantes de una misma pieza (Alfresco *Standard Color / Custom Color*, `-SC
 | Kraus | 2 |
 | Benessi | 46 (2026-11-04, a mano: acero ↔ panelable en refrigeración, bajo cubierta y lavavajillas; acero ↔ negra/cristal negro en parrillas Masterpiece, cafetera 24", combi-vapor y microondas combinado 30") |
 | Sub-Zero | 114 (2026-11-10, a mano: Classic por familia + bisagra → Panelable · Acero jaladera Tubular · Acero jaladera Pro; muestras "acero inoxidable jaladera tubular/pro", "tubular", "pro") |
+| Coyote | 6 (2026-11-23, a mano: hornos de pizza Duomo 30" negro mate · rojo · amarillo y 40" negro mate · cobre · amarillo; cada color es su producto y el híbrido 30" lleva además la opción Tipo de gas; muestra nueva "amarillo") |
 
 Pendiente de Carla: Elica **PRF0024262A** y **PRF0098392** son la misma campana Seashell 32" Blanca; solo PRF0098392 quedó en el grupo.
 

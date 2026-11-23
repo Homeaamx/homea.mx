@@ -1,5 +1,5 @@
 {
- "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador. 2026-11-14 (Carla): Porsche x Smeg, 50's Style y Dolce&Gabbana son líneas distintas: sus círculos de color no se mezclan (refris FAB28, tostador TSF01, licuadora BLF03); D&G FAB28URDGME3 sin círculos. Fulgor Milano, 2026-11-14: cocción → campana del mismo ancho; hornos → cajón calientaplatos; cafetera ↔ trim; lavavajillas panelable ↔ jaladera; refrigeración acero ↔ panelable como círculos (misma bisagra y medida, como Sub-Zero) y columna de refrigerador → congelador y cava. Falmec, 2026-11-14: colores de campanas decorativas, Stella Plus, Polar Evo y Valentina Plus, lámparas Sophie y accesorios Spazio; accesorios = los que la lista pone bajo cada campana (filtros primero; en Stella Plus y Alba, que se venden sin motor, los motores primero). Tecnolam, 2026-11-14: círculos Nevada Mix (4 colores, 1 y 2 tinas), monomandos acero/cromo ↔ negro mate, Doppio, BIM30, H45MWCG, TECDW60 acero ↔ panelable, Lyra, Altair, Vortex AC ↔ NE ↔ SI (SI = plata, distinta al acero AC: Carla 2026-11-17; cava H45WC24 fuera: la .NE abre hacia abajo y la B de lado); comal GRIDDLE en FGR366/GTR366/GTR488, KITMAGIC en las Magic, pareja TSD559PR ↔ TSD559PF. Lynx, 2026-11-17: asadores → chaqueta, funda, protector de viento, carrito y kits de gas (PROLPK1/PRONGK1/WGO* los publica Viking); planchas Asado, hornos Napoli y quemadores → su funda, chaqueta y kits; despachador de cerveza → torres y fundas; tarjas → monomando LPFK y funda; puertas Ventana → kits LDRKS/LDRKL; cada accesorio → sus equipos. Eclipse, 2026-11-18: tarjas → rejilla compatible, contracanasta AAICON y dosificador ESD; llaves KS → su kit TEKS con dosificador y ESD. Commodore, 2026-11-18: triturador → su combo con control remoto (y 3-Bolt en 7600/8100), control remoto, switch de aire, imán y contracanasta; combo → su triturador, imán y contracanasta; 3-Bolt → adaptador Perfect Drain, control, switch e imán. Eclipse, 2026-11-19 (Carla): Línea Colors un producto por color (acero · BZ bronce · NG negro, como Schock); la llave sugiere el dosificador ESD de su mismo color.",
+ "_nota": "Sugerencias de la ficha por marca (lib/shopify/sugerencias.ts): colores = mismo modelo en otro color; accesorios = jaladeras, paneles, filtros y kits del modelo. Bertazzoni, 2026-10-30. kits = kits de color que van primero (puerta y faldón blanco/negro de estufas Wolf, Carla 2026-11-11). Smeg, 2026-11-13: colores de enseres menores, batería de cocina y refrigeradores FAB; filtros de campana, trims, kits y accesorios de batidora/tostador. 2026-11-14 (Carla): Porsche x Smeg, 50's Style y Dolce&Gabbana son líneas distintas: sus círculos de color no se mezclan (refris FAB28, tostador TSF01, licuadora BLF03); D&G FAB28URDGME3 sin círculos. Fulgor Milano, 2026-11-14: cocción → campana del mismo ancho; hornos → cajón calientaplatos; cafetera ↔ trim; lavavajillas panelable ↔ jaladera; refrigeración acero ↔ panelable como círculos (misma bisagra y medida, como Sub-Zero) y columna de refrigerador → congelador y cava. Falmec, 2026-11-14: colores de campanas decorativas, Stella Plus, Polar Evo y Valentina Plus, lámparas Sophie y accesorios Spazio; accesorios = los que la lista pone bajo cada campana (filtros primero; en Stella Plus y Alba, que se venden sin motor, los motores primero). Tecnolam, 2026-11-14: círculos Nevada Mix (4 colores, 1 y 2 tinas), monomandos acero/cromo ↔ negro mate, Doppio, BIM30, H45MWCG, TECDW60 acero ↔ panelable, Lyra, Altair, Vortex AC ↔ NE ↔ SI (SI = plata, distinta al acero AC: Carla 2026-11-17; cava H45WC24 fuera: la .NE abre hacia abajo y la B de lado); comal GRIDDLE en FGR366/GTR366/GTR488, KITMAGIC en las Magic, pareja TSD559PR ↔ TSD559PF. Lynx, 2026-11-17: asadores → chaqueta, funda, protector de viento, carrito y kits de gas (PROLPK1/PRONGK1/WGO* los publica Viking); planchas Asado, hornos Napoli y quemadores → su funda, chaqueta y kits; despachador de cerveza → torres y fundas; tarjas → monomando LPFK y funda; puertas Ventana → kits LDRKS/LDRKL; cada accesorio → sus equipos. Eclipse, 2026-11-18: tarjas → rejilla compatible, contracanasta AAICON y dosificador ESD; llaves KS → su kit TEKS con dosificador y ESD. Commodore, 2026-11-18: triturador → su combo con control remoto (y 3-Bolt en 7600/8100), control remoto, switch de aire, imán y contracanasta; combo → su triturador, imán y contracanasta; 3-Bolt → adaptador Perfect Drain, control, switch e imán. Eclipse, 2026-11-19 (Carla): Línea Colors un producto por color (acero · BZ bronce · NG negro, como Schock); la llave sugiere el dosificador ESD de su mismo color. Coyote, 2026-11-23: asadores, quemadores, plancha, hornos y kamado → chaqueta, funda, carrito, kits de gas, regulador, rostizador, parrillas Signature y briquetas de su medida; campanas → motor C1BLOW1200 y cubreductos; refrigeradores → kit trim; cada accesorio → sus equipos. Círculos de color en hornos de pizza (30\" negro mate/rojo/amarillo; 40\" negro mate/cobre/amarillo).",
  "DW2451": {
   "accesorios": [
    "9019420",
@@ -37694,6 +37694,1146 @@
   "colores": [
    "ESD",
    "ESD BZ"
+  ]
+ },
+ "C115R-S": {
+  "accesorios": [
+   "C115TK"
+  ]
+ },
+ "C121R-S-R": {
+  "accesorios": [
+   "C121TK"
+  ]
+ },
+ "C121R-S-L": {
+  "accesorios": [
+   "C121TK"
+  ]
+ },
+ "C124R-S": {
+  "accesorios": [
+   "C124TK"
+  ]
+ },
+ "C1HOOD36": {
+  "accesorios": [
+   "C1BLOW1200",
+   "C1FLUE10",
+   "C1FLUE12",
+   "C1FLUE8"
+  ]
+ },
+ "C1HOOD42": {
+  "accesorios": [
+   "C1BLOW1200",
+   "C1FLUE10",
+   "C1FLUE12",
+   "C1FLUE8"
+  ]
+ },
+ "C1HOOD48": {
+  "accesorios": [
+   "C1BLOW1200",
+   "C1FLUE10",
+   "C1FLUE12",
+   "C1FLUE8"
+  ]
+ },
+ "C1LINER36": {
+  "accesorios": [
+   "C1BLOW1200"
+  ]
+ },
+ "C1LINER42": {
+  "accesorios": [
+   "C1BLOW1200"
+  ]
+ },
+ "C1LINER48": {
+  "accesorios": [
+   "C1BLOW1200"
+  ]
+ },
+ "C3C30LP": {
+  "accesorios": [
+   "C3JAKTCSL30",
+   "C3-CCVR30-BIG",
+   "C3C30CART",
+   "C3WOS",
+   "C3ROT30",
+   "C3CSIGRATE30B",
+   "C3CSIGRATE30G",
+   "C3CSIGRATE30P",
+   "C3CSIGRATE30V",
+   "C3BRIQ30",
+   "C3C30CHTR",
+   "C3HZSC30",
+   "CCHTRAY15"
+  ]
+ },
+ "C3SL30LP": {
+  "accesorios": [
+   "C3JAKTCSL30",
+   "C3-CCVR30-BIG",
+   "C3-CCVR30-CTG",
+   "C3C30CART",
+   "C3SL30OS",
+   "C3ROT30",
+   "C3SLSIGRATE30B",
+   "C3SLSIGRATE30G",
+   "C3SLSIGRATE30P",
+   "C3SLSIGRATE30V",
+   "C3BRIQ30",
+   "C3SEARBURNER",
+   "CCHTRAY15"
+  ]
+ },
+ "C3C34LP": {
+  "accesorios": [
+   "CJAKTCC3",
+   "CCVR3-BIG",
+   "CCVR3-CTG",
+   "C3C34CT",
+   "C3C34OS",
+   "C3ROT34",
+   "C3CSIGRATE34B",
+   "C3CSIGRATE34G",
+   "C3CSIGRATE34P",
+   "C3CSIGRATE34V",
+   "C3BRIQ34",
+   "C3HZSC34",
+   "CCHTRAY12"
+  ]
+ },
+ "C3CL36LP": {
+  "accesorios": [
+   "CJAKTCS36",
+   "CCVR36-BIG",
+   "CCVR36-CTG",
+   "C3S36CT",
+   "C3CL36OS",
+   "C3ROT36",
+   "C3CLSIGRATE36B",
+   "C3CLSIGRATE36G",
+   "C3CLSIGRATE36P",
+   "C3CLSIGRATE36V",
+   "C3BRIQ36",
+   "C3SEARBURNER",
+   "CCHTRAY12"
+  ]
+ },
+ "C3SL36LP": {
+  "accesorios": [
+   "CJAKTCS36",
+   "CCVR36-BIG",
+   "CCVR36-CTG",
+   "C3S36CT",
+   "C3SL36OS",
+   "C3ROT36",
+   "C3SLSIGRATE36B",
+   "C3SLSIGRATE36G",
+   "C3SLSIGRATE36P",
+   "C3SLSIGRATE36V",
+   "C3BRIQ36",
+   "C3SEARBURNER",
+   "CCHTRAY12"
+  ]
+ },
+ "C3CL42LP": {
+  "accesorios": [
+   "CJAKTCS42",
+   "CCVR42-BIG",
+   "CCVR42-CTG",
+   "C3S42CT",
+   "C3CL42OS",
+   "C3ROT42",
+   "C3CLSIGRATE42B",
+   "C3CLSIGRATE42G",
+   "C3CLSIGRATE42P",
+   "C3CLSIGRATE42V",
+   "C3BRIQ42",
+   "C3SEARBURNER",
+   "CCHTRAY15"
+  ]
+ },
+ "C3SL42LP": {
+  "accesorios": [
+   "CJAKTCS42",
+   "CCVR42-BIG",
+   "CCVR42-CTG",
+   "C3S42CT",
+   "C3SL42OS",
+   "C3ROT42",
+   "C3SLSIGRATE42B",
+   "C3SLSIGRATE42G",
+   "C3SLSIGRATE42P",
+   "C3SLSIGRATE42V",
+   "C3BRIQ42",
+   "C3SEARBURNER",
+   "CCHTRAY15"
+  ]
+ },
+ "C2C34LP": {
+  "accesorios": [
+   "CJAKTCC3",
+   "CCVR3-BIG",
+   "CCVR3-CTG",
+   "C1C34CT",
+   "C2LP2NG"
+  ]
+ },
+ "C2C36LP": {
+  "accesorios": [
+   "CJAKTCS36",
+   "CCVR36-BIG",
+   "CCVR36-CTG",
+   "C1S36CT",
+   "C2LP2NG"
+  ]
+ },
+ "C2SL36LP": {
+  "accesorios": [
+   "CJAKTCS36",
+   "CCVR36-BIG",
+   "CCVR36-CTG",
+   "C1S36CT",
+   "C2LP2NG"
+  ]
+ },
+ "C2C42LP": {
+  "accesorios": [
+   "CJAKTCS42",
+   "CCVR42-BIG",
+   "CCVR42-CTG",
+   "C1S42CT",
+   "C2LP2NG"
+  ]
+ },
+ "C2SL42LP": {
+  "accesorios": [
+   "CJAKTCS42",
+   "CCVR42-BIG",
+   "CCVR42-CTG",
+   "C1S42CT",
+   "C2LP2NG"
+  ]
+ },
+ "C3FTG30LP": {
+  "accesorios": [
+   "CCVRFT-BIG",
+   "CCVRFT-CTG",
+   "C3FTCART",
+   "C3FTLP2NG",
+   "C3FTNG2LP"
+  ]
+ },
+ "C3HY50LP": {
+  "accesorios": [
+   "CCVR50-BIG",
+   "CCVR50-CTG",
+   "C3HY50CT",
+   "C3BRIQ50"
+  ]
+ },
+ "C3CO50LP": {
+  "accesorios": [
+   "CCVR50-BIG",
+   "CCVR50-CTG",
+   "C3HY50CT"
+  ]
+ },
+ "C3CH36": {
+  "accesorios": [
+   "CCVR36-BIG",
+   "CCVR36-CTG",
+   "C3CH36CT",
+   "C3ROT36"
+  ]
+ },
+ "C1HY50LP": {
+  "accesorios": [
+   "CCVR50-BIG",
+   "CCVR50-CTG",
+   "C1HY50CT"
+  ]
+ },
+ "C1CH36": {
+  "accesorios": [
+   "CCVR36-BIG",
+   "CCVR36-CTG",
+   "C1CH36CT"
+  ]
+ },
+ "C1CHCS": {
+  "accesorios": [
+   "ASADO-CVRG",
+   "C1CHCS-CT",
+   "C3SLV",
+   "ASADO-ACC",
+   "ASADO-CT",
+   "ASADO-GG",
+   "ASADO-HD",
+   "ASADO-PS"
+  ]
+ },
+ "C1PZ40WMB": {
+  "accesorios": [
+   "CCVR40PZ-BIG",
+   "C1PZCART"
+  ],
+  "colores": [
+   "C1PZ40WC",
+   "C1PZ40WY"
+  ]
+ },
+ "C1PZ40WC": {
+  "accesorios": [
+   "CCVR40PZ-BIG",
+   "C1PZCART"
+  ],
+  "colores": [
+   "C1PZ40WMB",
+   "C1PZ40WY"
+  ]
+ },
+ "C1PZ40WY": {
+  "accesorios": [
+   "CCVR40PZ-BIG",
+   "C1PZCART"
+  ],
+  "colores": [
+   "C1PZ40WMB",
+   "C1PZ40WC"
+  ]
+ },
+ "C1PZ30HMBLP": {
+  "accesorios": [
+   "CCVR30PZ-BIG",
+   "C1PZHCART",
+   "C1PZ30LP2NG",
+   "C1PZ30NG2LP"
+  ],
+  "colores": [
+   "C1PZ30HRLP",
+   "C1PZ30HYLP"
+  ]
+ },
+ "C1PZ30HRLP": {
+  "accesorios": [
+   "CCVR30PZ-BIG",
+   "C1PZHCART",
+   "C1PZ30LP2NG",
+   "C1PZ30NG2LP"
+  ],
+  "colores": [
+   "C1PZ30HMBLP",
+   "C1PZ30HYLP"
+  ]
+ },
+ "C1PZ30HYLP": {
+  "accesorios": [
+   "CCVR30PZ-BIG",
+   "C1PZHCART",
+   "C1PZ30LP2NG",
+   "C1PZ30NG2LP"
+  ],
+  "colores": [
+   "C1PZ30HMBLP",
+   "C1PZ30HRLP"
+  ]
+ },
+ "C1EL120SM": {
+  "accesorios": [
+   "CCVREL-BIG",
+   "C1ELCT21"
+  ]
+ },
+ "C3PBLP": {
+  "accesorios": [
+   "CJAKTC1PB",
+   "CCVRPB-BIG",
+   "C3SLV",
+   "CTEP",
+   "CWOK"
+  ]
+ },
+ "C2SL30LP": {
+  "accesorios": [
+   "CJAKTCS30",
+   "CCVR30-BIG",
+   "C2LP2NG"
+  ]
+ },
+ "C2SL30LP-FS": {
+  "accesorios": [
+   "CCVR30-CTG"
+  ]
+ },
+ "C3C30LP-FS": {
+  "accesorios": [
+   "C3-CCVR30-CTG"
+  ]
+ },
+ "C2P28": {
+  "accesorios": [
+   "CJAKTC1P28",
+   "CCVR28P-BIG",
+   "CSTUBE"
+  ]
+ },
+ "C2P28-FS": {
+  "accesorios": [
+   "CCVR2-CTG"
+  ]
+ },
+ "C2P36": {
+  "accesorios": [
+   "CJAKTC1P36",
+   "CCVR36P-BIG",
+   "CSTUBE"
+  ]
+ },
+ "C1PORTLP": {
+  "accesorios": [
+   "CCVRPG-CTG"
+  ]
+ },
+ "C3SBLP": {
+  "accesorios": [
+   "CJAKTC1SB",
+   "CCVRSB-BIG"
+  ]
+ },
+ "C3DBLP": {
+  "accesorios": [
+   "CJAKTC1DB",
+   "CCVRDB-BIG"
+  ]
+ },
+ "C1DBLP": {
+  "accesorios": [
+   "CJAKTC1DB",
+   "CCVRDB-BIG"
+  ]
+ },
+ "C1CHCS-FS": {
+  "accesorios": [
+   "ASADO-CVRG",
+   "ASADO-ACC",
+   "ASADO-CT",
+   "ASADO-GG",
+   "ASADO-HD",
+   "ASADO-PS"
+  ]
+ },
+ "C1SBLP": {
+  "accesorios": [
+   "CJAKTC1SB"
+  ]
+ },
+ "C115TK": {
+  "accesorios": [
+   "C115R-S"
+  ]
+ },
+ "C121TK": {
+  "accesorios": [
+   "C121R-S-R",
+   "C121R-S-L"
+  ]
+ },
+ "C124TK": {
+  "accesorios": [
+   "C124R-S"
+  ]
+ },
+ "C1BLOW1200": {
+  "accesorios": [
+   "C1HOOD36",
+   "C1HOOD42",
+   "C1HOOD48",
+   "C1LINER36",
+   "C1LINER42",
+   "C1LINER48"
+  ]
+ },
+ "C1FLUE8": {
+  "accesorios": [
+   "C1HOOD36",
+   "C1HOOD42",
+   "C1HOOD48"
+  ]
+ },
+ "C1FLUE10": {
+  "accesorios": [
+   "C1HOOD36",
+   "C1HOOD42",
+   "C1HOOD48"
+  ]
+ },
+ "C1FLUE12": {
+  "accesorios": [
+   "C1HOOD36",
+   "C1HOOD42",
+   "C1HOOD48"
+  ]
+ },
+ "C3C30CART": {
+  "accesorios": [
+   "C3C30LP",
+   "C3SL30LP"
+  ]
+ },
+ "C3C34CT": {
+  "accesorios": [
+   "C3C34LP"
+  ]
+ },
+ "C3S36CT": {
+  "accesorios": [
+   "C3CL36LP",
+   "C3SL36LP"
+  ]
+ },
+ "C3S42CT": {
+  "accesorios": [
+   "C3CL42LP",
+   "C3SL42LP"
+  ]
+ },
+ "C1C34CT": {
+  "accesorios": [
+   "C2C34LP"
+  ]
+ },
+ "C1S36CT": {
+  "accesorios": [
+   "C2C36LP",
+   "C2SL36LP"
+  ]
+ },
+ "C1S42CT": {
+  "accesorios": [
+   "C2C42LP",
+   "C2SL42LP"
+  ]
+ },
+ "C3FTCART": {
+  "accesorios": [
+   "C3FTG30LP"
+  ]
+ },
+ "C3HY50CT": {
+  "accesorios": [
+   "C3HY50LP",
+   "C3CO50LP"
+  ]
+ },
+ "C3CH36CT": {
+  "accesorios": [
+   "C3CH36"
+  ]
+ },
+ "C1HY50CT": {
+  "accesorios": [
+   "C1HY50LP"
+  ]
+ },
+ "C1CH36CT": {
+  "accesorios": [
+   "C1CH36"
+  ]
+ },
+ "C1CHCS-CT": {
+  "accesorios": [
+   "C1CHCS"
+  ]
+ },
+ "C1PZCART": {
+  "accesorios": [
+   "C1PZ40WMB",
+   "C1PZ40WC",
+   "C1PZ40WY"
+  ]
+ },
+ "C1PZHCART": {
+  "accesorios": [
+   "C1PZ30HMBLP",
+   "C1PZ30HRLP",
+   "C1PZ30HYLP"
+  ]
+ },
+ "C1ELCT21": {
+  "accesorios": [
+   "C1EL120SM"
+  ]
+ },
+ "C3SLV": {
+  "accesorios": [
+   "C1CHCS",
+   "C3PBLP"
+  ]
+ },
+ "CCVR3-BIG": {
+  "accesorios": [
+   "C3C34LP",
+   "C2C34LP"
+  ]
+ },
+ "CCVR3-CTG": {
+  "accesorios": [
+   "C3C34LP",
+   "C2C34LP"
+  ]
+ },
+ "CCVR30-BIG": {
+  "accesorios": [
+   "C2SL30LP"
+  ]
+ },
+ "CCVR30-CTG": {
+  "accesorios": [
+   "C2SL30LP-FS"
+  ]
+ },
+ "C3-CCVR30-BIG": {
+  "accesorios": [
+   "C3C30LP",
+   "C3SL30LP"
+  ]
+ },
+ "C3-CCVR30-CTG": {
+  "accesorios": [
+   "C3C30LP-FS",
+   "C3SL30LP"
+  ]
+ },
+ "CCVR36-BIG": {
+  "accesorios": [
+   "C3CL36LP",
+   "C3SL36LP",
+   "C3CH36",
+   "C2C36LP",
+   "C2SL36LP",
+   "C1CH36"
+  ]
+ },
+ "CCVR36-CTG": {
+  "accesorios": [
+   "C3CL36LP",
+   "C3SL36LP",
+   "C3CH36",
+   "C2C36LP",
+   "C2SL36LP",
+   "C1CH36"
+  ]
+ },
+ "CCVR42-BIG": {
+  "accesorios": [
+   "C3CL42LP",
+   "C3SL42LP",
+   "C2C42LP",
+   "C2SL42LP"
+  ]
+ },
+ "CCVR42-CTG": {
+  "accesorios": [
+   "C3CL42LP",
+   "C3SL42LP",
+   "C2C42LP",
+   "C2SL42LP"
+  ]
+ },
+ "CCVR50-BIG": {
+  "accesorios": [
+   "C3HY50LP",
+   "C3CO50LP",
+   "C1HY50LP"
+  ]
+ },
+ "CCVR50-CTG": {
+  "accesorios": [
+   "C3HY50LP",
+   "C3CO50LP",
+   "C1HY50LP"
+  ]
+ },
+ "CCVRFT-BIG": {
+  "accesorios": [
+   "C3FTG30LP"
+  ]
+ },
+ "CCVRFT-CTG": {
+  "accesorios": [
+   "C3FTG30LP"
+  ]
+ },
+ "CCVR28P-BIG": {
+  "accesorios": [
+   "C2P28"
+  ]
+ },
+ "CCVR2-CTG": {
+  "accesorios": [
+   "C2P28-FS"
+  ]
+ },
+ "CCVR36P-BIG": {
+  "accesorios": [
+   "C2P36"
+  ]
+ },
+ "CCVR30PZ-BIG": {
+  "accesorios": [
+   "C1PZ30HMBLP",
+   "C1PZ30HRLP",
+   "C1PZ30HYLP"
+  ]
+ },
+ "CCVR40PZ-BIG": {
+  "accesorios": [
+   "C1PZ40WMB",
+   "C1PZ40WC",
+   "C1PZ40WY"
+  ]
+ },
+ "CCVREL-BIG": {
+  "accesorios": [
+   "C1EL120SM"
+  ]
+ },
+ "CCVRPG-CTG": {
+  "accesorios": [
+   "C1PORTLP"
+  ]
+ },
+ "CCVRPB-BIG": {
+  "accesorios": [
+   "C3PBLP"
+  ]
+ },
+ "CCVRSB-BIG": {
+  "accesorios": [
+   "C3SBLP"
+  ]
+ },
+ "CCVRDB-BIG": {
+  "accesorios": [
+   "C3DBLP",
+   "C1DBLP"
+  ]
+ },
+ "ASADO-CVRG": {
+  "accesorios": [
+   "C1CHCS",
+   "C1CHCS-FS"
+  ]
+ },
+ "C3JAKTCSL30": {
+  "accesorios": [
+   "C3C30LP",
+   "C3SL30LP"
+  ]
+ },
+ "CJAKTCC3": {
+  "accesorios": [
+   "C3C34LP",
+   "C2C34LP"
+  ]
+ },
+ "CJAKTCS30": {
+  "accesorios": [
+   "C2SL30LP"
+  ]
+ },
+ "CJAKTCS36": {
+  "accesorios": [
+   "C3CL36LP",
+   "C3SL36LP",
+   "C2C36LP",
+   "C2SL36LP"
+  ]
+ },
+ "CJAKTCS42": {
+  "accesorios": [
+   "C3CL42LP",
+   "C3SL42LP",
+   "C2C42LP",
+   "C2SL42LP"
+  ]
+ },
+ "CJAKTC1P28": {
+  "accesorios": [
+   "C2P28"
+  ]
+ },
+ "CJAKTC1P36": {
+  "accesorios": [
+   "C2P36"
+  ]
+ },
+ "CJAKTC1SB": {
+  "accesorios": [
+   "C3SBLP",
+   "C1SBLP"
+  ]
+ },
+ "CJAKTC1DB": {
+  "accesorios": [
+   "C3DBLP",
+   "C1DBLP"
+  ]
+ },
+ "CJAKTC1PB": {
+  "accesorios": [
+   "C3PBLP"
+  ]
+ },
+ "C3WOS": {
+  "accesorios": [
+   "C3C30LP"
+  ]
+ },
+ "C3C34OS": {
+  "accesorios": [
+   "C3C34LP"
+  ]
+ },
+ "C3CL36OS": {
+  "accesorios": [
+   "C3CL36LP"
+  ]
+ },
+ "C3CL42OS": {
+  "accesorios": [
+   "C3CL42LP"
+  ]
+ },
+ "C3SL30OS": {
+  "accesorios": [
+   "C3SL30LP"
+  ]
+ },
+ "C3SL36OS": {
+  "accesorios": [
+   "C3SL36LP"
+  ]
+ },
+ "C3SL42OS": {
+  "accesorios": [
+   "C3SL42LP"
+  ]
+ },
+ "C2LP2NG": {
+  "accesorios": [
+   "C2C34LP",
+   "C2C36LP",
+   "C2C42LP",
+   "C2SL30LP",
+   "C2SL36LP",
+   "C2SL42LP"
+  ]
+ },
+ "C3FTLP2NG": {
+  "accesorios": [
+   "C3FTG30LP"
+  ]
+ },
+ "C3FTNG2LP": {
+  "accesorios": [
+   "C3FTG30LP"
+  ]
+ },
+ "C1PZ30LP2NG": {
+  "accesorios": [
+   "C1PZ30HMBLP",
+   "C1PZ30HRLP",
+   "C1PZ30HYLP"
+  ]
+ },
+ "C1PZ30NG2LP": {
+  "accesorios": [
+   "C1PZ30HMBLP",
+   "C1PZ30HRLP",
+   "C1PZ30HYLP"
+  ]
+ },
+ "C3CSIGRATE30B": {
+  "accesorios": [
+   "C3C30LP"
+  ]
+ },
+ "C3CSIGRATE30V": {
+  "accesorios": [
+   "C3C30LP"
+  ]
+ },
+ "C3CSIGRATE30P": {
+  "accesorios": [
+   "C3C30LP"
+  ]
+ },
+ "C3CSIGRATE30G": {
+  "accesorios": [
+   "C3C30LP"
+  ]
+ },
+ "C3CSIGRATE34B": {
+  "accesorios": [
+   "C3C34LP"
+  ]
+ },
+ "C3CSIGRATE34V": {
+  "accesorios": [
+   "C3C34LP"
+  ]
+ },
+ "C3CSIGRATE34P": {
+  "accesorios": [
+   "C3C34LP"
+  ]
+ },
+ "C3CSIGRATE34G": {
+  "accesorios": [
+   "C3C34LP"
+  ]
+ },
+ "C3CLSIGRATE36B": {
+  "accesorios": [
+   "C3CL36LP"
+  ]
+ },
+ "C3CLSIGRATE36V": {
+  "accesorios": [
+   "C3CL36LP"
+  ]
+ },
+ "C3CLSIGRATE36P": {
+  "accesorios": [
+   "C3CL36LP"
+  ]
+ },
+ "C3CLSIGRATE36G": {
+  "accesorios": [
+   "C3CL36LP"
+  ]
+ },
+ "C3CLSIGRATE42B": {
+  "accesorios": [
+   "C3CL42LP"
+  ]
+ },
+ "C3CLSIGRATE42V": {
+  "accesorios": [
+   "C3CL42LP"
+  ]
+ },
+ "C3CLSIGRATE42P": {
+  "accesorios": [
+   "C3CL42LP"
+  ]
+ },
+ "C3CLSIGRATE42G": {
+  "accesorios": [
+   "C3CL42LP"
+  ]
+ },
+ "C3SLSIGRATE30B": {
+  "accesorios": [
+   "C3SL30LP"
+  ]
+ },
+ "C3SLSIGRATE30V": {
+  "accesorios": [
+   "C3SL30LP"
+  ]
+ },
+ "C3SLSIGRATE30P": {
+  "accesorios": [
+   "C3SL30LP"
+  ]
+ },
+ "C3SLSIGRATE30G": {
+  "accesorios": [
+   "C3SL30LP"
+  ]
+ },
+ "C3SLSIGRATE36B": {
+  "accesorios": [
+   "C3SL36LP"
+  ]
+ },
+ "C3SLSIGRATE36V": {
+  "accesorios": [
+   "C3SL36LP"
+  ]
+ },
+ "C3SLSIGRATE36P": {
+  "accesorios": [
+   "C3SL36LP"
+  ]
+ },
+ "C3SLSIGRATE36G": {
+  "accesorios": [
+   "C3SL36LP"
+  ]
+ },
+ "C3SLSIGRATE42B": {
+  "accesorios": [
+   "C3SL42LP"
+  ]
+ },
+ "C3SLSIGRATE42V": {
+  "accesorios": [
+   "C3SL42LP"
+  ]
+ },
+ "C3SLSIGRATE42P": {
+  "accesorios": [
+   "C3SL42LP"
+  ]
+ },
+ "C3SLSIGRATE42G": {
+  "accesorios": [
+   "C3SL42LP"
+  ]
+ },
+ "C3BRIQ30": {
+  "accesorios": [
+   "C3C30LP",
+   "C3SL30LP"
+  ]
+ },
+ "C3BRIQ34": {
+  "accesorios": [
+   "C3C34LP"
+  ]
+ },
+ "C3BRIQ36": {
+  "accesorios": [
+   "C3CL36LP",
+   "C3SL36LP"
+  ]
+ },
+ "C3BRIQ42": {
+  "accesorios": [
+   "C3CL42LP",
+   "C3SL42LP"
+  ]
+ },
+ "C3BRIQ50": {
+  "accesorios": [
+   "C3HY50LP"
+  ]
+ },
+ "C3HZSC30": {
+  "accesorios": [
+   "C3C30LP"
+  ]
+ },
+ "C3HZSC34": {
+  "accesorios": [
+   "C3C34LP"
+  ]
+ },
+ "C3ROT30": {
+  "accesorios": [
+   "C3C30LP",
+   "C3SL30LP"
+  ]
+ },
+ "C3ROT34": {
+  "accesorios": [
+   "C3C34LP"
+  ]
+ },
+ "C3ROT36": {
+  "accesorios": [
+   "C3CL36LP",
+   "C3SL36LP",
+   "C3CH36"
+  ]
+ },
+ "C3ROT42": {
+  "accesorios": [
+   "C3CL42LP",
+   "C3SL42LP"
+  ]
+ },
+ "C3SEARBURNER": {
+  "accesorios": [
+   "C3CL36LP",
+   "C3CL42LP",
+   "C3SL30LP",
+   "C3SL36LP",
+   "C3SL42LP"
+  ]
+ },
+ "CSTUBE": {
+  "accesorios": [
+   "C2P28",
+   "C2P36"
+  ]
+ },
+ "CCHTRAY15": {
+  "accesorios": [
+   "C3C30LP",
+   "C3SL30LP",
+   "C3CL42LP",
+   "C3SL42LP"
+  ]
+ },
+ "CCHTRAY12": {
+  "accesorios": [
+   "C3C34LP",
+   "C3CL36LP",
+   "C3SL36LP"
+  ]
+ },
+ "C3C30CHTR": {
+  "accesorios": [
+   "C3C30LP"
+  ]
+ },
+ "CTEP": {
+  "accesorios": [
+   "C3PBLP"
+  ]
+ },
+ "CWOK": {
+  "accesorios": [
+   "C3PBLP"
+  ]
+ },
+ "ASADO-PS": {
+  "accesorios": [
+   "C1CHCS",
+   "C1CHCS-FS"
+  ]
+ },
+ "ASADO-HD": {
+  "accesorios": [
+   "C1CHCS",
+   "C1CHCS-FS"
+  ]
+ },
+ "ASADO-CT": {
+  "accesorios": [
+   "C1CHCS",
+   "C1CHCS-FS"
+  ]
+ },
+ "ASADO-GG": {
+  "accesorios": [
+   "C1CHCS",
+   "C1CHCS-FS"
+  ]
+ },
+ "ASADO-ACC": {
+  "accesorios": [
+   "C1CHCS",
+   "C1CHCS-FS"
   ]
  }
 }

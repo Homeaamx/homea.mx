@@ -249,6 +249,13 @@ export interface ProductoVivo {
   marca: string;
   /** Subcategoría 2 (= Tipo de producto en Shopify). */
   tipo: string;
+  /**
+   * Otros tipos en los que la pieza también se lista en el mismo listado
+   * (etiqueta `tambien-en-<colección>` cuando su propio tipo también está en la
+   * página; p. ej. el combo Coyote C3-CDWD: Cajones y también Gabinetes, Carla
+   * 2026-11-23). Una sola tarjeta que cuenta y filtra en los dos tiles del riel.
+   */
+  tambienTipos?: string[];
   imagenes: ImagenVivo[];
   variantId: string;
   /** Pesos SIN IVA, tal como cobra Shopify (antes del 16%). */

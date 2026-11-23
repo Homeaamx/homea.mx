@@ -196,6 +196,8 @@ const MUESTRAS: Record<string, string> = {
   dusk: "#423f40",
   alpina: "#f9f8f7",
   black: "#1e1e1e",
+  // Coyote (2026-11-23): hornos de pizza Duomo (negro mate, rojo y cobre ya están arriba).
+  amarillo: "#e9b22f",
 };
 
 /**

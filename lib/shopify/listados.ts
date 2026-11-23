@@ -52,10 +52,23 @@ async function tambienEn(tw: TipoWeb): Promise<ProductoVivo[]> {
     }));
 }
 
-/** Una tarjeta por pieza: si una pieza llega por dos caminos, gana la primera (la de su propio tipo). */
+/** Una tarjeta por pieza: si llega por dos caminos, queda la primera (la de su propio tipo) con el otro tipo en tambienTipos. */
 function unicos(productos: ProductoVivo[]): ProductoVivo[] {
-  const vistos = new Set<string>();
-  return productos.filter((p) => (vistos.has(p.sku) ? false : (vistos.add(p.sku), true)));
+  // Una pieza que llega por su tipo y además por `tambien-en-<colección>` queda
+  // como UNA tarjeta con los dos tipos (tambienTipos), no como la primera que llegó.
+  const vistos = new Map<string, ProductoVivo>();
+  const out: ProductoVivo[] = [];
+  for (const p of productos) {
+    const previo = vistos.get(p.sku);
+    if (!previo) {
+      const copia = { ...p };
+      vistos.set(p.sku, copia);
+      out.push(copia);
+    } else if (p.tipo !== previo.tipo && !(previo.tambienTipos ?? []).includes(p.tipo)) {
+      previo.tambienTipos = [...(previo.tambienTipos ?? []), p.tipo];
+    }
+  }
+  return out;
 }
 
 /** /productos/<macro>: sus tipos más los extras de otras colecciones por filtro. */

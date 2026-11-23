@@ -4037,6 +4037,7 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="tecnolam"] { height: 28px; }
 /* Lynx (2026-11-17): OneDrive DISEÑO 2026/Logos Marcas png/MIDDLEBY/lynx.png (isotipo + wordmark negro); proporción 5:1. */
 .pdp-logo[data-marca="lynx"] { height: 30px; }
+.pdp-logo[data-marca="coyote"] { height: 44px; }
 .pdp-logo[data-marca="eclipse"] { height: 44px; } /* "eclipse STAINLESS" gris, 2026-11-18 */
 .pdp-logo[data-marca="schock"] { height: 34px; } /* "SCHOCK Handmade in Germany", 2026-11-18 */
 .pdp-logo[data-marca="commodore"] { height: 40px; } /* escudo + "COMMODORE TRITURADORES", 2026-11-18 */

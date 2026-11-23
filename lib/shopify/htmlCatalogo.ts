@@ -285,6 +285,16 @@ const fotoDeTarjeta = (p: ProductoVivo) => p.imagenes.find((im) => !esImagenTecn
  * Datos de la tarjeta que leen los filtros y el orden de public/catalogo.js
  * (slugs separados por espacio). Los llevan igual la tarjeta completa y la vacía.
  */
+/** Slug del tile de la pieza más los de los tipos donde también se lista (tambienTipos). */
+function slugsDeTipo(p: ProductoVivo): string[] {
+  const propio = tipoDePieza(p).slug ?? slugValor(p.tipo);
+  const otros = (p.tambienTipos ?? []).map((t) => {
+    const q = { ...p, tipo: t };
+    return tipoDePieza(q).slug ?? slugValor(t);
+  });
+  return [...new Set([propio, ...otros])];
+}
+
 function atributosDeTarjeta(p: ProductoVivo, precio: PrecioPublico, orden: number): string {
   const atributos: string[] = [
     `data-cat-card`,
@@ -293,7 +303,7 @@ function atributosDeTarjeta(p: ProductoVivo, precio: PrecioPublico, orden: numbe
     `data-precio="${precio.mxnEquivalente ?? precio.venta}"`,
     // Para ordenar por inventario (public/catalogo.js): 1 = en stock, 0 = bajo pedido.
     `data-stock="${p.enStock ? 1 : 0}"`,
-    `data-tipo="${esc(tipoDePieza(p).slug ?? slugValor(p.tipo))}"`,
+    `data-tipo="${esc(slugsDeTipo(p).join(" "))}"`,
     `data-fv-marca="${slugValor(p.marca)}"`,
     // Subcategoría 1 (Refrigeración, Cocción…): grupo "Subcategoría" de los
     // paneles que cruzan varias (página de marca, macrocategoría).
@@ -737,11 +747,13 @@ export function panelFiltrosHtml(
     const cuenta = new Map<string, { nombre: string; n: number }>();
     for (const t of tiposRiel) cuenta.set(t.slug, { nombre: t.nombre, n: 0 });
     for (const p of productos) {
-      const pieza = tipoDePieza(p);
-      const slug = pieza.slug ?? slugValor(p.tipo);
-      const c = cuenta.get(slug) ?? { nombre: pieza.nombre ?? p.tipo, n: 0 };
-      c.n++;
-      cuenta.set(slug, c);
+      for (const t of [p.tipo, ...(p.tambienTipos ?? [])]) {
+        const pieza = tipoDePieza({ ...p, tipo: t });
+        const slug = pieza.slug ?? slugValor(t);
+        const c = cuenta.get(slug) ?? { nombre: pieza.nombre ?? t, n: 0 };
+        c.n++;
+        cuenta.set(slug, c);
+      }
     }
     const etiquetas = [...cuenta]
       .sort((a, b) => ordenValores(a[1].nombre, b[1].nombre))
