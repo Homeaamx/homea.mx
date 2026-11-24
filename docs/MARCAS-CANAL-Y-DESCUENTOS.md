@@ -98,10 +98,10 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | DAWN | LECROM / MARESA | DAWN | 25 | 10% | `/marcas/dawn` | completo |  |
 | EASY | MABE | EASY | 13 | 30% | `/marcas/easy` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | ECLIPSE | ECLIPSE | ECLIP | 98 | 10% | `/marcas/eclipse` | completo | Cargada 2026-11-18: 56 productos (catálogo eKitchen ago 2026, USD con IVA ÷ 1.16 con centavos); 2026-11-19: Línea Colors un producto por color → 76 productos. Value Line = mismo PLATA 10 %, garantía 3 años (resto 10 años). |
-| ELECTROLUX / ELECTROLUX ICON | INTERMUEBLES | ELECT | 12 | 10% | `/marcas/electrolux` | completo |  |
+| ELECTROLUX / ELECTROLUX ICON | INTERMUEBLES | ELECT | 12 | 10% | `/marcas/electrolux` | completo | Cargada 2026-11-23: 25 productos (lista combinada Frigidaire & Electrolux sep-2025, MXN con IVA ÷ 1.16 con centavos), incluye la pareja EI33AR80WS + EI33AF80WS + trim TRMKTSS2LV84 como producto Combo. Garantía 1 año. |
 | ELICA (todas las series) | ARTEXA | ELICA | 166 | 10% | `/marcas/elica` | completo |  |
 | FALMEC | TECNOLAM | FALME | 53 | 10% | `/marcas/falmec` | completo |  |
-| FRIGIDAIRE / GALLERY / PRO | INTERMUEBLES | FRIGI | 23 | 10% | `/marcas/frigidaire` | completo | Parejas Pro: checar precio Palacio |
+| FRIGIDAIRE / GALLERY / PRO | INTERMUEBLES | FRIGI | 23 | 10% | `/marcas/frigidaire` | completo | Cargada 2026-11-23: 38 productos (misma lista sep-2025), incluye la pareja Pro FPRU19F8WF + FPFU19F8WF + trim TRMKTEZ2LV79 como Combo (precio = suma de las 3 piezas, Carla). FPRU/FPFU sueltos En stock. |
 | FULGOR MILANO | LECROM / TECNOLAM | FULGO | 40 | 10% | `/marcas/fulgor-milano` | completo |  |
 | GAGGENAU | ARTEXA | GAGGE | 297 | 10% | `/marcas/gaggenau` | completo |  |
 | GE PROFILE | MABE | GEPRO | 84 | 30% | `/marcas/ge-profile` | completo | Validar margen con lista PPS (nota 4 de la política) |

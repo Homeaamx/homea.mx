@@ -26,6 +26,9 @@
 //     y faldones blancos o negros de las estufas Wolf). Van justo después de los
 //     colores y antes que todo lo demás; la rejilla crece una fila para que
 //     sigan cabiendo campanas y accesorios.
+//   - "combos": la pareja que incluye la pieza, o las piezas de la pareja
+//     (Carla, 2026-11-23, Electrolux/Frigidaire: refri + congelador + trim).
+//     Van después de los colores y antes que todo, también en accesorios (trim).
 
 import sugerenciasFabricante from "@/data/sugerencias-compra.json";
 import sugerenciasMarca from "@/data/sugerencias-marca.json";
@@ -35,7 +38,7 @@ import { esAccesorio } from "./coleccionesWeb";
 
 type ListasFabricante = { accesorios: string[]; limpieza: string[]; combinables: string[] };
 const FABRICANTE = sugerenciasFabricante as Record<string, ListasFabricante>;
-const MARCA = sugerenciasMarca as unknown as Record<string, { colores?: string[]; accesorios?: string[]; kits?: string[] }>;
+const MARCA = sugerenciasMarca as unknown as Record<string, { colores?: string[]; accesorios?: string[]; kits?: string[]; combos?: string[] }>;
 
 /** Máximo de tarjetas en "Sugerencias de compra" (dos filas de la rejilla de 3). */
 export const MAX_SUGERENCIAS = 6;
@@ -225,7 +228,7 @@ function puntaje(equipo: ProductoVivo, acc: ProductoVivo): number {
 /** Sugerencias a mano de la pieza (data/sugerencias-marca.json: kits y accesorios). */
 export function sugeridasAMano(sku: string): string[] {
   const m = MARCA[sku];
-  return m ? [...(m.kits ?? []), ...(m.accesorios ?? [])].filter((s) => s !== sku) : [];
+  return m ? [...(m.combos ?? []), ...(m.kits ?? []), ...(m.accesorios ?? [])].filter((s) => s !== sku) : [];
 }
 
 /** El mismo modelo en otros colores (data/sugerencias-marca.json), sin la pieza misma. */
@@ -243,7 +246,9 @@ export function sugerenciasDeCompra(equipo: ProductoVivo, candidatos: ProductoVi
   // 0. El mismo modelo en otros colores.
   const colores = (deMarca.colores ?? []).flatMap((s) => (s !== equipo.sku && porSku.has(s) ? [porSku.get(s)!] : []));
   const enColores = new Set(colores.map((c) => c.sku));
-  if (esAccesorio(equipo)) return colores; // a un accesorio se le muestran similares (o sus otros colores)
+  // Pareja ↔ piezas (combos): van justo después de los colores, también en accesorios.
+  const combos = (deMarca.combos ?? []).flatMap((s) => (s !== equipo.sku && porSku.has(s) && !enColores.has(s) ? [porSku.get(s)!] : []));
+  if (esAccesorio(equipo)) return [...colores, ...combos]; // a un accesorio se le muestran similares (o sus otros colores y su pareja)
   const elegidos = new Map<string, number>();
 
   // 1. Catálogo del fabricante.
@@ -265,6 +270,7 @@ export function sugerenciasDeCompra(equipo: ProductoVivo, candidatos: ProductoVi
   // Kits de color (puerta y faldón): siempre, en el orden de la lista.
   const kits = (deMarca.kits ?? []).filter((sku) => porSku.has(sku) && sku !== equipo.sku);
   kits.forEach((sku, i) => elegidos.set(sku, 950 - i));
+  combos.forEach((c, i) => elegidos.set(c.sku, 980 - i));
 
   // 2. Reglas por familia, medida, línea y tipo. Una campana con lista propia no
   // pasa por aquí: la regla por medida colaba kits de otras series del mismo ancho.
