@@ -42,6 +42,14 @@ FUENTE = Path.home() / (
     "Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive-Homea 2.noindex/"
     "OneDrive-Homea 2/HOMEA/SAE/SAE-CARLA/MAESTRO PRECIOS/CATALOGOS VIGENTES"
 )
+# La carpeta que Carla ve en Finder (2026-11-24): ahí caen los PDFs nuevos antes de que la
+# copia de Group Containers se ponga al día. Cada documento se busca primero aquí.
+FUENTE_CLOUD = Path.home() / "Library/CloudStorage/OneDrive-Homea 2/HOMEA/SAE/SAE-CARLA/MAESTRO PRECIOS/CATALOGOS VIGENTES"
+
+
+def fuente(src):
+    nube = FUENTE_CLOUD / src
+    return nube if nube.exists() else FUENTE / src
 TOPE = 19_500_000
 CDN = "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/"
 
@@ -135,7 +143,7 @@ def sellar(page, tarjeta, donde, junto=None, fraccion=None):
 
 
 def preparar(doc, op, salida, tarjeta, banner):
-    pdf = fitz.open(FUENTE / doc["src"])
+    pdf = fitz.open(fuente(doc["src"]))
     hecho = []
     for n in sorted(op.get("del", []), reverse=True):
         pdf.delete_page(n - 1)

@@ -12,8 +12,8 @@
 
 | Canal | En Shopify | En el sitio |
 |---|---|---|
-| **SHOPIFY** (56) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
-| **SOLO PDF** (28) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
+| **SHOPIFY** (55) | Catálogo completo, precio, inventario, carrito y checkout | `/marcas/<slug>` **con** listado y filtros de productos (Storefront API); aparece en PLP, filtros y buscador |
+| **SOLO PDF** (29) | No se sube | El botón de la marca en `/marcas` abre `/marcas/<slug>`, que muestra **el PDF** (catálogo o lista) y la cotización por WhatsApp, **sin** listado ni filtros de Shopify. Existe **por SEO** |
 
 En el código, el canal vive en el tile de `preview/marcas.html` (`data-canal="shopify|pdf"`), pasa a
 `data/marcas.json` con `npm run marcas` y la plantilla `app/(es)/marcas/[marca]/page.tsx` lo respeta.
@@ -75,7 +75,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
   columna *Arte* de las tablas dice qué falta. La carpeta de OneDrive con logos y fotos ya no está
   sincronizada en esta Mac.
 
-## SHOPIFY — 56 marcas
+## SHOPIFY — 55 marcas
 
 | Marca | Proveedor | Línea SAE | Productos tras carga | Descuento Shopify (PLATA) | Página | Arte | Nota |
 |---|---|---|---:|---:|---|---|---|
@@ -84,7 +84,6 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | ALFRESCO | ARTEXA | ALFRE | 247 | 10% | `/marcas/alfresco` | completo |  |
 | ARTISAN | ARTEXA | ARTIS | 104 | 10% | `/marcas/artisan` | completo |  |
 | NAPOLEON | — | — | 0 | — | `/marcas/napoleon` | completo | Alta 2026-10-29 (Carla): asadores; logo, fotos y hero listos; sin piezas en Shopify todavía (se ve sin tienda) |
-| AXCENT | ITALY TOP | AXCEN | 101 | 15% | `/marcas/axcent` | completo | Solo línea de cocina |
 | BENESSI | ARTEXA | BENES | 100 | 15% | `/marcas/benessi` | completo |  |
 | BERTAZZONI | ARTEXA | BERTA | 109 | 10% | `/marcas/bertazzoni` | completo |  |
 | BLANCO | ARTEXA | BLANC | 881 | 10% | `/marcas/blanco` | completo |  |
@@ -136,10 +135,11 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | WHIRLPOOL | WHIRLPOOL | WHIRL | 282 | 30% | `/marcas/whirlpool` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | WOLF | IESA/LAVISH | WOLF | 665 | 10% | `/marcas/wolf` | completo | Condición distinta para fuera de línea vs. de línea |
 
-## SOLO PDF — 28 marcas
+## SOLO PDF — 29 marcas
 
 | Marca | Proveedor | Línea SAE | Productos tras carga | Descuento Shopify (PLATA) | Página | Arte | Nota |
 |---|---|---|---:|---:|---|---|---|
+| AXCENT | ITALY TOP | AXCEN | 101 | 15% | `/marcas/axcent` | completo | Solo línea de cocina · **Pasa a SOLO PDF (Carla, 2026-11-24)**: se publica el catálogo + lista de cocina 2025 (`/listas-de-precios/axcent-cocina.pdf`), no se sube a tienda |
 | FABER | LECROM | FABER | 12 | 5% | `/marcas/faber` | completo | **Pasa a SOLO PDF (Carla, 2026-11-19)**: de LECROM solo Coyote, Dawn y Summit van a tienda |
 | FRANKE | LECROM | FRANK | 28 | 10% | `/marcas/franke` | completo | Se compra por Lecrom (no IESA) · **Pasa a SOLO PDF (Carla, 2026-11-19)**: de LECROM solo Coyote, Dawn y Summit van a tienda |
 | NANTUCKET | LECROM | NANTU | 20 | 10% | `/marcas/nantucket` | completo | **Pasa a SOLO PDF (Carla, 2026-11-19)**: de LECROM solo Coyote, Dawn y Summit van a tienda |

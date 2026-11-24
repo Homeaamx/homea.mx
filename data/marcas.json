@@ -134,12 +134,13 @@
         "tarjas",
         "banos"
       ],
-      "canal": "shopify",
+      "canal": "pdf",
       "logo": "/assets/logos/axcent.webp",
       "foto": "/assets/photos/brands/axcent-cocina-y-bano.webp",
       "fotoHero": "/assets/photos/brands/hero/axcent-cocina-y-bano.webp",
       "logoHero": "/assets/logos/hero/axcent.webp",
       "listas": [
+        "axcent-cocina",
         "axcent-banos",
         "axcent-tarjas-y-monomandos"
       ]

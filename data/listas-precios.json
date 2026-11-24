@@ -30,6 +30,7 @@
       { "slug": "josper-hornos-de-brasa", "titulo": "Hornos de brasa · lista de precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-josper-hornos-brasa-2026.pdf", "legacy": ["/Files/119914/LISTA_PRECIOS_JOSPER_HORNOS_LENA_2026.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-josper-hornos-brasa-2026.pdf" }
     ] },
     { "marca": "Axcent", "documentos": [
+      { "slug": "axcent-cocina", "titulo": "Línea de cocina · catálogo y lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-axcent-cocina-2025.pdf?v=1795562878", "legacy": [], "estado": "listo" },
       { "slug": "axcent-banos", "titulo": "Baños · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-axcent-banos-2025.pdf", "legacy": ["/Files/119914/Lista_Precios_Axcent_2025_Banos.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-axcent-banos-2025.pdf" },
       { "slug": "axcent-tarjas-y-monomandos", "titulo": "Tarjas y monomandos · lista de precios", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-axcent-tarjas-monomandos-2025.pdf", "legacy": ["/Files/119914/Lista_Precios_Axcent_2025_Tarjas_Monomandos.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-axcent-tarjas-monomandos-2025.pdf" }
     ] },

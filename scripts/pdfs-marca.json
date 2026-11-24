@@ -846,9 +846,19 @@
       "nombre": "Sauna Estilo",
       "titulo": "Catálogo",
       "vigencia": "2025",
-      "src": "GRUPO90 SOLO PDFS/CATALOGO_SAUNA_ESTILO_2025.pdf",
+      "src": "GRUPO 90/CATALOGO_SAUNA_ESTILO_2025.pdf",
       "archivo": "catalogo-saunas-sauna-estilo-2025.pdf",
       "op": {"back": true, "logo_dims": [240, 240], "stamp": "at_img", "fraccion": 0.2, "lineas": "UNA MARCA|DE LA FAMILIA"}
+    },
+    {
+      "slug": "axcent-cocina",
+      "marca": "axcent",
+      "nombre": "Axcent",
+      "titulo": "Línea de cocina · catálogo y lista de precios",
+      "vigencia": "2025",
+      "src": "AXCENT/JUN 26/Lista_Precios_Axcent_2025_Cocina.pdf",
+      "archivo": "lista-precios-axcent-cocina-2025.pdf",
+      "op": {"tarjeta_en": {"1": [70, 560, 230, 708]}}
     }
   ]
 }
