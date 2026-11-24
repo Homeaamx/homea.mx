@@ -38919,5 +38919,599 @@
   "combos": [
    "GMBS3068AF"
   ]
+ },
+ "KSS2141": {
+  "combos": [
+   "KWS0211AS"
+  ],
+  "colores": [
+   "KSS2141-BG"
+  ]
+ },
+ "KSS2141-BG": {
+  "combos": [
+   "KWS0211-BG"
+  ],
+  "colores": [
+   "KSS2141"
+  ]
+ },
+ "KSS1215-BL": {
+  "combos": [
+   "COMBO-BK1215"
+  ]
+ },
+ "KSS1217-RG": {
+  "combos": [
+   "KWS0110-RG",
+   "KWS0210-RG"
+  ]
+ },
+ "KSS1231-BK": {
+  "combos": [
+   "KGO4-KQDB"
+  ],
+  "colores": [
+   "KSS1231"
+  ]
+ },
+ "KSS1231": {
+  "combos": [
+   "KGO2-KTS3120A",
+   "KGO2-KUS3019A"
+  ],
+  "colores": [
+   "KSS1231-BK"
+  ]
+ },
+ "KSS1236-GD/BK": {
+  "combos": [
+   "KWS0110-GD",
+   "KWS0210-GD"
+  ]
+ },
+ "KSS1103A": {
+  "combos": [
+   "KGO1-KTD",
+   "GoLITE1-UT80D1",
+   "GoLITE2-UT100D1",
+   "GoLITE3-DT84"
+  ]
+ },
+ "KSS2101": {
+  "combos": [
+   "KWS0210AAS"
+  ],
+  "colores": [
+   "KSS2101-BG"
+  ]
+ },
+ "KSS2201": {
+  "combos": [
+   "COMBO-CUA"
+  ],
+  "colores": [
+   "KSS2201-BG"
+  ]
+ },
+ "KSS2211-BG": {
+  "combos": [
+   "KWS0110-BG"
+  ]
+ },
+ "KSS8011": {
+  "combos": [
+   "GoLITE1-UT80D3",
+   "GoLITE2-UT100D3",
+   "GoLITE3-DT84.3"
+  ]
+ },
+ "KSS0021-BG": {
+  "combos": [
+   "COMBO-BK1215"
+  ],
+  "colores": [
+   "KSS0021-GD",
+   "KSS0021-RG"
+  ]
+ },
+ "KSS0014-BK": {
+  "combos": [
+   "KGO4-KQDB"
+  ],
+  "colores": [
+   "KSS0014"
+  ]
+ },
+ "UT8050-D1": {
+  "combos": [
+   "GoLITE1-UT80D1"
+  ]
+ },
+ "UT8050-I3": {
+  "combos": [
+   "GoLITE1-UT80D3"
+  ]
+ },
+ "UT10050-I1": {
+  "combos": [
+   "GoLITE2-UT100D1"
+  ]
+ },
+ "DT8448-3": {
+  "combos": [
+   "GoLITE3-DT84.3"
+  ]
+ },
+ "UT8050-D3": {
+  "combos": [
+   "GoLITE1-UT80D3"
+  ]
+ },
+ "UT10050-D1": {
+  "combos": [
+   "GoLITE2-UT100D1"
+  ]
+ },
+ "UT10050-I3": {
+  "combos": [
+   "GoLITE2-UT100D3"
+  ]
+ },
+ "UT8050-I1": {
+  "combos": [
+   "GoLITE1-UT80D1"
+  ]
+ },
+ "UT10050-D3": {
+  "combos": [
+   "GoLITE2-UT100D3"
+  ]
+ },
+ "DT8448-1": {
+  "combos": [
+   "GoLITE3-DT84"
+  ]
+ },
+ "KTS3120A": {
+  "combos": [
+   "KGO2-KTS3120A"
+  ]
+ },
+ "KUS3019A": {
+  "combos": [
+   "KGO2-KUS3019A"
+  ]
+ },
+ "KHD3319A": {
+  "combos": [
+   "KGO3-KHD",
+   "COMBO-CUA"
+  ]
+ },
+ "KQDA3322A-BL": {
+  "combos": [
+   "COMBO-BK1215"
+  ]
+ },
+ "KAS-1/39": {
+  "combos": [
+   "COMBO-CUA"
+  ]
+ },
+ "HD-005-AI": {
+  "combos": [
+   "GoLITE1-UT80D1",
+   "GoLITE2-UT100D1",
+   "GoLITE3-DT84",
+   "GoLITE1-UT80D3",
+   "GoLITE2-UT100D3",
+   "GoLITE3-DT84.3"
+  ]
+ },
+ "KCP201-BK": {
+  "combos": [
+   "KGO4-KQDB"
+  ]
+ },
+ "KGR0001-AI": {
+  "combos": [
+   "KGO2-KTS3120A",
+   "KGO2-KUS3019A",
+   "KGO3-KHD",
+   "COMBO-CUA"
+  ],
+  "colores": [
+   "KGR0001-BK"
+  ]
+ },
+ "KGR0001-BK": {
+  "combos": [
+   "KGO4-KQDB",
+   "COMBO-BK1215"
+  ],
+  "colores": [
+   "KGR0001-AI"
+  ]
+ },
+ "KGO1-KTD": {
+  "combos": [
+   "KSS1103A"
+  ]
+ },
+ "KGO2-KTS3120A": {
+  "combos": [
+   "KTS3120A",
+   "KSS1231",
+   "KGR0001-AI"
+  ]
+ },
+ "KGO2-KUS3019A": {
+  "combos": [
+   "KUS3019A",
+   "KSS1231",
+   "KGR0001-AI"
+  ]
+ },
+ "KGO3-KHD": {
+  "combos": [
+   "KHD3319A",
+   "KGR0001-AI"
+  ]
+ },
+ "KGO4-KQDB": {
+  "combos": [
+   "KSS1231-BK",
+   "KGR0001-BK",
+   "KSS0014-BK",
+   "KCP201-BK"
+  ]
+ },
+ "KWS0211AS": {
+  "combos": [
+   "KSS2141"
+  ],
+  "colores": [
+   "KWS0211-BG",
+   "KWS0211-GD"
+  ]
+ },
+ "KWS0211-BG": {
+  "combos": [
+   "KSS2141-BG"
+  ],
+  "colores": [
+   "KWS0211AS",
+   "KWS0211-GD"
+  ]
+ },
+ "KWS0110-BG": {
+  "combos": [
+   "KSS2211-BG"
+  ],
+  "colores": [
+   "KWS0110-GD",
+   "KWS0110-RG"
+  ]
+ },
+ "KWS0110-GD": {
+  "combos": [
+   "KSS1236-GD/BK"
+  ],
+  "colores": [
+   "KWS0110-BG",
+   "KWS0110-RG"
+  ]
+ },
+ "KWS0110-RG": {
+  "combos": [
+   "KSS1217-RG"
+  ],
+  "colores": [
+   "KWS0110-BG",
+   "KWS0110-GD"
+  ]
+ },
+ "KWS0210AAS": {
+  "combos": [
+   "KSS2101"
+  ],
+  "colores": [
+   "KWS0210-GD",
+   "KWS0210-RG"
+  ]
+ },
+ "KWS0210-GD": {
+  "combos": [
+   "KSS1236-GD/BK"
+  ],
+  "colores": [
+   "KWS0210AAS",
+   "KWS0210-RG"
+  ]
+ },
+ "KWS0210-RG": {
+  "combos": [
+   "KSS1217-RG"
+  ],
+  "colores": [
+   "KWS0210AAS",
+   "KWS0210-GD"
+  ]
+ },
+ "GoLITE1-UT80D1": {
+  "combos": [
+   "UT8050-D1",
+   "UT8050-I1",
+   "KSS1103A",
+   "HD-005-AI"
+  ]
+ },
+ "GoLITE1-UT80I1": {
+  "combos": [
+   "UT8050-D1",
+   "UT8050-I1",
+   "KSS1103A",
+   "HD-005-AI"
+  ]
+ },
+ "GoLITE2-UT100D1": {
+  "combos": [
+   "UT10050-D1",
+   "UT10050-I1",
+   "KSS1103A",
+   "HD-005-AI"
+  ]
+ },
+ "GoLITE2-UT100I1": {
+  "combos": [
+   "UT10050-D1",
+   "UT10050-I1",
+   "KSS1103A",
+   "HD-005-AI"
+  ]
+ },
+ "GoLITE3-DT84": {
+  "combos": [
+   "DT8448-1",
+   "KSS1103A",
+   "HD-005-AI"
+  ]
+ },
+ "GoLITE1-UT80D3": {
+  "combos": [
+   "UT8050-D3",
+   "UT8050-I3",
+   "KSS8011",
+   "HD-005-AI"
+  ]
+ },
+ "GoLITE1-UT80I3": {
+  "combos": [
+   "UT8050-D3",
+   "UT8050-I3",
+   "KSS8011",
+   "HD-005-AI"
+  ]
+ },
+ "GoLITE2-UT100D3": {
+  "combos": [
+   "UT10050-D3",
+   "UT10050-I3",
+   "KSS8011",
+   "HD-005-AI"
+  ]
+ },
+ "GoLITE2-UT100I3": {
+  "combos": [
+   "UT10050-D3",
+   "UT10050-I3",
+   "KSS8011",
+   "HD-005-AI"
+  ]
+ },
+ "GoLITE3-DT84.3": {
+  "combos": [
+   "DT8448-3",
+   "KSS8011",
+   "HD-005-AI"
+  ]
+ },
+ "COMBO-CUA": {
+  "combos": [
+   "KHD3319A",
+   "KSS2201",
+   "KAS-1/39",
+   "KGR0001-AI"
+  ]
+ },
+ "COMBO-BK1215": {
+  "combos": [
+   "KQDA3322A-BL",
+   "KSS1215-BL",
+   "KGR0001-BK",
+   "KSS0021-BG"
+  ]
+ },
+ "KSS1230": {
+  "colores": [
+   "KSS1230-BK"
+  ]
+ },
+ "KSS1230-BK": {
+  "colores": [
+   "KSS1230"
+  ]
+ },
+ "KSS1234": {
+  "colores": [
+   "KSS1234-GD"
+  ]
+ },
+ "KSS1234-GD": {
+  "colores": [
+   "KSS1234"
+  ]
+ },
+ "KSS1103B": {
+  "colores": [
+   "KSS1103B-BK"
+  ]
+ },
+ "KSS1103B-BK": {
+  "colores": [
+   "KSS1103B"
+  ]
+ },
+ "KSS2702B": {
+  "colores": [
+   "KSS2702B-BK",
+   "KSS2702B-GD",
+   "KSS2702B-BG",
+   "KSS2702B-RG"
+  ]
+ },
+ "KSS2702B-BK": {
+  "colores": [
+   "KSS2702B",
+   "KSS2702B-GD",
+   "KSS2702B-BG",
+   "KSS2702B-RG"
+  ]
+ },
+ "KSS2702B-GD": {
+  "colores": [
+   "KSS2702B",
+   "KSS2702B-BK",
+   "KSS2702B-BG",
+   "KSS2702B-RG"
+  ]
+ },
+ "KSS2702B-BG": {
+  "colores": [
+   "KSS2702B",
+   "KSS2702B-BK",
+   "KSS2702B-GD",
+   "KSS2702B-RG"
+  ]
+ },
+ "KSS2702B-RG": {
+  "colores": [
+   "KSS2702B",
+   "KSS2702B-BK",
+   "KSS2702B-GD",
+   "KSS2702B-BG"
+  ]
+ },
+ "KSS2101-BG": {
+  "colores": [
+   "KSS2101"
+  ]
+ },
+ "KSS2201-BG": {
+  "colores": [
+   "KSS2201"
+  ]
+ },
+ "KSS0014": {
+  "colores": [
+   "KSS0014-BK"
+  ]
+ },
+ "KSS0021-GD": {
+  "colores": [
+   "KSS0021-RG",
+   "KSS0021-BG"
+  ]
+ },
+ "KSS0021-RG": {
+  "colores": [
+   "KSS0021-GD",
+   "KSS0021-BG"
+  ]
+ },
+ "KQSS2522A-BL": {
+  "colores": [
+   "KQSS2522A-WH"
+  ]
+ },
+ "KQSS2522A-WH": {
+  "colores": [
+   "KQSS2522A-BL"
+  ]
+ },
+ "KQS3120A-BL": {
+  "colores": [
+   "KQS3120A-WH"
+  ]
+ },
+ "KQS3120A-WH": {
+  "colores": [
+   "KQS3120A-BL"
+  ]
+ },
+ "KQSB3322A-BL": {
+  "colores": [
+   "KQSB3322A-WH"
+  ]
+ },
+ "KQSB3322A-WH": {
+  "colores": [
+   "KQSB3322A-BL"
+  ]
+ },
+ "KQD3322A-BL": {
+  "colores": [
+   "KQD3322A-WH"
+  ]
+ },
+ "KQD3322A-WH": {
+  "colores": [
+   "KQD3322A-BL"
+  ]
+ },
+ "KCS006-GD": {
+  "colores": [
+   "KCS006-RG"
+  ]
+ },
+ "KCS006-RG": {
+  "colores": [
+   "KCS006-GD"
+  ]
+ },
+ "KDS302-BG": {
+  "colores": [
+   "KDS302-AI"
+  ]
+ },
+ "KDS302-AI": {
+  "colores": [
+   "KDS302-BG"
+  ]
+ },
+ "KWS0111AS": {
+  "colores": [
+   "KWS0111-BG",
+   "KWS0111-GD"
+  ]
+ },
+ "KWS0111-BG": {
+  "colores": [
+   "KWS0111AS",
+   "KWS0111-GD"
+  ]
+ },
+ "KWS0111-GD": {
+  "colores": [
+   "KWS0111AS",
+   "KWS0111-BG"
+  ]
+ },
+ "KWS0211-GD": {
+  "colores": [
+   "KWS0211AS",
+   "KWS0211-BG"
+  ]
  }
 }

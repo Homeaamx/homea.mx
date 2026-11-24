@@ -95,6 +95,11 @@ const MUESTRAS: Record<string, string> = {
   espejo: "linear-gradient(135deg, #f2f2f2 0%, #a9abad 45%, #e6e7e8 60%, #8c8e90 100%)",
   "negro espejo": "linear-gradient(135deg, #4a4a4a 0%, #0f0f0f 45%, #2f2f2f 60%, #050505 100%)",
   "rose gold": "linear-gradient(135deg, #f0c4b0 0%, #d29a82 50%, #b07a62 100%)",
+  // Kele (2026-11-24): acabados de sus mezcladoras, dispensadores y Workstation.
+  "oro rosa": "linear-gradient(135deg, #f0c4b0 0%, #d29a82 50%, #b07a62 100%)",
+  dorado: "linear-gradient(135deg, #e8cf8a 0%, #c8a24a 50%, #a8842e 100%)",
+  dorada: "linear-gradient(135deg, #e8cf8a 0%, #c8a24a 50%, #a8842e 100%)",
+  "black gun": "linear-gradient(135deg, #6b6a68 0%, #3f3e3c 50%, #2a2928 100%)",
   "black slate y rose gold": mitad("#3d3b39", "#d29a82"),
   "diamond gray y rose gold": mitad("#7f7f7c", "#d29a82"),
   // Acros (2026-11-09): nombres de la lista Whirlpool tal como van en el título.

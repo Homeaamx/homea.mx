@@ -111,7 +111,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | INSINKERATOR | ARTEXA | INSIN | 67 | 10% | `/marcas/insinkerator` | completo |  |
 | INVISACOOK | INVISACOOK | INVIS | 9 | 10% | `/marcas/invisacook` | completo |  |
 | IO MABE | MABE | IOMAB | 78 | 30% | `/marcas/io-mabe` | completo | Validar margen con lista PPS (nota 4 de la política) |
-| KELE | INTERDEMEX | KELE | 206 | 10% | `/marcas/kele-master-sinks` | completo |  |
+| KELE | INTERDEMEX | KELE | 206 | 10% | `/marcas/kele-master-sinks` | completo | Cargada 2026-11-24: 176 productos (lista oficial OCT 2026; solo el precio de la tarjeta de cada modelo, sin Precio Base / Gremio / Volumen; MXN más IVA, PLATA 10 %). 29 paquetes (KELE GO, Workstation, Go Lite, Combo Cuadra y Black-1215; los Master Combos quedan fuera por "hasta agotar"): foto 1 = paquete armado, foto 2 = lámina "Este paquete incluye" y piezas sueltas en sugerencias. Organizadores de mueble en Accesorios de Tarjas y Monomandos. Vendor = "Kele Master Sinks". |
 | KITCHENAID (incl. portátiles) | WHIRLPOOL | KITCH | 223 | 30% | `/marcas/kitchenaid` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | KRAUS | ARTEXA | KRAUS | 79 | 10% | `/marcas/kraus` | completo |  |
 | LYNX | MIDDLEBY | LYNX | 137 | 5% | `/marcas/lynx` | completo |  |
