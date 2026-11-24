@@ -67,7 +67,9 @@ I-Drain, Kaldewei y Treesse (catálogos del fabricante con tarjeta HOMEA en port
 ⚠️ El kit Catalano + Valsir trae en la última página las "Condiciones comerciales" del distribuidor (envío sin cargo desde $25,000 + IVA,
 tiempos de entrega): se publicó tal cual.
 
-**Faltan (2 marcas sin ningún PDF):** Peerless (SHOPIFY) y Sauna Estilo.
+**Subida el 2026-11-24:** Sauna Estilo, catálogo 2025 (`catalogo-saunas-sauna-estilo-2025.pdf`, 10 págs., 7.4 MB). Es marca de Grupo 90 (como Mr. Steam y Nobili): se quitó su logo "una marca de la familia" de la portada (va la tarjeta HOMEA) y su página de contacto (contraportada HOMEA). Fuente en `CATALOGOS VIGENTES/GRUPO90 SOLO PDFS/`.
+
+**Falta (1 marca sin ningún PDF):** Peerless (SHOPIFY).
 
 **Publicadas pero viejas** (conviene buscar la edición nueva): Frigidaire·Electrolux (jul 2023), Onix (2023),
 Trade-Wind (abr 2024), Nantucket (2024), Mabe, IO Mabe, GE Profile y Haier (2024), Clearlight y Jacuzzi

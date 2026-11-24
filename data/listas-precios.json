@@ -227,6 +227,9 @@
     { "marca": "Kaldewei", "documentos": [
       { "slug": "kaldewei", "titulo": "Catálogo", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-kaldewei-tinas-regaderas-acero-vitrificado-2026.pdf?v=1794269993", "legacy": [], "estado": "listo" }
     ] },
+    { "marca": "Sauna Estilo", "documentos": [
+      { "slug": "sauna-estilo", "titulo": "Catálogo", "vigencia": "2025", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-saunas-sauna-estilo-2025.pdf?v=1795562694", "legacy": [], "estado": "listo" }
+    ] },
     { "marca": "Treesse", "documentos": [
       { "slug": "treesse", "titulo": "Catálogo", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-treesse-tinas-hidromasaje-2026.pdf?v=1794269993", "legacy": [], "estado": "listo" }
     ] }

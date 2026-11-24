@@ -839,6 +839,16 @@
       "op": {
         "stamp": "tr"
       }
+    },
+    {
+      "slug": "sauna-estilo",
+      "marca": "sauna-estilo",
+      "nombre": "Sauna Estilo",
+      "titulo": "Catálogo",
+      "vigencia": "2025",
+      "src": "GRUPO90 SOLO PDFS/CATALOGO_SAUNA_ESTILO_2025.pdf",
+      "archivo": "catalogo-saunas-sauna-estilo-2025.pdf",
+      "op": {"back": true, "logo_dims": [240, 240], "stamp": "at_img", "fraccion": 0.2, "lineas": "UNA MARCA|DE LA FAMILIA"}
     }
   ]
 }

@@ -1213,7 +1213,9 @@
       "foto": "/assets/photos/brands/sauna-estilo-saunas.webp",
       "fotoHero": "/assets/photos/brands/hero/sauna-estilo-saunas.webp",
       "logoHero": "/assets/logos/sauna-estilo.webp",
-      "listas": []
+      "listas": [
+        "sauna-estilo"
+      ]
     },
     {
       "slug": "schock",
