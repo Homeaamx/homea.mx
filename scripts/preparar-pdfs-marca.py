@@ -10,7 +10,7 @@ Qué hace con cada PDF de scripts/pdfs-marca.json (una entrada por documento):
     de "términos y condiciones de compra" del distribuidor ("del") y su contraportada
     ("back", se sustituye por la tarjeta de contacto HOMEA), palabras sueltas ("palabras",
     p. ej. "Dealer") y líneas enteras que casen con un patrón ("lineas", p. ej. leyendas
-    "Confidential").
+    "Confidential"). "blanquear" ({página: caja}) tapa con blanco lo que no es texto.
   · Pone la tarjeta HOMEA en la portada ("stamp": tr · tl · br · bl · at_img = donde
     estaba el logo quitado) o el banner HOMEA donde iba el logo del distribuidor en
     cada página ("banner_dims": ancho × alto en px de ese logo).
@@ -215,6 +215,11 @@ def preparar(doc, op, salida, tarjeta, banner):
             )
         for punto, nuevo, tam, color in escribir:
             p.insert_text(punto, nuevo, fontname="helv", fontsize=tam, color=color)
+        # Trazos que la redacción no alcanza (p. ej. los iconos Gremio/Volumen de la leyenda de
+        # Kele, dentro de un XObject): se cubren con un rectángulo blanco sobre fondo blanco.
+        blanco = op.get("blanquear", {}).get(str(i + 1))
+        if blanco:
+            p.draw_rect(fitz.Rect(blanco), color=None, fill=(1, 1, 1), overlay=True)
     if op.get("banner_dims"):
         dims = tuple(op["banner_dims"])
         sitios = [

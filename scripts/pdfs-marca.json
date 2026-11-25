@@ -15,9 +15,10 @@
       "marca": "kele-master-sinks",
       "nombre": "Kele Master Sinks",
       "titulo": "Lista de precios",
-      "vigencia": "jul 2026",
-      "src": "KELE/JUL 26/LISTA_PRECIOS_KELE_2026_V_3.pdf",
-      "archivo": "lista-precios-kele-jul-2026.pdf"
+      "vigencia": "oct 2026",
+      "src": "KELE/OCT 2026/LISTA_PRECIOS_KELE_2026_OCTUBRE.pdf",
+      "archivo": "lista-precios-kele-oct-2026.pdf",
+      "op": {"lineas": "Esta Lista de Precios con fotograf|Precio Directo al Gremio|matriz de precios", "blanquear": {"2": [30, 16, 585, 48], "3": [30, 16, 585, 48], "4": [30, 16, 585, 48], "5": [30, 16, 585, 48], "7": [30, 16, 585, 48], "8": [30, 16, 585, 48], "10": [30, 16, 585, 48], "11": [30, 16, 585, 48], "12": [30, 16, 585, 48], "13": [30, 16, 585, 48], "14": [30, 16, 585, 48], "15": [30, 16, 585, 48], "16": [30, 16, 585, 48], "18": [30, 16, 585, 48], "19": [30, 16, 585, 48], "20": [30, 16, 585, 48], "22": [30, 16, 585, 48], "23": [30, 16, 585, 48], "24": [30, 16, 585, 48], "26": [30, 16, 585, 48], "27": [30, 16, 585, 48], "28": [30, 16, 585, 48], "29": [30, 16, 585, 48]}}
     },
     {
       "slug": "smeg",
