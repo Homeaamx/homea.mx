@@ -37,22 +37,10 @@
       "slug": "supra",
       "marca": "supra",
       "nombre": "Supra",
-      "titulo": "Lista de precios",
+      "titulo": "Catálogo y lista de precios",
       "vigencia": "jul 2026",
-      "src": "SUPRA/LISTA_PRECIOS_SUPRA_SIGNATURE_2026_07_EXCELL.pdf",
-      "archivo": "lista-precios-supra-jul-2026.pdf"
-    },
-    {
-      "slug": "supra-catalogo",
-      "marca": "supra",
-      "nombre": "Supra",
-      "titulo": "Catálogo",
-      "vigencia": "2026",
-      "src": "SUPRA/CATALOGO SUPRA 2026.pdf",
-      "archivo": "catalogo-supra-2026.pdf",
-      "op": {
-        "stamp": "tr"
-      }
+      "src": "SUPRA/LISTA_PRECIOS_SUPRA_2026_07.pdf",
+      "archivo": "catalogo-y-lista-precios-supra-jul-2026.pdf"
     },
     {
       "slug": "the-galley",

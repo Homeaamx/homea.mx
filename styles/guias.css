@@ -1448,6 +1448,12 @@
 .ilus--coccion .c-halo-vitro { fill: #E0381E; opacity: .35; filter: url(#ilus-desenfoque); }
 .ilus--coccion .c-espira { fill: none; stroke: #FF3B1F; stroke-width: 1.5; stroke-dasharray: 1.6 1.1; opacity: .85; }
 .ilus--coccion .c-espira-separa { fill: none; stroke: #050607; stroke-width: 1.2; }
+/* Plato eléctrico (Parrillas › Eléctrica, 2026-11-25): hierro negro con anillos y aro de acero; encendido se pone al rojo. */
+.ilus--coccion .c-aro-plato { stroke: #4A5056; stroke-width: .6; }
+.ilus--coccion .c-plato { fill: #1E2023; stroke: #0A0B0C; stroke-width: .6; }
+.ilus--coccion .c-plato-rojo { fill: #B8321C; opacity: .55; }
+.ilus--coccion .c-plato-anillo { fill: none; stroke: #3A3E43; stroke-width: .9; }
+.ilus--coccion .c-plato-centro { fill: #5A6066; }
 /* Al apagarla el rojo se va despacio: la placa conserva el calor. */
 .ilus--coccion .c-zona-vitro .c-zona-calor { transition: opacity 2800ms var(--ease-standard) 200ms; }
 :is(.tfk-card:hover, .tfk-card:focus-visible, .is-abierto) .ilus--coccion .c-zona-vitro .c-zona-calor { transition: opacity 700ms var(--ease-standard) 200ms; }

@@ -177,6 +177,9 @@ const nextConfig = {
       "/marcas/fontana": "/productos/exterior",
       "/marcas/poletti-sinks": "/productos/cocina-y-bar/tarjas-y-griferia",
       "/marcas/sapphire": "/productos/cocina-y-bar",
+      // Supra (2026-11-25, Carla): el catálogo y la lista Signature se juntaron en un
+      // solo PDF (catálogo + listas jul 2026) que vive en /listas-de-precios/supra.pdf.
+      "/listas-de-precios/supra-catalogo.pdf": "/listas-de-precios/supra.pdf",
     };
 
     // Productos obsoletos (fuera de la lista vigente del proveedor): la ficha va con

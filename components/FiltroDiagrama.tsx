@@ -770,6 +770,32 @@ const DIAGRAMAS: Record<string, ReactElement> = {
     </>
   ),
 
+  /* Eléctrica de plato: acero con cuatro platos de hierro macizos (disco con
+     anillos) y perillas al frente. Al hover los platos se ponen al rojo. */
+  "parrilla-electrica": (
+    <>
+      <rect x="28" y="30" width="84" height="72" className="fb" />
+      <circle cx="50" cy="50" r="10" className="fb" />
+      <circle cx="90" cy="50" r="8" className="fb" />
+      <circle cx="50" cy="80" r="8" className="fb" />
+      <circle cx="90" cy="80" r="10" className="fb" />
+      <circle cx="50" cy="50" r="5.5" className="ln" />
+      <circle cx="90" cy="50" r="4.5" className="ln" />
+      <circle cx="50" cy="80" r="4.5" className="ln" />
+      <circle cx="90" cy="80" r="5.5" className="ln" />
+      <circle cx="58" cy="96" r="1.8" className="ln" />
+      <circle cx="66" cy="96" r="1.8" className="ln" />
+      <circle cx="74" cy="96" r="1.8" className="ln" />
+      <circle cx="82" cy="96" r="1.8" className="ln" />
+      <g className="in">
+        <circle cx="50" cy="50" r="10" className="ring warm" />
+        <circle cx="90" cy="50" r="8" className="ring warm" />
+        <circle cx="50" cy="80" r="8" className="ring warm" />
+        <circle cx="90" cy="80" r="10" className="ring warm" />
+      </g>
+    </>
+  ),
+
   /* Inducción: cristal negro con zonas marcadas por una cruz (+) — la marca de
      inducción — y barra táctil. Al hover aparece el sartén: aquí se calienta la
      olla, no la placa, así que el anillo se queda frío. */

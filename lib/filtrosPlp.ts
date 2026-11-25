@@ -87,6 +87,7 @@ export const FILTROS_PLP: Record<string, FiltroPlp[]> = {
       valores: [
         "Gas",
         "Vitrocerámica",
+        "Eléctrica",
         "Inducción",
         "Inducción con sistema de Extracción",
         "Híbrida (Gas + Inducción)",

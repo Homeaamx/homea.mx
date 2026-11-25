@@ -824,6 +824,19 @@
                   }
                 },
                 {
+                  "nombre": "Eléctrica",
+                  "filtro": "/productos/parrillas/?f=electrica",
+                  "ficha": {
+                    "grupo": "estilo",
+                    "diagrama": "parrilla-electrica",
+                    "descripcion": "Platos de hierro macizo que se calientan con una resistencia eléctrica: la opción sencilla y económica cuando no hay gas.",
+                    "specs": "110 V · Platos de hierro · Cualquier olla",
+                    "detalle": "Cada plato es un disco de hierro con la resistencia integrada: se calienta y transmite el calor por contacto, así que acepta cualquier olla de fondo plano y conserva calor un rato después de apagarlo. Se controla con perillas, muchas funcionan a 110 V y no requieren instalación de gas; tardan más en calentar y en responder que la inducción.",
+                    "catalogo": "/productos/cocina-y-bar/coccion/parrillas?f=electrica",
+                    "ilustracion": "parrilla-electrica"
+                  }
+                },
+                {
                   "nombre": "Inducción",
                   "filtro": "/productos/parrillas/?f=induccion",
                   "ficha": {

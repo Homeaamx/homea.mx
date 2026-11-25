@@ -8,8 +8,7 @@
       { "slug": "viking", "titulo": "Lista de precios", "vigencia": "abr 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-viking-abr-2026.pdf?v=1790123911", "legacy": ["/Files/119914/ListaPreciosVIKING2024feb.pdf"], "estado": "listo" }
     ] },
     { "marca": "Supra", "documentos": [
-      { "slug": "supra", "titulo": "Lista de precios", "vigencia": "jul 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-supra-jul-2026.pdf?v=1790123875", "legacy": ["/Files/119914/Lista_Precios_SUPRA_2025.pdf"], "estado": "listo" },
-      { "slug": "supra-catalogo", "titulo": "Catálogo", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-supra-2026.pdf?v=1790123875", "legacy": [], "estado": "listo" }
+      { "slug": "supra", "titulo": "Catálogo y lista de precios", "vigencia": "jul 2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/catalogo-y-lista-precios-supra-jul-2026.pdf?v=1795636329", "legacy": ["/Files/119914/Lista_Precios_SUPRA_2025.pdf"], "estado": "listo" }
     ] },
     { "marca": "Elica", "documentos": [
       { "slug": "elica-campanas", "titulo": "Campanas · lista de precios", "vigencia": "2026", "url": "https://cdn.shopify.com/s/files/1/0688/0788/4860/files/lista-precios-campanas-elica-2026.pdf", "legacy": ["/Files/119914/LISTA_PRECIOS_ELICA_CAMPANAS_2026_03.pdf", "/Files/119914/Lista_Precios_Elica_2025_jun.pdf", "/Files/119914/241542329910613.pdf"], "estado": "listo", "archivo": "shopify/lista-precios-campanas-elica-2026.pdf" }

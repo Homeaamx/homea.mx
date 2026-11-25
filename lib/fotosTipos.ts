@@ -109,6 +109,11 @@ export const FOTOS_TIPOS: Record<string, Record<string, FotoTipo>> = {
       src: "/assets/photos/tipos/parrilla-vitroceramica-cristal-negro-5-zonas.webp",
       alt: "Parrilla vitrocerámica de cristal negro con cinco zonas radiantes encendidas",
     },
+    // Supra 2P Tramonto (foto del proveedor, 2026-11-25): subcategoría nueva de Carla.
+    electrica: {
+      src: "/assets/photos/tipos/parrilla-electrica-platos-hierro-acero.webp",
+      alt: "Parrilla eléctrica de acero inoxidable con dos platos de hierro y perillas al frente",
+    },
     induccion: {
       src: "/assets/photos/tipos/parrilla-induccion-vista-superior-cristal-negro.webp",
       alt: "Parrilla de inducción de cristal negro vista desde arriba, con cinco zonas y controles al frente",

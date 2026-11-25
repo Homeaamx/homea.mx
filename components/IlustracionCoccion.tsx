@@ -1422,6 +1422,29 @@ function OllaPlano({ x, v, r, alto = 26, sarten }: { x: number; v: number; r: nu
   return <Olla cx={cx} y={cy} w={w} h={Math.max(alto, r * 1.05) * s} ry={(w / 2) * ((PF - PB) / PDEP)} />;
 }
 
+/** Plato eléctrico de hierro (tipo Supra Tramonto): disco negro con anillos
+ *  concéntricos y aro de acero. Encendido, el hierro se pone al rojo despacio
+ *  (mismo pulso que la vitrocerámica). */
+function PlatoElectrico({ q }: { q: Quemador }) {
+  const e = elip(q.x, q.v, q.r);
+  const ring = (f: number) => ({ cx: e.cx, cy: e.cy, rx: e.rx * f, ry: e.ry * f });
+  return (
+    <g className="c-zona-vitro">
+      <ellipse cx={e.cx + 1} cy={e.cy + 1.4} rx={e.rx * 1.06} ry={e.ry * 1.06} className="c-sombra" />
+      <ellipse {...ring(1.06)} fill="url(#ilus-cromo)" className="c-aro-plato" />
+      <ellipse {...ring(1)} className="c-plato" />
+      <g className="c-zona-calor">
+        <ellipse {...ring(1.02)} className="c-halo-vitro" />
+        <ellipse {...ring(0.98)} className="c-plato-rojo" />
+      </g>
+      {[0.28, 0.46, 0.64, 0.82].map((f) => (
+        <ellipse key={f} {...ring(f)} className="c-plato-anillo" />
+      ))}
+      <ellipse {...ring(0.14)} className="c-plato-centro" />
+    </g>
+  );
+}
+
 /** Placa (vidrio negro o acero) sobre la cubierta con su canto. */
 function Placa({ x1, x2, v1, v2, acabado = "vidrio", marco }: { x1: number; x2: number; v1: number; v2: number; acabado?: "vidrio" | "acero"; marco?: boolean }) {
   const [, yf] = P(x1, v2);
@@ -1439,7 +1462,7 @@ function Placa({ x1, x2, v1, v2, acabado = "vidrio", marco }: { x1: number; x2: 
 }
 
 
-type TipoParrilla = "profesional" | "tradicional" | "gas" | "vitro" | "induccion" | "extraccion" | "hibrida" | "submontar" | "invisible" | "modular" | "superficie";
+type TipoParrilla = "profesional" | "tradicional" | "gas" | "vitro" | "electrica" | "induccion" | "extraccion" | "hibrida" | "submontar" | "invisible" | "modular" | "superficie";
 
 function Parrilla({ tipo }: { tipo: TipoParrilla }) {
   const x1 = 140;
@@ -1563,6 +1586,38 @@ function Parrilla({ tipo }: { tipo: TipoParrilla }) {
           <PerillaCilindro key={k} x={236 + k * 17.6} v={vp} led={k === 2} />
         ))}
         <polygon points={quad(388, 414, vp - dv(4), vp + dv(4))} className="c-placa-marca" />
+      </g>
+    );
+  }
+  if (tipo === "electrica") {
+    // Eléctrica de plato tipo Supra 4P Tramonto 60 cm: acero inoxidable con
+    // cuatro platos de hierro (dos grandes, dos chicos) y perillas al frente.
+    const X1 = 150;
+    const X2 = 410;
+    const V1 = 0.24;
+    const V2 = 0.86;
+    const platos: Quemador[] = [
+      { x: 212, v: 0.42, r: 40 },
+      { x: 345, v: 0.42, r: 32 },
+      { x: 212, v: 0.7, r: 32 },
+      { x: 345, v: 0.7, r: 40 },
+    ];
+    const vp = V2 - dv(14);
+    const [, yc] = P(X1, V2 + dv(4));
+    const [xa] = P(X1 - 4, V2 + dv(4));
+    const [xb] = P(X2 + 4, V2 + dv(4));
+    return (
+      <g>
+        <polygon points={quad(X1 - 4, X2 + 4, V1 - dv(4), V2 + dv(4))} className="c-marco-placa" />
+        <polygon points={quad(X1, X2, V1, V2)} fill="url(#dgm-acero)" className="c-acero-plano" />
+        <polygon points={quad(X1, X2, V1, V2)} fill="url(#ilus-acero-luz)" className="i-acero-luz" />
+        <rect x={xa} y={yc} width={xb - xa} height={2.5} className="c-canto-acero" />
+        {platos.map((q) => (
+          <PlatoElectrico key={`${q.x}-${q.v}`} q={q} />
+        ))}
+        {[0, 1, 2, 3].map((k) => (
+          <PerillaCilindro key={k} x={246 + k * 22} v={vp} led={k === 0} />
+        ))}
       </g>
     );
   }
@@ -4572,6 +4627,11 @@ const ESCENAS: Record<string, () => Escena> = {
     escenaParrilla("vitro", [
       { x: 190, y: 226, hasta: 120, texto: "Calienta sartenes a\ntravés de resistencias\neléctricas" },
       { x: 346, y: 263, hasta: 440, texto: "Mantiene mucho calor\nincluso después\nde apagarla" },
+    ]),
+  "parrilla-electrica": () =>
+    escenaParrilla("electrica", [
+      { x: 190, y: 226, hasta: 120, texto: "Platos de hierro\nque se calientan\ncon resistencia" },
+      { x: 330, y: 276, hasta: 440, texto: "Perillas al\nfrente, 110 V" },
     ]),
   "parrilla-induccion": () =>
     escenaParrilla("induccion", [
