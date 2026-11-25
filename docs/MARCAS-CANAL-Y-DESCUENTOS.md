@@ -116,7 +116,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | LYNX | MIDDLEBY | LYNX | 137 | 5% | `/marcas/lynx` | completo |  |
 | MABE (incl. cuadro básico) | MABE | MABE | 589 | 30% | `/marcas/mabe` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | MAYTAG | WHIRLPOOL | MAYTA | 46 | 30% | `/marcas/maytag` | completo | Validar margen con lista PPS (nota 4 de la política) |
-| MIELE | MIELE | MIELE | 292 | 5% | `/marcas/miele` | completo |  |
+| MIELE | MIELE | MIELE | 292 | 5% | `/marcas/miele` | completo | Cargada 2026-11-24: 179 productos / 185 variantes (lista abril 2026, MXN con IVA ÷ 1.16, PLATA 5 % Rev 22, garantía 2 años, solo cotizar). SKU = clave Miele a 8 dígitos; serie = modelo comercial. Parrillas/estufas G y LP = opción "Tipo de gas" (6). Un producto por color con círculos (12 grupos). Fuera: aspiradoras, consumibles y refacciones (rango 11385020–7236280), piezas limitadas (cafeteras CM5/CM6), versiones v1 y lo "TERMINARSE STOCK". Hornos con microondas en Microondas (Multifunción). Lista de precios de la página = abril 2026. |
 | MONOGRAM | MABE | MONOG | 87 | 10% | `/marcas/monogram` | completo |  |
 | MONT ALPI | MARESA | MONTA | 87 | 10% | `/marcas/mont-alpi` | completo |  |
 | PITT | ARTEXA | PITT | 108 | 10% | `/marcas/pitt-cooking` | completo |  |

@@ -58,6 +58,14 @@ const MUESTRAS: Record<string, string> = {
   "bronce moca": "linear-gradient(135deg, #8a705c 0%, #6b5444 55%, #4c3a2e 100%)",
   // Smeg (2026-11-13): enseres 50's Style, batería de cocina, refrigeradores FAB y ediciones especiales.
   rojo: "#b3262b",
+  // Miele (2026-11-24): líneas de diseño Generación 7000 (PureLine / ContourLine acero, VitroLine cristal).
+  "clean steel": METAL,
+  "pureline clean steel": METAL,
+  "contourline clean steel": METAL,
+  "obsidian black": "#1d1d1d",
+  "vitroline obsidian black": "#1d1d1d",
+  "graphite grey": "#5b5c5c",
+  "vitroline graphite grey": "#5b5c5c",
   crema: "#efe6d2",
   "azul pastel": "#a9c6dd",
   "verde pastel": "#b7d3b4",
