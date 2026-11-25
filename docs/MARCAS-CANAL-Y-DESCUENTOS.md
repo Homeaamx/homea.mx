@@ -108,7 +108,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | HOSHIZAKI | ARTEXA | HOSHI | 20 | 10% | `/marcas/hoshizaki` | completo |  |
 | IEM | MABE | IEM | 9 | 30% | `/marcas/iem` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | INSINKERATOR | ARTEXA | INSIN | 67 | 10% | `/marcas/insinkerator` | completo |  |
-| INVISACOOK | INVISACOOK | INVIS | 9 | 10% | `/marcas/invisacook` | completo |  |
+| INVISACOOK | INVISACOOK | INVIS | 9 | 0% | `/marcas/invisacook` | completo | Cargada 2026-11-25: 9 productos de la lista NOV 2026 (8 parrillas de inducción invisible bajo cubierta = Parrillas + funcionamiento "Invisible", y el cargador InvisaCharge INVCH en Accesorios de cocción). Sin descuento por regla de Carla (la política dice PLATA 10 %): precio = lista con IVA ÷ 1.16, sin tachado. Compra en línea, Bajo pedido; la ficha dice "No incluye flete ni instalación" (falta definir el flete en Shopify). |
 | IO MABE | MABE | IOMAB | 78 | 30% | `/marcas/io-mabe` | completo | Validar margen con lista PPS (nota 4 de la política) |
 | KELE | INTERDEMEX | KELE | 206 | 10% | `/marcas/kele-master-sinks` | completo | Cargada 2026-11-24: 176 productos (lista oficial OCT 2026; solo el precio de la tarjeta de cada modelo, sin Precio Base / Gremio / Volumen; MXN más IVA, PLATA 10 %). 29 paquetes (KELE GO, Workstation, Go Lite, Combo Cuadra y Black-1215; los Master Combos quedan fuera por "hasta agotar"): foto 1 = paquete armado, foto 2 = lámina "Este paquete incluye" y piezas sueltas en sugerencias. Organizadores de mueble en Accesorios de Tarjas y Monomandos. Vendor = "Kele Master Sinks". |
 | KITCHENAID (incl. portátiles) | WHIRLPOOL | KITCH | 223 | 30% | `/marcas/kitchenaid` | completo | Validar margen con lista PPS (nota 4 de la política) |
