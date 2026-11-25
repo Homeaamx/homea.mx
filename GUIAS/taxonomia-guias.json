@@ -2068,6 +2068,18 @@
               }
             },
             {
+              "nombre": "Ahumadores",
+              "slug": "ahumadores",
+              "filtro": "/productos/ahumadores/",
+              "tienda": "/productos/exterior/asadores-y-hornos?tipo=ahumadores",
+              "tarjeta": {
+                "imagen": "/assets/photos/subcats/ahumador-carbon-agua-napoleon-apollo.webp",
+                "ambiente": false,
+                "pos": "center 50%",
+                "resumen": "Ahumadores de carbón con agua para cocción lenta: brisket, costillas y pescado ahumado."
+              }
+            },
+            {
               "nombre": "Hornos de pizza",
               "slug": "hornos-de-pizza",
               "filtro": "/productos/hornos-de-pizza/",

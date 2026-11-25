@@ -1126,7 +1126,9 @@
       "foto": "/assets/photos/brands/napoleon-asadores.webp",
       "fotoHero": "/assets/photos/brands/hero/napoleon-asadores.webp",
       "logoHero": "/assets/logos/napoleon.webp",
-      "listas": []
+      "listas": [
+        "napoleon"
+      ]
     },
     {
       "slug": "nobili",

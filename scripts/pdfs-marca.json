@@ -2,6 +2,16 @@
   "_nota": "PDFs de marca que salen de CATALOGOS VIGENTES (OneDrive) y se suben a Shopify Files. 'src' es relativo a esa carpeta; 'archivo' es el nombre con el que vive en Shopify (y el que va en la 'url' de data/listas-precios.json). 'op' = limpieza de scripts/preparar-pdfs-marca.py. Los PDFs nunca entran al git.",
   "documentos": [
     {
+      "slug": "napoleon",
+      "marca": "napoleon",
+      "nombre": "Napoleon",
+      "titulo": "Lista de precios",
+      "vigencia": "oct 2026",
+      "src": "NAPOLEON/LISTA_PRECIOS_NAPOLEON_2026_OCTUBRE.pdf",
+      "archivo": "lista-precios-napoleon-octubre-2026.pdf",
+      "nota": "Preparada a mano (Carla 2026-11-25): sin la nota de flete, sin los 'ok' y 'En tramite de NOM' → 'Próximamente' (.carga/napoleon/lista-web.py)."
+    },
+    {
       "slug": "teka-tarjas-y-monomandos",
       "marca": "teka",
       "nombre": "Teka",

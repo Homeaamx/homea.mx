@@ -1,5 +1,5 @@
 {
-  "_nota": "Orden y nombre visible de los filtros por Subcategoría 2 (= Tipo de producto en Shopify). Clave = metafield filtros.<clave>; \"marca\" = vendor, \"precio\" = precio. GENERADO desde FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx (OneDrive, columna E = orden propuesto) el 2026-10-06. Si cambia la tabla, se regenera. 2026-10-07: se añade filtros.bisagra (Bisagra / apertura) a refrigeración por indicación de Carla (prioritario en refrigeración y hornos). 2026-10-09: Bisagra / apertura también en Hornos y Microondas (hornos de velocidad), después de Diseño. 2026-10-12: se añade filtros.altura_ada (\"Altura\": Estándar / ADA) a Lavavajillas y a refrigeración (todas menos Accesorios), después de Ancho, por indicación de Carla. 2026-10-27: Microondas suma \"Tipo de instalación\" (Empotre · De cajón · De mesa · Sobre estufa; el de cajón lleva también Empotre) y \"Tipo de funcionamiento\" (solo Multifunción = horno + microondas; los convencionales van sin valor, porque Empotre / De cajón / De mesa / Sobre estufa ya lo implican) antes de Diseño, por indicación de Carla; Diseño se queda porque las fichas de Guías enlazan con diseno:*. 2026-10-27: Campanas suma los anchos 20\", 26\", 34\", 40\", 46\" y 72\" (catálogo Elica). 2026-10-28: anchos de Artisan (Asadores 26\"; Quemador lateral 14\"; Gabinetes 15, 17, 20, 26, 36 y 42\"), aprobados por Carla. 2026-10-29: Uso (Cocina / Exterior) en Tarjas y Accesorios de Tarjas, Exterior en Monomandos, 23\" en Gabinetes y 56\" en Asadores (Alfresco). 2026-11-04: nuevo tipo \"Humidor para puros\" (Refrigeración, tras Centros de bebida; Benessi BKHUM24) con filtros de su ficha técnica; Cavas de vino suma ancho 36\" (Benessi BKFW36). 2026-11-06: Campanas (y Campanas — Uso: Exterior) suman el grupo Acabado (filtros.acabado: Pulido · Cepillado · Mate · Brillante) después de Color, por indicación de Carla. 2026-11-06: Accesorios de cocción suma Color y Acabado (cubreductos, extensiones de chimenea y cubiertas decorativas de campana, con el color y acabado de su campana). 2026-11-06: Accesorios de refrigeración suma Color y Acabado (kits de jaladeras Café por acabado) y Refrigeradores el ancho 33\" (Café CWE19), aprobados por Carla. 2026-11-06: Parrillas suma el ancho 12\" (dominó de 30 cm IO Mabe) y Estufas el horneado Air Fry (estufas IO Mabe y Monogram). 2026-11-06 (Mabe): valores nuevos de la carga Mabe (anchos de refrigeración y estufas 20\", Air Fry, Gris oscuro/Rosa/Plata, capacidades de lavandería, 'Lavadoras de 2 tinas', Portátil/Ducto y 4–5 toneladas en Aire acondicionado, Ultrafiltración en Purificadores). 2026-11-09: Whirlpool (aprobado por Carla): Parrillas 34\" (86 cm), Frigobares 22\", Cavas 11\" y 19\" y color Plata, Lavandería 26 y 28 kg, y color Plata/Gris donde lo trae la carga. 2026-11-09 (Maytag): Lavandería suma las capacidades 26, 28 y 29 kg (lavadoras y secadoras Maytag). 2026-11-10: filtro nuevo \"Panel\" (filtros.panel: Panelable / Acero inoxidable de fábrica) antes de Color en Refrigeradores, Congeladores, Centros de bebida, Humidor para puros, Frigobares, Máquinas de hielo, Cavas de vino, Cajones refrigerantes, Cajones y Lavavajillas; en esas tablas Color ya no lleva Panelable ni Acero inoxidable (Carla). Los accesorios conservan Color = Acero inoxidable. 2026-11-13: Cajones suma el tipo \"Sommelier\" (Smeg CPS) y Electrodomésticos menores suma Hervidores, Hornos de mesa, Batería de cocina y Soda maker (Carla, carga Smeg). 2026-11-14: 'Altura' (Estándar/ADA) pasa a 'Altura ADA' y la de hornos a 'Altura de horno' (Carla), para no confundirlas. 2026-11-23 (Summit): Tipo de funcionamiento en Centros de bebida (Todo congelador = congelador de exterior que también sale en Exterior › Centros de bebida) y en Congeladores; Uso en Congeladores; producción 45/47/68 lb y capacidad 26 lb en Máquinas de hielo; ancho 22\" en Cajones refrigerantes. 2026-11-23: Coyote — funcionamiento \"Pellet\" en Asadores; anchos 12\" en Quemador lateral, 14\", 31\" y 45\" en Gabinetes, 21\" en Centros de bebida y 25\"/26\" en Hieleras. 2026-11-24 (Kele): Accesorios de Tarjas y Monomandos suma el tipo \"Organizador de cocina\" (alacenas, esquinas mágicas, botelleros, canastillas, cestas, cajones y colgantes Kele) y garantía 5 años; Monomandos suma garantía 5 años y colores Blanco y Oro rosa; Tarjas suma acabados Cepillado y PVD y colores Dorado y Oro rosa (Workstation dorada y oro rosa). 2026-11-25 (Carla, carga Miele): en Microondas, solo los multifunción de verdad (horno + microondas empotrado: hornos de velocidad, speed oven, combinados) llevan también \"Eléctrico\" en Tipo de funcionamiento (39 piezas); microcampanas, microondas de mesa, de cajón y microondas de convección no son multifunción y no llevan Eléctrico. 2026-11-25: Invisacook — ancho 20\" en Parrillas y tipo \"Cargador inalámbrico\" en Accesorios de cocción. 2026-11-25 (Supra, Carla): Parrillas suma funcionamiento \"Eléctrica\" (platos de hierro, subcategoría nueva con tile y ficha en Guías), instalación \"Sobreponer\" (parrillas portátiles de gas e inducción) y anchos 13\", 18\", 19\", 26\", 29\" y 46\"; Campanas suma 31\" (80 cm) y 47\" (120 cm).",
+  "_nota": "Orden y nombre visible de los filtros por Subcategoría 2 (= Tipo de producto en Shopify). Clave = metafield filtros.<clave>; \"marca\" = vendor, \"precio\" = precio. GENERADO desde FILTROS DE BUSQUEDA EN LA WEB_CLAUDE.xlsx (OneDrive, columna E = orden propuesto) el 2026-10-06. Si cambia la tabla, se regenera. 2026-10-07: se añade filtros.bisagra (Bisagra / apertura) a refrigeración por indicación de Carla (prioritario en refrigeración y hornos). 2026-10-09: Bisagra / apertura también en Hornos y Microondas (hornos de velocidad), después de Diseño. 2026-10-12: se añade filtros.altura_ada (\"Altura\": Estándar / ADA) a Lavavajillas y a refrigeración (todas menos Accesorios), después de Ancho, por indicación de Carla. 2026-10-27: Microondas suma \"Tipo de instalación\" (Empotre · De cajón · De mesa · Sobre estufa; el de cajón lleva también Empotre) y \"Tipo de funcionamiento\" (solo Multifunción = horno + microondas; los convencionales van sin valor, porque Empotre / De cajón / De mesa / Sobre estufa ya lo implican) antes de Diseño, por indicación de Carla; Diseño se queda porque las fichas de Guías enlazan con diseno:*. 2026-10-27: Campanas suma los anchos 20\", 26\", 34\", 40\", 46\" y 72\" (catálogo Elica). 2026-10-28: anchos de Artisan (Asadores 26\"; Quemador lateral 14\"; Gabinetes 15, 17, 20, 26, 36 y 42\"), aprobados por Carla. 2026-10-29: Uso (Cocina / Exterior) en Tarjas y Accesorios de Tarjas, Exterior en Monomandos, 23\" en Gabinetes y 56\" en Asadores (Alfresco). 2026-11-04: nuevo tipo \"Humidor para puros\" (Refrigeración, tras Centros de bebida; Benessi BKHUM24) con filtros de su ficha técnica; Cavas de vino suma ancho 36\" (Benessi BKFW36). 2026-11-06: Campanas (y Campanas — Uso: Exterior) suman el grupo Acabado (filtros.acabado: Pulido · Cepillado · Mate · Brillante) después de Color, por indicación de Carla. 2026-11-06: Accesorios de cocción suma Color y Acabado (cubreductos, extensiones de chimenea y cubiertas decorativas de campana, con el color y acabado de su campana). 2026-11-06: Accesorios de refrigeración suma Color y Acabado (kits de jaladeras Café por acabado) y Refrigeradores el ancho 33\" (Café CWE19), aprobados por Carla. 2026-11-06: Parrillas suma el ancho 12\" (dominó de 30 cm IO Mabe) y Estufas el horneado Air Fry (estufas IO Mabe y Monogram). 2026-11-06 (Mabe): valores nuevos de la carga Mabe (anchos de refrigeración y estufas 20\", Air Fry, Gris oscuro/Rosa/Plata, capacidades de lavandería, 'Lavadoras de 2 tinas', Portátil/Ducto y 4–5 toneladas en Aire acondicionado, Ultrafiltración en Purificadores). 2026-11-09: Whirlpool (aprobado por Carla): Parrillas 34\" (86 cm), Frigobares 22\", Cavas 11\" y 19\" y color Plata, Lavandería 26 y 28 kg, y color Plata/Gris donde lo trae la carga. 2026-11-09 (Maytag): Lavandería suma las capacidades 26, 28 y 29 kg (lavadoras y secadoras Maytag). 2026-11-10: filtro nuevo \"Panel\" (filtros.panel: Panelable / Acero inoxidable de fábrica) antes de Color en Refrigeradores, Congeladores, Centros de bebida, Humidor para puros, Frigobares, Máquinas de hielo, Cavas de vino, Cajones refrigerantes, Cajones y Lavavajillas; en esas tablas Color ya no lleva Panelable ni Acero inoxidable (Carla). Los accesorios conservan Color = Acero inoxidable. 2026-11-13: Cajones suma el tipo \"Sommelier\" (Smeg CPS) y Electrodomésticos menores suma Hervidores, Hornos de mesa, Batería de cocina y Soda maker (Carla, carga Smeg). 2026-11-14: 'Altura' (Estándar/ADA) pasa a 'Altura ADA' y la de hornos a 'Altura de horno' (Carla), para no confundirlas. 2026-11-23 (Summit): Tipo de funcionamiento en Centros de bebida (Todo congelador = congelador de exterior que también sale en Exterior › Centros de bebida) y en Congeladores; Uso en Congeladores; producción 45/47/68 lb y capacidad 26 lb en Máquinas de hielo; ancho 22\" en Cajones refrigerantes. 2026-11-23: Coyote — funcionamiento \"Pellet\" en Asadores; anchos 12\" en Quemador lateral, 14\", 31\" y 45\" en Gabinetes, 21\" en Centros de bebida y 25\"/26\" en Hieleras. 2026-11-24 (Kele): Accesorios de Tarjas y Monomandos suma el tipo \"Organizador de cocina\" (alacenas, esquinas mágicas, botelleros, canastillas, cestas, cajones y colgantes Kele) y garantía 5 años; Monomandos suma garantía 5 años y colores Blanco y Oro rosa; Tarjas suma acabados Cepillado y PVD y colores Dorado y Oro rosa (Workstation dorada y oro rosa). 2026-11-25 (Carla, carga Miele): en Microondas, solo los multifunción de verdad (horno + microondas empotrado: hornos de velocidad, speed oven, combinados) llevan también \"Eléctrico\" en Tipo de funcionamiento (39 piezas); microcampanas, microondas de mesa, de cajón y microondas de convección no son multifunción y no llevan Eléctrico. 2026-11-25: Invisacook — ancho 20\" en Parrillas y tipo \"Cargador inalámbrico\" en Accesorios de cocción. 2026-11-25 (Supra, Carla): Parrillas suma funcionamiento \"Eléctrica\" (platos de hierro, subcategoría nueva con tile y ficha en Guías), instalación \"Sobreponer\" (parrillas portátiles de gas e inducción) y anchos 13\", 18\", 19\", 26\", 29\" y 46\"; Campanas suma 31\" (80 cm) y 47\" (120 cm). 2026-11-25 (Napoleon, Carla): Asadores suma anchos 14\", 49\", 52\", 55\", 60\", 66\", 74\" y 77\"; Plancha Teppanyaki 32\"; Quemador lateral 10\"; Gabinetes diseño \"Combinado\" (centro de bebidas empotrable BI-2418-BEV) y color Negro (gabinetes OASIS); Ahumadores (reactivado con los Apollo) suma 22\".",
   "subcategorias": {
     "Refrigeradores": [
       {
@@ -2848,6 +2848,7 @@
         "nombre": "Ancho",
         "clave": "ancho",
         "valores": [
+          "14\"",
           "18\"",
           "20\"",
           "22\"",
@@ -2863,11 +2864,18 @@
           "41\"",
           "42\"",
           "44\"",
+          "49\"",
           "50\"",
           "51\"",
+          "52\"",
           "54\"",
+          "55\"",
           "56\"",
-          "57\""
+          "57\"",
+          "60\"",
+          "66\"",
+          "74\"",
+          "77\""
         ]
       },
       {
@@ -3101,6 +3109,7 @@
         "nombre": "Ancho",
         "clave": "ancho",
         "valores": [
+          "10\"",
           "12\"",
           "13\"",
           "14\"",
@@ -3182,6 +3191,7 @@
         "clave": "ancho",
         "valores": [
           "30\"",
+          "32\"",
           "40\""
         ]
       },
@@ -3273,6 +3283,7 @@
         "valores": [
           "18\"",
           "20\"",
+          "22\"",
           "24\"",
           "36\"",
           "56\""
@@ -3407,7 +3418,8 @@
           "Puertas",
           "Compartimiento de basura",
           "Esquinero",
-          "Módulo kamado"
+          "Módulo kamado",
+          "Combinado"
         ]
       },
       {
@@ -3443,7 +3455,8 @@
         "nombre": "Color",
         "clave": "color",
         "valores": [
-          "Acero inoxidable"
+          "Acero inoxidable",
+          "Negro"
         ]
       },
       {
