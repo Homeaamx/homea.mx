@@ -4047,6 +4047,7 @@ html.wl-lock, html.wl-lock body { overflow: hidden; }
 .pdp-logo[data-marca="frigidaire"] { height: 22px; } /* "FRIGIDAIRE" azul con triángulo rojo, Logos Marcas png/ELECTROLUX/frigidaire.png; 8.6:1, 2026-11-23 */
 .pdp-logo[data-marca="invisacook"] { height: 56px; } /* sartén con flama + "INVISACOOK The Original" negro, OneDrive LOGOTIPOS PROVEEDORES/INVISACOOK LOGO.png; 1.6:1, 2026-11-25 */
 .pdp-logo[data-marca="supra"] { height: 48px; } /* flama + "SUPRA" negro apilado, OneDrive Logos Marcas png/SUPRA/Supra-Logo-NEGRO.webp; 1.25:1, 2026-11-25 */
+.pdp-logo[data-marca="teka"] { height: 40px; } /* "Teka" negro con el punto, OneDrive Logos Marcas png/TEKA/tekalojo.png; 1.7:1, 2026-11-26 */
 /* Las tres pestañas se reparten el ancho de la columna (antes "Especificaciones
    técnicas" en una sola línea se salía del panel). Texto centrado; si no cabe en
    una línea, baja a dos dentro de su pestaña. */

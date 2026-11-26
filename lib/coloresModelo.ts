@@ -113,6 +113,10 @@ const MUESTRAS: Record<string, string> = {
   // Acros (2026-11-09): nombres de la lista Whirlpool tal como van en el título.
   "gris acero": METAL,
   titanio: "linear-gradient(135deg, #a3a39f 0%, #77776f 50%, #5c5c57 100%)",
+  // Teka (2026-11-26): Tegranite Stone Gray, campanas TMX Titanium y HLC 8440 C ST.
+  titanium: "linear-gradient(135deg, #a3a39f 0%, #77776f 50%, #5c5c57 100%)",
+  "gris piedra": "#8d8a84",
+  "stone gray": "#7d7d79",
   plateado: "linear-gradient(135deg, #ececec 0%, #c0c0c0 50%, #a2a2a2 100%)",
   coral: "#e8796b",
   morado: "#6c4675",

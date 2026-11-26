@@ -1268,9 +1268,11 @@
           "23\"",
           "24\"",
           "26\"",
+          "28\"",
           "29\"",
           "30\"",
           "31\"",
+          "32\"",
           "33\"",
           "34\"",
           "35\"",
@@ -1621,6 +1623,7 @@
         "clave": "ancho",
         "valores": [
           "14\"",
+          "16\"",
           "20\"",
           "21\"",
           "23\"",
@@ -1977,7 +1980,9 @@
           "Motor de campana",
           "Control remoto",
           "Lámpara",
-          "Cargador inalámbrico"
+          "Cargador inalámbrico",
+          "Bandeja para horno",
+          "Plancha"
         ]
       },
       {
