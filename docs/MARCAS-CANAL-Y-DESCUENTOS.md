@@ -83,7 +83,7 @@ revisarlo antes de cargar precios (tarea en el plan, Fase 4.5).
 | ALFA FORNI | IESA/LAVISH | ALFA | 20 | 10% | `/marcas/alfa-forni` | completo |  |
 | ALFRESCO | ARTEXA | ALFRE | 247 | 10% | `/marcas/alfresco` | completo |  |
 | ARTISAN | ARTEXA | ARTIS | 104 | 10% | `/marcas/artisan` | completo |  |
-| NAPOLEON | — | — | 116 | 0% | `/marcas/napoleon` | completo | Alta 2026-10-29 (Carla): asadores. **Cargada 2026-11-25:** 116 productos de la lista octubre 2026 (MXN con IVA ÷ 1.16, sin descuento; sin centavo exacto → 1 ¢ arriba). 110 activos y 6 "En trámite de NOM" archivados a precio 0 (se activan cuando llegue la NOM y su precio). Solo gas LP, como la lista. Línea en el título. Ahumadores reactivado con los Apollo. Lista de precios de la página = oct 2026 editada (sin flete, NOM → "Próximamente"). |
+| NAPOLEON | — | — | 116 | 0% | `/marcas/napoleon` | completo | Alta 2026-10-29 (Carla): asadores. **Cargada 2026-11-25:** 116 productos de la lista octubre 2026 (MXN con IVA ÷ 1.16, sin descuento; sin centavo exacto → 1 ¢ arriba). 110 activos y 6 "En trámite de NOM" archivados a precio 0 (se activan cuando llegue la NOM y su precio). Solo gas LP, como la lista. Línea en el título. Ahumadores reactivado con los Apollo. Lista de precios de la página = oct 2026 editada (con la nota de flete, sin los "ok", NOM → "Próximamente"; Carla 2026-11-26). |
 | BENESSI | ARTEXA | BENES | 100 | 15% | `/marcas/benessi` | completo |  |
 | BERTAZZONI | ARTEXA | BERTA | 109 | 10% | `/marcas/bertazzoni` | completo |  |
 | BLANCO | ARTEXA | BLANC | 881 | 10% | `/marcas/blanco` | completo |  |

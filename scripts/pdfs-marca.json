@@ -8,8 +8,8 @@
       "titulo": "Lista de precios",
       "vigencia": "oct 2026",
       "src": "NAPOLEON/LISTA_PRECIOS_NAPOLEON_2026_OCTUBRE.pdf",
-      "archivo": "lista-precios-napoleon-octubre-2026.pdf",
-      "nota": "Preparada a mano (Carla 2026-11-25): sin la nota de flete, sin los 'ok' y 'En tramite de NOM' → 'Próximamente' (.carga/napoleon/lista-web.py)."
+      "archivo": "lista-precios-napoleon-oct-2026_3cafb6cb-3d0a-44c2-9532-91360a503201.pdf",
+      "nota": "Preparada a mano (Carla 2026-11-25/26): conserva la nota de flete, sin los 'ok' y 'En tramite de NOM' → 'Próximamente' (.carga/napoleon/lista-web.py)."
     },
     {
       "slug": "teka-tarjas-y-monomandos",
